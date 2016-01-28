@@ -52,7 +52,7 @@ sub get_non_broken_version {
         mkpath(dirname($url));
         my $archiveurl = "http://web.archive.org/$ts/".uri_escape("http://".$url);
         print $archiveurl."\n";
-        getstore($archiveurl, $url);
+        getstore($archiveurl, $url.".html");
         return;
     }
 }
