@@ -42,7 +42,8 @@ To get the forum discussion pages, run
 
 The script creates a `typophile.com` directory with a copy of each page, as it was the last time it was archived before it got wiped. 
 
-The next step is to finish converting these raw materials into clean MarkDown, and a Jeykll site to publish them nicely on the web.
+The next steps are to finish converting these raw materials into clean MarkDown, and a Jeykll site to publish them nicely on the web.
+See the [github project issues](https://github.com/typophile/typophile.github.io/issues) for details.
 
 * * * 
 
