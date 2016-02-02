@@ -36,8 +36,13 @@ sub key2url {
 
 while (<>) {
     chomp;
-    print(key2url($_). " -> ");
-    my $result = get("http://web.archive.org/cdx/search/cdx?fl=urlkey,timestamp&url=".uri_escape(key2url($_)));
+    my $url = key2url($_);
+    print($url. " -> ");
+    if (-e $url.".html") {
+        print "[DOWNLOADED, SKIPPING]\n";
+        next;
+    }
+    my $result = get("http://web.archive.org/cdx/search/cdx?fl=urlkey,timestamp&url=".uri_escape($url));
     get_non_broken_version($result);
 }
 
