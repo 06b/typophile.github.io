@@ -31,7 +31,9 @@ def file2json(f)
       rescue
       end
     end
-    l["href"] = URI.join("http://web.archive.org/",uri).to_s
+    if uri then
+      l["href"] = URI.join("http://web.archive.org/",uri).to_s
+    end
   end
 
   title = r.css("title")
