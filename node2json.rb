@@ -1,7 +1,7 @@
 require 'reverse_markdown'
 require 'nokogiri'
 require 'json'
-require 'URI'
+require 'uri'
 
 def file2json(f)
   id = f.match(/node\/(\d+).html/)
