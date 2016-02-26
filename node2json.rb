@@ -68,7 +68,7 @@ def file2json(f)
     picture = r.css("div.node .picture a")
     if picture.first then
       uid = picture.first["href"].gsub(/.*user\//,"")
-    elsif info.children.count > 1
+    elsif info.children.count > 1 and info.children[1]["href"] then
       uid = info.children[1]["href"].gsub(/.*user\//,"")
     end
   end
