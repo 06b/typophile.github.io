@@ -1,0 +1,158 @@
+{
+  "id": "51537",
+  "title": "Arabic web fonts",
+  "forum": "Arabic Typography & Type Design",
+  "tags": [
+    "Arabic Typography & Type Design"
+  ],
+  "content": "I have an idea to chew on.  \nLet's produce a font, or a series of fonts specifically designed for the web. Then give the package to makers of operating systems, windows, mac and linux, to include in their system font package.  \nThis way, the web designers will have the option to use fonts that a) work on any platform b) are optimized for web viewing, both in terms of clarity and in terms of balance between Roman and Arabic, while maintaining the integrity of Arabic script.  \nHow about that Amsterdam?!\n\n",
+  "author": "behnam",
+  "time": "11 Nov 2008 — 5:49am",
+  "uid": "5890",
+  "comments": [
+    {
+      "time": "11 Nov 2008 — 5:56am",
+      "content": "Then give the package to makers of operating systems, windows, mac and linux, to include in their system font package.  \nFree of Charge of Course:  \n [http://alvi.urdushare.net/blog/20081...alvi-nastaleeq](http://web.archive.org/web/20150414223542/http:/alvi.urdushare.net/blog/20081...alvi-nastaleeq \"http://alvi.urdushare.net/blog/20081...alvi-nastaleeq\")  \nWith Baskets of Flowers\n\n"
+    },
+    {
+      "time": "11 Nov 2008 — 6:38am",
+      "content": "Thanks Aziz. Yes of-course. This can be one option of the package. But technically speaking, my idea is a bit more complex than that.  \nI don't urge operating system makers to go and shop around to see what free Arabic font is available and collect them. This is what users do! They will not do it and I don't want them to do it either.\n\nOn the technical side, the fonts in the package has to go through serious and reliable tests in terms of their proper functionality on various platforms. For one thing for example, that Nasta'liq font doesn't have AAT and won't work on older Macs.  \nOn the visual side, I'm not sure that font can meet the web clarity requirements, particularly on Windows platform.\n\nSo what I mean is a serious concerted effort to produce a package with a credible stamp of approval. Otherwise, Linux may go for it, but not the two others.\n\n"
+    },
+    {
+      "time": "20 Nov 2008 — 7:14am",
+      "content": "So what you are looking for is something akin to Verdana and Georgia: widely distributed, generously licensed fonts that provide reliable font spec'ing in CSS etc. In addition, designed specifically with the screen in mind and suitably hinted for low-resolution display. [The big difference between creating such fonts now and when Verdana and Georgia were first developed is that black & white pixel displays are pretty much a thing of the past, so the hinting model would be different.]\n\nIt is certainly do-able. Any ideas about funding?\n\n"
+    },
+    {
+      "time": "20 Nov 2008 — 3:47pm",
+      "content": "Thanks John. No I have no idea about funding. But throwing the idea is a good start I hope.\n\nI was thinking of a 'package' of fonts because as you may have noticed, the idea of what constitutes a single good standard Arabic web font may vary substantially. So it's good that you mentioned two fonts because I think at least we need two typeface. One with basic ligatures for Arab users, another one without ligatures for mostely non Arabs. I don't know how much the language identification can be reliable for this on different platforms and different browsers. Besides, there may be an Arabic site that doesn't want to have ligature or vice-versa. Then of-course there might be different views about what style is more 'standard' for the web. I am leaning toward a simplified Naskh, something simialr to Geeza Pro and Yagut. Others may have other ideas. This is basically a topic for exploring the idea.\n\nThere may well be that at some point, embedded fonts will be supported on all platforms and all browsers and web designers will be less dependent on system fonts. This also may be a solution for Arabic web situation, both for Arabic language and particularly for non Arabic languages. But it is certainly not a solution for quality font making.\n\nHinting is generally a trade secret. I have no knowledge of it. Is hinting model as good as pixel display?\n\n"
+    },
+    {
+      "time": "27 Nov 2008 — 5:08am",
+      "content": "Hinting isn't a trade secret (although the particular tricks and strategies and tools that individual hinters use may be). Hinting is, simply stated, a means of influencing outlines at specific sizes and resolutions in order to obtain a better rasterised image (rasterisation is the wrapping of outlines to pixel or other dot grids). The effects of hinting on the same outlines will, therefore, vary depending on the rasterisation model (binary pixel display, i.e. black and white, vs. greyscale antialiasing vs. subpixel colour antialiasing).\n\n"
+    },
+    {
+      "time": "27 Nov 2008 — 11:55am",
+      "content": "I think this is a great idea. Although I don't read Arabic, it's surely one of the scripts which may suffer most from small onscreen textsetting.  \nAlthough I have no idea about funding, I'd be glad to contribute, if I can. Besides, it would be a good excuse to learn the Arabic letterforms and to attempt designing them…\n\nPlus, it would be interesting to have a font following the semplification experiments of Saad or the \"simplified Arabic\" of Khattar-Hedrick…\n\n"
+    },
+    {
+      "time": "28 Nov 2008 — 4:01pm",
+      "content": "Thanks piccic for your offer but nobody is fund-raising anything yet. I'll keep it in mind though!\n\nJohn I'd go with greyscale antialiasing if that is what is being done on the Mac. It is perfect for scripts with a lot of curvatures that in a small size can not simply be reduced to black and white pixels.  \nI know that it is partially a question of habit. I heard that some PC users were complaining that Safari on the PC is 'blurry'. So the habit may go the other way too. But definitively for Arabic script this should be a plus.  \nMy suggestion of a font face similar tp Yagut is mostly because the design is fairly resistant in becoming jagged in small size. It's a fairly thick design and fairly geometrical. A finer typeface without antialiasing is a desaster in small size. I know it because a site is currently using a finer face (that I made and didn't put anything other than authohinting of FontLab) and it looks very nice on the Mac but pretty unusable on a PC (unless perhaps Safari is being used).  \nIf hinting in the font can do what is automatically done on the Mac, this could be a sigh of relief because the typeface options for Arabic web fonts extends substantially.\n\n"
+    },
+    {
+      "time": "28 Nov 2008 — 4:24pm",
+      "content": "You misunderstand. The rendering model used largely depends on the system or application, not on the font. For systems that offered both black and white bitmaps and greyscale antialiasing, it is possible to set flags in the font to turn on and off antialiasing at specific sizes and to apply or not apply hints. Colour subpixel rendering does not offer this option, and may selectively apply hints (MS ClearType ignores x-direction delta hints, for example) or ignore hints completely (Apple Quartz rendering). Also, different systems or applications may interpret the same hints in different ways.\n\nSome amount of hinting is desirable in pretty much any font -- unless one knows for sure that Apple Quartz rendering is the only environment in which the font will appear --, even if it is only to control vertical alignment zones. The kind of hinting we do for sub-pixel rendering environments tends to be quite minimal, concentrating on y-direction hints. Depending on the individual design, auto-hinting can sometimes take one a long way toward good results; other designs call for a lot of manual work.\n\n"
+    },
+    {
+      "time": "29 Nov 2008 — 6:54am",
+      "content": "Bahnam\n\n\\>\\>I know it because a site is currently using a finer face (that I made and didn’t put anything other than authohinting of FontLab) and it looks very nice on the Mac but pretty unusable on a PC (unless perhaps Safari is being used).\n\nAutohinting of FL has \\*some\\* benefits to Latin fonts, but even there it is not so hot an idea. In Arabic, autohint should be off. Antialiesing gives best possible results. Otherwise one would need to go the painful path of original hinting.\n\n"
+    },
+    {
+      "time": "29 Nov 2008 — 11:53am",
+      "content": "Saad, blind autohinting seldom gives good results in any script, but it is possible to manage the autohinting by manually specifying alignment zones and standard stem weights, what I call semi-automatic hinting. Since Arabic tends to have a greater range of letter heights, controlling alignment zones is trickier than for Latin, but in general terms the relative efficacy of (semi-)autohinting is typeface dependent, not script dependent.\n\n_Antialiesing gives best possible results._\n\nAntialiasing and hinting are not exclusive unless a particular rendering engine chooses to ignore hints completely (e.g. Apple's 'full-fuzz' Quartz rendering, which personally I can't stand). Most antialiasing makes use of hints in various ways.\n\n"
+    },
+    {
+      "time": "30 Nov 2008 — 9:00am",
+      "content": "I guess I have to agree with Saad on this. For Arabic script, blanket antialiasing is the way to go. I know that there is a conceptual difference of opinion between two platforms in text rendering that is going on here that I fail to understand. But I can not fail my eyes. And my eyes tell me that to view properly an Arabic script, you need antialiasing. In fact, the goal of proper hinting of an Arabic web font should be to look like what it looks with antialiasing which of-course, may have the advantage of not having an unnecessary 'shadow' on a larger size. But to me, this minor advantage fades in the face of the fact that how limiting it has made the use of Arabic fonts on the web.  \nArabic glyphs don't loose their curvatures in size 12. Pixels do. And it is for text rendering engine to resolve this obvious fact not the font.. in my opinion. But this topic is for solving a font problem which should not have been a problem to begin with.\n\nNow in a parallel discussion that we had on our community site, Aziz (not the same Aziz, another one!) has posted the pictures of a text on the Mac and Windows, with and without ClearType and antialiasing, produced by two or three different fonts. ClearType somewhat improves the unbearable state of the text on the Windows. My question is that how much more improvement can be applied to the fonts with proper hinting? In these samples, Geeza and Yagut are fairly thick fonts (although it's hard to believe it in some pictures!) and Zar is moderately fine.  \n [http://balatwit.com/fonts/](http://web.archive.org/web/20150414223542/http:/balatwit.com/fonts/ \"http://balatwit.com/fonts/\")\n\n"
+    },
+    {
+      "time": "30 Nov 2008 — 10:12am",
+      "content": "I would like to ask all:  \nWhy trouble yourselves setting text onscreen with small fonts and long lines (Behnam Samples)? Why strain your eyes and crane your necks?  \nJust make our life easy and use Big fonts on short lines!\n\n"
+    },
+    {
+      "time": "30 Nov 2008 — 10:22am",
+      "content": "There is so many 'because' that I don't know where to start. Because the text is moving from paper to screen. Because finesse is in the nature of the script. Because this is the way I read the books... because I don't like the limitations.\n\n"
+    },
+    {
+      "time": "30 Nov 2008 — 10:55am",
+      "content": "\\> ... because I don’t like the limitations.\n\nLimitations? What Limitations? The screen knows no limits?!  \nMoreover:  \n1. The bigger the Arabic Script, the nicer?!  \n2. Walking through long lines causes cross in the eyes?!\n\n"
+    },
+    {
+      "time": "30 Nov 2008 — 11:18am",
+      "content": "Dear Aziz this is irrelevant to this discussion. You may choose your page layout, font size or font shape anyway you want. The preferences may differ in different languages or different countries or simply different persons. The bottom line is that the text should look as it is expected to look.  \nI didn't see anybody complaining the lines are too long or the font is too small in this forum. But of-course, I'm using a Mac! I just want to know how this is being done on this site, and same thing with the same size can not be done in Arabic.\n\n"
+    },
+    {
+      "time": "30 Nov 2008 — 11:23am",
+      "content": "\\> I didn’t see anybody complaining the lines are too long or the font is too small in this forum.\n\nIncluding me?!\n\n\\> The preferences may differ in different languages...\n\nExcluding Arabic?!\n\nExcuse my complaining with non-Arabic with Flowers\n\n"
+    },
+    {
+      "time": "1 Dec 2008 — 11:00am",
+      "content": "I agree with you both, since:\n\n- Aziz is right: onscreen text is often too small (and in recent years, higher resolution monitors, amybe even of small dimensions, i.e. the ones in portable PCs, worsened the problems).  \nPlus, I do not even remotely believe that \"the text is moving from paper to screen\" (Benham).  \nThe text is \\*also\\* on the screen, but this does not mean I will ever read on it, besides Internet and programming or the like… A big energetic crisis would make people aware of how technology-dependent we have become…\n\n- Benham is right: Aziz, you can specify point size as wished in page layout, on the web, maybe somewhere, but menus and text in applications becomes problematic to handle (or to specify) in bigger sizes. Plus, don't think it's only Arabic which benefits from being looked in its details…  \nI guess I'm not interested (so much) in hinting, since I have no wish to produce most of what I am doing except for printed applications. Should I be forced to stop using electricity, well I guess I'd learn stone carving, or at least how to punch-cut… :=)\n\nFlowers to both, and may the All-merciful be with you… :=)\n\n"
+    },
+    {
+      "time": "1 Dec 2008 — 11:40am",
+      "content": "<cite>onscreen text is often too small (and in recent years, higher resolution monitors ... worsened the problems)</cite>\n\nAnother factor seems to be antialiasing which encouraged people to use type at sizes they'd never have dared use when type was black and white only.\n\n"
+    },
+    {
+      "time": "1 Dec 2008 — 3:41pm",
+      "content": "This discussion is not going anywhere. All I want to do is to be able to do what we are doing in this forum, in this page, with this size, but in Arabic. With or without antialiasing or ClearType.\n\nBTW I love this featured font Whitman Display!\n\n"
+    },
+    {
+      "time": "1 Dec 2008 — 7:51pm",
+      "content": "\\> but menus and text in applications becomes problematic to handle (or to specify) in bigger sizes.\n\nThat's was not problem even on Windows3.1.  \nMenus+Database Texts need not to be fully-ligatured + fully-kerned.  \nAdditionally, menus are too frequently used to click blindly.\n\n\\> Another factor seems to be antialiasing which encouraged people to use type at sizes they’d never have dared use when type was black and white only.\n\nAntialiasing Or Tantalizing?\n\n"
+    },
+    {
+      "time": "4 Dec 2008 — 7:25am",
+      "content": "<cite> This discussion is not going anywhere. </cite>  \nIt's because we still lack funding… :=)\n\nOn my part: I'm 99% in favor of aliased text, at least for point sizes under 12pt.\n\n@Aziz: It's anyway annoying to have an excessively big system pt. size.  \nEven if you use 18, in most applications you have not enough space for all the main menus…  \nIs 18 enough for the nuances of vocalized Arabic, by the way (but why would I need vocalized arabic in System menus? Huh?)\n\n"
+    },
+    {
+      "time": "5 Dec 2008 — 5:48am",
+      "content": "Piccic, Ligatures, kerning , Marks are applicable to Big Arabic fonts  \nand never used for Arabic system fonts.\n\n"
+    },
+    {
+      "time": "5 Dec 2008 — 6:44am",
+      "content": "Ah, OK, fine, so this comment of yours:  \n<cite> Just make our life easy and use Big fonts on short lines! </cite>  \nwas not closely related to the project proposed by Benham, which is of a simplified Arabic type for menus and system applications. That's why I did not understand, now it's clearer, thanks…\n\nWe should see, however, what Behnam meant when saying “specifically designed for the web\".  \nIt seems to me that the term could apply both to your full-accented calligraphic faces & to simple system fonts…\n\n"
+    },
+    {
+      "time": "5 Dec 2008 — 5:12pm",
+      "content": "System fonts are not involved in this discussion. The only way that they are involved is that I want to get rid of them in web pages!  \nIn the practical usage of Arabic script, at least from what I know from Persian and what I see in Arabic, vowels are assumed, not written. This applies to the application localized versions too. Generally the extensive usage of vowels requires larger font size to accommodate the visibility of vowels. Occasional usage of vowels in web text is mostly used when writer can not 'assume' that the reader would know the proper pronunciation of the word.  \nSo my focus here for web fonts is not the vowels performance per se, but the characters clarity, which would also have a better rendition of vowels as a side effect. But the focus is on the characters themselves.  \nOn applications with antialiasing, this visibility in small size is already achieved. The problem for web pages is that they can not assume the user has this facility. I think that there is no global solution for this situation and web designers should assume that the users have at least a rendering technology such as ClearType at their disposal. This will make the text at least readable, although the font face would loose all its specificity in small size.  \nThe rest, I think, will fall on user shoulder to choose the proper tools for web viewing to his satisfaction. A font can not make miracle and if it could, it would be one single font with a lot of work. This limits substantially the web designer choice of page layout. It may well be that for Arabic web pages, the advent of embedded fonts would be the best and most practical solution. Although simplified Naskh is what I have in mind when thinking about web pages, the embedded font would allow all kind of styles, if the web designer see fit for his usage.\n\n"
+    },
+    {
+      "time": "7 Dec 2008 — 10:36am",
+      "content": "Yes, sorry, while speaking I forgot you were talking especially of the web. :=)\n\nBut mentioning the web makes me think in the same vein of any other screen application.  \nArabic looks crucial to me for its inherent characteristics, as it suffers at small sizes, but if money is the only thing which motivates software vendors, an effort like the one you are suggesting seems the most effective way to see the thing realized.\n\nPlus, text on screen is not for extensive reading, no matter how you treat it.  \nYou should have low-emission screens like the eBook devices which are developing now, to make a reading which does not tire the eye. And – at any rate – this will never substitute (as being \"the same\") such a simple object as a book.\n\n"
+    },
+    {
+      "time": "8 Dec 2008 — 4:40pm",
+      "content": "Well, while the initial idea, making optimized Arabic web fonts and somehow making sure they are present in all computer is still the best idea, at least for 'body text' and localized usage of applications, the CSS embedded font technology looked promising to me for the freedom of design that it provides. But it seems that it has a serious effect in webpage 'volume', particularly if it is an Arabic font (which should also include some Roman).  \nIt seems that if this Typophile page has an embedded font for example, I have to load it each time I open this page, weather I already have the font in my computer or not. If that is the case, this is not a good substitution for the original idea. Considering how big an Arabic font would be, and how slow opening of a web page will get.\n\nAs you see, we have to juggle between technicalities and aesthetics issues constantly... and getting nowhere!\n\n-------------\n\nBut you are right. The current screens are not for reading books. I also am looking forward to see what will become of this 'reflective' screens technology. My point was simply that it is not out of ordinary to expect a font size on the screen as you would see on a book... and that there in a constantly increasing reading time spent in front of the screen.\n\n"
+    },
+    {
+      "time": "13 Sep 2009 — 10:58am",
+      "content": "A system of fonts for the Web already exists: The font system based on Unified Arabic (TM) created by my father, Nasri Khattar, is perfectly adapted to the Web as well as to all other electronic systems. I have begun to pick up his work after a long hiatus following his passing in 1998. The font system contains eight very different typefaces based on Unified Arabic. Each contains 28 to 30 characters and are based on ASMO 449. Some of them have already been designed \\*to automatically connect\\* without any additional ligatures; some of them do not connect, but are separate unified shapes easily read by anyone who can read Arabic characters - not just Arabs, as you know, but Kurds, Pakistanis, Iranians, and so on.\n\nI'm in the process of scanning samples and creating a new Web site. I created just one page a few years ago on which you can see the Neo-Kufic (TM) form Khattar created in the page header.\n\nPlease let me know what you think.\n\nCamille Khattar Hedrick  \nPresident, Daughter of Nasri Khattar  \nUnified Arabic, LLC\n\n"
+    },
+    {
+      "time": "20 Sep 2009 — 1:30pm",
+      "content": "Dear Camille,  \nSorry for the late response and thank you for your interest.  \nSince I posted this topic, I have changed my mind and I'm no longer looking for a solution for web font. I'm not familiar with your father's work but considering the timeframe, I suspect we are not talking about the same thing.  \nThere was a time that the challenge was to produce Arabic text within the capabilities of the computers of the time. The challenge was to produce an Arabic text that could be printed on a dot-matrix printer for example. I'm sure that the work of your father could be greatly appreciated facing that challenge.  \nNow the challenge is to accommodate Arabic script natural beauty by the computers. It is no longer an issue of text adjusting itself to the technology limitations, but to adjusting technology to the text aesthetics and functionality requirements. And now I believe the solution doesn't start with the font but the text engine technology for Arabic script which is not geared to the natural behavior of Arabic script.  \nRegards,  \nBehnam\n\n"
+    },
+    {
+      "time": "20 Sep 2009 — 8:55pm",
+      "content": "Dear Benham,\n\nThank you for your kind response. Yes, my father did create a style for the dot-matrix printer, of course! It was just one of the many applications. You knew that already.\n\nWhat I need to do is show the newer fonts that are connected, although based on Unified Arabic. I am still working on finding funding to produce software from his original designs and then distribute them as widely as possible.\n\nSince he reduced the number of characters to only 28-30, and designed them to connect, it would be very simple to produced the seven or eight typefaces as software.\n\nHis newer designs do in fact accommodate the natural beauty of Arabic script. Unfortunately, I have a full-time job, and just don't have the time to do everything that needs doing. I will keep logging in to this site to learn more and more about this field, which was my father's, but is not mine - I'm in marketing and communications.\n\nI hope we can stay in touch.\n\nSincere regards,\n\nCamille Khattar Hedrick  \nPresident and Owner, Unified Arabic, LLC  \nDaughter of Nasri Khattar\n\n"
+    },
+    {
+      "time": "14 Dec 2009 — 4:03am",
+      "content": "A born dead project ? Is anyone still willing to work on this ? Actually it is frustrating how Arabic typography on the web is so monotone (and ugly)...It feels like it has all been done on typewriters. Imagine the whole latin web using Courier...!  \nUnfortunately, i can't help as i am not a typography artist. But how i wish this project gets started and succeeds.\n\n"
+    },
+    {
+      "time": "27 Jan 2010 — 5:20pm",
+      "content": "Hello friends,\n\nI came to this thread wondering what the best choices for Arabic web typography are. In particular I need a font that meets two criteria:\n\n1) the vertical proportions are the same between English and character sets, so that the line-height and letter-spacing propertes do not need careful tweaking.\n\n2) the font is licensed for web use (ideally to be embedded with @font-face)\n\nIf this is not possible, which web-safe font should I use, and what is the most appropriate way to balance English and Arabic text on the page?\n\nI would love some references to Arabic web typography in general, I have spent an awful lot of time on this and can't seem to ever get something that makes everyone happy -- and really just wish to defer to someone else's best practices.\n\n"
+    },
+    {
+      "time": "31 Jan 2010 — 5:18pm",
+      "content": "unthinkingly,  \nThese [fonts](http://web.archive.org/web/20150414223542/http:/wiki.irmug.org/index.php/X_Series_2) are multilingual and BIG. So I'm not sure it they are suitable for your web use. But give them a try if you wish.\n\n"
+    },
+    {
+      "time": "9 Jul 2010 — 1:14pm",
+      "content": "Support this idea at Google font directory to add [Arabic web fonts](http://web.archive.org/web/20150414223542/http:/goo.gl/mod/A3vn)\n\n"
+    },
+    {
+      "time": "23 May 2011 — 11:13am",
+      "content": "There is finally a [Arabic webfont](http://web.archive.org/web/20150414223542/http:/alefba.us/typography/arabic-persian-webfonts/) service. I think it is the only webfonts service for Arabic and Persian.\n\n"
+    },
+    {
+      "time": "9 Jan 2012 — 6:31pm",
+      "content": "Thankfully fonts.com has arabic webfonts now, but we are still waiting on Google, which has a very fast and free font hosting network. I am also surprised that other companies like typekit.com have not started to support Arabic yet.\n\nHowever multilingual support improved vastly last year among webfont hosts, so I expect to see many Arabic webfonts any day.\n\nIf you want to keep updated with one of Google's Arabic type development projects check out [http://shashafont.com](http://web.archive.org/web/20150414223542/http:/shashafont.com/ \"http://shashafont.com\") —&nbsp;I think they are still working on it, though I'm curious why the project has not been moved to Kickstarter like some of their other fonts.\n\nCheers  \nc\n\n"
+    },
+    {
+      "time": "9 Jan 2012 — 6:34pm",
+      "content": "\\> [http://shashafont.com](http://web.archive.org/web/20150414223542/http:/shashafont.com/ \"http://shashafont.com\")\n\nThat's not very nice, sorry.\n\nhhp\n\n"
+    }
+  ]
+}

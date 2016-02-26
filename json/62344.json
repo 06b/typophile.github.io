@@ -1,0 +1,86 @@
+{
+  "id": "62344",
+  "title": "PUA – “Promotional Use Area”? A FontLab issue",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "When I pop up the block’s list in Fontlab’s font window (Unicode depiction mode; see image) and scroll down to E000 – [Private Use Area](http://web.archive.org/web/20140831063547/http:/typophile.com/wiki/Private%20Use%20Area), then I read a bunch of subheadings which suggest that MS, Apple, SIL and Adobe have made their own “private” deal upon that codepoint space. But it isn’t that I wonder about. I wonder about why Fontlab submissively sub-labels that area and uses it for promotion.\n\nThere are other PUA encoding schemes established which have not less merits than the one apparently favoured by FL. I find this favouring offending and suggest that FL should \\*not\\* continue to feature this subheadings by default in the future.\n\nOr was it money –?\n\n ![](http://web.archive.org/web/20140831063547im_/http:/typophile.com/files/FL_pua_5572.jpg)\n\n",
+  "author": "Andreas Stötzner",
+  "time": "24 Sep 2009 — 4:56am",
+  "uid": "17347",
+  "comments": [
+    {
+      "time": "24 Sep 2009 — 4:59am",
+      "content": "In my browser I see some figures bombed into the headline at the place of the quotation marks … I’m verry sorry.  \n(It seems to get right in the topic’s list)\n\nI used \\*english\\* quotation marks. ;-)\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 5:29am",
+      "content": "That's best answered by Adam.\n\nHowever, I think you are lamenting about the wrong thing.  \nThe issue is not that FL favors some PUA schemes over others. I assume that if FL would get hold of others they would include them too.  \nThe issue is that the presence of special PUA schemes suggests they are kind of \"standards\" that type designers should address -- rather than discouraging use of PUA altogether.\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 6:23am",
+      "content": "_Area201D_  \nThat's where the aliens are kept, is it not?\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 6:46am",
+      "content": "A more helpful pop-up would be the Open PUA code points, rather than the ones already spit on.\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 7:40am",
+      "content": "<cite>… if FL would get hold of others they would include them too.</cite>\n\nYou can’t incorporate different schemes for one and the same space.\n\n<cite>… the Open PUA code points, rather than the ones already spit on.</cite>\n\nThe use of this area is subject to constant change. Since the area has been declared as “private” (which is quite silly in itself, but let’s leave this aside) no authority can claim to define its content. The only sensible solution I see is to just omitt any subheadings under “Privat Use Area”. Otherwise FL <cite>suggests they are kind of “standards” that type designers should address</cite> which would be misleading.\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 9:50am",
+      "content": "This is informational. If a major software developer has used PUA codepoints for some particular purpose -- most likely legacy -- then there is a risk that these codepoints might come with assumptions attached in that software, and it would be a good idea to avoid using these particular PUA codepoints. Alternatively, if you specifically want to make a font that is compatible with the use of PUA in particular software, then you want to know what this use is. And it would be perfectly possible for FL to expose multiple and conflicting uses of PUA codepoints in this way. All you are looking at is a labelling system.\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 12:38pm",
+      "content": "John, do correct me if I'm wrong. If these areas in the PUA are 'taken', I can think of two possible problems.\n\n1st: if one puts a character into one of these areas and has to ascertain it's a certain glyph, that would make it part of the standard Unicode set -- not defined by unicode.org, but that doesn't _matter_ because we have to adhere to stay 'compatible' anyway -- no matter who created the rule, you'd have to stick to it \"to stay compatible\".\n\n2nd: if these code points are assumed to contain a certain glyph, where would one find which glyph to put where? One would hope that it gets put into the new up-and-coming FL, added to the code page templates.\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 5:35pm",
+      "content": "See page 11 of this Unicode PDF:  \n [http://unicode.org/book/ch13.pdf](http://web.archive.org/web/20140831063547/http:/unicode.org/book/ch13.pdf \"http://unicode.org/book/ch13.pdf\")\n\nUnless one actually has a need to produce a font that is compatible with a particular company's use of PUA codepoints, it is best to avoid that relatively small set of codepoints, just in case some piece of software is making assumptions about those codepoints. That said, the nature of the PUA is explicitly such that neither software developers nor font developers should expect _any_ degree of safety in making assumptions about the use of any PUA codepoint beyond their own internal use. The basic rules of the PUA apply as much to the ‘Corporate Use Sub-Area’ codepoints as to any other PUA codepoints, so there is nothing to prevent another company or an individual using the same codepoints for other purposes or even claiming them as their own ‘corporate use area’.\n\nCorporate use of the PUA has occasionally been an issue for me in my work, but only because I'm making fonts for companies that have already made use of some PUA codepoints and I need to make sure that I use fresh ones that their software does not associate with other characters.\n\n"
+    },
+    {
+      "time": "25 Sep 2009 — 12:05am",
+      "content": "The logic behind this, I'm guessing, is that these companies have made regular usage of those code points and because they produce software used by millions of people, those areas have been \"reserved\" for them by FontLab.\n\nAdobe uses regular regions of the PUA for small caps, oldstyle figures, swash characters, etc., which have not been assigned specific Unicode points. While condoning to their lead isn't a standard practice, their labels in FontLab was likely due to convention rather than promotion.\n\nAnyway, those big companies developed the common font formats that we all use today — might as well give them first dibs.\n\n"
+    },
+    {
+      "time": "25 Sep 2009 — 12:23am",
+      "content": "John: <cite>This is informational.</cite>\n\nThank you but I don’t want to be bothered by MS or Adobe product “information” while I’m at work. The more if I happen to deal with that codespace in a way different from how others do it.\n\n<cite>… that neither software developers nor font developers should expect any degree of safety in making assumptions about the use of any PUA codepoint</cite>\n\nCome on. You know perfectly well that we produce fonts incorporating many hundreds of PUA codepoints under the assumption that they are of \\*particular\\* usefulness for our clients – who rely on it.\n\nAll you’ve said so far does not touch the fact that there is no decent reason for FL to label any PUA section in any specific way. Moreover, nobody has a right to label parts of that area with his own name and the suffix “reserved”, this is plain impertinent.  \nThe very nature of this area is to be \\*used\\* not \\*reserved.\n\nFor example: some of the so-called SIL-parts contain characters (e.g. in Dolous SIL) which moved into the official standard a time ago. What possible reason should anybody have to take care of that outdated occupation?! Rediculous. (except SIL staff, of course)\n\nSo the current FL practice remains sheer advertising and this is highly questionable. Hallo, Fontlabbies, just tell us you’ve got $$$$$$$$$$$$$$$$$$ for it and we close this in peace ;-)\n\n"
+    },
+    {
+      "time": "25 Sep 2009 — 4:38pm",
+      "content": "_You know perfectly well that we produce fonts incorporating many hundreds of PUA codepoints under the assumption that they are of \\*particular\\* usefulness for our clients – who rely on it._\n\nYou may. I avoid PUA like the plague. The only time I ever use PUA is for non-semantic glyphs such as ornaments.\n\n"
+    },
+    {
+      "time": "28 Sep 2009 — 2:13am",
+      "content": "I don't think there's any nefarious plot going on here - but then again, I am from SIL. I'm actually surprised to see this documentation of the SIL PUA ranges in FontLab. We didn't ask for it. It looks like Fontlab is only trying to serve their customers by gathering together info on the most common uses of the PUA. SIL's use of the PUA is [publicly documented](http://web.archive.org/web/20140831063547/http:/scripts.sil.org/UnicodePUA) and follows the guidance of the Unicode Consortium.\n\nLike John, we try by all means to avoid using the PUA. Most often it has been used as a practical temporary way to encode language data during the sometimes lengthy process of getting new characters accepted into Unicode. Around 80% of our PUA assignments are characters that have now been accepted into Unicode, and the use of them as PUA characters has now been deprecated (no longer recommended). Our detailed [deprecation strategy](http://web.archive.org/web/20140831063547/http:/scripts.sil.org/PUA_deprecation) is available, and explains why we keep characters at both new and old codepoints in our fonts. The other 20% are characters that Unicode rejected, ones that we have not yet proposed, or ones we ourselves have later deprecated.\n\nFontLab's acknowledgment of the most common PUA uses is not advertising. They are only trying to let font developers know about them so they can avoid those places if they have customers that already use MS, Adobe or SIL fonts - or use them in the same way. Note that since this is a _Private Use Area_ you can feel free to use the range however you choose. Nothing bad will happen if you assign random chars to fall in the 'SIL PUA'. :-)\n\n"
+    },
+    {
+      "time": "28 Sep 2009 — 9:52am",
+      "content": "Viktor, what you say is all perfectly reasonable. This wasn’t about who uses the PUA how and for what and for how long, what is put in and what is deprecated. All this is what the PUA is obviously intended for.\n\nAccounting what has been said up to this point I’m the more convinced that it should be \\*avoided\\* to ascribe \\*any\\* kind of prescription to the PUA range. I’ll try to make the FontLab colleagues notice that.\n\nJohn: <cite>I avoid PUA like the plague.</cite>\n\nYou may. I use the PUA when this is beneficial for those who buy my fonts. And some of them [do use this space very seriously](http://web.archive.org/web/20140831063547/http:/www.signographie.de/cms/front_content.php?idart=320&changelang=2), may it be decent in your opinion or not. It’s just a matter of practice and agreement.\n\nThanks guys for your comments.\n\n"
+    },
+    {
+      "time": "28 Sep 2009 — 10:34am",
+      "content": "Andreas, a massive number of the PUA-encoded glyphs in your excellent survey are presentation forms of letters plus diacritic marks that have standard Unicode encodings using combining mark sequences. While I understand that there have been difficulties in the past in reliably rendering combining mark sequences, these difficulties have very largely disappeared, and maintaining non-standard encodings for these diacritic letters is very bad text processing and interchange practice. All you need is one user receiving the text and either displaying it in a font with different PUA usage or being unable to display it at all, and the whole ‘practice and agreement’ falls apart. Standards exist for a reason, and as soon as something is encodable via the standard private encodings should be deprecated as quickly as possible.\n\n"
+    },
+    {
+      "time": "29 Sep 2009 — 1:50am",
+      "content": "Yes John what you say is perfectly correct and most alert. And yet, you miss the point.  \nAsk Odd Einar Haugen and Jost Gippert if you wish. It was not my idea to encode these letters.\n\n"
+    },
+    {
+      "time": "8 Oct 2009 — 10:15am",
+      "content": "Andreas,\n\n\\> Thank you but I don’t want to be bothered by MS or Adobe product “information”  \n\\> while I’m at work. The more if I happen to deal with that codespace in a way  \n\\> different from how others do it.\n\nIf you place your own copy of \"uranges.dat\" in the Data subfolder of the FontLab Studio shared user folder, FontLab Studio will automatically use that. Feel free to customize that file and remove any range labels that you feel \"offensive\". This is precisely why FontLab Studio is very customizable.\n\nSince Adobe, Microsoft and SIL have publicly documented their use of the PUA, we are providing their assignments so that users of FontLab Studio who would like to adhere to their \"quasi standards\" can easily access them. You can publish your own PUA mappings in the \"urange.dat\" format on your website so that users who would like to take advantage of your use of the encoding space can easily do that.\n\nI do not consider our information any more \"promotional\" than the fact that we use the Adobe Glyph List for New Fonts rather than providing completely invented glyph names -- because there is software in the world that actually makes use of those mappings. We try to be compatible with major software vendors' products so that the fonts our users generate can be, too. That's it.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "9 Oct 2009 — 6:48am",
+      "content": "Thanks to Mr. Twardoch for stepping in!  \nThe suggestion to customize that list is indeed a very valuable one. I tried out and … further description is [in this new topic](http://web.archive.org/web/20140831063547/http:/typophile.com/node/62901) .\n\n<cite>Since Adobe, Microsoft and SIL have publicly documented their use of the PUA, we are providing their assignments so that users of FontLab Studio who would like to adhere to their “quasi standards” can easily access them. You can publish your own PUA mappings in the “urange.dat” format … </cite>\n\nAnd yet, it still seems more decent to me if FL does \\*not put any labels\\* under [PUA] at all by default. As it is, it is suggestive for the avarage user and that kind of suggestion is possibly misleading.\n\n"
+    },
+    {
+      "time": "10 Oct 2009 — 10:11pm",
+      "content": "Andreas,\n\nindeed, it is suggestive for the average user, and it has its reasons. One of the reasons is that some PUA codepoints actually are hardcoded into Windows' CJK processing so using them may result in non-functional fonts. For more details, see [http://scripts.sil.org/PUACharsInMSSotware](http://web.archive.org/web/20140831063547/http:/scripts.sil.org/PUACharsInMSSotware \"http://scripts.sil.org/PUACharsInMSSotware\")\n\nOther major vendors also make use of certain PUA codepoints, as documented here: [http://scripts.sil.org/VendorUseOfPUA](http://web.archive.org/web/20140831063547/http:/scripts.sil.org/VendorUseOfPUA \"http://scripts.sil.org/VendorUseOfPUA\")\n\nSince this may have repercussions on the functionality of fonts made by independent vendors, we think that labeling the PUA subsections has its merits.\n\nCheers,  \nAdam\n\n"
+    }
+  ]
+}

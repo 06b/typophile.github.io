@@ -1,0 +1,34 @@
+{
+  "id": "37644",
+  "title": "FontLab problem with naming glyphs",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "Hi all,\n\nI have serious trouble in understanding this thing about the naming of the glyphs (and all the other in my eyes too complicated stuff about all the naming in a font.-).  \nIn certain situations- please don’t ask me how it came up - I found myself a glyph board like the one below. It has large designs so the letters are not visible in the whole. Tried thousand numbers in thousand menus to make it fit without success. ;-)  \nBut this is not the problem here. What makes me sick is in this case my ‘R’ It has the strange name \\_0082 or something like that and if I want to change its name FontLab cancels it from its place and throws me at the end (and its not possible to paste it away from there!) where I absolutely don’t want to have it and where besides it doesn’t work any longer with the R-key for example in the metrics window. How can I achieve that it stays where it is meant to be in between Q and S and is named R and comes out pressing the R-key? Would be a miracle! Why couldn’t the FontLab programmers not do a simple thing as it was for decades in FontStudio? I wonder about the sense of all the complications.\n\nThanks  \nStefan\n\n ![](http://web.archive.org/web/20080706224525im_/http:/www.typophile.com/files/Bild-2_5753.gif)\n\n ![](http://web.archive.org/web/20080706224525im_/http:/www.typophile.com/files/Bild-3_5265.gif)\n\n [‹ Horley Old Style Research](http://web.archive.org/web/20080706224525/http:/www.typophile.com/node/37648 \"Go to previous forum topic\") [Famous design studio for fashion Logo design? ›](http://web.archive.org/web/20080706224525/http:/www.typophile.com/node/37645 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080706224525/http://www.typophile.com/user/19151\" title=\"View user profile.\">Stefan Seifert</a>",
+  "time": "<br>",
+  "uid": "19151",
+  "comments": [
+    {
+      "time": " 30.Sep.2007 2.24am",
+      "content": "It puts the R at the end because it doesn’t recognize it as an R.\n\nAs I have told you in a recent post, you should’t create standard characters from scratch. They are all already prepared with the right names and unicodes.  \nI would strongly suggest to start over.  \nFile-\\>New  \nYou empty font should look like this:\n\n ![](http://web.archive.org/web/20080706224525im_/http:/www.typophile.com/files/Bild1_4499.png)\n\nYou can then copy and paste your glyph R from the old font to the slot named R in the new font and it should work as expected.\n\n"
+    },
+    {
+      "time": " 30.Sep.2007 3.02am",
+      "content": "Hi Ralph,\n\n\\>As I have told you in a recent post, you should’t create standard characters from scratch\n\nYou did? ;-)\n\nNo, seriously, thanks!\n\n\\>You can then copy and paste your glyph R from the old font to the slot named R in the new font and it should work as expected.\n\nIt’s exactly what I did. Works fine.\n\nThanks again  \nStefan\n\nPS I like your patient smile on the photo.  \nIt seems to be made for people like me :-)\n\n"
+    },
+    {
+      "time": " 30.Sep.2007 6.05am",
+      "content": "Which glyphs appear in the font window and where in the sequence they are located is determined in the encoding file. The encoding file is a simple text document that lives in the following directory:\n\n` MyHD / Users / UserDirectory / Library / Application Support / FontLab / Encoding`\n\nTo build your own custom encoding try this: Duplicate one of the existing files, change the file name and the unique number in the first line of the document and insert your own fonts name like this:\n\n` %%FONTLAB ENCODING: 11005; MyFabFont`\n\nYou will see that it is very easy to change the order of the glyphs or to add a glyph in the desired spot in the sequence like this:  \n`\n    F\n    G\n    G.alt\n    H\n`\n\nIn case of doubt the FLS manual is a super resource (p.152).  \nGood luck.\n\n"
+    },
+    {
+      "time": " 30.Sep.2007 10.54am",
+      "content": "Hi Hannes,\n\nthanks, sounds very interesting! Seems you know something about it.  \nI will try this. For now I helped myself as adviced above by creating a new standard font and copying the glyphs into it. Yet, as a solution it felt strange. Yours seems to be worth a try.\n\nStefan\n\n"
+    },
+    {
+      "time": " 30.Sep.2007 11.40am",
+      "content": "Stefan,  \nIf you open any of the standard encoding pages in FontLab—for instance Latin Extended A—you will have a prebuilt encoding in proper naming. You simply draw your glyphs in the boxes with the names that coincide. Be sure you have the naming set to name instead of unicode so the names show up.\n\nChrisL\n\n"
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "id": "51100",
+  "title": "Accents in Font Names",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I thought this might have come up here before, but I can't find any discussions about it...\n\nIs it possible to include an accented character in a font name? FontLab allows it in some name fields, but not others. This leads me to wonder if such a discrepancy (some name fields with the accented character, some without) would lead to technical problems for users.\n\nI've found at least one font with an accent in the name: ITC Odyssée. It appears that the accent is used only in the \"trade name\" as it appears in specimen books and such, not in the actual font name. I'm not sure if anything usefull can be deduced from this.\n\n",
+  "author": "Mark Simonson",
+  "time": "30 Oct 2008 — 6:49am",
+  "uid": "1043",
+  "comments": [
+    {
+      "time": "30 Oct 2008 — 7:51am",
+      "content": "I believe at least Microsoft doesn’t support accented characters. Whenever i put my surname Jürgen into the entry field the u-dieresis doesn’t show up in the Microsoft related entries. And i remember once having crashed the OS when i loaded a generated font with an accented character. But that was years ago in Fontographer era. Haven’t tried it again since then ;-)\n\n"
+    },
+    {
+      "time": "30 Oct 2008 — 8:27am",
+      "content": "Mark,\n\nevery OT name record contains information about platform and encoding.  \nE.g. 16,3,1,1033 stands for\n\n16 = name ID Preferred Family  \n3 = platform ID Microsoft  \n1 = encoding ID Unicode  \n1033 = language ID English\n\nSo theoretically it is possible to add separate name records for each possible combination of platform, encoding and language. But if it works like you suppose ... You'll have to test!\n\nBest,\n\nChristoph\n\n"
+    },
+    {
+      "time": "30 Oct 2008 — 8:32am",
+      "content": "Adobe tried using them in Künstler Script but they reverted to Kuenstler Script due to compatibility problems with older apps.\n\nI strongly recommend for family and style names (both regular and OpenType variants) as well as in the full name to stick to uppercase and lowercase plain English letters, spaces, and possibly numbers — but nothing else. No dashes, underscores, slashes, ampersands or accented letters.\n\nIn PS Font Name, only plain English letters, no spaces or even numbers, and exactly one dash between the family name part and the style name part.\n\nAdam\n\n"
+    },
+    {
+      "time": "30 Oct 2008 — 8:42am",
+      "content": "ASCII-7 still lives at the deepest levels.\n\nhhp\n\n"
+    },
+    {
+      "time": "30 Oct 2008 — 8:54am",
+      "content": "I was afraid that was the case, since I don't recall noticing any fonts with accented characters in my font menus. Too bad.\n\n"
+    },
+    {
+      "time": "30 Oct 2008 — 10:40am",
+      "content": "We include localized font names in some of our East Asian fonts (eg Meiryo メイリオ ) however these do tend to cause problems in legacy apps.\n\n"
+    },
+    {
+      "time": "30 Oct 2008 — 12:07pm",
+      "content": "What I have in mind wouldn't be a localization. An example would be if I want to use a French word/name as a font name or part of a font name and preserve the French spelling (with proper accents) regardless of the host system's language.\n\n"
+    },
+    {
+      "time": "30 Oct 2008 — 1:00pm",
+      "content": "Given Adam's remarks above, I hesitate to even advance this suggestion: in the AFDKO MakeOTFUserGuide.pdf see the \"Note on accented/extended characters\" (pages 8-9).\n\nLike far too many things with OpenType at present (despite how many years since initial rollout?), the caveat seems to stand: Access to features/functions is dependent on a given user's operating system and application support.\n\nIn short, Mark, seems like it's a crapshoot at best. Good luck.\n\n"
+    },
+    {
+      "time": "30 Oct 2008 — 2:14pm",
+      "content": "So, possible, but maybe not a good idea. Thanks, everyone.\n\n"
+    },
+    {
+      "time": "31 Oct 2008 — 2:54am",
+      "content": "Adam wrote: _In PS Font Name, only plain English letters, no spaces or even numbers, and exactly one dash between the family name part and the style name part._\n\nWhere would you see problems when using numbers (or a period) in the PS Font Name of OT fonts? I did some tests on this recently and didn't notice any.\n\nJens\n\n"
+    },
+    {
+      "time": "31 Oct 2008 — 5:12am",
+      "content": "\"...and possibly numbers.\"\n\nI've found that numerals don't work, and must be spelled.\n\nCheers!\n\n"
+    },
+    {
+      "time": "31 Oct 2008 — 2:44pm",
+      "content": "_\"... numerals don't work, and must be spelled.\"_\n\nHold the phone, David. Mightn't that be a bug in FontLab?\n\nHowzat? See this: \"Numbers in Font Names\" ( [http://www.typophile.com/node/44515](http://web.archive.org/web/20130822161748/http:/www.typophile.com/node/44515 \"http://www.typophile.com/node/44515\")) wherein R. Roberts essentially says numbers are legit.\n\nWhich (or who) is right? Beats me ... as usual.\n\nThread Drift Dep't.: &nbsp;Oh, and while we're at it, how about an apostrophe in a font name? Is _that_ a legal character? FontLab balks and pukes out an error alert. But how else to generate a proper handwriting font called, say, \"Satan's Scrawl\"? (It is Halloween after all.)\n\n"
+    },
+    {
+      "time": "1 Nov 2008 — 4:41am",
+      "content": "\"Mightn’t that be a bug in FontLab?\"\n\nFontlab makes them fine, but they don't appear up in all application menus, is what I could have said.\n\nCheers!\n\n"
+    },
+    {
+      "time": "1 Nov 2008 — 6:34am",
+      "content": "dberlow - which applications ?\n\n"
+    },
+    {
+      "time": "2 Nov 2008 — 5:30am",
+      "content": "The last time I tried this, a year and half ago, was for a series where there was a font for each size from 8 to 16 point, and those numbers did not work with either InDesign or Text edit menus, I cannot remember which, and had to be changed to words. Before that around 2 years ago, I tried with Juliana, and ended up with words like \"Opal\" and \"Pearl\", instead of 8 or 9.\n\nCheers!\n\n"
+    },
+    {
+      "time": "2 Nov 2008 — 10:23am",
+      "content": "Exlibris and Linotype are both shipping fonts that work fine with numbers in the names. Maybe Jos or a Linotyper can shed some light…\n\n"
+    },
+    {
+      "time": "2 Nov 2008 — 11:12am",
+      "content": "My Mana pixelfonts have numbers in the names, and I haven't had any complaints from users. I have tested them in InDesign (on Windows) but haven't tried them in Text.\n\nDavid, and I was thinking that your spelling-out of numbers was an aspiration towards classiness. :-)\n\nhhp\n\n"
+    },
+    {
+      "time": "2 Nov 2008 — 11:44am",
+      "content": "I guess this puts out of question my ideas for the possible naming strategy of an Italian typeface (with planned point size masters using numerals) that has an accented letter in its name. In fact I was almost sure it was a risk, since a trial I did of the face showed fine in some applications (InDesign), with the unaccented letter substituted in others, and with a \"blank square\" in some word processor.\n\nAnyone knows how John Downer named the variants of his Paperback typeface (released by House Industries)?\n\n<cite>ASCII-7 still lives at the deepest levels.</cite>  \nAt least this sounds like good science fiction… :)\n\n"
+    },
+    {
+      "time": "8 Nov 2008 — 8:39pm",
+      "content": "The problem we (Adobe) found with accents in menu names was in very early 2003. From my records, it affected two classes of apps:\n\n- The then-current version of Microsoft Word for Mac (2001?). Because of differences in the menu name handling between Mac and Windows, Word files using these fonts failed to be cross-platform, ever.\n\n- Adobe's \\*Japanese\\* applications using our core font library. AFAICT, this was fixed in the CS2 generation of our Japanese applications, shipped in late 2004. The \"problem\" fonts did not appear in the font menu of these applications.\n\nSpecial thanks to Google Desktop for digging up this info. :)\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "9 Nov 2008 — 3:53am",
+      "content": "So now (theoretically) the issue should not be a problem, Thomas?\n\nBTW many thanks for the glyph coverage articles on your page…\n\n"
+    },
+    {
+      "time": "9 Nov 2008 — 8:32pm",
+      "content": "I don't know if the MS Word for Mac problems were resolved, or when. I think one would want to test that....\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "2 Aug 2012 — 5:33am",
+      "content": "FYI, Word for Mac 2011 shows the correct name and font in the font menu, but reverts to the default sans serif on the page.\n\n"
+    },
+    {
+      "time": "18 Aug 2012 — 5:23pm",
+      "content": "Ouch! Okay, so accents in menu names are still a problem.\n\nThey might be a problem in some other apps as well—that is just the one we know about.\n\nT\n\n"
+    },
+    {
+      "time": "19 Aug 2012 — 9:56am",
+      "content": "I think that there's a NON-technical usability reason for avoiding accents in font names and file names.  \nMany people (particularly in the US ) have no idea how to enter an accented character (even if they know what they are), and if they're trying to search for anything with such characters, they're dependent upon whatever search tool they're using. Google's Search does a good job of equating e and é and è, but many tools only look for exactly what's entered; they won't find Egalité if the user looks for Egalite\n\n"
+    },
+    {
+      "time": "20 Aug 2012 — 4:20am",
+      "content": "Is this how url usability should work too?\n\n"
+    },
+    {
+      "time": "20 Aug 2012 — 9:57am",
+      "content": "[should this apply to URL usability?]. Probably much less so. I imagine that most web access is either through links or bookmarks, rather than via manual URL entry. And those that DO enter web addresses are more likely to know what they're doing. One might not know exactly what to search for, but if copying, the original can be seen.\n\n"
+    },
+    {
+      "time": "20 Aug 2012 — 10:38am",
+      "content": "H, most design software provide a list of fonts to choose from, so you don't _have_ to type the name.  \nEven if so, it would be a nice feature if the software ignored accents when typing a font name.\n\nCatering for older software ... I don't know. Of course people are going to hate you when they \"just can_not_ use\" your font, but then again there was a time when leadsetters said the same about digital fonts.\n\nMy own font creation flimsy doesn't mind about accents, I leave it up to the user :-) (Then again, for compatibility sake it _does_ issue a warning when the accent is out of ISO-Latin-1 range as, per OTF specs, a font name must be recognizable in both Windows -- Unicode! -- and Boring Old Mac Roman text strings...)\n\n(Edit) I see that Adam Twardoch addresses the Win/Mac Name Discrepancy issue in [Recommendations for [..] Word](http://web.archive.org/web/20130822161748/http:/typophile.com/node/95677). Fortunately, my own tool is targeted mainly at InDesign users. Who needs Word anyway ;-)\n\n"
+    },
+    {
+      "time": "27 Aug 2012 — 4:22am",
+      "content": "\"Is this how url usability shou\n\nLol.  \nI'll try again, because I don't think the issue of accents in font names is neither an American, nor a typing issue.:)\n\nFont names may have to carry the family, weight, width, posture, kind-o-terminal, size mastered, glyph repertoire, and foundry before anything specific to a device, client or rendering.\n\nMSAlmostAdriansUltraCompressedItalicCrenulatedHeadlinePro.ttf, eg, even if I don't show it to you.\n\nYou don't think that font names need Unicode enablement? Even if less information's needed to be carried in the names through mutually agreed on UI standards, a seriously farfetched notion in 2012, the font family names alone should not be so limited, should they?\n\n"
+    },
+    {
+      "time": "6 Sep 2012 — 2:04pm",
+      "content": "I agree that font names need Unicode enablement, and that apps and OSes ought to support it. I am sad that not all apps do. :/\n\n"
+    }
+  ]
+}

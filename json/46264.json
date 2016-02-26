@@ -1,0 +1,78 @@
+{
+  "id": "46264",
+  "title": "Better than @font-face: an open internet font service",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "I wrote up my thoughts on bypassing @font-face altogether and just having a browser plug-in (and ideally, native browser support for) a open internet service that will download any fonts needed to render a page.\n\nOf course these would be only fonts that are openly licensed for such distribution. I suppose the service could eventually add in DRM and commercial licensing features if it took off. But initially, it’s all about just providing a larger palette of type for all web pages without requiring any additional coding.\n\n[http://www.kpao.org/2008/06/wanted-font-family-font-server-plug-in-firef...](http://web.archive.org/web/20090502142415/http:/www.kpao.org/2008/06/wanted-font-family-font-server-plug-in-firefox.html \"http://www.kpao.org/2008/06/wanted-font-family-font-server-plug-in-firefox.html\")\n\nThoughts? Anyone interested in making it happen?\n\n",
+  "author": "<a href=\"/web/20090502142415/http://www.typophile.com/user/29180\" title=\"View user profile.\">davidc</a>",
+  "time": "<br>",
+  "uid": "29180",
+  "comments": [
+    {
+      "time": " 9.Jun.2008 10.48pm",
+      "content": "As far as I can make out you’re proposing a central repository for “open-licensed” fonts designed to be used on webpages. That’s the main thing, and I don’t think it will make much difference how this repository is accessed by user agents—as long as user agents support @font-face, the font resources could be centralized or scattered at numerous locations.\n\nIt’s an appealing idea, but you can probably improve web typography faster by spurring Microsoft, Mozilla and Opera to make their browsers support @font-face. Håkon Wium Lie, the guy who developed CSS and @font-face, works for Opera, so I assume the next version of that user agent will support @font-face.\n\nThe other major factor in all this is support from font makers. I’ve just released a font explicittly licensed for “embedding” on webpages using the CSS @font-face rule and unlimited distribution on web servers. You can read more about it here: [http://typophile.com/node/46088](http://web.archive.org/web/20090502142415/http:/typophile.com/node/46088 \"http://typophile.com/node/46088\")\n\nj a m e s\n\n"
+    },
+    {
+      "time": " 9.Jun.2008 11.03pm",
+      "content": "A web service for commercial fonts would be great. I am also trying to promote that idea:  \n [http://opentype.info/blog/2008/04/19/font-face-survey-results/](http://web.archive.org/web/20090502142415/http:/opentype.info/blog/2008/04/19/font-face-survey-results/ \"http://opentype.info/blog/2008/04/19/font-face-survey-results/\")\n\nBut a web service for “open-licensed” fonts doesn’t make sense to me. Why should I rely on a service when I can put the font on my server instead? The Google hosting of code libraries is a different thing because such libraries change all the time and it’s a nice service that you could just link to the library and Google cares about the updates. But fonts are rarely updated.\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 6.28am",
+      "content": "\\>just having a browser plug-in\n\nWell, that’s what we have now, isn’t it? It’s called Flash. And 90% of font vendors either allow, or turn a blind eye, to font redistribution within .SWF.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 7.09am",
+      "content": "And it’s a malice...\n\n@font-face, a XHTML+CSS standard is the way to go.\n\nSzabolcs\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 7.27am",
+      "content": "This solution wouldn’t preclude @font-face, but @font-face has 3 barriers to entry:\n\n1. Requires browser support, which only Safari has now  \n2. Requires explicit calls in the CSS  \n3. Doesn’t deal with commercial licensing issues\n\nMy proposal still has #1 as a requirement, but the other two are not issues at all.\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 7.58am",
+      "content": "Actually @font-face has been supported in IE for ten years. However, one of the major problems with its support (and the same goes for your suggestion) is that it uses a proprietary font format (Embedded OpenType). As Szabolcs’ suggests open standards are clearly the way to go in today’s world - not that Flash is on the way out.\n\nAs you probably know EOT has been submitted to the W3C for standardization.\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 10.02am",
+      "content": "<cite>1. Requires browser support, which only Safari has now<br>\n2. Requires explicit calls in the CSS<br>\n3. Doesn’t deal with commercial licensing issues</cite>  \n<cite>My proposal still has #1 as a requirement, but the other two are not issues at all.</cite>\n\nYour system works without “explicit calls”? How are the font selected then? The visitor of the website decides!?\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 10.57am",
+      "content": "<cite>As you probably know EOT has been submitted to the W3C for standardization.</cite>\n\nAny update on how that’s going? It’s been nearly a year now.\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 11.00am",
+      "content": "Actually it was submitted in March or April. I think the schedule is by the end of this year.\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 11.10am",
+      "content": "_My proposal still has #1 as a requirement, but the other two are not issues at all._\n\n**Q.** If the other two are not issues at all for your proposal, why are they such big issues for @font-face?  \n**A.** Because any kind of scheme for using explicit fonts on webpages requires explicit calls in one form or another in the CSS, and the type industry doesn’t run on good will alone, but well-defined EULAs and cash. It has to be practical, and if your proposal treats an issue like commercial licensing as a non-issue, it’s hard to see many people getting behind it.\n\nj a m e s\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 11.37am",
+      "content": "@Ralf Herrmann: In my system, fonts are simply referenced in the font-family CSS declaration as today. The system would then fetch any reference fonts from the server if they are not present on the local computer.\n\n@James Arboghast: Having a central server makes it trivial to ensure commercial fonts are not present. If for any reason they do appear, requests (or in the extreme DMCA takedown notices) are all that would be needed to rectify the situation. And again, if this turned out to be a popular system, it could be extended to include DRMed font files to enforce commercial licenses.\n\nOf course if it gets popular, the costs of running the service could become pretty large. Which is why I think Google should do it, just like they’re doing for popular javascript libraries.  \n [http://code.google.com/apis/ajaxlibs/](http://web.archive.org/web/20090502142415/http:/code.google.com/apis/ajaxlibs/ \"http://code.google.com/apis/ajaxlibs/\")\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 12.12pm",
+      "content": "Ralf, I think David’s idea is to make font face declarations as simple as possible.\n\n@davidc: _Having a central server makes it trivial to ensure commercial fonts are not present..._\n\nYou trivialize the issue of commercial licensing by calling it a non-issue, using flawed reasoning like _...If for any reason they do appear, requests (or in the extreme DMCA takedown notices) are all that would be needed to rectify the situation._\n\nIf your proposal is practical it will ensure commercial fonts never appear in the central repository. Then nobody will need to send cease and desist notices and commercial fonts won’t have to be removed. A DMCA takedown notice is not extreme. That’s kid’stuff in the world of intellectual property and commercial rights enforcement.\n\nHave you talked to Google about it yet? Google may say yes, but then you’d have to get font makers to donate fonts to the repository. I’m not trying to knock your idea into the ground. It has potential, but it needs support from font makers. It needs fonts. You already have my support in the form of Pyke’s Peak. The question is, How many other font makers will donate a font or two from their catalogs?\n\nj a m e s\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 1.05pm",
+      "content": "<cite>Ralf, I think David’s idea is to make font face declarations as simple as possible.</cite>\n\nHere someone just started a service for central hosting of sIFR fonts: [http://www.fontburner.com/](http://web.archive.org/web/20090502142415/http:/www.fontburner.com/ \"http://www.fontburner.com/\")  \nMakes a lot of sense, because sIFR is not easy to set up.  \nBut a @font-face declaration is as simple as linking an image on a website. So I don’t see a real benefit in this plugin approach over a @font-face implementation. Am I missing something?\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 1.24pm",
+      "content": "@font-face declarations _can be_ as simple as linking an image on a website, if the font resource is on the same server as the html/css files. If it’s on another server the call will involve [http://website.com/yada-yada/yoda.otf](http://web.archive.org/web/20090502142415/http:/website.com/yada-yada/yoda.otf \"http://website.com/yada-yada/yoda.otf\").\n\nIf a central repository of “open licensed” fonts existed, broswers could in theory be made to look in the repository by default if the font called doesn’t exist in the same directory on the same server as the html/css.\n\nThe increase in simplicity may be small, but in the world of web development many small gains add up.\n\nj a m e s\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 8.20pm",
+      "content": "Here’s a thought. What if we just consider the union of all the current free font sites out there\\* “the font service”? At that point the service is simply an mediator. Create an index of the fonts available and their source URLs, and grab the file from the server when it isn’t available locally. This seems like a pretty straightforward piece of code.\n\nBTW, thanks to all for having this discussion with me. It’s been helpful in thinking about how to approach the design of the system. Now I just need to find a developer...\n\n\\* dafont.com, 1001freefonts.com, urbanfonts.com, simplythebest.net/fonts, fontgarden.com, fontsugar.com, larabiefonts.com &c.\n\n"
+    },
+    {
+      "time": " 11.Jun.2008 12.18am",
+      "content": "Just one of the many flaws: you have to many name conflicts in fonts.  \nAlso, they are virtually unavoidable.\n\nSzabolcs\n\n"
+    }
+  ]
+}

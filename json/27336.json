@@ -1,0 +1,34 @@
+{
+  "id": "27336",
+  "title": "FontLab 5.0.2 output [WARNING]",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "And then suddenly when I compiled the OT-lookups it happened…  \n…The lookups work however, but my once so carefully named kerning and OpenType classes has been reduced.  \nFor instance: Kerning class “\\_A1” (right), “\\_A2” (left) turned into just “\\_A” (right).\n\n[WARNING] Glyph class @Font Name redefined [/Users/User Name/Library/Application Support/FontLab/Studio 5/Features/fontlab.fea 41]  \n[WARNING] Glyph class @Font Name redefined [/Users/User Name/Library/Application Support/FontLab/Studio 5/Features/fontlab.fea 42]  \n[WARNING] Glyph class @Font Name redefined [/Users/User Name/Library/Application Support/FontLab/Studio 5/Features/fontlab.fea 46]  \n–  \n[WARNING] Glyph class @Font Name redefined [/Users/User Name/Library/Application Support/FontLab/Studio 5/Features/fontlab.fea 83]\n\nWhy?  \nPlease help me!\n\n// Kristian M\n\n",
+  "author": "<a href=\"/web/20120103164414/http://typophile.com/user/13022\" title=\"View user profile.\">Kristian M</a>",
+  "time": "<br>",
+  "uid": "13022",
+  "comments": [
+    {
+      "time": "",
+      "content": "<cite>For instance: Kerning class “_A1” (right), “_A2” (left) turned into just “_A” (right).</cite>\n\nDo you mean, in your original .vfb, or in the .otf or .ttf which you generated from it?\n\nAs to the warning, have you checked if there is there are classes with the same name but with different content?\n\nKarsten\n\n"
+    },
+    {
+      "time": "",
+      "content": "_Do you mean, in your original .vfb, or in the .otf or .ttf which you generated from it?_\n\nIn the .otf-file – and there are no duplicates. I never had this problem in FL 4.6…\n\n// Kristian M\n\n"
+    },
+    {
+      "time": "",
+      "content": "In the .otf, classes have different names than in the .vfb; don't expect to find your original names. Also, feature code may look a bit different in the .otf.\n\nNo duplicate class names, then this is strange. You assigned leftside or rightside flags (the checkboxes, either in the classes panel or in the kerning assistance dialog) correctly? Just a guess. But -- to my knowledge -- the warning appeals to duplicate class names. (I had this myself last week, and it took me some time to find the class.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "That redefined warning comes up when there are two sets of classes (or duplicate classes). If you imported your features, you may have also imported a set of classes with the features. (The default in FLS5 is to included classes in the feature code) Look in the features panel and see if there are classes listed in the lower right hand panel (under the panel that contains the feature text). If it is there delete it. Then recompie with your original classes.\n\nJames\n\n"
+    },
+    {
+      "time": "",
+      "content": "Oh, of course how silly of me!  \nThank you, thank you, thank you – both!\n\n// Kristian\n\n"
+    }
+  ]
+}

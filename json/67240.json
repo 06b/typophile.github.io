@@ -1,0 +1,36 @@
+{
+  "id": "67240",
+  "title": "Python Q - replacing last glyph in each word",
+  "forum": "Build",
+  "tags": [
+    "Python",
+    "replace",
+    "Build"
+  ],
+  "content": "Hey, I was wondering if anyone could help me with a python script. I'm making a script font, and would like to substitute out the final glyph in each word (with one that has a finishing flourish).\n\nI remember seeing something like that here before, but I can't find it now :(\n\n",
+  "author": "HaleyFiege",
+  "time": "9 Feb 2010 — 6:21pm",
+  "uid": "17709",
+  "comments": [
+    {
+      "time": "9 Feb 2010 — 7:23pm",
+      "content": "Python? Do you mean coding an OpenType feature?\n\nIf so, it goes like this:\n\nMake a few groups:\n\n@any\\_letter = [_a list of all letters from your font that could be part of a word_] ;\n\n@not\\_final = [_a list of the non-final glyph forms_] ;\n\n@final = [_a list of the final glyph forms (same order, same number of glyphs)_] ;\n\nHere is the feature code, which should be put in the calt feature:\n\nfeature calt {\n\nlookup fix\\_finals {  \nignore sub @not\\_final' @any\\_letter ;  \nsub @not\\_final' by @final ;  \n} fix\\_finals ;\n\n} calt ;\n\nThe \"ignore\" part means skip the rest if another letter follows. If no letter follows, then the substitution happens.\n\n"
+    },
+    {
+      "time": "9 Feb 2010 — 7:23pm",
+      "content": "By the way, the groups can be made either in the OT editor in FontLab, either just before the feature code, or in the lower pane of the OT editor panel. Or, you can use the Classes panel, select \"New OpenType Class\" from the pop-up, and use this syntax:\n\ngroup\\_name: _list of glyphs_\n\nI prefer putting it all in the OT editor. Seems easier to manage.\n\n"
+    },
+    {
+      "time": "9 Feb 2010 — 7:34pm",
+      "content": "Thanks Mark :)\n\n"
+    },
+    {
+      "time": "9 Feb 2010 — 8:26pm",
+      "content": "So it's working when I test in the fontlab opentype tester window, but not when I use it in Indesign or Illustrator. Is there a feature in opentype I have to turn on for this to work? (all my other scripts are working though)\n\nOr did I do something wrong :(\n\n"
+    },
+    {
+      "time": "9 Feb 2010 — 8:59pm",
+      "content": "Is this the only feature in the font? There is a bug in InDesign where it ignores a feature if it is the only one.\n\nIf that's not the case, it could be that you have contextual alternates unchecked in InDesign.\n\nIt's also possible that you are not including OT features when you generate the font. There is a checkbox for this in the preferences.\n\n"
+    }
+  ]
+}

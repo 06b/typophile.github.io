@@ -1,0 +1,36 @@
+{
+  "id": "68685",
+  "title": "Arabic-Script font designing and its difficulty",
+  "forum": "General Discussions",
+  "tags": [
+    "arabic",
+    "Arabic Fonts",
+    "General Discussions"
+  ],
+  "content": "Dear all,\n\nThis is my first post on this site. I’m beginner in designing [Arabic](http://web.archive.org/web/20150415200828/http:/typophile.com/wiki/Arabic) fonts.  \nFor a long time I was looking for a design guide for Arabic fonts on internet for accomplishing my own design of nastaaliq-shekasta, but didn’t find ANYthing else than a few companies that just sell their products. I have many troubles with Arabic OpenType features especially mkmk, mark and kashiada[?].  \n\\*Could you introduce me a free guide or handbook about Arabic fonts, or a complete OpenType features guide?  \n\\* How can I learn about mkmk and mark? could you help me?  \n\\* Which programs you are using to design OTF tables?  \n\\* Can I ask some more questions here? or this forum is just for experts?\n\n",
+  "author": "Soroush",
+  "time": "23 Mar 2010 — 9:33am",
+  "uid": "59250",
+  "comments": [
+    {
+      "time": "23 Mar 2010 — 10:23am",
+      "content": "Soroush, you might find the Typophile [Arabic forum](http://web.archive.org/web/20150415200828/http:/typophile.com/forum/366) a useful place to ask such questions.\n\nAlso check out the [MS VOLT tool forum](http://web.archive.org/web/20150415200828/http:/forum.fontlab.com/microsoft-visual-opentype-layout-tool-volt-b24.0/). VOLT is the preferred tool for building OpenType Layout tables for most Arabic font development.\n\nDo you read Persian? The best book on the writing of Persian styles is _Ta’lim-e Khatt_ by Habib-ollah Fazāeli. This is a calligraphy manual, but does a better job than most of describing the grammar -- the rules and permitted variations -- of the nastaliq and other styles, and understanding the grammar of a script style is the first step in being able to faithfully represent that style typographically.\n\nThe OTL mark and mkmk features are fairly easy to understand, I think. These features dynamically position combining marks such as vowel signs to letters (mark) and to other marks (mkmk). This is done by defining anchor attachment points on the mark and on the base letter or mark. This can be done in VOLT.\n\n"
+    },
+    {
+      "time": "23 Mar 2010 — 10:58am",
+      "content": "thank you very much! links was so useful and enlightening for me.\n\nand about the  \nتعليم خط: حبیب‌الله فضائلی\n\nI have own that book! I design shekasta ligatures by scanning its pages and converting they to Bezier curves. (but finally the book was destroyed :-( and I bought another one!)\n\nand about mkmk and mark: I know what they do and how they work, but do you think it’s so difficult to mark each haraka on each letter? I’m looking a python macro for automatically calculating position and creating top and bottom anchors in FontLab.  \nanother problem: anchors of FontLab 5.0 are not generated when outputting ttf file…  \nand a personal question: your name is not Iranian or Armenian, but your icon in site is in Nastaliq Style; do you read Farsi? why you learn?\n\n"
+    },
+    {
+      "time": "23 Mar 2010 — 1:01pm",
+      "content": "_I’m looking a python macro for automatically calculating position and creating top and bottom anchors in FontLab._\n\nI'm not aware of any macro to do this within FontLab, and am not sure that it is possible. [Mamoun Sakkal](http://web.archive.org/web/20150415200828/http:/www.sakkal.com/) offers a service for automatic mark positioning that some of my clients have used. He uses proprietary software to analyse and calculate mark positioning, and provides the result as a VOLT GPOS lookup .vtl file.\n\n_another problem: anchors of FontLab 5.0 are not generated when outputting ttf file…_\n\nYes, this is a limitation of the current FontLab. It relies on Adobe FDK code for OpenType Layout, and uses an earlier FDK that did not support GPOS anchor attachments. This is one of the reasons why VOLT remains the preferred tool for Arabic font development. I understand that FontLab Studio 6.0 will support this feature.\n\n_your name is not Iranian or Armenian, but your icon in site is in Nastaliq Style; do you read Farsi?_\n\nNo, I do not. I design make fonts for lots of different writing systems -- sometimes in collaboration --, and can't learn all the languages involved. My icon was a gift sent to me by a colleague: my name written by a calligrapher. I liked it so much, I made it my Typophile icon.\n\n"
+    },
+    {
+      "time": "23 Mar 2010 — 1:03pm",
+      "content": "_I have own that book! I design shekasta ligatures by scanning its pages and converting they to Bezier curves._\n\nI strongly encourage you to consider not making ligature glyphs but, instead, breaking them down into smaller components that can be contextually substituted and arranged using the 'curs' feature. This will make your font much smaller and more flexible.\n\n"
+    },
+    {
+      "time": "24 Mar 2010 — 12:53am",
+      "content": "Thanks a lot for your useful hints\n\n"
+    }
+  ]
+}

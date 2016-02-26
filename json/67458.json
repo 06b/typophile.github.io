@@ -1,0 +1,118 @@
+{
+  "id": "67458",
+  "title": "List of glyphs in different languages",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "Is there an existing list of glyphs available somewhere, to see what glyphs are used in what languages? I would imagine it to be very helpful in designing fonts. I've found some advice in the web, but the information seems to be somewhat scattered to concerning only diacritics for example. If I'm creating a language support into a font, I'd like to know exactly what glyphs I need to design for that language. Some key issues to the design of the foreign characters would be a plus of course.\n\n",
+  "author": "Topy",
+  "time": "15 Feb 2010 — 11:43pm",
+  "uid": "19417",
+  "comments": [
+    {
+      "time": "15 Feb 2010 — 11:52pm",
+      "content": "There is no such list. The people involved in the Unicode standards process do not even have such a list, because it’s not something that everyone knows. In fact, there’s not even an organized list of all the writing systems known, either.\n\nYou can try [Decode Unicode](http://web.archive.org/web/20150315072732/http:/www.decodeunicode.org/) as a place to start, and check the [Unicode code charts](http://web.archive.org/web/20150315072732/http:/unicode.org/charts/) for additional information. Also see [Omniglot](http://web.archive.org/web/20150315072732/http:/www.omniglot.com/) for a guide to many – but by no means all&nbsp;–&nbsp;of the world’s known writing systems.\n\n"
+    },
+    {
+      "time": "16 Feb 2010 — 12:22am",
+      "content": "Those are good suggestions. You can also check Wikipedia, as it has some good information, but only for certain languages and scripts.\n\nA few of us have been working on a more comprehensive clearinghouse for this type of info: [ScriptSource](http://web.archive.org/web/20150315072732/http:/www.scriptsource.org/). We now have a working site with some great features, but it's not yet ready for public use. We're also busy creating some very basic content. We hope to open it up to a limited group of people in a few months - particularly people who would want to contribute linguistic, design or technical information. Contact me if you're interested in helping.\n\n"
+    },
+    {
+      "time": "16 Feb 2010 — 12:24am",
+      "content": "Thanks, Decode Unicode is a good read towards what I'm looking for. I'm amazed that there isn't such a tool made from typography design point of view. At least for the common latin/western languages. So it seems that most fonts get away with Basic Latin, Latin-1 and Latin Extended A character sets?\n\n"
+    },
+    {
+      "time": "17 Feb 2010 — 11:50am",
+      "content": "Yes, that’s about it. Actually, most fonts out there only manage Basic Latin and Latin-1. It seems that people get bored after designing just about that many glyphs, and then they move on to some other font.\n\nLatin Extended A gets supported for fonts that say they can handle “Central European”, i.e. Polish, Czech, Hungarian, and a bunch of other European national languages. Anything beyond that is quite rare. I’ve seen some fonts where only _parts_ of Latin Extended A are supported, because the designer only cares about Czech and Polish but not Maltese or Romanian, for example. That’s kind of annoying, but it’s the designer’s decision in the end, I suppose.\n\nThe worst offenders are fonts where the designer has made a token attempt at adding things but doesn’t actually test them. An example is the Combining Diacritical Marks block, where sometimes a font includes most or all of the diacritics but the designer doesn’t bother to add composed glyphs or instead properly use the mark feature. Then it looks at first glance like the font could support many more characters in composition, but it actually doesn’t because the diacritics don’t work as God and the Unicode committee intended.\n\nSome fonts have a small subset of the Combining Diacritical Marks, only the ones used in Western European languages, and then they don’t work except for the precomposed characters in Latin-1 and Latin Extended A. This is generally because designers will use the CDM block as a sort of scrap space, storing the diacritics for use in designing the Latin-1 & LEA characters, and never considering that the presence of things in the CDM block implies functionality beyond those two ranges of precomposed glyphs. This behaviour is extremely common: try adding an acute accent to a lowercase n in your favorite fonts some day.\n\nAnyway, I’m off on an irrelevant rant. But I do have an important point to make. IMNSHO if you’re going to add a character you should endeavour to support it fully, and not just have it in there as a useless stub. In the case of fonts, nothing is better than broken and misleading.\n\n"
+    },
+    {
+      "time": "17 Feb 2010 — 5:12pm",
+      "content": "There was a Microsoft project in the 1990s that involved the creation of a database that would for example allow one to see what characters were required to support a language. The project seems not to have been completed, but it yielded Sylfaen as a by-product:\n\n[http://www.tiro.nu/Articles/sylfaen\\_article.pdf](http://web.archive.org/web/20150315072732/http:/www.tiro.nu/Articles/sylfaen_article.pdf)\n\n"
+    },
+    {
+      "time": "18 Feb 2010 — 12:38am",
+      "content": "jcrippen: Thank you very much for your comment! I didn't consider it rant or irrelevant. Actually, this is just the kind of information I'm after. I have too noticed that diacritics in most fonts are not working properly. I'm designing a font and would like to add a proper support for many languages, but I'm really lacking the appropriate knowledge to do so. I guess that's also the reason why many of existing fonts are the way they are. What would be nice to have, is a list in design point of view, but also technical guide. How to make that functionality of adding acute accent to lowercase n, for example?\n\nCould you please explain what you mean by the \"mark feature\"?\n\nJongseong: This is very interesting. I guess this project is not online to visit?\n\n"
+    },
+    {
+      "time": "18 Feb 2010 — 5:46am",
+      "content": "James Crippen writes:\n\n<cite> I’ve seen some fonts where only parts of Latin Extended A are supported, because the designer only cares about Czech and Polish but not Maltese or Romanian, for example. That’s kind of annoying, but it’s the designer’s decision in the end, I suppose. </cite>\n\nI find this comment to be a bit peculiar. No font can realistically be expected to support _all_ latin-based languages; each designer must therefore make decisions regarding which languages they will choose to support. What's odd about the above is that it suggests that those decisions should somehow revolve around the rather arbitrary grouping of languages into unicode blocks. Why is this more sensible than using geographical (e.g. Central European vs. Balkan/Mediterranean) or phylogenetic (e.g. Slavic vs. Romance/Semitic) criteria?\n\nI admit to being guilty of this view myself, insofar as I tend to add support for Esperanto just to fill out the Latin Extended A block despite the fact that this language ranks _very_ low on my list of languages I'd want to support. On reflection, though, this really doesn't make much sense.\n\nAndré\n\n"
+    },
+    {
+      "time": "18 Feb 2010 — 5:56am",
+      "content": "Two resources which haven't been mentioned yet are [The Letter Database](http://web.archive.org/web/20150315072732/http:/www.eki.ee/letter) and [Michael Everson's site](http://web.archive.org/web/20150315072732/http:/www.evertype.com/alphabets).\n\nAndré\n\n"
+    },
+    {
+      "time": "18 Feb 2010 — 6:00am",
+      "content": "Thanks all!\n\n"
+    },
+    {
+      "time": "18 Feb 2010 — 6:09am",
+      "content": "This is what I came up with for my [Test Text Generator](http://web.archive.org/web/20150315072732/http:/justanotherfoundry.com/tools/generator/):\n\ncs: áčďéěíňóřšťúůýž  \nda: æøå  \nde: äüöß  \nes: áéíñóúü  \nfi: äö  \nfr: œàâçéèêëîïôûù  \nis: áðéíóúýþæö  \nit: àèéìòù  \nnl: óëéï  \npl: ąćęłńóśźż  \npt: áâãàçéêíóôõúü  \nro: ăâîşţ  \nsv: åäö  \ntr: çğıöşüâ\n\nThey are based on rather large amounts of text plus Wikipedia research but they are debatable, of course. For example, you would find à and é in German but I tried to include only those characters that are \"native\" to that language.\n\n"
+    },
+    {
+      "time": "18 Feb 2010 — 12:03pm",
+      "content": "My contribution: [http://www.cheapprofonts.com/Languages.php](http://web.archive.org/web/20150315072732/http:/www.cheapprofonts.com/Languages.php \"http://www.cheapprofonts.com/Languages.php\")  \nNot by any means a complete list, but at least the glyphs of 65 languages using the latin script is presented in a visual way. It is the result of a couple of weeks research before I started my multilingual project/site over 2 years ago. My, how time flies! :)\n\n"
+    },
+    {
+      "time": "18 Feb 2010 — 12:34pm",
+      "content": "<cite>Jongseong: This is very interesting. I guess this project is not online to visit?</cite>\n\nI don't think anything available to the public came out of the project. Shame, really, because it would have been a nice resource had the project been continued.\n\n_For example, you would find à and é in German but I tried to include only those characters that are \"native\" to that language._\n\nTo be thorough, it would be useful to indicate which characters are marginal to a language. You would also find à and é in English, although they are not considered native letters. The same for å, š, and ž in Finnish, except that å does appear in the Finnish alphabet (which also includes a number of other letters not used for native Finnish words).\n\nIt's really complicated when you go through all these details. This is why it is useful to group several languages together and define the character set that will be sufficient for each of those languages. Hence the Western European, Central European and Baltic, etc. With something like African languages which are numerous and poorly documented, this is really the only possible approach; rather than trying to find out which characters are needed for each of hundreds of languages used in West Africa, it is more efficient to draw up a list of characters needed for several major West African languages. This is because regional and cultural groupings of languages tend to share characteristic letters.\n\nThe original poster talked about glyphs. Technically there is a difference between a glyph and a character, in that glyph refers to a particular shape of a character. The distinction is rather important because Unicode considers some similar characters used in different languages but with slightly different forms in each to be the same character. Depending on the language, uppercase Eng (Ŋ) will either resemble \"N\" with a hook or an enlarged \"n\" with a hook that may or may not descend, but in Unicode all these glyphs are variants of the same character. So really, you do need to know which languages you intend to support, because that may determine how you draw the glyphs.\n\n"
+    },
+    {
+      "time": "18 Feb 2010 — 5:35pm",
+      "content": "Brian-\n\nAs a Finn I have to say that in Finnish language there are only 'ä' and 'ö' as extras to English alphabet. That 'å' is there because Finland is bilingual country, so Swedish is there as well.\n\n"
+    },
+    {
+      "time": "19 Feb 2010 — 10:45am",
+      "content": "I said that å occurs in the Finnish alphabet even though it isn't a native letter, specifically referring to the Finnish alphabet and not the Finnish language in general. Do you disagree with this? When you recite the alphabet in Finnish, don't you include the \"ruotsalainen oo (Swedish o)\" as a letter?\n\nThe å is part of the Finnish alphabet, regardless of the fact that it is not used for any native Finnish words. So are letters like c, q, w, x, and z, which don't occur in native Finnish words either. Yes, the fact that Finland is a bilingual country probably has a lot to do with why the Finnish alphabet includes letters not really used in the language. But I stated nothing controversial.\n\n"
+    },
+    {
+      "time": "19 Feb 2010 — 11:25am",
+      "content": "_... people get bored after designing just about that many glyphs, and then they move on to some other font._\n\nI don't think that's true for a lot of foundries that produce OpenType text faces.  \nI have been putting, for instance, Esperanto characters (not to mention Greenlandic small k) in all my \"Extended Latin\" OpenType fonts (all styles and weights) for several years now, out of a sense of professional duty, although it makes absolutely no economic or practical sense.\n\n"
+    },
+    {
+      "time": "19 Feb 2010 — 12:47pm",
+      "content": "Exactly right, Nick, bravo! We don't get paid by the letter, nor should we. We do have a duty as professionals to support many languages. even if there is minimal compensation for doing so.\n\n"
+    },
+    {
+      "time": "19 Feb 2010 — 3:59pm",
+      "content": "Some of the old ATF catalogues did include brief tables showing which accented letters belonged to which language in at least a few of the more well-known cases.\n\n"
+    },
+    {
+      "time": "19 Feb 2010 — 8:16pm",
+      "content": "Regarding the Greenlandic small k (kra), it hasn't been part of the official orthography of Greenlandic since 1973. I'm certainly in favor of fonts with lots of obscure characters, but that particular letter isn't one I'd go out of my way to support...\n\n"
+    },
+    {
+      "time": "22 Feb 2010 — 1:28am",
+      "content": "Wow, many thanks to everybody for contributing!\n\n"
+    },
+    {
+      "time": "9 Nov 2010 — 3:19pm",
+      "content": "Victor, has there been any development on ScripSource recently? It looks very promising!\n\nThese are two further related projects I find interesting:\n\n[FontConfig](http://web.archive.org/web/20150315072732/http:/cgit.freedesktop.org/fontconfig/tree/fc-lang) has an impressive list of languages.\n\nTypekit's [Speakeasy](http://web.archive.org/web/20150315072732/http:/blog.typekit.com/2010/10/28/announcing-speakeasy-a-new-open-source-language-tool-from-typekit/) started only this month, doesn't have a large database yet but also looks very promising, too.\n\n"
+    },
+    {
+      "time": "10 Nov 2010 — 1:24pm",
+      "content": "There is a small inconsistency in Letter DB, FontConfig and Cheap Pro Fonts: Guarani uses both G and g with tilde, but in these sites just g with tilde is included. BTW, these two characters are unencoded.\n\nI plan to make public a large chart showing almost all Latin-based alphabets with the release of my [font](http://web.archive.org/web/20150315072732/http:/typophile.com/node/67787). By now, I have 300+ languages and transliteration schemas mapped. Unhappily, there are very few information about some native languages from South America and Central Africa.\n\n"
+    },
+    {
+      "time": "20 Nov 2010 — 4:34am",
+      "content": "<cite>No font can realistically be expected to support all latin-based languages</cite>\n\nWhy not –?\n\nOf course, not every font can be expected to cover everything. So, the choice to make is really a severe issue. However, as Nick Shinn puts it, it is a matter of “sense of professional duty” to provide at least a set of \\*some\\* decent comprehensiveness. A set on which to decide is still left to every font provider, to be based on his own considerations.  \nUnfortunately neither UC ranges nor the so-called codepages give reliable reference to that decision, so it remains – up to you.\n\n"
+    },
+    {
+      "time": "20 Nov 2010 — 7:48am",
+      "content": "There is this dance that starts with one partner and eventually everybody is dancing. I find I see a single glyph or two would add another language; having done that, I see just a few more would bring in yet another,... and so it goes--until it is time to do the caps, smallcaps, kerning exceptions. I have several fonts with over 2000 glyphs. Who was it that said something about \"just 26 letters\"\"?  \nAt first, it is intriguing and you feel compelled to be fair to everybody in the World and get a good sense of fair play erasing the boundaries of nationalism. Then you get interupted by the sound of your head hitting the keyboard as you drift off to sleep in the midst of your Ajurbajany.\n\n"
+    },
+    {
+      "time": "20 Nov 2010 — 8:14am",
+      "content": "@ Then you get interupted by the sound of your head hitting the keyboard as you drift off to sleep in the midst of your Ajurbajany.\n\nSecond Dezcom?!\n\n ![](http://web.archive.org/web/20150315072732im_/http:/typophile.com/files/HeadxPC_4511.gif)\n\n"
+    },
+    {
+      "time": "20 Nov 2010 — 8:26am",
+      "content": "Since there are fonts which support Chinese, and fonts which support the entire Basic Multilingual Page of Unicode, the idea that a font - not every font, but a font specifically designed to have a broad range of support - might support \"all\" latin-based scripts does not, at first glance, seem impossible.\n\nBut as we see in this thread, even that humble \"all\" requires research and is fuzzy around the edges. The African and Native American languages with such scripts are often quite obscure. And it's not impossible that new scripts of this type are still being developed.\n\nLatin-based transliteration schemes for Arabic and ancient Egyptian, for example, I suppose might also be noted. The American Library Association had a modified version of ASCII which included the combining diacritics required for printing library cards for books from just about anywhere - but that would be just a start compared to the goal here.\n\n"
+    },
+    {
+      "time": "20 Nov 2010 — 9:58am",
+      "content": ":-)\n\n"
+    }
+  ]
+}

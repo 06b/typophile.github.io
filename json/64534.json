@@ -1,0 +1,106 @@
+{
+  "id": "64534",
+  "title": "Why Rent or Buy, When You Can Rasterize.",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "Typekit, purchase, rental, DRM, etc .. it's all good, but here is an idea that can be easily implemented right now and that will cover the **100%** of the web design community needs.\n\n_An online service that for a monthly fee allows rasterizing unlimited amount of text in a specific typeface. You select the typeface, the size and the color and it gives you a transparent PNG back. Licensed for a web use PNG that is._\n\nIf you think for a moment how _exactly_ non-standard fonts are used in the web design, it will immediately make perfect sense. They are used sparingly for headers, menus and such and they are always rasterized. The web designers need the PNGs, not the OTFs or TTFs. So sell them just that.\n\nIf the service fee is reasonably low (something like $10 per year per font, or perhaps $50 for the buffet), this will open up existing font portfolios to a much much wider designer audience. It should also curb the piracy to a certain degree, because people are stealing fonts predominantly for the online use.\n\nAdditionally, this should allow for using custom rasterizers that are font- or foundry-specific. Case in point - [Effra](http://web.archive.org/web/20100131092831/http:/typophile.com/node/57114) from Dalton Maag.\n\nMyFonts, for example, already have all the technology in place to make this happen. Just needs a trip to a lawyer and a web interface. It all can be up and running in a matter of weeks.\n\n",
+  "author": "<a href=\"/web/20100131092831/http://typophile.com/user/39971\" title=\"View user profile.\">apankrat</a>",
+  "time": "<br>",
+  "uid": "39971",
+  "comments": [
+    {
+      "time": "",
+      "content": "One issue is that it creates an unintended \"penalty\" when the designer messes up or needs to revise whatever has been rasterized.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"100% of the web design community needs.\"\n\nNot at all. An image instead of html text is...\n\n- more troublesome for users to resize  \n - harder to select  \n - useless for body text (screen readers and google need to see text)  \n - a pain to maintain  \n - adds bandwidth issues\n\nThat's not to say that's not been the standard method up to this point, but it's a method that's definitely on its way out.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Rasterized text is so anti-web. Anti-accessible, anti-scalable, anti-searchable…  \nThat's what we've had to do for years, and it's about time it ended.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_- more troublesome for users to resize_\n\nNot really. All modern browsers resize images along size with the text. Not perfectly (no cubic spline interpolation), but very much passably.\n\n_- harder to select_\n\nAgreed.\n\n_- useless for body text (screen readers and google need to see text)_\n\nNot really, there is an alt attribute in the img tag and there's also that placing the text in the div with a very large offset and using the image as div's background. There's probably something else. Pre-rasterized text is nothing new and there is a set of SEO techniques for it.\n\n_- a pain to maintain_\n\nThe pain is already there. See below :-)\n\n_- adds bandwidth issues_\n\nAgreed, though properly optimized PNGs will probably add up to significantly less than all the javascript bloat that comes with an average page nowadays.\n\n--\n\nI am not saying that this is a pretty technology. I am saying that there is a set of established practices that are lacking proper type licensing support at the moment. And that it is almost trivial to satisfy this need. Designers are getting an access to more fonts, foundries are getting additional revenue without releasing vector data, the web practices stay the same.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"All modern browsers resize images along size with the text. Not perfectly\"\n\nexactly. 12pt type as an image scaled to 24pt is going to look like crap.\n\n\"there is an alt attribute in the img tag \"\n\nThere's various limits with the number of characters that can be used for that in both browsers and in terms of screen readers and SEO.\n\n\"Pre-rasterized text is nothing new and there is a set of SEO techniques for it.\"\n\nAnd they are less than perfect once you factor in accessibility and usability issues.\n\n\"though properly optimized PNGs will probably add up to significantly less than all the javascript bloat that comes with an average page nowadays.\"\n\nMost of the javascript (when properly implemented) would be cached from page to page. Custom PNGs would not.\n\nIt's not a terrible idea from 'can it be done' standpoint, it's just what we were doing circa 5 years ago. sIFR is a better option than that in a lot of cases, and @font-face is even better.\n\nHaving font licensing issues trump web site user's needs isn't very pragmatic, IMHO. Granted, I'm more of a web designer than type designer. ;)\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> _it’s just what we were doing circa 5 years ago_\n\nThat's what we are still doing circa now. There is a lot of web designers that use pre-rendered text in their designs. What I have suggested is going to simplify their life, and give foundries more control over what's happening with their fonts in the online context.\n\nI fully understand that rendering on the end device is far better than pre-rendering, and I do not disagree that latter is full of problems as per your list. Font-face adoption for the design (as opposed its support in browsers) still has a long way to go, and the pre-rendered text is here to stay for a while. All I am saying that there is no reason not to improve at least some aspects of it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Sumner Stone has been arguing for [something similar](http://web.archive.org/web/20100131092831/http:/stonetypefoundry.com/Resources/Use%20any%20font%20on%20the%20web.pdf).\n\n"
+    },
+    {
+      "time": "",
+      "content": "I think it should be noted that this raster idea is more of a business solution than a technical or an aesthetic solution.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Either the foundry/retailer has to set up some quite complex system for integrating these images with the customers' web page(s), or the customer will have to manually integrate every frickin' graphic, instead of the one-shot integration of the font rental CSS or Javascript code.\n\nThen there's the whole scalability issue. Sure, graphics can be resized. But they will look icky.\n\nI suspect that the perceived plausibility of this scheme is influenced by where you're coming from: Stuart at Font Diner almost exclusively works with unusual display faces that are only going to be viable for headlines and banners, not even really subhead material for the most part. But that's just one part of the overall font market....\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thomas, thanks for the reply.\n\nThe point I am trying to make is that the use of images for headers, menus, etc. is already an established practice.\n\nIf you look through a [Creattica](http://web.archive.org/web/20100131092831/http:/creattica.com/css/latest-designs) or [PatternTap](http://web.archive.org/web/20100131092831/http:/patterntap.com/tap/collection/headers) collections, you may notice how wide-spread its use actuallt is. For example, have a look at [this site](http://web.archive.org/web/20100131092831/http:/www.curbinnovative.com/), which is quite typical as far as the use of technique goes. Even larger sites, like [Jive](http://web.archive.org/web/20100131092831/http:/www.jivesoftware.com/) and [Akamai](http://web.archive.org/web/20100131092831/http:/www.akamai.com/) use it.\n\nNo reason not to offer a special font licensing option for these cases. There is a lot of smaller designer shops working on smaller projects that can't really justify paying $200 for a font family, do not really need the actual OTFs, but would gladly use it for their designs. Offering them rasterized option not only means a better looking web, fewer reasons to look at the piracy and an additional revenue stream for the foundries, it also builds the relationship with them and makes them more likely to purchase the real deal later on. Similar to how village does it with their \"taster option\".\n\n"
+    },
+    {
+      "time": "",
+      "content": "You can have this today:  \n [True Font Family](http://web.archive.org/web/20100131092831/http:/www.truefontfamily.com/?p=index&title=Font-Family-Typeface-Typography-TrueType-Web-Fonts-TTF)  \nThere's another site offering something very similar but I'm still looking for the link.\n\nWorth checking out just to see. But not an answer to the question of typography on the web.\n\nIf you're looking for a headings-limited raster solution, Cufón is much more elegant. And in IE, it doesn't use raster - it uses Vector Markup and scales beautifully.  \n(In Webkit browsers and FF it uses the canvas tag and renders as a bitmap.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Ah, found it:\n\n[Facelift](http://web.archive.org/web/20100131092831/http:/facelift.mawhorter.net/)\n\n(Cool name, too.)\n\nSame concept as True Font Family.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"The point I am trying to make is that the use of images for headers, menus, etc. is already an established practice. \"\n\nAnd is on its way out due to all the points already mentioned.\n\nWeb designers aren't really in any hurry to keep this particular method around.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> _And is on its way out due to all the points already mentioned._\n\nIt may take several years for this method to actually cease to be relevant.\n\nEven when the @font-face support gets all its wrinkles sorted out, the websites will still need to be designed for then legacy browsers such as FF3 and IE7.\n\nConsider the situation with IE6. It was released in 2001, IE7 was out in 2006, and it is only now that some sites start to refuse IE6 clients. And that's not even a mainstream practice yet.\n\nI know what you are saying. This is an ugly practice, doesn't scale, doesn't reflow, etc. No argument there, I agree.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I realize that this being Typophile, we tend to put a higher value on type, but I think, in general, most web designers are perfectly happy with graceful desegregation of @font-face selections to system font-stacks. That's still preferable over having to server custom images.\n\nI think small sites will still be OK with the 'image as headline' option but since they're small sights, I'm not sure how much demand there'd be for online rasterization services for that. If I'm using a custom face on my site, I'd like want a license to it anyways for my print material.\n\nI hate to shoot down the idea, I think it's something worth exploring, I just to clarify what the market demand might actually be for that before undertaking such a project.\n\n"
+    },
+    {
+      "time": "",
+      "content": "@epsilicon\n\nI've been looking at the source code for Facelift.  \nThanks for posting this. I've become re-interested.  \nJust as the increase in bandwidth has made @font-face a viable proposition so too, might some of these image replacement techniques be worth a second look.  \nSome sites might not want to settle for the fallback font-family. On a well-optimized site the performance hit for this kind of stuff might be acceptable if not over-used.\n\nDesigners certainly want the kind of \"graceful degradation\" that fonts-as-images provide. But are they willing to put up with the unwanted side-effects?\n\n\\>This is an ugly practice, doesn’t scale, doesn’t reflow, \\>etc.\n\nIt scales somewhat but gets fuzzy. However, if there were onzoom or ontextsize change events built into browser javascript engines a true re-scaling could be achieved.  \n(FF is finally, at least, providing a javascript property for detecting the zoom level. But no events as yet.)  \nI've done some research and proof-of-concept work on this aspect of scaling and browser capabilities.  \nReflow can be achieved right now, using javascript and Ajax. Kind of a production, though. Don't know if it's worth the hassles. Easier to apply it only to short headlines far left aligned!\n\nThis as a service? Not optimistic about that, but who knows.\n\n[Rich](http://web.archive.org/web/20100131092831/http:/readableweb.com/)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Personally, I would like it if in addition to the ambitious schemes still in development for web fonts, it were possible to use the standard bitmap font file formats that are used with Linux in conjunction with web pages. Yes, such fonts would not scale well, but at least it would allow people to draw their own fonts for use with their web pages without waiting for the development of new technology. Of course, that would have been even more true years ago, since now it seems like the web font standard is coming soon.\n\n"
+    },
+    {
+      "time": "",
+      "content": "This thread made me think a little further about the case for using this technology which is on anything that doesn't support @font-face . . .\n\nMy thought is that you could have some javascript that detects the browser and an 'if all else fails' then the old standby's Cufon and sIFR- [http://cameronmoll.com/archives/2009/03/cufon\\_font\\_embedding](http://web.archive.org/web/20100131092831/http:/cameronmoll.com/archives/2009/03/cufon_font_embedding \"http://cameronmoll.com/archives/2009/03/cufon\\_font\\_embedding\")\n\nI think a rasterized solution is likely plan Z . . .\n\nStuart\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>I think a rasterized solution is likely plan Z . . .\n\nYou must not get out much, or do web solutions start at Z. ;)\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Pre-Turkey Coma . . . :D\n\nPlan Z = When all other options become unavailable and you don't want to lose the client . . .\n\n:D\n\n"
+    },
+    {
+      "time": "",
+      "content": "I hope you had a nice nap.\n\nMay I assume by \"client\", you mean the person who's hired someone to design their web site?\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Indeed . . .\n\n"
+    },
+    {
+      "time": "",
+      "content": "...then, if the term 'client' is shifted to mean the person who points their browser at a web sites, and you think about it as an web designing employee, and not a consultant, or web standards agitator: Plan Z, is great when all other options are risky and you don’t want to lose **your job**...:)\n\nI mean, you can't count on quality text (or smaller), from @font-face fonts, without great care and testing, and even then, some clients... and, you can't count on quality headlines from @font-face fonts, without great care and testing, and even then, some clients...\n\nCheers!\n\n"
+    }
+  ]
+}

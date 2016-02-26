@@ -1,0 +1,86 @@
+{
+  "id": "18452",
+  "title": "Kerning pair with lig's.",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Just wanted to know if this was the correct way to do kerning pairs w/ligs, since i can’t seem to pull up the lig without the back-slash.\n\nThanks\n\n ![](http://web.archive.org/web/20080829165511im_/http:/typophile.com/files/flint.png)\n\n [‹ Fontlab issues on PC?](http://web.archive.org/web/20080829165511/http:/typophile.com/node/20179 \"Go to previous forum topic\") [FontLab 5.0 ›](http://web.archive.org/web/20080829165511/http:/typophile.com/node/20292 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080829165511/http://typophile.com/user/6194\" title=\"View user profile.\">Eric_West</a>",
+  "time": "<br>",
+  "uid": "6194",
+  "comments": [
+    {
+      "time": " 10.Mar.2006 5.33pm",
+      "content": "Yep.\n\nHere’s how that would look as an OpenType feature:\n\nfeature kern {  \n pos f\\_l i -1;  \n} kern;\n\nCouldn’t be simpler! Nice looking forms, too, Eric.\n\nc\n\n"
+    },
+    {
+      "time": " 10.Mar.2006 5.34pm",
+      "content": "Thanks Chester!\n\n"
+    },
+    {
+      "time": " 10.Mar.2006 5.49pm",
+      "content": "I know you didn’t ask, but... The crossbar of the “f” traditionally doesn’t touch the “l”. You’ve got something there that looks a little bit like a cap “A”.\n\n"
+    },
+    {
+      "time": " 10.Mar.2006 10.02pm",
+      "content": "Point taken.\n\n"
+    },
+    {
+      "time": " 11.Mar.2006 3.03am",
+      "content": "You can also type “/f\\_l int” (note the space after /f\\_l). The slash is required so FLS knows “f\\_i” is the glyph name not three individual glyphs.\n\nIf your “l” and the “l” in “f\\_l” are not too different, you might create a kern class with “l” as base glyph and then kern the “l” only. So: “\\_l\\_1: d l’ f\\_l f\\_f\\_l”.  \nIn this example, the first “\\_” in the class name indicates to FLS that it’s a kern class. The “l” in the class name reminds you of the base glyph (which you have to kern in FLS). And the “\\_1” [one] is a hint that this is a leftside-of-a-pair-class, or first class. (A rightside-of-a-pair-class would have “\\_2” at the end.)  \nRight from the start, for a kerning class containing “I” “Idotaccent” “Igrave” “H”, you should prepare TWO classes nevertheless — one for “I” “Idotaccent” “Igrave” “H” being the first glyph of a pair, one for them being the second glyph of a pair (“\\_I\\_1: I’ Idotaccent Igrave H” and “\\_I\\_2: I’ Idotaccent Igrave H”). Anything else would bring you into trouble when compiling the kern feature later.\n\n"
+    },
+    {
+      "time": " 11.Mar.2006 7.41am",
+      "content": "and another point, for ligatures that have their own postscript names, you should name them with those names, thus: fi, fl, ff, ffi, ffl, st, longst but f\\_t, c\\_t, s\\_p, &c.\n\n"
+    },
+    {
+      "time": " 18.Apr.2006 10.14pm",
+      "content": "Hello Mr Hunt — do you know about issues with standard ligatures named with underscore? I haven’t found any. Windows didn’t knew fi and fl anyway, not to speak of st or longst. And OS9 is almost dead. Compatibility is nice, but the question is: how far back?, as this thread is about OpenType not PS T1 fonts.\n\nKarsten\n\n"
+    },
+    {
+      "time": " 18.Apr.2006 10.17pm",
+      "content": "_do you know about issues with standard ligatures named with underscore?_\n\ni’ve been informed that either way is acceptable. i stand corrected. thank you.\n\n"
+    },
+    {
+      "time": " 19.Apr.2006 7.40am",
+      "content": "_The crossbar of the “f” traditionally doesn’t touch the “l”._\n\nYou sure about that chester?\n\n"
+    },
+    {
+      "time": " 19.Apr.2006 7.45am",
+      "content": " ![](http://web.archive.org/web/20080829165511im_/http:/typophile.com/files/bookman03pdh.gif)\n\nf-ligatures from Lanston New Bookman (metal)\n\n"
+    },
+    {
+      "time": " 19.Apr.2006 8.56am",
+      "content": "I don’t know about “tradition” in this case, but to me not only the bar shouldn’t touch, but neither should the tops! :-) Especially for a book font (small x-height, strong “f”, longish serifs).\n\nhhp\n\n"
+    },
+    {
+      "time": " 19.Apr.2006 3.45pm",
+      "content": "That’s the only reason I had done it before, after seeing other type use it, but he was right about mine, it didn’t help.\n\n"
+    },
+    {
+      "time": " 29.May.2006 8.15am",
+      "content": "Is there a way to study properly how class-based kerning works in FontLab 5? I have not worked seriously on type for almost two years, and I would really welcome the opportunity to study properly these things.\n\nI mean, is there a book, or something like that? I quite dislike technical aspects and code, and that’s one of the reasons which contributed to my inactivity (well, just one, in fact).\n\nI feel somewhat lost when I start looking at the complexity a type design seem to require nowadays. I guess it’s just the matter of getting used to this basic programming, but I really feel disoriented about it.\n\n"
+    },
+    {
+      "time": " 29.May.2006 10.00am",
+      "content": "Paul,  \n\\> for ligatures that have their own postscript  \n\\> names, you should name them with those names,  \n\\> thus: fi, fl, ff, ffi, ffl, st\n\nI wonder if you could elaborate a bit on what you mean by “ligatures that have their own postscript names”. The authoritative source, Adobe Glyph List for New Fonts ( [http://partners.adobe.com/public/developer/en/opentype/aglfn13.txt](http://web.archive.org/web/20080829165511/http:/partners.adobe.com/public/developer/en/opentype/aglfn13.txt \"http://partners.adobe.com/public/developer/en/opentype/aglfn13.txt\") ) does not list any single of those you quote.\n\nThe legacy Adobe Glyph List 2.0 ( [http://partners.adobe.com/public/developer/en/opentype/glyphlist.txt](http://web.archive.org/web/20080829165511/http:/partners.adobe.com/public/developer/en/opentype/glyphlist.txt \"http://partners.adobe.com/public/developer/en/opentype/glyphlist.txt\") ) includes ff, fi, fl, ffi, ffl but not st. But that said, these are considered legacy names since they’re absent from AGLFN. According to AGLFN, you should use the algorithmic names (f\\_f, f\\_i, f\\_l, f\\_f\\_i, f\\_f\\_l, s\\_t) in all cases.\n\nA.\n\nAdam\n\n"
+    },
+    {
+      "time": " 29.May.2006 10.27am",
+      "content": "_I wonder if you could elaborate a bit on what you mean_  \nsorry adam, thnx for clearing up my confusion. i still need to read through this documentation so i don’t make stupid mistakes like this.\n\n"
+    },
+    {
+      "time": " 29.May.2006 10.49am",
+      "content": "Of course if you use the names like “fi” or “fl” for the standard ligatures, it won’t break anything. The difference between AGLFN (Adobe Glyph List for New Fonts, [http://partners.adobe.com/public/developer/en/opentype/aglfn13.txt](http://web.archive.org/web/20080829165511/http:/partners.adobe.com/public/developer/en/opentype/aglfn13.txt \"http://partners.adobe.com/public/developer/en/opentype/aglfn13.txt\") ) and AGL2 (Adobe Glyph List 2.0, [http://partners.adobe.com/public/developer/en/opentype/glyphlist.txt](http://web.archive.org/web/20080829165511/http:/partners.adobe.com/public/developer/en/opentype/glyphlist.txt \"http://partners.adobe.com/public/developer/en/opentype/glyphlist.txt\") ) is that the first lists the recommended glyph names (“best picks”, so to say) while the second also lists “legacy” names that will also be understood. For Unicode codepoints not listed in the AGLFN, you need to follow the algorithmic approach that is discussed in the “Editing Fonts” chapter, “Glyph Naming and Character Encoding” section of the FontLab Studio 5 manual.\n\nA.\n\n"
+    },
+    {
+      "time": " 29.May.2006 11.24am",
+      "content": "speaking of the FLS5 manual: when will there be a new one without the postscript errors?\n\n"
+    },
+    {
+      "time": " 29.May.2006 1.04pm",
+      "content": "Which one are you talking about? Can you please contact us at [http://www.fontlab.com/problem/](http://web.archive.org/web/20080829165511/http:/www.fontlab.com/problem/ \"http://www.fontlab.com/problem/\") , telling us the URL that you downloaded the manual from and the exact problem you’re having?\n\nA.\n\n"
+    }
+  ]
+}

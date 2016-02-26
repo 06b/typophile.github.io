@@ -1,0 +1,30 @@
+{
+  "id": "52204",
+  "title": "Fontlab Metrics.txt: Can I create classes for individual letters?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Is it possible to create classes for individual letters in Fontlab’s Metrics.txt file? And if so, what is the proper syntax?\n\n",
+  "author": "blank",
+  "time": "30 Nov 2008 — 12:10pm",
+  "uid": "14722",
+  "comments": [
+    {
+      "time": "30 Nov 2008 — 3:31pm",
+      "content": "If it's just single letters you don't need classes. Classes are like folders.\n\nIf there is nothing inside on compile it will just convert them to single lines of code.\n\n"
+    },
+    {
+      "time": "1 Dec 2008 — 12:24pm",
+      "content": "James,\n\nas this is not officially documented, I'm trying to find out the answer to your questions from our developers.\n\nAdam\n\n"
+    },
+    {
+      "time": "1 Dec 2008 — 12:31pm",
+      "content": "Thanks Adam!\n\n"
+    },
+    {
+      "time": "1 Dec 2008 — 12:53pm",
+      "content": "Well, here is your answer:\n\nyou can create new sections of the Metrics.txt file (or best, put a copy into your user data folder first) by the following pattern:\n\n`%%CLASS_BEGIN\n#name of your section\nnames of classes as defined in the Classes panel\nseparated by new lines\n%%TEMPLATE\none-line template definition using the /glyphname or \\uUnicode notation, where @ is the currently active glyph and \\n is the place of the line wrap\n%%CLASS_END`\n\nFor example, if you have classes \"onum1\", \"lnum1\", \"pnum1\" and \"tnum1\" defined in your Classes panel that contain all the various figure types, you could define a Metrics.txt section as follows:\n\n`%%CLASS_BEGIN\n#figures\nonum1\nlnum1\npnum1\ntnum1\n%%TEMPLATE\n/zero/one/two@/three/four\\n/five/six/seven@/eight/nine\\n/dollar/sterling/Euro@/cent/currency\\n/H/O/H@/n/o/n\\n\n%%CLASS_END`\n\nThe \"onum1\" etc. class names here refer to what is defined in the Classes panel as \"OpenType classes\", without any glyphname prefix.\n\nBut you can also use names of Metric classes here (named e.g. \".A\", \".O\" etc., with dot as the prefix) or Kerning classes (named e.g. \"\\_A\", \"\\_Y\" etc., with underscore as the prefix).\n\nAlso note that in kerning mode, \"@\" stands of the currently selected kerning pair, and that in such case, for both glyphs from the kerning pair the appropriate left or right part of the template is selected. So if you have a section defined for uppercase and another section defined for smallcaps, then for kerning pairs such as /T/y.smcp the left part of the template will be shown from the #uppercase section and the right part will be shown from the #smallcaps section.\n\nAlso note that in Metrics.txt, there are some internally pre-initialized glyph classes such as \"uppercase\", \"UPPERCASE\", \"LATIN\\_UC\", \"lowercase\", \"LOWERCASE\", \"LATIN\\_LC\", \"smallcaps\", \"SMALLCAPS\", \"LATIN\\_SC\". If they are not defined in the Classes panel, a default pre-initialized definition will be used for them but if you define classes with those names in your Classes panel, that definition will be used. Of course you can also have additional class names that you add to the appropriate sections for Metrics.txt, e.g. \"UC\", \"LC\", \"SC\" if that is how you choose to name your classes in the Classes panel.\n\nRegards,  \nAdam\n\n"
+    }
+  ]
+}

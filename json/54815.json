@@ -1,0 +1,342 @@
+{
+  "id": "54815",
+  "title": "Implementing size feature",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "A few years ago I have seen Thomas Phinney's presentation talking about updating Adobe's font library. I have only vague recollection of it, but I remember that he mentioned that all Adobe OTF fonts will include SIZE feature. We (at Typotheque) are in the proces of updating our library, fixing some minor bugs, and making the OTF features better, so I wondered about the use of SIZE feature.\n\nWhat is an advantage of SIZE when a font includes just a single optical master? How is the feature implemented, and what benefit it provides to the users. Is anyone else using it at all?\n\nI'd love to hear your comments. Also if Thomas or Miguel is around, can you please explain me how does it work?\n\n",
+  "author": "<a href=\"/web/20100203164716/http://typophile.com/user/3279\" title=\"View user profile.\">peter bilak</a>",
+  "time": "<br>",
+  "uid": "3279",
+  "comments": [
+    {
+      "time": "",
+      "content": "Peter,\n\nThe \"size\" feature essentially contains information about the recommended point size for which a certain font should be used. It makes most sense for a family of optical masters but I think it also has some sense for single fonts (as an informative resource) but I don't think anybody ever added the \"size\" feature for a single-optical-master family.\n\nAs far as I can tell, XeTeX is the only application that currently supports the \"size\" feature. To easily install XeTeX on Mac OS X, go to [http://www.tug.org/mactex/morepackages.html](http://web.archive.org/web/20100203164716/http:/www.tug.org/mactex/morepackages.html \"http://www.tug.org/mactex/morepackages.html\") and install the BasicTeX-2008 package followed by either LaTeXiT or MacTeX-Additions.\n\nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"What is an advantage of SIZE when a font includes just a single optical master?\"  \nThe advantage is for the creator to inform the user of the ideal size of a scaleable font in print (or online if people want to double-purpose that bit too). I'm not sure about other programs presenting this to the user, but FontBook 'info' mode shows no 'Size\", but 'says' all fonts are 18 pt.;)\n\n\"How is the feature implemented, and what benefit it provides to the users. Is anyone else using it at all?\"  \nA primary vehicle for such urges has become the font name or information from external source(s).\n\nThere was also once, an opsz table that QuarkExpress of the early 90's used, and that worked on single masters the way I think you imagine this would, collecting the proper size via table from a range of masters and composing with that master/size match. This still requires multiple font names for multiple fonts to perplex menus while distinguishing the sizes, but it would simplify a lot of publishing problems that have not already been solved by templating.\n\nIn addition, under most circumstances, having a proper c. 1994 size table may also help evolve support for the value of selecting the proper size/whatever from a table pointing to a modern 'ranging master', as all the previous generations of type & typographer solutions did with such hideous difficultly in their own materially complex ways. We here have, only software to deal with.\n\nCheers, and a 2xCheers to those updating their libraries!\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>I don’t think anybody ever added the “size” feature for a single-optical-master family.</cite>\n\nAll Adobe's fonts were revised to include this, as Peter mentioned in his post.\n\nIt could simply be informative for the user, but this information could also be used to automatically track the font when used at a significantly larger/smaller size than the design size. Both of these reasons were considered relevant in the Adobe decision.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thomas, do any of Adobe's products support the size tag?\n\n—Noam\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"LiveCycle,\" a server-based forms product, does, oddly enough. (Odd that would be the only one.)\n\nI certainly lobbied hard for 'size' support several times over the years.\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Well God bless you for your efforts, sir! I'm working on a size-aware font for my MFA thesis, and right now I'm figuring out how it would get implemented in the wild. Plug-ins seem like one way to go.\n\n—Noam\n\n"
+    },
+    {
+      "time": "",
+      "content": "[XeTeX](http://web.archive.org/web/20100203164716/http:/scripts.sil.org/xetex) supports the size feature.\n\n"
+    },
+    {
+      "time": "",
+      "content": "When one says \"supports the size feature\", what exactly happens? Does the app somehow convey to the user what the recommended size is, does it _prevent_ the use of the font at any other size, or what?\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "I am assuming this is about having a linked group that are \"the same font\" except for being different optical size variants. LiveCycle will then automatically pick the correct font from that subset. This is the main functionality that was intended for the OpenType feature tag when it was conceived.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, that's the way it works in XeTeX too.\n\n"
+    },
+    {
+      "time": "",
+      "content": "For me, the holy grail would be having different optical sizes exist within the same font as alternate glyphs, to be intelligently substituted as needed by the software. Far fetched, perhaps, but hey...it's my thesis, I gotta dream big right?\n\n—Noam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Noam,\n\nRemember that ideally, different optical sizes might have different default linespacing values (looser for smaller sizes, tighter for large sizes). Also, if the stem thickness differs between the optical sizes, it would greatly complicate the hinting. And finally, OpenType fonts are limited to 65,535 glyphs per font — not a problem for European fonts but certainly a problem for Asian fonts.\n\nI think that having separate fonts for each optical size is reasonable.\n\nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Noam,\n\nRemember that ideally, different optical sizes might have different default linespacing values (looser for smaller sizes, tighter for large sizes). Also, if the stem thickness differs between the optical sizes, it would greatly complicate the hinting. And finally, OpenType fonts are limited to 65,535 glyphs per font — not a problem for European fonts but certainly a problem for Asian fonts.\n\nI think that having separate fonts for each optical size is reasonable.\n\nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"...having different optical sizes exist within the same font as alternate glyphs, to be intelligently substituted as needed...\"  \nThis suggestion is part of any good optical scaling system and was suggested as part of the proposal for a size table to add to the OT spec. Although the idea of a master outline embedded in a single master is superior for a million reasons, one still needs to account for glyphs whose contours do not vary to target with a single contour definition. Kanji needs this for smaller sized glyphs that need to lose features, and Latin needs it for smaller fi lig. e.g. that must lose its dot vs. larger sizes where the dot may stay.\n\nTwardock: \"... it would greatly complicate the hinting\"  \nHow? How greatly?\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "I presume Adam means that putting all the optically adjusted glyphs within a single font would complicate the hinting by requiring multiple sets of CVT values for the different stem weights and alignment heights. Definitely a complication, although not an insurmountable one. It would be more difficult in terms of FontLab hinting than it would be in VTT.\n\nIn general, though, I agree with Adam: there's no significant benefit to putting all the size-variant glyphs in a single font vs. having them in multiple fonts, any more than there would be in putting all the weight variant or italic variant forms of a type family in a single font.\n\nBut I don't think the current ‘size’ GPOS feature implementation is in any way a good one. Basically, it's a hack that uses the GPOS table in a way that is completely unlike every other use of that table, and I believe that is one of the reasons why the feature is not supported outside of, apparently, two applications. It falls outside of the basic OTL processing model, and developers who have taken the time to understand and implement that model simply ignore the ‘size’ feature.\n\nI suggested a dedicated SIZE table to Adobe and MS a few years ago, and David drafted a proposal for such a table last year. I suspect there will be some disagreement about the contents of the proposed table and how it should work, but in any case someone needs to turn this proposal into a draft technical spec, because until that happens I don't think we'll get a lot of serious engagement with the idea from MS and Adobe.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> there’s no significant benefit\n\n?  \nConvenience (not having to switch fonts manually) is always  \na major benefit. Just like how OT makes it so much nicer when  \nusing formerly-so-called \"expert\" characters.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Unless you're going to have a different master for every size, when to change sizes is another matter best left up to the user.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The user should certainly have the choice to use a font at  \na \"non-recommended\" size, but I think the software can and  \nshould make the \"default\" selection. Remember that: the  \nsoftware can be smart enough to choose the closest best size;  \nand the size recommendation can (and almost always should)  \nbe a range, not a single size.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "From an economic point of view, it would make more sense to have the optical sizes in separate fonts. After all, it takes a lot of time to adapt a normal font to either headline or micro variants, and not every user needs them all. So if a foundry wants to recover its investment when all the variants are in a single font, that will make for a very expensive font, and many customers ending up buying variants they might not really need. Or deciding not to buy at all.\n\n\\*\\*\n\nThe foundry should be able to put some information in the fonts that determines the optimum **relative** size at which to use them.\n\nFor instance, if I design a Didone face where the hairline/serif thickness of the \"micro\" or \"footnote\" version at 7 pt is the same as that of the \"normal text\" size at 10 pt, that ratio of 70% should be embedable in the fonts and recognizable by layout applications. It's not quite the same as specifying an optimum size for each \"optical\" variant.\n\nThis quality of size relationship is also fundamental in monoline typefaces such as Luc de Groots's Taz and my Bodoni Egyptian, where the line thickness of different weights is calculated to equalize when they are set at specific size ratios.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I like the idea of relative sizes, but I don't think it scales linearly as you suggest. There's not that much difference between 36pt and 72pt metal, but the difference between 6pt and 12pt is profound. (I have a bunch of ATF cutting slips and know how to read them, if anybody needs convincing).\n\nOf course, one of the goals of multiple masters, oh so many years ago, was to make the production of different size variants happen dynamically, and I think there was some support for it in a few apps, but it also never really got off the ground.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"From an economic point of view, it would make more sense to have the optical sizes in separate fonts.\"  \nFrom an economic point of view, it makes vastly more sense to have all the optical sizes in a single variable master, and be able to deliver it!\n\n\"There’s not that much difference between 36pt and 72pt metal... \"  \nThis is well known. The variations required for optical sizing are increasingly non-linear to the bottom, which is why Multiple Masters could not die early enough.\n\n\"Remember that: the software can be smart enough... \"  \nIt's all academic because my inventory of pro bono draft technical specs for multibillion dollar companies who can't get beyond their 'embrace and pollute' attitude towards standards — is exhausted. Which reminds me! where the hell is Hithcock's 'white' paper on TT instructions ignored and added by cleartype? ISO is not pleased.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "_From an economic point of view, it makes vastly more sense to have all the optical sizes in a single variable master, and be able to deliver it!_\n\nWell, it depends whose economy you're talking about.\n\n_the difference between 6pt and 12pt is profound._\n\nNot at all.  \nIf the stroke thickness of Font A at 24 pt is the same as that of Font B at 12 pt, then the thicknesses will be the same when A is at 12 pt and B at 6 pt.\n\n"
+    },
+    {
+      "time": "",
+      "content": "No Nick, it's not linear (ideally). Especially not above 12 (too big to read immersively) and below 9 (too small to read immersively). Outside the immersive reading range the performance requirements are different.\n\n\\> which is why Multiple Masters could not die early enough.\n\nI'm pretty sure I remember David Lemon once stating that MM was not [necessarily] linear\\*; at the very least it was multi-linear (meaning a bunch of small lines that simulate a curve). The limitations of [retail] font design software is a different matter.\n\n\\* In fact the MM format even supported the \"non-continuous\" switching of glyphs based on size (think of the \"Q\" in Caslon's italics).\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Ooh, the fight is on!\n\n@dberlow: _The variations required for optical sizing are increasingly non-linear to the bottom, which is why Multiple Masters could not die early enough._\n\nNope. The Multiple Master format definitely has support for nonlinear parameters, by means of the BlendDesignMap feature. Here's the relevant figure from Adobe Tech Note 5091 (which I've been into recently because I'm citing another passage for my thesis):\n\n ![](http://web.archive.org/web/20100203164716im_/http:/typophile.com/files/blenddesignmap_3793.png)\n\nI'm not sure how many fonts used this feature correctly, but then again, there were precious few Multiple Master fonts that even tried to do an optical scaling axis. There's Minion and Adobe Jenson. Any others? [Edit: according to [Adobe](http://web.archive.org/web/20100203164716/http:/kb.adobe.com/selfservice/viewContent.do?externalId=328600), there's also Sanvito.]\n\n@Nick: _If the stroke thickness of Font A at 24 pt is the same as that of Font B at 12 pt, then the thicknesses will be the same when A is at 12 pt and B at 6 pt._\n\nThat is absolutely not true for ATF metal, which I've studied extensively. I can haul out scans, curves, and decoded cutting slips, but it would take me some time, and I'm not sure how easily convinced you'd be by such gearhead arguments anyway.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thank you Raph.\n\nSome people need the numbers.  \nSome people are afraid of them.  \nAnd some people know when to hold 'em and know when to fold 'em.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Tracking (the bane of David's existence :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Raph, Hrant, here's what I mean.\n\n ![](http://web.archive.org/web/20100203164716im_/http:/typophile.com/files/Ns_5827.jpg)\n\nIn the first example (Scotch Modern), I've designed the serif thicknesses and hairlines of the Normal and Micro to match when the first is at 10 pt and the second at 7 pt. As long as this 10:7 ratio is maintained, the fine tolerances match.\n\nIn the second example (Bodoni Egyptian), similar thing, although these are not optical sizes per se, but different weights of the face.\n\nOf course, there is the issue of press gain and hinting, and adjustments to the letter proportions, but the idea is to keep the threshhold of the face's finesse constant between optical sizes.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> the idea is to keep the threshhold of the  \n\\> face’s finesse constant between optical sizes.\n\nWell, no.  \nYou need more _overall_ optical compensation, the lower you go.\n\n\\> these are not optical sizes per se, but different weights of the face.\n\nThose are not optical sizes, period.  \nWeight change is only one of the many factors.  \nThe other big ones are vertical proportions, spacing and width.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hrant: _Convenience (not having to switch fonts manually) is always a major benefit._\n\nI'm presupposing an automated mechanism to select the desirable glyphs, whether at the glyph level from within a single font or at the family level from among numerous fonts. Wherever the size-specific glyphs are stored, there needs to be a) a mechanism to automatically display them at appropriate sizes and b) a mechanism to override that automatic display.\n\nSo given these mechanisms, there is no significant benefit to putting all the size variants in a single font, and Adam has identified a number of downsides to that approach.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"Nope. The Multiple Master format definitely has support for nonlinear parameters, by means of the BlendDesignMap feature.\"  \nYep. The Multiple Master format definitely has support for piecewise nonlinear intermediates, but not enough intermediates are allowed to approximate the bottom end of all optically mastered designs, just the simpler ones. But I ain't a gonna fight about it until you've taken a run at it with MM tech. ;)\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "@Hrant: _You need more overall optical compensation, the lower you go._\n\nSo how do you handle the relative thickness, at different optical sizes, of serifs and hairlines in a didone face, if not by equalization?\n\n@Hrant: _Those are not optical sizes, period._\n\nAs I said, not per se. But a typographer may combine different sizes of different weights of a monoline face to homogenize the stroke weight. This effect may also include line rules.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Raph: _That is absolutely not true for ATF metal,_\n\nOf course not, because you can only set a metal font at one size.\n\nWe're talking about what happens when digital fonts are not set at the optimal optical size.  \nConsider, if font A, optimized for 10 pt, is used in a layout with font B, optimized for 7 pt, and font A is changed to 11 pt? what should happen to font B?\n\n1. Size increased to 7.7 pt  \n2. Size unchanged  \n3. Size unchanged and made slightly heavier\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> a typographer may combine different sizes of different  \n\\> weights of a monoline face to homogenize the stroke weight.\n\nSure. Like that survivalist on TV who  \neats mildly poisonous spiders for lunch.\n\n\\> you can only set a metal font at one size.\n\nThat's entirely beside the point.\n\n\\> We’re talking about what happens when digital  \n\\> fonts are not set at the optimal optical size.\n\nNo, we _were_ talking about the [non-]linearity of features relative to scale.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "@Nick: I see what your point, and I think it's valid in some design settings, but not for optical scaling in general. I stand by my assertion - the amount of adjustment (and, as Hrant points out, includes spacing, width, and vertical proportions in addition to stroke thickness) is considerably more between, say 6 and 12 points, as it is between 36 and 72.\n\n@dberlow: Okay, that's a different argument. There's lots not to like about Multiple Masters, and the need for an exponential increase in number of masters is one of them, but again, I stand my assertion that the format is _capable_ of nonlinearities, both in mapping the amount of adjustment nonlinearly by point size (which is what the figure refers to) and in allowing intermediates (which is what you seem to be mostly talking about).\n\nWould anyone truly say that Minion's optical scaling is weak because of an inadequate number of intermediate masters? I think that if your goal was to precisely replicate, say, an existing optically scaled metal face, there would be problems, but if you do it in a way that's natural for the format, I think MM is adequate.\n\nTo make that argument a little more concrete, in ATF scaling, the vertical proportions are identical from 10 points up, and the 8pt and 6pt sizes have shorter descenders. Getting _exactly_ that effect in MM is not easy. At the very least, you'd need to make an intermediate at the 10pt size. But I don't think there's anything wrong with just nonlinearly interpolating, so that (using the curve above), the 12pt vertical proportions would be about halfway between 6 and 72pt. I don't think there's anything wrong with that - a reasonable approach that conversely would be very difficult to achieve in metal.\n\n"
+    },
+    {
+      "time": "",
+      "content": "@Hrant, Raph: If two different optical sizes of the same type are scaled together, the relationship between them is linear. Think of it as a single \"Caps with Small Caps\" font at different sizes.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> If two different optical sizes of the same type are  \n\\> scaled together, the relationship between them is linear.\n\nOf course, but how is this relationship useful? It's not something that plays any role in good craft. At least not at the level of type design itself. And even in the _use_ of type, since we hopefully agree that using a given size master at a different size is non-ideal, what's the point?\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hrant: _...we hopefully agree that using a given size master at a different size is non-ideal..._\n\nThat is certainly the case when types designed for larger sizes are used at small sizes, because the lightness of the strokes, the tight spacing, and the small counters deleteriously affect readability.  \nIt isn't necessarily the case, though, when types for small size are used at larger sizes, because in that case the chunkiness of the small size types become a stylistic feature of the typography.\n\nThis is one of the things that is often overlooked in discussions of size-specific type: the methods applied to making type work at small sizes are essentially functionally, while the conventions applied to making type for large sizes are essentially aesthetic. And note that I refer to the one as methods and to the other as conventions. There is nothing that functionally determines that types for larger sizes need to be lighter or have smaller x-heights: these are conventions derived from cultural notions of elegance. So I think the question of the linearity or non-linearity of size-specific type depends very much on what happens on either side of the point at which the functional and the aesthetic meet and, indeed, on what happens at that point.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> the chunkiness of the small size types  \n\\> become a stylistic feature of the typography.\n\nIndeed, and sometimes features of small type are \"extracted\" and used in type meant only for larger sizes (think Amplitude, and Bradlo earlier). On the other hand, such \"chunkiness\" has tellingly never really been a mainstream aesthetic preference, and one could claim that the human consciousness leans towards attributes (such a geometric congruence) that are essentially display-centric and anti-text. To put it another way, taste is admittedly variable (individually and socially) but still falls within some bounds set by the primal human psyche. This is what leads me to believe that a text font _must_ have a certain ugliness (visible only when set large) to really be optimal.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "_...how is this relationship useful? It’s not something that plays any role in good craft..._\n\nIt's important to work at the optimal optical sizes when combining optical weights.  \nFor instance, if two fonts are designed to work optimally at 9 pt and 6 pt, if they are combined at 10 and 6, that won't look as good as 10 and 6.7. A deviation of one point from optimal size is not of itself particularly significant, but is much more noticeable in combination.\n\n"
+    },
+    {
+      "time": "",
+      "content": "John: \"There is nothing that functionally determines that types for larger sizes need to be lighter or have smaller x-heights... \"  \nThere is. Having evenly balanced white space in and around the characters is functional. Larger external spaces of a small master size can be diminished by tracking, but the internal spaces cannot be regulated for the external spaces from a small master at large sizes. Now you will tell me how much you like Verdana at 72 point. In serif faces, the large clunky serifs of small sizes used large are a distracting chord against the tiny serifs of the smaller sizes. Now you will tell me how much you like Georgia at 72 point.\n\nRalph: \"Would anyone truly say that Minion’s optical scaling is weak because of an inadequate number of intermediate masters?\"  \nMinion, and most other Adobe MM do not push very far in the normal axes of width and weight, so no, Minion is not weak. But when I talk about the suitability of a technology for a purpose, I always think broadly in terms of scripts and styles and not specifically to foundries or families that avoid stylistic extrema.\n\nCheers\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Minion, and most other Adobe MM do not push very far in the normal axes of width and weight, so no, Minion is not weak. But when I talk about the suitability of a technology for a purpose, I always think broadly in terms of scripts and styles and not specifically to foundries or families that avoid stylistic extrema.</cite>\n\nAn interesting point which applies to other aspects of font technology too.  \nFor example, OT layout tables are designed to address so-called \"complex scripts\" but fail to do so in practice as soon as things are getting as complex as the term promises. Ben Kiel's recent presentation at [RoboThon](http://web.archive.org/web/20100203164716/http:/robofab.com/robothon/index.html) (the best conference I attended so far) illustrated that even \"simple\" things like kerning can easily get one in trouble. One limitation is 16-bit offset values in GSUB and GPOS. The more fundamental limitation is in the atomistic approach that these tables follow: defining layout behavior piece by piece for every possible specific context is ok for substituting an initial form here or there, including for pseudo-random effects, but better do not try to address a huge number of interacting contexts ...\n\nAdmittedly off-topic as regards the size feature. Regard as just another example for the same phenomenon: simplifying the layout behavior is making a design compromise, an attempt to \"avoid stylistic extrema\".  \n(How technology and tools influence design bugs me a lot recently.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> if two fonts are designed to work optimally at 9 pt and 6 pt, if they  \n\\> are combined at 10 and 6, that won’t look as good as 10 and 6.7.\n\nGranted, but this is pretty tangential to what we  \nwere discussing: the proper design of optical sizes.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Me: _There is nothing that functionally determines that types for larger sizes need to be lighter or have smaller x-heights..._\n\nDavid: _There is. Having evenly balanced white space in and around the characters is functional._\n\nOf course, so _if_ one's larger size types are lighter and have smaller x-heights, then they also need tighter spacing, or if they have tighter spacing then they need to have smaller x-height to tighten the internal space. But my point is that it is an aesthetic convention that larger size types are lighter, part of a larger set of typographic conventions related to page design, and not something that is inherently functional to readability, in the way that beefing up and opening out smaller type is. The fact this is an aesthetic convention of larger type and not a functional requirement is demonstrated by the great variety of heavy, chunky display types available. There is nothing that determines that larger type needs to be elegantly light and airy: that is just one possible style.\n\n_In serif faces, the large clunky serifs of small sizes used large are a distracting chord against the tiny serifs of the smaller sizes._\n\nThis is a good point, but it presupposes the typographic conventions of page design to which I referred above: particular kinds of combinations of larger and small type in a closely related style on the same page. Important stuff, to be sure, but the methods necessary to make small type readable are independent of these conventions: you have to do them regardless of whether there will also be large type appearing in proximity. The conventions of large type are not of the same functional order.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Karsten, it could also be said that the limitations of tools serve to focus design.  \nFor instance, when I couldn't get a pseudo-random script font to compile in FontLab, because it had a huge kern feature, that forced me to rationalize the fit of the face, by adjusting sidebearings and reducing the number of kerning classes. More work, but also a more rigorously designed typeface.\n\nBut I hear what you're saying. Duffy Script creates its pseudo-random effect with four alternates of every character--that's not quite enough to minimize the possibility of repetitive sequences as much as I'd like. So there's a technological dead end there.\n\nUltimately, Donald Knuth's concept of the metafont, stroke-based rather than outline-based, would seem to offer more potential as a means of creating typography that is amenable to digital processes. Is the font industry going to be sidewiped by someone developing a layout engine and a set of fonts which uses that technology?\n\nHrant, we have gone off topic a bit, but Peter's request for comments on the SIZE feature was quite broad in scope.\n\nActually, I haven't put SIZE in any fonts yet. Because I'm not comfortable putting features I can't test into fonts.  \nI have put some unsupported features in fonts, for instance \"hist\", but at least that can be tested in FontLab's OT Preview.  \nI primarily target the CS applications, so when InDesign supports this feature, then I will consider it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> the limitations of tools serve to focus design.\n\nGood point (although not exactly \"focus\").\n\n\\> Donald Knuth’s concept of the metafont, stroke-based rather  \n\\> than outline-based, would seem to offer more potential as a means  \n\\> of creating typography that is amenable to digital processes.\n\nI'd agree, but sadly -and hopefully much  \nmore significantly- it's very anti-reader.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Honestly, I prefer a tool/technology serving me rather than me serving a tool/technology.&nbsp;&nbsp;;-)\n\n"
+    },
+    {
+      "time": "",
+      "content": "John: _There is nothing that functionally determines that types for larger sizes need to be lighter or have smaller x-heights..._\n\nSeveral reasons:\n\nFirstly, something practical. Consider body text set at 10 pt, and footnotes at 7 pt.  \nNow suppose that the footnote text font has a larger x-height, corresponding to 7.5 pt of the body text.  \nWhat is the advantage of this, in a layout, for the typographer?\n\nCompare the ratio of size to leading, in the body and footnote.  \nIf body is set 10 on 12 and footnote at 7 on 9, the ratios are 0.83 and 0.78.  \nTo equalize the proportion, the footnote should be set 7 on 8.4, or 7.5 on 9.  \nSo, having a larger x-height in small text allows for a whole-number leading value.\n\nSecondly, think of the footnote text not as 7 pt with a big x-height, but as 7.5 pt with shorter extenders.  \nWhat is the advantage of shorter extenders in small type?\n\nWell, it depends on the leading.  \nSo, say the typographer equalizes the ratio of x-height to between-x-height space, in the two type sizes.  \nThis is a principle which typographers follow.  \nWhat is the advantage of having shorter extenders in the smaller size?\n\nConsider the gap, or tolerance, between descenders and ascenders in adjacent lines.  \nIf this is decreased proportionately in the footnote text, it will of course be a smaller absolute value.  \nHowever, this \"distance between\" is of the same order as the distance between glyphs, i.e. their sidebearings.  \nSo if the horizontal proximity space between glyphs is proportionately increased in small optical sizes, then the vertical proximity should also be increased.\n\nThis is because the smaller type becomes, the more the tolerances involved approach absolute values at the threshold of perception. Another way of saying this is that legibility issues are more crucial at small sizes than readability issues. Hence \"non-linearity\" of design with relation to size.\n\nThirdly, there is the question of overall density of a text block.  \nMicro type is necessarily bolder than normal text size type. Even with wider sidebearings, text colour may still be bolder than that of the main text. Reducing the size of extenders and capitals compensates, so that the two optical sizes still look like the same weight of type.\n\nFourthly, the small-cute connection.  \nHumans are programmed to like the appearance of small creatures with big features, presumably so that we don't devour our young.\n\n ![](http://web.archive.org/web/20100203164716im_/http:/typophile.com/files/images_5951.jpeg)\n  \nNote shorter extenders in the smaller optical size (left).\n"
+    },
+    {
+      "time": "",
+      "content": "Nick, when I was talking about ‘large’ type, I meant larger than text sizes, what we might call display type, but also some sizes of e.g. subheads. As I acknowledged in my response to David, there are good reasons for reducing the x-height and tightening the spacing of lighter, more elegant styles of letters so that they work well alongside smaller type of the same style. But these are design decisions that are subsequent to particular styles of typography, not to the size of the type per se. But when we are dealing with small type, but which I mean typical text sizes and smaller, then we are making design decisions that are not subsequent to particular styles of typography but to fundamentals of legibility and readability.\n\nTo put it another way: 6pt type needs to have certain characteristics in order to be legible and readable; 36pt type can have virtually any common type characteristics and still be legible and readable. So the factors determining the design for type at 36pt are predominantly aesthetic, and insofar as they are functional they are so within the aesthetic framework of particular typographic styles and systems.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> legibility issues are more crucial at small sizes than readability issues.\n\nYes, and the fact that legibility at small sizes is largely a result of _visibility_ is why shorter extenders (ie larger relative x-height) are better for smaller sizes. But this is why the bulk of your argument fails; all those scenarios are easily addressed by a consideration of what the reader needs, as opposed to what a designer does. For example just because some typographers try to equalize vertical proportions and such across sizes doesn't make it a good idea; in my book that's deluded Modernism - an \"internal game\". The reader does not benefit, he suffers.\n\n\\> Reducing the size of extenders and capitals compensates\n\nNo, because human vision has already played that role. Smaller type needs to be darker simply because our eyes see it lighter. The ideal amount of spacing and width and the ideal vertical proportions and leading stem from such realities, not some designer's whim or habits.\n\n\\> presumably so that we don’t devour our young.\n\nSo you only eat unattractive things? :-)\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "John: \"The fact this is an aesthetic convention of larger type and not a functional requirement...\" and \"...the factors determining the design for type at 36pt are predominantly aesthetic...\"\n\nFacts and definitions of function vary with distance and mirrors, I guess. I'm sure you can not draw the line between aesthetic and function so clearly in either the old or new design paradigms, or in the confluencial format/devices we today employ. E.g I'm not just making the x smaller, the spacing and width narrower and the strokes lighter to be Mr. Elegant — I'm out to fit more on a headline, or make it useful bigger, or both. That sounds functional to me.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "_... definitions of function vary ..._\n\nAn important point.  \nType designers have two clients/users -- the typographer and the reader.  \nFonts have to work as tools for the typographer, as well as possessing an innate functionality of readability.  \nOther constraints informing type design: market forces, cultural trends, technological capabilities.\n\n_... make it ... bigger..._\n\nWords often associated with size features.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Make it bigger but fit it into a smaller space is often the cry of the client.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "David: _I’m sure you can not draw the line between aesthetic and function so clearly in either the old or new design paradigms, or in the confluencial format/devices we today employ. E.g I’m not just making the x smaller, the spacing and width narrower and the strokes lighter to be Mr. Elegant — I’m out to fit more on a headline, or make it useful bigger, or both. That sounds functional to me._\n\nYes, it's functional, but it is functional within the context of particular kinds of typography, e.g. newspaper headline, not functional in the context of readability in the way that the decisions we make in the design of small type are.\n\nAs I suggested earlier, what is interesting is what happens at the point where the functionality of readability gives way to the functionality of typography that is possible at larger sizes. This point is design-dependent and not merely size dependent, although I think it is generally around typical text sizes, and hence one of the reasons why those sizes are typical: they solve the challenges of readability and begin to make richer typographic layouts possible.\n\nNewspaper headline type is a good example to look at, because it is generally heavier as well as more condensed than the text face, unlike a book titling face which will tend to be lighter. So this is an example of what I was talking about above: different kinds of large size typography that are independent of what is happening in the type at small sizes.\n\n"
+    },
+    {
+      "time": "",
+      "content": "John: \"...what happens at the point where the functionality of readability gives way to the functionality of typography...\"  \nThis is a made-up point.\n\nJohn:\"... different kinds of large size typography that are independent of what is happening in the type at small sizes.\"  \nI think of the big bold condensed sans as an optically sized version of the text, serif or sans; that the choice of whether to use a slight serif, or a bold sans is not usually independent of what is happening in the type at small sizes; and that this is something inherently functional to readability and not what you are here calling 'typography.'\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "As soon as you have a situation in which text type X is combined with display type Y in one situation and display type Z in another situation, you have to look at what is different in the situations -- in the typography -- rather than what is different in the types, in order to understand why Y or Z is appropriate to that situation. To say that a display type is ‘an optically sized version of the text' when there are no stylistic similarities between the text and display types, when, indeed, the typographic style may be based on deliberate contrast of the style of these types, makes no sense. The display type is optically sized, to be sure, but it is not ‘a version of the text'.\n\nAnd my central point remains: the decisions in the process of type design that are necessary to make small type readable are of a different kind from the decisions that result in a variety of different display types. Let's imagine starting with a typical text face, designed for use at around 11pt. Then let's say that one needs to make a version of that type for use at 6pt. This is a need that is only addressable by making the new design stylistically related to the text type; otherwise, the word ‘version' has no meaning, and one might as well use some other type already optimised for 6pt. My argument is that, at 6pt, the kind of things that one has to do to that 11pt design to make it work at the smaller size, are so constrained by requirements of readability as to be essentially deterministic (complicated, to be sure, and not programmatic in a way that is readily automated for optimum results, although one can get a good distance quickly with Tim Ahren's RMX tools). But heading in the opposite direction -- making a display version of the same text type (again with the word ‘version' actually meaning something) -- one is not faced with constrained decisions about what one _must_ do to make the type readable, but with options as to what one _can_ do to make the type serve different kinds of typographic layout (condensed headlines or elegant book titling; direct linear similarity (real or apparent) or deliberate distinctiveness (à la Caslon's big types)).\n\nPut it another way: for the same 11pt text type, one might produce a variety of display versions for use in different typographic situations, and they will all be readable; but if you want your 6pt version to be readable, then it is going to look one particular way.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_if you want your 6pt version to be readable, then it is going to look one particular way._\n\nThere is no reason that there can't be several \"readable\" text versions of a typeface developed from a display original.  \nVersions for book and news text may be quite different, in the length of descenders, notably.  \nFor instance, compare 6 pt. Linotype Scotch and Linotype Scotch No.2 (I'm looking at a 1950s specimen book). The latter has longer extenders, presumably for book work, whereas the former is more suitable for cramming agate.  \nSo as David says, it is the requirements of the document, and the particular medium, that are the constraining criteria, not a generalized and abstract notion of \"readability\".\n\nIt is good old \"immersive\" typographism to privilege body text as the basic and pure form of reading, with display text considered to be decorated with aesthetic glosses. But there is no difference for the reader, she doesn't see the so-called typographic qualities of display sizes any more than similar qualities in small type. What are these qualities? Sidebearing width, stroke weight, x-height, extender length, counter size -- all these things are incrementally variable across the full range of type size, and visually significant to the experience of reading.  \nIt's not like you read small text and that's it, but when you read big text you also see aesthetics.  \nPeople read documents, not fonts.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> So as David says, it is the requirements of the document, and  \n\\> the particular medium, that are the constraining criteria, not  \n\\> a generalized and abstract notion of “readability”.\n\nI think he said that's _one_ of the constraints. I hope he doesn't in fact subscribe to your denialism of readability - that would be very disappointing.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "These days I don't deny readability, but situate it primarily as a function of the document, not the typeface.  \n(Nonetheless, I do advertise the readability of certain of my typefaces, according to general wisdom.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> primarily as a function of the document, not the typeface.\n\nCertainly. But for a person who makes type, the readability of fonts must be a big chunk of his world. No matter what the market wants.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Nick, in the Latin script, ascender and descender length is pretty flexible regardless of the type size, because with the exception of the g they are usually very simple forms. And as you note in comparing different cuts of 6pt Scotch types, extenders of different length are a quick and cheap way to vary the appearance and hence usefulness of otherwise similar or identical types. I don't think this affects my argument significantly, though, because the same thing may be done to the extenders at any size, so this is not a factor in the decisions that need to be made to make the letters readable at small sizes.\n\n"
+    },
+    {
+      "time": "",
+      "content": "John you are a cleavin' a single issue in two with private semantics. Making type \"attractive\" let's say, in the most literal use of that word, whether large or small, is in a single set of variables up and down the size spectrum. Choice in these variables is informed, in the best case, by reaching for a proper aesthetic, executing with a proper economy, and for a given environment attached to the needs of that reader.\n\n_Obviously_ there are fewer choices in smaller sizes because of their aesthetic preconceptions of those wee spaces, and _obviously_ there are more choices in larger sizes because of their aesthetic preconceptions of those less wee spaces. But it is a single spectrum of variables, aesthetics and economies for all readers.\n\nWhen I said that those big thick clunky Sans were the optically sized version of text serif, I was informed by historical fact and by practice. Why John is cleaving a single issue into two parts with semantics _may_ only be answered, later.\n\nNick: \"There is no reason that there can’t be several “readable” text versions...\"  \nThat's for sure.\n\n\\> So as David says...  \nReally?  \n\\>I think he said that’s one of the constraints.  \nReally.\n\nJohn: \"Nick, in the Latin script, ascender and descender length is pretty flexible regardless of the type size,...\"  \nIf you say so, but foot space and headspace are usually dictated rather strictly by the x-ht's proportion of the Em, making the rest not particularly flexible unless built-in leading is summoned, or the face is scaled on the body. If this is not a factor in the decisions that need to be made to make the letters readable at small sizes, I'm not sure what is.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Donald Knuth’s concept of the metafont, stroke-based rather than outline-based, would seem to offer more potential as a means of creating typography that is amenable to digital processes.\n\nI’d agree, but sadly -and hopefully much more significantly- it’s very anti-reader.\n\n@hrant: care to elaborate on what you mean by \"anti-reader\"? :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Please let me know if my review of Legato\\* is enough.  \nIf not I can find more elaborations on-site.\n\n\\* Best current place to read it: [http://typophile.com/node/55783](http://web.archive.org/web/20100203164716/http:/typophile.com/node/55783 \"http://typophile.com/node/55783\")\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "David: _Obviously there are fewer choices in smaller sizes because of their aesthetic preconceptions of those wee spaces, and obviously there are more choices in larger sizes because of their aesthetic preconceptions of those less wee spaces. But it is a single spectrum of variables, aesthetics and economies for all readers._\n\nAt this point, I think we're just looking at the same thing in two different ways. To me, variables are only significant if they are ‘in play’, so when you talk about fewer or more ‘choices’ being available at smaller or larger sizes, that to me means simply fewer or more variables being in play. As an example, let's consider x-height as a variable: x-height is a variable that can be taller or shorter. A 6pt type needs an x-height of a minimum size relative to the em, below which it cannot function; at the same time, it can't get so large that it diminishes the significance and effectiveness of the ascenders. So the x-height variable in 6pt type is severely constrained and, in effect out of play. 72pt type, on the other hand, might have a tiny x-height or a relatively huge one, depending on style, intended use, etc., so x-height is a variable that is in full play in 72pt type. You think about this in terms of fewer or more choices at different sizes; I think about it in terms of few or more variables being in play. Ultimately, we probably mean something pretty similar, but have found it useful to think about it in different ways.\n\n"
+    },
+    {
+      "time": "",
+      "content": "David: _If you say so, but foot space and headspace are usually dictated rather strictly by the x-ht’s proportion of the Em, making the rest not particularly flexible unless built-in leading is summoned, or the face is scaled on the body. If this is not a factor in the decisions that need to be made to make the letters readable at small sizes, I’m not sure what is._\n\nNick was the one who cited two 6pt Scotch types, one with short extenders and one with long extenders. Yes, that implies decisions about how to proportion the whole relative to the em, but obviously there are technical solutions, even at 6pt.\n\nPerhaps it would have been more appropriate to say that, in the Latin script, ascender and descender length is pretty flexible regardless of the relative height of the non-extending letters, independent of specific technologies; i.e. it is a feature of the script not of font formats and typesetting technologies.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> Donald Knuth’s concept of the metafont, stroke-based  \n\\> rather than outline-based, would seem to offer more  \n\\> potential as a means of creating typography that  \n\\> is amenable to digital processes.\n\nRight. Only that so far, nobody presented an attractive and workable (i.e. not ugly and not overloaded with untolerable compromises) solution using that concept :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "I suspect that is because they were trying to imitate type made with old media.  \nOf course, that's a requirement of new type technolgy.  \nBut wouldn't a monoline cursive script be reasonably free of compromise, and suited to metafont technology?\n\n"
+    },
+    {
+      "time": "",
+      "content": "I wouldn't call it a requirement.\n\nMonoline? That has its own difficulty, since the modulation necessary to make it _appear_ monoline is exactly something that stroke-based design sucks at. (Plus, a monoline cursive script is low readability.)\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'm not that fond of strokes either. You have to encode a lot of extra information into the weight modulation, and then (to my eye, anyway), joins and corners never look exactly right. There are some technical advantages (they're easier to hint than outlines), but I don't think that outweighs their drawbacks.\n\nIn particular, I don't think they're that much better suited to optical scaling than outlines. Yes, it's easy to just crank up the pen nib, but for outlines, you can accomplish pretty much the same by adding a stroke outline - and that's historically accurate to what ATF did (not forgetting to also pay attention to spacing, width, and vertical proportions).\n\n[Kalliculator](http://web.archive.org/web/20100203164716/http:/www.kalliculator.com/) is of course interesting, and I'm pretty sure there are some compressed CJK fonts for mobile applications based on strokes, but I'm happy to stick with outlines even into the Star Trek future. I just want them to be spiro curves instead of Beziers :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "I was thinking the FontChameleon technology would have its patent expire soon (US patent #5949435), and would be of interest in this discussion. But it turns out the patent wasn't filed until 1997, and doesn't expire until 2017. Oh well.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"...in the Latin script, ascender and descender length is pretty flexible regardless of the relative height of the non-extending letters, independent of specific technologies;\"  \nYes. And if it were not for this huge planet in the way, one could sky-dive forever.\n\nFontChameleon technology? Thomas, do you know how that works(ed)?\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yeah, I know a lot about it... but.\n\nBefore I chat much about it, I'd have to read the patent carefully to determine how much is public knowledge, and maybe talk to my former management as well, to see their thoughts. Adobe isn't currently doing much with it, but I'm mindful of my NDA.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "A good general description of how FontChameleon worked can be found in the prior art discussion of Agfa's font compression patent ( [5754187, 1998](http://web.archive.org/web/20100203164716/http:/patft.uspto.gov/netacgi/nph-Parser?Sect1=PTO2&Sect2=HITOFF&u=%2Fnetahtml%2FPTO%2Fsearch-adv.htm&r=8&f=G&l=50&d=PTXT&p=1&p=1&S1=5,754,187&OS=5,754,187&RS=5,754,187)):\n\n_The FONTCHAMELEON product incorporates one or more \"master fonts\" and more than 200 typeface design descriptors that reshape the master font to simulate popular typeface designs such as TIMES and HELVETICA. Each master font comprises outlines containing as control points all those required to define any of the typeface design style variations supported by the master. For Latin alphabets, at least two master fonts are required: one for non-italic and the other for italic styles. The individual typeface design descriptors define only those required for a given typeface, leaving the remainder unused as redundant points. Each master font requires about 200 KB of storage, and each typeface design descriptor uses about 3 Kbytes of disk space.  \n...._\n\nThe above methods in the prior art have in common the compression of font data by content information compaction to a varying degree. The INFINIFONT and FONTCHAMELEON systems both replace individual typeface design-dependent character outlines with one or more master outline data or procedural descriptions from which approximations of character outlines are constructed on-the-fly by typeface design- and character-dependent descriptors.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"I’d have to read the patent carefully to determine how much is public knowledge...\"\n\nYou do that! We made three of four hundred 'descriptors' for Adobe so I can tell you, if no one has upgraded the tools since OS 8, fuggetaboutit!\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "David B: The Chameleon descriptor dev tool \"ChamEdit\" hasn't been touched since OS 8 days, no. There was a last-gasp effort to write a manual for ChamEdit, though, which could be helpful.\n\nI had dinner with David Lemon last night, and just as he was dropping me off at Paul Hunt's afterward I asked about the possibility of getting at least the Chameleon editor out of Adobe in some fashion. He thought it was a pretty oddball request, but not necessarily out of the question.\n\nI think the above descriptions give a decent idea of how the Chameleon tech works. The patent is pretty clear, too. Basically, you've got a \"master outline\" with lots of points on it. Each \"descriptor\" stores only the transformations to that outline. Wherever possible, those transformations are done globally: things like lower-case vertical stem standard thickness, etc. That's also how they work in ChamEdit: you set a variable like this and it is automatically applied everywhere it's needed. Then you do overrides where necessary.\n\nWhat am I thinking?\n\nI have long thought that for many kinds of typeface designs, the Chameleon editor would make a really handy rapid prototyping tool. A great way to quickly define the basic characteristics of the typeface. It could export Type 1 fonts....\n\nOn the downside, the natural tendency of working with such an environment would be to create a more bland and homogenized font. Instead of starting with lots of personality and trying to tame it (my usual type design problem), you'd be facing the opposite problem.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thomas,\n\nthis sounds like the Font Chameleon principle is not much different from TrueType Variations as implemented in Skia GX/AAT (the [gvar](http://web.archive.org/web/20100203164716/http:/developer.apple.com/textfonts/TTRefMan/RM06/Chap6gvar.html) table), in which the variations are described using deltas of point coordinates, and which could be edited, AFAIR, using the GX Mutator tool.\n\nUnfortunately, I've never seen ChamEdit or GX Mutator \"in action\". I would like to, and I would happily talk with my colleagues at FontLab about possibilities to implement such an approach in our applications.\n\nAlternatively, people should have a look at Erik van Blokland's [Superpolator](http://web.archive.org/web/20100203164716/http:/superpolator.com/) which implements a similar approach as the one which was used in TrueType Variations.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Well, \\*kind\\* of. But first you have a bunch of info about deltas for global stuff, and then only gradually get more specific. Depending on the typeface, some (or many) glyphs might not have \\*any\\* \"glyph-specific\" info at all!\n\nAnd you only worry about the key points you need... all the many \"unnecessary\" points from the master design get interpolated....\n\nThe execution, in terms of the actual \\*code\\* and stability thereof kinda sucks. But the concepts and UI are pretty great.\n\nOf course remember that many aspects of this are patented for another eight years. :/ Of course, you could always approach Adobe about licensing the patent.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Oh, and to bring this back around to optical size, one of the nice things about ChamEdit is that one could easily tweak parameters like serif thickness, contrast, and x-height, with corresponding global effects on glyphs. That was part of what brought it to mind here.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "In technical principles, TrueType Variations used an open format for input, defined with a free and open tool, stored it in a few open tables, and output as open TT, while Chameleon didn't use any standards. In design principles Font Chameleon is much like a corral, go play anywhere, but don't leave. Variations and Superpolations are a wide open field with posts that have signs telling you what's in each direction, and it's all up to the designer or user to wander the space, or in fact leave it. So I'm not sure what common principles there are among these formats, except that one can twiddle input and effect output.\n\n\"...one of the nice things about ChamEdit is that one could easily tweak parameters...\"  \nThis is true, after a very long preprocess. And in the end, all these brilliances have to return to the puny-human formats and caved-in menus of the dummy-world where none of these multiple mastered formats are installable.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "I located a FontChameleon box gathering dust here. It specifies System 7 for Mac and Windows 3.1 for Windows - although it's possible things would run on a modern OS too. I haven't tried it, because I'm too lazy to try to find a floppy disk drive that will connect to my MacBook.\n\nI think David B's comments are on target here. The master font predetermines what range of possibilities is available. The shrinkwrap version of FontChameleon comes with a canned master font, and 47 descriptors \"similar to\" various popular faces, crafted for FontChameleon by The Font Bureau. (The clone aspect is the main reason Adobe promptly buried the product.)\n\nAdobe did use the technology for a while, but it required extensive (and expert) work on the master font to make it useful for our purposes. I believe there were something like five people who ever knew how to do it. I suspect that's the kind of work David B is recalling so fondly...\n\nI do think Thomas' idea is attractive in its way. If one had a programmer available to set up & tune the master font to one's spec's, one could indeed use the Chameleon tools to do parametric tweaks as a means of design exploration. But that's an enormous \"if\". Of course one can get similar results on a much smaller (but more doable) scale by setting up appropriate multiple masters.\n\nThe guys who created FontChameleon did see type design potential in it. They were thinking that a designer might want to start out a new project by creating outlines that were, say 70% Bodoni and 30% Palatino, and then adjust parameters from there. Personally, I have trouble seeing a serious designer being interested in such an approach, but maybe that's just me.\n\n"
+    },
+    {
+      "time": "",
+      "content": "David L, you're looking at the FontChameleon retail product. It's an amusing toy, but not very interesting (to me, anyway) for developing new fonts. I don't see much use in starting out with something that's 70% Bodoni and 30% Palatino, either.\n\nBut I was thinking about the ChamEdit application, that was used by FB and others to create the \"descriptor\" files (a.k.a. Chameleon fonts). Although I never completed a typeface with it, I did get pretty far along in that direction while reviewing the newly-written documentation.\n\nI was thinking that for prototyping a brand new design, from scratch, the ChamEdit app would be pretty handy. I'd have loved to use it that way. Instead of using it to duplicate an existing font, you'd be using it to develop a new one. Heck, if I'd been on a Mac, I probably would have used it for the early stages of Hypatia Sans development. No programmer required. :)\n\nOf course, I would have run up against limitations of the master font pretty quickly, just in terms of it not supporting Greek, Cyrillic, and some of the extended Latin I was doing. But other than that, it seems like a reasonably workable approach to start.\n\nI do wonder if it might interact poorly with trying to do a real multiple master or Superpolator approach, though. Hmmm.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "DavidL: \"The shrinkwrap version of FontChameleon comes with a canned master font, and 47 descriptors “similar to” various popular faces, crafted for FontChameleon by The Font Bureau. (The clone aspect is the main reason Adobe promptly buried the product.)\"\n\nOoops! to make clear what Mr. Lemon is casually portraying in an unclear, borderline yikes! fashion: The term 'clone' in the usual context @Typophile, means to make a copy of something that someone else made which the cloner has no right to. Chameleon descriptor files, by contrast and by contract, were only made from template fonts to which Adobe had legal license. With Adobe tools, at Adobe expense this was _instead_ a format conversion for the purpose of file compression for cheaper PostScript printer boards for faster printing at a time where such things were thought by Adobe to be concerns to Adobe's customers.\n\nI was always of the opinion, that dumber and cheaper and crisper and blacker were all you could ask for in a printer, (a bad idea for printer royalty junkies), and the cpu should do All The Font Work. The market agreed, and that, I believe, is the actual size main reason Adobe eventually buried the product. I remember nothing prompt in it at all, but I may be corrected.\n\nThomas: \"I was thinking that for prototyping a brand new design, from scratch, the ChamEdit app would be pretty handy. \"\n\nPrototyping a brand new design, from scratch, (type design) is best handled otherwise in my experience. One would only need to use CE a few days to argue your self back to reality. Compared to the upfront work involved in making what did get made, this product was only handy for what it was made to do. Or, if FC had been applied to some kind of fine output tuning, like to shorten a text artistically .998%, or weight a text meticulously for a particular production path, or help type on screen or in print to survive a background, or hop long descenders over caps and descenders, it might have lived.\n\n\"Of course, I would have run up against limitations of the master font pretty quickly... [and]...I do wonder if it might interact poorly with trying to do a real multiple master or Superpolator approach\"\n\nBoth MM and FC are subsets of SP to the skilled and patient. And, since one is the master of one's own SP master, one would run up against no limitations in the master quickly and forever. Look Ma, no Ernie!\n\nCheers!\n\n"
+    }
+  ]
+}

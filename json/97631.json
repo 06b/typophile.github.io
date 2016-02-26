@@ -1,0 +1,47 @@
+{
+  "id": "97631",
+  "title": "Generating / converting proper SVG fonts",
+  "forum": "Build",
+  "tags": [
+    "svg fonts",
+    "Build"
+  ],
+  "content": "Hello,\n\nI am trying to generate clean SVG fonts.  \nI was using the batik font converter ( [http://xmlgraphics.apache.org/batik/tools/font-converter.html](http://web.archive.org/web/20130824061313/http:/xmlgraphics.apache.org/batik/tools/font-converter.html \"http://xmlgraphics.apache.org/batik/tools/font-converter.html\"))…  \nBut for some reason it seems to skip some glyphs. Can't manage to get the euro sign for example.\n\nTried with FontForge as well, no success at all.  \nWhat are you guys using? At best not fontsquirrel… ?\n\nAgain, it seems our favorite tools are lacking quite important functions.  \nNot really happy about relying on some command line found through browsing the internet.\n\n",
+  "author": "xy",
+  "time": "29 Oct 2012 — 6:25am",
+  "uid": "201944",
+  "comments": [
+    {
+      "time": "29 Oct 2012 — 7:00am",
+      "content": "> At best not fontsquirrel… ?\n\nWhat about Font Squirrel's convertor did not work for you?\n\n"
+    },
+    {
+      "time": "29 Oct 2012 — 7:08am",
+      "content": "Font Squirrel is using FontForge internally, and I think that is the best you can find. Inkscape can build SVG fonts IIRC, but it will not convert existing ones.\n\n"
+    },
+    {
+      "time": "29 Oct 2012 — 8:54am",
+      "content": "If Fontsquirrel is using FontForge, then I'm curious about how it is doing that.  \nI tried converting a font with it, and it produced a file that would not work in safari.  \nDo you have an idea of the command line to convert from a ttf file?\n\nKarl\\> I think fontsquirrel is fine for tests and for people converting their fonts, but as a professional type designer, I don't think it is the best idea to rely on an online tool which produces a result without giving me any control and understanding on what is happening.  \nOn top of that, I wanted to try it today because nothing was working, and it is down because of a storm (?!).\n\n"
+    },
+    {
+      "time": "29 Oct 2012 — 9:07am",
+      "content": "@Officer McClane, why do you need SVG as opposed to WOFF? Also, which version of Safari are you working with as I think SVG is only supported in later versions.\n\nI think that FontForge is currently the only publicly available editor that supports the output of SVG fonts but I do not understand all of the complexities of that application.\n\n"
+    },
+    {
+      "time": "29 Oct 2012 — 9:13am",
+      "content": "You could also try this:\n\n[http://sourceforge.net/projects/birdfont/](http://web.archive.org/web/20130824061313/http:/sourceforge.net/projects/birdfont/ \"http://sourceforge.net/projects/birdfont/\")\n\nI have only just found it and so have no idea how useful it might be.\n\n"
+    },
+    {
+      "time": "29 Oct 2012 — 12:02pm",
+      "content": "I don’t use SVG fonts myself (it is a very limited font format when it comes to fonts for complex scripts. which is what I generally work on), but FontForge can be scripted and called from regular Python scripts (unlike FontLab which I’m told you have to run the scripts inside its GUI), which is almost certainly how Font Squirrel is calling it. There is also a “native” FontForge scripting language that I often use for quick stuff, so to convert any font format that FontForge can read to SVG from command line, I’d use something like this `fontforge -lang=ff -c 'Open($1); Generate($1:r+\".svg\")' fontname.ttf`, which should create a `fontname.svg` file in the current directory.\n\n"
+    },
+    {
+      "time": "29 Oct 2012 — 4:09pm",
+      "content": "Thank you Khaled, I'll look into it.  \nI managed to solve my problem today but I'd still like a better solution.\n\nKarl\\> Some clients want svg, for older versions of iOS I think.  \nsvg still render on safari 6.\n\n"
+    },
+    {
+      "time": "29 Oct 2012 — 4:10pm",
+      "content": "Thank you Karl for Birdfont, I'll give it a try too.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "17210",
+  "title": "Register.com Rendered Font",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "I just renewed a domain and went to Register.com  \nto see if it worked, and stumbled on this curiosity:\n\n ![](http://web.archive.org/web/20120312001251im_/http:/typophile.com/files/register.gif)\n\nThat's a canned paragraph, but it's followed by  \nsome dynamically-generated text, rendered  \non-the-fly certainly.\n\nI assume this is to prevent textual copying by  \nrobots (or just by humans). Anyway, not that the  \nrendering is very good (the JPEG haloing for one  \nis pretty bad) but I'm curious as to the mechanics  \nof this. What kind of font, and software?\n\nhhp\n\n",
+  "author": "<a href=\"/web/20120312001251/http://typophile.com/user/1250\" title=\"View user profile.\">hrant</a>",
+  "time": "<br>",
+  "uid": "1250",
+  "comments": [
+    {
+      "time": "",
+      "content": "The simplest cross-platform way to something like that would be to use [FreeType](http://web.archive.org/web/20120312001251/http:/freetype.sourceforge.net/), possibly in conjuction with an image manipulation library such as the one that comes with [ImageMagick](http://web.archive.org/web/20120312001251/http:/www.imagemagick.org/).\n\nI've used FreeType in the past to write a full-fledged text renderer for the [TiVo](http://web.archive.org/web/20120312001251/http:/www.tivo.com/) Series 1 platform. My application took arbitrary input text and presented it in a \"dialog box\" on the user's TV screen. Here's a screen shot:\n\n ![](http://web.archive.org/web/20120312001251im_/http:/typophile.com/files/messagebox.jpg)\n\nI had to implement some of the fancy stuff (such as word wrap, kerning, and input text parsing) myself; fortunately, FreeType makes all the necessary metrics available to the programmer. Some of the hardest parts -- parsing the TrueType files, and rendering the actual glyphs -- are done by FreeType itself.\n\nRegister.com's use of JPEG compression instead of PNG or GIF is just silly. Saving the rendered image to a proper PNG file can be done pretty simply by using [libpng](http://web.archive.org/web/20120312001251/http:/www.libpng.org/pub/png/libpng.html).\n\n"
+    },
+    {
+      "time": "",
+      "content": "Cool - and thanks!\n\nEdward, if I send you a \"special\" TrueType font, one that renders out  \ngrayscale bitmaps, would you be willing to test it with your setup?  \nFor one thing I think you might be impressed with the rendering  \nquality of handmade gs bitmaps - but mostly I'd like to test it, and  \nmaybe even have a showcase for it.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'd be happy to test your TrueType font on my TiVo setup if you want. I've actually been following some of your progress, and I've been looking forward to seeing the results in action.\n\nNote that at the glyph level, the output will essentially be the output of the FreeType rasterizer.\n\nThe FreeType rasterizer has many internal options that can be tweaked; for my specific application, I spent a lot of time experimenting in order to determine out the combination of options that best approximated the text rendering of the native TiVo software (which, by the way, is probably using FreeType itself). My goal was seamlessness rather than optimal subjective rendering quality. That's the reason that, for example, the tracking is too tight (in my opinion).\n\nTherefore, if I test your font under that particular setup, it may not look as good as it possibly can. Additionally: I'm not sure what you mean when you say that your TrueType font is \"special\", but if it uses esoteric TrueType features, it's possible that FreeType will choke on it in some way. The only way to know for sure is to try it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I've not looked at the text too closely but at a guess it looks like Lucida or a similar hinted TrueType font with both gridfitted hinting and grayscale antialiasing applied.\n\nYou see very similar rendering on Windows under regular antialiasing if you hack the 'gasp' table of a hinted font like Tahoma using the TTFGasp tool. [http://www.geocities.com/SiliconValley/Lakes/8162/](http://web.archive.org/web/20120312001251/http:/www.geocities.com/SiliconValley/Lakes/8162/ \"http://www.geocities.com/SiliconValley/Lakes/8162/\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "Great - I'll send you Mana-16 Regular, since you  \nprobably need to do larger settings. What email?  \nMine is hpapazian thatsymbol gmail dot com\n\n\\> best approximated the text rendering of the native TiVo software\n\nOK, I get it - good to know.  \nBecause yes, the tracking is too tight. :-)\n\nBTW, if they're using FT as well, weren't they  \nwilling to reveal their settings/tweaks to you?\n\n\\> it may not look as good as it possibly can.\n\nWell, if the grays get shifted a little bit that's OK.  \nIf they get shifted a lot (which is hard to quantify)  \nthen it all backfires... Questions: does FreeType have  \nconsistent \"defaults\"; how often do [you think] people  \nchange them; and by how much?\n\n\"Special\": nothing fancy at the TT level, in fact the point  \nis to make it all fool-proof and consistent (something no other  \nfont technology provides btw). Although maybe the apparent  \nflexibility of FreeType might make total consistency harder.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Simon, yes, I've done that sort of thing myself, although only  \nfor testing, certainly no redistribution. Because: it's not legal,  \nis it? Do you think Register.com is really doing that?\n\nOr maybe: they didn't actually modify the font,  \nthe renderer is deciding what font features to  \nuse and not.\n\nI wonder why they didn't just leave it 1-bit though,  \nsince the font is clearly not designed for gs. Maybe  \nit's part of the security aspect, since it might be  \nharder to OCR?\n\nhhp\n\n"
+    }
+  ]
+}

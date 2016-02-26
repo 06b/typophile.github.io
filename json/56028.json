@@ -1,0 +1,70 @@
+{
+  "id": "56028",
+  "title": "Font naming driving me crazy",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I've been renaming and regenerating for days now. The problem I have is that Roman typefaces and their italics appear under different font menus even though the family name is exactly the same (see pic). How can I sort this and have them all appear under the same menu? I have spent enough time going round in circles getting nowhere. Why are there so many options in FontLab and no definitive solution to generating an OTF family in a range of weights?\n\nAny help much appreciated. Thanks.\n\n ![](http://web.archive.org/web/20121214051823im_/http:/typophile.com/files/Fontmenu_4695.gif)\n\n",
+  "author": "Nick Cooke",
+  "time": "19 Mar 2009 — 5:04am",
+  "uid": "3834",
+  "comments": [
+    {
+      "time": "19 Mar 2009 — 5:19am",
+      "content": "[http://forum.fontlab.com/fontlab-studio-tips-and-tricks/font-family-nami...](http://web.archive.org/web/20121214051823/http:/forum.fontlab.com/fontlab-studio-tips-and-tricks/font-family-naming-in-fontlab-studio-5-t313.0.html \"http://forum.fontlab.com/fontlab-studio-tips-and-tricks/font-family-naming-in-fontlab-studio-5-t313.0.html\")\n\nHope this helps, it helped me.\n\n"
+    },
+    {
+      "time": "19 Mar 2009 — 5:25am",
+      "content": "Karsten Lücke's \" [Font Naming](http://web.archive.org/web/20121214051823/http:/kltf.de/kltf_otproduction.htm)\" pdf is great. Maybe you should nuke your font caches too.\n\n"
+    },
+    {
+      "time": "19 Mar 2009 — 7:18am",
+      "content": "Post screenshots of your naming and OT naming options for these fonts, please. Regular and italic versions.\n\nAlso, I have found that even after deleting fonts and cleaning the font caches Indesign will sometimes maintain an incorrect family name for a font even after a correctly named version has replaced it.\n\n"
+    },
+    {
+      "time": "19 Mar 2009 — 7:19am",
+      "content": "Nick\n\nI wrote this python code to help me with naming fonts in FL - it works for Light, Regular, Medium, Bold and Italics. You should be able to adapt it for other weights.\n\n`\nfrom robofab.world import CurrentFont\nfrom robofab.interface.all.dialogs import AskString\nf = CurrentFont()\n#\nfontName = AskString('Font Name')\nWeight = AskString('Weight')\n#\ndef naming( short, weight, weight2 ):\n\tf.info.familyName = fontName+\" \"+short\n\tf.info.widthName = \"Normal\"\n\tf.info.styleName = weight\n\tf.info.fontName = fontName.replace(' ', '')+\"-\"+weight2.replace(' ', '')\n\tf.info.fullName = fontName+\" \"+weight2\n\tf.info.menuName = fontName+\" \"+short\n\tf.info.fondName = fontName.replace(' ', '')+\" \"+weight2.replace(' ', '')\n\tf.info.otFamilyName = fontName\n\tf.info.otStyleName = weight2\n#\nif Weight == \"Thin\":\n\tnaming(\"Th\", \"Regular\", \"Thin\")\n\tf.info.weightName = \"Thin\"\n\tf.info.weightValue = 250\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Light\":\n\tnaming(\"Lt\", \"Regular\", \"Light\")\n\tf.info.weightName = \"Light\"\n\tf.info.weightValue = 300\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Regular\":\n\tnaming(\"Rg\", \"Regular\", \"Regular\")\n\tf.info.weightName = \"Regular\"\n\tf.info.weightValue = 400\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Medium\":\n\tnaming(\"Lt\", \"Bold\", \"Medium\")\n\tf.info.weightName = \"Medium\"\n\tf.info.weightValue = 500\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Bold\":\n\tnaming(\"Rg\", \"Bold\" ,\"Bold\")\n\tf.info.weightName = \"Bold\"\n\tf.info.weightValue = 700\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Thin Italic\":\n\tnaming(\"Th\", \"Italic\", \"Thin Italic\")\n\tf.info.weightName = \"Thin\"\n\tf.info.weightValue = 250\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Light Italic\":\n\tnaming(\"Lt\", \"Italic\", \"Light Italic\")\n\tf.info.weightName = \"Light\"\n\tf.info.weightValue = 300\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Italic\":\n\tnaming(\"Rg\", \"Italic\", \"Italic\")\n\tf.info.weightName = \"Regular\"\n\tf.info.weightValue = 400\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Medium Italic\":\n\tnaming(\"Lt\", \"Bold Italic\", \"Medium Italic\")\n\tf.info.weightName = \"Medium\"\n\tf.info.weightValue = 500\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Bold Italic\":\n\tnaming(\"Rg\", \"Bold Italic\", \"Bold Italic\")\n\tf.info.weightName = \"Bold\"\n\tf.info.weightValue = 700\n\tprint f.info.fullName+\" \"+\"Named\"\nelse:\n\tprint \"Ooops that's not a weight\"\n\tprint fontName+\" \"+\"is not named\"\n#\nf.update()`\n\n"
+    },
+    {
+      "time": "19 Mar 2009 — 2:08pm",
+      "content": "Rachel, that's a good idea.  \nLet's hope that this is incorporated into the next FontLab, invisibly!\n\n"
+    },
+    {
+      "time": "19 Mar 2009 — 2:12pm",
+      "content": "_Why are there so many options in FontLab and no definitive solution to generating an OTF family in a range of weights?_\n\nThe whole font-naming mess is a conspiracy to create work for programmers and derogate the importance of mere glyph-limners.  \nOn the up side, if you ever get this sorted out, you can charge big bucks/eros/pounds for being such a pro!\n\n"
+    },
+    {
+      "time": "19 Mar 2009 — 3:13pm",
+      "content": "The font naming issues are complex and varied… I'm glad I'm not the only one who has had problems. I figured it out through a combination of sources such as the links above and a lot of trial and error, now that I'm set I'm sticking with the process I have as it works well.\n\n"
+    },
+    {
+      "time": "21 Mar 2009 — 12:30am",
+      "content": "As this involves italic, how about this little gem from Miguel Sousa (nothing to do with naming fonts):  \n [http://typophile.com/node/55320](http://web.archive.org/web/20121214051823/http:/typophile.com/node/55320 \"http://typophile.com/node/55320\")\n\n"
+    },
+    {
+      "time": "24 Mar 2009 — 3:59pm",
+      "content": "Since my last post I ran into the same problem. There was a space after the last character in one of the font names, and that space was causing the font to be counted as a second family with what looked like the same name. Fixing the fonts did not fix the problem; I found that the only way to fix it was to stop using the fonts via a font manager and instead put them in /Library/Application Support/Adobe/Fonts.\n\n"
+    },
+    {
+      "time": "25 Mar 2009 — 5:05am",
+      "content": "Thanks for all the help. It's sorted now - I renamed them all slightly and that sorted it.\n\nRachel - thanks for that, but I have no idea what to do with it; I have an aversion to all that python stuff - it's on a par with manual hinting which thankfully I have also managed to steer well clear of. Creating features and classes is bad enough, but that makes me shudder.\n\nNick Cooke\n\n"
+    },
+    {
+      "time": "25 Mar 2009 — 8:56am",
+      "content": "Nick\n\nYou do need RoboFab installed it's really simple - I'm not the sharpest knife in the box.\n\n1. Select all the code and save it in a text file (I use TextMate on a mac).  \n2. Name the file something with .py at the end, I use NamingMacro.py  \n3. Put this file into your macros folder, on a mac thats - /Users/Username/Library/Application Support/FontLab/Studio 5/Macros  \n4. In FontLab open the macros toolbar View - Toolbars - Macro.  \n5. The file you put in the macros folder should be there, select it and press run.  \n6. A window will open asking you for the family name then one for the weight.  \n7. Done.\n\n"
+    },
+    {
+      "time": "25 Mar 2009 — 9:15am",
+      "content": "It would be nice to have an expanded version of RoboFab to handle all weight possibilities… does RoboFab mimic FontLab Studio naming even for the PS Font name with no spaces and the OpenType naming?\n\nDoes it sync with Adam Twardoch's naming conventions for FontLab Studio?\n\nJust curious this looks interesting.\n\nI don't have any problems currently with naming but it looks like a very efficient system…\n\nMike\n\n"
+    },
+    {
+      "time": "26 Mar 2009 — 9:57am",
+      "content": "I tried that on an unnamed font and an output window came up with:\n\nFile \"\", line 1  \n {\\rtf1\\ansi\\ansicpg1252\\cocoartf949\\cocoasubrtf430  \n ^  \nSyntaxError: invalid token\n\nI assume that's not right?\n\nNick Cooke\n\n"
+    },
+    {
+      "time": "26 Mar 2009 — 10:28am",
+      "content": "Nick\n\nDo you have RoboFab installed and working correctly ?\n\nDo you get the windows asking for the Font name and Font weight ?\n\n"
+    }
+  ]
+}

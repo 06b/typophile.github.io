@@ -1,0 +1,46 @@
+{
+  "id": "33028",
+  "title": "Pixel Traps",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Hi everyone,\n\nI'm working on a screen font that will have a strange design to make it looks fine at small size on a screen (without any hinting). Therefor I need to find a way to make it looks well optically. I've found the Bell Centennial font (below) that has enormous ink traps so I will be really grateful if you can give any other exemples that may help me.\n\n ![](http://web.archive.org/web/20131019033131im_/http:/typophile.com/files/A_5250.png)\n\nYou can also find the first tests I've done attached below.\n\n| Attachment | Size |\n| --- | --- |\n| [n.pdf](http://web.archive.org/web/20131019033131/http:/typophile.com/files/n.pdf) | 210.69 KB |\n\n",
+  "author": "kuroneko",
+  "time": "13 Apr 2007 — 4:52am",
+  "uid": "17794",
+  "comments": [
+    {
+      "time": "13 Apr 2007 — 5:22am",
+      "content": "You might find some interesting information & links in this thread:  \n [http://typophile.com/node/28975](http://web.archive.org/web/20131019033131/http:/typophile.com/node/28975 \"http://typophile.com/node/28975\")\n\n"
+    },
+    {
+      "time": "13 Apr 2007 — 6:32am",
+      "content": "Isn't that exactly what hinting is for?\n\nAs for ink traps, well, they won't make much sense on screen...as there really isn't such a thing as 'pixel spread' ;o)\n\n"
+    },
+    {
+      "time": "13 Apr 2007 — 9:00am",
+      "content": "Trapping actually does make sense onscreen, although less on an LCD than a CRT. But even on an LCD it help because a big reason trapping in general is useful is that it fights optical degradation, not just \"mechanical\". At small sizes funny things happen, as Dwiggins discovered so explicitly.\n\nJas, it looks like you're making an outline font that tries to look good onscreen, as opposed to a true pixelfont. Which is one good way to go, especially since that means it will be usable for print. But know that you will end up compromising the screen rendering to a good degree (unless you do mountains and mountains of hinting).\n\nBut in any case looking at your PDF you really have to worry about the more \"macro\" features looking good on screen first - like the right stem of the \"n\". Even just that is a challenge - and bitmap trapping is a level (or two) above that...\n\nhhp\n\n"
+    },
+    {
+      "time": "13 Apr 2007 — 9:47am",
+      "content": "Don't get too distracted by ink traps. Those were developed to compensate for very real conditions in a specific printing environment. The issues with a screen-optimized face are very different; as Hrant points out, it's larger issues like stem weight, counters, sidebearings, overshoot, etc. to worry about. If you don't have to match a print version, it frees you up to choose optimal proportions and placement of the most important features, and it is really quite different when you have that freedom. For instance, if you have to match a print font, sometimes you end up with very cramped or bent-looking shapes to AKMNVWkvwy. If you start with bitmaps, you can design them from the beginning to look right onscreen. Spacing, character shapes and things like dots and accents will benefit greatly.\n\n"
+    },
+    {
+      "time": "13 Apr 2007 — 10:26am",
+      "content": "\\> If you start with bitmaps ...\n\nIndeed. The trick here though (I mean in something where trapping  \ncan be relevant) is that those bitmaps would have to be <cite>grayscale</cite>...\n\n[http://www.themicrofoundry.com/manademo/](http://web.archive.org/web/20131019033131/http:/www.themicrofoundry.com/manademo/ \"http://www.themicrofoundry.com/manademo/\")\n\nhhp\n\n"
+    },
+    {
+      "time": "13 Apr 2007 — 12:19pm",
+      "content": "Thanks a lot!  \nThe main idea of my font is to find how to draw a font to make it look good on screen without using any hinting (just like ink traps are working for printed typography). The font is mainly intended to be used at 12 or 14pt on a 72dpi screen and I like the idea that the font will look (absurdly) different at a big size.\n\n"
+    },
+    {
+      "time": "13 Apr 2007 — 12:25pm",
+      "content": "In this case your font has to be PPEM-specific.\n\nRelated:  \n [http://typophile.com/node/12648](http://web.archive.org/web/20131019033131/http:/typophile.com/node/12648 \"http://typophile.com/node/12648\") \\_  \n [http://typophile.com/node/29761](http://web.archive.org/web/20131019033131/http:/typophile.com/node/29761 \"http://typophile.com/node/29761\")\n\nhhp\n\n"
+    },
+    {
+      "time": "13 Apr 2007 — 1:24pm",
+      "content": "Yes, if you get sorted with a specfic target PPEM you are off & running. This kind of project will be complicated inevitably by the fact that different PC laptops can have different PPEMs and the fact that Different OS' have different ways of rendering. So in some ways to do something that isn't fairly mad you will be better off accepting that not all computer screens will be optimal for your font. If it's a Mac your talking about ( sounds like it to me! ) then it will be much more predictable - but there are still screen differences to stay aware of.\n\nCarl is right that trapping could be blind alley for your purposes. In my case I have found that they mostly help to make text look mushy on screen. And Carl & Hrant are right that figuring out what you want in greyscale first might help you to clarify your intent - what the finnished rendering should look like.\n\nHere are some more links:\n\n[http://www.rogerblack.com/blog/second\\_font\\_war](http://web.archive.org/web/20131019033131/http:/www.rogerblack.com/blog/second_font_war \"http://www.rogerblack.com/blog/second\\_font\\_war\")  \n [http://www.rogerblack.com/blog/screen\\_fonts\\_history](http://web.archive.org/web/20131019033131/http:/www.rogerblack.com/blog/screen_fonts_history \"http://www.rogerblack.com/blog/screen\\_fonts\\_history\")\n\nrelated\n\n[http://lists.freedesktop.org/archives/openfontlibrary/2007-February/0003...](http://web.archive.org/web/20131019033131/http:/lists.freedesktop.org/archives/openfontlibrary/2007-February/000377.html \"http://lists.freedesktop.org/archives/openfontlibrary/2007-February/000377.html\")  \n [http://www.type4screen.com/?cat=8](http://web.archive.org/web/20131019033131/http:/www.type4screen.com/?cat=8 \"http://www.type4screen.com/?cat=8\")\n\n"
+    }
+  ]
+}

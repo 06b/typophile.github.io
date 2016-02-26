@@ -1,0 +1,78 @@
+{
+  "id": "34903",
+  "title": "Embedded bitmaps in TTF in Windows",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hello. I am planning to embed bitmaps in one of our fonts to improve on screen appearance in very small sizes. However I am wondering how TTF fonts with embedded bitmaps behave now in Windows XP and Windows Vista. Does it depend on the Settings of Windows whether or not the applications honour the embedded bitmap table of the TTF font?\n\nDoes anyone have experience in which circumstances the bitmaps will show in the specific ppem sizes, and when the Windows rasterizer show the rasterized outlined instead? How can one make sure the bitmaps are used, when the outlines are present in the font as well?\n\nThanks, Peter\n\n",
+  "author": "peter bilak",
+  "time": "5 Jul 2007 — 2:28am",
+  "uid": "3279",
+  "comments": [
+    {
+      "time": "5 Jul 2007 — 6:45am",
+      "content": "Hi Peter,\n\nYou might want to drop Vinnie Connare or Tom Rickner a note as they've some experience here. Also you could experiment with Calibri and Cambria (shipping versions) as they contain embedded bitmaps at key sizes - these were inserted to improve rendering when CT and regular antialaising were turned off, or under certain terminal server settings.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "5 Jul 2007 — 8:28am",
+      "content": "Peter, my old Arasan\\* still works as it did under Windows 98,  \nso you're safe on Windows-XP. I don't know about OSX though...\n\n\\* [http://www.themicrofoundry.com/f\\_arasan.html](http://web.archive.org/web/20120418220202/http:/www.themicrofoundry.com/f_arasan.html \"http://www.themicrofoundry.com/f\\_arasan.html\")\n\nThe bitmaps will show if they're there for the given character at the given PPEM. I'm not sure about how the OS settings affect the selection of the bitmaps - I can test on XP if you like (or I can send you Arasan for you to test yourself). I'm also not sure about how Unicode and/or OT fonts play into this. Are you doing anything like that?\n\n\\> Calibri and Cambria .... contain embedded bitmaps at key sizes\n\n!!  \nNice. So it still works on Vista too. Thank you, MS.\n\nHmmm, Simon, what would it take to embed _grayscale_ bitmaps  \ninto a CT font? Anybody done this with Bitfonter, or \"manually\"?\n\nhhp\n\n"
+    },
+    {
+      "time": "5 Jul 2007 — 9:02pm",
+      "content": "\\>Hmmm, Simon, what would it take to embed grayscale bitmaps  \ninto a CT font?\n\nI'll ask Greg.\n\n"
+    },
+    {
+      "time": "5 Jul 2007 — 9:17pm",
+      "content": "Thanks!  \nBut wait, what I really meant was: what would  \nit take to embed _deep color_ bitmaps into a CT font...\n\nhhp\n\n"
+    },
+    {
+      "time": "6 Jul 2007 — 1:15am",
+      "content": "Thanks Si.  \nIt is quite surprising how NOT documented is the bitmap embedding in TTF, and its use in Windows. I suppose it calls for a comparative study to see which applications and systems honour the embedded bitmap tables and which not.\n\nIn the meantime , I wrote to Tom Rickner, and I am awaiting his response.  \ncheers, P\n\n"
+    },
+    {
+      "time": "6 Jul 2007 — 4:43pm",
+      "content": "My experiences show that embedded bitmaps work in Windows only when ClearType is OFF. If it is on, the embedded bitmaps are not shown. This is, of course, something we could expect because ClearType does not use full pixels but instead does subpixel rendering. Especially with subpixel (fractional) glyph positioning (where the origins of the glyphs are also positioned on subpixels, showing embedded bitmaps would be very odd).\n\nA.\n\n"
+    },
+    {
+      "time": "6 Jul 2007 — 4:59pm",
+      "content": "But if embedded bitmaps can be in color (and I think they can) then...\n\nhhp\n\n"
+    },
+    {
+      "time": "7 Jul 2007 — 7:54am",
+      "content": "Hrant,\n\nit's not the point. The point is that when ClearType renders fonts on fractional widths, then the glyph origin may fall on the R, the G or the B subpixel. So then, assuming (in a simplified way) that the left stem of a glyph will be only two subpixels thick, it will be then rendered on the RG, GB or BR subpixels. In other words, the same character in one line of text may be rendered differently if it occurs several times.\n\nThere is no way that this can be done with bitmape, even if they have fixed colors. In theory, for a bitmap-only font, ClearType could be smart and render such font on integer widths only -- but the problem arises if, say, only 1/4 of the glyphs have bitmaps. This is a case the rasterizer would have to consider -- but mixing embedded bitmaps on integer widths and outline glyphs on fractional glyphs would be difficult to implement and I doubt it would yield any good results.\n\nThe recent incarnations of ClearType do show great potential. The rendering is quite good and more legible than the Windows 2000/XP grayscaling (but then, the Windows 2000/XP grayscaling is horrible -- Mac OS X shows that pure grayscaling can still yield good results).\n\nHowever, I feel that the implementation of ClearType has gone in the wrong way when it comes to how a font can opt in or out to certain treatment. Microsoft should have extended the gasp table in a clear, readable way so that a font could choose what and when to use: embedded bitmaps, delta hinting, grayscaling, subpixel glyph rendering, fractional/integer widths. The ClearType rasterizer could still apply its defaults to fonts that don't have any of it specified, but for newer fonts for which the developer specifically tuned some settings, there should be a clear way to tell ClearType: \"Here, I want pure black-and-white delta-hinted outlines for this one\" or \"I want embedded bitmaps\".\n\nA.\n\n"
+    },
+    {
+      "time": "7 Jul 2007 — 8:23am",
+      "content": "\\> when ClearType renders fonts on fractional widths, then the  \n\\> glyph origin may fall on the R, the G or the B subpixel.\n\nNot if the font is designed well.  \nAnd the set-widths can be controlled with hinting.\n\n\\> I feel that the implementation of ClearType has gone in the wrong way  \n\\> when it comes to how a font can opt in or out to certain treatment.\n\nAgreed, and something I've been saying since the beginning.\n\nhhp\n\n"
+    },
+    {
+      "time": "10 Jul 2007 — 8:57am",
+      "content": "After trying several things I can answer my original question. It seems is that embedded bitmaps in TTF font work ONLY when ClearType or Grayscale anti-aliasing is OFF. I couldn't make bitmaps show in situations when anti-aliasing was activated in Win 2000, XP or Vista.\n\nPeter\n\n"
+    },
+    {
+      "time": "10 Jul 2007 — 9:08am",
+      "content": "On my system CT does in fact negate embedded bitmaps, but anti-aliasing certainly does not. Maybe you should test Arasan, since it's been deployed all around the world for a decade and I have yet to hear a complaint that the bitmaps don't show up. Vista though might change that. :-(\n\nhhp\n\n"
+    },
+    {
+      "time": "10 Jul 2007 — 10:02am",
+      "content": "BTW, it's possible that embedding grayscale bitmaps (without necessarily  \nusing any gray pixels) might help in some way, maybe even CT rendering.\n\nhhp\n\n"
+    },
+    {
+      "time": "12 Jul 2007 — 6:31am",
+      "content": "One would expect that b/w bitmaps be used when antialiasing is switched off, and that grayscale bitmaps should be used when antialiasing is on.\n\nHave asked Greg if he can make a GS embedded bitmap font, but he seems to be a bit busy right now.\n\nWould be interesting to make a hand-tuned bitmap font that would support some level of sub-pixel spacing. Obviously need to limit the number of iterations per character - maybe to 3 or 4.\n\n"
+    },
+    {
+      "time": "12 Jul 2007 — 7:12am",
+      "content": "\"..but mixing embedded bitmaps on integer widths and outline glyphs on fractional glyphs would be difficult to implement and I doubt it would yield any good results.\"\n\n...but Quartz has always...well nevermind, crystal clear must be a relative thing.\n\n\"Would be interesting to make a hand-tuned bitmap font that would support some level of sub-pixel spacing\"\n\nContours Are Able to Do The Job! lol trust me. Geeeze, a candle for this fellow!?\n\nIs it my imagination or is there an epidemic of users and designers seeking clarity in type on screens? this is three threads today, twelve or so this past two weeks of grids, and groans.\n\nCheers!\n\n"
+    },
+    {
+      "time": "12 Jul 2007 — 7:16am",
+      "content": "\\> b/w bitmaps be used when antialiasing is switched off\n\nNo, the b&w bitmaps in Arasan show in either mode as long as CT is off.\n\n\\> an epidemic of users and designers seeking clarity in type on screens?\n\nI hope so - we need it!\n\nhhp\n\n"
+    },
+    {
+      "time": "12 Jul 2007 — 12:19pm",
+      "content": "Peter,\n\ndid you specify in the \"gasp\" settings that the font should not use antialiasing for the bitmap size?\n\nA.\n\n"
+    }
+  ]
+}

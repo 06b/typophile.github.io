@@ -1,0 +1,138 @@
+{
+  "id": "115342",
+  "title": "Trouble with 'N' Character in Poly Font",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Hello Everyone,\n\nI am having trouble with the character 'N' using the Poly font. Any suggestions?\n\n| Attachment | Size |\n| --- | --- |\n| [Picture 10.png](http://web.archive.org/web/20140809142439/http:/typophile.com/files/Picture%2010_34.png) | 8.76 KB |\n| [Picture 9.png](http://web.archive.org/web/20140809142439/http:/typophile.com/files/Picture%209_37.png) | 5.51 KB |\n\n",
+  "author": "HuntedCity",
+  "time": "28 Mar 2014 — 5:27pm",
+  "uid": "44410",
+  "comments": [
+    {
+      "time": "29 Mar 2014 — 8:27am",
+      "content": "Use a well-made font.  \nOr get somebody to fix this one.\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Mar 2014 — 7:49am",
+      "content": "Troublesome overlap...\n\nThe two easiest approaches:  \n1. Use a font editor to modify the affected glyphs ('N' and accented 'N's) or  \n2. use the TTF files instead of the OTFs. TTF is less sensitive to this phenomenon.\n\nI, being me, took the hard way. I dumped it to FontForge's SFD format and hand-hacked that.\n\n    StartChar: N\n    Encoding: 78 78 8\n    Width: 775\n    Flags: MW\n    HStem: 0 21G<50 50 50 297 595 595 598 598 598 657> 673 20G<50 186 127 241 186 186 241 241 500 735 735 735>\n    VStem: 120 67<101 592> 590 67<189 572 572 601>\n    LayerCount: 2\n    Fore\n    SplineSet\n    50 0 m 1\n     44 39 l 1\n     118 52 120 62 120 101 c 2\n     120 592 l 2\n     120 631 118 641 44 654 c 1\n     50 693 l 1\n     241 693 l 1\n     582 189 l 1\n     590 189 l 1\n     590 572 l 2\n     590 630 580 644 494 654 c 1\n     500 693 l 1\n     735 693 l 1\n     739 654 l 1\n     677 642 l 2\n     658 638 657 628 657 616 c 2\n     657 0 l 1\n     595 0 l 1\n     196 592 l 1\n     187 592 l 1\n     187 100 l 2\n     187 68 197 52 231 48 c 2\n     301 39 l 1\n     297 0 l 1\n     50 0 l 1\n    EndSplineSet\n    Substitution2: \"'c2sc' Capitals to Small Capitals in Latin lookup 4 subtable\" N.sc\n    Position2: \"'cpsp' Capital Spacing in Latin lookup 0 subtable\" dx=25 dy=0 dh=25 dv=0\n    EndChar\n\n"
+    },
+    {
+      "time": "29 Mar 2014 — 9:57am",
+      "content": "Thank you. Problem solved by using TTF instead of OTF.\n\n"
+    },
+    {
+      "time": "29 Mar 2014 — 10:03am",
+      "content": "This time... for now...  \nBTW conversion to TT curves isn't without potential flaws.\n\nWhenever you can, use a good font.\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Mar 2014 — 7:02pm",
+      "content": "Any recommendations for a font similar to Poly that would be good for setting a Bilingual Spanish/English text?\n\n"
+    },
+    {
+      "time": "29 Mar 2014 — 7:58pm",
+      "content": "What's your budget?\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Mar 2014 — 8:15pm",
+      "content": "The sky's the limit.\n\n"
+    },
+    {
+      "time": "29 Mar 2014 — 9:36pm",
+      "content": "When you said Spanish/English, I immediately thought of Type Together:  \n [http://www.type-together.com/catalogue](http://web.archive.org/web/20140809142439/http:/www.type-together.com/catalogue \"http://www.type-together.com/catalogue\")  \nCheck out their Athelas, Edita, Karmina and Sirba.\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Mar 2014 — 11:11pm",
+      "content": "Polly is a very good and well made font.  \nYou should use the TTF, since that is the official \"released\" version where the contours are merged and does not have any overlaps. The OTF files included in the \"src\" folder are part of the \"source files\", and thus not merged in order to make future edits easier.\n\nThe Google Fonts version does not have this bug. I guess you are using the FontSquirrel version, for some reason they are giving you the source OTF instead of the final TTF.\n\nFWIW, the Times New Roman that comes with the Mac also have a similar problem in /Hbar  \n ![](http://web.archive.org/web/20140809142439im_/http:/cl.ly/image/0W0s053m2W2T/MacTimesHbar.png)\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 4:25am",
+      "content": "Font Squirrel has, as far as I can tell, always preferred to hand out the Ottos. (The ID word in CFF-flavoured OTF forms 'OTTO'.)\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 8:39am",
+      "content": "The font is rendered correctly on my Mac (I checked with Word and TextEdit).\n\n ![](http://web.archive.org/web/20140809142439im_/http:/typophile.com/files/PolyN_6607.png)\n  \nWhat software or system is causing a rendering that would correspond to paths that do not wind properly? The paths look fine to me (though I agree they should normally be merged). \n"
+    },
+    {
+      "time": "30 Mar 2014 — 3:16pm",
+      "content": "And, by the way, do you get the same problem with the letter ę which is made of two overlapping references? (though I must confess that if I render the letter a 1000 points with textedit, the contours eventually show up when we look very carefully; they are also visible in the grab of the N above)\n\n ![](http://web.archive.org/web/20140809142439im_/http:/typophile.com/files/eogonekb_5221.png)\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 9:12am",
+      "content": "Better question: why leave the odd glyph unmerged?\n\nhhp\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 10:14am",
+      "content": "I just received word back from the designer with a link to the updated version. He wrote :\n\nThanks for appreciate Poly. I am so sad that people still have problems with Poly, the problems that you mentioned is a early bug in the file that google published (they published the production file). Whatever, I have been working in little updates according with the user's feedback like you.\n\nYou can access the latest version of Poly at the follow link:  \n [https://dl.dropboxusercontent.com/u/1318937/Poly\\_latest\\_versions.zip](http://web.archive.org/web/20140809142439/https:/dl.dropboxusercontent.com/u/1318937/Poly_latest_versions.zip \"https://dl.dropboxusercontent.com/u/1318937/Poly\\_latest\\_versions.zip\")\n\nOf course the overlap problems are solves in this version. Enjoy the new fonts.\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 10:24am",
+      "content": "Thanks for the suggestions hrant. Sirba and Athelas really stand out for me. Although I do agree with PabloImpallari that Poly is \"a very good and well-made font.\" I would love to hear what you guys think about Poly despite the issues already raised. Anyone want to try their hand at a colorful description of the typeface for use in the colophon? Cheers.\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 10:43am",
+      "content": "To me anybody who feels he can afford a professional font should not risk the potential headaches of using a free font (except if it has a good pedigree). Things can go wrong way after it's too late to change the font choice. BTW incremental fixes don't really convey much confidence that the current version is good enough...\n\nFurthermore, in the case of Poly (as with a great many free fonts, frankly) I'm personally getting a bad vibe in terms of it having been made from scratch\\* (although it could be my paranoia again :-) and I myself wouldn't want to support –even inadvertently– such an approach.\n\n\\* One trenchant question: what other fonts has that designer previously made?\n\nhhp\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 11:22am",
+      "content": "> Better question: why leave the odd glyph unmerged?\n\nIs asking a question and contending it is better a reason not to answer the \"lesser\" question? In particular, should overlapping references always be unreferenced and merged?\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 11:36am",
+      "content": "From [https://www.behance.net/zar\\_nicolas20](http://web.archive.org/web/20140809142439/https:/www.behance.net/zar_nicolas20 \"https://www.behance.net/zar\\_nicolas20\")\n\n> Nicolás Silva is an award-winning graphic and typeface designer based in Monterey, California. He has received national and international recognition for his work, including a Bronze Cannes Lion for his collaboration on the graphic production of a campaign directed by JWT Buenos Aires.\n> \n> Nicolás graduated with honors from the University of the Andes in Venezuela with a BA in graphic design. Later, he received a postgraduate certificate in typeface design from the University of Buenos Aires in Argentina. For his final project, he created the font Poly, which was selected for display at the Ibero American Design Biennale and listed as one of the Behance Most Appreciated Projects of 2012.\n\nAnd from the font itself\n\n> Poly is a medium contrast condensed serif font. However unlike many serif fonts, it has very short ascenders and a very high x hight. Poly is very efficient in small sizes. Thanks to its careful balance between the x height and the glyph width, it allows more economy and legibility than standard web serifs, even in small sizes. This font was originally designed to compose texts in agglutinative languages, which contain very long words. The goal was to develop a typeface that would tolerate cramped tracking and that would increase the number of letters that enter in a single line.\n"
+    },
+    {
+      "time": "30 Mar 2014 — 11:53am",
+      "content": "Sorry I didn't address your questions. Having a question I consider better (from the perspective of my own needs, admittedly) is not a sufficient reason; however trying to manage one's time is. :-)\n\nAnd here's a question _I'm_ apparently having to re-ask: what other fonts has Nicolás Silva produced, in particular before Poly?\n\n> should overlapping references always be unreferenced and merged?\n\nYes; that's the only way to maximally reduce unpleasant surprises. Sort of how using an EM of 1000 for PS and 2048 for TT is _still_ a Good Idea (barring force majeure).\n\nNow, if it's a _production_ file that's meant to be easy to modify: it must be made crystal clear that it's not supposed to be deployed as-is; and one would expect _all_ glyphs with potential overlaps (like the \"M\") to feature separated contours (otherwise it's probably just sloppiness).\n\nhhp\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 1:06pm",
+      "content": "> although it could be my paranoia again :-)\n\nROFL hahaha, yes it is. Cool down :)  \nNicolas designed Poly at CDT-UBA under supervision from a superb staff of teachers.  \n [http://www.cdt-uba.org/index.php?option=com\\_content&view=article&id=49&I...](http://web.archive.org/web/20140809142439/http:/www.cdt-uba.org/index.php?option=com_content&view=article&id=49&Itemid=59 \"http://www.cdt-uba.org/index.php?option=com\\_content&view=article&id=49&Itemid=59\")\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 3:06pm",
+      "content": "That sounds like some twisted reasoning to me: Based on a flaw that demonstrably also appears in commercial fonts, a free font is declared badly made. When it proves to be not so badly made, after all, its maker is accused of plagiarism instead—without any factual basis except for the fact that he has not released any crap in the past. Come on! Even in court, you are innocent until proven guilty. I am in favour of speaking out against plagiarism (which is rampant in free fonts, I know), but I am against random suspicion, just because something is better than many a commercial font. ‘Paranoia’ indeed seems to be the right term for that.\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 4:03pm",
+      "content": "I simply prefer to err on the side of caution, based on two things: a belief that there's a general –if imperfect– correlation between a thing's cost and its quality; and my instincts. Could I be wrong? Of course, and I often am. Usually it's simply inconclusive (noting here that a person necessarily does not arrive at actionable conclusions the way a court of law does). Once in a while though I do manage to unravel a dirty secret:  \n [http://typophile.com/node/99822#comment-538894](http://web.archive.org/web/20140809142439/http:/typophile.com/node/99822#comment-538894 \"http://typophile.com/node/99822#comment-538894\")\n\nPablo, a number of those teachers I personally know and respect, which is certainly reassuring. Is it possible to see Silva's output as a student?\n\nhhp\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 4:07pm",
+      "content": "Oddly enough, we just bought Sirba last Friday to use for a customer, and I've had a quick look. I assume the advocate of \"professionalism\" living in Southern California will pay me $50 for every flat-out error I've found in the font? (I've only checked the roman so far.)\n\nMis-coded characeters, that sort of thing? Or does a grave really run this way / when it is below a character, rather than, say, \\ ???\n\nAnd is the **spacing modifier** (aka raised comma or apostrophe) found at U+02BC really (1) small, like the comma accent, as one would expect at 0313, and (2) zero width? Esp. when there is no comma accent at 0313?\n\nAnd shouldn't the combining diacritics all be zero width (regardless of where one places them in that setwidth)?\n\nAnd o335-0336 should be positioned to work as Unicode intended, mid-plane (as well as needing to be zero width), regardless of how useful they may have been to the designer in constructing the font via scripts.\n\nDon't get me wrong, I think Sirba is gong to be a real nice typeface, and if it sets as well as like I think it will, I'll have no hesitation recommending it to other customers. Things happen, though. I know, because I've done them too. It takes, perhaps, oddballs like me to \"finish the proofing.\" I've no doubt that when these are pointed out to the designer, they will either be fixed, or an explanation offered as to why they are correct, in spite of what someone might expect.\n\nBest of all though, Hrant's going to owe me enough to offset the purchase price of the whole font family!\n\n@R -- You've been around typophile long enough to know that Hrant, in spite of his numerous posts, has a smallish litany of advice for people, not always, but usually: (1) What you want to do isn't legal. (2) If it is legal, it isn't morally right. (3) Even when it is legal (& maybe morally acceptable), you don't have the skill. (4) if it's free, it's no good. All leading to (5) What's you budget?\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 4:22pm",
+      "content": "Yeah, those are much worse than getting the \"N\" wrong...\n\nBTW, I wouldn't even pay you to set a book exactly the way you've been doing it since the 19th century. The only thing I would pay you for is stooping less low in distorting the beliefs and actions of people you simply disagree with.\n\nhhp\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 4:23pm",
+      "content": "I understand your wish to err on the side of caution and, like you, I don’t want to use fonts that are re-using the work of others without their permission. But: being cautious about using or recommending fonts that give you a bad gut feeling is—to my mind—worlds apart from insinuating publicly that a font might be based on plagiarism. The latter, I think, is unfair and unwarranted unless you have fairly solid evidence. A general correlation between price and quality that you claim does not seem nearly enough to me. You might be aware of the saying ‘Audacter calumniare, semper aliquid haeret’ (Slander boldly, something always sticks). If you make (unfounded or poorly founded) accusations and these are eventually proven wrong, this can still result in damaging an honest type designer’s reputation. Why? Because somebody might misread your ‘trenchant questions’ as facts and wrongly associate an untarnished name with plagiarism. That’s not the way the world should be, but the list of careers that were ruined by false allegations is probably even longer than the list of free fonts based on plagiarism.\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 4:57pm",
+      "content": "You're right that sometimes I'm unduly aggressive in my speculation. It might be a desperate compensation for the fact that many people who harbor much more animosity towards plagiarism (really, among type designers I'm a moderate in that respect) have simply given up on Typophile, at least in terms of promoting moral behavior. Which is a shame. Also, part of me hopes that I can simply raise a red flag and people who are better than me at nailing down the exact source of plagiarism can pick up the baton. But I have to admit that very rarely actually happens...\n\nPerhaps a better avenue is not voicing vague suspicions, quietly trying to gather evidence of plagiarism, and then crashing a thread with a bang. I'm just not the sneaky type. Plus it's a lot more work. :-/\n\nBut I will try to take your balanced argumentation to heart.\n\nhhp\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 5:10pm",
+      "content": "BTW, one instance does not make a rule, but here's something telling that I once experienced: a font house representative showed me a Latin+Armenian font and asked if they should carry it. It was designed by somebody I personally know, and actually like as a person. But within five minutes of looking at it I got a bad vibe... and then spotted –inconclusive– indications of plagiarism (the trapping across scripts was suspiciously inconsistent). The representative (an \"inspiration liberal\", if you know what I mean) thought that wasn't enough grounds to reject it. Maybe he was right. But on a whim I looked at other fonts from that designer, and traced the path: the font in question was a \"some-serif\" based directly on the outlines of a previous sans typeface... owned by a rival font house. :-/ I opined that –even though it was the same designer– publishing the font would not be OK unless that other font house were aware, and approved. I don't know what ended up happening.\n\nhhp\n\n"
+    },
+    {
+      "time": "30 Mar 2014 — 7:41pm",
+      "content": "Thanks for taking my point into consideration.\n\nI agree that there must be ways to avoid unnecessary roadkill on the way to a better type design world without being on plagiarism patrol full time. If you encounter a typeface that you think is based on plagiarism, you could privately alert others to it and see if any of them can shed light on the matter. You could additionally approach the designers of suspicious typefaces themselves and see what they have to say in their defence. And: Is there any type design forum with restricted access that is not indexed by search engines? If so, that might be a place to discuss such cases. Typophile, I think, ranks fairly high on Google & Co. and a thread on plagiarism is not what you want on the first page of results as a young type designer—particularly if you did not plagiarise. Also, I suggest to let go cases in which you cannot substantiate your instinct. I understand (and support) your inclination to name and shame actual offenders, but I think there is less to be gained from each copycat exposed than to be lost when rashly publishing allegations that have to be dismissed eventually (or, even worse, go unchallenged and keep on floating about).\n\n"
+    },
+    {
+      "time": "31 Mar 2014 — 12:16pm",
+      "content": "In reference to an earlier point: [https://twitter.com/typofonderie/status/450628510819033088](http://web.archive.org/web/20140809142439/https:/twitter.com/typofonderie/status/450628510819033088 \"https://twitter.com/typofonderie/status/450628510819033088\")  \nAnd Poly is missing explicit inflection points all over the place.\n\nhhp\n\n"
+    },
+    {
+      "time": "31 Mar 2014 — 4:46pm",
+      "content": "Any thoughts on Essay Text from Type Together? Would it work well at a small size. I'm setting a book of aphorisms. English on top in Roman, the original Spanish in Italics directly beneath.\n\n"
+    },
+    {
+      "time": "31 Mar 2014 — 5:37pm",
+      "content": "It's a very expressive, even mannered design. There are a few things I like about it, and nominally it would work very well for the usage you mention... except the small size bit: fonts with a modest x-height prefer to be set large.\n\nhhp\n\n"
+    }
+  ]
+}

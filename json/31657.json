@@ -1,0 +1,30 @@
+{
+  "id": "31657",
+  "title": "Fontlab Encoding ?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm new to fontlab and just finding my feet.  \nWhat code page should I be using to develop my font ?  \nI want to make an opentype font to use cross platform, is the type of code page I choose going to effect the font I make or can I choose any code page and still get the same results?\n\nRegards\n\nRachelR : )\n\n",
+  "author": "RachelR",
+  "time": "21 Feb 2007 — 11:11am",
+  "uid": "16986",
+  "comments": [
+    {
+      "time": "22 Feb 2007 — 10:21am",
+      "content": "Rachel,\n\nthe only thing that matters in OpenType fonts is that each glyph has an appropriate name and an appropriate Unicode codepoint. The codepages, encodings and Unicode ranges are for orientation only. They are not stored inside of OpenType fonts (unless you set the FontLab Studio Preferences to enable some special encoding options.)\n\nRegards,  \nAdam Twardoch  \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": "22 Feb 2007 — 10:29am",
+      "content": "How do I make sure each glyph has the correct name and Unicode codepoint ?\n\nRachelR : )\n\n"
+    },
+    {
+      "time": "22 Feb 2007 — 1:05pm",
+      "content": "If your glyph is a default representation of a Unicode character, just pick the codepage, Unicode range or encoding in which this glyph is listed, and double-click on an empty glyph cell to create a blank glyph. A glyphname and a Unicode codepoint will be assigned automatically. (If you know the correct glyphname for your glyph, you can use Glyph / Generate Glyphs and type it there.) If your glyph is not a default representation of a Unicode character (i.e. it's a ligature, a variant glyph etc.), you need to name the glyph according to the recommendations described in the \"Glyph Naming and Encoding\" section of the FontLab Studio manual.\n\nA.\n\n"
+    },
+    {
+      "time": "22 Feb 2007 — 2:32pm",
+      "content": "A good codepage to begin with is MS Windows 1252 Western.  \nIf you complete all those characters, you will get basic cross-platform compatability.  \nActually, once you've done that, it's very easy to also do 1250 European, because if you have the separate characters and accents, FontLab automatically makes the composite characters, all you have to do is click on the grey box.\n\nWhen you generate your font, in \"Font Info \\> Encoding and Unicode\", clicking on the magic green diamond will automatically tell you which code pages the characters you have created for your font will support.\n\n"
+    }
+  ]
+}

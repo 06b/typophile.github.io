@@ -1,0 +1,106 @@
+{
+  "id": "41744",
+  "title": "Classes vanish in FontLab5 twice so far",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I have been working on my typeface Froggy for a few years now and lately I have revisited all my metrics yet again, mostly class kerning. After finishing setting up my classes and kerning the font, I noticed the next day that the kerning classes had vanished. In my frustration, I used the “automatic” feature to rebuild the kerning classes. The result was less than satisfactory so I restarted the job of setting up kerning classes a third time manually. I had finished the Cyrillic glyphs of the job and decided to test the progress before doing the Latin. Upon updating the kern feature and recompiling the OpenType window, I was greeted with a message that “glyph class not defined (text was “@lcall”)”. I checked my opentype classes and to my horror found that ALL of them had vanished (kern classes were still there). The only thing that seemed to be a correlation in both cases was that I had selected only certain class(kern or opentype) to view while I was working (in the little pop-up menu at the bottom of the list of classes). Needless to say, I am not a happy camper. I don’t know if this is a bug or just my incompetence but the frustration level is out of the solar system. There was no warning or dire caution of any kind.\n\nChrisL\n\n [‹ Help: understanding dpi (or lpi) of newspapers](http://web.archive.org/web/20081203213429/http:/www.typophile.com/node/40448 \"Go to previous forum topic\") [CS2/CS3 different Unicode? ›](http://web.archive.org/web/20081203213429/http:/www.typophile.com/node/41799 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081203213429/http://www.typophile.com/user/3135\" title=\"View user profile.\">dezcom</a>",
+  "time": "<br>",
+  "uid": "3135",
+  "comments": [
+    {
+      "time": " 5.Feb.2008 8.21pm",
+      "content": "I guess Adam and the FontLab folks are long since asleep by now.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 5.Feb.2008 8.25pm",
+      "content": "I ran into this bug recently. I’m not sure, but I think it’s related to using the FL feature where you tell it to show only a certain kind of class, only OpenType classes for example. If you then use the “clean up classes” command, it deletes the classes that are not shown. Like I say, I’m not totally sure this is what caused it, but I was using those two features before my classes disappeared, and I don’t use those features often AND this hadn’t happen to me before. Maybe just voodoo thinking on my part.\n\nLuckily, I had started using the Time Machine feature in Leopard, so I was able to retrieve a version of the font from a few hours earlier and copy the missing classes.\n\n"
+    },
+    {
+      "time": " 5.Feb.2008 8.41pm",
+      "content": "Ah ha! I can reproduce it:\n\n- Open the Classes panel  \n- Use the pop-up menu at the bottom to show only one kind of class  \n- Choose “Clean Up Classes” from the pop-up menu near the top of the panel  \n- Be sure to check the “Sort classes alphabetically” option  \n- Use the pop-up menu at the bottom to show all classes again — Oops! The others have vanished!\n\nI haven’t tried every combination, but it seems to be the alphabetization option that triggers the bug.\n\n"
+    },
+    {
+      "time": " 5.Feb.2008 8.43pm",
+      "content": "By the way, the alphabetization option doesn’t alphabetize the classes, either.\n\n"
+    },
+    {
+      "time": " 5.Feb.2008 9.32pm",
+      "content": "I found that it’s best to keep all four kinds of class showing.  \nIf I decide to view only one, and edit it by dragging its items into a different order, the contents of the other three get trashed.\n\n"
+    },
+    {
+      "time": " 5.Feb.2008 11.26pm",
+      "content": "Chris, I’ve had the same problem only it seemed to effect Metrics classes only. Couldn’t figure it out and it was definitely frustrating, it has happened randomly here and there and I didnt know what to make of it… would be nice to hear if there is a fix for it…\n\n"
+    },
+    {
+      "time": " 6.Feb.2008 4.41am",
+      "content": "After one or two instances where I lost my classes, I started to export my classes to a .flc file on a regular basis. It started out as a backup strategy (and saved me more than once), but I also found it easier to review the classes or make some overall changes by working on the file in a text editor and then importing back into FontLab when I was done.\n\n"
+    },
+    {
+      "time": " 6.Feb.2008 5.54am",
+      "content": "Thanks everyone! That sounds like the same issue I am having. When I select show only OpenType the kern classes vanish. When I select show only OpenType, the kern classes die. I will stay away from that button! I hope the FontLab folks can fix it cause it sure is a pain!  \nSparky, I just started doing the same thing by saving classes. Too bad that you have to though.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 6.Feb.2008 2.42pm",
+      "content": "I posted this as a bug to the FontLab support site and linked to this thread.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 7.Feb.2008 6.22am",
+      "content": "I just got an email from Adam saying that “this was a known bug” and will hopefully be fixed in the next maintenance update.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 7.Feb.2008 8.40am",
+      "content": "I guess I should post a warning here for FontLab users:\n\n ![](http://web.archive.org/web/20081203213429im_/http:/www.typophile.com/files/donttouch_3576.gif)\n\nChrisL\n\n"
+    },
+    {
+      "time": " 7.Feb.2008 12.25pm",
+      "content": "OMG, another awesome Dezcom face.  \nWhen are you launching?\n\n"
+    },
+    {
+      "time": " 7.Feb.2008 1.23pm",
+      "content": "Nick,  \nThat is P22’s Mystic, not one of mine. It even tells your fortune! I used it to indicate the nature of the FontLab bug which just rolls up like the 8 ball and you never know when it will strike! :-)\n\n[http://www.p22.com/ihof/mystic.html](http://web.archive.org/web/20081203213429/http:/www.p22.com/ihof/mystic.html \"http://www.p22.com/ihof/mystic.html\")\n\nChrisL\n\n"
+    },
+    {
+      "time": " 7.Feb.2008 1.33pm",
+      "content": "I think it would be fair and good customer relations if FontLab would email their paying customers when bugs are found instead of just letting us find out the hard way. Now knowing that it was a known bug makes me feel even worse that no warnings were given.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 7.Feb.2008 3.37pm",
+      "content": "I think I’d be happy even with a page I can check (possibly with a syndication feed, too) for these things. I wouldn’t mind also not having to search Python docstrings to understand how FontLab scripting works.\n\n"
+    },
+    {
+      "time": " 9.Feb.2008 6.50am",
+      "content": "Oops. :)  \nI added this to a list of things to fix.\n\n"
+    },
+    {
+      "time": " 9.Feb.2008 7.22am",
+      "content": "Thanks, Yuri!\n\nChrisL\n\n"
+    },
+    {
+      "time": " 9.Feb.2008 9.57am",
+      "content": "_That is P22’s Mystic, not one of mine._\n\nSee, I need the Dezcom specimen catlog, so I don’t make foolish mistakes like that!\n\n"
+    },
+    {
+      "time": " 9.Feb.2008 10.15am",
+      "content": "LOL!!!  \nNick, here is an interrum work in progress (yet to be released as usual for me):\n\n[http://dezcom.com](http://web.archive.org/web/20081203213429/http:/dezcom.com/ \"http://dezcom.com\")\n\nChrisL\n\n"
+    },
+    {
+      "time": " 9.Feb.2008 12.13pm",
+      "content": "Looking good, Chris. But who is “us”? ;-)\n\n"
+    },
+    {
+      "time": " 9.Feb.2008 12.43pm",
+      "content": "Thanks Mark. So far, us is only me!\n\nChrisL\n\n"
+    },
+    {
+      "time": " 9.Feb.2008 12.58pm",
+      "content": "I am pretty sure this will be the only foundry with a “Punitentiary” :)\n\n"
+    },
+    {
+      "time": " 9.Feb.2008 1.08pm",
+      "content": "Careful you don’t commit a felony, William:-)\n\nChrisL\n\n"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "118928",
+  "title": "Which font editor implements smooth export into Illustrator and back?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I want to edit an existing glyph in a advanced vector graphics editor like Adobe Illustrator. After editing complete in AI, I copy/paste the glyph into font editor back.\n\nThe bad thing is the editor has already lost information about the original size/placement of the glyph in the box. Thus, a human is obliged to reduce size and fix placement of each glyph manually and by eye.\n\nIs there a way to avoid that monkey job?\n\nSoftware tried: FOG5 + AI CS6\n\n",
+  "author": "zencd",
+  "time": "22 Aug 2014 — 12:41pm",
+  "uid": "99905",
+  "comments": [
+    {
+      "time": "22 Aug 2014 — 1:23pm",
+      "content": "I don't work that way so I haven't done it myself, but this Glyphs tutorial covers how that editor handles importing from AI:  \n [http://www.glyphsapp.com/tutorials/importing-from-illustrator](http://web.archive.org/web/20150420211755/http:/www.glyphsapp.com/tutorials/importing-from-illustrator \"http://www.glyphsapp.com/tutorials/importing-from-illustrator\")\n\n"
+    },
+    {
+      "time": "22 Aug 2014 — 1:29pm",
+      "content": "The easiest way to accomplish what you want is to place spacers above and below the exported characters at points reflecting the ascent and descent of the font. I usually export five characters at a time using this method, with font dimensions set at Ascent 1000 and Descent 0 in Fontographer.\n\nAfter I have imported all the characters, I determine the location of the true baseline (I use the underscore character), shift all of the characters down by that amount, then reset the font dimensions so that the Descent matches the amount I shifted the characters.\n\n ![](http://web.archive.org/web/20150420211755im_/http:/typophile.com/files/MillRich-Grange_4027.png)\n\nAs a footnote, I delete the spacers as I go, since they've served their purpose already.\n\n"
+    },
+    {
+      "time": "22 Aug 2014 — 1:39pm",
+      "content": "A line extending from the ascent to descent will work, too. One thing you need to be careful of: If your glyph extends beyond either the ascent or descent or both, this won't work.\n\n"
+    },
+    {
+      "time": "23 Aug 2014 — 5:35am",
+      "content": ".\n\n"
+    },
+    {
+      "time": "24 Aug 2014 — 8:04am",
+      "content": "In both RoboFont and FontLab, 1 point in Illustrator = 1 em unit.\n\nSo, if you draw something in Illustrator that's 500 points tall, copy and paste into RoboFont or FontLab, it will be 500 em units tall.\n\nThe one caveat: While the origin point (0,0) in a font editor is usually the left side of the baseline, the origin point in Illustrator is the top left corner of the page. You can change this in Illustrator, but, at least with the latest versions, it has no effect when you copy paths to a font editor. This means that pasted paths will appear somewhere down below the baseline and you have to reposition them.\n\nI don't know when this changed, but it used to be that objects copied from Illustrator would honor the modified origin point. In recent versions, it always uses the top left of the page, no matter what you do.\n\n"
+    }
+  ]
+}

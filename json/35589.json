@@ -1,0 +1,50 @@
+{
+  "id": "35589",
+  "title": "Beginners problems with FontForge",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm trying to put a few symbols together in FontForge to use as a font, but it turns out to be tricky.\n\nIn Illustrator, it seems that the last Symbol always doesn't show. In TextEdit there is hardly any line spacing. Quark crashes...\n\nI've uploaded the resulting TrueType font and would be grateful if someone could have a look at this, maybe with FontForge and tell me what on earth I have to do differently.\n\n[http://nullsieben.co.uk/ArtFund-Symbol-A1.ttf](http://web.archive.org/web/20141018210214/http:/nullsieben.co.uk/ArtFund-Symbol-A1.ttf \"http://nullsieben.co.uk/ArtFund-Symbol-A1.ttf\")\n\nMaaaaaaaany thanks!\n\n",
+  "author": "spirelli",
+  "time": "31 Jul 2007 — 11:41am",
+  "uid": "8202",
+  "comments": [
+    {
+      "time": "31 Jul 2007 — 12:09pm",
+      "content": "The glyph that occupies the \"s\" needs to have the contours merged. The contours are currently overlapping. Spacing alone should be able to handle the shapes of your symbols, so I'm not sure why there are kerning features and other kerning pairs added. Between the coffee cup and the wheelchair, there is a positive kern of 3075. It seems if you need a specific space between those two characters, you could put them together as a single glyph.\n\n"
+    },
+    {
+      "time": "31 Jul 2007 — 7:15pm",
+      "content": "I have neither Illustrator nor Quark. Your spacing problem can be solved by adding [edit: to your font] a dumb character that is much higher than your icons.\n\n"
+    },
+    {
+      "time": "1 Aug 2007 — 10:42am",
+      "content": "Your problems may also come from the options when you generate the font (but I would remove all kerning pairs anyway). For instance I just downloaded the [public domain]\\* icon font [marvosym.ttf](http://web.archive.org/web/20141018210214/http:/www.marvosym.de/download.html) (Für Puristen) and installed it on my mac. TextEdit would'nt even see the font. So I uninstaled it, opened marvosym.ttf with fontforge, clicked \"File \\> Generate fonts\", then clicked \"Options\" and unchecked \"Apple\", \"Opentype\" and \"Old style kern\" and then generated a new ttf font that I installed; everything seems to work nicely (always better to check the file with \"Font Book\" before installing, of course).\n\n[edit] \\* I meant Freeware; here is the copyright: _Martin Vogel's Symbols are freeware - look for information and new versions at [http://www.marvosym.com](http://web.archive.org/web/20141018210214/http:/www.marvosym.com/ \"http://www.marvosym.com\") - Neue Versionen und Informationen finden Sie auf [http://www.marvosym.de](http://web.archive.org/web/20141018210214/http:/www.marvosym.de/ \"http://www.marvosym.de\")_\n\n"
+    },
+    {
+      "time": "13 Aug 2007 — 8:23am",
+      "content": "I just don't get it --- I thought creating a font was easier....\n\nStill the same problems:  \n- the latest typed Character is not visible (a row of characters shows then, minus the last one)  \n- when doing a return the text below diappears  \n- Also, the typeface name in the Illustrator font menu is in brackets . I just cant work out why. Other symbol fonts don't have that.\n\nHere's a test file with more or less all the Fontforge defaults in place. I just imported the drawings and generated the font. I'll do letter spacing later. What would I have to do now to get it to work in the first place?  \n [http://nullsieben.co.uk/symbols2.sfd](http://web.archive.org/web/20141018210214/http:/nullsieben.co.uk/symbols2.sfd \"http://nullsieben.co.uk/symbols2.sfd\")\n\n"
+    },
+    {
+      "time": "13 Aug 2007 — 10:40am",
+      "content": "Here is a modified [sfd file](http://web.archive.org/web/20141018210214/http:/www.iro.umontreal.ca/~boyer/typophile/symbols2.sfd) and the resulting [Untitled2.ttf](http://web.archive.org/web/20141018210214/http:/www.iro.umontreal.ca/~boyer/typophile/Untitled2.ttf) file. The fact that the space character was undefined caused some problems and I just added it. The name of the font (independently of the filename) is, as you chose, \"Untitled2\" and when I select it in Word, Photoshop or Inkscape, I do not experience any of your problems. Maybe I should add that I am a LaTeX user and, for my very limited needs, fontforge has so far proven enough. This implies nothing for use in more sophisticated environments.\n\n"
+    },
+    {
+      "time": "14 Aug 2007 — 8:57am",
+      "content": "By mere curiosity I installed a trial version of Adobe Illustrator CS3 and tried the above Untitled2 font; I experienced absolutely none of your problems; everything works fine.\n\n"
+    },
+    {
+      "time": "17 Aug 2007 — 4:57am",
+      "content": "Your font works fine! The reason seems to have been the missing space character. Many thanks for helping out!\n\nThe next challenge will be for me to include ligatures :) I'll see how it goes.\n\nThanks again.\n\n"
+    },
+    {
+      "time": "17 Aug 2007 — 5:14am",
+      "content": "Welcome! And good luck.\n\nMichel\n\n"
+    },
+    {
+      "time": "17 Aug 2007 — 6:39am",
+      "content": "Your font works fine! The reason seems to have been the missing space character. Many thanks for helping out!\n\nThe next challenge will be for me to include ligatures :) I'll see how it goes.\n\nThanks again.\n\n"
+    }
+  ]
+}

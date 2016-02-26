@@ -1,0 +1,34 @@
+{
+  "id": "37077",
+  "title": "Unicode-Double-Mapping Omega",
+  "forum": "Volker\\_S's blog",
+  "tags": [
+
+  ],
+  "content": "From two blogs\n\n[http://www.typophile.com/node/27984](http://web.archive.org/web/20131017023730/http:/www.typophile.com/node/27984 \"http://www.typophile.com/node/27984\")  \nfeed://www.typophile.com/crss/node/27984\n\nI learned that there is double mapping for Delta, Omega, mu; according to “AGLFN 1.6 (new) strict” Unicode-Name mapping table:\n\nU+2206 “uni2206” - (for the INCREMENT)  \nU+0394 “Delta” - (for Greek Delta)  \n---------------  \n U+00B5 “uni00B5” - (for MICRO SIGN)  \nU+03BC “mu” - (for Greek Mu)  \n----------------  \nU+2126 “uni2126” - (for OHM SIGN)  \nU+03A9 “Omega” - (for Greek Omega)\n\nI have to transform an old postscript font (that was used for some phonetics) into an opentype font so that a large amount of text that was created in the postscript font (in various Mac-programs) can be used with opentype font both on Mac and PC. (At the same time I need to make sure that we still can use the old postscript font - or an appropriate updated new postscript font - because we need it for creation of \"printing standard\"-Acrobat4-pdfs that are accepted by printing companies.)\n\nIf I use Glyph names \"Delta\" and \"mu\", all is fine with these letters.\n\nHowever, for Omega neither the name “Omega” nor the name “uni2126” produces satisfactory results. In InDesign (Mac) it is basically OK, but in TextEdit and some other programmes on MacIntosh the phonetic letter does not show up, but rather the letter is transformed into Lucida Grande (Standard Font) and appears as an Omega in this Lucida Grande Font.\n\nIf I name the Glyph “uni03A9”, which is not according to “AGLFN 1.6 (new) strict”, then all works out fine on the MacIntosh.  \nI wonder why this is so and if this choice could create problems in the future - or on the PC. (I am using MacBookPro OSX.4.10)  \nI should add that I use the \"MacOS Roman\" encoding table in Fontlab.\n\nPart II:  \nAlso I would be happy if you could also suggest what is better:\n\n1) Double encoding  \nName: \"Delta\"; Unicode: 0394 + 2206  \nName: \"mu\"; Unicode: 03BC + 00B5  \nName: “uni03A9”; Unicode: 2126 + 03A9\n\nor simple encoding for first two Glyphs  \n2)  \nName: \"Delta\"; Unicode: 0394  \nName: \"mu\"; Unicode: 03BC  \nName: “uni03A9”; Unicode: 2126 + 03A9\n\nor  \n3)  \nName: \"Delta\"; Unicode: 0394  \nName: \"mu\"; Unicode: 03BC  \nName: “uni03A9”; Unicode: 03A9\n\nor  \n4)  \nName: \"Delta\"; Unicode: 0394  \nName: \"mu\"; Unicode: 03BC  \nName: “uni03A9”; Unicode: 2126\n\nThe fourth possibility, which is unusual, I consider because it seems to me that Adobe Programmes prefer Unicode 2126.\n\nThanks in advance for any advice  \nVolker\n\n",
+  "author": "Volker_S",
+  "time": "13 Sep 2007 — 8:09am",
+  "uid": "21735",
+  "comments": [
+    {
+      "time": "14 Sep 2007 — 12:03pm",
+      "content": "this would have been better filed under the \"Build\" section.\n\nI was hoping that someone like Adam or Miguel or John would have piped up before me, but i'm guessing they're all busy with ATypI at the moment. Anyway, I recently dealt with this problem and found that To get things to work properly I had to give the letter names (Delta, Omega, mu) to the math glyphs and uni-names to the Greek letter glyphs. However, I was alerted that giving uni-names to other Greek letter glyphs (such as Alphatonos) will produce problems in Mac applications.\n\n"
+    },
+    {
+      "time": "26 Sep 2007 — 9:48am",
+      "content": "Thank you very much for the advice. You are right, I should have put it in \"Build\", somehow it took me days to find where I actually put it (I was also a few days out of office).\n\nI profited a lot from the your thread \"Apple and CFF: what's the deal?\" [http://www.typophile.com/node/37122](http://web.archive.org/web/20131017023730/http:/www.typophile.com/node/37122 \"http://www.typophile.com/node/37122\") that you started a few minutes after you answered my question. It seems its best to hope that apple solves the issue with Mac OS X 10.5 Leopard.\n\nIt is somewhat a surprise <cite>\"that to get things to work properly\"</cite> you <cite>\"had to give the letter names (Delta, Omega, mu) to the math glyphs and uni-names to the Greek letter glyphs\"</cite>. From “AGLFN 1.6 (new) strict” Unicode-Name mapping table:\n\nU+2206 “uni2206” - (for the INCREMENT)  \nU+0394 “Delta” - (for Greek Delta)  \n---------------  \n U+00B5 “uni00B5” - (for MICRO SIGN)  \nU+03BC “mu” - (for Greek Mu)  \n----------------  \nU+2126 “uni2126” - (for OHM SIGN)  \nU+03A9 “Omega” - (for Greek Omega)\n\none would expect it just the other way . But it was also my experience with the \"Omega\", although \"Delta\" and \"mu\" seemed kind of OK also the other way.\n\nVolker\n\n"
+    },
+    {
+      "time": "17 Jul 2009 — 3:02am",
+      "content": "I am sorry to be such an amateur at this but I am just getting into typesetting in InDesign while using polytonic Greeks fonts. I am now familiar with a few of the letters. I went to type a \"smooth breathing\" mark for a capital letter. In glyph it says that it's corresponding letter is 'increment'. Where is that found? So I surfed google. I came across this site. And now I read of all these other discrepancies: omega, and mu. Would someone help me with my beginning in understanding this all. Or steer me the right direction.\n\nThanks,  \nYanni\n\n"
+    },
+    {
+      "time": "17 Jul 2009 — 4:26am",
+      "content": "Paul's solution is right, and that's the way it is recommended by the current version of the AGLFN, 1.7.\n\n"
+    },
+    {
+      "time": "24 Aug 2009 — 11:11am",
+      "content": "Thanks,\n\nI was having the same problem with several faces I am adding a Greek weight too. It drove me crazy trying to figure out what was happening. I thought I had some weird coding fragment so I imported several of them into a new file, but it didn't work. Paul's solution worked flawlessly.\n\nIt does seem strange to me that the Greek alphabet wouldn't get claim to the glyph names and not the other way around.\n\n"
+    }
+  ]
+}

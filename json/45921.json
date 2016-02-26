@@ -1,0 +1,42 @@
+{
+  "id": "45921",
+  "title": "FLStudio: Problems Generating OpenType (CFF)",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi everyone,\n\nI’ve been working on a design and have run into a problem which I’ve been unable to remedy. I’m hoping that someone might have some suggestions on how to go about tracking down the source of this problem since I am at a lost. I realise it’s a bit of a longshot, but perhaps someone has encountered a similar problem in the past and this rings some bells.\n\nI’m using FontLab Studio 5.0.4/MacOS 10.5.2\n\nWhen I generate my font as a Postscript-flavoured OpenType font, I get no error messages, but when attempting to install the font in FontExplorer X, I get a message that the font is corrupt (this message is an OS-level message, not a font-explorer message). Sometimes it will instantly deactivate, other times it will not. In the latter case, the font will show up in the font menu, but when I attempt to use it certain glyphs will be missing (that is they appear blank; they do not show up as the .notdef character). This includes several of the base glyphs (i.e. ones with unicode values) and all alternate glyphs (ones without unicode values which should be appearing when various OT features are active). Nothing appears to be wrong with any of these glyphs in the FontLab file.\n\nIf I generate the font as a TrueType-flavoured font, everything works fine.\n\nI have attempted to copy all of the glyphs into a new .vfb file, but get the same results.\n\nIf I open generated .otf font in FontLab and regenerate it, then I get a font which does not report errors when installed and which does not exhibit any of the problems outlined above. However, if one embeds this font in a .pdf file, the .pdf file will be replete with .notdef symbols, incorrect glyphs, etc. so obviously something is still wrong.\n\nI realise that debugging someone else’s font based only on the above is probably a tall order, but on the off chance that it suggests some known issue I thought I’d ask.\n\nI don’t want to generate the font as a .ttf file since that would basically require that I redo all of the hinting in the font.\n\nAny suggestions appreciated,\n\nAndré\n\n [‹ Construction question](http://web.archive.org/web/20080905083605/http:/www.typophile.com/node/46107 \"Go to previous forum topic\") [A FontLab \"sort glyphs\" wrinkle . . . ›](http://web.archive.org/web/20080905083605/http:/www.typophile.com/node/46077 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080905083605/http://www.typophile.com/user/31798\" title=\"View user profile.\">agisaak</a>",
+  "time": "<br>",
+  "uid": "31798",
+  "comments": [
+    {
+      "time": " 31.May.2008 11.19pm",
+      "content": "Put the font through some of these [Font Validation Software](http://web.archive.org/web/20080905083605/http:/www.typophile.com/wiki/Font%252BValidation%252BSoftware) tools and I’m sure you’ll find the problem. Also, the problem might not be directly related with the VFB but with the way the font is being generated, in which case you may have to tweak FontLab’s preferences. Hope this helps.\n\n"
+    },
+    {
+      "time": " 1.Jun.2008 7.10pm",
+      "content": "Thanks Miguel,\n\nfontQA found the problem — my cedilla and ogonek were resulting in overlapping contours when certain composites were being decomposed — an easily remedied problem.\n\nIt also identified a number of other issues, though, which I was unaware _were_ issues, and which don’t seem to be producing any negative effects that I am aware of of. I was wondering if anyone could explain to me why the following may be problematic:\n\n1. Multiple suffixes: I have characters which include names like “Q.smcp.swsh”, which seem sensible to me, but which fontQA thinks are problematic.\n2. (2) Suffixed names with unicode assignments: I have assigned unicode values to certain glyph variants, e.g. “two.sinf” has been assigned U+2082 which seems sensible to me.\n\nWhat unanticipated consequences might arise from either of the above?\n\nAndré\n\n"
+    },
+    {
+      "time": " 2.Jun.2008 9.34am",
+      "content": "@1: These names are okay, FontQA just complains because it checks the names against an old FSI internal naming convention.\n\n@2: Because the inferior 2 is a glyph that doesn’t have a “friendly name” as defined in the AGLFN, it should be named uni2082 (its unicode value prefixed with “uni”). Otherwise certain systems (i.e. Mac OS X) which rely on the glyph names will have problems accessing this glyph. Your name “two.sinf” suggests that you use this glyph with the “sinf” OT feature. Of course you can still do that when the glyph is named “uni2082”.\n\nJens\n\n"
+    },
+    {
+      "time": " 2.Jun.2008 2.52pm",
+      "content": "Well, they are sort of OK.\n\nIf you look at Unicode and Glyph names\n\n[http://www.adobe.com/devnet/opentype/archives/glyph.html](http://web.archive.org/web/20080905083605/http:/www.adobe.com/devnet/opentype/archives/glyph.html \"http://www.adobe.com/devnet/opentype/archives/glyph.html\")\n\nyou’ll see\n\n<cite>Step 1: drop all the characters from the glyph name starting with the first occurrence of a period (U+002E FULL STOP), if any.</cite>\n\nSo your second period in G.smcp.swash won’t show. Not really an issue, since from a PDF, the glyph so named will map to a cap G, which is probably what you want anyway.\n\n"
+    },
+    {
+      "time": " 2.Jun.2008 3.57pm",
+      "content": "A proper and strict implementation of support for Adobe’s glyph naming standards will do the right thing when encountering multiple periods in a glyph name. That being said, if it were me I wouldn’t go there, under the assumption that some piece of consuming software is likely to have a problem, and it doesn’t really gain you much.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": " 2.Jun.2008 3.58pm",
+      "content": "(accidental double-post)\n\n"
+    },
+    {
+      "time": " 4.Jun.2008 7.51pm",
+      "content": "“Q.smcp.swsh” is OK but “Q.smcp\\_swsh” is “safer”.\n\nA.\n\n"
+    }
+  ]
+}

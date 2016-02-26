@@ -1,0 +1,62 @@
+{
+  "id": "58223",
+  "title": "Which feature for catchwords and catchwords.alt?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Howdy, I've got two styles of catchwords in my font and was wondering what feature (or combination thereof) to put them in.\n\nOrnaments, Stylistic Set or Titling Alternates seem to make the most sense with titl having the broadest support.\n\nHowever the only way to get them to work in photoshop is via dlig or salt. Is there a problem with having the functionality in both titl and salt?\n\nThinking of something like:\n\ntitl  \n- - -  \nsub A N D by AND.catch;  \nsub A n d by AND.catch;  \nsub a n d by AND.catch;  \nsub ampersand by AND.catch;\n\nsalt  \n- - -  \nsub AND.catch by AND.catch.alt;\n\n ![](http://web.archive.org/web/20100203093153im_/http:/typophile.com/files/catch22_5418.gif)\n\n",
+  "author": "<a href=\"/web/20100203093153/http://typophile.com/user/7783\" title=\"View user profile.\">Randy</a>",
+  "time": "<br>",
+  "uid": "7783",
+  "comments": [
+    {
+      "time": "",
+      "content": "Presumably you want to only perform these substitutions when the input string is not directly preceded or followed by another letter, otherwise you'll get the substitutions happening in words like ‘m_and_ible’.\n\nI don't think there is a problem with implementing the same substitution in more than one feature so long as there is a reasonable interpretation of the purpose of the features. I would be inclined to use dlig rather than salt, though.\n\n"
+    },
+    {
+      "time": "",
+      "content": "John,  \nHow would you insure that the substitutions only take place where a space breaks the string. Would you change the code to:\n\nsub A n d [space period comma] by AND.catch;\n\nbut then you would delete the space? Is there a word end and begin code? It seems there must be for Arabic where different forms exist in different parts of a word?\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Chris, I'd attack the problem as John suggests, from the other way. Make am OT Class @lettersonly, and ignore sub when this is adjacent to the target string. That way \"mANDible\" is ignored, whilst \"'The...'\" would be.\n\nignore sub @lettersonly A N D ;  \nignore sub A N D @lettersonly ;  \nsub A N D by AND.catch;\n\n- - -  \nWhoops, that didn't work. Not sure how to ignore a string of letters:  \nignore sub @lettersonly A' N' D';\n\nHelp?\n\nInteresting John, dlig for everything? I also have s and c dligs. Seems weird to have catchwords in their too?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Nevermind. I forgot to put me primes (') on!\n\nignore sub @lettersonly A' N' D' ;  \nignore sub A' N' D' @lettersonly ;  \nsub A' N' D' by AND.catch ;\n\n"
+    },
+    {
+      "time": "",
+      "content": "I guess your syntax was prime evil, Randy :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, what Randy says.\n\nI don't use FL or the Adobe FDK for OTL work, so I can never remember without looking what the syntax is. In VOLT terms:\n\nA N D -\\> AND.catch  \nEXCEPT |  \nEXCEPT |\n\n"
+    },
+    {
+      "time": "",
+      "content": "Calling the glyph \"AND.catch\" is not a good idea. It's definitely recommended to use the Adobe-compatible glyph naming syntax (which in this case would be \"A\\_N\\_D.catch\").\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Adam. I'm guessing the benefit is that adobe apps recognize these glyphs as ligs in some special way?\n\n"
+    },
+    {
+      "time": "",
+      "content": "I think that the underscore helps separate the ligs back as letters for PDF text reading.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, if you name your glyph A\\_N\\_D.catch then Acrobat will be able to find the glyph in a PDF\\* if the user searches for the text \"AND\". If you use a name AND.catch, then Acrobat will \"think\" that it is just an unknown glyph.\n\nI recommend reading the Glyph Naming and Encoding chapter of the FontLab Studio 5 user's manual.\n\n\\*) This only applies to some PDFs, depending on the way they were created. In some scenarios, Acrobat will still find AND.catch, but the name A\\_N\\_D.catch is safer and works in more occasions.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Changing the names now...  \nRead the manual? \\*Sigh\\* Guilty as charged. Thx guys.\n\n"
+    },
+    {
+      "time": "",
+      "content": "GO Randy! :-)\n\nChrisL\n\n"
+    }
+  ]
+}

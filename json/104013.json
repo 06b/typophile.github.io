@@ -1,0 +1,63 @@
+{
+  "id": "104013",
+  "title": "What are Glyph Names for?",
+  "forum": "Build",
+  "tags": [
+    "glyph names",
+    "Build"
+  ],
+  "content": "Hi, I'm doing some scripting with fonts and it just so happens that in the conversion, the glyph names will be the same as the unicode names, I've found that this seems to be okay (i.e. /a/ will be called uni0061 instead). Are they only for human-reabable purposes, or do they need to be the specific name that corresponds to the unicode number?\n\n",
+  "author": "hashiama",
+  "time": "21 Jun 2013 — 4:27am",
+  "uid": "16341",
+  "comments": [
+    {
+      "time": "21 Jun 2013 — 4:44am",
+      "content": "After some digging I found this [http://www.typophile.com/node/103618#comment-556529](http://web.archive.org/web/20150415045353/http:/www.typophile.com/node/103618#comment-556529)...\n\n"
+    },
+    {
+      "time": "24 Jun 2013 — 12:01pm",
+      "content": "My interest in this issue has recently been rekindled, so I'd like to followup with some questions.\n\n1) The link above is to Thomas Phinney's suggestion that glyph names are important for glyph-to-Unicode mapping in certain PDF work flows. I have heard elsewhere that extracting text from PDF using glyph-to-Unicode mapping isn't all that reliable anyway -- especially for complex scripts. Can anyone comment on the reliability and accuracy of this mechanism?\n\n2) Other than the above-mentioned PDF issue, are there any reasons that ttf-flavored OpenType fonts need glyph names at all? Said another way, what would break if all my fonts had format-3 post tables?\n\nAccording to the [post table spec](http://web.archive.org/web/20150415045353/http:/www.microsoft.com/typography/otspec/post.htm) regarding format 3:\n\n> The printing behavior of this version on PostScript printers is unspecified, except that it should not result in a fatal or unrecoverable error. Some drivers may print nothing, other drivers may attempt to print using a default naming scheme.\n\nwhich seems to suggest there can be printing problems. But then [Microsoft's recommendations](http://web.archive.org/web/20150415045353/http:/www.microsoft.com/typography/otspec/recom.htm) later state:\n\n> OpenType fonts containing CFF outlines use only format 3.0 of the 'post' table.\n\nso I'm getting mixed messages here.\n\nWhy the question? The growing use of webfonts makes font size an issue again, and thus omitting glyph names can improve performance.\n\nThanks for any help.\n\nPS: I know that glyph names are useful during development, e.g., for writing OT and Graphite feature code. My question relates to the final product, not the development process.\n\n"
+    },
+    {
+      "time": "24 Jun 2013 — 10:32am",
+      "content": "The links above are dangling. Here they are using the `<a href=\"...\"> text</a>` format else https links don't work  \n [microsoft.com/typography/otspec/post.htm](http://web.archive.org/web/20150415045353/http:/www.microsoft.com/typography/otspec/post.htm)  \n [microsoft.com/typography/otspec/recom.htm](http://web.archive.org/web/20150415045353/https:/www.microsoft.com/typography/otspec/recom.htm)\n\n"
+    },
+    {
+      "time": "24 Jun 2013 — 12:04pm",
+      "content": "> The links above are dangling\n\nDuh. Sorry. Updated.\n\n"
+    },
+    {
+      "time": "24 Jun 2013 — 3:43pm",
+      "content": "<cite>Can anyone comment on the reliability and accuracy of this mechanism?</cite>  \nAFAIK it is good as long as no one to many substitutions or glyph reordering are involved. Also there should be strict one to one or many to one maapings between input characters and glyphs, e.g. if you have both `smcp` and `c2sc` features, there must be two smallcap glyph sets, one a.sc, …, z.sc and one A.sc, …, Z.sc respictively.\n\n<cite>Said another way, what would break if all my fonts had format-3 post tables?</cite>  \nPDF creators should build a non-version 3 post table when embedded such fonts in PDF files (some do), but if they don’t printing can break.\n\n<cite>so I'm getting mixed messages here.</cite>  \nCFF table contains glyph names, so there is no need for them in the post table.\n\n"
+    },
+    {
+      "time": "24 Jun 2013 — 6:18pm",
+      "content": "Thank you, Khaled. Questions of clarification below:\n\n_Can anyone comment on the reliability and accuracy of this mechanism?  \nAFAIK it is good as long as no one to many substitutions ..._\n\nBy \"one to many substitutions\", are you referring to GSUB lookups of type 2 (\"multiple\") or something else?\n\n_... or glyph reordering are involved._\n\nDoes this includes character-level reordering as in what the Indic shapers for OpenType do?\n\n_so I'm getting mixed messages here.  \nCFF table contains glyph names, so there is no need for them in the post table._\n\nAh, that explains that part of the mystery. Thanks again.\n\n"
+    },
+    {
+      "time": "25 Jun 2013 — 6:01am",
+      "content": "<cite>By \"one to many substitutions\", are you referring to GSUB lookups of type 2 (\"multiple\")…</cite>\n\nYes. Generally you can reverse map a single glyph to a single or multiple characters, but you can’t reverse map multiple glyphs to a single character. The exact algorithm used is described in [Adobe Glyph Naming convention](http://web.archive.org/web/20150415045353/http:/www.adobe.com/devnet/opentype/archives/glyph.html#2).\n\n<cite>Does this includes character-level reordering as in what the Indic shapers for OpenType do?</cite>\n\nSince the output of the reverse mapping will be in the order of the glyphs, any recording that affects the final glyph order will a;so affect the reverse mapping (except for RTL swapping, though some applications fail with that too and return reverse mapped text in the visual not the logical order).\n\n"
+    },
+    {
+      "time": "25 Jun 2013 — 11:11am",
+      "content": "> Since the output of the reverse mapping will be in the order of the glyphs, any [reordering] that affects the final glyph order will also affect the reverse mapping\n\nRight. It is tempting to think that it might be possible to reverse reordering once one has the character identities of the glyph string, but in practice this fails in a number of ways, influenced by how the font has been built. It isn't unusual for post-reordering GSUB features to produce ligatures of glyphs that represent characters that are not sequential in the pre-reordered string. Adobe's glyph naming conventions do not cater for this.\n\nI think it would be possible to define glyph name conventions and rules for making Indic fonts that would make it possible to cleanly reverse reordering from parsed character strings, but I doubt if that would get much traction.\n\n"
+    },
+    {
+      "time": "26 Jun 2013 — 7:34am",
+      "content": "This thread has been very helpful -- thanks for the input. One last (I hope) question:\n\nOther than the PDF text extraction previously discussed, what will break if the glyphs have names that are well-formed but are not names that are included in the [Adobe Glyph List Specification](http://web.archive.org/web/20150415045353/http:/sourceforge.net/adobe/aglfn/wiki/AGL%20Specification/)?\n\nI am acquainted with AGL and AGLFN, and our policy is to conform to AGLFN when the font is shipped. (During development we may use non-AGL names, but those are replaced prior to shipping). But I am having an ongoing discussion with someone who dislikes the Adobe names and chooses to ignore the AGL conventions. Is there any risk to his behaviour?\n\n"
+    },
+    {
+      "time": "26 Jun 2013 — 10:06am",
+      "content": "Apparently some versions of Mac OS X used glyph names for character mapping for CFF OTF, rather than the cmap table. Word is that this has been fixed, but I've not seem detailed reports of which versions do what.\n\n"
+    },
+    {
+      "time": "26 Jun 2013 — 10:19am",
+      "content": "John: _Apparently some versions of Mac OS X used glyph names for character mapping for CFF OTF, rather than the cmap table._\n\nAFAIK 10.3 and 10.4. See also page 11 of [http://www.fonttools.org/downloads/TD\\_2009/OpenType\\_Status\\_2009.pdf](http://web.archive.org/web/20150415045353/http:/www.fonttools.org/downloads/TD_2009/OpenType_Status_2009.pdf \"http://www.fonttools.org/downloads/TD\\_2009/OpenType\\_Status\\_2009.pdf\")\n\nFEB\n\n"
+    },
+    {
+      "time": "17 Jul 2013 — 1:02pm",
+      "content": "I'm pretty sure it was fixed back in 10.5. At least it was far back enough that a bunch of good folk at Apple had no idea what I was talking about when I inquired as to when this was fixed.\n\nAs for problems today, the main one remains the classic: if a PostScript print stream or file is created, and then turned into PDF without the original font available, then glyph names are the only means to get the encoding from the print stream. If the font uses unrecognized glyph names, then the text in the resulting PDF will not be searchable, copyable, etcetera.\n\n"
+    }
+  ]
+}

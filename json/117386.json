@@ -1,0 +1,42 @@
+{
+  "id": "117386",
+  "title": "Lato revisited (version 2.0)",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "<cite>I don't think anyone has done a post on version 2.0 of this family. Apologies if someone has. But I just went and looked (and downloaded) the new version. I didn't check every weight, but WOW.</cite>\n\n<cite>Which lead to my posting the following to the AAUP design list:</cite>\n\nA few years ago, I posted about Lato, a SIL OFL (Open Font License) font. Sans serif, created by professionals, interesting story behind it. Not going to repeat it, it's too long. A number of people used it at that time, but it lacked small caps, old-style figures, and many of the the niceties.\n\nNow, it seems version 2.0 is out.\n\n[http://www.latofonts.com/](http://web.archive.org/web/20140730181252/http:/www.latofonts.com/ \"http://www.latofonts.com/\")\n\nI only checked the medium weight, but...\n\nOld style figures.  \nPolytonic Greek.  \nCyrillic.  \nAll the combining diacritics. Some of the combining diacritics supplements.  \nFull IPA phonetics, and some supplements.  \nAll of Latin Extended A (European languages, including Central and Eastern Europe)  \nAll of Latin Extended B (many African languages).  \nAll of Latin Extended Additional (romanized Indic scripts, romanized Arabic, Vietnamese).  \nMuch of Latin Extended C (never needed it, but it's there...)  \nEtc.\n\nAnd not only in roman, but (at least medium) italic as well.\n\nNo small caps, outside those used in phonetics, but almost everything else one could wish for, all free, and free to use in print, digital, or web publications.\n\n",
+  "author": "charles ellertson",
+  "time": "19 Jun 2014 — 8:42pm",
+  "uid": "5094",
+  "comments": [
+    {
+      "time": "20 Jun 2014 — 6:45am",
+      "content": "Indeed very impressive.  \nNow if it were only Apache instead of OFL...\n\nhhp\n\n"
+    },
+    {
+      "time": "20 Jun 2014 — 11:19am",
+      "content": "Apache license offers only one thing over and above the OFL license: You can take a free-for-the-world product that has thousands of hours of donated time put in by someone else, add a few hours our your own time, and create a product you can sell. Of course you \\*could\\* also donate of your time and skills, but you do have the option of selling.\n\nFine as long as eventual buyers are not misled about (1) what they are getting and (2) their other options.\n\nTwo things:\n\n1. Read <cite>Mountains beyond Mountains</cite> (authored by Tracy Kidder, about the early life of the doctor Paul Farmer). This to counter your knee-jerk notion that only money adds value. But if you want to press on,\n\n2. It would seem you can also do something equivalent with (at least some) of the fonts from the X-consortium. See [http://en.wikipedia.org/wiki/Bitstream\\_Charter](http://web.archive.org/web/20140730181252/http:/en.wikipedia.org/wiki/Bitstream_Charter \"http://en.wikipedia.org/wiki/Bitstream\\_Charter\")\n\nOn that page, go to External Links and download\n\nBitstream Charter con­vert­ed into OTF, TTF and webfonts\n\nNow, open, say, the roman and look at the copyright. You find\n\n> (c) Copyright 1989-1992, Bitstream Inc., Cambridge, MA. You are hereby granted permission under all Bitstream propriety rights to use, copy, modify, sublicense, **sell,** and redistribute the 4 Bitstream Charter (r) Type 1 outline fonts and the 4 Courier Type 1 outline fonts for any purpose and without restriction; provided, that this notice is left intact on all copies of such fonts and that Bitstream's trademark is acknowledged as shown below on all unmodified copies of the 4 Charter Type 1 fonts: \"BITSTREAM CHARTER is a registered trademark of Bitstream Inc.\"\n\nemphasis (in bold) added.\n\nI would, were I you, check on what seems to be the legal permission in the above copyright. Maybe \"modification to OpenType\" would somehow exceed the permission, though I can't see how, in part because there was no OpenType in 1992.\n\nBe advised that I plan to offer an expanded version of Charter (not Charis) as well, for **free** , after checking that above clause. For moral reasons, I also checked with Matthew. Mine is planned as a very extended version, but Latin alphabet only, no non-Latin, such as Armenian.\n\n"
+    },
+    {
+      "time": "20 Jun 2014 — 11:42am",
+      "content": "> Fine as long as eventual buyers are not misled\n\nAgreed.  \nThe ethical trump card in making money by modifying libre fonts is that people can always get a free alternative, if it exists (and it probably couldn't exist if making money were not [ethically] possible).\n\n> your knee-jerk notion that only money adds value.\n\nNever said that, never even thought it.  \nI rarely make minority fonts for money, I merely hope to reduce the losses from this labor of cultural love, mostly to lessen my material shortcoming in providing for my family of six.\n\nMy TypeCon talk will afford me 20 minutes to fully explain. Please come.\n\nhhp\n\n"
+    },
+    {
+      "time": "20 Jun 2014 — 3:59pm",
+      "content": "On the other hand, @hrant, selling services is a perfectly legit way to a revenue stream in the FLOSS world, and as far as I can see, the OFL does not forbid that at all.\n\nIt should be possible to make up a library of mods that can be applied (by script, even) to a virgin font file when an order comes in; a bit like the new-car dealers.\n\n"
+    },
+    {
+      "time": "20 Jun 2014 — 6:10pm",
+      "content": "I know that people get paid to modify OFL fonts, and that's certainly encouraging, but it remains that the client does not own the results, and that's often a deal-breaker (or it causes the fee to drop like a rock). Also, the retail world is entirely excluded.\n\nAs for the \"formulaic\" approach you mention concerning the derivation of non-Latin fonts (assuming I understood that correctly) I wouldn't know how to do that while yielding high-quality results (and I've never seen that done either). From my experience in making multi-script fonts I know that both the macro and micro decisions seem nearly impossible to automate.\n\nhhp\n\n"
+    },
+    {
+      "time": "21 Jun 2014 — 3:06pm",
+      "content": "What I was thinking is based on using TTX as storage format since it's text. Text allows easy use of diff/patch and change control, common as sand on Linux/Unix systems.\n\n1. Dump a virgin font to TTX. (fresh.ttx)  \n2. Make some changes, save the new font and dump it to TTX. (modded.ttx)  \n3. diff -u fresh.ttx modded.ttx \\>changes.diff (changes.diff shows every difference between the two TTX files.)  \n4. patch -Np0 -i changes.diff (By now fresh.ttx and modded.ttx should be identical.)\n\nIn theory, a process built on this should allow you to build a library or collection of modifications. In practice... there're always some differences between theory and practice.\n\n"
+    },
+    {
+      "time": "16 Jul 2014 — 11:12am",
+      "content": "I downloaded the ttf version of Lato 2.0 which looks wonderful. Do I need to convert to otf format for print? I can use Trans type pro.\n\n"
+    }
+  ]
+}

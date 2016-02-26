@@ -1,0 +1,18 @@
+{
+  "id": "2123",
+  "title": "Create a font with surrogate pairs",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "I could use some help creating a simple   \ntest font for Windows. I'd like it to have the US latin alphabet and the following characters:   \n   \n\\u5000   \n\\u20050   \n   \nI don't have any experience creating fonts.   \nCan someone suggest a good tutorial site   \nor some 'font creator' software?   \n   \nThanks in advance for any help.   \n--Erik Ostermueller\n\n",
+  "author": "eostermueller",
+  "time": "Wed, 2003-11-19 08:08",
+  "uid": "2644",
+  "comments": [
+    {
+      "time": " Wed, 2003-11-19 11:15",
+      "content": "There are a couple of different ways to encode Supplementary Plane characters in fonts.   \n   \nThe very latest version of FontLab (4.6) has a mechanism to write the appropriate format of cmap table; this mechanism obliges you to _name_ glyphs using their Unicode 32bit scalar value, e.g. u20050. When generating the font, FontLab will read these glyph names and write the appropriate cmap table entries. Note that I have not tried this myself.   \n   \nAlternatively, you can pass your fonts through Microsoft's free VOLT tool. VOLT is intended for adding OpenType features to a font (and you may need to add at least one feature: I've never tried passing a font through VOLT without adding any features), but it also rewrites the cmap table. In VOLT's Glyph Edit window you can assign and edit Unicode values for individual; note, however, that in VOLT you need to use surrogate pairs for Supplementary Plane characters, not scalar values.   \n   \nYou will probably find this [scalar\\<-\\>surrogate convertor](http://web.archive.org/web/20050518123301/http:/trigeminal.com/16to32AndBack.asp) useful.\n\n"
+    }
+  ]
+}

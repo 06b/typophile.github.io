@@ -1,0 +1,216 @@
+{
+  "id": "68985",
+  "title": "General Puncuation - Spacing Glyphs - Why do some fonts but not others have them?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions",
+    "General Puncuation",
+    "spacing"
+  ],
+  "content": "I've noticed that some fonts contain the following [spacing](http://web.archive.org/web/20131015113005/http:/typophile.com/wiki/space) characters (presented with various encodings for them) and some don't:\n\n ![](http://web.archive.org/web/20131015113005im_/http:/typophile.com/files/spacingglyphs_5535.png)\n\n1) I am wondering why some fonts have them and some fonts don't.  \n2) I'd like to know what the deciding factors might be for either including them or not including them.  \n3) Is there a script for Fontlab or another tool that will add these automatically?\n\n",
+  "author": "Richard Fink",
+  "time": "31 Mar 2010 — 1:00pm",
+  "uid": "44873",
+  "comments": [
+    {
+      "time": "31 Mar 2010 — 1:36pm",
+      "content": "Fixed spaces are handy if you're doing a lot of complex tabular work; otherwise, most folks can live without such a dizzying array of options.\n\n"
+    },
+    {
+      "time": "31 Mar 2010 — 2:08pm",
+      "content": "These were never in any of the standard character sets, and only became interesting when the Web \"embraced\" Unicode. We added them to the core fonts for that reason...\n\n ![](http://web.archive.org/web/20131015113005im_/http:/typophile.com/files/arialspace_3859.PNG)\n\n"
+    },
+    {
+      "time": "31 Mar 2010 — 4:29pm",
+      "content": "Rich — Since these spaces are relative to font size and easily calculable, most professional layout and typesetting applications provide for [many of] these spaces without the need for their presence within a font. (The possible exceptions are _figurespace_ and _punctuationspace_, but even these are often fudged by the software.)\n\nThis has historically been the case, that the typesetting mechanism provides for these, not the specific font, such that I don’t think that most font makers give it any consideration.\n\nSo, as Si implies, until Unicode encoded these, it was a non-issue.\n\n"
+    },
+    {
+      "time": "31 Mar 2010 — 5:35pm",
+      "content": "Ok, so now that we know why they’re rarities, does anyone actually use them? And has anyone ever wanted to use them but been unable to because they’re not usually in a font?\n\n"
+    },
+    {
+      "time": "31 Mar 2010 — 5:39pm",
+      "content": "I've seen them in real-world HTML markup - we had bugs related to \"square boxes\" logged against various fonts.\n\n"
+    },
+    {
+      "time": "31 Mar 2010 — 5:56pm",
+      "content": ".\n\n"
+    },
+    {
+      "time": "31 Mar 2010 — 6:00pm",
+      "content": "Ditto what Si and Kent said.\n\nThe principal benefit I can think of to handling set-width spaces at the glyph level in fonts, rather than in distance offsets in layout software, is that these glyphs are then available for inclusion in OpenType Layout lookups. I can think of situations in which it might be appropriate, for example, for a contextual substitution that takes places across a standard word space to also be triggered across other kinds of spaces.\n\n"
+    },
+    {
+      "time": "31 Mar 2010 — 6:47pm",
+      "content": "I suppose if you take the view that the comp is just lucky to have your type at all, you can ask this question. If, on the other hand, you take the comp's point of view -- that the type designer's job is to furnish tools -- you should include them.\n\nPut rather pointedly, I'll allow.\n\nFor many years I was use to a typesetting program (TeX) where the comp could specify any needed space on the fly. InDesign doesn't provide for this; I find I miss it. I do use the figure space and punctuation space routinely when setting tables. Yes, I know you can use ID's decimal alignment, but fairly often you get a longish column where only one or two numbers need \"padding\" with white space, and it is just easier to add them & center the whole thing with the column head.\n\nBTW, there is a bug, apparently in InDesign CS4, Windows only, where if nine of these spaces (uni 2000-200B) occur on a line, and if \"show hidden characters\" is switched on, the program crashes. Miguel has tested this, and assures us it will not occur in the CS5. Got to be one of the worlds oddest bugs.\n\n"
+    },
+    {
+      "time": "31 Mar 2010 — 7:09pm",
+      "content": "sii -- <cite>I've seen them in real-world HTML markup</cite>\n\nOnly recently I read in a blog that these spaces should be used for fine-tuning spacing. I find it odd that different-width spaces have been encoded as characters, and even worse that people would solve design issues with help these pseudo characters ...\n\nIn future I will use REAL CAPS TEXT on the web.\n\n"
+    },
+    {
+      "time": "31 Mar 2010 — 8:47pm",
+      "content": "Karsten: _I find it odd that different-width spaces have been encoded as characters._\n\n"
+    },
+    {
+      "time": "31 Mar 2010 — 10:49pm",
+      "content": "The logic for encoding them as characters is clear. Type designers have to then either assume that reasonable applications will support them (the Adobe position), or decide that a really sophisticated font should include glyphs for these characters, to enable their use in less savvy applications.\n\nPersonally, I have long been of the latter POV, but I don't think the people who want to omit them are crazy, either. So I didn't argue the point too strenuously when over-ruled on this question at Adobe.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 4:55am",
+      "content": "<cite> &gt; For many years I was use to a typesetting program (TeX) where the comp could specify any needed space on the fly. InDesign doesn't provide for this; I find I miss it.</cite>\n\nCharles — I’m not sure I know what you mean when you say “on the fly” and “InDesign doesn’t provide for this.”\n\nLooks like all of the spaces listed above for the u2000–200B block are here (except zero-width space):\n\n ![](http://web.archive.org/web/20131015113005im_/http:/typophile.com/files/InDD-spaces_5437.png)\n\n&nbsp;  \nYou can customize the app to apply keyboard shortcuts to any of these.\n\nAnd it looks like you can specify them in InDD-tagged text using the form \\<0x200#\\>\n\nBTW, can anyone tell us what the difference is supposed to be between enquad/emquad and enspace/emspace? I haven’t been able to find an explanation yet.\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 5:08am",
+      "content": "Also: I’m not necessarily arguing that fonts \\*shouldn’t\\* include these encoded glyphs.\n\nIn my first reply, I was trying to explain why most font makers have not generally done so. I don’t think it has been a matter of incompetence, insolence, or arrogance.\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 6:38am",
+      "content": "\\> Charles — I’m not sure I know what you mean when you say “on the fly” and “InDesign doesn’t provide for this.”\n\nTeX has/had the ability to define any size of space, so if you need a 3/5 em space, you can create one. Perhaps this is what Charles meant.\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 7:15am",
+      "content": "I was a Quark XPress user and I miss the possibility to set a percentage of the em, available as a custom space. In French we place thin spaces (espaces fines) between some punctuation signs and words.  \nIn InDesign, you can only use predefined spaces. Unfortunately with some fonts, you won't find the right space, it'll be either too much or not enough. Reason why I'd like to be able to set a value, which could be available as \"Custom Space\" in the \"Insert White Space\" menu.  \nAnyone knows why this option doesn't exist in InDesign, or shall I study the manual closely, if it is?\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 7:37am",
+      "content": "Mathieu, you can change the horizontal scale of anything in ID -- either manually (it's in the Character panel) or with a character style. So 81.67% of an em space can be defined -- just make sure you only apply it to em spaces and not to your text.\n\n(I admit, at that point it's not really \"a predefined space\" anymore, and if you export to an XML format the formatting will be lost.)\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 8:04am",
+      "content": "If you think about metal type, incremental spaces were not part of the font. The type setter would add variation spaces as needed. I don't think the onus should be on the typeface designer to supply such things.\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 8:11am",
+      "content": "@Don: <cite> TeX has/had the ability to define any size of space, so if you need a 3/5 em space, you can create one. Perhaps this is what Charles meant.</cite>\n\nThanks, Don. I’ll bet you’re right. That sounds useful, and exactly like the kind of thing Charles would love.\n\nOf course, this is a completely separate issue from the presence of myriad encoded spaces within a font.\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 8:18am",
+      "content": "Sii wrote:  \n\\>I've seen them in real-world HTML markup - we had bugs related to \"square boxes\"  \n\\>logged against various fonts.\n\nYeah, this is what prompted the question. \"On the fly\" seems to be an issue.  \nI'll be back with details...\n\nRich\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 10:19am",
+      "content": "Kent: _BTW, can anyone tell us what the difference is supposed to be between enquad/emquad and enspace/emspace? I haven’t been able to find an explanation yet._\n\nI think the difference is that a font is allowed to ‘lie’ about one set, but not about the other. For example, in a very narrow compressed or very wide expanded font, the nominally en/em characters might actually be proportionally narrower or wider than actual width relative to body height.\n\nI _think_ the en/em quad characters are the ones that should be fixed relative to the body height, but am not 100% sure about that.\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 10:29am",
+      "content": "Well, what can I say? I use them and have advocated for them.\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 10:38am",
+      "content": "[Going back to John's post:] Unicode is not very specific here ...\n\nProblem is that encoding these spaces creates expectation that they should be present in fonts. (Complaint: Missing!) And type designers who add them likely interpret the use and thus width of these spaces differently, so that hair space might be visibly different in different fonts.\\* (Complaint: Not the width I expected!) They more \"encouragement\" for end users to modify fonts.\\*\\*\n\nWorse, they obscure the idea of what encoding characters means. The Unicode 5 book, p.205, suggests that  \n<cite>U+2009 THIN SPACE and U+200A HAIR SPACE are successively smaller-width spaces used for narrow word gaps and for justification of type</cite>\n\nwhere, in my understanding, \"narrow word gaps\" refer to the text level while \"justification of type\" (things like adjusting uppercase spacing?) is not a matter of text encoding but of design. Inviting to produce ambiguous data: when is thin/hair space a real space, when does it serve as design hack?\n\n\\* Unicode 5, p.205, says:  \n<cite>where they</cite> [u-2000..U+200A except sometimes U+2009] <cite>are used (for example, in typesetting mathematical formulae), their width is generally font-specific</cite>\n\n\\*\\* See initial post:  \n<cite>3) Is there a script for Fontlab or another tool that will add these automatically?</cite>\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 10:42am",
+      "content": "Well said, Karsten!\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 11:59am",
+      "content": "Karsten: _Problem is that encoding these spaces creates expectation that they should be present in fonts._\n\nI've never accepted the argument that just because something is in Unicode it should be in any font, let alone all fonts. Glyph sets are determined by font makers. Unless you are claiming support for a character set that includes characters that you don't in fact support, those characters can't be considered missing.\n\nI do put these space characters into my fonts, but that's because I know they are useful for scholars dealing with manuscript transcription in which capturing different widths of spaces in plain text can be important, and my clients tend to request them.\n\nFWIW, these are the space widths I use in fonts (most are obvious):\n\nU+2000 |enquad| 1/2em  \nU+2001 |emquad| 1em  \nU+2002 |enspace| 1/2em  \nU+2003 |emspace| 1em  \nU+2004 |thirdemspace| 1/3em  \nU+2005 |quarteremspace| 1/4em  \nU+2006 |sixthemspace| 1/6em  \nU+2007 |figurespace| tabular numeral width  \nU+2008 |punctuationspace/ comma width  \nU+2009 |thinspace| 1/5em \\*or\\* 2/3wordspace (whichever is narrower)  \nU+200A |hairspace| 1/18em  \nU+202F |NBSPnarrow| 1/5em (or 1/3em for Mongolian fonts)  \nU+205F |mathspacemedium| 1/4em\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 12:59pm",
+      "content": "FWIW, it looks like InDesign’s default values for some of those spaces which are subject to interpretation, when not encoded in the font, are as follows:\n\n**hair space** = 0.042 em (don’t ask me why; that’s what I measured)  \n**thin space** = 0.125 em (1/8 em)  \n**punctuation space** = width of a period  \n**figure space** = width of zero (does not change with OT figure features, so unless figs are tabular by default or an encoded figurespace is included, this will not be a tabular space)\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 2:12pm",
+      "content": "Kent, this is why I fill in those Unicode characters. The \\*figure space\\* gets the width of a tabular figure, the \\*punctuation space\\* the width of a tabular comma, which I sometimes make up & switch with the regular comma -- Minion needs one, for example. When I need one of these spaces, I enter the Unicode from the keyboard rather than counting on InDesign to figure it out.\n\nNot that it matters, but I use a 155 unit space for a thin, and a 55 unit space for the hair space -- same as John with the hair, & real close with the thin.\n\nThere is some precedent for varying hair space values; what a comp setting metal actually used for a hair space was \"whatever suited.\" The thin space is a different matter; in Linotype is was the spaceband, unexpanded (you could switch in different spacebands). For systems using the em, I'd imagine it varied as well.\n\nBTW, not all fonts have the same width for lining tabular figures as for oldstyle tabular figures. Well, it's not ideal, but you can live with that. What you can't live with are those fonts where the setwidth for roman tabular figures is different than for italic tabular figures. Ah, font designers. Why end users have to modify fonts.\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 9:52pm",
+      "content": "It's a good job we have you to set us right, Charles!\n\nHowever, I should point out that some of your ideas about what is correct are matters of taste (for instance, your preference for the slash to extend to descender depth), and/or geared to your own field of work, whereas comps in other parts of the graphics industry might have different standards and expectations.\n\nFWIW, I have included the extra space characters in my mega-fonts (and Goodchild Pro, which will see the light of day eventually), but otherwise don't consider them necessary.\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 4:00am",
+      "content": "I'm disappointed not to see a unicode value for a copper and a brass. Certainly just as important as a thin and hair space when composing hand set foundry type.\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 4:45am",
+      "content": "Well, copper = U2640. Brass would be a ligature of U2640 and possibly U2643. Or I suppose in a universe without bromine you could use a Br ligature.\n\nThese, of course, can be further ligated with any other unicode character if you need to specify the composition of your foundry type.\n\nAndré\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 6:32am",
+      "content": "@Theunis: Thank you for your answer but it doesn't appear to be the solution has you concluded.  \nI'm curious to hear from Thomas Phinney about this typographic setting “missing” from InDesign, thanks.\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 6:51am",
+      "content": "It's present in InDesign CS3. I'd be surprised therefore if it's absent from CS4 or CS5.\n\nIn CS3 it's under type-\\>insert white space.\n\nAndré\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 7:48am",
+      "content": "\\>my clients tend to request them.\n\nFor custom type, if you charge your clients by the glyph, recommending the inclusion of these would seem sensible. :-)\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 8:26am",
+      "content": "@André, I know it's possible to insert a white space in InDesign (CS3, CX4).\n\nWhat I'd like to have is a \"Custom space\", which for the width can be define in a percentage of the em in the Preferences. For more details about my question, please read my first post, thanks.\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 8:23am",
+      "content": "Sorry -- I missed your earlier post. It's not clear, though, why what you are suggesting couldn't be accomplished with manual kerning rather than custom spaces.\n\nAndré\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 8:34am",
+      "content": "You search/replace, then you have control on the amount of space everywhere you've placed this \"Custom space\" by simply changing the perrcentage of the em space. Theunis de Jong suggested horizontally scaling a white space, which can be done with a style sheet and basically equals the Quark XPress function. This solution has limitations, see his post.\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 9:04am",
+      "content": "But it doesn't have to be a apace from the same font. You can create a set of spaces that you can use for all.\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 9:12am",
+      "content": "@ Richard\n\nI just thought, that it would be handy to have an embedded font in the css stack, that contains only different spacing characters. Up till now I used the span-tag in cases, in which the spacing was very bad, but this soils the markup more than having a font just for such extra spaces.\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 9:16am",
+      "content": "A space font.  \nVery conceptual Chris.  \nYou shoulda published it yesterday!\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 9:23am",
+      "content": "Shoulda? You didn't see his great [online specimen](http://web.archive.org/web/20131015113005/http:/www.blank.org/)?\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 9:24am",
+      "content": "@ Nick\n\nOh. Was this already proposed? I would have been the second one, if I would not have wasted time with translating. And I swear, I did not read the thread thoroughly.\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 9:54am",
+      "content": "But I have another idea:\n\nI don’t know, if the problem is already solved in Firefox, but if you change the leading with the help of CSS with a relative value, it can happen, that one line is one pixel higher than the following one. I found this very bothering, because one pixel more or less is visible. So it would be possible to provide a font in the first place of the stack with a higher space for long lines for the case that Mozilla will not fix this bug (caused by too strictly following the specification). In the Internet Explorer the leading is even.\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 9:55am",
+      "content": "\\>You shoulda published it yesterday!\n\ntoo late...\n\n[http://www.p22.com/lanston/products/spacing\\_sorts.html](http://web.archive.org/web/20131015113005/http:/www.p22.com/lanston/products/spacing_sorts.html \"http://www.p22.com/lanston/products/spacing\\_sorts.html\")\n\nAm I really the only person who remembers this trivia? :-)\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 10:50am",
+      "content": "Oh, god, I am so unworthy of you guys :-)\n\nIsn't it still April 1st some where on the planet?\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 11:01am",
+      "content": "I might have known Kegler would have already excogitated that idea!\n\n_Am I really the only person who remembers this trivia? :-)_\n\nUntil you have won the TypeCon quiz, not by a long shot :-)  \nRight Kent?\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 12:43pm",
+      "content": ".. [Em space with a horizontal scaling applied --] just make sure you only apply it to em spaces and not to your text.\n\nI should've thought of it earlier -- since InDesign CS4 you can use a GREP style to apply the horizontal scale to em-spaces _only_. A GREP style only can apply character styles, which is sometimes annoying (just a little!), but in this case it's an advantage because you can change the scale in that style, and it'll be changed all over your document.\n\nSounds interesting? Create a new GREP style. In the Apply Style list, choose \"New Character Style\". Select this and name it \"em width\".  \nIn the To Text box put \"~m\" (_sans_ quotes, of course). Insert a number of ems into your document -- you don't have to apply the style manually --, then change the horizontal scale in the \"em width\" character style to 50% and 200% to see what happens.\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 1:26pm",
+      "content": "\\> Until you have won the TypeCon quiz, not by a long shot :-)  \n\\> Right Kent?\n\nI better start studying those Dwiggins books then :-)\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 1:32pm",
+      "content": "Si, study alot about LA as well :-)\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 1:39pm",
+      "content": "Got it, studying taco truck menus and Oscar ceremony typography - I should be good if Hrant and Mark Simonson don't team up.\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 2:50pm",
+      "content": "Don't worry, Si, I hear Hrant is teaming up with John Downer ;-)\n\n"
+    },
+    {
+      "time": "2 Apr 2010 — 2:54pm",
+      "content": "Just don't team up with me, Si. I have as much chance of winning the TypeCon Quiz as I do of winning the New York Marathon. There, instead of a stop-watch, you would need a perpetual calendar to see me cross the finish line.\n\n"
+    }
+  ]
+}

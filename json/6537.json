@@ -1,0 +1,62 @@
+{
+  "id": "6537",
+  "title": "En / em dash",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "What's the secret behind en and em dash widths? I saw that they vary from font to font. Is there anything to do with the n and m glyphs?   \n   \nThanks!\n\n",
+  "author": "<a href=\"/web/20110312220213/http://www.typophile.com/user/1333\" title=\"View user profile.\">fermello78</a>",
+  "time": "<br>",
+  "uid": "1333",
+  "comments": [
+    {
+      "time": "",
+      "content": "The width of the em-dash is usually equal to the measure of the font's em-square. The en-dash should be half the width of the em-dash.   \nWith digital fonts, the em-square usually measures 1000 units, so the em-dash should be 1000 units wide, and the en-dash 500 units.   \nOf course, this is just a 'rule-of-thumb'.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Eduardo.   \n   \nOne more doubt: why the em-square is usually set to 1000 units in digital font files, or 2048 in TTF files?   \nThe ascent value + the descent value should always result in 1000 units (or 2048)? I saw that there are some fonts that this doesn\n\n"
+    },
+    {
+      "time": "",
+      "content": "In the OS/2 table, the typoAscender + typeDescender values (taken as positive values) should equal the em-square height. The sum of the typoAscender + typoDescender + typoLineGap should equal the sum of the WinAscent + WinDescent. The latter two values determine the default linespacing and clipping zones in applications that use font vertical metrics.   \n   \nFor cross-platform compatible linespacing, the Ascender and Descender values in the hhea table should be set equal to the WinAscent and WinDescent values of the OS/2 table, and the hhea LineGap value should be set to 0 (zero). Note that this is contrary to the original TrueType specification, which said the hhea metrics should equal the OS/2 typo values. The reality is that systems and applications use the WinAscent and WinDescent values, for most everything, and the typo values are largely ignored (the Microsoft Font Validator actually reports an error if you follow the spec instead of matching the hhea values to the WinAscent and WinDescent). Unfortunately, the Adobe FDK code in FontLab follows the spec in this regard, so CFF OpenType fonts may not have cross-platform compatible metrics unless one edits the hhea table.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I am looking for a font where the dot on the letters i and j is in the form of a Northstar. Any suggestions?   \n   \nThanks\n\n"
+    },
+    {
+      "time": "",
+      "content": "Further to what I wrote above, I think I should clarify that I'm talking about how to actually get cross-platform compatible linespacing in the majority of current apps. The fact remains that the majority of apps that use font metrics to calculate default linespacing are doing it incorrectly, since WinAscent and WinDescent were not intended to be used for this purpose. But the error is so entrenched and widespread, the only way to reasonably achieve cross-platform metrics is to deliberatly make what is, in terms of the spec, a buggy font. ![:-(](http://web.archive.org/web/20110312220213im_/http:/www.typophile.com/forums/clipart/sad.gif)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Eduardo's \"rules\" are historically solid, but in contemporary practice many designers think those are off. I think the em-dash should be shorter than that, and the en slightly more than half the em.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "If I remember rightly, Kent Lew said that Matthew Carter has started using an em dash of 750, with space before and after as part of the glyph. Kent has also done this in his Whitman typeface.   \n   \nThis provides a solution between the English and American practices. The American practice, which Bringhurst criticises as a Victorian innovation that puts holes in the page, is to set phrases off with em dashes. The British is to use en dashes with word spaces on either side, which Bringhust prefers. I was recommended to use a thin space on either side of the en dash by Nathan Matteson - which I think is an improvement. I've tried a hair space, which I like even better. But the Carter solution may be the best. I do agree with Bringhurst that using two em dashes to set off phrases looks bad. Bringhurst likes the use of em dashes to introduce lines of dialogue, instead of quotes.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Note also Kent's \"innovation\" of kerning em-dash pairs negatively so they connect, allowing for the easy building of rules - and I've started doing that myself. BTW, I suspect that em-dashes without sidebearings were intended for that very purpose in the metal days - but of course with easy negative kerning in digital setting that's moot - which is why it makes sense to put spaces around em-dashed now (just like with the other dashes).   \n   \nBTW, in fonts with monowidth figures it might be useful to have the en-dash set at the figure width.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "John, where in Fontlab is the the OS/2 table? I see a similar table to what you describe under Font Info/metrics and dimensions/true type-specific dimensions.   \n   \nIf you start with the basic ps numbers, are the automatic calculations that Fontlab does for you for True Type messed up?   \n   \nAlso I see that some fonts have ascender + descender of over a thousand. This is all rather mysterious to me as a beginner,and I don't know what interline spacing I am getting for a given ascender and descender. How do applications figure the interline spacing with zero leading?\n\n"
+    },
+    {
+      "time": "",
+      "content": "William, the FontLab 'FontInfo/TrueType-specific metrics' panel contains the OS/2 and hhea table values.   \n   \nI've been discussing this with people at MS and Adobe over the past few days, because the difference between the font spec, what applications do and what common font development practice has become is serious and causes a number of problems. Really, the fault is with the application developers, many of whom are incorrectly calculating default interline spacing\\* using the OS/2 WinAscent and WinDescent values. This has prompted many font developers to use these values to control line height, when these values were originally intended to define the clipping height, i.e. the height and depth beyond which 'ink' may be clipped when the glyphs are painted. Linespacing should be calculated based on the OS/2 'Typo' values. I'm working with some people to clarify this issue and to come up with a set of recommendations for both font and application developers.   \n   \n   \n\\* Note that this applies only to applications that rely on font metrics to set linespacing. Obviously professional page layout apps like InDesign use precise point metrics, expressed in absolute terms, e.g. 12pt type on 12pt leading for 'solid set' text. Applications like members of the Office suite, text editors, web browsers, etc. use font metrics, which typically include some amount of leading internal to the metrics.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Whoops, sorry, I didn't see the OS/2 in brackets next to the first set of numbers.   \n   \nOk, I understand that there is a mess with respect to Word etc. that you are trying to sort out. But for say InDesign, how does it set the interline spacing - how much extra space there is?   \n   \nI thought it was based on what you don't fill up of the 1000 em square, but this can't be right because some fonts based on the 1000 em square have the ascender plus descender which are more than 1000 em. So how do the page layout programs, which you say don't use the method of Word etc., calculate the interline spacing, when the leading is zero?   \n   \nMaybe this thread should be moved to the 'build' section.\n\n"
+    },
+    {
+      "time": "",
+      "content": "InDesign doesn't use the OS/2 or hhea table values to calculate linespacing. In InDesign, linespacing is handled the same way as point size, by scaling the font em. So for a typical PS font with an em of 1000, that provides the scaling factor to produce e.g. 12pts regardless of whether that is 12pts of type size or 12pts of linespacing.   \n   \nTypically, applications that use the font metrics values to calculate default linespacing (correctly or incorrectly) are those that either do not offer users a way to adjust linespacing or which do not expect users to do this often or competently, e.g. MS Word.\n\n"
+    }
+  ]
+}

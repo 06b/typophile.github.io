@@ -1,0 +1,62 @@
+{
+  "id": "6236",
+  "title": "Adding bitmapped glyphs to Opentype fonts",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "There seems to be a lot of interest here in designing or discussing low-resolution bitmapped fonts.   \n   \nOpenType fonts have a feature that allows bitmapped glyphs for specific point sizes, optimizing on-screen display. Has anyone tried doing this?   \n   \nPaul\n\n",
+  "author": "capthaddock",
+  "time": "19 Jan 2003 — 5:04pm",
+  "uid": "1258",
+  "comments": [
+    {
+      "time": "31 Jan 2003 — 1:58pm",
+      "content": "I've experimented with this a little bit Paul, but I'm no technical wizard, so for your own safety, doubt everything I say here. As far as I'm aware, your OpenType font has to be TTF flavored - not CFF. I work in FontLab, so if you use that, try the following:   \n   \n1) open a glyph   \n2) Tools\\>Operations\\>TrueType Hinting   \n3) turn on the Bitmap tool (see below)   \n4) right click in the glyph window   \n5) select Generate Bitmap   \n   \nYou have to generate bitmaps individually for each glyph, for each ppem you want to support, as far as I know.   \n   \nHope that's helpful.   \n   \nNate   \n   \n   \n   \n ![](http://web.archive.org/web/20131013021815im_/http:/www.typophile.com/forums/messages/4100/5073.gif)\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 2:09pm",
+      "content": "I wish I knew more about it. I just figured at that small bit by playing around with the hinting operations.\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 2:14pm",
+      "content": "I just downloaded the [FontLab manual](http://web.archive.org/web/20131013021815/http:/www.font.to/downloads/FL45WinManual.pdf) - looks like pages 560-575 contain a reasonable explanation of importing/exporting bitmaps, TrueType hinting and such.   \n   \nCheers.\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 2:19pm",
+      "content": "I came across something on it when I was reading through Adobe's somewhat technical Opentype specifications. It seems like a good way to create a font to work for bitmapped work and print work. It's probably a lot easier than painstakingly hinting fonts to pixel-perfection like Verdana or Georgia have been, and it would let you accentuate features (serifs, swashes, etc.) at tiny bitmapped sizes that would normally disappear.   \n   \nNathan: I imagine that in Fontlab, you could probably highlight multiple glyphs and do the bitmap-generating operation, right?   \n   \nPaul\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 2:49pm",
+      "content": "\\> you could probably highlight multiple glyphs and do the bitmap-generating operation   \n   \nI could never get that to work. I think you have to be in the Glyph window view to access the hinting operations, so it's a one-by-one type thing. I've found they usually need a lot of tweaking anyway, so it's not a big deal having to go one by one.\n\n"
+    },
+    {
+      "time": "3 Feb 2003 — 1:14pm",
+      "content": "Trusting the Pyrus website, the \"bitmap messie\" seems to be Bitfonter, who can embed bitmaps, but only in TTFs. By the way, it can't generate OTFs.   \n   \nI'm not a Fontlab user, so how an OTF can be \"TTF flavored\", Nathan? Does the forced-hinting technique works for multiple sizes?\n\n"
+    },
+    {
+      "time": "3 Feb 2003 — 1:54pm",
+      "content": "As far as I know, an OTF font can contain either PostScript outlines, or TrueType outlines (i.e., its flavor). It's my assumption that hinting is dependent on whichever type of outline is in the OTF file.   \n   \nAnd, like BitFonter, I believe that FontLab can only output TTF files with embedded bitmaps in them.\n\n"
+    },
+    {
+      "time": "3 Feb 2003 — 1:58pm",
+      "content": "Well, only TT can _have_ embedded bitmaps, as far as I know.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "3 Feb 2003 — 3:48pm",
+      "content": "I've had a little experience with embedded bitmaps. My (free) font [Anonymous](http://web.archive.org/web/20131013021815/http:/www.ms-studio.com/FontSales/anonymous.html), a Mac/Windows TrueType font, uses them for the Windows version. (The Mac version has them in the suitcase file.)   \n   \nIt works, but it depends on OS support (and application support sometimes) for it to work properly. On MacOS 9 (and earlier) and Windows they are used instead of the TT rasterizer at the sizes that you would expect. MacOS X uses the bitmaps only when they fall below its anti-aliasing threshhold, otherwise it ignores them.   \n   \nFlash will use them (yay!) if the font is installed on the client system for dynamic and input text, but not (boo!) for static text and not for anything when you embed the font in the swf.   \n   \nAlso, the size at which they are used on Windows differs from Macs in the usual way. In other words, if you have embedded a 12-pixel tall bitmap font, it will appear at 12-point on Macs but at 8-point on Windows (assuming that the Windows default 96-dpi setting has not been changed).\n\n"
+    },
+    {
+      "time": "3 Feb 2003 — 3:52pm",
+      "content": "One other thing: Both the outline and bitmap versions of Anonymous were built in Fontographer, but I used FontLab to do the embedding thing. The original 9-point Mac bitmap font that it was based on was created in Fontastic about 10 years ago.\n\n"
+    },
+    {
+      "time": "3 Feb 2003 — 4:45pm",
+      "content": "You don't actually need FontLab (or BitFonter) to embed plain 1-bit bitmaps (in Windows-TT). I used the SBIT utility to put 5 sizes of bitmaps in my Arasan.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 2:03pm",
+      "content": "Very interesting. Do you know where one could find   \ndocumentation on this? (From Adobe?)\n\n"
+    }
+  ]
+}

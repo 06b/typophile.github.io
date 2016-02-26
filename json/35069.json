@@ -1,0 +1,18 @@
+{
+  "id": "35069",
+  "title": "True Type parsing issue",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hey!  \nI’m currently writing a parser for the TrueType file format for a project I’m doing. I don’t need all the tables present in the TT standard, and everything I’ve parsed so far has worked out nicely. Now I’m battling with the glyf-table, which I just can seem to get right!\n\nWhen I parse this table, everything works as expected as long as there are no blank glyphs (zero contours (spaces etc)). Sometime when my parser hits a blank glyph it gets out of synch, which of course has devastating effects...\n\nThe files I’m parsing don’t have composite glyphs, so I don’t have to worry about that (contour values = -1).\n\nI think I’ve localized the error. If I look at my font in a hex editor I can see that the blank glyphs do not have a full glyph-header (n\\_contours, x\\_min, y\\_min, x\\_max, y\\_max). Instead they seem to have an arbitrary (usually 1-3) byte entries which are zero, and then the next glyph on comes right after that.  \nFor instance, a blank glyph in a hex editor looks like this:\n\n... 05 e6 fa 1a | 00 | 00 01 01 AA ...\n\nThe first part is the en parts of the previous glyph. This seems to be correct - I get the right point values and flags for it.\n\nThe middle part is a single 0 entry, and that’s all I can find from the blank glyph.\n\nThe last part first says 0001 countours, which is correct, and 01AA xMin which is also correct for the following glyph. As you can see, the middle glyph, which is a blank glyph, only has one single entry... no full 5 Short value glyf-header!\n\nI have no clue why that is! For a while I thought the varying amount of zero entries were some kind of allignment padding in the file, but that doesn’t seem right...\n\nI’m thankful for any help I can get to help me out here!  \nThanks in advance!!\n\n/Magnus\n\n",
+  "author": "<a href=\"/web/20090417175125/http://www.typophile.com/user/19557\" title=\"View user profile.\">repstosw</a>",
+  "time": "<br>",
+  "uid": "19557",
+  "comments": [
+    {
+      "time": " 12.Jul.2007 8.59am",
+      "content": "It’s hard to say for sure without seeing the rest of the font data, but I would guess that what you’re calling the data for the blank glyph \\*is\\* in fact padding at the end of the first glyph. There can be 0 - 3 pad bytes at the end of each glyph’s data, depending on the length of the data and ’loca’ format (’indexToLocFormat’ value from the [’head’ table](http://web.archive.org/web/20090417175125/http:/www.microsoft.com/typography/otspec/head.htm)).\n\nAre you reading the ’loca’ table to obtain each glyph’s offset and length within the ’glyf’ table? I would be surprised to see such results if so, as it would indicate corruption (as an aside: if you haven’t already verified the integrity of the data, you should consider doing so with [Font Validator](http://web.archive.org/web/20090417175125/http:/www.microsoft.com/typography/FontValidator.mspx) or other utility). Truly blank glyphs will have a length of zero.\n\nIf you’re not using the ’loca’ values...well, you need to. The ’glyf’ table data is meaningless without the ’loca’.\n\n"
+    }
+  ]
+}

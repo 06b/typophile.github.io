@@ -1,0 +1,70 @@
+{
+  "id": "40961",
+  "title": "Adobe Acrobat Buttons",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "I'm designing a PDF for a photographer. The PDF opens in full-screen mode, and the user is told to scroll through it using the arrow keys. The last slide needs to have a button that allows the user to click on it and be transported to Page Layout View with bookmarks. Is it possible to make a button like that?\n\nAlso, is it possible to make a button that closes the document? I'm using Acrobat 7 Professional.\n\nThank you so much.\n\n",
+  "author": "talgoretsky",
+  "time": "15 Jan 2008 — 6:22pm",
+  "uid": "20850",
+  "comments": [
+    {
+      "time": "16 Jan 2008 — 4:22am",
+      "content": "rss\n\nIt's such a nicely put and reasonable request I wish I could help. But I can't. Just a note, Acrobat 8 is light years beyond 7. But quickly frankly, I'd ask Adobe. They might like the idea.\n\nGerald\n\n"
+    },
+    {
+      "time": "16 Jan 2008 — 8:57am",
+      "content": "Thanks, Gerald.\n\n"
+    },
+    {
+      "time": "16 Jan 2008 — 10:14am",
+      "content": "I wish I could help too. I'd definitely use the [Acrobat Forums](http://web.archive.org/web/20130616045906/http:/www.adobeforums.com/cgi-bin/webx/.3bbeda8b/?@162.P54ciKD1dfp@). If you do get an answer could you share the link to the discussion?\n\n"
+    },
+    {
+      "time": "16 Jan 2008 — 10:33am",
+      "content": "Not sure if this helps, but why not just make it a web site? There are some neat features in PDFs, but I find that they're usually not user friendly anyways.\n\n"
+    },
+    {
+      "time": "16 Jan 2008 — 10:39am",
+      "content": "\\> I’m using Acrobat 7 Professional.\n\nWindows or Mac? Windows only -- Acrobat 7 for windows also includes LiveCycle Designer;\n\nCreating a button field: Tools -\\> Advanced Editing -\\> Show Forms Toolbar.\n\n"
+    },
+    {
+      "time": "17 Jan 2008 — 9:29am",
+      "content": "Piece of cake. The trick is that the button has to have multiple actions:\n\n1. Before adding the button, set up the PDF file to open full screen.\n\n2. After you create and format the button and have the **Button Properties** dialog open, click on the **Actions** tab.\n\n3. Under **Add an Action \\> Select Trigger** , **Mouse Up** is generally fine. The Acrobat help file explains the other trigger options.\n\n4. Under **Add an Action \\> Select Action** , choose **Execute a menu item**. Click the **Add…** button.\n\n5. Under **Actions** , you should now have a little tree diagram. In the tree, highlight **Execute a menu item** and then click **Edit**.\n\n6. In the **Menu Item Selection** dialog, select **View \\> Full Screen**. (Since the document is in full screen mode, this switches it to page layout. Note that once the file is in page layout mode, clicking this button again will put in back into full screen mode). Click **OK**.\n\n7. Repeat steps 4 and 5 to add another **Execute a menu item** line to the action tree and open it for editing.\n\n8. In the **Menu Item Selection** dialog, select **View \\> Navigation Tabs \\> Bookmarks**. Click **OK**.\n\n9. If you want the user to be sent to another page, repeat steps 4 and 5. In the **Menu Item Selection** dialog, select **View \\> Go To** and choose an option. Click **OK**.\n\n10. In the **Button Properties** dialog, click **Close**.\n\n11. Save the PDF file and then test it in Adobe Reader to make sure it works.\n\nYou can rearrange the sequence in which the menu items are executed by moving lines up or down in the **Actions** tree, but different sequences may not give the same results.\n\nTo create a button that closes the file, follow steps 2 through 5, and then in the **Menu Item Selection** dialog, select **File \\> Close**.\n\n"
+    },
+    {
+      "time": "18 Jan 2008 — 4:34pm",
+      "content": "Gus, you're amazing! Thanks! I'd all but given up hope. I'll try this out and get back to you. Thanks a million!\n\n"
+    },
+    {
+      "time": "18 Jan 2008 — 4:56pm",
+      "content": "It worked, Gus. Thanks! Do you know how to make the PDF open automatically when the CD is inserted in the computer?\n\n"
+    },
+    {
+      "time": "18 Jan 2008 — 5:13pm",
+      "content": "Don't people generally hate it when programs launch automatically when they insert a CD into a computer?\n\n"
+    },
+    {
+      "time": "19 Jan 2008 — 12:45pm",
+      "content": "I think those of us that know how to use the software hate things happening automatically. But, some people would rather have it done for them.\n\n"
+    },
+    {
+      "time": "19 Jan 2008 — 2:35pm",
+      "content": "Yes, I agree - I would personally hate it. But my client wants it that way - I guess he's covering all his bases.\n\n"
+    },
+    {
+      "time": "21 Jan 2008 — 11:34am",
+      "content": "Sorry about not getting back to you sooner, but I've been fighting bronchitis and was pretty much bedridden all weekend.\n\n\\>Do you know how to make the PDF open automatically when the CD is inserted in the computer?\n\nUh oh. Fasten your seat belts, boys. I do, but only on Windows, not Mac or Linux. In fact, I’ve heard that OS X no longer supports what used to be called AutoStart on Macs. If you need to create a CD that will automatically play under both Windows and Mac, you’ll need a Mac guru.\n\nWhat you want is AutoPlay (WinXP and Vista) or AutoRun (Windows 95 through Win2K). However, there are so many variables and exceptions and special cases (I have 25 pages of notes on autorun) that it’s impossible to guarantee that a CD will autorun on every possible platform without getting into modifying the user’s registry or running weird scripts. I don’t think that’s ethical to do to unsuspecting users. Also, as you can see from Miss Tiffany’s posts, autorun annoys a lot of people, so WinXP and Vista allow the user to disable AutoPlay via the “take no action” option in the Autoplay dialog that pops up when you load a new type of CD or DVD. The bottom line is that your client is going to have to accept that the CD may not work 100% of the time.\n\nSince there are so many possibilities, I’m just going to outline a basic procedure that should work in most cases.\n\n1. Copy the following two lines to your favorite text editor or word processor and save the file as a plain text file named **autorun.inf** :\n\n[autorun]  \nshellexecute=yourfilename.pdf\n\n2. Burn the autorun.inf file and your PDF to the root of CD.\n\n3. Cross your fingers and test the CD on as many different machines as you can.\n\nThe meaning of the lines in autorun.inf:\n\n[autorun]  \nThis must be the first line and must have the brackets.\n\nshellexecute=yourfilename.pdf  \nThis line tells WinMe, WinNT 5.x, Win2K, WinXP, and Vista to launch the file named **yourfilename.pdf**. It uses the registered file associations to figure out which application to use. Change **yourfilename** to the name of your PDF file. If the PDF filename has spaces in it, enclose it in double quotes, like this: **“Your Clients File.pdf”**.\n\nIf you think your audience might be using Win95 or Win98, add the following line:\n\nopen=acrord32.exe yourfilename.pdf\n\nThis line tells Win95 and Win98 to launch Adobe Reader and passes Reader the filename **yourfilename.pdf**. Again, change **yourfilename** to the name of your PDF and use double quotes if needed. (Actually, shellexecute will work on Win9x systems if they have Microsoft Layer for Unicode installed. You see what I mean about too many special cases and exceptions?)\n\nSo, to cover Win95 through Vista, your autorun.inf would look like this:\n\n[autorun]  \nshellexecute=yourfilename.pdf  \nopen=acrord32.exe yourfilename.pdf\n\nIf for some reason the PDF file must be in a subfolder, not the root of the CD, you can use relative paths on the **shellexecute=** and **open=** lines, like this (but the autorun.inf file must always be in the root):\n\nshellexecute=\\mysubfolder\\yourfilename.pdf  \nshellexecute=“\\my sub folder\\your file name.pdf”\n\nopen=acrord32.exe \\mysubfolder\\yourfilename.pdf  \nopen=acrord32.exe “\\my sub folder\\your file name.pdf”\n\nOn the **open=** line, you can suppress the Reader splash screen by using the **/s** switch:\n\nopen=acrord32.exe /s yourfilename.pdf\n\nThere are two optional lines you can include in autorun.inf. They are **icon=** and **label=**.\n\nIf you have a Windows icon file (.ico) that you want to display for the CD in Windows Explorer or My Computer, use this:\n\nicon=youricon.ico\n\nIf you want a text label to appear for the CD in Windows Explorer or My Computer (but it probably won't work on Win95 or Win98), use this:\n\nlabel=Your CD name\n\n**Your CD name** can be anything you want, and it can have spaces without needing double quotes around it.\n\nYou can use **icon=** and **label=** together, individually, or not at all. Using all the commands, your autorun.inf would look like this:\n\n[autorun]  \nshellexecute=yourfilename.pdf  \nopen=acrord32.exe /s yourfilename.pdf  \nicon=youricon.ico  \nlabel=Your CD name\n\nGood luck…\n\n"
+    },
+    {
+      "time": "22 Jan 2008 — 7:20am",
+      "content": "I knew I shouldn't have gotten out of bed while my O2 sat was low. The **open=acrord32.exe** line doesn't work on Win9x. What it does is try to open the Reader from the CD, but of course the executable isn't there. The good news is that the buttons in the PDF file worked in Reader version 4.1.\n\nWithout the **open=** line, your autorun.inf would be:\n\n[autorun]  \nshellexecute=yourfilename.pdf\n\nor:\n\n[autorun]  \nshellexecute=yourfilename.pdf  \nicon=youricon.ico\n\nor:\n\n[autorun]  \nshellexecute=yourfilename.pdf  \nicon=youricon.ico  \nlabel=Your CD name\n\nIt is possible to put the Reader on the CD, but the files you need vary depend on which version of the Reader you want to use, and I'm not sure that Adobe approves. The best way to open the PDF file in Win9x is to use a small freeware launcher program. Rather than bore everyone with the details of that, though, I'll wait and see if you post here saying you do need to cover Windows 95 and 98.\n\n"
+    },
+    {
+      "time": "22 Jan 2008 — 10:10pm",
+      "content": "Thank you, Gus. You are a font of knowledge.\n\n"
+    }
+  ]
+}

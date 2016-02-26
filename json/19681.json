@@ -1,0 +1,66 @@
+{
+  "id": "19681",
+  "title": "Auto-activation for Windows?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Can anyone give me a simple answer as to why there are no font management tools for Windows that can auto-activate? I've heard bits & pieces about this, and have heard rumors that if Linotype ever releases Font-Explorer for Windows it might include auto-activation, but I don't understand why there seems to be nothing of the sort at the moment.\n\nWhat's the deal?\n\n",
+  "author": "jason",
+  "time": "2 May 2006 — 5:03pm",
+  "uid": "3771",
+  "comments": [
+    {
+      "time": "2 May 2006 — 6:48pm",
+      "content": "Application developers are waiting for Vista, maybe...\n\n"
+    },
+    {
+      "time": "2 May 2006 — 10:08pm",
+      "content": "How do you define auto activation? I assume you mean that if an application requests a font that's not installed it would be automatically installed? As far as I'm aware this would require some intelligence in the apps - the system itself just falls back to a default font in this case, and I think it's close to impossible for a font manager to insert itself between an app and the OS in this way - this wont change with Vista.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "2 May 2006 — 11:15pm",
+      "content": "There are really two types of auto-activation. In some cases an application can communicate directly with a font manager. For example, Suitcase Fusion uses Quark and InDesign plug-ins to read font information from the file and comunicate those requests to the parent application. If there is enough customer demand, this functionality could be added to a Windows font manager. The other type of auto-activation is the system-wide auto activation provided by ATS\\_Server on the Mac. Mac OS has a separate process for each user that handles font functionality. There are programming interfaces provided by Apple that make font activation possible. Basically, if any application requests a font that isn't active, a font manager can be notified and turn it on. On the Mac, this doesn't require the application developer to do anything special. It works in Word, for example.\n\nThere is a certain amount of complexity involved with this sort of functionality, and like any feature, it can create issues. With Microsoft, my guess is that the potential hazzards outweigh the benefits. It might be expensive or difficult to make a system that is backward compatible with existing applications, and it could introduce security risks. My guess is, there are very few users who would switch to Windows if they added it....\n\n"
+    },
+    {
+      "time": "3 May 2006 — 10:50am",
+      "content": "Thanks for the input Simon and Carl,\n\nSimon, your reply is what I've run into before, but it doesn't recognize that this sort of interaction between app and OS is possible on the Mac now. My question was to the fact that if it is available on the Mac, why not the PC?\n\nCarl addressed this, but it still doesn't make sense to me (by that I mean my ignorance has not been defeated quite yet). If plug-ins are available on the Mac for Quark & InDesign (and others) to communicate with the font manager (in this case, Fusion or FontExplorerX), then isn't the same sort of plug-in possible on the PC? As for backwards-compatibility, the average user likely doesn't need a font manager, let alone auto-activation, and I'd be quite happy if this feature only worked with InDesign CS/CS2 as that's the only place I'm eager to have it.\n\n_If there is enough customer demand, this functionality could be added to a Windows font manager._\n\nI've sent a few notes to Extensis in the past, with no response, but clearly my request doesn't amount to \"enough customer demand.\"\n\nIn the end I suppose this is, indeed, a \"special-interest\" issue, as I know I'm in the minority on my old PC, so I can't well expect quick solutions. The Linotype manager has frustrated the issue by hinting at an auto-activation-capable version for PC, and I suppose it's a combination of envy and impatience that led to my post.\n\nDan, you out there? Can you confirm if FontExplorer for PC is going to have auto-activation? I won't ask for a release date because I know that's taboo, but perhaps you could speak to the issues that have held auto-activation back from the PC.\n\n"
+    },
+    {
+      "time": "3 May 2006 — 3:48pm",
+      "content": "Did anyone ever get fonts to auto-activate in ATM Delux 4.1?\n\n[http://desktoppub.about.com/library/rev/aafpr-atm41.htm](http://web.archive.org/web/20131022025817/http:/desktoppub.about.com/library/rev/aafpr-atm41.htm \"http://desktoppub.about.com/library/rev/aafpr-atm41.htm\")\n\n<cite>If a required font is installed but inactive, ATM automatically activates it. However, auto-activation works only with Type 1 fonts. If you are using only Type 1 fonts this is a nifty feature allowing you to open documents created with inactive fonts with no hassle.</cite>\n\n"
+    },
+    {
+      "time": "4 May 2006 — 12:14pm",
+      "content": "I would be very (positively) surprised if FontExplorer for Windows enables system-wide font activation on Windows. I think it's unlikely for the reasons described above: Mac OS X has a mechanism to notify other applications if a font is requested, Windows (neither GDI nor WPF) does not have such a mechanism.\n\nAdam\n\n"
+    },
+    {
+      "time": "4 May 2006 — 12:52pm",
+      "content": "Again, I'm asking out of ignorance, but here's what I don't understand. When I open InD and get the warning/dialogue that fonts are missing, I click OK then head to Suitcase to activate the fonts needed. No big deal, but annoying.\n\nIs it for some reason impossible to write a script/plug-in/etc. that would intercept/recognize InD's warning, call-up the font management application, search the font list to locate the requested fonts, and activates them? I'm not a programmer, so perhaps I'm just searching for useful tools in the clouds, but this seems like a fairly simple sequence of actions. I'm assuming this is more or less what the current plug-ins for InD and Quark do for Fusion & FX.\n\n"
+    },
+    {
+      "time": "4 May 2006 — 2:03pm",
+      "content": "I can't speak to why different companies may or may not not release a product. However, judging by the traffic on Typophile there is demand. I think companies should pay more attention to early adopter/power users, because they are responsible for communicating information to everyone else.\n\nAlso, I agree with you regarding InDesign; it's really the only app where I would want auto-activation.\n\n"
+    },
+    {
+      "time": "5 May 2006 — 8:21am",
+      "content": "Jason,\n\nI don’t quite understand your question. You asked a question (“Is it for some reason impossible to write...”) and gave yourself an answer (“this is more or less what the current plug-ins...”). So, what was the question? :)\n\nA.\n\n"
+    },
+    {
+      "time": "5 May 2006 — 11:48am",
+      "content": "Let me rephrase:\n\n\"Is it for some reason impossible to write...\" **for PC** a script/plug-in/application that handles the sequence of actions I mentioned above, which seems to be \"more or less what the current plug-ins\" do on the Mac?\n\n"
+    },
+    {
+      "time": "6 May 2006 — 1:07pm",
+      "content": "Jason,\n\nfor applications that have a plugin architecture such as InDesign or QuarkXPress, there is no problem to create auto-activation plugins, regardless of the system they run on. It's just that none of the software makers who create major font management applications (Linotype, Extensis, Insider) have yet released current versions of their font managers for Windows. Apparently, they don't consider the Windows market worth the trouble.\n\nA.\n\n"
+    },
+    {
+      "time": "9 May 2006 — 12:23pm",
+      "content": "That, unfortunately, is what I figured. I suppose I was hoping someone would alert me to some new plug-in I wasn't aware of, but no such luck. Thanks for the feedback, and I hope that maybe, maybe, someone from Linotype, Extensis, Insider might read Adam's comment and feel a bit of a sting.\n\n"
+    },
+    {
+      "time": "27 Jun 2006 — 11:06pm",
+      "content": "Proxima software seems to have a solution for InDesign.\n\nCheck out the  \n [Missing Fonts Loader Plugin for Adobe InDesign CS2](http://web.archive.org/web/20131022025817/http:/www.proximasoftware.com/fontexpert/plugins/missingfontsloader.htm)\n\n"
+    }
+  ]
+}

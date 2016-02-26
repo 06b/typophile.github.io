@@ -1,0 +1,50 @@
+{
+  "id": "104920",
+  "title": "Minion Pro T-i Ligature?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Hello everyone. I am new; hopefully I am posting under the correct topic.\n\nI was given a piece of printed material with the word “Time” in the title.  \nIt is set in Minion Pro typeface, and the capital T and small i seem to be a ligature because the dot of the i is not present, and the bottom serif of the i sits within the width of the T hat. (please refer to the attached jpeg)\n\nI have looked over the entire glyphs of the typeface several times, tried selecting both Ligature and Discretionary Ligature.  \nNone of them seem to give me the result.\n\nWhat is definite is that the word is only within Minion Pro family (glyphs included), in one text frame only, the letters are not kerned, are evenly tracked, and the i is not rendered in any way to have the dot removed.\n\nLastly, I have also tried using the number 1 and Latin small dotless i; however, none of the number 1 resembles the i on the page, and latin dotless i would need to be either kerned or tracked close to the T, but I was told that these two actions are not involved.\n\nAny help is appreciated. Thank you in advance.  \n\\*Please see the attached jpeg of what the word supposedly looks like; I created it using Latin small dotless i, reduce the tracking between T and i.\n\n| Attachment | Size |\n| --- | --- |\n| [Ti ligature.jpg](http://web.archive.org/web/20150308211443/http:/typophile.com/files/Ti%20ligature_0.jpg) | 39.68 KB |\n\n",
+  "author": "magic2101",
+  "time": "24 Jul 2013 — 10:55am",
+  "uid": "213375",
+  "comments": [
+    {
+      "time": "24 Jul 2013 — 11:49am",
+      "content": "Not a ligature, unless someone has made a custom version of the font containing one. I'd say that's just T followed by dotless i, and if the latter needs kerning to look like this, then kerning has been applied and what you were told it incorrect.\n\n"
+    },
+    {
+      "time": "24 Jul 2013 — 1:07pm",
+      "content": "(Dotless i character is “option-shift-b”.)  \nI checked the font, and the combination “Tı” is indeed kerned within the font, as John assumed.\n\n"
+    },
+    {
+      "time": "24 Jul 2013 — 2:23pm",
+      "content": "The kerning given by the font is -80 (as in the first line below). To get the Tı as close as the jpg above, I have to fix it to about -115 in InDesign (as shown in the little box for kerning)\n\n![](http://web.archive.org/web/20150308211443im_/http:/typophile.com/files/kerning_6653.png)\n\nIf the kerning was not done in InDesign, then I suspect a special kerning pair was added to the font.\n\nIt may also be possible with luaTeX to add that kerning pair without touching the font. That would satisfy, in some way, all the given requirements.\n\n"
+    },
+    {
+      "time": "25 Jul 2013 — 4:59am",
+      "content": "The sample appears to be a display version of Minion Pro Bold (notice the thin joins of the _m_), not the normal version from which Michel extracted the -80 value. The display could be kerned tighter, perhaps.\n\nOr perhaps Optical Metrics is applied and the set size is very large. Not sure if the algorithm would kern it so tightly, but I wouldn’t put it past it.\n\n"
+    },
+    {
+      "time": "25 Jul 2013 — 6:43am",
+      "content": "I have the bold display of Minion version 1.011 and the kerning is tighter, -88. If I put the optical kerning with InDesign CS3, I get -69. That does not change if I choose 72 points or 96 points.\n\n![](http://web.archive.org/web/20150308211443im_/http:/typophile.com/files/bold-display_6086.png)\n\nMaybe some other combination of font version+application. Or maybe that is it.\n\nAdded:\n\nHere is a scaled link (with width=100%) to the original picture of magic2101 for rapid comparison.  \n ![](http://web.archive.org/web/20150308211443im_/http:/typophile.com/files/Ti%20ligature_0.jpg)\n\nThe font is different, but there is no way to compare with the original (that picture was a reconstruction). It looks like bold subhead, and the kerning I get is -83\n\n![](http://web.archive.org/web/20150308211443im_/http:/typophile.com/files/bold-subhead_4655.png)\n\nNot tight enough.\n\n"
+    },
+    {
+      "time": "25 Jul 2013 — 8:26am",
+      "content": "Is it the foundry font, or modified? I could get this without any kerning by making a modified font, having an extra dotless i with negative left sidebearing, and a {calt} feature...\n\n"
+    },
+    {
+      "time": "25 Jul 2013 — 8:55am",
+      "content": "Without modifying the font, and without using an explicit `\\kern` command, it can be done with luaLaTeX using a little file, say `Ti.fea` with the lines\n\n    languagesystem DFLT dflt;\n    languagesystem latn dflt;\n    feature kern {\n          pos \\T \\dotlessi -115;\n    } kern;\n\nand then loading the font with the option `[FeatureFile=Ti.fea]`. That does not seem to interfere with the rest of the kerning.\n\n"
+    },
+    {
+      "time": "25 Jul 2013 — 10:00am",
+      "content": "Kerning can be edited in Quark XPress to be document-speciﬁc, and the values in one document may be exported to another.\n\n"
+    },
+    {
+      "time": "25 Jul 2013 — 3:58pm",
+      "content": "Well, here is something for Quark to beat. I did not find a way to make a `calt` table for lualatex, nor to simulate adding a table that does not exist in a font. There is at least a `salt` table in Minion Pro so here is another experiment. This time, I used a little file I called `salt.fea` with the following lines\n\n    languagesystem DFLT dflt;\n    languagesystem latn dflt;\n    \n    feature salt {\n      script latn ;\n        language dflt ;\n           sub \\i by \\dotlessi ;\n    } salt ;\n    feature kern {\n     script latn;\n       language dflt ;\n          pos \\T \\dotlessi -115;\n    } kern ;\n\nI used it to define the fontface `\\head` in the following luaLaTeX file\n\n    \\documentclass{article}\n    \\usepackage{fontspec}\n    \n    \\setromanfont{Minion Pro Bold Subh}\n    \\newfontface\\head[FeatureFile=salt.fea,\n                      Style=Alternate]{Minion Pro Bold Subh}\n    \\begin{document}\n    {\\head Time} in Toronto\n    \\end{document}\n\nwhich gave the following output:\n\n![](http://web.archive.org/web/20150308211443im_/http:/typophile.com/files/timeintoronto_5104.png)\n\nOf course, the \"font face\" `\\head` used to write \"Time\" is of little use but at least the word \"Time\" is properly coded, without cheating with an dotlessi in the input. The worst that can happen if `salt.fea` is used with a font that misses a `salt` table is that the output simply shows \"Ti\" instead of \"Tı\" which is exactly as should be.\n\n"
+    }
+  ]
+}

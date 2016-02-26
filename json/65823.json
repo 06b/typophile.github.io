@@ -1,0 +1,22 @@
+{
+  "id": "65823",
+  "title": "Question with regard to FontLab panel: Non-English or special font names",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Platform 1Macintosh Encoding 0Roman Language 0English\n\nHow to I have to type in/encode the following characters, or is it unpossible to use them there?:  \nEnDash, CopyrightSign, Trademark, LeftSingleQuotationMark and RightSingleQuotationMark\n\nFor the Microsoft platform it is easy:  \nEnDash\\2013, CopyrightSign\\00A9, Trademark\\2122, LeftSingleQuotationMark\\2018 and RightSingleQuotationMark\\2019\n\n",
+  "author": "<a href=\"/web/20100202050042/http://typophile.com/user/45774\" title=\"View user profile.\">Arno Enslin</a>",
+  "time": "<br>",
+  "uid": "45774",
+  "comments": [
+    {
+      "time": "",
+      "content": "[http://www.germantype.com/cms/front\\_content.php?idcat=193](http://web.archive.org/web/20100202050042/http:/www.germantype.com/cms/front_content.php?idcat=193 \"http://www.germantype.com/cms/front\\_content.php?idcat=193\")\n\n\\D0 results in an Eth, but not in an endash.\n\nThis is from the FontLab manual:  \nTo add a new name record, click on the button on a toolbar, select  \nname record options using the controls below the list and type in the name record content. To enter non-ANSI characters use “\\[unicode index]” or “\\[code]” notation where [unicode index] is the Unicode index of the character if the name record is for the Unicode (0 or 1) platform and [code] is the character code in the Mac Roman codepage if the name record is for the Macintosh platform. For example you may enter “\\0411” for the Cyrillic “beh”.\n\n"
+    },
+    {
+      "time": "",
+      "content": "`[\\D0, \\A9, \\AA, \\D4, \\D5] results in [–, ©, ™, ‘, ’]`, when I open the generated Font in FontLab. Before it is generated  \n`[\\D0, \\A9, \\AA, \\D4, \\D5] is interpreted in this way: Ð, ©, ª, Ô, Õ`\n\n(When I decompile the name table with ttx, I get this: ` & #208;, & #169;, & #170;, & #212;, & #213;\n`)\n\nBut if I want to preserve the characters, when I regenerate the font, I have to insert [\\D0, \\A9, \\AA, \\D4, \\D5] again. Otherwise I get this: `, ©, \", , (& #19;, & #169;, \", & #24;, & #25;)`. Either FontLab does not generate the code correctly or it does not interpret the code correctly, when it imports the name table.\n\n"
+    }
+  ]
+}

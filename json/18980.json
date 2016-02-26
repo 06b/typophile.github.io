@@ -1,0 +1,58 @@
+{
+  "id": "18980",
+  "title": "What languages are supported by Latin Extended A?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Dear colleagues,  \nI am completing a font that uses the Latin Extended A character set and want to test in all the supported languages. Does anyone know what they all are or where I would find such a resource?\n\nThanks!\n\nChrisL\n\n",
+  "author": "dezcom",
+  "time": "2 Apr 2006 — 4:03pm",
+  "uid": "3135",
+  "comments": [
+    {
+      "time": "2 Apr 2006 — 4:07pm",
+      "content": "See that:\n\n[http://typophile.com/node/18844](http://web.archive.org/web/20141002111729/http:/typophile.com/node/18844 \"http://typophile.com/node/18844\")\n\n"
+    },
+    {
+      "time": "2 Apr 2006 — 4:13pm",
+      "content": "David,  \nYOU ARE THE MAN!!!\n\nTHANKS!\n\nChrisL\n\n"
+    },
+    {
+      "time": "2 Apr 2006 — 4:15pm",
+      "content": "You're welcome.\n\n"
+    },
+    {
+      "time": "2 Apr 2006 — 7:33pm",
+      "content": "For anyone interested, I found a great site with lots of language sample:\n\n[http://www.omniglot.com/babel/](http://web.archive.org/web/20141002111729/http:/www.omniglot.com/babel/ \"http://www.omniglot.com/babel/\")\n\nChrisL\n\n"
+    },
+    {
+      "time": "3 Apr 2006 — 7:04am",
+      "content": "Chris, I hope you don't mind if I piggy-back on this thread...\n\n--\n\nAbout Latin Extended A  \n [http://www.unicode.org/charts/PDF/U0100.pdf](http://web.archive.org/web/20141002111729/http:/www.unicode.org/charts/PDF/U0100.pdf \"http://www.unicode.org/charts/PDF/U0100.pdf\") \\_  \nI have a question concerning two characters:\n\n1) 0138 - Kra: Exactly how is it supposed to look different than the normal Latin \"K\"? You can't really know from that one Times sample. Seeing as how it's from the dead\\* language of Greenland (which is melting away as we speak anyway) I neither expect to get a firm reply nor should I be too concerned I guess. But still, if anybody knows, or knows somebody who knows, it would be nice to know. BTW, the 1862 specimen book of the Mekhitarist monks (still going strong on San Lazzaro, Venice) happens to show, along with 32 other languages/scripts, text in Greenlandic, and there's a normal looking lc \"k\" in there. One thing about Greenlandic btw, it seemingly had the most impressively and consistently longest words, like \"tammœgaralloamnik\" is about average, and then there's \"Ajortulliorkaungak'illangmutIllingnuldo\" (yes, it had intercaps too!).\n\n\\* I should say \"dormant\" (since a concept can never really die).\n\n2) 0149: Is it \"not actualy a single letter\" or what? If it's two characters, why is it in Unicode? If not: How close/above the \"n\" can I put the apostrophe? What can come right before this \"letter\"?\n\nhhp\n\n"
+    },
+    {
+      "time": "3 Apr 2006 — 7:17am",
+      "content": "Hrant,\n\nI think the difference in the lower case k is that there is no ascender. It looks more like a Greek kappa.\n\nChrisL\n\n"
+    },
+    {
+      "time": "3 Apr 2006 — 11:20am",
+      "content": "There is a very recent [typophile thread](http://web.archive.org/web/20141002111729/http:/www.typophile.com/node/18546) on kgreenlandic / kra, complete with very helpful examples and discussion from resident omniglot typophile extraordinaire John Hudson. Also see this [blog entry](http://web.archive.org/web/20141002111729/http:/blogs.msdn.com/michkap/archive/2005/01/12/351428.aspx) from Michael Kaplan for more orthographical notes.\n\nAnd you'll find discussion of Afrikaans \"'n\" [here](http://web.archive.org/web/20141002111729/http:/sourceforge.net/mailarchive/forum.php?thread_id=8267898&forum_id=44385). It's certainly confusing to me.\n\n"
+    },
+    {
+      "time": "3 Apr 2006 — 11:26am",
+      "content": "Wow, what are the chances! Thanks much.\n\nhhp\n\n"
+    },
+    {
+      "time": "3 Apr 2006 — 2:53pm",
+      "content": "The **napostrophe** (U+0149) is included in [WGL4](http://web.archive.org/web/20141002111729/http:/www.microsoft.com/typography/otspec/WGL4C.HTM)  \n [Unicode](http://web.archive.org/web/20141002111729/http:/typophile.com/wiki/Unicode) defines it as LATIN SMALL LETTER N PRECEDED BY APOSTROPHE  \n [http://www.unicode.org/charts/PDF/U0100.pdf](http://web.archive.org/web/20141002111729/http:/www.unicode.org/charts/PDF/U0100.pdf \"http://www.unicode.org/charts/PDF/U0100.pdf\")\n\n"
+    },
+    {
+      "time": "3 Apr 2006 — 3:03pm",
+      "content": "Unicode also says it's “not actualy a single letter”. Is that good/normal?  \nI have a feeling that people setting Afrikaans can elect to use either  \nthe compound or the discrete encoding - which is certainly Not Good.  \n(BTW, it's not really a regular apostrophe - that actually has a  \nseparate encoding from the one used in this little anomaly.)\n\nhhp\n\n"
+    },
+    {
+      "time": "3 Apr 2006 — 4:58pm",
+      "content": "Re. U+0149. This is one of those peculiar characters that is included in Unicode solely because of its presence in one of the pre0existing standards subsumed into Unicode. Some of these standards were industry-specific, e.g. the Dutch telecom standard from which we apparently get the digraph distinct from the sequence ij that Dutch people actually type. My guess is that U+0149 comes from a similar South African standard.\n\nIt has a compatibility decomposition to U+02BC U+006E, which means that it may be decomposed to that two-character sequence, ʼn, but that sequence may not be composed to U+0149.\n\nAs far as I can tell, there is no Afrikaans keyboard layout: they use the US Standard layout. So users almost certainly type 'n (U+0027 U+006E) and completely ignore both U+0149 and its compatible decomposition. Just because something is in Unicode or WGL4 does not mean it is used, or used widely.\n\nI would take the phrase 'not actualy a single letter' to mean that this doesn't sort separately from n in typical Afrikaans sorting, although I have no evidence for or against this interpretation.\n\nThere are lots of characters in Unicode that can be encoded in multiple ways, with either canonical (reversible) or compatibility (non-reversible) encodings. It is 'good/normal' so long as your applications and fonts are ready for this :)\n\n"
+    }
+  ]
+}

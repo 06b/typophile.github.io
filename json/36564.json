@@ -1,0 +1,46 @@
+{
+  "id": "36564",
+  "title": "Buggy, Buggy Word",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Okay, so i have 2 Word issues:\n\n1) I'm generating Windows PostScript Cyrillic fonts. I'm using FLS5, running Win XP SP2. I set the mode in FLS5 to codepages and selected MS Windows 1251 Cyrillic. In the Encoding options, I have chosen \"1251 Cyrillic\" under supported codepages and \"Cyrillic CP 1251\" under Microsoft Character Set (and \"Cyrillic\" for the Mac script). With these settings, The fonts work just fine in Adobe InDesign CS3, but i cannot figure out how the fonts are behaving in MS Word 2007. In Word the fonts generally default to Times New Roman.\n\n2) For OpenType and PostScript (latin) fonts, the bold style-linking is not working correctly in Word 2007. I have linking set up so that Heavy is the bold version of Medium. Does it matter that the bold style weight is not actually bold? Style linking works correctly in TrueType fonts generated using the same files and settings as the OpenType fonts and style linking works for all fonts (PS, OT, TT) in InDesign CS3.\n\nThe fact that these fonts work as expected lead me to believe that these are Word bugs, but i'll be glad to be proven wrong. If any of you can help me resolve these problems, I'd greatly appreciate your help. Thanks for looking!\n\n",
+  "author": "paul d hunt",
+  "time": "28 Aug 2007 — 10:09am",
+  "uid": "7006",
+  "comments": [
+    {
+      "time": "28 Aug 2007 — 5:23pm",
+      "content": "1. When you say 'PostScript Cyrillic' fonts do you mean Type 1 or CFF PostScript? I recommend making the latter and supporting both the CP1251 and also the Western European CP1252. Actually, I recommend supporting CP1252 in any font you make.\n\nWord has what I certainly consider a bug which means that even if a font supports a codepage that supports the ASCII Latin subset, such as the Windows Cyrillic or Hebrew codepages, Word will switch to a default font when you try to enter Latin characters from such a font, because it is looking for CP1252 support. You may be able to input Cyrillic characters correctly with your font. Have you tried that? If it is like the issue I hit with Hebrew codepage fonts, the font switching should only happen if you try to input the Latin subset characters.\n\n2. Hmm. This ring a bell, but I can't remember what the issue is. I suspect Adam Twardoch could tell you.\n\n"
+    },
+    {
+      "time": "28 Aug 2007 — 6:03pm",
+      "content": "_When you say ’PostScript Cyrillic’ fonts do you mean Type 1 or CFF PostScript?_\n\nType 1 PostScript.\n\nthnx, john. i'll give that a try. btw, i owe you a proper thank you for your time at TypeCon. i promise i'll have something in the mail soon. :D\n\nThe Bold problem is strange because Word is applying faux bold when there is a proper bold installed that _should_ be style-linked.\n\n"
+    },
+    {
+      "time": "28 Aug 2007 — 6:41pm",
+      "content": "okay, i tried adding CP1252 support and have the same behavior. Actually, I can input text in cyrillic directly with a keyboard, but if i select text and try to change the font, the the font does not change: or actually a few analphabetic characters change such as parens, numbers, punctuation, &c. very strange...\n\n"
+    },
+    {
+      "time": "29 Aug 2007 — 1:08pm",
+      "content": "it appears that #2 was caused by conflicting versions of the font being installed at the same time. i think we can check that one off the list. :P  \nstill having issues with #1, though.\n\n"
+    },
+    {
+      "time": "30 Aug 2007 — 10:59am",
+      "content": "back to #2...  \nafter a bit more testing it seems that you can link Medium to Heavy and Book to DemiBold, but not Thin to Light with the bold feature in Word.\n\n"
+    },
+    {
+      "time": "30 Aug 2007 — 11:41am",
+      "content": "What are the numbers you're using for the weights? If you're using 250 for the Thin, then the Light must be at least 600 (!!), which is obviously wrong :-/\n\nHere's a table that Thomas (?) did not too long ago. Hope it helps.\n\n ![](http://web.archive.org/web/20131022034304im_/http:/typophile.com/files/win_weights_4914.png)\n  \n**Legend**  \nRED: A single value or combination that fails to work in many common Windows applications (though not all). Typical failures include always or never getting the bold font, or getting a fake smeared bold effect on either the regular font or the bold font.  \nORANGE: Combination previously believed to work, but did not work correctly in Nov 2004 tests. \n"
+    },
+    {
+      "time": "30 Aug 2007 — 1:05pm",
+      "content": "Thnx, Miguel. That solved my style linking problem. Now if I could figure out how to get the Greek and Cyrillic PostScript files to work...\n\n"
+    },
+    {
+      "time": "7 Sep 2007 — 7:46am",
+      "content": "You have to deal with those pesky math and Greek duos like Arno does :-)\n\nChrisL\n\n"
+    }
+  ]
+}

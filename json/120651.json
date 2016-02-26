@@ -1,0 +1,59 @@
+{
+  "id": "120651",
+  "title": "Font classes aren't working consistently",
+  "forum": "Build",
+  "tags": [
+    "class",
+    "Build"
+  ],
+  "content": "I'm working with classes in my font to kern the font faster and more efficiently, but for some reason some classes aren't working. For example, I have to kern all my /a/s manually rather than kerning all /a/s at once. The /e/s are grouped though. I have the feeling things particularly go wrong when I have the base letter kerned before I apply the classes. What am I doing wrong?\n\n",
+  "author": "Martin Silvertant",
+  "time": "19 Oct 2014 — 11:26am",
+  "uid": "52182",
+  "comments": [
+    {
+      "time": "21 Oct 2014 — 6:40am",
+      "content": "Have you remembered to mark a key glyph in each of your kerning classes?\n\nDavid\n\n"
+    },
+    {
+      "time": "21 Oct 2014 — 10:17am",
+      "content": "Yes, I have. For some reason it doesn't always accept the first character as the master. Here's an example of my kerning classes:  \n\\_a: a' aacute acircumflex adieresis agrave atilde aring\n\n ![](http://web.archive.org/web/20150421094645im_/http:/typophile.com/files/Kerning%20class_5695.jpg)\n\nThe kerning classes are working for /e and /o, but not for /a. I have to kern each instance of /a manually. It's not the only class that doesn't seem to be working though.\n\n"
+    },
+    {
+      "time": "21 Oct 2014 — 10:21am",
+      "content": "Also, is it possible to put in numbers for the sidebearings and kerning rather than dragging guides? Right now I drag everything, and sometimes there's a slight difference in spacing between two instances of the same letter with different accents. I think I should be working more accurately. I'm kind of surprised I can't edit the parameters of the kerning classes (the width and space on both sides).\n\n"
+    },
+    {
+      "time": "21 Oct 2014 — 11:51am",
+      "content": "Have you checked the sidebearings you want to be active for the kerning class? Have you remembered to click the \"Accept\" button after making any changes or additions to a class? It might be helpful if you posted a shot of your classes panel, showing the \\_a class.\n\nTo your second question, click the third-last icon at the top of the Metric window (\"Expand the window\") it will reveal a table the sidebearings and kerning info for each glyph in whatever text you have active in the window. You can select the figures in the table to change them.\n\nTo change sidebearings and advance widths you need to set up metrics classes separate from the kerning classes.\n\nThe FontLab manual can be daunting but it is your friend, you just need to dig into it. Check the sections on Class-based Kerning and Metrics Assistance.\n\n"
+    },
+    {
+      "time": "21 Oct 2014 — 8:23pm",
+      "content": "> Have you checked the sidebearings you want to be active for the kerning class? Have you remembered to click the \"Accept\" button after making any changes or additions to a class?\n\nYes. It does create the classes; it just doesn't work when I start kerning.\n\n ![](http://web.archive.org/web/20150421094645im_/http:/typophile.com/files/Classes_3709.jpg)\n> The FontLab manual can be daunting but it is your friend, you just need to dig into it. Check the sections on Class-based Kerning and Metrics Assistance.\n\nI know, but to be honest with you I've consciously been avoiding it. This might sound sad, but I lead a pretty isolated life, and needing help is just a nice excuse for me to get in contact with people. I rather ask here than refer to the manual. I do have the manual in case no one can help me here.\n\n"
+    },
+    {
+      "time": "21 Oct 2014 — 11:54pm",
+      "content": "You’ve enabled kerning for /a as the left-hand member of a pair, but not as the right-hand member – hence Vå etc. won’t work.\n\n ![](http://web.archive.org/web/20150421094645im_/http:/typophile.com/files/akern_6255.jpg)\n\n"
+    },
+    {
+      "time": "22 Oct 2014 — 5:56am",
+      "content": "What George said.\n\n"
+    },
+    {
+      "time": "22 Oct 2014 — 10:04am",
+      "content": "I just realized I completely misunderstood this system. I had a look at the FontLab manual, and I must say this system is very confusing to me. It would be far easier if the master class glyph is denoted by the circle.\n\nThanks for the help though!\n\n"
+    },
+    {
+      "time": "22 Oct 2014 — 10:05pm",
+      "content": "Okay, I got used to this logic now. It just took a bit to properly switch. However, I seem to have a persisting problem. Now all accented /a characters are linked to the master character, except for aacute. I still have to kern that one manually. I also removed the class, set the kerning of both characters to 0, re-created the class and kerned /a, but aacute didn't move with it; the other characters do.\n\n"
+    },
+    {
+      "time": "23 Oct 2014 — 8:21am",
+      "content": "You may have inadvertently created a kerning exception for the aacute. You can get a list of all kerning pairs by choosing \"Table\" from the \"Options\" pop-up menu at the bottom of the Metrics window. It displays a list of kerning pairs in a spreadsheet-like table on the right side of the Metrics window. You can select and delete kerning pairs from that table.\n\n"
+    },
+    {
+      "time": "23 Oct 2014 — 12:31pm",
+      "content": "Thank you. I deleted the other characters from the table and they kern along with the master character now.\n\n"
+    }
+  ]
+}

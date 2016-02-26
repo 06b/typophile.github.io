@@ -1,0 +1,138 @@
+{
+  "id": "44841",
+  "title": "Making the letter \"O\" even in width all the way around.",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hello All,\n\nI am new to typography and I am trying to create a font set with Fontlab. But I am having trouble making the capital letter “O” evenly wide in thickness all the way around.\n\nFor example, if I draw the black circle/oval in guidelines of (0,0) to (400,1000) and the white circle/oval in guidelines (100,100) to (300,900) I get an oval shaped “O”. Then the mid-points of “O” i.e. the vertical mid-point measurement from (200,0) to (200,100) and (200,900) to (200,1000) is 100. Similarly the horizontal mid-point measurement from (0,500) to (100,500) and (300,500) to (400,500) is 100. So the width of the character line at these points is 100 but the width of the character line at other parts is not 100.\n\nDoes anyone know how to make the “O” even all the way around at 100 units thickness.\n\nThanks.\n\n [‹ So how do I learn this whole encoding thing?](http://web.archive.org/web/20080705163831/http:/www.typophile.com/node/45286 \"Go to previous forum topic\") [Installing AFDKO ›](http://web.archive.org/web/20080705163831/http:/www.typophile.com/node/45236 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080705163831/http://www.typophile.com/user/30344\" title=\"View user profile.\">Emma Ford</a>",
+  "time": "<br>",
+  "uid": "30344",
+  "comments": [
+    {
+      "time": " 30.Apr.2008 9.50am",
+      "content": "Could you provide a picture? I do not really understand...\n\n(Beside the fact that you don’t really want to make the stroke weight all equal in an O, not even in geometric typefaces – it just would look wrong.)\n\n"
+    },
+    {
+      "time": " 30.Apr.2008 11.35am",
+      "content": "Make your outer and inner contour just as you’ve described. Make a circle 100 x 100 units. Move the circle to anywhere along the inner contour between the top or bottom and one of the sides. Adjust the curve of the outer contour until it touches the edge of the circle. Move the circle further along the curve and adjust the outer contour as needed. When one quadrant looks okay, note the lengths of the control nodes of the outer contour in the adjusted section. Use the same values for the other three sections. In this method, the inner contour controls the overall shape. If you prefer the outer contour, you would adjust the inner contour instead. Note, however, that this will result in corners at the top and bottom of the inside of the O, which you probably don’t want.\n\n"
+    },
+    {
+      "time": " 30.Apr.2008 11.41am",
+      "content": "Note also that this is not usually the way O’s are drawn in real fonts. There are all sorts of optical illusions to take into account that have nothing to do with literal geometry, but with perceived geometry.\n\n"
+    },
+    {
+      "time": " 30.Apr.2008 12.23pm",
+      "content": "Just use the circle drawing tool in FontLab—drag the mouse with the shift key down. That will get you very close to a geometrical circle. Strictly speaking it is not possible to draw a real circle with bezier curves, but you won’t be able to see the difference.\n\nAn O made with two circles generally doesn’t look right, as Mark said. Only Avant Garde has that, I think, though I may be wrong.\n\n"
+    },
+    {
+      "time": " 30.Apr.2008 12.34pm",
+      "content": "I think Emma is trying to draw an O that looks like a tall, narrow ellipse. Assuming I followed her description correctly.\n\n"
+    },
+    {
+      "time": " 30.Apr.2008 1.26pm",
+      "content": "By the way, a method that may work better is to draw your inner ellipse first. Add at two nodes between the top, bottom, and side nodes, all the way around. Then, do Contour \\> Paths \\> Make Parallel Path... with a setting of 100 units. (Depending on the direction of the path, you may need to change it from left to right or right to left. Also, the path directions will need to be corrected after the procedure, since they will end up going the same direction, which you don’t want.) If you don’t add the extra nodes, the result will be identical to your initial example. The extra nodes force the distance to be the same all the way around (or at least closer to that ideal).\n\nHere’s how it looks:\n\n ![](http://web.archive.org/web/20080705163831im_/http:/www.typophile.com/files/ellipses_4523.gif)\n\nThe one on the left is your original O, the one on the right was constructed starting from the inner contour with extra nodes added and the Make Parallel Path command.\n\n"
+    },
+    {
+      "time": " 30.Apr.2008 2.27pm",
+      "content": "Sorry, I didn’t read the original post carefully.\n\nTo expand on Mark’s point about visual vs geometrical: generally horizontals look thicker than verticals of the same physical width, so that when the top and bottom of an oval are the same as the sides they look thicker.\n\nYou can see this effect most strikingly by playing with the widths of the strokes in a ’plus sign’: for the lines to look the same weight the vertical has to be thicker than the horizontal.\n\n"
+    },
+    {
+      "time": " 30.Apr.2008 3.35pm",
+      "content": "Absolutely. I also didn’t mention overshoot. I left these two optical adjustments out to focus on the problem at hand.\n\n"
+    },
+    {
+      "time": " 30.Apr.2008 10.45pm",
+      "content": "_Note also that this is not usually the way O’s are drawn in real fonts._\n\nAnother exercise for seeing this: type a large letter O in Futura (or Helvetica, too) in Illustrator. Then, in another layer, and using a different color, draw two perfect circles to match the inner and outer outlines of the letter O as closely as possible... This will let you see the optical adjustments.\n\n"
+    },
+    {
+      "time": " 30.Apr.2008 11.18pm",
+      "content": "My hat is off to you guys. What great and complete answers. Cheers!\n\n"
+    },
+    {
+      "time": " 1.May.2008 8.03am",
+      "content": "Thank you all for your contributions.\n\nWe look forward to the day when the font software can draw an oval perfectly even all the way around automatically.\n\n"
+    },
+    {
+      "time": " 1.May.2008 9.18am",
+      "content": "Note however, the outer contour is not “a perfect oval” in the corrected version, only the inner one is. I guess what you mean is, the parallel path function should be more rigorous, and not take the shortcut of simply scaling the curve. I have to admit that I was surprised that the parallel path command did not produce the desired results without adding the extra nodes.\n\n"
+    },
+    {
+      "time": " 1.May.2008 9.23am",
+      "content": "I just checked: Illustrator does the same operation correctly when you use the “offset path” command. Extra nodes are even inserted on the path it produces. So, perhaps an easier way would be to make the shape in Illustrator and move it to FontLab via the clipboard.\n\n"
+    },
+    {
+      "time": " 3.May.2008 9.14pm",
+      "content": "\\>\\>\\>\\>We look forward to the day when the font software can draw an oval perfectly even all the way around automatically.\\>\\>\\>\\>\n\nBut it could and I have used it for drawing one of my glyphs in a perfectly equal-width line.\n\nTools/Panels/Smart Shapes/Ellipse Specify the height and the width to get a circle or oval/OK. Then repeat the operation using the same height and width minus double the required line width. That draws a smaller circle or oval nicely centered inside the first. Before de-selecting the inner shape, reverse its contour direction Contour/Paths... and Voila! Smart Panels is one very useful function Fontlab spent a lot of effort to hide from view.\n\nAs for the optical illusions associated with curves and lines, isn’t it possible to ignore them and obtain interesting effects that are not necessarily bad? Besides at large display sizes the eye would sees the absolute line widths more clearly. I am just mentioning this as a possibility as it seems to me that correctly adjusting for optical illusions may be a fine art not always easily covered by facile rules of thumb.\n\n"
+    },
+    {
+      "time": " 3.May.2008 10.21pm",
+      "content": "<cite> Besides at large display sizes the eye would sees the absolute line widths more clearly. </cite>\n\nIs this right?\n\nWhat about when you are farther away. Then they come back into play - no?\n\n"
+    },
+    {
+      "time": " 3.May.2008 10.22pm",
+      "content": "It depends. I think the horizontal/vertical thickness rule can be ignored when a mechanical appearance is desired. The overshoot rule is harder to break since it has a bearing on the apparent relative size of shapes.\n\n"
+    },
+    {
+      "time": " 3.May.2008 11.34pm",
+      "content": "Thanks Mark!\n\n"
+    },
+    {
+      "time": " 4.May.2008 1.16am",
+      "content": "You are trying to draw a curve parallel to an ellipse drawing another ellipse. The problem is that the offset of an ellipse in NOT an ellipse, so the only way is using Make Parallel Path or a similar approach.\n\n"
+    },
+    {
+      "time": " 4.May.2008 7.18am",
+      "content": "Eben—I was replying to Vladimir’s comment, but you must have jumped in just before I posted.\n\nSome say that overshoot should be proportionally less for display sizes and proportionally greater for text sizes. If this is true, the further away you are, the smaller the shapes will appear, and the more overshoot you will need. I’m not so sure about this. I’ve never noticed O’s appearing smaller relative to flat-sided letters when they were farther away. In any case, if it were true, it would be impractical to do anything about it, given that type may be set at virtually any size and viewed at any arbitrary distance. (Put “This poster best viewed at five feet.” at the bottom in small print?)\n\n"
+    },
+    {
+      "time": " 4.May.2008 11.00am",
+      "content": "Mark, could you explain the extra nodes more fully?\n\nI have never quite understood them, though I have a feeling that my designs require them.\n\nThanks\n\n"
+    },
+    {
+      "time": " 4.May.2008 11.05am",
+      "content": "What other advantages do the extra nodes provide? Do they need to be positioned on the extrema (at 45°)?\n\n"
+    },
+    {
+      "time": " 4.May.2008 1.16pm",
+      "content": "“We look forward to the day when the font software can draw an oval perfectly even all the way around automatically.”\n\nWe look back on the day when people were not so lazy.\n\n"
+    },
+    {
+      "time": " 4.May.2008 7.02pm",
+      "content": "The nodes I placed were arbitrary, but sufficient to force FontLab to make a path that is more parallel. Adobe Illustrator places the extra nodes closer to the top and bottom, which presumably are the optimum places to put them.\n\nThe extra nodes may not be strictly necessary. It may in some cases be possible to draw a curve with only the top, bottom and side nodes that is very close to the same as the one with the extra nodes. But there is a limit to the kind of contour you can make with just two control points. You cannot make every possible curve that would fit between the two nodes. In fact, as William pointed out, even a circle can only be very closely approximated—not a perfect circle—when described with Bézier curves. If you can’t get the curve you want, you may need to add nodes. But don’t use more than you need.\n\n"
+    },
+    {
+      "time": " 5.May.2008 12.15am",
+      "content": "Eben, Mark: In wondering whether one can ignore the illusion rules I was not criticising a sensible practice honed over centuries by lettering and font-design practitioners. Rather I felt that\n\n1-Illusions are not quantifiable and a beginner (like me) can over-do this fine-tuning and the result would be just as ’wrong’\n\n2- In some scripts like Arabic, or for some fonts that are less than mainstream in design, or some uses like advertising or illustration, illusions may be acceptable. They may even enhance certain glyphs in close-viewing situations or in certain combinations with other glyphs by providing visual variety in unexpected ways.\n\n"
+    },
+    {
+      "time": " 5.May.2008 6.11am",
+      "content": "Vladimir, the illusion rules are partly quantified, but there is a whole lot that hasn’t been quantified yet. For example, generally, overshoots are said to work in the 2-3% range. But it is also argued that they should be different for bold characters and pointed characters. And Matthew Carter has said that he generally thinks that the S needs slightly less overshoot to look balanced.\n\nI think knowing the general guidelines is very useful, but equally important is not to view them as iron-clad rules, but instead to rely on your eyes.\n\nThis is assuming you want the balance such guidelines are aimed at achieving. Your design may not want such balance, particularly in a display face. For example if you have a ’bouncy’ baseline, you might want to have a character look shorter. Or if you wanted it to look brutally mechanical, you might want the heaviness that geometric equality of horizontal and vertical can give in roman script.\n\nI think the ’rules’ do change to some extent from script to script. In the Roman script the rule is heavy verticals and thin horizontals. Our eyes are accustomed to that, so violating that looks heavy, whereas in another script with different underlying ’rules’ it won’t.\n\nSo there is a mixture of the universal—the way human visual perception works—and partly conditioning by the usual rules of the script.\n\nOverall, I think the thing is to be aware of how what we see and what is on the paper or screen are significantly different, and then to make a conscious decision on how to deal with the differences to get the effect we want in the viewer.\n\n"
+    },
+    {
+      "time": " 6.May.2008 5.07am",
+      "content": "Thank you William for your excellent summary of your thoughts about this interesting topic. I am currently finalizing an Arabic font that has all its line widths equal - I wonder what is a good description for such an attribute: doesn’t ’mono-width’ refer to equal overall width of the glyphs between their sidebearings? Indeed some portions of my glyphs appear thicker or thinner than others because of illusions, but somehow I find that acceptable. In large sizes I like the clean ’absolute’ or ’pure’ look of the outlines. Are there any good Latin or other scrips that have equal outline widths?\n\n"
+    },
+    {
+      "time": " 6.May.2008 6.04am",
+      "content": "\\>Are there any good Latin or other scrips that have equal outline widths?\n\nI don’t know of any, though there might well be. I just checked Avant Garde in the big sizes you can display on Font Shop and even there the O seems to be slightly thinner on the top and bottom compared to the sides.\n\nThere are reversed-contrast fonts, though. The ’Old West’ slab styles are like this, though they are kind of novelty display faces. The most famous reversed-contrast sans is Antique Olive, and a more recent one FF Balance. I don’t like either of these personally, but they are well crafted and have a certain look.\n\nI don’t read Arabic script, but here would be my guess: equal weight of horizontal and vertical strokes will still make the horizontals look heavier than the verticals, because that’s the way the eye & brain work. But since the Arabic script is generally heavier in the horizontals, it might well not cause the problems it does in roman styles, and the letter forms may still look “normal.” So I can conceive of it working fine, though I really don’t know.\n\nAn interesting comparison might be the recent Hebrew typeface Erica sans, whose name is a tribute to Eric Gill’s sans. Hebrew script also follows the heavy horizontal light vertical rule—maybe it’s connected with right to left writing? And generally I think doing the latin script rules in Hebrew letters looks awful. But somehow the designer here brought it off brilliantly, and this face won a TDC award and is now very popular in Israel. You can read an interview with the designer [here](http://web.archive.org/web/20080705163831/http:/www.oketz.com/iontef/).\n\n"
+    },
+    {
+      "time": " 7.May.2008 8.20am",
+      "content": "Thanks William - this is very interesting and educational. I measured the O in Gill Sans and it was thinner on top than on the sides. Then I used your link to the article by the disigner of Erica- he seems to have done a good job of emulating Gill Sans and it is very nicely done.\n\n\\>\\>Hebrew script also follows the heavy horizontal light vertical rule—maybe it’s connected with right to left writing?\\>\\>\n\nArabic has many script variants (and their font adaptations and derivatives) but the most common ones do indeed have a thick horizontal and a thin vertical. On the other hand there is the strictly geometrical kufic which has equal width for both. The Arabic in Arial font follows the general rule but the Hebrew there has thin horizontals and thick verticals!\n\nThis thread started out with a discussion of a perfectly round O, a feature of Johnston’s London Underground lettering and Gill’s adaptation. Gill’s writings on typography and his Sans were a big influence in my work.\n\n"
+    },
+    {
+      "time": " 10.May.2008 4.38am",
+      "content": "<cite>I am currently finalizing an Arabic font that has all its line widths equal - I wonder what is a good description for such an attribute: doesn’t ’mono-width’ refer to equal overall width of the glyphs between their sidebearings?</cite>\n\nInstead of “mono-width” it’s “monospace.”\n\nThe other term you’re looking for is “monoline.”\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": " 13.May.2008 5.56am",
+      "content": "Thanks Mark I tried the two suggestions and particularly the Cut and Paste from Illustrator works very well.\n\n\\>\\>Tools/Panels/Smart Shapes/Ellipse Specify the height and the width to get a circle or oval/OK. Then repeat the operation using the same height and width minus double the required line width. That draws a smaller circle or oval nicely centered inside the first. Before de-selecting the inner shape, reverse its contour direction Contour/Paths... and Voila!\\<\\<\n\nVladimir I tried to follow your suggestion but I could not get it to work. I am new to Fontlab and I do have an older version (4.6). The closest I could find was Windows\\>Primitive Panel\\>Ellipse. I Placed the outer ellipse with Properties and then OK. I then Placed the inner ellipse with Properties and before deselecting it with OK I did Tools\\>Operations\\>Reverse Contours. But this did not work.\n\nPlease can you explain where I have gone wrong.\n\n"
+    },
+    {
+      "time": " 13.May.2008 7.38am",
+      "content": "Emma \\>\\>I did Tools\\>Operations\\>Reverse Contours. But this did not work.  \nPlease can you explain where I have gone wrong.\\>\\>\n\nWhat you did sounds right- unless you had both contours selected when you reversed them. When an inner contour has the reverse direction of the outer, where the two overlap is subtracted so you get a proper O shape with a hollow centre. If both contours run clockwise or both anticlockwise the inside O will be filled- there is a little arrow on each contour that shows the direction. Study the Fontlab 4.6 manual for alternate ways to reverse the contours for example by trying “set PS direction or Set TT direction” buttons if they exist, as they do on the 5.0 version. Good luck.\n\n"
+    }
+  ]
+}

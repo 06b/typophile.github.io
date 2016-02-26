@@ -1,0 +1,38 @@
+{
+  "id": "55319",
+  "title": "FontBook Kern Table Validation",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "FontBook in Mac OS 10.5 is reporting an improperly structured kern table upon installation of Aviano. I recently overhauled the entire family, including the kerning, and it is now based off of a Multiple Master. All font generated from the master are affected. Class based kerning is used extensively, and I expand kerning upon export. The export expands the kerning to about 1000 pairs. Microsoft Font Validator reports no issues, and Fontlab reports no issues with the structure upon export, and the Kerning Assistance dialog reports no problems. I have filed reports with Fontlab.\n\nIs anyone familiar with this issue? What additional information can I provide to help solve the issue?\n\nThank you for the help,\n\nJDooley\n\n ![](http://web.archive.org/web/20150428155752im_/http:/typophile.com/files/Picture%208_3633.png)\n\n [‹ Aligning the ordmasculine/feminine with sups, numerators, or ordinals?](http://web.archive.org/web/20150428155752/http:/typophile.com/node/55168 \"Go to previous forum topic\") [Is it possible? ›](http://web.archive.org/web/20150428155752/http:/typophile.com/node/55141 \"Go to next forum topic\")\n\n",
+  "author": "Jeremy Dooley",
+  "time": "27 Feb 2009 — 2:25pm",
+  "uid": "8555",
+  "comments": [
+    {
+      "time": "27 Feb 2009 — 3:40pm",
+      "content": "OT-CFF fonts should not have a 'kern' table. The kerning in OT-CFF fonts is handled by the 'kern' feature found in the 'GPOS' table.\n\n"
+    },
+    {
+      "time": "27 Feb 2009 — 3:50pm",
+      "content": "Miguel made a good point.  \nBut whatever FontBook's validation criteria are, both the declaration as \"serious error\" and \"structure and content\" are misleading except if the kern table is really built incorrectly.\n\n"
+    },
+    {
+      "time": "27 Feb 2009 — 3:59pm",
+      "content": "I turned off the expansion of the class based kerning upon export and FontBook validated the font as correctly formed.\n\nThis creates another problem, as some applications still don't support class based kerning. I have passed this information onto FontLab support.\n\nThank you for the assistance and insight.\n\nJDooley\n\n"
+    },
+    {
+      "time": "27 Feb 2009 — 4:13pm",
+      "content": "The OpenType specification does not permit the \"kern\" table in PostScript-flavored OpenType fonts, though the Apple specification does. But this obviously is not the problem since FontBook permits some OTF fonts with a \"kern\" table but chokes on others.\n\nFontBook has been known for false-flagging many situations, and this seems like one of them.\n\nI believe this is an Apple problem, not a problem with your font. You might want to install the Apple FontTools from  \n [http://developer.apple.com/textfonts/Fonttools/](http://web.archive.org/web/20150428155752/http:/developer.apple.com/textfonts/Fonttools/ \"http://developer.apple.com/textfonts/Fonttools/\")  \nand check your font with ftxvalidator, and see what it reports.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "2 Mar 2009 — 9:20am",
+      "content": "Thank you Adam, I will check into that.\n\nAlthough I agree that it is probably an error with FontBook validation and not FontLab, since users rely so heavily on FontBook, FontLab might want to look into the error or coordinate with Apple on this issue. I doubt that my font is the only one effected.\n\nThanks again,\n\nJeremy Dooley  \n [www.insignedesign.com](http://web.archive.org/web/20150428155752/http:/www.insignedesign.com/ \"www.insignedesign.com\")\n\n"
+    },
+    {
+      "time": "4 Mar 2009 — 2:11pm",
+      "content": "Jeremy,\n\nas far as I can tell, this problem has been fixed in more recent versions of Mac OS X. I just tested your font in Mac OS X 10.5.6 and FontBook did not complain at all.\n\nRegards,  \nAdam\n\n"
+    }
+  ]
+}

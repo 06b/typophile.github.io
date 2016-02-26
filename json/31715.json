@@ -1,0 +1,114 @@
+{
+  "id": "31715",
+  "title": "Testing opentype (TTF) and (OTF) on a PC",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "HI all,  \nI’ve had this problem testing fonts on PC for a week now so any help would be greatly appreicated.\n\nI have an opentype font in TTF and OTF flavours, both work fine on the Mac platform. When trying to test on the PC platform only one of the flavours work. If I test on one PC it’s the TTF that works and if I test on a different seperate PC it’s the OTF that works.\n\nI only install one font at a time and all applications are closed when installing the fonts.\n\nMy order is this:  \n1. Close all appliactions, install font files into fonts folder (TTF)  \n2. Open application and test - font will work fine.  \n3. Close application and remove fonts from fonts folder and empty trash  \n4. Restart system to make sure.  \n5. Install other flavour of font (OTF) and test in application.\n\nThis second font flavours won’t work in the application. Do PC have a font cache like Mac and is there a way I can remove. or what else can I try.\n\nc.\n\n",
+  "author": "coop",
+  "time": "23 Feb 2007 — 2:57am",
+  "uid": "5642",
+  "comments": [
+    {
+      "time": "23 Feb 2007 — 3:39am",
+      "content": "Which applications are you testing with?  \nCan you be more specific about what isn't working?\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 3:55am",
+      "content": "Could I ask why you are producing both formats (OTF + TTF)?  \nHave you hinted them separetely?\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 3:56am",
+      "content": "Miguel,\n\nIt's adobe applications that the fonts don't work with - Indesign, Illustratot and Photoshop. The fonts seem to work fine with Windows apps. like Word. When the fonts don't work the name shows in the font list and I can click them but the text goes blank.\n\nIf I have \"The quick brown fox…\" set in say Arial and then change the font to the font I'm testing, the text disappears and that weight of the font is removed form the font list.\n\nThe font flavours that don't work changes between machines, one machine works with the TTF and not the OTF, while a second machine the OTF works and not the TTF. This I why I thought it might be a cache problem to do with which font flavour I installed first, although I complete remove the first font I considered it might corrupt the second font installed.\n\nc.\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 5:05am",
+      "content": "Are you testing one font or a family of fonts? What happens if you instal only one font? (I'm trying to make sure it's not a naming conflict)\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 5:15am",
+      "content": "Miguel,\n\nI was trying a family of fonts - Light, Regular, Medium and Bold all with Italics.\n\nI've just tried single fonts - Regular of the OTF and then TTF, but only the OTF works.\n\nc.\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 6:19am",
+      "content": "This sounds stupid, but in the Adobe Apps, have you tried selecting the font from both the Character palette and the Type menu?\n\nI have that quite a lot, that I can't select a font via the Character palette, but can via the Type menu.  \nAlso most of the time I can't select fonts by typing in the first couple of letters from the name, I have to select it specifically.\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 6:27am",
+      "content": "Quincunx,\n\nI try both the Character palette and the Type menu. The font name appears in the type menu but if I select it the type in the text box goes blank.\n\nAlso if I look in the Glyph window ( Window - Type&Tables - Glyphs ) there are no glyphs shown, where as if the font is working the Gylphs window will show the full character set.\n\nc.\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 6:45am",
+      "content": "bizarro?\n\nChrisL\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 6:49am",
+      "content": "Quite odd indeed, especially since OTF is supposed to be cross-platform.  \nMaybe some Font-Generating-expert can help you generate those fonts again, because it sounds as if the problem is in the fonts. I don't know enough about that. :)\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 7:06am",
+      "content": "I had a similar problem with CFF-flavored Opentype fonts and PS Type 1 fonts on the PC. I installed the OTF font first for testing, then uninstalled it and attempted to install the PS font of the same name. I got an error message saying the font file was damaged. We will probably need to send up a Phinn-signal for this one, because I believe that the Adobe Font Handler is responsible for the problem: all I can gather is that, once a font with a certain name is installed, the Font Handler looks for other instances/formats of that font, and disables them in some way or another.\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 7:13am",
+      "content": "I wouldn't mind getting an error message, but I get nothing just a blank text box. so I dont' know what the explanation is.\n\nc.\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 7:57am",
+      "content": "If you test different flavors of otherwise \"same\" OTFs, you <cite>must</cite> clear all font caches -- both Adobe's AdobeFnt\\*.lst and the OS's -- before installing the other flavor.  \nAs regards Windows, perhaps somebody else can jump in and tell how to delete them properly.\n\nThere was (is?) a problem with testing different flavors of OTFs in the Windows-version of InDesign. Say, you install and test the PS-OTFs first, deinstall the fonts, then install the TT-OTFs, InDesign still has the information that fonts were PS-OTFs and looks for PS-outline which are not present in TT-OTFs. (If you place the cursor where was text before, you'll notice that the glyph's metrics are there, but it just doesn't render the outlines.)  \nIf I remember correctly, it is irrelevant if you test PS or TT flavor OTFs first.  \nI thought this bug is removed already, but since you write \"but I get nothing just a blank text box\" it seems it isn't.\n\nSo it's important to remove all references (caches) to the previously installed different-flavor OTFs.\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 8:07am",
+      "content": "k.l.,\n\nThanks for that, your description is exactly like my problem, but now how would I remove all references to the previous font.\n\nI've check in\n\nC:\\Program Files\\Adobe\\Adobe Indesign CS 2\\Fonts\n\nand\n\nC:\\Program Files\\Common Files\\Adobe\\Fonts\n\nand removed any reference to the fonts I'm testing. What other steps should I take to removes any references (caches)\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 8:14am",
+      "content": "For the \"AdobeFnt\\*.lst\" files, you should use Windows' search/find function and search for the phrase \"AdobeFnt\", and include system folders in the search (there's a checkbox somewhere).  \nThen delete files looking like \"AdobeFnt10.lst\" or \"AdobeFnt7.lst\".  \nBut don't delete files ending with \".db\"!\n\nFor Windows font cache files, someone else must help. I don't use Windows much ...\n\nI wonder, do you have the very latest version of InDesign (4.0.4)? Just curious, since I encountered this problem with the demo version which was 4.0 or so.\n\nBest wishes, Karsten\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 8:37am",
+      "content": "Yes I've deleted the \"AdobeFnt\\*.lst\" files\n\nI'm using Indesign CS 2\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 11:37am",
+      "content": "So does anyone know if it's possible to delete the font cache on a PC, or at least a hack to get Indesign to see new fonts installed with the same name but different format ?\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 7:19pm",
+      "content": "It's weird, I have the same problem sometimes, but usually the font cache sorts itself out after a restart of the software or something like that.  \nI thought I read earlier that you even restarted your system, and I would say that would clear the font cache...\n\nYou could also try to delete all Temp files in the windows temp dir. I don't know if it has anything to do with the font cache, but it's always filled with crap that needs to be deleted anyway.\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 11:23pm",
+      "content": "Quincunx,\n\nWhere would I find the windows temp dir, I don't use a PC that much.\n\nc.\n\n"
+    },
+    {
+      "time": "23 Feb 2007 — 11:49pm",
+      "content": "you need to use Disk Cleanup (Start -\\> Run; type: Cleanmgr); DC shows you internet cache files, temporary files etc etc.\n\n\\> I don’t use a PC that much.\n\npc is simple as mac; go to Start -\\> Help and Support; search your topic/issue.\n\n"
+    },
+    {
+      "time": "24 Feb 2007 — 5:03am",
+      "content": "Either what david hamuel says, or look for Windows temp dirs in C:\\WINDOWS\\Temp, C:\\Temp and C:\\Documents and Settings\\[username]\\Local Settings\\Temp. To check if anything stayed behind.\n\nAs far as I know you can delete everything in there. You probably need to close all applications first, otherwise some won't delete.  \nYou can also use the search option in windows, set it to C:\\ and search for \\*.tmp, and delete everything you find.\n\nI'm not responsible if anything go's wrong. :)\n\n"
+    },
+    {
+      "time": "24 Feb 2007 — 5:07am",
+      "content": "David was right - the Cleanmgr seem to work\n\nc.\n\n"
+    },
+    {
+      "time": "24 Feb 2007 — 5:12am",
+      "content": "Yes, it should work, but sometimes lots of junk can stay behind.\n\n"
+    },
+    {
+      "time": "24 Feb 2007 — 6:43am",
+      "content": "I think I spoke too soon, the Cleanmgr doesn't seem to work.  \nI'm sure the problem lies with the Adobe font cache, as I tried changing the name of one of the formats which worked fine. So if my font is callled Test, I had Test.otf and Test1.ttf, which worked as it does on the mac platform.\n\nSo the question still remains how do I delete the Adobe font cache.\n\nQuincunx, I looked under - C:\\WINDOWS\\Temp, and there are a number of files left, but becasue of my inexperience working with PC I don't know if I should delete these files.\n\n"
+    },
+    {
+      "time": "24 Feb 2007 — 9:37pm",
+      "content": "A bit off topic, but [CCleaner](http://web.archive.org/web/20150125063705/http:/www.ccleaner.com/) is a great freeware system cleaner to get rid of cached files, etc.\n\n"
+    },
+    {
+      "time": "25 Feb 2007 — 12:21am",
+      "content": "Thanks for that Jason - it worked once. The TTF version isn't working at the moment. I ran the CCleaner, restarted the system and the TTF version worked. I then removed the TTF version ran the CCleaner again, restarted and installed the OTF version to try that, but now that isn't working.\n\nI've spent far too long on this already, so I think it might be best to just rename one of the formats for testing on the PC.\n\nc.\n\n"
+    }
+  ]
+}

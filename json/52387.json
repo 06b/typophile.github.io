@@ -1,0 +1,210 @@
+{
+  "id": "52387",
+  "title": "massive problems after scaling (fontlab)",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "hi folks,\n\ni have a litl question regarding a problem i'm having in fontlab. i'm still in the process of figuring out the progr. so bare with me on this one\n\nI'm working on some characters and kind of did the basic form of the letters in illustrator without adding to much detail, i placed all the characters i had in fontlab and started fine tuning them in fontlab, since i imported the letters from illustrator they were in very small size so after fine tuning i scaled the letters to match the x-height.. but after scaling i noticed that all of the proportions of the letters where slightly changed, for example the stems are different in size, bowls are slightly different, i had the bowl of letters like d, p in the same curve now they are different from each other...\n\ni liked to know what it is that i'm doing wrong.\n\nthis is how i scaled them:\n\nplaced all letters next to each other and selected all of them than this box appears around the selected letters , place my cursor at the corner of the box hold down shift and scale till i get to the wanted x-heith.\n\nall help is very much appreciated\n\n",
+  "author": "<a href=\"/web/20101128114314/http://www.typophile.com/user/25150\" title=\"View user profile.\">omar</a>",
+  "time": "<br>",
+  "uid": "25150",
+  "comments": [
+    {
+      "time": "",
+      "content": "I suspect the problem is that FontLab \"snaps\" BCPs onto a nominal 1000-unit grid.  \nSo if you have something that imports into FontLab very small, the BCPs will snap onto the grid at integers within the 1000 units, whereas more accurately they would be at fractions of the grid.  \nFor instance, a BCP point that should be 223.4, 17.6 would snap to 223, 18.  \nSo you have to find a way to import the paths at a larger scale.  \nAlternatively, as all the font pros will tell you, create your glyphs in Fontlab from the very beginning.\n\n"
+    },
+    {
+      "time": "",
+      "content": "thank you for you're reaction Nick,\n\nmaybe one more small question\n\nsay if you would size a character up that was created in fontlab would one still get the same problem?\n\nand if i understand correctly i should just redo/check every letter?...but how do you figure out witch node is slightly changed, the letter \"d\" for instance, is it the outer curve node or the inner curve node in comparison to the stem, since some stems still have the same size than others and some are a bit smaller in width some a bit wider...\n\noh well you live and learn...\n\nthnx Nick\n\n"
+    },
+    {
+      "time": "",
+      "content": "You're discovering the difference between beziers in fonts vs in illustrator. Illustrator uses decimal values for coordinates on the art board, while fonts use integer values on the em square. The em square is pretty course as a result. Eg, say you have a square that is 3 em units wide. You scale it up 150%. Illustrator mentality says it is now 4.5emu. But fonts don't use decimals, so Fontlab rounds up to 5emu.\n\nWhen you try to draw a circle it's even worse! The following illustrates drawing a \"circle\" using the circle tool in fontlab (I added the pink em grid). The first is 1 emu in diameter, the next 2 emu, 3, 4, 5 etc. You can see the limitations of the coarse em square in this brutal example, and how scaling will introduce distortion. There's no way around it. But its a font issue, not a Fontlab issue.\n\n ![](http://web.archive.org/web/20101128114314im_/http:/typophile.com/files/em_coarse_4163.gif)\n\nHowever, it's not so bad. You'll generally not draw shapes 3emu in size! It does become a pain for ultra hairline fonts (you'll also want to keep an eye on symmetrical objects as they will not be if they're an odd emu width). This is one of the main reasons I gave up on drawing fonts in illustrator even though I love it as a drawing tool. I've learned to appreciate and become proficient FL too. Somtimes it's an advantage to be able to quickly say \"yes those handles are the same length.\" Tricky in illustrator. Now if FL would \\*borrow\\* AI's pathfinder and smart guides.. that would be fantastic.\n\nGood luck!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Please remember that by default settings, 1 pt in an EPS drawing (Illustrator file) corresponds to 1 font unit in FontLab Studio. So to get a glyph that is 700 units high in the font, you need to draw it 700 pt high in Illustrator. If you've drawn yours smaller, scale them up accordingly in Illustrator before bringing them over to FontLab Studio. The FontLab Studio manual has an entire section about using Illustrator to draw fonts, I recommend taking a look.\n\nBTW, it is not a limitation of FontLab Studio per se. It is the limitation of the digital font formats: they can only use integer coordinates. In Fontographer, we have code that supports fractional coordinates but the designer needs to explicitly snap the points to integers or the application will do that for him while generating the font. We agree that during the design process, non-integer coordinates are an advantage because you can losslessly scale down and up while drawing. So our goal is to have fractional coordinates support in FontLab Studio 7 (but not yet in version 6 which is planned for 2009).\n\nRegards,  \nAdam Twardoch  \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_say if you would size a character up that was created in fontlab would one still get the same problem?_\n\nSort of.\n\nThe inconsistency when importing from illustrator happens on import. You can import two identical shapes from different locations on the Illustrator art board and they can have different node placement in FL.\n\nOnce inside fontlab, it consistently rounds (distorts). So two identical shapes, scaled identically will be identically distorted. Fontlab will always try to best-fit a scaled object to the em square. If you scale again it will best fit the distorted shape in a distorted way, further distorting.\n\nAgain, small scale amplifies the distortion. To show this, I'll take a circle and scale it 115% in succession. First a 6emu circle, 60emu:\n\n ![](http://web.archive.org/web/20101128114314im_/http:/typophile.com/files/circlescale_small_5924.gif)\n  \nWow, that first scale was a doozy. Then FL does a decent job of approximating.\n\n ![](http://web.archive.org/web/20101128114314im_/http:/typophile.com/files/circlescale_large_4504.gif)\n  \nAt larger size, the distortion is hardly noticable. But if you look, our circle started symmetrical, but isn't throughout. **Bottom line: If you import from AI or scale something in FL, check it closely.**\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for the 1pt = 1fontunit tip.\n\nAdam, I like the idea of being able to scale without loss, but I'd want to be able to toggle the real/integer/font version of the outlines on the fly. Eg if you're making a hairline font, waiting till export to see the shifting would be bad. Thanks for your efforts on this!\n\n"
+    },
+    {
+      "time": "",
+      "content": "hey guys,\n\nthanx for taking the time to explain, appreciate it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I don't import from Illustrator to FontLab much anymore, but it would be nice if we could have options other than 1 emunit = 1 pt in Illustrator, mainly because it requires that each glyph in Illustrator takes up about a whole page. If you have dozens or hundreds of glyphs, things get pretty cumbersome. (Of course, if you use ScanFont to import Illustrator art, it doesn't matter what size you draw the glyphs in Illustrator, making all this irrelevant.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Mark,\n\n720 pt is just 10 inches or roughly 25 cm, so indeed, you're usually drawing your letters so that one would fit onto a regular sheet of paper. But you can create arbitrarily sized pages in Illustrator, can't you? I just created a 20,000x10,000 pt artboard in Illustrator without problems (which can fit in 200 glyphs at least). I believe the limitation of PDF size is actually in miles :) Also, in Illustrator CS4, you can have multiple artboards (i.e. pages).\n\nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "True, but I recall running into a pasteboard size limitation a couple of years ago when moving art from Illustrator to FontLab. I was helping another designer make a font. All the glyphs were arranged horizontally. Maybe the limitations have changed. Anyway, between working mainly in FontLab and using ScanFont when the need arises, it's not that big a deal to me.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>BTW, it is not a limitation of FontLab Studio per se. It is the limitation of the digital font formats: they can only use integer coordinates.\n\nAdam, I thought David Lemon had established that, at least if using Adobe tools, it was possible to generate fonts with floating point coordinates and it was possible with some RIPs to rasterize them successfully. It may not be recommended practice, but as far as I know, it is inaccurate to say that integer coordinates are a limitation of the font formats.\n\n\\>So our goal is to have fractional coordinates support in FontLab Studio 7 (but not yet in version 6 which is planned for 2009).\n\nWhy the wait? Why force designers to have another five years of lousy data and bad transformations?\n\nMoreover, you don't address the issue of floating point bcps, which Fontlab cannot do, but which have been present in PostScript for decades, including countless fonts made by Ädobe. Because of this embarrassing deficiency in Fontlab, Fontlab cannot accurately open or edit thousands of fonts created by Adobe, by other foundries, and by Fontographer 4+.  \nTo say that Fontlab cannot accurately open or edit these fonts is perhaps to use language that is too weak. On the contrary.\n\nFontlab introduces glaring errors into these fonts.\n\nFrankly, Adam, I think the time to fix this problem is today, this month, in Fontlab 5. This isn't a small defect. It is a large, glaring defect.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I've found myself drawing more in both FontLab and FreeHand at the same time (I do not use Illustrator).  \nThis came out as I realized the limits of boths. When I design, I need to be free to compare forms, assign different colors, work on single parts, do blendings, etc.\n\nTo avoid the problem underlined by Mark, I tried which size worked best for me, and then I use a percent value to scale down glyphs as I copy them in FreeHand, and another to scale them up before copying them back to the glyph cell in FontLab.  \nI did not notice any distortion, as long as the copied glyph respects the size needed in FontLab.  \nHowever, this works better if the initial glyph design fine-tuning is done in FontLab (to check stem width consistency, etc.). Afterwards, there are no problems.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Bill,\n\ncan you point me to some fonts with non-integer BCP coordinates, and show where the inaccuracies are particularly visible?\n\n\\> Frankly, Adam, I think the time to fix this problem  \n\\> is today, this month, in Fontlab 5. This isn’t a small  \n\\> defect. It is a large, glaring defect.\n\nIndeed, and given the size of the defect, I'm sure you'll understand that it is not a thing you can change overnight.\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Adam, could you tell when version 6 will be available?  \nI have had problems in trying to update to the latest version (an error), I am still using v5.0.1 and it has some bugs…\n\n"
+    },
+    {
+      "time": "",
+      "content": "Bill wrote:<cite>Adam, I thought David Lemon had established that, at least if using Adobe tools, it was possible to generate fonts with floating point coordinates and it was possible with some RIPs to rasterize them successfully. It may not be recommended practice, but as far as I know, it is inaccurate to say that integer coordinates are a limitation of the font formats.</cite>\n\nBill is correct in principle. However, this potential has been \\*very\\* little used.\n\nPersonally I would not trust the reliability of a font that used this functionality. Or put another way, I'd bet real money (even in my newly self-employed state) that at least some consumers of fonts have assumed integer coordinates and will behave badly when confronted by something else. Which consumers, and how badly, would need to be determined by extensive testing.\n\nI should also note that in a Type 1 or CFF charstring there are (at least?) two ways to represent added accuracy in coordinates. The obvious one is to use decimal points directly. The less obvious one, which I gather some of Adobe's engineers would favor, is to use a \"div\" operator in the charstring. So instead of \"10.2\" in the charstring you'd have \"102 10 div\". And no, I can't tell you why this would be preferable. :)\n\nAdam wrote: <cite>So our goal is to have fractional coordinates support in FontLab Studio 7 (but not yet in version 6 which is planned for 2009).</cite>\n\nI take it this is only for internal use within FontLab?\n\nBill asked: <cite>Why the wait? Why force designers to have another five years of lousy data and bad transformations?</cite>\n\nWell, for the reasons I mentioned above, introducing it into \\*output\\* fonts (Type 1 or CFF) is rather risky and should be carefully tested and approached with caution.\n\nChanging assumptions in FontLab internals is not so risky, exactly, but is likely to be a pretty pervasive issue throughout an awful lot of code, not just a switch they throw in one spot. Seems to me it's kind of like switching an application from single-byte text handling to Unicode.\n\n<cite>Moreover, you don’t address the issue of floating point bcps, which Fontlab cannot do, but which have been present in PostScript for decades, including countless fonts made by Adobe.</cite>\n\nReally? I don't recall ever running into an Adobe made Type 1 or OpenType CFF font that used floating point coordinates for either off-curve or on-curve points. I'll admit that I don't usually spend a \\*lot\\* of time directly poking the charstrings, but I did look at quite a few in my \\>11 years at Adobe. When I talked to David about this whole question last, he certainly didn't bring it up.\n\nAll that said, I'd love to see an option for FLS to use floating point or at least a few decimal places for coordinates internally. That would be a good thing.\n\nEqually or more important, though, would be using hinting information to achieve intelligent scaling. As long as the final output fonts have anything less than floating point coordinates, inconsistencies are introduced not only by scaling, but even by MM interpolation. Two stems that are the same thickness in all masters of an MM may end up different in generated instances, due to rounding issues. Intelligent scaling applies hinting information to ensure that hinted distances are maintained during scaling, and during interpolation/extrapolation, including instance generation.\n\nMust go now - crying baby.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Adam, Thomas, re Adobe fonts w/floating point bcps, I instanced the first one I looked at (one of the Poetica fonts) in an earlier thread in this forum. I'll look up some more. Because Fontlab always rounds up, a bcp which happens to be, say, 100.1, 200.1, would be rounded to 101, 201, and that would show as a serious distortion. Such imports do not often create a visible problem, but they do frequently enough for it to be a serious concern that anyone who has such data must consider very carefully, as it requires minute re-evaluation of the imported fonts. That means anyone who has imported a Fog4-created font into Fontlab. It means a lot of Adobe fonts, and it means a lot of other commercial fonts. I wonder what the IK-derived tools do?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thomas, lots of floating point bcps in Poetica (300, 301), some in Guardi italic bold (251), a few in Cheltenham Ultra Cond Italic (174). OK. Adobe font no. 1. Palatino italic. Point 2 in the inner curve is 130,338, with bcps of 152.83,398.06 and 106.83,227.06. So I guess the question is not when Adobe started using floating point bcps, but when or if it stopped?\n\nWhere is it most likely to be a visible problem when working in Fontlab? Where all four values have decimal places in the +.1 or +.2 range and all four are rounded up by Fontlab nearly a whole unit when it opens them. Regardless: Fontlab does not and can not import these Adobe fonts properly.\n\nSo, that leads to a terrible question indeed: have all the Adobe OT fonts been through Fontlab workflow? If so, they are not the fonts they were in T1.\n\nAlso, just happened to notice duplicate point in dot of i, lower right hand corner, in helv comp no. 50? Or is that a fog artefact?\n\nEver your friendly quality control engineer! B\n\n"
+    },
+    {
+      "time": "",
+      "content": "What other libraries might be affected by this problem? At the very least, any library that uses either Fontographer 4+ or the Adobe tools. (Certainly every piece of data I ever got back from Adobe had floating point bcps intact and, for the record, I was told that my data were superior before being subjected to the Bezlab treatment.) I just had a look at MetaPlus italic in its late-90s incarnation (obviously the problem will be most prominent in italics) and that certainly has floating point bcps (see a, with plenty of .1's). So that's the whole of the classic FontFont library, not to mention Emigre, DTL (which presumably has an IK workflow), etc. etc. Bitstream, with its own tools, too, is affected: try Galliard italic.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Everything here presented while keeping in mind that Fontlab may be capable of preserving some floating point data without being able either to display or edit it. If that were the case, you could import a font with floating point data, and OT-ify the font without, potentially, rounding up the floating point values. We don't know when or if this can happen.\n\n"
+    },
+    {
+      "time": "",
+      "content": "When scaling letters that I have drawn in Illustrator, I have found that creating an Action in Illustrator saves some trouble.\n\nI select the letter in Illustrator, then activate my Action, which copies it to a blank document in Illustrator, positions it to 0,0 coordinates, then enlarges it to 700 pts. tall, then cuts it to the clipboard.\n\nAll of that takes about 0.5 sec. and it's ready to paste at the correct size into FontLab. The Actions in Illustrator CS4 are a little wacky (they don't always behave the same way) but they still save you a lot of time when you are copying and pasting 240 glyphs from Illustrator to FontLab.\n\nBrian P. Lawler  \nTypographic Insomniac\n\n"
+    },
+    {
+      "time": "",
+      "content": "Heh, great.  \nI do the same in FreeHand, just manually, but it takes a pair of seconds, not more, and no distortion at all (except the one mentioned by Bill Troop, due to the em grid \"coarseness\", but just if the details are very very small, many or delicate).\n\n"
+    },
+    {
+      "time": "",
+      "content": "piccic...  \nYou're bringing a tear to my eye mentioning FreeHand.  \nOh, the good old days. lol.  \nI wish FreeHand, or even CorelDraw had of taken over the world instead.  \n(Though I do love P/Shop, the weight of the ill-informed, made Illustrator number 1)\n\nAs Twardoch mentions...\"Also, in Illustrator CS4, you can have multiple artboards (i.e. pages)\".  \nOh Wow! Multiple ArtBoards...what a progression! Who thought that up? Hmmm...  \nBack to the Future, Illustrator.  \n'Separations Preview'.  \n'Viewing only the clipped area of your objects during editing'.\n\nThe 'innovations' are endless...\n\nAll Hail piccic!!\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'm not entirely against Illustrator.  \nIt's just that the two programs never did the same thing, and now that Freehand seems dead there is no single true drawing program for graphic design.\n\nThey should not have turned programs into mimics of other programs, the result is that we had useless competition and remain without a true drawing program and not a program to do illustration or pictures.\n\nBesides, I have not even started to complain about the lack of good quality autotracing…  \nIt seems that the only software handling it good (Tracer) has disappeared…\n\n"
+    },
+    {
+      "time": "",
+      "content": "Piccic,  \nMy issue with Illustrator, and I have used these Apps long term, CorelDraw, Macromedia FreeHand (when it was Macromedia) and Illustrator, is that while other companies were coming up with unique interfaces, tools, work arounds and effects, because of the ever growing weight of the numbers of users using Illustrator, Adobe sat back and did not push the boundaries as hard as their smaller competitors.\n\nYears ago everyone was 'borrowing' the best from everyone else. Text based programs where initiating the use of graphics and graphical interfaces and effects and some of the Graphics programs were smart enough to offer the reverse cross over. Photoshop was doing wonderful things. Illustrator looked and felt like a kids paintbox program. FreeHand & even CorelDraw was years ahead in how the programs ran and felt. They treated the Graphic Designer like a professional.\n\nIllustrator and its creators could have easily grabbed 'pop out & hide away' menus that freed up the professional straight from CorelDraw, multiple page layouts from FreeHand or even QuarkXpress. How long did it take those at Adobe to see what others were doing?  \nSurely, they had people who knew people, that were proficient it a few Vector Apps?\n\nIllustrator was always going to be the powerhouse they are today.  \nIt's just a pity they were so blind to what the rest of the world was capable of earlier than them.\n\nAnd I disagree with you about programs mimicking other programs.  \nAll the great Apps, Operating Systems & Companies would not be around today without one of their competitors pushing the boundaries in an area they had not thought of.  \nUtilizing what comes before you, also makes for better, more rounded Apps.  \nYou cannot discover or create in a vacuum.\n\nCheers\n\n(And sorry to the rest for getting off the topic)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Maybe we could start a topic about this…  \nI've been a user of FreeHand since version 2.02, although I started with Illustrator 88.  \nIllustrator was still a good software, but I realized I would have needed the precision of Freehand for graphic design.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I've worked in many places over the years and some wanted me to use this software or another software. It was great for me because it allowed me to grind out every day on various Graphic Apps. Like using both Pc and Macs. So I'm long over being a zealot for one side or another. But Freehand was set up years ago like a professional would want to use it. CorelDraw came in leaps and bounds and started to look and work great. But Illustrator took so long to steal the best bits from other programs.  \nPhotoshop was leading edge. Illustrator 'thought' they were leading edge.\n\nNowadays I'll use anything that does the job, and appreciate that people have their favorites. But I hate people who bag Apps or other people's computers(like the Mac V Pc thing) if they haven't tried it.\n\nHaving said that, as I'm a newbie to Font Design, what is stopping Font Apps from talking seamlessly with Vector Graphic Programs? I mean, without jumping through hoops, Font programs should bend, adjust, tailor their Apps to have NO problems when talking with Vector Graphic Programs.\n\nVector Principles have been more widely used in the graphics industry well before Font Design vectorization came in, so we don't need a whole new 'nodes/paths' system or handling procedure...work with what we've got already. Newbies who are proficient in Illustrator come straight from there to a Font program, and soon realize this or that can't be done in their Fonts program. This is wrong. Who thought the wheel needed to be re-invented?\n\nIf I created a Font App tomorrow it would be so closely related to Illustrator (and I don't mean infringing on any copyright issues) that you would think my Font App was an Illustrator plug-in. That's what designers need. Illustrator doesn't generate font files\\*, so Font Programs should at least learn from those who've specialized in Vectorization of shapes long before them and do as they do.\n\nAs one famous (possibly deluded) person once said...\"Why can't we all just get along!\"\n\nCheers\n\n(\\*There's a thought Adobe...Font Apps don't want to be like you, so how about you whipping up a Font Creation App?...lol)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Adobe has no interest in owning a font creation application. It's just too small a niche market. Instead they support the smaller developers making such apps by licensing code at no charge....\n\n(Heck, Adobe doesn't even have a font management app, because \\*that's\\* too small a market!)\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Or maybe Adobe has become too big?  \nFlowers… :=)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Come on Thomas...create a market ;-)\n\nFind a designer who hasn't sat down in front of Illustrator in their first years and who hasn't said to himself while looking at their Font List, \"I'd love to create my own fonts\".\n\nHalf the battle is trying to get/find/stumble upon how Fonts are made to start with.  \nYou need a row of crumbs and Indiana Jones just to get near font creation.\n\nDo something for the Designer in all of us.  \nTo heck with the market size. Grow it!\n\nAdobe FontShape CS5 (instores Spring 2010)\n\n;-D\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Having said that, as I’m a newbie to Font Design, what is stopping Font Apps from talking seamlessly with Vector Graphic Programs?</cite>\n\nThe problem isn’t Fontlab. Fontlab does exactly what it should—provide an environment for creating fonts that will work right when designers send them to a press. It’s that Illustrator users are too lazy to consider that with fonts, like every other job one does with Illustrator, putting some effort into setup is required to make the final output useful.\n\nOne doesn’t just open Illustrator and build a CD label; the file has to be customized to make this work. The page size needs to be setup. The color space has to be picked. Grids and guides need to be created. The same is true with fonts. It would be nice for Adobe to include a design template for fonts, but I suspect that the same lazy people who get pissed off when their designs don’t work instantly in Fontlab because they never bothered to read the relevant section of the excellent Fontlab manua, which Fontlab provides as a searchable PDF.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Dr Jack, I'm afraid I don't work at Adobe any more. But even when I did, there was no way in heck I could have made an idea like this fly. I certainly considered it, and I was willing to fight some battles I knew I'd probably lose... but there was no point in fighting a battle I knew with nearly absolute certainty I'd lose. Better to spend that time and energy on something that had a chance.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "I am not so fond with neither FontLab interface (too cluttered) nor the manual (not so focused), but I agree with James Puckett. People often complain about software because they don't take the time to learn it. FontLab does even too much, being a type design program. The rest is outline editing and drwaing, you can use as much tools as you wish.\n\nWhat I was complaining about is just the single decision to suppress the only graphic design program offering solid behaviour, that was FreeHand. I'm still doing things in FreeHand I could never be able to do in Illustrator, and I would update my Illustrator license instantly if Adobe revived FreeHand.  \nIn this situation: no way. Should FreeHand be definitely buried, I will look for something else, not Illustrator, which is quite useless to me in its present state: uselessly heavy, handling tasks I do not need at all, without even the possibility of a simple usage of \"layers\" without recurring to absurd \"runarounds\"… Heavy, slow, costly and buggy, with plenty of features I do not need to actually draw.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"It would be nice for Adobe to include a design template for fonts... \"\n\nDone long ago. In addition, Adobe created an applet that gathered the files (letters), and befonted them. As I recall, Illustrator was a by-product of that ancient effort.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "I have no idea what you all are talking about.  \nI am a FL type designer for years and never had problems with either scaling or importing curves in to FL.\n\nI draw my fonts either in CorelDraw9 or directly in fonlab.\n\nwith fonts i draw in CorelDraw here is waht i do;  \nFirst I make a document X=1000, Y=110 mm  \nAn AI has a limitation of one meter any thing larger results in distortion.\n\nI scal the font to fit in this height.  \nNow here is the trick.  \nMake a box 1000X210 mm around the letters;  \nimport the intire box in to FL and scal it al at once so the letter Sit on the BaseLine Ant fit to your X-Height.\n\nNow erase the outer box counter and copy each letter to its glyph/\n\nSet equal width to al glyphs+option of center.  \nthen set left=XXX Righ=XXX to what ever your starting point of spacing the letter.\n\n"
+    },
+    {
+      "time": "",
+      "content": "oh, one mor thing  \nallways choose porportion scale  \nnot  \nH=90  \nV=90\n\nBut  \nproportional scale 90\n\n"
+    },
+    {
+      "time": "",
+      "content": "billtroop, if you're still reading this thread ...\n\nYou wrote:\n\n_I just had a look at MetaPlus italic in its late-90s incarnation (obviously the problem will be most prominent in italics) and that certainly has floating point bcps (see a, with plenty of .1’s)._\n\nAre you sure these floating point values are actually in the font files? Where did you see them? In Fontographer, I suppose?\n\nI tried looking at the raw PS code of MetaPlus-Italic using [t1disasm](http://web.archive.org/web/20101128114314/http:/www.lcdf.org/type/t1disasm.1.html) and saw nothing but integers. (Can't say how reliable t1disasm is.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Jens, yes, still here, patiently waiting for you to show up.\n\nI viewed these floating points in Fontographer 4 and 5. I imagine some of the IK tools must also allow this? What they would look like in disassembled code I have no idea, but I imagine that they are the result of a division operator or some other indirect mechanism like that. Unless, of course, they simply reveal a colossal and hitherto unreported bug extant in Fog for over a decade. For the time being, I am operating on the assumption that Fontographer's reading is correct.\n\nI reluctantly becoming convinced that Fontlab's inability to perform floating point arithmetic either in scaling or in multiple master manipulation is a serious obstacle to high quality font production. At the very least, the rounding-off mechanism should be revised so that round-off errors below x.5 are rounded off to the next lower integer, rather than the current, crude system, whereby even the smallest fraction is rounded off to the next higher integer. However, that would only slightly mitigate, rather than solve the problem. I think Fontlab should go fully floating point immediately, and I think it should be either a free or low-cost upgrade. I don't think the company should work on anything else until this problem has been solved.\n\nNearly everyone uses Fontlab to create mulitple master families which are then generated as single instance fonts for sale. But considerable manipulation goes on before that point, and Fontlab's gross rounding off errors create an enormous amount of unnecessary work.\n\nWe need, too, to know more about how and when floating point BCPs are rasterized. I am inclined to think they _are_ rasterized, but I don't _know_.\n\nOne thing is certain: no align to grid or other rounding-off command in Fog will change the non-integer nature of non-integer BCPs. (To the extent, obviously, that they are accurately reported.)\n\nWhen developing a MM, you have only to make a few transformations before the round-off errors pile up to create gross distortions. That isn't what we pay computers to do!\n\nNo to mention which: we also, as I warned earlier, need to know how safely we can import pre-Fontlab fonts into Fontlab. And if we should do so at all.\n\nThe absence of comment from heavy hitters reveals either that they have been caught with their pants down or I have. Which is it? Obviously, one hopes it is the latter. Don't worry. I can take the embarrassment! But can they?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Sorry to interrupt the interesting talk, but…\n\n<cite> As I recall, Illustrator was a by-product of that ancient effort. </cite>\n\nHuh? David, if I recall correctly Illustrator started as a black & white drawing program; color was added while developing the graphic novel by Mike Saenz \"Iron Man: Crash\", so you must be addressing some mysterious pre-history around 1986-87, right?  \nDo you have any source? Very curious about that…\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Bill,\n\nI've looked at the a of _Meta Plus Normal Italic_ again in Fontographer 4.1 and with t1disasm. Now I think I've been able to see what you mean.\n\n ![](http://web.archive.org/web/20101128114314im_/http:/typophile.com/files/mpni-a_6391.gif)\n\nThe distance of the yellow BCP to the previous point is displayed as -65.9,-67.1 by Fontographer. However, if I dump the raw PS code with t1disasm, the corresponding line of the Charstring for a reads:\n\n`-66 -67 -38 -114 0 -98 rrcurveto`\n\n(the first two numbers being the x and y distance of the BCP from the previous point).\n\nIf what Fog displays was correct, it would have to be\n\n`-659 10 div -671 10 div -38 -114 0 -98 rrcurveto`\n\nAs further evidence, if I build a Type1 font from the first version (the one without the divs), Fog again displays the fractional values.\n\nSo I really think _Fontographer_ is doing something strange there, and I'm glad the FontFont library isn't broken :)\n\nJens\n\n"
+    },
+    {
+      "time": "",
+      "content": "Fascinating. As an aside, you can take an outline in Fog 4/5, and copy it to the background. If, in the background, you go in and manually round off floating point BCPs, differences between foreground and outline will be visible at high zoom levels. So Fog is aware of a difference and is able to rasterize that difference. But how does it come about in the first place? Is either of the curves valid? How would the two different outlines be generated? How would transform operations affect them?\n\n"
+    },
+    {
+      "time": "",
+      "content": "It certainly looks as if Fontographer is doing something weird/wrong: interpreting integer Charstring entries as non integers. Question: is Fontographer trying to assign an integer length to the BCP distance from the previous point, i.e. not as an x,y offset but as a direct distance? That would be truly weird, but it would explain non integer positions for the BCP.\n\n_Is either of the curves valid?_\n\nIn the case of an opened font, the curve that corresponds to the PS Charstring values would be correct. In the case of a newly created font, the curve that corresponds to how the PS Charstring value will be written is correct. If you want to know what Fontographer does when it generates a font from a source that includes fractional BCP positions, generate a font and then dump the PS code.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Do you know how hard it is to keep three points collinear on a non-orthogonal line through any kind of any transformation or interpretation with or without hints? If it hurts, don't do it, as the doctor will tell you.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "David, you missed my quesion… ;=)\n\n"
+    },
+    {
+      "time": "",
+      "content": "For comparing PostScript Type1 fonts perhaps the new 2.0 version of _DTL CompareMaster Light_ ( [Mac OS X download](http://web.archive.org/web/20101128114314/http:/www.fonttools.org/downloads/CPMA/CPMA_Light_200_MAC.zip)) ( [Windows download](http://web.archive.org/web/20101128114314/http:/www.fonttools.org/downloads/CPMA/CPMA_Light_200_WIN.zip)) might be useful.\n\nThe full version of CPMA 2.0 compares OpenType CFF fonts either with each other or with PS Type1 fonts.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"...mysterious pre-history around 1986-87, right?\"\n\nSorry, assuming mysterious pre-history is a relative term, yes. Adobe had a peculiar notion of ownership of data via tools so, no, I don't have any of their software.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "The idea that FOG is doing something screwy with the point values would make sense of my and Bill's differing experiences in spelunking Adobe fonts. I was occasionally looking through unencrypted Type 1 data, without any real translation layer involved, and never saw a decimal point or a div instruction in a charstring.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>and never saw a decimal point or a div instruction in a charstring\n\nWell Thomas, I must accept that as the definitive word here as to pre-existing fonts, particularly Adobe's. But that still leaves many questions: what on earth has Fog been doing all these years, and why hasn't anyone done anything about it or even noticed it? When, if ever, is there any validity in Fog's decimal BCPs? (And of course most important of all, when, if ever, will PostScript be fully floating point? Could that be potential for a possible Level 4?)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Bill, most of those questions I'd have to say \"I haven't the slightest idea.\"\n\nBut to the last questions on PostScript... the PostScript language is already \"fully floating point.\" As with any language, there are limits to floating point accuracy. In the case of PostScript, these are based on the particular device implementation. Most 32-bit architectures running PostScript use single byte accuracy (often referred to as just \"single\"), meaning that they can handle approximately 8 significant digits of accuracy.\n\nDoubtless somebody will disagree with me, but I think 8 digits of floating point accuracy is probably sufficient for almost all fonts. I might feel \"safer\" with 16 digits a.k.a. \"double\" precision, but I think there will be very very few cases where the difference matters.\n\nI have no idea what a single-precision PostScript interpreter will do when faced with a number with more significant digits. Could be a limitcheck error. Could just round. Maybe somebody else knows.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thomas, does the \"8-digits\" of accuracy you speak about refer to Postscript in general, i.e. the precision I can achieve in Illustrator or Freehand as opposed to the limits of the grid in type design software?\n\n"
+    }
+  ]
+}

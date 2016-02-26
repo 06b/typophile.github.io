@@ -1,0 +1,22 @@
+{
+  "id": "55255",
+  "title": "The best TrueType export setting",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "For my client, a small type foundry, I need to export TrueType version of an Type 1 OpenType font. Could you please help me to set the export options to achieve the best results?\n\nThe font will be used exclusively in an office environment (there will be special OpenType \"Pro\" version for contracted printers and design studios). It will be used on Windows only (XP and Vista) in MS Office (Word, PowerPoint, Excel) and displayed on notebook screens or cheap LCD displays connected by VGA cable. The screen is usually 1024 px wide. All the computers have ClearType turned on.\n\nThere is no time and money form proper TrueType hinting. Therefore I need help with automatic features of Fontlab Studio 5.\n\nMy problem is, the font looks quite OK in basic sizes between 8 and 14. The 16-point size looks horrible. Then again, 24 point and higher looks cool. I tried to follow Victor Gaultney FontLab hinting recommendation but it didn't help much to improve the font.\n\nShould I care about the hinting at all? How would you set the values of \"Font Smoothing\" in Font Info? What is your advice?\n\nThank you all for your help, I really apreciate it.\n\n",
+  "author": "<a href=\"/web/20100825012803/http://typophile.com/user/1344\" title=\"View user profile.\">filip blazek</a>",
+  "time": "<br>",
+  "uid": "1344",
+  "comments": [
+    {
+      "time": "",
+      "content": "FontLab TT autohinting is derived directly from the PS hint model: blue zones serve as alignment zones, which can be delta's up or down to pop the e.g. the x-height or cap height at specific ppem sizes, and standard stem weights serve as link distances. So one of the best ways to improve TT autohinting results is to ensure that you have good blue-zones and stem values to begin with.\n\nSince ClearType will be turned on in all your target environments, you don't need to worry about the Font Smoothing (GASP table) settings, since these do not apply to CT rendering.\n\nThe main things you will need to worry about are alignment zones and y-direction thicknesses. Again, if you have good blue zones -- i.e. that catch all the elements you want aligned at smaller sizes -- and a reasonable set of y-direction standard stems (not too many but not too crude), you should get pretty good results without too much work.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, John, for the explanation.\n\n"
+    }
+  ]
+}

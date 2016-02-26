@@ -1,0 +1,54 @@
+{
+  "id": "57017",
+  "title": "Any 3B2 users...?",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "I work in journals production so get a lot of PDFs to check, of work done by our typesetting colleagues on another continent. Some of this was done in InDesign, and some in 3B2 (version 9). I often have trouble with them failing to set characters beyond the basic Latin alphabet (eg, accented characters such as Å, and even bog-standard non-alphanumerics such as the © symbol), and have queried this with them. For example, I've seen a regular A kerned onto a degree symbol (yes, not even a floating ring-diacritic, but a °), or a lowercase c kerned onto a circle taken out of some symbol font.\n\nThe response I have received is kinda hard to interpret, partly because it's techie but also because I suspect it's non-native-speaker English.\n\nSo if there's anyone on here who's _really_ conversant with 3B2, please let me know, and then I can show you more detail and see if you think their response is reasonable...\n\nThanks in advance,\n\n",
+  "author": "<a href=\"/web/20110526211122/http://www.typophile.com/user/8181\" title=\"View user profile.\">dtw</a>",
+  "time": "<br>",
+  "uid": "8181",
+  "comments": [
+    {
+      "time": "",
+      "content": "As far as I ever got in understanding 3B2, it uses a font format of its own -- much like (LA)TeX. PostScript fonts had to go through a conversion phase into the proprietary format, before the program could use them.\n\nAs with TeX fonts, it's not unusual to see \"original\" solutions to accented characters, unhindered by any standard such as Unicode.\n\nBut,\n\n<cite>... typesetting colleagues on another continent ...</cite>\n\nhints to me those \"colleagues\" are unhindered by any typographical knowledge at all. Perhaps they have an extremely expensive and capable piece of software but don't have the accompanying manual.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Ecch. The promo blurb for the latest version trumpets compatibility with Unicode and OpenType fonts etc, but our setters say they currently have no plans to upgrade; partly, presumably, because of cost in the current climate, but also explicitly because it would involve redoing a load of their templates. Hmmm.  \n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_  \nEver since I chose to block pop-ups, my toaster's stopped working.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Hmmm.</cite>\n\nWhat I'm thinking is operator error. Or, rather, not knowing anything else than plain ASCII. I find it quite hard to imagine even _basic_ font conversions to 3B2's internal format looses A-ring and copyright. It makes more sense those guys don't even know they are special characters:\n\n\"Hey, dude, look what the client asks. How am I gonna type _that_?\" \"No prob, take an o, make it smaller, and manouevre it somewhat up ... there you go...\"\n\n<cite>partly because it’s techie ...</cite>\n\nMy knowledge of 3B2 is a decade old and taken from the few pointers the sales rep was allowed to divulge, but even then I was amazed by both its price (...) _and_ by its tantalizing abilities--in the range of and perhaps beyond what FrameMaker does in the hands of a pro.\n\nI'd love to see their explanation. Care to share some of the good bits?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Slightly off topic, but I noticed that the document info on the PDFs that promote their software say they're created with InDesign:\n\n[Arbortext Product Suite Fact sheet](http://web.archive.org/web/20110526211122/http:/www.gpslsolutions.com/resources/sales/ArbProductSuite.pdf) | [APP Desktop Fact Sheet](http://web.archive.org/web/20110526211122/http:/www.gpslsolutions.com/resources/sales/APPDT.pdf)\n\nI guess they don't like to use their own publishing software, at least not for short documents.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I found a recent PDF created w/3B2 (v8.07f/W).\n\nAdobe's Digital Printing Preflight reports nothing unusual -- some images in RGB. Some lines as well, although they appear on screen in black. And, come to think of it, all text is in RGB as well, leading to tons of warnings and absurd CMYK values. Ptoei!\n\nThe fonts have interesting names: AdvGreekM, AdvMT\\_SY, AdvPi1, etc., none of them has a recognizable regular font name. The plain text font, however, clearly is MS Trebuchet.\n\nI see a single '©', but copying yields an ampersand. So no Unicode, but it _is_ a real glyph, not a manually faked one. Copying an '=' gives a '¼'. A degree gives '8'. Well, perhaps those are symbol fonts.\n\nNo trademark sign--superscript 'TM' instead. No plusminus but underlined '+'.  \nBeta's have been slanted manually to fake italics, and they're not from Trebuchet.\n\nAll in all, yeah, some surprises. But at this level it's hard to differentiate between (possibly) program limitations and (probably) operator stoopidities.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yeah, when I _do_ see a real copyright, it's invariably one of the two out of the standard Symbol font (one serif, one sans). Also, as mentioned earlier, if I look at the font info in the PDFs, it does tend to say stuff like \"AdvP4C4E74\" where the font name should be (and Encoding will be listed as either \"ANSI\" or \"Custom\")...\n\n<dl>\n<dt>OK, here's what I got from them, when I asked about the Å:</dt>\n<dd> ********************************************************************************\n<p>We are using 3B2 Version 9 (not Unicode) it takes up to 255 characters, ARING is not coming in this range. We have to use PS value of ring that is PS202 with A. It will not look like a degree sign.</p>\n<p>In Unicode version it will come directly, but it involves a complete change in the template, which is not a viable option. A sample has been attached for reference.</p>\n<p> ********************************************************************************* <br>\n</p>\n</dd>\n</dl>\n\nEver since I chose to block pop-ups, my toaster's stopped working.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>***<br>\n... it takes up to 255 characters, ARING is not coming in this range.</cite>\n\nHow very 20th century :-)\n\nA-ring can be found in the standard encodings for Windows (Western), Macintosh, and Adobe Standard Encoding.  \nSo Arbortext's font conversion uses an entirely different encoding (one wonders why, and which one); but shouldn't it be possible to re-map to users' specifications? It's not very user friendly not being able to access all characters, somehow.\n\nI can't say anything on the Unicode version without any further knowledge on how 'a complete template change' works.\n\nYou might want to assure them it's unacceptable to _fake_ characters that _do_ exist in the fonts they use. It's their software--they should contact the manufacturer for the how-to's.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yeah, I've had another communication from them saying the © funnies were due to the symbol not being in the base font (!!) - in response to which I have asked if they can send me a copy of the font files so I can see for myself, as I can't believe this would be the case. (If they're sticklers for their licence conditions they may be chary about doing this, but we'll see.) These fonts are bog-standard stuff like Times and Bembo and Stone. My copy of Stone Sans that I got from Linotype certainly has it -- I'd have been very dissatisfied if it didn't!\n\n"
+    },
+    {
+      "time": "",
+      "content": "OK, they now agree that the necessary characters are definitely there in the source fonts (thank goodness, and they have sent me their Win postscript copy of Stone Sans for verification), but say that the problem is down to them using _\"non Unicode version of 3B2 and there we are not able to produce © in that version\"_. They admit that _\"The switch of 3b2 version to Unicode would resolve this problem in totality. There would be addition work from our side, that would be to re-map all special characters and then validate the output. Apart from this there wouldn’t be any change.\"_\n\nSo my only confusion still lies in why the © would necessitate Unicode version in the first place; at a position well within standard encodings it's not like I'm asking them to set an interrobang or a rune or something...? And with Å, is the ring diacritic further outside the \"norm\" than the degree sign? (Uh, now I think about that one, perhaps it is...)  \n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_  \nEver since I chose to block pop-ups, my toaster's stopped working.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi,\n\nyes your correct that originaly 3B2 used converted type 1 postscript fonts in its own fnt format to enable all it clever stuff with character setting. Version 8 brough truetype font support and 9+ added open type support.\n\nPre unicode the basic character set was 256 ISOLAT1 using the font table as set in the users own font. Unicode came in for version 7+ but the fear of change and lack of knowledge and availability of unicode fonts, and the fact it would change behaviours of kerning and ligatures (therefore line endings) made few typesetters want to change over existing templates. New templates however should have made this a breeze! :)\n\nAny further info i can help you with on 3B2 (now Arbortext advanced print publisher) please let me know.\n\ncheers\n\n[www.tformat.com](http://web.archive.org/web/20110526211122/http:/www.tformat.com/ \"www.tformat.com\")\n\n"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "120748",
+  "title": "Question: should I turn justification on or off on my website?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Hi,\n\nThe title says it al. Question: should I turn justification on or off on my website? And why?\n\n[http://timandvincent.com/](http://web.archive.org/web/20150414192137/http:/timandvincent.com/ \"http://timandvincent.com/\")\n\nThanks\n\n",
+  "author": "timaarts",
+  "time": "22 Oct 2014 — 6:51am",
+  "uid": "172742",
+  "comments": [
+    {
+      "time": "22 Oct 2014 — 8:08am",
+      "content": "In principle, justification without hyphenation shouldn't be allowed ;-)  \nIn the specific case, the setting and the content don't seem to create especially jarring gaps between words, and the general boxiness and symmetry of the design probably work best with justified blocks.  \nSo, keep it on.\n\n"
+    },
+    {
+      "time": "22 Oct 2014 — 10:54am",
+      "content": "It depends on browser support of automatic hyphenation. But it’s good to have it turn on because CSS standards are always evolving (albeit slowly) and there will be definitely a day when major browsers all support it.\n\nSafest option now is not to use hyphenation because you’re unsure whether there will be people who view your website on Safari 6/7 (deprecated support for most CSS3 OT features), early versions of Firefox without silent updates, or worse, Opera.  \nCurrent stables of Chrome and Firefox have been avidly following CSS3 OT features for a long time. Surprisingly IE10 has been supporting more OT features than Chrome and Firefox (good job Microsoft).\n\nOn the other hand Safari 8 on Yosemite won’t even display discretionary ligatures. No point for you, Apple!\n\n"
+    },
+    {
+      "time": "22 Oct 2014 — 12:03pm",
+      "content": "> On the other hand Safari 8 on Yosemite won’t even display discretionary ligatures. No point for you, Apple!\n\nYet there are ways to enable hyphenation there too (I haven’t investigated how it’s done, but for example the “old” Twentytwelve Wordpress default theme do it).\n\n"
+    },
+    {
+      "time": "22 Oct 2014 — 3:33pm",
+      "content": "That’s usually done by extra Javascript. I’ve seen one of those (some clumsy) workarounds for browsers like Safari or IE9.\n\n"
+    },
+    {
+      "time": "22 Oct 2014 — 4:46pm",
+      "content": "> Safest option now is not to use hyphenation because you’re unsure whether there will be people who view your website on…\n\nWhy not use any hyphenation at all? I apply hyphenation to my websites using Javascript and it seems to work fine. Even if some browsers don't support whatever method you're using to hyphenate, it shouldn't cause any problems for the browsers that don't support it, does it? It would simply not hyphenate, which is the default anyway.\n\n"
+    },
+    {
+      "time": "22 Oct 2014 — 4:58pm",
+      "content": "No, if you specify text-align as justify, then those browsers that don’t read CSS hyphens (or load your JS in weird ways) would stretch word spacing to justify. That would look horrible.\n\n"
+    },
+    {
+      "time": "22 Oct 2014 — 6:31pm",
+      "content": "I have tested it in Safari (the Javascript method that is). I don't remember testing it in Opera but they use the same engine. Am I right to assume that Javascript provides a solution that will work for all browsers?\n\nHow does CSS create hyphens anyway? Do they make use of the font or does it attempt to do something more creative?\n\n"
+    },
+    {
+      "time": "22 Oct 2014 — 8:09pm",
+      "content": "Another factor is that some folks will bump up the minimum font size in their browser's settings, so line breaks and spacing may be different than you expect. I wear bifocals and often make website type larger.\n\n"
+    },
+    {
+      "time": "22 Oct 2014 — 8:23pm",
+      "content": "That doesn't seem to affect the Javascript method I utilize though.\n\n"
+    },
+    {
+      "time": "23 Oct 2014 — 1:02am",
+      "content": "Loading JS is sometimes viewed by web designers/developers as the inferior method, because one always strives to reduce page load. The more extra JS you load, the more manipulation to DOM, and the more time it takes to present the page. That’s why web typographers are so frantic about new CSS standards, which, once established and supported, would enable the same hyphenation function without JS.\n\nAutomatic hyphenation support (the _hyphens_ selector) is still in the very early stages in CSS (it’s not even in CSS3 but only a Working Draft). Consequently a few major browsers still don’t support this selector (Opera being the worst and IE10 being the best supporter right now).\n\nYou can read more about this in Mozilla’s network: [https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens](http://web.archive.org/web/20150414192137/https:/developer.mozilla.org/en-US/docs/Web/CSS/hyphens \"https://developer.mozilla.org/en-US/docs/Web/CSS/hyphens\") and also about when to hyphenate: [http://css-tricks.com/almanac/properties/h/hyphenate/](http://web.archive.org/web/20150414192137/http:/css-tricks.com/almanac/properties/h/hyphenate/ \"http://css-tricks.com/almanac/properties/h/hyphenate/\")\n\nCSS-supported hyphenation is achieved through manipulating browsers’ text rendering engine. Letting the text engine do the work has nothing to do with the font file (I don’t know how it would handle ligatures though – I think it would just break it up if necessary). This is in a sense more “authentic” (native) than Javascript, which calculates block width and inserts hyphens in separate tiny divs.\n\nLettering.js ( [http://letteringjs.com](http://web.archive.org/web/20150414192137/http:/letteringjs.com/ \"http://letteringjs.com\")) mainly uses JS to achieve typographic exercises on web without browser native support. This is rather clumsy, but the best workaround you can get.\n\n"
+    },
+    {
+      "time": "23 Oct 2014 — 11:10am",
+      "content": "> Loading JS is sometimes viewed by web designers/developers as the inferior method, because one always strives to reduce page load. The more extra JS you load, the more manipulation to DOM, and the more time it takes to present the page.\n\nI realize this has been a concern and I've had to work with that, but is it still a concern today? Bandwidth is so fast and computers are getting so good, it should become less and less of a problem. Obviously you would still want to keep JS implementation to a minimum though. A lot can be done more elegantly with CSS these days. I still use Javascript for hyphenation and sometimes for sliders when needed.\n\n> That’s why web typographers are so frantic about new CSS standards, which, once established and supported, would enable the same hyphenation function without JS.\n\nThat's an exciting development indeed, but I'm going to wait until there is better support before I start using it.\n\n"
+    },
+    {
+      "time": "24 Oct 2014 — 3:07am",
+      "content": "Hi guys,\n\n@riccard0 Thanks man, I'll keep it on.\n\n@GrubStreet, @Martin Silvertant Good suggestion about the javascript. I'm not a developer but definitely will check it out.\n\n"
+    }
+  ]
+}

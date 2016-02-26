@@ -1,0 +1,26 @@
+{
+  "id": "18427",
+  "title": "Stop FontLab from shifting accents?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Is there a way to keep FontLab from shifting accents from their default positions when making composites using the \"Generate Glyphs\" feature?\n\n",
+  "author": "<a href=\"/web/20110411065028/http://typophile.com/user/7006\" title=\"View user profile.\">paul d hunt</a>",
+  "time": "<br>",
+  "uid": "7006",
+  "comments": [
+    {
+      "time": "",
+      "content": "To prevent the accents from shifting up, you can specify \"~\" as in A+~acute\n\nBut to put the component always at 0,0, you need to either use anchors (just set them onto the 0,0 position at both glyphs so the components will snap there) or set the position of the second component to 0,0 per Python after generating the glyph as is:\n\nfl.glyph.components[1].delta = Point(0,0)  \nfl.UpdateGlyph(-1)\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "nice! thnx, Adam. is there a list anywhere of what all the symbols mean in the alias file, or do you mind going over them quickly here (if it's not too much). thnx again!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Paul,\n\nthey're in the manual (just look for \"~\" in the PDF ;) and a synopsis is in the Generate Glyph window if you click on the ? icon.\n\nA.\n\n"
+    }
+  ]
+}

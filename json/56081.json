@@ -1,0 +1,82 @@
+{
+  "id": "56081",
+  "title": "Filling the (glyph) space...",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi,\n\nI'm redesigning [Chumbitos](http://web.archive.org/web/20131022043744/http:/www.flickr.com/photos/fca_/tags/chumbitos/) and I want to \"fill\" its glyph \"space\", as another character. The problem is: When I test an .otf on Adobe software, it looks ok, but when I break the text into curves, the glyph \"space\" simply disappears. The curious thing is that on Corel the glyph appears only when I break the text into curves. And in Office, it looks ok...\n\nI thought that was happening because of a bad/poor draw of the glyph, but it happens with anything I put there...\n\nAnyone have any idea on what happens with this glyph?! :-/\n\nI'm on a PC (Windows XP) using FontLab with the \"FreeFont\" encoding...\n\nBy the way, I'm attaching a preview image to show what I want from the glyph \"space\", just to illustrate my sad story... ;-)\n\nThanks,  \nAnderson\n\n| Attachment | Size |\n| --- | --- |\n| [Chumbitos2\\_SpaceIssue.jpg](http://web.archive.org/web/20131022043744/http:/typophile.com/files/Chumbitos2_SpaceIssue.jpg) | 26.57 KB |\n\n",
+  "author": "AndersonMaschio",
+  "time": "20 Mar 2009 — 12:58pm",
+  "uid": "16249",
+  "comments": [
+    {
+      "time": "20 Mar 2009 — 1:08pm",
+      "content": "Interesting. I suspect that applications are making assumptions about /space/ being an empty, invisible glyph. They're not making the same assumptions, but they are making assumptions, and you are seeing the symptoms of these assumptions.\n\nSince these assumptions are almost certainly character-level, not glyph-level, there is probably nothing you can do about this on the font end.\n\nYou might try encoding your shaded space glyph as something other than the space character (e.g. U+2592, medium shade), and inform users that if they want this shaded space, then they should search-and-replace for the space character.\n\n"
+    },
+    {
+      "time": "20 Mar 2009 — 2:31pm",
+      "content": "I recently did a custom font that consisted of three fonts designed to render on top of one another. The top font had a normal \"empty space, while the other two fonts had the space filled. A TrueTYpe font using unicode encoding with Windows 1252 selected and everything worked fine.\n\n ![](http://web.archive.org/web/20131022043744im_/http:/typophile.com/files/dot_matrix_6380.jpg)\n\nThe solid background is one font, the gray dots another, and the white dots the third.\n\n"
+    },
+    {
+      "time": "20 Mar 2009 — 3:15pm",
+      "content": "Thank you John. I was suspecting the same, unfortunately... :-/\n\nAnyone from Adobe/Corel would like to say something about our assumptions? :-)\n\nBy the way, I never worked with opentype features, but I was thinking: Can I use it to replace the space character with another one, \"automagically\", like a ligature thing?\n\nAnd thank you too James. I've tried some other encodings, but nothing has changed. I'll try to generate it as OpenType TT, PS and TTF to see what happens...\n\n"
+    },
+    {
+      "time": "20 Mar 2009 — 4:33pm",
+      "content": "John's assumption would be mine as well. I would note that this could reasonably be considered a bug in the applications (though perhaps not a huge one, from the app point of view).\n\nNote that this behavior could differ from one application to another. You said \"Adobe software\": which specific application(s) and versions did you try? You probably ought to file a bug here:  \n [http://www.adobe.com/cfusion/mmform/index.cfm?name=wishform](http://web.archive.org/web/20131022043744/http:/www.adobe.com/cfusion/mmform/index.cfm?name=wishform \"http://www.adobe.com/cfusion/mmform/index.cfm?name=wishform\")\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "20 Mar 2009 — 4:50pm",
+      "content": "Not a bug in my opinion: it might have to do with the different behaviour required of space in unjustified or justified context. Only in unjustified, ragged setting does the space retain its character width. Also the end-of-line breaking behaviour would be affected (spaces get just dropped there).\n\n"
+    },
+    {
+      "time": "20 Mar 2009 — 6:48pm",
+      "content": "Hi Thomas, Jan,\n\nI tried Illustrator and Flash CS3, and both did the same thing. Photoshop (CS3) does it fine... Maybe a vector rendering issue?\n\nAnd sorry Jan, my english is not that good, so maybe I do not got exactly what you wrote. Do you think that because it retains the width between words/characters but drops it at the end of line, it's not a bug? Definitively it is a different behavior, but I think that, if the software is \"educated\" to \"see\" the space always as a blank space between characters, it's obvious that at the end of line it'll be \"dropped\", because it do not has any character at its left... :-)\n\nThe question -- I think -- is: these softwares take care of the content of the glyph space or they just get its width to do the thing? But maybe I'm completely wrong and it's all my fault with a dumb misconfiguration... Anyway, I'm \"attaching\" a new file ( [SpaceIssue.otf](http://web.archive.org/web/20131022043744/http:/www.fictilia.org/stuff/SpaceIssue.otf)) to this post, in case someone want to do a quick test and share the experience... I suggest to write some words with spaces -- it will show as circles between the squares -- and then break it into curves to see if the circles (space) remains...\n\n"
+    },
+    {
+      "time": "20 Mar 2009 — 7:11pm",
+      "content": "_By the way, I never worked with opentype features, but I was thinking: Can I use it to replace the space character with another one, “automagically”, like a ligature thing?_\n\nIf an app is making a character-level assumption, then a glyph substitution isn't going to be a viable work-around.\n\n"
+    },
+    {
+      "time": "20 Mar 2009 — 10:25pm",
+      "content": "Anderson, I think that the different applications have to treat the 'space glyph' just as an empty space, because ordinary, every day typesetting would be impossible without that.\n\nIn your case, it might work if you would define extra characters with the fill at the normal space width, en and em width, and let the users insert them manually.\n\n"
+    },
+    {
+      "time": "21 Mar 2009 — 2:35am",
+      "content": "We're talking about cases where the app already displays the thing correctly, just fails to preserve it when converting to outlines. Handling this correctly would not make \"every day typesetting impossible.\" As somebody who worked closely with the engineers handling this stuff, I can assure you it is not terribly difficult once you're already displaying and printing it correctly.\n\nNow, what you suggest may be a reasonable approach to work around the application bug, but that doesn't mean there's no bug.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "21 Mar 2009 — 2:55am",
+      "content": "I'm sure you could try using opentype to substitute an empty space with the glyph you want.\n\nOn second thoughts John would know more about this than me, so perhaps not. :/\n\n"
+    },
+    {
+      "time": "21 Mar 2009 — 5:20am",
+      "content": "I did a quick test, substituting space by another glyph (using liga{}), an it worked, but only on Illustrator, InDesign and Photoshop. On Flash and Corel it doesn't worked... :-/\n\n"
+    },
+    {
+      "time": "21 Mar 2009 — 5:37am",
+      "content": "Oops. I missed the 'break into curves' bit. I assumed it was 'text on a path'. If it's 'converting to outlines', then it's a bug, as you say, Thomas. On the other hand, why should we expect applications to convert outlines of spaces? Where, pray, is the outline for the already mentioned 'em' and 'en' spaces? Or perhaps an outline for a non-breaking space, which must be different from that of a normal one? Or a tab, line-feed, a hard return for that matter? Sorry, I am just kidding, it was a long day.\n\n"
+    },
+    {
+      "time": "21 Mar 2009 — 5:57am",
+      "content": "Jan, I told you that my english is not that good... ;-) By \"break it into curves\" I mean \"convert to outlines\".\n\nBut why should we expect applications to take space -- the glyph -- as a \"special character\", and not just another one? Just because it's **usually** empty? :-)\n\n"
+    },
+    {
+      "time": "21 Mar 2009 — 7:30am",
+      "content": "Yes, Anderson, that's what I meant to say. Empty is what (I think) the software expects. All the other characters are usually empty as well. It's not a bug, it's a misunderstanding.\n\n"
+    },
+    {
+      "time": "21 Mar 2009 — 1:11pm",
+      "content": "I believe InDesign recently changed so as to use the font-defined versions of em and en spaces (etcetera) if such glyphs are present, and will even render outlines for those characters if present. Part and parcel of the same general issue.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "21 Mar 2009 — 4:33pm",
+      "content": "Thanks, Thomas.  \nI was just being recalcitrant after a good lunch and good dinner (burp, hiccup). Would it then stretch/shrink the character for ordinary space in a justified text setting?\n\nAnderson, in this particular font there must be lots of characters on the keyboard that you could use for the (perhaps even different shades/textures) spaces? The lower case qwerty is six already: say 20% stipple, 40% stipple, 60% stipple, horizontal lines, vertical, diagonal? A simple readme file could explain the use ... just a thought.\n\n"
+    },
+    {
+      "time": "23 Mar 2009 — 8:25am",
+      "content": "Dear God... As I said before, I used liga{} to substitute 'space' by my shaded space. But I have two spaces with different lengths, one 'half' and one 'full', and when I have two 'halfs' in a row, I want it to substitute by one 'full', so I did this:\n\n`\nliga {\n  sub space by space.alt;\n  sub space.alt space.alt by space_space;\n} liga\n`\n\nIt worked, but just for four spaces in a row. When I hit the fifth, it don't works, and when I hit the sixth, it still shows just two 'fulls', and there it goes, showing just two 'fulls'...\n\nSo I decided to stop the fight, leave the space empty and use endash and emdash as my 'half' and 'full' shaded spaces... :-)\n\n"
+    }
+  ]
+}

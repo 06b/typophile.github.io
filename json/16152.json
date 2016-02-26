@@ -1,0 +1,122 @@
+{
+  "id": "16152",
+  "title": "Fontlab limitations",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I am curious about the limits of [fontlab](http://web.archive.org/web/20080907064438/http:/typophile.com/wiki/fontlab), if there are technical boundaries I suppose. I am working on some font projects that are super complex– I don’t think there are any glyphs that have less than a few thousand nodes, many are 10,000+ At this point I have about 33 glyph cells filled, but I was hoping to potentially do hundreds (at least the most basic roman set, but with extensive OT substitutions).\n\nThe problem is though that fontlab crashes when importing some of the images (from illustrator), but generally if I can cut down on the number of nodes it works. However, generating the font files never works. Fontlab crashes instantly with any setting. I saw at this thread [http://typophile.com/node/4173](http://web.archive.org/web/20080907064438/http:/typophile.com/node/4173 \"http://typophile.com/node/4173\") that turing off the compressing subroutines could help, but no luck for me.\n\nIs this simply an issue of too complex designs? I have already oversimplified these images more than I originally hoped and even if I could simplify them further, I still don’t have as much in here as I want. Maybe there is something else going on unrelated to the number of nodes.\n\nThanks for the help.\n\nRob\n\n [‹ Embedding fonts in Microsoft Office](http://web.archive.org/web/20080907064438/http:/typophile.com/node/16274 \"Go to previous forum topic\") [MP3 Compression ›](http://web.archive.org/web/20080907064438/http:/typophile.com/node/16325 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080907064438/http://typophile.com/user/3513\" title=\"View user profile.\">rob keller</a>",
+  "time": "<br>",
+  "uid": "3513",
+  "comments": [
+    {
+      "time": " 10.Nov.2005 6.56am",
+      "content": "Version and OS information for FontLab and Illustrator might be helpful.\n\nEven if you’re able to generate a valid font I wonder if the OSs, apps and printers will even handle it - I’d suspect some might identify the font as a denial-of-service attack.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": " 10.Nov.2005 7.09am",
+      "content": "I was curious if the file would even work in the OS as well...\n\nI am using OSX.4, FL 4.6, and Illustrator CS2\n\nRob\n\n"
+    },
+    {
+      "time": " 10.Nov.2005 5.12pm",
+      "content": "These may be limitations on the font formats, rather than FontLab only. I don’t think having 10,000+ nodes per glyph is within the limitations of Type 1 and CFF, IIRC.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": " 11.Nov.2005 12.05am",
+      "content": "Thanks Si and Thomas. This will be a bummer if it never works out, it would have been really interesting. I wonder how complex things can get before they stop functioning- either in FL, the font format, or the OS. This could be a lot of trial and error.\n\nRob\n\n"
+    },
+    {
+      "time": " 11.Nov.2005 10.03am",
+      "content": "I think it would be interesting to know where the limitations lie. Sometimes dingbats are used like clip-art; and I’ve seen fonts that must be near the limit. Also, some “distressed” or “grunge” fonts might have lots of nodes to achieve a certain effect. There must be a way within Illustrator to count nodes and smooth things down to a point where it will work. Simon’s comment is apt; there is no way to know a priori if a font like that is going to function for customers. Does anyone know if major foundries impose internal limits? If so, what would they be?\n\n"
+    },
+    {
+      "time": " 11.Nov.2005 10.19am",
+      "content": "Illustrator does actually have a feature that cont the points- it is under OBJECTS- PATHS- SIMPLIFY\n\nThat will tell you how many points there are before and after “simplifying” and you can adjust how extreme you want the modification to be.\n\nThose numbers I was giving are after doing that procedure, so my images are indeed extremely dense. Usually I also do the optimize feature in FL after importing to help lower the node count a bit more because ILL and FL handle it differently.\n\nRob\n\n"
+    },
+    {
+      "time": " 11.Nov.2005 10.21am",
+      "content": "Indeed, the problem probably isn’t with FontLab but with the font. There was a version of Rick Valicenti’s “Ooga Booga” with a blurry effect: many “bits and pieces”, loads of nodes. It crashed every printer it met.\n\n"
+    },
+    {
+      "time": " 11.Nov.2005 10.41am",
+      "content": "I remembered reading something about this somewhere and found this in Stephen Moye’s _Fontographer: Type by Design_ book (page 23):\n\n“ **14. Avoiding long paths.** Finally, avoid excessively long and/or complex paths. To se why, read the following passage from _Adobe Type 1 Font Format_: ’many versions of the PostScript interpreter have an internal limit of 1500 flattened path elements per character; exceeding this bout results in a limitcheck error. Each character outline in a given font design must not exceed this limit when rendered.’”\n\nA glyph with over 10,000 nodes would hit that limit rather quickly, I would imagine. I realize it’s Type 1 fonts Moye is writing about, but I would think other font formats have similar limitations (particularly PostScript-flavored OpenType fonts).\n\n"
+    },
+    {
+      "time": " 11.Nov.2005 12.32pm",
+      "content": "Don’t TrueType fonts have even more nodes than PostScript Type1?\n\nChrisL\n\n"
+    },
+    {
+      "time": " 11.Nov.2005 1.36pm",
+      "content": "Yes, but I don’t know if there would be a direct correlation between that and the number of “flattened path elements”. For instance, if you make an oval with just two nodes in a Type 1 font (possible!) or with 100 nodes, the number of flattened path elements would be about the same. It’s the twists and turns that ups the number, I would think. Even so, you are probably going to have at least as many flattened path elements as you have nodes. (I would sure love it if somebody from Adobe or FontLab would jump in here with more solid info.)\n\n"
+    },
+    {
+      "time": " 11.Nov.2005 1.47pm",
+      "content": "We are past Adam’s bed time and Thomas has baby duty :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": " 11.Nov.2005 2.01pm",
+      "content": "I wonder if there is a reason you feel you need these complex graphics to be accessible as glyphs in a font? I ask because of the way fonts are used; In early PostScript days people played with very noisy fonts and many discovered upper limits on output devices. SInce then, it’s very unusual to see glyphs in typefaces that use as many as one thousand nodes, much less multiple thousands. is it likely someone will be setting pages with the font you are making? I imagine each glyph would need to be quite large for the detail to be evident. What is so complex about them? Are they halftones? Maybe this is something that should simply exist as EPS files.\n\nOr, as an alternative, have you considered making a Photofont? Since the size of the picture resources there is your only technical limitation, you could put any amount of detail in the images.\n\n"
+    },
+    {
+      "time": " 11.Nov.2005 3.02pm",
+      "content": "There are a few reasons to have glyphs with a very large number of points.\n\nhhp\n\n"
+    },
+    {
+      "time": " 11.Nov.2005 3.41pm",
+      "content": "Another reason I’ve come across is putting a company or organizational logo in a custom font. It’s kind of a nice dingbat to have, but some logos might be fairly complex. This is almost a font-as-software sort of discussion because it shows how important it is to QA fonts, just like other types of software.\n\n"
+    },
+    {
+      "time": " 11.Nov.2005 4.13pm",
+      "content": "”...but some logos might be fairly complex”\n\nBut they shouldn’t be.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 11.Nov.2005 5.19pm",
+      "content": "My plans for this overly complex font I am preliminary calling an “art font.” It isn’t consisting of letters, nor is it a traditional dingbat font. There are images, some have halftone-like patterns, most are simply intricate. I am not considering it a dingbat though because, in theory, the scales and locations of the glyphs would change depending on what you type. Open Type substitutions are highly necessary for this to work, because I want to be able to type something and then have the different letter combinations or entire words and sentences change the composition the images make.\n\nThat maybe sounds confusing. Basically, I want to use words and phrases to create collaged images. Conceptually though, it is important this this is a font, that works, and not just an EPS image.\n\nRob\n\n"
+    },
+    {
+      "time": " 11.Nov.2005 7.28pm",
+      "content": "Will it be an interactive piece? Is that why it has to be a font instead of a series of eps graphics?\n\nChrisL\n\n"
+    },
+    {
+      "time": " 12.Nov.2005 12.43am",
+      "content": "Well, you may exceed the limits of font formats or rendering engines, as well as FontLab. But good luck with it.\n\nT\n\n"
+    },
+    {
+      "time": " 12.Nov.2005 7.36am",
+      "content": "Chris,\n\nThe fact that it is a font that creates the image is key. In some cases the composition that is made would be random due to what the user would type, but other times there would be keyword substitutions that would in some ways make a predetermined image created by me. This is also, in some ways, about technology and the technology’s role in the process. The process of me making the “software,” the software making the image, and the final output of a printed (or digital) picture and a font file.\n\nIn an “art” setting, say a gallery, I would like to sell the pieces as buying the rights to that phrase, therefor you would purchase the image and or just the font file (I don’t know yet), but then you could recreate that exact image simply by typing the phrase. The idea is similar to some of the early conceptual artists like Mel Bochner. He did his “measurement room” pieces where he used tape and (helvetica I believe) number stickers on the walls to measure all the dimensions of a room. The only tangible element that he sold though were the plans and directions on how to measure the room– that way the buyer could recreate the piece in other spaces.\n\nRob\n\n"
+    },
+    {
+      "time": " 12.Nov.2005 9.37am",
+      "content": "What if you subdivided each glyph into parts so that each part is within the node-count limit, and used OT code to do one-to-many substitutions, with all but one part being zero-spaced?\n\nhhp\n\n"
+    },
+    {
+      "time": " 12.Nov.2005 9.45am",
+      "content": "The only issue with breaking up a larger image into parts is that recreating the full image again would require typing in the exact word that will form that image, and more importantly, if you use those letters in another word then you will get parts of other images. Maybe with extensive enough substitutions it would be possible to change the images with different combinations, I am not sure exactly how that would work right now though.\n\nRob\n\n"
+    },
+    {
+      "time": " 12.Nov.2005 9.58am",
+      "content": "While I was/am hoping to make a full font of glyphs, I have thought about ideas similar to your idea Hrant.\n\nIt would be where each font only has one or a few pre determined phrase that would make an image. Either it would be one large one made broken up into parts like you said, or it would be smaller individual elements that would be arranged into a larger composition. Those concepts would work in some ways for me, but they fall short in the aspect that it looses a lot of it’s “font” nature where there is less opportunity to make your own image with your own word combination. It makes it more of a puzzle that you assemble with only one outcome rather than legos which you can make into anything.\n\nBut, seeing as how a significant aspect of this project is dealing with technology, I am restricted by what that technology can handle. My ideas have be flexible to adapting to the current limitations. It might be the situation now where they will have to start out simpler, maybe with only a few possible compositions from each font, then eventually they can get more extensive as computers and softwares advance.\n\n"
+    },
+    {
+      "time": " 12.Nov.2005 11.11am",
+      "content": "Why is my idea not usable for a “regular” font? Each character would have OT code to render out as multiple overlapping glyphs with one advance width.\n\nhhp\n\n"
+    },
+    {
+      "time": " 12.Nov.2005 11.38am",
+      "content": "Oh I see what you mean now. That is an awesome idea! I was originally thinking of each character being a part of a larger. The substitutions will be even more extensive that way, but if it will make it work then it would be worth it. Thanks a lot Hrant.\n\nRob\n\n"
+    },
+    {
+      "time": " 15.Nov.2005 12.54pm",
+      "content": "Hrant’s idea is spot on.  \nIt was common to split long paths into multiple shorter paths, to get Illustrator files to rip, back in the day.  \nIt works for fonts too, I had some trouble printing a “grunge filter” version of a font I had made, and the multiple path trick fixed it.\n\n"
+    },
+    {
+      "time": " 17.Nov.2005 9.51am",
+      "content": "“What if you subdivided each glyph into parts so that each part is within the node-count limit,”\n\nWe had to do this with TT versions of the ING logo (lion of many points), and it worked fine.\n\n"
+    },
+    {
+      "time": " 18.Nov.2005 11.21am",
+      "content": "No matter how you twist it, it will ALWAYS come down to the Type 1 limitation at some point:\n\n1. When a document that uses an OpenType PS font is printed on a PostScript printer, the printer driver converts it to one or more Type 1 fonts since PostScript (at least Level 1 and 2, but I think also 3) don’t have the notion of the CFF format. The conversion is lossless so there is no quality loss because the glyph definitions in OpenType PS and Type 1 are based on the same drawing model.\n\n2. Some applications, e.g. Corel Draw, \\*always\\* convert TrueType / OpenType TT fonts to Type 1 when sending them to the printer. While PostScript Level 2 and 3 understand TrueType natively (encoded as so-called Type 42), yet Corel’s printing engine doesn’t use it. Note that FontLab applications do a smart conversion from TrueType to PostScript curves by removing unnecessary points in the destination PostScript outlines. However, the Corel printing engine does not do that so the increased number of on-curve points in the TrueType font results in a converted Type 1 fonts with the same, relatively large number of nodes. So a complex TrueType font is even more likely to make the PostScript printer crash when used with Corel Draw.\n\n3. The PostScript printer driver on Windows has the ability to convert TrueType to Type 1 the same way as Corel Draw does. This is off by default in the printer driver if you use a modern PostScript printer, but with some imagesetters and older printers, it’s on. Then, the “Corel” limitations apply to all applications that the user uses. The Mac OS printer driver has similar capabilities though I don’t think the user has explicit control over it as on Windows (but I may be mistaken, I don’t know the Mac OS printing subsystem well enough).\n\nRegards,  \nAdam\n\n"
+    }
+  ]
+}

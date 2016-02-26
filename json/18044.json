@@ -1,0 +1,142 @@
+{
+  "id": "18044",
+  "title": "OT features Win/Mac Discrepancy in InDesign",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Okay, so i have an OpenType font that I've been developing with some extended language support (CE + Cyrillic) and it works fine on Windows XP, with all the features being accesible in InDesign. However, when installed on the Mac none of the features are accessible unless the font is installed directly to the Adobe Fonts folder. Any help on this one?\n\n",
+  "author": "<a href=\"/web/20100831010406/http://typophile.com/user/7006\" title=\"View user profile.\">paul d hunt</a>",
+  "time": "<br>",
+  "uid": "7006",
+  "comments": [
+    {
+      "time": "",
+      "content": "Are you saying that the font doesn't behave as expected when it is in /Library/Fonts/, but it works in /Library/Application Support/Adobe/Fonts? I'm a bit skeptical. Did you try it in /Library/Fonts/ after clearing system font caches?\n\n"
+    },
+    {
+      "time": "",
+      "content": "yes. yes. yes.\n\nI think there must be something about adding cyrillic support that does this. I'm actually thinking of two cases where I have seen this kind of behavior on Mac OSX with OT fonts containing cyrillic support. The only way I could get the features to show up when installed to the /Library/Fonts folder was to export the font as a dfont.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I've always assumed that Adobe applications activate fonts in a way that is similar to a font manager. What you're information implies is that InDesign is in some way bypassing ATS and using the font directly.  \nIs it possible that InDesign is overcoming a Mac OS deficiency of some kind?\n\n"
+    },
+    {
+      "time": "",
+      "content": "am i the only one who has experienced this problem?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Paul,  \nMy Leporello family has Cyrillic and Greek and it works fine in all apps (including Adobe) on a Mac OS-X loaded in the normal system fonts library. I have not tried it on a PC though. I developed it completely on a Mac and it is PS otf flavored but I don't know if that matters.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "i found that i can get rid of this problem if i \"hack\" the font and uncheck everything but \"Basic Latin\" in the \"Supported Unicode Ranges\". However, I'm fairly sure that it's having the Cyrillic checked that is throwing everything off, as I haven't had this problem with fonts OT fonts (PS flavored) that just have CE support.  \nCan you tell me what settings you have for this page for your fonts, Chris?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Paul,  \nI will look it up tonight when I am at home. I assume you mean which code pages are selected in check boxes.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Paul,  \nHere is a screen shot of one of the Leporello Unicode ranges:\n\n ![](http://web.archive.org/web/20100831010406im_/http:/typophile.com/files/LepCodePages.png)\n\nLooks like Cyrillic and Greek are checked.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "thnx chris, but it's not the codepages, it's the \"unicode ranges\" that are the problem. can i have you check that data for me?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Here ya go Cowboy:\n\nChrisL\n\n ![](http://web.archive.org/web/20100831010406im_/http:/typophile.com/files/Lepunicoderange.png)\n\n"
+    },
+    {
+      "time": "",
+      "content": "curiouser and curiouser... i'm baffled.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Me too Paul. Maybe Adam can shed some light?\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "...maybe you'll have to wait for OS X 10.5 (and pay for yet ANOTHER upgrade). Way to go, Steve...you da man!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Gee Nick, that was a great bit of quick diagnosis. You instantly figured out that Apple was the culprit without ever even seeing the files or examining the code. You are the man. What genius you've wasted doing type design.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "this problem seems to be fixed when running the font through [Adobe OpenType FileTyper](http://web.archive.org/web/20100831010406/http:/typophile.com/wiki/Adobe%2520OpenType%2520FileTyper).\n\n"
+    },
+    {
+      "time": "",
+      "content": "Paul, what I'm about to say might not relate directly with your problem, but may lead you to another possible solution.\n\nMy specific problem was in Quark 6, with an .otf font that covered Western and Central European Latin (no Greek or Cyrillic). The supported codepages selected were Latin 1, Latin 2: Eastern Europe, Turkish and Windows Baltic.  \nAs you probably know, Quark 6 only supports Western characters in OpenType PS (.otf) fonts, nonetheless I was getting CE characters when typing Western. After some fiddling, I found out that adding Greek to the supported codepages would fix the problem.\n\nHere's [Adam Twardoch](http://web.archive.org/web/20100831010406/http:/typophile.com/wiki/Adam%2520Twardoch)'s explanation:  \n_There is a bizarre bug in the Adobe font driver (ATM or the one built into Mac OS X) with respect to the \"Windows Greek codepage\" flag. If a font is flagged as \"Roman\" + \"CE\", then ATM thinks that the primary codepage of the font is CE, if the font is flagged as \"Roman\" + \"Cyrillic\", then ATM thinks that the primary codepage is Cyrillic, but if the font is flagged as \"Roman\" + \"CE\" + \"Greek\" or \"Roman\" + \"Cyrillic\" + \"Greek\", then ATM thinks that the primary codepage of the font is Roman. QuarkXPress only likes fonts that the system says the primary codepage is Roman. So in short, it may be help to activate the \"Windows Greek\" codepage flag._\n\n"
+    },
+    {
+      "time": "",
+      "content": "Oh, I have similar trouble!  \nI'm working with font which contains Roman+Cyrillic+Greek+CE+Turkish+Baltic+Vietnamese and all features works excellent in Windows Adobe CS/CS2 apps (font installed via ATM) including cyrillic ligature, please see example\n\n--------------------------------------\n\nfeature liga { # Standard Ligatures\n\nscript latn; # Latin  \nlookup liga3 {  \n sub f f i by ffi;  \n sub f i by fi;  \n} liga3;  \nlookup liga4 {  \n sub f f l by ffl;  \n sub f f j by ffj;  \n sub f f by ff;  \n sub f j by fj;  \n sub f l by fl;  \n sub f t by ft;  \n sub T h by T\\_h;  \n sub Tcaron h by T\\_h.caron;  \n} liga4;\n\nlanguage AZE exclude\\_dflt; # Azeri  \nlookup liga4;  \nlanguage TUR exclude\\_dflt; # Turkish  \nlookup liga4;  \nlanguage CRT exclude\\_dflt; # Crimean Tatar  \nlookup liga4;\n\nscript cyrl;  \nlanguage UKR;  \nlookup liga2 {  \n sub afii10104 afii10104 by \\_jiji.liga;  \n } liga2;  \n} liga;\n\n--------------------------------------\n\nbut under MacOS-X 10.4 (font installed via SuitCase 11) works all the features... except cyrillic ligature!\n\nIn \"font info\" checked all really present codepages, MS Charset = Bitstream, MAC script & Fond ID = Roman.\n\nAny ideas?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Can you test it under version 10.3? I've heard that some thing(s) got broken in the 10.4 build that affect .otf fonts. (Don't know exactly what, but I'll enquire about it)\n\nBTW, this line  \n`sub Tcaron h by T_h.caron;`  \nin your feature almost got me confuse. It makes no difference, but  \n`sub Tcaron h by Tcaron_h;`  \nseems more intuitive to me :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Good catch. Not just more intuitive, but correct. One wants it to decompose to have a Tcaron, not just a T.\n\nOS X 10.4 breaks style-linking for OpenType CFF fonts, btw. We hope to see it fixed in 10.5 \"Leopard.\"\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> Can you test it under version 10.3?\n\nUnder the 10.3 font don't recognized by Siutcase 11 as font... Brrrr... :(\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> sub Tcaron h by Tcaron\\_h; seems more intuitive to me :)\n\nMay be, but IT WORKS! :)))\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> We hope to see it fixed in 10.5 “Leopard.”\n\nThanks\n\n"
+    },
+    {
+      "time": "",
+      "content": "I can just hope that Leopard is the cat's meow for type :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> May be, but IT WORKS! :)))\n\nDid you read what Thomas wrote?  \n_ **One wants it to decompose to have a Tcaron, not just a T.** _\n\nIf you don't know what that means, try this:  \n(The example is based on a couple Adobe tools, but it applies to other things as well)\n\n1. Create an InDesign document that uses the **Ť h** ligature  \n2. Export it as a PDF file  \n3. Open the PDF, select the text and copy it  \n4. Paste it in a text editor\n\nWhat do you get? Is it what you were expecting?\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> 3. Open the PDF, select the text and copy it  \n\\> 4. Paste it in a text editor\n\nIt's impossible because I'm not allow installable mode in this font, only printing and previewing :)))\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> It’s impossible because I’m not allow installable mode in this font, only printing and previewing :)))\n\nFonts with embedding permission set to Preview & Print can be embedded in PDFs, so it's not impossible. [Embedding Permissions](http://web.archive.org/web/20100831010406/http:/store.adobe.com/type/browser/info/embedding.html)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Embedding Permissions:  \nfont ... may be embedded in an electronic document, the embedded font **may not be used to further edit** the document it is contained in or to edit or create other documents.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Look, although you can't edit the document, you can still select and copy the text content (with a font set to Preview & Print), so I stand right.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Could we be talking about two different things?\n\nAs I understand it, a font with the embedding permissions set to Print & Preview Only can still be copied from a PDF. However, a file exported to PDF can have the permission set to Print & Preview, but turn off the ability to copy text.\n\n ![](http://web.archive.org/web/20100831010406im_/http:/typophile.com/files/emblikeso_3610.png)\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'm talking about font embedding permissions within the font file (fsType), not PDF permissions.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I just tested this with a font whose embedding permissions are:\n\n ![](http://web.archive.org/web/20100831010406im_/http:/typophile.com/files/embedassuch_4909.png)\n\nI could copy from the PDF where I didn't set any permissions within InDesign. However, when I changed the settings as shown above I could highlight, but not copy and paste.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, Miguel, but I will discover this case later because I still resolving another troubles with this my project :)\n\n"
+    }
+  ]
+}

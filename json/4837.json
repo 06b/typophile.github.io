@@ -1,0 +1,26 @@
+{
+  "id": "4837",
+  "title": "Hebrew Mirror (\"X\") Fonts",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Major Israeli type vendors today distribute their fonts in several formats. One of those formats is called \"X Fonts\" or \"Mirror Fonts\", which are essentially horizontally-flipped versions of the original font files, for use in applications such as Macromedia Freehand and Flash, that don't have native support for Hebrew (or for any other Semitic, right-to-left language, for that matter) - the text blocks are then \"flipped\" again in the application itself, and the text can be edited more-or-less normally (with a few directional exceptions such as digits and complex punctuation).   \n   \nI am in the process of creating such \"X\" versions for my own Hebrew fonts in Fontographer, and the difficulty I'm having is in reserving the original font's spacing, since the only appropriate transformational attribute in Fontographer is a center-of-selection based horizontal flip, the left and right sidebearings remain as they were before the transformation.   \n   \nItay K has very helpfully suggested adding large rectangles which would cover each glyph, and would later be erased after the transformation is complete, thus flipping the sidebearings, as well.   \n   \nItay's method works very well, but I wonder if I could maybe automate the process a bit. I've developed a web-based algorythm that inputs an exported AFM file with spacing information, and then outputs an AFM file with corrected sidebearing information for \"mirrored\" spacing. I've worked according to the AFM specifications that I downloaded here:   \n [http://partners.adobe.com/asn/developer/pdfs/tn/5004.AFM\\_Spec.pdf](http://web.archive.org/web/20131011060550/http:/partners.adobe.com/asn/developer/pdfs/tn/5004.AFM_Spec.pdf)   \n   \nI'm currently attempting to import the corrected AFM files back to Fontographer, but it doesn't seem to have any effect. Does anybody have any insight or maybe someone has experienced same difficulties importing metrics, esp. sidebearings, into Fontographer?   \n   \nI would appreciate any comment or aid regarding this. Thanks very much!\n\n",
+  "author": "meir",
+  "time": "19 May 2004 — 7:07am",
+  "uid": "2595",
+  "comments": [
+    {
+      "time": "19 May 2004 — 8:03am",
+      "content": "\\> the only appropriate transformational attribute in   \n\\> Fontographer is a center-of-selection based horizontal flip   \n   \nWhat if you did a flip around the _Origin_, and then a rightward offset by the width?   \n(And a path direction correction.)   \n   \nhhp\n\n"
+    },
+    {
+      "time": "19 May 2004 — 8:18am",
+      "content": "Wow, Hrant, I'm finding this much easier than the rectangle method! If I wouldn't find a way to use this algorythm, I'll definately use your suggested method. Thanks very much!   \n   \nStill, I need to type in different offsets for each character, so my previous query remains.\n\n"
+    },
+    {
+      "time": "19 May 2004 — 8:22am",
+      "content": "If you use FontLab, a simple Python script would do the entire font in seconds.   \n   \nhhp\n\n"
+    }
+  ]
+}

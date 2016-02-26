@@ -1,0 +1,42 @@
+{
+  "id": "113937",
+  "title": "MS Office embedding OR OpenType features?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi\n\nI have made some fonts for a client, had them hinted and produced as TTF by third party, and am now having them tested for use in MS Office by another third party. Earlier in the process, we tested the (not final) fonts for embedding in MS Office, and it worked out fine then. Since then, the fonts have been hinted and I have added a DSIG-table to make MS Office recognize them as OpenType fonts (the OpenType features were also in the test-fonts, but not the DSIG-table).  \nAnd now, the fonts will not embed, or rather, the will embed but not show up on the end users screen.  \nThe third party testing the font for MS Office suggests it's because MS Office will not embed fonts that it recognizes as OpenType, and we should therefore make some \"Office-versions\" of the fonts with no OpenType-features and therefore for example tabular lining numerals as default.  \nThis makes good sense to me as long as MS Office really doesn't embed fonts with OpenType features, but is it really so? It seems odd, and a leap way back in time.\n\nI'm looking forward to hear your insights.\n\n",
+  "author": "Elias",
+  "time": "5 Feb 2014 — 11:35am",
+  "uid": "17399",
+  "comments": [
+    {
+      "time": "5 Feb 2014 — 12:16pm",
+      "content": "Which version of Office and which platform (Windows or Mac) are important pieces of the puzzle...\n\n"
+    },
+    {
+      "time": "6 Feb 2014 — 1:29am",
+      "content": "Thanks, Nick.\n\nThe issue is in Windows. The fonts have been tested in Office 2010 and 2013.\n\n"
+    },
+    {
+      "time": "7 Feb 2014 — 8:16am",
+      "content": "Is it possible that the DSIG-table is blocking something in the functionality of the embedded fonts?\n\nI'm using this table:\n\nDSIG  \n hexdata  \n 00000001 00000000  \n /hexdata  \n /DSIG\n\n"
+    },
+    {
+      "time": "8 Feb 2014 — 9:59am",
+      "content": "While like Sargent Schultz \"I know nothing,\" this Microsoft Tech Support Page seems to suggest that you'll need TrueType flavored OpenType fonts in order to embed them...\n\n[http://www.word-2010.com/embedding-fonts-in-word-2010/](http://web.archive.org/web/20140809191904/http:/www.word-2010.com/embedding-fonts-in-word-2010/ \"http://www.word-2010.com/embedding-fonts-in-word-2010/\")\n\n"
+    },
+    {
+      "time": "8 Feb 2014 — 11:18pm",
+      "content": "Thanks, Charles.\n\nThe fonts are however TTF fonts, and with all permissions given.  \nNote that the fonts did test well in the first round, and that only sub pixel hinting, slightly different names (only the names, not the naming structure) and the addition of the DSIG-table are the changes that have been made.  \nI have done some tests where I have taken the DSIG-table out of the fonts again, but with no positive result. The hinting doesn't seem to be the issue either, so now we're testing if it might be the actual name, though it doesn't seem to any dobbelgänger out there.\n\n"
+    },
+    {
+      "time": "9 Feb 2014 — 8:20am",
+      "content": "is the name now longer than 30 characters?\n\n"
+    },
+    {
+      "time": "9 Feb 2014 — 10:55am",
+      "content": "No, only eight.\n\n"
+    }
+  ]
+}

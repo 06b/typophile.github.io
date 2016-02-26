@@ -1,0 +1,34 @@
+{
+  "id": "54556",
+  "title": "Alarming Kerning Import Bug in Fontlab",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I want to import kerning from one 4-master vfb to another. I use paste special. I must select 'ignore destination selection' because otherwise I get a transposition, even though encoding is identical.\n\nBut now something worse occurs. 1400 pairs in the original, and only 800 in the copy. Strange things like all kern pairs between y and eacute are missing.\n\nIn other words, the program simply isn't doing what it is supposed to do, and every last step has to be checked. Most laboriously!\n\nIt is difficult to believe how anyone could reliably use this program as a production tool as is, and I imagine that those who do this on a large scale basis have various scripts, perhaps outside of Fontlab, that accomplish these operations in a reliable manner.\n\nWe've been slagging Fog a lot lately, but I never remember it being quite so unreliable in so many unexpected ways. However, there's no turning back!\n\n",
+  "author": "billtroop",
+  "time": "8 Feb 2009 — 10:33am",
+  "uid": "4019",
+  "comments": [
+    {
+      "time": "8 Feb 2009 — 10:51am",
+      "content": "Don’t copy/paste huge numbers of kerning pairs between fonts. Export your kerns to a file and import them back in.\n\n<cite>It is difficult to believe how anyone could reliably use this program as a production tool as is…</cite>\n\nI don’t disagree with you there. Every time Fontlab crashes because I used a keyboard chord to enter an accented character into the metrics window I think that we should start doing annual fund raisers for Fontforge. Fontlab is very good for some stuff, but it’s drawbacks can really eat up a lot of time when one is working on projects solo. I got Fontforge working on Friday night and I’m going to be reading the tutorials over the next week.\n\n"
+    },
+    {
+      "time": "8 Feb 2009 — 11:00am",
+      "content": "Thank you very much for that tip, James, which is superb advice for any computer program.\n\nI should have known better after all these years!\n\nThanks also for being so prompt. I would have gone nuts in another five minutes, wondering what to do next.\n\nIt will be interesting to know how you get on with Fontforge. But doesn't it only do TT outlines?\n\n"
+    },
+    {
+      "time": "8 Feb 2009 — 2:15pm",
+      "content": "<cite>But doesn’t it only do TT outlines?</cite>\n\nNot at all. It handles Type 1 as well and can output OpenType. I just find the interface less easy to use than FontLab.\n\n"
+    },
+    {
+      "time": "8 Feb 2009 — 6:35pm",
+      "content": "Bill, if you remember, Fontographer had all sorts of bugs. I use to keep a separate kerning file for every font, because Fontographer always messed up anything over decimal 255 . . .\n\nWhen FontLab first came out, I kept using Fontographer because it was what I knew. Except at the end, I added the step of running the font through FL, to get rid of those Fontographer bugs.\n\nOld habit die hard. Even using FL, I still write all OT features in a text editor & import them (& save them as a text file).\n\nMy current grumble with FL is it doesn't support mark and mkmk. Waiting for version 6.0, I guess.\n\n"
+    },
+    {
+      "time": "8 Feb 2009 — 7:58pm",
+      "content": "A couple of warnings re. using AFMs to export/import kerning.\n\nAFMs have a presumed UPM of 1000, which means that if your font has a different UPM you will get rounding errors in kern pair values.\n\nFontLab, historically at any rate, had problems with importing AFM kern data over a certain size: pairs would be dropped.\n\nThe real answer to this is Python scripts, which can very easily write lists of kern pairs for any UPM and import the same cleanly. Karsten Luecke wrote mine for me.\n\n"
+    }
+  ]
+}

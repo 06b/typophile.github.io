@@ -1,0 +1,58 @@
+{
+  "id": "32525",
+  "title": "Greek OpenType features",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’ve completed the main [Greek](http://web.archive.org/web/20081011163213/http:/typophile.com/wiki/Greek) Unicode block, and the Extended Greek block, for a couple of types.  \n(Actually, I’ve skipped the Coptic characters.)  \nNow I’m wondering how to implement the “extra” characters (variants, archaic, etc.) — and not just leave them in the glyph palette.  \nHere’s what I’m proposing at the moment, with several questions.  \nDefault characters are in the left column, the alternates in the right.\n\n ![](http://web.archive.org/web/20081011163213im_/http:/typophile.com/files/GreekOT_4644.jpg)\n\n [‹ FontAgent Pro for Windows](http://web.archive.org/web/20081011163213/http:/typophile.com/node/33370 \"Go to previous forum topic\") [Size (number of glyphs) limit in FontLab? ›](http://web.archive.org/web/20081011163213/http:/typophile.com/node/33308 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081011163213/http://typophile.com/user/2021\" title=\"View user profile.\">Nick Shinn</a>",
+  "time": "<br>",
+  "uid": "2021",
+  "comments": [
+    {
+      "time": " 25.Mar.2007 3.25am",
+      "content": "Like in Latin typefaces, there’s always more than one (correct) way to do it. Greek has various regional preferences, epoch preferences, and traditions, so it will be impossible to please everyone.\n\nHere’s how Garamond Premier Pro (left) and Arno Pro (right) were done:\n\n ![](http://web.archive.org/web/20081011163213im_/http:/typophile.com/files/gpp_arno1_4409.png)\n  \nIota adscript (prosgegrammeni) is the default, and iota subscript (ypogegrammeni) is implemented via a Stylistic Set.\n\n ![](http://web.archive.org/web/20081011163213im_/http:/typophile.com/files/gpp_arno2_4279.png)\n  \nAll are Stylistic Alternates (salt). In Garamond Premier, the theta, kappa and phi alternates are also grouped in a Stylistic Set. In Arno, theta and kappa alternates are in the same Stylistic Set, and pi and phi alternates have their own Stylistic Set each.\n\nNotice how the default form and the alternate form of some letters differs, depending on the style (upright vs. italic) and the typeface. These decisions — design and implementation — were made by Robert Slimbach.\n\n ![](http://web.archive.org/web/20081011163213im_/http:/typophile.com/files/gpp_arno3_4873.png)\n  \nThe kai alternate is only present in ’salt’.\n"
+    },
+    {
+      "time": " 25.Mar.2007 3.55am",
+      "content": "BTW, we stopped putting the final sigma (ς U+03C2) in the ’fina’ feature, as it confused/annoyed people every time they had to type a word containing a sigma (σ U+03C3) in the middle. And that didn’t help the users anyway, because the final sigma has its own keyboard key, which they use.\n\n"
+    },
+    {
+      "time": " 25.Mar.2007 7.07am",
+      "content": "My $0.02, based in part on having followed some of the debates about various Unicode proposals relating to some of these glyphs:\n\n2. Lunate (C-shaped) Sigma/sigma is specifically an ancient/medieval form, so as you say it is beyond merely “quaint” - it could be put in “hist” in addition to “salt” if you wanted, but there are so many different historical periods represented in Greek type that OT’s simple “present vs. past” distinction is too simple, perhaps. Curly (omega-shaped) pi is also defunct (medieval/early modern) and probably belongs in “hist” if you create that feature.\n\n3. Your uppercase Stigma there is really more of a cursive Digamma, but it hardly matters, because the only place where Stigma is needed in uppercase is for numerals, where stigma and digamma merged long ago anyway. You could make it a quaint “dlig” in lowercase if you want, but I wouldn’t do it in uppercase.\n\n5. The kai ligature doesn’t need a grave accent because that’s sort of assumed in the ligature.\n\n6/7. The omicron-upsilon ligature is still found occasionally in casual handwriting, more than stigma as a ligature certainly, but it’s more like Comic Sans rather than polytonic in its modern usage.\n\nAlso, I might be inclined to swap the tall phi for the script phi. The tall form is not standard in modern Greek, but to my eye, it looks less out of place in such a plain sans font than the script form does, especially when the rest of the stylistic set is script forms. This may just be my Porson-trained bias, though; I’d be curious to know what native Greek speakers think about this.\n\n"
+    },
+    {
+      "time": " 25.Mar.2007 2.48pm",
+      "content": "The question of whether the adscript or subscript mute iota should be the default depends on who your primary market is. Most publishers outside of Greece will be dealing with classical and Biblical texts, and the preference in the user communities is for the adscript. Within Greece, there seems to be a preference for the subscript form.\n\nI agree with Archaica’s observations about the archaic variant forms, the lunate sigma and scribal pi.\n\nI might put the lowercase stigma in the dlig feature, but not the uppercase. The uppercase Stigma is a recently invented casing form for the lowercase, without historical basis. It exists to fill a hole in the use of Greek letters as numerals, but other than that it should be avoided.\n\nNo, I don’t think the kai should be substituted for the Latin ampersand. For better or worse it has its own Unicode codepoint.\n\nYes, if you’re going to include stigma in the dlig feature then omicron-upsilon would be a reasonable addition. These two are the longest lingering of the once extensive Greek ligature set. I’ve even seen them in graffiti in Thessaloniki. Regarding the application of accents to the omicron-upsilon, yes this certainly can be done (Granjon did). The assumption has to be that this ligature always represents the diphthong, so the accent is always on the upsilon, not the omicron.\n\n"
+    },
+    {
+      "time": " 25.Mar.2007 6.27pm",
+      "content": "_The assumption has to be that this ligature always represents the diphthong, so the accent is always on the upsilon, not the omicron._\n\nsub omicron upsilon”accentX” by omup”accentX”;\n\n...where omup is the name of the ligature/dipthong.  \nSo whatever accenting is over the upsilon when it follows a plain omicron, then that accent should be over the ligature?\n\n"
+    },
+    {
+      "time": " 25.Mar.2007 11.49pm",
+      "content": "That’s what I would do. I just checked my Granjon references, and this is what he has done also. So you’re in good company.\n\nInterestingly, the showings of Greek sets in the big Enschedé book include the omicron-upsilon ligature at the end of the basic character set, not among the ligatures. As a representation of the diphthong, it has a status approaching that of an independent vowel.\n\n"
+    },
+    {
+      "time": " 23.Apr.2007 4.21pm",
+      "content": " ![](http://web.archive.org/web/20081011163213im_/http:/typophile.com/files/GrAlts1_6199.jpg)\n\nI’m puzzled by this.  \nAccording to Unicode,  \n03B8 = GREEK SMALL LETTER THETA  \n03D1 = GREEK THETA SYMBOL: script theta, used as a technical symbol\n\nAnd yet in the Italic of some fonts, 03D1 is less scripty than 03B8 (see above).  \nThis toggling of style seems to be putting a stylistic alternate at odds with Unicode.  \nLooking at both Adobe Pro and Cleartype fonts, the treatment of italics appears to be inconsistent by both companies, with some typefaces having the closed forms of alternates such as theta as 03B8, and the script variants as 03D1, and some the other way around — which is more consistent with Unicode, IMO (the same applies to phi, beta with descender, and the “latin” kappa). Like this:\n\n ![](http://web.archive.org/web/20081011163213im_/http:/typophile.com/files/GrAlts1b_3755.jpg)\n\nHowever, it occurs to me that in the upright font, perhaps 03D1 could be oblique, as the technical symbol could be full script (like the litre symbol), and the variant, _upright_ open form designated as 03B8.alt. Does that make sense?\n\nIn my own italic fonts, I am considering making the default in the open script form, as I prefer that for those faces, and making the “variant” character the same glyph, as that seems to be more consistent with Unicode (see below). After all, if the technical symbol is called for in the italic font, and it doesn’t look scripty, surely that is wrong.\n\n ![](http://web.archive.org/web/20081011163213im_/http:/typophile.com/files/GrAlts2_3869.jpg)\n\n"
+    },
+    {
+      "time": " 23.Apr.2007 7.16pm",
+      "content": "There is no requirement to use the “scripty” theta as the italic default form. My understanding is that it depends on the typeface. Garamond Premier Pro has the “scripty” theta as the default form in the italic, but Arno Pro does not. This was the designer’s deliberate decision.\n\nOn the other hand, the (default) form for U+03D1 needs to be the “scripty” one, as it was decided by Unicode. This should apply to both the roman and italic styles, . Arno Pro follows this convention.\n\n"
+    },
+    {
+      "time": " 23.Apr.2007 8.00pm",
+      "content": "_My understanding is that it depends on the typeface._\n\nAgreed. As I mentioned, I preferred the scripty Italic 03B8 theta etc for the faces I’m working on, not that it was mandatory.\n\nMy query was prompted by what appears to be the non-scripty 03D1 in italic fonts such as Garamond Premier which you showed above. It looks like (in Microsoft’s _Now Read This_ specimen) that Calibri, Candara, and Corbel are similarly configured — although not Constantia or Cambria.\n\n"
+    },
+    {
+      "time": " 23.Apr.2007 8.03pm",
+      "content": "Yes, I think your approach is correct Nick: the more cursive form should be default for U+03D1 regardless of what the default form of U+-0B8 for the particular typeface is. In the CT fonts, we didn’t do this, because we were maintaining a largely identical glyph set between the styles, but probably should have; on the other hand, I’m not expecting people to use the U+03D1 codepoint. If one follows Adobe’s one-glyph-per-character rule, then your approach may require the addition of an extra redundant glyph in italic fonts, if you want to provide the oval theta as a variant.\n\n"
+    },
+    {
+      "time": " 30.Apr.2007 12.35pm",
+      "content": "Marking,\n\nChrisL\n\n"
+    }
+  ]
+}

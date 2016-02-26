@@ -1,0 +1,42 @@
+{
+  "id": "12685",
+  "title": "Need Workaround Assistance",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I am setting a book that includes the polytonic (ancient) Greek alphabet. The Word document that I am pouring into InDesign has the Greek set in Hellenica, which has really large word space and unacceptably offset diacritical marks. I am setting the book in Minion Pro, which contains the appropriate glyphs, but when I selected the Hellenic text to change it into Minion, the Greek letter forms are replaced by Roman letter forms. It looks like the Unicode values for equivalent glyphs in each font, e.g. the Hellenica alpha and the Minion alpha, have different unicode values.\n\nI’m about to start setting a Greek-heavy chapter and would prefer to not have to manually change each glyph.\n\nCan you offer any suggestions?\n\nMany thanks in advance,\n\nBryan\n\n",
+  "author": "Bryan Narendorf",
+  "time": "24 May, 2005 - 7:57pm",
+  "uid": "7521",
+  "comments": [
+    {
+      "time": " 25 May, 2005 - 7:09am",
+      "content": "I’m guessing that the Hellenica font uses a hack 8-bit encoding for polytonic, rather than Unicode, and the Word doc uses this hack encoding. You are going to need to re-encode that Word document. The easiest way to do this is probably in Word, prior to copying/pasting to InDesign, using a macro. The macro will need to search/replace each hacked character in the Hellenica encoding and convert it to the correct Unicode character.\n\n"
+    },
+    {
+      "time": " 25 May, 2005 - 10:12am",
+      "content": "If you are working on a Mac there is a program called TextSOAP by Unmarked Software, [http://www.unmarked.com/](http://web.archive.org/web/20051126074843/http:/www.unmarked.com/) which can do the conversion for you very quickly once you setup the “cleaner”.\n\nOn a PC, I am looking for a program like TextSOAP. I have a programmer friend who will write a small software for me. If you are interested, I can let you use it once it is finished.\n\n"
+    },
+    {
+      "time": " 25 May, 2005 - 11:50am",
+      "content": "TextSoap is available for Windows.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 25 May, 2005 - 3:01pm",
+      "content": "If I recall correct, Hellenica is a font for modern Greek from Linguist’s Software (does not support polytonic, which explains why the diacritics don’t line up right). I have never used any of Linguist’s Software Greek fonts so I can’t speak about the encoding they use. John Hudson’s suggestion of a Word macro to do search and replace is what I would probably do myself.\n\nIf you determine that the font uses one of the several encodings used for polytonic Greek in pre-Unicode days, then Sean Redmond’s converter could help you: [http://www.jiffycomp.com/smr/unicode-converter/](http://web.archive.org/web/20051126074843/http:/www.jiffycomp.com/smr/unicode-converter/) . It converts from several widely used encodings into Unicode.\n\nDavid\n\n"
+    },
+    {
+      "time": " 26 May, 2005 - 1:38pm",
+      "content": "TextSoap looks like it could be pretty handy for a number of things, but — sorry, BUT — it doesn’t seem to handle multibyte text at all. I can’t paste any Unicode Greek or Cyrillic text into the work pane of the Windows version. :(\n\n"
+    },
+    {
+      "time": " 31 May, 2005 - 10:43pm",
+      "content": "Thank you for your assistance. I used the Redmond uni-code converter. It couldn’t handle the diacritical marks, but did successfully convert all of the unmarked glyphs in the text. It still took several tens of hours to do (and I shudder to think how many subscript iotas I dropped out in the process), but much less time than without the converter.\n\nAgain, your quick suggestions are greatly appreciated.\n\nI’ll be ready for Word to handle OpenType.\n\nBryan\n\n"
+    },
+    {
+      "time": " 1 June, 2005 - 6:00pm",
+      "content": "Actually, the later releases of Word do handle Unicode — you don’t really have to have OpenType in the Word documant. See, for example,\n\n[http://www.myfonts.com/info/opentype-support-in-applications/](http://web.archive.org/web/20051126074843/http:/www.myfonts.com/info/opentype-support-in-applications/)\n\nAs you can see, for everything to work out, both your platform and Word version and the authors platform & version of Word must support Unicode, and the font must use Unicode indicies, which right now means TrueType.\n\nYour problem was the fonts from Linguists Software — All of their fonts I’m aware of use, as John suggested, the 8-bit format with “inappropriate” names, not Unicode indicies. This “inappropriatness” isn’t an error on their part, it is caused by most composition systems not allowing the use of a custom encoding vector.\n\nWe’ve taken Word documents with polytonic Greek straight to comp when the font used in Word was Palatio TT (Unicode). I believe the customer wanted the job set in Palatino, but with the Unicode there, we could have set in in Minion OpenType CFF with no extra effort.\n\n"
+    }
+  ]
+}

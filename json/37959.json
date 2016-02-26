@@ -1,0 +1,38 @@
+{
+  "id": "37959",
+  "title": "Annoying message in FL5 class kerning",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm new to class kerning, I read the Cabarga book step by step, read the confusing FL5 manual as well, made some classes, made the kern feature as indicated (which I put after the liga feature) updated it, and apparently everything was going fine, but after some more pairs, on compiling and/or generating, I get this annoying (and worrying) message:\n\n\"Start of new pair positioning subtable; some pairs may never be accessed: etc etc\"\n\nI read some threads trying to find out about this and someone suggested inserting a \"subtable;\" line every 100 lines or so in the kern feature. I did this also but when I export my PS flavoured OT font, once more there's the message! (grrr!)\n\nAnyone knows why this is? I know this might be quite a basic thing for most of you but I'm really going nuts trying to find out what it was that I did wrong, or else I'll have to stick to my very dated way: manual kerning and simple TT and PS formats and shame for the great ligatures, alternates and so on...\n\nI'd really appreciate your help here, I hope this is something simple and I'm only drowning in a glass of water... Thanks!\n\n",
+  "author": "seneca",
+  "time": "10 Oct 2007 — 11:21am",
+  "uid": "20890",
+  "comments": [
+    {
+      "time": "10 Oct 2007 — 11:52am",
+      "content": "I think there is something wrong with your classes. Maybe some glyph are represented two times in a conflicting way or something like that, making it impossible to access some pairs, if you perhaps have two \"commands\" for this glyph.\n\nMy suggestion is that you triple-check that all classes are flagged (right/left) correctly in the class-panel. That is, make sure the classes are logical when it comes to deciding which is the first glyph in a pair, and which is the second.\n\nDid that make sense?\n\n"
+    },
+    {
+      "time": "11 Oct 2007 — 3:04am",
+      "content": "\\> _“Start of new pair positioning subtable; some pairs may never be accessed: ...”_\n\nThis message usually appears when a given glyph is contained in more than one kern class. What triggers the message is when these classes — that have a glyph in common — are used on the same side of two or more class kern pairs (within the same subtable). E.g.:  \n`\nfeature kern {\n@_B_LC = [b];\n@_O_LC = [o oacute];\n@_ROUND_LC_LEFT = [o b];`\n\npos @\\_B\\_LC @\\_O\\_LC -20;  \npos @\\_ROUND\\_LC\\_LEFT @\\_O\\_LC -30;  \n} kern;\n\nThe example above generates the following message:  \n`[WARNING] Start of new pair positioning subtable; some pairs may never be accessed: [b o] [o oacute]`\n\nThe warning means that some pairs downstream (second 'pos') are being masked by pairs defined upstream (first 'pos'). Effectively, these two class kern pairs are equivalent to the following singleton pairs,  \n`\npos b o -20;\npos b oacute -20;`\n\npos o o -30;  \npos o oacute -30;  \npos b o -30;  \npos b oacute -30;  \n  \nwhere it becomes clear that there are conflicting/repeated 'pos' commands. (BTW, pairs defined upstream take precedence).\n\nAll this to say that, as a rule of thumb, each glyph should only be included in one left kern class, and one right kern class, maximum. (This is by no means a strict rule, but you'll save yourself a few headaches if you follow it)\n\n"
+    },
+    {
+      "time": "13 Oct 2007 — 10:30pm",
+      "content": "Goran and Miguel: Thanks a lot for your tips, everything glided goldenly following them! Thing is I get too stressed out, and for no reason.\n\n"
+    },
+    {
+      "time": "9 Feb 2010 — 11:44pm",
+      "content": "I had the same problem on FL 5.0.4 (Win). It made me sick, because all classes were well prepared. Then I discovered, that Assistance reported a glyph duplicated in two classes, and one of them was removed previous day. So I understood that the bug may come from file \"memory\".  \nI saved my classes, deleted them (and the kern feature), closed the program, launched again and imported the saved classes. Voila! No bad report!\n\n"
+    },
+    {
+      "time": "6 Apr 2011 — 10:11pm",
+      "content": "Try 'Clean Up Classes' under the disk icon in your classes window. This worked for me.\n\n"
+    },
+    {
+      "time": "9 Apr 2011 — 6:05pm",
+      "content": "thanks from me too... I was about the ask the same question.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "10930",
+  "title": "Learning to love Fontlab pt1",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I recently made the jump to FontLab from Fog and have a few questions. I may be completely wrong on some of the assumptions Ive made as Im still trying to get my head around the software...   \n   \n1. FL hints PS1 and TT fonts in different ways. Should I keep a seperate FL file for each format? (I guess that FL doesnt store hinting data for PS1 and TT in the same file, but instead converts it.)   \n   \n2. I recently read that TT fonts should use 2048 UPM and PS1 fonts should use 1000 UPM. Again I suppose I should have seperate files for TT and PS versions of a font?   \n   \n3. If, sometime in the far future, we will all be publishing our typefaces as OpenType fonts should the hinting be PS1 or TT? I was always under the impression that TT is PS1s poor relation but TT hinting is much more advanced, so I guess TT is more future proof?   \n   \n4. I have a number of flash pixel fonts to publish. In the past I have published from Fog with no hinting to get the best results. How should I approach this in FL?   \n   \nThanks for your help!\n\n",
+  "author": "sbt",
+  "time": "9 April, 2003 - 1:04pm",
+  "uid": "863",
+  "comments": [
+    {
+      "time": " 9 April, 2003 - 4:27pm",
+      "content": "1. If you are doing manual TT hinting, then you should definitely maintain two source files, one for PS and one for TT. If you are letting FL automate the TT hinting, you can do this from the PS source, since the autohinting works by converting PS stem hints into TT instructions.   \n   \n2. A TrueType font can have any UPM value you like, so it is possible to maintain a single PS source with a UPM of 1000 and output a TT font with the same UPM. Microsoft recommends using a power of 2 for TT UPM, with 2048 as the most common. Smaller UPM values are sometimes used for East Asian fonts to reduce the font size; larger UPM values are used for designs with very fine details. Greg Hitchcock at Microsoft reports a very tiny improvement in rasterising time when you use a power of 2, but unless you're licensing fonts to Microsoft this needn't be a concern and you can safely use 1000.   \n   \n3. An OpenType font can contain either PS CFF outlines or TT outlines, with appropriate hinting. Generally, the choice is expressed this way: if you are designing type primarily for print media, CFF outlines and hinting are easy to work with and maintain; if you are designing type that will be heavily used in low resolution media, e.g. reading on screen, then you generally want the extra precision of TT hinting.   \n   \n4. Sorry, I don't know enough about Flash to help you with this question.\n\n"
+    },
+    {
+      "time": " 12 April, 2003 - 10:07am",
+      "content": "Thanks for your in depth answers, very helpful!\n\n"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "14590",
+  "title": "Adding opentype features",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi,  \nI am working on a font based on my handwriting and have included instructions for ligatures for the typical ffi ffl etc and also for er ar to ...letters that I normally join in my handwriting.  \nHowever the font includes modern greek and polytonic greek...and I want to include some ligatures for a few joined letters in modern greek.  \nFor instance how would I include the substitution for epsilon and iotatonos by glyph FB10 (which at this point is also named fb10)?  \nI put in the opentype instructions initially using VOLT. When I opened the font in Fontlab there was also a feature called zz01 this basically includes all the same info as the liga feature which also appears. Is this extra feature needed for liga to work?  \nfeature zz01 {  \n # Latin  \n language zz01 exclude\\_dflt;  \n sub a r by FB05;  \n sub e r by fb06;  \n sub f f i by ffi;  \n sub f f l by ffl;  \n sub f f by ff;  \n sub f i by fi;  \n sub f l by fl;  \n sub l l by fb07;  \n sub t h by fb08;  \n sub t o by fb09;  \n sub a y by fb0a;  \n sub t i by fb0b;  \n sub a u by fb0c;  \n sub t y by fb0d;  \n sub o u by fb0e;  \n} zz01;\n\nI have also tried to use class based kerning using the instructions with fontlab but when I create the font and try to test the kerning the only letters which kern are the initail ones used to set up the kerning group. Am I missing something in settings? Currently in my font there are 1922 kerning pairs, is this extreme?\n\nAny help in any of these areas would be very greatfully received.  \nThanks  \nNeil\n\n",
+  "author": "<a href=\"/web/20090714142547/http://typophile.com/user/7129\" title=\"View user profile.\">NeilE</a>",
+  "time": "<br>",
+  "uid": "7129",
+  "comments": [
+    {
+      "time": " 14.Aug.2005 9.22am",
+      "content": "Neil,\n\n1. I recommend adopting a proper glyph naming scheme rather than ad-hoc names like “fb06”. Read more here:  \n [http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mvie...](http://web.archive.org/web/20090714142547/http:/groups.msn.com/fontlab/tipsandtricks.msnw?action=get_message&mview=0&ID_Message=3065 \"http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mview=0&ID\\_Message=3065\")\n\n2. When FontLab decompiles an OpenType font with features created in VOLT, it sometimes needs to add the “zzXX”. This does not mean these features are in the font. Due to the nature of the Adobe FDK for OpenType source notation (.fea) used in FontLab’s OpenType panel, certain features cannot be directly expressed in the source notation as is. This is a limitation of the current version of the Adobe FDK for OpenType that is likely to be improved in the future.\n\nRelying on the OpenType feature notation decompiled by FontLab from an existing font is not recommended. The decompilation works in many cases, but it surely does not represent 100% preciseness.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": " 14.Aug.2005 9.55am",
+      "content": "Hi Adam,  \nThanks for replying.  \nCould you possibly direct me how to implement the liga feature for use with greek characters to be used with a greek layout keyboard( not a physical greek keyboard, but where you can change lanuages for your keyboard). I tried just adding the substitutions to the list already but it causes errors.  \nAlso what am I doing wrong regrding class kerning.  \nMany thanks again  \nNeil\n\n"
+    },
+    {
+      "time": " 8.Nov.2005 7.20am",
+      "content": "hi,  \ni am workng on a opentype font in fontlab and i was wondering if there was a way to have several differnt options for the same charachter within the same opentype feature. For example swashes if i wanted to replcae the glyph A with A.swsh i would type\n\nfeature swsh {sub A by A.swsh;}swsh\n\nbut if i wanted to give another glyph ontion on the leter A within the same opentype feature is there another way to do it. What I want is to have several glyph applied on top of each other so that the text can give he impression of being randomy chosen.\n\nIf any one could help me with this i would be very greatful.\n\nMany Thanks  \nNeil\n\n"
+    },
+    {
+      "time": " 8.Nov.2005 8.47pm",
+      "content": "See also this thread on contextual alternates [http://typophile.com/node/15724](http://web.archive.org/web/20090714142547/http:/typophile.com/node/15724 \"http://typophile.com/node/15724\"), and this thread with discussion of stylistic sets [http://typophile.com/node/16043](http://web.archive.org/web/20090714142547/http:/typophile.com/node/16043 \"http://typophile.com/node/16043\")\n\nT\n\n"
+    }
+  ]
+}

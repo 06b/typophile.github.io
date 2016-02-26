@@ -1,0 +1,62 @@
+{
+  "id": "45129",
+  "title": "Pill Gothic OTF Small Caps won't work in InDesign CS3",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "Hi there,\n\nI’ve used Pill Gothic OTF for a customer last year (who has bought the font from Veer) with InDesign CS2 and had no problems with Small Caps. Now making a new project for this particular customer, the Opentype Small Caps function in InDesign CS3 won’t work. InDesign doesn’t react in any way. What’s really strange is that the document from last year opens correctly with OTF Small Caps. Does anyone know of a bug in InDesign CS3 within Small Caps? Thanks in advance.  \n(Mac, 10.5.2, Indesign CS3, Preferences deleted without effect)\n\n [‹ I need some stuff, and to begin with, a nice picture of Evert Bloemsma](http://web.archive.org/web/20080515232803/http:/www.typophile.com/node/45147 \"Go to previous forum topic\") [Alternative Glyphs cast by Bruce Rogers ›](http://web.archive.org/web/20080515232803/http:/www.typophile.com/node/45004 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080515232803/http://www.typophile.com/user/1301\" title=\"View user profile.\">derya</a>",
+  "time": "<br>",
+  "uid": "1301",
+  "comments": [
+    {
+      "time": " 8.May.2008 3.21pm",
+      "content": "Do the small caps work OK in TextEdit?\n\n"
+    },
+    {
+      "time": " 8.May.2008 3.33pm",
+      "content": "thanks for the tip, nothing wrong with the font, InDesign is the culprit.\n\n ![](http://web.archive.org/web/20080515232803im_/http:/www.typophile.com/files/pic_4782.png)\n  \nstrange…\n"
+    },
+    {
+      "time": " 8.May.2008 3.46pm",
+      "content": "I saw this happen to an old version of Minion Pro. When I changed the _language_ to anything else than English, small caps and a few other niceties failed.  \nIt took me several years to find out. I discovered that in that version of Minion, there were definitions for a lot of OpenType options as well as sub-definitions for a few languages. The creator forgot to include all OpenType features for all languages ...\n\nYou can try if setting the language to “[None]” in ID solves it. If not, you’ll have to check the font file if it contains anything strange. Or (more feasable) contact your font vendor and ask if it’s a known issue.\n\n"
+    },
+    {
+      "time": " 8.May.2008 4.15pm",
+      "content": "You saved my day Theunis, indeed it worked that way out. Thanks very much. Seems like someone forgot to include sub-definitions for german. InDesign was the culprit, but the font is convicted, what a drama…  \n;-)\n\n"
+    },
+    {
+      "time": " 8.May.2008 5.11pm",
+      "content": "Derya, can you specify which version of the font(s) your using? (You can use InDesign’s “Find Font...” dialog to check that.) Thanks!\n\n ![](http://web.archive.org/web/20080515232803im_/http:/www.typophile.com/files/findFont_ID_5161.png)\n\n"
+    },
+    {
+      "time": " 8.May.2008 5.20pm",
+      "content": "How do I send someone a message directly through typophile. I think I can’t see a button...\n\n"
+    },
+    {
+      "time": " 8.May.2008 5.58pm",
+      "content": "That feature no longer exists. Instead you can contact users through their profile page.\n\n"
+    },
+    {
+      "time": " 9.May.2008 12.48am",
+      "content": "Hi Miguel,\n\nScreenshot:\n\n ![](http://web.archive.org/web/20080515232803im_/http:/www.typophile.com/files/Bild1_4611.png)\n\n"
+    },
+    {
+      "time": " 9.May.2008 10.57am",
+      "content": "Oh, I was actually asking for Minion Pro’s version, not Pill Gothic’s, but thanks anyway. My bad, Theunis was the one that mentioned Minion.\n\nTheunis, can you find out which “old version of Minion Pro” you were using? Thanks.\n\n"
+    },
+    {
+      "time": " 9.May.2008 2.19pm",
+      "content": "Miguel,\n\nI’m sure it must have been the one that originally came with InDesign CS. After installing CS3, I ran into troubles with the small caps and — surprisingly — with some accent characters of which ID thought they were there in the text, but did not show up in the Glyph window. As the PDF export failed miserably for these files, at that time I finally thought of checking font versions, and found the Minion supplied with CS3 was a newer and better one. Replacing them in my system solved all weird probs instantly.\n\nI’ve scanned my hard disk for the ’old’ version, and I think I still have one. See this (composited) screenshot of its properties.\n\n ![](http://web.archive.org/web/20080515232803im_/http:/www.typophile.com/files/minion_5886.PNG)\n\nNotice how for German the only feature is “Discretionary” (a few of the other languages, such as SRB and MOL only contain “locl”). My new Minion is a version 1.015, and that has full tables for all languages.\n\nFYI, the discretionary ligatures are here defined as\n\nsub c h by c\\_h  \nsub c k by c\\_k\n\nand these do not appear in any of the other sets. The new Minion contains these same ligatures, also for German only, _as well as_ all other standard sets.\n\n"
+    },
+    {
+      "time": " 9.May.2008 2.52pm",
+      "content": "... rereading my last post, I wondered if I got my version numbers right.\n\nIn case you didn’t notice, what I call “old” is really v1.021 (14 Oct, 2002), and “new” is v1.015 (20 May, 2005). I’m 100% sure, by now I;ve _triple checked_.\n\nSomeone at Adobe made a foo-bar :-) (Miguel, I hope you were not in charge of this versioning. If so, apologies.)\n\nAn interesting observation is that I couldn’t get my personal, old, IDCS to get it to display wrong. Derya noticed the same phenomenon — it _worked_ in CS (and probably in CS2 as well, I’ve used it for ages at work), and failed only with the advent of CS3. I would rather call it a bug in the older CSes, since, judging by the feature table, it does indeed work as advertised in CS3 — though not as meant (a very important distinction).\n\n"
+    },
+    {
+      "time": " 10.May.2008 12.41am",
+      "content": "Theunis, thanks a lot for the info.\n\nThe bug is in the fonts, not in InDesign. What happens is that prior to CS3, InDesign payed no attention to the instructions in the font targeted at specific languages. So once IDCS3 started parsing those instructions, the bugs in the fonts surfaced.\n\nThose buggy fonts were incorrectly built due to a misinterpretation on how to write and implement OT feature code. You know, back in 2002 OpenType was in its infancy, so some things were not as clear as they are nowadays. And the apps available at the time did not exercise all the font’s capabilities, so that bug passed unnoticed. It also proves once more that, “If it’s not tested, assume it’s broken”.\n\n\\> _In case you didn’t notice, what I call “old” is really v1.021 (14 Oct, 2002), and “new” is v1.015 (20 May, 2005). I’m 100% sure, by now I’ve triple checked.  \nSomeone at Adobe made a foo-bar :-) (Miguel, I hope you were not in charge of this versioning. If so, apologies.)_\n\nYeah, that’s strange. I joined Adobe in April’06, so I can’t be blamed for that one :^)\n\n"
+    }
+  ]
+}

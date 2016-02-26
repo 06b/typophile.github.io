@@ -1,0 +1,31 @@
+{
+  "id": "67745",
+  "title": "fontographer sizing",
+  "forum": "Typography / Composition",
+  "tags": [
+    "re-sizing characters",
+    "Typography / Composition"
+  ],
+  "content": "What is a good procedure for re-sizing characters that have been imported into Fontographer? My entire font needs to be enlarged by 149% to meet the publisher's technical requirements. I find that I can enlarge one character at a time using Fontographer's Transform function, but when I select multiple characters they not only enlarge, but turn upside down.\n\nThere must surely be a simpler solution to this problem. Any ideas?\n\nTom Lincoln\n\n",
+  "author": "thomas lincoln",
+  "time": "23 Feb 2010 — 12:43pm",
+  "uid": "14572",
+  "comments": [
+    {
+      "time": "23 Feb 2010 — 1:28pm",
+      "content": "It's been years since I've used Fontographer, but here's a trick I figured out way back when for scaling an entire font:\n\n(Be sure to Save first in case you make a mistake.)\n\n1. Choose \"Element \\> Font Info...\"\n\n2. The \"Font Info\" dialog box is displayed. There are two checkboxes near the bottom, \"Retain path coordinates...\" and \"Automatically compute...\". Make sure both of these are **unchecked.**\n\n3. Note the current \"Em Square:\" value and multiply it by your scaling amount. For example, if the Em Square value is 1000 and the scaling amount is 149%, then 1000 x 1.49 = 1490. Enter the calculated value in the \"Em Square:\" field and hit \"OK\".\n\nAt this point, the paths are all scaled up, but the Em Square value is wrong. So,\n\n5. Choose \"Element \\> Font Info...\"\n\n6. **Check** the box next to \"Retain path coordinates...\"\n\n7. Enter the original Em Square value (in the example above it would be 1000) and hit \"OK\".\n\nYour font is now scaled.\n\n"
+    },
+    {
+      "time": "23 Feb 2010 — 1:44pm",
+      "content": "That will work, Mark, but I think there's an easier way:\n\n1. In the main window press Ctrl-a to mark all glyphs.  \n2. In the menu, choose Element/transform.  \n3. In the popup window choose  \n a) Center transformations around: Character origin  \n b) First transformation: Scale uniformly 149 (or whatever) percent.  \n c) then: do nothing  \n d) click on the button \"transform\".\n\nStep 3 a) is important, otherwise the smaller characters will sit somewhere in mid-air if you choose Center of selection instead.\n\nAndreas\n\n"
+    },
+    {
+      "time": "23 Feb 2010 — 1:50pm",
+      "content": "The advantage of my method is that it also scales the kerning.\n\n"
+    },
+    {
+      "time": "24 Feb 2010 — 7:12am",
+      "content": "Good point. Mine doesn't (just checked it). I think the reason that I never thought of that is that the fonts I scaled were in such a rough state that they didn't have any (proper) kerning at all.\n\n"
+    }
+  ]
+}

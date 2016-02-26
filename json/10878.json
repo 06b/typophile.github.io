@@ -1,0 +1,34 @@
+{
+  "id": "10878",
+  "title": "Logotype Embed Logo in Font... which char?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I hope this is a good place for this post. So I need to insert a company logo into a typeface. Is there a standard key combo that people use to do this? Or do I just pick a little-used character and write over it? I hate to blow away the eastern euro support built into the face but since it's a US company (for now) it'll probably be one of those...   \n   \nI'm counting on Hrant for this one.   \n   \nThanks in advance, free beer in VT.   \n   \ng\n\n",
+  "author": "gahlord",
+  "time": "2 April, 2003 - 9:18am",
+  "uid": "1513",
+  "comments": [
+    {
+      "time": " 2 April, 2003 - 9:24am",
+      "content": "For this I use the private area.   \n   \nabout uniF000\n\n"
+    },
+    {
+      "time": " 2 April, 2003 - 9:26am",
+      "content": "I'm flattered, but I think you should count more on an encoding guru, like John Hudson.   \n   \nWith my little knowledge, I might put it where the \"sputnik\" is (that generic currency symbol), and map it to some memorable shift-option position. But if you go lower-ASCII, I might consider repurposing the \"pipe\" (shift-backslash).   \n   \n\\> I hate to blow away the eastern euro support built into the face but since it's a US company   \n   \nDon't worry, I'm pretty sure getting rid of eccents 'n' stuff is part of the US Master Plan.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " 2 April, 2003 - 10:11am",
+      "content": "This depends on what kind of font you are producing, in what environments it will be used, and whether you need documents produced with it to be accessible on older systems or across platforms. Today, I would favour Andreas' solution and simply use a codepoint from the Unicode Private Use Area, but this presumes that the font has a Unicode cmap (TrueType or OpenType), or some other method of mapping from glyphs to character codes, and is going to be used in a Unicode text processing environment (Windows NT, 2000 or XP; Cocoa apps on OS X; ? on Linux).   \n   \nIf you are making Type 1 fonts, or are otherwise aiming at legacy environments, then you may find it expedient to replace a character in one of the standard 8-bit codepages. Since any use of the logo is screwing up text anyway, it doesn't really matter which character you replace. If you want easy keyboard access, Hrant's suggestion of the bar character is not bad.   \n   \nAnother thing we've done in the past is to make a separate logo font, that contains only a single glyph. This discourages customers from trying to typeset documents with font that might contain their logo replacing a character that might occur in normal text.\n\n"
+    },
+    {
+      "time": " 2 April, 2003 - 10:21am",
+      "content": "If the logo font is destined for Macintosh Postscript Type 1, then you might consider the shift-option-k (dec 240) position, which usually contains Apple's apple logo. (You'll need to generate the font with Macintosh encoding and not Adobe Standard, so that the character isn't pulled from the Symbol font. I think you'll need to do the same if you replace the \"pipe\" character also.)   \n   \n-- K.\n\n"
+    },
+    {
+      "time": " 2 April, 2003 - 10:29am",
+      "content": "I think nothing in ASCII-7 (like the pipe) ever gets touched.   \n   \nhhp\n\n"
+    }
+  ]
+}

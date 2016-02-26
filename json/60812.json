@@ -1,0 +1,138 @@
+{
+  "id": "60812",
+  "title": "Vietnamese text problem with InDesign",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "A colleague of mine faces a problem with importing vietnamese text into InDesign: a couple of characters fail to get displayed correctly. A quick test of applying different Pro-fonts on the text reveals that with each of them a different selection and number (!) of ch.s submarine.  \nOn the other hand, the same text performes perfectly well in e.g. Apples MAIL or TEXTEDIT.  \nSee this view of Indesign (top) and Textedit (bottom), text file and font \\*are the same\\*:\n\n– Has anyone a clue?\n\n ![](http://web.archive.org/web/20130914174522im_/http:/typophile.com/files/vietn_4853.jpg)\n\n",
+  "author": "Andreas Stötzner",
+  "time": "10 Aug 2009 — 6:09am",
+  "uid": "17347",
+  "comments": [
+    {
+      "time": "10 Aug 2009 — 7:06am",
+      "content": "The support for mark-to-base (to position a single accent character to its base letter) and mark-to-mark (to position multiple accents relative to eachother) differs from one application to another. Pre-CS4, InDesign did not support it (at all, or correctly); CS4 should finally support it in full. That's from hearsay, by the way.\n\nIt's also possible Textedit doesn't _need_ the Opentype definitions and can simulate the compositions just by having the right glyphs in the font.\n\n"
+    },
+    {
+      "time": "10 Aug 2009 — 8:42am",
+      "content": "I don't think this is anything to do with mark positioning GPOS. All the Vietnamese diacritics are precomposed Unicode characters, so GPOS isn't necessary. In any case, the InDesign problem displays as .notdef glyphs, indicating that the program is confused about the underlying characters.\n\nAndreas, do you know what method your colleague is using to import the text?\n\n"
+    },
+    {
+      "time": "10 Aug 2009 — 11:07am",
+      "content": "He says: <cite>»… Text kopiert aus openoffice (das freie office-Programm, word vergleichbar, aktuelle Version). Die Datei selbst kommt vom Verlag bearbeitet in word.«</cite>\n\nThat is: “text pasted from OPENOFFICE (the free office application, similar to WORD, actual version). The file comes originally from the publisher and was edited in WORD.”\n\n"
+    },
+    {
+      "time": "10 Aug 2009 — 11:13am",
+      "content": "What happens if you first import the textfile in TextEdit and then copy/paste into InDesign?\n\n. . .  \nBert Vanderveen BNO\n\n"
+    },
+    {
+      "time": "10 Aug 2009 — 11:28am",
+      "content": "Andreas, can you confirm that the font contains the characters that InDesign is showing as notdef? (e.g. ắ ễ)\n\nInDesign doesn't do font fallback whereas TextEdit does. So I'm wondering if the problem doesn't show up in TextEdit because it's using a different font to display the missing characters.\n\n"
+    },
+    {
+      "time": "10 Aug 2009 — 11:57am",
+      "content": "Andreas, here is an example where the fallback is obvious, but you may have more fonts than I do and get a fallback that is not so clear. To check if the character that is displayed is in the font you think, you select the character in TextEdit, and then select \"Format \\> Font \\> Show fonts\". The name of the font used to display the character is then displayed at the top of the font window, as \"Lucida grande\" is displayed in my grab. If no font name is displayed, the selection is a mixture of different fonts.\n\n ![](http://web.archive.org/web/20130914174522im_/http:/typophile.com/files/fallback_6690.jpg)\n\nMichel\n\n"
+    },
+    {
+      "time": "10 Aug 2009 — 1:35pm",
+      "content": "And here is a convincing way to prove that Charis SIL is used to display all the selected text in TextEdit (select the text and display the font name at the top of the font window):\n\n ![](http://web.archive.org/web/20130914174522im_/http:/typophile.com/files/charis_5968.jpg)\n\n"
+    },
+    {
+      "time": "10 Aug 2009 — 2:13pm",
+      "content": "Auto-glyph replacement _is_ high on my wish-list for InDesign :-) (although I'd appreciate a minimum of control -- see Michel's first picture, mixing two rather unlikely fonts).\n\n"
+    },
+    {
+      "time": "10 Aug 2009 — 3:55pm",
+      "content": "I think it would be a bad thing if InDesign started to do font fallback. Font fallback is highly desirable in environments where the content (i.e. the data/information) is more important than its form (i.e. the design/typography). So I'd argue that, being InDesign a professional typesetting tool, it's very important to get typographic fidelity and therefore having things like font fallback and faux styles is undesirable\\*.\n\n\\* (Even the faux small caps that InDesign already allows is sort of an heresy for Type geeks)\n\n"
+    },
+    {
+      "time": "10 Aug 2009 — 7:32pm",
+      "content": "<cite>Even the faux small caps that InDesign already allows is sort of an heresy for Type geeks</cite>\n\nMiguel, you have made my day. I've never been called a geek before!\n\n"
+    },
+    {
+      "time": "11 Aug 2009 — 1:32am",
+      "content": "Ah -- but I wouldn't call it a \"fallback\"! (in the sense that Word, for example, automatically falls back onto faux bold & italic).\n\nWhy not call it a Feature, and have the user specify which other font to use if there is a glyph missing? It's what I do now manually: check a font for missing glyphs, find a replacement font, create character style for it and apply that to the missing characters.\n\n"
+    },
+    {
+      "time": "11 Aug 2009 — 5:00am",
+      "content": "Why not -- as Adobe does -- allow the comp to modify the font, so needed characters can be made up?\n\nComposition is going to get so automated that typesetters will become buttonpushers. The results won't be quite as good generally, but I suppose it will serve. Of course, if you really need a good comp, there won't be one around anymore.\n\n"
+    },
+    {
+      "time": "11 Aug 2009 — 5:39am",
+      "content": "You are worried the ancient typesetters' art of memorizing the fonts in which to find any of several thousands glyphs will be lost for future generations?\n\nI'd rather once enter it somewhere and then have my computer look it up where necessary. It's really good at that sort of things.\n\n"
+    },
+    {
+      "time": "11 Aug 2009 — 7:36am",
+      "content": "No, I'm worried that the new, modern \"compositor/punchcutter,\" who makes up the proper character in the correct font, (or does the equivalent in the typesetting file with combining diacriticals/spacing modifier characters) will be replaced by the pushbutton what-the-heller.\n\n"
+    },
+    {
+      "time": "11 Aug 2009 — 8:41am",
+      "content": "Make it a hidden option, activated by a password which you receive together with your Graphic Designer certificate.\n\nI still think it'd be useful. Altering existing fonts is an option, but\n\n- it takes a lot of time and effort  \n- you might break existing structures in the font, such as kerning and opentype features  \n- you end up with a unique font you cannot legally distribute -- thus, you can't send any of the original files you used it in to someone else.\n\nHow does the virtual font system I imagine compare to that?\n\n- For any character not in font _f_, you should be able to specify an alternate glyph _g_ from another font. Somewhere in the InDesign Glyph panel -- browse & click.  \n- The program (InDesign, preferable) handles the replacement of glyphs; the fonts themselves are not touched.  \n- It's just a data table somewhere in the document; yes, anyone else using your original documents should have the same fonts, but this is already a (reasonable) requirement.\n\n"
+    },
+    {
+      "time": "11 Aug 2009 — 11:33am",
+      "content": "<cite>can you confirm that the font contains the characters that InDesign is showing as notdef? (e.g. ắ ễ)</cite>  \nYes I can. Regarding the font in question the Vietnamese range is definitely complete. So fallback is surely not the issue.  \nMichel, in the snapshot by which you show Textedit’s fallback operation you obviously used one of the Andron Freefonts, none of them support Vietnamese, however. But Andron Mega does (which my colleague sets a book with) as well as e.g Lucida Grande does.  \nSo I still see no explanation for that mystery.\n\n"
+    },
+    {
+      "time": "11 Aug 2009 — 12:04pm",
+      "content": "I used Andron Scriptor Web, and in that font the character ắ is defined and it shows in the following InDesign grab (whilst it does not show in yours)\n\n ![](http://web.archive.org/web/20130914174522im_/http:/typophile.com/files/InDesignASW_5687.jpg)\n\nThe other characters are not defined and do not show. All is thus normal.\n\nYou have not confirmed that, in spite of the characters being defined in Andron Mega, when you select the text in TextEdit and look at the top of the font window, the fontname does not show. That would have helped to isolate the problem. So now I can only speculate. One possibility is that, in the font causing problems, the characters are not named uniXXXX (like uni1EAF in Andron Scriptor Web) but are given a name like `abreveacute`. On the Macintosh, that may cause the type of problem you seem to be experimenting. Look and let us know.\n\n"
+    },
+    {
+      "time": "11 Aug 2009 — 12:14pm",
+      "content": "<cite>can you confirm that the font contains the characters that InDesign is showing as notdef? (e.g. ắ ễ)</cite>  \nYes I can. Regarding the font in question the Vietnamese range is definitely complete. So fallback is surely not the issue.  \nMichel, in the snapshot by which you show Textedit’s fallback operation you obviously used one of the Andron Freefonts, none of them support Vietnamese, however. But Andron Mega does (which my colleague sets a book with) as well as e.g Lucida Grande does.  \nSo I still see no explanation for that mystery.\n\n"
+    },
+    {
+      "time": "11 Aug 2009 — 12:20pm",
+      "content": "Andreas, back to my earlier question: do you know what method your colleague is using to import the text?\n\nAlso, do you know from what source he is importing it? Is the source Unicode, or an 8-bit Vietnamese encoding?\n\nHave you tried copying one of those .notdef box characters out of InDesign and into e.g. Word? On Windows, you can then use alt+X to reveal the character code, and then you'll know what InDesign thinks it is.\n\n"
+    },
+    {
+      "time": "11 Aug 2009 — 12:30pm",
+      "content": "Andreas, if you have the InDesign text, you could just copy it from \"Diese\" to \"2006\" and paste it in your thread and we could know exactly what the characters it contains are.\n\nMichel\n\n"
+    },
+    {
+      "time": "12 Aug 2009 — 10:32am",
+      "content": "John, Michel, thanks for your suggestions so far. I’ll go on testing, along the lines you propose. Just allow one or two days …\n\n"
+    },
+    {
+      "time": "13 Aug 2009 — 12:09am",
+      "content": "Michel asked: <cite>You have not confirmed that, in spite of the characters being defined in Andron Mega, when you select the text in TextEdit …</cite>  \nI’ve checked this by driving the cursor through the lines. Every single letter is there of Andron Mega, no fallbacks to other fonts. Definitely.\n\n<cite>… the characters are not named uniXXXX … </cite>  \nI checked this in Fontlab. See the image: blue marked ch.s have descriptive names (all others are named uniXXXX), but the red marked ch.s fail in the Indesign sample. There’s no match which would explain the failure.\n\n ![](http://web.archive.org/web/20130914174522im_/http:/typophile.com/files/And_vietn_FL_4322.jpg)\n\n"
+    },
+    {
+      "time": "13 Aug 2009 — 12:12am",
+      "content": "John: <cite>Andreas, back to my earlier question: do you know what method your colleague is using to import the text?</cite>  \n– See my earlier statement above.  \n<cite>Also, do you know from what source he is importing it? Is the source Unicode, or an 8-bit Vietnamese encoding?</cite>  \n– I go and ask him.\n\n"
+    },
+    {
+      "time": "13 Aug 2009 — 12:17am",
+      "content": "<cite> … copying one of those .notdef box characters out of InDesign and into e.g. Word?</cite>\n\nI copied the passage out of Indesign into TextEdit:\n\n ![](http://web.archive.org/web/20130914174522im_/http:/typophile.com/files/vietn2_3586.jpg)\n\nThe same happens when the text is pasted into MAIL.\n\n"
+    },
+    {
+      "time": "13 Aug 2009 — 12:32am",
+      "content": "And here comes the ultimate exercise, copied from TEXTEDIT pasted directly into TYPOPHILE (via FIREFOX):\n\nDiese ist: Nguyễn Huy Thiệp: Tuyển Tập Truyện Ngắn, Verlag Văn Hóa Sài Gòn, Ho-Chi-Minh-Stadt 2006. Eine der Geschichten (Lieder) ist dort nicht enthalten. Wir benutzten als Originaltext: Nguyễn Huy Thiệp: Tác Phẩm Và Dư Luận, Hanoi 1990, S. 211–228.\n\nFor comparison, this is how I see the preview of this:  \n[snapshot]\n\n ![](http://web.archive.org/web/20130914174522im_/http:/typophile.com/files/viertn3_4913.jpg)\n  \n[snapshot] \n"
+    },
+    {
+      "time": "13 Aug 2009 — 3:16am",
+      "content": "This is how I see your text above in Safari (Mac):\n\n ![](http://web.archive.org/web/20130914174522im_/http:/typophile.com/files/safari_5692.png)\n\nAnd copying that text to make a few text frames in InDesign CS2 (Mac), this is what they look like using (from top to bottom) Myriad Pro, Minion Pro and Arno Pro:\n\n ![](http://web.archive.org/web/20130914174522im_/http:/typophile.com/files/indesignCS2_5088.png)\n\nIn your TextEdit screenshot above, the [Last Resort font](http://web.archive.org/web/20130914174522/http:/developer.apple.com/textfonts/lastresortfont/) symbols seem to be Tibetan.\n\n"
+    },
+    {
+      "time": "13 Aug 2009 — 4:40am",
+      "content": "If I save the html source of this thread, remove with vim what is above and under the text pasted above and run a script that outputs the unicode characters, I get that the Vietnamese extract contains characters in the range 0020-007A, the character 2013 (EN DASH) and the following characters  \n`\n00E0;à;LATIN SMALL LETTER A WITH GRAVE\n00E1;á;LATIN SMALL LETTER A WITH ACUTE\n00F2;ò;LATIN SMALL LETTER O WITH GRAVE\n00F3;ó;LATIN SMALL LETTER O WITH ACUTE\n0103;ă;LATIN SMALL LETTER A WITH BREVE\n01B0;ư;LATIN SMALL LETTER U WITH HORN\n1EA9;ẩ;LATIN SMALL LETTER A WITH CIRCUMFLEX AND HOOK ABOVE\n1EAD;ậ;LATIN SMALL LETTER A WITH CIRCUMFLEX AND DOT BELOW\n1EAF;ắ;LATIN SMALL LETTER A WITH BREVE AND ACUTE\n1EC3;ể;LATIN SMALL LETTER E WITH CIRCUMFLEX AND HOOK ABOVE\n1EC5;ễ;LATIN SMALL LETTER E WITH CIRCUMFLEX AND TILDE\n1EC7;ệ;LATIN SMALL LETTER E WITH CIRCUMFLEX AND DOT BELOW\n`  \nand nothing else.\n\nOne thing that is quite mysterious is that in line four of the first grab,\n\n ![](http://web.archive.org/web/20130914174522im_/http:/typophile.com/files/linefour_5890.jpg)\n  \nthe letter\n\n`  1EC7;ệ;LATIN SMALL LETTER E WITH CIRCUMFLEX AND DOT BELOW`\n\ncomes out correctly in the word Thiệp but not in the word Truyện.\n\nMichel\n\n"
+    },
+    {
+      "time": "13 Aug 2009 — 5:06am",
+      "content": "Andreas, can you email me the textedit rtf file that you displayed above?\n\nMichel\n\n"
+    },
+    {
+      "time": "13 Aug 2009 — 5:34am",
+      "content": "Send me an adress via the signogrphie.de contact form.\n\nMeanwhile I did further testing. I copied text from serious Vietnamese websites and pasted it into TEXTEDIT and INDESIGN, applying Andron Mega in both instances – everything looks perfect.  \nNow I assume that the bug lies in the encoding of the original text (John: probably Unicode-encoded).\n\n"
+    },
+    {
+      "time": "13 Aug 2009 — 6:04am",
+      "content": "<cite>Send me an adress via the signogrphie.de contact form.</cite>  \nDone.\n\n"
+    },
+    {
+      "time": "28 Sep 2009 — 7:52am",
+      "content": "You downloaded an font named Reader Sans Roman to make it work in Scribus, thus adding the Vietnamese characters and etc and designed many others.\n\nAttached an image:\n\n ![](http://web.archive.org/web/20130914174522im_/http:/typophile.com/files/font_creator_preview_4854.png)\n\nThe following characters  \nể ắ  \nare blank in Reader Sans Roman, but in Opera it appears as Myriad Pro.\n\nVISCII has the ê and â accented letters in French.\n\nIt will be good if FontCreator will have an restore session feature so you can recover your sessions!\n\n"
+    }
+  ]
+}

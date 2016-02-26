@@ -1,0 +1,70 @@
+{
+  "id": "117160",
+  "title": "Digitizing \"handlettered\" typefaces.",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Hi,\n\nI have a question concerning the digitisation of handlettered typefaces. I have been experimenting translating some drawn letters and icons into fonts, which give me some problems. The way I usually work is like this:\n\n- scan as greyscale or bitmap  \n- remove unwanted \"schmutz\" in Photoshop  \n- trace in Illustrator to create a vector drawing (using the \"lettering\" preset), after which I usually simplify the result slightly (97-99%) to reduce the amount of nodes  \n- import this trace into Glyphs Mini and try to clean it up\n\nThese last steps are quite tricky: I have been experimenting with tracing settings to see which gives a faithful result with the least amount of nodes. Hovever, most of the time it still creates way to many to create a proper digital font. Also the conversion from Illustrator to Glyphs is not 1=1, so this creates another problem. I have been trying to manually trace the typeface in Glyphs Mini, but it is difficult to archieve the roughness of the original.\n\nI am looking for some advise on how to improve this workflow, to create a font which has a handlettered feel but is well drawn so it won't create havoc for rasterizers and computers. By the way: what is the maximum amount of points a character can have before it becomes problematic? I have some fonts with a vintage letterpress effect which are quite slow to process...\n\ndisclaimer: I am no professional typedesigner, I am an illustrator with a big interest in type. I have no formal training in creating type, but have experimented quite a bit over the years, so I know a thing or two about the technical stuff.\n\n",
+  "author": "Queneau",
+  "time": "10 Jun 2014 — 5:38am",
+  "uid": "20744",
+  "comments": [
+    {
+      "time": "10 Jun 2014 — 7:02am",
+      "content": "The easy way to do this is Scanfont from FontLab - Scan -cleanup (or not) -import -separate, size and save as Fontlab File. Or you can import grayscale glyph image as template into Fontographer or FontLab and trace.\n\n"
+    },
+    {
+      "time": "10 Jun 2014 — 7:42am",
+      "content": "I tried the Demo of scanfont, but it does not install on OSX Lion.\n\nI guess the tracing in Fontographer/Fontlab is the same as in Glyphs Mini, so that gives me the same problem I described above: how to maintain the handlettered feel without too many nodes.\n\nAlso, I hope I don't have to invest in another piece of software first. I am quite happy with drawing tool in Glyphs Mini, as they are very user-friendly (moreso than the ones in Illustrator IMO). I was quite interested in Scanfont as it seemed a good solution, especially if it saves me a lot of time. However it seems that it is a rather outdated piece of software which does not work on newer macs, which makes it useless to me. I believe Fontlab will not continue this product, but rather will roll it into a future version of Fontlab. Any better options for tracing would be appreciated, though....\n\nWhat about Type 3.2. I mean: it is not Pro software, but it is affordable to me (a non-pro) and has a tracing function which seems OK?\n\n"
+    },
+    {
+      "time": "10 Jun 2014 — 7:53am",
+      "content": "Fontographer has a feature to Simplify the number of nodes - you can easily cut the number down while maintaining the form. When I used to teach the program my students would take the worst glyph shape they could find, trace it with the most points possible and then see how small they could get it without loss of the feel.\n\n"
+    },
+    {
+      "time": "11 Jun 2014 — 7:11am",
+      "content": "I don't know about Glyphs, but –as Bob implies– FontLab's auto-tracing algorithms are smart and configurable.\n\n> what is the maximum amount of points a character can have before it becomes problematic?\n\nFor some reason the number 2,000 pops up in my head... However it's not just the number of nodes, but the control points too; I've been able to make a very complex glyph avoid problems by converting all the short/shallow curves into lines.\n\nTry doing some searching on Typophile (prefixing \"site:typophile.com\" on Google).\n\nhhp\n\n"
+    },
+    {
+      "time": "20 Jun 2014 — 4:35pm",
+      "content": "I find it efficient to use Scanfont on tif images, save the result as a vfb then open in Fontlab where I can see a shadow outline of the tif behind the nodes. For all but key nodes where a sharp connection is obviously needed -- crotches and corners --I convert everything to curves and smooth connections. If I'm having problems I reconvert the curves to lines and then back to curves with smooth connections at the non corner and non vertex segments. [I'm probably now as clear as mud.] I then delete as many of these nodes as possible by an incremental process until my vector outline is a fair approximation of the shadow. I find that the automated features of Fontlab to simplify are generally more trouble than doing it by hand. Add new sharp points as required. I then copy this outline to a clean glyph space and resize to my final font specs, e.g. caps height 700.  \nI then begin the refining of the design. Straightforward for a sans or standard Roman, incredible amount of work for something like a scanned Morris design! The objective is always to produce a glyph with the minimum number of nodes that will be a good representation of the original design. Too many and the font will be a slow or unworkable kluge. Easier said than done, particularly when time is not unlimited.  \nBTW the process works better by careful choice in the size of the tif image. Too large generates too many unnecessary points. Too small produces loss of accuracy in representing the outline. With practice its possible to find a relatively sweet spot.  \nAs in all such comments, your mileage may vary.  \nBTW I use an ancient version of Scanfont, but it still gets the job done.  \nDon\n\n"
+    },
+    {
+      "time": "22 Jun 2014 — 8:34am",
+      "content": "I am interested in Scanfont, as I can really see it as a great help, however on my mac (OSX Lion) it is no longer compatible, except with a rather questionable workaround. Otherwise I would have certainly tried the demo version in combination with typetool.\n\nIt is a shame that typetool is not a standalone application, which is compatible with newer macs, otherwise it would be a no-brainer. I could buy typetool+scanfont as a reduced package, but I don't really want to invest in another fonteditor if it does not offer a significant plus in features. It seems better to work with illustrator and glyphs for the moment (even if Illustrator's handling of bezier curves really annoys me) and wait and see what the fontlab people come up with in the next few years with a promising, completely redesigned code-base. I have tried Transtype 4, and if this is anything to go by, it will be a massive improvement!\n\n"
+    },
+    {
+      "time": "24 Jun 2014 — 2:38pm",
+      "content": "\\> It is a shame that typetool is not a standalone application, which is compatible with newer macs\n\nI think you mean “ScanFont,” not TypeTool. Yes?\n\n"
+    },
+    {
+      "time": "24 Jun 2014 — 7:03pm",
+      "content": "Thomas, If Scanfont is not being carried forward for newer Macs are its functions being added to FontLab?\n\n"
+    },
+    {
+      "time": "25 Jun 2014 — 4:07am",
+      "content": "Of course, thomas, sorry about that!\n\n"
+    },
+    {
+      "time": "25 Jun 2014 — 7:57am",
+      "content": "> I am interested in Scanfont, as I can really see it as a great help, however on my mac (OSX Lion) it is no longer compatible, except with a rather questionable workaround. Otherwise I would have certainly tried the demo version in combination with type tool.\n\nThe WINE wrapper for ScanFont on the latest Macs is much faster than ScanFont running native on Snow Leopard. The only \"workaround\" is you have to save the results to a .vfb file rather than have the vfb open in FL. Not such a bad thing. That said, I keep a Mac laptop running Snow Leopard just so I can use the ScanFont in its original incarnation when I have more than one or two things to import.\n\nMany of the tracing settings available in ScanFont have been in Fontlab for years. The last item in the Preferences is \"Trace Options\" and you can auto trace a background using: Tools/Background/Trace.\n\n"
+    },
+    {
+      "time": "25 Jun 2014 — 1:03pm",
+      "content": "Thanks for the info James!\n\n"
+    },
+    {
+      "time": "27 Jun 2014 — 10:35am",
+      "content": "\\> If Scanfont is not being carried forward for newer Macs are its functions being added to FontLab?\n\nThe old codebase is not being updated to make ScanFont run natively on newer Macs. The same (well, better actually) functionality will show up in the new codebase, however. The functionality is not going away. However, it is a bit early for me to publicly comment on the details of future product configurations.\n\n"
+    },
+    {
+      "time": "27 Jun 2014 — 11:59am",
+      "content": "Thanks Thomas - enough said - I realize that until it is done it is in flux but if the functionality is being thought of in the process that is good.\n\n"
+    },
+    {
+      "time": "27 Jun 2014 — 6:39pm",
+      "content": "Yes, it is actively under discussion and planning.\n\n"
+    }
+  ]
+}

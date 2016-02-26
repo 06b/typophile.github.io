@@ -1,0 +1,38 @@
+{
+  "id": "65355",
+  "title": "Dancing Shoes: OpenType FDK Feature Code Generator",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Dear Type Technicians,\n\nI have posted a little piece of software in your favorite script language that you can use to hack your OpenType features into your fonts.  \n_Dancing Shoes_ does not invent the features for you. But it takes care that they are put out in the correct order and syntax, and works around some possible bugs with FontLab’s built-in FDK compiler that should work according to the manual. For instance some _script_ and _language_ tags must not be preceded by others, although that should not be important according to the manual.\n\n_Dancing Shoes_ is especially useful if you generate feature code with multiple scripts, languages and lookupflags within one feature.  \nBut it can also ease the recurring task of applying features to all your fonts. Because you’ll most likely always use the same naming scheme for your glyphs (_.sc_ for SmallCaps etc), you can keep these in a separate, hard-coded file, and re-apply them with one click or from within another script.\n\nYou initialize the DancingShoes object:  \n`\nfrom dancingshoes import DancingShoes\nshoes = DancingShoes(glyphs, features)`  \n_glyphs_ is a list of your font’s glyph names and _features_ your hard-coded and ordered list of feature names.\n\nThen you can add substitutions like this:  \n`shoes.AddSubstitution('liga', 'f i', 'fi')`\n\nor, more complicated:  \n`shoes.AddSubstitution('rlig', 'afii57457 afii57455', 'uniFC61', 'arab', '', 'RightToLeft,IgnoreBaseGlyphs', 'ARABIC LIGATURE SHADDA WITH DAMMA ISOLATED FORM')`\n\nYou can then print the feature code like this:  \n`print shoes.GetFDKCode()`\n\nor, in case of a FontLab font object, use the helper funtion (_font_ being your FontLab’s font object:  \n`\nfrom dancingshoes.helpers import AssignFeatureCodeToFontLabFont\nAssignFeatureCodeToFontLabFont(font, shoes)\n`\n\nFor now, only substitutions and positioning lookups (Type 1 and 2) are supported. Which should be enough for most use scenarios. Other lookup types (like mark positioning) will be added later.\n\nYou’ll find it here, along with documentation:  \n [http://www.yanone.de/typedesign/code/dancingshoes/](http://web.archive.org/web/20130215025129/http:/www.yanone.de/typedesign/code/dancingshoes/)\n\nIt’s free.  \nBut as always: Should you use it for production of your professional fonts, a donation is highly appreciated.\n\n",
+  "author": "yanone",
+  "time": "14 Dec 2009 — 10:35am",
+  "uid": "24931",
+  "comments": [
+    {
+      "time": "15 Dec 2009 — 5:57am",
+      "content": "I'm looking forward to playing with this, thanks.\n\n"
+    },
+    {
+      "time": "17 Dec 2009 — 5:24am",
+      "content": "Yanone,\n\nby \"manual\", do you mean the FontLab Studio manual or the Adobe FDK for OpenType documentation? ( [http://www.adobe.com/devnet/opentype/afdko/topic\\_feature\\_file\\_syntax.html](http://web.archive.org/web/20130215025129/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html \"http://www.adobe.com/devnet/opentype/afdko/topic\\_feature\\_file\\_syntax.html\") ). We certainly recommend using both documents for reference. However, one needs to remember that FontLab Studio 5 uses the AFDKO library version 1.6, while Adobe now ships AFDKO library version 2.5. The new version of the library will be used in Fontographer 5 and in FontLab Studio 6.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "18 Dec 2009 — 1:29am",
+      "content": "Hi Adam,\n\nI meant the AFDKO Feature File Syntax.  \nI'm aware that the FDK compiler in FLS5 is much older, which is why _Dancing Shoes_ tries to provide work-arounds to some of its quirks.\n\n"
+    },
+    {
+      "time": "4 Jan 2010 — 4:11am",
+      "content": "Adam\n\nWill FontLab Studio 6 be up-datable if and when Adobe bring out an update to their AFDKO after the release of FontLab Studio 6?\n\nMalcolm\n\n"
+    },
+    {
+      "time": "5 Jan 2010 — 5:21am",
+      "content": "yanone: _‘But it can also ease the recurring task of applying features to all your fonts.’_\n\nWhich is a sensible thing to do. As you probably know, in the FM tools, including DTL OTMaster, listed OT Layout features that don't match the character set are simply removed during compiling. This makes it possible to use a standardized OT Layout features file that contains **all** possible features and to generate OpenType fonts (in batch with DataMaster). Everything that is supported by the AFDKO is supported by the FM tools also.\n\nLike DataMaster, OTMaster supports the latest build of the AFDKO 2.5. Because it is possible in OTM to export the features in a file, one can re-use this file in the app for compiling OT Layout tables for other fonts (batch is on the to-do list). For instance FontLab Studio users can easily update their fonts this way. The exported features file needs some updating then though, because of the syntax changes since the AFDKO 1.6.  \nIn contrast with DataMaster, OTM will not supply the user with detailed info concerning syntax errors, so some knowledge of the matter is required.\n\n"
+    },
+    {
+      "time": "19 Jan 2010 — 11:02am",
+      "content": "Malcolm,\n\nthe Adobe FDK for OpenType library used by FontLab Studio is incorporated into the source code of FontLab Studio. Fontlab Ltd. has a license for the source code of AFDKO. We do not use the freely downloadable binary version of AFDKO, since the use of AFDKO inside of FontLab Studio requires direct linking into the source code.\n\nWo when Adobe releases an updated version of the AFDKO source code, Fontlab Ltd. will be able to update FontLab Studio — but this is not always completely trivial.\n\nSince version of 1.6 of AFDKO, Adobe have extended and changed many aspects of the library, and introduced new functionalities (such as intelligent outline scaling or the Adobe autohinting). Also, support for mark attachment and additional lookup types have been added. Finally, some major changes to the syntax have been done. So we do need to modify FontLab Studio on our end to make it work with newer version of the library — therefore it's not a change that the users will be able to do themselves.\n\nOur work on Fontographer 5 is well under way, quickly approaching release. This will be the first product that will incorporate the new AFDKO library. FontLab Studio 6 and TransType 4 will follow later this year.\n\nBest,  \nAdam\n\n"
+    }
+  ]
+}

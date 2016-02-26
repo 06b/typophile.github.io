@@ -1,0 +1,96 @@
+{
+  "id": "108441",
+  "title": "Fonts language support",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions",
+    "language",
+    "languages"
+  ],
+  "content": "Hello everybody, I have a question and I can't find an answer in the internet.\n\nI'm in a process of designing a typeface - [TT Nord](http://web.archive.org/web/20150414062100/http:/dribbble.com/goloub/projects/177343-TT-Nord). It's not the final design by that link. Anyway, what bothers me is that I've drawn many glyphs, including Cyrillic extended and Latin extended a and b and others. Is there any way to know what languages does my font support? Maybe a script or some kind of a web service?\n\nThanks in advance?\n\n",
+  "author": "goloub",
+  "time": "22 Jan 2014 — 7:59am",
+  "uid": "215967",
+  "comments": [
+    {
+      "time": "22 Jan 2014 — 2:05pm",
+      "content": "I don't know of any automatic way to do it. Your face supplies the glyphs for scripts (Latin, Cyrillic, etc), of which various subsets are used to write various languages. It would be nice to know that language Foo uses all of SomeBlock except Bar, with the addition of Baz and Qux from AnotherBlock. That would make it easy to say, \"My font provides full support for language Foo\", which it going to be more relevant to most people than saying, \"My font provides full support for the Latin script\". This information may be partially compiled somewhere (e.g. \"Latin alphabets\" on the English Wikipedia), but it's a manual verification process.\n\n"
+    },
+    {
+      "time": "22 Jan 2014 — 5:35pm",
+      "content": "There is no such tool. I did a wide research about languages and alphabets between 2010 and 2013 for my own font project. Unhappily, no source is complete. If you have interest, here are some good information and sources:\n\nThe Wikipedia article about [Latin-derived alphabets](http://web.archive.org/web/20150414062100/http:/en.wikipedia.org/wiki/Latin-derived_alphabet) is the nearest single source I know. For deeper information, you can take a look on [each letter](http://web.archive.org/web/20150414062100/http:/en.wikipedia.org/wiki/A) and language article published in Wikipedia. Each letter article brings a table with diacritical combinations.\n\nA good place regarding Latin script is [this post](http://web.archive.org/web/20150414062100/http:/blogs.adobe.com/typblography/2008/08/extended_latin.html) from Adobe's Typblography. You may also find useful [this site about diacritics](http://web.archive.org/web/20150414062100/http:/diacritics.typo.cz/).\n\nRegarding transliterations, there is an [excellent archive](http://web.archive.org/web/20150414062100/http:/transliteration.eki.ee/index.html) made by Thomas Pedersen. It's almost hidden in the Estonian Language Institute site.\n\nYou can also consider to do the contrary: define which languages you want to support and then include the proper characters. Unicode blocks are heterogeneous and the Latin ones brings together glyphs needed to less common European languages besides Asian languages, Medieval characters and even Roman signs.\n\nFor example: Latin Extended Additional includes 1E9E, the German uppercase double S. It seems ok to include that. In the same block you find the Vietnamese accented and double-accented vowels. Of course, you would ignore them if Vietnamese support is out of your target. This Unicode block also adds several precomposed combinations to support Indic, Hebrew and Cyrillic transliterations. Again, you must choose if transliterations would be supported.\n\nA similar definition must be made about Phonetic alphabets, currency and letterlike symbols. This will take some research, but you will not include unnecessary glyphs.\n\nSome additional data about Unicode blocks:\n\n1. Latin B has mostly glyphs to African languages, but also mix rarely used European glyphs and Pinyin transliteration.\n2. Latin C brings glyphs to Cyrillic transliterations and old African orthographies. 2C6D and 2C70 are needed to complete African support, the remaining probably are out of your scope.\n3. Latin D has many Medieval additions and support for old orthographies. Probably the whole block is unnecessary to you.\n4. Latin Additional is a mess. Define the languages and look in detail this block.\n5. IPA and Phonetic block. Just needed to phonetic support.\n6. Super and subscripts. Add the whole block if you want to keep up to date with contemporary type trend.\n7. Currencies. The very basic set is: dollar, cent, pound, yen, currency (generic) and euro. An improved set also includes thai, cólon, naira, won, new sheqel, kruvinia (hryvnia), tenge, new rupee (20B9) and tugrik. Most of others are historical.\n8. Letterlike. nº, liter, estimated, TM, and Ohm are basic. Others may be included or not according to your scope, but are not essential.\n9. Punctuation. Basic: 2002, 2003, 2013, 2014, 2018 to 2022, 2026, 2027, 2032, 2033, 2039, 203A, and 2044.\n\nHere in Typophile you will find a number of quite informative threads. Some:  \n [http://typophile.com/node/67458](http://web.archive.org/web/20150414062100/http:/typophile.com/node/67458)  \n [http://typophile.com/node/84563](http://web.archive.org/web/20150414062100/http:/typophile.com/node/84563)  \n [http://typophile.com/node/77983](http://web.archive.org/web/20150414062100/http:/typophile.com/node/77983)\n\nThe thread where I presented [my own font project](http://web.archive.org/web/20150414062100/http:/typophile.com/node/67787#comment-402703) has some good information about this, kindly gave by fellow typophilers. The link above points to where this discussion begun.\n\nOther threads I also begun may be useful:  \n [Unicode and diacritics](http://web.archive.org/web/20150414062100/http:/typophile.com/node/74164)  \n [Eng and hooked N](http://web.archive.org/web/20150414062100/http:/typophile.com/node/78082)  \n [Currencies and others](http://web.archive.org/web/20150414062100/http:/typophile.com/node/73886)  \n [Greek and Cyrillic](http://web.archive.org/web/20150414062100/http:/typophile.com/node/71504)  \n [Slashed letters](http://web.archive.org/web/20150414062100/http:/typophile.com/node/78088)\n\n"
+    },
+    {
+      "time": "22 Jan 2014 — 7:16pm",
+      "content": "Wonderful resource, thanks!\n\n"
+    },
+    {
+      "time": "22 Jan 2014 — 10:53pm",
+      "content": "I am glad to know you find this useful, Charles. Here are other sites which helped me during this research:\n\n[Atlas of Languages](http://web.archive.org/web/20150414062100/http:/wals.info/index)  \n [Ethnologue](http://web.archive.org/web/20150414062100/http:/www.ethnologue.com/home.asp)  \n [Etnolinguistica](http://web.archive.org/web/20150414062100/http:/www.etnolinguistica.org/)  \n [Evertype](http://web.archive.org/web/20150414062100/http:/www.evertype.com/)  \n [LanguageGeek](http://web.archive.org/web/20150414062100/http:/www.languagegeek.com/)  \n [Linguasphere](http://web.archive.org/web/20150414062100/http:/www.linguasphere.org/)  \n [Omniglot](http://web.archive.org/web/20150414062100/http:/www.omniglot.com/)  \n [Script Source](http://web.archive.org/web/20150414062100/http:/www.scriptsource.org/cms/scripts/page.php?&id=)  \n [Endangered Languages](http://web.archive.org/web/20150414062100/http:/www.endangeredlanguages.com/)  \n [MultiTree](http://web.archive.org/web/20150414062100/http:/multitree.linguistlist.org/)  \n [Language Exploration](http://web.archive.org/web/20150414062100/http:/www.ldc.upenn.edu/exploration/#CBOLD)\n\n"
+    },
+    {
+      "time": "23 Jan 2014 — 12:06am",
+      "content": "Thank you Chris for your advices and Igor for such wonderful resources, they will help me a lot, definitely!\n\nI want to fill an almost empty niche of supporting minor languages, at least of ethnic minorities, particularly those in Russia.\n\nForgive me my ignorance, but on MyFonts.com each font has supported languages specified. Since I've never submitted to MyFonts yet, I'd like to know is it done automatically, or each author describes language support manually?\n\n"
+    },
+    {
+      "time": "23 Jan 2014 — 1:10am",
+      "content": "There is no such tool, and such a tool would never be complete.\n\nIn addition to the links posted by Igor Freiberger:\n\n- the eki-letter database (oldish, but still good): [http://www.eki.ee/letter/](http://web.archive.org/web/20150414062100/http:/www.eki.ee/letter/)\n\n- unicode cldr has a list of exemplar characters per language (base, extended, punctuation etc). You can read it from the database or browse:\n\n[http://cldr.unicode.org/cldr-features](http://web.archive.org/web/20150414062100/http:/cldr.unicode.org/cldr-features)  \n [http://cldr.unicode.org/index/charts](http://web.archive.org/web/20150414062100/http:/cldr.unicode.org/index/charts)  \n [http://www.unicode.org/cldr/charts/dev/by\\_type/index.html](http://web.archive.org/web/20150414062100/http:/www.unicode.org/cldr/charts/dev/by_type/index.html)  \n [http://www.unicode.org/cldr/charts/dev/by\\_type/core\\_data.alphabetic\\_information.html](http://web.archive.org/web/20150414062100/http:/www.unicode.org/cldr/charts/dev/by_type/core_data.alphabetic_information.html)\n\nUnicode cldr only contains information about the most used languages, and their \"official\" characters in current orthography or typography. E.g. there is no information about more exotic languages like Yiddish. Old orthography like long-s (most European languages in 18th century) or LETTER U WITH SMALL E ABOVE (used in German instead Umlaut U+DIARESIS) is not supported.\n\n"
+    },
+    {
+      "time": "23 Jan 2014 — 4:21am",
+      "content": "<dl>\n<dd><em><br>\nForgive me my ignorance, but on MyFonts.com each font has supported languages specified. Since I've never submitted to MyFonts yet, I'd like to know is it done automatically, or each author describes language support manually?<br>\n</em></dd>\n</dl>\n\nMaybe they use an internal tool or rely on information sent by the designer. But note that MyFonts does not identify all languages supported by a given font. The advanced search just offers 13 group of languages, most based on scripts. In the technical info they list common character sets, again related to a handful of languages.\n\n<dl>\n<dd><em><br>\nI want to fill an almost empty niche of supporting minor languages, at least of ethnic minorities, particularly those in Russia.<br>\n</em></dd>\n</dl>\n\nBegin here: [Wikipedia: Languages of Russia](http://web.archive.org/web/20150414062100/http:/en.wikipedia.org/wiki/Category:Languages_of_Russia)\n\nI am doing exactly this with my font projects, besides supporting Cyrillic variations to Bulgarian and Serbian. AFAIK, there are just four or five typefaces with this kind of support, and none of them is really goood.\n\nUnhappily, when I begun to do this, I do not registered my findings in an organised way –just made a large table with needed glyphs and some notes, but didn't listed glyphs by language.\n\nSome less known minority languages are poorly documented and it is really difficult to find data about the proper way to design their glyphs. But as a native Russian, you are entitled to find much more than I did.\n\nThis would give an idea (sorry for the large image):\n\n ![](http://web.archive.org/web/20150414062100im_/http:/typophile.com/files/2014-01-23_10-06-27b_4115.png)\n\nI know, quite a strange goal to a Brazilian, but I am addict to Cyrillic. If you want further contact, can reach me at contato ( ) if . pro . br.\n\n"
+    },
+    {
+      "time": "25 Jan 2014 — 5:56pm",
+      "content": "“There is no such tool.” There are actually several such tools!\n\nFontaine was first released in March 2009. [http://fontaine.sourceforge.net/](http://web.archive.org/web/20150414062100/http:/fontaine.sourceforge.net/ \"http://fontaine.sourceforge.net/\")\n\nSpeakeasy in October 2010. [https://github.com/typekit/speakeasy](http://web.archive.org/web/20150414062100/https:/github.com/typekit/speakeasy \"https://github.com/typekit/speakeasy\")\n\nNeither had all that impressive a data collection, so I drew on both those sources and added a LOT more data at Extensis. We released that data in April of last year, download it here:  \n [http://blog.webink.com/custom-font-subsetting-for-faster-websites/](http://web.archive.org/web/20150414062100/http:/blog.webink.com/custom-font-subsetting-for-faster-websites/ \"http://blog.webink.com/custom-font-subsetting-for-faster-websites/\")\n\nIt is not perfect, but it covers over 150 languages and character sets. We use the data internally with a proprietary scanning tool.\n\nI do agree with Igor that “no source is complete,” and neither is my data. But it is considerably better than nothing. Most type designers just want to figure out either what characters to add to cover a given language, or what languages are supported by a given character set, and have a one-stop answer to the question. For the languages covered by this data—and there are a lot of them—it should be reasonably solid. Where I am suspicious of the data source or have not done sufficient cross-checks, that is noted in the file.\n\n"
+    },
+    {
+      "time": "27 Jan 2014 — 9:00am",
+      "content": "Thomas - **thank you** for this information! I'd never heard of these. I wish the fontaine and speakeasy sites were a bit more verbose, and screenshots would be helpful.\n\n—CT\n\n"
+    },
+    {
+      "time": "29 Jan 2014 — 5:48am",
+      "content": "Thank you Thomas, those are precious links!  \nHowever, I'd agree with ChristTrekker, I wish I knew how to use those tools.\n\n"
+    },
+    {
+      "time": "29 Jan 2014 — 7:31am",
+      "content": "I am now including fontaine-generated language reports on my individual font pages. I wonder if Mr. Trager would import your data set to improve its output. BTW, [www.unifont.org/fontaine](http://web.archive.org/web/20150414062100/http:/www.unifont.org/fontaine \"www.unifont.org/fontaine\") is better for learning about it than the SF page.\n\nHaven't looked at speakeasy since I don't do ruby.\n\n—CT\n\n"
+    },
+    {
+      "time": "29 Jan 2014 — 11:14am",
+      "content": "I have heard from a couple of folks who said they were interested in doing such a thing. I have started pinging, it would be good to make that happen.\n\n"
+    },
+    {
+      "time": "29 Jan 2014 — 4:37pm",
+      "content": "Actually, it seems Dave Crossland integrated our data file into PyFontaine a while back. He has already integrated the newest one as well. :)  \n [https://github.com/davelab6/pyfontaine](http://web.archive.org/web/20150414062100/https:/github.com/davelab6/pyfontaine \"https://github.com/davelab6/pyfontaine\")\n\nThis is a Python re-implementation of Fontaine. However, it does not currently use the Extensis data as broadly as it could/should. I pointed that out and I gather it will be updated pretty quickly. I gather there is a lot more happening on PyFontaine in the last few years than on Fontaine proper.\n\n"
+    },
+    {
+      "time": "31 Jan 2014 — 6:58pm",
+      "content": "fontaine  \npyfontaine\n\nThis is a little far afield, I know, but does anybody here remember Frank Fontaine?\n\nBetcha Dezcom does.\n\n"
+    },
+    {
+      "time": "31 Jan 2014 — 10:25pm",
+      "content": "PyFontaine has been updated to use the data in all the appropriate ways. Very slick!\n\n"
+    },
+    {
+      "time": "2 Feb 2014 — 7:31am",
+      "content": "Thomas\n\nI had a look at your xml file. Nice initiative! The number of languages you cover is impressive.\n\nHowever your code for French (my mother tongue) does not appear to match what I read on your blog. If the characters listed in `subsetting-codepoints` are considered as accessory, then you have put there characters that are so frequently used in French that they are on the French azerty keyboard as well as the Canadian French keyboard, namely çèàùé (for the others you need to use a dead key); they are certainly not accessory.\n\nThe French alphabet is very clearly listed on the German Wiki [Französisches Alphabet](http://web.archive.org/web/20150414062100/http:/de.wikipedia.org/wiki/Franz%C3%B6sisches_Alphabet) as well as the French Wiki [Alphabet français](http://web.archive.org/web/20150414062100/http:/fr.wikipedia.org/wiki/Alphabet_fran%C3%A7ais), where characters specific to French (to be added to what you call \"English\") are listed separately.\n\nSo, the small characters needed to be in the font to contain the French alphabet (and my understanding is that they should appear in `scanning-codepoints` similarly to what was done for Portuguese) are (using intervals)\n\n    0x00E0,0x00E2,0x00E6-0x00EB,0x00EE,0x00EF,\n    0x00F4,0x00F9,0x00FB,0x00FC,0x00FF,0x0153\n\nThe corresponding capitals are\n\n    0x00C0,0x00C2,0x00C6-0x00CB,0x00CE,0x00CF,\n    0x00D4,0x00D9,0x00DB,0x00DC,0x0178,0x0152\n\nThat list assumes, of course, that if `parent` is `English` then the scanning code points of English are inherited.\n\nMichel\n\n"
+    },
+    {
+      "time": "9 Feb 2014 — 3:41pm",
+      "content": "Thanks, I think you are the first non-Extensis person to point out a bug in our file!\n\nFrench is one of the ones we inherited from one of the other data sources. Clearly it had some significant issues. :( I have updated it for the next release.\n\n"
+    },
+    {
+      "time": "9 Feb 2014 — 7:31pm",
+      "content": "Thomas,\n\nI noticed a few other things\n\nIn Cyrillic you list 108 characters including 65 from Russian.  \nWhy not just list the 43 new characters that are added to Russian since Russian is parent?\n\nFor Ukrainian, you use Cyrillic as parent; 8 of the 9 characters you list in the scanning-codepoints for Ukrainian are already in Cyrillic. Why not choose Russian as parent for Ukrainian?\n\nIn the languages Tajik, TalyshCyrillic, TurkmenCyrillic, Tuvan, Udmurt you have Cyrillic as parent-name; the attribute \"parent-name\" is used nowhere else. Was that intended? Maybe parent should have been Russian (or Cyrillic)?\n\nThe scanning codepoints you list for Urdu are those I see in the file src/orthographies/Urdu.h of the fontaine sources. However the fontaine file fontface.cpp contains the code\n\n    // Arabic:\n       //\n       if(_checkOrthography(Arabic::pData)){\n               _checkOrthography(Farsi::pData);\n               _checkOrthography(Urdu::pData);\n               _checkOrthography(Kazakh::pData);\n               _checkOrthography(Pashto::pData);\n               _checkOrthography(Sindhi::pData);\n               _checkOrthography(Uighur::pData);\n       }\n\nI would personally have put Arabic as parent for each of those languages before checking any further.\n\nMichel\n\n"
+    },
+    {
+      "time": "14 Feb 2014 — 11:27am",
+      "content": "Thanks for all the feedback! It's great to have somebody else actually looking at this.\n\nThese sound like good improvements (and in some cases outright bugs). I'll do a review of the file next week and issue a revision. :)\n\n"
+    },
+    {
+      "time": "14 Feb 2014 — 12:07pm",
+      "content": "Crazy Guggenheim\n\n"
+    }
+  ]
+}

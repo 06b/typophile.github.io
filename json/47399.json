@@ -1,0 +1,54 @@
+{
+  "id": "47399",
+  "title": "Macro to generate composite glyphs",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi all\n\nDoes anyone knows any available macro to auto generate accented glyphs built with components?  \nOr is it possible to automate that task with any other method in fontlab? A text file with glyph name index that i can paste into the generate glyph window could also be usefull.\n\nThanks in Advance  \nRegards\n\n",
+  "author": "kiko",
+  "time": "14 Jul 2008 — 4:03pm",
+  "uid": "17987",
+  "comments": [
+    {
+      "time": "14 Jul 2008 — 4:21pm",
+      "content": "FontLab does it for you if you built the pieces.\n\nChrisL\n\n"
+    },
+    {
+      "time": "14 Jul 2008 — 4:45pm",
+      "content": "Hi\n\nIf i'm understanding what you mean, you're saying to buit them one by one with the add component action? That will not save me any time...  \nI was think about something like put \"acute\", \"breve\", \"dierisis\" and so on, and combine them with \"a\", \"e\", \"o\" etc, in every possible combinations automaticaly. The new generated glyphs would have their correct names and unicode value, and were built using components.  \nIs this possible to do?\n\nSorry i'm still not so comfortable with english, neither with fontlab, as I would like to.\n\nRegards\n\n"
+    },
+    {
+      "time": "14 Jul 2008 — 4:54pm",
+      "content": "Just create the lowercase and caps and the diacritics. Then type the string of names of each glyph seperated by a space in the \"Generate Glyph\" window and hit return.\n\nAlso, for smallcaps, you can use this (if you named all your smallcaps witha \".sc\" suffix:\n\nA.sc+|acute=Aacute.sc A.sc+|breve=Abreve.sc A.sc+|circumflex=Acircumflex.sc A.sc+|dieresis=Adieresis.sc A.sc+|grave=Agrave.sc A.sc+|macron=Amacron.sc A.sc+|ogonek=Aogonek.sc A.sc+|ring=Aring.sc A.sc+|tilde=Atilde.sc C.sc+|acute=Cacute.sc C.sc+|caron=Ccaron.sc C.sc+|cedilla=Ccedilla.sc D.sc+|caron=Dcaron.sc E.sc+|acute=Eacute.sc E.sc+|breve=Ebreve.sc E.sc+|caron=Ecaron.sc E.sc+|circumflex=Ecircumflex.sc E.sc+|dieresis=Edieresis.sc E.sc+|dotaccent=Edotaccent.sc E.sc+|grave=Egrave.sc E.sc+|macron=Emacron.sc E.sc+|ogonek=Eogonek.sc G.sc+|commaaccent=Gcommaaccent.sc I.sc+|acute=Iacute.sc I.sc+|circumflex=Icircumflex.sc I.sc+|dieresis=Idieresis.sc I.sc+|grave=Igrave.sc I.sc+|macron=Imacron.sc I.sc+|ogonek=Iogonek.sc K.sc+|commaaccent=Kcommaaccent.sc L.sc+|acute=Lacute.sc L.sc+|caron=Lcaron.sc L.sc+|commaaccent=Lcommaaccent.sc N.sc+|acute=Nacute.sc N.sc+|caron=Ncaron.sc N.sc+|commaaccent=Ncommaaccent.sc N.sc+|tilde=Ntilde.sc O.sc+|acute=Oacute.sc O.sc+|circumflex=Ocircumflex.sc O.sc+|dieresis=Odieresis.sc O.sc+|grave=Ograve.sc O.sc+|hungarumlaut=Ohungarumlaut.sc O.sc+|macron=Omacron.sc O.sc+|tilde=Otilde.sc R.sc+|acute=Racute.sc R.sc+|caron=Rcaron.sc R.sc+|commaaccent=Rcommaaccent.sc S.sc+|acute=Sacute.sc S.sc+|caron=Scaron.sc S.sc+|commaaccent=Scommaaccent.sc T.sc+|caron=Tcaron.sc T.sc+|commaaccent=Tcommaaccent.sc U.sc+|acute=Uacute.sc U.sc+|circumflex=Ucircumflex.sc U.sc+|dieresis=Udieresis.sc U.sc+|grave=Ugrave.sc U.sc+|hungarumlaut=Uhungarumlaut.sc U.sc+|macron=Umacron.sc U.sc+|ogonek=Uogonek.sc U.sc+|ring=Uring.sc Y.sc+|acute=Yacute.sc Y.sc+|dieresis=Ydieresis.sc Z.sc+|acute=Zacute.sc Z.sc+|caron=Zcaron.sc Z.sc+|dotaccent=Zdotaccent.sc C.sc+|circumflex=Ccircumflex.sc C.sc+|dotaccent=Cdotaccent.sc G.sc+|circumflex=Gcircumflex.sc G.sc+|breve=Gbreve.sc G.sc+|dotaccent=Gdotaccent.sc H.sc+|circumflex=Hcircumflex.sc I.sc+|tilde=Itilde.sc I.sc+|breve=Ibreve.sc I.sc+|dotaccent=Idotaccent.sc J.sc+|circumflex=Jcircumflex.sc L.sc+|dotaccent=Ldotaccent.sc O.sc+|breve=Obreve.sc S.sc+|circumflex=Scircumflex.sc U.sc+|tilde=Utilde.sc U.sc+|breve=Ubreve.sc W.sc+|circumflex=Wcircumflex.sc Y.sc+|circumflex=Ycircumflex.sc S.sc+|cedilla=Scedilla.sc\n\nChrisL\n\n"
+    },
+    {
+      "time": "15 Jul 2008 — 12:57am",
+      "content": "I'll try that. Thanks a lot, that will definetly help.\n\nRegards\n\n"
+    },
+    {
+      "time": "16 Jul 2008 — 11:39pm",
+      "content": "You can also use Python which is more powerful and flexible.  \nThe following script sets anchors and places caps and small letters diacritics in the right position. It is very simple to make changes in the anchors positions.\n\nWith Robofab and Font Tools installed:\n\n# Building Accented Glyphs for PS1 font\n\nfrom robofab.world import CurrentFont\n\n# accentBuilder lives in robofab.tools  \nfrom robofab.tools.accentBuilder import AccentTools\n\nfont = CurrentFont()\n\n# a list of accented glyphs that you want to build  \nmyList=['Ntilde','ntilde','aacute', 'agrave', 'acircumflex', 'adieresis', 'atilde', 'aring', 'eacute', 'egrave', 'ecircumflex', 'edieresis', 'iacute', 'igrave', 'icircumflex', 'idieresis', 'oacute', 'ograve', 'ocircumflex', 'odieresis', 'otilde', 'uacute', 'ugrave', 'ucircumflex', 'udieresis', 'Adieresis', 'Aring', 'Agrave', 'Atilde', 'Acircumflex', 'Aacute', 'Eacute', 'Ecircumflex', 'Edieresis', 'Egrave', 'Iacute', 'Icircumflex', 'Idieresis', 'Igrave', 'Odieresis', 'Otilde', 'Oacute', 'Ocircumflex', 'Ograve', 'Udieresis', 'Uacute', 'Ucircumflex', 'Ugrave', 'Scaron', 'scaron', 'Yacute', 'yacute', 'Zcaron', 'zcaron', 'ydieresis', 'Ydieresis']\n\n# start the class  \nat=AccentTools(font, myList)\n\n# clear away any anchors that exist (this is optional)  \nat.clearAnchors()\n\n# add necessary anchors if you want to  \nat.buildAnchors(ucXOffset=20, ucYOffset=40, lcXOffset=15, lcYOffset=30)\n\n# print a report of any errors that occured  \nat.printAnchorErrors()\n\n# build the accented glyphs if you want to  \nat.buildAccents()\n\n# print a report of any errors that occured  \nat.printAccentErrors()\n\n"
+    },
+    {
+      "time": "27 Jul 2008 — 8:25pm",
+      "content": "Is there any way to do it in a manual way? I need to add Indian diacritics (dots under the consonants) and they are not in the list above. In what order should I do, what is the methodics of adding a component to several letters? [http://www.iondesignteam.com/devanagari-fonts/](http://web.archive.org/web/20131108203429/http:/www.iondesignteam.com/devanagari-fonts/)\n\n"
+    },
+    {
+      "time": "27 Jul 2008 — 9:30pm",
+      "content": "I have a composite management script that Ben Kiel wrote for us. It dumps and fuses composite glyph data to and from a semicolon-separated text list, of the format\n\n[glyph name];[width];[base component];[x offset];[y offset];[2nd component];[x offset];[y offset];...\n\ne.g.\n\naacute;1465;a;0;0;acutecomb;1435;0\n\n[I now always use zero-width 'comb' accents for composites, not spacing accents, as the composites then match mark postioning offsets and can be leveraged to build GPOS data.]\n\nBeing able to dump and fuse composite info in this format makes it easy to define or edit composite glyphs in a spreadsheet.\n\nWe paid Ben for the development of this script, but it is released under the GNU open source license. Contact Ben for more info: [http://benkiel.com/](http://web.archive.org/web/20131108203429/http:/benkiel.com/ \"http://benkiel.com/\")\n\n"
+    },
+    {
+      "time": "28 Jul 2008 — 6:58pm",
+      "content": "I haven't yet put the script that John mentions online, but one can download it [here](http://web.archive.org/web/20131108203429/http:/benkiel.com/typeDesign/scripts/downloads/fuseDump.zip). It requires that Robofab be installed, but that's it.\n\n"
+    },
+    {
+      "time": "1 Aug 2008 — 4:31am",
+      "content": "Thanks, I'll try that and see how it goes.\n\nRegards\n\n"
+    },
+    {
+      "time": "6 Feb 2009 — 4:57am",
+      "content": "HI!\n\nI was wondering. If you write A.sc+|acute=Aacute.sc in generate window you will get a glyph without UNICODE. But I found that some fonts has E003 assigned to this character. Is that a problem? Do you have to assign a UNICODE value in this case? Is thre any way of doing it via macro?  \nthanks in advance. Darío\n\n"
+    }
+  ]
+}

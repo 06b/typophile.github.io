@@ -1,0 +1,82 @@
+{
+  "id": "48382",
+  "title": "Hebrew and English side-by-side in InDesign",
+  "forum": "Design",
+  "tags": [
+
+  ],
+  "content": "I'm working on a Hebrew-English dictionary project for print, and want to achieve what appears in the following image:\n\n ![](http://web.archive.org/web/20100201113105im_/http:/typophile.com/files/hebrew_5710.gif)\n\nAs a web designer primarily, the only way I can describe this is that I want the Hebrew word to \"Float Right\" immediately preceding (or inside) the English paragraph comprising the Hebrew word's definition.\n\nAny ideas on how to assign this as a paragraph or character style inside InDesign (CS2 Middle Eastern)? Thanks!\n\n",
+  "author": "<a href=\"/web/20100201113105/http://typophile.com/user/18366\" title=\"View user profile.\">heraldmonkey</a>",
+  "time": "<br>",
+  "uid": "18366",
+  "comments": [
+    {
+      "time": "",
+      "content": "Are anchored graphics out of the question?\n\n"
+    },
+    {
+      "time": "",
+      "content": "yes, there are thousands of entries, and each will be imported from Word text.\n\n"
+    },
+    {
+      "time": "",
+      "content": "BTW, about the hebrew word — throw light on, illuminate? or name of a person?\n\n"
+    },
+    {
+      "time": "",
+      "content": "I think you are going to have to put the Hebrew in a separate text frame if you want the English to word wrap around it in an editable way--which is, I take it, what you want. But I'm not an Indesign ME maven, so maybe there is another solution.\n\nBy the way, the Hebrew in your illustration doesn't sit all the way to the right, which is I would think what you want.\n\n"
+    },
+    {
+      "time": "",
+      "content": "This project cries out for a coder interfacing directly with the InDesign object model - the approach was demo'd by Linotype at ATypI Tech summit a few years back. Otherwise this is going to be a long laborious manual project.\n\n"
+    },
+    {
+      "time": "",
+      "content": "More questions.\n\nDoes the MS Word doc encode the Hebrew characters right-to-left?\n\nHow averse are you to moving to CS3?\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Does the MS Word doc encode the Hebrew characters right-to-left?</cite>\n\n(Sure it does. Word even has no problems at all with Arabic and its initial/medial/finals.)\n\n(Post-edit: \"encoding\" ... the text appears left-to-right in the actual file, and that's what InDesign/Regular reads and shows. It's _also_ what InDesign/ME reads, but that shows it correctly.)\n\n<cite>How averse are you to moving to CS3?</cite>\n\nIf I was the OP, I'd go down kicking and screaming.  \nSure, CS3 has a few advantages over CS2 -- it's significantly faster, and its GREP Search and Replace has some fantastic applications. But, like CS2, it has **no** support at all for RTL languages. It will import the Word document just fine, but without warning it will load all text left to right, thus \"gnisrever\" the RTL text. The ME version has it all.\n\nNo anchored frames because of  \n<cite>thousands of entries, and each will be imported from Word text.</cite>  \nwouldn't worry me in the least. If these words always appear at the same place, for instance as a heading before the actual definition paragraph, it's well worth the effort writing a script that cuts the word, inserts an anchored object, and pastes the word inside it. Thing is, anchored objects do not like text wrap, and reverse. I think there are solutions to this; perhaps you'd better ask in the [InDesign User's forum](http://web.archive.org/web/20100201113105/http:/www.adobeforums.com/cgi-bin/webx/.3bbf275c/). Whatever the solution is, scripting is the way to go.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Scripting wouldn't be necessary with CS3, hence the question. A Hebrew word paragraph could be baseline shifted down to the next line and an anchored object grepped in at the beginning; the anchored object would simply be a white nonprinting box with _wrap to: left side_ applied.\n\nThe right-to-left is something I'm not familiar with, so that could be a stumbling block.\n\nHere's a quick mockup of what I mean:\n\n ![](http://web.archive.org/web/20100201113105im_/http:/typophile.com/files/example_3471.gif)\n\n"
+    },
+    {
+      "time": "",
+      "content": "To do Hebrew--and generally any right-to-left language--you do need InDesign ME, as opposed to plain InDesign. But then it seems to me like Pica Pusher's really clever solution should work.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Adobe InDesign CS/3 ME (Middle East edition, for Middle Eastern languages, such as Arabic, Hebrew and Persian [Urdu]) is a very intelligent program which handles mixing both left-to-right languages, such as English or Russian, together with right-to-left languages, such as Arabic or Hebrew, in an intelligent way.\n\nThe combination can either be for a left-to-right language (in which the arrow indicator in the character palette should be on the left side, pointing right (see the character palette), or be for a right-to-left language (in which the arrow indicator in the character palette should be on the right side, pointing left (see the character palette), or side by side, with each language in its own text block.\n\nWhen the two languages are side-by-side in separate text boxes, consider carefully the best side to place the boxes.\n\nAs a professional typesetter, I suggest to place the left-to-right language on the left side, and the right-to-left language on the right side.\n\nThis decision is based upon the graphic arts concept of \"eye movement\". When the left-to-right language is on the left side, the left-to-right language reader simply places his or her eye naturally on the left side. So, too, when the a right-to-left language is on the right side, the right-to-left language reader simply places his or her eye naturally on the right side.\n\nIf the right-to-left language is Hebrew, the size of the font and the line spacing is not simply automatic.\n\nThis is because Hebrew text translates into much more words in Western languages, such as English. Thus, if the font size and line spacing remains the same in both languages, the Hebrew side will take up far less lines than English. If you desire this kind if result, fine. If, however, you desire to each text block to be filled with lines equally, you have three choices:  \n1) to keep the same line spacing, but to increase the font size for the Hebrew;  \n2) to keep the sane font size, but to increase the line spacing for the Hebrew;  \n3) to increase both the line spacing, and the font size.\n\nAnother consideration is that Hebrew letters look much too big if they match the size of uppercase English letters. Yet, if they match the size of lowercase English letters, the Hebrew letters look much too small.\n\nI think the correct way to match side-by-side languages is to weigh the \"color\" look of the page as a whole. This means, each side has a certain \"color\" of the amount of black ink and white empty space. The best font size and line spacing for the Hebrew is a proper \"color balance\".\n\nIdeally, the font should not be increased too much for the Hebrew to cause ot to look too \"holey\" or \"spacey\". On the other hand, the line spacing should not be increased too much to cause the Hebrew letters to look too small in comparison to the English text, or to have too much space between the lines.\n\nOf course, since the right-to-left language determines the page count, it should be laid out first, and the left-to-right language should follow later.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I forgot to mention that if you choose to use Adobe InDesign CS/3 ME, you will need up-to-date Hebrew fonts with Unicode encoding. Older Hebrew fonts, including some TrueType Hebrew fonts, will not work.\n\nIf you choose to use Adobe InDesign CS/3 in its US or Western European version, then you could use older Hebrew fonts.\n\nYou might be able to position the Hebrew words as embedded or anchored graphics. However, before you make the graphic, you will have cause the Hebrew text to be lowered a little, so the baseline of the English text lines up with th Hebrew word. Also, you will have to key in the Hebrew letters in backwards order, or hit the left arrow key after entering the Hebrew letters in correct order.\n\nI syuggest to mix the languages in the proper way, and use Adobe InDesign CS/3 ME.\n\nYou can contact FontWorld (at [www.fontworld.com](http://web.archive.org/web/20100201113105/http:/www.fontworld.com/ \"www.fontworld.com\")), for very good sales and free technical support for Adobe InDesign CS/3 ME and other Adobe ME products.\n\n"
+    },
+    {
+      "time": "",
+      "content": "You can do this with anchored text boxes very easily. You will probably want to script this and do it in CS4 since there is a bug in CS3 which will cause you problems but not unsurmountable. GoHebrew is correct in that the direction is odd. The Hebrew should be on the left of the English paragraph, but of course that is an editorial decision.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Oh and also in your sample the position of the kamatz under the resh is very wrong.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The font is SBL-Hebrew, and in the Diacritic Positioning, OpenType is turned off, and normal is on. Right?\n\n"
+    },
+    {
+      "time": "",
+      "content": "I see Adobe Hebrew; where's SBL-Hebrew?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks all for your very insightful comments, particularly that infographic by pica pusher.\n\nI believe the Hebrew in my sample is Adobe Hebrew, the kamatz was positioned automatically.\n\nThe dictionary would read right-to-left because that's the instinctive direction for thumbing through a Hebrew dictionary. This project is a revision of the classic Jastrow Aramaic-English Talmud dictionary from 1903, which is paginated from left-to-right, ostensibly due to the vast majority of english text, but it's unwieldy when searching for that specific reason.\n\nThe original also indented the Hebrew heading for each entry, which is why I did in my sample. Any thoughts as to best practices in this regard? Should the heading be indented, flush, outdented?\n\nOh, to David Hamuel, Meira is my neice :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "This thread is a bit old and passed away silently. How did you finally solve it, heraldmonkey?\n\nPS: Did you try to search in Project Gutenberg? I tried looking for samples but the search is down.\n\n"
+    }
+  ]
+}

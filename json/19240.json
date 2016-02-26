@@ -1,0 +1,50 @@
+{
+  "id": "19240",
+  "title": "Romanian Characters not showing up",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hello.  \nI am on a mac and using fontlab 4.5  \nI have added in four extra characters with the generate glyphs:\n\nT comma uppercase & lowercase  \nS comma uppercase & lowercase  \n( the characters with a comma centered under them)\n\nThey had no naming as far as unicode goes once it made them so I typed in the correct values the glyph properties. They still do not show up.\n\nIs there a something that I need to indicate in the font info area? Like language support? or make it a unicode font. I have run out of ideas...\n\nthanks in advance\n\n [‹ Software for TrueType collections?](http://web.archive.org/web/20071104015708/http:/www.typophile.com/node/19341 \"Go to previous forum topic\") [Chinese Fonts & Adobe Software ›](http://web.archive.org/web/20071104015708/http:/www.typophile.com/node/19200 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20071104015708/http://www.typophile.com/user/5892\" title=\"View user profile.\">neutura</a>",
+  "time": "<br>",
+  "uid": "5892",
+  "comments": [
+    {
+      "time": " 13.Apr.2006 11.53am",
+      "content": "\\> so I typed in the correct values\n\nCould share them with us?\n\n\\> They still do not show up\n\nWhere? Fontlab? Or you’ve generated the font and the characters you’ve added don’t show up in the applications you’re using?\n\n"
+    },
+    {
+      "time": " 13.Apr.2006 12.03pm",
+      "content": "Fontlab’s (v4.5) `alias.dat` file inside the folder “Mapping” might not have the necessary entries.\n\nUse `T+commaaccent t+commaaccent S+commaaccent s+commaaccent`  \ninstead of `Tcommaaccent tcommaaccent Scommaaccent scommaaccent`\n\nOf course, you’ll need to have the necessary glyphs (T t S s commaaccent), before you use the command “Generate Glyphs...”\n\n"
+    },
+    {
+      "time": " 13.Apr.2006 12.25pm",
+      "content": "The values are below. They also appear to be correct if I open a blank font, select unicode as view, and pull down to Latin Extended B. Which is where they reside in my current font.\n\nS comma = 218  \ns comma = 219  \nT comma = 021A  \nt comma = 021B\n\nThey appear in the font and fontlab file. They do not appear when typing in applications. Any for that matter. I’ve even converted my computer to Romanian and I get the same thing. They do however appear in the glyphs palette and exist in the font.\n\nWhen making a multi-language or extended character font do you need to specify that in any dialog boxes?\n\n"
+    },
+    {
+      "time": " 13.Apr.2006 1.02pm",
+      "content": "Your glyph names and Unicode values are not entirely correct. You should use these:\n\n**Ș** — **Scommaaccent** (U+ **0218** )  \n**ș** — **scommaaccent** (U+ **0219** )  \n**Ţ** — **Tcommaaccent** (U+ **0162** )  \n**ţ** — **tcommaaccent** (U+ **0163** )\n\nSome more info on the subject, from the Fontlab Forum:  \n [[Tips / Glyph Naming] Glyph naming and encoding](http://web.archive.org/web/20071104015708/http:/groups.msn.com/FontLab/tipsandtricks.msnw?action=get_message&mview=0&ID_Message=3065)\n\n"
+    },
+    {
+      "time": " 14.Apr.2006 10.44pm",
+      "content": "Thanks for all your help.  \nI have tried everything suggested and still do not appear in applications. I have tried giving them two unicodes, separate unicodes, unicodes as names. etc, etc...\n\nIn the Adobe glyphs palette it doesn’t seem to want to recognize both sets.  \n0162, 0162 vs. 021A, 021B. It won’t accept 021A, 021B\n\nTo make it more confusing it worked once in one font out of five!  \nANy other ideas?\n\nthis is nuts. It seems so simple!\n\n"
+    },
+    {
+      "time": " 15.Apr.2006 11.07am",
+      "content": "Don’t give up, you’re in the right path.\n\nRight now, you’re probably just experiencing font cache problems. Read this thread:  \n [http://www.typophile.com/node/16143](http://web.archive.org/web/20071104015708/http:/www.typophile.com/node/16143 \"http://www.typophile.com/node/16143\")\n\nAlso, do a search on your computer and trash all the files named “AdobeFnt.lst”.\n\n"
+    },
+    {
+      "time": " 17.Apr.2006 7.59am",
+      "content": "Thats funny. Thats my post. Maybe you know. I feel the same way this time! Argg!  \nSo since then I generate to the Adobe font folder. I will try the trash thing. Do all of you guys work for a type house or something?\n\n"
+    },
+    {
+      "time": " 17.Apr.2006 10.42am",
+      "content": "\\> _Do all of you guys work for a type house or something?_\n\nSome do, but most have to build up their experience just like you: trial and error, and a lot of thread reading/posting.\n\nAnd, in case it makes you feel any better, even type foundries face problems... so don’t despair :^)\n\nLike Thomas said, _[It is very much like those days, unfortunately. We’re on the new font frontier, cowpokes. Saddle up and watch for raiders!](http://web.archive.org/web/20071104015708/http:/www.typophile.com/node/16143#comment-94649)_\n\n"
+    },
+    {
+      "time": " 18.Apr.2006 12.26pm",
+      "content": "I love that quote Miguel! I remember it from the “Going Bald” thread too. :-)\n\nChrisL\n\n"
+    }
+  ]
+}

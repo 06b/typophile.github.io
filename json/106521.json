@@ -1,0 +1,18 @@
+{
+  "id": "106521",
+  "title": "Typefacet AttributeError",
+  "forum": "Build",
+  "tags": [
+    "error",
+    "script",
+    "typefacet",
+    "Build"
+  ],
+  "content": "Hi,\n\nI wanted to try out the TypeFacet autokern script. I'm using it with Anaconda. When I run the script, I get the following error:\n\n`$ env PYTHONPATH=dependencies/RoboFab/lib:dependencies/pystache:dependencies/svgwrite:dependencies/PyYAML/lib:dependencies/FontTools/Lib:python/src-main python python/src-main/autokern/Autokern.py --ufo-src-path python/src-main/autokern/Regular.ufo --ufo-dst-path out/Regular-kerned.ufo --min-distance-ems 0.00 --max-distance-ems 0.00 --max-x-extrema-overlap-ems 0.0 --intrusion-tolerance-ems 0.0 --precision-ems 0.005 --log-path logs --kern-samples-only`\n\nProcessing configuration...  \nRenaming old logs folder to: logs.2  \nError: 'NoneType' object has no attribute 'endswith'  \nTraceback (most recent call last):  \n File \"python/src-main/autokern/Autokern.py\", line 3248, in  \n autokern.process()  \n File \"python/src-main/autokern/Autokern.py\", line 3188, in process  \n self.configure()  \n File \"python/src-main/autokern/Autokern.py\", line 373, in configure  \n self.configureLogging()  \n File \"python/src-main/autokern/Autokern.py\", line 335, in configureLogging  \n srcCssFile = os.path.abspath(os.path.join(TFSProject.findProjectRootFolder(), 'data', 'styles.css'))  \n File \"/Users/pascal/anaconda/lib/python2.7/posixpath.py\", line 77, in join  \n elif path == '' or path.endswith('/'):  \nAttributeError: 'NoneType' object has no attribute 'endswith'\n\nSomehow it has to do with that findProjectRootFolder() doesn't return anything. However, I have no idea how to fix this. Any ideas, anyone?\n\nCheers,  \nPascal\n\n",
+  "author": "lepascal",
+  "time": "24 Sep 2013 — 9:21am",
+  "uid": "205934",
+  "comments": [
+
+  ]
+}

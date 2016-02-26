@@ -1,0 +1,82 @@
+{
+  "id": "65408",
+  "title": "Font Lab adding nodes when generating ttf",
+  "forum": "Build",
+  "tags": [
+    "fontlab",
+    "generate font",
+    "node",
+    "ttf",
+    "Build"
+  ],
+  "content": "I am a newborn in the world of type design.  \nI'm using FontLab for the first time to design my own typeface.  \nWhen I 'Generate Font' fontlab adds nodes to all my curves. This causes visible waves in my curves when printed large format (tabloid). I have attached two files that I created in Illustrator to demonstrate what I mean, one using glyphs from my ttf file, the other contains the glyphs I drew myself.  \nHow can I avoid this, I see this as a major issue.\n\nThanks for your help,\n\n| Attachment | Size |\n| --- | --- |\n| [Picture 4.png](http://web.archive.org/web/20131013132527/http:/typophile.com/files/Picture%204_60.png) | 31.32 KB |\n| [Picture 5.png](http://web.archive.org/web/20131013132527/http:/typophile.com/files/Picture%205_55.png) | 32.83 KB |\n\n",
+  "author": "calvintennant",
+  "time": "16 Dec 2009 — 11:09am",
+  "uid": "51445",
+  "comments": [
+    {
+      "time": "16 Dec 2009 — 11:42am",
+      "content": "Are you shure it adds points? It happened to me in Illustrator on converting to outlines, but not to the font files.\n\n"
+    },
+    {
+      "time": "16 Dec 2009 — 11:51am",
+      "content": "_When I ’Generate Font’ fontlab adds nodes to all my curves._\n\nYes, that usually happens when you convert from PostScript curves (which you probably use for drawing in FontLab) to TrueType curves.\n\nBut when you convert a font to outlines in Illustrator, the curves get converted to PostScript again, and even more points are added. That means what you see in Illustrator after converting isn't what's actually in the font.\n\nSolution is a) to generate PostScript-based OpenType fonts (no curve conversion necessary) or b) convert manually to TrueType inside FontLab before generating OT/TrueType fonts. In the latter case you get the chance to check the converted curves for bumps and waves (copy the actual PS outlines into the mask layer to see the differences) and correct them by hand before generating.\n\n"
+    },
+    {
+      "time": "16 Dec 2009 — 11:52am",
+      "content": "I'm fairly sure FontLab is adding the points. I can see the wobble when I print the ttf. Any other ideas?\n\nCalvin Tennant  \ncalvintennant.ca\n\n"
+    },
+    {
+      "time": "16 Dec 2009 — 11:54am",
+      "content": "@ Jens Kutliek thanks!\n\nCalvin Tennant  \ncalvintennant.ca\n\n"
+    },
+    {
+      "time": "16 Dec 2009 — 12:06pm",
+      "content": "Worked perfectly, I've attached a screenshot for reference.\n\n ![](http://web.archive.org/web/20131013132527im_/http:/typophile.com/files/Picture2_6448.png)\n\nThanks so much.\n\nCalvin Tennant  \ncalvintennant.ca\n\n"
+    },
+    {
+      "time": "16 Dec 2009 — 2:56pm",
+      "content": "OK, tested and you're right.  \nHowever, if you want to generate TTF's with the same amount of points, just select all the glyphs and go to Contour \\> Paths \\> Set TT Direction.\n\nCheers!\n\n"
+    },
+    {
+      "time": "17 Dec 2009 — 5:20am",
+      "content": "calvintennant,\n\nevery type design tool will change the contours slightly when converting PostScript curves to TrueType curves. It is due to the nature of the curves.\n\nThese curves are based on different geometry. Each PostScript node has up to two control points, while in TrueType, there are on-curve points and off-curve points: between two nodes there may be often just one off-curve \"control point\". It's just a different way to draw curves, and some PostScript curves cannot be represented 100% exactly on the same UPM size (i.e. on the same grid of units per em).\n\nThis is somewhat similar to a situation when you convert a PNG image to a JPG image, or to a situation when you export a movie into a different format, with different compression/encoding. You'll never get pixel-for-pixel fidelity.\n\nIf you want better fidelity in the conversion, you could increase the UPM size in Font Info / Metrics and Dimensions before generating the .ttf font (you need to enable \"Scale all glyphs...\" there). You can use 2000 or 3000 UPM rather than 1000.\n\nI recommend reading the FontLab Studio manual for more information about the difference between PostScript and TrueType curves.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "17 Dec 2009 — 5:28am",
+      "content": "\\>However, if you want to generate TTF’s with the same amount of points just select all the glyphs and...\n\nThis is, I believe, false. The direction of the curves being correct, is separate from the control points being chosen during the lossy conversion from T1 to TT. The best way to avoid this issue is to have native drawing of TT in FL. It is the majority product format these days, and losslessly converts to T1. When?\n\nCheers!\n\n"
+    },
+    {
+      "time": "17 Dec 2009 — 10:51am",
+      "content": "Wow! Thank you all so much for the responses. Its nice to finally be part of such an active community.\n\nTo ensure that I'm understanding this correctly:\n\nFontLab uses PostScript in its drawing interface, or at least by default it uses PostScript  \nOpenType uses PostScript geometry, so by using OpenType I do not need to convert to TrueType geometry  \nTrueType uses its own geometry, different and incompatible with PostScript  \nFontLab will automatically convert PostScript to TrueType on export (if I select TrueType)\n\nIs this correct?\n\nThe only thing I don't understand: why would I use TrueType?\n\nThanks again,\n\nCalvin Tennant  \ncalvintennant.ca\n\n"
+    },
+    {
+      "time": "17 Dec 2009 — 12:17pm",
+      "content": "\\>The only thing I don’t understand: why would I use TrueType?\n\nBecause there are circumstances where \"Font Lab adding nodes when generating ttf\" is not a good thing for the end product.\n\nCheers!\n\n"
+    },
+    {
+      "time": "17 Dec 2009 — 2:13pm",
+      "content": "This is with the end product being TTF, but why not use OpenType PS?\n\nCalvin Tennant  \ncalvintennant.ca\n\n"
+    },
+    {
+      "time": "18 Dec 2009 — 5:32am",
+      "content": "\\>...but why not use OpenType PS\n\nThere are several billion users who don't use PS of any kind, sometimes.\n\nCheers!\n\n"
+    },
+    {
+      "time": "18 Dec 2009 — 8:53am",
+      "content": "One main reason for using TrueType can be the most precise hinting. But I’ve always worked with OpenType PS for typefaces intended for print.\n\n"
+    },
+    {
+      "time": "28 Dec 2009 — 6:59am",
+      "content": "`dberlow writes:\n\"The best way to avoid this issue is to have native drawing of TT in FL\" `\n\nYou can draw TT natively in FL since its first release, even TT MM, but it is unconvenient. We are still waiting for meta control points to control curvature, tension and distances between TT off-curve points.\n\ndberlow writes:  \n\"TT losslessly converts to T1\"\n\nThat is not correct for various reasons.\n\nTT can have a much higher UPM than PS, then you'll have rounding to a coarser grid.\n\nIn theory, between 2 TT off-curve points a PS on-curve point can be placed, but this new point must be rounded to the grid, just as any new BCP. With all this rounding you lose the quality of your TT curve.\n\nWhen you edit quadratics (TT) in FL, you might notice you can do things that are not possible in cubic curves (PS) e.g. an optically pleasing connection between a straight and a curve, and this will never convert loslessly.\n\nBefore converting from PS to TT, up scaling the UPM will give a much better curve fidelity. At the same time you get more off-curve points per curve segment, and all these off-curve points are rounded to the grid, giving a subtle warm wobbliness, that won't be there when you go back to PS :-)\n\nTT curves and fonts \\*can\\* be superior to PS, it is just too much work.\n\n"
+    },
+    {
+      "time": "28 Dec 2009 — 7:27am",
+      "content": "\\>When you edit quadratics (TT) in FL, you might notice you can do things that are not possible in cubic curves (PS) e.g. an optically pleasing connection between a straight and a curve, and this will never convert loslessly.\n\nI don't see how this can be correct. PS curves are cubic equations, of which quadratic equations are a special case. So whatever you can do in outlines with quadratic--and TT outlines are quadratic--you should be able to do with cubic PS curves, if you are on a grid with the same resolution. You may need intermediate points off the extrema in PS Beziers, but there is no barrier to adding intermediate points--or working in 2048 units per em, right?\n\n"
+    },
+    {
+      "time": "28 Dec 2009 — 2:31pm",
+      "content": "\\> TT can have a much higher UPM than PS\n\nHow so? You can make OpenType PS (.otf) fonts with a UPM of from 16 to 16,384 units, same for Type 1 -- exactly as with TrueType fonts. The maximum coordinates limit in OpenType PS (.otf) fonts and Type 1 fonts is ±4,095, so converting a 16,000 UPM TT font to PS may indeed pose a problem. But for the most common cases, there is none. Adobe Arabic is an .otf font with PS outlines based on a 2048 UPM, just like most Microsoft-made TT fonts. Conversely, many TT fonts are based on a 1000 UPM, just like most Adobe-made PS fonts. But both PS and TT fonts can have pretty much any UPM, within the set limits.\n\nSee [http://www.typophile.com/node/30913](http://web.archive.org/web/20131013132527/http:/www.typophile.com/node/30913 \"http://www.typophile.com/node/30913\") for more discussion on this.\n\nCheers,  \nAdam\n\n"
+    }
+  ]
+}

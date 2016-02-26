@@ -1,0 +1,59 @@
+{
+  "id": "107368",
+  "title": "Why do these spacing characters exist in Unicode?",
+  "forum": "Build",
+  "tags": [
+    "Unicode",
+    "Build"
+  ],
+  "content": "I've found these **spacing** characters in Unicode. What are they for?\n\n005E - CIRCUMFLEX ACCENT  \n0060 - GRAVE ACCENT  \n00A8 - DIARESIS  \n00B4 - ACCUTE ACCENT\n\nand others.\n\n",
+  "author": "Belloc",
+  "time": "19 Nov 2013 — 5:09am",
+  "uid": "99297",
+  "comments": [
+    {
+      "time": "21 Nov 2013 — 3:19am",
+      "content": "I think I have the answer. Please correct me, if I'm wrong: these characters were already present in code pages (863, 850, 858 and Windows 1252) before 1991, when Unicode was first published.\n\n"
+    },
+    {
+      "time": "26 Nov 2013 — 8:57pm",
+      "content": "Presumably so. One of the Unicode principles is to have backwards compatibility with pretty much all pre-existing character sets. So plenty of things that would not otherwise be encoded, get encoded through that \"back door\" principle. Spacing versions of diacritics that don't dynamically combine are likely yet another example of this.\n\nPrecomposed accented characters are one such thing. So are ligatures. For both, only the ones that existed pre-Unicode got encoded.\n\nThere are fascinating political issues around this. For example, there are folks for whom Tamil is a native language, who want it to work without dynamic accent composition, with precomposed accented characters. But there wasn't a standard Tamil encoding prior to Unicode, so Unicode didn't do Tamil that way (and will never do so), hence standard text processing architectures based on Unicode require that Tamil be treated as a complex writing system, like Arabic or Tibetan. This means that antique apps that don't use the right APIs don't work with \"proper\" Unicode Tamil—but could have if it wasn't a complex writing system. Such old apps and operating systems are pretty nearly dead here in the USA, but are much more common in India and south Asia....\n\n"
+    },
+    {
+      "time": "15 Dec 2013 — 10:34am",
+      "content": "Thanks for the instructive answer\n\n"
+    },
+    {
+      "time": "16 Dec 2013 — 9:50am",
+      "content": "I believe they were intended for overprinting on printing terminals. Why else would there be a free-standing cedilla in Latin-1?\n\nCurrent use? Well, the backtick (U0060) is used in Unix shells when you want to assign the output from a pipeline to a shell variable.\n\nWords=`wc -w \"$1\" | cut -d \" \" -f 1`\n\n"
+    },
+    {
+      "time": "16 Dec 2013 — 11:10am",
+      "content": "Could they not be used for over-layering to construct a given glyph that may not either be pre-made in the font or not currently in the standard encoding system?\n\n"
+    },
+    {
+      "time": "17 Dec 2013 — 8:14am",
+      "content": "Of which overprinting (on paper) is but a basic example.\n\n"
+    },
+    {
+      "time": "17 Dec 2013 — 2:30pm",
+      "content": "I too think they're legacy characters, for backwards compatibility. Since we only set books (new publications), I take them out of all the fonts we modify for our use (usual disclaimers about following the EULAs). However, I do make sure the spacing modifiers and combining diacriticals are populated, which is what Unicode expects for proper canonical composition/decomposition with diacriticals. BTW, I also remove any Unicode number from any ligatures.\n\nBy doing this, we do make sure the \"legacy\" doesn't continue with any manuscripts/files going out of our shop. I guess people making fonts for general use can't take this approach, someone would squawk. Might be worth it, though. You'd get a .notdef for the removed accents, which could then be replaced by the proper Unicode character.\n\nSadly, another reason is very few font designers/publishers include the combining diacriticals and spacing modifiers. Maybe if these were actually included, the apps would be made to work as intended, and the problems Thomas mentions could gradually disappear.\n\nRead the Unicode section on Combining diacriticals sometime. What they expected people to do and what is actually done are two different things. Which means the general mess will continue...\n\n"
+    },
+    {
+      "time": "20 Dec 2013 — 9:16pm",
+      "content": "There are two reasons to have spacing accents in Unicode:\n\n1. A spacing accent is needed as metainformation. Let's say you have to show how is a caron. The easiest way to do this is... with a caron, of course. Although you can also use the combining diacritic preceded by spaces, this would wrest the use Unicode attributes to combining characters.\n\n2. Spacing accents are used as modifiers in linguistic and phonetic texts. They work to indicate tones, pauses, unions, stops, syllables, and other data to which the plain text is not enough.\n\nBackward compatibility is only the reason why some modifiers are out of the spacing modifiers block (02B0–02FF), but even without any backward policy these modifiers would be necessary to address cases 1 and 2 above.\n\n"
+    },
+    {
+      "time": "21 Dec 2013 — 12:08pm",
+      "content": "Yes. Spacing modifiers -- the characters under their own \"name\" -- are sometimes needed. Problem is, the assignments noted by Mr. Belloc are mis-located as spacing modifiers. They seem to have a legacy purpose only.\n\ncircumflex should be at 02C6, not 005E  \ngrave should be at 02CB, not 0060  \nacute should be at 02CA, not 00B4  \nmacron should be at 02C9, not 00AF\n\nApparently 00A8 is all Unicode made available for the encoding of a \"spacing\" dieresis, the others I take out, for reasons given above.\n\n"
+    },
+    {
+      "time": "21 Dec 2013 — 3:48pm",
+      "content": "Charles, we are actually agreeing. As I said, “Backward compatibility is only the reason why some modifiers are out of the spacing modifiers block (02B0–02FF)”.\n\n"
+    },
+    {
+      "time": "21 Dec 2013 — 6:44pm",
+      "content": "Ah, Good. Now if people would only start populating the spacing modifiers and combining diacriticals, even if they feel it also necessary to include the glyphs in legacy character positions...\n\n"
+    }
+  ]
+}

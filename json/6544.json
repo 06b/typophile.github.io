@@ -1,0 +1,106 @@
+{
+  "id": "6544",
+  "title": "Font conversation problems (fontographer)",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "hi, i tried to convert an macintosh truetype font using fontographer (mac) to pc TT.   \n   \ni imported the font metrics, and generated the font file(s) (i used the same bmp sizes as in the original font).   \n   \nat small sizes certain letters (a, e,...) looked jagged in freehand, and the kerning was wrong.   \n   \ni saved the font as a mac version- same problem.   \n(in the printout, the \"jagged\" letters were gone, and the kerning was wrong at very small sizes only [\\< 7]).   \n   \nplease help me, i can\n\n",
+  "author": "anonymous",
+  "time": "28 Jan 2003 — 8:24am",
+  "uid": "1203",
+  "comments": [
+    {
+      "time": "31 Jan 2003 — 9:39am",
+      "content": "Yes, Autohint should be checked. This is the URL for the tech notes   \n   \n [http://www.macromedia.com/support/fontographer/technotes.html](http://web.archive.org/web/20131103102611/http:/www.macromedia.com/support/fontographer/technotes.html)   \n   \nIn looking back at your original post I don't understand the following:   \n   \n(i used the same bmp sizes as in the original font).   \n   \nTrueType fonts don't have bitmaps.\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 10:06am",
+      "content": "TT fonts can actually have embedded bitmaps\\*, although it is rare.   \nBut that doesn't mean I understand what florian means.   \n   \n\\* [http://www.themicrofoundry.com/f\\_arasan.html](http://web.archive.org/web/20131103102611/http:/www.themicrofoundry.com/f_arasan.html)   \n   \nhhp\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 10:26am",
+      "content": "florian   \n   \nAgain, I'm a bit confused:   \n   \nwhen i open it in atm, especially the holes in the \"8\", \"a\", \"e\" and so on look out of place.   \n   \nATM is a rastorizer (specifically for PS1 screen fonts, which are bitmapped). TrueType doesn't need ATM. What formats \\*are\\* you working with?   \n   \nHave you tried to use your regenerated font in a page-layout program?   \n   \nAre your encodings set right in your FOG preferences.\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 10:35am",
+      "content": "Why convert fonts in fontographer? You can try using Transtype(pc & mac) or Crossfont(pc). Usually works for me.\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 10:51am",
+      "content": "Yeah, TransType is good and I'd recommend it (though I wish Pyrus would upgrade it for OT conversion).   \n  \nBut, ya know, florian has Fontographer.\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 11:39am",
+      "content": "Stephen   \n   \nOh, you know, to convert your TT and PS1 font libraries to OT. Now before you say what's the point of this, I'll just ask a silly bunch of questions: why did Adobe convert its entire PS1 line to OT? And discontinue PS1 altogether? If OT-aware applications don't need to be bothered with whether a font is TT or PS1 or OT, why would Adobe bother? Why wouldn't they just concentrate on making their new font offerings in OT?\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 12:04pm",
+      "content": "Stephen.   \n   \nI don't see it as a cross-platform issue. But I know the developers do. I see it as an obsolence issue. The foundries don't give a crap that I've invested thousands in PS1. They'd just as soon we bought new format versions rather than being able to convert the fonts ourselves. And once, again, before anyone asks why do we need to do this, I'll just refer back to my previous silly questions.\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 12:17pm",
+      "content": "Continuing to support Type 1 fonts indefinitely requires maintenance and support of Type 1 rasterisers, Type 1 encoding handlers, and various other aspects of that architecture. The biggest reason for dumping Type 1 is that there is no place to include Unicode encoding data within a Type 1 font: it is an 8-bit encoding format with no internal glyph-to-character mapping. Adobe have converted their entire library to OT for the same reason that they are gradually converting all their core text handling and applications to Unicode: this is how text is being handled in today's software. I suspect Adobe apps will continue to support Type 1 fonts internally for a long time to come, but I doubt very much if companies like Microsoft will bother to maintain Type 1 rasterisers and all the other stuff necessary for backwards compatibility with what is, from their perspective, very much an obsolete format.\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 12:28pm",
+      "content": "Regarding converting existing Type 1 fonts to OT: there's no reason at all why users can't do this themselves using a tool like FontLab or DTL FontMaster. I think the idea is that most users will want to buy the versions from Adobe because they're going to be well made and include layout features, etc. If all you want to do is to maintain functionality of your Type 1 fonts in future systems and applications, you can simply open a Type 1 font in FontLab and save as a .otf. You get an PS-flavour (CFF) OT font with the same character set as the original Type 1: no additional bells and whistles, but the font will work. The only thing you need to be careful about is the encoding of expert sets and smallcap fonts; if you want to emulate the old 8-bit encoding, you need to overwrite glyph names with the Adobe standard set (e.g. ffi-\\>W, etc.)   \n   \nIt isn't much more work to merge fonts and add layout features for things like smallcaps, ligatures and oldstyle figures. I did this for a few fonts I needed for the [_Language Culture Type_](http://web.archive.org/web/20131103102611/http:/www.amazon.com/exec/obidos/tg/detail/-/1932026010/qid=1044044931/sr=8-1/ref=sr_8_1/102-2699481-5964141?v=glance&s=books&n=507846) book, because OT versions were not yet available.\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 12:32pm",
+      "content": "\\> PS1 screen fonts, which are bitmapped   \n   \nReal quick: PS fonts on Windows can't have bitmaps.   \n   \n--   \n   \nJohn, I share Gerald's feeling (?) that the whole point of this OT exercise is to recycle those legacy outlines, yet again... The cheapest way to make more money.   \n   \nWhich doesn't mean OT can't benefit typographic quality - it mostly does.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 12:34pm",
+      "content": "John   \n   \nThanks for this. Very, very useful information. Which brings me back to the statement that started this. I wish TransType (FontLab's convertor) would be upgraded to allow \\*batch\\* conversion to OT.\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 4:53pm",
+      "content": "_the whole point of this OT exercise is to recycle those legacy outlines, yet again_   \n   \nWell, I can't stop you 'feeling' things, but I think you are wrong. There are too many solid technical reasons why OpenType is _necessary_ for the 'whole point' of the exercise to be recycling of old fonts.\n\n"
+    },
+    {
+      "time": "3 Feb 2003 — 9:17am",
+      "content": "florian   \n   \nBy the way, what was the original font? All TrueType fonts made by Microsoft or Monotype (and many by other commercial foundries) were made with Delta Hint. Fontographer didn't support this and can't rehint as in the original.   \n   \nBut you might also try this. There is a way to fix a corrupt font that follows the procedure I gave you but has another step (normally, this would require you to initially cut and paste the original entirely into a font, opened as \"new font\"):   \n   \nAfter you recalc the vertical alignment zones select Hint Parameters from the Hints menu. Click Recalc and click OK. Then select Autohint twice to turn it off and back on.   \n   \nThen regenerate.   \n   \nBut most likely what you have encountered is loss of Delta Hinting.\n\n"
+    },
+    {
+      "time": "3 Feb 2003 — 9:38am",
+      "content": "I worry about \"simple\" opentype conversions by foundries. Yes, if a typeface is upgraded to OT and given additional characters or features that add something to it being OT, fair enough. Good for graphic designers, good for type designers, good for foundries. But how much of Adobe's collection has actually gained any significant benefit from their conversions?   \n   \nIts important to ask these questions, especially as there is no upgrade path for existing PS or TT users from Adobe (unless something has changed since TypeCon2002).   \n   \nI am not as cynical as Hrant on this, but neither am I as blindly optimistic as some here in the honesty of commercial enterprises not to use OT as an excuse to make a large wad of cash with little gain.\n\n"
+    },
+    {
+      "time": "3 Feb 2003 — 11:41am",
+      "content": "I did this for a few fonts I needed for the Language Culture Type book, because OT versions were not yet available.   \n   \nJohn   \n   \nI finally received my copy of this today. Very nice work.   \n   \nThink I \"get it\" now. Beginning to see the light.\n\n"
+    },
+    {
+      "time": "3 Feb 2003 — 12:11pm",
+      "content": "Re. the Adobe library: existing Type 1 families that included smallcap, expert sets, etc. have been merged into OT fonts with appropriate layout features. I think this is a significant benefit, because I have found working with OT fonts in InDesign to be faster and easier than trying to achieve the same results with Type 1 fonts. This does not mean that I would necessarily go out and spend a huge amount of money replacing all my Type 1 fonts, but if a project came along that was going to require extensive use of a particular typeface I would certainly consider a font upgrade to be a worthwhile way to spend some of the budget.   \n   \nI don't think Adobe's aim is to 'make a large wad of cash with little gain': I have not seen them actively marketing the OT fonts on people who already own the Type 1 versions. Indeed, if that was their intent they surely would have introduced an upgrade path to attract more people to do this. I believe their goal is to replace the way in which they ship and support fonts. I think the motivation here is strategic and has to do with survival. I think Adobe came to the realisation that _structurally_ TrueType is a much better font format that Type 1. Indeed, at the ATypI Font Technology Forum in Rome, one of the Adobe guys (can't remember if it was David Lemon or Thomas Phinney) acknowledged that they had at one stage considered giving up on PS fonts altogether and converting the entire library to TrueType. With OpenType, they have the best of both worlds, because they can continue to utilise the PS outline and hint technology they're so good at, but do so with the sfnt table structure of a TT font, with all the encoding and intelligent layout options that this provides.\n\n"
+    },
+    {
+      "time": "4 Feb 2003 — 2:19am",
+      "content": "Mr Hudson, I do agree with an awful lot that you say on this, and please do not get me wrong here - I am very very pro-OT. However, having heard Mr Phinney talk on the conversion of the Adobe library at TypeCon2002, I am concerned about the lack of upgrade path and Adobe's apparent attitude to it.   \n   \nIt is appealing to think that upgrading to OT fonts will be entirely based on choice and typographic merit, but it is unlikely that this will be the case. As more people move over to the advantages of OT, many people will be left in the situation of _having_ to upgrade in order to be able to work on projects, output artworks, and so on. These people will have to go out and upgrade (sorry, get a whole new license) - a not inconsiderable expense.   \n   \nAdobe are not marketing to Type 1 users? The press release from Adobe does imply otherwise.   \n   \n [http://www.adobe.com/aboutadobe/pressroom/pressreleases/200204/200204opentype.html](http://web.archive.org/web/20131103102611/http:/www.adobe.com/aboutadobe/pressroom/pressreleases/200204/200204opentype.html)   \n   \nI reiterate, I am a strong supporter of OpenType, but if the format is to suceed and quickly become a dominant standard, with all the benefits that will bring, those who create and market the typefaces need to be sensitive to those who have invested heavily in their typeface collections. These people have, after all, contributed the money to pay for the format's development in the first place.\n\n"
+    },
+    {
+      "time": "4 Feb 2003 — 9:05am",
+      "content": "John Hudson wrote:   \n_you can simply open a Type 1 font in FontLab and save   \nas a .otf. You get an PS-flavour (CFF) OT font with   \nthe same character set as the original Type 1: no   \nadditional bells and whistles, but the font will work_      \n   \nWhat about hint quality?\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 5:44am",
+      "content": "hi. thanks for your answer,   \ni tried it several times, but it seems that the font is still \"wrong\". when i open it in atm, especially the holes in the \"8\", \"a\", \"e\" and so on look out of place.   \n   \ndo i have to check \"autohint\" or not?\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 11:09am",
+      "content": "_I wish Pyrus would upgrade it for OT conversion_   \n   \nI'm cornfused. If OT is cross-platform what's the   \npurpose of OT conversion?\n\n"
+    },
+    {
+      "time": "31 Jan 2003 — 11:45am",
+      "content": "Ahh, I do see the point in that. Say you're working in a   \nshop where both macs and PCs are used. Easier to   \nhave one font file for both, right?\n\n"
+    },
+    {
+      "time": "3 Feb 2003 — 8:58am",
+      "content": "again, thanks for your answers...   \nas you\n\n"
+    },
+    {
+      "time": "30 Jan 2003 — 9:17am",
+      "content": "According to FOG technical reports, you should first set the encoding of the final font in preferences. Then open the target font.   \n   \nIn the Elements menu select Font Info and change the font's name (or add to it).   \n   \nSelect all characters and again, in the Elements menu, select Clean Up Paths. Use the defaults.   \n   \nIn the Hints menu, select Vertical Alignment Zones. Click Recompute and then OK.   \n   \nThen click on Auto Hint.   \n   \nGo to Files and click on Generate Font Files.   \n   \nShould work fine. You don't need to import the font metrics w/TT conversion.\n\n"
+    }
+  ]
+}

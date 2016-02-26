@@ -1,0 +1,38 @@
+{
+  "id": "37252",
+  "title": "Copy kerning from glyph to glyph",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "This is driving me spare. In Typetool 3, I copy my \"A\" into \"Aacute\", edit the glyph, and then have to type lots of numbers into the Metrics window so that PÁTÁVÁWÁYÁOÁGÁC kerns the same as PATAVAWAYAOAGAC does, and hope I haven't forgotten any pairs. I'm not looking forward to doing this too many more times. Is there a way to copy all the kerning-pair information from a character and put it into another?\n\n",
+  "author": "cerulean",
+  "time": "19 Sep 2007 — 1:35am",
+  "uid": "2462",
+  "comments": [
+    {
+      "time": "19 Sep 2007 — 9:48am",
+      "content": "It's my understanding that TypeTool 3 will generate OpenType fonts (TT2 doesn't), so I would assume (perhaps foolishly) that it also supports class-based kerning. If it doesn't, however, you can generate a PS Type 1 font, open the .afm file in a simple text editor, make changes there, then import the new metrics back into your .vfb file. Admittedly, it's a pain, but it may be less painful than coming up with the cash to upgrade to FontLab Studio...\n\n"
+    },
+    {
+      "time": "19 Sep 2007 — 10:19am",
+      "content": "FontLab has 'paste special' where you can choose what to paste into a glyph slot, including right and left side bearing. Does Typetool?\n\n"
+    },
+    {
+      "time": "19 Sep 2007 — 2:52pm",
+      "content": "Well there's also kerning classes in FontLab. Basically when you set kerning for key letter all others get the same values automatically as well.\n\n"
+    },
+    {
+      "time": "19 Sep 2007 — 4:23pm",
+      "content": "Searching the TT3 manual for the word \"class\" gives me a description of class-based kerning in \"what is kerning\" and lists it as a feature in \"the advantages of OpenType\", but it is mentioned nowhere else. Opentype support in TypeTool is basically limited to exporting a font in Opentype format with no Opentype-specific features. I haven't acquired VOLT yet; maybe it does class kerning as well as lookup tables?...\n\n"
+    },
+    {
+      "time": "20 Sep 2007 — 7:22am",
+      "content": "I fiddled around with VOLT for a little while before deciding it was a little too challenging for (lazy) me, but I'm fairly sure that, while it can add OpenType tables and features to a font, it won't generate those features (although there's an active VOLT forum in MSN Communities, and someone among them may have developed add-ons which they are willing to share).\n\nAnother option--if you're not up to tackling the .afm file editing mentioned earlier--is to set up a kerning pairs text file that makes the task a little simpler, such as...\n\nAVÀVÁVÂVÃVÄVÅV\n\n...and so on. Once you determine the first value, you can simply tab over and fill it in the same value for the remaining pairs. Or upgrade to FontLab Studio...\n\n"
+    },
+    {
+      "time": "21 Sep 2007 — 11:18am",
+      "content": "TypeTool does not support class kerning nor copying kerning. Only FontLab Studio supports those advanced features.\n\nA.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "44549",
+  "title": "How is the aalt set constructed?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Examining existing OTFs, I cannot find a decent definition of the [aalt](http://web.archive.org/web/20131015124549/http:/typophile.com/wiki/aalt) feature.\n\nIf you dissect an OTF, it seems all features supported by it are concatenated into a single large list (perhaps two; although the 2nd usually looks suspiciously like the first). Should one reconstruct the aalt table by looking up _every_ possible 'complete' list in the rest of the features? Even then, the MinionPro.fea sample from Adobe (revision 2.012) shows some additional lookups added to the aalt table.\n\nPerhaps this was never meant to be re-engineered :-)\n\n",
+  "author": "Theunis de Jong",
+  "time": "22 Apr 2008 — 3:33pm",
+  "uid": "29994",
+  "comments": [
+    {
+      "time": "22 Apr 2008 — 9:35pm",
+      "content": "\\> _I cannot find a decent definition of the aalt feature._\n\nHere's \\*the\\* definition: [8.a. The all alternates ('aalt') feature](http://web.archive.org/web/20131015124549/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#8.a)\n\n\\> _Perhaps this was never meant to be re-engineered :-)_\n\nYou mean reverse engineered? There's no need to do that. Go to [http://www.adobe.com/devnet/opentype/afdko/](http://web.archive.org/web/20131015124549/http:/www.adobe.com/devnet/opentype/afdko/ \"http://www.adobe.com/devnet/opentype/afdko/\") and download ExampleRomanFonts.zip, or get it at [http://www.adobeforums.com/webx/.3bb58628](http://web.archive.org/web/20131015124549/http:/www.adobeforums.com/webx/.3bb58628 \"http://www.adobeforums.com/webx/.3bb58628\")\n\n"
+    },
+    {
+      "time": "23 Apr 2008 — 3:40am",
+      "content": "Thanks, Miguel. I read the entire specs before, but seem to have missed this exact definition ...\n\nAs for the reverse-engineering, well yeah, I have seen the Minion Pro feature file. What I'm hoping for is the reverse: given any font, get a (reasonably) correct feature file out of it. The MinionPro-Regular.fea is my target output, and I'd like to produce a comparable file by reading and parsing MinionPro.otf.\n\nReading the specs, it sounds it's possible by including all tags which define _any_ single glyph input substitution. That would (correctly) exclude 'frac' in the Minion sample, as this does not contain single input glyphs at all, as well as 'ss02' (that one has an explicitly mentioned workaround).\n\n"
+    }
+  ]
+}

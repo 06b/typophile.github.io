@@ -1,0 +1,90 @@
+{
+  "id": "61335",
+  "title": "FDK vs VOLT",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "what are the advanteges of FDK over VOLT and VOLT over FDK????\n\n",
+  "author": "Typograph",
+  "time": "24 Aug 2009 — 3:24pm",
+  "uid": "31385",
+  "comments": [
+    {
+      "time": "24 Aug 2009 — 4:42pm",
+      "content": "VOLT has a GUI (to throw in another abbrv), AFDKO -- which I assume you mean -- doesn't have one. On the other hand, I can't really work with VOLT, GUI or not. It assumes quite a lot of background knowledge or something. There are just a few reasonable tutorials, and from the barrage of questions with 'VOLT' in the subject line in this forum you can derive how clearly written they are ...\n\nAFDKO, on the other hand, has been advertised as the bee's knees if you're into scripting and command lines. Well, I'm into that, so with a little help from the accompanying documentation I'm pretty much able to make it sit up, beg, and occasionally roll over and play dead. MakeOTF has a few peculiarities (such as insisting on a 'registered family name'??), but the latest version also comes with an updated TTX, and that gives more control over a font than a mere mortal could ask for, including even larger ASCII documents to wade through. I've just successfully compiled a font with MakeOTF, despite a large wad of warnings, and was able to put remaining finishing touches into a TTX dump.\n\nSince both are free, just install both of them and see what works for you.\n\nFontLab is built upon the ADFKO (not yet the very latest version, but I'm sure they will announce clearly and loudly when they do) but all the interesting OTF stuff is still done by typing in commands. DTLs OT Master (full version) allows you to just type in the required values -- although you still need a good background in Opentype to know what goes in which edit field.\n\nOn the subject of GUIs, I'd be sorry not to mention [FontForge](http://web.archive.org/web/20141029051547/http:/fontforge.sourceforge.net/) -- it's _also_ free, and from what I have seen, you can do vast amounts of 'coding' in a GUI environs. A minor drawback is that it's Linux based (I think it _should_ work just fine on a modern Mac OSX).\n\n[Edit] Almost forgot: traditionally, VOLT works best with TrueType fonts, and ADFKO with CFF (Postscript) fonts, although both created valid OTFs. However, there are tricks to use CFFs in VOLT; and its major feature, being able to add cursive, mark-to-base and mark-to-mark features to fonts (needed for accent positioning and scripts such as Arabic) has finally been integrated into the last ADFKO.\n\n"
+    },
+    {
+      "time": "24 Aug 2009 — 5:11pm",
+      "content": "Ok, let me clearify my self alittle more.  \nI use volt for my projects for hebrew font.  \nnow, hebrew fonts are the most complex scripts to develop.  \nCurrenly i am using over 45 OFF features and over 200 lookups and 1000ns of context conditions\n\nAs the hebrew font fully supports diacritics and candilation marks.  \ngrammer distinguish of sheva na nach - dagesh kal hazaq ect' ect'  \n+ it supports grammaticly removing the diacritics and inserting letters replacing these diacritics\n\nso as you can C my project is hug.  \nlately i am having difficulties compilng the font for the project is super large and it seems that volt has a code block limitation and cannot handle this complexity.  \nfor now i am still managing to optimize my project in verious ways, so for the mean while a can still compile my projects but i fear for the near future.\n\nuntil now Adobe FDK was not an option because i use mark to base and mark to mark.  \nbut i am wondering if this is a VOLT limitation that could be solved with FDK or is it an open type limitation.\n\n"
+    },
+    {
+      "time": "24 Aug 2009 — 6:12pm",
+      "content": "According to  \n [http://www.adobe.com/devnet/opentype/afdko/topic\\_feature\\_file\\_syntax.htm...](http://web.archive.org/web/20141029051547/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#6.d \"http://www.adobe.com/devnet/opentype/afdko/topic\\_feature\\_file\\_syntax.html#6.d\")  \nmark to base, mark to ligature and mark to mark are now supported [AFDKO 2.5](http://web.archive.org/web/20141029051547/http:/www.adobe.com/devnet/opentype/afdko/)\n\nMichel\n\n"
+    },
+    {
+      "time": "24 Aug 2009 — 6:55pm",
+      "content": "yes,  \nand thats why untill now FDK was not an option  \nand now after supporting these features it is an option.\n\nso now that it does support these features  \ni am asking does FDK also hav a code block limit???\n\n"
+    },
+    {
+      "time": "24 Aug 2009 — 9:45pm",
+      "content": "Did you activate the option to make use of extension type lookups?\n\nNot sure if this is the problem but it looks like you need two split some subtables into multiple ones. There is a subtable size limitation of about 65k which is a limitation of the OT layout tables.\n\nI do not see a reason why not to use AFDKO. Since the problem -- if this is your problem -- is related to OT layout tables rather than VOLT/AFDKO, you'd face it with both of them.\n\nKarsten\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 4:42am",
+      "content": "<cite>There is a subtable size limitation of about 65k</cite>\n\nWhen I read the [GPOS Opentype spec](http://web.archive.org/web/20141029051547/http:/www.microsoft.com/typography/otspec/gpos.htm#MBP), I understand that the limit is 65536 records, not 65536 bytes (uint16 as well as offset are 16 bit integers).\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 5:29am",
+      "content": "I dont think I ever reached 65,536 Records  \nThe font after compilation is almost 300KB the clean TTF is around 130KB  \na difference of 170KB between clean TTF and compiled TTF.\n\nHere is a question for John Hudson or the MSVOLT devlopers (if they write in typophile)\n\nare there any code limitations in OTF?  \nIf so,  \nWhat exactly are the OTF limitations?????  \nlimitations of context block  \nlimitations of composing\\decomposing Glyphes  \nLimitations of amount of Anchers\n\nEct' Ect'\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 6:47am",
+      "content": "Since you refer to it, take a PairPosFormat2 subtable as an example:  \nCoverage table and ClassDef1/2 table offsets are, as you say, 16 bit integers so the maximum value can be 65536 (meaning bytes, from the beginning of the subtable). This means that there's a little less space than that left for the actual kerning data -- which is Class1Count\\*Class2Count\\*ValueRecord(s)[1] -- plus Coverage and ClassDef1 table lengths to make sure that Coverage, ClassDef1 and ClassDef2 tables are in reach.  \nIt is not too hard to reach this limit.\n\n[1] For kerning to work, there must be a value only for the first glyph of the pair, i.e. one Record. Yet do not forget the ValueRecordFormat as another factor. Since with right-to-left scripts both positioning and advance width need to be adjusted, this means another \\*2.\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 10:07am",
+      "content": "<cite>offsets are, as you say, 16 bit integers so the maximum value can be 65536</cite>\n\nOffset are indeed in bytes and you are right with PairPosFormat2. On the other hand, if I type\n\n`spot -t GPOS AdobeHebrew-Regular.otf |grep -i offset | cut -d\\= -f3 | sort | uniq -c`\n\nthe largest value of offset that is output is 4400. Are there offsets that spot is not outputing?\n\nMichel\n\nPS The output looks better with  \n`spot -t GPOS AdobeHebrew-Regular.otf |grep -i offset | cut -d\\= -f3 | sort | tail -1`\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 10:18am",
+      "content": "I missed offsets on lines for which there is just one = sign. The largest is 42a8. Any other that I missed?\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 10:25am",
+      "content": "Hmm, With AdobeArabic-Regular.otf, I see an offset of f18a. Feels tight indeed.\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 2:57pm",
+      "content": "I now took the time to have a closer look at that offset in AdobeArabic-Regular.otf Version 1.016. What I see in the file given by `spot -t GPOS AdobeArabic-Regular.otf` is  \n`\n--- Lookup [78] (0ab6)\nLookupType =0009\nLookupFlag =0008\nSubTableCount=1\n--- SubTable[index]=offset\n[0]=0008\n--- Subtable [0] (0008)\n--- ExtensionPos\nPosFormat = 1\nLookupType = 2\nOffset = 0000f18a\n`  \nand I should have realized right away that the offset is 32 bits, not 16 bits with a [lookup type 9](http://web.archive.org/web/20141029051547/http:/www.microsoft.com/typography/otspec/gpos.htm#EP) (Extension positioning). In fact, there seems to be no offset that requires 32 bits in that font. Am I missing something?\n\nMichel\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 3:10pm",
+      "content": "Michel, I don't know whether you're missing anything or not. The Adobe Arabic font was made using VOLT -- the only option at the time, and still the only tool I use for OTL table work -- and I set the extension lookups option to whatever will enable the font to compile in VOLT. I always start with the option turned off, but turn it on if the font won't compile. What VOLT does in the background is a mystery to me.\n\n"
+    },
+    {
+      "time": "26 Aug 2009 — 2:38am",
+      "content": "Michael Boyer -- <cite>and I should have realized right away that the offset is 32 bits, not 16 bits with a lookup type 9 (Extension positioning). In fact, there seems to be no offset that requires 32 bits in that font. Am I missing something?</cite>\n\nThat's what the extension lookup type (type 9 in GPOS, type 7 in GSUB) is for, allowing for larger offset values.&nbsp;&nbsp;;-)&nbsp;&nbsp;Such a lookup is not a \"real\" lookup but only serves as a relay to a \"real\" lookup (which then contains lookup metadata and refers to subtables defining glyph positioning or substitution). One might call it a nice hack to overcome at least part of a serious limitation.\n\nSo back to Mr Fried's question, the best thing is to try activating the use extension option and see if it helps.\n\n"
+    },
+    {
+      "time": "26 Aug 2009 — 7:27am",
+      "content": "Activating extention options is somthing i hav done long ago  \nbut still expiriancing dificukties.\n\n"
+    },
+    {
+      "time": "26 Aug 2009 — 8:13am",
+      "content": "Hm, then you may need to split up VOLT lookup definitions into multiple ones.\n\nAs a correction, I said that an extension type lookup \"only serves as a relay to a real lookup\" which should read \"relay to a subtable\".\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 9:20am",
+      "content": "Theunis de Jong wrote  \n \\>there are tricks to use CFFs in VOLT\n\nPlease tell me how! Where can I learn these tricks?\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 12:17pm",
+      "content": "<cite>Where can I learn these tricks?</cite>\n\nWhy, where else than on [Typophile](http://web.archive.org/web/20141029051547/http:/typophile.com/node/1161)? Scroll down to John Hudson's 2nd post.\n\nI am surprised by the date of it: just one day after my birthday! :-)\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 4:09pm",
+      "content": "I've put more detailed FontLab-to-Volt workflow, including CFF-in-VOLT, documentation online here:  \n [http://www.tiro.com/John/FontLab-to-VOLTworkflow.pdf](http://web.archive.org/web/20141029051547/http:/www.tiro.com/John/FontLab-to-VOLTworkflow.pdf \"http://www.tiro.com/John/FontLab-to-VOLTworkflow.pdf\")\n\n"
+    }
+  ]
+}

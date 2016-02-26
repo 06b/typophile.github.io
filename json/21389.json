@@ -1,0 +1,78 @@
+{
+  "id": "21389",
+  "title": "Merging and converting PS1 fonts to OpenType",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I was recently setting some text in FF Scala Sans (PS1 fonts) in InDesign and was annoyed by the need to constantly switch between, say, Scala Regular and Scala Regular SC in order to get real small caps. So I decided to use FontLab 5 to convert the PS1 fonts into OpenType, starting with the Regular font and adding to it the small caps, lining figures etc from the complementary fonts.\n\nThe idea sounds simple enough, but in order to make the resulting OpenType font do what I wanted in InDesign, I decided to use a native Adobe OS font (Minion) as a template and started copying the glyphs to the same places. So for starters I had to move the proportional text figures from their original place in the Scala Sans Regular font to U+F730 — U+F739 in the new OpenType font, then copy the lining figures to U+0030 — U+0039, then the small caps also to the private use area (but to two different blocks, one for the accented and another for the unaccented glyphs), and so on.\n\nThen of course I had to create all the substitution classes in FontLab for ligatures, proportional text figures etc etc etc.\n\nBy the time I was done with the new Scala Sans OS, I had all but given up on the idea of doing the same thing all over again for the italic, then the bold, then all the condensed fonts.\n\nDoes anyone know of a simpler way to accomplish this conversion? Isn’t there a nice little tool out there somewhere that lets you choose the source fonts and automatically creates a new OpenType font, transfering the relevant glyphs from the different source fonts to the right places in the new OS font?\n\n",
+  "author": "<a href=\"user/10481\" title=\"View user profile.\">Erik Fleischer</a>",
+  "time": "<br>",
+  "uid": "10481",
+  "comments": [
+    {
+      "time": " 19 July, 2006 - 3:09pm",
+      "content": "I empathize with your plight, Erik. Font editing and creation can be pure tedium and frustration. Two things to keep in mind.\n\n1. Check the foundry EULA. It can be illegal to modify the font or create new fonts based on the FF data.\n\n2. [FF Scala Sans OT](http://web.archive.org/web/20060821185058/http:/www.fontshop.com/showfont.cfm?fid=FF.11571.0.0) Regular is $49 and includes small caps, alternate figures, and other extras ( [PDF](http://web.archive.org/web/20060821185058/http:/www.fontshop.com/vFileStore/shop/info/FF/FF11571/ScalaSansOTRegular.pdf)). No editing required.\n\n"
+    },
+    {
+      "time": " 19 July, 2006 - 3:30pm",
+      "content": "In the case of FF faces, the EULA changed fairly recently.\n\nSo, it depends when you bought the font. You need to check the EULA that you agreed to!\n\n"
+    },
+    {
+      "time": " 19 July, 2006 - 3:51pm",
+      "content": "True, John. Thanks for that.\n\nRegardless of the EULA, fifty bucks can be less costly than the hours required to brew your own OpenType.\n\n"
+    },
+    {
+      "time": " 19 July, 2006 - 5:12pm",
+      "content": "Yes, Stephen, no question it would be $49 well spent.\n\n"
+    },
+    {
+      "time": " 19 July, 2006 - 5:15pm",
+      "content": "Perhaps FontFont can/should sell Mr. Fleischer an upgrade instead of forcing him to buy the same fonts all over again in different format.\n\nMikey\n\nPS… Just a thought, doesn’t/didn’t Emigre offer an upgrade to OpenType for their customer coming from the ‘legacy’ formats?\n\n"
+    },
+    {
+      "time": " 19 July, 2006 - 5:51pm",
+      "content": "\\> Perhaps FontFont can/should sell  \n\\> Mr. Fleischer an upgrade instead  \n\\> of forcing him to buy the same  \n\\> fonts all over again in different  \n\\> format.\n\nI’d speculate that Mr. Fleischer actually now knows how much work it is to produce an OpenType font, and that it’s not a matter of a simple conversion. Therefore, I’m sure Mr. Fleischer will agree that $50 is not a prohibitive price if you want to spare yourself the work of doing the remastering yourself.\n\nI’m not aware that CD vendors were offering upgrade prices to owners of vinyl records, but I may be mistaken.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": " 19 July, 2006 - 6:26pm",
+      "content": "Adam\\> har har, the cd-vinyl analogy is irrelavant. A better one: you buy a full license to windows xp pro and when windows vista comes out you buy an upgrade license.\n\nI’m not suggesting that fondries should not be compensated for OpenType developement, what I am saying that since the glyphs are the same why not charge Mr. Fleischer a portion of the full price. To me that seems like good business.\n\nMike\n\n"
+    },
+    {
+      "time": " 20 July, 2006 - 6:08am",
+      "content": "Thanks for your suggestions.\n\nFifty bucks for a single font file may not be prohibitive, but I have quite a few PS1 fonts that I would like to convert to OT (not OS, sorry), so the total investment would quickly run in the thousands. That, to me, is prohibitive, especially because I am based in Brazil, so something that costs my North-American or European colleagues U$ 50 costs me the equivalent of U$ 130 (at least).\n\nAlso, it seems kind of stupid to pay all this money for new bundles of the same glyphs that I already have, just organized in a different way. Sure, some work goes into producing an OT font, but I suspect all foundries have to upgrade their fonts anyway, and they must have automated processes to do this, so I don’t exactly feel a moral duty to pay them all over again. Besides, as far as I know, foundries have nothing to do with the development of OpenType technology; they’re just using it to make their fonts. So I don’t really agree with the Windows Xp/Vista analogy.\n\nAs for EULA issues, I make a distinction between what is legal and what is moral. I can’t see a moral reason in the universe why a type foundry should be able to stop me from rearranging the glyphs I’ve already bought from them anyway I like so I can work more efficiently. If I am free to manually adjust letterfit by kerning, and even convert letterforms to curves and alter them using, say, Illustrator, why should I be forbidden to group glyphs in a different manner and add substitution classes to them. This may not be legal, but it’s certainly not immoral.\n\nAnyway, my point is not to voice my disagreements with other people’s opinions (which I respect completely) about whether or not digital foundries should be able to make money by selling OT upgrades to their PS1 fonts. My point is that I cannot afford to buy all these new OT fonts, so I was looking for a less expensive solution.\n\n"
+    },
+    {
+      "time": " 20 July, 2006 - 9:08am",
+      "content": "I have been informed (and I should have already been aware - many apologies) that FontShop offers 15% discount on OT versions of packages that are already licensed in another format. Not a complete solution, but I hope it helps.\n\n_Sure, some work goes into producing an OT font, but I suspect all foundries have to upgrade their fonts anyway, and they must have automated processes to do this_\n\nIn many cases, yes. But there is no standard process or script for all foundries. Each has to develop their own method, and that takes time and money.\n\n"
+    },
+    {
+      "time": " 20 July, 2006 - 9:40am",
+      "content": "You can indeed convert, in a batch mode, simple PS fonts into OT format. The catch is, that process doesn’t handle substitution code, features, additional kerning, etc; it just translates 1 : 1. For OT Pro or extended character sets, it’s done slowly, one weight at a time, just like you did it, even at the large foundries. For the type of OT font you’re looking for, there is no quick tool for conversion. If someone develops one, please announce it on typophile…. ;)\n\n"
+    },
+    {
+      "time": " 20 July, 2006 - 9:40am",
+      "content": "Erik, I use following procedure to merge single fonts into an OT. This is reliable for large families, not for single fonts.\n\n1) I analyze the glyphs from the additional fonts. I create a list of glyphs I should add to the basic font from each separate font (OSF, CE, Expert…)  \n2) I rename the glyphs to be added to the basic font (one –\\> one.oldstyle, A –\\> A.small, at –\\> at.alt…). I’ve found free Python scripts for easier renaming of the glyphs  \n3) I create encoding scheme which only includes the glyphs I need to copy to the basic font  \n4) I append new glyphs to the basic font  \n5) I save the renaming schemes and encodings to comfortably build all the fonts in a family  \n6) I solve problems and irregularities in the fonts (not all Expert fonts in one family share the same number of glyphs, some fonts have missing or wrong characters etc.)  \n7) I do the technical stuff (family renaming, setting of proper encodings, building OT naming, adding invisible glyphs etc.)  \n8) I generate OT features (I have a collection of scripts doing this automatically according to glyph suffices)  \n9) If necessary, I expand kerning to accented glyphs (some fonts contain kerning for pairs with one accented glyph only, they don’t have fonts with two accented glyphs; I have a script doing this in a very smart way)  \n10) I export the fonts.\n\nSome of the steps could be made easier in FL Studio 5 using Merge Fonts feature.\n\n"
+    },
+    {
+      "time": " 20 July, 2006 - 11:48am",
+      "content": "Thanks for all your comments once again.\n\nFilip, did you write those scripts you mentioned? If so, would you be willing to share them with us? If not, could you tell us where you found them?\n\n"
+    },
+    {
+      "time": " 20 July, 2006 - 11:51am",
+      "content": "Stephen\\> I’m very glad to hear that FontFont offers upgrades. I think its fair.\n\nNow if only foundries let you transmit PDF’s freely (sighs)…..\n\n;-)  \nMikey\n\n"
+    },
+    {
+      "time": " 20 July, 2006 - 1:43pm",
+      "content": "Filip,\n\nI don’t see a step on your list where you combine kerning. Do you rely on “append glyphs” to bring kerning from one font to the other? If so, are the renamed glyphs reflected in the added kern pairs?\n\nKerning between caps and small caps seems like an essential part of an extended OT font.\n\n"
+    },
+    {
+      "time": " 20 July, 2006 - 5:52pm",
+      "content": "Stephen, the hypothetical violation of the EULA might constitute breach of contract, but it would not be illegal. The difference is important.\n\nCheers,  \nTQ\n\n"
+    },
+    {
+      "time": " 21 July, 2006 - 2:47am",
+      "content": "Crossgrove, kerning is preserved when you rename glyphs, as well as when you append them to the basic font. I don’t do special tricks.\n\nErik, I’ve found some useful scripts at Eccentrifuge website years ago, but the link is broken now. Contact them. The OT Features scripts were written by a programmer for me. I plan to distribute them commercially soon, but I still try to solve some minor bugs and write a user guide. Once they will be released, I will publish a note on Typophile.\n\n"
+    }
+  ]
+}

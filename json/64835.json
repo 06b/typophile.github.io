@@ -1,0 +1,54 @@
+{
+  "id": "64835",
+  "title": "Aligning points on outline of straight to curved stroke",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "When drawing the outline of a glyph where the stroke changes from straight to curved, how should the points align? As an example, consider the points A and B in the P shown below. Should they be horizontally aligned? If not, should the inner or outer point be closer to the curved part? How much?\n\nThanks for any insights! It seems this issue arises in several characters, most notably U, but also B,D,P,R, and a bunch of lowercase letters.\n\nI have also posted a pdf for closer examination that shows the points defining the outline of the P.\n\nBest wishes,  \nStephen\n\n ![](http://web.archive.org/web/20140809075618im_/http:/typophile.com/files/P_5157.png)\n\n| Attachment | Size |\n| --- | --- |\n| [P.pdf](http://web.archive.org/web/20140809075618/http:/typophile.com/files/P.pdf) | 12.6 KB |\n| [outer-curve-adjustment.pdf](http://web.archive.org/web/20140809075618/http:/typophile.com/files/outer-curve-adjustment.pdf) | 11.34 KB |\n| [curvature-Untitled1-P-1.pdf](http://web.archive.org/web/20140809075618/http:/typophile.com/files/curvature-Untitled1-P-1.pdf) | 14.5 KB |\n\n",
+  "author": "sgh",
+  "time": "29 Nov 2009 — 3:09pm",
+  "uid": "11800",
+  "comments": [
+    {
+      "time": "30 Nov 2009 — 3:17am",
+      "content": "It doesn't really matter where and how you align the nodes as far as you are satisfied with relation between the outer and the inner curves. To avoid sudden jerks, sometime you need to add extra nodes, and sometime you need to remove. Since I don't see any diagonal stress in your letter P - I guess the current nodes alignment is fine.\n\n"
+    },
+    {
+      "time": "30 Nov 2009 — 6:29pm",
+      "content": "satya, thanks for your reply! I don't quite understand what you mean by \"sudden jerks\"--could you elaborate?\n\nThe P is designed not to have any diagonal stress. If it did, how would that change the alignment?\n\nThanks!\n\n"
+    },
+    {
+      "time": "1 Dec 2009 — 9:20am",
+      "content": "If your glyphs have stress, think about the angle of the pen that creates that stress. That will inform the angle between the inner and outer contours.\n\nYou get different effects by moving the inner nodes in and out in relation to the outer bcp. It's not always very noticeable and the only way really is to try both ways and see how it looks. I think a geometric face would generally have the nodes aligned on a glyph like this, but as yours looks more neo-grotesque (wider), I'd try pulling the outer contour including the A point (and the corresponding one on the base of the bowl) inwards a little, towards the stem a few units.\n\nOn a tangent, how about removing the intermediate points with the diagonal bcps?\n\n"
+    },
+    {
+      "time": "1 Dec 2009 — 7:14pm",
+      "content": "bendy, thanks for your comments!\n\n<cite>If your glyphs have stress, think about the angle of the pen that creates that stress. That will inform the angle between the inner and outer contours.</cite>\n\nSo suppose I'm using a pen tilted at a 45 degree angle (so that the bottom leg of the K is thick and the top arm is thin)--in that case, A would be to the right of B, and the top of the bottom of the bowl would be to the right of the bottom, correct?\n\n<cite>as yours looks more neo-grotesque (wider), I’d try pulling the outer contour including the A point inwards a little, towards the stem a few units.</cite>\n\nInteresting that grotesques would have a different alignment than geometrics! I will try your suggestion and post the results tomorrow. I looked at Arial (with quadratic curves) and the points are aligned as you suggest. However, I also looked at URW Nimbus Sans (a Helvetica clone with cubic curves), and the inner points are closer to the stem. Might the order of the curves affect which alignment to use?\n\n<cite>how about removing the intermediate points with the diagonal bcps?</cite>\n\nThe intermediate points are there to ensure continuous curvature, particularly at the join from curved to straight. I found that I could not get a smooth enough transition otherwise. I'll try to post a plot of the curvature tomorrow that shows the smoothness.\n\nThe issue of the alignment arose because I was considering how to get smooth transitions from straight to curved. I think I now understand how to do that with an individual curve, but I still have some difficulty with the outline of a stroke transitioning from a straight segment to a curve.\n\nBest wishes, Stephen\n\n"
+    },
+    {
+      "time": "2 Dec 2009 — 4:20am",
+      "content": "Hm, the pen thing is a bit fishy; the validity and relevance of this model really depends a lot on the philosophy of the font you're making. And judging from that \"P\", this doesn't look like a very calligraphically-inspired font… So why imagine an imaginary pen making imaginary strokes and then emulate those with digital tools? ;-) It should be a lot more interesting and beneficial, like you've already done, to look at more existing fonts and study how they deal with the relative node placement. And of course, play! Make variants, try different solutions, put them side by side.\n\nAnd I agree with Ben about using as few points as possible for as long as possible. Adding more points is actually more likely to make your curves \\*more\\* bumpy.  \nAs far as I understand, it's only on rather exotic occurrences that you should consider using intermediate (non-extremum) points – but certainly not in a \"normal\" sans serif \"P\".\n\n<cite>\"I still have some difficulty with the outline of a stroke transitioning from a straight segment to a curve.\"</cite>  \nWhat editor are you using? Knowing that would make it easier to give practical advice.\n\n"
+    },
+    {
+      "time": "2 Dec 2009 — 8:21am",
+      "content": "\\>So suppose I’m using a pen tilted at a 45 degree angle (so that the bottom leg of the K is thick and the top arm is thin)—in that case, A would be to the right of B, and the top of the bottom of the bowl would be to the right of the bottom, correct?\n\nThat's what I think, yes.\n\n\\>the pen thing is a bit fishy; the validity and relevance of this model really depends a lot on the philosophy of the font you’re making\n\nThat's why I qualified the statement with 'If your glyphs have stress'. But of course it depends on whether your stress is chirographic (oh no, let's not get into <cite>that</cite>).\n\nNina's right: play! Just see how different positioning affects the contours.\n\n\\>Interesting that grotesques would have a different alignment than geometrics  \nI was speculating there. Geometrics are based on circles and rectangles; grotesques can afford more rhythm.\n\nI think the key is for straight-curved transitions to be as smooth as possible, which may mean taking the nodes inward toward the straight section, whilst keeping the bcps fixed. Or at least that's my experience.\n\n\\>Might the order of the curves affect which alignment to use?  \nI don't know, but I doubt it. The order of the curves shouldn't have much to do with the position of nodes, just what happens between them.\n\n"
+    },
+    {
+      "time": "2 Dec 2009 — 9:46pm",
+      "content": "Attached at the top is a sample of 26 variations of the P, shifting the point A from closer to the straight to farther. The symmetric point at the bottom of the bowl is also shifted; the points on the inside of the bowl are left unchanged.\n\nWhich letter do you think looks the best?\n\n"
+    },
+    {
+      "time": "2 Dec 2009 — 10:07pm",
+      "content": "The third attachment at top shows a plot of the curvature of the inner contour for the original P. The plot starts at the top left corner and proceeds counterclockwise around the contour. The plot shows curvature on the y axis and arc length on the x axis (units are em units). The straight line segments have curvature zero, and the curves have positive curvature, indicating that they curve to the left.\n\nThe point B is at about arc length 840. Note that the curvature is continuous here; this occurs because the point B and the two off-curve control points are collinear.\n\nThe curvature is continuous everywhere on the curve with one glaring exception: the rightmost point on the bowl. I still need to fix that!\n\n"
+    },
+    {
+      "time": "26 Oct 2010 — 1:05am",
+      "content": "Here is my thread on a similar concern:\n\n[http://typophile.com/node/75610#comment-436344](http://web.archive.org/web/20140809075618/http:/typophile.com/node/75610#comment-436344 \"http://typophile.com/node/75610#comment-436344\")\n\n"
+    },
+    {
+      "time": "25 Nov 2011 — 7:50am",
+      "content": "\\> the pen thing is a bit fishy\n\nA bit. Like one-week-old fish.\n\nhhp\n\n"
+    }
+  ]
+}

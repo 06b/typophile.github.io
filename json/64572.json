@@ -1,0 +1,30 @@
+{
+  "id": "64572",
+  "title": "Odd Font Behavior in InDesign",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "Greetings,\n\nI have observed an odd behavior with a font. In the attached InDesign CS4 screenshot, selected in the Glyphs panel is the glyph I'm trying to enter. Selected in the text is the combination of glyphs that results. The font is Rachana, a free (GPL) TrueType font for the Malayalam script. The character in question is an akhand, a ligature of three characters: 0D15 + 0D4D + 200D. The latter (200D) is the control joiner character, and all other akhands that use it have the same problem. But no other akhand does.\n\nSo, how do I make the correct glyph appear? Any ideas?\n\nLeo\n\n| Attachment | Size |\n| --- | --- |\n| [Rachana.jpg](http://web.archive.org/web/20100131100032/http:/typophile.com/files/Rachana.jpg) | 10.37 KB |\n\n",
+  "author": "<a href=\"/web/20100131100032/http://typophile.com/user/49648\" title=\"View user profile.\">silverberry</a>",
+  "time": "<br>",
+  "uid": "49648",
+  "comments": [
+    {
+      "time": "",
+      "content": "I've found that InDesign won't allow you to insert all characters from scripts which it doesn't support. The problem is essentially that it doesn't actually insert that ligature when you select it from the glyph palette, but rather the sequence of base characters from which it is composed. However, in cases where the font relies on shaping features which InDesign doesn't support, you never end up with the intended result.\n\nI haven't ever found a way around this short of duplicating the desired character within the font such that InDesign doesn't see it as an Indic (in this particular case) character and thus just treats it as a simple glyph. Of course then your document isn't going to play well with others.\n\nAndré\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, André!\n\nBut InDesign appears to support the \"akhn\" tag well enough with other akhands, at least in the TrueType Rachana. I have tried the OpenType version, and discovered that ALL akhands have this problem in OpenType. Odd.\n\nBut perhaps, as you suggest, I may embed the glyph elsewhere--not necessarily in another font, but in the private area of the same font, as a standalone character not tagged with \"akhn.\" Could anyone suggest a cheap, lightweight tool to accomplish this? I don't want to shell out several hundred dollars only to fix a single character that appears exactly twice, in two instances of the same word, in my document.\n\nLeo\n\n"
+    },
+    {
+      "time": "",
+      "content": "Considering that the font is free, under a GPL license.\n\nLeo\n\n"
+    },
+    {
+      "time": "",
+      "content": "I believe you can get InDesign to use the actual glyph by utilizing its GID (Glyph ID). This is a bit of a hack, but might accomplish what you want for your limited situation.\n\nI believe you can only do this via an InDesign Tagged Text document. It will be helpful if you are already familiar with InDD Tagged Text and its syntax. If not, you might research a little to familiarize yourself.\n\nThen try this:\n\nFirst, in the Glyph palette, hover over your desired glyph until the info box appears and then make note of the GID #.\n\nThen, select your text and use File \\> Export... to export as Adobe InDesign Tagged Text format.\n\nOpen the resulting text document in a text editor. Where you want your glyph to appear place this code:\n\n`<pSG:##><0xFFFD><pSG:>` &nbsp;(where `##` is the GID number of your desired glyph).\n\nThen reimport the text back into your InDesign document. You may need to fiddle with the import options to make sure it reads your tagged text correctly. (This is where being familiar with InDD Tagged Text can help you troubleshoot.)\n\nThis will probably be easiest to manage if you just export the single paragraph that contains your problematic glyph. Then reimport into a separate text frame and copy and paste back into your main text.\n\nBecause this references the specific glyph order, your text will only display reliably with your specific font and won't necessarily translate to any other.\n\nHTH.\n\n"
+    }
+  ]
+}

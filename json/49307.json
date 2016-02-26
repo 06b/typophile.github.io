@@ -1,0 +1,90 @@
+{
+  "id": "49307",
+  "title": "African language support",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Is there a place I can look where the various glyphs to support the different African languages are listed?\n\nI poked my way through Unicode Latin B extension and have got many of them, but it would be nice to see them all listed in one place.\n\nJamesM\n\n",
+  "author": ".00",
+  "time": "10 Sep 2008 — 11:32am",
+  "uid": "1947",
+  "comments": [
+    {
+      "time": "10 Sep 2008 — 11:07pm",
+      "content": "James,  \ntake a look at the Adobe Latin character sets over at [Thomas Phinney's blog](http://web.archive.org/web/20131017220718/http:/blogs.adobe.com/typblography/2008/08/extended_latin.html). Especially [the Excel spreadsheet](http://web.archive.org/web/20131017220718/http:/blogs.adobe.com/typblography/latin_charsets/adobe_latin_ext.xls) might help you.\n\n"
+    },
+    {
+      "time": "11 Sep 2008 — 11:10pm",
+      "content": "James, I recently did a project with MS specifying a glyph set for a pan-African UI font (much of the work based on research I originally did for them in 1998). I've got reasonably good data for about 200 African languages (mostly in paper form); from this research and from discussions on software Africanisation forums I've long since come to the conclusion that trying to target specific language coverage is a bad idea unless the number of languages is small. OpenType GPOS mark positioning makes it relatively easy to target the majority of African languages without needing to compile data about individual languages, which is difficult to come by.\n\nNote that some diacritic letters needed for African alphabets are not individually encoded in Unicode: they rely on combining mark characters. These can be handled using GSUB in the ccmp feature, but it is much more flexible to handle them with GPOS mark positioning.\n\nI gave a presentation on Latin glyphs for African fonts as part of a workshop with MS and Diane Collier at TypeCon in Buffalo (other presentations dealt with indigenous African writing systems). I've uploaded my slides to\n\n[http://www.tiro.com/John/African%20Presentation.pdf](http://web.archive.org/web/20131017220718/http:/www.tiro.com/John/African%20Presentation.pdf \"http://www.tiro.com/John/African%20Presentation.pdf\")\n\nI don't know how useful they are without commentary, but feel free to contact me if you have questions.\n\n"
+    },
+    {
+      "time": "11 Sep 2008 — 11:14pm",
+      "content": "PS. The various 'standard' pan-African alphabets shown in the early slides are mainly of historical interest, since none have been adopted as shown here, although the Africa Institute alphabet forms the basis of the majority of modern African orthographies.\n\n"
+    },
+    {
+      "time": "12 Sep 2008 — 2:09am",
+      "content": "i'm sorry i missed your workshop, John! thanks for sharing your slides.\n\n"
+    },
+    {
+      "time": "12 Sep 2008 — 7:28am",
+      "content": "I think some of the orthographies are still in flux. I remember back in the early 1990s when a book designer needed some Pan-Nigerian characters. Zapf had made a font for Pan Nigerian, but the designer want to use something different.\n\nSomebody with some official connections got involved in all this, and I was told that when a unified Pan Nigerian character set was first proposed, some people wanted a dot under characters (e,i,o, & s, I believe); others wanted a bar below. A compromise was reached, whereby a bar with rounded corners was used -- it could also be thought of as an extended dot. Anyway, I made the characters up with that mark.\n\nLast year we set a book which had some Pan Nigerian, and at first, the author wanted those old marks, but in proof changed to wanting the dots, as shown at\n\n[http://en.wikipedia.org/wiki/Pan-Nigerian\\_Alphabet](http://web.archive.org/web/20131017220718/http:/en.wikipedia.org/wiki/Pan-Nigerian_Alphabet \"http://en.wikipedia.org/wiki/Pan-Nigerian\\_Alphabet\")\n\nFWIW\n\n"
+    },
+    {
+      "time": "12 Sep 2008 — 11:40am",
+      "content": "John,\n\nMany thanks for this. I think the slides are quite informative even without the commentary. I'll chew on this awhile and contact you directly with my questions.\n\nJames\n\n"
+    },
+    {
+      "time": "12 Sep 2008 — 11:59am",
+      "content": "John, that was a very interesting capital eh, eth? I noticed that from the Wiki page on the African Reference Alphabet, there are two letters each with the same Icelandic capital form, but with different minuscules. In the table you have, there are two different capital forms. Is this from lack of distinction in modern fonts, or that no one language uses both letters so no need to distinguish, or lack of support by the language users?\n\n_«El futuro es una línea tan fina que apenas nos damos cuenta de pintarla nosotros mismos». (La Luz Oscura, por Javier Guerrero)_\n\n"
+    },
+    {
+      "time": "12 Sep 2008 — 5:33pm",
+      "content": "The Niamey African Reference Alphabet has a number of problems, and so far as I can tell it was never widely adopted. In particular, I've not seen the lowercase eth form used in any African texts, so I think this introduction -- and the innovative uppercase form to distinguish it from the barred D -- was a non-starter. The display in the chart on the Wikipedia page shows a Croatian-style barred lowercase d instead of an eth as in the original Niamey document, adding to the confusion. In all the African orthographies I researched, the Ɖ was the uppercase of ɖ.\n\nIf you look at [Don Osborne's page on the Niamey alphabet](http://web.archive.org/web/20131017220718/http:/www.bisharat.net/Documents/Niamey78annex.htm), you'll see that the French language version of the report did not show any uppercase letters. One of the books I consulted in my research in 1998 was _A thesaurus of African languages_ by Mann and Dalby, the (English language) text of which is set in all lowercase letters. It presents a revised African Reference Alphabet that incorporates new letters proposed by the authors, including the inverted v as an a vowel variant.\n\n"
+    },
+    {
+      "time": "13 Nov 2008 — 6:31am",
+      "content": "I suspect I am entering the Tower of Babel… :=)\n\n"
+    },
+    {
+      "time": "13 Nov 2008 — 10:35pm",
+      "content": "\\>I suspect I am entering the Tower of Babel…\n\n...that everyone left two months ago?\n\nMaybe Lazarus tomb - resurrecting dead threads for no apparent reason? ;-)\n\n"
+    },
+    {
+      "time": "14 Nov 2008 — 4:39am",
+      "content": "The reason is that I wished to \"bookmark\" it in my tracking… :=)  \nMany thanks to John for the PDF…\n\nBesides, Lazarus was not resurrected for \"no apparent reason\".\n\n"
+    },
+    {
+      "time": "14 Nov 2008 — 7:59am",
+      "content": "So you \"bookmarked\" the page to impress a bunch of Jewish peasants in an attempt to convince them to become your followers? Nice! ;-)\n\n"
+    },
+    {
+      "time": "14 Nov 2008 — 2:43pm",
+      "content": "check out these links from the [ANLoc](http://web.archive.org/web/20131017220718/http:/www.africanlocalisation.net/) initiative:\n\n- [Characters needed for African orthographies in Latin writing system](http://web.archive.org/web/20131017220718/http:/www.africanlocalisation.net/node/70)\n- [African Latin fonts (presentation for AtypI '08)](http://web.archive.org/web/20131017220718/http:/www.africanlocalisation.net/node/68)\n\n"
+    },
+    {
+      "time": "14 Nov 2008 — 3:24pm",
+      "content": "@gferreira: many thanks for these links… :=)\n\n@sii: \"Peasant\" means \"contadino\" (I had to look in the dictionary). If there is a way to bookmark these threads (via RSS or something thread-specific), please tell me, otherwise I can't see what your jokes are about, you seem to wish only to be annoying…\n\n"
+    },
+    {
+      "time": "14 Nov 2008 — 4:28pm",
+      "content": "\\>you seem to wish only to be annoying…\n\nIt's not my only wish, but it is on my list. However, I'd agree that it's better to be unintentionally annoying, rather than intentionally annoying. :-(\n\n\\>otherwise I can’t see what your jokes are about\n\nSadly I don't get your jokes about the tower of Babel and bookmarking either. :-(\n\n"
+    },
+    {
+      "time": "17 Nov 2008 — 5:48am",
+      "content": "I'd be interested in Unicode definitions for African languages comparable to evertype or eki ... Anybody?  \nCheers,\n\nChris\n\n"
+    },
+    {
+      "time": "19 Jan 2009 — 5:33am",
+      "content": "<cite> Sadly I don’t get your jokes about the tower of Babel and bookmarking either. :-( </cite>\n\nThey weren't jokes.\n\n"
+    },
+    {
+      "time": "19 Jan 2009 — 6:43am",
+      "content": "\\>They weren’t jokes.\n\nAh, it all makes sense now! Hilarious. Thanks for the Monday morning chuckle.\n\n"
+    },
+    {
+      "time": "21 Jan 2009 — 6:49am",
+      "content": ":=|\n\n"
+    }
+  ]
+}

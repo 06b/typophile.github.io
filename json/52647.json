@@ -1,0 +1,34 @@
+{
+  "id": "52647",
+  "title": "SeeFont for Windows [Preliminary version]",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "For your delight & entertainment: a Font Viewer. \"Not another one!\" I hear you cry. Well, this one I wrote especially to examine OpenType features. Drag any font onto it and it will tell you if it found an OpenType substitution table. If so, a mere press of the F5 key pops up a window where you can browse the features at leisure. It uses FreeType to display glyphs, so it should be able to load just about any file type there is; however, I've dismembered it to read only PFB, TTF, OTF and TTC (first font only for that one).\n\nDownload the tiny zip (282K) from [my website](http://web.archive.org/web/20110308210326/http:/www.jongware.com/binaries/seefont_1_0.zip) and start a-draggin' those fonts onto it.\n\nA few caveats follow right after these pretty pictures.\n\nThe main screen. Move Cursor to see all glyphs, with glyph names if available, AGL names if not, unicode point if there isn't one, and glyph id as last resort.\n\n ![](http://web.archive.org/web/20110308210326im_/http:/typophile.com/files/seefont1_5081.PNG)\n\nPress F5 to browse through OpenType features. Those numbers \"#188\" and so on are glyph ids (this is Calibri, which doesn't contain names).\n\n ![](http://web.archive.org/web/20110308210326im_/http:/typophile.com/files/seefont2_4934.PNG)\n\nPress F2 to see which Unicode blocks are covered (partially) by the font.\n\n ![](http://web.archive.org/web/20110308210326im_/http:/typophile.com/files/seefont3_5427.PNG)\n\nOkay, here come the caveats.\n\n- It works just fine on my old Windows machine. Do not try on a Mac. I'm not sure about Vista.\n- No GPOS support. Difficult to program in. Check your kerning and spacing case somewhere else.\n- Not all substitution types are supported, specifically Contextual ones. A pity, because these are always interesting to check out, but it is _hideously_ difficult.\n- Some fonts take _ages_ to load. Arial Unicode, for example, takes many many seconds. Apple's LastResort.ttf takes a quarter of an hour. Really!\n- Some fonts are displayed at what seems double size, mostly CJK fonts it seems. I have ta think about that.\n- At startup it tries to locate the Windows/Fonts folder for its interface font: Calibri, if not found Arial. If neither is found, you don't have text in the main view.\n\nThe good news is you can also use it as a font browser: press Page Up and Page Down to browse the folder the last font was found in (i.e., _first_ drag any font onto it, _then_ browse). You can also right-click a font file once (not in the Windows' font folder), select \"Open With...\" and browse once for the proggy. That'll insert it in the font type's \"Open With\" list. Don't set it as default -- I can't imagine what'll happen. Perhaps your hard disk will be erased.\n\nIf you are browsing, you can press F4 to see a list of all supported font files in the current directory. Don't press F1 -- it does not supply help (who needs that anyway) but pops up an old dialog I forgot to take out :-). Press F3 to sort by Glyph Id; as mentioned before, press F5 for the OpenType features. Press Control+G to jump immediately to a glyph number; press Control+F to find a glyph by name.\n\nNo worries. No problem. No guarantees.\n\n",
+  "author": "<a href=\"/web/20110308210326/http://www.typophile.com/user/29994\" title=\"View user profile.\">Theunis de Jong</a>",
+  "time": "<br>",
+  "uid": "29994",
+  "comments": [
+    {
+      "time": "",
+      "content": "Theunis,\n\nif you're using FreeType to display the glyphs, why don't you try using HarfBuzz to render the OpenType Layout? HarfBuzz and FreeType should work together nicely.\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Adam,\n\nThe program does not \"use\" Opentype features -- you cannot 'test drive' a font, switching options on and off to see what happens.  \nAt the mo', I'm not interested in actually _rendering_ OpenType, but more in how the features are written. That's what the program attempts to display.\n\n(I could take a look at the HarfBuzz code though, check how the hideously difficult bits were done.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "This is a wonderfully useful font viewer, Theunis – many thanks for making it available!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Cool, and thank you! Seems fine under Vista64.\n\nDavid\n\n"
+    },
+    {
+      "time": "",
+      "content": "I should mention I'm thoroughly depressed by DTL's freeware OTMaster Lite (as announced on [Typophile](http://web.archive.org/web/20110308210326/http:/typophile.com/node/53989) -- to examine OTF features, _that_ is the tool (and the full version to edit them). So I didn't bother to add more OTF viewing caps.  \nAh -- that should be \"impressed\" :-)\n\nHowever, to take just a quick look at any vector font file, it's a nice little proggie isn't it?\n\n"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "105707",
+  "title": "Is there a way to type an empty combining diacritic in LaTeX or Word or Indesign?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "To make it look like this?\n\n[http://s21.postimg.org/4bfp0urxz/sshot\\_90\\_naglasci.png](http://web.archive.org/web/20140804223108/http:/s21.postimg.org/4bfp0urxz/sshot_90_naglasci.png \"http://s21.postimg.org/4bfp0urxz/sshot\\_90\\_naglasci.png\")\n\n",
+  "author": "Sylph",
+  "time": "21 Aug 2013 — 12:07pm",
+  "uid": "29977",
+  "comments": [
+    {
+      "time": "21 Aug 2013 — 12:31pm",
+      "content": "Actually, what you want is a spacing modifier, see  \n [http://www.unicode.org/charts/PDF/U02B0.pdf](http://web.archive.org/web/20140804223108/http:/www.unicode.org/charts/PDF/U02B0.pdf \"http://www.unicode.org/charts/PDF/U02B0.pdf\")  \nthe one you want is 02C6, MODIFIER LETTER CIRCUMFLEX ACCENT\n\nEnter it the way you'd enter any Unicode character. There is a difference between the \\*characters\\* in spacing modifiers and combining diacriticals, even though they are often the same \\*glyph\\* -- a concept sort of at the core of Unicode.\n\n"
+    },
+    {
+      "time": "21 Aug 2013 — 2:04pm",
+      "content": "I've actually tried that, but it didn't turn out well.\n\nWhat I need is an **inverted breve** as a modifier and not a combining diacritic, but I'm not sure it even exists.\n\n"
+    },
+    {
+      "time": "21 Aug 2013 — 2:27pm",
+      "content": "Perhaps I can combine the inverted breve with an empty space, but I don't know what is the width of the horizontal space between two words, such as in this line, for example.\n\n"
+    },
+    {
+      "time": "21 Aug 2013 — 3:25pm",
+      "content": "In Word or InDesign just copy and paste the unicode character using a font which supports it: ̑.\n\nIn LaTeX there are multiple ways to achieve this:\n\n- LaTeX has a series of built-in diacritical commands. Leaving the argument empty produces the diacritical mark. For instance, `\\^{}` renders as ˆ. Here is a [list of such commands](http://web.archive.org/web/20140804223108/http:/en.wikibooks.org/wiki/LaTeX/Special_Characters#Escaped_codes).\n\nIf you use a XeTeX (putting `\\usepackage{fontspec}` in your preamble):\n\n- Type the character directly.\n- Type the unicode (hexadecimal) codepoint into the `symbol` command, with a preceding double apostrophe `''`. To produce an inverted breve you would type `\\symbol{''0311}`.\n\n"
+    },
+    {
+      "time": "21 Aug 2013 — 5:26pm",
+      "content": "Yes, I don't know if there is an inverted breve (might also be called \"roundcap\") in Unicode that isn't ALSO a combining diacritic.\n\nAs has been suggested, easy enough to get one to print -- just use the combining diacritic over, say, a thin space between word spaces, but odd things happen to space characters in some applications, such as EPUB.\n\nIf the mark can be longer, as with a scansion mark, you could use one of those over a word space.\n\nNot sure why you need it, but things can be found in odd places in Unicode -- like the glottal stops for Guatemalan Mayan in a section generally devoted to Chinese...\n\nIt could be that if you described the need, one of the people more familiar with the Cyrillic alphabets could help. I forget which, but either Brill or Gentium is pretty good with extended Cyrillic characters.\n\nOtherwise, while most of us are never in favor of using Unicode characters for a purpose outside their intent -- like a combining diacritic for a spacing modifier -- in this case, you have have no choice.\n\n"
+    },
+    {
+      "time": "21 Aug 2013 — 5:33pm",
+      "content": "In LaTeX, you can use phantom letters: they are not in the text but the text is typeset as if they were there. You can thus put you combining diacritic on a fictitious letter. Here is an example:\n\n    \\documentclass{article}\n    \\usepackage{polyglossia}\n    \\setdefaultlanguage{serbian}\n    \\setmainfont[Script=Cyrillic,Language=Serbian]{Cambria}\n    \\setlength{\\fontdimen2\\font}{2\\fontdimen2\\font}\n    \\begin{document}\n    \n    на првоме слогу и са \\phantom{a}\\symbol{\"0311}\\, на другоме.\n    \n    \\end{document}\n\nand here is the output:  \n ![](http://web.archive.org/web/20140804223108im_/http:/typophile.com/files/ndiacr_3506.png)  \nThe `\\setlength` command doubles the interword spacing, so as to look more like your picture; a phantom \"a\" is used for the combining diacritic and the command `\\,` puts a thin space after because otherwise, it looked ill centered.\n\n"
+    },
+    {
+      "time": "22 Aug 2013 — 1:42am",
+      "content": "Wow, thank you, Lex, Charles and Michel!\n\nI knew there was a way to insert symbols via their Unicode numbers! That's what I wanted!\n\nHowever...\n\nThis sort of code\n\n`Vin.\\ i zvat.\\ mn.\\ imaju akcente kao i im.\\ mn.: \\emph{zȗbe : zȗbi}, \\emph{knȅzove : knȅzovi}, \\emph{púževe} i t.\\ d.`\n\n`\\phantom{a}\\symbol{\"0311} na ˊ u svima padežima osim onih koji će se na po se spomenuti, n.\\ p.\\ \\emph{strȋc} ima u rod.\\ jed.\\ \\emph{stríca}, dat.: \\emph{strícu}, vin.: \\emph{stríca}, tvor.: \\emph{strícem}, skaz.: \\emph{strícu}; tako \\emph{dvȏr} ima u im.\\ mn.\\ \\emph{dvóri} i \\emph{dvórovi}, i t.\\ d.`\n\nproduces\n\n![](http://web.archive.org/web/20140804223108im_/http:/s24.postimg.org/pj4r23nph/phantom.png)\n\nWhy the such a big space between the paragraphs?\n\n"
+    },
+    {
+      "time": "22 Aug 2013 — 4:57am",
+      "content": "I don't know the why and I usually use \\phantom in equations without problems. If you write your phantom so that the letter be a mathematical letter the problem seems to disappear. With the input  \n`\nVin.\\ i zvat.\\ mn.\\ imaju akcente kao i im.\\ mn.: \\emph{zȗbe : zȗbi}, \\emph{knȅzove : knȅzovi}, \\emph{púževe} i t.\\ d.\n``\n$\\phantom{i}$\\symbol{\"0311} na ˊ u svima padežim [\\ldots]\n``\nblabla [\\ldots]\n`  \nI get\n\n ![](http://web.archive.org/web/20140804223108im_/http:/typophile.com/files/blabla_4259.png)\n\n`\\phantom{a}` was giving a \"left side bearing\" that was too large; with Cambria, `$\\phantom{i}$\\symbol{\"0311}` also looked fine between two words.\n\nFor the whys, y0u may try [http://tex.stackexchange.com/questions/](http://web.archive.org/web/20140804223108/http:/tex.stackexchange.com/questions/ \"http://tex.stackexchange.com/questions/\")\n\n"
+    },
+    {
+      "time": "22 Aug 2013 — 9:28am",
+      "content": "Michael, IIRC, isn't there a (sort of dangerous) \"squash\" command in TeX? It's not named \\squash (and it's been over 10 years), but we use to use something like that to hide vertical height.\n\n"
+    },
+    {
+      "time": "22 Aug 2013 — 10:29am",
+      "content": "I guess it is `\\smash`. Here is a grab from personal notes (which also reminds us that the alignment of \"accents\" is culture dependent).\n\n ![](http://web.archive.org/web/20140804223108im_/http:/typophile.com/files/smash_6029.png)\n\nAdded: I used an explicit kern to fix the l squared. Here is the source  \n``\n\nLet us try with \\verb+\\vphantom{\\othertheta}+ and next with \\verb+\\rdot+  \n\\[  \nL\\ = \\frac{ml^{\\kern0.05em2}}{2}\\left(\\dot{\\othertheta}^2 + \\sin^2\\othertheta \\cdot \\dot{\\vphantom{\\othertheta}\\othervarphi}^2\\right) + mgl\\,\\cos \\othertheta  \n\\]  \n\\[  \nL\\ = \\frac{ml^{\\kern0.05em2}}{2}\\big(\\rdot{\\othertheta}^2 + \\sin^2\\othertheta \\cdot \\rdot{\\othervarphi}^2\\big) + mgl\\, \\cos \\othertheta  \n\\]  \n  \nThe math font is Fourier [http://www.ctan.org/tex-archive/fonts/fourier-GUT/](http://web.archive.org/web/20140804223108/http:/www.ctan.org/tex-archive/fonts/fourier-GUT/ \"http://www.ctan.org/tex-archive/fonts/fourier-GUT/\") whose latin letters come from Utopia [http://www.ctan.org/pkg/utopia](http://web.archive.org/web/20140804223108/http:/www.ctan.org/pkg/utopia \"http://www.ctan.org/pkg/utopia\").\n\n"
+    }
+  ]
+}

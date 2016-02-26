@@ -1,0 +1,215 @@
+{
+  "id": "48746",
+  "title": "Small Capital Eszett?",
+  "forum": "Build",
+  "tags": [
+    "General Discussions",
+    "Build"
+  ],
+  "content": "Hi guys.  \nI'm making a font and trying to include capital ß, and small capital ß as well. I understand that Capital ß was recently added to Unicode as U+1E9E LATIN CAPITAL LETTER SHARP S, but I can't find the small capital one. I suppose it's probably not yet included, but I'm not sure. Does anyone know about the issue, and is there no problem not assigning a Unicode number? (I'm planning to make this character appear by Opentype smcp or salt feature)\n\n",
+  "author": "Tosche",
+  "time": "24 Aug 2008 — 11:09pm",
+  "uid": "25106",
+  "comments": [
+    {
+      "time": "24 Aug 2008 — 11:34pm",
+      "content": "The \"Latin Capital Letter Sharp S\" is just the uppercase letter to \"Latin Small Letter Sharp S\". The lowercase letter (ß) was always part of the western codepages. Just the uppercase letter is new.\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 12:01am",
+      "content": "Isn't Tosche asking about small caps/Kapitälchen?\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 12:59am",
+      "content": "Small caps never have a unicode number assigned but are invoked by formatting features (OT preferably), except if small capitals are used in some (e.g. phonetic transcription) alphabets as letters with distinct meaning. \"Capital Esszet\" is not even used in any official orthography in the world, and of course neither is the small capital form of it used in any phonetic alphabet. Therefore you don't have a Unicode codepoint for it.\n\nSzabolcs\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 1:14am",
+      "content": "<cite>Isn’t Tosche asking about small caps/Kapitälchen?</cite>\n\nOh, I see.  \nThe Small Caps Eszett doesn't get a Unicode.\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 2:07am",
+      "content": "I was of the impression that there are no standardized unicode encodings for small-caps in the typographical sense at all. Only for small-caps that have a particular meaning in some language, such as 'LATIN LETTER SMALL CAPITAL R' (U+0280), which is the lower case of 'LATIN LETTER YR' (U+01A6). But such codepoints have a different semantic then those typically encoded in the private use area of opentype fonts. Consequently, a smallcaps form of the capital SZ would be placed in that private use area too as it doesn't have semantics in the linguistic sense.\n\nI wasn't aware of the capital SZ being standardized. I think this is cool and also very ironic as the latest reformation of German orthography almost entirely abandoned the need for the SZ at all.\n\nRalf, I just saw the samples you provided for the [German Wikipedia page on the capital ß](http://web.archive.org/web/20131017073403/http:/de.wikipedia.org/wiki/Gro%C3%9Fes_%C3%9F). Neat stuff! I really like some of the interpretations those faces offer, especially P22 Underground's version.\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 3:26am",
+      "content": "Thanks everyone!  \nI didn't know that only some small capital letters have proper Unicode (and those are for phonetical use or some kind of thing, right?), and that there are free private use area. I might forrow your advice, thank you Lars! In fact I'm not familiar with technical issues of digital typography, though I know much more about typography itself (especially Japanese).\n\nIn gratitude, I would like to show you the small cap ß that I made later.\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 5:08am",
+      "content": "Traditionally, Small Cap Postscript fonts have ss in the eszett place to allow for graceful substitution. Everyone seems to have accepted this except Zuzana Licko and Rudy Vanhderlans (see the specimen book for Mrs Eaves). Presumably esszett in OT translates to SC/ss ?\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 5:38am",
+      "content": "<cite>Presumably esszett in OT translates to SC/ss ?</cite>\n\nAbsolutely -- and it's nothing new to OT either.  \nSince there has been a code point for the eszet for ages, all-caps fonts had to put something there. If you check [Trajan](http://web.archive.org/web/20131017073403/http:/www.linotype.com/47727/trajanproregular-charactermap.html) and [Lithos](http://web.archive.org/web/20131017073403/http:/www.paratype.com/fstore/charmap.asp?ProductID=36740566) (random first links copied), you will find a double 'SS' in the place reserved for 'german double s'.\n\nAll OTF (Pro) fonts I have at the mo' with a regular eszet display them as 'ss' in small caps. (Just checked:) and as 'SS' in All Caps.\n\nIt may give rise to an interesting discussion. Should conversion (if that's the word) from eszet to double-s be a font designer's decision, or should it be at the typesetters' end?\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 6:28am",
+      "content": "Do the fonts actually contain an SS-glyph, or is the caps/smallcaps conversion in the font set up to replace a single ß-glyph with two consecutive S-glyphs?\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 7:47am",
+      "content": "I would guess in anything _except_ OpenType there is an actual single \"SS\" glyph. Translation of single-to-multiple glyphs is something very recent.\n\nI was going to mention plain old Courier as a test case, because a monospace font may only be called that if _all_ glyphs are the same width. I know from experience you should switch ligatures off in monospaced fonts (in the future, before the book is printed, not afterwards), because Courier has \"fi\" and \"fl\" ligatures, and they are the same width as a single character.  \nBut someone thought ahead, and provided a modern OTF variant, so the \"ß\" single width glyph translates to double-width double-S on capitalisation.\n\n(Even checking further:) Oh, okay: my Courier _doesn't have_ a single \"SS\" glyph. It must be the software that did the translation (and thus prohibiting 'capitalized-ß').\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 8:49am",
+      "content": "I see really interesting discussion going on.  \nBy the way, here's what I said.\n\n ![](http://web.archive.org/web/20131017073403im_/http:/typophile.com/files/grosse_6321.jpg)\n  \nAs you can see, this is a re-digitalized Centaur (Of course Bruce Rogers did not design neither Capital ß nor sc ß). \n"
+    },
+    {
+      "time": "25 Aug 2008 — 9:28am",
+      "content": "As I understand it, there should be nothing in the OpenType small cap feature (smcp) that converts ß to small cap eszett.  \nHowever, caps-to-small-caps (c2sc), which is implemented as part of the \"all small caps\" menu item, should access the small cap eszett. It may be a good idea to have some other means of changing ß to small cap eszett, for instance in a stylistic set or as a stylistic alternate.\n\n\\*\\*\n\nIs this just a gimmick, product of the restless minds and historical ambitions of Unicode developers (and chore for font designers), or will it find, or create, any real-world usage?  \nI mean, how many times are we going to see that 1954 book cover?\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 10:10am",
+      "content": "<cite>… or will it find, or create, any real-world usage?</cite>\n\nIt will definitely be used for proper names (once the most-used fonts are updated). There are around 2 million people in Germany who have an Eszett in their family name or in the name of their home town.\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 11:07am",
+      "content": "_It will definitely be used...once the most-used fonts are updated._\n\nI very much doubt it. The character is too hard to access. \"Shift-ß\" will continue to set SS.  \nImplementation via stylistic set or stylistic alternate is both too obscure in layout applications, and inconsistently handled in fonts.\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 11:14am",
+      "content": "I'm not sure that the most-used fonts are going to be updated. This isn't like the euro currency symbol. There was a very impending need with this… font makers had to update their fonts, because the currency hit the ground running in a dozen countries on a single day!\n\nBut even when font makers updated their fonts to include euros, these font updates were not distributed free-of-charge to licensees, at least not by the larger distributors. The best case scenario was that some foundries released \"euro fonts,\" which were fonts with just the new euro symbols in them, in various fonts or styles…\n\nI wouldn't expect average computer users—or even average graphic designers or CS users—to have cap (or small cap) eszetts in their most commonly-used fonts any time soon, if ever. Perhaps when OpenType fonts are supplanted by whatever technology will come around next, and everyone will needs re-license their old fonts/license new fonts/etc. Maybe some of these will have cap and small cap eszetts…\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 1:22pm",
+      "content": "I'm putting it in all my new fonts, and in the OpenType upgrades to the older ones.  \nWhy? Because it's an interesting design challenge, and, lacking precedents in the \"most commonly-used\" typefaces, there's a fresh feeling when working on it.\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 2:34pm",
+      "content": "I am doing the same, Nick. I don't know how many users will require it but, like you, I enjoy the challenge.\n\nChrisL\n\nHere is one I am working on now:\n\n ![](http://web.archive.org/web/20131017073403im_/http:/typophile.com/files/einfluss_6536.png)\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 11:51pm",
+      "content": "Enjoy the challenge!  \n(I'm looking forward to your solution for Oneleigh, Nick!)\n\nBut, to be honest, most people in Germany don't even know how to make proper use of the lowercase ß (which even has its own key), so – don't expect to see it anywhere ... ;)\n\n"
+    },
+    {
+      "time": "26 Aug 2008 — 5:20am",
+      "content": "Nick, the way the German keyboard layout is arranged, shift-ß gives you a question mark - so much for people entering it manually. For a capitalized charcter stlye it's good to have though, albeit many people will expect 'SS' instead of capital-ß, so making it optional (stylistic set? not sure about the technical implementation) seems reasonable.\n\nWhile you are at design challenges posed by the German language, how about adding fffl ligatures for beauties such as \"Sauerstoffflasche\" (oxygen bottle). The only font I know of that has this is Requiem (because Bringhurst mentioned it). Coincidentally, H&FJ get it wrong in [their sample](http://web.archive.org/web/20131017073403/http:/www.typography.com/fonts/font_features.php?featureID=44&productLineID=100020) and misspell it \"Sauerstoffflachen\" ;). With the 1996 rules, an fff-ligature for \"Schifffahrt\" (boat trip) may also be in order. However, and now I'm getting totally off-topic, someone had the ingenious idea of making orthographic rules about ligature. These rules (in general) state that a ligature should not be used when compunds are formed (which is often the case in the German language). Thus, the use of an fffl ligature in \"Sauerstoffflasche\" would be considered an error by that rule ;)\n\nIn [another thread](http://web.archive.org/web/20131017073403/http:/www.typophile.com/node/46540), where Ralf and others already provided a lot of interesting background on this topic, it was suggested that a new type of ligature was called for. Kind of a non-connecting ligature. In a font where the f reaches far to the right (e.g. Bembo) setting a word like \"auflegen\", for which the rule states not to use an fl-ligature, results in such letterspaceing that it reads like \"auf\\_legen\". That is if you don't want the f and l glyph to clash.\n\nThus, the next German type design challenge would alternative ligatures for use at German compound boundaries which are designed so that the glyphs in the ligature don't touch. I wonder if German users would be interested in such fonts ;)\n\n"
+    },
+    {
+      "time": "26 Aug 2008 — 5:41am",
+      "content": "Oh, and while we're at it, include an f that looks good in front of diacritics.\n\n ![](http://web.archive.org/web/20131017073403im_/http:/typophile.com/files/bembo_5656.png)\n  \n(Bembo)\n\nI'm not saying that the f should \"swallow\" the left dot on the u-umlaut, but I also think they are too close so an alternate version of the f with a shorter arc might be a solution... (maybe this is just my bad taste)\n\n"
+    },
+    {
+      "time": "26 Aug 2008 — 5:58am",
+      "content": "It's really no argument to say it can't catch on, because there is no keyboard shortcut. That's like someone would have said a 100 years ago, we can't invent planes, because there are no airport terminals ...  \nWhen people will start using this character, they will also create the demand for font updates and better input methods. It wont go as fast as with the Euro character, but it doesn't have to be. Who knows if we use the same kind of keyboards and operation systems in 15 years from now?\n\nBTW: You can already install alternative keyboard drivers which enable the Capital Sharp S with the shortcut Option + Shift + ß (Mac) or AltGr + Shift + ß (Windows).\n\n"
+    },
+    {
+      "time": "26 Aug 2008 — 6:58am",
+      "content": "_That’s like someone would have said a 100 years ago, we can’t invent planes, because there are no airport terminals_\n\nNo, it's like saying people won't fly because they have no idea how to get to the airport.\n\n"
+    },
+    {
+      "time": "26 Aug 2008 — 6:59am",
+      "content": "Lars:\n\n[http://www.typophile.com/node/40439](http://web.archive.org/web/20131017073403/http:/www.typophile.com/node/40439 \"http://www.typophile.com/node/40439\")\n\n"
+    },
+    {
+      "time": "26 Aug 2008 — 7:17am",
+      "content": "Two real-world examples:\n\n ![](http://web.archive.org/web/20131017073403im_/http:/typophile.com/files/n47874590367_3308443_4095_5010.jpg)\n\n ![](http://web.archive.org/web/20131017073403im_/http:/typophile.com/files/Bild-2_3925.jpg)\n\n"
+    },
+    {
+      "time": "26 Aug 2008 — 7:56am",
+      "content": "Ralf, nice... what is the Max Goldt cover set with? Some sort of sort of Caslon?\n\n"
+    },
+    {
+      "time": "26 Aug 2008 — 8:58am",
+      "content": "Heh...you know, just as an alternative to writing out a double ss, it seems like a useful shortcut. Why doesn't English do that?\n\nAs for the f before ü, i agree that a discretionary ligature w/ a shorter arc would be a good idea.\n\nPeace,  \nJT\n\n"
+    },
+    {
+      "time": "26 Aug 2008 — 9:27am",
+      "content": "Ralf, that's more like it!\n\n"
+    },
+    {
+      "time": "26 Aug 2008 — 3:03pm",
+      "content": "Lars, there is a partial cure to fü used by Matthew Carter for example, viz., a small positive kern.\n\nChris, I am wild about your capital esszet. It is by far the most organically convincing solution I have yet seen. Brilliant thinking, showing a real sensitivity to the reader's eye.\n\n"
+    },
+    {
+      "time": "26 Aug 2008 — 3:44pm",
+      "content": "Thanks Bill!\n\nChrisL\n\n"
+    },
+    {
+      "time": "27 Aug 2008 — 6:36pm",
+      "content": "I still maintain that a more \"rectangular\" form of capital ß would be better, along the lines of my proposal at  \n [http://typophile.com/node/33647](http://web.archive.org/web/20131017073403/http:/typophile.com/node/33647 \"http://typophile.com/node/33647\")\n\nThe curved top left corner is illogical and only makes sense if the top left color of F is curved as well, a la Handel Gothic. Through the analogy, if the lowercase longs looks like a lowercase f without the bar, then the (nonexistent) uppercase longs should look like the uppercase F without the bar, i.e. like the Greek uppercase Gamma. And this should be what the left side of the uppercase ß looks like.\n\nRemember that there should be clear, obvious visual distinction between a lowercase letter and an uppercase letter. The curved-top uppercase ß proposals all look like hybrids between uppercase and lowercase, they're not sufficiently different from the normal lowercase ß.\n\nA.\n\n"
+    },
+    {
+      "time": "27 Aug 2008 — 7:01pm",
+      "content": "_Remember that there should be clear, obvious visual distinction between a lowercase letter and an uppercase letter._\n\nOf course, but in what way? Many letters in the Latin alphabet have extremely similar shapes across case, differentiated by other qualities, in particular stroke weight and size. Now admittedly, the cap and lower case eszett are nominally the same size, which is potentially problematic, but if the weight and proportions are suitably \"upper case\", then there won't be confusion. Context must count for something, and this letter never starts a word, and is usually surrounded by other capitals. In Ralf's samples, it is simply illogical to assume that when all other letters are upper case, the eszett is lower case, and in those fonts, it is sufficiently big and with matching stroke weights that it doesn't give that impression. However, I do think that in the Max Goldt cover, the character is too fussy for a capital, with that upward \"flick\" of a stroke towards the top right.\n\n"
+    },
+    {
+      "time": "28 Aug 2008 — 5:33am",
+      "content": "Adam, I second you. This is absolutely my opinion as well as I have already put it forward earlier.\n\nNick, with this argument \"In Ralf’s samples, it is simply illogical to assume that when all other letters are upper case, the eszett is lower case, and in those fonts, it is sufficiently big and with matching stroke weights that it doesn’t give that impression.\"  \nyou could just continue using lowercase ß in all-caps setting, as NUßBAUMER's ß would be clearly recognized as uppercase, as \"it is simply illogical to assume that when all other letters are upper case, the eszett is lower case\"... ;-)\n\nSzabolcs\n\n"
+    },
+    {
+      "time": "28 Aug 2008 — 1:38pm",
+      "content": "Well, I have looked at the interminable thread referenced, and all the examples, and I still find Chris's example is the only persuasive one. I don't know why, and I don't know whether the approach would work in a serif font, and I'm not entirely happy with Chris's normal, lowercase eszett. Of all the serif models proposed here and in the previous thread, I find them annoying, illogical and too noticeable.\n\nThe superb thing about Chris's uppercase design is that it is practically unnoticeable - - the traditional goal of all typography. You're seeing a character you've never seen before, yet you don't even have to pause to recognize it. You know at once what it is. Transparency is operating on several synergistic levels here. This is a remarkable achievement. This is what type is all about.\n\n"
+    },
+    {
+      "time": "28 Aug 2008 — 2:13pm",
+      "content": "P.S. Adam, without having any positive ideas about how to solve this problem for serif fonts, what I dislike about the rectangular form you proposed for Garamond PP is that the form has a pronouncedly Kyrillic flavour which I fear will be found uncongenial.\n\n"
+    },
+    {
+      "time": "28 Aug 2008 — 8:10pm",
+      "content": "Szabolcs, you're right, my logic was flawed.\n\nIn fact, readers don't make assumptions about whether a character has an upper or lower case shape--which is why unicase isn't too hard to read.\n\nSo the only thing that matters is the typographical aesthetic--does the glyph harmonize?\n\nWith that criteria, I'm afraid I don't like the \"rectangular\" cap Eszett Adam proposes. It's too busy, a crowded shape.\n\n"
+    },
+    {
+      "time": "29 Aug 2008 — 8:20am",
+      "content": "My reasoning for the form I used was an attempt to have a reader simply accept the capital as an Eszett with as little debate as possible. This for me is a daunting task because I am not a native German speaker who is used to seeing German text. My hope is that if enough type designers make an attempt and put something out there to be seen, that the German speakers will discuss all the options and we will eventually have a range of forms that are acceptable. Right now, there is very little out there for a proper dialogue to ensue. As for myself, I am just hoping for more input from the German speaking community.  \nI can completely understand Adam's logic in treating the cap F without a crossbar in the same way as we treated the long s of old. The trouble is as I attempted to use it, was that it kept separating itself too much from the rest of the text. It looked either too angled, too Greek (or Cyrillic as Bill says), to constructed or just too awkward. I felt as though a reader would have to go through the logical steps of figuring out the longS as an F and then saying, \"Oh, that is what he means\" rather than just reading Eszett without further ado. The long s in lowercase is so rarely seen that many people may not even attend to it as anything familiar to begin with. In the cap form, it never existed so there is no visual memory, only right-brained extrapolation and reconstructed logic, A similar thing to extreme might be to use bull's head line drawing inverted as an A for a new glyph called the double bowled cap A. We may know the origin of Aleph but the connection no-longer reads without analysis. I was just trying a way to just have it read without needing interpretation.  \nIn the eyes of German speakers, I may have failed--this I do not deny. I admit I have been greatly influenced by reading Ralf's posts here and on Flickr regarding this over recent years since he seems to be one of the few to invite the dialogue and prompt his fellow Germans to respond. I am an interested observer who knows little of the German language but seek to participate in the dialogue not only because I attempt to design typefaces but that the idea of a new letterform intrigues me greatly. I admit I do feel like an interloper who might have been tempted to draw a U to go with the Trajan inscription :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "30 Aug 2008 — 2:22am",
+      "content": "I disagree with Adam's logic.  \nMost importantly, ß is definitely a ligature of long-s and s, not f and s, and that's the same story with uppercase. I think there's no connection between _ß looks like fs_ and _capital ß should be like FS_. It's not FS ligature, and it should look like SS ligature.\n\n"
+    },
+    {
+      "time": "30 Aug 2008 — 7:22am",
+      "content": "\\> Most importantly, ß is definitely a ligature of long-s  \n\\> and s, not f and s, and that’s the same story with uppercase.\n\nI was never arguing that ß is a ligature of f and s. I said that the capital ß should be a ligature of a capital longs and a capital s. Since the capital longs never existed, it needs to be imagined though reverse thinking. Since the lowercase longs is the lowercase f without the crossbar, it is only logical to assume that the capital longs could look like a capital f without a crossbar, i.e. like the capital Greek gamma. In other words, the relationship of Γ and ſ and of F and f is the same. Since ß is a ligature of ſs, it is a logical consequence that the capital ß could be a ligature of ΓS. This is \\_pure logic\\_.\n\nThen, one needs to examine the practicality of the solution. And there, one arrives at the conclusion that since ß can be drawn as a ligature of ſs or as a ligature of ſƷ, the clearest distinction between the uppercase and the lowercase ß can be achieved if you draw the uppercase ß as a ligature of ΓƷ and the lowercase ß as the traditional ligature of ſs.\n\nI maintain that the ΓƷ shape is very \"masculine\" and very appropriate for a letter that is inherently uppercase.\n\nA.\n\n"
+    },
+    {
+      "time": "30 Aug 2008 — 3:13pm",
+      "content": "\\>This is \\_pure logic\\_.\n\nSo was the roman du roi. So was Romulus italic. Where are they now? (Matthew Carter once wrote something to the effect that the only typeface with a theory behind it that was persuasive either as theory or type was Meridien.)\n\nChris, as far as I'm concerned, your place in type history is secured by being the first to design a great cap fz. Do you think you could try and top that with a seriffed solution?\n\n\\>My reasoning for the form I used was an attempt to have a reader simply accept the capital as an Eszett with as little debate as possible. This for me is a daunting task because I am not a native German speaker who is used to seeing German text.\\<\n\nThis is classic American thinking of the best kind. Being respectful of the historical context but not being burdened with it, so able to get the job at hand done.\n\n"
+    },
+    {
+      "time": "30 Aug 2008 — 5:48pm",
+      "content": "\\>So was the roman du roi. So was Romulus italic.\n\nYeah, and so was Dürer's Roman Capital.\n\n"
+    },
+    {
+      "time": "31 Aug 2008 — 5:49am",
+      "content": "This is why I'm not saying, use pure logic. I say, use logic as your startpoint, apply natural laws to it (like, ease of drawing the symbol by hand) plus your craft and talent.\n\nChris's capital ß looks like it's coming from Handel Gothic :) That type of curve is unheard of in the skeleton of the Latin uppercase letter, so it looks alien. It looks like three-quarters uppercase, like an eunuch of sorts (assuming that the uppercase is masculine, coming from static stone carving, while the lowercase is feminine, coming from freehand writing).\n\nTake a shot and casual handwriting and come up with a cap-ß form that is easy and natural to write by hand.\n\nA.\n\n"
+    },
+    {
+      "time": "31 Aug 2008 — 6:00am",
+      "content": "\"That type of curve is unheard of in the skeleton of the Latin uppercase letter, so it looks alien.\"  \nThat's exactly how I feel about the curved form. (Though I don't like quite some of Adam's examples where the lower bowl of the 3-shaped Z-component forms a 1/2 to 3/4 circle... It's as someone noted too crowded. Go for descenders and more verticality within the 3-shape, like in J!  \n;-)\n\nSzabolcs\n\n"
+    },
+    {
+      "time": "31 Aug 2008 — 7:23am",
+      "content": "I like the solutions Chris shows here. Like Bill I felt a Cyrillic reference when I first saw Adams thoughts worked out.\n\nFor what it's worth ... here are my Versal Eszets:\n\n ![](http://web.archive.org/web/20131017073403im_/http:/typophile.com/files/cap_ss_3912.png)\n\n"
+    },
+    {
+      "time": "31 Aug 2008 — 4:32pm",
+      "content": "I like these very much though I don't like them quite as much as Chris's. Trying to analyze my feelings I'd say at a rough guess that I prefer the more generous way he handles the top left curve and the more free way he handles the bottom right curve. But another factor is that I really like good ultra light sans designs. Ultra light seems to me the sweet spot for appreciating the intrinsic beauties of many sans designs. Not that we're talking about beauty here, but I'm trying to factor in my prejudices. What you have shown, Jos, is that the principle has merit, and can be successfully applied to a variety of styles. Now we have to see if this principle stands up when used with a conventional serif face such as Garamond or Baskerville. Nobody should feel ashamed for not achieving an ideal cap esszet, considering how very many truly dreadful lower case esszets have been designed in the history of type! Either case, it's a difficult character!\n\n"
+    },
+    {
+      "time": "31 Aug 2008 — 11:25pm",
+      "content": "Chris' and Jos' Eszetts still have the problem, that there too much \"B\" in it, especially if your reading it in smaller sizes. The small gap and the short diagonal stroke just isn't enough. This is true, even if the B looks very differently in those typefaces. We don't read by comparing the letter forms. The neurons just fire, when they see a shape that matches the pattern. And the B neurons will fire when they see such capital Eszetts. Sure, the reader will usually correct that within the context of the surrounding letters, but it might be better to have a unique letter in the first place.  \nI usually solve this by making the character significantly wider than B, usually the width of a G. Such a design can never be mistaken for a B.\n\n ![](http://web.archive.org/web/20131017073403im_/http:/typophile.com/files/lucida_4402.png)\n\n"
+    },
+    {
+      "time": "1 Sep 2008 — 7:30am",
+      "content": "Jos,\n\nyour #3 looks good — in this particular typeface, with a strong calligraphic flair, it makes sense to give the cap-ß а descender and overall a more flowy, rounded shape. However, the letter is too dark compared to the regular uppercase letters.\n\nBut the other three cap-ßs just look like enlarged lowercase ßs. They don't feel like uppercase letters at all — they're too narrow and too complex in their structure. The uppercase of the Latin alphabet uses a very simple set of basic composition elements: vertical stroke, horizontal stroke, diagonal stroke and a half-circle. Even the letter S, which is a fairly complex shape, is still pretty simple. The letter J is the only one that does not use the standard building blocks — since it's a \"late arrival\" to the alphabet. The other \"late arrivals\" like K and W have integrated nicely because they speak the formal language of the Latin uppercase.\n\nThe shape you guys are proposing lacks one essential aspect of the other Latin uppercase letters: robustness. The underlying skeleton of the Latin capitals is robust and flexible at the same time. They're capable of taking any stylistic treatment you imagine, and they clearly stand apart from each other. The new member of the gang must bring the same qualities. It should look like it always belonged there.\n\nAdam\n\n"
+    },
+    {
+      "time": "2 Sep 2008 — 2:24am",
+      "content": "Thanks Bill, Ralf and Adam for the kind feedback and thoughts about the Versal ß. This really inspires me to have another look at it. To be continued...\n\n"
+    },
+    {
+      "time": "2 Sep 2008 — 7:04am",
+      "content": "Ralf, I like your variation but I think you worry too much about B-ness. Character differentiation at small sizes is an issue in itself, one that affects all characters. b-ness, or Beta-ness, is also a problem that afflicts many of the badly designed lowercase esszet glyphs of the past (less for a German reader, who will always know that the near-Beta is supposed to be an esszet, than for everyone else). And none of that means that a near-Beta generic lowercase esszet is a good thing. All of that said, I still think your example is too wide, because it is out of proportion with the other characters. The right hand side is longing to be closer to the left hand side.\n\nAdam, you speak of skeleta, flexibility, and robustness ... terms that are frustratingly inexact and reflect the implicit difficulty of a scientific approach. Still, the Chris Lozos esszet is still the only one that looks 'like it always belonged there.' I see no reason why this should not happen at small sizes. Reduced to slushy 8 point newsprint, you might have problems, but you will have those for many other characters in the alphabet under such conditions and must redesign accordingly. The task here is more to come up with a general solution than to provide insurance for every possible optical condition. Since the displaying is at display size, it naturally makes sense for the design to be a display size.\n\nRalf, the more I look at your version, the more I like it. But it needs to be a trifle narrower, and though I love the upsweep of the curve in the final stroke, I think it is a mistake, because it makes the lower curve look like the illustration of a hook. One of the reasons Chris's example works is that all the curve directions appear to be in the right place to signal the brain to get the message ''it's OK\", its recognizable, it's a friend, I know it.\n\n'Hookness' should probably be avoided to the extent possible. You can see Jos's examples being on the edge of hookness, and just barely avoiding it.\n\nNeedless to say, like Chris, I'm on edge about giving my opinion about a German character to a German, but ' . . . wenn man hoeflich ist' !\n\n"
+    },
+    {
+      "time": "2 Sep 2008 — 9:52am",
+      "content": "The dilemma we face as type designers and type aficionados is that we are very close to form issues and very far from being naive readers. We tend to get inthralled with the nuance and detail that separates one typestyle from another and overlook the forest. Much of our discussion in this thread has been about the details of a typeface rather than the distinctions of a single new glyph in relation to the rest of the long established set. A reader is not looking for what will become a decision point of form during reading. Readers are not looking for any form issues. They just want the flow of reading to continue without intervention. Imagine what happened when the first U was made part of the Roman alphabet? It was a new odd form that had to find its place. There is no getting around this point in time. It may take a generation or 2 to have the new Eszett take an accepted place for readers. It is not a question of proportions of space or degree of curve. These are type design issues we all deal with. Something much more basic is at issue here, pointed upper-left corner or rounded upper-left corner, vertical stem drops below baseline or not, S curve or Z? While I might find Ralf's form too wide and disturbing to color, it is basically the same as the one I have drawn or Jos has shown. There are way too many variations in type style that need to be allowed for to constrain anyone's design by style. I also find the O he has shown in that same sample as being too narrow for the D or other letters but I still clearly see it as an O and not a zero. That would be a discussion he and I might have about designing a particular typeface but not about defining a new glyph. With ANY new glyph, the reader will struggle to decide f it is one of the older glyphs or not. This is a learning process we must go through and formal quality is not the issue for that, only structure.\n\nI agree with Bill's comments about abstract terms. I never knew about or even accept the gender description of Latin caps and lower case as being masculine or feminine. Likewise' what exactly is \"Robustness\" and how does it come into play? These terms don't help me understand the problem Adam is seeing. I hope Adam can find another way to describe the problem he sees.\n\nThanks for the kind words, Bill!\n\nChrisL\n\n"
+    },
+    {
+      "time": "2 Sep 2008 — 11:03am",
+      "content": "Having looked at the samples on these threads, I agree with Adam that the upper left corner should follow the style of other upper left corners present in the uppercase B D E F H I K L M N P R. I have been trying to upload my take on this, but I keep getting error messages no matter if I try to upload a jpg or png image.\n\nJamesM\n\n"
+    }
+  ]
+}

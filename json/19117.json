@@ -1,0 +1,70 @@
+{
+  "id": "19117",
+  "title": "Conversion from true type to T1",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hello. Few years ago I designed a font (more than one in fact) in true type format and now I want to convert it to Type 1 and Open type. When I do the conversion I see that the font does not retain the quality of the original true type version. Is there a way to convert the font so the curves won’t be ’bumpy’? It ain’t very bad but this could be better. Thanks for the tips. Reg - I use FontLab 4.04\n\n [‹ Is the Term “Pro” Adobe property or a defacto standard?](http://web.archive.org/web/20080929202900/http:/typophile.com/node/19012 \"Go to previous forum topic\") [Mac bitmap ttf issues ›](http://web.archive.org/web/20080929202900/http:/typophile.com/node/19016 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080929202900/http://typophile.com/user/2995\" title=\"View user profile.\">Reg</a>",
+  "time": "<br>",
+  "uid": "2995",
+  "comments": [
+    {
+      "time": " 7.Apr.2006 10.28pm",
+      "content": "It’s a tricky conversion. If the font is hinted, you will lose the hints entirely. You \\_can\\_ mathematically convert quadratic Beziers (TT) to cubics (Type1/CFF) without loss, but you have to make sure not to integer quantize the resulting coords, and you’ll get about twice as many control points as strictly needed. I don’t know much about FontLab, and whether they’ve improved their spline math in recent years, but I do know that FontForge can be coaxed into doing this conversion reasonably well [the conversion in the other direction, though, from T1 to TT, sucks, as does the “simplify” tool for trying to reduce the number of control points].\n\nBut why convert? TrueType outlines are even more native within OpenType than are Type1’s. Type1 is fast becoming a legacy format, so unless there’s a special need to support older systems, why not just release in OT with TT outlines?\n\n"
+    },
+    {
+      "time": " 8.Apr.2006 6.20am",
+      "content": "Yeah, plain Type1 is basically dead: [Phasing out “PostScript” Type 1 fonts](http://web.archive.org/web/20080929202900/http:/blogs.adobe.com/typblography/2005/10/phasing_out_typ.html)\n\nDoes FL4.04 generate fonts in OpenType format? Version 4.6 will do OTF-CFF (PS-flavored), but not proper OpenType-TT. I believe you’ll need FLStudio5 for that.\n\nAfter converting quadratic B-splines (TT) to cubic Beziers (Type1) with FontLab – don’t forget to reverse the contours accordingly –, you could use FL’s **Optimize** operation to remove the superfluous nodes/points. (In FL4.6 it’s under Tools-\\>Outline-\\>Optimize)\n\nHere are a few excelent threads related with this topic:  \n [TrueType Versus Postscript](http://web.archive.org/web/20080929202900/http:/typophile.com/node/16695)  \n [Opentype PS vs Opentype TT](http://web.archive.org/web/20080929202900/http:/typophile.com/node/18821)  \n [Critiques of the OpenType format?](http://web.archive.org/web/20080929202900/http:/typophile.com/node/16838)\n\n"
+    },
+    {
+      "time": " 8.Apr.2006 7.12am",
+      "content": "Truetype is cross-platform so I can’t see the advantage in conversion to T1. The only advantage is when saving to outlines in Illustrator for manipulation purposes, the T1 curves have fewer points. Other than that, TT does a fine job all round and saves to opentype with no problem.  \nMiguel, I think FL-4.6 can output to either opentype format. The wording used to describe it all in FL5 is better though.  \nFOGs “Clean up Paths” does a better job of point reduction than FL-4.6 Optimize , IMHO.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 8.Apr.2006 9.55am",
+      "content": "Chris, yes I know that FL4.6 generates both OpenType flavours. But how _proper_ native will the OT-TTs be? The .ttf files will contain the additional tables, but Windows does not recognise them as OpenType, at least not with me. I use FL4.6Mac and on the various occasions I tried, my .ttf OT-TT files never acquired the expected OpenType icon.\n\n\\> _FOGs “Clean up Paths” does a better job of point reduction than FL-4.6 Optimize_\n\nI leave that to the experts ;^)\n\n"
+    },
+    {
+      "time": " 8.Apr.2006 11.31am",
+      "content": "Thanks for the clarification Miguel. Hopefully, Microsoft will make there next revisions more OTF friendly. I never use Word for any serious type work so I have little experience with your issue. I am sure you are “The Expert” in many regards Miguel :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": " 8.Apr.2006 9.30pm",
+      "content": "Come on Chris, April 1st was last week... ;^)\n\n"
+    },
+    {
+      "time": " 9.Apr.2006 12.07am",
+      "content": "_my .ttf OT-TT files never acquired the expected OpenType icon._\n\nthis is because the OT icon is only displayed for TT flavored fonts if the font is [digitally signed](http://web.archive.org/web/20080929202900/http:/typophile.com/wiki/digital%252Bsignature).\n\nFrom the thread you referenced earlier on TrueType vs. Postscript:  \n [http://www.typophile.com/node/16695/#comment-99575](http://web.archive.org/web/20080929202900/http:/www.typophile.com/node/16695/#comment-99575 \"http://www.typophile.com/node/16695/#comment-99575\")\n\n"
+    },
+    {
+      "time": " 9.Apr.2006 6.39am",
+      "content": "” April 1st was last week… ;^)”\n\nLOL!!! Miguel, I can be a fool every week :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": " 9.Apr.2006 7.32am",
+      "content": "Thanks Paul, that had escaped me. (Uau! What a conundrum just to get the right icon...)\n\nChris, we all are... fools and experts, in a way or another :^)\n\n"
+    },
+    {
+      "time": " 9.Apr.2006 8.03am",
+      "content": "Actually, I had always been concerned about going from a 2048 em to a 1000 em in regards to point shifting . . . I have always assumed it’s a one way trip that you could go from a smaller to a larger em grid but never the other way around . . .\n\nStuart :D\n\n"
+    },
+    {
+      "time": " 9.Apr.2006 8.41am",
+      "content": "_Thanks Paul, that had escaped me. (Uau! What a conundrum just to get the right icon…)_\n\nPersonally, I think it’s all rather silly, as the dsig table is the singular element that determines whether this icon displays or not. For example: you could have a feature-rich TT-flavored OTF without a signature, which does not display the icon. or you could have a simple TT file with no special features that has been signed and DOES display the OT icon. I think this is all very silly and, obviously, confusing to users.\n\n"
+    },
+    {
+      "time": " 9.Apr.2006 9.14am",
+      "content": "\\> _Personally, I think it’s all rather silly_\n\nI agree. Why don’t the OS make the decision of changing the icon based upon the presence of font data other than the DSIG table? Microsoft’s intelligent approach again? (Can anyone call Simon, please? Or should we create a Si-signal? :^)\n\n"
+    },
+    {
+      "time": " 9.Apr.2006 9.41am",
+      "content": "”...Or should we create a Si-signal? “\n\nGo for it Miguel!  \n:-)\n\nChrisL\n\n"
+    },
+    {
+      "time": " 9.Apr.2006 3.17pm",
+      "content": "Microsoft has said that they are looking at doing something a bit more sensible for Vista wrt which TT fonts get the OT icon.\n\nT\n\n"
+    }
+  ]
+}

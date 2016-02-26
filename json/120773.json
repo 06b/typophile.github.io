@@ -1,0 +1,70 @@
+{
+  "id": "120773",
+  "title": "Mapping fists",
+  "forum": "Build",
+  "tags": [
+    "arrows",
+    "fists",
+    "manicules",
+    "OpenType",
+    "Build"
+  ],
+  "content": "So, as a sort of oddity I'm adding fists/manicules to my latest typeface and I figured arrows would be handy as well. Now, I have them mapped with the appropriate unicodes as far as possible. To make them more accessible I figured I would create a stylistic set so you can type \\>\\> to make an arrow. However, when I add the code and I click on compile OpenType program it tells me it has to abort because of errors.\n\nI must be doing something wrong. How do you usually map these kind of symbols to OT functions, or don't you?\n\nfeature ss07 { # Stylistic Set 7  \n # DEFAULT  \n sub \\> \\> by arrowright;  \n sub \\< \\< by arrowleft;  \n sub \\> \\> \\> by blackmaniculeright;  \n sub \\< \\< \\< by blackmaniculeleft;  \n} ss07;\n\n",
+  "author": "Martin Silvertant",
+  "time": "23 Oct 2014 — 12:40am",
+  "uid": "52182",
+  "comments": [
+    {
+      "time": "23 Oct 2014 — 1:16am",
+      "content": "You need to use unicode names: replace \"\\>\" by \"greater\" and \"\\<\" by \"less\"\n\n"
+    },
+    {
+      "time": "23 Oct 2014 — 5:23am",
+      "content": "And put the longer substitutions first, or the shorter ones will preempt them.  \nAlso, do style sets support many-to-one? If not, you may need to put this in discretionary ligatures.\n\n"
+    },
+    {
+      "time": "23 Oct 2014 — 5:40am",
+      "content": "[https://www.microsoft.com/typography/otspec/features\\_pt.htm#ssxx](http://web.archive.org/web/20150420154145/https:/www.microsoft.com/typography/otspec/features_pt.htm#ssxx \"https://www.microsoft.com/typography/otspec/features\\_pt.htm#ssxx\")  \n\"Each ssXX feature uses one-to-one (GSUB lookup type 1) substitutions.\"\n\n"
+    },
+    {
+      "time": "23 Oct 2014 — 7:14am",
+      "content": "Thanks for the help. What does one-to-one mean exactly?\n\n"
+    },
+    {
+      "time": "23 Oct 2014 — 8:01am",
+      "content": "ONE glyph input -\\> ONE glyph output  \nBTW your font app will not allow you to do something like this in ssXX:  \nsub \\greater \\greater by \\arrowright;\n\n"
+    },
+    {
+      "time": "23 Oct 2014 — 12:09pm",
+      "content": "> ONE glyph input -\\> ONE glyph output\n\nI still don't understand what that might mean. I have a stylistic set where I replace I J with an IJ digraph and it works perfectly.\n\nBy the way, should I be using the backslash in the features or was that just to denote the glyphs to be replaced?\n\n"
+    },
+    {
+      "time": "23 Oct 2014 — 2:57pm",
+      "content": "Yes, FontLab accepts  \nsub \\I \\J by \\IJ.alt ;  \nin ssXX, but it is clearly against the Microsoft OTspec (see above). Most probably it is a bug.  \nBTW FontForge crashes when such a stylistic set is invoked.\n\n\"By the way, should I be using the backslash...\"  \n [http://www.adobe.com/devnet/opentype/afdko/topic\\_feature\\_file\\_syntax.htm...](http://web.archive.org/web/20150420154145/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#2.d \"http://www.adobe.com/devnet/opentype/afdko/topic\\_feature\\_file\\_syntax.html#2.d\")  \n \\<\\ backslash Identifies CIDs. Distinguishes glyph names from an identical keyword\\>  \nLooks like people usually don't use backslashes in front of glyph names.\n\n"
+    },
+    {
+      "time": "23 Oct 2014 — 3:54pm",
+      "content": "It has been working for me without the backslash, but I guess I better start using it. Although, what kind of keywords might it conflict with?\n\n"
+    },
+    {
+      "time": "23 Oct 2014 — 9:06pm",
+      "content": "It seems unnecessarily cautious to use backslashes routinely. Especially given that there are no standard glyph names that are also OpenType feature keywords.\n\nIt is handy in the unlikely case that you need to name a glyph something like \"sub\" or \"lookup\", but if you do happen to use a keyword as a glyph name, the compiler will complain, letting you know to use a backslash (or a different name).\n\nBut, no need to do it all the time preemptively, unless you want to.\n\n"
+    },
+    {
+      "time": "28 Oct 2014 — 4:33pm",
+      "content": "Agreed with cerulean, stylistic sets are not supposed to contain ligatures. Also agreed that if you were going to do this as a ligation, 'dlig' would be appropriate.\n\n"
+    },
+    {
+      "time": "28 Oct 2014 — 6:00pm",
+      "content": "By the way, how do you handle the fact that some software just have no way to access the OT features in a certain way? There are some differences between the Typography panels from Photoshop, Illustrator and InDesign. In some cases you need stylistic sets while in other cases you can't access them. That's why I created a few extra stylistic sets so some of the rather standard OT functions can still be accessed in all software.\n\n"
+    },
+    {
+      "time": "28 Oct 2014 — 9:37pm",
+      "content": "It's a classic catch-22. The app makers (e.g., Adobe) need to support this stuff better, but they don't because they say users aren't asking for it. Users aren't asking for it because, since the apps don't support it, they don't know it exists. Given this situation, workarounds are understandable, but we would all be better off if the basic problem were resolved.\n\nThere's a petition effort going on right now to (hopefully) address this. You might be interested:\n\n[http://ilovetypography.com/2014/10/25/why-a-better-opentype-user-interfa...](http://web.archive.org/web/20150420154145/http:/ilovetypography.com/2014/10/25/why-a-better-opentype-user-interface-matters/ \"http://ilovetypography.com/2014/10/25/why-a-better-opentype-user-interface-matters/\")\n\n"
+    },
+    {
+      "time": "29 Oct 2014 — 5:53am",
+      "content": "Oh I'm definitely interested.\n\nI agree with your statement, but I also wonder despite whether we're interested in it or not, why the typography panels need to be different anyway. InDesign's typography panel has just about everything. I think they more or less know users want more options, because in Photoshop CC there's finally access to OT functions, though the glyphs window is still not included. I just see no practical reason for making these panels different in all three programs. I guess they have been developed independently, but since a few years now they ought to be the same, based on InDesign's typography panel.\n\n"
+    }
+  ]
+}

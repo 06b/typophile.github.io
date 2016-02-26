@@ -1,0 +1,82 @@
+{
+  "id": "59648",
+  "title": "Layered Font Misalignment, Vertical Metrics Problem",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I am nearing completion on a display face I would like to offer in both a merged/solid option and broken-apart/two-layer option. I have generated the three font files (solid, layer 1, and layer 2) with identical vertical metrics. When I typeset text boxes on top of each other to test the alignment, layer 2 lines up properly on top of the solid font, but layer 1 is set at a slightly higher baseline.\n\nSearching past threads, I found this post by Nick Shinn from a couple years back where a similar problem was being dealt with. However I could not find an answer. I have also tried John Hudson’s how-to on vertical metrics and Adam Twardoch’s guide in Learn FontLab Fast for setting metrics for type families but have failed to fix this problem.\n\nBelow are screenshots of the relevant Font Info metrics panels for the three fonts:\n\n**Solid**\n\n ![](http://web.archive.org/web/20150303050329im_/http:/typophile.com/files/01_solid_4672.jpg)\n\n**Layer 1**\n\n ![](http://web.archive.org/web/20150303050329im_/http:/typophile.com/files/02_left_4896.jpg)\n\n**Layer 2**\n\n ![](http://web.archive.org/web/20150303050329im_/http:/typophile.com/files/03_right_5058.jpg)\n\nThis screenshot illustrates the issue I'm facing.\n\n ![](http://web.archive.org/web/20150303050329im_/http:/typophile.com/files/comparison_4095.jpg)\n  \nThe left shows Layer 1 misaligned atop the Solid font; the right shows Layer 2 working just fine.\n\nIf anyone could throw me a technical life preserver on this, I would be greatly appreciative. Some notes: working with FL5 on Mac OS 10.4 (Intel); alignment problem occurs in Illustrator and Photoshop CS2, but not InDesign CS2; generated fonts are OT PS.\n\n\\*hhea table metrics inconsistency has been corrected but problem persists.\n\n",
+  "author": "Andy Babb",
+  "time": "4 Jul 2009 — 5:44pm",
+  "uid": "44822",
+  "comments": [
+    {
+      "time": "4 Jul 2009 — 6:22pm",
+      "content": "Your hhea table metrics are inconsistent, which may account for this problem.\n\n"
+    },
+    {
+      "time": "4 Jul 2009 — 7:28pm",
+      "content": "John, thank you for catching the inconsistency with my hhea table metrics. I have corrected this within the Layer 1 font but continue to experience the misalignment problem.\n\n"
+    },
+    {
+      "time": "5 Jul 2009 — 4:46am",
+      "content": "Nice b!\n\n"
+    },
+    {
+      "time": "5 Jul 2009 — 2:53pm",
+      "content": "Andy Babb\n\n<cite>but layer 1 is set at a slightly higher baseline.</cite>\n\nNot slightly. It’s the half of the edge of the triangle. I notice, that the sum of WinAscent and Win Descent (or Ascender and Descender) is bigger than the Font BBox height (1224); is this allowed? I am not sure. And the solid style minus the layer 2 style is the layer 1 style. I can imagine, that this subtraction has cut a key glyph, Photoshop or Illustrator uses for alignment, at the top. I am speculating, hope this is okay. I think, that I would test the font with a very basic character set; I mean, that I would remove first most characters from the font. Do you have tested it with the b as the only glyph, that is contained in it? For the case, that the different height of a key glyph is the cause, I would try to insert a mini dummy outline (which is likewise a triangle, but with an edge length of round about 1 unit, isn’t it?) into the key glyph.\n\n"
+    },
+    {
+      "time": "5 Jul 2009 — 6:06pm",
+      "content": "Arno: thank you for your response. You're correct—perhaps 'slightly' is a bit of an understatement. I will look into setting the WinAscent/Ascender and WinDescent/Descender values so that their sum are equal to or less than 1224.\n\nHere is how the three font files were created: 1) I made an _unmerged_ font for production that contained all triangles (both those of layer 1 and 2) as separate contours; 2) I merged all contours into individual characters, creating the solid font, adjusted metrics, kerning, and hinting; 3) imported the metrics from the solid file into the original unmerged production file and deleted triangles in each character to form the layer 1 and 2 font files. Which is to say, I did _not_ create one of the layer files, then use a transformation or contour substraction to yield the other layer file. I'm not sure if that makes sense.\n\nAny suggestions for what to start with in terms of a basic character set for doing a diagnostic?\n\n"
+    },
+    {
+      "time": "5 Jul 2009 — 7:31pm",
+      "content": "Having the OS/2 Win- metrics values sum to greater than the bbox is permitted, although Adobe avoid doing it. There are circumstances in which it is desirable, notably if one is releasing a font that is liable to be extended in future with additional scripts or stacked diacritics, and you want to be able to maintain metrics compatibility. In that case, it makes sense to build some leeway into the Win- metrics.\n\nHowever, if an application is using the bbox to calculate vertical alignment, which it might do for the first line in a text block, then the font with shorter descenders will be raised, as shown. One way around this would be to create a dummy glyph in the font that is the same height as the ascender in the taller fonts, e.g. the height of your Solid and Layer 1 b. This will make the bbox values compatible.\n\n"
+    },
+    {
+      "time": "6 Jul 2009 — 2:19am",
+      "content": "John\n\nThe height of the bbox in Andy’s fonts already is the same. (The bbox values cannot be edited like Ascender, Descender and so on.) That’s the reason, why I wonder, whether Illustrator and Photoshop CS2 calculate the alignment with the help of a key glyph in the font, the letter H for example. In this case you had to make the key glyph heigher, which could be done by adding a useless node over the top of the key glyph. Does a single node violate the specifications? A single node or two connected nodes would be optimal, because they are unvisible. If two nodes are not permitted, I would create an outline, that is as small as possible. I think, that is a triangle with an edge length of 1 unit. Such a triangle is even not visible at 512 zoom size (points?) in FontLab. Nevertheless this would be a dirty solution.\n\nAndy\n\n<cite>Any suggestions for what to start with in terms of a basic character set for doing a diagnostic?</cite>\n\nIf there is a key glyph, that Photoshop CS2 or Illustrator CS2 use for alignment, I doubt, that this glyph is not in the alphabet (without diacritics). I can imagine, that it is the H. (Edited: It can’t be the b, because its height is the same in solid and layer 1.) If the different alignment remains, after you have removed all glyphs, except from the alphabet, I would remove the small letters additionally and test again. Something like that. But make sure, that you don’t change the bbox height, when you remove the glyphs. So keep a glyph, that is not in the basic alphabet and make make sure, that its height is 936 units in all three fonts.\n\n"
+    },
+    {
+      "time": "6 Jul 2009 — 3:41am",
+      "content": "The problem also appears in Photoshop CS3, but only, if you use a text frame. If you type text without a frame, it does not appear. And if there is a key glyph, it is not the H.\n\n"
+    },
+    {
+      "time": "6 Jul 2009 — 10:04am",
+      "content": "Andy\n\nI think, that I have solved the problem: The small d is the key glyph. I have added a horizontal line, which is an open contour, to all characters d of my test font family except from the d, that is the highest one in my test font family. The line, that I have added is in the same height as the highest d in the family. When you generate the Font, FontLab grumbles. Ignore it. Maybe there is a cleaner solution. I am not sure, if this has any negative side-effects.\n\nMay it be, that the d of your solid style is a b, mirrored at the vertical line? I ask, because otherwise the layer 1 d would probably also have the same height as the solid d.\n\nNote, that not your font is the problem (in my theory). All fonts, in which the small d has another height as the other styles in the font family (measured from the baseline to the top), show the same problem in Photoshop and Illustrator.\n\nEdited:\n\nJust save the following code as eps file and drag the eps file to the d-character. FontLab will not grumble, when you generate the font, because now I have taken three nodes, from which two overlay.\n\n`\n%!PS-Adobe-3.0 EPSF-3.0\n%%Creator: FontLab\n%%Title:\n%%CreationDate: Mon Jul 06 16:28:37 2009\n%%BoundingBox: 0.00 788.00 10.00 788.00\n%%EndComments\n%%BeginProlog\n/FontLab 24 dict def FontLab begin\n/Version 0 def\n/bd {bind def} def\n/n {newpath} bd\n/c {curveto} bd\n/C {curveto} bd\n/L {lineto} bd\n/l {lineto} bd\n/m {moveto} bd\n/f {closepath} bd\n/S {} bd\n/*u { } bd\n/*U { fill} bd\n/A {pop} bd\n/O {pop} bd\n/D {pop} bd\n/g {setgray} bd\nend\n%%EndProlog\n%%BeginSetup\nFontLab begin\nn\n%%EndSetup\n0 A *u 0 O 0 g\n0 D\n0.00 788.00 m\n10.00 788.00 l\n0.00 788.00 l\nf\n*U\n%%PageTrailer\nshowpage\n%%Trailer\nend\n%%EOF`\n\nAnd I doubt, that this has negative side effects.\n\n<cite>Nice b!</cite>  \nYes. It’s nice.\n\n"
+    },
+    {
+      "time": "6 Jul 2009 — 3:29pm",
+      "content": " ![](http://web.archive.org/web/20150303050329im_/http:/typophile.com/files/Thanks_4117.png)\n  \nBrilliant! I can't express how grateful I am to you for coming up with this fix.  \nAnd belated thanks to Tom for his comment on the b. \n"
+    },
+    {
+      "time": "6 Jul 2009 — 6:35pm",
+      "content": "Good job, Arno! The lowercase d makes sense: it is the traditional PS font ascender measurement.\n\n"
+    },
+    {
+      "time": "8 Jul 2009 — 3:22pm",
+      "content": "Damn it! There is a negative side effect. Photoshop renders the aligner in the modes _sharp, sharper, strong and rounded_. It even renders it, if all three nodes of the aligner are at the same position. It’s small, but visible.\n\nPerhaps the problem can be solved by copying the aligner to the same position and change the path direction of the copied one.\n\n"
+    },
+    {
+      "time": "8 Jul 2009 — 4:17pm",
+      "content": "Haven't read the entire discussion, so please handle with care ...\n\nDo you add extra points/outlines only to force FLS5 to calculate specific bounding box values?  \nRather than adding points/outlines, you could dump all fonts with TTX to .ttx files, open them in a text editor, find the largest _head_ table yMin and yMax values and _CFF_ table FontBBox values from all fonts, and then change all fonts' values to these largest values:\n\n&nbsp;&nbsp;&nbsp;{head}  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[...]  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{xMin value=\"-215\"/}  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{yMin value=\"-270\"/}  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{xMax value=\"1113\"/}  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{yMax value=\"900\"/}  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[...]  \n&nbsp;&nbsp;&nbsp;{/head}\n\n&nbsp;&nbsp;&nbsp;{CFF}  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[...]  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{FontBBox value=\"-215 -270 1113 900\"/}  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[...]  \n&nbsp;&nbsp;&nbsp;{/CFF}\n\nThen run .ttx files through TTX again, this time with the -b option so TTX won't recalculate box values, to get .otfs again.  \nI am not sure if it would hurt application if these values are larger than perhaps necessary, might be worth a try.  \nPerhaps it isn't even the worst idea to so with all fonts of any family, to make sure that all styles align identically in apps which rely on bounding box values for the distance from the top of the box.  \n(I am tired and may have missed other occurrences of bounding box values in the font. Haven't tested on which of the box values apps actually rely. And braces of course should be larger/smaller signs.)\n\nKarsten\n\n"
+    },
+    {
+      "time": "8 Jul 2009 — 6:02pm",
+      "content": "Arno: thanks for flagging the potential Photoshop issue. I've created a couple of quick .psd's using PS CS2, setting the text by clicking and also within text frames, and haven't noticed any visible sign of the aligner with all the various aliasing methods. What version of the program were you using when you encountered this problem with the aligner being visible?\n\nKarsten: being very much a newbie to formal type design, I had to Google TTX to know what you were referring to! Thanks very much for your suggestion of using it to fine-tune the font min and max values. I will look into this.\n\n"
+    },
+    {
+      "time": "9 Jul 2009 — 3:01am",
+      "content": "Karsten\n\n<cite>Do you add extra points/outlines only to force FLS5 to calculate specific bounding box values?</cite>\n\nNo. Photoshop aligns the first line in a text frame with the help of the height of the character d. So the heighest point of the d is always in the same height as the text frame. (And it seems to compute the height for the actual text size, which can result in a one pixel rounding error.) It simply does not use any of the values stored in the font for aligning the first line. So I doubt, that the manipulation of the bbox values will help here. But it is nevertheless a useful tip, which might solve other problems with alignment and leading.\n\nOff topic: Have a look at [my addition to Adam Twardoch’s naming tutorial](http://web.archive.org/web/20150303050329/http:/forum.fontlab.com/fontlab-studio-tips-and-tricks/font-family-naming-in-fontlab-studio-5-t313.0.html;msg23929#msg23929), please. I have read a few of your tutorials (thanks for them!) and my comment might help to complete your naming tutorial.\n\nAndy\n\nPhotoshop CS3 renders the aligner, but I assume, that Photoshop CS2 also does it. It probably is dependent from the text size, in which you test. Imagine, that the aligner has no content. At least I thought, that a line with a height of zero does not have content. So it may help to double the aligner and change the path direction of the aligner, which is on the top. I want to test that. But even if it works, now I cannot exclude anymore, that there are negative side effects. The way, in which Photoshop aligns the first line, is the problem, not your fonts.\n\n"
+    },
+    {
+      "time": "9 Jul 2009 — 3:42am",
+      "content": "<cite>Photoshop aligns the first line in a text frame with the help of the height of the character d.</cite>\n\nIn this case it is indeed more than a pity and perhaps should be considered as a bug. Other apps use more reliable values -- and be it OS/2.usWinAscent\\* ...\n\n\\* Joking.\n\n"
+    },
+    {
+      "time": "9 Jul 2009 — 4:07am",
+      "content": "My idea with a second aligner on the same position as the first one does not work likewise.\n\nI don’t know, if it is a bug or a relict from times, in which it was useful; a feature from former times. Whatever it is, today it is a vermin, because the ecosystem has mutated, while the insect is still the same.\n\nAndy, if you use the 10-units-aligner, the minimum size, at which it is visible, is round about 110 Pixel. Try 300 pixel. And remember, that it aligns with the text frame. So hit the enter key, when you are ready with writing the d.\n\nYou could build an OpenType feature, that substitutes a fake d with the real d. But remember all the non OpenType savy apps.\n\n"
+    }
+  ]
+}

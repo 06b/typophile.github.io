@@ -1,0 +1,35 @@
+{
+  "id": "27877",
+  "title": "Service Mark Glyph",
+  "forum": "Build",
+  "tags": [
+    "General Discussions",
+    "Build"
+  ],
+  "content": "Looking for any info on an easy way to insert Service Mark - (℠)- glyph into documents - It is unicode 2120 but how can you tell average corporate users how to insert it or even what fonts contain it? This is an actual problem in a large business and any suggestions would be great. I do it in the Glyph table in InDesign but that not a solution for people using word processors - copyright, trademark are easy with keystrokes - but service mark?\n\n",
+  "author": "bojev",
+  "time": "24 Aug 2006 — 5:19am",
+  "uid": "7409",
+  "comments": [
+    {
+      "time": "24 Aug 2006 — 5:50am",
+      "content": "If you're using Windows XP, you can enable direct Unicode keypad entry by doing the following:\n\n1. Start the Registry Editor (`regedit.exe`) and navigate to the following key:  \n`HKEY_Current_User/Control Panel/Input Method`.\n2. Set the `EnableHexNumpad` value to `1`.  \nIf the `EnableHexNumpad` value doesn't already exist, create it as a string value (`REG_SZ`).\n3. Restart the computer.\n\n(This process can be automated by creating a simple `.reg` file and importing it on each of your computers. Let me know if you need help doing that.)\n\nOnce you've got that set up, you should be able to enter the \"℠\" character by holding down the ALT key and typing the following on the numeric keypad:\n\n`+ 8 4 8 0`\n\n(That's five keys: You have to press the actual \"+\" key on the keypad before entering the four digits -- all while holding the ALT key down. In case you're wondering where the 8480 value comes from, it's the \"℠\" code point, U+2120, in decimal.)\n\nNote that the \"℠\" character will appear only if that glyph is defined in the the currently selected font. One way to check if a given font contains the glyph is to use Character Map (`charmap.exe`).\n\n"
+    },
+    {
+      "time": "24 Aug 2006 — 5:52am",
+      "content": "I use PopChar Pro to find \"hidden\" glyphs, but in Windows there's a \"special character box\" that can be opened from any application (it's somewhere in the \"Start\"-button I think, but I'm not sure). Don't know if there's any better solution (unless you'd know of a character with an easy shortcut that nobody actually ever types so you could change glyphs with it).\n\n"
+    },
+    {
+      "time": "24 Aug 2006 — 5:54am",
+      "content": "... òr you could do what Spire suggests, that sounds better! ;-)\n\n"
+    },
+    {
+      "time": "24 Aug 2006 — 6:11am",
+      "content": "I forgot to mention this: If you don't mind a solution that's specific to Microsoft Word, you can enter an “℠” by simply typing 2120 into your document and then pressing ALT+X (hold down ALT and press the \"X\" key). If the current font doesn't contain the glyph, Word will automatically find one that does, and switch to it.\n\nThis should work on all Windows versions of Word starting with Word 2002. Don't know if there's an equivalent for Mac versions of Word.\n\n"
+    },
+    {
+      "time": "24 Aug 2006 — 11:08am",
+      "content": "Thanks for the ideas will pass them along.\n\n"
+    }
+  ]
+}

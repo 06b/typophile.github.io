@@ -1,0 +1,30 @@
+{
+  "id": "37976",
+  "title": "'Two sided' OpenType Script Question (Calt)",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I have started to experiment with code to support special glyph forms based on shapes of neighboring glyphs. For example:\n\nRound Left, x, Round Right  \nRound Left, x, Flat Right  \nFlat Left, x, Round Right  \nFlat Left, x, Flat Right  \nDiagonal Left, x, Round Right  \nDiagonal Left, x, Flat Right  \nDiagonal Left, x, Diagonal Right  \nRound Left, x, Diagonal Right  \nFlat Left, x, Diagonal Right\n\nNote: x= is the glyph to be modified\n\nNote:  \nRound Right = o,b,e etc  \nRound left = o,d,q etc  \nFlat Right = n,d,u etc  \nFlat Left = n,b,u  \nDiagonal Right= v,w,y  \nDiagonal Left= v,w,y\n\nI understand how to do the classes now but I am not sure in a calt expression how you would best order things. I suspect that you would pick a standard say for instanace 'Flat' and make that the default. Then it's a matter of making the class' for Round, Diagonal, and for ligatures and special cases. That is fine.\n\nWhat I don't seem to be able to do is to effectively figure out is what is the smart way of doing this.\n\nThis is what I did so far was this. I did it for an 'f' whose crossbar I am altering gently. It seems to be working.\n\nsub @rnd.rt f' @rnd.lft by f.rnd.bth;  \nsub @rnd.rt f' @flat.lft by f.rnd.lft;  \nsub @flat.rt f' @rnd.lft by f.rnd.rt;\n\n",
+  "author": "ebensorkin",
+  "time": "10 Oct 2007 — 6:40pm",
+  "uid": "2942",
+  "comments": [
+    {
+      "time": "11 Oct 2007 — 9:38am",
+      "content": "On first read, what you have there seems fine. Once you get all your variations in there, maybe some trouble would reveal itself -- but I think what you're sketching out here is basically simple.\n\n_But_... things will get squirrely pretty fast if you're going to change the third glyph after the second one changes. Will the third glyph's change affect what the second glyph should be? Then you'll have a sort of reverse cascade. Ow. My head is hurting now.\n\nThis is the kind of thing that can drive one crazy when figuring out contextual substitution. Perhaps you don't intend to get that sophisticated about it, which would save you a lot of trouble!\n\nAs a general remark, I once read something about programming (which might be elementary to any programmer, but maybe not so obvious to font developers): Concentrate first on writing code that just works, without worrying about efficiency or elegance. Once you have something that does what you want, you can then turn to distilling the code into something more efficient or less messy.\n\n"
+    },
+    {
+      "time": "11 Oct 2007 — 12:46pm",
+      "content": "Thanks Christopher! Happily there are only a few glyphs that I think benefit from this kind of treatment but yes, it is the combinations that could get me. Things like a the double o where the second o changes and is followed by for instance an f. I think that probably just expanding the class' members should sort out any problems but I can imagine an unforeseen circumstance biting me later. Next time I will probably sketch out a list of likely targets/combinations ahead of time!\n\nHas anybody else been down this road already?\n\n"
+    },
+    {
+      "time": "11 Oct 2007 — 1:29pm",
+      "content": "Did I send you a pdf on the Calt workshop I gave at TypeCon Boston?\n\nIt might be good to make \"round left\" the default, as that will come in handy for when there is no lower case letter to the left-- e.g. following a capital, figure, punctuation or space.\n\n"
+    },
+    {
+      "time": "11 Oct 2007 — 4:55pm",
+      "content": "Yes you did. Thanks for the reminder! This thing is not actually a script but I imagine the code there will be useful all the same.\n\nI will post some examples when it's starting to gel enough to make sense.\n\n"
+    }
+  ]
+}

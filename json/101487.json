@@ -1,0 +1,163 @@
+{
+  "id": "101487",
+  "title": "Hinting and printing",
+  "forum": "Build",
+  "tags": [
+    "font hinting printing",
+    "Build"
+  ],
+  "content": "Hi,\n\nAm in the process of designing a series of fonts for personal use (6 weights with associated italics, OTF-CFF, 2048em) . I am wondering, what effect does PS hinting have on printing? Does it make the final product sharper on digital print I am looking at printing at 1200dpi - 2400 dpi on both commercial and non-commercial printing services. There is mixed discussion related to Type1 fonts but nothing on OTF. Also, I have tried using Adobe Font Development Kit for OpenType to make autohints for my font - on Mac OSX (Mountain Lion) the glyphs look fine on-screen, bit haphazard on PC (Win7).\n\nAny comments/suggestions are welcome.\n\n",
+  "author": "peterfwyang",
+  "time": "18 Mar 2013 — 3:36am",
+  "uid": "163060",
+  "comments": [
+    {
+      "time": "18 Mar 2013 — 6:45am",
+      "content": "In that dpi range the positive effects of hinting are mostly only visible for very small text (like footnotes).\n\nhhp\n\n"
+    },
+    {
+      "time": "18 Mar 2013 — 7:20am",
+      "content": "Hello HHP,\n\nThanks for your comment. FYI, In general body copy is 12 pt. Tables 10pt and some small notes in 9pt (i.e. Figure/Table descriptors for example 'Fig. 1: Napoleonic départements in 1812') the smallest glyph I will use is the super/sub-script at 10pt that form fractions ½ for example. What would be the effect at 600dpi?\n\nBTW, Is there any way to copy the hints?\n\nPete\n\n"
+    },
+    {
+      "time": "18 Mar 2013 — 8:14am",
+      "content": "You can preview hinting in Acrobat by setting e.g. 600dpi in Edit\\>Preferences\\>Page display.\n\n"
+    },
+    {
+      "time": "18 Mar 2013 — 9:59am",
+      "content": "<cite>Does it make the final product sharper on digital print I am looking at printing at 1200dpi - 2400 dpi on both commercial and non-commercial printing services. </cite>\n\nI would say no. Certainly not at 2400 dpi.\n\n"
+    },
+    {
+      "time": "18 Mar 2013 — 10:04am",
+      "content": "At 600 dpi hinting most certainly will make a difference at text sizes, unless it's being masked by very low-quality printing (or a font that's supposed to look coarse anyway).\n\nCopy the hints? You mean from one font to another? AFAIK that's not possible, but I'm no expert.\n\nhhp\n\n"
+    },
+    {
+      "time": "18 Mar 2013 — 1:16pm",
+      "content": "You'd only be able to copy PS hint info if the overshoots, vertical metrics and stem widths are identical, but it's easy enough to configure them correctly anyway.\n\n"
+    },
+    {
+      "time": "18 Mar 2013 — 5:23pm",
+      "content": "At 2400 dpi hinting won't improve rasterisation. Which, note, is not the same thing as saying that hinted and unhinted glyph will rasterise _exactly_ the same at 2400 dpi. But you're unlikely to be able to tell the difference without a lot of magnification.\n\nAt 1200 dpi, I would still expect hinting to improve things in terms of stem weight consistency and alignment at some sizes.\n\n> ...on Mac OSX (Mountain Lion) the glyphs look fine on-screen, bit haphazard on PC (Win7).\n\nIn Windows, you will get different results with PostScript (CFF) OpenType fonts depending on whether a given piece of software is using the GDI renderer (crap) or the DWrite rendered (excellent). Most software is still using the older GDI renderer; newer software, especially that aimed at Win8, is more likely to use DWrite and -- best news in recent weeks -- the new Office 2013 uses DWrite (note, however, that means the end of Type 1 font support in Office).\n\n"
+    },
+    {
+      "time": "18 Mar 2013 — 8:06pm",
+      "content": "<cite>At 1200 dpi, I would still expect hinting to improve things in terms of stem weight consistency and alignment at some sizes.</cite>\n\nIt is an interesting question, John. While not exactly the same technology, the old Linotron 202 was 960 \"lines\" per inch. Stem weight & alignment was, in my eye, good enough.\n\nWhen imagesetters first came along, Dick Angstadt (one of the authors of the <cite>Glossary of Typesetting Terms</cite>) did some experimenting with various dpi outputs -- and in some cases, found that 1260 was \"better\" than 2400 dpi (<cite>GTS</cite>, page 76). This in terms of fattening up the fine lines of, say, Bembo.\n\nNot particularly to disagree, but to remind everyone that at some level, we get down to ink on paper -- what shows, what doesn't. And in evaluating what shows, at some level, what's \"better\" should be judged, in its entirety, by the human eye.\n\n"
+    },
+    {
+      "time": "18 Mar 2013 — 8:44pm",
+      "content": "And there are dots and there are dots, so 1200 dpi from one device won't be the same as 1200 dpi from another. The medium is always a factor, and the original poster mentioned 'both commercial and non-commercial printing services', which could cover a wide range of devices and output media. I was horrified to see the quality of some of the print-on-demand tests of the Brill types.\n\n"
+    },
+    {
+      "time": "18 Mar 2013 — 8:51pm",
+      "content": "So DWrite will appear more like Mac in that it doesn't pay that much attention to hints and uses the outlines of the font?\n\n"
+    },
+    {
+      "time": "18 Mar 2013 — 9:02pm",
+      "content": "Hi John,\n\nThe commercial printer: HP Indigo W7200 digital press according to HP Specs it can print:\n\n1) 812 and 1219 dpi at 8 bit  \n2) 2,438 x 2,438 addressability HDI (High Definition Imaging)  \n3) Line screen: 144, 175, 180\n\nThe non-commercial FUJI Xerox ApeosPort-IV C5575 according to FujiXerox specs:\n\n1) 1,200 x 2,400dpi (Multi-value-photo)  \n2) 600 x 600dpi (Text / Text-Photo / Photo / Map)\n\n"
+    },
+    {
+      "time": "19 Mar 2013 — 2:46am",
+      "content": "You may want to change the ems to 1000 units.\n\n"
+    },
+    {
+      "time": "19 Mar 2013 — 12:18pm",
+      "content": "_So DWrite will appear more like Mac in that it doesn't pay that much attention to hints and uses the outlines of the font?_\n\nGDI used a rather ancient and not very good PS black box rasteriser that Adobe provided to Microsoft back in the late 1990s. I'm not sure if it was ever updated. It displayed both Type 1 PS and CFF OpenType fonts.\n\nDWrite applies its ClearType rendering model to both TT and CFF OpenType fonts. This is x-direction subpixel colour rendering combined with y-direction greyscale rendering and subpixel horizontal positioning. It does not support Type 1 PS fonts.\n\nWith regard to hinting, I'm not entirely sure how DWrite makes use of PS hinting, but I suspect it does since Microsoft have always been more concerned about maintaining stroke density than Apple. DWrite rendering of TrueType makes use of basically the same subset of TT hint instructions as previous versions of ClearType, but uses y-direction greyscale and subpixel positioning.\n\nThen there's the new Metro greyscale subpixel rendering in Windows 8, which applies to some new applications and to the Metro UI. I'm not sure what this does if it encounters PS fonts, but my guess is that it applies the same model, since this renderer is an offshoot of the DWrite ClearType development.\n\n"
+    },
+    {
+      "time": "21 Mar 2013 — 5:51am",
+      "content": "\"Microsoft have always been more concerned about maintaining stroke density than Apple\"\n\n ![](http://web.archive.org/web/20140809090640im_/http:/typophile.com/files/BRILLCTVSBRILLQTZ_5511.png)\n\nHmmmm. Should I explain again?  \nPerhaps you should print this font,\\* compare its stroke density to these two screen samples, and explain what you see to yourself, before you explain it to others.\n\n\\*You must have Brill, but if you'd like me to send you the matching pdf I will.\n\n"
+    },
+    {
+      "time": "21 Mar 2013 — 12:26pm",
+      "content": "David, that Vista rendering is the GDI PS greyscale rasteriser at work.\n\nIn the paragraph in which I mentioned stroke density, I was clearly talking about the DWrite ClearType rendering, i.e. the rendering over which Microsoft have control, not the black box they got from Adobe.\n\nThe loss of stroke density in horizontal bars not at baseline, x-height or cap height is characteristic of Mac rendering:\n\n ![](http://web.archive.org/web/20140809090640im_/http:/typophile.com/files/Mace_5233.png)\n\nSee also A, E, F, H....\n\nNote also in your Mac example the inconsistency of stroke weight: e.g. the very heavy k in line 6 vs much lighter verticals elsewhere.\n\n"
+    },
+    {
+      "time": "21 Mar 2013 — 6:17pm",
+      "content": "<cite>BTW, Is there any way to copy the hints?</cite>\n\nCopy the hints between fonts? Well in FontLab with RoboFab you can access the PS hints with Python and do what you'd like with them. I have to admit I have not had to do this yet, and I'm not too excited about having to do it, so I'm not an expert in this part of the Object model. But there's some details here:  \n [http://www.robofab.org/objects/pshints.html](http://web.archive.org/web/20140809090640/http:/www.robofab.org/objects/pshints.html)\n\n"
+    },
+    {
+      "time": "21 Mar 2013 — 7:09pm",
+      "content": "> The loss of stroke density in horizontal bars not at baseline, x-height or cap height is characteristic of Mac rendering\n\nEven at those alignment zones OSX and iOS somehow manage to add gray fuzz to perfectly dense bars.\n\nhhp\n\n"
+    },
+    {
+      "time": "21 Mar 2013 — 7:31pm",
+      "content": "Hi Guys,\n\nSorry for not replying, I have been away for the past few days.\n\n@JasonC. Thanks - I think this copies the font-wide settings such as Blues and V&H Stems. I was looking for something that could copy the individual hints...\n\n@John Hudson, although I primarily use Mac, I am looking forward to DWrite. I hope some day that we can get to a point where font hinting is irrelevant. As for printing - did you see the specs of the machines I posted? Do you think it will affect on those two machines?\n\n@hrant, yes, I agree, however, in my opinion, PS fonts usually look better on Mac than they do on PC.\n\n"
+    },
+    {
+      "time": "21 Mar 2013 — 7:50pm",
+      "content": "I don't know those two machines personally. I'm not a print expert, only wanted to alert you to the fact that resolution isn't an absolute factor.\n\nThe 600x600 dpi text setting of the FUJI Xerox machine should definitely show some positive impact from hinting. I would generally avoid an asymmetric rendering for type, but you could experiment with the higher resolution of the photo setting.\n\n"
+    },
+    {
+      "time": "22 Mar 2013 — 4:03am",
+      "content": "\"PS fonts usually look better on Mac than they do on PC\"\n\nAll fonts look better on the Mac. No wait... all fonts always look better on the Mac. You just happen to be reading from a tiny minority who don't understand stroke density vs hinting. :)\n\n"
+    },
+    {
+      "time": "22 Mar 2013 — 6:16am",
+      "content": "I think Kevin should switch to studying how people want to believe how people read...\n\nhhp\n\n"
+    },
+    {
+      "time": "22 Mar 2013 — 11:46am",
+      "content": "I'm sorry you don't understand, David. Let me explain. :)\n\nStroke density refers to the intensity of blackness (presuming nominally black text) independent of stroke thickness. In good quality print and in b/w pixel rendering, stroke density is consistent, i.e. it doesn't matter whether one is looking at a thick stem or a hairline stoke, the density of the black is the same. And since one of the few things we know absolutely about reading is that strong contrast between figure and ground is important, it follows that stroke density is important to reading. If strokes are greying out, then contrast is being lost, and hence reading conditions are suboptimal.\n\nFrom your comments here and elsewhere, you appear to be judging how good fonts 'look' on different platforms relative to how closely they match the colour (heaviness of texture) of print, which is a reasonable criterion if one of the things you are trying to achieve is a kind of parity between print and web editions of a publication. It's a criterion that is independent of and may be at odds with criteria related to readability on screen, given that comparative text colour doesn't imply anything about stroke density of bits and pieces of individual glyphs.\n\nI say Microsoft are more concerned about stroke density than Apple because they have deliberately made their ClearType rendering model retain intensity where Apple allows theirs to grey out. This is simply an observation: in Apple rendering horizontal bars regularly grey out, while in Microsoft rendering they remain good and dark.\n\nNow, with regard to stroke density vs hinting, these are not necessarily directly related, since it would be possible to manage stroke density at the rendering level without hinting if one had a sufficiently good means of analysing glyph shape. For example, Apple have demonstrated that they are able to get pretty good stroke density at key alignment zones (baseline, x-height and cap height), but they fail when horizontals do not fall at these alignments, and after many years they show no sign of caring to solve this problem. [Note that I am not even bothering to get into the effect of Apple rendering on a variety of non-Latin scripts that involve many horizontal strokes at non-standard heights. The claim that 'All fonts look better on the Mac' doesn't stand up to non-Latin scrutiny.] While stroke density needn't rely on hinting, Microsoft decided that they would make use of hinting information to help them retain stroke density, and this is demonstrated by what happens in DWrite's y-direction antialiasing if one compares fonts with hinting and fonts without.\n\nFinally, here is the Brill PS font rendered with DWrite in Internet Explorer at the same size as in your comparison above. I agree that the comparative-to-print colour of the Mac rendering is overall closer -- although terribly inconsistent at the level of individual glyphs --, but I don't think that is an important criterion when it comes to reading on screen. The DWrite rendering is sharper and the letter shapes more clearly defined (less fuzz) -- note this also reflects my personal CT tuning preference, which is for sharper glyphs rather than heavier ones --; while lighter than the Mac rendering and hence less close to the print image it is more internally consistent in weight, and crucially, in my opinion, it is more consistent in stroke density (see enlargement).\n\n ![](http://web.archive.org/web/20140809090640im_/http:/typophile.com/files/DWriteMac_5029.png)\n\nIf you have a nice long corridor leading away from your screen, try walking backwards and note how long the enlargement on the left continues to look like an _e_ and the point at which the one on the right starts to look like a _c_.\n\nThere are a few aspects of the DWrite rendering that I would expect to be different and better if the font were TrueType, notably the height of the middle horizontal of the uppercase B.\n\n"
+    },
+    {
+      "time": "23 Mar 2013 — 6:06am",
+      "content": "Oh but I do understand John. There’s just a big difference between our understandings, and you use funny terms and don’t write right.;)\n\nI joined this conversation because no one explained to this poster that he had a crossed-spec, asking for hinting advice on a 2048 PS font.\n\nThen, as he sojourned throught the resolution spectrum, I though it good to explain the weight shift between print and the screen in the Windows environment.\n\nJohn said,  \n“This is simply an observation: in Apple rendering horizontal bars regularly grey out, while in Microsoft rendering they remain good and dark.”\n\nYou keep saying that as if, “as long as horizontal bars are good, everything else can go to hell?\" and that is the effect. I disagree. I think type is much more about everything, than it is about any thing. And if everything is “light”, any thing becomes irrellevant.\n\nSo, if you enlarge those glyphs, you don’t see the issue. And if you use the term stroke density to mean dropout control, you’re messing with terms in use for decades.\n\nAnd at some point... MS should probably give up lightening everything via asymmetrical rendering 'cause it's not good to be out of touch with the stroke density of the rest of the world.\n\n"
+    },
+    {
+      "time": "23 Mar 2013 — 9:49am",
+      "content": "_...no one explained to this poster that he had a crossed-spec, asking for hinting advice on a 2048 PS font._\n\nA 2048 UPM is perfectly within spec for a CFF OpenType font. The 1000 unit limitation was specific to Type 1 fonts. At least one third party PDF-creator assumes a 1000 UPM for all PS fonts, causing spacing problems if this is not the case, but other than that and a problem with cursor scaling in the first version of InDesign, long since fixed, I've not encountered any problem with a non-1000 UPM in CFF fonts. Indeed, we've even made 2048 unit CFF fonts for Adobe.  \n\\_\\_\\_\\_\\_\n\nI don't think I am saying that horizontal bars are the be-all-and-end-all and that everything else can go to hell. I merely point out that this is a consistent problem in Apple text rendering at what you've spent years reminding me are still important resolutions. I also pointed out what I think are other problems with the Apple rendering as shown in your example: greatly inconsistent weights across different glyphs and an overall lack of sharpness.\n\nNor am I saying that I think the Microsoft rendering is perfect. In terms of PS rendering, though, its a heck of a lot better than what Adobe's black box produced for GDI. And it has _some_ qualities, despite its lightness, that I think are better -- i.e. better for reading -- than what Apple produce for the same font at the same size and resolution. Do I wish it were possible to marry those qualities to a better representation of the true weight of a given type? Yes. Do I think achieving that better representation is worth throwing out those qualities? No. That's where you and I seem to differ in opinion, and it is at that point a matter of opinion.\n\nI use a terminology that might be different from what you use because I've thought about it carefully and determined that we should be able to talk about stroke density as a quality of text independent of particular technology. Drop-out control is a particular technical mechanism that plays a role in stroke density in particular environments. I originally settled on the term stroke density because various people -- including Kevin Larson and other cognitive psychology folk -- were talking about 'stroke contrast', which is a confusable term since typographers use the same phrase to talk about the relationship of thick and thin strokes in a letter (what I call stroke modulation pattern when I'm seeking to be precise, which is most of the time).\n\n"
+    },
+    {
+      "time": "24 Mar 2013 — 1:52pm",
+      "content": "I think our \"difference of opinion\" is that you think its 2013 and its fine for a rendering technology to need _hints and antialiasing_ to prevent dropouts in a text face(!), and I think this should work fine by 2004 without that. If that's not the case, I guess you must be saying every single text face in the world is drawn too dark for reading, and needs CT to work.\n\nAnd, I would not lic. 2048 PS fonts to users. You may do so to Adobe, but that's like I said \"...we don't feel comfortable making magazines that hold more than four rounds of ammo?\" to which you replied, \"...why not!? we made 10,000 round magazines for Bell Helicopter!\"\n\n"
+    },
+    {
+      "time": "24 Mar 2013 — 3:16pm",
+      "content": "Dave (bbg): Your analogy doesn’t hold up so well, as Adobe turns around and bundles those fonts, putting them in the hands of essentially the exact same users you are licensing to.\n\nAlso, I want to point out that Apple could do its fuzzy rendering even if it were using the hints in the font, and Microsoft could do its stronger stems even if it were auto-hinting on the fly like Apple. Though I will grant there is some connection between the use-of-hinting choices and the rendering model.\n\n"
+    },
+    {
+      "time": "24 Mar 2013 — 5:29pm",
+      "content": "I don't know if I'll ever understand how a highly intelligent person could convince himself that OSX's blur around the edges of totally black and totally straight elements (including at the baseline and capline, mind you) is totally OK. Le cœur a ses raisons que la raison ne connaît point.\n\nhhp\n\n"
+    },
+    {
+      "time": "24 Mar 2013 — 7:51pm",
+      "content": "David, I never said I thought it fine for a rendering technology to _need_ hints and antialiasing to prevent dropouts; Karsten and I spent time explaining to MS exactly what we thought Apple was doing right with regard to hintless fonts and why it shouldn't be necessary for every font on the Windows platform to be hinted in order to look even minimally reasonable. But I still think that Apple's solution isn't as good as they apparently think it is, because since 2004 they've been sitting on an 80% solution when it comes to drop out (or grey out, since we're talking about antialiased text and there's seldom total stem collapse, just a great paleness).\n\n"
+    },
+    {
+      "time": "25 Mar 2013 — 8:09am",
+      "content": "Wow, I never thought my question would evoke such a debate between respondents. I agree with you John, MS need to pick up their game in terms of no-hints required :-) as for Apple - have you tried on their new Retina displays? To my eye anyway they look very crisp. I use a pre-retina MacBook Pro (2011) with the wide-screen custom build option and even that is still sharp.\n\n"
+    },
+    {
+      "time": "25 Mar 2013 — 8:18am",
+      "content": "I'm pretty sure John isn't saying Windows should ignore hinting too. Thankfully MS hasn't given up on people actually reading for content the way Apple has.\n\nhhp\n\n"
+    },
+    {
+      "time": "25 Mar 2013 — 10:57am",
+      "content": "Retina and other high resolution screens are a whole other matter. When one has sufficient pixels in which to capture outline data, much of the concerns about fuzz, greyout and, on the Windows side, weight reduction are greatly diminished or disappear completely. But as David convinced me, low-to-medium resolution monitors remain important and can't yet be ignored.\n\n"
+    },
+    {
+      "time": "25 Mar 2013 — 3:11pm",
+      "content": "\"...a great paleness\"\n\n...in tiny places, is apparently far less likely to launch 100 reading studies, that a great paleness everywhere.\n\nJohn \"David convinced me, low-to-medium resolution monitors remain important...\"\n\nBut, David was trying to do that in a now distant past, where it mattered to an impossibly ignorant hinting industry in dire need.\n\nHrant \"MS hasn't given up on people actually reading for content the way Apple has.\"\n\nHere, some attention: You know, pictures and movies work extremely well at 100-150 dpi. Apple has pushed the entire world into a OS solution package with even higher resolution on both mobile and desktop displays than are needed for pictures and movies, even though it brings is a huge penalty in price, performance and quality assurance. Billions o documents are comfortably read on a daily basis with this solution package.\n\nHow silly you write about reading.\n\n"
+    },
+    {
+      "time": "25 Mar 2013 — 3:45pm",
+      "content": "David, I know I'm risking your temper on this, but I won't hide my thoughts just to avoid that. I value and respect your opinion on a great many things. But when it comes to something involving MS versus Apple, something goes off. I had an inkling of this long ago\\* but the defining moment for me came when I was talking to you at the ATypI conference in Mexico City: it was before Apple's \"retina\" display, and I mentioned that HTC had put out a phone with over 250 ppi. You said \"that's too high\". Now, retina is your godsend.\n\n\\* It seems to have started when MS went with John for the CT fonts, but that could be a coincidence.\n\nApple didn't raise resolution to help people read. And Apple's lousy text rendering isn't limited to hi-res displays.\n\nhhp\n\n"
+    },
+    {
+      "time": "25 Mar 2013 — 4:02pm",
+      "content": "@Hrant: There is a correlation between processing speed and screen resolution. A few years ago a high res for a mobile device implied poor performance and a high price.  \nThings have moved along and it appears that Apple's Retina-devices have hit the sweet spot for performance/resolution/price, so David may have had a point at the time he made the “too high” statement.\n\n"
+    },
+    {
+      "time": "25 Mar 2013 — 7:57pm",
+      "content": "That HTC phone pre-dated the Retina display only by about six months. Coupled with the lesser pixel count I see no reason to believe there was a qualitative performance difference (and/or that David had field-tested the HTC).\n\nhhp\n\n"
+    },
+    {
+      "time": "26 Mar 2013 — 5:12am",
+      "content": "To me, it's not \"MS versus Apple\", it's Hrant vs Reality. I want Apple and MS, along with many others to succeed wildly.\n\n\"...started when MS went with John for the CT fonts...\"\n\n_Picture yourself in a boat on a river, with tangerine trees and marmalade skies._\n\nYour \"defining moment\" in 2009 indicated a desire for 1000s of millions of \\>160 dpi devices, not 100s of 1000s of 250 dpi devices. ...and, if ya'd spoken with my 3rd grade classmate who showed up at typecon seattle, she'd told ya I thought _Treasure Island_ is the best book of all time, and you can back further and decide I prefer breast milk to a dry martini neither shaken or stirred.\n\nBut what's the point? You say Apple does all this resolution hiking for non-reading, and the reading results are lousy, and you use Windows XP at 96 dpi(?) and own a kindle. :)\n\n"
+    },
+    {
+      "time": "26 Mar 2013 — 7:44am",
+      "content": "Sorry, David, I'm not buying it. And you seem to have a very narrow view of what technologies people should be using, how they should live their lives; e-readers for example are tellingly much more about _reading_ than iAnything.\n\nBTW I'm typing this on a retina-class device.\n\nhhp\n\n"
+    }
+  ]
+}

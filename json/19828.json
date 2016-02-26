@@ -1,0 +1,130 @@
+{
+  "id": "19828",
+  "title": "Maximum number of points?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi,\n\nIs there anybody who has worked with a font that needs a few hundred points per letter to get a transparancy effects, or maybe worked with a \"trashy\" looking font?\n\nMy problem is that I made the letters look like I wanted them to look - but when using the font in InDesign, the document got very, very slow, so I had to strip it down and try again all the time. I guess the number of points has a whole lot to do with this.\n\nMaybe someone have similar experiences and could give some useful tips?\n\nThanks in advance!\n\n",
+  "author": "Goran Soderstrom",
+  "time": "9 May 2006 — 10:12am",
+  "uid": "11526",
+  "comments": [
+    {
+      "time": "9 May 2006 — 11:14am",
+      "content": "Are you setting more than a line or two? You might consider setting that in Illustrator and using it as a placed image.\n\n"
+    },
+    {
+      "time": "9 May 2006 — 11:39am",
+      "content": "One of my students ran into this issue as well\\*, and I  \ndidn't have an answer for her (beyond the lame \"try to  \nlimit each glyph to a few hundred points\"). So I'll point  \nthis thread out to her and keep my fingers crossed...\n\n\\* She made a stencil unicase font with a variant that  \nmimics overspray, so it has all this simulated fuzzy  \nspray around the contours.\n\nhhp\n\n"
+    },
+    {
+      "time": "9 May 2006 — 12:12pm",
+      "content": "The thread on [FontLab limitations](http://web.archive.org/web/20131016090113/http:/www.typophile.com/node/16152) from November might help answer the question, see Mark Simonson's response on November 11th.\n\n"
+    },
+    {
+      "time": "9 May 2006 — 12:23pm",
+      "content": "I had a student this year with the same problem Hrant mentioned. We \"solved\" the issue by making the text into a raster image at 600 dpi and saving it as a one bit diffusion dither. This is a technique I use all the time to print screen shots on my class handouts and they print quickly. On type it works best on grunge and distressed type or something with fuzzy edges\n\n"
+    },
+    {
+      "time": "9 May 2006 — 12:40pm",
+      "content": "Hmm, I guess there is no straight answer for this one and experiment is the best way to maybe solve it, and I maybe a look at the \"FontLab limitations-post\" there aswell.\n\nThe thing is that I am doing the font in Fontographer, and it seems that between 200-300 points there is no problem (other than it sometimes slows down InDesign when zooming). At first when the letters carried about 600-700 points it even made InDesign crash....\n\nBut the less points, the less transparent the letters look like.\n\nFor those who are interested, I am trying to make a font that looks like fluff... ;-)\n\nI think maybe 200-300 points is far to less points to get that effect?\n\n"
+    },
+    {
+      "time": "9 May 2006 — 12:47pm",
+      "content": "One thing you can do is use OpenType code to map single  \nletters to multiple characters (with all but one having a  \nzero advance width) which would allow you to double,  \ntriple, etc. the max allowable.\n\nhhp\n\n"
+    },
+    {
+      "time": "9 May 2006 — 12:52pm",
+      "content": "Ah, yes - I just read this at the other post - that seems like a very nice idea! That would definately make it possible to make the font look like fluff!\n\nBut I'm sorry to say that I have just about zero experience with making OpenType fonts...\n\nGuess I have to learn =)\n\n"
+    },
+    {
+      "time": "9 May 2006 — 2:23pm",
+      "content": "You can also set the metrics in Fontographer to overlap glyph elements and make one letter out of several character pieces, each with a smaller number of points. This will limit the number of letterforms in a font but each one you did could be more complex. This was mentioned in the early Fontographer tutorials as a way to do complex logo fonts.\n\n"
+    },
+    {
+      "time": "10 May 2006 — 12:11am",
+      "content": "Good Idea.\n\nThat will not make the font very user-friendly, when you have to instruct people how to use it, but could be a way to make it look better.\n\n"
+    },
+    {
+      "time": "10 May 2006 — 12:51pm",
+      "content": "Another technique is to split up long outlines.\n\n"
+    },
+    {
+      "time": "10 May 2006 — 1:16pm",
+      "content": "How do you mean split up long lines? You mean insert more points if there is a long curve?\n\nI'm having some new stuff regarding this little issue. I opened a trashy font that was a TrueType-font in FOG, and was surprised that the font had over thousand points per glyph. This font was working just fine in InDesign, while my font with 500 points made InDesign very slow.\n\nWhy is this happening?\n\nI made mine in PS1. (Is it better with PS3?)\n\n"
+    },
+    {
+      "time": "10 May 2006 — 1:26pm",
+      "content": "This one must have a large number of points aswell, and this is a professional font, what's the secret?\n\n[http://www.p22.com/products/Franklin.html](http://web.archive.org/web/20131016090113/http:/www.p22.com/products/Franklin.html \"http://www.p22.com/products/Franklin.html\")\n\n"
+    },
+    {
+      "time": "10 May 2006 — 1:52pm",
+      "content": "I'm guessing they're using straight lines while you're using curves.\n\n\\> Another technique is to split up long outlines.\n\nI don't see that helping this problem.\n\nhhp\n\n"
+    },
+    {
+      "time": "10 May 2006 — 2:07pm",
+      "content": "So maybe it's better to do a circle with 12 straight lines ( 12 points ) instead of 4 points with curves?\n\n"
+    },
+    {
+      "time": "10 May 2006 — 2:16pm",
+      "content": "I don't know, since I haven't figured out how beziers translate  \nto \"flattened path elements\". But a circle with 4 straight lines ;-)  \nis definitely better than one with 4 curves.\n\nhhp\n\n"
+    },
+    {
+      "time": "10 May 2006 — 7:30pm",
+      "content": "_One thing you can do is use OpenType code to map single  \nletters to multiple characters (with all but one having a  \nzero advance width) which would allow you to double,  \ntriple, etc. the max allowable._\n\nNote that you would need to use VOLT to do this. FontLab and the Adobe FDK do not support GSUB type 2 (one-to-many) lookups.\n\n"
+    },
+    {
+      "time": "10 May 2006 — 11:57pm",
+      "content": "I really wish someone with the right experience could fill me in here. Not that trashy looking fonts are my favourites, but I still want to complete this font - if not just for learning how it works.\n\nSurely there must be some type designers here who has actually done a font like this (?)\n\n"
+    },
+    {
+      "time": "11 May 2006 — 1:16am",
+      "content": "[http://typophile.com/node/19833](http://web.archive.org/web/20131016090113/http:/typophile.com/node/19833 \"http://typophile.com/node/19833\")\n\nhhp\n\n"
+    },
+    {
+      "time": "11 May 2006 — 5:29am",
+      "content": "Damn. that was a nice one!\n\n"
+    },
+    {
+      "time": "11 May 2006 — 5:51am",
+      "content": "Plus it's a recent/active thread, so you might ask Marcio what he ran into.\n\nhhp\n\n"
+    },
+    {
+      "time": "11 May 2006 — 9:29am",
+      "content": "Here's what I mean by splitting a long path into two shorter paths.  \nI've \"exploded\" the view to show how it works -- the two short paths that cut the stem would actually superimpose (not a problem). I don't know if this technique would speed up rendering, but it allows smaller-memory printers to RIP fonts that would otherwise freeze them.\n\n ![](http://web.archive.org/web/20131016090113im_/http:/typophile.com/files/SplitpathNS_3990.jpg)\n\n"
+    },
+    {
+      "time": "11 May 2006 — 11:18am",
+      "content": "Nick, thanks for that. My english is not that well, so I dont know what \"superimpose\" means, but I get the idea. This is definately worth a try, since the font anyway would feel good with some transparancy here and there.\n\nThanks!\n\nOtherwise, this seems a hard nut to crack - I wish someone could tell me som facts – do that, do this and it will work, so and so many points is maximum etc =)\n\n"
+    },
+    {
+      "time": "11 May 2006 — 11:45am",
+      "content": "I think Nick is alluding to the old postScript 1 errors that were frequent early on in complex paths. The solution, as he has shown, was to butt segments together of shorter paths. In effect, two paths of 20 points ripped far easier than one path of 40 points.\n\nChrisL\n\n"
+    },
+    {
+      "time": "11 May 2006 — 12:00pm",
+      "content": "OK, I see.\n\nWell, the mystery is now solved. If I did \"Retract BCP\" on all the glyphs (so all curves got straightened out) the font is working so much better and renders faster in InDesign.\n\nSo hrant - you were indeed right when speaking about straight lines instead of curves.\n\nI guess I have to live with that.\n\n"
+    },
+    {
+      "time": "11 May 2006 — 12:11pm",
+      "content": "But you might be aiming too low if you convert a curve-based glyph  \nthat's <cite>slightly</cite> too complex into a line-based one. I'd try converting a  \ncurve-based glyph that's like doubly too complex.\n\nhhp\n\n"
+    },
+    {
+      "time": "11 May 2006 — 1:37pm",
+      "content": "Yeah, I got your point. We have to find the right \"balance\" =)\n\nI think in this case however - that this will work just fine. The font is built up by small dots. It used to be circles, but it could also be squares, or eight-sided (octogons?) I think.\n\n"
+    },
+    {
+      "time": "11 May 2006 — 1:41pm",
+      "content": "If you use four sides, consider lozenges instead of squares.\n\nhhp\n\n"
+    },
+    {
+      "time": "11 May 2006 — 10:49pm",
+      "content": "Yep, I did that - it feels more like circles in that way. It also seemd like FOG automatically makes lozenges out of circles when Retracting BCP's.\n\n"
+    },
+    {
+      "time": "12 May 2006 — 3:15pm",
+      "content": "Sorry, stupid post, deleted.\n\n"
+    }
+  ]
+}

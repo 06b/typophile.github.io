@@ -1,0 +1,26 @@
+{
+  "id": "12334",
+  "title": "time to crack python...",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "ok, i guess it’s time for me to brush up on some scripting…\n\nfirst of all, is there a macro for a group of .vfb files that will:  \n-Switch to “codepages”  \n-View by Name  \n-select MacOS Roman (and a variant to select MS windows 1252 Latin 1) -generate names -and lastly copy the currency (euro) to the Euro glyph position?\n\nif not, how hard would it be for a beginner to write something that will do these for me in a batch? can anyone point me in the right direction? any help would be appreciated!!!\n\n",
+  "author": "paul d hunt",
+  "time": "Tue, 2005-05-10 08:39",
+  "uid": "7006",
+  "comments": [
+    {
+      "time": " Tue, 2005-05-10 09:31",
+      "content": "The best place to start is the [fontlab-scripting list](http://web.archive.org/web/20050808082636/http:/mail.letterror.com/mailman/listinfo/fontlab-scripting) at letterror. If you search the archive you’ll find almost what you need. It will take some scripting and piecing together, but that list is the best place to start.\n\n"
+    },
+    {
+      "time": " Thu, 2005-05-12 11:45",
+      "content": "hasn’t anybody written “Learn Python for FontLab Fast”?\n\nI checked out the Letterror mailing list and I agree that’s a great resource. However, I need to start from the beginning and move along at a faily quick clip so i can get mostly over the learning curve. I keep getting stuck at _print “Hello World”_. Not because that’s hard, but because I want to skip past that to something useful in terms writing FontLab macros and don’t know what point to skip to… any other tips, anyone?\n\n"
+    },
+    {
+      "time": " Thu, 2005-05-12 13:27",
+      "content": "Ah, no the “Learn Python for FontLab Fast” doesn’t exist. However, here are the links that I’m always referring to when I’m working on a script:\n\n[FontLab Python](http://web.archive.org/web/20050808082636/http:/dev.fontlab.net/flpydoc/)  \n [Python 2.3 documentation](http://web.archive.org/web/20050808082636/http:/www.python.org/doc/2.3.5/)  \n [RoboFab Object Model](http://web.archive.org/web/20050808082636/http:/www.letterror.com/code/robofab/objects/model.html)  \n [FontLab Scripting Archive](http://web.archive.org/web/20050808082636/http:/mail.letterror.com/pipermail/fontlab-scripting/)\n\nand lastly, the [RoboFab](http://web.archive.org/wiki/RoboFab) documentation which will be in your RoboFab folder (if you have it installed) here: Documentation/robofabDocs/robofab.html\n\nA quick plug for [Typgraphica](http://web.archive.org/wiki/Typgraphica), there is a quick [article](http://web.archive.org/web/20050808082636/http:/typographi.com/000978.php) up there now, which I wrote, that details an introduction to RoboFab.\n\nQuickly, however. There are two things here. The first is a need to know something (and only a little something) about programming. O’Reilly is a good source of books on programming languages and theory. They have several good python books to get you up to speed. The second is the fontlab specific python. Personally, I find that using RoboFab can help speed things up a great, great deal. The FontLab python interface isn’t as clean or intuitive as the RoboFab one.\n\nExample. Today I wanted to copy only the side-bearings from one of my fonts to another. Sounds simple, but trying to do it by exporting AFM files and the like doesn’t work, as you import widths that you don’t want. So in about 15 minutes I wrote this:\n\n`\n#FLM: Copy Font Side-bearing`\n\n#Imports  \nfrom robofab.world import OpenFont, CurrentFont  \nfrom robofab.interface.all.dialogs import Message\n\nfontToChange = CurrentFont()  \norignalMetricsFont = OpenFont(None, \"Which font's sidebearings do you want?\")  \norignalMetrics = {}\n\nfor glyph in orignalMetricsFont:  \n[tab]orignalMetrics[glyph.name] = [glyph.leftMargin, glyph.rightMargin]  \n[tab]print orignalMetrics[glyph.name]  \norignalMetricsFont.close()\n\nfor name, metrics in orignalMetrics.iteritems():  \n[tab]if fontToChange[name]:  \n[tab][tab]fontToChange[name].leftMargin = metrics[0]  \n[tab][tab]fontToChange[name].rightMargin = metrics[1]  \nfontToChange.update()  \nMessage('Done changing side-bearings')  \n  \n**_Replace [tab] with an actual tab_**\n\nMuch, much easier to do this in RoboFab than it is through FontLab’s python. Or by hand.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "107983",
+  "title": "Fontforge n00b - SVG import",
+  "forum": "Build",
+  "tags": [
+    "FontForge",
+    "import",
+    "SVG",
+    "Build"
+  ],
+  "content": "The example I'm trying to learn FontForge with is a very simplistic font, not the actual font I want to create. I figured it is best to try to learn with something with extremely simplistic glyphs. So no need to critique this font itself, it's just practice and learning.\n\nHere is the concept that I am attempting to learn with:\n\n![](http://web.archive.org/web/20150419170351im_/http:/i1246.photobucket.com/albums/gg611/AliceWonder32/AlicePC_zps24ac0ba5.png)\n\nI created an SVG file that is 1000 x 1000 with the ascender guide at y=200, decender guide at y=800, baseline at y=684, x height guide at y=287. For this practice font, ascender and cap height are the same (as they are with, say, Helvetica)\n\nPNG rendition of my Letter A imposed over the guide:\n\n![](http://web.archive.org/web/20150419170351im_/http:/i1246.photobucket.com/albums/gg611/AliceWonder32/template_zps800eff5d.png)\n\nThe SVG path to create the A -\n\n    <path d=\"M340.5,664\n             l 0 -435\n             l 29 -29\n             l 290 0\n             l 0 464\n             l -72.5 0\n             l 0 -239.25\n             l -174 0\n             l 0 239.25\n             l -72.5 0\n             \"/>\n\nThe result of importing it into fontforge:\n\n![](http://web.archive.org/web/20150419170351im_/http:/i1246.photobucket.com/albums/gg611/AliceWonder32/ScreenshotA_zps914a3ed2.png)\n\nIs that correct? It seems that fontforge doesn't know what my baseline is or my cap height, and I guess that makes sense because there is nothing in the SVG to specify that. Is there someplace in fontforge where I can specify the baseline, x-height, and cap-height?\n\nLooking at the fontforge import, it does Y coordinates reverse from SVG and it looks like it would have the baseline at 140, possibly 136 (which would be 800 - my SVG baseline of 664)\n\nTo do the least amount of work after import, should I use SVG coordinates of y=800 for my baseline or is that something I can configure in FontForge?\n\nThank you for any tips.\n\n",
+  "author": "AliceWonder",
+  "time": "3 Jan 2014 — 6:59am",
+  "uid": "216577",
+  "comments": [
+    {
+      "time": "3 Jan 2014 — 5:16pm",
+      "content": "OK - it does look like I need to set the baseline at y=800 in the SVG file and it looks like the initial M command in an SVG path, assuming that I start drawing the glyph in the left most position, should be left side bearing.\n\nI have to read more about left side bearing, I always assumed spacing between letters was done a different way, I guess the left and right side bearing are initial spacing before justification?\n\nI need to read more about that.\n\nAnd it looks like the width of the SVG file needs to be left-side-bearing + bounding box width + right side bearing.\n\nI'm still trying to figure out how to get the ascender and descender properly identified by FontForge.\n\n"
+    },
+    {
+      "time": "3 Jan 2014 — 5:28pm",
+      "content": "I could perhaps just use y=0 in the SVG as the ascender guide, but I have seen some fonts where for whatever reason a few glyphs do stretch slightly above or below what is clearly the ascender or descender line, so I'm not sure I want y=0 as the ascender. I guess that's probably not the end of the world to have part of a curve cross y=0 in the SVG, but I'd prefer not to.\n\n"
+    },
+    {
+      "time": "3 Jan 2014 — 7:16pm",
+      "content": "Clearly there's something I'm not understanding.\n\nPlaying with various fonts, choosing a size so the baseline is 800 units below the ascender, the decender is usually more than 200 units below the baseline.\n\nSo there must be some way of letting fontforge know what the ascender, baseline, and decender lines are in a SVG that is 1000 units in height.\n\n"
+    },
+    {
+      "time": "3 Jan 2014 — 7:27pm",
+      "content": "Sorry to ramble on but what would be nice is if I could always set my ascender at y=20 and decender at y=980 and then set the baseline, xheight, and cap-height somewhere in-between.\n\nThat would allow all my glyphs to have a bounding box within 1000 x 1000 even if a glyph or two has legitimate need to exceed the ascender/decender a tad.\n\nSome kind of xml metadata tag in the SVG file to define where the ascender,decender, and baseline are to fontforge on import would be in my mind the easiest way to do that.\n\n"
+    },
+    {
+      "time": "4 Jan 2014 — 2:29am",
+      "content": "Font Information under General allows changing the ascent / decent lines.\n\nAll is well.\n\n"
+    },
+    {
+      "time": "5 Jan 2014 — 8:36am",
+      "content": "I think you may need more info about ascender and descender settings. Hint: descender is always a negative number in normal fonts.\n\nThere is an image here [FontForge Documentation](http://web.archive.org/web/20150419170351/http:/fontforge.org/overview.html) that should give you a lot of insight on Baseline, Ascender and Descender.\n\nOther than that, read all of the FontForge documentation, or find a good book or website on the subject, such as this one [I Love Typography](http://web.archive.org/web/20150419170351/http:/ilovetypography.com/2007/10/22/so-you-want-to-create-a-font-part-1/).\n\n"
+    },
+    {
+      "time": "6 Jan 2014 — 10:52am",
+      "content": "On the side, why are you creating your initial outlines in an SVG file?\n\nOf course, sometimes you will have outlines in some other format and need to bring them into your font editor. But if that's not the case, and you are drawing them from scratch right now, you may have a MUCH easier time of it drawing the outlines in your font editor instead. Just a thought!\n\n"
+    }
+  ]
+}

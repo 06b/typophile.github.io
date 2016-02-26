@@ -1,0 +1,78 @@
+{
+  "id": "33087",
+  "title": "Creating dialect-specific alternates in opentype font?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "When creating dialect-specific alternates in an opentype font, is the locl feature the only one that needs to be addressed? I have 5 serbian alternates to Cyrillic glyphs. I thought they might also be part of aalt or salt as well. I made a couple of small classes and made subs by class. Is there a “better” way to do this?\n\nChrisL\n\n",
+  "author": "dezcom",
+  "time": "16 Apr 2007 — 12:17pm",
+  "uid": "3135",
+  "comments": [
+    {
+      "time": "16 Apr 2007 — 1:19pm",
+      "content": "Strictly speaking, they are language-specific substitutions, which are activated by the language tag. Here's how I'm doing it.\n\nlanguage SRB exclude\\_dflt; # Serbian  \nsub afii10066 by be.serb;\n\n"
+    },
+    {
+      "time": "16 Apr 2007 — 1:55pm",
+      "content": "Thanks Nick!  \nIt seems not much different than what I did:\n\nfeature locl { # Localized Forms  \n # Latin  \n language MOL exclude\\_dflt; # Moldavian  \n sub [Scedilla scedilla Scedilla.smcp] by [Scommaaccent scommaaccent Scommaaccent.smcp];  \n language ROM exclude\\_dflt; # Romanian  \n sub [Scedilla scedilla Scedilla.smcp] by [Scommaaccent scommaaccent Scommaaccent.smcp];  \n language SER exclude\\_dflt; # Serbian  \n sub @ru2serb by @serbalt;  \n} locl;\n\n"
+    },
+    {
+      "time": "16 Apr 2007 — 4:38pm",
+      "content": "Chris, some of the preferred Serbian forms may also be accepted as stylistic variants for non-Serbian language, including Russian. The Serbian be and italic de are both forms that are found in some Russian typefaces, and could be made available via 'salt' or one of the stylistic set features.\n\n"
+    },
+    {
+      "time": "16 Apr 2007 — 7:10pm",
+      "content": "Thanks John! Then having them in both 'locl' and 'salt' would be OK?\n\nGreat! I'll do it.\n\nChrisL\n\n"
+    },
+    {
+      "time": "17 Apr 2007 — 12:16pm",
+      "content": "Chris, I believe the language tag is SRB, not SER.  \nAt least that's what was in the online resource I checked; but I didn't keep a record of where it was, and haven't checked back.\n\nAFAIK, in Serbia they would be using a keyboard driver that specified \"SRB\", and that would activate the features tagged thusly in a font.\n\n"
+    },
+    {
+      "time": "17 Apr 2007 — 12:23pm",
+      "content": "Thanks Nick! Glad you caught that! It was a screwup, not a position :-) SER might be an entirely different language.\n\nChrisL\n\n"
+    },
+    {
+      "time": "17 Apr 2007 — 12:26pm",
+      "content": "The keyboard driver is usually unrelated to activating features and does not need to know anything about OT language tags. All it does is pass codepoints in to the OS. The OS or application needs to tag the text with the appopriate language. The OS or app could derive the language from the keyboard selection, but what then about cases where a single keyboard can be used for multiple languages? Or text is imported or copied and pasted from some other source?\n\nSome applications may try to derive the script and/or language from the particular codepoints being used. This is obviously prone to error, particularly if it's language rather than script that is driving the processing.\n\nSo the most reliable method is to have the end user needs specify the language. InDesign CS3 relies on this; when the end user specifies the language for spelling and hyphenation purposes, that also serves to tell InDesign what language tag applies.\n\nThe downside of InDesign CS3's approach is that currently users can't specify a language they don't have a dictionary for. I hope to see this limitation removed in a future version of InDesign. But for now I'm pretty glad to have language-specific OT feature processing.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "17 Apr 2007 — 12:31pm",
+      "content": "\"The downside of InDesign CS3’s approach is that currently users can’t specify a language they don’t have a dictionary for. \"\n\nIs a stop-gap measure possible where more dictionairies could be produced? I don't know if it would be quicker to add more dictionaries than to wait for CS4?\n\nChrisL\n\n"
+    },
+    {
+      "time": "17 Apr 2007 — 12:34pm",
+      "content": "So is it a good idea to also produce a \"plain\" language-specific version of fonts for Serbia or Bulgaria, for users there who aren't using CS3? Such fonts would have the \"alternate\" glyphs at the standard code points.\n\nThomas, does CS3 have a Bulgarian dictionary?\n\n"
+    },
+    {
+      "time": "17 Apr 2007 — 2:45pm",
+      "content": "[language system tag](http://web.archive.org/web/20131019011054/http:/typophile.com/wiki/language%20system%20tag)\n\n_does CS3 have a Bulgarian dictionary?_\n\nor, a better question: can we find a list of what dictionaries DO ship with InD CS3?\n\n"
+    },
+    {
+      "time": "17 Apr 2007 — 4:53pm",
+      "content": "My [InDesign CS3] installation lists these. I think that's all.\n\n ![](http://web.archive.org/web/20131019011054im_/http:/typophile.com/files/IDCS3_dict_6036.png)\n\n"
+    },
+    {
+      "time": "17 Apr 2007 — 4:56pm",
+      "content": "Is making a dictionary difficult and once made, is it easy to install without recoding InD?  \nChrisL\n\n"
+    },
+    {
+      "time": "17 Apr 2007 — 4:59pm",
+      "content": "[Adding language/hyphenation dictionaries to InDesign](http://web.archive.org/web/20131019011054/http:/www.typophile.com/node/17681)\n\n"
+    },
+    {
+      "time": "17 Apr 2007 — 5:18pm",
+      "content": "And here's the list for InDesign CS2.\n\n ![](http://web.archive.org/web/20131019011054im_/http:/typophile.com/files/IDCS2_dict_4934.png)\n\n"
+    },
+    {
+      "time": "17 Apr 2007 — 6:28pm",
+      "content": "There was a bug in CS2 that made adding the exception dictionary to a document unworkable -- we did send in a bug report, but Adobe doesn't acknowledge them as policy, so we have no way of knowing what the final disposition was. Has this been fixed in CS3? If not, then you can only have an \"application\" exception dictionary. This means if there are variables for a particular job, you have to change the dictionary, write it off, save it with the job, & reinstall it in the system for each job when proof comes back.\n\nSince the bug occurred with differences in word endings following an apostrophe (OK with one letter following the apostrophe, not OK with more than one letter), this may or may not affect some of these languages.\n\n"
+    },
+    {
+      "time": "17 Apr 2007 — 9:14pm",
+      "content": "Thanks Miguel, that's very impressive.\n\nAre there font ramifications for the variants in English, French, Norwegian, German and Portuguese?\n\nI note there is no Moldavian dictionary, despite the Moldavian tags in Adobe Pro fonts.\n\n"
+    }
+  ]
+}

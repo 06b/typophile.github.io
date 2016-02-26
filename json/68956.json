@@ -1,0 +1,54 @@
+{
+  "id": "68956",
+  "title": "Question about optical size family naming",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "I'm working on a family with Text and Display optical sizes and trying to decide on the best way to handle the family naming. I've been debating between three scenarios, which I've attempted to illustrate below. Does anyone have any thoughts, preferences, or general feedback? I'm leaning strongly toward Option 1, but I wanted to see what other people thought.\n\n-  \nOption 1 : Separate families for each size\n\nFont Family Text  \n• Light  \n• Light Italic  \n• Regular  \n• Regular Italic  \n• Semibold  \n• Semibold Italic  \n• Bold  \n• Bold Italic\n\nFont Family Display  \n• Light  \n• Light Italic  \n• Regular  \n• Regular Italic  \n• Semibold  \n• Semibold Italic  \n• Bold  \n• Bold Italic\n\nThis is fairly common, probably even the standard way to do it. Everything is nicely organized and easy to manage. The downside is that switching between families is a two step process (change family, select style) and can get annoying.\n\n-  \nOPTION 2 - One family with styles ordered: Weight -Size-Italic\n\nFont Family  \n• Light Text  \n• Light Text Italic  \n• Light Display  \n• Light Display Italic  \n• Regular Text  \n• Regular Text Italic  \n• Regular Display  \n• Regular Display Italic  \n• Semibold Text  \n• Semibold Text Italic  \n• Semibold Display  \n• Semibold Display Italic  \n• Bold Text  \n• Bold Text Italic  \n• Bold Display  \n• Bold Display Italic\n\nI've seen this option used a few times as well. It's is easier and faster to use in font menus (just change the style) but it's a little messy. I also dislike how it hides the distinction between text and display.\n\n-  \nOPTION 3 - One family with styles ordered: Size-Weight-Italic... but tricked to be grouped by Size\n\nFont Family  \n• Display Light  \n• Display Light Italic  \n• Display Regular  \n• Display Regular Italic  \n• Display Semibold  \n• Display Semibold Italic  \n• Display Bold  \n• Display Bold Italic  \n• Text Light  \n• Text Light Italic  \n• Text Regular  \n• Text Regular Italic  \n• Text Semibold  \n• Text Semibold Italic  \n• Text Bold  \n• Text Bold Italic\n\nI've never actually seen this method used. It requires a little backend weight number fudging, are there any serious problems with this bit of trickery?\n\nOne of the benefits to this method would be that I could add \"Agate\" and \"Deck\" sizes in there and have them appear in the correct size order. Option 1 only works alphabetically.\n\n-  \nThanks.\n\n",
+  "author": "Jackson",
+  "time": "30 Mar 2010 — 3:40pm",
+  "uid": "4346",
+  "comments": [
+    {
+      "time": "30 Mar 2010 — 3:51pm",
+      "content": "I'd say go for #3 if you could manage it. I'm no expert on the adverse effects of weight number fudging, but it seems to be the most logical way.\n\n"
+    },
+    {
+      "time": "30 Mar 2010 — 4:25pm",
+      "content": "I can't comment authoritatively on the technical implications, but from a usability point of view I like option 3. If the family grew to monumental proportions, it might be easier to go with option 1, but with the style list you have I vote for option 3.\n\nOn a related topic, I've always wondered if Adobe will ever implement something where stylistic sets can be given custom names that will be visible to users from their app menus. That way you could get aggro with consolidation and just have all your optical sizes built in to one base set of fonts.\n\n"
+    },
+    {
+      "time": "30 Mar 2010 — 6:58pm",
+      "content": "I prefer (1).  \nIt doesn't seem right in (3) to go from Light to Heavy twice in the same menu item.\n\n"
+    },
+    {
+      "time": "31 Mar 2010 — 12:27am",
+      "content": "<cite> On a related topic, I've always wondered if Adobe will ever implement something where stylistic sets can be given custom names that will be visible to users from their app menus. </cite>\n\nThat's already part of the [OT Spec](http://web.archive.org/web/20131015220952/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#8.c). Not sure how many applications actually implement this, though.\n\nAndré\n\n"
+    },
+    {
+      "time": "31 Mar 2010 — 1:53am",
+      "content": "If in option 2 the distinction between Text and Display faces ought to be more eye catching, try to take T and D instead of the full words.\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 6:36am",
+      "content": "<cite> &gt; The downside is that switching between families is a two step process (change family, select style) and can get annoying</cite>\n\nI guess this depends upon what software you’re talking about and what work habits one has.\n\nIf weights and styles are named & numbered in a proper and completely parallel fashion, then in InDesign you can change just the Family (if you’re working from the control bar or character palette) and it will match the style. Same in Photoshop.\n\nIf you’re working from InDesign’s Type \\> Font menu, then selecting the Family alone won’t do anything, true. You have to select the Family and slide out the flyout to the style. But that’s not really a two-step process. If that’s your work habit, then you have to do the same motion to change the Style anyway.\n\nAFAIK, Quark doesn’t distinguish Family from Style, so you have to change both at once anyway, and again, it’s not really a two-step process.\n\nNot sure what problem you’re trying to solve.\n\nOption 3 is clever, but I side more with Nick Shinn. With a list that long, I might just focus on the first set of sizes and not realize that there’s a whole ’nother set that starts over again.\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 7:57am",
+      "content": "Thanks for you insight, Kent. I'm not trying to solve a specific problem, just thinking through the best way to set things up. I've all but decided to go with Option 1.\n\nI'm surprised no one mentioned Option 2, which is very close to what Adobe uses in their Pro fonts. They do one family with a weight-size-italic style but follow OpenType naming specs and drop \"Regular\". It seems to get overwhelming very fast, I would need a taller monitor to select something in Minion Pro.\n\nFont Family  \n• Light Display  \n• Light Text  \n• Light Italic Display  \n• Light Italic Text  \n• Display  \n• Text  \n• Italic Display  \n• Italic Text  \n• Semibold Display  \n• Semibold Text  \n• Semibold Italic Display  \n• Semibold Italic Text  \n• Bold Display  \n• Bold Text  \n• Bold Italic Display  \n• Bold Italic Text\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 9:19am",
+      "content": "Yeah, I never liked Adobe’s approach. Too cumbersome, from this user’s perspective.\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 10:44am",
+      "content": "I agree with Nick Shinn and Kent Lew: 1.\n\n"
+    },
+    {
+      "time": "1 Apr 2010 — 4:46pm",
+      "content": "Option 1! As Kent already said, you only have to select the complete text and pick up the other family from the font family menu in Indesign. Option 3 is also nice, if you, as Andreas said, abbreviate Display and Text, although I would prefer to have the text styles first in the list (You maybe can do that by faking the width classes in the fonts, but I am not sure, if Indesign also uses the width classes by building the order.):\n\n• D Light  \n• D Light Italic  \n• D Regular  \n• D Regular Italic  \n• D Semibold  \n• D Semibold Italic  \n• D Bold  \n• D Bold Italic  \n• T Light  \n• T Light Italic  \n• T Regular  \n• T Regular Italic  \n• T Semibold  \n• T Semibold Italic  \n• T Bold  \n• T Bold Italic\n\nYes, that it is much clearer. You also could abbreviate Italic to Ita. (\"Italic\" was a keyword in Indesign and in case of Type 1, as far as I remember, even parts of the string \"Italic\" like \"Ita\". Again, as far as I remember. In other words, Indesign made the order with the help of that keyword. Or was it OpenType? I only remember, that it was a keyword and that there was a difference in the order, when I changed the name to \"kursiv\" for example.) Alternatively to the weight names, you also could use numbers.\n\n• D 1  \n• D 1 Ita  \n• D 2  \n• D 2 Ita  \n• D 3  \n• D 3 Ita  \n• D 4  \n• D 4 Ita  \n• T 1  \n• T 1 Ita  \n• T 2  \n• T 2 Ita  \n• T 3  \n• T 3 Ita  \n• T 4  \n• T 4 Ita\n\n(I would not use the weight class numbers 100–1000 for the names, because of potential trouble with style linking, when they are chosen correctly and irritations for the user of the menu, if they are not chosen correctly.)\n\nOption 2 is very irritating.\n\n---------------\n\nThis also would work, because Indesign makes a difference between small and capital letters:\n\n• t Light  \n• t Light Italic  \n• t Regular  \n• t Regular Italic  \n• t Semibold  \n• t Semibold Italic  \n• t Bold  \n• t Bold Italic  \n• D Light  \n• D Light Italic  \n• D Regular  \n• D Regular Italic  \n• D Semibold  \n• D Semibold Italic  \n• D Bold  \n• D Bold Italic\n\n"
+    }
+  ]
+}

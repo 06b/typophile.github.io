@@ -1,0 +1,150 @@
+{
+  "id": "37053",
+  "title": "Installed FontForge on A G5 Macintosh; Want to Install AutoTrace",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Anyone gone this route? Can you tell me where to go for a Macintosh (UNIX, I guess) package to install AutoTrace? Is there a guide of some kind somewhere that explains the process? FontForge was relatively easy to get up and running, but the packages I've seen for AutoTrace are kind of ambiguously labelled. A little help, please?\n\nThank you.\n\nSteve\n\n",
+  "author": "Steve Tiano",
+  "time": "12 Sep 2007 — 4:40pm",
+  "uid": "20846",
+  "comments": [
+    {
+      "time": "12 Sep 2007 — 5:37pm",
+      "content": "A good choice is [**potrace**](http://web.archive.org/web/20130410040951/http:/potrace.sourceforge.net/). I use it as a line command but I just checked that it also works in fontForge if I put PreferPotrace on in the Apps preferences.\n\n"
+    },
+    {
+      "time": "12 Sep 2007 — 7:02pm",
+      "content": "Is there anything installs like a Macintosh program, without fussing in Terminal?\n\n"
+    },
+    {
+      "time": "12 Sep 2007 — 7:28pm",
+      "content": "\\> <cite>without fussing in Terminal?</cite>\n\nNot that I know of. The best I could find for you is the binaries above (you don't need to compile from the sources!). It seems no one cared to build a package that makes the intallation for you, else that would be on Peter Selinger's page, I guess.\n\n"
+    },
+    {
+      "time": "12 Sep 2007 — 7:56pm",
+      "content": "Man, I don't want to be a ninny, but is there a step-by-step somewhere for what to do once the binaries are installed. God knows, I appreciate your directing me to them so I don't have to compile from sources. But this is practically a phobia of mine, getting into Terminal and ending up with a doorstop that used to be a computer.\n\n"
+    },
+    {
+      "time": "12 Sep 2007 — 8:19pm",
+      "content": "Once you expand the archive, all you have to do is copy/move the programs `potrace' and `mkbitmap' to a directory on your path. (I've added so much stuff to my path, I don't recall what is there by default.) Most likely /usr/local/bin will be on your path, so I suggest moving there. (First, open Terminal and type\n\necho $PATH\n\nto see what's on your path, and if /usr/local/bin is there, cd to the expanded folder (potrace-1.8.mac-[ppc/intel]) and type\n\nsudo mv potrace /usr/local/bin\n\ngive your password, and do the same with mkbitmap. You're done, with no doorstop.\n\n"
+    },
+    {
+      "time": "12 Sep 2007 — 8:22pm",
+      "content": "Once the binaries are downloaded, they are not installed and the guys that made those binaries really assumed the user knows the basics of Unix. If no one else can help you, I'll look tomorrow at what I can do.\n\n"
+    },
+    {
+      "time": "12 Sep 2007 — 8:46pm",
+      "content": "Okay, I downloaded the PowerPC version, 1.7--1.8 is for the Intel chips. /usr/local/bin is on the path, along with a bunch of other stuff, when I type echo $PATH.\n\nWhat is \"cd to the expanded folder\"? Obviously I know where the expanded folder is, in a folder where all my downloads go (like when I have to download something from a publisher's FTP site for a book I'm working on)\\> So I looked and, yes, the expanded file, named \"potrace-1.7.darwin6.0-powerpc\" is there. Both \"potrace\" and \"mkbitmap\" [my quote marks, of course] are in the file named \"potrace-1.7.darwin6.0-powerpc\".\n\nI gather that \"cd\" is somehow the command that locates \"potrace-1.7.darwin6.0-powerpc\". So what do I type after cd to get me to the next step, :sudo mv potrace /usr/local/bin\"?\n\nThanks. Maybe I can through this tonight.\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 4:15am",
+      "content": "Okay, some progress ... maybe.\n\nI took a shot and opened Terminal. I got the Welcome and then the name of my computer, followed by the $ prompt. There's what transpired next:\n\n[my\\_computer's\\_name]:~ [name]$ echo $PATH  \n/usr/local/mysql/bin:/usr/local/mysql/bin:/usr/local/mysql/bin:/bin:/sbin:/usr/bin:/usr/sbin  \nmy-Computer:~ [name]$ cd [folder all my stuff is in]/[folder my downloads go to]  \nmy-Computer:~[folder all my stuff is in]/[folder my downloads go to] stephentiano$ sudo mv potrace /usr/local/bin  \nPassword:  \nmv: rename potrace to /usr/local/bin/potrace: No such file or directory  \nmy-Computer:~[folder all my stuff is in]/[folder my downloads go to] [name]$\n\nSo do I need to create /usr/local/bin?\n\nThank you.\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 9:08am",
+      "content": "You could install into /usr/bin, which is already on your path.\n\nTo create /usr/local/bin\n\nsudo mkdir /usr/local/bin\n\nThen you will have to add /usr/local/bin to your path. How to do that depends on what shell you are using. For bash (now the default on OS X), edit or create .bash\\_profile and add the lines:\n\nPATH=$PATH:/usr/local/bin  \nexport PATH\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 12:58pm",
+      "content": "Steve\n\nIf things are not working yet, can you do this:\n\nGo in /Applications/Utilities and click the X11 icon. If a xterm window does not open, click \"Terminal\" in the X11 Applications menu. Then, in the xterm window you get, type\n\necho $SHELL  \n echo $PATH\n\nand tell me what you get. I'll come back two hours from now.\n\nMichel\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 4:21pm",
+      "content": "Okay, clicking the X11 icon and typing:\n\necho $SHELL\n\nresulted in:\n\n/bin/bash\n\nThen, typing:\n\necho $PATH\n\n/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11R6/bin\n\nWhat's next?\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 4:35pm",
+      "content": "Next you close all windows, click [**here**](http://web.archive.org/web/20130410040951/http:/www.iro.umontreal.ca/~boyer/typophile/potrace-1.7.darwin6.0-powerpc.pkg), download the quick and dirty package I made and install it. When you are done, you stard again X11 and type in your window\n\nwhich fontforge  \nwhich potrace\n\nIf you get /usr/local/bin/fontforge and /usr/local/bin/potrace your problems shoud be over. You should then be able to forget about terminal windows and use Autotrace directly in FontForge. If not, you tell me again what the path is.\n\nMichel\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 4:54pm",
+      "content": "Michel, I think I can't thank you enough. Interesting thing ... After downloading, I had two packages: potrace-1.7.darwin6.0-powerpc.pkg AND potrace-1.7.darwin6.0-powerpc.1.pkg.\n\nI double-clicked and, therefore, installed potrace-1.7.darwin6.0-powerpc.1.pkg. Seemed to go off without a hitch.\n\nI again opened the Terminal in X11, typed \"which fontforge\", hit and got:\n\n/usr/local/bin/fontforge\n\nThen I typed \"which potrace\", hit and got:\n\n/usr/local/bin/potrace\n\nLook right?\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 4:56pm",
+      "content": "I spoke too soon, didn't I? Isn't the idea to be able to open FontForge in X11 and also find potrace in the X11 Applications menu while FontForge is open?\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 5:01pm",
+      "content": "Yes. Now if you start fontforge directly from X11 and import some bitmap, Autotrace should be activated.\n\n[edit] If the path is properly exported, as it seems to be, then there should be no problem. Another way to proceed now is to type \"fontforge\" in your Xterm window.\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 5:27pm",
+      "content": "By the way, if you want to know the parameters of potrace, you can always type\n\n&nbsp;&nbsp;`man potrace`\n\nin some Terminal (which shows that terminals are not that bad). Same for mkbitmap that is also installed (in case you feel like trying some line commands like in Selinger's doc).\n\nMichel\n\n[edit] Not true because though PATH is fixed, MANPATH is not fixed by the package. You need to do it by hand or type something weird like\n\nnroff -man /usr/local/man/man1/potrace.1 to get it (which proves there was life before tex and latex, namely nroff and troff).\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 5:22pm",
+      "content": "Damn, the tutorial I have has .png files. And FontForge doesn't seem to recognize them from the Import menu. I haven't actually started even sketching anything. Anyone have a stray bitmap of a letter they can \"lend\" me. I promise, I think I'm about to get out of everybody's hair on this particular thread.\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 5:31pm",
+      "content": "I opened the .png for the letter \"C\" in Illustrator and saved it as a .eps file. It showed up in selection box when I went to import from FontForge. But when I went to import I got a message saying it was too complex for FontForge. What gives?\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 5:58pm",
+      "content": "Open it with preview, save it as BMP and try Autotrace just for fun. [edit] I mean, open the .png with preview.\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 6:09pm",
+      "content": "I can open it with Preview. But BMP is not there to save as--only GIF, PDF, PNG, and TIFF.\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 6:19pm",
+      "content": "I have Preview 3.0.9, just opened three .png files and has as options BMP, GIF, JPEG-2000, JPEG, PDF, PHOTOSHOP, PICT, PNG, SGI, TGA, TIFF. ?\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 6:27pm",
+      "content": "I tried opening again and saving in Illustrator. Saved a SVG, another format that FontForge's menu says I can choose to open. Like the EPS one I saved earlier, I got the following Error message:\n\nToo Complex or Bad  \nI’m sorry this file is too complex for me to understand (or is erroneous)\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 6:39pm",
+      "content": "Try GraphicConverter; there is always something that works. And if not try [this png](http://web.archive.org/web/20130410040951/http:/www.iro.umontreal.ca/~boyer/typophile/ther_4937.png). My preview accepts to save it as a lot of things.\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 7:17pm",
+      "content": "Okay, that worked. I’ve imported the letterform capital C. Now how should I be able to access potrace? It's not under the X11 Applications menu, nor is it under any Edit menu—either X11’s or FontForge’s.\n\nWHere to find potrace?\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 7:28pm",
+      "content": "I thought you wanted to do everything inside Fontforge. If so, once you imported the bitmap, say \"r\" in the letter \"r\" of fontforge, you select the menu \"element\" at the top of the window of the letter \"r\" and then click \"autotrace\". That's it.\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 8:31pm",
+      "content": "It is, indeed. I didn't realize that was how you did it. Thank you so much. Now I have to start reading again, big-time, so I can do some meaningful work.\n\nI do appreciate it. Thank you, Michel.\n\n"
+    },
+    {
+      "time": "13 Sep 2007 — 8:04pm",
+      "content": "Good that it worked. I am also over with the text I was writing whilst having a look at the thread. Good luck!\n\n"
+    },
+    {
+      "time": "14 Sep 2007 — 2:56pm",
+      "content": "Good stuff here. Thanks for the tutorial Michel. Potrace is one of the best autotracers I have found, commercial or free.\n\n"
+    },
+    {
+      "time": "15 Sep 2007 — 1:30am",
+      "content": "By the way Steve, the formats that you were trying to save to in Illustrator, SVG and EPS are vector outline formats. Saving a bitmap to either of those formats doesn't change the nature of the file, and when FF tries to open an EPS or an SVG it is looking for a vector document.\n\nSaving to either a .tiff or .jpeg should work because their nature is that of a bitmap image.\n\nBut why Potrace/FF wouldn't accept a .PNG is beyond me since that is the better and more open format, and is widely used by the FOSS/UNIX/LINUX community...\n\n"
+    },
+    {
+      "time": "15 Sep 2007 — 6:44am",
+      "content": "Potrace not accepting PNG format surprised me, too, Dan. But it just wasn’t available in the format menu. Nevertheless, good old Graphic Converter—hadn’t had a need for it in ages—came through. So I’ve gotten as far as opening FontForge, importing letterforms, and getting them into Potrace. Now I just need to get a better handle on what I want to draw in letterforms, actually draw them, import them, and begin the work. Geez, I just made that sound so simple.\n\nI know it doesn’t seem like much to you folks who draw and have a bunch of typefaces under your belt already, but it’s actually taken me a bit to get to this point. Funny thing is, now that I have gotten this far—part of why I got started on exploring type design is that I was idle—my work is starting to pick up. Two books poised to start: the first a straight layout job on a WWII history, and the second a design and layout on a handbook of sorts.\n\nYou never know what the charm is going to be.\n\n"
+    },
+    {
+      "time": "16 Sep 2007 — 2:43pm",
+      "content": "FontForge needs libpng to open PNG files. Perhaps you don't have that installed?\n\nOn my machine, I can open PNGs in FontForge... but I'm using Ubuntu, which sets all that stuff up for me. And they say Macs make life easier :) I just opened Add/Remove Software, selected potrace and fontforge, and BAM! everything works (except, of course, that I like to have my fontforge fresh every week, so I have to download anyway).\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 5:32am",
+      "content": "There is [**png2bmp**](http://web.archive.org/web/20130410040951/http:/cetus.sakura.ne.jp/softlab/b2p-home/) that converts `.png` files to `.bmp` format. If you have lots of `.png` files, and `png2bmp` is installed, then you only `cd` to the directory where the `.png` files are and type\n\n&nbsp;&nbsp;` for i in *.png; do png2bmp $i; done`\n\nand you get all the corresponding `.bmp` files. You can also pipe the output of `png2bmp` into `potrace` so as to get all the `.eps` or `.svg` files.\n\nFor me that's enough. In fact, if I can avoid opening fontforge, I like it better, and it is in fact easy to write a script that starts with `.png` files with properly chosen names and generates a `.sfd` file where all the `.bmp` bitmaps are in the background of their corresponding character; that's just the kind of facility I like with fontforge.\n\nMichel\n\nPS. If you don't know how to compile `png2bmp`, [**here**](http://web.archive.org/web/20130410040951/http:/www.iro.umontreal.ca/~boyer/typophile/png2bmp-1.6-powerpc.pkg.zip) is a compiled version for a ppc with OS X 10.4 (I am not sure it requires 10.4) ready to be installed (in package form). Don't click twice on **here** else the package is loaded twice.\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 8:59am",
+      "content": "\\> <cite>if I can avoid opening fontforge, I like it better</cite>\n\nWhat I mean is that if I can avoid opening the graphics interface, I like it better (especially if I have hundreds of font files to process). Of course, if I write `#!/usr/local/bin/fontforge` as the first line of a script, I \"open\" fontforge.\n\n"
+    },
+    {
+      "time": "4 Nov 2007 — 1:26pm",
+      "content": "\\> <cite>But why Potrace/FF wouldn’t accept a .PNG is beyond me since that is the better and more open format, and is widely used by the FOSS/UNIX/LINUX community...</cite>\n\nI never needed to read png files but, whilst looking at how FontForge integrates Spiro, I realized that all you need for FontForge to read png files is to install the libpng library. I compiled a version for ppc running 10.4 and added it to the resources I put [**here**](http://web.archive.org/web/20130410040951/http:/www.iro.umontreal.ca/~boyer/typophile/ff.html) as an answer on how to get the current development version of FontForge with spiro.\n\nMichel\n\n"
+    }
+  ]
+}

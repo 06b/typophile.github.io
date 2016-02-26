@@ -1,0 +1,26 @@
+{
+  "id": "39898",
+  "title": "Can FontLab Scripts Manipulate Metrics/Kerning Classes?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm actually a little afraid to ask this question because there's so much riding on it, but I've been planning [read: counting] on using scripts to automate the process of creating classes for metrics and kerning.\n\nPart of the reason is that I find the process painfully gruntwork-ish and would like to automate it for all future font projects, and second, because I've had bad experiences with FontLab thus far and on more than one occasion, have seen my metrics classes magically vanish without explanation and would like the ability to rebuild all classes the next time this happens.\n\nUnfortunately, between the Unofficial FontLab Python API and the admittedly shallow official documentation, I can't find any real mention of metrics or kerning classes.\n\nSo, dare I ask? Is there any way to create/modify classes from a Python script in FontLab, or is the workflow I'm building doomed?\n\n",
+  "author": "amv",
+  "time": "8 Dec 2007 — 9:58pm",
+  "uid": "23823",
+  "comments": [
+    {
+      "time": "9 Dec 2007 — 2:10am",
+      "content": "Hello,\n\nThis may help:\n\n_Font Attribute:_  \n`\nclasses[string]`  \n list of glyph classes in Classes panel\n\n_Font Methods:_  \n`\nSetClassFlags(int class_index, bool left, bool right)`  \n allows to set 'left' and 'right' properties of the kerning class  \n`\nSetClassFlags(int class_index, bool lsb, bool rsb, bool width)`  \n allows to set 'lsb', 'rsb' and 'width' properties of the metrics class  \n`\nGetClassLeft(int class_index)`  \n returns the 'left' property of the class  \n`\nGetClassRight(int class_index)`  \n returns the 'right' property of the class  \n`\nGetClassMetricsFlags(int class_index)`  \n returns the tuple containing LSB, RSB and Width flags of the metrics class\n\nRegards  \nEigi\n\n"
+    },
+    {
+      "time": "9 Dec 2007 — 2:20am",
+      "content": "Oh thank god, this looks like something I can work with. Where did this come from? Do you have a larger reference of which this is part?\n\nThanks so much!\n\n"
+    },
+    {
+      "time": "9 Dec 2007 — 10:51am",
+      "content": "Hello,\n\n`print Font(). __doc__ `\n\nEigi\n\n"
+    }
+  ]
+}

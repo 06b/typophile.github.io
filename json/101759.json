@@ -1,0 +1,36 @@
+{
+  "id": "101759",
+  "title": "Clipping glyphs in MS Word",
+  "forum": "Build",
+  "tags": [
+    "clipping characters",
+    "MS Word",
+    "Build"
+  ],
+  "content": "We've developed a couple of fonts in FL 5, generating OTFs.\n\nIn MS Word the descenders glyphs get clipped on screen as shown in the below picture. I've played around with the WinAscent and Typo values but can't get it to stop. Word 2003 and 2010.\n\nIs this just how Word works? Is there anything that can avoid this?\n\nThanks,  \nKen\n\n ![](http://web.archive.org/web/20150308211438im_/http:/typophile.com/files/Capture_5084.JPG)\n\n",
+  "author": "Ken Krugh",
+  "time": "26 Mar 2013 — 8:44pm",
+  "uid": "17947",
+  "comments": [
+    {
+      "time": "27 Mar 2013 — 4:56am",
+      "content": "Go here:  \n [http://www.kltf.de/downloads/FontMetrics-kltf.pdf](http://web.archive.org/web/20150308211438/http:/www.kltf.de/downloads/FontMetrics-kltf.pdf \"http://www.kltf.de/downloads/FontMetrics-kltf.pdf\")  \nRead the instructions contained therein and apply them to your font; that should fix your problem.\n\n"
+    },
+    {
+      "time": "27 Mar 2013 — 8:14am",
+      "content": "Thanks for replying George. I should have added that I've set things that way. I've not seen Karsten's fabulous explanation (he has SO much great info available, very helpful/generous guy) but I've read the article by John Hudson that he references.\n\nSetting the values as described in those articles works but only when Word is determining the leading with it's Line Spacing set to something other than \"Exactaly.\" Unfortunately we need to be able to set the line spacing in these projects to the specifications of the series.\n\nIt doesn't seem to matter what those settings are made in the font, Word still clips the characters on screen when the leading is set to \"Exactaly.\" I guess that's just the way it works, unfortunately.\n\nThanks again,  \nKen\n\n"
+    },
+    {
+      "time": "27 Mar 2013 — 9:44am",
+      "content": "This is a Word issue. If you set an absolute ('exactly') leading value that is shorter than the WinAscent/WinDescent OS/2 values, then Word will clip. This is because of the way in which Word lays out each line.\n\n"
+    },
+    {
+      "time": "27 Mar 2013 — 10:52am",
+      "content": "Thanks John.  \nI should also clarify that the clipping only happens on-screen, when PDF'd is fine.\n\n"
+    },
+    {
+      "time": "28 Mar 2013 — 1:41pm",
+      "content": "Yes, PDF and also most printers should be fine.\n\n"
+    }
+  ]
+}

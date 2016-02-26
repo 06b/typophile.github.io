@@ -1,0 +1,42 @@
+{
+  "id": "39149",
+  "title": "Classes Issue",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Im working in Fontlab 5 and as a test setup a simple Kerning Class\n\n\\_G: G’ g\n\nIn the Metrics Window with Kerning Mode on I have three of the same words\n\nANALOG  \nAnalog  \nanalog\n\nIn the first all caps ANALOG above I kern the ’G’ at -10 and expect to see the lower case ’g’s below move in accordance and nothing happens.\n\nWhy isnt this class working and affecting the lowercase g as it should?\n\nThanks\n\nMike\n\n [‹ ScanFont 5 is released](http://web.archive.org/web/20081208141035/http:/typophile.com/node/39095 \"Go to previous forum topic\") [Opentype font converted to type 1?? ›](http://web.archive.org/web/20081208141035/http:/typophile.com/node/39159 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081208141035/http://typophile.com/user/17099\" title=\"View user profile.\">Mike Jarboe</a>",
+  "time": "<br>",
+  "uid": "17099",
+  "comments": [
+    {
+      "time": " 15.Nov.2007 7.32pm",
+      "content": "What I’m trying to do is since the font uses the same glyphs for both upper and lowercase is to have any kerning that is done to all characters at the same time, all of these below included in one class\n\n\\_A: A’ Aacute Acircumflex Adieresis Agrave Aring Atilde\n\n\\_a: a’ agrave aacute acircumflex atilde adieresis aring\n\nCan I combine the two and have it work so I dont have to seperately kern upper and lowercase since they are the same glyphs basically it is an uppercase only font.\n\n"
+    },
+    {
+      "time": " 15.Nov.2007 7.34pm",
+      "content": "Of course I would have another case for that would cover all ’A’ characters the above is right and here is left:\n\n\\_A\\_left: A’ AE Aacute Acircumflex Adieresis Agrave Aring Atilde\n\n\\_a\\_left: a’ ae aacute acircumflex adieresis agrave aring atilde\n\n"
+    },
+    {
+      "time": " 15.Nov.2007 7.39pm",
+      "content": "Yes, you can combine them. The FontLab metrics window gives you the options of (flat) pairs kerning, class kerning, and class kerning with exceptions. You probably don’t have one of the “class” options selected. There is a PDF manual that comes with the program. Read the kerning section.\n\n"
+    },
+    {
+      "time": " 16.Nov.2007 10.36am",
+      "content": "I’ve sent a ticket into fontlab, I’ve tried everything, with class options selected, read the manual numerous times no matter what I cant get the most simplest classes to work and react in the preview window, my kerning actions only affect the main glyph and when I click the icon the submenu is greyed out when it should show the class and glyph associations…\n\n"
+    },
+    {
+      "time": " 16.Nov.2007 4.14pm",
+      "content": "\\> _Why isnt this class working and affecting the lowercase g as it should?_\n\nTo me it sounds like you haven’t ticked the checkboxes on the Classes panel.\n\n ![](http://web.archive.org/web/20081208141035im_/http:/typophile.com/files/Classes_panel_4991.png)\n\n"
+    },
+    {
+      "time": " 16.Nov.2007 7.45pm",
+      "content": "To tell you a little secret, I too have trouble with FontLab. How I work is to write my features, then “save” them from the OT panel.\n\n_(Edit: actually, to be truthful, I don’t even “write” the features in Fontlab, but with a text editor that allows a column mode. But the easiest way, the first time, is to write them in FontLab.)_\n\nI then open up that file with a text editor — I use VEDIT, but EditPad Pro is likely a better, more modern choice. At the head of the features file, I write my classes, such as:\n\n@\\_exclam=[exclam bracketright c d e g i j k l p r s t v w x y question quoteright quotedblright uni02BE uni02BF];  \n@\\_zerosuperior=[zerosuperior onesuperior twosuperior threesuperior foursuperior fivesuperior sixsuperior sevensuperior eightsuperior ninesuperior];\n\nthen, make a kern feature, e.g.,\n\nfeature kern {\n\nand add the positioning commands, e.g.\n\npos @\\_exclam @\\_zerosuperior 50;  \n pos @\\_comma @\\_zerosuperior -50;\n\netc.\n\nSome creativity with this technique is possible; you can do you kerning as pairs in FontLab, build a kern featrure in FontLab, export it, then (as above) define your classes in the feature file (NOT the classes file, that should have nothing in it with my technique), change your existing entries in the kern feature in accordance with the classes you write, and re-import the modified (new) features file.\n\ni.e. in the file, you change\n\npos A C -36;\n\nto\n\npos @\\_A2 @\\_C1 -36;\n\nand since you have now written classes for @\\_A2 and @\\_C1, it should compile just fine.\n\nJust remember that when FontLab alerts you that the kerning values are different from the kern values in the features, and asks if it should rebuild the kern feature, you say NO. Not only NO but HELL NO.\n\nThis is a tough way to go, but I’ve found it bullet proof when, as always happens, I have to go back into the font and change/add kerning. I save the .VFB, and try to never work from the .OTF. In point of fact, I keep the separate (importable) features file current as well.\n\nJust remember that the kerning in the compiled feature file is what is used when you generate a font.\n\nGood luck\n\n"
+    },
+    {
+      "time": " 17.Nov.2007 3.20pm",
+      "content": "I figured it out thanks for the feedback!\n\n"
+    }
+  ]
+}

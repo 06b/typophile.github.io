@@ -1,0 +1,38 @@
+{
+  "id": "101735",
+  "title": "XOX Kerning Problem",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm checking the kerning of an OT font that I thought was close to finished. Everything looked to be working well in Illustrator and InDesign except the OX and ox combination don't kern. XO and xo combinations kern in. But OX and ox don't. I just realized the same thing happens with the small caps.\n\nI can't figure out why. The OT features compile no problem. The Kerning Assistance Tool finds no errors. It all looks good in the Metrics windows. All the OAO, OVO and OYO combinations work properly. The X glyphs are just about the only glyphs not part of any kerning class in this font. The O is part of the C class on the left and the D class on the right. The o is part of the c class on the left and the b class on the right.\n\nI'm not sure what to do to fix it. Does it make sense to put the X into a class by itself? With just the one glyph in the class?\n\n",
+  "author": "Robby Woodard",
+  "time": "26 Mar 2013 — 11:22am",
+  "uid": "703",
+  "comments": [
+    {
+      "time": "26 Mar 2013 — 11:24am",
+      "content": "Here are a couple scree shots of the problem...\n\n ![](http://web.archive.org/web/20150417204754im_/http:/typophile.com/files/oxo_4762.gif)\n\n"
+    },
+    {
+      "time": "26 Mar 2013 — 2:00pm",
+      "content": "This may be a dumb question, but do you have any other features in the font BESIDES the **kern** feature? For some odd reason, _some_ programs don't recognize the **kern** feature if there's not at least one other feature (such as **liga** ) present. Go figure…\n\n"
+    },
+    {
+      "time": "26 Mar 2013 — 2:30pm",
+      "content": "Nick ~ Yes, this thing has 16 features and 2 stylistic sets. But I remember having that one kern feature problem when I first started using FontLab. Was there an issue with where the kern feature appeared in the feature list? Right now kern is third after locl and aalt.\n\nI am only having this kern problem with all the Xs in the font. And only on the left side. Weird, huh?\n\n"
+    },
+    {
+      "time": "26 Mar 2013 — 6:25pm",
+      "content": "Nick, as I remember, it was some Adobe products -- CS2, maybe? -- that had this issue. Basically, the program checked for gsub tables, and if it didn't find any, rather than moving on to look for gpos tables, it just said \"Oh, there aren't any ...\" All you needed was one gsub routine to get kerning to work.\n\nAs for Mr. Woodard's problem, I'd bet he'll find it somewhere in the class kerning setup. With FontLab, I'd try opening up the font (not vfb), write off the \"features\" file, put a kerning exception line in the kern table (before the class kerns) and read it back in, compile, generate the font, and test. If the kern now works, that little test confirms there is an issue with the class kerning setup.\n\nFWIW\n\nEDIT: And I guess make sure there isn't an\n\npos X O o; (or really low value)\n\nas an exception already in the file...\n\n"
+    },
+    {
+      "time": "27 Mar 2013 — 11:40am",
+      "content": "Thanks, but I can't say I follow Charles' suggestions. I am not sure what a \"kerning exception line\" is or how to put it in or how to write off the features from the otf file. Sometimes FontLab makes me really miss my old Fontographer.\n\nThe OT Kerning Assistance Tool doesn't find any problems with my classes. I have combed through them several times to see where I might have messed something up. All the rest of the kerning works fine. All I can figure is that it must have something to do with the fact that the three X's are the only glyphs not part of a kerning class.\n\nTrying to get it to work, I set up individual kerning classes for the X, x and x.smallcap. With just the single glyph in each class. Seems stupid... But the X's are kerning fine now -- in all my Adobe apps anyway. I am checking to see if this has caused any issues in other apps.\n\n"
+    },
+    {
+      "time": "28 Mar 2013 — 6:32am",
+      "content": "Did you check for conflicts in your class tables and do the D. b and c have the correct side bearings set?\n\n"
+    }
+  ]
+}

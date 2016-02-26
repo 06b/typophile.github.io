@@ -1,0 +1,125 @@
+{
+  "id": "119069",
+  "title": "Advanced OpenType features",
+  "forum": "Build",
+  "tags": [
+    "features",
+    "OpenType",
+    "OT",
+    "Build"
+  ],
+  "content": "I'm wondering if it's possible to script any advanced features. Primarily I'm looking to solve a specific problem, but more generally I'm curious if more can be done with OT scripting than the standard \"sub\" script to replace one glyph with an other.\n\nI'm tired of people over-hyphens so I wanted to script a fix for that, so in the standard ligatures I put the following code:  \nsub comma hyphen by comma\\_endash;\n\nThis replaces the comma followed by a hyphen with a ligature glyph where I have a comma followed by a line which is in between the hyphen and the en dash in length, which is more appropriate for denoting prices ($50,–).\n\nNow I want to do the same fix for \"x\" after numbers, so every time an /x is typed after a number it's automatically replaced by a multiply symbol. Unfortunately I'm unable to script this accordingly. Every time I try to generate the font, it aborts because of an error in the script. Now, I'm not sure if my code is appropriate for numbers. I'm trying the following:  \nsub one x by one multiply;\n\nI suppose it's possible to replace 1 followed by x by a '1×' \"ligature\" like in the comma/hyphen example but I need the code to be much more flexible because it's not realistic to create such a \"ligature\" for all numbers from all number sets, and with this method it's no longer affected by tracking. So is there a way to define that the /x is automatically replaced by the multiply symbol when preceded by a number? If I can't script this for all numbers automatically, is it possible to script it for each number specifically without having to rely on the ligature method described above? Is this function possible at all?\n\n",
+  "author": "Martin Silvertant",
+  "time": "29 Aug 2014 — 5:39pm",
+  "uid": "52182",
+  "comments": [
+    {
+      "time": "29 Aug 2014 — 8:51pm",
+      "content": "1. What font editor are you using?  \n2. What application(s) are you testing your font in?  \n3. Have you read this: [Adobe Feature File Syntax information](http://web.archive.org/web/20150420160001/http:/partners.adobe.com/public/developer/opentype/afdko/topic_feature_file_syntax.html)\n\nScripting should not be necessary. Substitution allows for more than one-to-one, but you have to write it correctly and more importantly the app you intend to use the font in must support it. Check the Adobe Developer site linked in #3 above and read up on the syntax. I think it will save you a lot of time and frustration.\n\n"
+    },
+    {
+      "time": "30 Aug 2014 — 4:24am",
+      "content": "This is the newest Feature File Specification:  \n [http://www.adobe.com/devnet/opentype/afdko/topic\\_feature\\_file\\_syntax.html](http://web.archive.org/web/20150420160001/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html \"http://www.adobe.com/devnet/opentype/afdko/topic\\_feature\\_file\\_syntax.html\")  \nI think that type of automation is no good idea, unless you want to make your font unusable. In my example I used Stylistic Set, so user must chose this behaviour intentionally.  \nAnyway:  \n\"sub comma hyphen by comma\\_endash;\"  \nbetter  \nsub comma hyphen' by endash;  \n\"replace 1 followed by x by a '1×'\"  \nsub @numbers x' by multiply;\n\n ![](http://web.archive.org/web/20150420160001im_/http:/typophile.com/files/Kerning_6721.jpg)\n\nfull .fea file:  \nlanguagesystem DFLT dflt;  \nlanguagesystem latn dflt;  \n@numbers=[zero one two three four five six seven eight nine];\n\nfeature ss01 {  \nsub @numbers x' by multiply;  \nsub comma hyphen' by endash;  \n} ss01;\n\n"
+    },
+    {
+      "time": "30 Aug 2014 — 6:57am",
+      "content": "1. FontLab Studio  \n2. FontLab Studio, Illustrator, InDesign  \n3. I hadn't read it until now. It probably doesn't solve all my problems (I still prefer asking about specific problems and see best practices) but it does create new possibilities already.\n\n<cite>Scripting should not be necessary.</cite>  \nWhat do you mean by this? I've seen that in some software like Glyphs the scripting is done for you, but somehow I still prefer to do it myself. At least I know what exactly is going on in the back end, and I would like to use the software most type designers use so that I can ask questions if necessary. There are already too few tutorial videos on FontLab. It might be worse for other software. However I'm interested in hearing what you might use to improve the workflow.\n\n<cite>I think that type of automation is no good idea, unless you want to make your font unusable.</cite>  \nWhy isn't it a good idea? How does it make the font unusable? I have no problem with putting the scripts in stylistic sets, but I thought it was a good idea to fix as many issues as possible with the standard ligatures set.\n\n<cite>sub comma hyphen' by endash;</cite>  \nI read that the hyphen defines the glyph to be replaced. Does it ignore the comma in this case? I guess this is the better way to script because you can still perform tracking on the comma and endash, right?\n\n<cite>@numbers=[zero one two three four five six seven eight nine];</cite>  \nWhere would you put this line of code? Underneath the language statements or inside the stylistic set? I want the x to be replaced by a multiply symbol after any kind of number. Do I need to define all number sets in \"@numbers=[]\"?\n\n<cite>In my example I used Stylistic Set, so user must chose this behaviour intentionally.</cite>  \nWhy is it better in this case to choose it intentionally? Are there contexts in which you would want to use comma-dash and x inappropriately?\n\nThanks a lot for the tips!\n\n"
+    },
+    {
+      "time": "30 Aug 2014 — 7:55am",
+      "content": "It's generally a bad idea for a font to change the actual character codes instead of just changing glyph variation, even if this is done in an attempt to fix sloppy typesetting. Sometimes people really do intend the characters that they type. For example, consider an algebraic expression y = 3x + 15\n\nThere was a discussion of this some years ago here, with many useful comments on the problem: [http://typophile.com/node/34108](http://web.archive.org/web/20150420160001/http:/typophile.com/node/34108)\n\n"
+    },
+    {
+      "time": "30 Aug 2014 — 8:06am",
+      "content": "<cite>For example, consider an algebraic expression y = 3x + 15</cite>  \nI'm glad you mentioned this. I feel stupid for not having considered the use of x in mathematics. Even in a stylistic set, having x automatically replaced by the multiply symbol when placed after a number seems like a bad idea. I should define the context more clearly.\n\nCan someone tell me how to have the x replaced by the multiply symbol only when the x is both preceded and followed by a number or spaces and numbers? So only in these contexts:  \n2x2=4  \n2 x 2 = 4\n\nI will then also place it in a stylistic set so you can still turn the feature off.\n\n"
+    },
+    {
+      "time": "30 Aug 2014 — 8:57am",
+      "content": "\"you can still perform tracking on the comma and endash, right?\"  \nRight  \n\"@numbers=[zero one two three four five six seven eight nine];  \nWhere would you put this line of code?\"  \nIf you want to use this Class in another functions, declare it outside any features (globally). If it is to use only once - inside the feature.  \n[named lookups behave differently - declared globally or locally are always available]  \n\"Do I need to define all number sets in \"@numbers=[]\"?\"  \nAll 10 digits are defined already.  \nThanks DTY, excellent thread.\n\n\"2x2=4  \n2 x 2 = 4\"  \nfeature ss02 {  \nsub @numbers x' @numbers by multiply;  \nsub @numbers space x' space @numbers by multiply;  \n} ss02;\n\n"
+    },
+    {
+      "time": "30 Aug 2014 — 1:08pm",
+      "content": "<cite>If you want to use this Class in another functions, declare it outside any features (globally)</cite>  \nThat's the same panel where the language feature is defined, right?\n\n<cite>All 10 digits are defined already.</cite>  \nI meant all number sets, not all digits. But I guess the code refers to all number sets.\n\nI have another question. I have disconnected ligatures for f?, ff? (where the /f is shorter so it doesn't blend with the question mark) and another two for an alternate question mark which is part of a stylistic set. Now I have learned some new tricks on scripting I want to get rid of these ligatures and substitute the /f instead. It works fine for a single /f, but what do I do for double glyphs? I tried the following:  \nsub f' f' question by f\\_f.alt;\n\nIt looks right when I test it in FontLab. Is it right? I'm just making sure I'm using the script appropriately\n\n"
+    },
+    {
+      "time": "31 Aug 2014 — 9:11am",
+      "content": "> _Scripting should not be necessary._  \n> What do you mean by this?\n\nI just realized you are referring to writing feature code as scripting while in my mind scripting is something along the lines of Python. I suppose in the strictest sense of the word \"scripting\", feature code might be considered as such but I haven't previously seen it referred to that way. Thus the confusion on my part.\n\n> sub comma hyphen' by endash;  \n> I read that the hyphen defines the glyph to be replaced. Does it ignore the comma in this case? I guess this is the better way to script because you can still perform tracking on the comma and endash, right?\n\nThe right quote marks the glyph or glyph group to be replaced, and yes, it is the better way.\n\n> It works fine for a single /f, but what do I do for double glyphs? I tried the following:  \n> sub f' f' question by f\\_f.alt;\n\nThat appears to work but it does not follow the Adobe syntax specs and may not always work everywhere. The Adobe specs say it should be written as:  \n_sub [f f]' question by f\\_f.alt;_\n\n"
+    },
+    {
+      "time": "30 Aug 2014 — 5:29pm",
+      "content": "> I just realized you are referring to writing feature code as scripting while in my mind scripting is something along the lines of Python.\n\nThey're all scripting languages, whether it's Python, OpenType, CSS, Javascript etc. What would you usually refer to writing OT code as?\n\nThanks for the clarification on Adobe syntax.\n\n"
+    },
+    {
+      "time": "30 Aug 2014 — 8:40pm",
+      "content": "Just coding a feature. You are right though, it is scripting but on a small scale.\n\n"
+    },
+    {
+      "time": "31 Aug 2014 — 6:15am",
+      "content": "> They're all scripting languages, whether it's Python, OpenType, CSS, Javascript etc.\n\nIn a very broad sense, OpenType features could be seen as a form of scripting language as they define a set of rules for the interpreter to follow, but what is usually called a scripting language has many more characteristics than that and basically no one in this industry refers to OpenType features as such. It’s also why no one calls CSS a scripting language, but rather a style description language.\n\n"
+    },
+    {
+      "time": "31 Aug 2014 — 8:49am",
+      "content": "To me, OT feature code feels more like a kind of advanced search and replace, like grep or regex, at least with GSUB. GPOS is more like a lookup table.\n\n"
+    },
+    {
+      "time": "31 Aug 2014 — 2:49pm",
+      "content": "\"sub [f f]' question by f\\_f.alt;\"  \nI believe this line works like this:  \nIF \\f \\? or \\f \\? is met THEN \\f is substituted by \\f\\_f.alt  \n[nota bene: second \\f !]  \nso output is: \\f \\f\\_f.alt \\question  \nYou probably want:  \nsub f' f' question by f\\_f.alt  \n(see OpenType Feature File Specification, 5.f.i. Specifying a Chain Sub rule and marking sub-runs, Example 4. [Link](http://web.archive.org/web/20150420160001/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#5.f.i))\n\n"
+    },
+    {
+      "time": "1 Sep 2014 — 8:06am",
+      "content": "> It’s also why no one calls CSS a scripting language, but rather a style description language.\n\nI've been calling it a scripting language. Apparently incorrectly so, although I appear not to be the only one when I search on Google.\n\n"
+    },
+    {
+      "time": "1 Sep 2014 — 11:25am",
+      "content": "Not counting scripts written as add-ins for font editors, the only time I've seen anything pertaining to fonts referred to as \"script\" pertains to writing systems. For example, Latin, Cyrillic and Greek are all scripts.\n\n"
+    },
+    {
+      "time": "1 Sep 2014 — 4:11pm",
+      "content": "> I've been calling [CSS] a scripting language. Apparently incorrectly so, although I appear not to be the only one when I search on Google.\n\nYou know, there are people that say HTML is a programming language, and this despite the _Markup_ in its very name… But that’s just nomenclature. Really what matters is clear communication, and the misunderstanding you had with George speaks for itself. Regardless of what the reasons are, throughout those twenty years ‘scripting’ just never got it into the OpenType terminology.\n\n"
+    },
+    {
+      "time": "2 Sep 2014 — 8:15am",
+      "content": "> I'm tired of people over-hyphens so I wanted to script a fix for that, so in the standard ligatures I put the following code: sub comma hyphen by comma\\_endash;\n> \n> This replaces the comma followed by a hyphen with a ligature glyph where I have a comma followed by a line which is in between the hyphen and the en dash in length, which is more appropriate for denoting prices ($50,–).\n> \n> Now I want to do the same fix for \"x\" after numbers, so every time an /x is typed after a number it's automatically replaced by a multiply symbol.\n\nIt's one thing to replace a sequence of letters with a ligature, but I question whether the type designer should fill the role of a copy editor any more than the layout application should do so. A type designer's role, I think, should be to create a well-designed font, not to ensure that the end user adheres to a preferred punctuation style.\n\n"
+    },
+    {
+      "time": "2 Sep 2014 — 2:29am",
+      "content": "> > Now I want to do the same fix for \"x\" after numbers, so every time an /x is typed after a number it's automatically replaced by a multiply symbol.\n> \n> A type designer's role, I think, should be to create a well-designed font, not to ensure that the end user adheres a preferred punctuation style.\n\nAgreed. Add to it that there are plenty of instances where this can go wrong (and it will, as per Murphy's Law), and that there are few more infuriating things than software that tries to outsmart you...\n\n"
+    },
+    {
+      "time": "2 Sep 2014 — 4:52pm",
+      "content": "Agreed. Pretty much nobody calls writing OpenType code “scripting,” and doing so is likely to lead to confusion.\n\nNot saying it would be crazy to refer to it that way, just unwise. :)\n\n"
+    },
+    {
+      "time": "3 Sep 2014 — 11:20am",
+      "content": "What would one call writing OT features though?\n\nAs for the punctuation fixes... I personally feel that to the extent that we can exert control over the typography we should do so. The graphic design course I'm following is completely lacking on typographic education and when I look at the typography on the streets I see errors all the time so apparently some solution is necessary. By the time we will graduate I'm convinced more than 90% still won't know the difference between a hyphen and an en-dash and still won't understand that the letter /x is not a multiply symbol. If the editors aren't preventing these errors, then who else should do it? I think an OT feature accessible by a stylistic set is a nice solution.\n\n> but I question whether the type designer should fill the role of a copy editor any more than the layout application should do so.\n\nWhat about spell check for those who can't or refuse to spell correctly? Years ago you might have said this is the editor's job but an automatic solution is much more practical and elegant and I think you would have admitted to that then. To be honest I don't think the solution should be in the typeface but right now no one else is solving the problem, except for editors doing manual work but apparently many design agencies have no such editors.\n\n"
+    },
+    {
+      "time": "3 Sep 2014 — 4:06pm",
+      "content": "Regardless of whether writing OT features is considered scripting, it can be considered programming or coding.\n\nAs an example of the complications that Riccardo mentioned, I thought of another case: y = 2x² (I used U+00B2 here as a Typophile interface hack, but in real life it would be set as an ordinary “2”, with superscript style applied either fake or through OT substitution.\n\n"
+    },
+    {
+      "time": "3 Sep 2014 — 4:57pm",
+      "content": "> Years ago you might have said [spell check] is the editor's job but an automatic solution is much more practical and elegant and I think you would have admitted to that then.\n\nIndicating a misspelling automatically is one thing, but autocorrection done in a way that you possibly don’t even notice is another. Riccardo’s right when he says that those things can really go wrong, just like autocorrection does these days. Either you or the editor would have to look through those substitutions each time the text changes anyway, so why not do it at the character level in the first place?\n\n"
+    },
+    {
+      "time": "3 Sep 2014 — 7:59pm",
+      "content": "> What about spell check for those who can't or refuse to spell correctly? Years ago you might have said this is the editor's job but an automatic solution is much more practical and elegant and I think you would have admitted to that then.\n\nThe more usable spell checkers highlight the word as you're typing to provide an immediate indication that a change was made and to give the author the option of changing it back. The author also has the option of turning off the spell checker or adding custom spellings.\n\nIf someone could come up with a way to do much the same thing with the same kind of user control and sophistication on the kinds of problems that you're referring to, that would be great. For example, if I could chose to have my text checked and/or corrected against the Associated Press Stylebook or the Chicago Manual of Style I'd be all for it. Unfortunately, OpenType scripting (or whatever it might be called) isn't really robust or extensive enough for something this complex.\n\nAnyway, many of these kinds of issues really are just matters of style — they're not necessarily right or wrong. Also, many are contextual in the sense that they might not always be appropriate. For example, substituting an en dash for a hyphen between two numbers would be great if the en dash is meant to indicate the missing numerical range. On the other hand, an en dash would be inappropriate between, say, the numerals in a telephone number. Likewise, 633 - 244 might be part of an equation or it might be a sequence in a serial number. Similarly, the sequence of a comma and an end quote mark is typically reversed in British and American style.\n\nI'm intrigued by what you have in mind, but you'd need to be very judicious in the implementation and aware of the limitations. You wouldn't want to inadvertently cause a bigger problem than you solved.\n\n"
+    },
+    {
+      "time": "4 Sep 2014 — 2:07am",
+      "content": "One example of a similar mechanism not doing what it is supposed to do: When you type ' (U+0027), MS Word AutoCorrect will try to guess if this is supposed to be a single opening quotation mark (after a space) or a single closing quotation mark (after any character other than a space). Apostrophes are treated like closing quotation marks, but that’s not a problem—in English. In German, single closing quotation marks and apostrophes are not represented by the same character ’ (U+2019). Rather, apostrophes are ’ (U+2019), as in English, whereas single closing quotation marks are ‘ (U+2018). But AutoCorrect can’t tell. You could try to come up with a better substitution rule (based on the character that follows). As long as that doesn’t happen, each and every German-language document created in MS Word with AutoCorrect switched on will have the single closing quotation marks wrong.\n\nI would also advise against trying to improve the microtypography of a text through OpenType features, for two reasons: First, Murphy’s Law. Second, this kind of replacements will screw up the encoding of the text. It will lead to glyphs being replaced by other glyphs that don’t belong to the underlying character. This would also have the undesirable effect that, when you replace your typeface by another, all typographical ‘improvements’ will be lost. If you want to promote rule adherence on the microtypographical level, write a script for InDesign that performs replacements (like the ones you have in mind) on the character level. Many typesetters have created such scripts for themselves, but if you come up with something that’s cleverer and more comprehensive, there would certainly be a market for that.\n\n"
+    },
+    {
+      "time": "4 Sep 2014 — 8:57am",
+      "content": "<cite>Regardless of whether writing OT features is considered scripting, it can be considered programming or coding.</cite>\n\nI use the term 'Feature Coding' or 'OpenType Coding'.\n\nWhile the term 'programming' is frequently encountered, I personally think it is a bad idea to use this term in reference to OT coding because it ultimately can lead to all sorts of misconceptions about what you're actually doing when you code features. The language used by AFDKO (and, by extension, FontLab), describes static data tables. Thinking of it as a programming language can mislead people into thinking that they are creating algorithms rather than describing data, which will sometimes result in confusion over how a particular feature will actually behave.\n\nAndré\n\n"
+    },
+    {
+      "time": "22 Oct 2014 — 12:21am",
+      "content": "I would use \"coding\", not \"programming\" (which is something more serious).\n\nThis is a domain-specific language (like CSS or HTML):  \n [http://en.wikipedia.org/wiki/Domain-specific\\_language](http://web.archive.org/web/20150420160001/http:/en.wikipedia.org/wiki/Domain-specific_language \"http://en.wikipedia.org/wiki/Domain-specific\\_language\")\n\n"
+    },
+    {
+      "time": "22 Oct 2014 — 10:43am",
+      "content": "That's rather illuminating. Thank you.\n\n"
+    }
+  ]
+}

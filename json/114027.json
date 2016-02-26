@@ -1,0 +1,87 @@
+{
+  "id": "114027",
+  "title": "Test Paragraph that Includes all Western, Central and South Eastern European Diacritics",
+  "forum": "General Discussions",
+  "tags": [
+    "diacritics",
+    "General Discussions"
+  ],
+  "content": "Hello! I've designed a font that includes diacritics for Western, Central and South Eastern European languages. I'm looking for a paragraph of text or multiple paragraphs that include these diacritics so I can evaluate how all the letters work together. I've looked in all the usual places and can't find something suitable.\n\nThanks!\n\n",
+  "author": "indyfont",
+  "time": "8 Feb 2014 — 3:09pm",
+  "uid": "217518",
+  "comments": [
+    {
+      "time": "8 Feb 2014 — 4:10pm",
+      "content": "[http://www.ohchr.org/EN/UDHR/Pages/SearchByLang.aspx](http://web.archive.org/web/20140804081316/http:/www.ohchr.org/EN/UDHR/Pages/SearchByLang.aspx \"http://www.ohchr.org/EN/UDHR/Pages/SearchByLang.aspx\")\n\n"
+    },
+    {
+      "time": "9 Feb 2014 — 10:44am",
+      "content": "Thanks, that's a nice resource to know about. I'm looking for one paragraph with all the diacritics. Something like this, but grammatically correct:\n\n[![](http://web.archive.org/web/20140804081316im_/https:/m1.behance.net/rendition/modules/74963727/disp/9db9195e36cb0bac471353ced587f2ca.png)](http://web.archive.org/web/20140804081316/https:/m1.behance.net/rendition/modules/74963727/disp/9db9195e36cb0bac471353ced587f2ca.png)\n\n"
+    },
+    {
+      "time": "9 Feb 2014 — 11:19am",
+      "content": "Might want to delve into the 'Pedia's page o' pangrams, then.\n\n"
+    },
+    {
+      "time": "9 Feb 2014 — 12:10pm",
+      "content": "You're right. I think that could work. Thanks!\n\n"
+    },
+    {
+      "time": "9 Feb 2014 — 12:26pm",
+      "content": "Or the Drag and Drop Testing Page, on the last tabs: [http://www.impallari.com/testing/](http://web.archive.org/web/20140804081316/http:/www.impallari.com/testing/ \"http://www.impallari.com/testing/\")\n\n"
+    },
+    {
+      "time": "10 Feb 2014 — 6:58am",
+      "content": "I see that in section 5.2, the Wikipedia pangrams page does address the issue raised.\n\nI also made an edit: \"Pack my box with five dozen liquor jugs\" was used for type specimens before the Beagle Brothers - so I mentioned the Kelsey Press Company of Meriden, Connecticut.\n\n"
+    },
+    {
+      "time": "10 Feb 2014 — 12:52pm",
+      "content": "Pablo's test page is excellent and I'm planning on contributing to [the code for it](http://web.archive.org/web/20140804081316/https:/github.com/impallari/font-testing-page) on Github shortly.\n\n(Among other things - adding a single-symbol fallback font implemented as a Data URI internal to the page, that will make it easy to see characters that are specified in the test page's source but missing in the font that's currently displayed by the browser. A \"notdef\" fallback font I guess you could call it. Similar to the one built into this [pangram testing page](http://web.archive.org/web/20140804081316/http:/readableweb.com/latest-version-8-2-of-drag-n-drop-pangram-font-tester/). (The font's name is declared as \"backdrop\" in the @font-face rule. It has too limited a character set and I'm not fond of the symbol it's using to indicate a notdef character. Soon to be upgraded.)\n\nBut I'm digressing before I even begin....\n\nWhat I wanted to say was that, in my experience, the sample text for webfonts in HTML test pages should ideally use Unicode points, not keyed-in characters.\n\nWhy? Well, here is what happens when the browser tries to interpret the page with the Central European character set:\n\nMenu selection:\n\n ![](http://web.archive.org/web/20140804081316im_/http:/typophile.com/files/CentralEur-inFFmenu_4705.png)\n\nMessed up output:\n\n ![](http://web.archive.org/web/20140804081316im_/http:/typophile.com/files/CentralEur-messup_4272.png)\n\nJust flagging a potential problem.\n\nAnd also - talkin' 'bout Diacritics - take into account the special handling required for the S/s commaaccent/cedilla, T/t commaaccent/cedilla. Uni points: 015E, 015F, 0218, 0219, 0162, 0163, 021A, 021B  \nThere's a thread about that here on Typophile I believe.\n\nrich\n\n"
+    },
+    {
+      "time": "10 Feb 2014 — 3:36pm",
+      "content": "Just use UTF8 :)\n\n"
+    },
+    {
+      "time": "10 Feb 2014 — 4:27pm",
+      "content": "What a pleasure to be on a board with such knowledgeable, helpful people. Thanks for all the input!\n\n"
+    },
+    {
+      "time": "10 Feb 2014 — 5:31pm",
+      "content": "Also:  \nBy Language: [http://urtd.net/projects/cod/source/words\\_language](http://web.archive.org/web/20140804081316/http:/urtd.net/projects/cod/source/words_language \"http://urtd.net/projects/cod/source/words\\_language\")  \nAll languages mixed: [http://urtd.net/projects/cod/source/mix](http://web.archive.org/web/20140804081316/http:/urtd.net/projects/cod/source/mix \"http://urtd.net/projects/cod/source/mix\")\n\n"
+    },
+    {
+      "time": "10 Feb 2014 — 6:17pm",
+      "content": "Honestly, \\*this\\* is exactly what I was looking for!\n\n"
+    },
+    {
+      "time": "10 Feb 2014 — 6:30pm",
+      "content": "Keep in mind that while Urtd project is trully awesome research, it is also limited to a narrow set of 26 Latin languages only (out of 105 Latin languages).\n\n"
+    },
+    {
+      "time": "10 Feb 2014 — 9:13pm",
+      "content": "\\>Just use UTF8 :)\n\nAbsolutely. No page complete without specifying charset UTF-8 in the head.  \nBut....  \nMy understanding is that regardless of the charset specified, if it just doesn't seem to fit the content, the browser will take a guess at the codepage to use based on that content. I've seen it happen with my own eyes.  \n(I've actually seen an alternate code page triggered by a web font - don't ask me how but I've got the screen shots to prove it.  \nA Google font titled Atomic Age (which was recently re-done so the problem is gone.)\n\nThe only way I know to prevent either human error or an unwanted intervention by the browser, is to use Unicode.\n\nBut hey, that's just me. I'm picky that way.\n\nThanks for the additional links. Nice.\n\nrich\n\n"
+    },
+    {
+      "time": "10 Feb 2014 — 9:38pm",
+      "content": "The thing with UTF-8 is that:  \na) While editing your webpage file in your text editor of choice, it must be configured to save the file as utf-8.  \nb) Some web-hosting (in particular cheap shared webhosting) can fail to deliver your page as utf-8 to the browser, so you must force them to do it by including a PHP header function.  \nc) You must specify UTF-8 in the HEAD Content Type of your Html\n\nAs long as you do all those 3 things, the browser will get it right, and you will have no problem.\n\n"
+    },
+    {
+      "time": "11 Feb 2014 — 2:42am",
+      "content": "One more trap: The server must not claim contrary in the header. Due to a massive bout of perversion, the HTTP header charset overrides the document charset.\n\n"
+    },
+    {
+      "time": "11 Feb 2014 — 12:51pm",
+      "content": "Try [adhesiontext](http://web.archive.org/web/20140804081316/http:/www.adhesiontext.com/)™.\n\n"
+    },
+    {
+      "time": "15 Feb 2014 — 10:09am",
+      "content": "From Pablo:\n\n\\>a) While editing your webpage file in your text editor of choice,  \n\\>it must be configured to save the file as utf-8.  \n \\>b) Some web-hosting (in particular cheap shared webhosting)  \n\\>can fail to deliver your page as utf-8 to the browser, so you must  \n\\>force them to do it by including a PHP header function.  \n \\>c) You must specify UTF-8 in the HEAD  \n\\>Content Type of your Html\n\nand from Té:\n\n\\>One more trap: The server must not claim contrary in the  \n\\>header. Due to a massive bout of perversion, the HTTP header  \n\\>charset overrides the document charset.\n\nAll great tips. (Although Té, isn't what you are describing the same problem as Pablo's 'b' listing, or no?)\n\nOne downside I see with taking this approach - what if you are distributing the page to others who don't have that kind of control over their servers and/or the technical expertise?\n\nAnyway, to sum up:\n\nyou can take, if possible, all the steps listed above,\n\nor.......\n\nyou can write the test text as HTML Unicode points using either the decimal or hex syntax. (Example: &#21512; versus &#x5408;)\n\nFor test pages where all browsers need to process exactly the same characters and testers all need to see exactly the same text, I think, in this instance, the principle of \"defensive coding\" favors the Unicode points. You only have to remember one thing - convert the test text to Uni. Take that one simple precaution and after that, it can't go wrong - the browser can be set to use any old codepage and the test text will still render predictably.\n\nI rest my case.\n\n(BTW - I've had this kind of argument before and it's really rare that I change anybody's mind.\\* It seems to be very much philosophical. Everybody's got their own inner sense of what's important and even if they acknowledge the logic behind what you say, they still do what they've always done. Perhaps that's out of a feeling of \"the way I usually do it is good enough\", I don't know. Not an end of the world event, )\n\n\\* However, I did convince web designer and author [Zoe Mickley Gillenwater](http://web.archive.org/web/20140804081316/http:/zomigi.com/publications/) - with words written right here on Typophile - that using the \"local\" descriptor in a @font-face declaration is poor practice!\n\nI take solace in the little things.....\n\n"
+    },
+    {
+      "time": "15 Feb 2014 — 12:08pm",
+      "content": "Same or similar; I'm not sure. Remains a fact, though, that if the document header says \"charset=utf-8\" but the HTTP header says \"charset=iso-8859-1\", the browser will render the document as iso-8859-1 (aka Latin-1) unless somehow spiked to do otherwise. Caused me quite some scratching of head to find out why so many things looked wrong all of sudden coming from the bedroom LAN server.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "101607",
+  "title": "combining characters",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Regarding combining characters, is it the job of the display engine to position them correctly over the base character, or should the typeface designer use a negative advance width?\n\n",
+  "author": "ChristTrekker",
+  "time": "21 Mar 2013 — 2:04pm",
+  "uid": "65972",
+  "comments": [
+    {
+      "time": "21 Mar 2013 — 5:35pm",
+      "content": "Well, kind of complicated. Start here. The combining diacritics should have zero width.\n\nSome layout programs will \"automatically center\" them -- except, of course, what's the center? And some layout programs won't.\n\nOne tactic is to center the glyph -- so, for example, a circumflex has equal positive & negative sidebearings, all with a zero width. That helps a layout program with automatic centering. Another tactic is to put the accent glyph all to the left --- negative right & left sidebearings, again, zero width. How far to the left? Probably to balance with an \"o\", letting the a, e, dotless-i, and u be a little off, assuming a layout program that doesn't center.\n\nAs the type designer, you can take over positioning by using mark and mkmk, or by using ccmp. There are pluses and minuses to each approach.\n\nAs a typesetter, I'd say your first responsibility is to get them in the font, and with zero width. As long as you've done that, populate the spacing modifiers, too. That way, the syntactical integrity of the text file will be preserved.\n\nFurther work on appearance comes through mark/mkmk or ccmp.\n\n"
+    },
+    {
+      "time": "25 Mar 2013 — 10:43pm",
+      "content": "Where can I learn more about mark/mkmk and ccmp?\n\n"
+    },
+    {
+      "time": "26 Mar 2013 — 10:30am",
+      "content": "These are OpenType Layout features. The {mark} and {mkmk} features are dynamic glyph positioning features for, respectively, mark-to-base and mark-to-mark attachments. The {ccmp} feature is a glyph substitution feature that can compose combining mark sequences to precomposed ligatures (the same feature can also be used to decompose diacritic characters into combining mark sequences). In order to work, these features must be supported in the individual font and also implemented by the layout engine.\n\n"
+    },
+    {
+      "time": "28 Mar 2013 — 12:24pm",
+      "content": "So, generally speaking, at a minimum I should provide zero-width centered combiners so the layout engine can attempt to do some kind of sensible default, and if I want to take more control and have things look their best then I can utilize mark/mkmk/ccmp features in the font design.\n\n"
+    },
+    {
+      "time": "28 Mar 2013 — 1:40pm",
+      "content": "Correct.\n\nFor left-to-right scripts, I usually offset marks to the left so that they will sit reasonably over medium-width letters; this provides the best results in software without more sophisticated support.\n\n"
+    },
+    {
+      "time": "1 Apr 2013 — 7:27am",
+      "content": "That's the other thing…many current layout engines _don't_ have a sensible default—the default is to do nothing at all. This forces the designer to compensate.\n\nA simplistic “sensible default” would be align the center of the combining character with the center of the previous character. Probably would work fairly well in most situations, and I imagine it would be very easy to implement. But if you have to offset leftward for the braindead engines, now the smarter engines have to inspect the glyph outline to find its “center”. I imagine they do this anyway for rasterization, so no big deal there, and if they care enough about typography to try to do combiners right there's a fair chance they'll implement the mark features.\n\nSo more accurately, at a minimum I should provide zero-width left-offset (or right-, depending on the script) combiners so the layout engine can attempt to do some kind of sensible default, and if I want to take more control and have things look their best then I can utilize mark/mkmk/ccmp features in the font design.\n\nIt's just unfortunate that combined characters are going to look suboptimal because we have to compensate for an unknown base character width, when a workable default could have been built in with little extra effort.\n\n"
+    },
+    {
+      "time": "1 Apr 2013 — 10:34am",
+      "content": "Yes, it's unfortunate, but since its a long legacy issue, it isn't likely to be changed, especially not now that there is a preferred mechanism (GPOS mark and mkmk positioning).\n\nBTW, the old Windows Hebrew engine works as you describe, with marks being centred on letter widths (and with some built in cleverness to shift them to the right for certain letters). So when making Hebrew fonts, the default mark position is usually optically centred on the zero-width.\n\n"
+    },
+    {
+      "time": "1 Apr 2013 — 7:52pm",
+      "content": "Chris, For a type designer, I would first determine what languages you want to cover. If you want to include some romanized languages, include that in your planning. For example, you can cover most romanized Arabic with just 4 characters in the spacing modifiers, and 10 in Latin Extended Additional. Romanized \"Sanskrit\" takes more, primarily in Latin Extended Additional. Several African languages need characters in Latin Extended B, as well as a couple combining diacritics.\n\nAnyway, after deciding which languages you want to fully support, it would be kind to complete the combining diacritics as well. While such a font may not have every character, a typesetter aiming at print can always make things work, if there aren't too many occurrences. This is somewhat regardless of the layout program. Same would apply to ebooks in PDF format. Not quite sure what would happen in EPUB, but then, the reader can change fonts on you anyway.\n\nWhen you try to cover everything, you're letting yourself in for a lot of work, and failure anyway. Quick, what's a glottal stop in the native Guatemalan language? How many Native American Languages do you want to cover, esp. since there may not be an agreed orthography?\n\nFor the character sets you will cover, I prefer using {ccmp} & making up the precomposed glyph. That way, you get exactly what you want. Last time I heard (a while ago, to be sure) Ross Mills (John Hudson's partner at Tiro Typeworks) favored this approach as well.\n\nBTW, blindly centering an accent is not always the way to go. Usually, for the European acute & grave accents, I prefer not to \"perfectly center\" them, as long as they aren't too shallow. Adam Twardoch has written a nice piece on the use of the ogonek for Polish. Probably, but not necessarily, it's OK to use the same ogonek positioning for the Native American languages that also use it...\n\nEverybody but the typesetter gets a say. We're doing a book just now where the author insists the \"Greek circumflex\" be signaled by an inverted breve rather than the tilde. The book designer chose Arno for the book. Slimbach chose to use the tilde. That's 65 glyphs per font I have to change...the book uses 3 fonts, roman, italic, and bold...\n\nI've seen discussions on Vietnamese diacritics where it seems many representations aren't correct, including Adobe & SIL ...\n\nIn short, there are no completely right answers. It is better, I think, to pick the languages you are going to support, and get informed. For the rest of the languages, just populate the combining diacritics and let the end user take it from there.\n\n"
+    },
+    {
+      "time": "1 Apr 2013 — 8:04pm",
+      "content": "> When you try to cover everything, you're letting yourself in for a lot of work\n\nYou're also sabotaging the potential of getting paid to add stuff...\n\nhhp\n\n"
+    },
+    {
+      "time": "3 Apr 2013 — 7:47am",
+      "content": "> I would first determine what languages you want to cover. […] When you try to cover everything, you're letting yourself in for a lot of work, and failure anyway. […] For the character sets you will cover, I prefer using {ccmp} & making up the precomposed glyph.\n\nOh, from the design perspective I completely agree with you.\n\n> BTW, blindly centering an accent is not always the way to go.\n\nI'm not saying it's great or ideal design, but from a programmer's perspective it's a reasonable first approximation. As a programmer myself, it's the kind of approach I'd take when building the layout engine, and that's kind of the angle I was taking in these posts. If someone on the programming side had done a better job long ago, it would have made a lot of designers' jobs a lot easier.\n\nAdditionally, there's situations like these: ℻⃛ ⚜⃝ ♫⃟ ☣⃠ ⚾⃢. (OT, I just discovered one can't post SMP characters here.) With the even greater variance that is likely with these base characters, it's currently even more difficult to do these properly, but would have been easy with the simplistic approach I mentioned. Granted, these are going to be rare, but the only way to be sure they're reasonable is to use marks.\n\n> You're also sabotaging the potential of getting paid to add stuff...\n\nLOL!\n\n⸻CT\n\n"
+    }
+  ]
+}

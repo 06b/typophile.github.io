@@ -1,0 +1,142 @@
+{
+  "id": "33707",
+  "title": "Quark Problems / OT-fonts.",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I have a font generated from FontLab 5.02 and it is not working properly in Quark 6.5.\n\nI’ve heard about problems with Quark and OT-fonts, but is there a solution available?\n\nWhat happens is that some diacritic letters, like Å (Aring) gets mixed up with other letters?\n\nAnyone with knowledge on this?\n\nThanks\n\nGöran\n\n",
+  "author": "Goran Soderstrom",
+  "time": "11 May 2007 — 6:10am",
+  "uid": "11526",
+  "comments": [
+    {
+      "time": "11 May 2007 — 9:30am",
+      "content": "That sounds like an encoding problem, or something to do with codepages. Are you on a Mac?\n\n"
+    },
+    {
+      "time": "11 May 2007 — 10:11am",
+      "content": "It may be a font cache issue. Try generating the font with a different name.\n\n"
+    },
+    {
+      "time": "11 May 2007 — 11:00am",
+      "content": "From what I know, QXP6 doesn't understand any OT features or Unicode. But it does \"accept\" fonts in OT format. So, for Mac, you have to make sure to generate fonts using a Mac codepage, (and Win for Win,) and for all kerning to be exported as a kern table, not a kern feature.\n\n"
+    },
+    {
+      "time": "11 May 2007 — 2:13pm",
+      "content": "Yes, I’m on a mac, but the font should be able to work on both platforms. An OTF-font.\n\nDo you have any recommendations on how to generate the font properly?\n\n"
+    },
+    {
+      "time": "11 May 2007 — 3:16pm",
+      "content": "\\>Do you have any recommendations on how to generate the font properly?\n\nIn my experience, fotns generated with Windows codepages will work perfectly on Windows and Mac, but NOT IN QUARKXPRESS 6. The problems you are experiencing with QuarkXPress are problems with that application, and can be solved by using InDesign. (Or generate your fonts in legacy PostScript Type 1 format for QXP users, and OT format for everyone else.)\n\n"
+    },
+    {
+      "time": "11 May 2007 — 3:54pm",
+      "content": "This comprehension of OT issue is also present in FreeHand MX.\n\n"
+    },
+    {
+      "time": "11 May 2007 — 6:42pm",
+      "content": "<cite>The problems you are experiencing with QuarkXPress are problems with that application, and can be solved by using InDesign. </cite>\n\nSometimes it feels to me like Quark 6 occupied the same developmental stage as Photoshop 7 and Illustrator 11. It's a transitional application. Many Quark 6 users are still primarily using PostScript fonts because they are inherently conservative. This isn't necessarily a bad decision, since they are able to recover the substantial costs they've sunk into their type libraries. I agree with Village; use PostScript with Quark 6 and consider OpenType with InDesign or Quark 7.\n\n"
+    },
+    {
+      "time": "11 May 2007 — 10:31pm",
+      "content": "Right.  \nIf you're making fonts for Quark 6 users, they should be PostScript Type 1.  \nA lot of people still use the pre-opentype formats, so it's worth doing.\n\n"
+    },
+    {
+      "time": "12 May 2007 — 1:54am",
+      "content": "Thanks for all help.\n\nIf you would explain how to use all the codepages options available when generating a perfect OT-font (PS-flavoured) so that it should work \"properly\", how would it be:\n\n• In Font Info? (is the green auto button OK to use, really?)  \n• In the Codepages view?  \n• In the names view?\n\n...and, does the choice of codepage view really affect the final font really, isnt the unicode itself THE codepage and what really effects the final font is the Index mode (how the glyphs are placed). In the manual it is written that codepages choices is most important when generating Type 1, not when generating OT)\n\nAnything else important?  \nI’m most grateful for all help. I dont find the FL manual sufficient in many areas.\n\n"
+    },
+    {
+      "time": "12 May 2007 — 11:36am",
+      "content": "Note also that Mac OS cares about glyph names and not only the Unicode cmap. Not sure whether this affects character access in QXP or not, but there's a good chance it does.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "12 May 2007 — 11:54am",
+      "content": "And further to what Thomas said, up through OS X 10.3, they need to be the names from the Adobe Glyph List 2.0 from several years ago, not the current names.\n\n_edit:_ I should clarify. I don't know exactly which list Apple used, but where the various Adobe glyph naming list versions differ, I have so far found the AGL2.0 of 20 September 2002 to work successfully. YMMV; I haven't done any really large character sets that would test all the possibilities.\n\n"
+    },
+    {
+      "time": "14 May 2007 — 5:43am",
+      "content": "Given the problems using OT with Quark brings up the larger question mentioned - what of the investments users have made in Postscript Type 1 fonts if they won't work on newer design programs, current versions of InDesign, etc. Or do they? Is Postscript out the window? Perhaps this is another subject.\n\n"
+    },
+    {
+      "time": "14 May 2007 — 8:56am",
+      "content": "I have not heard of any problems with Type 1 fonts in InDesign, etc.\n\n"
+    },
+    {
+      "time": "15 May 2007 — 6:43pm",
+      "content": "My recent experience is that OTFs in QXP 6.5 on Mac require Mac-encoding when generated from FontLab, otherwise I have a similar problem.\n\nMaybe the better question is: are the intended users PS Type 1 folks or OTF types?\n\n"
+    },
+    {
+      "time": "16 May 2007 — 11:51am",
+      "content": "Thanks for all answers. Now, I will experiment :)\n\n"
+    },
+    {
+      "time": "16 May 2007 — 2:13pm",
+      "content": "Nope, I cant get it to work. It really beats me...\n\nIt feels as I have tried all possibilities now, but cant get an OT font work in QuarkXpress 6.5 without the å ending up being an \"Cacute\" and the Å ending up being \"Amacron\". And Ive seen this on other fonts aswell, which I didnt generate.  \nIt works fine in Quark 7 and everywhere else, but not in 6.5. OK, I know that 6.5 isnt supporting OT fonts fully, but still – a lot of OT-fonts with a \"pro\" character set indeed does work in Quark 6.5, so it kind of gives me an itch to try to solve this.\n\nWell, actually I CAN get it work if it is not an OT-Pro font, with only the standard glyphs as they were for example in FOG – Standard Mac OS Roman(?) but if I have all the Latin Extended glyphs in the font, it seems impossible.\n\nDoes anyone have patiance to try to help? (help for dummies..)  \nJust to be clear with what you all mean, with the encoding-stuff: Do you mean that when I encode I should Stand in the CODEPAGES mode, and there choose for example the MacOS Roman encoding and then generate the font? Doeas this mean that I have used this encoding? Or should I do something else also? Maybe I dont get it...?  \nPlease have mercy on me :)\n\nPS: Darn.. I just want to use my dear FontLab and be able to make it work. I think it’s rather funny that the most difficult part of producing fonts, is not the design, not the spacing, not the kerning, not the OT-code-writing etc – but generating the final font??! Its like you have a hundred of different choices to choose and click on, just to generate the font.  \nWhy cant this just be as generating a PDF? :)\n\n"
+    },
+    {
+      "time": "16 May 2007 — 3:43pm",
+      "content": "Ok, try this (Warning: no guarantee of success!):\n\n1. Add \"1253 Greek\" to the supported Codepages. (I don't think the Greek codepage has anything to do with this issue, but just in case it happens to have...)\n\nThe point above is likely to do nothing, so try this instead:\n\n2. Take one of your .otf fonts, and using [TTX](http://web.archive.org/web/20131222104105/http:/typophile.com/wiki/TTX) run the following command:  \n`ttx -t 'CFF ' MyFont.otf`  \nA file named MyFont.ttx will be created in the same folder as the .otf file. Open the .ttx file in a text editor, and search for **Encoding**. What does it say in front of **name=** in that same line? If it does NOT say _\"StandardEncoding\"_, then you'll need to change the way you're generating the font out of FontLab.\n\nMy 2 cents.\n\n"
+    },
+    {
+      "time": "16 May 2007 — 5:26pm",
+      "content": "This is definitely a codepages problem: the old MacOS 7 Central European codepage has \"Amacron\" in the position where \"Aring\" is in the MacRoman page, and \"Cacute\" in the position where \"aring\" is in MacRoman. Is this also happening for all the other diacritics except the umlaut, for instance \"AE\" turning into \"gacute\"?\n\n"
+    },
+    {
+      "time": "16 May 2007 — 5:51pm",
+      "content": "Interesting. But what's the workaround? Or, better, is there a workaround? (Can't exactly turn to a discontented customer and say, \"Well, it's a 'known issue' and the OT font would work fine if you'd bother to upgrade your system. So no refund, but thanks for asking.\")\n\n"
+    },
+    {
+      "time": "16 May 2007 — 9:31pm",
+      "content": "<cite>Can’t exactly turn to a discontented customer and say, “Well, it’s a ‘known issue’ and the OT font would work fine if you’d bother to upgrade your system.</cite>\n\nIf that's addressed to me, I have some idea _what_ is happening, but I have no idea _why_ it's happening. I wouldn't be able to replicate it, not knowing any of the details of how the font is set up, generated, or used. If you think it's so obvious, why don't you tell us?\n\nAnd if you want a workaround instead of a diagnosis, it has already been given - generate Type 1 instead of OTF for use with Quark 6.\n\n"
+    },
+    {
+      "time": "17 May 2007 — 12:56am",
+      "content": "Another attempt, though I am not sure if XPress6.5 uses this table:  \nIn the FLS5 Preferences, set 'Use the following codepage to build cmap(1,0) table' to \"MacOS Roman\". (NOT \"[MacOS Roman]\" which is in brackets!) See this [screenshot](http://web.archive.org/web/20131222104105/http:/www.kltf.de/stuff/cmap10.jpg).\n\n"
+    },
+    {
+      "time": "17 May 2007 — 7:43am",
+      "content": "Thanks so very much for assistance – I will now try all of these advices and then get back to this thread and report what happened. If I get it to work, it could be a good thread to save if others have same problem :)\n\n"
+    },
+    {
+      "time": "17 May 2007 — 7:50am",
+      "content": "<cite>This is definitely a codepages problem: the old MacOS 7 Central European codepage has “Amacron” in the position where “Aring” is in the MacRoman page, and “Cacute” in the position where “aring” is in MacRoman. Is this also happening for all the other diacritics except the umlaut, for instance “AE” turning into “gacute”?</cite>\n\nYes, a lot more diacritics gets mixed up, but not all of them. The AE gets the .notdef – not the \"gacute\" however.\n\n"
+    },
+    {
+      "time": "17 May 2007 — 7:58am",
+      "content": "HAHA! First try did it!\n\nMiguels advice:\n\n<cite>1. Add “1253 Greek” to the supported Codepages ...</cite>\n\nThis little action instantly changed my font into a full working OT font, even in Quark 6.5.\n\nMiguel, I salute you – I want to give you a big hug from Sweden :)\n\n"
+    },
+    {
+      "time": "17 May 2007 — 10:28am",
+      "content": "Great, I'm glad it worked out! I know how these things can be frustrating, and I'm happy that you achieved success at last.\n\nThis is actually a semi-documented bug. Read here:  \n [http://typophile.com/node/18044#comment-120965](http://web.archive.org/web/20131222104105/http:/typophile.com/node/18044#comment-120965 \"http://typophile.com/node/18044#comment-120965\")\n\n"
+    },
+    {
+      "time": "17 May 2007 — 11:57am",
+      "content": "Oh, it feels so great now that it also has some sort of explanation. I always get this \"itch\" when things dont seem to have an explanation, or if I dont understand the explanation :)\n\nJust a follow up question;  \nDoes is in anyway has some negative effect in other situations to have an OTF-font with this 1253 Greek support checked?\n\nI mean, the font doesn‘t actually have the greek support (no greek glyphs, except the usual Delta etc).\n\n"
+    },
+    {
+      "time": "17 May 2007 — 4:24pm",
+      "content": "\\> _Does is in anyway has some negative effect in other situations to have an OTF-font with this 1253 Greek support checked?_\n\nI haven't heard of any... yet ;^)\n\nKeep in mind that, AFAIK, Quark 6.x only supports one codepage at a time. So, in a 'Pro' OpenType CFF (.otf) font with a large character set, only a subset of that will work correctly. This means you won't be able to get Western and CE characters working correctly at the same time; you can only have one or the other.\n\nHave you ever wondered why some foundries make different versions of the same font? (e.g. [FontFont](http://web.archive.org/web/20131222104105/http:/typophile.com/wiki/FontFont)'s Maiola Pro, Maiola OT, Maiola CE, Maiola Cyrillic) One of the reasons is to circumvent the problem that some applications treat OpenType CFF fonts as if they were basic Type 1 fonts (where you can only encode 256 glyphs).\n\n"
+    },
+    {
+      "time": "18 May 2007 — 3:28am",
+      "content": "Ah, yes – I tested and you‘re so right again. My \"pro\" font became a \"STD\" font in Quark 6.5. Just like Minion Pro, btw.\n\nSo in other words there is really no point in doing this at all for a Pro font except if you only want to do one font-file and then tell people it wont work in Quark 6.5.\n\nWell it was however very interesting to find out what it was and it feels like I’ve learned something.\n\nThanks Miguel, for generously sharing your experiences.\n\n"
+    },
+    {
+      "time": "18 May 2007 — 8:43am",
+      "content": "\\> _So in other words there is really no point in doing this at all for a Pro font except if you only want to do one font-file and then tell people it wont work in Quark 6.5._\n\nNot necessarily. The \"hack\" you did ensures that the Western subset of your Pro font will work in Quark 6.x (on a Mac; AFAIK the PC version will not trigger the OS/ATM bug). The same font will also work on Quark 7.x, Adobe apps, etc. My point is, just because Quark 6.x only \"sees\" a subset of your fonts, it doesn't mean that you need to trim-down all your fonts to that subset; there are more software applications on the planet ;^)\n\nWhat you should do is to advise your clients that when using your Pro fonts with Quark 6.x, only the Western set of characters will be handled properly, because Quark 6.x is not [Unicode](http://web.archive.org/web/20131222104105/http:/typophile.com/wiki/Unicode) savvy. If they require CE (for example) characters in the same job, then they should upgrade to Quark 7.x. Alternatively, you could (in the same way as FontFont does) provide fonts that are effectively subsets of the Pro font, to your clients still on Quark 6.x.\n\nHowever, I do not recommend the second option. Why? Because, let's imagine you make a font that contains only the CE glyphs. When using such font in Quark 6.x, although you get the intended glyphs (i.e. you get the correct ink on the page), in Unicode-speaking the underlying character is incorrect, because the codepoint inserted (when you type a key on the keyboard) does not correspond to the glyph you're seeing. This has the side effect that the text will not be correctly encoded, so if you try to use a Unicode-savvy font with it, you'll get gibberish glyphs in place of CE characters.\n\nPut in a simplistic way: Think of codepages as if the two first Unicode blocks (Basic Latin and Latin-1 Supplement, the first 256 codepoints) were repurposed over and over to display different glyphs.\n\n"
+    },
+    {
+      "time": "18 May 2007 — 3:25pm",
+      "content": "Well said Miguel. You come to the rescue again Spiderman! :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "18 May 2007 — 11:47pm",
+      "content": "Thanks from me also, Miguel. Your explanation is very helpful.\n\n"
+    },
+    {
+      "time": "20 May 2007 — 12:17pm",
+      "content": "I love Miguel. And not only because he saves me from having to explain all sorts of things. :)\n\nT\n\n"
+    }
+  ]
+}

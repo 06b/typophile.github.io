@@ -1,0 +1,74 @@
+{
+  "id": "34856",
+  "title": "MM Font Outlines - help",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi all,\n\nIt´s my first time with MM tools so...\n\nDoes the outlines of two single fonts (light and bold) have to be compatible in order to use them as masters? Do I have to use the blend tool to build the multiple masters or there´s other way to do it? If yes, is it inevitable that the original shapes change even a little...?\n\nSorry if i´m not making any sense.\n\nThanks In advance  \nBest regards\n\n [‹ FontLab Type 1 hinting preview, \"Adobe\" preview unavailable?](http://web.archive.org/web/20081008043425/http:/www.typophile.com/node/34995 \"Go to previous forum topic\") [No kerning in InDesign but ok in Corel ›](http://web.archive.org/web/20081008043425/http:/www.typophile.com/node/34933 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081008043425/http://www.typophile.com/user/17987\" title=\"View user profile.\">kiko</a>",
+  "time": "<br>",
+  "uid": "17987",
+  "comments": [
+    {
+      "time": " 29.Jun.2007 2.03pm",
+      "content": "The more compatible the outlines are in advance, the better.  \nIn fact the Blend tool gives the most reliable results, <cite>because</cite> it may add nodes to the original outlines.  \nThe point of MM is that the node structure of each master is identical. So deleting a node in one master means deleting it in the other master too. Just like in a single master glyph, each outlines has a certain number of nodes — but in a MM glyph, each node does not hold just one x-y-coordinate per node, but for every node there is one x-y-coordinate per master.\n\n"
+    },
+    {
+      "time": " 3.Jul.2007 5.17pm",
+      "content": "ok, i see what you mean...  \nthanks for the reply\n\nThis is what happens when i blend them to build the MM...  \nThe left ones are the originals, now look how diferent they get after that! Is this normal? Is this the right way to do things or am i doing something wrong? Could it be the point plancement on the rounded corners that causes this?\n\n ![](http://web.archive.org/web/20081008043425im_/http:/www.typophile.com/files/2_5636.jpg)\n\n"
+    },
+    {
+      "time": " 4.Jul.2007 1.47am",
+      "content": "Seems there are two problems.\n\nThe first (and main one) is that the start nodes sit at different places. I’d use the position of the black weight for the light weight too. Obviously, FLS tried to reposition them, but since there seem to be other outline-incompatibilities, it inserted points and moved others around ...  \n[On Mac, Ctrl-Alt-T will highlight start nodes and contour numbers; in the light font, click on the point which shall become start node; then double click somewhere into the Glyph Window to leave this special mode. After re-positioning the start node you should click on the former start node and delete it; undo if the point is really gone after that! Point is: sometimes a former start node consists of two overlapping nodes instead of just one, which would also destroy the outline compatibility.  \nAlternatively, you can run the Correct Start Node script which ships with Adobe’s AFDKO — on both the original light and black fonts, before blending them.]\n\nThe second problem may be ’kinking’, especially with the differently angled diagonals in the 2 — you should see one of Thomas Phinney’s presentations on this.&nbsp;&nbsp;:)&nbsp;&nbsp;Maybe he can give some more information since he’s the MM expert.  \nSome information are in the [Design MM Fonts](http://web.archive.org/web/20081008043425/http:/www.adobe.com/devnet/font/pdfs/5091.Design_MM_Fonts.pdf) PDF.\n\n"
+    },
+    {
+      "time": " 4.Jul.2007 6.28am",
+      "content": "I would suggest that you not use the blend tool to create MM font data, and instead use the older Mask-to-Master technique. Yes, this does require that all your master instances have exactly the same point structure and relative placement (especially the start point). Yes, this does involve a few extra steps, and Yes this does require you to save the font metrics of your original instances in case they get a bit screwed up in the transition, but in my opinion it is worth it. By using the Mask-to-Master technique (and make sure to tell FontLab, NOT to add points when doing the conversion) you get to control the shapes of your glyphs completely. I don’t know about how you work, but the last thing I want is FontLab mucking around with the outlines I spent so much time fine-tuning.\n\nJames\n\n"
+    },
+    {
+      "time": " 4.Jul.2007 4.35pm",
+      "content": "Thanks to all for sharing your knowledge and experience. I gess i´ll go back to FL or adobe manual to do my homework and see if i (maybe) get something properly done ;), before bothering with other questions.\n\nThanks again for your replies.\n\nRegards\n\n"
+    },
+    {
+      "time": " 7.Jul.2007 8.09am",
+      "content": "From your screenshot, I can tell that your initial designs don’t have matching startpoints, which may be a problem.\n\nA.\n\n"
+    },
+    {
+      "time": " 8.Jul.2007 12.04pm",
+      "content": "yes i was told to relocate startpoints to maching positions in each masters. Then i repeated the blend to build MM operation, but the results were much the same...\n\n"
+    },
+    {
+      "time": " 8.Jul.2007 2.17pm",
+      "content": "Not only do the two designs have different start points, their outlines go in different directions. Always a bad thing.\n\n"
+    },
+    {
+      "time": " 9.Jul.2007 6.45am",
+      "content": "ok, here´s another screenshot with matching startpoints and contour direction in each masters. The result seems pretty much the same! Besides missing one node, the upper terminals and the spine diagonals still not look like the original shape. Should the diagonals be paralels in both masters? I must be doing something stupidly wrong!\n\n ![](http://web.archive.org/web/20081008043425im_/http:/www.typophile.com/files/3_4294.jpg)\n\n"
+    },
+    {
+      "time": " 9.Jul.2007 7.13am",
+      "content": "In the blend dialog box, did you check “Outlines are compatible do not add points or rearrange contours”\n\nIf you did not, you should.\n\n"
+    },
+    {
+      "time": " 9.Jul.2007 9.10am",
+      "content": "yes, “Do not interpolate compatible outlines” box is checked. Is this dialog box you´re saying?\n\n ![](http://web.archive.org/web/20081008043425im_/http:/www.typophile.com/files/1_6647.jpg)\n\n"
+    },
+    {
+      "time": " 9.Jul.2007 1.37pm",
+      "content": "On a side note, with regards to the diagonals, you need to keep EITHER the angle the same (easiest) OR keep the ratio of the BCP distances from the on-curve point the same. That is, if the first BCP is twice as far from the on-curve point as the second one in one master, it would need to be twice as far away in the other master as well - even if all the distances were 50% greater or 1/3 as far or some other multiplier.\n\nI think James gives great advice on the rest.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": " 9.Jul.2007 4.43pm",
+      "content": "Kiko,\n\nit seems that you’re using some old version. I would recommend updating to a newer version as soon as possible.\n\nA.\n\n"
+    },
+    {
+      "time": " 10.Jul.2007 6.52am",
+      "content": "It´s true in fact i´m still using 5.0.0 for windows. I guess i should have updated it a long time ago. Didn´t realize that could be the problem.\n\nThanks to all.  \nRegards\n\n"
+    },
+    {
+      "time": " 10.Jul.2007 7.39am",
+      "content": "I recommend updating to FontLab Studio 5.0.4 that was just released:\n\n[http://typophile.com/node/35006](http://web.archive.org/web/20081008043425/http:/typophile.com/node/35006 \"http://typophile.com/node/35006\")\n\nA.\n\n"
+    }
+  ]
+}

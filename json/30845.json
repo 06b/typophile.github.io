@@ -1,0 +1,210 @@
+{
+  "id": "30845",
+  "title": "As a graphic designer, how important to you are Central European characters in OpenType fonts?",
+  "forum": "Home",
+  "tags": [
+
+  ],
+  "content": "Not important at all\n\n 19% (19 votes)\n\nSomewhat unimportant\n\n 12% (12 votes)\n\nNeither important nor unimportant\n\n 19% (19 votes)\n\nSomewhat important\n\n 13% (13 votes)\n\nVery important\n\n 38% (39 votes)\n\n Total votes: 102 \n\n",
+  "author": "paul d hunt",
+  "time": "24 Jan 2007 — 6:43am",
+  "uid": "7006",
+  "comments": [
+    {
+      "time": "1 Feb 2007 — 10:13am",
+      "content": "Thanks Adam!\n\nChrisL\n\n"
+    },
+    {
+      "time": "1 Feb 2007 — 7:22am",
+      "content": "The Baltic languages and Romanian use letters with a comma accent below them. The Turkish language uses cedilla.\n\nThe Unicode Standard was admittedly wrong when assuming that the Baltic letters such as \"G with comma accent\" are letters with cedillas. This is why they named them \"Latin capital letter G with cedilla\" and created a canonical decomposition into G and cedilla. The Unicode Consortium now knows that they were wrong, but for compatibility reasons they were not able to change the decomposition or the names. The only thing they revised is the sample glyphs in the Standard.\n\nAdobe is not bound by backwards compatibility issues in glyph naming so Adobe was able to change the old AGL name \"Gcedilla\" to a new AGLFN name \"Gcommaaccent\". This was done deliberately, after a careful review of all the issues involved. Of course the Unicodes are still the same for those characters, and the keyboard layouts you tried use those Unicodes. Some older fonts (that you may have tried to preview the results of your typing) may also be wrong in that they include cedillas in place of commaaccents in the design of those glyphs. But this is a problem with those fonts, and some of them (e.g. Arial) will likely be changed in the next version of Windows.\n\nThe issue of keyboard mapping has nothing to do with glyph design or the naming. Keyboard layouts generate Unicodes. The fonts map Unicodes to glyphs. Glyph names are only used as an auxiliary mechanism.\n\nEven though the Unicode names and canonical decomposition is wrong, it is fixed and cannot be changed. But each font is separate and the glyph design should reflect the typographic traditions and not the mistakes of some gremium.\n\nTo sum up:\n\n1. All Baltic glyphs should use commaaccents, and use the names like Ncommaaccent, Kcommaaccent, Gcommaaccent etc., but of course they map to Unicodes that in the Unicode Standard have names such as \"Latin capital letter N with cedilla\", and decompose into N + cedilla. That's fine, and that's the correct (at least from the standards point of view) way of handling things.\n\n2. The T character has two instances in the standard: Latin capital letter T with cedilla (in the 01xx section) and Latin capital letter T with commaaccent (in the 02xx section). The latter is newer, so this character has been \"disambiguated\" at some point. Their glyphs should be named as they are specified in standard.nam, and both should use commaaccent in the design.\n\n3. The issue of Scedilla and Scommaaccent is a bit more complicated. Again, in older versions of the Standard there was just one character that was meant for use in both Turkish and Romanian. Later, the character has been disambiguated. The Latin capital letter S with cedilla should use the cedilla in the design, and the Latin capital letter S with commaaccent should use the commaaccent. For Romanian however, some locales use the old (wrong) S with cedilla Unicode rathen than the new assignment. Therefore, it is useful to provide an OpenType \"locl\" feature that replaces Scedilla with Scommaaccent in the Romanian context.\n\n(All above comments also apply to lowercase appropriately, of course).\n\nSome more discussions:  \n [http://groups.msn.com/FontLab/general.msnw?action=get\\_message&ID\\_Message...](http://web.archive.org/web/20150326031624/http:/groups.msn.com/FontLab/general.msnw?action=get_message&ID_Message=1825 \"http://groups.msn.com/FontLab/general.msnw?action=get\\_message&ID\\_Message=1825\")\n\nAdam\n\n"
+    },
+    {
+      "time": "29 Jan 2007 — 2:11pm",
+      "content": "Is the Scommaaccent the substitution for Scedilla in Turkish?\n\nChrisL\n\n"
+    },
+    {
+      "time": "29 Jan 2007 — 1:33pm",
+      "content": "_As for the Latin+Greek+Cyrillic scenario,_\n\nA bi-lingual Russian translation of an English work that quotes Greek, e.g. Eliot's _The Waste Land._\n\nAnd of course, packaging for EU products.\n\n"
+    },
+    {
+      "time": "29 Jan 2007 — 1:29pm",
+      "content": "_In fact, I believe many people will indeed never realize that their font includes European accents, or Greek, or Cyrillic._\n\nSoftware. Don't you just love the redundancy?!  \nBut it's not too different from the old days -- I mean, who reads the entire newspaper every day, or every book they buy? I will say that I've listened to every track of every album and CD I've bought new, at least once. But downloading addicts who just collect the stuff and never play it, that's next level.\n\n_What?! No Latin 9?_\n\nI didn't mention Latin 9 because, as far as I am aware all the characters are already in lower-numbered encodings. I'm assuming this with complete faith in FontLab. So yes, I should have said up to 9.\n\nAs for Latin 10, the only characters previously unaccounted foris \"Scommaaccent\". I don't know what to do with that. No Unicode number in FL, and some confusion with Scedilla, I don't understand. So no 10.\n\n"
+    },
+    {
+      "time": "28 Jan 2007 — 2:44pm",
+      "content": "What?! No Latin 9? What’s this? S with caron is used in Finnish, although it can be replaced with a ‘sh’. It can be a bit strange, too. Imagine “šit” meaning not to “sit” but… Also z with caron is supposedly used in Finnish but I don’t know any words where it’s used.\n\nSeriously, though, is Latin 9 a bit slept on? The euro mark is of course in every new font.\n\n"
+    },
+    {
+      "time": "28 Jan 2007 — 2:36pm",
+      "content": "\\> Although no break for American English-only buyers — but  \n\\> do such folk really exist, licensing all their fonts  \n\\> from Paratype?\n\nWell, you could (rather simplisticly) assert that for an American-English buyer it doesn’t really matter if he gets the \"Pro L\", \"Pro C\" or \"Pro G\" version because all they will care for is what’s in the \"lower half\" of the encoding. In fact, I believe many people will indeed never realize that their font includes European accents, or Greek, or Cyrillic.\n\nAs for the Latin+Greek+Cyrillic scenario, the most likely use I imagine is by scientists from Moscow who would write in Russian, include English, French or German personal names and occasionally intersperse mathematical or physical symbols using Greek. Jokes aside, I definitely agree with Tom Phinney that both the Cyrillic and the Greek font would need a full set of accented Latin simply because Latin-script words or names are occasionally quoted in all the other scripts (Cyrillic, Greek, Hebrew, Arabic etc.).\n\nA.\n\n"
+    },
+    {
+      "time": "28 Jan 2007 — 1:33pm",
+      "content": "_Regarding a minimal or recommended glyph set, I will publish something within the next few weeks._\n\nThanks again Adam, that would be really helpful.\n\n"
+    },
+    {
+      "time": "28 Jan 2007 — 9:38am",
+      "content": "Tom,\n\nMy logic for the lesser Greek and Cyrillic prices:\n\n1) Those fonts are not really more work, because they are add-ons, and starting from the Latin of a typeface, one already has the figures and punctuation, plus common glyphs and glyph parts to work with.\n\n2) As you surmise, what the market will bear. But perhaps I am wrong -- there is a lot of consumer wealth in Russia now, surely some of it must find its way into the design budgets of upscale Russian magazines and advertising?\n\n3) Yes, there's a clever \"low budget\" buy for the English-only language user.\n\n\\*\\*\\*\n\nOK, several people have pointed out Russian-Western links, and the European Union and all that implies -- with the implication that the comprehensive \"LCG\" font should be the standard. Perhaps L (incl.CE) + C, and L (incl. CE) + G would also be suitable formats. Or is there a C + G user base -- surely not?\n\nIf you are a font user who really does need to cover the full EU, then you should have no qualms about getting the full LCG font for $79.\n\nI still think that the LC and LG fonts make sense, given that those are the legacy encodings, and given that English is far and away the most-used \"other language\" in C and G documents.\n\n\\*\\*\\*\n\nSo, using something like Adam's terminology:\n\n1. Pro L (Latin 1-8)  \n$49\n\n2. Pro C (includes \"English\", i.e. non-accented Latin)  \n$49\n\n3. Pro G (includes \"English\", i.e. non-accented Latin)  \n$49\n\n4. Pro LCG (everything)  \n$79\n\nWith this scheme, an upgrade from any basic Pro font to Pro LCG gets you two extra full script groups. For Latin, you get C + G, for Cyrillic you get Latin 2-8 + G, for Greek you get Latin 2-8 + C. There seems to be a balance now.\n\n(Although no break for American English-only buyers -- but do such folk really exist, licensing all their fonts from Paratype?)\n\n"
+    },
+    {
+      "time": "27 Jan 2007 — 11:31pm",
+      "content": "Somehow I managed to license one of my fonts to a Hungarian video game company, but it just had a basic Latin 1 set. I suppose if I knew how I should have provided them an extended set, but that would have necessitated additional fees and it was one of my old free fonts. I let them get by with giving me some copies of the game and a T-shirt.\n\n"
+    },
+    {
+      "time": "27 Jan 2007 — 8:11pm",
+      "content": "\\> There are also, historically and in the present,  \n\\> legions of joint German–Russian business ventures\n\n...and of Russian occupation of Poland, but we kicked their butts once or twice as well ;)\n\nA.\n\n"
+    },
+    {
+      "time": "27 Jan 2007 — 11:26am",
+      "content": "Nick,\n\nInteresting pricing decision, that you would charge less for the Cyrillic Pro and Greek Pro than for the Latin Pro, even though the Greek and Cyrillic are more work than the extended Latin. It might be tempting for some American buyers to just go for one of the cheaper ones, as they all cover English equally well. Or am I missing something?\n\nI'm guessing that perhaps your thinking is to charge based on the idea that the Greek and Cyrillic markets are less wealthy than the Latin ones?\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "27 Jan 2007 — 7:17am",
+      "content": "There are also, historically and in the present, legions of joint German–Russian business ventures\n\n"
+    },
+    {
+      "time": "27 Jan 2007 — 7:07am",
+      "content": "_In this scheme, the assumption is that basic Cyrillic and Greek users will need English (non-accented latin), but not other European Latin languages. Is this correct?_\n\nI'd say this is incorrect, Russia particularly has a history of French as its second language and this is reflected in some of its greatest literature.\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 10:53pm",
+      "content": "I’d also to point out that while until January 1, 2007, Latin and Greek were the only alphabets officially used in the European Union, now Cyrillic was added to the list as Bulgaria joined the EU. That means that only LCG (Latin+Cyrillic+Greek) fonts offer a complete EU coverage.\n\nNick, how about using suffixes like \"ProL\", \"ProC\", \"ProG\", \"ProLC\", \"ProLG\", \"ProLCG\"? Optionally with a space after Pro, or perhaps omiting \"Pro\" completely. Alternatively, you could use suffixes \"XL\", \"XC\", \"XG\", \"XLC\", \"XLG\", \"XLCG\" :) And for the fonts that have small caps and other extravagancies for all those scripts, you’d go with \"XXL\", \"XXC\" etc. :D\n\nI mean it :D\n\nA.\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 9:57pm",
+      "content": "Further on the extended Greek and Cyrillic encodings: if you're going to bother publishing a font that covers those languages, the extended Cyrillic and Polytonic Greek would seem to be worth doing.\n\nTwo good marketing reasons: neither Greece (very small country) or the Cyrillic countries (problems with piracy) are very promising markets -- but there is an academic market in the west which requires thorough encodings; the second non-indigenous market is global corporations that need total coverage.\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 9:47pm",
+      "content": "Chris,\n\n\\> Adam and Filip have both been very helpful to me in  \n\\> my attempts to learn proper diacritics. They genuinely  \n\\> care not for selfish interests\n\nWell, we do care for selfish interests. Mine is: I read a lot in my native language (Polish), and I appreciate it if the typography is not butt ugly. Filip’s concern is similar.\n\n:)\n\nRegarding a minimal or recommended glyph set, I will publish something within the next few weeks.\n\nAdam\n\nA.\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 7:09pm",
+      "content": "Thanks Chris and Paul. I am now bookmarking this page as a resource!\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 5:49pm",
+      "content": "I've been thinking about how to put the different encodings into fonts.\n\nIt may make sense if you're bundling fonts with other apps to put everything into one big non-discriminatory font, but I'm leaning towards the following scheme:\n\nA. PRO  \nIncludes all Latin-based encodings (but not Vietnamese)  \nAnd OT features  \n$49\n\nB. CYRILLIC PRO  \nIncludes Cyrillic (extended as per Thomas' new blog entry) and non-accented Latin.  \nAnd OT features  \n$29\n\nC. GREEK PRO  \nMono- and Polytonic Greek and non-accented Latin  \nAnd OT features  \n$29\n\nD. SUPER PRO  \nEverything  \n$79\n\nThe purpose of such a scheme would be to:\n\n(1) differentiate between Shinntype fonts that have Greek and/or Cyrillic, and those that don't, right in the name, and\n\n(2) to offer a better price to those who don't want to pay lots for stuff they'll never use.\n\n\\*\\*\\*\n\nIn this scheme, the assumption is that basic Cyrillic and Greek users will need English (non-accented latin), but not other European Latin languages. Is this correct?\n\n\\*\\*\\*\n\nNB. I wouldn't call the base fonts \"Pro\" if I didn't intend to keep Type 1 and TrueType versions of my older typefaces on the market. That's a business necessity for now,\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 3:23pm",
+      "content": "CE is kind of a no-brainer to me; no question that it's worthwhile.\n\nThe next steps are Cyrillic and Greek. Then you have to decide whether to do polytonic Greek, and how much Cyrillic to do as there is lots beyond the basic set.\n\nSee also my blog post on extended Cyrillic here: [http://blogs.adobe.com/typblography/2006/08/defining\\_an\\_ext.html](http://web.archive.org/web/20150326031624/http:/blogs.adobe.com/typblography/2006/08/defining_an_ext.html \"http://blogs.adobe.com/typblography/2006/08/defining\\_an\\_ext.html\")\n\nParticularly interesting is how I/Adobe got a bit of flack for not going far enough in what we put in our standard extended Cyrillic character set (see the comments on my blog, and those on the OpenType mailing list). Basically, some people felt that anything less than everything was insufficient and discriminating against the smaller language groups.\n\nThe flip side of that is, if we had to put \\*all\\* the Cyrillic characters into every typeface we did that supported Cyrillic, we'd probably put Cyrillic in about half as many typefaces.\n\nOops, I think I'm digressing. I'll stop now.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 11:16am",
+      "content": "Thanks Paul!\n\nChrisL\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 10:42am",
+      "content": " ![](http://web.archive.org/web/20150326031624im_/http:/typophile.com/files/ogonek_4706.png)\n\nChrisL\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 10:17am",
+      "content": "_does it work with FL5?_\n\nyes.\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 10:09am",
+      "content": "_It’s a very small character set._\n\nLatin 8 has fifteen extra characters, make that thirty with upper and lower. Make it forty-five with small caps.\n\nNo problem. The real pain in the butt is that damned ogonek!\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 8:56am",
+      "content": "In regards to Adam's mention of the Business Software Alliance:  \n [http://www.theregister.co.uk/2006/06/27/unlicensed\\_software\\_shocker/](http://web.archive.org/web/20150326031624/http:/www.theregister.co.uk/2006/06/27/unlicensed_software_shocker/ \"http://www.theregister.co.uk/2006/06/27/unlicensed\\_software\\_shocker/\")\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 8:49am",
+      "content": "Paul,  \nThat link specifies FL 4.5, does it work with FL5?\n\nChrisL\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 8:35am",
+      "content": "I believe [Adam](http://web.archive.org/web/20150326031624/http:/typophile.com/wiki/Adam%20Twardoch)'s [FontLab on Steroids](http://web.archive.org/web/20150326031624/http:/steroids.fontlab.net/) has several codepages that you can use to create a full CE set.\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 8:22am",
+      "content": "Look at the Latin Extended A code page in FontLab Terry. Add that to the basic set.\n\nChrisL\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 7:12am",
+      "content": "Adam's links have been very helpful in my understanding as well. BTW, as a newbie to font design, what is considered a full character set including CE characters? Is there a list or chart somewhere to use for reference?\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 5:38am",
+      "content": "Adam and Filip have both been very helpful to me in my attempts to learn proper diacritics. They genuinely care not for selfish interests but because they just want to see typography open to the many needs of world users. They have taken time to write long specific posts on how to do it and created web pages with indepth instruction and not gotten a penny out of it. Thank goodness for both of them.\n\nChrisL\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 5:21am",
+      "content": "Adam, thanks for your very informative and helpful answer. I do appreciate the light you regularly shed on both technical font issues and the Eastern European world of fonts.\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 3:10am",
+      "content": "I’ll keep this brief as it’s off the point of this poll.\n\n\\> <cite>Conor, what’s with the Latin 8 (Celtic) encoding?</cite>\n\nIt exists because it is required by _some_ living in Ireland, Northern Ireland, Scotland, Wales, The Isle of Man and Brittany. I may be wrong, but thanks should go to [Michael Everson](http://web.archive.org/web/20150326031624/http:/www.evertype.com/) for this.\n\n\\> <cite>Does Gaelic use all those consonants with dots over them?</cite>\n\nIt’s traditional _Irish_ or _Gaeilge_ that uses them. So in short, yes. However, Modern Irish only has one diacritic, the _síneadh fada_ or _fada_ (for short) which means “long”. This looks like a standard “accent”.\n\nThe “dot” is called a _ponc séimhithe_ or _buailte_. I would need all day and night to explain to you what it’s role is in traditional Irish. In Modern Irish it is replaced by a proceeding _h_.\n\n\\> <cite>Would you find a font with that encoding useful, and be predisposed to licence it?</cite>\n\nLike I said above, _some_ would find it useful. I would be delighted to licence it should someone require it. It’s a very small character set.\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 3:01am",
+      "content": "William,\n\nfor what it matters, a large part of the Eastern European or Central European countries that use Latin accented characters outside of the Western set are part of the European Union now. The situation looked very different in the 1990s but these days, my sense is that for example in Poland, font piracy is even less imminent than in Germany. This has to do with a smaller number of fonts that have these characters and with a smaller number of font distributors, so if an ad or a magazine uses an illegal copy of a font, it’s pretty easy to spot this. This has also to do with factual enforceability of copyright, which is actually quite amazing. A few years ago, Business Software Alliance seized computers in some companies and actual led to some convictions (not for illegitimate fonts but for illegal software installations), which had a large impact on the publishing industry. To some extent, it has also to do with the fairly low typographic awareness of the clients and designers -- designers are keen on trying out new fonts and alternate solutions, but are not so extremely determined to do so. The clients won’t be extremely upset if the designer uses a more common font rather than a more original one. So the designer will only go for something different if he is sure that the client will pay for it and that everything is in the legitimate area.\n\nSince many fonts don’t come equipped with CE glyphs, local font distributors such as Kentype in Warsaw \"localize\" the fonts, i.e. add the local glyphs. Typographically, this is not always the best option (because many of those \"localizations\" are done hastily) but some font distributors actually put the client’s name at the end of the copyright string in the modified font. This has proven to be a quite good method to encourage the clients not to leak the fonts outside of their company. Since these are custom localizations that the clients pay extra for (though it’s not really much), the clients actually do have a slight sense of exclusivity of what they have, so they’re less likely to leak the fonts anyway.\n\nGiven that nearly half of European Union uses Latin characters outside of the Western codepage, I think it only make sense to \"pre-emptively\" put them in, especially that with FontLab Studio, the Generate Glyphs feature, anchors and class kerning, it’s not really a very complex task.\n\nAs for the design of the diacritic characters goes, there are many resources available online, e.g.:  \n [Filip Blažek’s Diacritics project](http://web.archive.org/web/20150326031624/http:/diacritics.typo.cz/)  \n [My old Polish how-to document](http://web.archive.org/web/20150326031624/http:/www.twardoch.com/download/polishhowto/intro.html) (needs to be re-worked)  \n [My essay about Polish diacritics](http://web.archive.org/web/20150326031624/http:/www.twardoch.com/adam/project.php?pid=0016)  \n [Victor Gaultney’s essays](http://web.archive.org/web/20150326031624/http:/www.sil.org/~gaultney/research.html)  \n [Slides from a lecture Victor and I did](http://web.archive.org/web/20150326031624/http:/www.twardoch.com/adam/project.php?pid=0062)\n\nPeople like myself offer critique and consulting on diacritic design for particular projects, both paid and unpaid, depending on the nature of the project.\n\nBest,  \nAdam\n\n"
+    },
+    {
+      "time": "25 Jan 2007 — 8:57pm",
+      "content": "In another thread Erik Spiekermann said that piracy is so rampant in the countries that use Cyrillic that people are reluctant to design Cyrillics. Is the situation better in the parts of Eastern Europe that use the latin alphabet? No accusations, just asking.\n\n"
+    },
+    {
+      "time": "25 Jan 2007 — 1:11pm",
+      "content": "Conor, what's with the Latin 8 (Celtic) encoding?  \nDoes Gaelic use all those consonants with dots over them?  \nWould you find a font with that encoding useful, and be predisposed to licence it?\n\n"
+    },
+    {
+      "time": "25 Jan 2007 — 1:06pm",
+      "content": "I'm not totally convinced it makes business sense for my foundry.  \nAfter all, Latin 1 encoding covers quite a few European countries where I don't sell many fonts, including the UK. Most of my sales are in the US.  \nActually, I've recently sold some fonts to a Polish newspaper, but they wanted Type 1 Mac and PC.  \nNonetheless, convinced of my civic duty by Adam, Gerry, and Maxim, I am soldiering ahead with extending language support for upcoming OT releases, so that they will all have CE encoding at the least.  \nAlso, it's quite interesting doing the work, despite the extra tedium. Thank goodness FontLab automates so much of it.\n\nThere is another reason, which is derived from the Long Tail, the principle being that you can never have enough products because there is always someone somewhere who will buy that obscure non-best-selling product, and all those combined small sales add up to more than the income from the best-sellers.\n\nSo what every designer and foundry should do (as many have in the past) is produce \"their\" Venetian, their Old Style, their transitional, their Didone, their Geometric Sans, their Humanist Sans, their Grotesque sans, their Script, their Slab Serif, and so on.\n\n"
+    },
+    {
+      "time": "25 Jan 2007 — 3:46am",
+      "content": "Font Font not that long ago put out a font with every type of Euro dollar design necessary for use with whatever fonts you are using.\n\nIf in 5 years the CE characters are necessary for all of us, perhaps the other manufacturers will learn from Font Font's lead, and create the sets we need to update the type fonts we already own.\n\nOnly a thought.\n\n"
+    },
+    {
+      "time": "25 Jan 2007 — 2:19am",
+      "content": "I’m extremely glad the majority considers the issue important.\n\nA.\n\n"
+    },
+    {
+      "time": "24 Jan 2007 — 3:08pm",
+      "content": "I'd take a handful of as-complete-as-possible opentype fonts over 4 dozen fonts with missing glyphs any day. If you don't think it's worth the effort to make as many letterforms/ glyphs as you can, maybe your font-family isn't up to scratch?\n\n"
+    },
+    {
+      "time": "24 Jan 2007 — 10:08am",
+      "content": "\\> As a graphic designer, how important to you are Central European characters in OpenType fonts?\n\nGood question. Why do you ask? :^)\n\n"
+    },
+    {
+      "time": "24 Jan 2007 — 8:03am",
+      "content": "Certainly as a font designer (which I'm not!), I can't imagine not including them for the obvious reason Chris mentioned, but as an editor and graphic designer in Canada, I get only limited call for their use.\n\nThat being said, I've done a couple of scientific articles that used source material from archaeological digs in Greenland and was grateful to have the appropriate glyphs available....\n\n"
+    },
+    {
+      "time": "24 Jan 2007 — 7:46am",
+      "content": "_This is way too subjective a question._\n\ndon't fault me for trying. as with all of my polls, this one is fatally flawed, but hopefully it will spark some interesting discussion. That is always my hope in posting these.\n\n"
+    },
+    {
+      "time": "24 Jan 2007 — 7:45am",
+      "content": "I agree with you whole-heartedly, Chris!\n\nI hate to make this sound all black-or-white, but the trend with OpenType is to only offer one version of a font. Everything is either inside font that you have to offer, or it is not. (Custom work is a whole different ball game. There, you put in what the client pays for; each client could conceivably have their own version… something not really possible at the moment with retail fonts).\n\nIf you don't put CE glyphs into your font because you think that they are not important, then you limit the possible reach of your work (and your sales). You are welcome to do this, of course, but I don't see how it makes much sense at the moment.\n\nThis does also mean that designers, going forward, may produce less new typefaces per year than they previously were used to, but that each new typeface will have more to offer. I don't see this is a negative thing. But it migh mean that, before a designer begins work on a new face, he or she should consider its maketability more than they did before, since each typeface will have to carry a bit more weight… if that makes any sense.\n\n"
+    },
+    {
+      "time": "24 Jan 2007 — 7:36am",
+      "content": "\\> <cite>Do all Western Europeans need CE glpyhs at their fongertips? Probably not. But I would gamble that more of them do (or will in 5 years) than do not.</cite>\n\nI’d have to agree.\n\n\\> <cite>Fonts are a long term investment.</cite>\n\nAye!\n\n"
+    },
+    {
+      "time": "24 Jan 2007 — 7:36am",
+      "content": "Location, Location, Location. Dan is right about much of the U.S. market but that is not why I will include CE in all the fonts I design. As a type designer, you not only have an obligation to your customers to supply them with all the glyphs they need but you should also think about the marketability of your work. The world does not begin and end within any single country's borders. International interbusiness relationships are growing steadilly. So is the need for communication ease with the printed word. I would also add that non-Latin scripts are also important. The difficulty is that it is much harder to learn a foreign script than it is to learn how to extend Latin to CE. This means fewer typefaces will be extended to foreign scripts by Latin based language designers and much of the task will fall to native speakers of the non-latin scripts. This in time may change as well--at least I hope it does. TDC is sponsoring workshops in foreign scripts to help type designers in the U.S. develop non-latin understanding.\n\n[http://www.tdc.org/events/education/non-latinweek-ends/index.html](http://web.archive.org/web/20150326031624/http:/www.tdc.org/events/education/non-latinweek-ends/index.html \"http://www.tdc.org/events/education/non-latinweek-ends/index.html\")\n\nChrisL\n\n"
+    },
+    {
+      "time": "24 Jan 2007 — 7:30am",
+      "content": "I don't know if Eurocentric is the right word…\n\nToday, we make fonts and license them over the internet. These fonts are licensed by people all over the world, but probably primarially in North American and Western European countries. These two big customer groups have different needs; and the myriad of smaller groups have their own needs as well. But since the rise of OpenType fonts, we just produce one font for the whole marketplace.\n\nSo, new fonts have to meet the needs of many groups. Do all Western Europeans need CE glpyhs at their fongertips? Probably not. But I would gamble that more of them do (or will in 5 years) than do not.\n\nDo all North American need them? Again probably not… but the range of people who do need them is probably smaller than the market segment that doesn't in Western Europe.\n\nLastly, there are lots of clients in North America who do require CE glyphs (travel agents, direct to customer companies who sell in Europe, cultural heritage groups, some Christian demoninations, etc., just to name a few}. Even if you aren't servicing any of these types of clients now, can you guarantee that you won't be doing so in the future? Fonts are a long term investment.\n\n"
+    },
+    {
+      "time": "24 Jan 2007 — 7:22am",
+      "content": "\\> <cite>subjective</cite>\n\nYep… and Eurocentric.\n\n"
+    },
+    {
+      "time": "24 Jan 2007 — 7:18am",
+      "content": "This is way too subjective a question. If you are living in the US, the chances are probably there that CE glyphs will be far less important than if you are a designer living in the Czech Republic, Poland, or Romania! (Or even Germany, Austria, or Britain… where so many of the packages sold on Eastern European shelves are layed out).\n\n"
+    },
+    {
+      "time": "24 Jan 2007 — 7:18am",
+      "content": "It’s becoming increasingly important given Europe’s growing cross-pollination of cultures and languages.\n\nOver 200,000 immigrants came to Ireland in 2006, with more than 90,000 Polish (Witajcie!) among others from Slovakia and Slovenia. It’s handy not to have to bend over backwards to type their names properly.\n\n_Off the point and on a personal note:_  \nI’m not fond of the Anglicisation of language (particularly names and places).\n\n"
+    }
+  ]
+}

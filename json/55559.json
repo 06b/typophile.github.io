@@ -1,0 +1,34 @@
+{
+  "id": "55559",
+  "title": "Command line/batch processing of UFO to OTF?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I’m getting really tired of waiting for Fontlab to open a batch of UFO files. Aside from Area 51 are there any apps/scripts that can quickly convert a batch of UFO files to OTF or some other format Fontlab reads natively? Can I do this from the command line with FontForge?\n\n",
+  "author": "blank",
+  "time": "5 Mar 2009 — 1:17pm",
+  "uid": "14722",
+  "comments": [
+    {
+      "time": "10 Mar 2009 — 9:36am",
+      "content": "I don't think a command line tool has been created yet. You could make one easily using the [ufo2fdk](http://web.archive.org/web/20131101121607/http:/code.typesupply.com/wiki/ufo2fdk) package that I released last week. In fact, the demo script from my presentation might be a good starting point for you. It is included below. (Replace the \"....\" with the appropriate white space.)\n\nAlternatively, you could use the batch generator in [Area51](http://web.archive.org/web/20131101121607/http:/tools.typesupply.com/area51.html).\n\n`\nfrom robofab.world import OpenFont\nimport ufo2fdk\nimport glob\nimport os`\n\n# path to the fonts  \ndirectory = \"/path/to/a/directory/containing/ufos\"\n\n# print a message if the FDK can't be found  \nif not ufo2fdk.haveFDK():  \n....print \"I couldn't find the FDK :-(!\"  \n# if the FDK is available  \nelse:  \n....# start the compiler  \n....compiler = ufo2fdk.OTFCompiler()\n\n....# for each UFO in the directory  \n....for ufoPath in glob.glob(os.path.join(directory, \"\\*.ufo\")):  \n........print \"Compiling: %s...\" % os.path.basename(ufoPath)  \n........# put the OTF next to the UFO  \n........otfPath = os.path.splitext(ufoPath)[0] + \".otf\"  \n........# open the UFO  \n........font = OpenFont(ufoPath)  \n........# compile  \n........report = compiler.compile(font, otfPath)  \n........# print the makeotf report  \n........print report[\"makeotf\"]\n\n# done  \nprint \"Done!\"\n\n"
+    },
+    {
+      "time": "11 Mar 2009 — 9:09am",
+      "content": "Thanks, Tal. I’m actually planning to update to 10.5 this week just to use Area51 for batch UFO generation.\n\n"
+    },
+    {
+      "time": "12 Mar 2012 — 3:35am",
+      "content": "I try to compile my UFO font to OTF as explained above but it doesn't work because my UFO font is not complete.\n\nI'm working on a project where typography is gradually created. Thus, I don't have a complete UFO font but I have to create the OTF to display the progress…\n\nDoes anyone have an idea for this case?\n\nThank you very much.\n\n"
+    },
+    {
+      "time": "12 Mar 2012 — 6:32am",
+      "content": "Can you do it with FontForge? Yes, I'm pretty sure you can. FF can read UFO, and it handles scripts, both Python and its own old scripting language.\n\n"
+    },
+    {
+      "time": "12 Mar 2012 — 10:04am",
+      "content": "I work without FontForge. The project is a website and everything (all the process) must be launched online. Of course, it's very difficult to install FontForge on my webhosting…\n\nOtherwise, you're right. Fontforge can do that.\n\n"
+    }
+  ]
+}

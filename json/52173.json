@@ -1,0 +1,42 @@
+{
+  "id": "52173",
+  "title": "mkmk broken in InDesign?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I have just installed InDesign CS4 trial for Windows (normally I don’t use this program, but I needed it to test my OpenType layouts) and was very surprised with the following odd effect: when I am attempting to stack several combining marks over a base character, they are lined up diagonally, each subsequent mark higher and further to right than the previous one. Thus the vertical positioning is correct but the horizontal is completely wrong. I have an impression there was just a typo somewhere in the source code, so that marks are shifted by the same amount of space both vertically and horizontally.\n\nThe problem can be reproduced with any font (e. g. SIL Doulos) and any combining marks for which proper mark to mark attachment points are specified.\n\nNow I am wondering, if anybody else has experienced this problem, and if so, if it is known to Adobe developers?\n\n",
+  "author": "<a href=\"/web/20091130194349/http://typophile.com/user/19667\" title=\"View user profile.\">anagnost</a>",
+  "time": "<br>",
+  "uid": "19667",
+  "comments": [
+    {
+      "time": " 28.Nov.2008 1.52pm",
+      "content": "I reported failings of mkmk about 3 months ago (for CS3). Admittedly, they’ve never _advertised_ it was working. I tested with [Rogier van Dalen’s Legendum](http://web.archive.org/web/20091130194349/http:/home.kabelfoon.nl/~slam/fonts/fonts.html), which has (AFAICT) proper mark and mkmk support. Just not for InDesign!\n\nSince you are testing, can you do this: type a base character, then a mark (which should go over the preceding character), then another character **in another font**? That fails just miserably in CS3 — the mark feature loses all its magic properties, and the mark gets set as a spacing diacritic.\n\n"
+    },
+    {
+      "time": " 28.Nov.2008 2.58pm",
+      "content": "Try this too: enter a word in which the last character is a combining mark shifted vertically from its default height, e.g. stacked above another combining mark; then type a word space; then change to another font and start typing. In InDesign CS3 ME, the text in the new word will be shifted off the baseline to a height corresponding to the height of the shifted combining mark in the previous font. This only happens when the last character in the preceding word is a combining mark.\n\n"
+    },
+    {
+      "time": " 28.Nov.2008 3.20pm",
+      "content": "While we’re at it. Is there _any_ text editor that gets this right?\n\nPreferably on Windows; preferably free as well... It’s just for testing my fonts, pending Adobe’s repairing their broken implementation. I tried FontForge, but my system doesn’t like the Windows runtime for \\*nix proggies at all.\n\n"
+    },
+    {
+      "time": " 29.Nov.2008 10.05am",
+      "content": "Theunis,  \nI believe Word 2007 for Windows does it just fine.  \nA.\n\n"
+    },
+    {
+      "time": " 29.Nov.2008 11.43am",
+      "content": "_Preferably on Windows; preferably free as well_\n\n[www.openoffice.org](http://web.archive.org/web/20091130194349/http:/www.openoffice.org/ \"www.openoffice.org\")\n\nOn Windows, you can also test mark and mkmk positioning in Wordpad and NotePad. The latter is particularly useful sometimes because it gives raw exposure of Uniscribe behaviour, without intervening layers of application or other text engine code such as RichEdit.\n\n"
+    },
+    {
+      "time": " 30.Nov.2008 5.41am",
+      "content": "Theunis, John,\n\nI could not reproduce the bugs you have described in InDesign CS4. Apparently there are some improvements in comparison with the previous version. However the problem with ’mkmk’ is quite annoying, especially because everything else seems to work as expected.\n\nBTW I have also noticed that marks are stacked properly if the base character is formatted with a different font (of course this usually means the first mark is positioned improperly).\n\n"
+    },
+    {
+      "time": " 8.Dec.2008 12.40pm",
+      "content": "\\> _when I am attempting to stack several combining marks over a base character, they are lined up diagonally, each subsequent mark higher and further to right than the previous one._\n\nFWIW, this was working correctly in InDesign CS3. ID CS3 had a nasty bug involving combining marks (described [here](http://web.archive.org/web/20091130194349/http:/typophile.com/node/46665)) that got fixed. Perhaps that work triggered this new bug. I’ve logged it in our bug database and it’s being analyzed. Thanks for reporting it.\n\n"
+    }
+  ]
+}

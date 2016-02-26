@@ -1,0 +1,66 @@
+{
+  "id": "100478",
+  "title": "Getting consistent word-spacing",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "I was wondering how many of actually kern letters with space? Standard kerning can only get the letter-spacing right but what about the consistent spacing between words? I've checked a couple of fonts (from respected designers) but they don't seem to have any kerning pairs with space. Any thoughts?\n\n ![](http://web.archive.org/web/20150414122114im_/http:/typophile.com/files/word-sapcing_5503.png)\n\n",
+  "author": "satya",
+  "time": "12 Feb 2013 — 5:24am",
+  "uid": "14032",
+  "comments": [
+    {
+      "time": "12 Feb 2013 — 9:38am",
+      "content": "<cite>they don't seem to have any kerning pairs with space.</cite>\n\nBecause it cannot work this way. In your example “A V”, you are correct, it might benefit from adjusted spacing, but that is cause by the combination of A and V itself, not by the letters standing with a space. You cannot solve this problem by kerning SPACE and V and A and SPACE. Because those 2 single kern pairs don't know the other letter involved. Should the first letter change, than the kerning of SPACE and V would be wrong again.  \nYou would need to take all 3 letters into account, which is hardly possible considering all the letters that can stand on each side of the space.\n\n"
+    },
+    {
+      "time": "12 Feb 2013 — 9:42am",
+      "content": "I've seen typefaces that kern the word space, and others with contextual kerning for select triplets (though not including the wordspace, I think).\n\n"
+    },
+    {
+      "time": "12 Feb 2013 — 9:47am",
+      "content": "It's pretty rare, probably because it can be dangerous, since it can result in words becoming too close (and too loose doesn't harm readability nearly as much as too tight, at least in terms of wordspace). But I wonder, what about kerning something like \"f\"-[space] _positively_? For a really... well-endowed \"f\" that might be good.\n\nA more sophisticated solution though is kerning _triplets_ (with the space in the middle) although as Ralf says it can explode.\n\nhhp\n\n"
+    },
+    {
+      "time": "12 Feb 2013 — 11:06am",
+      "content": "Williams Caslon Text uses CALT to substitute different shorter-nosed f's before spaces, depending on what the letters are following the space. I also negatively kerned some of the space-letter combinations, like space V, space T. I think the triples involving the substituted f's work pretty nicely. This idea came from Charles Ellertson, if I remember rightly.\n\n"
+    },
+    {
+      "time": "12 Feb 2013 — 12:00pm",
+      "content": "Certain digital fonts used to have letter-space kerning originally, but have been revised to remove it, e.g. Gill Sans, IIRC.\n\nMyriad has some space-letter kerning, but not the corresponding letter-space kerning.\n\n"
+    },
+    {
+      "time": "12 Feb 2013 — 1:09pm",
+      "content": "Hrant: _But I wonder, what about kerning something like \"f\"-[space] positively?_\n\nYes. This is more important than tightening word spacing for letters like A and V. If those are well-spaced to begin with, then the visual impact on word spacing isn't very great. But an f that extends a long way into the word space will come very close indeed to a following cap or ascender, especially a T.\n\nThis (above) is the f-to-space kerning in Brill Roman, with the same sequence without kerning below. The value here is +45/1000 units.\n\n ![](http://web.archive.org/web/20150414122114im_/http:/typophile.com/files/ralf_6726.png)\n\n"
+    },
+    {
+      "time": "12 Feb 2013 — 1:42pm",
+      "content": "Oh, I remember this came up last year, and I did an example with \"of Two\", which is here:\n\n ![](http://web.archive.org/web/20150414122114im_/http:/typophile.com/files/fs_word_spacing_4621.gif)\n\nThe top is as the font works now, with a shorter nosed f substituted and the space-T kerned. The middle is with the long nosed f with the space-T kerned. The bottom is the long-nosed f and no kerning on space-T.\n\nI think this works better than just kerning out the f-space combination. But I don't think the whole issue is that consequential.\n\n"
+    },
+    {
+      "time": "15 Feb 2013 — 7:20pm",
+      "content": "I wasn't going to comment, but...\n\nYou need to be very careful kerning anything with a space. It is a slippery slope, and easy to get in trouble.\n\nI've used this example before on Typophile. Take Adobe Jensen. Set f\\_wordspace\\_quotedbleleft\\_a\n\nThe wordspace just vanishes -- esp if you fill out the words, like\n\n...variance of \"allowed\" tolerances...\n\nHugh Ambrose's book, <cite>The Pacific</cite>, is full of these. The cause of this problem with Jensen isn't so much the \"f\" but the kerning of the quotes back into the wordspace. The two kerns in concert kill the wordspace.\n\nIf you want to kern an f with a wordspace, be sure to test it when followed by a few capitals -- capital J is usually the worst, as in \"of Jewish origin.\" Some lower-case letters can give problems, too (b,h,i,j,k,l), as well as the left quotes.\n\nI prefer to create a special f, where, when followed by a wordspace, the flag (nose) of the f is shorter, and the sidebearing a bit greater -- though I suppose increasing the sidebearing is the same as using a blanket kern. I believe this is what Bill showed with his Caslon. With OpenType, a calt substitution can make its use automatic.\n\nAs others have said, the real answer, in so far as there is one, comes from the design and spacing of all the letters, and the compromises they occasion. Pairs kerning offers only limited help. You have to set it up for the worst case. Contextual kerning can improve greatly on that.\n\nHere is the mental model I use for contextual kerning. Back in the days of hand-set type and the composing stick, you set the line, then added more space to the word spaces to drive the line out to full measure. If a particular space was optically larger, you just didn't add as much space there.\n\nThe problem with machine set type, esp. computers, is that adding equal space to drive out the line is automatically applied everywhere. The \"programmatic handwork\" then, comes in taking out space -- kerning. Essentially, that requires triplets. For example, c\\_space\\_w usually requires less space than h\\_space\\_n. for optically even spacing. Etc.\n\nIf you can put this in the font and your layout program supports it, fine. Otherwise, easy enough to write a script to put the kerns in with a layout program -- InDesign, TeX, whatever. If you use regular expressions, you can get quite close to the thinking/approach of class-based kerning. We've done this in our shop since the late 1980s, when we drove a photocomp machine (Linotron-202) with TeX.\n\nBut for kerning between just two letters, don't go beyond what the worst situation allows when you add that third letter -- e.g., f\\_space\\_J, f\\_space\\_quoteleft, etc.\n\n"
+    },
+    {
+      "time": "18 Feb 2013 — 7:27am",
+      "content": "Bill, Charles, I've opined this before, and I still think making the \"f\" more modest (compromising the bouma) before a space is backwards: the beak of the \"f\" (the only worthwhile ascender in the Latin alphabet) is kept at bay mostly to avoid a collision, and the blank space totally eliminates that problem. So -assuming you're not getting into kerning _triplets_- I think kerning the \"f\" positively with the space is generally the best compromise; I might even contextually make the beak _bigger_. Remember, too much space isn't nearly as bad as too little.\n\nhhp\n\n"
+    },
+    {
+      "time": "19 Feb 2013 — 3:33pm",
+      "content": "Well, effectively substituting different f's depending on the triplet amounts to triple kerning. I used three different terminal f's. The regular terminal was this with the shortened nose (red-terminal, black-regular) :\n\n ![](http://web.archive.org/web/20150414122114im_/http:/typophile.com/files/f_reg_and_f_5281.dbl.gif)\n\nand one alternative was this, same side bearings with a longer bar to the right:\n\n ![](http://web.archive.org/web/20150414122114im_/http:/typophile.com/files/f_reg_and_f_terminal_4850.gif)\n\nAnd then there was another one like the above, but with wider side bearings on the right. I substituted one of the three using CALT depending what seemed to work best with the triplet.\n\n"
+    },
+    {
+      "time": "8 Apr 2013 — 7:24pm",
+      "content": "\\> You would need to take all 3 letters into account, which is hardly possible considering all the letters that can stand on each side of the space.\n\n“All the letters that can stand on each side of the space” come in exactly the same count as “all the letters that can stand on each side of the gap between two letter”. So, in the worst-case scenario, you need to double the size of the kerning table. (This ignores the fact that some pairs may be not kerned correct, as in `f+space+opendblquote` mentioned before — usually, there is little need to kern `f+opendblquote`. So it has a chance to become more than 2× larger…)\n\n"
+    },
+    {
+      "time": "9 Apr 2013 — 4:28am",
+      "content": "> usually, there is little need to kern f+opendblquote.\n\nAssuming that by “opendblquote” you mean the _quotedblleft_ (U+201C), then this statement is true only if one does not intend the font to be used for German.\n\n"
+    },
+    {
+      "time": "14 Apr 2013 — 2:08pm",
+      "content": "Right, I completely missed this. And shame on me, since I suggest to my users to remember this :-[— and recommend seeing [http://en.wikipedia.org/wiki/Non-English\\_usage\\_of\\_quotation\\_marks](http://web.archive.org/web/20150414122114/http:/en.wikipedia.org/wiki/Non-English_usage_of_quotation_marks \"http://en.wikipedia.org/wiki/Non-English\\_usage\\_of\\_quotation\\_marks\").\n\n— So it may happen that the limit is indeed about 2× number of non-spaced kerning pairs. BTW, can somebody see why just using the “usual” kerning even when separated by space won’t solve the original problem?\n\n"
+    }
+  ]
+}

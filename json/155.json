@@ -1,0 +1,182 @@
+{
+  "id": "155",
+  "title": "Active Text Resizing",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "What do you guys think of the way this page allows you to resize your web text \"actively\" (using those admittedly suspect magnifying-glass icons), maintaining a set of explicit pixel sizes that the author wants, independent of platform:   \n   \n [http://www.vcu.edu/engweb/transcendentalism/authors/thoreau/walden/chapter15.html](http://web.archive.org/web/20131022115630/http:/www.vcu.edu/engweb/transcendentalism/authors/thoreau/walden/chapter15.html)   \n   \nTo me, as long as you have a compatible browser, this is the best solution to the generally hopeless case of properly presenting text on the web. But maybe I'm missing something...   \n   \nhhp\n\n",
+  "author": "hrant",
+  "time": "9 Apr 2002 — 8:11am",
+  "uid": "1250",
+  "comments": [
+    {
+      "time": "9 Apr 2002 — 11:29am",
+      "content": "This is a good solution, although tedious for the designer. To do it properly, you would need to create 8 different style sheets: 4 for mac, 4 for windows, then the accompanying javascript to identify the browser/platform, and load corresponding stylesheet.   \n   \nIt works ... I just wish there was a more efficient way of handling the problem.\n\n"
+    },
+    {
+      "time": "9 Apr 2002 — 11:49am",
+      "content": "true, it is a bit time.-consuming, but you don't have to code as many stylesheets. take a look at the text options on a list apart ( [http://www.alistapart.com/](http://web.archive.org/web/20131022115630/http:/www.alistapart.com/)), with only 2 options, (small sans/large serif) you have very visually different choices\n\n"
+    },
+    {
+      "time": "9 Apr 2002 — 11:55am",
+      "content": "right, but you still need to account for on-screen text size differences according to platform to truly keep it consistent. Not to mention:   \n   \n\\> the buttons do not yet work in the Opera browser\n\n"
+    },
+    {
+      "time": "9 Apr 2002 — 11:58am",
+      "content": "oops, add one more style sheet for the \"printer friendly\" version:   \n( \\<link rel=\"stylesheet\" type=\"text/css\" media=\"print\" href=\"/print.css\" /\\> )\n\n"
+    },
+    {
+      "time": "10 Apr 2002 — 11:13am",
+      "content": "This page doesn't work in navigator, so clearly scheme doesn't work.   \n   \nFWIW, it's a waste of time anyway, because all \"modern\" browsers have \"text zoom\".   \n   \nThere's no issue with size differences between platforms if you've coded the (single) style sheet properly.\n\n"
+    },
+    {
+      "time": "10 Apr 2002 — 11:26am",
+      "content": "\\> There's no issue with size differences between platforms if you've coded the (single) style sheet properly.   \n   \nAm I to assume that you mean setting the type sizes in pixels? There is still a bit of a difference.\n\n"
+    },
+    {
+      "time": "10 Apr 2002 — 12:45pm",
+      "content": "Kevin, I'm not really understanding what you're meaning. The only difference between platforms is the same difference you're going to get on the same platform, ie screen resolution, or pixel size.   \n   \nIt's not a platform issue, it's a physical screen in front of you issue.\n\n"
+    },
+    {
+      "time": "10 Apr 2002 — 1:03pm",
+      "content": "\\> The Mac will generally render your typeface in a smaller pixel size than the PC will.   \n   \n [http://www.netmechanic.com/browser-photo/tutorial.htm](http://web.archive.org/web/20131022115630/http:/www.netmechanic.com/browser-photo/tutorial.htm)#1.3\n\n"
+    },
+    {
+      "time": "10 Apr 2002 — 1:14pm",
+      "content": "\\>You can avoid this problem is [sic] you use   \n\\>Cascading Style Sheets to set your font   \n\\>size in pixels.   \n   \nSame paragraph.\n\n"
+    },
+    {
+      "time": "10 Apr 2002 — 1:27pm",
+      "content": "joe,   \nSince you probably know more about this than I do, let me ask you this:   \n   \nWhen I set type using Verdana at 10px, why is there a noticeable difference when viewed on a pc vs. my mac? Is is just screen res then? What is the solution?\n\n"
+    },
+    {
+      "time": "10 Apr 2002 — 2:05pm",
+      "content": "\\> What is the solution?   \n   \nI'm not Joe, but the reason I brought up that link/technique is because it's the only way to really do it right - if you think the whole mess through.   \n   \nBTW, Netscape has much more serious problems than not being able to handle that page...   \n   \nhhp\n\n"
+    },
+    {
+      "time": "10 Apr 2002 — 2:33pm",
+      "content": "i agree, but i assume that you would agree that this is unfortunate.\n\n"
+    },
+    {
+      "time": "10 Apr 2002 — 3:50pm",
+      "content": "Kevin, the solution is to have the same size screens running at the same res on every desk.   \n   \nie there is no solution.   \n   \nLook at your own screen, I don't know what you're running, but with any Mac you can just switch resolution via the control strip - mine goes from 640\\*480 up to 1920\\*1080. As you can imagine, from my viewpoint, switching between those ranges of resolutions is going to result in vastly different physical text sizes.   \n   \nBut, 10 pixels is always 10 pixels.   \n   \nThe ideal solution is to use ems as measuring units - but MS fcuked this up for the world by making everyone think that a good default text size is 18px - wrong, wrong wrong.   \n   \nOn most screens a good base text size is more like about 12px, some are going to want to go up to 14px or so.   \n   \nClever people are going to try to set their preferences to a base font size that works for them, while 90% of the web designers [sic] out there are thinking to themselves \"this 18px default is far to big, I'm gonna have to size that down to (fontsize) \"2\" or 0.75em...\" and the smart people go \"huh, what's wrong with these jerk off designers, I can't read this stuff!?\".   \n   \nMaking sense, probably not.   \n   \nHere, tip from the top: if you're thinking to yourself \"10px\" is excellent text size, think again. 10px is legible on most screens, I have a problem with it on large screens and would rather have 12px - but that's not the real problem. The real problem is that you \\*cannot\\* go much below 10px, you can only realistically go to 9px.   \n   \nThere aren't enough pixels to rasterise text at 8px (specialist bitmaps aside).   \n   \nSo, if your text is 10px, and you want a picture caption/credit - you've only got 9px to go to, and there really isn't enough differentiation in the rasterised text to really show that you've done anything (it's not like 10pt and 9pt at high res).   \n   \nSo go with 12px, you can then get some decent differentiation by going to 10px for small bits. Those (few) that genuinely find 12px too big can use the text zoom to get down to 90%, those that find it too small can go up to 120%.   \n   \nSo go for the middle 80%.   \n   \nI know as web designers we all get stuck in \"it's got to be 600\\*800\", but the reality is that most people are running 1024\\*768 and higher.   \n   \n   \nJoe\n\n"
+    },
+    {
+      "time": "10 Apr 2002 — 3:56pm",
+      "content": "Sorry, the only way to \"do it right\" is to size text in px and educate users that there's such a thing as text zoom.   \n   \nYou need users to understand what's going on, not give thema a set of (site dependent) buttons to click, that don't actually work in all browsers.   \n   \nWhat happens when they go to the next page, the JS variable isn't going to get carried over unless you do a lot of over-engineering in your HTML.   \n   \nRecipe for disaster.   \n   \n   \nJoe\n\n"
+    },
+    {
+      "time": "10 Apr 2002 — 4:10pm",
+      "content": "\\> the only way to \"do it right\" is to size text in px and educate users that there's such a thing as text zoom.   \n   \nClive, you're too anti-user.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "10 Apr 2002 — 4:20pm",
+      "content": "I meant this guy:   \n [http://www.clivebarker.com/](http://web.archive.org/web/20131022115630/http:/www.clivebarker.com/)   \nOf course.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "10 Apr 2002 — 10:52pm",
+      "content": "Joe:   \n1. There are nominal-dpi differences on many levels, including platform.   \n2. Browser sizing controls are too out-of-sight/out-of-mind.   \n   \nThe only \"valid\" overall reason to dislike the \\*type\\* of solution in Ron Koster's page (if not his exact implementation) is if you're an html purist who values \"elegance\" more than real-world functionality. And I put \"valid\" in quotes because of a simple fact: \\*users\\* are not html purists, and web sites are for users.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "11 Apr 2002 — 7:26am",
+      "content": "Too true. I clung to Netscape almost as religiously as being a Mac user - until I realized that IE was consistently much more stable and reliable.   \n   \nI still have a hard time looking myself in the mirror, but at least my code renders the way I intend it.   \n   \nOf course, I never upgraded past Netscape 4.7. After seeing what AOL did to subsequent versions, I couldn't use it.   \n   \njb\n\n"
+    },
+    {
+      "time": "11 Apr 2002 — 7:40am",
+      "content": "\\> I'm all for reigning in what I can.   \n   \nThen we're in the same camp!   \n   \n\\> It was a sad but liberating day.   \n   \nNicely said. IE is simply better. Armenian proverb:   \n   \n\"Dzour nsdink, shidag khosink.\"   \n\"Let's sit crooked, but talk straight.\"   \n   \nHowever, a confession. Because:   \n1. I don't browse to new sites very often,   \n2. The sites I do go to behave well in NS4.7x,   \n3. and I suffer from a \"legacy email\" situation: 30,000 old emails in NS that I can't live without,   \nI still use NS more than IE! :-/   \n   \nhhp\n\n"
+    },
+    {
+      "time": "11 Apr 2002 — 9:33am",
+      "content": "If you are on a mac you should try omni web. It's buggy still, but it uses the OS X rendering engine to display it's type, widgets, etc. and looks pretty sharp. Obviosly most sites aren't designed to be rendered this way, and some look a bit odd, but it's worth checking out as a one day possible alternative.   \n   \ncr\n\n"
+    },
+    {
+      "time": "11 Apr 2002 — 9:33am",
+      "content": "Posts missing!?   \n   \nClive Barker: site has no style sheets, and is poorly designed and coded. Is that what you meant?   \n   \nNetscape 4.79 is browser of choice for one reason alone: it doesn't tolerate mistakes in code as IE does. Also, given the developing nature of CSS it's a prerequisit to test in multiple browsers.   \n   \nThe issue with the highlighted page is that the functionality doesn't carry from page to page within the site, and it's poor user interface design to rely on something that will change in implementation from site to site (or even page to page). Built-in browser functionality is preferable, and more consistent.   \n   \nIt's such a good idea that MS stole the idea from it's Mac Business Unit and put it into Win browsers too.   \n   \nThe latest Nav/Mozilla releases are both stable and fast, something IE on the Mac hasn't been up to 5.1.3 (everything before was a dog!). Mac IE 5.1.3 still has bugs with encoding and form submission, but it is getting better.   \n   \nThe one thing IE does better than Nav 4.x is render complex tables quickly - but the Nav/Mozilla 6.x releases make up for that.   \n   \nAs for consistency - sure IE is more consistent, but that's just because so many people (idiots) use it as their benchmark and don't test in other browsers.   \n   \nThe really dumb thing about IE up to the most recent releases was that the Win version running under emulation in VPC was faster than the \"native\" Mac version!?\n\n"
+    },
+    {
+      "time": "11 Apr 2002 — 9:36am",
+      "content": "\\> it doesn't tolerate mistakes in code   \n   \nYes, intolerance is a great virtue.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "11 Apr 2002 — 11:53am",
+      "content": "Almost.   \n\"You spin - I am gravity.\"   \n   \nAnd if you think punctuation is secondary:   \n [http://listserv.heanet.ie/cgi-bin/wa?A2=ind0204&L=typo-l&F=&S=&P=4614](http://web.archive.org/web/20131022115630/http:/listserv.heanet.ie/cgi-bin/wa?A2=ind0204&L=typo-l&F=&S=&P=4614)   \n   \nhhp\n\n"
+    },
+    {
+      "time": "12 Apr 2002 — 5:52pm",
+      "content": "\"You spin - I am an en dash\"?!\n\n"
+    },
+    {
+      "time": "15 Apr 2002 — 8:28am",
+      "content": "C. Stalin: \"The one thing IE does better than Nav 4.x is render complex tables quickly\"   \n   \nNope, the one and important thing it does better is comply with standards--still does not do it completely, but will handle a standards-compliant page MUCH better than Netscape 4.x\n\n"
+    },
+    {
+      "time": "16 Apr 2002 — 12:14pm",
+      "content": "-deleted-\n\n"
+    },
+    {
+      "time": "16 Apr 2002 — 8:58am",
+      "content": "-deleted-\n\n"
+    },
+    {
+      "time": "16 Apr 2002 — 11:03am",
+      "content": "-deleted-\n\n"
+    },
+    {
+      "time": "16 Apr 2002 — 2:01pm",
+      "content": "Kermie, I still find IE a bit of a dog, I also think you have to put the whole thing in a little bit of historical context. I like Nav 4.x because it's low overhead (processor, memory and HD) and it's pretty stable. IE renders... how people think they want things to render, but it's a processor hog, it wants plenty of RAM and at regular intervals it just stops working.   \n   \nAlthough, 5.1.3 is much improved over 5.0.   \n   \nOn the other hand we have several 'Zilla/Gecko based browsers - which are standards compliant - if a little wobbly.   \n   \nThe historical angle with Nav 4.x is that it's old code, I think v4 was launched about 98, when IE was truly... not good.   \n   \nAs far as standard compliance goes, we wouldn't have gotten very far if Netscape hadn't pushed the boundries - tables were a Netscape, unofficial, extension to the HTML spec.\n\n"
+    },
+    {
+      "time": "16 Apr 2002 — 2:13pm",
+      "content": "Clive, I think your obviously strong dislike of MS is preventing you from seeing what most of us clearly do: overall, IE is a better browser (irrespective of how it got there).   \n   \nI happen to use NS4.7x, but simply because I have a massive \"legacy email\" situation, and the handful of sites I go to are adequately stable under NS. But whenever somebody points me to a new site, I simply dread clicking on the link, and like one time out of four my dread ends up being justified! :-/ In which case I fire up IE, and go to that site, with very rarely a problem.   \n   \nUse the newer versions of NS? There are more horror stories there.   \n   \nThe bottom line is this:   \nCompliance, shmompliance - people need tools that \\*work\\*.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "16 Apr 2002 — 2:34pm",
+      "content": "\\> competition being good for the consumer...   \n   \nLong live sweat shops!   \n   \nhhp\n\n"
+    },
+    {
+      "time": "16 Apr 2002 — 5:10pm",
+      "content": "Joe, long term I think it's a mistake to not \"test against a huge amount of variables\" - web sites take just as long, if not longer, as print to put together. Some of those sites are going to be \"historical records\".   \n   \nRight now there aren't many sites that have been up, and intact, for four years or more, but I've certainly worked on \"sub-sites\" that are pretty much intact from the day they first went up - in that time period.   \n   \nNo one is really going to want to come along five or ten years later and tear those things apart again to make them work (because someone relied on the dominant browser of the time - which had non-standard features). Clean code is your future - no one wants to go back and do it again, elegance in code is just as evident as elegance in design.   \n   \nFour year's ago IE had next to no market share, things will change as development goes on in the morass that is HTML development. Right now, IMO the market choice for browsers is richer than it's ever been - there are at least three different Gecko-based browsers, IE, iCab, OmniWeb and Opera - just for the Mac. The 6.x releases of Mozilla and Netscape are pulling together nicely, the other Gecko browser, Chimera has some nice features and is well integrated into MacOS X.   \n   \nWith AOL switching its browser to a Netscape-based offering it's clear to me that the competition is far from over.   \n   \n\\<blink\\>\"My name is Joe\"\\</blink\\> (too)\n\n"
+    },
+    {
+      "time": "16 Apr 2002 — 6:45pm",
+      "content": "Just to reinforce your point: In the overall, and unlike at Typophile, almost all users (about 95%) are on Windows - for better or worse.   \n   \nBTW, here's a great source for detailed stats:   \n [http://www.TheCounter.com/stats/](http://web.archive.org/web/20131022115630/http:/www.thecounter.com/stats/)   \n   \nExample: comparing April 2001 to April 2002, NS has dropped from 10% to 5%.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "16 Apr 2002 — 7:21pm",
+      "content": "Joe, certainly, the stats have changed. But certainly they'll change again. AOL has a huge influence - globally, cross-platform.   \n   \nAlso you have to remember that for most Mac installs over the last three years (perhaps more) the default (and often only) browser was IE - installed by Apple.   \n   \nAs I wrote before IE 5.1.3 is a decent browser - the first time I could say that about IE (note, recently updated to 5.1.4, due, surprise, surprise, to security issues) - but it still tends to launch into Classic when running X!?   \n   \nAnyone who's had to develop web sites knows that IE 5.0 was a dog (real encoding issues on forms, complicated by poor memory management), and IE 4.5 for Mac was the main reason many sites couldn't be developed with fairly advanced DHTML.   \n   \nNav 4.7 may be a bit of a clunker, but it is solid.   \n   \nGoing out for a late lunch booze-up you guys will have to continue on your own!\n\n"
+    },
+    {
+      "time": "10 Apr 2002 — 10:05pm",
+      "content": "Our comrade raises a lot of good points. Why   \nrecreate functionality that a browser can do?   \nEspecially when you can only do it poorly at   \nbest?   \n   \nThis isn't a question of being 'user friendly' it's   \na matter of practicality.   \n   \nRegarding the size differences Kevin brings up:   \nI think this is not a difference between Mac and   \nPC, it's the difference between Internet Explorer   \nand Netscape (it's platform independent).   \n   \nTry this: if you're running IE, go to your   \npreferences and select \"Language/Fonts\" and   \nnotice the default resolution is 96 dpi, while in   \nNetscape I believe it's 72 with no option to   \nchange it. When I change this setting to 72 it's   \nmuch more true to what I'm used to in Netscape.   \n   \nQuestion: Is the whole Windows OS 96dpi? That's   \nmy suspicion but I'm not sure.   \n   \n   \nThe other Joe\n\n"
+    },
+    {
+      "time": "11 Apr 2002 — 12:32am",
+      "content": "Do you mean design purist? If that's what you   \nmean, then I'm guilty as charged. (HTML is not   \na pure art. People have been breaking HTML   \nto make it work since before Al Gore invented   \nthe 'net.)   \n   \nOn the web there are a hundred things that   \nare beyond a designer's control (color,   \nresolution, browsers, fonts, platforms,   \nplugins). I'm all for reigning in what I can.   \nWhich means I want to know what px size my   \nuser's type is in order to craft that experience.   \n   \nMy take: if you have a really long block of   \ncontent, run it in a narrower column with   \nslightly more line spacing. Or break it into   \nmore pages with appropriate pacing so the   \nreader can pause briefly between chunks of   \ncontent (like we've tried to do in our articles).   \nOr better still, provide a printable version or   \nPDF.   \n   \nI dread the day when web sites are designed   \nfor the lowest common denominator. Jakob   \nNielsen can have the all Arial, all vanilla   \nweb.   \n   \nNow that I'm finished ranting, please don't   \nput me into a black and white, \"for users or   \nagainst users\" camp. There may be very   \nviable--albeit few--instances to use this text   \nresizing thing...   \n   \nIn the end, I'm a believer in making decisions   \nbased on the maximum benefit to the   \nmaximum number of users (but again, not the   \nlowest common denominator.)   \n   \n//jp\n\n"
+    },
+    {
+      "time": "11 Apr 2002 — 12:44am",
+      "content": "I have to agree on the Netscape issue. Let's   \nall let that browser die quietly and quickly while we   \nsilently mourn the death of that slow-to-change   \nunderdog. (I had an easier time fighting for NS   \nwhen it wasn't an AOL product.)   \n   \nI finally had to switch browsers (to an MS product,   \n\\*gasp\\*) when I discovered that IE displays sites   \nmuch more reliably and with much more stability   \non my Mac. It was a sad but liberating day.\n\n"
+    },
+    {
+      "time": "11 Apr 2002 — 11:45am",
+      "content": "You spin, I am gravity.\n\n"
+    },
+    {
+      "time": "11 Apr 2002 — 11:59am",
+      "content": "An em dash would be funnier.\n\n"
+    },
+    {
+      "time": "16 Apr 2002 — 11:03am",
+      "content": "-deleted-\n\n"
+    },
+    {
+      "time": "16 Apr 2002 — 2:28pm",
+      "content": "Comrade Stalin,   \n   \nYou're absolutely right... had it not been for   \nthe browser wars of 97 through '00+ we wouldn't   \nbe where we are right now. Just supporting the   \nold addage about competition being good for the   \nconsumer...   \n   \n(Let Karl keep rolling in that grave.)   \n   \nSo, it's a double edged sword. If everybody moves   \nover to IE there will be stagnation there. But   \nthen again, if everybody moves over to IE, we can   \nspend our time developing rich experiences and   \nnot testing against a huge amount of variables...\n\n"
+    },
+    {
+      "time": "16 Apr 2002 — 5:25pm",
+      "content": "Typophile stats are pretty telling. Traditionally   \nthe Mac has been the bastian for Netscape.   \n(You know the whole underdog/anti MS thing.   \nIE wasn't tied to the OS like it was on Windows.)   \nI think two years ago, about 50% of Mac users   \nwere on NS.   \n   \nSo looking at our statistics and seeing that   \n55% of our users are on Macs you'd think our   \ntotal browser stats would reflect something   \nlike 30% Netscape.   \n   \nTypophile.com Browser Stats for March '02 by   \nnumber of requests:   \n   \n188797: IE   \n\\_25568: Netscape   \n\\_\\_2560: URL\\_Access   \n\\_\\_1430: Netscape (compatible)   \n\\_\\_\\_875: Opera   \n   \nThat, about 12% NS among an audience   \nthat's 55% Mac. Two years ago it would've   \nbeen more like 50% Netscape.   \n   \nAnybody else see trends like this among Mac   \nusers? (This is no surprise to the PC crowd.)\n\n"
+    }
+  ]
+}

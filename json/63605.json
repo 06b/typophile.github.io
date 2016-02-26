@@ -1,0 +1,30 @@
+{
+  "id": "63605",
+  "title": "Problem in Font Validator regarding 'italic angle' value and 'head.macStyle'",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi there,\n\nI am generating a 'non style-linked' font family and for that reason I am not using the checkboxs 'Font is Italic', etc.  \nFollowing advice given in this forum, I set a value in the 'Italic Angle' field (Font Info \\> Metric and Dimensions) because in that way styles are better listed in applications like InDesign.  \nThe problem is that when I test the generated OT font in Font Validator, it seems to find an inconsistency in Italic styles:\n\n'The italicAngle is nonzero, but the head.macStyle italic bit is no set'.  \nThe error is marked red in the report.\n\nIs it really something to fix or I should ignore it?\n\nThanks in advance.\n\n",
+  "author": "<a href=\"/web/20100203123359/http://typophile.com/user/1137\" title=\"View user profile.\">RamiroE</a>",
+  "time": "<br>",
+  "uid": "1137",
+  "comments": [
+    {
+      "time": "",
+      "content": "On pointing out some errors, the Font Validator does a great job. On others ... it's safe to ignore it. If you search this forum you might find a few priors on this (and I am pretty sure this one has come up before).\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Theunis,\n\nSorry, I can not find a single typophile entry dealing with this problem :(\n\nCheers.\n\nR.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Using Google I found [this one-year-old thread](http://web.archive.org/web/20100203123359/http:/ww.typophile.com/node/45985) ... sorry, that must be the one that rang my bells.\n\n"
+    },
+    {
+      "time": "",
+      "content": "In the AFDKO package there's a file named MSFontValidatorIssues.htm that lists some of the issues you might run into when testing OpenType-CFF fonts in MS Font Validator. And one of the things listed indeed sounds like the problem you're having. Here's the quote from that file:\n\n<cite>A font which is not an italic style of another face in the same family can nevertheless have large italic angle. Examples are script fonts and italic designs which are the only font in the family. In this case the Adobe Type Department prefers to enter the real italic angle in the post table italicAngle field. This way, the insertion bar is correctly slanted in most programs. However, this will cause the following messages:</cite>\n\n`E1316 The macStyle italic bit is clear, but the post table italic angle is nonzero`\n\n`E2308 The italicAngle is nonzero, but the head.macStyle italic bit is not set`\n\n"
+    }
+  ]
+}

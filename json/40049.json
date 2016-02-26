@@ -1,0 +1,34 @@
+{
+  "id": "40049",
+  "title": "100% black from inDesign",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "Hi,  \nI have a file in inDesign that I need to send to a publisher in pdf format. But when I output it (using print to pdf), the 100% black gets spread over all the cmy plates as well. I have color management turned off, but can't seem to find what I need to change to stop this.\n\nAny ideas?\n\n",
+  "author": "cNorris",
+  "time": "13 Dec 2007 — 8:26am",
+  "uid": "25013",
+  "comments": [
+    {
+      "time": "13 Dec 2007 — 8:29am",
+      "content": "Are you sure it's not process black or 'rich' black?\n\n"
+    },
+    {
+      "time": "13 Dec 2007 — 8:34am",
+      "content": "It is just the default black in the swatches, I think. But it shows as c0 m0 y0 k100, and when I look at the \"Seperations Preview\" in inDesign, all the art shows up only on the black plate-which is what I want. But when I print to pdf and then look at Output Preview the art shows up on all four plates.\n\n"
+    },
+    {
+      "time": "13 Dec 2007 — 9:08am",
+      "content": "It might be something in the PDF output settings converting spot color to CMYK, or CMYK to RGB and back again or something. Are you generating your PDF through the \"Print...\" dialog, or \"Save as...\", or \"Export...\"?\n\n"
+    },
+    {
+      "time": "13 Dec 2007 — 9:48am",
+      "content": "Check you preferences. You might have it set to output all blacks as rich black.\n\n ![](http://web.archive.org/web/20150124044750im_/http:/typophile.com/files/outputblackrich_4605.gif)\n\n"
+    },
+    {
+      "time": "13 Dec 2007 — 10:03am",
+      "content": "Firstly turn on colour management in Bridge (so that the settings are synchronised across CS applications). Choose the Prepress setting for your territory. Now don't print and distil to make the PDF, but use the export menu in InDesign. Choose the PDF X-1a setting and you are golden.\n\nDoing it this way ensures that untagged CMYK or grey colour values defined in InDesign goes unchanged to the PDF. Make sure your document is converted to the new colour settings you are using, and check to see that all elements are now tagged with the correct colour: K=100\n\nChanging the appearance of black in the preferences has no effect on the values in the PDF, it only changes how black is show on your screen.\n\n"
+    }
+  ]
+}

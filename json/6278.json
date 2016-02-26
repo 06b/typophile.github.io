@@ -1,0 +1,34 @@
+{
+  "id": "6278",
+  "title": "Mac OS X Kerning with Fontlab 4.5",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "After making a kerning run through my current project, I fired up TextEdit on Mac OS X 10.2 to check out the results. I was a bit shocked and fully dismayed to see nary a kern. Adobe InDesign 2.0, on the other hand, handles the kerning just fine.   \n   \nAfter a bit more exploring, it seems clear that you have to choose a platform. Apple supplied fonts kern only with apps that use their text engine, no kerning in sight in InDesign. FontLab generated fonts, OpenType in my case, kern great in InDesign but fall over in TextEdit.   \n   \nIs this really the sad state of type on Mac OS X? After finally settling on OpenType as a crossplatform format, are we going to have to go back to offering multiple downloads, one for each text engine? Or is there a way to insert an Apple format kerning table into my OpenType font?\n\n",
+  "author": "Aaron Sittig",
+  "time": "24 Jan 2003 — 6:50am",
+  "uid": "1290",
+  "comments": [
+    {
+      "time": "24 Jan 2003 — 5:20pm",
+      "content": "I think it's because TextEdit throws away kerning and doesn't care about OpenType features. It ignores them. It prefers to see Apple's own AAT tables built into the font. So that's why TextEdit likes Apple's own fonts.   \n   \nInDesign, on the other hand, is OT-savvy, but not AAT-savvy, I think. So it's the other way around. There is less than a handful of fonts that have both OT and AAT tables (ok, only one, I guess). I suspect that most people are going to ignore AAT and develop OT tables for their own fonts, regardless of which technology is better.   \n   \nI'm totally guessing.   \n   \nAlan\n\n"
+    },
+    {
+      "time": "24 Jan 2003 — 5:33pm",
+      "content": "\\> only one, I guess   \n   \nWhat font is that?   \n   \nhhp\n\n"
+    },
+    {
+      "time": "24 Jan 2003 — 6:28pm",
+      "content": "Maybe it's time to dust of my programmer hat and write an app to sync the two kerning tables. Apple has some command line tools for OS X to help develop AAT fonts. They may lend themselves to being scripted.\n\n"
+    },
+    {
+      "time": "24 Jan 2003 — 6:48pm",
+      "content": "'Tis the season to get into font scripting, my friend!   \n   \nhhp\n\n"
+    },
+    {
+      "time": "25 Jan 2003 — 8:50am",
+      "content": "\\>\\> only one, I guess   \n  \n\\> What font is that?   \n  \nDamn me, I got it wrong. I was thinking of the one that supports both OT and Graphite. Can't remember the name, though.\n\n"
+    }
+  ]
+}

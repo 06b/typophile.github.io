@@ -1,0 +1,126 @@
+{
+  "id": "36019",
+  "title": "CS hinting in OS X -- what's going on?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": " ![](http://web.archive.org/web/20071231133924im_/http:/www.typophile.com/files/CShinting_5685.jpg)\n\nThese are all screen grabs of the same text, set in the same font (.otf, Type 1 outlines) with some variation in hinting settings.  \nAt left is TextEdit, showing the way the system rasterizes fonts — love it!  \nAt centre is InDesign, at right Illustrator.\n\nThe bottom type face is “properly” hinted with stem widths and alignment zones (generating with no hints at all produces a similar result).  \nI find it much too weak and blurry, and would prefer something stronger, like in TextEdit.  \nThe only way I could achieve something like that was by giving the stem widths “crazy”, very narrow values - that’s the top font in the CS specimens. I hesitate to do that, in case Adobe changes its rendering engine in the future.\n\nWhat’s going on — why does CS over-ride Apple’s rasterizing with something that, at least for this typeface, is inferior?\n\nOr have I missed something important in the production process?\n\n [‹ Connecting AFDKO & FontForge](http://web.archive.org/web/20071231133924/http:/www.typophile.com/node/36229 \"Go to previous forum topic\") [Problem - Adobe Creative Suite bundled fonts can't be used in other apps ›](http://web.archive.org/web/20071231133924/http:/www.typophile.com/node/36282 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20071231133924/http://www.typophile.com/user/2021\" title=\"View user profile.\">Nick Shinn</a>",
+  "time": "<br>",
+  "uid": "2021",
+  "comments": [
+    {
+      "time": " 11.Aug.2007 10.10pm",
+      "content": "As far as I know, many Adobe programs do not utilize/depend on Mac OS X core services/frameworks (APIs) in favor of their own ’proprietary’ APIs. For example, Apple’s Aperture uses Quartz and probably Core Animation for ’slickness’ but Adobe’s Lightroom does not- it uses its own proprietary software.\n\nBut Thomas Phinney would for sure know what’s going on here though!!!\n\nMikey\n\n"
+    },
+    {
+      "time": " 11.Aug.2007 10.29pm",
+      "content": "Nick, you must not be reading the many discussions about font rasterization that keep cropping up here!\n\nAnyway, the short answer is that most Adobe creative suite apps use their own Adobe rasterizer, and thereby get consistent screen rendering across all platforms they run on. This has been true for many years - going back to Illustrator 7, Photoshop 5, and InDesign 1.\n\nI can’t say why you’re getting the particular results you’re getting, though. I’m sure even our rasterizer engineers couldn’t tell you without the font on hand.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": " 11.Aug.2007 10.33pm",
+      "content": "Adobe use their own rasterisers, not the system rasterisers, so they are completely bypassing Apple’s Quartz rendering. They do the same thing on Windows. It is part of Adobe’s efforts to avoid dependency on system resources and to provide, as far as possible, identical cross-platform user experience.\n\n[Edit: Thomas and I appear to have been typing at the same time.]\n\n"
+    },
+    {
+      "time": " 12.Aug.2007 4.48am",
+      "content": "...and TextEdit uses integer spacing vs Cooltype’s subpixel position ing, don’t it?\n\nCheers!\n\n"
+    },
+    {
+      "time": " 12.Aug.2007 7.54am",
+      "content": "_Nick, you must not be reading the many discussions about font rasterization that keep cropping up here!_\n\nSorry Thomas, I do my best to be a good little techie, but some things tend to make my eyes glaze over more than others :-)\n\n"
+    },
+    {
+      "time": " 12.Aug.2007 1.59pm",
+      "content": "_...and TextEdit uses integer spacing vs Cooltype’s subpixel positioning, don’t it?_\n\nYes, but note that not all Adobe rendering is CoolType subpixel rendering. I’ve lost track of how many different rasterisers Adobe are using now.\n\n"
+    },
+    {
+      "time": " 12.Aug.2007 8.16pm",
+      "content": "I can totally understand why discussions of font rasterization would cause glazing, truly. :/\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": " 13.Aug.2007 1.40am",
+      "content": "Also, I believe that the Apple rasterizer completely ignores hints. I think it does some smart supersampling, i.e. rasterizes the glyphs at, say, 2x the actual size and then applies its very efficient antialiasing to scale the glyphs down. It seems that this is why you don’t see any changes when you change the stem values.\n\nThe Apple rasterizer has a tendency to draw type “more readable”, i.e. very often, simply “bolder”. This is obvious with Apple’s goal at hand: the best screen readability possible. On the other hand, Adobe’s goals are different, at least in InDesign and Acrobat: to simulate the print appearance as good as possible. This is why type may be drawn lighter (with accurate hinting) because the Adobe rastierizer tries to balance two aims: on one hand, make the type readable on screen, on the other hand, show the fonts in an appropriate relation to bitmaps, outline drawings etc. that appear in the project.\n\nPlease note that if you open a PDF in Apple’s Preview, it usually gives you good on-screen reading experience but it does not accurately reflect the actual relations between the type weight and the other elements of the publication. So if you used Preview’s appearance as a preview for what you’ll get in print, you may end up being bitterly disappointed.\n\nA.\n\n"
+    },
+    {
+      "time": " 13.Aug.2007 1.40am",
+      "content": "Also, I believe that the Apple rasterizer completely ignores hints. I think it does some smart supersampling, i.e. rasterizes the glyphs at, say, 2x the actual size and then applies its very efficient antialiasing to scale the glyphs down. It seems that this is why you don’t see any changes when you change the stem values.\n\nThe Apple rasterizer has a tendency to draw type “more readable”, i.e. very often, simply “bolder”. This is obvious with Apple’s goal at hand: the best screen readability possible. On the other hand, Adobe’s goals are different, at least in InDesign and Acrobat: to simulate the print appearance as good as possible. This is why type may be drawn lighter (with accurate hinting) because the Adobe rastierizer tries to balance two aims: on one hand, make the type readable on screen, on the other hand, show the fonts in an appropriate relation to bitmaps, outline drawings etc. that appear in the project.\n\nPlease note that if you open a PDF in Apple’s Preview, it usually gives you good on-screen reading experience but it does not accurately reflect the actual relations between the type weight and the other elements of the publication. So if you used Preview’s appearance as a preview for what you’ll get in print, you may end up being bitterly disappointed.\n\nA.\n\n"
+    },
+    {
+      "time": " 13.Aug.2007 4.40am",
+      "content": "_“I can totally understand why discussions of font rasterization would cause...”_   \n... most people to stop working on font quality. :)\n\n**Screen fonts:**  \nThe Mac uses all of the hints some of the time.  \nWindows uses some of the hints all of the time.  \nAdobe uses none, ever.  \nThe reason for this minor discrepancy is that each one has landed on _the perfect solution_.  \nAll the concerned type designer has to cross this platform divide is an outline, a baseline, and a prayer.\n\nCheers!\n\n"
+    },
+    {
+      "time": " 13.Aug.2007 7.27pm",
+      "content": "David: _Adobe uses none, ever._\n\n?\n\nSo far as I know, Adobe’s PS rasterisers use all of the hints all of the time, but interprets them differently depending on the rendering model. Adobe’s TT rasterisers use some of the hints all of the time, but I’m not sure what they do with x-deltas in the subpixel rendering.\n\nSo far as I know, only Apple’s Quartz rendering completely ignores all hints.\n\n"
+    },
+    {
+      "time": " 13.Aug.2007 9.14pm",
+      "content": "So, as an aspiring type designer, does this mean that I can just click the autohint button in Fontlab and forget it, because by the time I’ve been doing this stuff long enough to have figured out how to apply all of this nuttiness it will all just be obsolete?\n\n"
+    },
+    {
+      "time": " 14.Aug.2007 4.28am",
+      "content": "“So far as I know, Adobe’s PS rasterisers use all of the hints all of the time, but interprets them differently depending on the rendering model.”\n\nIf “interprets them differently” means not using them at all, we’re agreed.\n\n“Adobe’s TT rasterisers use some of the hints all of the time, but I’m not sure what they do with x-deltas in the subpixel rendering.”\n\nNo way. Thomas?\n\n“Apple’s Quartz rendering completely ignores all hints.”\n\nWe know this is not true, right? Quartz uses all the hints when rendering is below the user-defined threshold!?\n\n“all of this nuttiness it will all just be obsolete”\n\nLow resolution is a thing of the present and future, so I’m not sure. If the discerning user becomes obsolete, maybe...\n\nCheers!\n\n"
+    },
+    {
+      "time": " 14.Aug.2007 10.04am",
+      "content": "<cite>Low resolution is a thing of the present and future, so I’m not sure.</cite>\n\nI meant the quirks of all the various rasterization methods, which will probably be obsolete by the time they’ve been figured out by people not on the respective programming teams. It’s sort of comparable to trying to figure out how Internet Explorer actually handles HTML.\n\n"
+    },
+    {
+      "time": " 14.Aug.2007 9.48pm",
+      "content": "With the exception of Flash’s Saffron rasterizer, AFAIK all Adobe’s rasterizers make heavy use of hint information. (If the CoolType rasterizer ignored hints, Nick would not have gotten dramatic changes from simply adjusting the hinting.)\n\nThe CoolType rasterizer used by InDesign, Illustrator, Photoshop and Acrobat/Reader has several configurable modes of anti-aliasing. For example, only Acrobat and InDesign story editor (and InCopy) support enhanced rendering for LCD screens.\n\nI believe John is right that CoolType ignores TrueType delta hints - I think it ignores both X and Y deltas, but I’m pretty sure it ignores X deltas. Mind you, this might be true only when doing LCD rendering... I don’t pay close attention to the non-LCD stuff.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": " 14.Aug.2007 11.59pm",
+      "content": "I think I’ve got it figured out. I needed to play around with the standard stem width values a bit more.  \nUsually I don’t put this much hinting in fonts, leaving things a bit soft but with more accurate letter shapes, but that didn’t seem to work for this kind of Didone typeface. So now it’s sharp and black (InDesign at centre, Illustrator right), although the proportions aren’t as true as the Apple rendering (TextEdit, left). It’s hard to say which is better, especially as their relative effectiveness varies with size, but in general I prefer the less bitmappy look of the Apple — although there are probably a few more tricks I could do in nuancing the hinting.\n\n ![](http://web.archive.org/web/20071231133924im_/http:/www.typophile.com/files/Hinty_3815.jpg)\n\n"
+    },
+    {
+      "time": " 15.Aug.2007 4.42am",
+      "content": "Here I have created an exampe of the horrible screen type quality you get from Adobe CS cool type engine:\n\n[http://www.iconwerk.de/illustrator.jpg](http://web.archive.org/web/20071231133924/http:/www.iconwerk.de/illustrator.jpg \"http://www.iconwerk.de/illustrator.jpg\")\n\nI can’t believe that a company like Adobe has no professional typographer in the cool type team.  \nCompare the perfect Apple Preview type to the jaggy Illustrator CS type. And the bad quality isn’t even CONSISTENT across the Adobe apps!\n\nYou can’t even differenciate between a bold and a thin typeface at small sizes in AI. In Apple Preview you can.\n\nBTW.: This started with AI 10 and the new cool type engine. Makes AI 13 CS3 not the perfect choice for typophiles...\n\n"
+    },
+    {
+      "time": " 15.Aug.2007 7.16am",
+      "content": "That looks much better now, Nick. I guess the more extreme the contrast, the more hinting work to be done?\n\nChrisL\n\n"
+    },
+    {
+      "time": " 15.Aug.2007 8.31am",
+      "content": "That’s right Chris, you have to make sure that the fine strokes register as a standard stem width; that sharpens them up — otherwise they are rendered as a blur which all but disappears.\n\nBut as I said, the downside is that the overall effect is a bit clunky bitmappy, and the proportions are wack, so it’s a tradeoff. But really, it’s a bit much to expect to a Didone to render nicely on screen.\n\nIt seems that typographers such as Stefan may prefer something which is indistinct, rather than something which is sharp but inconsistent.\n\nHowever, in Adobe’s defence, I must say that now that I’ve figured out a rendering for this font on CS for the Mac, I don’t have to worry how it will look in CS on a PC, and these hinting settings should be OK for Word as well.\n\nStefan, what is the font used in your sample? If it’s not an Adobe font, some of the onus for its performance may fall on the foundry that produced it.\n\nWith regards to Didone types, Apple’s system font Didot renders weakly in both the OS apps (eg Textedit) and CS apps — it seems that there is no hinting, the assumption being that the system will take care of everything.\n\n"
+    },
+    {
+      "time": " 15.Aug.2007 9.38pm",
+      "content": "One might also find it interesting to compare Acrobat/Reader’s rendering, with the LCD enhanced rendering turned on.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": " 16.Aug.2007 8.54am",
+      "content": " ![](http://web.archive.org/web/20071231133924im_/http:/www.typophile.com/files/SmoothOff_4954.gif)\n  \nAcrobat CoolType LCD “Smoothing” off.  \nLeft: Font hinted; Right; Font not hinted.\n\n ![](http://web.archive.org/web/20071231133924im_/http:/www.typophile.com/files/SmoothOn_4775.gif)\n  \nAcrobat CoolType LCD “Smoothing” on.  \nLeft: Font hinted; Right; Font not hinted.\n\nThanks Thomas, CoolType makes a big improvement — but it would help if it were device sensitive — it is off by default on my Apple LCD monitor, and one has to find the “Smoothing” option in the Acrobat Preferences, from among 27 items, some of which have more promising names, such as Reading and Page Display. When one sees the effect of CoolType, it’s more Sharpening than Smoothing.\n\n"
+    },
+    {
+      "time": " 16.Aug.2007 5.12pm",
+      "content": "\\> _But as I said, the downside is that the overall effect is a bit clunky bitmappy, and the proportions are wack, so it’s a tradeoff._\n\nIt’s a tradeoff indeed. It’s the result of the grid-fitting process. The hints act as guides to the rasterizer, telling it how the outlines can be adjusted/distorted so that more pixels can be completely turned off (i.e. made black), and thus making the resulting raster-letterforms appear crisp.  \nNot allowing grid-fitting will result in blurrier letter-images.\n\nThis is an interesting observation as well: [http://www.typophile.com/node/31448#comment-185584](http://web.archive.org/web/20071231133924/http:/www.typophile.com/node/31448#comment-185584 \"http://www.typophile.com/node/31448#comment-185584\")\n\n"
+    },
+    {
+      "time": " 16.Aug.2007 8.41pm",
+      "content": "_it’s a tradeoff_\n\nSo a design space is opened up, because different kinds of typeface call for different kinds of hinting.  \nBut I don’t think users pay a lot of attention to the on-screen hinting of fonts — other than to big-up Georgia and Verdana — in general one forms one’s opinions of what a typeface looks like based on observing how it behaves in offset print, or by looking at its lettershapes onscreen at very large magnification.\n\n"
+    },
+    {
+      "time": " 17.Aug.2007 2.04pm",
+      "content": "Hi again:\n\nJust curious... is there a difference in rasterization output between Type1 and TrueType outlines?\n\nMike Diaz :-)\n\n"
+    },
+    {
+      "time": " 19.Aug.2007 7.00pm",
+      "content": "Short answer: It depends. Mostly the difference is related to differences in the hinting (which goes with the outlines) rather than the outline format alone.\n\nNot much difference in Flash, nor in Mac OS X’s native rendering. More difference with most other renderers. With both CoolType’s LCD-enhanced rendering, and WPF ClearType rendering, with properly-hinted fonts, I don’t know that you’ll consider either outline type significantly “better” - they’re just different.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": " 20.Aug.2007 5.36am",
+      "content": "Found this:  \n [http://antigrain.com/research/font\\_rasterization/index.html](http://web.archive.org/web/20071231133924/http:/antigrain.com/research/font_rasterization/index.html)\n\n"
+    },
+    {
+      "time": " 20.Aug.2007 5.41am",
+      "content": "Thanks Karsten!\n\nChrisL\n\n"
+    },
+    {
+      "time": " 21.Aug.2007 9.00am",
+      "content": "Yes thanks. I had been following the related links. This has some great ideas, including mashing the weight to fit an individual’s need and _iiiiiiiiiiiiii_...can’t remember what else ;)\n\nBut it still asks (and presumably is trying to answer) the question: **“Can’t we have hinting at low resolutions, and accuracy at high resolutions, too? “**. . . In addition: **“while Microsoft uses their aggressive hinting there will be no higher than 100 DPI resolutions, period”**\n\nI checked, it was published this month and higher than 100 DPI resolutions have been here since at least 1988, so I think he’s confused. :( He’s coming from a Windows environment, where billions of options are “required” and a scaleable operating system is like getting a whole shipload of sacred cattle way too close to the rocks. I think.\n\n**“No more horizontal pixel grid! Really! From now on the horizontal grid is 1/256 of a pixel!”**  \nWhat’s more, optical scaling was never required in the first place, you silly font freaks, a single digital outline font, can do all that’s required for everybody’s needs everywhere. Any smart guy with 256 options should be able to make “great looking type”, really! (he’s got the algorithm).\n\nI think the point that’s been made over here, the last year&1/2, is that there is a spectrum. That safari looks like an elfinized nerdsion of itself on windows, _(the origin of this link and related posts)_, is proof of the fact that disintegrated type systems running on disintegrated hardware in a disintegrating network, can make type look positively and negatively disintegrated, all over the spectrum, and particularly bad in some places...he almost get there when he says:\n\n**“As [a] result the fonts are not freely scalable; they only seem to be scalable but they are not.”**\n\nooooooooooh,\n\nCheers!\n\n"
+    }
+  ]
+}

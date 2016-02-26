@@ -1,0 +1,26 @@
+{
+  "id": "60189",
+  "title": "Create Font with Letter Combinations",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "I'm creating a handwritten font right now. Had a question if anyone can help?\n\nI'm currently using Fontographer to create.\n\nCan I make the font so that when two Zs (e.g. ZZ) are typed together they will produce a different looking combination effect versus if I use a Z in another way (e.g. Za or ZA)? Basically, ZZ is stylized a different way from a regular Z.\n\nI think this is called a ligature, but I'm new to font creation and new to Fontographer. I only found one mention of ligatures in the Fontographer manual.\n\nThanks in advance for the instruction.\n\n",
+  "author": "khedaywi",
+  "time": "21 Jul 2009 — 6:44pm",
+  "uid": "23452",
+  "comments": [
+    {
+      "time": "21 Jul 2009 — 8:21pm",
+      "content": "Yes, it's called ligatures. You can set a character substitution using OpenType feature tag which goes like this:\n\n# Ligature formation  \nfeature liga {  \n substitute f i by f\\_i;  \n substitute f l by f\\_l;  \n} liga;\n\nYou can find more sample of this at:  \n [http://www.adobe.com/devnet/opentype/afdko/topic\\_feature\\_file\\_syntax.html](http://web.archive.org/web/20131020185322/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html \"http://www.adobe.com/devnet/opentype/afdko/topic\\_feature\\_file\\_syntax.html\")\n\nUnfortunately, you can't write those feature tags in Fontographer. Fortunately, you can use a tool called VOLT which is freely downloadable from:  \n [http://www.microsoft.com/typography/VOLT.mspx](http://web.archive.org/web/20131020185322/http:/www.microsoft.com/typography/VOLT.mspx \"http://www.microsoft.com/typography/VOLT.mspx\")\n\nGood luck!\n\n"
+    },
+    {
+      "time": "23 Jul 2009 — 3:20pm",
+      "content": "Awesome. Figured out how to do it...not in Fontographer unfortunately.\n\nfeature liga {  \nsubstitute Z Z by Z\\_Z;  \n}liga;\n\nThe above worked like a champ where the new \"Double Z\" glyph was named Z\\_Z\n\nThanks!\n\n"
+    },
+    {
+      "time": "23 Jul 2009 — 6:23pm",
+      "content": "Could we maybe see some samples?\n\n"
+    }
+  ]
+}

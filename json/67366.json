@@ -1,0 +1,118 @@
+{
+  "id": "67366",
+  "title": "Contextual Alternates: limit to massive use",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I'm designing my first typeface, a contemporary serif family with four weights. I'd like to use massive contextual alternates (as in Kinescope or Vesper), but I have doubts about the limits to use this feature.\n\nI plan to adopt contextual alternates through stylistic sets for these situations:\n\n1. beginnings and endings;  \n2. glyphs collisions and undesired optical effects;  \n3. typesetting special symbols as arrows and flourishes;  \n4. Roman numerals;  \n5. chess notation with figurines (unsure about this one);  \n6. mathematical symbols and expressions.\n\nBesides this, there would also be optional variations in some glyphs (typically, Q, R, f, a) which could also be set with stylistic sets.\n\nSo, is there any problem to set dozens or even hundreds of contextual alternates in OT tables? This may cause poor performance?\n\nI understand some of the situations I listed could be addressed with GREP styles in InDesign (as Roman numerals and chess notation), but it would be nice if the font had all these features.\n\n",
+  "author": "<a href=\"/web/20100220045515/http://www.typophile.com/user/32723\" title=\"View user profile.\">Freiberger</a>",
+  "time": "<br>",
+  "uid": "32723",
+  "comments": [
+    {
+      "time": "",
+      "content": "There won't be any performance issues. Similarly, there could be, and usually are, tons of lookups in the GPOS kern feature which don't effect rendering performance.\n\nSome of the alternates you plan to design may be better suited in other features, such as Stylistic Alternates and Discretionary Ligatures.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, Terrance.  \nWhich features do you consider to be best defined as Stylistic Alternates or Discricionary Ligatutes?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Well, stylistic alternates are usually for the 'optional variations' as you described it, like a g, a, tail on Q, etc.\n\nBe careful with ligatures too, try to resolve glyph collisions with sidebearings and kerning first.\n\nSpend some time looking at the features and how they are used with other designs.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks again. I'll follow your advice!\n\n"
+    },
+    {
+      "time": "",
+      "content": "The only program I’ve run into that has problems with numerous lookups is Illustrator, which can lag as much as a second when I type in the characters from my font Black Monday. But in that case every single character is cycled by CALT.\n\n"
+    },
+    {
+      "time": "",
+      "content": "James, this may be an issue. Do the Illustrator delay occurs just when Contextual Alternates are turned on? Which IL version are you using? Mac or Windows?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Just with CALT on, using CS3 on Mac.\n\n"
+    },
+    {
+      "time": "",
+      "content": "For what it's worth, I haven't noticed any performance hit on any of the fonts I've done that have \"advanced\" contextual stuff in them, in Illustrator or otherwise. They seem to display just as fast as any other font. Maybe they're not \"advanced\" enough.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks again for these valuable inputs.\n\nI still did not saw the use of CALT to substitute Arabic/Roman numbers. As the font is (also) designed to be used in legal texts, the idea is to typeset something like 48 and to have XLVIII in an automatic way. Maybe the idea is very much strange...\n\nThe possibility to combine chess figurines or typical computing itens (keyboard shortcuts, icons) seems also uncommon. Hope this would not be excessively out of CALT purpose.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The roman numeral thing has been done before:\n\n[http://new.myfonts.com/fonts/ihof/p22-operina/](http://web.archive.org/web/20100220045515/http:/new.myfonts.com/fonts/ihof/p22-operina/ \"http://new.myfonts.com/fonts/ihof/p22-operina/\")\n\nNo idea how it works. P22 has done some unusual things with calt, including a font that answers questions sort of like a Magic 8 Ball.\n\n"
+    },
+    {
+      "time": "",
+      "content": "It's really hard to be original these days. :-)\n\nThe feature P22 built is very smart. I believe they used nested lookups to achieve the substitution to any number, starting with units and adding set of ten, hundreds and thousands in a hierarchical way. Need to learn further about this.\n\nThanks for the tip, Mark.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I put four versions of each character in Duffy Script, and they cycle character-by-character using the \"calt\" feature, for a pseudo-random effect. I did notice a slight delay when opening large multi-page documents, but not something that might be attributed specifically to a font. I should add that this an entirely subjective observation, I haven't made any measurements or calculations.\n\n"
+    },
+    {
+      "time": "",
+      "content": "There is some performance hit, but very little, and mostly noticed on older computers and older computer systems.\n\nIn the Zapfino Extra LT Pro code that I developed in 2003, there are about 600+ contextual substitutions in about a dozen lookups. In applications such as InDesign CS2 and Notepad running on Windows XP, tested some 4-5 years ago, there was a performance hit, i.e. using a really long text (100 pages or so), it does take noticeably longer time to lay out the pages than when a \"regular\" font is used.\n\nThough in InDesign, after the initial delay in laying out the pages, the performance is good, since InDesign caches the glyphs. In Notepad, such caching does not take place, so even scrolling up and down the pages was kind of slow.\n\nBut such complex fonts are rarely used for continuous text that has hundreds of pages. Plus, the computers and the applications have gotten faster in text processing. So the problem is going away. And the benefits of smart fonts are in my opinion worth paying the (small) price.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Careful with Roman numerals.  \nI had set these up as regular ligatures of numbers (there is probably another node advising against this).  \nIt worked well - however inDesign seems to have ligatures switched on as default so all numbers above 9 became Roman numerals when entering in un-styled raw text.  \nI have since learned the lesson had have made into a Stylistic Set!\n\n"
+    },
+    {
+      "time": "",
+      "content": "@ All: thank you very very much! It's an honor to receive advices from masters in type design. My plan is to use stylistic sets as this:\n\n**1**. glyph alternates for lowercase (a, f, g, k, y);  \n**2**. glyph alternates for uppercase (G, K, R);  \n**3**. beginnings;  \n**4**. endings;  \n**5**. Roman numerals;  \n**6**. alternates for undesired optical effects;  \n**7**. arrows, flourishes and dingbats;  \n**8**. math symbols and alternates for math expressions;  \n**9**. figurine chess notation.\n\nOf course, now I have to discover how to do the Roman numerals substitution for all numbers using OT lookups. The other I believe I already discovered how to (although I did not tested all this as the design is just beginning).\n\nAgain, thank you all.\n\n"
+    },
+    {
+      "time": "",
+      "content": "See if this suits you..  \nNote - I have added roman numerals upto 16 in my fonts as this is an expected usage of numbering of the 1st section in a book. ie 16 pages in a section.\n\nI notice I have not updated the code to reflect this, but will post as is so I don't mess up what I have already.\n\nNote # The order is important :  \nI think I found through trial and error that this order seemed to work.  \nI still need to retest this, but I think it works...\n\nNote #testing if ligatures work in SS:  \nSelf fulfilling prophesy! Here I am testing it.\n\n====\n\nfeature ss05 {\n\n# Romansmall  \n # Ligatures  \n # The order is important  \n sub one' zero' zero' zero' by onethousandroman;  \n sub one' zero' zero' by onehundredroman;  \n sub five' zero' zero' by fivehundredroman;  \n sub one' zero' by tenroman;  \n sub one' one' by elevenroman;  \n sub one' two' by twelveroman;  \n sub one' three' by thirteenroman;  \n sub one' four' by fourteenroman;  \n sub one' five' by fifteenroman;  \n sub five' zero' by fiftyroman;  \n sub one by oneroman;  \n sub two by tworoman;  \n sub three by threeroman;  \n sub four by fourroman;  \n sub five by fiveroman;  \n sub six by sixroman;  \n sub seven by sevenroman;  \n sub eight by eightroman;  \n sub nine by nineroman;\n\n#testing if ligatures work in SS\n\n} ss05;\n\n============\n\nhere is my swap from lowercase to uppercase Roman numerals:  \n@roman1 being lowercase  \n@roman2 being the Caps version\n\n============\n\nfeature ss03 {  \n# Stylist Set: Roman Large\n\nsub @roman1 by @roman2;\n\n} ss03;\n\n===========\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thank you, Michael. Wonderful help! I'll try it later and then bring you back the results.\n\n"
+    },
+    {
+      "time": "",
+      "content": "One of my targets are legal texts. Brazilian Constitution has a sequence of itens numbered in Roman which goes until LXXVIII (!).\n\n"
+    },
+    {
+      "time": "",
+      "content": "When ordering the Stylistic sets the set changing from lowercase to Capital Roman numeral style needs to come last.\n\nIn my example above I have changed the order so that what was SS03 is now SS06.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Actually converting a date like 2012 to a roman numerals as you are trying to do is difficult and will need further input.  \nI have settled for a compromise and am limiting use to automatically change two numbers to small roman numerals for folios, with an option to change the result to Large Roman Numerals.\n\nI was considering a database or a modular approach but neither seemed workable.  \nIf your usage was for current dates you could create glyphs for the next 10 years perhaps?\n\nFor me the limit is that OpenType allows for a string in, like f\\_f\\_l but can only out put a single glyph and not a composite of 2 or more glyphs (to my knowledge).  \nThere might be a solution if you were able to set up conditions like \"IF there are 4 numbers together treat the first one like this and the second like this... ex-cetera\" but this is way beyond me.\n\nGood luck.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>One of my targets are legal texts. Brazilian Constitution has a sequence of itens numbered in Roman which goes until LXXVIII (!).</cite>\n\nShouldn't it be leaved to layout programs instead of fonts?\n\n"
+    },
+    {
+      "time": "",
+      "content": "You can map a single character to multiple glyphs using AFDKO, but many applications don't currently recognise this type of substitution. Moreover, I agree with riccardO that this really is more appropriate for the application to implement rather than the font.\n\n"
+    },
+    {
+      "time": "",
+      "content": " **@ Michael** : thanks again for the input.\n\n**@ Riccard0 and Agisaak** : sure, you're right. As I stated above, features like Roman numerals may be best suited for InDesign GREP styles. But the possibility to have automatic number substitution through OT hooked me. At least, it's an opportunity to learn more about OT tables and features.\n\nI'm testing a way to have this substitution for almost all numbers. Of course, this is just useful if does not cause hundreds of lines of code. If I get it done, I'll share here.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Well, without using one to many substitutions, this would be fairly straightforward provided you included ligatures for roman numerals 2, 3, 4, 6, 7, 8, 9, 20, 30, 40, 60 and 70 (assuming you only want to go as high as LXXVIII). To produce larger numbers you'd need more ligatures, but it would remain manageable. A simple ignore statement could be used to prevent the feature from applying to numbers which fall outside of the range.\n\nI'll leave the actual code as an exercise for the reader.\n\nAndré\n\n"
+    },
+    {
+      "time": "",
+      "content": " **Automatic Roman numerals from Arabic ones**\n\nI created a code to apply automatic substitution to any number from 1 to 9999. With just 37 substitutions, the code seems to be fair. But as I'm a novice, it may be improved by more experienced designers.\n\nTo proceed all substitutions, the font needs 30 additional glyphs. And the principle behind all these substitution could be used in other similar procedures.\n\nFirstly, you need a class which brings together all numeric figures in the font:\n\n`@NUMBERS=[@ONE @TWO @THREE @FOUR @FIVE @SIX @SEVEN @EIGHT @NINE @ZERO];`\n\nThen, you create a Stylistic Set with four lookups of substitutions, ordened this way: thousands, hundreds, sets fo ten and units:\n\n`feature ss09 {\nlookup THOUSANDS {\n\tsub one' @NUMBERS @NUMBERS @NUMBERS by M.sc;\n  \tsub two' @NUMBERS @NUMBERS @NUMBERS by twothousand.rm;\n  \tsub three' @NUMBERS @NUMBERS @NUMBERS by threethousand.rm;\n  \tsub four' @NUMBERS @NUMBERS @NUMBERS by fourthousand.rm;\n  \tsub five' @NUMBERS @NUMBERS @NUMBERS by fivethousand.rm;\n  \tsub six' @NUMBERS @NUMBERS @NUMBERS by sixthousand.rm;\n  \tsub seven' @NUMBERS @NUMBERS @NUMBERS by seventhousand.rm;\n  \tsub eight' @NUMBERS @NUMBERS @NUMBERS by eightthousand.rm;\n  \tsub nine' @NUMBERS @NUMBERS @NUMBERS by ninethousand.rm;\n  } THOUSANDS;\n\tlookup HUNDREDS {\n   \tignore substitute @NUMBERS' @NUMBERS @NUMBERS @NUMBERS;\n  \tsub one' @NUMBERS @NUMBERS by C.sc;\n  \tsub two' @NUMBERS @NUMBERS by twohundred.rm;\n  \tsub three' @NUMBERS @NUMBERS by threehundred.rm;\n  \tsub four' @NUMBERS @NUMBERS by fourhundred.rm;\n  \tsub five' @NUMBERS @NUMBERS by D.sc;\n  \tsub six' @NUMBERS @NUMBERS by sixhundred.rm;\n  \tsub seven' @NUMBERS @NUMBERS by sevenhundred.rm;\n  \tsub eight' @NUMBERS @NUMBERS by eighthundred.rm;\n  \tsub nine' @NUMBERS @NUMBERS by ninehundred.rm;\n  } HUNDREDS;\n  \tlookup TENS {\n  \tignore substitute @NUMBERS' @NUMBERS @NUMBERS;\n  \tsub one' @NUMBERS by X.sc;\n  \tsub two' @NUMBERS by twoten.rm;\n  \tsub three' @NUMBERS by threeten.rm;\n  \tsub four' @NUMBERS by fourten.rm;\n  \tsub five' @NUMBERS by L.sc;\n  \tsub six' @NUMBERS by sixten.rm;\n  \tsub seven' @NUMBERS by seventen.rm;\n  \tsub eight' @NUMBERS by eightten.rm;\n  \tsub nine' @NUMBERS by nineten.rm;\n  } TENS;\n\tlookup UNITS {\n\tignore substitute @NUMBERS' @NUMBERS;\n  \tsub one' by I.sc;\n  \tsub two' by two.rm;\n  \tsub three' by three.rm;\n  \tsub four' by four.rm;\n  \tsub five' by V.sc;\n  \tsub six' by six.rm;\n  \tsub seven' by seven.rm;\n  \tsub eight' by eight.rm;\n  \tsub nine' by nine.rm;\n  } UNITS;\n\tlookup ZEROS {\n\t  sub zero' by zero.rm;\n\t} ZEROS;\n} ss09;`\n\nNote the last lookup is a trick: to remove the zeros I applied a general substitution to a glyph zamed zero.rm. This glyph is empty and has zero width. So, all the zeros are hidden.\n\nIt's running OK in the tests I made.\n\n"
+    },
+    {
+      "time": "",
+      "content": "A PDF with code and comments is available here:  \n [http://if.pro.br/RomanNumerals.pdf](http://web.archive.org/web/20100220045515/http:/if.pro.br/RomanNumerals.pdf \"http://if.pro.br/RomanNumerals.pdf\")\n\nA font for test, based on FreeFontPro, is here:  \n [http://if.pro.br/FreeRoman.otf](http://web.archive.org/web/20100220045515/http:/if.pro.br/FreeRoman.otf \"http://if.pro.br/FreeRoman.otf\")\n\n"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "14976",
+  "title": "Font index order and alt-pop-up menus in InDesign's glyph palette...",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "As always, I should preface this by mentioning I’m blundering my way through this learning process and thus will likely sound like an idiot in my attempts to explain my current query.\n\nI’ve been given the opportunity to take a close look at a pre-release version of an upcoming font (let’s call it PRERELEASE) and one of the tasks still to be done is re-ordering the glyph index order. What I’ve gathered is that the glyph index order designates the order glyphs are listed in InDesign’s glyph palette (I’m sure index numbers serve other purposes as well, so I suppose that’s part of my query here).\n\nWhat I began to be curious about was how to set up pop-up menus in InDesign’s glyph palette; that is, to set up the small arrow in the bottom-right corner so that when you mouse-over the glyph a menu pops up with the alternates for that glyph. I had assumed there was some sort of code in the font file that set up this function, but I couldn’t find anything of the sort. However, in beginning to re-order the font, suddenly those pop-ups began to appear when I loaded the font in InDesign.\n\nAs I haven’t been able to find a standard index list, I simply selected another OpenType Pro font in InDesign and, based on its listing in the glyph palette, began reordering the PRERELEASE font. Many (most) of the expected pop-ups are appearing in InDesign’s glyph palette, but not all of them.\n\nFor instance, mousing-over lowercase e pops up a menu with e, smallcap e, superscript e and scientific inferior e, which is great. However, the PRERELEASE font has over 10 alternate ampersands, and half a dozen alternate Qs, yet only the small cap versions of each of these is showing up in the pop-up menu. What I’m wondering, then, is where should I place the alternate ampersands and Qs, etc.?\n\nI should mention that I’ve only re-ordered about 200 of the near 2000 glyphs in the font, but I thought I’d post this query now rather than get too far ahead of myself.\n\nIf this makes any sense at all to anyone, I’d appreciate any insight you might have to offer.\n\nThanks in advance...\n\n [‹ Cleartype hinting questions](http://web.archive.org/web/20071112200749/http:/typophile.com/node/14961 \"Go to previous forum topic\") [TrueType or OpenType ›](http://web.archive.org/web/20071112200749/http:/typophile.com/node/14937 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20071112200749/http://typophile.com/user/3771\" title=\"View user profile.\">jason</a>",
+  "time": "<br>",
+  "uid": "3771",
+  "comments": [
+    {
+      "time": " 3.Sep.2005 1.43pm",
+      "content": "The glyph index order may best be thought of as the physical order of the glyphs in the font file. That’s the order the glyphs are displayed in InDesign’s glyph palette.\n\nOrdering has no effect at all on what alternates are shown for a given glyph. This is instead controlled by OpenType layout features. The ’aalt’ feature in particular fives “all alternates” of a given glyph. I’m not sure if InDesign will also show alternates that are not in ’aalt’ - perhaps.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": " 3.Sep.2005 5.05pm",
+      "content": "Hi Thomas,\n\nMy query was based primarily on the fact that the only change I’ve made to the font is to re-order some of the glyphs in the Index codepage. In doing so, the pop-up menus in InDesign’s glyph palette have changed.\n\nFor the most part, these alt pop-ups have appeared (small cap variants pop up for all basic uppercasae glyphs; small cap, superscript, scientific inferiors pop-up for each basic lowercase glyph, etc.), but in a few cases, those alt pop-ups have disappeared. I do understand that it is the OpenType features that enable the pop-ups, but I’m trying to understand how the glyph index order impacts these pop-ups, because clearly that order does have some effect. I say this simply because in re-ordering some of the glyphs in the font I’m working with, those pop-ups changed in InDesign. Specifically, the ampersand’s pop-up menu in InDesign changed from including all 12 alt glyphs to suddenly only displaying the standard and smallcap variant, the 10 alt variants have disappeared from the pop-up.\n\nI’ll keep tinkering and see if I can discover the mystery here, but if anyone has any input, please join in.\n\n"
+    },
+    {
+      "time": " 3.Sep.2005 7.30pm",
+      "content": "As expected, there was indeed more to the disappearing features than simply re-ordering glyphs (as Thomas suggested). It seems that in opening the font in FontLab some of the features were being stripped out, and I had to re-write them for the features to show up in the re-generated OTF file. All is well now and I’ve learned a fair bit in the process. Lots of fun.\n\nOne question though: why, when I try to add a new glyph class to the list (eg: “@class17 = [thisglyph thatglyph]”), do I get nothing but errors on re-compiling the features? That question is probably way too vague, but perhaps someone will know what I’m getting at.\n\n"
+    },
+    {
+      "time": " 4.Sep.2005 1.52pm",
+      "content": "Simple recipe for reordering: right-click on the Font Window, choose Sort Glyphs \\> Names, then once more, but this time choose Sort Glyphs \\> Unicode.\n\nA.\n\n"
+    }
+  ]
+}

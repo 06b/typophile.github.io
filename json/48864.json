@@ -1,0 +1,54 @@
+{
+  "id": "48864",
+  "title": "Mac MS 2008 not displaying Aviano OT font",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Running Mac MS 2008 on OS C 10.4.11  \nFonts are managed via suitcase  \nAny suggestions?\n\n",
+  "author": "vivicity",
+  "time": "27 Aug 2008 — 8:19pm",
+  "uid": "36055",
+  "comments": [
+    {
+      "time": "27 Aug 2008 — 9:00pm",
+      "content": "I would de-activate the font in Suitcase and test the font in the system directly. Place the font files in /Users//Library/Fonts/. Run a font utility like Font Nuke and restart your system. Then test to see if it still fails.\n\nFont Nuke  \n [http://www.versiontracker.com/dyn/moreinfo/macosx/29757](http://web.archive.org/web/20131019055850/http:/www.versiontracker.com/dyn/moreinfo/macosx/29757 \"http://www.versiontracker.com/dyn/moreinfo/macosx/29757\")\n\nI've encountered a couple of old Mac font-suitcase based TrueType fonts that seem to not work in Word 2008. I can tell this is an application-level issue (in my case) because the fonts appear in other applications. I think TextEdit.app is a useful baseline application to determine if Mac OS has the font active. You might also want to test the fonts with FontBook's Validate Font File feature.\n\nIf this is a font that you have licensed, you should consider contacting the vendor. They probably have a better chance at determining whether this is a problem with the font itself or the application. They may also be able to recommend a workaround.\n\n"
+    },
+    {
+      "time": "27 Aug 2008 — 9:58pm",
+      "content": "Thanks - I followed all your suggestions - and the font shows up in every other application, just not in Word 2008.  \nI will try to contact the vendor.\n\nAny other thoughts?\n\n"
+    },
+    {
+      "time": "28 Aug 2008 — 2:30am",
+      "content": "I recently posted a similar problem with Word 2008. After doing a LOT of research, the conclusion seems to be this is a known bug in Office 2008, and the MS people do not seem terribly concerned with fixing it. The problem is NOT with your font, so don't bother your font vendor, your problem will not get solved. The Word/Office 2008 font menu problem is not a function of format either--it occurs with T1, TT and OTF fonts.\n\nIf you know the actual filename of the font, you CAN still access it in Word. Using the listbox in the formatting palette, type the entire font file name, hit return, and bingo--it will apply the font to the text you have selected in your document. For example, if you have the T1 font \"XYZ Medium Italic\" on your system, with postscript file name \"XYZ-MediumItalic\", type that in the listbox and it will work, even though it does not show up in Word's font menu.\n\nUnfortunately, the font menu won't remember this trick, so if you need to repeatedly apply this font, either (a) put the cursor in a text block where you have already applied the font, do a copy:format, and then do a paste:format to the new text where you wish the \"invisible\" font to be applied, or (b) create a style in Word with the affected font, give it a name and save it, and then apply that style whenever you wish to use the invisible font.\n\nA real pain in the arse, but this IS Microsoft we're talking about.\n\n"
+    },
+    {
+      "time": "28 Aug 2008 — 7:01am",
+      "content": "Ryan - brilliant workaround! After hours of frustration - a totally viable approach to a ridiculous problem!\n\nI'm establishing Styles anyway, so this works just fine.\n\n"
+    },
+    {
+      "time": "28 Aug 2008 — 7:01am",
+      "content": "Ryan - brilliant workaround! After hours of frustration - a totally viable approach to a ridiculous problem!\n\nI'm establishing Styles anyway, so this works just fine.\n\n"
+    },
+    {
+      "time": "28 Aug 2008 — 6:01pm",
+      "content": "This issue has apparently been fixed in [Office 2008 for Mac Service Pack 1 (12.1.0)](http://web.archive.org/web/20131019055850/http:/support.microsoft.com/kb/952331) released in May 13, 2008,\n\n<cite>Reliability is improved when you work with some third-party fonts.<br>\nThis update fixes an issue that prevents some third-party fonts from appearing on the Font list. This update also fixes an issue that prevents some fonts from being applied correctly when you select the font in the Font list.</cite>\n\n"
+    },
+    {
+      "time": "29 Aug 2008 — 2:02am",
+      "content": "Wrong. Not fixed. Not even with the latest 12.1.2 update. MS is aware that the problem still exists. From what I gathered, the issue above only \"solved\" Microsoft's coding errors with OT fonts in font menus, and even then it only \"fixed\" families where the base weight name is \"Roman\" instead of \"Regular\".\n\nMS really seems to be purposefully sabotaging its Mac applications software, a real shame given the long history between the two companies. Surely they realize they're going to lose their Mac side customer base with this type of behavior, right?\n\n"
+    },
+    {
+      "time": "3 Sep 2008 — 10:28am",
+      "content": "<cite>MS really seems to be purposefully sabotaging its Mac applications software...</cite>\n\nHonestly...I don't think so. MS is profit driven just like any other company. If they really wanted to undermine Mac users they would stop investing in Mac app development and embargo our side of the world. It is simply a bug that they still have to squash.\n\nI experienced it recently as well. I'm developing a family of fonts. I found that with the Demi and Demi Italic faces loaded Word displayed Demi in the font menu but not Demi Italic. (I felt like I'd stepped into Windows for a second, since that is the norm there.) If I typed Demi Italic into the listbox in the formatting palette (as ryanholmes suggested) I could access it just fine, but I could never access it without manually typing it in. I edited my font changing only the name from Myfont Demi and Demi Italic to Myfont Medium and Medium Italic. It now shows up properly in Word's font menu.\n\n"
+    },
+    {
+      "time": "3 Sep 2008 — 7:06pm",
+      "content": "Ultimately just a very time-consuming problem, making a 2hr project suddenly an all night quest for a solution.\n\nAs to the MS Word updates - I couldn't even install them!  \nThey didn't recognize the existing MS Word 2008 on my hard drive.\n\nThanks for all the suggestions - typing in the name of the font worked and I was able to do stylesheets.\n\nOn to the next project.\n\n"
+    },
+    {
+      "time": "4 Sep 2008 — 10:13am",
+      "content": "<cite>As to the MS Word updates - I couldn’t even install them!<br>\nThey didn’t recognize the existing MS Word 2008 on my hard drive.</cite>\n\nVivicity, is Word installed in the Applications folder of your boot drive? I keep it installed in a \"Programs\" volume and the updater won't recognize it unless it's in the Applications folder. You can simply copy your installed copy there, update, then move it back to where you normally keep it.\n\nIf that isn't the situation, sorry, that's the only work-around that popped into my head.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "107658",
+  "title": "Font Rendring spped too much slow... whats a solution...?",
+  "forum": "Arabic Typography & Type Design",
+  "tags": [
+    "Arabic Typography & Type Design"
+  ],
+  "content": "Hello,\n\nI am working on a an open type chracter based Urdu Unicode Nastaliq Font named 'Mher e nastaliq'. The problem is that the font rendring speed is too much slow, even when I type one line in my font the typing process becomes too much slow.. But when I starts a new paragraph, the first few words are typed correctly and then the same problem occures when i reached at the end of line... !\n\nPlease help me, and suggest me the solution to overcome this problem..!\n\nI am using MS. Volt for making Open type tables, and my system specifications are as under:.  \nCore 2 due 3.0 GHZ processer 64 bit  \nWindows 8  \n4 GB ram\n\nI needed your help urgently, please guide me in this regards..\n\nThanks in advance!  \nMuhammad Zeeshan Nasar\n\n",
+  "author": "Zeeshan Nasar",
+  "time": "16 Dec 2013 — 12:42am",
+  "uid": "210064",
+  "comments": [
+    {
+      "time": "16 Dec 2013 — 3:23am",
+      "content": "What are the applications you see that slowness in?\n\nSome OpenType renderrers get pretty slow as the number of the lookups in the font increases, so one solution might be to try to decrease the number of the lookups as possiple.\n\n"
+    },
+    {
+      "time": "16 Dec 2013 — 4:38am",
+      "content": "thanks for replying dear Khaled Hosny,  \ni use normally inpage3 witch use the default windows rendring engine\n\n"
+    },
+    {
+      "time": "17 Dec 2013 — 12:38am",
+      "content": "Did you try other Windows applications? Simple ones like Notepad or Wordpad, or even things like MS Word, to rule out issues specefic to that application?\n\n"
+    },
+    {
+      "time": "17 Dec 2013 — 9:36am",
+      "content": "The problem might be due to cursive attachment among all letters. Higher the number of cursive attachment letters, slower will be the font.\n\nYou may test it. Just remove the cursive attachment lookups from the project and then test the font in the software. Though it will disturb the whole font and letter shaping but I am suggesting it just for testing purpose to confirm that the slowness is created by cursive lookups.\n\nThanks,  \nZ.A\n\n"
+    },
+    {
+      "time": "18 Dec 2013 — 3:39am",
+      "content": "How many rules do you have in your font?\n\nYou may try to group your mutually exclusive rules by prefixing the group of rules with some tag. e.g. if you have 5 rules\n\nrule1  \nrule2  \nrule3  \nrule4  \nrule5\n\nand you know if rule1 is fired then there is no need to check the other rules. You may prefix these rules (name these in VOLT) like\n\ngroup1\\rule1  \ngroup1\\rule2  \ngroup1\\rule3  \ngroup1\\rule4  \ngroup1\\rule5\n\nI am unable to find the documentation but you may see sample font for reference.\n\n"
+    }
+  ]
+}

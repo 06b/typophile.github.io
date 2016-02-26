@@ -1,0 +1,90 @@
+{
+  "id": "101029",
+  "title": "Optical sizes in OT",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "So, this might have been discussed before, or it might be really far out there, but I thought about it and thought I'd get some input.\n\nIn the era of metal type different sizes had different qualities. Especially didot-faces were adjusted between sizes, something that poses some difficulties using digital didot amongst sizes. When Monokrom launched their foundry, their catalogue had both Satyr and Faunus, which is the same face made for different uses. Text size and medium size. Would this be possible to implement in a font technology? Or would it just be a huge pain in the ass for type designers, not worth it, technically impossible etc? I'm talking about an automated process where the form of the font would adjust to the size set in the software. So, if I chose satyr in 10/12pt it would display as satyr and if I increased the size to 18/20 it would switch to what Monokrom calls faunus?\n\nJust a thought ;)\n\n[https://monokrom.no/catalogue](http://web.archive.org/web/20140809090324/https:/monokrom.no/catalogue \"https://monokrom.no/catalogue\")\n\n",
+  "author": "sondre m",
+  "time": "2 Mar 2013 — 5:13pm",
+  "uid": "26373",
+  "comments": [
+    {
+      "time": "2 Mar 2013 — 6:40pm",
+      "content": "Absolutely; it was done in some multiple master fonts, and optical sizes are still supported in InDesign as far as I know (I'm sure I'll be corrected if I'm wrong!), see [here.](http://web.archive.org/web/20140809090324/http:/help.adobe.com/en_US/indesign/cs/using/WSa285fff53dea4f8617383751001ea8cb3f-6e29a.html#WSa285fff53dea4f8617383751001ea8cb3f-6e18a)\n\nOr Google \"Multiple Master optical size axis.\"\n\n"
+    },
+    {
+      "time": "2 Mar 2013 — 7:46pm",
+      "content": "Also, some people (like the Kingsley boys before they called it quits\\*, and Vincent Connare) have actually used _hinting_ to that effect!\n\n\\* See end of: [http://www.myfonts.com/foundry/Kingsley\\_ATF/](http://web.archive.org/web/20140809090324/http:/www.myfonts.com/foundry/Kingsley_ATF/ \"http://www.myfonts.com/foundry/Kingsley\\_ATF/\")\n\nhhp\n\n"
+    },
+    {
+      "time": "2 Mar 2013 — 10:06pm",
+      "content": "<cite>Would this be possible to implement in a font technology? </cite>\n\nIt already is. There is an OpenType feature called SIZE that is supposed to select a font from a family based on the type size.\n\n<cite>So, if I chose satyr in 10/12pt it would display as satyr and if I increased the size to 18/20 it would switch to what Monokrom calls faunus?</cite>\n\nThis describes, why the SIZE feature never caught on. There is little advantage for word processing and layout apps, where people make many conscious decisions about the typeface and their appearance anyway. Why not let them make that choice? It saves one click. So what? It might even lead to results the user doesn't want or doesn't expect.\n\nSuch features might make more use when text is displayed on electronic devices in various formats and sizes. But there it is also already possible. On my blog I use a display typeface for headlines, but when the size of the screen is small (like on mobile phones) I use CSS media queries to replace the display font with a more robust typeface. Same idea. But doesn't need the SIZE feature or any other new technology.\n\n"
+    },
+    {
+      "time": "2 Mar 2013 — 10:15pm",
+      "content": "The existing OpenType 'size' feature is a hack, and its no surprise that after fifteen years there is still almost no software that supports it. It involves co-opting the data structure of the GPOS table to store non-GPOS data about intended size range of a font. It requires a layout engine to access this odd GPOS feature prior to font selection; whereas normally GPOS features are the last things applied in layout. Everyone I've spoken to at Microsoft and Adobe agrees that this feature is a non-starter; what I've yet to get them to agree on is what should replace it.\n\n"
+    },
+    {
+      "time": "3 Mar 2013 — 5:52am",
+      "content": "Hrant: \" ...some people (like the Kingsley boys before they called it quits\\*, and Vincent Connare) have actually used hinting to that effect!\"\n\nNot likely. TT has no provision for using points in calculations, as in, \"this is 9 point so do something special.\" We, and others make assumptions based on pixels per em, but 18 of them could be 6 pt, 12 pt or 18 and the hints would never know.\n\n"
+    },
+    {
+      "time": "3 Mar 2013 — 6:33am",
+      "content": "> Why not let them make that choice?\n\nRalf, I'm not sure if you're for or against the idea, but: to me you don't want a reader determining too many things for the same reason you don't want a driver determining things like cylinder firing order - they're not trained to know what would go wrong. And they don't really want to know. There's very much such a thing as freedom _from_ choice!\n\nDavid: Maybe that's why it didn't catch on... But I do remember having discussions about that (with Vincent participating) on Typophile. Let me try to track it down.\n\nhhp\n\n"
+    },
+    {
+      "time": "3 Mar 2013 — 8:33am",
+      "content": "<cite>I'm not sure if you're for or against the idea</cite>\n\nDepends. When a family has display and body styles, the user can just select them. I don't see much benefit in automating this step. In the same way as I don't expect my app to automatically switch to old-style figures in copy text and tabular figures when I type in a table. These kind of automatic changes would probably be more confusing than helpful.  \nOn the other hand: When I think of the Adobe type families where different weights & widths are multiplied with up to 4 optical sizes, then this can create simply too much choice for the regular font user. Here an automatic style change or maybe simply a different style menu could help. But then again, such type families are so rare, I don't think it’s worth to push such possibilities just for a few font families.\n\n"
+    },
+    {
+      "time": "3 Mar 2013 — 7:22pm",
+      "content": "Indeed it depends. For example to me it actually makes sense to automate the selection of a display versus a text cut of a typeface, for most people; but for \"power users\" (usually graphic designers well versed in typography) let them deviate from the default method (or even change the default behavior). Also, I would say there are changes that are subtle enough (such as an increase in stroke contrast for a display cut) to be worth quietly automating, versus more structural changes (like OS versus lining numerals) that are indeed risky to automate.\n\nhhp\n\n"
+    },
+    {
+      "time": "3 Mar 2013 — 12:42pm",
+      "content": "_to me it actually makes sense to automate the selection of a display versus text cuts of a typeface_\n\nThe problem with idiot-proofing any process is that American culture seems to have a uncanny ability to build bigger and better idiots…\n\n"
+    },
+    {
+      "time": "3 Mar 2013 — 3:19pm",
+      "content": "Clearly.\n\nAs for automating the selection of size masters within a family, I think it should also be made clear that most font families released with discrete size masters, are a compromise subset of a font that contains, or contained, indiscreet outlines, gx variations, plain matching masters, multiple masters, whatever was used to capture a range of sizes, widths, weights or contrasts.\n\nFont publishers like myself would rather not publish a font for each and every point size, weight, width or PX size to satisfy the needs of e.g. print or responsive media. and, i think apps and font formats won't make way. Understanding all the intelligence in and around the use of a size range of typecases is simply too much for modern engineering.\n\n"
+    },
+    {
+      "time": "3 Mar 2013 — 4:28pm",
+      "content": "On the subject of choice and automating, I was thinking to implement the design of the type designer as intended, like the variation of metal type between sizes. I guess it could be implemented as a manual alternative set in OT. But, the question, would it be \"worth the hours\"? Would it be viable?\n\n"
+    },
+    {
+      "time": "3 Mar 2013 — 5:31pm",
+      "content": "> But I do remember having discussions about that (with Vincent participating) on Typophile. Let me try to track it down.\n\nHrant, please don't forget to try and find that discussion. It is something I'm very interested in.\n\nThanks.\n\n"
+    },
+    {
+      "time": "3 Mar 2013 — 8:02pm",
+      "content": "@bbg: certainly any hinting decisions are based on ppm, not pt, but I don't see that as an issue, it's probably a better determiner than pt size.  \nObviously thing like shrinking serifs to nil below certain sizes is easily done.  \nBut beyond that, it's technically possible to include 2 sets of outlines in each glyph and let the hints choose which one to use based on ppm size. However it's a lot of work, writing the functions to do that. And more to the point, it's not valuable nowadays as many OS's would throw away your hints.\n\n"
+    },
+    {
+      "time": "3 Mar 2013 — 9:50pm",
+      "content": "Ah, I think I remember now what the problem was with using hinting to emulate optical scaling: when you zoom in/out, the text reflows! :-/\n\nGeorge, I'm not sure this is it - I don't have time to re-read the whole thing right now.  \n [http://typophile.com/node/18814](http://web.archive.org/web/20140809090324/http:/typophile.com/node/18814 \"http://typophile.com/node/18814\")  \nBut there might be more anyway.\n\nhhp\n\n"
+    },
+    {
+      "time": "4 Mar 2013 — 2:59am",
+      "content": "Vinny said: \"MPPEM[] returns the PPEM  \nthe instruction for PointSize doesn't work and is useless since size is dependant on resolution.\"\n\nScaling, sizing and zooming, three different things historically, are merged today.\n\n"
+    },
+    {
+      "time": "4 Mar 2013 — 11:54am",
+      "content": "This idea makes sense where the typographer would like to maintain an even thickness of stem (for monoline or sans faces) or serif, at different sizes.\n\nI could have built it into Scotch Modern, where I designed the 18 pt, 10 pt and 7 pt of Display, Regular, and Micro to relate to one another that way, but I didn’t know how to implement it and I don’t think it’s a style of setting type that very many people are interested in.\n\n ![](http://web.archive.org/web/20140809090324im_/http:/typophile.com/files/eyes_4861.png)\n\n"
+    },
+    {
+      "time": "4 Mar 2013 — 3:14pm",
+      "content": "TeX uses \"optical sizes\", and it attempts to make it resolution-independent by asking the user to input a scale factor. Something complicated, such as \"give me 10pt size characters, for an intended output of 125%\".  \nThat can never work with fonts _alone_ -- the rasterizer needs not only know the pixel size but also the intended \"output\" size -- the Zoom factor. And on top of that an optional output scale as well.\n\nNick, your equalized stem widths for different font sizes sounds really great, but indeed there is (at current) no way to have software decide what size to use.\n\n"
+    },
+    {
+      "time": "6 Mar 2013 — 3:07pm",
+      "content": "\"...typographer would like to maintain an even thickness of stem\"\n\n..constant thickness of serif, I think. Whether there is contrast or evenness in the color resulting from stems, I think it's the contrasting serifs and hairlines of each size one is tempting the reader into believing in.\n\n"
+    },
+    {
+      "time": "7 Mar 2013 — 5:06pm",
+      "content": "Yes, I didn’t say what I meant.  \nI meant even thickness of serifs.\n\n"
+    }
+  ]
+}

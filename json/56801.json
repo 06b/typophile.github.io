@@ -1,0 +1,106 @@
+{
+  "id": "56801",
+  "title": "Can anyone explain step by step th interpolation process in Font Lab?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I am new in font lab and i am learning how to use it, but i dont know how to create a extralight version and then a Extrablack and have the family with all weights...  \nCan anyone explain step by step how to do it? I have know the two weights...  \nBest Regards\n\n",
+  "author": "BrunoMiguel",
+  "time": "8 Apr 2009 — 4:04pm",
+  "uid": "43563",
+  "comments": [
+    {
+      "time": "8 Apr 2009 — 4:17pm",
+      "content": "Read the Multiple Master chapter of the Fontlab manual.\n\n"
+    },
+    {
+      "time": "9 Apr 2009 — 3:19am",
+      "content": "Thanks\n\n"
+    },
+    {
+      "time": "9 Apr 2009 — 3:35am",
+      "content": "It's a four step process at the beginning:\n\n1. Open your two master weights in FontLab  \n2. Tools \\> Blend Fonts  \n3. Click the option \"Build the Multiple Master font\"  \n4. Click OK\n\nThe result may vary very much depending on how compatible your outlines are, so you may have to do adjustmenst before blending. But make some trial and errors and you probably get the hang of it.\n\n"
+    },
+    {
+      "time": "9 Apr 2009 — 3:36am",
+      "content": "Bruno\n\nDo you need to know how to create a MM font from which you can generate intermediate weights or Interpolation in general ?\n\nRr\n\n"
+    },
+    {
+      "time": "9 Apr 2009 — 3:52am",
+      "content": "I've found Blend Fonts to be a nightmare - I would create a MM font\n\n1. Open your two master weights in FL (eg. Light,Bold)  \n2. With Light, Tools - Mask - Assign Font Mask, select Bold.  \n3. Tools - Multiple Master - Define New Axis.  \n4. Select all glyphs in the Light weight, Tools - Multiple Master - Mask to Master, select Wt1\n\nGlyphs colored green are compatible, those colored red need looking at for contour direction, starting points etc.\n\n"
+    },
+    {
+      "time": "9 Apr 2009 — 6:05am",
+      "content": "In addition to the manual, Adobe has a great ebook about MM and interpolation:  \n [http://www.adobe.com/devnet/font/pdfs/5091.Design\\_MM\\_Fonts.pdf](http://web.archive.org/web/20150317221400/http:/www.adobe.com/devnet/font/pdfs/5091.Design_MM_Fonts.pdf \"http://www.adobe.com/devnet/font/pdfs/5091.Design\\_MM\\_Fonts.pdf\")\n\n"
+    },
+    {
+      "time": "9 Apr 2009 — 9:34am",
+      "content": "(tracking)\n\n"
+    },
+    {
+      "time": "9 Apr 2009 — 11:24am",
+      "content": "<cite>Glyphs colored green are compatible, those colored red need looking at for contour direction, starting points etc.</cite>\n\nI wouldn't trust those green cell colors if I were you. Go to the Multiple Master section of Font Info and set the default Weight Vector to something other than 0 or 1000. This will change the display in the Font Window and you will see any interpolation anomalies that might be hiding.\n\n"
+    },
+    {
+      "time": "9 Apr 2009 — 1:24pm",
+      "content": "Thank you, James! I never noticed that setting before.\n\n(I think a good prerequisite to using FontLab would be proficiency at playing Zork.)\n\n"
+    },
+    {
+      "time": "10 Apr 2009 — 8:56am",
+      "content": "<cite>I’ve found Blend Fonts to be a nightmare - I would create a MM font.<br>\n1. Open your two master weights in FL (eg. Light,Bold)<br>\n2. With Light, Tools - Mask - Assign Font Mask, select Bold.<br>\n3. Tools - Multiple Master - Define New Axis.<br>\n4. Select all glyphs in the Light weight, Tools - Multiple Master - Mask to Master, select Wt1</cite>\n\nDo this produce a better result? Care to explain why?\n\nAs far as I'm concerned, that procedure you describe, must end up with the exact same result as my method. This is also a kind of blending isnt it?\n\nThe result in both cases is a MM-font with the light as one master, and the bold as the other.\n\n"
+    },
+    {
+      "time": "10 Apr 2009 — 11:46am",
+      "content": "I can't remember the exact problems I had with Blend Fonts, there are posts here about the pros of creating MM fonts over using Blend Fonts.\n\n[http://typophile.com/node/56054](http://web.archive.org/web/20150317221400/http:/typophile.com/node/56054 \"http://typophile.com/node/56054\")\n\n"
+    },
+    {
+      "time": "10 Apr 2009 — 11:12pm",
+      "content": "I think what Thomas is referring to in that thread is the fact that it is better to design one weight, make it a MM, and then design the next weight. Because everything will be compatible from the start. But this topic was about having two different weights from the start, and then \"Blending\" them ;-)\n\n"
+    },
+    {
+      "time": "11 Apr 2009 — 1:16am",
+      "content": "I wish I could remember why I stop using Blend fonts - I'm sure it will come to me.\n\nWhat would be the benefit of making a light weight and making it a MM font and then designing the bold weight.?  \nAs opposed to designing both weights separately then creating the MM font with either Blend Fonts or the method I described.\n\nCan the light weight MM font be used to construct the bold weight.?\n\n"
+    },
+    {
+      "time": "11 Apr 2009 — 5:09am",
+      "content": "\\> it is better to design one weight, make it a MM, and then design the next weight.  \n\\>Because everything will be compatible from the start.\n\nIf blending, one designs one weight and then designs the other from it, so everything will be compatible from the start.  \nThere is not really any way around putting your \"interpolation pants\" on \"one leg\" at a time. ;)\n\nCheers!\n\n"
+    },
+    {
+      "time": "11 Apr 2009 — 6:11am",
+      "content": "<cite>Do this produce a better result? Care to explain why?</cite>\n\nBuilding MM fonts with the Mask-to-Master technique is superior to Blending in so far as Blending will always add additional points even if you set it not to.\n\n"
+    },
+    {
+      "time": "12 Apr 2009 — 6:54pm",
+      "content": "Yeah, that's a pretty critical issue....\n\nT\n\n"
+    },
+    {
+      "time": "12 Apr 2009 — 8:27pm",
+      "content": "Of course one can always just make sure the masters match, export to UFO, and interpolate in Superpolator. Much faster than dealing with blend or mask-to-master, discounting the time it takes to import UFO files…\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 3:23am",
+      "content": "<cite>What would be the benefit of making a light weight and making it a MM font and then designing the bold weight.?<br>\nAs opposed to designing both weights separately then creating the MM font with either Blend Fonts or the method I described.<br>\nCan the light weight MM font be used to construct the bold weight.?</cite>\n\nIn a way, yes, the first master you design can be used to construct the other master(s).\n\nFor me, this is much better because everything will be compatible from the start as you place every point at the right place from the start (and it is very easy to see if it is placed wrong aswell). You can see the both masters together all the time, and easy compare details and test the details how they look in the interim weights. If you extrapolate the weights at the same time (with the slider) it is also very easy to see errors. Everything is so visible if you for instance go below the 0, and put in -200 or something.\n\nFurther, you can kern them both at the same time, build your sidebearing system so it is compatible, put in all the OT-features, classes etc.\n\nIt is also good because you will have the exact same character set through out the family without even thinking specially about it, no glyph will be forgotten.\n\nI always make the fonts as ready as possible in the MM-project, so when i pick out the weights, the only thing to do is to go through the glyphs and make small, small adjustments – and rebuild the kern feature :)\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 3:26am",
+      "content": "<cite>Building MM fonts with the Mask-to-Master technique is superior to Blending in so far as Blending will always add additional points even if you set it not to.</cite>\n\nAh, great. Didnt know that. Good to know.\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 3:42am",
+      "content": "TerminalD\\>Blending will always add additional points even if you set it not to.\n\nThomasP\\>Yeah, that’s a pretty critical issue....\n\nBut since the statement is false... I mean, I've blended 1,000s and 1,000s of characters and none of them come out of the blending process with additional points because I set it not to, and I feed it right.\n\nCheers!\n\n"
+    },
+    {
+      "time": "14 Apr 2009 — 2:46am",
+      "content": "Ah, not to forget when speaking of working effective with Multiple Master:\n\nRMX. These are simply the best tools. Period.  \n [http://remix-tools.com/](http://web.archive.org/web/20150317221400/http:/remix-tools.com/ \"http://remix-tools.com/\")\n\n"
+    },
+    {
+      "time": "27 Dec 2014 — 7:48pm",
+      "content": "Could anyone help me? I've been searching for sources that properly explain how to work with masters but to no avail. The only tutorial video I can find is a Polish one, which gives insight into the process but he shows how the master works on only one letter by adjusting it for the light master, while I already designed two weights to use as masters. I read the whole chapter on Multiple Masters and interpolation from the FontLab manual but I feel the information is very incomplete. It's probably complete if you consider more than 700 pages came before it, but this specific chapter on its own doesn't give all the information.\n\nI managed to get steps further by reading your comments. I blended two weights and almost half my glyphs are green now while the other almost-half is white, with some glyphs in red. What does it mean when glyphs remain white? Won't they be interpolated? If not it seems I have to do a lot of manual work either way, but I still like to get as much of the work done automatically anyway.\n\nAlso, I can't find out how to open up the panel with the slider so I can adjust the weight. Right now I just have a font file with two blended weights and have no idea how to proceed further. I'm seriously frustrated with the lack of documentation on FontLab. I always spend hours researching and in the end get nothing done. I always learn things, but it requires a tremendous amount of time to finally find the answers I was looking for.\n\nAnd to clarify, I'm actually trying to extrapolate, though I've never worked with Multiple Masters before so I'm looking forward to do interpolation as well. I designed Light, Regular and Bold and right now I require Black and figured I may be able to do at least some of the work automatically using extrapolation.\n\n"
+    },
+    {
+      "time": "31 Dec 2014 — 6:34am",
+      "content": "1. Prepare your 1st font - all needed glyphs, sets of numerals, small caps etc. All accented glyphs made via mark and mkmk features. When completed save as otf file and as pfb file. Save feature file as well.  \n[skip steps 2. and 3. if you have your bold font ready]  \n2. Open your pfb file in Fontographer 4.1. Element -\\> Change Weight, set desired value and set Don't change vertical size and Don't change horizontal size as you wish.  \n3. Save your font (if you want) and File -\\> Generate Font Files. Set Encoding \"Original\" and Format \"PostScript Type1\".  \n4. Open your files, let say 1.pfb and 2.pfb in FontLab.  \n5. Tools -\\> Multiple Master -\\> Define New Axis. Set \"Weight\", OK.  \n6. Tools -\\> Multiple Master -\\> Assign Master, as \"wt0\" select your basic font and as \"wt1\" your emboldened/bold one, OK (quite long processing).  \n7. Some glyphs have red squares - they are incompatible in these two fonts. It would be better to edit bold font to resolve all problems. (see [http://typophile.com/node/39965#comment-246011](http://web.archive.org/web/20150317221400/http:/typophile.com/node/39965#comment-246011 \"http://typophile.com/node/39965#comment-246011\") , the whole thread is well worth reading)  \n8. Now you can generate MM font, install it via ATM 4.1 and test in real world.  \n9. When you know which instances you are interested in, go to Tools -\\> Multiple Master -\\> Generate Instance, set desired value and OK. New font is open in FontLab. Save and Genarate Font for further editing.  \n10. Open new OTF font in font editing program\\*, merge saved previously feature file. Edit your mark and mkmk features if needed, make all accented glyphs from composites.  \n11. Check your new font in real applications, make corrections, add hints etc, generate final font.  \nOf course you can do it in quite different way, this one looks good for me.  \n\\* FontForge or VOLT\n\nI. Fontographer: Type by Design by Moye, Stephen  \nII. [http://partners.adobe.com/public/developer/en/font/5091.Design\\_MM\\_Fonts.pdf](http://web.archive.org/web/20150317221400/http:/partners.adobe.com/public/developer/en/font/5091.Design_MM_Fonts.pdf \"http://partners.adobe.com/public/developer/en/font/5091.Design\\_MM\\_Fonts.pdf\")  \nIII. [http://www.glyphsapp.com/tutorials/multiple-masters-part-1-setting-up-ma...](http://web.archive.org/web/20150317221400/http:/www.glyphsapp.com/tutorials/multiple-masters-part-1-setting-up-masters \"http://www.glyphsapp.com/tutorials/multiple-masters-part-1-setting-up-masters\") and part-2, part-3\n\n"
+    }
+  ]
+}

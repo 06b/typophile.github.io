@@ -1,0 +1,58 @@
+{
+  "id": "20461",
+  "title": "Kerning interpolation",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I cant´t get this to work in either in FL 4.6 or FL 5.0 (Demo): I have about 250 kerning pairs on each master (with classes applied to them), but when generating an MM-instance, all I get is 89 pairs.. Anyone?\n\n [‹ Deleting nodes in FontLab Studio 5](http://web.archive.org/web/20070808064540/http:/typophile.com/node/20680 \"Go to previous forum topic\") [Metrics on italics: how to do it right? ›](http://web.archive.org/web/20070808064540/http:/typophile.com/node/19788 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20070808064540/http://typophile.com/user/3070\" title=\"View user profile.\">Toby</a>",
+  "time": "<br>",
+  "uid": "3070",
+  "comments": [
+    {
+      "time": " 5.Jun.2006 11.02am",
+      "content": "[http://www.typophile.com/node/19646](http://web.archive.org/web/20070808064540/http:/www.typophile.com/node/19646 \"http://www.typophile.com/node/19646\")\n\n"
+    },
+    {
+      "time": " 5.Jun.2006 5.19pm",
+      "content": "This doesn´t work like it should, lots of people creating a full weight family should have experienced this.. no?\n\n"
+    },
+    {
+      "time": " 6.Jun.2006 12.21am",
+      "content": "From having 250 kerning pairs in the MM font, down to only 89 in the generated instance, that is a significant lost. Can you tell, in general, which pairs are being dropped out?\n\n"
+    },
+    {
+      "time": " 6.Jun.2006 12.02pm",
+      "content": "It´s hard to say, it seems new pairs are created that I never defined, and most of those I did define are gone.. It´s totally screwed up. I make the MM font with the “blend fonts”-function, then generate an instance out of this. Is this the wrong way to do it?\n\n"
+    },
+    {
+      "time": " 6.Jun.2006 1.22pm",
+      "content": "\\> _Is this the wrong way to do it?_\n\nNot necessarily. FL offers more than one way to put together a MM font; hopefully these will all produce a reliable source for generating instances.\n\nSince the issue here is the kerning data, when you blend the fonts, do any of them have kerning? If so, do the pairs ’overlap’? (Meaning, a given pair exists in both fonts)\n\nWhen you open a Metrics Window, you should be able to see the various kerning values for each master. Do they look alright?\n\nI’m using FL 5.0.2 Mac, and from the tests I’ve done with a 2-axis (4 masters) font, I had no problems. No pairs were dropped or added, and the kerning was interpolated.\n\n"
+    },
+    {
+      "time": " 6.Jun.2006 1.48pm",
+      "content": "The two masters both have about the same number of kerning pairs with many having the same value, yes.. Most pairs exist in both masters, and they look totally normal to me. Maybe they fixed it in 5.0.2 then.. Thanks anyway Miguel!\n\n"
+    },
+    {
+      "time": " 7.Jun.2006 3.10am",
+      "content": "I can confirm that we have made some improvements in kerning handling in FontLab Studio 5.0.2. I’m not sure if they’re MM-related but chances are that 5.0.2 will help you.\n\nRegards,  \nAdam Twardoch  \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": " 8.Jun.2006 9.04am",
+      "content": "Tried it in the .02 version too now, with the same result..strange\n\n"
+    },
+    {
+      "time": " 8.Jun.2006 9.30am",
+      "content": "Got it now.. it does work in 5.0.2 when defining a new axis.. but not with the “blend fonts” function!\n\n"
+    },
+    {
+      "time": " 8.Jun.2006 7.02pm",
+      "content": "Give this a try: (Can’t promise it’ll work, tho.)  \n1. Extract the kerning of both fonts to .AFM files, before blending them;  \n2. Blend the fonts, and then import the kerning back from each file into the correspondent master.\n\n"
+    },
+    {
+      "time": " 10.Mar.2007 12.00pm",
+      "content": "It works like this: In the font where you set up the masters, you have to import the metrics/kerning data into each corresponding master - before generating an instance, otherwise all masters get the same data! It shouldn´t be like that..\n\n"
+    }
+  ]
+}

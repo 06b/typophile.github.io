@@ -1,0 +1,38 @@
+{
+  "id": "68284",
+  "title": "FL feature corruption?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Yesterday I was trying to figure out fixing a Postscript font where I work that was not working. Font Doctor said the data tables of the bitmap files were \"questionable and said it fixed these. The font still did not work. So I decided I would rebuild it. Since our proprietary PS fonts use various character slots for alternates and ligatures I decided to move there into there own slots and write feature code for the substitutions.\n\nWhile I was typing the code I noticed my text was acting a bit weird. Like when I would insert the cursor in between letters, the text would shift over as if I had hit the tab key. This was annoying, but did not seem to affect the outcome. I added 6 features plus the aalt feature (which I moved to the top) so I could get the glyph palette to be easy to use. The font seems to work fine. What really threw me for a loop is when I opened up the FontLab file again, FL took all my other features away from the left side column and placed them below the aalt feature which is the only one on the left side now. BTW …in the OT preview all the features show up fine.\n\nIs this an indication that FontLab is corrupt or is there something I did that caused this?\n\n ![](http://web.archive.org/web/20100314165732im_/http:/typophile.com/files/OT_panel_4652.png)\n\n ![](http://web.archive.org/web/20100314165732im_/http:/typophile.com/files/OT_preview_4708.png)\n\n",
+  "author": "<a href=\"/web/20100314165732/http://typophile.com/user/14650\" title=\"View user profile.\">Stephen Rapp</a>",
+  "time": "<br>",
+  "uid": "14650",
+  "comments": [
+    {
+      "time": "",
+      "content": "That is weird.\n\nI'm not sure if it's related, but recently I was writing features for a font and put in lots of comments at the top of the lower pane, followed by some class definitions. Everything was fine until I closed and re-opened the font: The stuff I'd put in the lower pane vanished, along with my feature definitions in the upper area. I discovered I could work around it by putting the comments inside a dummy class.\n\nIt seems that what you type in the OT panel is saved but not always read back in correctly, maybe because it is not formatted the way FontLab expects or something.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I can’t remember the details, but I had similar problems and assumed it was my fault. When I work with OT code I now handle it the same way I handle classes. Once everything is set up and working I immediately generate a feature file that I can use to restore the working setup.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Mark and James.\n\nI wrote my feature code in text edit (mac) and pasted it into the OT feature panel. The text edit file was on plain text mode so that shouldn't have been a problem. Since typing in general seemed buggy, I think something was out of synch. I might try a 2nd time after I've done a restart and see if FL behaves the same. I seem to have a penchant at work for making software go bad.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The typing thing is a matter of choosing a better default font for FL5 to show your code in. Try a couple of different monospace coding fonts until you find one that spaces the way FL5 thinks it should.\n\nThe other thing seems like you left out a semicolon somewhere.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Chris, I checked and all semicolons are there. The font would have failed to compile if a semicolon was missing, so I don't think that was it. I'm hoping it was just my computer acting weird and not anything permanently altered with FL.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Chris, looks like you were on to something.\n\nI did 3 changes. First I changed the font. That made everything line up much better in the OT panel. Next I noticed in the aalt feature under \"feature salt\" the semicolon was there, but 1 space away. I deleted that space. Then at the end of the aalt feature I noticed that there was no space after the right brace so I put a space there. Then I saved and closed the font. When I opened it again everything was listed on the left as it should have been.\n\nThank you so much!\n\n ![](http://web.archive.org/web/20100314165732im_/http:/typophile.com/files/OT_fixed_6347.png)\n\n"
+    }
+  ]
+}

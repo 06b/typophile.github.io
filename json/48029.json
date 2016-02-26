@@ -1,0 +1,22 @@
+{
+  "id": "48029",
+  "title": "Adding an instance in FL removes all OT features",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "When opening/generating an instance in FL5.0.4 with Python like this:\n\n`fl.Add(Font(Font('/foo/bar/font.vfb'), (400, 400)))`\n\nall the OT features from the MM VFB are lost. That is not the case if you apply the Generate Instance on an open MM using the menu command.\n\nIs this a feature or a bug?\n\n",
+  "author": "Marten Thavenius",
+  "time": "3 Aug 2008 — 4:22am",
+  "uid": "1021",
+  "comments": [
+    {
+      "time": "3 Aug 2008 — 5:34am",
+      "content": "A \"feature\". You need to transfer font.features (a list, transfer items one by one), font.ot\\_classes (text) and possibly font.classes (list) separately. Karsten\n\n"
+    },
+    {
+      "time": "3 Aug 2008 — 5:56am",
+      "content": "Thanks for the workaround Karsten.\n\n`font.classes` from the MM font are preserved when using the Add instance method and I can't see a reason why the OT features shouldn't be passed to single master like they do when you are using the Generate Instance menu command. Re-attach them (transfer from MM to the new instance) like you describe works fine though.\n\n"
+    }
+  ]
+}

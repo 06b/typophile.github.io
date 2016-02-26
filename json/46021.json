@@ -1,0 +1,22 @@
+{
+  "id": "46021",
+  "title": "Copy to Composites Macro - RoboFab ?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi all,\n\nI trying to write a macro with RoboFab that works in the same way as FL copy to composites from the metrcis window, so I can quickly copy the metrics from glyphs like \"H\" to the Hbar.\n\nI was trying something like this :\n\n``\n\n#CopyToComposites  \n#  \nfrom robofab.world import CurrentFont  \nf = CurrentFont()  \n#  \nf['Hbar'].leftMargin = f['H'].leftMargin  \nf['Hbar'].rightMargin = f['H'].rightMargin  \n#  \nf.update()\n\nThe problem with this is it copies the actual sidebearing, so in cases like the Hbar the sidebearing is measured from the bar which overhangs the stem of the 'H', but I want it to be measured form the stem like you can do with the measuring line in the metrics window.\n\n ![](http://web.archive.org/web/20130823092746im_/http:/typophile.com/files/Untitled-1_5264.gif)\n\n",
+  "author": "ReginaldV",
+  "time": "3 Jun 2008 — 10:01am",
+  "uid": "29224",
+  "comments": [
+    {
+      "time": "3 Jun 2008 — 11:25am",
+      "content": "A [pen to calculate the horizontal margins of a glyph at any given height by intersecting the shape with a horizontal line](http://web.archive.org/web/20130823092746/http:/code.robofab.com/changeset/86) was recently added to Robofab, which seems to be what you need.\n\n"
+    },
+    {
+      "time": "3 Jun 2008 — 12:55pm",
+      "content": "So I need to copy this script into Robofab ? - where would I put the script ?\n\n"
+    }
+  ]
+}

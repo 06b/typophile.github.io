@@ -1,0 +1,38 @@
+{
+  "id": "52414",
+  "title": "Language-specific contextual substitution",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "The only way I can think to do this seems a bit complex so maybe there’s ane asier way.\n\nIn Spanish (including modern day) often times the word “de” when set in all capitals is ligatured. However, a standard ligature isn’t enough because de appears in many words. So I was going to do a contextual substitution to make sure I only nab DE as a single word.\n\nBUT, this is of course unacceptable in most other languages. So here’s my solution, and just wondering if I’m approaching it properly or if there is a more efficient way. (I’m using FontForge so I’ll use psuedo code)\n\n1: If language is “es”, switch “D” with “D.es”  \n2: If language is “es”, switch “E” with “E.es”  \n3: If sequence “[any letter]&nbsp;D.es E.es” found, match and do nothing  \n4: If sequence “D.es E.es [any letter]” found, match do nothing  \n5: If sequence “D.es E.es” found, replace with D\\_E\n\nThis requires making an extra glyph that is identical to a normal D and that in a Spanish document would be constantly being replaced. I’m not sure if that in and of itself might cause concern as well.\n\n [‹ Fontlab 5 font file ignores kerning values](http://web.archive.org/web/20081210052349/http:/typophile.com/node/17113 \"Go to previous forum topic\") [Variant names ›](http://web.archive.org/web/20081210052349/http:/typophile.com/node/52425 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081210052349/http://typophile.com/user/16708\" title=\"View user profile.\">guifa</a>",
+  "time": "<br>",
+  "uid": "16708",
+  "comments": [
+    {
+      "time": " 5.Dec.2008 7.34pm",
+      "content": "House Industries did a whole language specific contextual sub thing with their new script Sable. It has local versions of some of the diacritic marks.\n\n[http://www.houseind.com/index.php?page=showfont&id=665&subpage=studio\\_ho...](http://web.archive.org/web/20081210052349/http:/www.houseind.com/index.php?page=showfont&id=665&subpage=studio_how_lang \"http://www.houseind.com/index.php?page=showfont&id=665&subpage=studio\\_how\\_lang\")\n\n"
+    },
+    {
+      "time": " 5.Dec.2008 11.34pm",
+      "content": "Seems like this is something for locl or salt or ss1 (stylistic sets) or a combo:  \n(taking a stab as I’m trying to improve my OT mind)\n\n@UC = uppercase;\n\nfeature locl { # Localized Forms  \nlanguage ESP exclude\\_dflt; # Spanish;  \nsub @UC D’ E @UC by D.es; #D.es is a duplicate D marker glyph  \nsub D E by D\\_E;  \n} locl;\n\nfeature salt { # Spanish DE ligature  \nsub @UC D’ E @UC by D.es; #D.es is a duplicate D marker glyph  \nsub D E by D\\_E;  \n} ss1;\n\nfeature ss1 { # Spanish DE ligature  \nsub @UC D’ E @UC by D.es; #D.es is a duplicate D marker glyph  \nsub D E by D\\_E;  \n} ss1;\n\nThis could well be garbage :-) but it’s what I’d try.  \nWhoops that’s fontlab, not fontforge.\n\nIt’d be nice to get rid of both marker glyphs, not just one. The only other way I figured required an illegal one to many substitution. You could try to define when you do want the sub, not when you don’t, but it’s trickier.\n\n"
+    },
+    {
+      "time": " 5.Dec.2008 11.54pm",
+      "content": "I don’t think the glyphs D.es and E.es are necessary. I believe it can be done in one shot. The FDK syntax should be something like this:  \n`\nlanguagesystem latn dflt;\nlanguagesystem latn ESP;`\n\n@ALL\\_LETTERS = [A-Z a-z];\n\nfeature liga {  \n script latn;  \n language ESP;  \n ignore sub @ALL\\_LETTERS D' E';  \n ignore sub D' E' @ALL\\_LETTERS;  \n sub D' E' by D\\_E;  \n} liga;\n\n"
+    },
+    {
+      "time": " 6.Dec.2008 2.08pm",
+      "content": "Hi Miguel,\n\nThank you! I didn’t know about “ignore sub” .. that will be handy!\n\nSide questions:\n\n1. Is languagesystem toggled by the Language dropdown in the character palette of InD CS2?  \n2. Is that the prefered way to do things like polish diacritics in apps without locl support, or stylistic sets?  \n3. Can it be done in Fontlab’s opentype editor or just FDK?  \n4. In your liga feature how do you signal the end of ESP specific subs, say if you wanted to add french specific subs or the aforementioned polish diacritics?\n\n"
+    },
+    {
+      "time": " 6.Dec.2008 3.32pm",
+      "content": "Hey Randy,\n\n1. Yes, it is toggled by the Language dropdown in the character palette, but it will only work in InDesign CS3 and up. Photoshop CS4 and Illustrator CS4 support it as well.\n\n2. If the app does not have support for language-specific lookups, things won’t work. For example, Adobe has been putting language-specific code in its fonts (e.g. Turkish) for quite some time, but only with InDesign CS3 we’ve started seeing the results of that code.\n\n3. You’ll be able to compile the features and see the results in Fontlab, but you should also include the line `languagesystem DFLT dflt;` in the features. However, the current Fontlab 5 will throw an error message because of that. You’ll have no problems if you use the FDK.\n\n4. The end of ESP would be signaled by the end of the feature, the start of another language, or the start of another script. Matthew’s case had to do with a language-specific ligature, so the best way to do it is through ’liga’. In the case of Polish diacritics I’d say ’locl’ is more appropriate. In the case of French, it depends on what you’re trying to do. Below is some code for language-specific ligatures and diacritics.\n\n`\nlanguagesystem DFLT dflt;\nlanguagesystem latn dflt;\nlanguagesystem latn ESP;\nlanguagesystem latn FRA;\nlanguagesystem latn PLK;`\n\nfeature locl {  \nscript latn;  \nlanguage FRA;  \nsub eacute by eacute.FRA;\n\nlanguage PLK;  \nsub cacute by cacute.PLK;  \n} locl;\n\n@ALL\\_LETTERS = [A-Z a-z];\n\nfeature liga {  \nscript DFLT;  \nlanguage dflt;  \nlookup LIGA {  \nsub f i by f\\_i;  \n} LIGA;\n\nscript latn;  \nlanguage dflt;  \nlookup LIGA;\n\nlanguage PLK include\\_dflt;\n\nlanguage ESP include\\_dflt;  \nignore sub @ALL\\_LETTERS D' E';  \nignore sub D' E' @ALL\\_LETTERS;  \nsub D' E' by D\\_E;\n\nlanguage FRA include\\_dflt;  \nsub e t by e\\_t;  \n} liga;\n\nThe code in ’locl’ is straightforward; glyphs are replaced by other glyphs depending on the language. The code in ’liga’ is a little more tricky because there are ligatures that you’ll want to have for all the languages and/or scripts in addition to the language-specific ones. In this case, all Latin languages (including ESP, FRA and PLK) will have the ’f\\_i’ ligature. In addition, the ’D\\_E’ ligature will be available to Spanish, and the ’e\\_t’ ligature will be available to French.\n\nI could have been more concise with the ’liga’ code but when it comes to coding language-specific behavior I like to be as explicit as I can to avoid unexpected behaviors. For example, the keyword ’include\\_dflt’ could be omitted (because the lookups under ’language dflt;’ are inherited by default by other languages within the same script). However, ’language PLK;’ needs to be included in ’liga’ otherwise ’f\\_i’ will NOT be available for Polish.\n\n"
+    },
+    {
+      "time": " 7.Dec.2008 11.52pm",
+      "content": "Thanks for your comprehensive reply. Next up: FDK bootcamp for me.\n\nRandy\n\n"
+    }
+  ]
+}

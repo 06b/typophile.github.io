@@ -1,0 +1,30 @@
+{
+  "id": "60916",
+  "title": "Problems with components in Fontlab",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I'm working on a font that contains numbers within circles. I've created numbers 0-9, and the circle, and then am using those elements as components to create larger numbers within the circles (37, 45, etc.)\n\nSome work fine, but none of my 1s or 3s are showing up as components. Nothing looks different about those particular glyphs in comparison to others. Any ideas?\n\nthanks!\n\nJonathan\n\n",
+  "author": "<a href=\"/web/20100203100953/http://typophile.com/user/25245\" title=\"View user profile.\">jonathanhughes</a>",
+  "time": "<br>",
+  "uid": "25245",
+  "comments": [
+    {
+      "time": "",
+      "content": "Do those glyphs themselves contain components? You cannot reference a glyph which itself only references other glyphs.\n\nAndré\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Do those glyphs themselves contain components? You cannot reference a glyph which itself only references other glyphs.</cite>  \nNot correct. You cannot place a glyph as a component if it contains a mix of outlines and components.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Path direction?\n\n"
+    },
+    {
+      "time": "",
+      "content": "It's definitely something to do with path direction.\n\nWhat fixed it was by setting the path direction of the glyphs that weren't showing up to TrueType. But all the others are set to PostScript.\n\nThe manual isn't all that clear on the whole path direction issue.\n\nWill it cause problems if some paths are set to TT while the others are PS?\n\n"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "id": "60441",
+  "title": "Current @font-face support",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "I was reading about Typotheque's forthcoming webfont delivery service here: [http://www.typotheque.com/site/news\\_details.php?id=164](http://web.archive.org/web/20130213085423/http:/www.typotheque.com/site/news_details.php?id=164 \"http://www.typotheque.com/site/news\\_details.php?id=164\")  \nAnd the author states that 'The @font-face rule is supported by Firefox 3.5, Safari 3.1, Opera 10, Chrome 2.0 and Internet Explorer 4.0 and later. Our system is thus compatible with more than 95% of all browsers in use.'\n\nI don't believe that Chrome or IE do support the @font-face rules. Does anyone have more information on this?\n\n",
+  "author": "paul d hunt",
+  "time": "29 Jul 2009 — 11:14am",
+  "uid": "7006",
+  "comments": [
+    {
+      "time": "29 Jul 2009 — 11:23am",
+      "content": "Overview of browser @font-face support: [http://webfonts.info/wiki/index.php?title=%40font-face\\_browser\\_support](http://web.archive.org/web/20130213085423/http:/webfonts.info/wiki/index.php?title=%40font-face_browser_support \"http://webfonts.info/wiki/index.php?title=%40font-face\\_browser\\_support\")\n\nIE does support it since version 4.0. Chrome could support it (since it's built on the Webkit framework), but it's currently disabled. The fonts are even downloaded ...\n\n"
+    },
+    {
+      "time": "29 Jul 2009 — 11:42am",
+      "content": "Hmmm, i'm surprised by IE! Any clues why it's blocked in Chrome?\n\nMore: But IE only supports EOT, can that really be considered @font-face support?\n\n"
+    },
+    {
+      "time": "29 Jul 2009 — 12:01pm",
+      "content": "<cite>can that really be considered @font-face support?</cite>\n\nPeople often mix up @font-face, EOT and \"raw fonts\". @font-face is the general technology; EOT, TTF, OTF, SVG and so on are possible formats which can work with @font-face depending on the browser support. (Similar to GIF/JPG/PNG and the IMG tag)\n\n"
+    },
+    {
+      "time": "29 Jul 2009 — 12:23pm",
+      "content": "yes, i know that @font-face is just a css rule. the confusing things is that each of the browsers only supports certain font formats with this rule. to me it almost makes no sense to speak of @font-face support in general then. If speaking about @font-face support it would make more sense to differentiate between @font-face embedding for 'raw' or 'naked' fonts and @font-face embedding for encrypted font formats, ie EOT.\n\n"
+    },
+    {
+      "time": "29 Jul 2009 — 12:32pm",
+      "content": "<cite>would make more sense to differentiate between @font-face embedding for ’raw’ or ’naked’ fonts and @font-face embedding for encrypted font formats, ie EOT.</cite>\n\nThe line is hard to draw. You could also built an EOT font without URL-binding and compression and obfuscate a \"raw\" font, so it's not really raw any more ...  \nAnd it's getting more complicated now that new formats are being proposed. Some more information:  \n [http://opentype.info/blog/2009/07/29/why-webfont-services-are-the-future...](http://web.archive.org/web/20130213085423/http:/opentype.info/blog/2009/07/29/why-webfont-services-are-the-future-of-fonts-on-the-web/ \"http://opentype.info/blog/2009/07/29/why-webfont-services-are-the-future-of-fonts-on-the-web/\")  \nhttp://ilovetypography.com/2009/07/20/web-fonts-—-where-are-we/  \n [http://new.typographica.org/2009/on-typography/audio-from-the-web-fonts-...](http://web.archive.org/web/20130213085423/http:/new.typographica.org/2009/on-typography/audio-from-the-web-fonts-panel-at-typecon2009/ \"http://new.typographica.org/2009/on-typography/audio-from-the-web-fonts-panel-at-typecon2009/\")\n\n"
+    },
+    {
+      "time": "29 Jul 2009 — 12:35pm",
+      "content": "Paul: _the confusing things is that each of the browsers only supports certain font formats with this rule. to me it almost makes no sense to speak of @font-face support in general then._\n\nCertainly talk of @font-face support needs to carry this caveat, that different font formats are required to display @font-face linked fonts in different browsers. But in terms of recognising @font-face in CSS and doing _something_ with that information, one can say that all these browsers support it.\n\nServices like Typotheque's, Typekit and Kernest serve different file formats to different browsers as appropriate, while trying to provide some measure of server-side or in-font obfuscation to naked font data to make it uninstallable on desktop systems. So they can claim to support ‘95% of all browsers in use’ even though those browsers support @font-face in different ways.\n\nFrom a type foundry perspective, considering whether to sign up for any of these services, a key question is whether the methods of obfuscation of naked font data provided are sufficient. You probably also want to make sure that your web font license and your contract agreement with these service providers specifies that such methods are a requirement, i.e. that naked font data should not be served without such measures.\n\n"
+    },
+    {
+      "time": "29 Jul 2009 — 12:35pm",
+      "content": "I think it would make more sense for everyone to stop using the terms embedding and @font-face when discussing web fonts and be specific about what font formats browsers support. Many web designers aren’t even writing code, they have production staff for that, so talking about a specific CSS rule isn’t very helpful. I do think those designers can handle an explanation of what font formats are supported, which might lead to designers leaning on Microsoft to support raw linking and lean on all browser makers and the W3C to get a good web font standard defined and implemented.\n\n"
+    },
+    {
+      "time": "29 Jul 2009 — 12:43pm",
+      "content": "James, your first sentence more clearly explains my own thinking. Thanks for piping up.\n\n"
+    },
+    {
+      "time": "29 Jul 2009 — 1:52pm",
+      "content": "@james puckett  \n\"_Many web designers aren’t even writing code, they have production staff for that, so talking about a specific CSS rule isn’t very helpful._\"\n\nHuh? I'm not getting this. What kind of web designer doesn't have some working knowledge of CSS?  \nWhat do you mean by web designer, then?  \nI hardly think of CSS as \"writing code\".  \nStraighten me out on this.\n\n"
+    },
+    {
+      "time": "29 Jul 2009 — 1:59pm",
+      "content": "\"I’m not getting this. What kind of web designer doesn’t have some working knowledge of CSS?\"\n\nThe bad ones. ;)\n\n"
+    },
+    {
+      "time": "29 Jul 2009 — 2:04pm",
+      "content": "It’s not uncommon for graphic designers to have little or no knowledge knowledge of XHTML/CSS and to handle web design by mocking up sites in Photoshop or InDesign. The design is then passed on to production staff who handle all of the HTML/XHTML/CSS/backend setup.\n\n"
+    },
+    {
+      "time": "29 Jul 2009 — 2:49pm",
+      "content": "Well. I am a graphic designer and did a week long course on webdesign when HTML 2.0 was hot, and I am confounded by all this @font-face stuff…  \nBut I am quite sure that after the clouds of warfare have settled things will become a lot clearer.  \nIn other words: most designers will wait out the font wars and get into the game when some semblance of consensus has been achieved.\n\n. . .  \nBert Vanderveen BNO\n\n"
+    },
+    {
+      "time": "29 Jul 2009 — 9:23pm",
+      "content": "\\> _Any clues why it’s blocked in Chrome?_\n\nBecause of security concerns, apparently: [http://lists.w3.org/Archives/Public/www-font/2009JulSep/0823.html](http://web.archive.org/web/20130213085423/http:/lists.w3.org/Archives/Public/www-font/2009JulSep/0823.html \"http://lists.w3.org/Archives/Public/www-font/2009JulSep/0823.html\")\n\n"
+    },
+    {
+      "time": "30 Jul 2009 — 11:26am",
+      "content": "JP: _...which might lead to designers leaning on Microsoft to support raw linking_\n\nSo far, the only pressure I've seen from web designers/authors has been on the other browsers to support EOT Lite, because it is the only format that offers a significant measure of backwards compatibility with well over 50% of browsers in current use.\n\nAnd I think the chances of MS supporting raw linking are now close to nil.\n\n_...and lean on all browser makers and the W3C to get a good web font standard defined and implemented._\n\nThat we're working on.\n\n"
+    },
+    {
+      "time": "2 Aug 2009 — 9:26am",
+      "content": "Paul, I understand this is indeed confusing, especially since Internet Explorer has supported @font-face for a very long time, but very few people took advantage of this. But in a way, this is not so much different from another basic HTML code: \\<img src=\"url\" /\\>\n\nNot every browser supports all image formats (e.g. PNG, BMP), the designer has to choose the format that is best for the purposes. Hopefully, we'll soon have one font format that works in all browsers, so we don't have to specify two or more\\* font formats per single web page.\n\nPeter  \n [http://www.typotheque.com](http://web.archive.org/web/20130213085423/http:/www.typotheque.com/ \"http://www.typotheque.com\")\n\n\\* It is a fact that right now, we deliver subsetted and obfuscated TTF for some browsers, and the same font wrapped in EOT for other browsers. But because we aim for multilingual support, we realise that even this may not be enough, as Apple requires AAT fonts for correct shaping of some non-Latin scripts. I am just playing with Devanagari fonts, and while on Windows this sample ( [http://www.typotheque.com/hindi.html](http://web.archive.org/web/20130213085423/http:/www.typotheque.com/hindi.html \"http://www.typotheque.com/hindi.html\")) is rendered correctly in all browsers, on Mac the conjuncts are not correctly rendered. The sample is in fact Nepalese, not Hindi.\n\n"
+    },
+    {
+      "time": "2 Aug 2009 — 4:10pm",
+      "content": "Does anyone have any inside info on the status of **TypeKit**? There hasn't been an update for quite a while now. In the meantime, I've had decent luck with the [**Font Squirrel**](http://web.archive.org/web/20130213085423/http:/www.fontsquirrel.com/fontface) website. they've organized the their fonts into **@font-face kits** complete with the proper CSS syntax. Pretty decent selection, too.\n\n"
+    },
+    {
+      "time": "3 Aug 2009 — 11:45am",
+      "content": "Peter,  \nThanks for chipping in. The Devanagari sample is quite interesting. For your own information, I am on Win XP and getting Fedra Devanagari in Firefox (3.5.1) and IE (6), but Mangal in Chrome (2.0.172.39) and Safari (4.0.2).\n\n"
+    },
+    {
+      "time": "3 Aug 2009 — 1:56pm",
+      "content": "I know that current version of Chrome doesn't support @font-face, but I wonder what's up with Safari 4.0.2? I suppose you see other @font-face pages there? Is it Devanagari issue only? Sorry I have no Win machine at the moment.\n\nPeter  \n [http://www.typotheque.com](http://web.archive.org/web/20130213085423/http:/www.typotheque.com/ \"http://www.typotheque.com\")\n\n"
+    },
+    {
+      "time": "3 Aug 2009 — 2:24pm",
+      "content": "Interesting... I just checked again and the correct font is now showing in both Safari and Firefox. Perhaps the browser wasn't properly downloading the font earlier? In any case it seems to be working correctly now.\n\np\n\n"
+    },
+    {
+      "time": "19 Dec 2012 — 2:22pm",
+      "content": ".\n\n"
+    }
+  ]
+}

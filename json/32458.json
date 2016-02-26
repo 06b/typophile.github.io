@@ -1,0 +1,50 @@
+{
+  "id": "32458",
+  "title": "Photoshop CSx not recognizing calt feature",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m finishing up a script font that uses `calt` (Contextual Alternates) to pick appropriate glyphs depending on where they fall in a word—mainly selecting different glyphs for the beginning and ending of lowercase runs, but not exclusively. All is working exactly as it should in InDesign (CS, CS2), Illustrator (CS, CS2), and Quark 7.\n\nHowever, Photoshop (CS, CS2, and CS3-beta) is not cooperating. It does not seem to recognize that the feature is present (it’s grayed out in the OT feature menu). Not only this, it seems to think my font has a `titl` feature instead—which it does not.\n\nI’m using FLS5 (Mac) and generating OT CFF fonts. What’s going on with this? Anybody run into this problem before?\n\n [‹ caching ATSUI fonts...](http://web.archive.org/web/20080312174535/http:/www.typophile.com/node/32454 \"Go to previous forum topic\") [Type Designer looking for detailed developer ›](http://web.archive.org/web/20080312174535/http:/www.typophile.com/node/32346 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080312174535/http://www.typophile.com/user/1043\" title=\"View user profile.\">Mark Simonson</a>",
+  "time": "<br>",
+  "uid": "1043",
+  "comments": [
+    {
+      "time": " 21.Mar.2007 9.08pm",
+      "content": "I have seen this too, but it was Swashes that were missing. Strangely, quitting Photoshop, clearing font caches, and reactivating the font seemed to fix the problem. But don’t quote me on this as it was more than a few weeks ago.\n\n"
+    },
+    {
+      "time": " 21.Mar.2007 9.30pm",
+      "content": "I don’t think it’s a font cache problem because I routinely incrementally change the name of the font each time I generate a new version in order to avoid cache issues.\n\n"
+    },
+    {
+      "time": " 22.Mar.2007 4.25am",
+      "content": "That’s interesting. AFAIK, Photoshop and Illustrator share the same text engine, so I would expect the same kind of behavior. It might be something else then.\n\nMark, could you please send me the font (or an equivalent one) so that I can attach it to the bug report? Thanks.\n\n"
+    },
+    {
+      "time": " 22.Mar.2007 6.28am",
+      "content": "Thanks, Miguel. I’ll do that.\n\n"
+    },
+    {
+      "time": " 22.Mar.2007 1.34pm",
+      "content": "I think this is a Mac+Adobe problem. Sometimes I’ve had contextual features not show up in certain applications unless the font is installed directly to the Adobe Fonts folder. Try installing the font there and see if the problem persists, if the problem is fixed, then I’m guessing the font is fine, but OS/App handling is the culprit.  \nI’m assuming that you’re testing the font on a Mac, have you tried it on a PC? If so, do you notice the same problem?\n\n"
+    },
+    {
+      "time": " 22.Mar.2007 1.43pm",
+      "content": "I’ve tried installing the font in both the user (system) font folder and the Adobe font folder. No difference.\n\n"
+    },
+    {
+      "time": " 22.Mar.2007 5.26pm",
+      "content": "Update:\n\nI was able to test the font in Photoshop on Windows (thanks Paul!) and it worked correctly. I also tried it a different Mac. The OpenType menu was not quite right (“Contextual Alternates” checked but grayed out; “Titling Alternates” enabled even though the feature doesn’t exist), but the `calt` feature itself works correctly. I now suspect the problem is not the with the font, but with Photoshop. Curious.\n\n"
+    },
+    {
+      "time": " 22.Mar.2007 10.44pm",
+      "content": "Mark, looks like you’re right. “Titling Alternates” seems to be broken on the Mac. I tested Adobe Garamond, which has the ’titl’ feature, and the option is grayed out on the OT menu.\n\nThe good news is, I just tried the latest build of Photoshop CS3 and your font works perfectly, and so does Adobe Garamond.\n\n"
+    },
+    {
+      "time": " 23.Mar.2007 7.16am",
+      "content": "Two of the systems I tried it on are Intel Macs—a Mac Pro tower and a MacBook Pro. Both of these also have the Photoshop CS3 beta installed on them. Both are running 10.4.9. On the MacBook Pro, the calt feature works, but it’s grayed out and checked (on by default, I presume) and the Titling Alternates feature is enabled, even though it doesn’t exist in the font.\n\nI also tried it on a PowerMac Dual G5 tower (Photoshop CS2, 10.4.8) and had the same results as the Mac Pro. This computer did not have the CS3 beta installed.\n\nIn some cases (on the Mac Pro), when I was trying different OT output settings in FL, Oldstyle Figures would be enabled instead of Titling Alternates.\n\n"
+    }
+  ]
+}

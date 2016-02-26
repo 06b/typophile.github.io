@@ -1,0 +1,38 @@
+{
+  "id": "44982",
+  "title": "Computer generated text image",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I was wondering if there were any solutions to make an image out of a text file. Like an ASCII image, but with real text and variations in font size and weight. Is there any commercial solutions for this, or any scripts for Scriptographer etc?  \nExample by Herb Lubalin:\n\n ![](http://web.archive.org/web/20131104072915im_/http:/typophile.com/files/picasso_5129.jpg)\n\n",
+  "author": "fruktbart",
+  "time": "5 May 2008 — 7:05am",
+  "uid": "15213",
+  "comments": [
+    {
+      "time": "5 May 2008 — 8:12am",
+      "content": "there are a bunch of tools for this:\n\n[http://www.google.com/search?q=ascii+art+generator](http://web.archive.org/web/20131104072915/http:/www.google.com/search?q=ascii+art+generator \"http://www.google.com/search?q=ascii+art+generator\")\n\n"
+    },
+    {
+      "time": "5 May 2008 — 8:34am",
+      "content": "Most ASCII generators aren't what you're looking for at all. There's this [http://www.typorganism.com/asciiomatic/](http://web.archive.org/web/20131104072915/http:/www.typorganism.com/asciiomatic/ \"http://www.typorganism.com/asciiomatic/\") one which does generate ASCII images, but can also change the darkness of the letters if you tell it to do it in colour; however it doesn't change the weights or anything. But it's kiiinda close to what you want - perhaps you could put your image through this and then exaggerate parts of it by hand by changing weights and type sizes\n\n-Rafe\n\n"
+    },
+    {
+      "time": "6 May 2008 — 4:43pm",
+      "content": "That was surprisingly difficult to write. Sampling a picture (a recognizable one, at this very low rez) is easy. So is drawing text at arbitrary sizes -- I'm using the FreeType lib for that. The difficulty came in when I tried to emulate the sizing; FreeType allows that, but it took a bit of fiddling to get it right (sort of).\n\nMy program resembles an ASCII art generator, but instead of selecting characters for darkness, it selects one of 5 weights of Myriad, so the 'effective' gray resolution is just 5 levels. I do hope you can recognize the image, though!\n\n ![](http://web.archive.org/web/20131104072915im_/http:/typophile.com/files/einstein_6170.png)\n\n"
+    },
+    {
+      "time": "6 May 2008 — 4:47pm",
+      "content": "And just for completeness, an inverse version of the image! Note the text runs different.\n\nBy the way, the text is not broken at whole words -- that's quite a bit more work, although it should be doable --, but it _is_ fully justified.\n\n ![](http://web.archive.org/web/20131104072915im_/http:/typophile.com/files/einstein2_5932.png)\n\n"
+    },
+    {
+      "time": "15 May 2008 — 1:53am",
+      "content": "What's FreeType Theunis? What you've reproduced is exactly what I need for a project I'm doing right now\n\n-Rafe\n\n"
+    },
+    {
+      "time": "15 May 2008 — 2:04am",
+      "content": "FreeType is a [free programmer's library](http://web.archive.org/web/20131104072915/http:/www.freetype.org/) for C programmers, which enables your program to use just about any font file directly.  \nI used it for the above samples to get the character metrics (the important part), and to output the raster graphics. But I don't even need it in my Windows version -- that uses your installed fonts in the regular way.\n\n(I posted a pointer to my Window version under a [new topic](http://web.archive.org/web/20131104072915/http:/typophile.com/node/45299) to prevent cross-pollution. That didn't last long ...)\n\n"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "id": "68742",
+  "title": "Two presentations on type at the Mix10 conference: Webtype and Kevlar",
+  "forum": "General Discussions",
+  "tags": [
+    "conferences",
+    "General Discussions",
+    "screenfonts",
+    "webtype"
+  ],
+  "content": "The [Microsoft Mix10 conference](http://web.archive.org/web/20131013024850/http:/live.visitmix.com/ \"Generic Mix site (will change from year to year)\") that took place last week featured two presentations on typography (with videos and slides in various downloadable formats, including MP4):\n\n1. [Jonathan Snook on Web typography](http://web.archive.org/web/20131013024850/http:/live.visitmix.com/MIX10/Sessions/DS15 \"The Type We Want\"). (Fun drinking game! Down a shot of cranberry juice or moral equivalent at every repeated mispronunciation, including “sã serif,” OS “eks,” and that old standby, “Hohfler.”)\n2. [Kevin Larson on onscreen reading.](http://web.archive.org/web/20131013024850/http:/live.visitmix.com/MIX10/Sessions/DS07 \"The Art, Technology and Science of Reading\")\n\n",
+  "author": "joeclark",
+  "time": "24 Mar 2010 — 10:20am",
+  "uid": "7076",
+  "comments": [
+    {
+      "time": "24 Mar 2010 — 12:07pm",
+      "content": "\\>mispronunciation\n\nAren't some of those are the Canadian pronunciations?\n\n[http://snook.ca/about/](http://web.archive.org/web/20131013024850/http:/snook.ca/about/ \"http://snook.ca/about/\")\n\n"
+    },
+    {
+      "time": "24 Mar 2010 — 12:17pm",
+      "content": "I gave up on Snook once I realized it was just the same rundown of web font stuff that shows up online every other day. But Kevlar’s lecture is a must-watch for people who like reading psychology.\n\n"
+    },
+    {
+      "time": "24 Mar 2010 — 10:17pm",
+      "content": "Yes, thanks, Joe, for sharing Kevin's talk. It's incredibly exciting to see some early psychological evidence for the benefits of good typography and type selection.\n\n"
+    },
+    {
+      "time": "25 Mar 2010 — 3:07pm",
+      "content": "Thanks everyone. I'm glad no one noticed that I had taken pain killers that day. I had surgery 3 days before the talk.\n\n"
+    },
+    {
+      "time": "26 Mar 2010 — 5:15am",
+      "content": "_I'm glad no one noticed that I had taken pain killers that day._ [Kevin]\n\nSo that's why you weathered the font display issues so gracefully.\n\nKevin, I thought the presentation was an excellent summary of your involvement in font issues so far.\n\nWhat science was used to motivate the ClearType spacing work? What kind of algorithm is used in the implementation?\n\n"
+    },
+    {
+      "time": "26 Mar 2010 — 7:04am",
+      "content": "That's really cool, thanks Kevin! (first time I've not felt the need to take pain killers;).\n\nWhat's odd about your presentation's content, from (Dawn and the Differentiations, almost to the end), is the insistence of You and the Researchers, on telling the subject, (and the audience) — what they should think of the options, and then reinforcement of the \"good\" answers, e.g. \"...and there was one crazy person who liked the document on the left\" —&nbsp;Kevin. Was that 1 Crazy Person the author of the 2000 document on Al Queda? I.E. is there no document for any purpose that should have the form of the document on the left? Then, the Corsiva vs. Times... whew! I'd like to suggest a differentiation study between Corsiva and Times Italic, first;)\n\nThe big thing is, that there is not enough separation in design between the fonts being tested, relative to the differentiation being suggested. And then, there is too much difference between the \"good\" and \"bad\" documents being suggested, with insufficient context.\n\nCheers!\n\n"
+    },
+    {
+      "time": "26 Mar 2010 — 10:03am",
+      "content": "\"I'm glad no one noticed that I had taken pain killers that day\"\n\nMust have been a \"House\" episode :-)\n\n"
+    },
+    {
+      "time": "26 Mar 2010 — 9:25am",
+      "content": "\\> What science was used to motivate the ClearType spacing work? What kind of algorithm is used in the implementation?\n\nThe ClearType spacing work was done not long after the invention of ClearType (before I joined the team), but getting it into the operating system required a fundamental change to the graphics platform. With the older versions of ClearType every glyph had to start and end on a full pixel boundary which limits how well the spacing between letters can be controlled. If a glyph naturally wants to use 6.8 horizontal pixels of space, then that glyph will use 7 pixels of horizontal space. And most every glyph has some sort of rounding error. The new version, which we call sub-pixel positioned ClearType, allows us to start and end glyphs on fractional boundaries. A glyph that wants 6.8 pixels of space can have 6.83 pixels of space. DirectWrite is the new graphics platform that is allowing application to have sub-pixel positioned ClearType. Applications have to be written for DirectWrite as the older graphics engine (GDI) isn’t going away. Both Firefox and IE have announced plans to use DirectWrite in future versions.\n\nMore info on DirectWrite:  \n [http://blogs.msdn.com/e7/archive/2009/02/13/advances-in-typography-and-t...](http://web.archive.org/web/20131013024850/http:/blogs.msdn.com/e7/archive/2009/02/13/advances-in-typography-and-text-rendering-in-windows-7.aspx \"http://blogs.msdn.com/e7/archive/2009/02/13/advances-in-typography-and-text-rendering-in-windows-7.aspx\")\n\n"
+    },
+    {
+      "time": "28 Mar 2010 — 8:08pm",
+      "content": "Kevin: _With the older versions of ClearType every glyph had to start and end on a full pixel boundary which limits how well the spacing between letters can be controlled._\n\nI would rephrase that. In terms of _control,_ full pixel spacing actually provided more control via hinted widths than typical subpixel positioning does. What subpixel positioning enables is closer overall fidelity to natural glyph spacing -- just as ClearType outline rendering provides closer overall fidelity to natural glyph shape -- through increased x-direction resolution. The argument for sub-pixel positioning is really that it reduces the need for the kind of control required in full-pixel spacing environments (which CT without sub-pixel spacing simply broke). The lesson here is that however you render shapes should also be the way you render spacing, and I'm glad MS is finally doing this.\n\nThe fact that Verdana and Georgia, typefaces that was designed and hinted for both full-pixel shape rendering and full-pixel shaping, continue to look better and seem to be more readable in CT with sub-pixel positioning than most other fonts should provoke one of those moments in which we all think carefully.\n\n"
+    },
+    {
+      "time": "28 Mar 2010 — 8:10pm",
+      "content": "Kevin: _Applications have to be written for DirectWrite as the older graphics engine (GDI) isn’t going away._\n\nFor those who have been through this before: GDI = Classic, DirectWrite = Cocoa.\n\n"
+    },
+    {
+      "time": "29 Mar 2010 — 2:51pm",
+      "content": "\\>What subpixel positioning enables is closer overall fidelity to natural glyph spacing --\n\n\\> just as ClearType outline rendering provides closer overall fidelity to natural glyph shape -\n\n(...where natural = print).\n\n\\>For those who have been through this before: GDI = Classic, DirectWrite = Cocoa.\n\nOh, I thought it was: the Greeks sail for troy = Adobe Type Manager's release... the Trojans lose the war = OS X release... then Odysseus returns home 10 years after, to find DW2 waiting on his PC, (the fall of the house of alias takes longer than the Illiad and the Odyssey combined.:)\n\nCheers\n\n"
+    },
+    {
+      "time": "29 Mar 2010 — 3:04pm",
+      "content": "David: _(...where natural = print)._\n\nNatural = unhinted sidebearing distances. So whether those are better suited to print or to screen depends on the individual font. Leaving aside the wisdom of hiring people to design typefaces with the brief ‘look good on screen _and_ in print’.\n\nPS. You left out the bit where Peter Karow = Cassandra, prophecies the fall of the house of alias before the war even begins, but no one listens.\n\n"
+    },
+    {
+      "time": "29 Mar 2010 — 3:46pm",
+      "content": "Beware of Geeks sharing rifts\n\n"
+    },
+    {
+      "time": "29 Mar 2010 — 4:51pm",
+      "content": " ![](http://web.archive.org/web/20131013024850im_/http:/typophile.com/files/300_5283.png)\n\n"
+    },
+    {
+      "time": "29 Mar 2010 — 5:15pm",
+      "content": "Hey, it's that [Leonidas](http://web.archive.org/web/20131013024850/http:/typophile.com/node/68824) bloke again.\n\n"
+    },
+    {
+      "time": "29 Mar 2010 — 8:10pm",
+      "content": "The road to Thermopoly never looked so good :-)\n\n"
+    },
+    {
+      "time": "29 Mar 2010 — 9:06pm",
+      "content": "_Thermopoly_\n\nIs that the version of Monopoly in which the Persians have hotels on all the high rent streets, the Greek are arguing about who is going to be the site manager on Marathon Avenue, and Xerxes is about to pass Go and collect 300 Spartans?\n\n"
+    },
+    {
+      "time": "30 Mar 2010 — 5:30am",
+      "content": "LOL!!!  \nYou've been there, John? :-)\n\n"
+    }
+  ]
+}

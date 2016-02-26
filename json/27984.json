@@ -1,0 +1,58 @@
+{
+  "id": "27984",
+  "title": "Unicode-Double-Mapping",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I ran the FontQA-test on a new typeface.\n\nThere was this error:\n\nSome glyphs have Unicode-Double-Mapping.  \nmu: 00B5, 03BC, Delta: 0394, 2206, Omega: 03A9, 2126  \nNow, this is actually FontLab that creates two Unicode values, not me.\n\nThen I looked at the Unicode charts, and there IS two codes available for the same glyph according to [www.unicode.org/charts](http://web.archive.org/web/20110522212518/http:/www.unicode.org/charts \"www.unicode.org/charts\")\n\nWhat should I do — take away one number or just let it be?  \nThanks in advance, Font Maestro’s\n\n",
+  "author": "<a href=\"/web/20110522212518/http://typophile.com/user/11526\" title=\"View user profile.\">Goran Soderstrom</a>",
+  "time": "<br>",
+  "uid": "11526",
+  "comments": [
+    {
+      "time": "",
+      "content": "[http://partners.adobe.com/public/developer/en/opentype/aglfn13.txt](http://web.archive.org/web/20110522212518/http:/partners.adobe.com/public/developer/en/opentype/aglfn13.txt \"http://partners.adobe.com/public/developer/en/opentype/aglfn13.txt\")\n\n[http://partners.adobe.com/public/developer/opentype/index\\_glyph.html](http://web.archive.org/web/20110522212518/http:/partners.adobe.com/public/developer/opentype/index_glyph.html \"http://partners.adobe.com/public/developer/opentype/index\\_glyph.html\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "Sorry, if I am \"have-to-make-sure-two-times\" but I am very new to this, I have had Fontlab in a week or so only.\n\nBut, are you referring to this?\n\n1.5 [23 November 2005]  \n# - removed duplicated block at end of file  \n# - changed mappings:  \n# 2206;Delta;INCREMENT changed to 0394;Delta;GREEK CAPITAL LETTER DELTA  \n# 2126;Omega;OHM SIGN changed to 03A9;Omega;GREEK CAPITAL LETTER OMEGA  \n# 03BC;mu;MICRO SIGN changed to 03BC;mu;GREEK SMALL LETTER MU  \n# - corrected statement above about why ffi is omitted.\n\n...and mean that I should choose the \"new\" number?  \nShouldnt FontLab also get this update in that case, and take away the \"older\" number?\n\n"
+    },
+    {
+      "time": "",
+      "content": "The FontQA test tool represents FontShop's workflow and approach, so it flags a couple of things as errors which are not technically errors at all but simply reflect things that FontShop don't do in their own fonts (or at least think should be checked). This error message suggests that FontShop follows Adobe's practice of not double-encoding glyphs, so that there is an unambiguous path back from the glyph ID to a single Unicode characters (which Acrobat sometimes needs, in order to be able to restore character strings from a PDF created from a print stream).\n\nIt is, however, perfectly permissable to map a single glyph to multiple Unicode codepoints. It is a workflow decision not a font error.\n\n"
+    },
+    {
+      "time": "",
+      "content": "John, thank you so very much for your great explanation!\n\nNow, I just hope somone could give a similar great explanation to this one;\n\n[http://typophile.com/node/20429](http://web.archive.org/web/20110522212518/http:/typophile.com/node/20429 \"http://typophile.com/node/20429\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thank you John,  \nit is exactly as you said. It is against the production guidelines of FontShop International, not against the specs, to map multiple Unicode codepoints to a single glyph.  \nShould i remove this test from the public version of fontQA?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Andreas, I understand it is you who has developed this fontQA.\n\nAmazing work, in my opinion — and many thanks for letting people use it!\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>It is against the production guidelines of FontShop International, not against the specs, to map multiple Unicode codepoints to a single glyph.<br>\nShould i remove this test from the public version of fontQA?</cite>\n\nHello! As the test can be useful for some people, maybe add a little note \"not required\" for the others (like me). :)\n\nBest wishes, Karsten\n\n"
+    },
+    {
+      "time": "",
+      "content": "Eigi,\n\nperhaps you could demote the error to something like warning.\n\nFontLab Studio 5.0.2 includes three glyphname-to-Unicode mapping tables: Standard Table, AGLFN 1.4 (old) strict and AGLFN 1.6 (new) strict. The AGLFN 1.4 (old) table maps the human-readable glyphnames to the mathematical/scientifical Unicodes, while presuming that the Greek text glyphs would carry uniXXXX glyphnames. The AGLFN 1.6 (new) table reverses the logic: the human-readable glyphnames are mapped only to the Greek text Unicodes while the mathematical/scientifical glyphs would carry uniXXXX names. The Standard Table double-maps the human-readable glyphnames so there is no need to include the uniXXXX glyph names.\n\nIf you want to include both Greek text glyphs and scientific glyphs that differ in design, or would like to make sure that Acrobat always precisely guesses the Unicode of a glyph (i.e. it will never confuse the Greek text Unicodes with the scientific Unicodes when doing searches or text extraction in a PDF), I'd use the AGLFN 1.6 (new) strict table. But this will mean that you will need to provide two glyphs for each of the characters.\n\nOtherwise, if you only want to design one set of glyphs, double-encode them (using the Standard Table).\n\nBTW, there some additional explanations in the .NAM files themselves.\n\nRegards,  \nAdam Twardoch  \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Fontlab Ltd. recommends using both the \"old\" and the \"new\" codes for these glyphs, i.e. double-mapping them. This is what STANDARD.NAM is programmed to do in FontLab Studio 5, but you can also choose just the \"old\" or the \"new\" Adobe mapping by choosing a different Unicode-to-glyphname mapping file in FontLab Studio's preferences.\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The other option is to simply use a composite so that from a design perspective it's one glyph, but in the final font it's two.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "To sum up:\n\nIf you use the \"Standard Table\" as your default Unicode-Name mapping table in FLS5, your font should have three glyphs, each of them having two Unicode codepoints assigned:  \nU+2206 U+0394 \"Delta\"  \nU+2126 U+03A9 \"Omega\"  \nU+00B5 U+03BC \"mu\"\n\nIf you use the \"AGLFN 1.6 (new) strict\" as the default Unicode-Name mapping table, your font should have six glyphs, each having just one Unicode codepoint assigned; three of these glyphs can be composites of the other three:  \nU+2206 \"uni2206\", U+0394 \"Delta\"  \nU+2126 \"uni2126\", U+03A9 \"Omega\"  \nU+00B5 \"uni00B5\", U+03BC \"mu\"\n\nFor new multilingual \"Pro\"-type of OpenType fonts, use of \"AGLFN 1.6 (new) strict\" (aglfn16.nam) is recommended. For other font work (such as fonts converted from older formats etc., plain/simple OpenType fonts without large character sets), \"Standard Table\" (standard.nam) is recommended.\n\nTo set your default Unicode-Name mapping table, go to the General Options / Unicode and OpenType section of FontLab Studio's Preferences (on Mac) or Options (on Windows).\n\nAdam\n\n"
+    }
+  ]
+}

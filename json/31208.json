@@ -1,0 +1,42 @@
+{
+  "id": "31208",
+  "title": "glyphs palette pop-up",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m designing a font with lots of alternate characters. While playing around with Brioso pro, I noticed a cool little pop-up menu (triangle symbol on each glyph square) in the glyphs palette in Illustrator CS2 that showed a selection of alternates for each character that had them. I want this for my font! I did a little research and read that it had something to do with all alternates (aalt). So I looked at Brioso’s OT coding and fumbled around with my own but alas, couldn’t get it to work. To complicate things even more, I opened it up in InDesign CS2 and it recognized my alternates and gave me the pop-up. But no go in Illustrator. Could someone inform me how exactly to get get this working? It would be much appreciated!  \nThanks!\n\nJosh\n\n",
+  "author": "<a href=\"user/7730\" title=\"View user profile.\">scruggsdesign</a>",
+  "time": "<br>",
+  "uid": "7730",
+  "comments": [
+    {
+      "time": " 7 February, 2007 - 7:25am",
+      "content": "Whenever you define any features in your font that produce 1:1 substitutions by some alternates (salt, ss01-ss20, swsh, hist, smcp, c2sc etc.), you should link these features to aalt in the following way:\n\nfeature aalt {  \n feature salt;  \n feature ss01;  \n feature ss02;  \n feature hist;  \n feature smcp;  \n feature c2sc;  \n} aalt;\n\nAll the substitutions from the original features that have been linked into “aalt” will become available in the little popup menus of the Illustrator and InDesign glyph palettes.\n\nBest,  \nAdam\n\n"
+    },
+    {
+      "time": " 7 February, 2007 - 9:11am",
+      "content": "Another tidbit from Adam!\n\nAdam, does this follow the other alt features or does the order even matter?\n\nChrisL\n\n"
+    },
+    {
+      "time": " 7 February, 2007 - 9:28am",
+      "content": "Thanks a lot Adam!!  \ntrying it now\n\nJosh\n\n"
+    },
+    {
+      "time": " 7 February, 2007 - 9:32am",
+      "content": "sweeet it works!!\n\n"
+    },
+    {
+      "time": " 7 February, 2007 - 12:21pm",
+      "content": "Plenty of great FontLab Q&A these days! :)\n\n"
+    },
+    {
+      "time": " 7 February, 2007 - 1:22pm",
+      "content": "The AFDKO feature syntax for “aalt” is special, unlike any other feature. Rather than duplicating all possible substitutions that are already defined in the font, Adobe created this shorthand notation for “aalt”: the AFDKO compiler looks at the “table of contents” defined under “feature aalt”, then checks all the feature definitions listed there, collects all the lookups associated with those features and maps them to “aalt”. In other words, through the special “aalt” syntax, the font developer decides which of the lookups that are already defined in his font and are associated with some features should be also associated with “aalt”.\n\nAdam\n\n"
+    },
+    {
+      "time": " 7 February, 2007 - 1:45pm",
+      "content": "Dziekuje!\n\nChrisL\n\n"
+    }
+  ]
+}

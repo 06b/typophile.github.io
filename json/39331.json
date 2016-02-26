@@ -1,0 +1,50 @@
+{
+  "id": "39331",
+  "title": "Migrating T1 fonts to OTF",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I need to migrate my T1 fonts to OpenType format.  \nWhat is the best way of merge two T1 fonts in an unique OTF?\n\nExample:  \nRegular + Small Caps with old style number = OTF\n\nThanks in advance,  \nEduardo\n\n [‹ Open Type Positioning Punctuation](http://web.archive.org/web/20080828033128/http:/www.typophile.com/node/39578 \"Go to previous forum topic\") [Using Multiple Masters to Generate Weights in a Family - Insight? ›](http://web.archive.org/web/20080828033128/http:/www.typophile.com/node/39376 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080828033128/http://www.typophile.com/user/1501\" title=\"View user profile.\">fontime</a>",
+  "time": "<br>",
+  "uid": "1501",
+  "comments": [
+    {
+      "time": " 22.Nov.2007 6.51am",
+      "content": "GENERAL DISCLAIMER: If it ain’t an Adobe font, it may break your license for the font. You’ll have to check.\n\nIf the final font is to be an OpenType font, you are going to have to write features. So the first questions is, do you want to save the kerning in the original Type 1 small cap font. It will be flat pairs kerning, not class-based kerning.\n\nIf you don’t want to save that kerning, just cut & paste the small cap glyphs into the “main” font file, and rename them. The usual convention is to name them “A.smcp” and use no Unicode number. To make them accessible, you need to write a couple features — if you are using FontLab, see the FontLab examples.\n\nIf you do want to save the kerning in the original small cap font, I’d rename the glyphs in that font (again, “A.smcp” etc.) and write off an .afm file with the renamed glyphs. Now cut & paste the glyphs as above, and write off an .afm file for the new font file that now contains the A.smcp etc.\n\nUsing “grep” (or the Mac equivalent) extract “smcp” from the original .afm file to another file (e.g. grep “smcp” smallcap.afm \\> smcaps). Open up that file & delete all lines except the KPX lines. Add the KPX lines to you new afm (after the other KPX lines works fine), save, & read that afm back into the font. Now you have your pairs kerning with the added small capitals.\n\nA lot of work, isn’t it? You can write some little programs to ease the manual work, but I don’t know of any generally available. I use old TeX tools, but maybe there are some Python scripts out there.\n\nBTW, the problem with just merging the fonts in FontLab is the kerning. You have to leave the full caps and punctuation in the font you are merging in order to preserve the kerning. That means when you merge, you double them up in the resulting font. FontLab will give these “doubled glyphs” a unique name (something like like A.1), but the small cap kerning for those “doubled letters” is now with that unique name.\n\nPlay around a bit, you might hit on something faster.\n\nBTW-2: If your time is worth anything, it will be cheaper just to buy new OT versions of the fonts.\n\n"
+    },
+    {
+      "time": " 22.Nov.2007 8.18am",
+      "content": "<cite>I wonder if this takes away the italic feeling here?</cite>\n\nEdit: no...\n\n"
+    },
+    {
+      "time": " 22.Nov.2007 1.42pm",
+      "content": "\\> _GENERAL DISCLAIMER: If it ain’t an Adobe font, it may break your license for the font. You’ll have to check.  \nBTW-2: If your time is worth anything, it will be cheaper just to buy new OT versions of the fonts._\n\nI think Eduardo wants to convert \\*his own\\* fonts, since he happens to have his own foundry [http://www.tipo.net.ar/sobre\\_eng.html](http://web.archive.org/web/20080828033128/http:/www.tipo.net.ar/sobre_eng.html \"http://www.tipo.net.ar/sobre\\_eng.html\")\n\nEduardo, I’d encourage you to use the [AFDKO](http://web.archive.org/web/20080828033128/http:/www.typophile.com/wiki/AFDKO). There are several threads around here about how to use it.\n\n"
+    },
+    {
+      "time": " 22.Nov.2007 2.05pm",
+      "content": "Miguel\n\nYes, we wants to convert our fonts!, and we look the AFDKO.\n\nThanks!  \nEduardo Rodríguez Tunni  \n [www.tipo.net.ar](http://web.archive.org/web/20080828033128/http:/www.tipo.net.ar/ \"www.tipo.net.ar\")\n\n"
+    },
+    {
+      "time": " 27.Nov.2007 10.36am",
+      "content": "Miguel:\n\nI’m trying to install AFDKO, but I can’t do it.  \nCan you help me?\n\nThanks,\n\nEduardo Rodríguez Tunni  \n [www.tipo.net.ar](http://web.archive.org/web/20080828033128/http:/www.tipo.net.ar/ \"www.tipo.net.ar\")\n\n"
+    },
+    {
+      "time": " 27.Nov.2007 4.34pm",
+      "content": "Sure. Which part are you having problems with? Are you on Mac or PC?\n\n"
+    },
+    {
+      "time": " 28.Nov.2007 3.24am",
+      "content": "Miguel:\n\nI’m in Mac with 10.4.11 and FontLab Studio 5.04\n\nThanks in advance!\n\nEduardo Rodríguez Tunni  \n [www.tipo.net.ar](http://web.archive.org/web/20080828033128/http:/www.tipo.net.ar/ \"www.tipo.net.ar\")\n\n"
+    },
+    {
+      "time": " 28.Nov.2007 5.54pm",
+      "content": "I posted the instructions on the [AFDKO](http://web.archive.org/web/20080828033128/http:/www.typophile.com/wiki/AFDKO) wiki page.\n\n"
+    },
+    {
+      "time": " 29.Nov.2007 3.25am",
+      "content": "Miguel:\n\nThanks!!\n\nEduardo Rodríguez Tunni  \n [www.tipo.net.ar](http://web.archive.org/web/20080828033128/http:/www.tipo.net.ar/ \"www.tipo.net.ar\")\n\n"
+    }
+  ]
+}

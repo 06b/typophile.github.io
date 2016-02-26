@@ -1,0 +1,102 @@
+{
+  "id": "17517",
+  "title": "OpenType and Mac Word 2004",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi,\n\nI'm working on an OpenType font that works OK in Mac TextEdit and NeoOffice. The composite characters use the ccmp feature class. When I try the font in Mac Office 2004 the characters are not rendered per the composite and instead each glyph that is part of the composite character appears as a separate character on screen. It was my understanding from reading elsewhere that Mac Office 2004 had good support for unicode and OpenType. Do I need to use Volt instead of ccmp in FontLab?\n\nAny ideas? Thanks,\n\n",
+  "author": "fredjonze",
+  "time": "24 Jan 2006 — 9:36pm",
+  "uid": "10195",
+  "comments": [
+    {
+      "time": "25 Jan 2006 — 4:42am",
+      "content": "Fred,\n\nDo you have something like this on top of your list of features?  \n`\nfeature aalt {\n   feature ccmp;\n} aalt;\n`  \nIf you don't, add it. It might help solving your problem.\n\n"
+    },
+    {
+      "time": "25 Jan 2006 — 2:02pm",
+      "content": "Hi Mike,\n\nNo, I didn't have the aalt feature. I added it to the feature list, but it didn't seem to have any effect on the rendering in Mac Word 2004. Here is a snippet of the two individual features. Unicode characters that are represented as a single unicode codepoint (such as U+026B) seem to display OK. Any composite characters, such as uni00430313) don't. On the screen they are rendered as a 'c' followed by a commaabove. Again, all works fine in TextEdit and NeoOffice.\n\nfeature aalt {  \nfeature ccmp;  \n} aalt;\n\nfeature ccmp {  \n sub C commaabovecmb by uni00430313;  \n sub c commaabovecmb by uni00630313;  \n sub C caroncmb by uni0043030C;  \n sub c caroncmb by uni0063030C;  \n sub C caroncmb commaabovecmb by uni0043030C0313;  \n sub C commaabovecmb caroncmb by uni0043030C0313;  \n sub c caroncmb commaabovecmb by uni0063030C0313;  \n sub c commaabovecmb caroncmb by uni0063030C0313;  \n sub Ccaron commaabovecmb by uni0043030C0313;  \n sub ccaron commaabovecmb by uni0063030C0313;  \n sub K commaabovecmb by uni004B0313;  \n sub k commaabovecmb by uni006B0313;  \n sub K wsuperior by uni004802B7;  \n sub k wsuperior by uni006B02B7;  \n sub K wsuperior commaabovecmb by uni004B031302B7;  \n sub K commaabovecmb wsuperior by uni004B031302B7;  \n sub uni004B0313 wsuperior by uni004B031302B7;  \n sub k wsuperior commaabovecmb by uni006B031302B7;  \n sub k commaabovecmb wsuperior by uni006B031302B7;  \n sub uni006B0313 wsuperior by uni006B031302B7;  \n sub L commaabovecmb by uni004C0313;  \n sub l commaabovecmb by uni006C0313;\n\n"
+    },
+    {
+      "time": "25 Jan 2006 — 3:49pm",
+      "content": "One more bit of information. I downloaded InDesignCS (Mac OSX) as I understand it has the best OpenType Unicode support. When I typed the characters in InDesign I found the same behaviors as with Word 2004...composite characters don't render properly. However, when I opened the glyph palette and double-clicked on the composite characters they rendered properly on-screen. When I back-spaced over the properly displayed characters they decomposed a glyph at a time...which makes me think that maybe I've done something wrong in either creating the font or assigning names in the OpenType features.\n\nAny ideas are very welcome. Thanks,\n\n"
+    },
+    {
+      "time": "25 Jan 2006 — 6:36pm",
+      "content": "Unfortunately I don't have a final answer to this problem, however I did some tests and here's what I found out:\n\nI took a typeface that had a ccmp feature and played around with it in InDesign CS and TextEdit.\n\n**This is how the feature looks like:**  \n`feature ccmp {\n\tsub Ccaron dotbelowcmb by uni010C0323;\n\tsub R macroncmb by uni00520304;\n} ccmp;`\n\n**This is how InDesign reenders it:** (the first line is set in Times)\n\n ![](http://web.archive.org/web/20131012110243im_/http:/typophile.com/files/calouste_ccmp.png)\n\n**This is how the text stream looks like:** (snippet of InDesign Tagged Text file)  \n`C<0x010C><0x010C><0x0323>RR<0x0304>R`\n\nAs you see, the text stream is correct.\n\n**Observations:**  \n— TextEdit rendered the caracters correctly. These were inserted via the keyboard plus the system's Character Pallete.  \n— InDesignCS rendered the caracters correctly, only when these were inserted via the Glyph Pallete.  \n— Copying & pasting between TextEdit and InDesign worked correctly in both ways.\n\nSo, looks like something is broken somewhere, however it might not be the font itself.\n\nMiguel Sousa\n\n"
+    },
+    {
+      "time": "25 Jan 2006 — 8:55pm",
+      "content": "Miguel,\n\nYou're not doing anything wrong. InDesign does not (yet) support ccmp. Presumably neither does Word 2004.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "26 Jan 2006 — 6:45am",
+      "content": "Is there a feature that does work in InDesign that I can use to accomplish the same goal? For instance, I've heard that Volt can now be added to a font and then opened in FontLab where the ccmp can be added. I was going to go down this road, but when I opened the FontLab font in Volt it wanted to clear the FontLab features, and I thought that this wouldn't work very well if I had to routinely rebuild the FontLab features.\n\n"
+    },
+    {
+      "time": "26 Jan 2006 — 6:53am",
+      "content": "Hi Miguel,\n\nIn my case, copying and pasting between TextEdit and InDesign did not work...in InDesign the characters were decomposed into separate glyphs just as though they were typed.\n\n"
+    },
+    {
+      "time": "26 Jan 2006 — 7:04am",
+      "content": "Hi Miguel,\n\nI also noticed, that when the 'highlight substituted glyphs' is enabled in InDesign, the composite characters that are entered via the glyph palette show highlighted. I assumed that this meant that it would be substituting a different font...but it appears to indicate that it is substituting the composite character from the font as it is correctly rendered when the glyph palette is used.\n\nRegards,\n\n"
+    },
+    {
+      "time": "26 Jan 2006 — 7:07am",
+      "content": "Maybe I'm old-fashioned, but why not just build the composite characters and have them in your font's glyphset? Especially if they have Unicode indices. Perhaps someone smarter than I am - Adam, Thomas, John H, everyone else - can share some insight to the benefits of ccmp versus \"standalone\" composites?\n\n"
+    },
+    {
+      "time": "26 Jan 2006 — 7:35am",
+      "content": "For these particular fonts, which are several native american languages, many of the codepoints for the composite characters do not exist in Unicode. The only alternative, as I understand, would be placing them in the PUA which will prevent them from being used in spell checking, find and replace and some applications that don't recognize the PUA.\n\n"
+    },
+    {
+      "time": "26 Jan 2006 — 5:42pm",
+      "content": "Another bit of trivia...copy and paste from Mac TextEdit to InDesign only appears to work when you first insert a composite character from the glyph palette into a text block and then immediately paste the OpenType text into InDesign. Bizarre.\n\n"
+    },
+    {
+      "time": "26 Jan 2006 — 6:13pm",
+      "content": "Tom, thank you for shedding the light on this. I had looked into the [OpenType Layout Feature Support by Application](http://web.archive.org/web/20131012110243/http:/store.adobe.com/type/browser/pdfs/OTGuide.pdf) chart but found no reference to the **ccmp** feature, so I was not sure if it was supported or not.\n\nChester, like Fred said, there are no [Unicode](http://web.archive.org/web/20131012110243/http:/www.typophile.com/wiki/Unicode) code-points assigned to these characters. The composite characters do indeed exist within the font, but we have to rely on the Glyph Composition/Decomposition(ccmp) feature to access them.\n\nI came across this problem when I was developing a font that included several \"unUnicoded\" characters for Armenian transliteration. The best solution I could think of was to use the **ccmp** feature.\n\nUsing something else (let's say **liga** for example) would simply be hacking. Personally I wouldn't do any workarounds on this. Just as an example, the **locl** feature is present in some Adobe fonts, nevertheless none of their applications support it yet.\n\nFred, you could use VOLT to implement the feature, but that won't produce any difference on InDesign's behavior.\n\nFred, I've also noticed one more thing. Looking at your 2nd post, I believe the order of the substitutions is incorrect. Sequences that are made up of larger number of glyphs must be placed before those that require fewer glyphs (f\\_f\\_i before f\\_i, for instance). So in your case, the order of lines 1 and 6 should be reversed.\n\nsub C commaabovecmb by uni00430313;  \nsub C commaabovecmb caroncmb by uni0043030C0313;\n\n"
+    },
+    {
+      "time": "26 Jan 2006 — 6:21pm",
+      "content": "I'm using TextEdit v1.4 and InDesign v3.0.1, and have no problems copying and pasting between the two.\n\n"
+    },
+    {
+      "time": "26 Jan 2006 — 10:18pm",
+      "content": "I rearranged the order of the features and still no change with the InDesign behavior. I'm using TextEdit v1.4 and InDesign v4. I've replicated the same behavior on another Mac. In other words, direct typing doesn't work. A copy and paste only works if a composite character is entered via the glyph palette and the paste is done immediately after the composite character.\n\nI guess I may be up against a wall on this. In this case, since there may be no other option to still use Unicode and OpenType, can I try the liga feature until such a time that InDesign fully supports ccmp, then modify the OT features to ccmp, and redistribute the font? I'm assuming that the typed glyphs will be the same it's just the rendering mechanism that will be different. I assume the already typed documents will still be valid.\n\nAt this site I learned that InDesign only support 7 OpenType features, and ccmp isn't one of them.\n\n[http://www.microsoft.com/typography/VOLT%20and%20InDesign/default.mspx](http://web.archive.org/web/20131012110243/http:/www.microsoft.com/typography/VOLT%20and%20InDesign/default.mspx \"http://www.microsoft.com/typography/VOLT%20and%20InDesign/default.mspx\")\n\n"
+    },
+    {
+      "time": "27 Jan 2006 — 3:24am",
+      "content": "For feature support in Adobe apps, the last page of this one may be more reliable: [http://store.adobe.com/type/browser/pdfs/OTGuide.pdf](http://web.archive.org/web/20131012110243/http:/store.adobe.com/type/browser/pdfs/OTGuide.pdf) (PDF-document) ;-)\n\n"
+    },
+    {
+      "time": "27 Jan 2006 — 5:21pm",
+      "content": "Fred, I never said that the rearrangement of the substitutions would make the feature (ccmp) to start working on InDesign. As Thomas said, InDesign does NOT support this feature yet, so there's no way around it. What the rearrangement most certainly does — and you might want to test this under TextEdit, since it seems to support the feature in question —, is to make the substitution order to work as expected. With the order you had before, I'm quite positive that the substitution program would never have had been able to access the command on line 6, since line 1 would substitute the glyphs first.\n\nWhat do you mean by 'direct typing'? Are you able to type a _commaabovecmb_ (U+0313) with your keyboard? What keyboard layout are you using? Is it a custom created one?\n\nHere's how Copy&Paste work for me:\n\nfrom InDesign to TextEdit\nMake a new document\nMake a text box\nInsert any composite glyph via the Glyph Palette (no other way works, since InDesign does NOT support the ccmp feature)\nSelect the text and copy it\nMake a new document in TextEdit (RichText format)\nPaste it (Even the font settings go along!!)\nfrom TextEdit to InDesign\nMake a new document (in RichText)\nInsert any composite glyph via the keyboard (base glyph) plus the system's Character Palette (accent glyph)\nSelect the text and copy it\nMake a new document in InDesign\nMake a text box\nPaste it (and select the correct font, if I haven't done that before)\n\nIt's obvious that you've hit a wall, if you're trying to make the substitutions work in InDesign through a ccmp feature. One thing I can think of right away that would make me not use a liga feature to accomplish this, is that the user can turn it off. It goes without saying that your neat text will completely break up in that scenario. So, if you want an alternative to ccmp, I would say Required Ligatures (rlig). However, InDesign does not support that one as well. I wonder if there's at least one feature that InDesign support which can't be turned off by the user...\n\n"
+    },
+    {
+      "time": "27 Jan 2006 — 9:14pm",
+      "content": "Mac Office does not support OpenType Layout, and is not plugged into the Mac OS X stuff that does. Nor does it support AAT layout. In this respect it is trailing rather a long way behind the Windows version in terms of internationalisation.\n\n"
+    },
+    {
+      "time": "27 Jan 2006 — 9:20pm",
+      "content": "Sorry for the misunderstanding regarding the ordering of ccmp subs. As I mentioned I'm new to Unicode and Opentype and trying to learn as much as I can to accomplish the task at hand. I've used the generous references to InDesign limitations to understand the complexities that need to be addressed. By 'direct typing' I'm refering to using a Ukelele keyboard that enters multiple unicode codepoints with a single keystroke...as opposed to using the glyph palette.\n\nI copied the ccmp subs into a new liga feature, that proceeds ccmp, and the characters are rendering properly in InDesign. Yes, I realize it is a hack...but it appears to be only solution at this time other than resorting to a non-Opentype font.\n\nOne other hurdle is to get basic functionality with PhotoShop. That seems to be elusive as the liga hack doesn't appear to work properly...even though Adobe docs appear to indicate that liga is supported.\n\nWe have partial success in that they will be able to use NeoOffice, Mellel or TextEdit to type characters and then place the text into InDesign for publications. It appears that the text will cross platforms to the PC, where Word 2003 appears to support ccmp well enough. PDFs seem to generate OK using the font and properly transfer to folks that don't have the font installed. The other request was to use PhotoShop...but I'll need to keep experimenting to see if there is another alternative. We're hoping all of this will be sorted out better in the next several years. What's interesting is that apps like ComicLife, Safari, iWeb, iMovie, etc. all work well with the font with just the ccmp feature. I guess there's hope.\n\n"
+    },
+    {
+      "time": "27 Jan 2006 — 9:34pm",
+      "content": "Chester: _Maybe I’m old-fashioned, but why not just build the composite characters and have them in your font’s glyphset? Especially if they have Unicode indices. Perhaps someone smarter than I am - Adam, Thomas, John H, everyone else - can share some insight to the benefits of ccmp versus “standalone” composites?_\n\nEven if characters do exist as precomposed diacritics in Unicode, there is a good argument for supporting them in the ccmp feature as well as encoding them in the cmap. The reason for this is that a user may be working with an input method that results in base + combining mark sequences or, even more likely, text normalisation will result in canonical decomposition to base + combining mark sequences. So what is originally input as ǚ \\01DA\\ might, at any point between the input and the viewing of the document, be normalised to either ǚ \\00FC,030C\\ or to ǚ \\0075,0308,030C\\ depending on the normalisation form used. All these character sequences are canonically equivalent, which means that a robust rendering technology, including fonts, should be able to display them all identically.\n\nThe easiest and quickest way to handle the canonical equivalence of \\01DA\\, \\00FC,030C\\ and \\0075,0308,030C\\ is for the layout engine to check the font cmap table for an entry for U+01DA and, if it finds one, to perform a buffered character substitution of the mapped glyph whenever it encounters the strings \\00FC,030C\\) and \\0075,0308,030C\\. This does not require any work from the font developer, other than mapping U+01DA correctly. This is how Microsoft's Uniscribe engine handles such cases.\n\nHowever, I am not confident at this stage that all rendering engines will perform this operation in the same way, so for the time being I am advising a full mapping of precomposed diacritics, whether encoded or not, in the ccmp feature. If the layout engine performs a character level substitution, the ccmp lookup entry for the sequence will be ignored, but if the layout engine does not, then the ccmp feature is the next best chance of rendering the sequence correctly and not as a munged mess of colliding combining marks.\n\nNote that all of this presumes that you intend to handle diacritics using GSUB. By far the best way to handle combining mark sequences is with the GPOS mark and mkmk features, as complex script developers have been doing for the better part of a decade now. This is much more flexible than GSUB, and does not rely on a font including a precomposed glyph for every diacritic that a user might want. Using GPOS, you can efficiently globalise a font for even those hard-to-reach languages.\n\n"
+    },
+    {
+      "time": "28 Jan 2006 — 8:17am",
+      "content": "Great! Thanks John. Your post made grought forth light from the darkness. Cheers.\n\nSo, how does a ccmp table get into a font? Does FLS encode it into the OTF upon generation? Is there a preference setting which handles this? Is it something one would drop into a TTXed file and then recompile?\n\nThanks for the clarification.\n\n"
+    },
+    {
+      "time": "28 Jan 2006 — 8:28am",
+      "content": "What I've found with more experimentation with Photoshop CS2 on MacOSX 10.4...\n\nI have several different types of keyboard layouts I'm using. One is a standard keyboard with slight modifications to allow me to type the Unicode combining diacriticals with an option+ keystroke. Another keyboard is configured for 'touch typing' wherein a single keypress will enter the base + combining diacriticals + space modifiers.\n\nFor NeoOffice, TextEdit, Mellel, InDesign and some others both keyboards work well. However, I found that the 'touch type' keyboard doesn't work in PhotoShop. I experimented with the other keyboard...where I type a base character and then individually enter the combining diacriticals...and found that I need to 'double enter' the combining diacritical. Once I do this, the character is properly rendered. In other words, for the ccmp (or liga hack) \"sub C caroncmb commaabovecmb by uni0043030C0313\", I first type a 'C', then I need to enter my 'option+' keystroke equivalent for U+030C twice, then I need to enter my 'option+' keystroke equivalent for the U+0313 twice. When I do this the composite character is properly rendered in PhotoShop. I initially thought it might be a problem with using an 'option+' for the keystroke...but the same actions are required if I use the OSX character palette. All other applications do not require a 'double entry' of combining diacriticals.\n\nAny ideas what I might be doing wrong...or if this is the way PhotoShop CS2 Mac works?\n\nThanks for any advice...\n\n"
+    },
+    {
+      "time": "28 Jan 2006 — 2:38pm",
+      "content": "Chester: _So, how does a ccmp table get into a font? Does FLS encode it into the OTF upon generation? Is there a preference setting which handles this? Is it something one would drop into a TTXed file and then recompile?_\n\nccmp is an OTL feature, not a table. The spec is here:  \n [http://www.microsoft.com/typography/otspec/features\\_ae.htm#ccmp](http://web.archive.org/web/20131012110243/http:/www.microsoft.com/typography/otspec/features_ae.htm#ccmp \"http://www.microsoft.com/typography/otspec/features\\_ae.htm#ccmp\")\n\nIt seems to me that much of the content of a typical ccmp feature could be automated using Python. For instance, it should be easy to determine that a glyph called /Aringacute/ should be mapped from /A/ /ringcomb/ /acutecomb/.\n\n"
+    }
+  ]
+}

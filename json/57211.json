@@ -1,0 +1,46 @@
+{
+  "id": "57211",
+  "title": "OpenType feature for AE and OE + Some errors",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi,\n\nI'm now adding OpenType features (for the first time :D ) to my Geometro typeface.  \nI have merged \"ae\" and \"oe\" glyphs, but where should I put my OT code \"sub A E by AE;\", etc?  \nCurrently I've put them at Discrete Ligatures (dlig).\n\nMy FontLab problems:\n\nI'm getting this error when compiling OT features:  \n-\"[WARNING] Start of new pair positioning subtable; some pairs may never be accessed: [question P T V W Y Z z ...] [four six A J a c d ...] [C:/Documents and Settings/Martijn van Berkel/Mijn documenten/FontLab/Studio5/fontlab.fea 126]\"\n\nThese warnings when saving font:  \n- \"Do you want to rebuild the kern OpenType feature?\" (Clicking Yes removes my kern code. I compiled it before saving, so nothing is changed.)  \n- \"UPM size is not 1000 which is not recommended for OpenType.\"\n\nAnd this warning after saving:  \n- \"[WARNING] The feature file OS/2 overrides TypoAscender and TypoDescender do not sum to the font bbox size!\"\n\nCould someone explain these errors?\n\nI find it unfortunate that no Help library is supplied and accessible through Help or F1.\n\nThanks in advance!\n\nKind regards,  \nMartijn\n\n",
+  "author": "<a href=\"/web/20100203084647/http://typophile.com/user/38279\" title=\"View user profile.\">Martijn van Berkel</a>",
+  "time": "<br>",
+  "uid": "38279",
+  "comments": [
+    {
+      "time": "",
+      "content": "<cite>some pairs may never be accessed</cite>\n\nYou have the same side of a pair controlled by more than one class.\n\n<cite>“Do you want to rebuild the kern OpenType feature?”</cite>\n\nJust click no. I think you might be able disable automatically doing this in the Fontlab preferences.\n\n<cite>“UPM size is not 1000 which is not recommended for OpenType.”</cite>\n\nThere are dozens of threads about whether or not UPM sizes other than 1000 work. The consensus seems to be that it might work, but probably isn’t a good idea.\n\n<cite>The feature file OS/2 overrides TypoAscender and TypoDescender do not sum to the font bbox size</cite>\n\n[Read this](http://web.archive.org/web/20100203084647/http:/www.kltf.de/downloads/FontMetrics-kltf.pdf), understand it, do what it says.\n\n<cite>no Help library is supplied</cite>\n\nGo to Fontlab.com and download the manual.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, and what about the first question?\n\nKind regards,  \nMartijn van Berkel\n\n"
+    },
+    {
+      "time": "",
+      "content": "Why would you need an opentype feature for the (french) Œ and (scandinavian) Æ in the first place?  \nThey are (AFAIK) considered separate and unique glyphs and are never typed in as OE and AE - always as a separate glyph on the keyboard.  \nUnless your font is just for setting old, archaic text where you want to force OE into Œ and EA into Æ you don't need to program this in OpenType - all those who need these glyphs should know how to type them in directly...\n\n"
+    },
+    {
+      "time": "",
+      "content": "The Æ and Œ are standard characters even though they are made of 2 glyphs. You don't need to do a substitution or ligature for these.\n\nOops! Not Quick enough!\n\n"
+    },
+    {
+      "time": "",
+      "content": ":)  \nGood to know I'm not the only one thinking this. I don't think I've seen many commercial fonts with OpenType coding for Æ and Œ... It might have its uses, but it is not the usual way to do it...\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for your tips! I've removed the AE en OE OT features. :)  \nI think Geometro is now around finished:\n\n ![](http://web.archive.org/web/20100203084647im_/http:/typophile.com/files/geometro_4120.PNG)\n\n&nbsp;  \nHope you like it. I'm just 15 years old and it's my first big typeface, so don't rate to rough. :|\n\nKind regards,  \nMartijn van Berkel\n\n"
+    },
+    {
+      "time": "",
+      "content": "Martĳn,\n\nif you want, you can duplicate your AE and OE glyphs as \"A\\_E\" and \"O\\_E\" for uppercase, and \"a\\_e\" and \"o\\_e\" for lowercase, and then include a \"dlig\" substitution for them. I'd also include them in \"hlig\" (historical ligatures). There are indeed cases (such as in English) where one might want to use a ligature in ae and oe. For example, in contemporary English, the word \"aesthetically\" is spelled with \"ae\" and not \"æ\" but in some cases, designers may want to use them to evoke a historical or more stylized spelling of the word, which would look like \"æsthetically\" then, but typing in the \"æ\" letter from the keyboard is not what they would usually want.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Conceptually it's nice. It looks like there are a number of things you could do differently with the outline construction that could improve the execution of the concept considerably, if you're interested in detailed feedback.\n\nCheers,\n\nT\n\n"
+    }
+  ]
+}

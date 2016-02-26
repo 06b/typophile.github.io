@@ -1,0 +1,30 @@
+{
+  "id": "60987",
+  "title": "Problem with contextual replacements - suggestions?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi all,\n\nI'm currently working on a face which implements a joining behaviour using contextual alternates. However, problems can occur at boundaries if the ' [calt](http://web.archive.org/web/20100203114203/http:/typophile.com/wiki/calt)' feature is turned on for only part of a string, as illustrated below:\n\n ![](http://web.archive.org/web/20100203114203im_/http:/typophile.com/files/AGIByzCaltSample_5250.gif)\n\nI've avoided this by including the following at the beginning of my 'calt' feature:\n\nsub A by A.calt;  \n sub B by B.calt;  \n _etc._\n\nThe contextual rules then refer only to \\*.calt forms rather than the base glyphs from which they are derived.\n\nHere's the problem: I'd wanted to split my replacement rules into several distinct groups so the user could choose to apply some or all of them depending on how elaborate they wanted the joining to be. Unfortunately, if I do this I have to deal with more than a single type of boundary. For example, in the word 'affable', a user might apply 'ss01' to _affa,_ 'ss02' to _fab,_ 'ss03' to _fabl,_ &c.\n\nWhile in principle, I could adopt a similar solution -- creating \\*.ss01, \\*.ss02, and \\*.ss03, in practice this simply isn't workable -- when you consider that I'd have to duplicate not only the base glyphs (including all forms with diacritics), but also the contextual alternates created by every feature which applies before the feature in question, I suspect I'd run up against FontLab's glyph limit, not to mention the headaches involved in creating all those duplicates and debugging all the code which deals with them.\n\nI'm wondering if there is a simpler solution to this which I just haven't thought of.\n\nThoughts?\n\nAndré\n\n",
+  "author": "<a href=\"/web/20100203114203/http://typophile.com/user/31798\" title=\"View user profile.\">agisaak</a>",
+  "time": "<br>",
+  "uid": "31798",
+  "comments": [
+    {
+      "time": "",
+      "content": "Apparently no one has any thoughts on this matter.\n\nI've come up with a tentative solution which involves a set of 'clean-up' substitutions at the end of each of the relevant features, i.e.\n\nsub @hasnorightjoin @hasleftjoin' by @hasnoleftjoin;  \nsub @hasrightjoin ' @hasnoleftjoin by @hasnorightjoin;\n\nThis seems unaesthetic to me though since it involves changes of the form X -\\> Y -\\> X and it also increases the size of the font's tables.\n\nSo as a follow-up question, should boundry issues of this sort be the font's responsibility or the application's responsibility?\n\nOn the one hand, I did a quick check of several OT fonts with contextual alternates, and I couldn't see anything in their GSUB code which looked like it was there to deal with boundary issue (though admittedly I find it more difficult to follow other people's decompiled tables then to follow my own where I am familiar with the classes involved), suggesting that other designers may not be worried about this issue.\n\nOn the other hand, InDesign (CS3) clearly passes the context to the font when applying the calt feature even if that context doesn't have calt active for it.\n\nIs there an 'official' position on this issue?\n\nAndré\n\n"
+    },
+    {
+      "time": "",
+      "content": "I don't think users should be encouraged to apply stylistic sets in a piecemeal manner.  \nIMO stylistic sets are to be used globally, e.g. in style sheets applied to paragraphs.  \nThe \"calt\" feature is most certainly global, on by default.\n\nIf you provide a variety of stylistic sets which have different looks (e.g. degrees of complexity), then the user can try them out on a piece of text and see which looks best. They may even be applied cumulatively.\n\nIf users are really dissatisfied with the options available, then they can cherry-pick from the glyph palette, with no features applied.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I agree with you regarding how stylistic sets should be used. It isn't my intention that users should apply the features to partial words, but I've become bogged down in the possibility that they _might_ . So perhaps a better way of phrasing my question would be: \"how much effort should one employ in dealing gracefully with strange things the user might do?\"\n\nBTW in my earlier post I was fixating on features which created joining variants of characters, but of course final or initial variants are also possible, so it cannot be left up to the the application to simply ignore context which doesn't have the feature selected. Any attempts to deal gracefully with contextual features applied to partial words would have to be dealt with by the font rather than the application. But is it worth the effort?\n\nAndré\n\n"
+    },
+    {
+      "time": "",
+      "content": "No.\n\nBTW, that looks like AFFARLE.\n\n"
+    }
+  ]
+}

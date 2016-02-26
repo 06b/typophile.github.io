@@ -1,0 +1,34 @@
+{
+  "id": "68618",
+  "title": "Is it really bad to keep rebuilding the \"kern\" feature in fontlab?",
+  "forum": "General Discussions",
+  "tags": [
+    "font",
+    "fontlab",
+    "General Discussions",
+    "kern",
+    "rebuild"
+  ],
+  "content": "I keep changing things within the kerning and whenever I generate a font, it asks me if I want to rebuild the kern feature.\n\nSometimes, I get the dialog box when generating the OTF font file at the end of the exporting process... and that's when it freezes the program. the only safe way I can rebuild it is to rebuild it within the opentype window and then generate the font.\n\nI'm afraid i'm damaging the font?\n\nAny suggestions would be greatly appreciated\n\n",
+  "author": "swisscheese",
+  "time": "22 Mar 2010 — 1:31am",
+  "uid": "57220",
+  "comments": [
+    {
+      "time": "22 Mar 2010 — 7:01am",
+      "content": "In FontLab, when you create kerning pairs in the Metrics window, it only updates the kern table, not the kern feature. In order to bring the kern feature up to date with the kern table, you have to rebuild the kern feature. You can do this in the Kerning Assistance window. If you haven't done this, FontLab will remind you and give you the option to do it when you generate an OT font.\n\nNormally, if you're doing all your kerning within FontLab using the Metrics window, there's no harm in doing it when you generate an OT font.\n\nI don't know what's causing the freeze, but it's probably not related to rebuilding the kern feature.\n\n"
+    },
+    {
+      "time": "22 Mar 2010 — 7:04am",
+      "content": "BTW, the only time it's bad to rebuild the kern feature is if you've edited the kern feature code directly in the OT Panel or have generated it outside of FontLab (using something like Metrics Machine, for instance). Rebuilding the kern feature will wipe out whatever you've done, replacing it with whatever happens to be in the kern table.\n\n"
+    },
+    {
+      "time": "22 Mar 2010 — 7:58am",
+      "content": "FL (5) always freezes on me if I _haven't_ rebuilt the kern feature before compiling. You can rebuild as many times as you like.\n\n"
+    },
+    {
+      "time": "22 Mar 2010 — 4:33pm",
+      "content": "Oh ok, cool thanks guys!\n\n"
+    }
+  ]
+}

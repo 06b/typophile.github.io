@@ -1,0 +1,36 @@
+{
+  "id": "106518",
+  "title": "Opentype and Arabic script",
+  "forum": "Build",
+  "tags": [
+    "Arabic script",
+    "OpenType",
+    "Build"
+  ],
+  "content": "Opentype is the most common rendering engine which has facilitated implementing Arabic script and so many other non latin writing systems in computer. But apparently there are many shortcomings in opentype and tools which are used to develop arabic/persian fonts using opentype. Part of these problems stems from the fact that the geniuses who have created the tools were not familiar with the nature of arabic script, so they have tried to solve the problems using the ideas they have learned while they were trying to implement latin script in computer. Other problems comes from the restrictions in opentype language, which is developed to be understood very easily and it made opentype an inflexible computer language. Opentype is a great invention and maybe there is a way to overcome these problems and a discussion about this might bring new ideas and help the developers and other people whom are trying to use opentype for rendering arabic script in computer to solve their issues.\n\nI start with a topic here but it will not end here:  \nPositive kerning  \nPositive kerning between connected letters is not straight forward. We don't have proper tools to implement it and some tools which are developed for this purpose have problems. In this example which I'm showing a sample of Adobe Arabic font, you can see that when a short kashida is inserted between two letters in order to avoid collision of dots and diacritics; mark positioning breaks on the first letter. Problem here is not critical but what if a designer wants to use dots as diacritics when he is developing a font? in that situation he will not be able to use positive kerning in this situation (actually there is project and one of my colleagues has this problem).\n\n ![](http://web.archive.org/web/20150416010314im_/http:/typophile.com/files/arabic-diacritic-kashida-problem_6044.png)\n  \nSo far I haven't found any solution to this. First I thought reordering of features might help, but apparently mark positioning is placed after contextual alternative feature in VOLT, and I couldn't find any GSUB feature that could be placed after mark positioning. I think solution would be a flag to ignore certain glyphs in mark positioning lookup. In opentype we have a flag to ignore marks but we don't have a flag to ignore some glyphs like this short kashida. What do you think? \n",
+  "author": "Bahman Eslami",
+  "time": "24 Sep 2013 — 2:05am",
+  "uid": "16942",
+  "comments": [
+    {
+      "time": "24 Sep 2013 — 1:55pm",
+      "content": "{to follow}\n\n"
+    },
+    {
+      "time": "27 Sep 2013 — 5:52pm",
+      "content": "Bhaman, in your illustration, it looks very much like the vowel mark is being ordered after the kashida glyph, and this is why the positioning is broken: in fact, the mark is being positioned relative to the kashida, rather than relative to the preceding letter. This implies the glyph order after GSUB is\n\n`yeh.init kashida kasra alif.fina hamzabelow`\n\nIf you restructure the contextual substitution so that it inserts the kashida before the second letter, rather than after the first letter, that should solve the problem. In VOLT syntax, the example you give could be handled like this (presuming NFD decomposed text):\n\n`alif.fina -> kashida alif.fina`\n\nin context\n\n`yeh.init kasra | hamzabelow`\n\nand the resulting glyph string should be\n\n`yeh.init kasra kashida alif.fina hamzabelow`\n\nand your kasra will be positioned on the yeh.init base.\n\n"
+    },
+    {
+      "time": "28 Sep 2013 — 6:21am",
+      "content": "That is the case and it was a clever solution. You know we examined lots of other options that didn't' work but your option is pretty much easier and it works! :D\n\nThanks John\n\n"
+    },
+    {
+      "time": "28 Sep 2013 — 6:59am",
+      "content": "{double post}\n\n"
+    },
+    {
+      "time": "28 Sep 2013 — 11:32pm",
+      "content": "[http://neshanmagazine.com/articles.asp?id=392](http://web.archive.org/web/20150416010314/http:/neshanmagazine.com/articles.asp?id=392 \"http://neshanmagazine.com/articles.asp?id=392\")\n\n"
+    }
+  ]
+}

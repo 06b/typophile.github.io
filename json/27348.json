@@ -1,0 +1,42 @@
+{
+  "id": "27348",
+  "title": "Programmer Needed (Font rendering for the web)",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m having a feature developed for a web project that involves rendering type from 6 different typefaces at a pt size of 9-10px. We’re having problems with the quality at such a small size—gets very jagged. Anything below 12pt gets pretty screwy. We are basically generating a preview image on the fly from the font files. It works similar to the the preview feature here, however we’re not selling fonts: [http://www.fontshop.com/](http://web.archive.org/web/20060821185107/http:/www.fontshop.com/)\n\nDoes anyone out there have experience with something like this? We’re using ‘glib’ and I believe everything runs through PHP or related programming. We have everything working great, it’s just that rendering the smaller pt sizes is giving us fits. My developer thinks it has something to do with anti-aliasing.\n\nThanks,  \nWilliam\n\n",
+  "author": "<a href=\"user/13922\" title=\"View user profile.\">willieb</a>",
+  "time": "<br>",
+  "uid": "13922",
+  "comments": [
+    {
+      "time": " 31 July, 2006 - 11:11pm",
+      "content": "It’s not your technology that is lacking, it’s the fonts. You need to use properly [hinted](http://web.archive.org/wiki/Hinting) fonts to get good results under 12 pt.\n\n"
+    },
+    {
+      "time": " 1 August, 2006 - 4:43am",
+      "content": "“It’s not your technology that is lacking, it’s the fonts.”\n\nHe drove the car at 100 miles an hour straight into a 10 foot thick, 10 foot high steel reinforced wall. He didn’t survive. It wasn’t that the wall was so big, but rather that he or the car just wasn’t tough enough. ;)\n\nThere are only a couple of dozen fonts that have both the stylistic and technical ability to scale to 9 pixels per Em while remaining readable. What’s the actual problem?\n\n"
+    },
+    {
+      "time": " 1 August, 2006 - 6:15am",
+      "content": "Once we’re working at these sizes, (below 12pt) the rasterizer, OS, and formats used become critical. You’re working on a project for the web, so presumably the end user can use any modern OS and browser. What’s of concern is how you are rendering the image. Are you using TrueType OTF or CSS/OTF? What rasterizer are you using? A Win, OSX, or something custom?\n\nAnother comment: regarding your comment, “..gets very jagged.”  \nA hand-hinted TTF/OTF on a Win system, would have the gasp table set to show B+W rendering at sizes below 12pt. This is because Anti-aliasing at these sizes tends to cause more problems than it solves. So the characters are rendered B+W (like a bitmap) so that it remains legible. This does result in a stair step affect, but it’s a compromise that needs to be made, if you’re hinting these small sizes.\n\nAnother note, although there are more than a couple of dozen hand-hinted quality TTF/OTF fonts, the stylistic differences at these sizes all but disappear, as David mentioned,. The truth is, there just aren’t enough pixels to go around. This means that the differences between Arial, Helvetica, and even Frutiger or Optima, all disappear at these small sizes, when you have to make a legible glyph, and have no room for stylistic differences.\n\nJason C\n\n"
+    },
+    {
+      "time": " 1 August, 2006 - 10:48am",
+      "content": "\\> Once we’re working at these sizes, (below 12pt) the rasterizer, OS, and formats used become critical.\n\nTrue, my immediate thought was unhinted or autohinted fonts with Windows defaults that alias below 12pt - if that’s the case you could run the fonts through “ [ttfgasp](http://web.archive.org/web/20060821185107/http:/www.geocities.com/SiliconValley/Lakes/8162/)” to set antialaising at all sizes (license permitting of course)\n\n"
+    },
+    {
+      "time": " 2 August, 2006 - 10:44am",
+      "content": "Thanks for all the input, I’ll run it by my developer. We’re testing a few things that we think might do the trick. I’ll let you guys know how/if they pan out.\n\n"
+    },
+    {
+      "time": " 3 August, 2006 - 8:48am",
+      "content": "did it again…\n\nJason:\n\n“working at these sizes, (below 12pt) the rasterizer, OS, and formats [] become critical”\n\nAll the rest is sane, just be a bit careful using “pt”, because e.g. “12 pt” can contain anywhere from ((LESSTHAN))12 pixels per em to 32 or more per em depending on OS and display device. Since that makes it possible for a 9 pt to be 20 pixels, or more, and 9 being a smaller size than 12, we always have to think in pixels, not points, like, I believe a gasp table.\n\n"
+    },
+    {
+      "time": " 4 August, 2006 - 10:56am",
+      "content": "I second david’s last comment. Text at 6pt displayed on a 300 dpi screen will take up 25 pixels and look wonderful with anti-aliasing turned on :-)\n\n"
+    }
+  ]
+}

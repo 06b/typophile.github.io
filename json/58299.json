@@ -1,0 +1,34 @@
+{
+  "id": "58299",
+  "title": "UPM, two-color fonts, etc.",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hello, I am a longtime reader, a recently registered user, and now, a first time poster.\n\nI am currently working on a font design that will enable users to designate separate colors for two separate stripes within the strokes. Theoretically, there will be two font files for each weight; metrics and kerning pairs will correspond between the two font files so that, when a user typesets text in the first color/font file, they can then paste-in-place the text box, select the text and switch it to the second color/font file. I'm not familiar with the precedents for this, so if anyone can enlighten me, I'd greatly appreciate it.\n\nThe two stripes within the strokes intertwine or weave over and under each other (see first image below), making for what I presume could be quite a headache ahead of me in getting the font functional in FontLab (I've been using Illustrator to build the paths as I'm more comfortable with it). I'm very new to type design and have tried to get a grasp on the 1000 vs 2048 UPM concept by reading past Typophile threads but admit I'm helplessly lost. I first tried 1000 UPM and found that it distorted some of my curves. I've seen better fidelity results using 2048 now, but am having much trouble in getting the areas where the stripes intersect to perfectly align (see second image below). If anyone has _any_ suggestions whatsoever, please let me know!\n\nThank you,  \nAndy\n\n| Attachment | Size |\n| --- | --- |\n| [H.png](http://web.archive.org/web/20131201004034/http:/typophile.com/files/H.png) | 7.47 KB |\n| [H\\_zoom.png](http://web.archive.org/web/20131201004034/http:/typophile.com/files/H_zoom.png) | 6.99 KB |\n\n",
+  "author": "Andy Babb",
+  "time": "22 May 2009 — 6:24pm",
+  "uid": "44822",
+  "comments": [
+    {
+      "time": "22 May 2009 — 7:48pm",
+      "content": "Here are your two options  \n1: overlap the two layers  \n2: put matching points and handles at the tangent points of every intersection\n\n"
+    },
+    {
+      "time": "22 May 2009 — 7:58pm",
+      "content": "You need to read the section of the Fontlab manual that explains how to configure Illustrator so that you can bring your outlines into Fontlab with no distortion. Because you did not do this before you started you must tweak your existing drawings to work as a font no matter what you do.\n\nDo not create your work as a 2048 UPM TrueType font, stick to a 1000 UPM Postcript. If you use TT the curves will get distorted if users convert the fonts to outlines and it will screw up your careful attempts to avoid overlapping.\n\nRosewood is a great chromatic font that comes with Adobe Creative Suite. There’s a manual for using it either on the CDs or available somewhere at Adobe.com\n\n"
+    },
+    {
+      "time": "23 May 2009 — 3:07am",
+      "content": "I would strongly suggest that you build the font directly in Fontlab. I cannot stress enough how much trouble it will save you. Also, independently of if you do this or not I would suggest that you make a 3rd reference font in which all the parts you need are present and that you use the use the remove overlap tool located in \"actions\" to make the cuts you need then they will be completely precise. Note that to have the change be subtractive you will need to have the direction of the outlines be opposite each other. Also having made the subtraction happen you need to check your outline direction is correct. I have just tested this and it works. I am not at all convinced that with the category of shapes you are showing above that you need more than a UPM of 1000.\n\n"
+    },
+    {
+      "time": "23 May 2009 — 7:23pm",
+      "content": "Jackson, James, and Eben: your responses are invaluable. Thanks very much. I will look into how Adobe configured the specs for Rosewood. I'm glad I realized this problem now, at a point when I've only designed a dozen or so of the characters, rather than make all of the characters in Illustrator for this and the other weights of the family I hope to create and be pulling my hair out months from now. Eben: I assume the 3rd reference font file you are suggesting I create would be one I make simply for completing the two separate color font files? Which is to say, you're not suggesting that this 3rd file be included in a package should I ever make the font commercially available?\n\nMany thanks again to all three of you!\n\n"
+    },
+    {
+      "time": "23 May 2009 — 7:53pm",
+      "content": "You are correct - the 3rd file would just be for development.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "57223",
+  "title": "Robofab generateGlyph ?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi all\n\nI'm looking for a simple way to generate the Accents glyphs with a Robofab/Python script. From the Robofab documentation it looks like generateGlyph should do the trick.\n\n`\nfrom robofab.world import CurrentFont\nf = CurrentFont()\nglyphs = ['ccaron','amacron','Cacute','Cdotaccent','Abreve','cdotaccent','ccircumflex','Aogonek','abreve','cacute','Ccaron','Amacron','aogonek','Ccircumflex']`\n\nfor glyph in glyphs:  \n nglyph = f.generateGlyph(glyph)  \n nglyph.autoUnicodes()  \n nglyph.mark = 10  \n#  \nf.update()\n\nThis works fine for generating the glyphs and adding the base glyphs but doesn't add the accent. Is it possible to add the accent with Robofab so the code would work like - Glyph \\> Generate Gkyohs in FontLab.\n\nRr\n\n",
+  "author": "<a href=\"/web/20100203083847/http://typophile.com/user/16986\" title=\"View user profile.\">RachelR</a>",
+  "time": "<br>",
+  "uid": "16986",
+  "comments": [
+    {
+      "time": "",
+      "content": "Have you had a look at Ben Kiel's 'accentTools'? [http://www.benkiel.com/typeDesign/](http://web.archive.org/web/20100203083847/http:/www.benkiel.com/typeDesign/)  \nIt might be of inspiration, or actually what you are looking for.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I tired that script but it seemed to be doing the same thing - adding the base glyph but not the accent.\n\n"
+    },
+    {
+      "time": "",
+      "content": "It sounds like you don't have your accents named correctly. Also, check that you have your anchors named correctly in your base glyphs and in the accents (and remember the accents are supposed to start with an \\_).\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi,\n\nYou can try with this:  \n`\n----------------------------------------------------\nfrom robofab.world import CurrentFont\nfrom robofab.tools.accentBuilder import AccentTools`\n\nfont = CurrentFont()\n\naccents = ['ccaron','amacron','Cacute','Cdotaccent','Abreve','cdotaccent']  \naccentTool = AccentTools(font, accents)\n\naccentTool.buildAnchors(ucXOffset=30, ucYOffset=70, lcXOffset=20, lcYOffset=50, doProgress=True)\n\naccentTool.printAnchorErrors()  \naccentTool.buildAccents(doProgress=True)  \naccentTool.printAccentErrors()  \nfont.autoUnicodes()\n\n#font.update()  \n# This glyph update isn't the best way, but it works...  \nfor glyph in font:  \n glyph.update()  \n----------------------------------------------------  \n``\n\n"
+    },
+    {
+      "time": "",
+      "content": "If you use standard names, you shouldn't even need a script. In the \"Generate glyphs\" dialog, you can just paste glyph names or link to a text file with the names of the glyphs you want to generate. I'm actually not really sure why people bother to use scripts. There is a FL system file which specifies how base glyphs and accents combine, so you can modify this if you want to use case specific accents.\n\n"
+    }
+  ]
+}

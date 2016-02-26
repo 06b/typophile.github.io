@@ -1,0 +1,94 @@
+{
+  "id": "63438",
+  "title": "Cryptic Error message in FontLab during compile",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I get the following messages when trying to output a font or when hitting the compile button on the OpenType panel:\n\n[WARNING] Glyph class @FLSFNT823E redefined [/Users/chrisL/Library/Application Support/FontLab/Studio 5/Features/fontlab.fea 110]\n\n[WARNING] Glyph class @DezBoulder-Alter redefined [/Users/chrisL/Library/Application Support/FontLab/Studio 5/Features/fontlab.fea 110]\n\nI have searched through all my classes but find nothing odd. What does the above mean and how do I fix it?\n\nThanks!\n\n",
+  "author": "<a href=\"/web/20120203232028/http://typophile.com/user/3135\" title=\"View user profile.\">dezcom</a>",
+  "time": "<br>",
+  "uid": "3135",
+  "comments": [
+    {
+      "time": "",
+      "content": "Hello Mr Lozos, you have classes of the same name defined in the Classes Panel as well as in the bottom segment of the OpenType Panel, and in _Preferences \\> General Options \\> Unicode and OpenType_ have the option _Add all glyph classes to OpenType feature definition code_ activated. So either deactivate the options or remove class definitions from the OpenType Panel segment. Karsten\n\n"
+    },
+    {
+      "time": "",
+      "content": "You really should make another PDF document about these kind of stuff, Mr. Luecke. :D\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, Karsten, I will try that! I have no ideal how all that happened. It surely was not on purpose. I wonder why the error message didn't say that or something more helpful instead of what tey wrote?\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "This only happens to annoy you. FL is very whimsical in that respect.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, Juergen, and it is doing a very good job of annoying me :-)\n\nKarsten's suggestion did not work. Now, instead of \"fea 110\" it is \"fea 107\" whatever that means.\n\n[WARNING] Glyph class @DezBoulder-Alter redefined [/Users/chrisL/Library/Application Support/FontLab/Studio 5/Features/fontlab.fea 107]\n\n[WARNING] Glyph class @FLSFNT1749 redefined [/Users/chrisL/Library/Application Support/FontLab/Studio 5/Features/fontlab.fea 107]\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Could you send me the font?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Sure can! Thanks!\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Karsten said:  \n<cite>Preferences &gt; General Options &gt; Unicode and OpenType have the option Add all glyph classes to OpenType feature definition code activated. So either deactivate the options or remove class definitions from the OpenType Panel segment.</cite>\n\nDoes this nullify all classes in exported fonts? For example, if I have kerning classes set up, and I disable that option, will class kerning be disabled in exported fonts or will they still work?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks to Karsten for his generous help offline, I solved all my problems!\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "BTW, Ray, deactivating that option did not solve my problem so I did not do it. I had a duplicate kerning class but no left or right activated so it did not show up when I clicked the Yin-Yang button but still caused the error message.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Mr Larabie, perhaps it is easier to answer your question by describing roughly how OpenType feature export works:  \nFeatures defined in the OpenType Panel and text located in the OpenType Panel's bottom field will be merged into a single feature definition text file. This file serves as input for AFDKO with which FLS5 compiles OT layout tables.  \nIf you have activated the option _Add all glyph classes to OpenType feature definition code_, the Classes Panel's class definitions will be converted into AFDKO syntax and included in this feature definition text file too.  \nNow two problems may occur:  \n_(a)_&nbsp;&nbsp;If a class name is shared by a class defined in the Classes Panel and by a class defined in the OpenType Panel's bottom field, and if the _Add_ option is activated, then AFDKO will find two definitions for the same class in this feature definition text file, use the later definition, and emit a warning. This means: despite of the warning it will compile. You only get in trouble if the content of the identaically named classes differs. Then you may end up with too little or too much kerning. This is similar to what Mr Lozos experienced. In his case, the classes that shared a name were both in the Classes Panel -- the effect is the same though.  \n_(b)_&nbsp;&nbsp;If there are no class definitions in the OpenType Panel's bottom field and the _Add_ option is _de_activated (class definitions from the Classes Panel will be ignored), then MakeOTF will complain too -- but this time compilation of OT layout tables will fail. This is the case you describe.\n\n"
+    },
+    {
+      "time": "",
+      "content": "How about this message:\n\n[FATAL] GPOS feature \\'kern\\' causes overflow of offset to a subtable (0x149326)  \nERROR: There was a problem while compiling OpenType font. Final .otf font is not saved. Please, check OpenType features definition for errors\n\nThis font is a rather lively script with some 1600 ligatures, and the number of kerning pairs is currently at 335887 (it takes FontLab some time to calculate that).  \nI'm wondering wheather I've reached the limit of FontLab Studio or something else…\n\n"
+    },
+    {
+      "time": "",
+      "content": "Are you using class kerning?\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "I did at first, but deleted those, both from classes and from OT panel. No help. And anyway, class based kerning didn't work for my design; too lively for that.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The classes would help reduce the number of pairs. Surely SOME classes would help? You would also have to clear all the unintentional exceptions (the ones in red that are not needed).\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, I see your point, but because of the nature of the design, there'll still be a huge amount of kerning pairs. I'm waiting for a responce from FontLab, but at this moment I'm contemplating turning Suomi Scrip a free font, since I can't maintain a commercial quality…\n\n"
+    },
+    {
+      "time": "",
+      "content": "or you may wish to work with a consultant like Tal Leming?\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes; I have been thinking of Tal, or perhaps Rodrigo from Psy/Ops, but I have this quirk that if I give my font to somebody else to tinker with, it's no longer my font. It's stupid, but there you go…\n\nHere's a sample of the font. I basically took my hadwriting ITC'd it. In other words, I polished and tweaked it so that even I can't recognise my writing from it. Tell me what you think.\n\n ![](http://web.archive.org/web/20120203232028im_/http:/typophile.com/files/Suomi_5638.png)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Tomi, you can see [here under the title \"My Kern Runneth Over\"](http://web.archive.org/web/20120203232028/http:/www.channels.com/episodes/show/3424257/FontTools-and-TTX) Ben Kiel's talk about your problem and how to solve it. I had the same problem with my italic and bold italic--which also have swash characters and small caps and many thousands of kerns and over 150 kerning groups. The problem was solved by having a recent version of Tal Leming's Metrics Machine export the .fea file \"with subtables.\" Ben Keil talks about this and other ways to solve the problem.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, I'll see if that can help.\n\n"
+    }
+  ]
+}

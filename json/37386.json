@@ -1,0 +1,22 @@
+{
+  "id": "37386",
+  "title": "sorting ligatures",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm probably answering my own question but:\n\nif i have ligatures for 'a\\_m' and 'c\\_a' and i write the word 'came' how it does it work exactly.\n\nif my coding goes\n\nsub am by a\\_m;  \nsub ca by c\\_a;\n\nthen i'm assuming it would use the a\\_m ligature.\n\nI'm creating a ligature rich font and was wondering if people know of any problems with having a lot ligatures.\n\n",
+  "author": "cuttin shapes",
+  "time": "23 Sep 2007 — 2:55am",
+  "uid": "16450",
+  "comments": [
+    {
+      "time": "23 Sep 2007 — 4:27am",
+      "content": "You answered your question.&nbsp;&nbsp;:)&nbsp;&nbsp;Indeed you need to plan carefully which ligatures shall have priority.  \nDon't forget the space between 'a' and 'm', or 'c' and 'a' -- 'am' would be considered as one glyph named 'am'.\n\n"
+    },
+    {
+      "time": "24 Sep 2007 — 12:58am",
+      "content": "One very common mistake is to mix up the priority of overlapping ligatures, e.g.\n\n`sub f f i by f_f_i;\nsub f f by f_f;\nsub f i by f_i;`\n\nIf that ffi ligature is not first, it will get preceded by the others and never appear.\n\nAlso, beware of the output of other alternate features (e.g. 'salt') affecting the input of ligatures. You might want an alternate f to be included in your ligature substitution -- or you might not. If you have contextual substitutions ('calt', 'clig'), then you'll have to worry about other alternates and ligatures affecting the context in those features, too.\n\n"
+    }
+  ]
+}

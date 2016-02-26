@@ -1,0 +1,186 @@
+{
+  "id": "29770",
+  "title": "How to get an OpenType icon on a OpenType TTF Flavored font file?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi there!!\n\nWhen I generate a Opentype TrueType flavored font on FLAB, it gets a TrueType icon file in Windows. (I'm not sure that also happens on MAC platform).  \nBut I've seen these kind of font files with the .TTF extension presenting an Opentype font icon. I know DaltonMaag uses this.\n\nHow can this be done?\n\nI'm selling fonts with this format (for better screen hinting), but the .TTF extension and font file icon missleads some users...thinking they've bought a simple TrueType font.\n\nmany regards from sunny Brazil ;)\n\nFabio\n\n",
+  "author": "haag",
+  "time": "28 Nov 2006 — 8:19am",
+  "uid": "2079",
+  "comments": [
+    {
+      "time": "28 Nov 2006 — 8:30am",
+      "content": "Add a [digital signature](http://web.archive.org/web/20130823060716/http:/typophile.com/wiki/digital%20signature) (DSIG). You can do it in FontLab Studio but you need to own an \"Authenticode\" Class 3 code signing digital certificate. You can get one from Thawte or Verisign, they cost some $200-$400. It's also possible to create a self-signed test certificate for free -- for more information see\n\nhttp://msdn2.microsoft.com/en-us/library/aa140234(office.10).aspx#odc\\_dcss\\_procedure\n\n(you only need to complete steps 1-3). Once you have the private key file and the .spc certificate file that you produce in this process (or obtain from VeriSign/Thawte), you can link these files to the Digital signatures section of FontLab Studio's Preferences/Options dialog box.\n\nA.\n\n"
+    },
+    {
+      "time": "28 Nov 2006 — 8:34am",
+      "content": "Uauuu....it does cost to do that!  \nI'll check that test certificate....\n\nThks a lot for the quick response ;)\n\nFabio\n\n"
+    },
+    {
+      "time": "28 Nov 2006 — 10:10am",
+      "content": "Is there - or will there be - a downside in not having the digital signature? (Beside confused customers …)\n\nRalf\n\n"
+    },
+    {
+      "time": "28 Nov 2006 — 10:47am",
+      "content": "Ralf,\n\nthe digital signatures singed with a proper (non-test) certificate are a safe way to ensure that the font you're dealing with is an original creation of a certain foundry. If a font was modified, the digital signature becomes invalid (or is not included at all). Some foundries, e.g. Linotype, use DSIG to check if a font that a customer is complaining about is an unmodified Linotype original or if it was \"touched\" by someone and therefore \"the warranty is void\". You could view DSIGs as some sort of \"warranty seal\".\n\nA.\n\n"
+    },
+    {
+      "time": "29 Nov 2006 — 12:05am",
+      "content": "Ah, I see.  \nThanks Adam!\n\nRalf\n\n"
+    },
+    {
+      "time": "29 Nov 2006 — 10:50am",
+      "content": "BTW, why this kind of 'chain reaction'? why not to have OT/TT icon like OTF? ... and the DSIG is kind of useless.\n\n"
+    },
+    {
+      "time": "29 Nov 2006 — 1:58pm",
+      "content": "Microsoft's idea way to differentiate somehow between the old-style TrueType fonts and the new OpenType TT fonts. Since both carry a \".ttf\" extension, Microsoft decided to check for the presence of the \"DSIG\" table. At the time when Windows 2000 was created, they thought digital signatures in fonts would become \"the big thing\".\n\nBTW, I don't think DSIGs are useless. When you produce original typefaces, it's quite useful to stamp them in a way that cannot be forged -- no?\n\nA.\n\n"
+    },
+    {
+      "time": "29 Nov 2006 — 2:17pm",
+      "content": "\\> Microsoft’s idea way to differentiate somehow between the old-style TrueType fonts and the new OpenType TT fonts.\n\nThey're doing great job, but this idea is just bad one. Why to differentiate? -- just have two icons (old ttf, and 'new' ttf)\n\n\\> When you produce original typefaces....\n\nMaybe (this is useful) :) but the fact that you can change the digital signature.....\n\n"
+    },
+    {
+      "time": "29 Nov 2006 — 2:43pm",
+      "content": "\\> just have two icons (old ttf, and  \n\\>‘new’ ttf)\n\nWell, yes, but you need a criterion on which the operating system assigns these icons :)\n\nA.\n\n"
+    },
+    {
+      "time": "29 Nov 2006 — 3:10pm",
+      "content": "I see. Too much work? :) So, just one icon -- OTT\n\n"
+    },
+    {
+      "time": "1 Dec 2006 — 2:45pm",
+      "content": "On the subject of digital signatures:\n\nThe certificate cost--even the less expensive one from Thawte--is somewhat of a burden for a small foundry; however, if enough small foundries were interested in forming a VERY loose coalition and obtaining ONE certificate for use by ALL members, the cost could be reduced substantially. Does this idea interest anyone?\n\n"
+    },
+    {
+      "time": "1 Dec 2006 — 3:28pm",
+      "content": "\\> On the subject of digital signatures:\n\nwhy not to do it with FL?\n\n"
+    },
+    {
+      "time": "1 Dec 2006 — 6:02pm",
+      "content": "David,\n\nwhat do you mean by \"with FL\"?\n\nA.\n\n"
+    },
+    {
+      "time": "1 Dec 2006 — 6:12pm",
+      "content": "Adam,\n\nTo do the digital signature with FL, and eliminate the third party. Or to have a plug or something, and you pay one time fee and that's it.\n\np.s.  \nwhere's Paul? survey, please :)\n\n"
+    },
+    {
+      "time": "1 Dec 2006 — 6:57pm",
+      "content": "David,\n\nI do understand each word of yours but not the contents of the entire sentence :) What do you mean by \"FL\"? FontLab Studio, the application? Fontlab Ltd., the company? What do you mean by \"do the digital signature\"? Embed the digital signature in the font? Purchase the digital certificate? Something else?\n\nFontLab Studio 5 has the ability to embed digital signatures into fonts, if the font developer installs an appropriate certificate. But Fontlab Ltd. does not issue or share digital certificates, and Fontlab Ltd. is not a certification authority. You need to obtain a digital certificate from a certification authority such as VeriSign or Thawte.\n\nFont developers are free to form a \"coalition\" of some sort to share the cost and effort (the certification authority would have to issue the certificate to that \"coalition\", which I presume would need to be a legal entity of some sort.\n\nAlso, any font developer can purchase a digital certificate in his own name, and then choose to offer a service of using his own certificate to digitally sign fonts for other developers as well, or even to share his digital certificate with some other trusted vendors so they can sign the fonts using that certificate as well.\n\nA.\n\n"
+    },
+    {
+      "time": "1 Dec 2006 — 7:53pm",
+      "content": "Adam,\n\n\\> I do understand each word of yours but not the contents of the entire sentence :)\n\nThis is like the GMAT :)\n\nI'm talking about FontLab Studio 5.\n\n\\> What do you mean by “do the digital signature”?\n\nI'll try to illustrate it the simple/easy way: something like \"Generate Font...\" -\\> \"Generate Digital Signature\".\n\n"
+    },
+    {
+      "time": "3 Dec 2006 — 6:12am",
+      "content": "Well, this is how it works. You link your .spc and .pvk files in FontLab Studio's preferences once, and from then on, all your OpenType PS and OpenType TT fonts that you generate are automatically digitally signed.\n\nA.\n\n"
+    },
+    {
+      "time": "3 Dec 2006 — 4:34pm",
+      "content": "$200–$400 is not that much, for a serious foundry, is it? Just think how many (few) licenses it would have to sell, to have the cerificate paid back?\n\nAdam — Does the certificate only apply to Windows? Or is it cross-platform, in that it is recognised on Mac OS/X and/or Linux, as well? What's the legal status, in case one would want to prove in court that one's fonts had been pirated or forged?\n\n"
+    },
+    {
+      "time": "3 Dec 2006 — 5:53pm",
+      "content": "The Authenticode code signing certificates are principally a Microsoft format. However, for the purpose of signing OpenType fonts, you use one and the same certificate to sign your fonts.\n\nA.\n\n"
+    },
+    {
+      "time": "3 Dec 2006 — 7:44pm",
+      "content": "who said $200–$400 is that much? or the issue?\n\n"
+    },
+    {
+      "time": "4 Dec 2006 — 5:18am",
+      "content": "_who said $200–$400 is that much? or the issue?_\n\n...per YEAR, every year.\n\n"
+    },
+    {
+      "time": "4 Dec 2006 — 6:57am",
+      "content": "Ah— that's another thing, indeed!\n\nI shouldn't have expected differently from a M$ proprietary 'standard'...\n\n"
+    },
+    {
+      "time": "4 Dec 2006 — 10:54am",
+      "content": "Ludwig,\n\nfrom your remark, I gather that you're one of those fellows who are happy in their simplistic view of the world that goes like \"Microsoft is bad, others are good\".\n\nTherefore, I guess it will be a huge shock for you to learn that this has very little to do with being an \"MS proprietary standard\". The Authenticode code signing certificates are X.509 IETF certificates issued for a particular purpose and packaged in a particular, Microsoft-specific way. However, there are opensource tools that can convert a code signing X.509 certificate into an Authenticode code signing certificate, and the format of the Microsoft packaging of digital certificate is widely published.\n\nX.509 digital certificates are an IETF international standard, and are used widely on the WWW, for example in SSL (https) encryption. They all cost money, even those that you use on an opensource Apache server. This has to do with the fact that the certification authorities that issue the certificates are companies that have costs of operation and (since they are companies) their purpose is to make money.\n\nThis, per se, has nothing to do with Microsoft, but I guess where you live ranting against \"M$\" is just an easy way to escape the complex reality.\n\nTip for the future: do some background reading before publicly announcing your conclusions.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "4 Dec 2006 — 12:14pm",
+      "content": "I agree with Adam; no need to say/use \"M$\"\n\n"
+    },
+    {
+      "time": "4 Dec 2006 — 12:17pm",
+      "content": "BTW, some current pricing for Microsoft Authenticode code signing certificates (alco called Authenticode digital IDs):\n\nThawte: ~US$200/year  \n [https://www.thawte.com/ssl-digital-certificates/code-signing/](http://web.archive.org/web/20130823060716/https:/www.thawte.com/ssl-digital-certificates/code-signing/ \"https://www.thawte.com/ssl-digital-certificates/code-signing/\")\n\nGlobalSign: ~US$215/year  \n [http://www.globalsign.net/digital\\_certificate/objectsign/index.cfm](http://web.archive.org/web/20130823060716/http:/www.globalsign.net/digital_certificate/objectsign/index.cfm \"http://www.globalsign.net/digital\\_certificate/objectsign/index.cfm\")\n\nComodo: ~US$240/year  \n [https://secure.comodo.net/products/frontpage?area=codesigning](http://web.archive.org/web/20130823060716/https:/secure.comodo.net/products/frontpage?area=codesigning \"https://secure.comodo.net/products/frontpage?area=codesigning\")\n\nVeriSign: ~US$450/year  \n [http://www.verisign.com/products-services/security-services/code-signing...](http://web.archive.org/web/20130823060716/http:/www.verisign.com/products-services/security-services/code-signing/digital-ids-code-signing/ \"http://www.verisign.com/products-services/security-services/code-signing/digital-ids-code-signing/\")\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "6 Dec 2006 — 7:38pm",
+      "content": "\\> _Well, yes, but you need a criterion on which the operating system assigns these icons :)_\n\nWhat about relying on the presence of a table other than the 'DSIG'?  \nMaybe 'GSUB'? This one is certainly more tied with OpenType than the 'DSIG', no?\n\n"
+    },
+    {
+      "time": "8 Dec 2006 — 3:53pm",
+      "content": "At one time MS was going to move to a more complex system whereby they'd use the OT icon based on the presence of any of several other tables. Then they'd have a little ribbon adornment that would indicate whether the TT or OT font has a digital signature.\n\nI have a hazy thought that maybe this didn't make it into Vista.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "8 Dec 2006 — 8:04pm",
+      "content": "\\>I have a hazy thought that maybe this didn’t make it into Vista.\n\nTrue, sadly. Long story... maybe over a pint at TC07 if anyone is really interested.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "10 Dec 2006 — 4:13pm",
+      "content": "BTW, the Arabic fonts (OpenType) by Linotype don't have the OT/TTF icon -- just the 'plain' .ttf\n\n"
+    },
+    {
+      "time": "11 Dec 2006 — 6:29am",
+      "content": "David,\n\nthat's somewhat surprising. I was under the impression that Linotype signs all their fonts.\n\nA.\n\n"
+    },
+    {
+      "time": "11 Dec 2006 — 6:54am",
+      "content": "Why is Verisign's version more than twice as much as Thawte?  \nAre they not the same thing?\n\nChrisL\n\n"
+    },
+    {
+      "time": "11 Dec 2006 — 12:13pm",
+      "content": "Chris,\n\nThawte is owned by VeriSign but VeriSign is a better-known brand. It's called product diversification.\n\nA.\n\n"
+    },
+    {
+      "time": "11 Dec 2006 — 12:24pm",
+      "content": "Expensive brand snobbery when after you buy it, there is no cache to it. If you by a BMW instead of a VW, at least the car snobs notice :-)\n\nYou have helped me make my choice. I think I will support the lesser brand and save the $250. :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 3:26am",
+      "content": "I have seen icon sets with a TrueType+Ribbon icon. Are these now standard in Vista?  \nWill Vista still look for the DSIG table?  \nDo OpenType PS still get the OpenType-O-icon regardless of the digital signature?\n\nI still run XP and couln't find the answers to those questions.\n\nRalf\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 3:28pm",
+      "content": "You can get the OpenType icon without a digital signature, you just need the DSIG header with:\n\nusNumSigs (Number of signatures in the table) = 0;\n\nit works. The font wont be digitally signed of course, but the operating system only checks if the DSIG table is present to produce the icon.\n\nDon't think you can do that with FontLab though.\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 4:28pm",
+      "content": "Here is a better price for that:  \n [https://secure.ksoftware.net/code\\_signing.html?gclid=CPqW-9qt9JECFQkIuwo...](http://web.archive.org/web/20130823060716/https:/secure.ksoftware.net/code_signing.html?gclid=CPqW-9qt9JECFQkIuwodQHFapgRegards \"https://secure.ksoftware.net/code\\_signing.html?gclid=CPqW-9qt9JECFQkIuwodQHFapgRegards\"),\n\nDH\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 9:15pm",
+      "content": "\\*Never mind\\*\n\n"
+    },
+    {
+      "time": "17 Mar 2008 — 8:50am",
+      "content": "Hi Allan,\n\nI understand that this function: \"usNumSigs = 0;\" should do the trick.  \nAFAIK, this function is not in python's syntax.\n\nCould you please be more specific?\n\nRegards,\n\nDH\n\n"
+    },
+    {
+      "time": "17 Mar 2008 — 9:26pm",
+      "content": "The digital signature is interesting, it would be nice if it could be applied to any digital file/product as well.\n\n"
+    },
+    {
+      "time": "18 Mar 2008 — 12:12am",
+      "content": "Hi DH,\n\nDon't know how to do it with Python, but you can do it with Microsoft's free 'AddTable.exe' tool available here:  \n [http://www.microsoft.com/typography/tools/tools.aspx](http://web.archive.org/web/20130823060716/http:/www.microsoft.com/typography/tools/tools.aspx)\n\nyou also need a data file containing the bytes for the blank DSIG table (8 bytes):  \n00 00 00 01 (ulVersion = 1)  \n00 00 (usNumSigs = 0)  \n00 00 (usFlag = 0)  \n(Ive made one here you can download:  \n [http://homepages.ihug.co.nz/~allanm1/DSIG.DAT](http://web.archive.org/web/20130823060716/http:/homepages.ihug.co.nz/~allanm1/DSIG.DAT))\n\nThen type on the command line:  \naddtable DSIG dsig.dat in.ttf out.ttf  \n(make sure that the DSIG is uppercase)\n\nin.ttf is your original font.  \nout.ttf is the output font which will now have the OpenType icon on Windows XP.\n\nAllan\n\n"
+    },
+    {
+      "time": "18 Mar 2008 — 5:35am",
+      "content": "Thanks, I will give it a shot.  \nWill the icon work onMac OSX as well? I will check that too.\n\nRegards,\n\nDH\n\n"
+    },
+    {
+      "time": "18 Mar 2008 — 12:47pm",
+      "content": "On MacOS X (10.4 Tiger) there are just generic font icons with the addition TTF/OTF/FFIL/DFONT/...  \nOn 10.5 Leopard the icon is (by default) replaced by a live preview.\n\nMay I bump my question:  \nWhat about Vista and OpenType icons and the connection to the DSIG table?\n\nRalf\n\n"
+    },
+    {
+      "time": "26 Mar 2008 — 8:53am",
+      "content": "Funny enough, but an OT font, digitally signed like Arno Pro by Adobe, doesn't show the O icon on the Mac. On windows the icon is perfect but onthe Mac,FontBook seems to take over the fonts' icons...\n\nThe font info window, opposed to Windows properties, doesn't inform you the font is digitally signed.  \nThe \"Open with\" option is set to Font Book (default).\n\nRegards,\n\nDH\n\n"
+    }
+  ]
+}

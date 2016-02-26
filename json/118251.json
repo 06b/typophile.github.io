@@ -1,0 +1,42 @@
+{
+  "id": "118251",
+  "title": "'kern' feature undefined in salt",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm perplexed. I'm building a font family of a script. There are four different font files (vfb). All are very similar and I plan to eventually 'merge' them into one Pro version of the font. All of them generate OTF files just fine except for one file. When I generate IT, I get the following message in the FontLab output panel:\n\n**[WARNING] feature 'kern', referenced in aalt feature, either is not defined or had no rules which could be included in the aalt feature.**\n\nCan anyone tell me what I am missing? I've tried to research it, and can't figure it out.\n\nThis particular font appears to work just as well as the others (which do not give any warning message), but I'm wondering what, if any problems this may cause in the future.\n\nShould I even be concerned, if the font works fine in applications like InDesign? Or will Microsoft Word regurgitate it?\n\n",
+  "author": "TypeSETit",
+  "time": "25 Jul 2014 — 1:38pm",
+  "uid": "56431",
+  "comments": [
+    {
+      "time": "25 Jul 2014 — 1:41pm",
+      "content": "BTW, all of the fonts have just two features: AALT and KERN  \n**feature aalt {**\n\nfeature kern;  \n} aalt;\n\nBut only this single font is giving me caniptions.\n\n"
+    },
+    {
+      "time": "25 Jul 2014 — 3:52pm",
+      "content": "Well, the question is why the other fonts are not giving you conniptions, not why this one is.\n\n'aalt' is a substitution feature that acts as a catch-all for other substitution features. You can't stick 'kern' in it and expect anything good to happen.\n\nIf you have no other, real, substitution features, then you don't need aalt.\n\n"
+    },
+    {
+      "time": "26 Jul 2014 — 11:18am",
+      "content": "Thomas, I will be adding the other OT features later. I have found that if I don't have the 'kern' feature, the font generates fine, but when I go into Indesign to test it, the kerning pairs are not loading.\n\nI assumed that if I had any features (like 'kern'), I would need to have the 'aalt' feature form them to be accessed. I have removed the 'aalt' feature, and now things seem to be generating fine without the warning message. So thanks for that.\n\nI'm wondering if I will need to add it back in when I created the other features (like 'salt' and 'liga' etc.)\n\nthanks again for the help\n\n"
+    },
+    {
+      "time": "26 Jul 2014 — 2:08pm",
+      "content": "You don't have to have 'aalt', but it is considered good form. It's just that 'kern' should never be placed in 'aalt', as it does not access alternate glyphs.\n\n"
+    },
+    {
+      "time": "27 Jul 2014 — 10:50am",
+      "content": "Thanks for clarifying Thomas.\n\nRob\n\n"
+    },
+    {
+      "time": "16 Aug 2014 — 1:10pm",
+      "content": "Rob,  \nIf you have just the regular standard character set filled out you could use the liga feature to add at least one feature.  \nLike:  \nfeature liga {  \n sub f l by fl;  \n} liga;\n\nThis type of substitution does not need to have the aalt feature either, but when you add features like calt where a specific character gets subbed by another then add that to aalt.\n\n"
+    },
+    {
+      "time": "18 Aug 2014 — 12:27pm",
+      "content": "Or you could just completely ignore {aalt}. It was a workaround devised by Adobe to drive early versions of their glyph palettes. Not only does it not have any practical use for font users, it isn't even needed to drive the font palette, which can derive the same information from parsing all the GSUB features for one-to-one substitution lookups.\n\n"
+    }
+  ]
+}

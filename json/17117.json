@@ -1,0 +1,46 @@
+{
+  "id": "17117",
+  "title": "OpenType problem",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hello. I just started designing OpenType typefaces and have a problem with the fractions.  \nCan anyone tell me if something is wrong with this:\n\nfeature frac { # Fractions  \n sub [one one.onum] [slash fraction] [two two.onum] by onehalf;  \n} frac;\n\nThanks!  \nPieter\n\n [‹ Harmonizing font names on MS Word Mac/Windows](http://web.archive.org/web/20081029010551/http:/typophile.com/node/17086 \"Go to previous forum topic\") [Batch Printing Help ›](http://web.archive.org/web/20081029010551/http:/typophile.com/node/17115 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081029010551/http://typophile.com/user/5585\" title=\"View user profile.\">Pieter van Rosmalen</a>",
+  "time": "<br>",
+  "uid": "5585",
+  "comments": [
+    {
+      "time": " 6.Jan.2006 9.10am",
+      "content": "this is the top of a font I did. The brackets you have seem odd. The names aren’t standard are they the glyph names? and I’ve encluded the perthousand and percent to show if you have similar glyphs like a 1/10 and 1/100 you need to order longest first or it won’t work.\n\nWhat is your behaviour?\n\nWhat are the names of the base glyphs?\n\n=================================\n\nfeature frac { # Fractions  \n # Latin  \n sub zero slash zero zero by perthousand;  \n sub zero slash zero by percent;  \n sub one slash two by onehalf;  \n} frac;\n\n"
+    },
+    {
+      "time": " 6.Jan.2006 9.20am",
+      "content": "Thanks for the information, but it’s still not working.  \nI entred the lines exactly as you did.  \nThe glyphs have the same names as yours.  \nPieter\n\n"
+    },
+    {
+      "time": " 6.Jan.2006 9.32am",
+      "content": "Pieter, here’s what I would do...\n\nCreate classes for your numerals like this:\n\n@class\\_0 = [zero zero.OP];  \n@class\\_1 = [one one.OP];  \n@class\\_2 = [two two.OP];  \n@class\\_3 = [three three.OP];  \n@class\\_4 = [four four.OP];  \n@class\\_5 = [five five.OP];  \n@class\\_6 = [six six.OP];  \n@class\\_7 = [seven seven.OP];  \n@class\\_8 = [eight eight.OP];  \n@class\\_9 = [nine nine.OP];\n\n"
+    },
+    {
+      "time": " 6.Jan.2006 9.32am",
+      "content": "Arse... My post got bust up...\n\nAlso add a class for the slashes:\n\n@class\\_slash = [slash fraction];\n\n"
+    },
+    {
+      "time": " 6.Jan.2006 9.34am",
+      "content": "Then your frac will look like this, (also incorporating the perthousand and percent subs Mr Connare suggested):\n\nfeature frac { # Fractions  \n # Latin  \n sub @class\\_0 @class\\_slash @class\\_0 @class\\_0 by perthousand;  \n sub @class\\_0 @class\\_slash @class\\_0 by percent;  \n sub @class\\_1 @class\\_slash @class\\_4 by onequarter;  \n sub @class\\_1 @class\\_slash @class\\_2 by onehalf;  \n sub @class\\_3 @class\\_slash @class\\_4 by threequarters;  \n} frac;\n\n"
+    },
+    {
+      "time": " 6.Jan.2006 9.45am",
+      "content": "also in the OT output you have to type ’1’ ’//’ ’2’ not just one slash but two.\n\nthat’s two slashes for ’/’\n\n"
+    },
+    {
+      "time": " 6.Jan.2006 9.47am",
+      "content": "Or better yet: /one/slash/two\n\n"
+    },
+    {
+      "time": " 6.Jan.2006 9.52am",
+      "content": "It’s working now! I only typed 1/2 instead of 1//2...  \nThanks!  \nAlso thanks for the ’class’ suggestion.  \nPieter\n\n"
+    }
+  ]
+}

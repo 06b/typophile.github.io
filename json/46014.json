@@ -1,0 +1,38 @@
+{
+  "id": "46014",
+  "title": "Hanging Indent outside text margin - Indesign",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "Hello,  \nI need some advice on hanging indents in InDesign.\n\nI would like the bullet points of a par to align outside the margin of the text (see attached image LH column). The only way I can seem to achieve this is to indent the normal body copy and heads. Is this the right way to do it? Seems like I need to reset all of my body copy indents to make this work. Then it don't align with my grid (ie page heads are 4mm out of whack).\n\nHope this makes sense and someone can help.\n\nCheers  \nJason.\n\n| Attachment | Size |\n| --- | --- |\n| [Picture 2(2).png](http://web.archive.org/web/20150218043049/http:/typophile.com/files/Picture%202(2).png) | 116.86 KB |\n\n",
+  "author": "haildesign",
+  "time": "3 Jun 2008 — 6:25am",
+  "uid": "12130",
+  "comments": [
+    {
+      "time": "3 Jun 2008 — 8:32am",
+      "content": "Hello Jason,\n\nSorry for my English, I don't know if it is this that you want, I can't fully understand your question :-D\n\nThe way I would do is to have a Paragraph Style with all the text indentend at 4mm and then have the bullets lines with a paragraph first line at -2 (this is because Indesign can't indent text outside the text box frame). For this to work your text box would have to 'include' the gutter.\n\nIf you only have a few lines to put the bullets into you could think of having two paragraph styles, one 'normal' and one like I mentioned above. You would then have two types of text boxes: the 'normal' ones without the gutter and the 'bullet' ones (linked) when you need them.\n\nHope this helps  \nAll the best\n\nPedro Monteiro  \n [http://whatype.wordpress.com/](http://web.archive.org/web/20150218043049/http:/whatype.wordpress.com/ \"http://whatype.wordpress.com/\")\n\n"
+    },
+    {
+      "time": "3 Jun 2008 — 12:14pm",
+      "content": "Here's what I'd do:  \n1. Set a _Left Indent_ in the body style  \n2. Create a new bullet style with a tab equal to the length of the indent  \n3. Set the _Space After_ for the bullets  \n4. Insert _Indent to Here_ symbols before the first letter of each bulleted sentence  \n5. Apply the Bullet style to the text you wish to negatively indent.\n\n ![](http://web.archive.org/web/20150218043049im_/http:/typophile.com/files/Bullets_4719.gif)\n\n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_  \nPersonal Art and Design Portal of Ivan Gulkov  \n [www.ivangdesign.com](http://web.archive.org/web/20150218043049/http:/www.ivangdesign.com/ \"www.ivangdesign.com\")\n\n"
+    },
+    {
+      "time": "3 Jun 2008 — 2:02pm",
+      "content": "As an aside, although there are ways to do what you want, I'd question whether the goal is desirable. Ick.\n\nT\n\n"
+    },
+    {
+      "time": "3 Jun 2008 — 6:46pm",
+      "content": "Thanks all for your input. I thought this was the way to do it - however it mucks with the column alignment (ie. if I have a 3 column grid and a text box with 3 columns set with an indent of 4mm and a hanging bullet of -4mm, it doesn't align correctly with the grid. I think I'll just hang the bullets like I normally do - with the bullet aligned to the left of the column along with the text and indented 4mm.\n\nThanks again.\n\n"
+    },
+    {
+      "time": "7 Jul 2008 — 4:42pm",
+      "content": "I had the same question Jason; thanks for posting.\n\nThomas - not a fan of hanging punctuation?\n\n-Juhan\n\n"
+    },
+    {
+      "time": "10 Jul 2008 — 7:12pm",
+      "content": "I faced this problem today, with line numbers that hang into the left margin. Our old program (TeX) had llap (left lap) and rlap; I'd sure like to see them implemented with InDesign.\n\nWhat worked was to go into the font & make up a zero-width character (U+200B). Set that character first, then your line number, then an em-space (or whatever clearance you want), then begin your text. Put a 1,000 unit negative kern between the zero-width character and the line number (or bullet, or whatever). That is the most ID CS2 will allow. But you can change the actual distance the copy moves left by varying the size of the \"zero-width\" character. Since it has no width, it doesn't push the copy inward as the point size goes up, it just moves left.\n\nI could move the line numbers off the page by using a large point size zero-width character with a -1,000 unit kern to the line number. Just pick the size that places things as you want.\n\nIf you are using multiple digits, set up using tabular numbers for the line numbers. As long as you are making up a zero-width space, make up a figure space for padding if needed. We pre-program all this into an InDesign-tagged-text file with a character style around the line numbers, but all that saves is time, the technique will work with direct formatting.\n\nNot a replacement for reverse carriage, or the better tools of llap & rlap, but it does work.\n\nFWIW\n\n"
+    }
+  ]
+}

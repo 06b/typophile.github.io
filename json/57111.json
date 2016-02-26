@@ -1,0 +1,46 @@
+{
+  "id": "57111",
+  "title": "Class Kerning errors",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I have used class kerning before, but just ran into a problem I had not encountered before.\n\nAll my previous classes were simple with both sides being the same. I watched a video on class kerning this evening and he explained also how to do class kerning on one side only.  \n [http://www.vimeo.com/681300?pg=embed&sec=681300](http://web.archive.org/web/20100203075111/http:/www.vimeo.com/681300?pg=embed&sec=681300 \"http://www.vimeo.com/681300?pg=embed&sec=681300\")\n\nIn this family of typefaces that I'm working on I had a handful of alternate letters and some ligatures that I had under the dlig feature. Previous to this I had not generated a kern feature since I knew I would be adding more classes.\n\nAnyway… when I generated the kern feature on the first font with the new one-side-only kerning classes and then compiled it in the OT panel I got a whole list of warnings.\n\nSample:  \n[WARNING] Start of new pair positioning subtable; some pairs may never be accessed: [A Adieresis Aring Agrave Atilde Acircumflex Aacute A.alt Amacron Abreve Aogonek] [T T\\_H T\\_H\\_E T\\_T T\\_T\\_Y T\\_U T\\_V T\\_W T\\_Y]\n\nIt still compiles and the kerning seems to work as it should in the metrics window. When I deleted the new classes, deleted the kern feature and regenerated it without the new classes it was fine. Anybody know what's going on with that?\n\nHere is a sample of a left-side only kerning class:  \n\\_Tleftside: T' T\\_H T\\_H\\_E T\\_T T\\_T\\_Y T\\_U T\\_V T\\_W T\\_Y  \nI then checked the box to the right side.\n\nStephen\n\n",
+  "author": "<a href=\"/web/20100203075111/http://typophile.com/user/14650\" title=\"View user profile.\">Stephen Rapp</a>",
+  "time": "<br>",
+  "uid": "14650",
+  "comments": [
+    {
+      "time": "",
+      "content": "Please could anyone dig for the (how-to?) page that contains a bunch of discussions related to class kerning? All has been said there, but I cannot find it any more ...\n\n"
+    },
+    {
+      "time": "",
+      "content": "When this happens to me it’s because a glyph appears in the same side of multiple classes. On a related note, you might want to just switch to kerning in Metrics Machine. Its group creation tool includes an error checker that shows where conflicts have occurred.\n\n"
+    },
+    {
+      "time": "",
+      "content": "James, can you give me a simple example of what you mean by «a glyph appears in the same side of multiple classes». It seems like that might be a natural thing, but maybe I'm just not getting it. For instance, I have a class for T that includes all the accented T's. Then I have 2 classes for T that each have glyphs (ligatures} that have T on either end. Does that cause what you're referring to?\n\n"
+    },
+    {
+      "time": "",
+      "content": "This was a good discussion, and in one of my posts there are more links:  \n [http://www.typophile.com/node/38773](http://web.archive.org/web/20100203075111/http:/www.typophile.com/node/38773)\n\nTwo more:  \n [http://www.typophile.com/node/37959](http://web.archive.org/web/20100203075111/http:/www.typophile.com/node/37959)  \n [http://www.typophile.com/node/29125](http://web.archive.org/web/20100203075111/http:/www.typophile.com/node/29125)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Karsten. I had tried a search, but sometimes the search feature here doesn't seem to function.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Does that cause what you’re referring to?<cite></cite></cite>\n\nThat could be the problem if there is a conflict between your ligature and duplicate T classes, or if you accidentally put a T into another class entirely. It might be worth copy/pasting those classes into text edit and looking at them blown up. I sometimes miss syntax problems in my classes because I have a hard time reading the tiny text in the class window.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I would run the auto diagnostic in Tools/Kerning Assistance first (the yang/yin button).  \nAlso, it happened to me when I had different glyph names defined in the classes and the font.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks so much for all the help.  \nI reworked the classes so that I didn't have glyphs doubled and it worked perfectly. I always love it when I can learn something new like this. Typophile is such a great resource.\n\n"
+    }
+  ]
+}

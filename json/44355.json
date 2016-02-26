@@ -1,0 +1,46 @@
+{
+  "id": "44355",
+  "title": "Advice with FontLab 5.0",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "A friend and I have been drawing up faces for university for the past year or so as an ongoing project, mostly display faces, but faces none-the-less. Having a strength with using illustrator, we naturally use that first to draw up the letterforms, but recently, we've been importing our vectors into FontLab to create the actual type files. In doing so, we've come across some glitches.\n\nThe scaling.  \nThe scaling from Illustrator to FontLab is ridiculous, but that's not our main qualm..\n\nDistortion of vectors.  \nUpon importing our more intricate faces, FontLab distorts the vectors beyond easy repair. We don't understand why fontlab would distort the vectors to begin with.\n\nfor example.. certain nodes along a curves will kink or be thrown into a wrong curve projection, distorting the character completely.\n\n ![](http://web.archive.org/web/20131018073847im_/http:/typophile.com/files/type_6496.jpg)\n\nIf anyone knows of something we might be doing wrong in the import process that might be causing this, please let me know... other than not working directly in FontLab... we feel more at home with Illustrator's drawing capabilities.\n\n",
+  "author": "romano11",
+  "time": "17 Apr 2008 — 1:12am",
+  "uid": "26738",
+  "comments": [
+    {
+      "time": "17 Apr 2008 — 2:00am",
+      "content": "Rescale your indivisual drawings in the Illustrator(height: 150 to 300mm) and then import either as illustrator eps or copy paste them directly into FontLab.\n\n"
+    },
+    {
+      "time": "17 Apr 2008 — 2:15am",
+      "content": "I am pretty sure other explanations might follow, but to give it a reasonable start..\n\nScaling problem as well as distortion of vectors:\n\nBefore you start drawing your letterforms in Illustrator, activate \"snap to grid\" (view) and create/set up a grid from within the preferences menu.\n\nIn the pref. menu set a grid line e.g. every 50pt with a subdivision of 50 as well.\n\nDepending on the subdivisions you like to see and use you can make a finer or coarsar grid, eg. a grid line every 100pt with subdivisions every 10points.\n\nAs a result you will be able to set your bezier points/nodes actually on the grid and not somewhere in between.\n\nSince a glyph will be 1000pt x 1000pt correlating to the UPM glyph size in Fontlab you have pretty much possibilities to set a node..\n\nWhen you work without a grid and you import your vectors to Fontlab your nodes might get rearranged since they were slightly off position.\n\nAnd here we are concerning the scaling..\n\nIf you then define the baseline, descender/ascender-height and x-heigth make sure to achieve 1000pt. E.g. -250 descender, 600 x-height, 150 ascender..\n\nNow you can import your glyphs in Fontlab immediately in the correct size, no need for rescaling..\n\n--\n\nThe way I would do it:\n\n- Set up a grid (50pt grid line / 50 subdivisions) and make sure to activate \"snap to grid\"..\n\n- Create a second layer and set up baseline, descender/ascender-height and x-heigth as thin coloured lines horizontally across the whole canvas.. pretty much the same layout you would have in Fontlab.\n\n- draw the glyph..\n\n- define a shortcut action that a) copies the current glyph b) pastes the glyph c) puts the glyph to the coordinates x0,y0 (reference point should be bottom left) d) cuts the glyph to the clipboard again..\n\nWhen a glyph is finished, click it an run the action, go into Fontlab, open the corresponding glyph and hit paste (command+v). The glyph will then sit at the correct place with the correct size.\n\n- -\n\nWhen you decide to draw your glyphs in Illustrator, familiarize yourself with the different aspects you have to keep mind to actually use the workflow (you might have developed in Illustrator) to your advantage.\n\nSome will ask, why not draw your glyphs directly in Fontlab?\n\nI really hope, my explanation will clear up some aspects :)\n\nRegards, Steffen\n\n"
+    },
+    {
+      "time": "17 Apr 2008 — 5:42am",
+      "content": "thanks steffen, your reply was a great help, though a few more questions... we have been using a grid and snapping to it. our more geometric letterforms translate fine, but our letterforms that resemble more organic yet sans serif faces such as helvetica or univers are the ones distorting. we even tried using univers in illustrator, converting to outlines, then copying it into fontlab, and it still distorts.. mind you this is a face that is already well designed/thought out by professional foundries. we seem to think that certain vectors that may be more complex are hard for fontlab to translate. we may or may not be right.. just a thought.\n\n"
+    },
+    {
+      "time": "17 Apr 2008 — 6:01am",
+      "content": "hi,\n\nin illustrator: type in, let's say, an R (in 1000pt). convert it to outlines, copy and paste it to Fontlab.\n\ncopy it back if you want to verify.\n\nall nodes and beziers will be at the exact same place.\n\nbest regards\n\n"
+    },
+    {
+      "time": "17 Apr 2008 — 6:22am",
+      "content": "btw, concerning the scaling issue:\n\nyou could always look at the height of your letters (from descender till caps height/ascender), devide 1000 by your height to get a number x. then when you build up an action similar to the one i described earlier, multiply your glyph by x somewhere in the routine.\n\nof course it would be more helpful and precise to actually draw the glyphs at their original intented sizes. in case you rund out of canvas space (which eventually will happen) create layers..\n\nregards again\n\n"
+    },
+    {
+      "time": "17 Apr 2008 — 6:48am",
+      "content": "I use the same procedure of creating in Illustrator and pasting into FontLab. I do it all the time, and not once have I seen distortion as severe as the image you included. Small tweaks are all I ever need to make. This leads me to think you could make improvements in your method of drawing in Illustrator. Can you show what the original letters looked like, and where you placed the bezier nodes in Illustrator?\n\nAs for scaling, it's easy. If you use the standard 1000 units, with 700 units for cap height, you can draw a 700 unit box in FontLab (from the cap height line to the baseline), and paste it into Illustrator. It gives you a box with a height of 9.7222. Take something like an H and scale it up to that height. Take note of the percentage, and use it to scale the entire set of glyphs at the same time. Now you can paste them into FontLab and they will be the correct size and in proportion to one another. If you're starting a new project in Illustrator, build it with the cap height of 9.7222 in mind and you won't need to scale at all.\n\n"
+    },
+    {
+      "time": "17 Apr 2008 — 6:53am",
+      "content": "Even if you draw the letters in Illustrator with the right grid, you must correct small details in FontLab afterwards, so there is really no point in doing that unless you absolutely refuses to learn to master FontLab bezier curves.  \nMost people I know, who had crossed from Illustrator to FontLab realize after a couple of weeks/months that drawing in FontLab is SO much easier, and better – and that it saves SO much time.\n\n:)\n\n"
+    },
+    {
+      "time": "17 Apr 2008 — 7:14am",
+      "content": "Two things to keep in mind:\n\nFIrst: 1 point in Illustrator = 1 em unit in FontLab\\*\n\nSecond: In Illustrator, the coordinate space is accurate to 1/1000 of a point, while in FontLab, the em unit is the smallest possible unit\n\nIn effect, when you paste art from Illustrator into FontLab, the coordinates of the nodes are rounded to the nearest whole point first. This is what causes the distortion. To minimize the distortion, scale your art up in Illustrator beforehand so that 1 point corresponds to 1 em unit (basically, what others have advised above).\n\n\\* Unless you change the EPS import settings in Preferences, and I wouldn't unless you know what you are doing.\n\n"
+    }
+  ]
+}

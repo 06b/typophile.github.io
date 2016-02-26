@@ -1,0 +1,30 @@
+{
+  "id": "54020",
+  "title": "copying glyphs and their kerning",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I've been trying to copy entire glyphs in Fontlab -- for example, copying a single quote, to also work as a left quote and right quote (don't worry, I have a very expressive hand-written font, and this is appropriate for the design).\n\nWhen I do this, the kerning will copy, for the glyph in question vs. it's pair to the right. But, it will not copy the kerning for the glyph regarding it's pair to the left. Is there any way to do this? I have tons of individual pairs, since it's a very non-conventional font, and this becomes a big issue, especially, since even if I do it manually (which is very consuming), whenever I regenerate the kerning it erases all the manual changes. Is there a better software to take this on?\n\nI understand that class kerning is another approach to solving this issue. Unfortunately, I'm also having trouble with expanding kerning classes that were not built in a functional way earlier, so that I can't rebuild the classes in the way that I'd like to now. I just posted a question about this under a previous thread, so if that's answered it might alleviate this issue.\n\nThanks.\n\n",
+  "author": "robarnow",
+  "time": "27 Jan 2009 — 2:00am",
+  "uid": "41784",
+  "comments": [
+    {
+      "time": "27 Jan 2009 — 5:03am",
+      "content": "This might be all wrong, but if I was in your predicament, I would save the file with individual pair kerning, then auto-generate the kerning classes (+save), give them a good review (+save), compress kerning into class-based and review again.  \nprgr\n\n"
+    },
+    {
+      "time": "27 Jan 2009 — 5:57am",
+      "content": "I do something similar sometimes -- use essentially the same numbers for superiors, numerators, and denominators. The vertical position is different of course. (Usually the superiors are a bit smaller, but in a pinch, the same side bearing can work.)\n\nSo, kern one set, write off a AFM, grab all the numbers (grep \"\\.super\" for instance) to a separate file. Here, search & replace \".super\" with .numr\" and put them into the AFM. Then S&R \".super\" (or .numr) with \".dnom\", and put them in the AFM file as well. Then import he new AFM back into Fontlab.\n\nTakes about as long as it took to write this post.\n\nYou could do the same with \"quote\". Anyway, the moral is don't forget the AFM file as a vehicle for doing this kind of work.\n\n\\* \\* \\*\n\nNote: Before I get too much flack, if you are trying to minimize kerning, you don't give numerators and denominators the same side bearings. If you do it as above, you minimize kerning time with the numbers themselves, but usually have to kern them ALL with the fraction bar. But this way is fast, and when you hit 12/64, the fraction looks good.\n\n"
+    },
+    {
+      "time": "27 Jan 2009 — 9:52am",
+      "content": "Hello,\n\nWith normal copy/past actions only the right side kerning is copied. If you select _Paste Special_ you can select what you want to paste, e.g. Outline + left side kerning + right side kerning.\n\nEigi\n\n"
+    },
+    {
+      "time": "27 Jan 2009 — 1:50pm",
+      "content": "Thanks everyone. Eigi, that's a really straight-forward and easy way to solve the problem -- and I just tried it and it worked!\n\nRob\n\n"
+    }
+  ]
+}

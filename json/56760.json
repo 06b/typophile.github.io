@@ -1,0 +1,106 @@
+{
+  "id": "56760",
+  "title": "Trouble with 'Merge Contours' in Fontlab",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I have until recently used Ben Kiel's 'Font Generator Version 1.1' script to generate OTFs. After I changed the shape of my serifs (they are components placed in the relevant glyphs) the merging of contours have started to fail in some places. If I do the procedure manually, the result is the same as with the script. I have tried to optimise the paths, set pathdirections, cut and paste from working glyphs to bad ones, re-draw sections, set new start points, but to no avail. Sometimes a left side serif is missing, sometimes the stems and serif parts get entangled after merging instead of merging. What to do?\n\n/Claus\n\n",
+  "author": "<a href=\"/web/20100203174008/http://typophile.com/user/16321\" title=\"View user profile.\">clauses</a>",
+  "time": "<br>",
+  "uid": "16321",
+  "comments": [
+    {
+      "time": "",
+      "content": "Make sure each segment of the glyph has counter clockwise contour for OTF. If not, cut the good segments, reverse the contour of the bad ones, then paste the good ones again. That works for me.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Do your letters have multiple contours in or are they built from other components in addition to the serifs? If yes, you might want to try simplifying things. Algorithms can only handle so many paths before they start having problems.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Run \"Set postscript direction\" on all your glyphs and then preview them.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "I did all that. No dice.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Had you releases all contours first?\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, all components are decomposed if that is what you mean. I think it's just (yet another) Fontlab bug.\n\n"
+    },
+    {
+      "time": "",
+      "content": "FL's not good at this if the contours intersect twice. Sometimes, if there are lots of contours, it only understands one pair of contours merging at a time. And, sometimes, until you correct the direction for each path separately it won't merge. Finally, when not even this works, I copy the parts into the mask, rip 'em apart and put them together manually.\n\nWhen we want to annoy them, let's all ask for \"Create Overlap\".\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes thanks David, but I'm not getting my hopes up. Yuri et al seems busy with other things than adding features to Fontlab 5.\n\nWhat is especially annoying is that is worked one moment, then I changed some components a bit and now it doesn't. It's not even more than two shapes overlapping each other at any one time, and the shapes are surely not complex in any way. And if Typophile would let me insert an image I could show you. Alas.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Whenever a glyph is behaving oddly, in other words, whatever I'm try to do with it doesn't seem to work, I select the entire glyph, cut it and then paste it. Somehow, moving a glyph to the clipboard and back seems to sort things out. I don't know if this will help in your case, but it might.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for the tip Mark, but that didn't help. A related bug that just popped up, is that if I copy two overlapping boxes from one glyph to another they are merged into one with some of the points missing! God dammit.\n\n"
+    },
+    {
+      "time": "",
+      "content": "See if there are any stray points around.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "I don’t know how well this worked in Fontographer, but FWIW I’ve never noticed that any vector graphics program is good at merging anything beyond simple overlaps of two contours.\n\n<cite>if I copy two overlapping boxes from one glyph to another they are merged into one with some of the points missing!</cite>\n\nThat one drives me nuts.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Not sure if it is related, but what is your \"paint\" setting?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Never mind. \"Paint\" mode probably is not related.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>Yuri et al seems busy...  \nI was not kidding obviously enough. Creating overlaps makes removing overlaps seem like fun.\n\n\\>God dammit.  \nIndeed, I ran into one of these a couple of years ago, everything right and no reason for mis-merge. I documented it for them but I'm sure it's not on any list.\n\nAnd whatever you do with components, do not move the origin line or else.\n\nI also recommend what Mark said about copying and pasting the glyph, but every once in a while I need to do this to the whole font to stop some cascading bug. It's like FL has lost proper offset to some table and only a new font fixes it.\n\n\\>if I copy two overlapping boxes from one glyph to another they are merged into one with some of the points missing!\n\nThis is, I think, a setting 'cause it does not happen to me.\n\nSorry it sounds like voodoo, as opposed to computer science, but... well you know. :-o\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>This is, I think, a setting ’cause it does not happen to me.</cite>  \nIt not a setting, it's a bug. Happens once in a while, but not in any consistent manner.\n\nAnyhoot, I deleted one of the offending shapes, and redrew it. That fixed it... in that character. Now on to the rest of the offenders...\n\n"
+    },
+    {
+      "time": "",
+      "content": "Glad to hear you moving on, the next suggestion was loud verbal threats at the shapes.  \nThey don't take kindly to threats of deletion you know.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> Yuri et al seems busy with other things than adding features to Fontlab 5.\n\nActually, exactly the opposite is the case. Yuri is working on FontLab Studio 6 at the moment.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Actually, exactly the opposite is the case. Yuri is working on FontLab Studio 6 at the moment.</cite>\n\nThat is what I was hinting at.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>Yuri is working on FontLab Studio 6 at the moment.  \nGet your own Dr. Dave's Anti-Voodoo Keyboard Ointment and The FontMeister Magic Mouse Tooth Rattle Today! ;)\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"Dr. Dave’s Anti-Voodoo Keyboard Ointment and The FontMeister Magic Mouse Tooth Rattle\"\n\nDavid, do you have any version 5 models left? My can of Raid is empty and FL bugs are now immune to it! :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>David, do you have any version 5 models left?  \nDez, I'm sorry I shook all the teeth loose and used up all the anti-voodoo goo making huge glyph sets over the winter. (otherwise it'd've been summer ere I finished). But I am working on shrinking a head... I'll split it with ya?\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Splitting Heads you win, David, but would that make you a crack head? :-)  \nI am trying to work my grandmothers magic with the greek coffee ground patterns inside the cup but I don't have her gift!\n\nChrisL\n\n"
+    }
+  ]
+}

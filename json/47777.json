@@ -1,0 +1,22 @@
+{
+  "id": "47777",
+  "title": "How to copy anchor data in volt?",
+  "forum": "Arabic Typography & Type Design",
+  "tags": [
+    "Arabic Typography & Type Design"
+  ],
+  "content": "Hi, all  \nI was making a qurani font.... and here i have put all marks in only one position. How ever for some marks like, superscript alef are placed slightly differently, so they cannot be put at the same point as fatha and dammatan.....\n\nThats wht i want to copy anchor; attach1 to a new anchor; attach3 and I want to preserve all its anchor data.\n\nSee the attachments.....\n\nCan some one help me plz............... specially Hudson and Surgey :)\n\nThnx\n\n| Attachment | Size |\n| --- | --- |\n| [a181.gif](http://web.archive.org/web/20150414212203/http:/typophile.com/files/a181.gif) | 15.35 KB |\n| [a182.gif](http://web.archive.org/web/20150414212203/http:/typophile.com/files/a182.gif) | 15.59 KB |\n\n",
+  "author": "arifkarim",
+  "time": "26 Jul 2008 — 11:02am",
+  "uid": "30220",
+  "comments": [
+    {
+      "time": "4 Aug 2008 — 3:18pm",
+      "content": "1. Make a GPOS mark attachment lookup in which the alifcomb glyph is positioned using the attach1 anchor. Only include in this lookup any glyphs that you eventually want to be positioned with the attach3 anchor.\n\n2. Export this lookup to a .vtl text file.\n\n3. Open the .vtl file in a text editor. Search for\n\nattach1\"\n\nand replace with\n\nattach3\"\n\ni.e. rename the anchors without changing the attachment offsets. Save.\n\n4. Import the edited .vtl back into VOLT. If asked if you want to replace existing attach3 anchors, say YES.\n\nThis will create attach3 anchors with the same positions as attach1 anchors, and these can now be edited for specific base glyphs. Note that anchors are stored internally in VOLT, so if you have existing lookups that reference both attach1 and attach3 the latter will inherit your new positioning. In this case, you can delete the working lookups used to export and import .vtl files.\n\n"
+    },
+    {
+      "time": "15 Aug 2008 — 5:22pm",
+      "content": "hopp la, thnx it works!\n\n"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "id": "17059",
+  "title": "OpenType and Word 2003",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi,\n\nI created an OpenType font using FontLab Studio on MacOSX. I'm using the ccmp OT class to create composite characters such as \"uni004B1D420313\" composed of glyphs from U+004B, U+1D42 and U+0313. On OSX with TextEdit the characters compose properly and everything looks OK. When I install the font on WinXP, and use Word 2003, the characters don't appear to compose properly. I was using the 'insert symbol' dialog in Word to enter the glyphs. Some characters, such as a Ccaron, will compose...but I don't believe it's based upon the ccmp code and rather something related to UniScribe. Do I need to install another bit of software on Windows?\n\nAgain, I'm pretty new to this and still reading the big book on Unicode.\n\nThanks for any insight...\n\n",
+  "author": "fredjonze",
+  "time": "3 Jan 2006 — 9:59am",
+  "uid": "10195",
+  "comments": [
+    {
+      "time": "3 Jan 2006 — 10:13am",
+      "content": "You might need to confirm that you have the latest Service packs installed for both Office and Windows.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "3 Jan 2006 — 12:43pm",
+      "content": "Hi,  \nI have all the latest SPs for both.\n\nI found one more possible bit of information. When I try to build a keyboard layout using the MS Keyboard Creator it squaks and says that the characters assigned to keys are not in the 1252 code page and may create problems with non-Unicode programs. When I enable the keyboard and type the diacriticals or modifiers some characters combine and some don't. For instance a U+0063 and U+0313 work fine but a U+0043 and U+0313 doesn't (the latter seems to override the ccmp and place the caroncomb over the C without the placement set up via ccmp...I'm assuming that some lower level Word/Windows action is doing this).\n\nIdeas?\n\n"
+    },
+    {
+      "time": "3 Jan 2006 — 1:05pm",
+      "content": "[I'm a bit confused by your example, because U+0313 is a combining comma above, not a caroncomb]\n\nTest your keyboard in NotePad. Word has some key combinations hard coded as hotkeys, so will not accept character input from them. You may also find that RichEdit apps gets confused if you enter characters that are part of an 8-bit codepage but your font does not support that codepage: the app may switch fonts on your during inputting, which is extremely annoying. NotePad will give you a better indication of whether your keyboard layout is working.\n\nNotePad will also indicate what Uniscribe is doing, without the layers of application API decision making that Word imposes.\n\nIf your font contains an encoded precomposed diacritic character such as U+010C, Uniscribe will make a character level substitution for U+0043 + U+030C, because this is the canonical decomposition for the former. It is faster for Uniscribe to do this at the character level than to process glyph processing lookups in the font. If, for some reason, you didn't want U+0043 + U+030C to result in the glyph encoded at U+010C, e.g. because you wanted to always use GPOS mark positioning, you would actually need to decompose U+010C -\\> U+0043 + U+030C in the ccmp feature.\n\n"
+    },
+    {
+      "time": "3 Jan 2006 — 4:43pm",
+      "content": "Slightly off-subject but on-topic:\n\nIn Word 2003, there is an option to \"Embed TrueType fonts\".\n\nAre OT/Type1 fonts also embedded when this box is checked?\n\nI'm sure I could experiment, but I'm sure someone out there already knows the answer :)\n\n"
+    },
+    {
+      "time": "3 Jan 2006 — 8:34pm",
+      "content": "No, sadly not. Regardless the font embedding feature in Word is a bit flaky, seems to work okay for one-off display fonts, but has problems with extended families.\n\nFred, if you have access to them try the Windows Vista versions of Tahoma or Microsoft Sans Serif to see if they exhibit the behavior you're expecting.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "16 Jan 2006 — 8:44am",
+      "content": "I solved my problem of odd behaviors with some diacriticals (for instance U+004D U+0323) by creating a composite with a codepoint of 1E42. However, have I made things worse by doing this? I'm trying to understand whether it is better to have all of the composite characters as non-codepoint composites...for instance uni004D0323...or have them point to a Unicode codepoint such as Mdotbelow.\n\nThe follow-on question is for subsequent characters, such as U+0043 U+030C U+0313, should I create an intermediate codepoint of 010C or use a composite of uni0043030C with no codepoint? What I've currently done is create a ccmp 'sub Ccaron commaabove by uni0043030C0313'. The alternative would be 'sub uni0043030C commaabove by uni0043030C0313'.\n\nHope I've phrased this right...I'm a novice and still trying to understand UniCode and OpenType. What I want to ensure is the best solution for spell-checking that is cross-platform. If I understand what you're explaining, then UniScribe will decompose a compsite and enter the codepoints for the separate glyphs. Does this happen in MacOSX? If not...it might seem better to not use codepoint composites as decompisition does not occur on the Mac and will support better cross-platform compatibility.\n\nThanks,\n\n"
+    },
+    {
+      "time": "7 Jan 2008 — 7:32pm",
+      "content": "Hi,\n\nPlease help, I'm losing my sanity trying to create Word templates that will work on both a Mac and a PC. I thought i'd be clever and use OpenType fonts to avoid any font issues between the two platforms, but when i install the fonts on the PC, the bold and italic weights won't show up in the Word 2003 font menu (not to mention coming out in Courier and spoiling my beautifully created Word template!).\n\nPlease help, i don't want to have to resort to using different fonts for Mac and PC users and i'd love to learn how to solve this problem!\n\nCheers,\n\nJo\n\n"
+    },
+    {
+      "time": "7 Jan 2008 — 8:02pm",
+      "content": "Jo, you should start a new thread with this problem. Make sure you title it in an exemplary way.\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 6:15am",
+      "content": "This is a known issue which is [documented here](http://web.archive.org/web/20131019231356/http:/www.adobe.com/type/browser/OTReadMe.html#Anchor-WindowsIssues), scroll down to the section _Fonts do not map correctly in documents transferred from Mac OS to Windows_. (Thank you Miguel!)  \nThe problem is that Mac and Windows Word documents are not really cross-platform compatible when it comes to identifying fonts. The Mac version identifies fonts by name ID18/Mac if present, else by name ID4/Mac, while the Windows version identifies fonts by name ID1/Win.  \nI would consider this as a bug in Word. At least, the developers didn't care for document exchange from Mac to Windows. Smart applications identify fonts by name ID6.\n\nFor font developers:\n\nWith larger font families, this can be (partially) worked around -- see Thomas Phinney's TypoTechnica [presentation on font naming (PDF)](http://web.archive.org/web/20131019231356/http:/blogs.adobe.com/typblography/typotechnica2007/Font%20names.pdf), page 15.\\*  \nBut _even then_ a Word for Mac user needs to select only the base font of a style-linked sub-family from the font pulldown menu and then apply Bold/Italic buttons. With some luck, fonts are recognized when opening the document in Word for Windows. If, instead, a Word for Mac user selects italic etc styles from the font pulldown menu _directly_, most likely (s)he will get Courier when opening the document in Word for Windows ...\n\n\\* Unfortunately, I was not aware of _how_ important ID18/Mac is in style-linked families until yesterday when Bas Jacobs told me that something must be wrong with my Font Naming PDF. In a future update I will point out that  \n[1] name ID18/Mac should be present in larger, style-linked families  \n[2] name ID18/Mac should be identical with name ID1/Win in the base font ('Regular' style) of each sub-family (identified by a common name ID1/Win).  \n(Thanks to Thomas for clarifying this in his above-mentioned presentation!)\n\nTranslating name IDs to FLS5 FontInfo tags:  \n_name ID1/Win_ -- 'Family Name'  \n_name ID4/Mac_ -- 'Full Name'  \n_name ID6_ -- 'PS Font Name'  \n_name ID18/Mac_ -- 'Mac Name' in 'OpenType-specific names' page, below of 'OT Family Name' and 'OT Style Name'\n\nKarsten\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 11:56pm",
+      "content": "It may actually be even worse than this - name ID 18 was used prior to OS X, but I gather OS X apps are largely no longer using it and instead use name ID 4 Mac, meaning that there's no reasonable way to get consistent cross-platform menu name mapping AFAICT. :( At least, if my understanding is correct this is so.\n\nIf Windows were to move to using name IDs 16 and 17 then we could manage it, but I wouldn't hold my breath for that.\n\nT\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 4:47am",
+      "content": "Hello Thomas, I tested in OSX 10.3 and 10.4:  \nIdentification is still by name ID18 if present, else by name ID4/Mac.  \n10.5 not tested.\n\n[DISCLAIMER: JUST MUSING!] Couldn't we just forget about name ID18 and, by default, create name ID4/Mac by the rules that apply to name ID18, i.e. abbreviate this name if required? This because _if_ name ID18 is present, then ID4/Mac is ignored by applications anyway. Such an abbreviated name ID4/Mac may even go into the CFF table's FullName since this too seems to be ignored. But this also means that then name ID4/Mac rather than name ID18 must meet the condition that it be identical with name ID1/Win in each base font.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "52425",
+  "title": "Variant names",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi folks. I’m in the process of teaching myself to make fonts in FontForge, and I thought I’d start with a fairly simple project: converting some resource-fork fonts to OpenType format.\n\nI started with a family of Cochin containing the usual Roman, Bold, Italic, and Bold Italic. Everything seems to work perfectly, except that the Bold Italic shows up in InDesign’s font list as “BoldItalic” (no space). When I preview the font in Windows, I see the space. If I change the “Name For Humans” field in FontForge to “Test,” it reads as “Cochin Test” in the Windows preview but still as “BoldItalic” in InDesign.\n\nIt seems clear that InDesign is reading a different field for the name of the font, but I can’t figure out what or where it is. Can anyone tell me? Thanks.\n\n",
+  "author": "<a href=\"/web/20090804053614/http://typophile.com/user/17152\" title=\"View user profile.\">apetickler</a>",
+  "time": "<br>",
+  "uid": "17152",
+  "comments": [
+    {
+      "time": " 6.Dec.2008 11.38pm",
+      "content": "InDesign (and many Adobe apps) use NameID=17 for the subfamily or “style” field, if present. If it is absent, they fall back to NameID=2. NameID=2 is what you’ll be seeing in Windows preview, I expect.\n\nWith any luck the FontForge documentation will have enough info to tell you which of its fields correspond to these values.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": " 10.Dec.2008 5.13am",
+      "content": "Thanks a million.\n\nNow I just have to find it....\n\n"
+    }
+  ]
+}

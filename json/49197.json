@@ -1,0 +1,30 @@
+{
+  "id": "49197",
+  "title": "Underscores in glyph name extensions",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "FDK’s CompareFamily is blaming me for using underscores in glyphname extensions like in `zero.onum_pnum`. It interprets the glyphs as ligatures like a `f_l` glyph and it searches for the pnum glyph without any luck. Is it just FDK that is a little bit too sensitive here or does this affect decomposition behavior in Acrobat as well?\n\n [‹ Inkscape now integrates Spiro](http://web.archive.org/web/20081012005603/http:/typophile.com/node/48924 \"Go to previous forum topic\") [Chinese Fonts & Adobe Software ›](http://web.archive.org/web/20081012005603/http:/typophile.com/node/19200 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081012005603/http://typophile.com/user/1021\" title=\"View user profile.\">Mårten Thavenius</a>",
+  "time": "<br>",
+  "uid": "1021",
+  "comments": [
+    {
+      "time": " 7.Sep.2008 4.04pm",
+      "content": "`zero.onum_pnum` is a fine name. Some CompareFamily tests may be too tailored to the glyph names we use at Adobe. Would be good to know exactly what’s the message you’re getting and which test is generating it, so that we can improve the algorithm to account for such glyph names. Thanks.\n\n"
+    },
+    {
+      "time": " 8.Sep.2008 12.10am",
+      "content": "Thanks Miguel.\n\nThe warning is in the `Single Face Test 26: Glyph name checks` part and says:\n\n`Warning. Glyph name 'pnum' in ligature name 'zero.onum_pnum' is neither in the AGD, nor a 'uni' name, and can't be mapped to a Unicode value.`\n\nThe same message follows for all the other glyphs with the same kind of name extension.\n\nI’m running a rather verbose report with the following command:\n\n`comparefamily -rm -rn -rp -hint -l ../log/compareFamily.log`\n\n"
+    },
+    {
+      "time": " 8.Sep.2008 8.45am",
+      "content": "This is a bug in CompareFamily - it shouldn’t be applying the ligature checking logic to the glyph suffix. This fixed now in my version, fix will be available in the next AFDKO release, =do in a few weeks.\n\n"
+    },
+    {
+      "time": " 8.Sep.2008 8.52am",
+      "content": "Thanks, Read!\n\nChrisL\n\n"
+    }
+  ]
+}

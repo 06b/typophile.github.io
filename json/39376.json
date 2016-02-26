@@ -1,0 +1,126 @@
+{
+  "id": "39376",
+  "title": "Using Multiple Masters to Generate Weights in a Family - Insight?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I am working on a typeface and not looking forward to the idea of redesigning each glyph for every single [weight](http://web.archive.org/web/20150317222039/http:/typophile.com/wiki/weight), so I'm very interested in generating some of the weights using [multiple masters](http://web.archive.org/web/20150317222039/http:/typophile.com/wiki/multiple%20master) in FontLab.\n\nHow does this generally work? I read the chapter in the FL manual and it seems that the best way to do it is:\n\n1) Create a regular weight  \n2) Create \"extremes\", for instance, \"Ultra Thin\" and \"Ultra Black\".  \n3) Interpolate the intermediate forms, like Thin, Light, Bold, Black, etc.\n\nIs this how it's generally done? Are most typeface families created from these three weights? Also, are the results acceptable if you're interpolating something across a wide range, such as an interpolation between a regular weight and an \"Ultra Black\" weight? Or should the extremes be closer together?\n\nLastly, I want at least three weights-- light, regular and bold. I'd imagine that in this case, MM can't help me, as I would need at least these three weights before I could do any interpolation anyway. The only other way would be using extrapolation, but I don't trust the results of that particular technique for my font weights.\n\n",
+  "author": "msa",
+  "time": "23 Nov 2007 — 10:22am",
+  "uid": "17100",
+  "comments": [
+    {
+      "time": "23 Nov 2007 — 12:12pm",
+      "content": "I’m also looking for any good references on interpolation techniques, Fontlab-centric or otherwise.\n\n"
+    },
+    {
+      "time": "23 Nov 2007 — 2:02pm",
+      "content": "[http://superpolator.com/movies/SuperpolatorScreencast\\_intro\\_small.mov](http://web.archive.org/web/20150317222039/http:/superpolator.com/movies/SuperpolatorScreencast_intro_small.mov \"http://superpolator.com/movies/SuperpolatorScreencast\\_intro\\_small.mov\")  \n. . .  \nBert Vanderveen BNO\n\n"
+    },
+    {
+      "time": "23 Nov 2007 — 2:12pm",
+      "content": "Yes, the Thin--Regular--Ultra system works for me.  \nExtrapolation is marginally useful.  \nOther than that--experiment! You don't need a whole font, just make a few letters and see what happens.  \nIf you want three weights, it makes sense to have Hairline and Ultra as the extremes, rather than Light and Bold, because you will then be able to make those anyway, and interpolation is far better than extrapolation. And for a sans, Hairline is quite easy--just draw a path (using your Regular in the mask layer as a guide) and give it a stroke value of 20.\n\n"
+    },
+    {
+      "time": "23 Nov 2007 — 2:15pm",
+      "content": "A related thread is [http://typophile.com/node/39239](http://web.archive.org/web/20150317222039/http:/typophile.com/node/39239) (Design forum), with a great post by Carl Crossgrove.\n\n"
+    },
+    {
+      "time": "26 Nov 2007 — 5:46am",
+      "content": "You may find [this](http://web.archive.org/web/20150317222039/http:/tim-ahrens.de/type/Tim%20Ahrens%20-%20Partial%20Extrapolation.pdf) interesting. Or useful. Or totally confusing.\n\n"
+    },
+    {
+      "time": "26 Nov 2007 — 11:06am",
+      "content": "Totally confusing, Tim, but interesting. I'm having a little trouble imagining how it would be applied, i.e. what the results would look like in an actual glyph. But I love this statement:\n\n_These three diagrams are different interpretations or manifestations of the same phenomenon. Just like a thrown object describes a parabola in real space as well as in a path-space diagram._\n\n"
+    },
+    {
+      "time": "26 Nov 2007 — 2:38pm",
+      "content": "This is a real world example:\n\n ![](http://web.archive.org/web/20150317222039im_/http:/typophile.com/files/p_extra_5569.gif)\n\nThis is assuming a manually designed extralight (XL), regular (REG) and extrabold (XB) exist, otherwise my system cannot be applied.  \nIf we want to generate a semibold (SB) we can do so by extrapolating from XL 'across' REG, as seen on the left. However, the horizontal bar is too heavy for this weight since it is (almost) proportional in both the source weights.  \nIn the XB the bar is tweaked very much, which finds its way into the interpolated SB, as seen on the right: the horizontal is too heavy, and also the overall weight.  \nWhat we want is something in between: part extrapolation and part interpolation. This can be achieved by adjusting the weights in our cocktail that gives the semibold. I typically put the three weights into an MM font (which means, unfortunately, that two masters are identical) and then calculate the required MM positions to give the desired resulting weight, and amount of extra- vs interpolation. Note that in the above example the fact that there is exactly 100% REG is random, it could be more or less than that.\n\nThis may all seem complicated and the improvements are not drastic. However, it amost does not cause any additional work – all you have to do is to combine your weights a bit differently when you generate the weights you do not design manually. It is my experience that the time you save for correcting the semibold outweighs (ha ha) the effort to set up the MM font.\n\n"
+    },
+    {
+      "time": "26 Nov 2007 — 3:22pm",
+      "content": "[http://www.lucasfonts.com/index\\_neu.html](http://web.archive.org/web/20150317222039/http:/www.lucasfonts.com/index_neu.html \"http://www.lucasfonts.com/index\\_neu.html\")\n\n\\>information \\> interpolation theory\n\n"
+    },
+    {
+      "time": "26 Nov 2007 — 4:30pm",
+      "content": "The LucasFont idea is this: all the formulas boil down to saying that b, the width of the \"medial\" stem, is the square root of the product of a by c, where a is the smallest and c the largest stem. This means that the width of the medium stem is the geometric mean of the widths of the smallest and largest stems. This is equivalent to saying that the logarithm of b is exactly the arithmetic mean of the logarithm of a and that of c. This is logarithmic interpolation and this looks interesting. My feeling is that Tim's interpolation uses a quadratic fit (whence the parabola). Am I wrong? Tim, would it make any sense to mix the two approaches (i.e. take a log, use a quadratic fit, and then exponentiate)?\n\nMichel\n\n[edit 1] Maybe the method should rather be called \"exponential interpolation\". I can find no reference for the moment.  \n[edit 2] Yes, it should be called exponential interpolation as can be found [here](http://web.archive.org/web/20150317222039/http:/music.nuim.ie/musictec/docs/progr/interpolation.pdf).\n\n"
+    },
+    {
+      "time": "26 Nov 2007 — 4:36pm",
+      "content": "As someone pointed out in another thread, a simple way of stating Lucas's idea is that the weights should be a geometric progression: the ratio of each term (weight) to the previous one is the same. For example, if you have three successively heavy weights, A,B,C, then algebraically A/B = B/C. Rearranging you get Lucas's formula: AC = B^2 . In a talk I saw him give, he explained a more complex version that takes into account double and triple horizontal strokes, but I don't remember it.\n\n"
+    },
+    {
+      "time": "26 Nov 2007 — 4:42pm",
+      "content": "\\> <cite> Lucas’s idea is that the weights should be a geometric progression</cite>\n\nThis is exactly why they can be made to fit an exponential curve.\n\n"
+    },
+    {
+      "time": "26 Nov 2007 — 4:51pm",
+      "content": "<cite>My feeling is that Tim’s interpolation uses a quadratic fit.</cite>\n\nNote that my diagrams are in different spaces than Lucas's. My approach does not say anything about the weight of the individual instances, it considers only the interpolation. By choosing the amounts of the three ingredients (which means two degrees of freedom) you can create any graph you want. All I am saying is that it should not have kinks. A pure interpolation with a kink is a special case in my approach.\n\n<cite>Yes, it should be called exponential interpolation</cite>\n\nNo, it should be called geometric sequence or progression (see [http://en.wikipedia.org/wiki/Geometric\\_sequence](http://web.archive.org/web/20150317222039/http:/en.wikipedia.org/wiki/Geometric_sequence \"http://en.wikipedia.org/wiki/Geometric\\_sequence\")). This is precisely what it is, nothing more and nothing less. You can transform that into complicated formulas if you want, of course, but they will not say anything else.\n\nLucas's concept is about the individual weights – despite the name it does not say anything about interpolation, actually.\n\n"
+    },
+    {
+      "time": "26 Nov 2007 — 5:18pm",
+      "content": "\\> <cite>You can transform that into complicated formulas if you want, of course, but they will not say anything else.</cite>\n\nI agree with your statement. However, if the smallest stem is a, the largest is c, and if you have 5 weights between a and c, then according to Lucas the stem of weights k=1 to 5 is a\\*(c/a)\\*\\*(k/6.0) using Python code. The explanation in terms of geometric progression is nice but does not give Python code.\n\n[edit] I meant according to the formula y(x) = y0\\*(y1/y0)\\*\\*x; here y0 = a, y1 = c; x is k/6 where k=0 for stem a and k=6 for stem c and k from 1 to 5 gives those in between.\n\n"
+    },
+    {
+      "time": "26 Nov 2007 — 5:34pm",
+      "content": "If you take the formula on Geometric Progression in Wikipedia, you can also write a\\*r\\*\\*k for k from 1 to 5 with r = (c/a)\\*\\*(1.0/6). Both approaches are indeed equivalent; the advantage of the formula in [http://music.nuim.ie/musictec/docs/progr/interpolation.pdf](http://web.archive.org/web/20150317222039/http:/music.nuim.ie/musictec/docs/progr/interpolation.pdf \"http://music.nuim.ie/musictec/docs/progr/interpolation.pdf\") is that it is expressed as an interpolation formula.\n\n"
+    },
+    {
+      "time": "26 Nov 2007 — 8:45pm",
+      "content": "The important thing to decide is how many instances you have between the lightest and the fattest.  \nYou want to be very careful to avoid an instance where the stem width and the width between stems is identical.  \nThat can happen if you have, say, x number of instances, but x+1 or x-1 will avoid it. However, then you have to consider another priority: you should have Regular and Bold work well together and look like Regular and Bold, not Regular and Extra Bold or Light and Medium.\n\n"
+    },
+    {
+      "time": "28 Nov 2007 — 7:23pm",
+      "content": "I just want to say that I’ve been playing with the MM features in Fontlab based on the comments in this thread, the Fontlab manual, and Adobe’s _Designing Multiple Master Typefaces_.\n\nThis is so awesome and easy it’s scary. And it’s fun, too.\n\n"
+    },
+    {
+      "time": "28 Nov 2007 — 8:30pm",
+      "content": "_You want to be very careful to avoid an instance where the stem width and the width between stems is identical._\n\nI don't think I've ever heard this rule before. It's not hard to find examples of classic foundry typefaces where this is true for some characters, so I must say I'm a bit skeptical. Where does this idea come from and what's the reason for it?\n\n"
+    },
+    {
+      "time": "28 Nov 2007 — 10:05pm",
+      "content": "I wouldn't say it's a rule, just an observation and a recommendation.  \nThere's something disconcerting about evenly matched values in a figure-ground relationship, because the eye is not quite sure which is which.  \nSo I think it makes sense, when you're picking where to place your instances on the curve, to avoid that situation.  \nHere are two typeface examples of adjacent weights, Helvetica and Univers, which straddle the equivalent instance.  \nI haven't done a survey, but I suspect this is typical.  \nThe general idea is that while a multiple master curve offers infinite choices, there are scales of visually-pleasing instances which restrict what is practical.\n\n ![](http://web.archive.org/web/20150317222039im_/http:/typophile.com/files/ns_5646.jpg)\n\n"
+    },
+    {
+      "time": "7 Sep 2009 — 3:01pm",
+      "content": "Moderators, please _do_ remove spam.\n\n<cite><strong>Member for</strong><br>\n1 hour 22 min</cite>\n\n... and then already kicked out. Tsk, tsk.\n\n"
+    },
+    {
+      "time": "8 Sep 2009 — 2:18pm",
+      "content": "If you notice spam please [report it to the moderators](http://web.archive.org/web/20150317222039/http:/typophile.com/moderators). Thanks. :)\n\n"
+    },
+    {
+      "time": "10 Nov 2014 — 4:33am",
+      "content": "i found your blog really amazing its really nice.  \n [http://www.replicaorologi4it.com](http://web.archive.org/web/20150317222039/http:/www.replicaorologi4it.com/ \"http://www.replicaorologi4it.com\")  \n [http://www.irepliquemontresluxe.com](http://web.archive.org/web/20150317222039/http:/www.irepliquemontresluxe.com/ \"http://www.irepliquemontresluxe.com\")\n\n"
+    },
+    {
+      "time": "10 Jan 2015 — 3:31pm",
+      "content": "I am researching this topic for use in a future business I am thinking about starting. Thank you for this information, it has been educational and helpful to me. [Web Site](http://web.archive.org/web/20150317222039/http:/www.createautomation.co.uk/iPad-in-wall-mounts_c_29.html)\n\n"
+    },
+    {
+      "time": "14 Jan 2015 — 2:40pm",
+      "content": "Sounds like pretty interesting stuff, I haven't been to particular with my own site when it comes to font families, I think the font I've used for my guides (like: [http://www.compuchenna.co.uk/speed-up-your-computer/](http://web.archive.org/web/20150317222039/http:/www.compuchenna.co.uk/speed-up-your-computer/ \"http://www.compuchenna.co.uk/speed-up-your-computer/\") ) is very clear and easy to read, which is most important.\n\n"
+    },
+    {
+      "time": "15 Jan 2015 — 8:54am",
+      "content": "Here at Toronto Secure Locks we offer an unbeatable fast Professional  \nLocksmith service, so if you’re locked out, need your locks changing  \nor replacing or even need a safe opening we can help any time of day,  \n we also provide an Access control, CCTV\n\n[http://yorklocksmith.com/](http://web.archive.org/web/20150317222039/http:/yorklocksmith.com/ \"http://yorklocksmith.com/\")  \n [http://0544342878.com](http://web.archive.org/web/20150317222039/http:/0544342878.com/ \"http://0544342878.com\")  \n [http://mysaite.ru](http://web.archive.org/web/20150317222039/http:/mysaite.ru/ \"http://mysaite.ru\")\n\n"
+    },
+    {
+      "time": "16 Jan 2015 — 9:27pm",
+      "content": "הרודס מפורסם והארווי ניקס, וברים ומסעדות בשפע כמו בודהה בר  \n וסן לורנצו, שם לעולם לא נהיה מחסור במקומות ללכת. ובכל מקום  \n שאתה הולך אתה תהיה מוקף בתזזיות וזוהר זה שם נרדף לאזור.\n\n[http://escorts4you.me](http://web.archive.org/web/20150317222039/http:/escorts4you.me/ \"http://escorts4you.me\")  \n [http://escorts4you.biz](http://web.archive.org/web/20150317222039/http:/escorts4you.biz/ \"http://escorts4you.biz\")  \n [http://escorts4you.info](http://web.archive.org/web/20150317222039/http:/escorts4you.info/ \"http://escorts4you.info\")\n\n"
+    },
+    {
+      "time": "20 Jan 2015 — 8:29am",
+      "content": "Here at Toronto Secure Locks we offer an unbeatable fast Professional  \nLocksmith service, so if you’re locked out, need your locks changing  \nor replacing or even need a safe opening we can help any time of day,  \n we also provide an Access control, CCTV\n\n[http://localcalgarylocksmith.com/](http://web.archive.org/web/20150317222039/http:/localcalgarylocksmith.com/)  \n [http://0544342878.com](http://web.archive.org/web/20150317222039/http:/0544342878.com/)  \n [http://mysaite.ru](http://web.archive.org/web/20150317222039/http:/mysaite.ru/)\n\n"
+    },
+    {
+      "time": "28 Jan 2015 — 6:56am",
+      "content": "[שירותי ליווי](http://web.archive.org/web/20150317222039/http:/livuysex.com/)  \n [זונות ליווי](http://web.archive.org/web/20150317222039/http:/livuysex.net/)  \n [נערות ליווי](http://web.archive.org/web/20150317222039/http:/livuysex.biz/)\n\n"
+    },
+    {
+      "time": "20 Feb 2015 — 7:34am",
+      "content": "Here at LocalMaster. Locksmith we understand the importance of your  \n security needs and that is why we provide emergency locksmith service  \nin Toronto around the clock for you! Whether you require a locksmith for  \n your vehicle, a locksmith for your home or a commercial locksmith we  \n will always have the right solution for you, every time.\n\n[Locksmith Scarborough](http://web.archive.org/web/20150317222039/http:/localmaster.info/locksmith-scarborough)\n\n"
+    }
+  ]
+}

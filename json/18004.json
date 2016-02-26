@@ -1,0 +1,74 @@
+{
+  "id": "18004",
+  "title": "Open type fraction feature with glyph positioning",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Always careful not to scream \"Bug!\", but what I'm seeing on my screen is at least odd. I've made an Open Type font that can produce nut fractions, fractions with a horizontal bar between numerator and denominator. Strictly speaking these kind of fractions belong in the \"afrc\" feature, but I put them in the frac feature because that's the one Adobe apps support (with InDesign as main target). The feature consists of a mixture of subtitution and positioning lookups. For instance, if you type \"1/23\", the 1 will be replaced by a numerator, the slash by a horizontal bar twice the width of single digit and the 2 and 3 will be replaced by denominators. The 1 will be shifted to the right, to center it above the bar, the bar is positioned underneath the 1, and the 2 and 3 are positioned underneath the bar. Works fine in Fontlab, works fine in InDesign (CS and CS2). So far so good. When I checked the font in Illustrator (CS and CS2) the fraction feature only triggered the substitution lookups, not the positioning. Same result in Photoshop. Is this an example of differences in type rendering engines between Adobe apps (in this case Indesign vs AI/PS) shining through? Am I missing something in the Open Type specs? Anyone any thoughts on this?\n\nKind regards\n\nPaul Dieterman\n\n",
+  "author": "Paul Dieterman",
+  "time": "18 Feb 2006 — 1:41pm",
+  "uid": "5546",
+  "comments": [
+    {
+      "time": "18 Feb 2006 — 1:55pm",
+      "content": "It's almost certainly not you, but Illustrator. The rendering engine and underlying font engine is shared across all the major Adobe apps, but the text engine is not (though Illustrator and Photoshop do share their text engine), and there's where the problem lies.\n\nWe don't have anything like this in-house to test with. If you'd be willing to share the font along with a description of the problem, I can pass it on to the relevant engineers. With any luck we could get this fixed for a future version of the Creative Suite.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "18 Feb 2006 — 2:16pm",
+      "content": "Thanks Thomas for your swift response. It's very easy to reproduce this kind of behaviour without sending you my bunch of code (which I'm willing to send of course). Just put any kind of positioning lookup in the frac feature and it will be ignored by Illustrator.\n\nthanks again  \nPaul\n\n"
+    },
+    {
+      "time": "18 Feb 2006 — 3:44pm",
+      "content": "Are you building this with FontLab, or with VOLT?\n\nT\n\n"
+    },
+    {
+      "time": "18 Feb 2006 — 3:54pm",
+      "content": "I build all my fonts with Fontlab. By the way, is it fair to say that the type rendering engine of InDesign is more sophisticated/up-to-date than Illustrator's or is that an oversimplification?\n\nPaul\n\n"
+    },
+    {
+      "time": "19 Feb 2006 — 12:23am",
+      "content": " **Paul Dieterman**\n\nPlease, show the source code of it your feature.\n\nThanks\n\n"
+    },
+    {
+      "time": "19 Feb 2006 — 11:54am",
+      "content": "I've done the same thing.  \nI optimized for InDesign.\n\nThe problem I have with Illustrator is that in order to position the superior figure, bar(s), and inferior figure on the same vertical axis, I've given my horizontal bar(s) negative sidebearings, and while InDesign recognizes them on both sides, Illustrator appears not to recognize the right-side negative sidebearing -- so I'm contemplating closing up the space between figure and bar by kerning instead.  \nBut perhaps I will not bother, as I don't believe that Illustrator users have any need of fractions.\n\nQuark 7 offers \"fraction\" in its OpenType menu, but it is not the correct \"Fraction\" feature: rather, it is a \"hack\" using the numerator, fraction slash (virgule) and denominator features.\n\n ![](http://web.archive.org/web/20131217034419im_/http:/typophile.com/files/frax.png)\n\nI think it may be possible to achieve consistency across the applications by replacing the angled virgule with a horizontal bar, making superiors and numerators identical, and inferiors and denominators identical, and positioning the fraction elements by kerning -- although the kerning support of OpenType fonts in the beta of Quark 7 is incomplete.\n\n"
+    },
+    {
+      "time": "19 Feb 2006 — 12:35pm",
+      "content": "Nick, would you be willing to throw a misbehaving font my way? I'd love to see this fixed in some future version of Illustrator....\n\nT\n\n"
+    },
+    {
+      "time": "19 Feb 2006 — 1:03pm",
+      "content": "I don't use any sidebearings within the horizontal bars, I just apply some very hefty kerning to the glyphs, with the following result in InDesign:\n\n ![](http://web.archive.org/web/20131217034419im_/http:/typophile.com/files/InDesignFrac.png)\n  \nIn Illustrator (or Photoshop) the result is as follows:  \n\n ![](http://web.archive.org/web/20131217034419im_/http:/typophile.com/files/IllyFrac.png)\n  \nNick, do you kern the bar under the numerator _ **and** _ use negative sidebearings?\n\nPaul\n\n"
+    },
+    {
+      "time": "19 Feb 2006 — 1:08pm",
+      "content": "Wow, looks nice.\n\nWhat the XPress 7 frac feature does is exactly what the specs say. So literally, this is not \"hack\" but \"the right thing\". But nicely indicates that specs are a bit behind real-world development.\n\n<cite>... although the kerning support of OpenType fonts in the beta of Quark 7 is incomplete.</cite>\n\nThere are always applications which don't support things correctly. Making OpenType fonts either means: including the nice things which specs promised, or: making fonts that work in a majority of applications. If anyone knows how to do both, please let me know. :)\n\nMore and more I am convinced that trying to get fonts right is one thing. Another one would be to tell application developers explicitly what they shall do with all the information they can find in OpenType fonts! Like, we find the entire history of digital type represented in a collection of font name entries, or three sets of vertical metrics values, or a strange numeric weight value which is even used by apps which otherwise read legacy family/style name (with the nice effect that weight value must be set \"wrongly\" [specs p.o.v.] so that they work \"right\" [applications' p.o.v.], or style linking doesn't work) &c ... And there isn't a chance to get rid of some of these information if fonts shall be backward compatible. Which also means that most likely -- because information are there -- even future apps may make use of them.\n\n"
+    },
+    {
+      "time": "19 Feb 2006 — 1:29pm",
+      "content": "There's a growing sentiment in much of the OpenType community that all layout features should be free to use all lookup types, as needed.\n\nA lot of this other stuff is indeed arcane and horrible, from a font developer's POV.\n\nT\n\n"
+    },
+    {
+      "time": "19 Feb 2006 — 1:38pm",
+      "content": "Contextual kerning would have made my font a **lot** easier to make...  \nIt's a pity indeed we have to develop fonts with the limitations of the target applications in our minds while the specs promise so much more.\n\nPaul\n\n"
+    },
+    {
+      "time": "19 Feb 2006 — 3:16pm",
+      "content": "Thomas, I will send you the font.  \nPaul, I haven't used kerning within the fraction (i.e. on either side of the horizontal bar).  \nBut I have added a little positive kerning between the full size figures and the superior figures, otherwise the fractions are too close to preceding full-size figures.\n\n"
+    },
+    {
+      "time": "1 Mar 2006 — 3:07pm",
+      "content": "When I noticed that Nick Shinn said, \"I don’t believe that Illustrator users have any need of fractions.\", I wanted to respond with a plea that some of us need all the power for setting mathematical expressions you can give us in both Illustrator and Indesign! Please consider that any mathematical expression an author/scientist might want to write in a figure for a journal article or book needs to be doable in Illustrator so that it looks good when put in InDesign.\n\nAs another example, in Indesign I figured out how to insert multiple non-breaking white spaces each with negative kerning to write a Greek word with both a superscript and a subscript that start at the same position. (The text contains 139,000 Greek words, each with a id superscript and a separate id subscript).\n\nFrom comments I have seen others also are struggling with math expressions in text (InDesign) and figures (Illustrator) even when we buy math plugins.\n\n"
+    },
+    {
+      "time": "21 Feb 2010 — 11:40am",
+      "content": "<cite>What the XPress 7 frac feature does is exactly what the specs say.</cite>\n\nI think QuarkXPress violates the specification, because it ignores the following rule:\n\n`When the full sequence is found in the frac coverage table, the application passes the sequence to the frac table and gets a new GID in return.`\n\nInstead of that it directly assumes case two:\n\n`When the frac table does not contain an exact match, the application performs two steps. First, it uses the numr feature (see below) to replace figures (as used in the numr coverage table) preceding the slash with numerators, and to replace the typographic slash character (U+002F) with the fraction slash character (U+2044). Second, it uses the dnom feature (see below) to replace all remaining figures (as listed in the dnom coverage table) with denominators.`\n\nMaybe the problem can be solved by a hack. (At least the slash can be substituted in the numerator feature. And then it will not be automatically replaced by QuarkXPress.)\n\nAt first QuarkXPress seems to check, if a string \"figure slash figure\" is present in the text for which the fraction feature shall be applied. And then it goes to the numerator feature. If the slash is not substituted there, Quark replaces the slash automatically, before the substitutions embedded in the frac feature can be applied. So \"sub slash by fraction.alt\" is ignored in the frac feature, because the slash already was replaced by the fraction.\n\nI did make a quick test only. I may be wrong. And in cases, where you have a string of a prebuilt fraction followed by a number, Quark is not replacing anything, because the slash is missing in the string. This problem could maybe solved by integrating a multiple substitution like \"sub onequarter by one.numerator slash four.denominator\" in the numerator feature. But I did not check that.\n\n"
+    },
+    {
+      "time": "21 Feb 2010 — 12:00pm",
+      "content": ".\n\n"
+    }
+  ]
+}

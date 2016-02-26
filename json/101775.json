@@ -1,0 +1,29 @@
+{
+  "id": "101775",
+  "title": "Fontlab: Tri Master Interpolation - HOW ?",
+  "forum": "Build",
+  "tags": [
+    "fontlab",
+    "interpolation",
+    "multiple master",
+    "Build"
+  ],
+  "content": "Hi everybody,  \nI'm currently struggling with the following problem - I have ultra light, regular and ultra bold and want to interpolate them in Fontlab MM space, so I could create an extensive family. As it seems, Fontlab MM space does not allow for the use of intermediate design (Normal) to be place between the two masters - ultra light + ultra black. (or am I mistaken?)\n\nSo that leaves me with two choices:  \n1) to keep two MM files with light - normal and normal - black interpolations and constantly troubling about consistency  \nor 2) use two weight axis in same MM font and do mind-bending slider-switching so I could achieve tri-master interpolation in four-master space ?!?\n\nThe discussed type family is still in design stage and I have developed a habit to work/design in MM space, so what should I do... anyone wiling to share some experience, workaround or .. call it trick... how tri-master interpolation could be made possible in Fontlab?\n\nThank you in advance!\n\n",
+  "author": "kateliev",
+  "time": "27 Mar 2013 — 8:09am",
+  "uid": "18978",
+  "comments": [
+    {
+      "time": "27 Mar 2013 — 8:31am",
+      "content": "You can use four masters and ignore one of them, being careful to only interpolate along a single axis at a time between light and regular, and regular and bold. Tricky, but it works. This is why things like Superpolator were created, which can handle masters placed arbitrarily in a design space. Glyphs also has some ability to handle intermediate masters.\n\n"
+    },
+    {
+      "time": "27 Mar 2013 — 8:31am",
+      "content": "How does this differ from \"Blend Fonts\"?\n\n"
+    },
+    {
+      "time": "27 Mar 2013 — 8:45am",
+      "content": "Blend fonts is a one shot deal, working from two source fonts. You need to re-blend whenever you make a change to one of the source fonts to see what effect it has. The MM facility in FL is \"live\" so you can see what happens with the interpolation while you're editing your masters. It's more interactive.\n\n"
+    }
+  ]
+}

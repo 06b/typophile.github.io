@@ -1,0 +1,86 @@
+{
+  "id": "57070",
+  "title": "OpenType feature for Turkish i",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I'm trying to slowly build up my opentype features, but I have reached an impasse with my Turkish i in small caps. The InDesign 'Opentype small caps' does no longer work for the languages excluded in 'locl', but it seems to work in Fontlab's opentype 'Preview' panel... that is except the substitution between the small caps I and the dotted Turkish small caps I. What have I done wrong?\n\n`\n@_n1=[a h m n aring adieresis agrave aacute acircumflex];\n@_period=[period comma quotesinglbase quotedblbase];\n@_n2=[m n r u udieresis uacute ugrave ucircumflex];\n@_o1=[b e o p oslash edieresis eacute oacute odieresis ograve egrave ocircumflex ecircumflex];\n@_o2=[c d e o q oslash edieresis eacute oacute odieresis ograve egrave ocircumflex ecircumflex];\n@_i3=[i j dotlessi iacute igrave icircumflex];\n@_v3=[v w x y ydieresis yacute];\n@_dashes=[hyphen endash emdash];\n@_upperquote=[quotesingle quoteleft quoteright quotedblleft quotedblright];\n@_k1=[k];\n@_l2=[h l k];\n@_O2=[C Ccedilla G O Oslash Q];\n@_O1=[D O Oslash Q];\n@_H2=[B D E F H I K L M N P R U];\n@_H1=[H I M N U];\n@lc=[a b c d e f g h i j k l m n o p q r s t u v w x y z];\n@sc=[Asmall Bsmall Csmall Dsmall Esmall Fsmall Gsmall Hsmall Ismall Jsmall Ksmall Lsmall Msmall Nsmall Osmall Psmall Qsmall Rsmall Ssmall Tsmall Usmall Vsmall Wsmall Xsmall Ysmall Zsmall];\n@uc=[A B C D E F G H I J K L M N O P Q R S T U V W X Y Z];\n@acute=[cacute sacute zacute nacute oacute];\n@kreska=[ckreska skreska zkreska nkreska okreska];\n@_n1=[a h m n aring adieresis agrave aacute acircumflex];\n@_period=[period comma quotesinglbase quotedblbase];\n@_n2=[m n r u udieresis uacute ugrave ucircumflex];\n@_o1=[b e o p oslash edieresis eacute oacute odieresis ograve egrave ocircumflex ecircumflex];\n@_o2=[c d e o q oslash edieresis eacute oacute odieresis ograve egrave ocircumflex ecircumflex];\n@_i3=[i j dotlessi iacute igrave icircumflex];\n@_v3=[v w x y ydieresis yacute];\n@_dashes=[hyphen endash emdash];\n@_upperquote=[quotesingle quoteleft quoteright quotedblleft quotedblright];\n@_k1=[k];\n@_l2=[h l k];\n@_O2=[C Ccedilla G O Oslash Q];\n@_O1=[D O Oslash Q];\n@_H2=[B D E F H I K L M N P R U];\n@_H1=[H I M N U];\n@lc=[a b c d e f g h i j k l m n o p q r s t u v w x y z];\n@sc=[Asmall Bsmall Csmall Dsmall Esmall Fsmall Gsmall Hsmall Ismall Jsmall Ksmall Lsmall Msmall Nsmall Osmall Psmall Qsmall Rsmall Ssmall Tsmall Usmall Vsmall Wsmall Xsmall Ysmall Zsmall];\n@uc=[A B C D E F G H I J K L M N O P Q R S T U V W X Y Z];\n@acute=[cacute sacute zacute nacute oacute];\n@kreska=[ckreska skreska zkreska nkreska okreska];\nlanguagesystem latn dflt;\nlanguagesystem latn PLK;\nlanguagesystem latn MOL;\nlanguagesystem latn ROM;\nlanguagesystem latn TRK;\nlanguagesystem latn AZE;\nlanguagesystem latn CRT;\nlanguagesystem cyrl dflt;\nlanguagesystem cyrl SRB;\nlanguagesystem grek dflt;`\n\nfeature locl { # Localized Forms  \n# Latin  \n# Handling of Turkish i  \nlanguage TRK exclude\\_dflt;  \nlookup locl\\_TRK {  \nsub [i Ismall] by [i.TRK Idotaccentsmall];  \n# The Òi.TRKÓ glyph should be an identical copy of ÒiÓ  \n} locl\\_TRK;  \nlanguage AZE exclude\\_dflt;  \nlookup locl\\_TRK;  \nlanguage CRT exclude\\_dflt;  \nlookup locl\\_TRK;  \n# Handling of Romanian Scommaaccent  \nlanguage ROM exclude\\_dflt; # Romanian  \nlookup locl\\_ROM {  \n sub [Scedilla scedilla] by [uni0218 uni0219];  \n sub [uni0162 uni0163] by [uni021A uni021B];  \n} locl\\_ROM;  \nlanguage MOL exclude\\_dflt; # Moldavian  \nlookup locl\\_ROM;  \nlanguage PLK exclude\\_dflt; # Polish;  \n sub @acute by @kreska;  \n} locl;\n\nfeature c2sc {  \n sub @uc by @sc;  \n} c2sc;\n\nfeature smcp {  \n sub @lc by @sc;  \n} smcp;\n\nfeature liga {  \n sub f f l by ffl;  \n sub f f i by ffi;  \n sub f f by ff;  \n sub f i by fi;  \n sub f i.TRK by fi;  \n sub f l by fl;  \n sub f b by f\\_b;  \n sub f f b by f\\_f\\_b;  \n sub f h by f\\_h;  \n sub f f h by f\\_f\\_h;  \n sub f j by f\\_j;  \n sub f f j by f\\_f\\_j;  \n sub f k by f\\_k;  \n sub f f k by f\\_f\\_k;  \n sub T h by T\\_h;  \n} liga;\n\nfeature kern {  \n pos slash slash -357;  \n pos backslash backslash -357;  \n} kern;\n\n",
+  "author": "<a href=\"/web/20110617170414/http://typophile.com/user/16321\" title=\"View user profile.\">clauses</a>",
+  "time": "<br>",
+  "uid": "16321",
+  "comments": [
+    {
+      "time": "",
+      "content": "I could be wrong but have you tried inserting an explicit line \"script latn;\" below your line \"# Latin\" in locl?  \nID does casing first, then applies c2sc to the uppercased string. Idotaccent and Idotaccentsmall are not covered in your classes @uc and @sc, so are not available to c2sc. Also I think you can omit Ismall and Idotaccentsmall from \"sub [i Ismall] by [i.TRK Idotaccentsmall];\" in locl but then need an additional line in smcp, as sketched [here](http://web.archive.org/web/20110617170414/http:/www.kltf.de/stuff/locl-feature.zip).\n\nBy the way, I spotted \"sub f i.TRK by fi;\" in liga which is better removed. Part of i.TRK's job is _avoiding_ this ligature if language is TRK. In Turkish, i-with-dot and i-without-dit are separate letters, and an f-i ligature in which the dot is connected to the f would look like f-dotlessi ...\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Karsten  \nThanks a lot for your approach. The whole thing now works in Fontlab's preview panel, but all the declared languages in the locl feature still can not display their small caps in InDesign – that problem persists.\n\nMy new features look like this:\n\n`\n@_n1=[a h m n aring adieresis agrave aacute acircumflex];\n@_period=[period comma quotesinglbase quotedblbase];\n@_n2=[m n r u udieresis uacute ugrave ucircumflex];\n@_o1=[b e o p oslash edieresis eacute oacute odieresis ograve egrave ocircumflex ecircumflex];\n@_o2=[c d e o q oslash edieresis eacute oacute odieresis ograve egrave ocircumflex ecircumflex];\n@_i3=[i j dotlessi iacute igrave icircumflex];\n@_v3=[v w x y ydieresis yacute];\n@_dashes=[hyphen endash emdash];\n@_upperquote=[quotesingle quoteleft quoteright quotedblleft quotedblright];\n@_k1=[k x];\n@_l2=[b h l k];\n@_O2=[C Ccedilla G O Oslash Q];\n@_O1=[D O Oslash Q];\n@_H2=[B D E F H I K L M N P R U];\n@_H1=[H I M N U];\n@lc=[a b c d e f g h i i.TRK j k l m n o p q r s t u v w x y z];\n@sc=[Asmall Bsmall Csmall Dsmall Esmall Fsmall Gsmall Hsmall Ismall Idotaccentsmall Jsmall Ksmall Lsmall Msmall Nsmall Osmall Psmall Qsmall Rsmall Ssmall Tsmall Usmall Vsmall Wsmall Xsmall Ysmall Zsmall];\n@uc=[A B C D E F G H I Idotaccent J K L M N O P Q R S T U V W X Y Z];\n@acute=[cacute sacute zacute nacute oacute];\n@kreska=[ckreska skreska zkreska nkreska okreska];\nlanguagesystem DFLT dflt;`\n\nlanguagesystem latn dflt;  \n languagesystem latn PLK;  \n languagesystem latn MOL;  \n languagesystem latn ROM;  \n languagesystem latn TRK;  \n languagesystem latn AZE;  \n languagesystem latn CRT;\n\nlanguagesystem cyrl dflt;  \n languagesystem cyrl SRB;\n\nlanguagesystem grek dflt;  \nfeature locl {\n\nscript latn;  \n language TRK;  \n lookup ITRK {  \n sub i by i.TRK;  \n } ITRK;\n\nlanguage AZE;  \n lookup ITRK;\n\nlanguage CRT;  \n lookup ITRK;\n\n# Handling of Romanian Scommaaccent  \n language ROM; # Romanian  \n lookup COMMAACCENT {  \n sub [Scedilla scedilla] by [uni0218 uni0219];  \n sub [uni0162 uni0163] by [uni021A uni021B];  \n } COMMAACCENT;\n\nlanguage MOL; # Moldavian  \n lookup COMMAACCENT;\n\nlanguage PLK exclude\\_dflt; # Polish;  \n sub @acute by @kreska;\n\n} locl;  \nfeature c2sc {  \n sub @uc by @sc;  \n} c2sc;\n\nfeature smcp {  \n sub @lc by @sc;  \n # Here, we need an additional substitution to  \n # cover the \"dotlessi\":  \n sub dotlessi by Ismall;  \n} smcp;\n\nfeature liga {  \n sub f f l by ffl;  \n sub f f i by ffi;  \n sub f f by ff;  \n sub f i by fi;  \n sub f l by fl;  \n sub f b by f\\_b;  \n sub f f b by f\\_f\\_b;  \n sub f h by f\\_h;  \n sub f f h by f\\_f\\_h;  \n sub f j by f\\_j;  \n sub f f j by f\\_f\\_j;  \n sub f k by f\\_k;  \n sub f f k by f\\_f\\_k;  \n sub T h by T\\_h;  \n} liga;\n\nfeature kern {  \n pos slash slash -357;  \n pos backslash backslash -357;  \n} kern;\n\nCan you figure it out?\n\n"
+    },
+    {
+      "time": "",
+      "content": "I do not have any problems with this method in my fonts, [here](http://web.archive.org/web/20110617170414/http:/www.kltf.de/stuff/turkish-i-in-InDesign-CS4.jpg) is what I get in InDesign CS4.\n\nCould you describe what \"InDesign Opentype Small Caps does no longer work for the languages excluded in locl\" exactly means?\n\n"
+    },
+    {
+      "time": "",
+      "content": "For some reason my small caps doesn't work in any of the languages that are exceptions from the default in the locl feature – that is what I meant in my very convoluted sentence above. Here is what it looks like in InDesign CS4:\n\n ![](http://web.archive.org/web/20110617170414im_/http:/typophile.com/files/InDesign_6087.png)\n\nIn Fontlab it looks allright though:\n\n ![](http://web.archive.org/web/20110617170414im_/http:/typophile.com/files/fontlab_4295.png)\n\nThere must be some stupid thing somewhere in my code, but I can't see it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Karsten let me know that some of this trouble was caused by my betterFontGenerate script. That's been fixed and updated at [http://www.benkiel.com/typeDesign/scripts/downloads/betterGenerateFont.zip](http://web.archive.org/web/20110617170414/http:/www.benkiel.com/typeDesign/scripts/downloads/betterGenerateFont.zip \"http://www.benkiel.com/typeDesign/scripts/downloads/betterGenerateFont.zip\").\n\n"
+    },
+    {
+      "time": "",
+      "content": "Claus,\n\nit's quite simple: your `smcp` feature is only registered in `latn dflt` (also other features, I guess, such as kern).\n\nIn the lower-right part of the OpenType panel, you need to declare ALL languagesystems in which you want to register the feature definitions which do not have explicit languagesystem handling. If this is not done, the features get registered only in the implied languagesystem, which is `latn dflt`.\n\nSo, you should put:\n\n`languagesystem DFLT dflt;\nlanguagesystem latn dflt;\nlanguagesystem latn PLK;\nlanguagesystem latn MOL;\nlanguagesystem latn ROM;\nlanguagesystem latn TRK;\nlanguagesystem latn AZE;\nlanguagesystem latn CRT;\nlanguagesystem cyrl dflt;\nlanguagesystem cyrl SRB;\nlanguagesystem grek dflt;`\n\nI see that you have done this but there may be something wrong there...\n\nAlso, I advise that you don't use glyphnames outside of AGLFN. `Asmall` is a definietely a bad idea. `A.smcp` or `A.sc` or `A.small` would be much better.\n\nUse DTL OTMaster or FontTools/TTX to examine your font and find out if the `smcp`-related lookups get actually registered in the `latn TRK` languagesystem.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Adam  \nThe reason it didn't work was because I used Ben's BetterFontGenerate in a version 1.1, there was unfortunately a little bug, but Ben got it sorted. Then we ran into another issue in the BetterFontGenerate script, which might be solved. I just ran it on another Fontlab file tonight and had the issue again. I will inform Ben directly if I see it again. The BetterFontGenerate is now hovering around version 1.6 I believe, and I hope the issue I ran into today was just a temporary Fontlab quip.\n\nBy the way I got the 'Nsmall' idea from the FreeFont encoding that came with Fontlab. So not a good idea I understand, I will rename according to the Adobe glyph list.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Claus,\n\nwe're working on updating the FreeFont Pro font and encoding.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Clauses there's no problem with this picture  \n [http://www.typophile.com/files/InDesign\\_6087.png](http://web.archive.org/web/20110617170414/http:/www.typophile.com/files/InDesign_6087.png \"http://www.typophile.com/files/InDesign\\_6087.png\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "(There is, though not with the dots. In the Turkish part, no smallcaps are applied to lines two and three though they should.) :D\n\n"
+    },
+    {
+      "time": "",
+      "content": "No it's not a problem. Kitabım and KİTABIM is right. Turkish part absolutly works perfectly.  \ni=İ and ı=I  \nIf you don't see right encoding in my message, check out this image.\n\n ![](http://web.archive.org/web/20110617170414im_/http:/typophile.com/files/kitap_3447.jpg)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Altan, sorry, but you don't get what the illustration was for. It was to show the non functioning _smcp_ and _c2sc_ when _locl_ was set to Turkish. The issue is resolved now.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Sorry for my careless mistake because of focusing to visual part, without reading.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Claus,\n\nin your \"In Fontlab it looks allright though\" illustration, ccedilla is not being replaced by a smallcap glyph. Is this intended?\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yeah, I hadn't done the small caps version of that glyph at that time. Anyhoot, my design was too boring, so I've abandoned it and have started from scratch. One for the drawer.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Very useful thread, thank you. Here's my result:\n\n ![](http://web.archive.org/web/20110617170414im_/http:/typophile.com/files/Turkish-Small-Caps_6120.gif)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Er, coming back to this...how do I ensure that my liga feature excludes Turkish so that fi and fı don't end up looking the same?\n\n"
+    },
+    {
+      "time": "",
+      "content": "If you do the i.TRK trick in the 'locl' feature (for languages TRK, AZE, CRT) as described throughout this thread, then you don't need to do anything Turkish-specific in 'liga' or any other features. That's what the trick is about. :)\n\n"
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "id": "51440",
+  "title": "OpenType fonts - Glyph coverage strategies",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I don't know if it's an intelligent question, but I am trying to understand.  \nWhen you have to generate an OpenType font (OTF or TTF), is it better to consider the glyph coverage in terms of \"Unicode Ranges\" or \"Codepages\"?\n\n",
+  "author": "piccic",
+  "time": "8 Nov 2008 — 12:03pm",
+  "uid": "1316",
+  "comments": [
+    {
+      "time": "8 Nov 2008 — 12:30pm",
+      "content": "Sounds like an intelligent question to me, but the answer will likely depend on your notion about the eventual use of your font(s). If they are for text, I'd say the thing to pay attention to is \\*languages\\* -- for example, there are many languages that use the Latin alphabet, or are commonly transliterated using the Latin alphabet. Slavishly following either a \\*codepage\\* or \\*Unicode range\\* formula will not give you the best coverage of languages.\n\nFor Latin-based languages, see\n\n[http://blogs.adobe.com/typblography/2008/08/extended\\_latin.html](http://web.archive.org/web/20150416053923/http:/blogs.adobe.com/typblography/2008/08/extended_latin.html \"http://blogs.adobe.com/typblography/2008/08/extended\\_latin.html\")\n\nThen there are the non-Latin languages . . .\n\n"
+    },
+    {
+      "time": "8 Nov 2008 — 12:42pm",
+      "content": "Ciao Claudio,\n\nYou might also want to look at this link from Thomas Phiney as well:\n\n[http://blogs.adobe.com/typblography/2008/08/character\\_set\\_terms.html](http://web.archive.org/web/20150416053923/http:/blogs.adobe.com/typblography/2008/08/character_set_terms.html \"http://blogs.adobe.com/typblography/2008/08/character\\_set\\_terms.html\")\n\nChrisL\n\n"
+    },
+    {
+      "time": "8 Nov 2008 — 1:03pm",
+      "content": "Many thanks for your considerations.  \nYes, I was asking mostly for non-Latin, as I see more or less the languages are fully covered by the Latin Extended-A (Unicode range). In fact, as I did the Extended-A for an unreleased typeface, I see it covers most of \"Adobe Latin\" ranges described by Thomas Pinney (great resouce, thanks to him!)\n\nI wish to consider different typefaces in specific ways. I do not intend to draw (at first) a large number of glyphs for a typeface which is not meant for big, multi-lingual editorial purposes, inversely I wish – if I decide to include a language – to make the face enough complete in its script as well (i.e. Greek with Politonic).\n\nI guess it's hard to reach economic standards in glyph choices, but it helps a lot making all these considerations.\n\n"
+    },
+    {
+      "time": "8 Nov 2008 — 1:09pm",
+      "content": "Just found while you were posting, Chris… :=) Many thanks.\n\nIn fact, while looking, I still haven't understood properly the \"Names mode\" in FontLab.  \nApperently it may include any kind of encoding (defined by the text files with suffix .enc), so you may use it to create handy sets for your own production, but Pinney says \"a code page is an encoding\", so are there encodings listed in the \"Codepage\" mode which are the same of the ones in \"Names mode\"?  \nThis thing is not clear to me… :=(\n\n"
+    },
+    {
+      "time": "8 Nov 2008 — 1:59pm",
+      "content": "Names mode relates to the older Type 1 format, in which each glyph was given a name (but no code). The encoding was supplied by a separate look-up table in the font. When you're making OpenType or TrueType fonts, the Names mode doesn't have any effect on how the font is generated, but can still be a useful way to view a font during development, especially since you can make your own encodings.\n\nCode pages and Unicode ranges are just different ways of slicing up the Unicode gamut. Code pages relate to different keyboard layouts for different regions and operating systems and often support several languages, while Unicode Ranges are subsets of Unicode specific to various languages and purposes.\n\nThe encodings you can select while in Names Mode are similar to code pages, but come from the various encodings which have been used for making Type 1 fonts.\n\n"
+    },
+    {
+      "time": "8 Nov 2008 — 2:03pm",
+      "content": "By the way, a lot of font designers like to start with the Macintosh Roman encoding in Names mode because it contains all the glyphs needed for the basic Latin Mac and Windows code pages.\n\n"
+    },
+    {
+      "time": "8 Nov 2008 — 2:14pm",
+      "content": "Enlightening, Mark, many thanks! I suspected something similar but it was not so clear to me.  \nGenerally, while designing, I switch from Macintosh Roman to custom encodings I am creating, divided per areas (numerals, for example), to the Index mode.\n\nMy question comes from an indecision on considering more Code Pages or Unicode ranges instead.  \nAs charles\\_e suggested, the main concern is the languages covered (at least for me), so the keyboard layouts should come as a consequence.\n\nMark, may I ask you if you use more the Unicode ranges? And, if you don't mind, could you tell me how much you covered with your new release of Metallophile? I would have asked Proxima Nova, but I prefer to consider a more \"self-contained\" family.\n\n"
+    },
+    {
+      "time": "8 Nov 2008 — 3:46pm",
+      "content": "I use pretty much the same Unicode coverage as Adobe does in its \"Pro\" fonts (but not Cyrillic or Greek as they do with a few). Basically, most Western and Eastern European Latin-based languages. I haven't published anything yet outside of Latin-based scripts.\n\nYou can see the entire character set of Metallophile in this PDF:\n\n[http://www.ms-studio.com/FontSales/pdf/MetallophileSp8.pdf](http://web.archive.org/web/20150416053923/http:/www.ms-studio.com/FontSales/pdf/MetallophileSp8.pdf \"http://www.ms-studio.com/FontSales/pdf/MetallophileSp8.pdf\")\n\nAnd Proxima Nova's here:\n\n[http://www.marksimonson.com/fontspecimens/ProximaNovaOverview.pdf](http://web.archive.org/web/20150416053923/http:/www.marksimonson.com/fontspecimens/ProximaNovaOverview.pdf \"http://www.marksimonson.com/fontspecimens/ProximaNovaOverview.pdf\")\n\n"
+    },
+    {
+      "time": "8 Nov 2008 — 4:30pm",
+      "content": "I set type rather than design typefaces. Over the years, we've made a fair bit of money when publishers needed a Latin-based language set, where no font had the needed characters. Adobe helps out, their EULA allows their fonts to be modified as needed.\n\nThe only non-Latin alphabets I worry about -- the only ones where it would be nice to have both the Latin & non-Latin in the same typeface -- are Greek and Cyrillic. By all means include polytonic Greek, all the while remembering that the classical Greek period lasted over a thousand years, & not all is covered in Unicode.\n\nBut you delude yourself to think that \"most\" of Latin is covered by Latin Extended A. One of the vowels with an ogonek is in Latin B, as are the characters needed for Yoruba & Pan Nigerian, and probably some other African Languages. Thomas Phinney has pointed out that Tagalog has a wide audience. Few of the Native American languages are covered with just Latin A, including Apache, Navajo, Kiowa, and Lakota. Some can't be covered with any of A, B, and extended additional, but can with with either a \\*mark\\* or \\*ccmp\\* feature. (I believe \\*mark\\* isn't currently supported by Adobe, but it is coming.)\n\nAnyway, that's why I think it more important to cover languages than somewhat artificial codepoints.\n\n"
+    },
+    {
+      "time": "9 Nov 2008 — 3:48am",
+      "content": "Many thanks, Mark. I think Metallophile (and maybe even Proxima) does not include most of Latin Extended-B and the additional glyphs mentioned by Charles. That's what I was thinking about, since – in the end – I have no specific language audience in mind (for Latin), so I am quite torn between the idea of keeping the face self-contained and the idea of having a more thorough Latin coverage.  \nIt would be important to see which languages (of wider use) are covered by Latin Extended-B. May it be there's somewhere such a resource?\n\nI spoke of codepeages merely to rationalize my design approach, since I am a mess and I always tend to lose myself in details (i.e. spending hours to design an accent), so I have to find the right balance considering both language coverage and the typeface artistic framework.\n\n"
+    },
+    {
+      "time": "9 Nov 2008 — 5:18am",
+      "content": "Like Charles said, one should base the decision which characters to include in a font rather on language support than on Unicode ranges.\n\nThere are some resources about languages (or rather _orthographies_) and their required characters:\n\n[http://www.eki.ee/letter/](http://web.archive.org/web/20150416053923/http:/www.eki.ee/letter/ \"http://www.eki.ee/letter/\")  \n [http://www.evertype.com/alphabets/#1.2](http://web.archive.org/web/20150416053923/http:/www.evertype.com/alphabets/#1.2 \"http://www.evertype.com/alphabets/#1.2\")\n\nBut there's also a definition problem, because often it's not precisely clear which characters are really needed.\n\nTake, for example, German: Ask a German school kid and he'll probably tell you the alphabet consists of 26 letters. But what about ä, ö, ü and ß? That makes it 29, and is widely agreed to be sufficient for German. The eki.ee site adds à and é, so then we can write »Café« and »à la carte«, as well as André and René, which are common given names in Germany. But still Mrs Hoëcker and Mr Ruëtz aren't happy because they cannot write their surnames, which are proper German names, no foreign names btw. For historic texts you might want to add ſ (long s).\n\nNot to forget foreign names which might occur frequently depending on the kind of text that you are setting. Schools in Berlin would definitely need fonts for Turkish, Polish, Serbian, French, Croatian, Vietnamese (to name the biggest groups) to properly write the names of their pupils (non-Latin scripts would be transliterated) in German texts (actually they probably don't care).\n\n"
+    },
+    {
+      "time": "9 Nov 2008 — 6:05am",
+      "content": "Many thanks, Jens, pages of great interest.  \nAny of your observations comes as precious material…\n\n<cite>For historic texts you might want to add ſ (long s).</cite>  \nThis comes always out as an \"automatic\" design, when I take the effort to design the eszett/German double s, which is one of my favorite glyphs.\n\n"
+    },
+    {
+      "time": "9 Nov 2008 — 8:35am",
+      "content": "Jens,\n\nGREAT LINKS!!! Thanks!\n\nChrisL\n\n"
+    },
+    {
+      "time": "9 Nov 2008 — 12:24pm",
+      "content": "Jens -- really good considerations!\n\nOne remark about [www.eki.ee](http://web.archive.org/web/20150416053923/http:/www.eki.ee/): It is a brilliant collection, yet I remember that their database contains PUA codepoints which Adobe has used in some of their earlier fonts, like [this one for M/m with circumflex](http://web.archive.org/web/20150416053923/http:/www.eki.ee/letter/chardata.cgi?search=m+with+circumflex). The site does acknowledge this (see \"not an UCS character!\" on the page I refer to) and one should take the warning seriously and think twice before using such a codepoint. (And compare e.g. with Adobe's current practice.)\n\n"
+    },
+    {
+      "time": "10 Nov 2008 — 7:53am",
+      "content": "Now that we have Karsten I feel even more confident… :=)  \nWhat could happen if I use a Unicode value which is not standard?\n\nThis reminds me I have to post another question to see if I can try to set my own 'conventions' to assign Unicode values to non-Unicode glyphs (like the Small Capitals)…\n\n"
+    },
+    {
+      "time": "10 Nov 2008 — 8:00am",
+      "content": "_What could happen if I use a Unicode value which is not standard?_\n\nThe results will be unpredictable if the user changes the text set in your font to a different font. (By unpredictable results, I mean the glyph that appears in place of your non-standard coded glyph will be unpredictable, not that the computer might blow up or suddenly transform into a bowl of petunias.)\n\n"
+    },
+    {
+      "time": "10 Nov 2008 — 3:17pm",
+      "content": "<cite>This reminds me I have to post another question to see if I can try to set my own ’conventions’ to assign Unicode values to non-Unicode glyphs (like the Small Capitals)…</cite>\n\nShort answer is: Of course you can. That's what the Private Use Area ranges are for.\n\nThat said there are some organizations that have laid (unofficial, non-binding) claim on parts of the PUA for special purposes ( [MUFI](http://web.archive.org/web/20150416053923/http:/mufi.info/) and [Conscript](http://web.archive.org/web/20150416053923/http:/www.evertype.com/standards/csur/) being but a couple), as well as corporate assignments, like uniF8FF being used for the Apple logo.\n\nIt's been said many times on this site and elsewhere that you're not supposed to give unicode numbers to glyphs like small caps or ligatures and to address them solely through OpenType features, but some programs won't recognize those off-list characters without a unicode number.\n\n"
+    },
+    {
+      "time": "10 Nov 2008 — 6:00pm",
+      "content": "I am new here with little experience. Can a person please tell me in short language how to understand this subject? I use Macintosh System 7 for graphical purpose.\n\nAdvancing gratitude.  \nGui Yong\n\n"
+    },
+    {
+      "time": "10 Nov 2008 — 6:38pm",
+      "content": "I don't know if there is a simple way to explain it, but here is a link to a discussion in which that was attempted:\n\n[http://typophile.com/node/39726](http://web.archive.org/web/20150416053923/http:/typophile.com/node/39726 \"http://typophile.com/node/39726\")\n\nSystem 7.0 (1991) predates the first release of the Unicode standard, but System 7.5 (1995) and later support Unicode via QuickDrawGX. However, not many applications supported QuickDrawGX (and therefore Unicode).\n\n"
+    },
+    {
+      "time": "11 Nov 2008 — 7:44am",
+      "content": "Hi Gui, if your question becomes clearer (and I'd be curious to hear it) we may start a separate discussion, beside mine…\n\n"
+    },
+    {
+      "time": "11 Nov 2008 — 12:09pm",
+      "content": "I did A LOT of research before deciding which glyphs to include in the reworked fonts on my site.  \nThe result (based on -among other things- both eki and wiki information ;) is presented in this list of languages:\n\n[http://www.cheapprofonts.com/Languages.php](http://web.archive.org/web/20150416053923/http:/www.cheapprofonts.com/Languages.php)\n\nThe character set I ended up with is made up by:  \n- the Mac + Windows standard set  \n+ Latin Extended-A  \n+ 8 glyphs from Latin Extended-B  \n+ 12 Unicoded glyphs outside of those ranges  \n+ 8 glyphs without Unicode values  \n(A simple rundown can be found in the downloadable PDF Catalog ;)  \n= 65 Latin-based languages...\n\nEnough for my concept, but your mileage may vary ;)  \nSo, yes, I think a list of supported languages makes more sense for an enduser than codepage/unicode block information...\n\n"
+    },
+    {
+      "time": "11 Nov 2008 — 12:22pm",
+      "content": "Many thanks Roger, much appreciated.  \nBesides, your initiative looks commendable. I'd have not thought of it…\n\n"
+    },
+    {
+      "time": "11 Nov 2008 — 5:49pm",
+      "content": "Roger, would you care to comment on \\*why\\* you chose to support those particular languages?\n\nLike many such charts, it seems to focus on European languages, even quite obscure ones, over equally easy to support languages from the third world, even when the latter are spoken by 100x as many people. For example,Tagalog (22M as first language, 90M total), or Yoruba (25M people).\n\nOf course, it's easy to imagine one might sell more copies in Luxembourg than the Phillipines.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "12 Nov 2008 — 1:03pm",
+      "content": "Well, Thomas - my main concern was to not stray too far away from my knowledge area ;)  \nMy goal is to make very useable multilingual displayfonts, and so I had to know how to properly make the glyphs.\n\nI have previously done many customized fonts to cover northern and eastern european languages, so I felt very confident I could do proper letter and diacritic design for all Latin-1 and Latin Extended-A glyphs. Then I started looking into which languages would be covered by these glyphs, and found quite a few additional languages that would be covered by adding just a few additional composite glyphs. So I included those, too.\n\nThe reason I cover some obscure european languages is basically that their glyphs are covered by these two Unicode blocks and simple composited glyphs.  \nI don't know specifically the usage of e.g. Rhaeto-Romance, but my fonts have all the glyphs needed to write it, so I include it it my language list :)  \nThe Ibreve/ibreve glyphs (from the Extended-A block) are included, although their usage apparently are for cyrillic languages...\n\nMany african languages require modified letterforms (hooks and curves and loops and whatnot ;) and as I have no direct knowledge of how to properly design these (their history and how they are usually implemented) I chose to not include them. Because of their sometimes \"awkward\" letterforms they would also make kerning much more time-consuming, and all this extra time would work against my idea of low-cost fonts.  \nAND the Eng character used for african languages has a completely different design than the Saami Eng - I didn't want to muddle things up with that (as I live in Saami-speaking territory this is perhaps the most important reason for me :)\n\nAs for the asian coverage: well, I do have Tagalog covered but I may have it sorted wrong (under F for Filipino) - a result perhaps (as mentioned in the beginning) of not knowing enough about the language. But the glyphs themselves are pretty straight forward ;)  \n(I will probably have to move this entry to T for Tagalog and also call it Filipino/Pilipino ;)\n\nYoruba is a whole other kettle of fish: I did look into it, but the character set is full of non-Unicode encoded glyphs, and I found no conclusive information about their design and usage.  \nSame also for vietnamese: there would be too much additional work to learn and implement all the needed glyphs - all for covering a market I do not really know how to approach.\n\nI might expand the language coverage for the fonts I rework later, though - but as a start I have focused on languages where I KNOW how to properly design the glyphs and at least have some idea how to approach the markets. Which I will do more actively when I have built up a large enough library of fonts. :)\n\nMy, what a long post! ;)\n\n"
+    },
+    {
+      "time": "12 Nov 2008 — 1:39pm",
+      "content": "In fact, Jens' links are particularly interesting if you worry about transliteration of non-Latin languages. Thanks, again! :=)\n\n"
+    },
+    {
+      "time": "12 Nov 2008 — 7:46pm",
+      "content": "Covering African languages can indeed involve some problems; see\n\n[http://typophile.com/node/49307](http://web.archive.org/web/20150416053923/http:/typophile.com/node/49307 \"http://typophile.com/node/49307\")\n\nHaving said that, using the characters found in Unicode (and the composites that have to be made up) will cover the needs of many users of Yoruba and Hausa. We have run into authors that insist it must be <cite>this</cite> way -- say, a bar under a letter rather than a dot -- but the number diminishes as Unicode becomes more widely adopted. We recently had an author change her mind after first proof. We'd set bars under per her initial request, and she decided in first proof that the dot was becoming a standard, so we switched to that. Admittedly far easier for a typesetter to make these moves than a type designer.\n\nBut there will always be a move towards standardization and what is easy to achieve. For example, while Kiowa properly uses macrons below vowels, the use of the underscore is common, because it is easy. And one reason it is easy is because even with OpenType, few foundries fill out the combining diacriticals. Once that is done, I'd expect more & more people to use the macron below rather than the underline.\n\nSo one point might be to fill out the Unicode ranges for Combining Diacriticals and Spacing Modifiers -- Lord, even MS Word will use them, though not always place them correctly. But to cover a language with characters using multiple diacriticals not precomposed in Unicode requires ccmp or mark, and the latter is not universally supported.\n\n"
+    },
+    {
+      "time": "13 Nov 2008 — 6:19am",
+      "content": "<cite> So one point might be to fill out the Unicode ranges for Combining Diacriticals and Spacing Modifiers — Lord, even MS Word will use them, though not always place them correctly. But to cover a language with characters using multiple diacriticals not precomposed in Unicode requires ccmp or mark, and the latter is not universally supported. </cite>\n\nIs that a similar issue than the one we have in Biblic (and for poeatry) Hebrew?  \nI aske because I was talking of this with Israel in the Hebrew type area, and I still know almost nothing about \"Combining Diacriticals\"… :=(\n\nAmazingly interesting remarks you make about publisher's choices. Here in Italy it's often a luxury if they worry to buy a license for setting Greek in a typeface matching latin. Even big publishers sometimes use some shareware Greek, or worse… :=(\n\nThank you! :=)\n\n"
+    },
+    {
+      "time": "13 Nov 2008 — 10:31pm",
+      "content": "Ah, sorry I missed Tagalog there! And yes, doing African languages as a group gets challenging, but some of them are easy or at least easy-ish.\n\nBut it sounds like you did a lot of homework, and thanks for the explanation of how you came up with the character set. It's very interesting to me to understand how other folks have tackled the problem of character set definition....\n\nCheers,\n\nT\n\n"
+    }
+  ]
+}

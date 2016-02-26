@@ -1,0 +1,50 @@
+{
+  "id": "53382",
+  "title": "Exporting in FontLab Studio",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "could someone please help with this retard-question in fontlab studio\n\nhow do you export a font with several families? at the moment i've got seperate fontlab files for regular/bold, but how do i combine them into one .otf?\n\nfollow-up question: in file menu, what's the difference between  \n– generate font  \n– generate all  \n– generate suitcase  \n?\n\nps. what unicodes do i use for alternate characters?\n\nthanks for your help\n\n",
+  "author": "Agata_Wycichowska",
+  "time": "12 Jan 2009 — 10:01am",
+  "uid": "41330",
+  "comments": [
+    {
+      "time": "12 Jan 2009 — 10:07am",
+      "content": "oh, and where is the best place to export the font to,\n\nin the user font library, or macintosh HD library?  \nsuitcase freaks out if it's not in any official \"font\" folder\n\n"
+    },
+    {
+      "time": "12 Jan 2009 — 11:47am",
+      "content": "<cite>how do i combine them into one .otf?</cite>\n\nYou ... don't. An OTF file is not a font family, it's a single font.\n\nThere is a small workaround for 'family-aware' fonts, with the 'size' feature, but that has been poorly constructed and has led to errors in the past. Besides, no application supports it (perhaps InDesign CS4 does). Besides #2, you cannot add it with FontLab, you would need ADFKO for that.\n\n<cite>ps. what unicodes do i use for alternate characters?</cite>\n\nYou may think of anything. A rule of thumb I have seen in Adobe fonts is to let the user choose between selecting an alternate for a character (such as ornaments found under the bullet), and have it as alternate for 'regular' characters (i.e., 'A' is ornament #1, 'B' for ornament #2), but that option seems to be outdated already.\n\nUsing Unicodes in the private area would be okay, I guess.\n\n"
+    },
+    {
+      "time": "12 Jan 2009 — 1:00pm",
+      "content": "_how do you export a font with several families? at the moment i’ve got seperate fontlab files for regular/bold, but how do i combine them into one .otf?_\n\nAs Theunis points out, you can't make a single OTF file with several fonts in it, but, depending on the way you set up the name fields in your fonts, you can create associations between them so they show up in programs as one family. (See [Font Naming](http://web.archive.org/web/20140411212921/http:/www.typophile.com/wiki/Font%20Naming) in the TypoWiki.)\n\n_follow-up question: in file menu, what’s the difference between  \n– generate font  \n– generate all  \n– generate suitcase  \n?_\n\nGenerate Font: Generates a single TTF or OTF font file. (Some other formats, too, but mainly it's used for those.)\n\nGenerate All: Same as Generate Font, except for multiple fonts at one time. Can include all fonts that are open in FontLab or just some of them.\n\nGenerate Suitcase: For making old style Mac PostScript and TrueType fonts. These only work on Macs.\n\n_ps. what unicodes do i use for alternate characters?_\n\nThese should either be left unencoded (no Unicode number) or given Private Use Area (E000-F8FF) codes. There are no standards for this area by definition, so you can use them any way you want. They will be unlikely to match glyphs in other fonts that use the PUA, but that's the nature of PUA. Adobe and other recommend not encoding alternate characters, but there are some reasons for doing so.\n\n"
+    },
+    {
+      "time": "13 Jan 2009 — 3:17am",
+      "content": "ok thanks so much for yos help!\n\n.otf – duh for me! i understand now it's a font not a family\n\ni'll look at font naming on typowiki – thanks for the link\n\nbut i still don't understand about alternate unicodes – how do i make the alternate appear in glyph window \"alternates for selection\" in indesign, if it's un-coded?\n\nthanks!\n\n"
+    },
+    {
+      "time": "13 Jan 2009 — 2:29pm",
+      "content": "_but i still don’t understand about alternate unicodes – how do i make the alternate appear in glyph window “alternates for selection” in indesign, if it’s un-coded?_\n\nYou can use the \"aalt\" OpenType feature for that, [see here](http://web.archive.org/web/20140411212921/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#8.a) for an example of the required feature code.\n\n"
+    },
+    {
+      "time": "14 Jan 2009 — 4:06pm",
+      "content": "<cite>... if it’s un-coded ...</cite>\n\nIn addition to Jens, OpenType features are not Unicode dependent; they work with 'raw glyphs' instead. But assigning Unicodes to the alternates has the advantage they are visible and can be entered into non-OpenType aware applications. Also, you can use Unicode characters in the InDesign Search & Replace fields, but non-encoded glyphs have to be searched and replaced with the Search For Glyphs (CS3+) function (which does that and nothing more).\n\n<cite>Adobe and other recommend not encoding alternate characters, but there are some reasons for doing so.</cite>\n\nFont switching is one, but it's hardly a valid point if you're talking about manually selected alternates. Any more? I remember the original Adobe specification of assigning 'regular' characters to ornaments using aalt (? memory) was removed somewhere in time.\n\n"
+    },
+    {
+      "time": "15 Jan 2009 — 10:28am",
+      "content": "yes it worked – thanks everyone!\n\nunicodes: still confusion but i'll read about it in the incredibly complicated adobe thread about aalt\n\nall very interesting!\n\n"
+    },
+    {
+      "time": "18 Jan 2009 — 9:47am",
+      "content": "Actually you can hav one font with sevral familiy weights.  \nbut this would be an awkward way of implementing weights.\n\n1. With copy\\append in FL make as meny as glyfs are needed for all weights.\n\n2. now in volt you would simply add sub lookups as  \nLight  \nRegular  \nBold  \nBlack\n\nand attach them to Stylistic set Features  \n(SS01-SS02 Ect' Ect')\n\nSub Lookup [Light]  \nARegular -\\> Alight  \nABold -\\> ALight  \nABlack -\\> ALight\n\nEct' Ect'\n\nLight\n\nBut this is not a way to do things :)\n\nWhy not Do this????\n\n1. Single file very large  \n2. only last set will be activated - if enabled SS1+SS2+SS3  \nonly 3 will be activated becaus they are applied by their sequence  \n3. not standart\n\nWhy yes do this?  \nSS features can be attached as styles  \nu cant sub or pos between 2 weights, but you can if they are all in one file.\n\ncreazy thought but doable :)\n\n"
+    },
+    {
+      "time": "20 Jan 2009 — 9:59am",
+      "content": "Another good reason not to do this is that the normal \"bold\" and \"italic\" from style menus or buttons would not work with it. Also, support for Stylistic Sets is rather lacking at this time, unfortunately.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "id": "48198",
+  "title": "Is hinting dying?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "[Wikipedia (in the TrueType article):](http://web.archive.org/web/20150123091152/http:/en.wikipedia.org/wiki/TrueType)\n\n> Increasingly, new approaches to screen rendering have reduced the importance of extensive TrueType hinting. Apple's rendering approach on Mac OS X ignores almost all the hints in a TrueType font, while Microsoft's ClearType ignores many hints, and works best with \"lightly hinted\" fonts.\n\nWill font rendering technologies eventually render hinting obsolete?\n\n",
+  "author": "pdxuser",
+  "time": "7 Aug 2008 — 9:40pm",
+  "uid": "15738",
+  "comments": [
+    {
+      "time": "8 Aug 2008 — 6:47am",
+      "content": "Hinting for low screen resolution will always be necessary. However, it seems that the process of finding out what to hint is moving towards the type _renderer_, rather than the _designer_ (as seen in, for example, FreeType).\n\nI can think of various good reasons for this. A system-local hinting engine can consider local hardware issues such as resolution and pixel representation -- up to the order of RGB pixels on an LCD screen. I seem to remember FreeType's hinting works on both horizontally and vertically aligned LCD RGB pixels, where ClearType is focused onto horizontal alignment only. There's no way all this (excluding!) hinting can be built into every font.\n\nAnother good reason is _consistency_: some fonts are very well hinted, others not at all. Using the type render engine to calculate hints means every font gets an equal chance to look good. (Or bad.)\n\nA final reason is, the two main hint types of TrueType and Type 1 are mutually exclusive. The designer has to pick one. FreeType can work directly with the 'raw curves'.\n\n(Note to everyone: this is all typed without resorting to manuals, web pages, and logn term memory storage. Feel free to argue.)\n\n"
+    },
+    {
+      "time": "8 Aug 2008 — 7:41am",
+      "content": "Note the use of the word extensive in the Wikipedia entry. Hinting is still being done, but thanks to better rendering and autohinters there’s (relatively) little need for the extensive manual hinting that was common in the recent past.\n\n"
+    },
+    {
+      "time": "8 Aug 2008 — 8:16am",
+      "content": "I didn't check the actual wiki page, but I suspect\n\n<cite>Increasingly, new approaches to</cite>\n\nand\n\n<cite>ignores almost all the hints</cite>\n\nand\n\n<cite>ClearType ignores many hints</cite>\n\nare tagged with \"vaguerism\" tags.\n\n"
+    },
+    {
+      "time": "8 Aug 2008 — 8:40am",
+      "content": "\\>However, it seems that the process of finding out what to hint is moving towards the type renderer, rather than the designer (as seen in, for example, FreeType).\n\nThat's where we want to be.\n\nIf you go back to 1989, everyone was still thinking in terms of basic type libraries of only a very few hundred fonts. Even so, the TT developers' claim they would have parity with the Adobe library in a year proved delusory, and let's not forget the whole thing came about because Adobe was charging exorbitant licensing fees.\n\nIn those days, when nobody thought of tens of thousands of fonts, it was tenable for Apple and MS to think of putting the hinting burden primarily on the font, rather than the rasterizer. But Adobe's philosophy, to put the burden on the rasterizer rather than the font, was always, one hoped, going to win out in the end -- otherwise independent type designers would go mad. It looks like TT is embracing this, thanks to better and better anti-aliasing. Nevertheless, even in ClearType, a tiny wrong instruction can wreak havoc, as shown by the error in Constantia revealed in a thread here some time ago.\n\nWhat it's looking like is that rasterizers are going to be doing a better and better job, but that hand-hinting will always offer opportunities for the best possible output -- unfortunately, of course, such hinting is always tied to a particular rasterizer. Could there ever be universal rasterizer?\n\n"
+    },
+    {
+      "time": "15 Aug 2008 — 5:06am",
+      "content": "Every now and then, it's just better to edit the wiki.\n\n"
+    },
+    {
+      "time": "16 Aug 2008 — 11:26am",
+      "content": "David, the most recent changes in the Wikipedia article only amount to this:\n\n'Increasing resolutions and new approaches to screen rendering have reduced the requirement of extensive TrueType hinting. Apple's rendering approach on Mac OS X ignores almost all the hints in a TrueType font, while Microsoft's ClearType ignores many hints, and according to Microsoft, works best with \"lightly hinted\" fonts.'\n\nHave you had a go or are you planning to ?\n\n"
+    },
+    {
+      "time": "19 Aug 2008 — 2:51am",
+      "content": "\"Have you had a go or are you planning to ?\"  \nthe top of the thread is the old one, the wiki now is the new one.\n\nCheers!\n\n"
+    }
+  ]
+}

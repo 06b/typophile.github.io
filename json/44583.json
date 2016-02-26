@@ -1,0 +1,50 @@
+{
+  "id": "44583",
+  "title": "assign a glyph to a keystroke in fontlab",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm working on a font that is more or less a dingbat font. There are going to be a lot of glyphs, and I need to put them in a specific order on the keyboard.\n\nis there a way in Fontlab to specify what strokes on the keyboard are assigned to a glyph (ie. I have a glyph that I want to be accessed by typing option-u. can I specify that somehow, or do i just need to place the glyph in the corresponding cell in fontlab)?\n\nI've searched through the manual and can;t seem to find the answer.\n\nthanks!\n\nJonathan\n\n",
+  "author": "jonathanhughes",
+  "time": "23 Apr 2008 — 9:39am",
+  "uid": "25245",
+  "comments": [
+    {
+      "time": "23 Apr 2008 — 10:24am",
+      "content": "You can't do that in FontLab. The assignment of keys to specific unicodes is the responsibility of the keyboard driver/keyboard layout. You could make a custom keyboard layout for use with your font using [Ukulele](http://web.archive.org/web/20131107215750/http:/scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=ukelele&_sc=1) though, but you still have to put your glyphs in the right slots in FontLab first.\n\nJens\n\n"
+    },
+    {
+      "time": "25 Apr 2008 — 8:26am",
+      "content": "Thanks!\n\nDoes anyone know of a chart that shows unicode numbers for specific Mac key combinations? I've googled, but haven't found anything that seems to be what I need. Unless there's a simpler way to do what I need to do (assign glyphs to the keys so they follow a specific sequence).\n\nJonathan\n\n"
+    },
+    {
+      "time": "26 Apr 2008 — 1:49am",
+      "content": "It all depends which keyboard layout the user has chosen. Don't hack the encoding by giving your dingbats the unicode numbers for other characters unless you're the only person who is ever going to be using it. To assign particular glyphs to particular keystrokes, create a special keyboard layout for your font. If your glyphs don't have unicode values, you can always put them in the PUA.\n\n"
+    },
+    {
+      "time": "27 Apr 2008 — 2:44pm",
+      "content": "I believe page 100 of the FLStudio5 Mac manual answers your question.\n\n"
+    },
+    {
+      "time": "8 May 2008 — 7:50pm",
+      "content": "On a Mac:  \n\\* when the user chooses the U.S. English keyboard layout, pressing Option-U will produce ¨ and pressing Option-E will produce ´,  \n\\* when the user chooses the Polish keyboard layout, pressing Option-U will still produce ¨ but pressing Option-E will produce ę,  \n\\* when the user chooses the Czech keyboard layout, pressing Option-U will produce nothing while pressing Option-E will produce ę,  \n\\* when the user chooses the French keyboard layout, pressing Option-U will produce º and pressing Option-E will produce ê,  \n\\* when the user chooses the Russian keyboard layout, pressing Option-U will produce ў and pressing Option-E will produce ё.\n\nAs you see, different keyboard layouts produce different characters. You might produce a font that would have a \"handy\" character mapping when used with a particular keyboard layout (Swedish, German, Czech, U.S. English or whatever your preferred layout is) but most likely, your \"handy\" character mapping will be useless for users of keyboard layouts other than yours.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "8 May 2008 — 10:00pm",
+      "content": "If you restricted your font to the ten numbers (which presumably occur in the usual order irrespective of keyboard language), then you could have four sequences of ten symbols in each font (plain, shift, option, and option-shift).\n\nOther than that, just use the North American keyboard, which covers a fair-sized constituency.\n\n"
+    },
+    {
+      "time": "11 May 2008 — 6:56pm",
+      "content": "Thanks for all the assistance, everyone.\n\nNick, your suggestion sounds like what I ended up doing.\n\nMy original post probably should've been more clear about what I was trying to do. I wanted to create a font that was all the numbers 1-99 each in a circle. I know there are existing fonts that are like this, but I thought it would be a fun challenge, and a way to get to know fontlab better. I've used the freeware font Combinumerals in the past, but was always annoyed by the way the glyphs were laid out on the keys. So I wanted to make sure that mine was in a logical order. I was hoping that I could assign a keystroke to a glyph, but since that's not possible, I just figured out where everything was. So everything seems to be cool now -- the QWERTY row gives you 10-19, the ASDFG row gives you 20-21, shift-QWERTY gives you 40-41, and option-QWERTY gives you 70-79, etc. etc., etc.\n\nI just have a little more tweaking to do, and it'll be done.\n\nthanks!\n\nJonathan\n\n"
+    },
+    {
+      "time": "6 Jun 2008 — 6:39pm",
+      "content": "\\> So everything seems to be cool now — the QWERTY  \n\\> row gives you 10-19, the ASDFG row gives you  \n\\> 20-21, shift-QWERTY gives you 40-41,  \n\\> and option-QWERTY gives you 70-79, etc. etc., etc.\n\nOf course this only makes sense if the user is using a U.S. English keyboard. On the German keyboard, the top row is QWERTZ, not QWERTY, while on the French keyboard, it's AZERTY, not QWERTY etc. etc., etc.\n\nI'm not sure if forcing the user to install a particular keyboard layout that he's never used before, to type in some characters, is very user-friendly. Also, keep in mind that once the user generates a PDF with numbers typed in this way, the underlying text will not be searchable and will yield nonsense.\n\nI think you'd be better off (at least as a complementary solution) with contextual alternates, initial, final and medial forms, and stylistic sets.\n\nAdam\n\n"
+    },
+    {
+      "time": "7 Jun 2008 — 5:51pm",
+      "content": "Thanks for the tips. This font was mainly for my own use, so I wasn't too concerned about it being useful for anyone other than me. Regardless, i released it into the wild for anyone who may find it useful:\n\n[http://typophile.com/node/45939](http://web.archive.org/web/20131107215750/http:/typophile.com/node/45939 \"http://typophile.com/node/45939\")\n\n"
+    }
+  ]
+}

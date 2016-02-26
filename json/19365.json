@@ -1,0 +1,54 @@
+{
+  "id": "19365",
+  "title": "newbie question: adding opentype feature (onum)...",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "OK, so I have a font with all the lc and uc, lining numerals and old-style numerals designed. Lining numerals have their usual names, and I named the old-styles so that they have the “.onum” suffix (e.g. “one.onum”).\n\nHow do I go about implementing an open type feature for the old style numerals? I’d assume that I go to the open type panel, hit “+”, and the new “xxxx” feature appears. But what next? When I try renaming the “xxxx” feature so that it says:\n\nfeature onum {  \n sub by ;  \n} onum;\n\nI get compile errors. Where & how do I add the numbers? I was checking the FL manual, but I’m not getting far with it. Can somebody point me to any resoruce or explain how adding an OT feature such as old-style numerals works in a nutshell?\n\nI’m using FL 4.6 on a Mac  \nThanks\n\n [‹ Batch Pagination Programs - why?](http://web.archive.org/web/20070808060537/http:/typophile.com/node/19434 \"Go to previous forum topic\") [how to improve kerning and letterspacing in font lab ›](http://web.archive.org/web/20070808060537/http:/typophile.com/node/17995 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20070808060537/http://typophile.com/user/1393\" title=\"View user profile.\">boole</a>",
+  "time": "<br>",
+  "uid": "1393",
+  "comments": [
+    {
+      "time": " 19.Apr.2006 5.23pm",
+      "content": "Have a look at Minion Pro’s feature file  \n [http://www.adobeforums.com/cgi-bin/webx?50@@.3bb58628](http://web.archive.org/web/20070808060537/http:/www.adobeforums.com/cgi-bin/webx?50@@.3bb58628 \"http://www.adobeforums.com/cgi-bin/webx?50@@.3bb58628\")\n\n"
+    },
+    {
+      "time": " 19.Apr.2006 6.48pm",
+      "content": "The code that is inserted into the OpenType panel when you hit the “+” button is a stub—it’s incomplete and you are expected to complete it. You got halfway there by changing “xxxx” to “onum,” but you’ve got to finish the job. “sub by ;” needs to say something like “sub one by one.onum ;”. This is what is called a one-to-one substitution in OpenType feature speak. What it means is that the normal “one” will be substituted by “one.onum” when the user asks for old style numerals. You have to add a line like this for every number. It should look something like this:\n\n`feature onum {\nsub one by one.onum ;\nsub two by two.onum ;\nsub three by three.onum ;`\n\nand so on, finishing up with:\n\n`} onum;`\n\nIt can get more complicated than this—for instance if you have both proportional and tabular figures—but that’s basically it. (It’s all covered in the manual, by the way.)\n\n"
+    },
+    {
+      "time": " 20.Apr.2006 2.11pm",
+      "content": "Or make a class for num and a class for onum and sub the class.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 20.Apr.2006 2.14pm",
+      "content": "Here is the code:\n\nfeature onum { # Old style numerals  \n sub @num by @onum;  \n} onum;\n\n"
+    },
+    {
+      "time": " 22.Apr.2006 10.04pm",
+      "content": "Thanks a lot everyone. Figured it out. I would have had it earlier if I had only scrutinized the manual :).\n\nAnd subing classes seems like THE way to go.\n\nI posted Kaled Sans for the cirtique over [in the neighborhood](http://web.archive.org/web/20070808060537/http:/typophile.com/node/19445). You can see my old style’s feature at work [in this image](http://web.archive.org/web/20070808060537/http:/ebukva.cidamon.com/type/Picture4.png).\n\nNow, one more question: Are there advantages to doing the kerning as an OT feature as opposed to the kerning table in metrics? Since I’m jsut starting to kern, should I just go for the OT kern feature?\n\nEmir\n\n"
+    },
+    {
+      "time": " 23.Apr.2006 7.56am",
+      "content": "That depends. The spec for PostScript-flavored OT (CFF) fonts says that a kerning table is not supported, meaning you must use class kerning. TrueType-flavored OT (TTF) fonts may have either or both. In fact, FontLab will let you include either or both in both flavors of OT fonts.\n\nThat said, class kerning is the way to go. It takes a bit more planning, but it’s more efficient and thorough.\n\n"
+    },
+    {
+      "time": " 23.Apr.2006 9.17am",
+      "content": "It seems there was another aspect to your question:  \nFor direct visual control, you should use the Metrics Window for kerning. This also allows you to use classes. Then — whether you used classes or not — you go to the Metrics Assistance panel and hit the “update kern feature” button which generates a kern feature for you.  \nThis way, your plain kerning table and the kern feature are (or at least: could be) equivalent for one is generated from the other.\n\n"
+    },
+    {
+      "time": " 24.Apr.2006 6.14pm",
+      "content": "I think you need both because some apps don’t read the opentype kern feature and need the table. That is why I think Karsten’s solution is best. It gives you both and they are the same. Also, you can see it well in the metrics window as you do it.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 24.Apr.2006 8.55pm",
+      "content": "Here’s the deal, though: With CFF fonts, the old-style kern table will never get used. OT-savvy apps will use the kern feature; non-OT-savvy apps get a synthesized kern table based on the kern feature. So, even though you _can_ include a kern table in an OT CFF font using FontLab, it will simply be taking up space.\n\nIncidentally, there was recently a discussion about this on the OpenType list. Adam Twardoch was advocating that kern tables should be supported in OT CFF fonts just as they are in OT TTF fonts. Judging from the discussion, it doesn’t sound like it will likely happen.\n\n"
+    },
+    {
+      "time": " 25.Apr.2006 4.42am",
+      "content": "<cite>Here’s the deal, though: With CFF fonts, the old-style kern table will never get used. OT-savvy apps will use the kern feature; non-OT-savvy apps get a synthesized kern table based on the kern feature.</cite>\n\nOh yes, I only addressed one question, how to get consistent results among kern table & kern feature.\n\nYou are right, according to the current specs, only the kern feature should be present in PS-flavored OTFs. Personally, I stick to this. Too much redundant information in OTFs already ... (Also, in an earlier test I had the impression that some application ignored kerning completely if both table and feature were present, but forgot the details and cannot — nor do I want to — reproduce this.)\n\n"
+    }
+  ]
+}

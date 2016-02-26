@@ -1,0 +1,38 @@
+{
+  "id": "41090",
+  "title": "Character preview in Adobe CS3",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "A while back, I did some simple OT development on a font that a friend of mine was commissioned to create based on the writing of a designer. He got that font back as well as a few others (ones I had nothing to do with) for minor fixes. Since he isn’t as yet able to work with OT as yet, I agreed to do all the fixes. One of the complaints they listed was that the fonts were “too small”. At this point I haven’t been able to even communicate with the art director, but I know they are comparing it to another font with shorter ascenders/descenders. They also said this caused the preview in the character window to be too small to read. I know they are using InDesign (and WORD as well), but not sure yet which version.\n\nSo I started with one of the fonts that I didn’t originally work on, did the changes and increased the size. Before I loaded it I checked the preview in the character window of InDesign CS3. It showed small and hard to read. After replacing with the new version (via Font Explorer) I expected the bigger size to show up, but it did not. I opened Illustrator and noticed it displayed the bigger size in preview. This is compared to the one that I developed next to it in the menu. I did find that you can increase the preview size in the preferences, but I’m wondering if Adobe apps keep some sort of preview cache that doesn’t necessarily update itself.\n\nAny ideas how to get a bigger character preview to come in properly? I should note that I don’t have a great deal of experience with InDesign.  \nStephen Rapp\n\n [‹ What may be the problem?](http://web.archive.org/web/20080312190454/http:/www.typophile.com/node/41024 \"Go to previous forum topic\") [indesign question ›](http://web.archive.org/web/20080312190454/http:/www.typophile.com/node/41040 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080312190454/http://www.typophile.com/user/14650\" title=\"View user profile.\">Stephen Rapp</a>",
+  "time": "<br>",
+  "uid": "14650",
+  "comments": [
+    {
+      "time": " 18.Jan.2008 6.55pm",
+      "content": "Font “previews” are all ostensible the same... the preview is a set size for ALL the fonts (unless the application has some feature to change those sizes).\n\nSome fonts specify an irregular UPM value in relation to their Ascender/Descender values. The UPM determines a font’s “scale”... if your UPM is 1000, then there are 1000 “units” per 1-point size. If your Ascender value is 700, and your descender value is 300, then you font should measure exactly to the point size (a 12-point setting would measure exactly 12 points from the top of an ascender to the bottom of a descender).\n\nBut a lot of fonts go “over” or “under” their Ascender/Descender values... I have seen a couple that have a UPM of 1000 but have an Ascender of over 2000! That means they look TWICE their size! Some fonts ignore limits altogether, so they clip off in some applications.\n\nYou want to increase the size of your glyphs relative to the UPM.\n\nGood discussion HERE: [http://www.typophile.com/node/19130](http://web.archive.org/web/20080312190454/http:/www.typophile.com/node/19130 \"http://www.typophile.com/node/19130\")\n\n"
+    },
+    {
+      "time": " 18.Jan.2008 7.25pm",
+      "content": "Thanks for the link, Scott.  \nWhat I’m seeing in the font menu is the name in a standard face, and next to that a sample in the script of choice. These vary in size depending what the font is like.\n\nI do understand about the UPM values. The fonts were originally made a bit smaller because of the ascender/descender lengths, but I enlarged them 150%. I didn’t want to go much bigger so as not to run into problems of clipping or excessively clashes at default leading. It seems to me that InDesign doesn’t recognize the difference in the font menu preview. I don’t know much about the inner workings of InDesign. At my day job we still use Freehand which has an uncanny way of holding onto old data that you might not want it to, especially regarding font updates. In Freehand a metrics problem that was fixed will sometimes come right back in. Retyping the glyphs will sometimes fix that.\n\nStephen\n\n"
+    },
+    {
+      "time": " 18.Jan.2008 8.37pm",
+      "content": "For displaying the Font sample and the glyphs in the Glyph palette, InDesign probably uses the font’s bounding box to determine how much it needs to scale down the preview image to fit all the glyphs. If the difference between the largest and the smallest glyph in the font is big, the smaller glyphs will be displayed really small (and often unintelligibly) because InDesign is trying to fit the bigger glyphs. You can clearly see this happening with Bickham Script Pro (below).\n\n ![](http://web.archive.org/web/20080312190454im_/http:/www.typophile.com/files/ID_bbox_4804.png)\n\n"
+    },
+    {
+      "time": " 18.Jan.2008 11.26pm",
+      "content": "Sorry. I think I’m confusing everybody. By preview I mean the character palette as in this pic.\n\nStephen\n\n ![](http://web.archive.org/web/20080312190454im_/http:/www.typophile.com/files/preview_5505.jpg)\n\n"
+    },
+    {
+      "time": " 19.Jan.2008 12.12am",
+      "content": "I’ve wondered about this as well. I have a couple lighter weight fonts that look very insignifcant (comparitively) when scrolling through the character palette but it seems a bit much to modify the font (increase the scale) just for the possibility to have it look slightly better (bigger, clearer, bolder) in the character palette scroll…\n\n"
+    },
+    {
+      "time": " 19.Jan.2008 4.22am",
+      "content": "\\> _Sorry. I think I’m confusing everybody. By preview I mean the character palette as in this pic._\n\nI understood what you meant, that’s why I wrote _“For displaying the **Font sample** and the glyphs in the **Glyph palette** [...]”._ Your image refers to the first location and mine to the second. I illustrated the explanation with a screenshot of the Glyph palette, but I could as well have used the image below.\n\n ![](http://web.archive.org/web/20080312190454im_/http:/www.typophile.com/files/bickham_fontMenu_4658.png)\n\n"
+    }
+  ]
+}

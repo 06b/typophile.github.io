@@ -1,0 +1,86 @@
+{
+  "id": "17316",
+  "title": "Drawing with beziers",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "There is quite a lot written on the form of letters — structures, balances, styles etc etc, but seemingly very little written on the actual digital construction of the forms themselves. It seems to me that when you get your head around general principles of letters, you’re expected to bumble through the digitalisation process, working out bezier principles through trial and error. Now I’m not saying there is anything wrong with this process per se — observing how others have done it, and trying yourself. But, it just doesnt seem there is enough documented on this subject. I can only really say that leslie carbarga’s font and logo lettering bible is all I’ve come across that touches on this subject — and even this isn’t all that helpful. I could be looking in all the wrong places of course?\n\n",
+  "author": "dux",
+  "time": "15 January, 2006 - 6:07pm",
+  "uid": "2193",
+  "comments": [
+    {
+      "time": " 15 January, 2006 - 6:44pm",
+      "content": "If you don’t like beziers that much, draw it out first, then trace in vector prog. or font prog. It’s pretty much trial and error. Lots of error. It’ll start coming to ou, but it takes some time.\n\n"
+    },
+    {
+      "time": " 16 January, 2006 - 2:58am",
+      "content": "I’ve got nothing against beziers eric, and whether I draw it out first, or go at the outlines right off the bat are besides the point. At some stage, you’ll still need to play with beziers, and as you know there are better ways of drawing with them than others. Surely there are some sources of information in this area?\n\n"
+    },
+    {
+      "time": " 16 January, 2006 - 8:09am",
+      "content": "Great question, dux.\n\nThe Fontlab manual for 4.6 was an index of functions, rather than an explanation of how to use the functions in drawing and production. The new manual for 5.0 I am just starting to look at, and it seems to be quite a bit better written, but still an index of functions.\n\nLeslie Cabarga’s ‘Learn Fontlab Fast’ is essential reading as it starts to explain the ‘How to’ of using the functions. —Do you know this book?\n\nStill, it is only a start. The “How to” Section here in the Typowiki has a lot of good stuff also, thanks to experienced pros like John Hudson and David Berlow, who have written stuff in threads that have been posted there.\n\nHere are a couple of things I have gleaned from Typophile or by trial and error or elsewhere, confirmed on Typophile.\n\n**Task** : Revising glyphs to get ‘best version.’  \n**How to** : Paste the existing glyph to mask before starting revisions. That way you know what you are changing, and can easily go back selectively, and not only by ‘undo’. I put the ‘mask’ tool bar on the desk top so it is instantly accessible. Also, revise in context. Have the preview window open, big enough to see the curves but small enough to see the context of a number of side-by-side glyphs.\n\n**Task** : Smoothing out ‘bumps’ and fixing awkward curves.  \n**How to** : Make use of the shift key. With the shift key down, if you click and hold on a non-selected bezier node you can slide it while keeping the bezier handle points fixed. This sometimes magically takes out bumps, where moving the handles around trying to do the same thing will just drive you crazy. Also, with the shift key down clicking on a non-selected handle point while enable you to drag the handle point while keeping the handle the same angle and the node fixed. Being able to move either the node while keeping the handles fixed or visa versa really gives you a lot more control in fixing curves. You can, for example, first take out the lump moving the node, then fix the resulting curve by moving the handles.\n\nThere are no doubt more and better ways for these two tasks, and for sure a lot more good guidelines for other tasks in drawing and production; I would love to learn other people’s techniques on these and other tasks. The best could go to the Typowiki ‘How to’.\n\n"
+    },
+    {
+      "time": " 16 January, 2006 - 9:55am",
+      "content": "Luke,\n\nHere are some axioms that can help you get better-quality outlines:\n\nUse the fewest number of points (segments) to achieve your desired outline.\n\nHowever, do not cheat the design by skimping on points where they are necessary.\n\nPlace points on the extrema (top, bottom, left, right) of any curve. Those may be all you need for certain shapes. The points on extrema help rasterizers align letters with their neighbors via hints.\n\nDo a lot of digitization in the environment (software) you expect to use primarily. Though Illustrator and FontLab employ beziers, the behavior of certain tools in Illustrator is not as useful for letter design as the type drawing tools in FL.\n\nIf you follow the above guides, and spend time digitizing, you will see there’s not much to document.\n\n"
+    },
+    {
+      "time": " 16 January, 2006 - 11:10am",
+      "content": "\\>Place points on the extrema (top, bottom, left, right) of any curve.\n\nAh, that brings up an important question. This rule about extrema is often said, but also often broken. For example, if you open up Adobe Garamond Pro, and turn on ‘font audit’, you will see that practically every serif is drawn without an extremum, and is flagged for possible correction.\n\nI find it hard to believe that Slimbach doesn’t know what he is doing, and I think I read somewhere that defining the extrema is important for the stems and arcs, but not for small terminals, such as that on the e, which are not normally hinted anyway, I believe.\n\nCan some of you tech mavens clarify when putting points on extrema is important and when not?\n\nFor me, sometimes I haven’t been able to make some convex curves at terminals look good with nodes placed at the extrema. Concave curves seem to be more amenable to accepting the extrema.\n\n"
+    },
+    {
+      "time": " 16 January, 2006 - 11:18am",
+      "content": "\\> I find it hard to believe that Slimbach doesn’t know what he is doing…\n\nHe does.\n\nsee Adobe Type 1 Font Format (pages 72-78)\n\n"
+    },
+    {
+      "time": " 16 January, 2006 - 11:48am",
+      "content": "Thanks David.  \nDoing a search based on the name you give, I found [this document.](http://web.archive.org/web/20060210094110/http:/partners.adobe.com/public/developer/en/font/T1_SPEC.PDF) It says on p. 35, “It is not necessary to place an endpoint at extremes of very small curves such as the tips of curved serifs.” I am now guilt-free about leaving them off sharp convex curves!\n\n"
+    },
+    {
+      "time": " 17 January, 2006 - 4:22am",
+      "content": "Hey guys —\n\nGreat feedback. I’m sure lots of people will find this as helpful as I do. I’m aware of learn fontlab fast. I think I read it about 10 times before even applying the tips and tricks. The extrema rule exception is particularly interesting. I suppose I’m always trying to make my shapes as smooth and beautiful as possible, but there are times when creating uglier forms is necessary — such as a really solid book face. I guess this is just like not skimping on points to stay true to your shapes — if you need to break the extrema rule to achieve a shape, that’s what you have to do.\n\n"
+    },
+    {
+      "time": " 17 January, 2006 - 6:12am",
+      "content": "“I could be looking in all the wrong places of course?”  \n1. Find font by designer/foundry of good reputation.  \n2. Get a font.  \n3. Open it in font design tool.  \n4. Examine each shape, and see how the designer got it.  \n5. Loop forever.\n\n“Place points on the extrema (top, bottom, left, right) of any curve”  \nMaybe, when you are producing it, but Don’t do this with an Italic when you are designing it.\n\n"
+    },
+    {
+      "time": " 17 January, 2006 - 9:28am",
+      "content": "\\> there are times when creating uglier forms is necessary — such as a really solid book face.\n\nIMHO, hpp is wrong on this one. Admittedly, the most elegant shape for a letter is often not an option in a text face, because of the demands of limited space and small optical size. But “ugly:” except for maybe 6pt, not necessary, and a liability.\n\n"
+    },
+    {
+      "time": " 22 January, 2006 - 8:22pm",
+      "content": "Moye’s old book covered the basics really well.\n\n\\> Don’t do this with an Italic when you are designing it.\n\nAnother thing you don’t do until the end but you really should do at the end is put explicit inflection points on things like the spine of an “s”. These are the sort of “Level 2” guidelines that are indeed hard to unearth.\n\n\\> hpp is wrong on this one\n\nThat’s “hhp” to you, mister! ;-)\n\nThe idea I’ve put forth that a “real” text font needs  \nto have a certain ugliness needs the elaboration that  \nthe idea of “ugly” is pretty hazy. Hey, I’m not even sure  \nexactly what it means. But I do know there’s something  \nthere - and it’s the difference between great and Real.  \nBut in any case this is not directly relevant to the  \nquestion at hand.\n\nBTW, Luke:  \n1) Where did you get that idea? William seems  \nto be thinking from me. But I know it’s actually  \nnot entirely original on my part - although I do  \nthink it hasn’t been made explicit and forceful  \nbefore/elsewhere, that I know of.  \n2) Nice site.\n\nhhp\n\n"
+    },
+    {
+      "time": " 22 January, 2006 - 8:37pm",
+      "content": "I missed this:  \n\\> except for maybe 6pt, not necessary, and a liability.\n\nHmmm, what’s the difference between 6 and 9?…\n\nhhp\n\n"
+    },
+    {
+      "time": " 22 January, 2006 - 9:12pm",
+      "content": "\\>what’s the difference between 6 and 9?\n\nPeople can barely read 6pt lower case, I think. I suspect you have to distort characters a lot just for minimal legibility. Biblion is the example I was thinking of. Some ugly stuff, but I guess it works.\n\n"
+    },
+    {
+      "time": " 22 January, 2006 - 9:22pm",
+      "content": "\\> I suspect you have to distort characters a lot\n\nSo then wouldn’t you distort 9 point a little?…\n\nhhp\n\n"
+    },
+    {
+      "time": " 22 January, 2006 - 9:26pm",
+      "content": "\\>distort 9 point a little?\n\nA little ain’t ugly.\n\n"
+    },
+    {
+      "time": " 22 January, 2006 - 9:51pm",
+      "content": "Not even a little bit ugly? :-)  \nCome on, William, let’s see the magic that is concession! :-\\>\n\nhhp\n\n"
+    },
+    {
+      "time": " 23 January, 2006 - 6:46am",
+      "content": "I think “ugly” is a tongue-in-cheek word in this usage. There are things you have to do in text sizes to keep counters open and joins to not feel heavy which, when enlarged greatly, just don’t look right. This was easily handled in the hot metal days where type was drawn specifically for the casting size. When Hrant says “ugly” just smile and think “visually adjusted to meet the needed characteristics for correct perception at small sizes”. But, as you can see, that is quite a mouthful so maybe a new word is needed. How about “Hugleigh”? It has the sound and feel of ugly but the warmth of a hug by Janet Leigh :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": " 23 January, 2006 - 7:00am",
+      "content": "\\>“ugly” is a tongue-in-cheek word\n\nI think that Hrant and I have a substantive disagreement, though I may be wrong. I think that in general good aesthetics is a plus for a typeface, and only should be compromised with great reluctance.\n\nI don’t think you can make a 9 point type as elegant as an 18 point type and keep it readable. It needs lower contrast and shorter extenders. But this doesn’t mean it has to be ugly. The distortions for the sake of legibility, such as in the joins, don’t have to be so great at normal text sizes to make the characters ugly.\n\n"
+    }
+  ]
+}

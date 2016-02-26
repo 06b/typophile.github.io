@@ -1,0 +1,22 @@
+{
+  "id": "13570",
+  "title": "i, dotlessi and Idotaccent in Turkish",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "This has bothered me for quite some time, and I haven't found an appropriate answer.\n\nFrom what I understand, in Turkish the uppercase form for the dotted i is Idotaccent. Similarly the uppercase form of the dotlessi is a undotted I (a normal uppercase I in latin script). If this is true then building a c2sc and smcp should have a language specific variation to cover this. I have examined a number of OpenType fonts that have shipped with my Adobe apps, and I can't say that I have found any that do this. A normal lowercase dotted i transforms into a normal small cap I even when using a Turkish keyboard as imput.\n\nHow is this being handled by those of you developing OT?\n\n",
+  "author": ".00",
+  "time": "7 Jul 2005 — 11:13am",
+  "uid": "1947",
+  "comments": [
+    {
+      "time": "7 Jul 2005 — 11:47am",
+      "content": "if you check the [OT feature file for Minion Pro](http://web.archive.org/web/20131013091044/http:/www.adobeforums.com/cgi-bin/webx?50@893.Qb7beqhqCtw.2@.3bb58628), all the necessary programing code is in there. i'm not sure why this isn't working for you. Maybe Thomas will explain...\n\n"
+    },
+    {
+      "time": "7 Jul 2005 — 11:52am",
+      "content": "I definitely use a Turkish language system tag and appropriate special mappings in the feature ( doesn't need special handling for Turkish). Adobe's view, I believe, is that the application should do buffered case conversion before applying the feature, so it technically should not be necessary for fonts to handle this in lookups. The idea is that when the user applies , the application will perform character based conversion to uppercase, taking into account special casing rules for Turkish text, and then apply the lookups.\n\nI'm not convinced, either by the idea or by the likelihood of it being implemented in this way outside of Adobe apps, so I continue to handle this directly in the feature. The nice thing is that implementing it directly in the feature for Turkish does not interfere with the buffered casing approach, so either implementation can be performed with the same font.\n\n"
+    }
+  ]
+}

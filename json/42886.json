@@ -1,0 +1,50 @@
+{
+  "id": "42886",
+  "title": "Fontlab 4.6 how to create a random font ?",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "Hello,\n\nI'm a graphic designer and I'm trying to create a font where, while writing, each character will be randomly substituted by some other versions of the same character. So that for the \"a\" I'll have 3 different \"a\", for the \"b\" I'll have 3 different \"b\" and so on.\n\nI found some scripts in Typophile where it seems this would work ( [http://typophile.com/node/19625](http://web.archive.org/web/20131218002103/http:/typophile.com/node/19625 \"http://typophile.com/node/19625\")), but i actually don't know how to make it work in Fontlab... :/\n\nI supose I have to create one class per character (in the \"collection/classes\" panel) where I put all the glyphs I want to use for the substitution and then (in the \"opentype\" panel) assign the script to each class. Is that it?\n\nBased on another .otf font, I tried to roughly repeat the proceadure just to see if anything happens (just tried to assign some script to the first class I created - please see image attached), but when I try to generate the opentype font it gives me an error \"ERROR: There was a problem while compiling OpenType font. Final .otf font is not saved. Please, check OpenType features definition for errors\".  \nI've checked, but apart from the UPM number, that I think has to be 1000, I have no clue of what I should be aware of...\n\nCould you please give me some hints on how to make it work?  \nI would really apreciate some help since I'm complete \"new\" on Fontlab and font design as well.\n\nThank you so much in advance!\n\nAndreia\n\n| Attachment | Size |\n| --- | --- |\n| [Imagem2.png](http://web.archive.org/web/20131218002103/http:/typophile.com/files/Imagem2.png) | 102.75 KB |\n\n",
+  "author": "andreia.comunica",
+  "time": "6 Mar 2008 — 8:47am",
+  "uid": "28003",
+  "comments": [
+    {
+      "time": "6 Mar 2008 — 10:51am",
+      "content": "Hi,  \nA very simple way to make alternates visible is to put a lookup with something like this into the liga feature:\n\nsub [a c m s] a' by a.alt1;  \nsub [e i o t] a' by a.alt2;\n\n(means: after a c m s glyph a is substituted by glyph a.alt1  \n after e i o t glyph a is substituted by glyph a.alt2 )\n\njs\n\n"
+    },
+    {
+      "time": "7 Mar 2008 — 4:26am",
+      "content": "Thanks for your quick answer :D!\n\nI'll try it out and tell you how it worked!\n\na.\n\n"
+    },
+    {
+      "time": "7 Mar 2008 — 4:59am",
+      "content": "The {liga} ligature feature is not a good place for this kind of substitution. Better to use {calt} contextual alternates feature instead, since that's the effect you're creating.\n\n"
+    },
+    {
+      "time": "8 Mar 2008 — 5:34am",
+      "content": "It's not Fontlab, but I think Metafont can do this.\n\n"
+    },
+    {
+      "time": "8 Mar 2008 — 10:07am",
+      "content": "Connecting you with [http://typophile.com/node/42950](http://web.archive.org/web/20131218002103/http:/typophile.com/node/42950 \"http://typophile.com/node/42950\")\n\nEverybody making script typefaces now?&nbsp;&nbsp;;-)\n\n"
+    },
+    {
+      "time": "8 Mar 2008 — 10:23am",
+      "content": "\"Everybody making script typefaces now?\"\n\nSome of us are still struggling with non-script faces, Karsten :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "8 Mar 2008 — 2:22pm",
+      "content": "\"Everybody\" except me, I mean.&nbsp;&nbsp;;-)  \nHm, but why not? Something with nice connectors, without need for kerning. I'm weary of even thinking about kerning, best practices, economic kerning, kerning features, limited kerning interfaces and all that ...\n\n"
+    },
+    {
+      "time": "8 Mar 2008 — 2:36pm",
+      "content": "Karsten, There is no escape except for monowidth fonts :-)\n\nI am finding that glyph drawing is the easiest and quickest part of type design. I have torn apart metrics and redone kerning a thousand times. With each redo, I learn something new and start again! The increments of change keep getting smaller as my vision gets more acute and my critical judgement becomes more unyielding--I feel I am getting closer to the carrot on the string but it is still not quite in my grasp :-/\n\nChrisL\n\n"
+    },
+    {
+      "time": "19 Aug 2008 — 6:40am",
+      "content": "Hi! I'm trying to do the same as Andreia but I'm working with TypeTool. Can I make variable glyphs with this software?\n\nThank you!\n\n"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "58707",
+  "title": "Opentype Access to unencoded ornaments & dingbats",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I read through a bunch of old threads about Ornaments and Opentype. At the end of the day I'm still confused about how to implement my specific situation. I'm up to my old tricks with banners. In addition, i have small illustrations of things like people and such, plus some flower-type things. All total about 50 glyphs.\n\nFor making the 9 styles of banners I have it set up thusly: Using ornm or SS02 typing 1====1 yields a style one banner with four extensions. 2=2 a style two banner with one extension. The = is contextually replaced to match the appropriate banner endings. This seems very user friendly. The argument against is that the actual output has nothing to do with two's or equals. Is the only alternative to hunt and peck in the glyph palette? That would be tricky even when well-ordered because the banner extensions (=) vary slightly which is hard to detect.\n\n ![](http://web.archive.org/web/20131017083354im_/http:/typophile.com/files/banners_3711.gif)\n\nWhat about the non-banner illustrations? Currently there is no feature to access them. I had considered subbing a-z -\\> orn1-orn26 but that was frowned on elsewhere. These seem less of an issue to hunt and peck for glyphs. Any advice appreciated.\n\n",
+  "author": "Randy",
+  "time": "4 Jun 2009 — 12:55am",
+  "uid": "7783",
+  "comments": [
+    {
+      "time": "4 Jun 2009 — 8:23am",
+      "content": "I'm an end user of type rather than a designer, but having said that, we do augment our fonts whenever the EULA - or special permission -- allows. So, I do have some experience with moving characters (and usually move the ornaments), adding characters, and writing simple features.\n\nSo here is my thinking: If you are switching on ornaments using either stylistic sets or the ornament features, there is no need to make the substitutions complicated. One to one works just fine. The user has already had to take an action to \"turn them on,\" and should be well aware that the characters keyed -- or in the file -- will not be what appear.\n\nHaving said that, we prefer to have the ornaments coded, in the Private Use area. As you say, any later use of the text now has a flag that the characters so encoded need attention. Moreover, they are accessible from programs that support Unicode but do not support some OT features.\n\nYMMV\n\n"
+    },
+    {
+      "time": "4 Jun 2009 — 11:51am",
+      "content": "Thanks for your input.\n\nIf I read you correctly, you're advocating opentype substitution a → orn.1, provided orn.1 has a PUA encoding? Is that what you meant?\n\nI did a little test on this in InDesign CS2:\n\n**Access method one: opentype substitution a → orn.1, with and without PUA on the orn**  \nWhen switching to a different font it reverts, orn.1 → a. I had hoped the PUA encoding would prevent the return.\n\n**Access method two: glyph palette hunt and peck**  \nWhen switching to a different font it highlights in red, regardless of PUA encoding. This is the preferred result.\n\n- - -\n\nSo PUA doesn't help in the way I'd hoped it would, but perhaps it's still worthwhile so that the illustrations are accessible in unicode apps without a glyph palette (not sure what that might be? Photoshop?). Here is what I'm currently thinking: use opentype sub for the banners (ornm & stylistic set) because that will make user's life much easier. For the illustrations, leave them unencoded and unfeatured with access via glyph palette. Yes this means a font switch will result in 4===4 showing up, but banners require attention to compose, are often converted to outlines/rasterized, and are rare -- so I don't think it's too much of an issue.\n\nThis seems like it might suit the pragmatists amongst us, but I'm curious what the by-the-spec crowd thinks?\n\n"
+    },
+    {
+      "time": "4 Jun 2009 — 12:35pm",
+      "content": "To be clear, what I'm advocating is using the PUA encoding without using any Opentype feature to switch a character with an ornament. That way, if you shift to a font that lacks the ornament -- actually, lacks a glyph with the same PUA number -- you get nothing but \"salmon,\" which is as it should be.\n\nYou can access PUA characters from the glyph pallet of course, but you can enter the Unicode number directly in InDesign. Or MS Word or EditPad Pro, for that matter. Dunno about Quark, but likely.\n\nUsing an OT feature as you describe has all the minuses you've noted, with, I suppose, a plus that people who don't know how to enter a Unicode character directly in ID have a crutch.\n\nCome to that, I also dunno about a Mac. To enter a Unicode number with Windows (make sure NumLock is on), hold down \"alt\" key, hit \"+\" on the keypad, followed by the numbers (also using the keypad), with any alpha caps from the regular keyboard. Then let go of the alt key. Takes longer to describe than to do. Probably something similar with the Mac.\n\nIn either case, a \\*readme\\* with the font would be nice. I always made a readme listing all the features, and any other special functions/features, and I only have to please two other comps. And of course myself, the next time I go back into the font, muttering \"what the hell did I do . . .\n\n"
+    },
+    {
+      "time": "4 Jun 2009 — 2:44pm",
+      "content": "Thanks. I've been known to mutter myself :-)\n\n"
+    },
+    {
+      "time": "4 Jun 2009 — 9:04pm",
+      "content": "I'm with Charles on this one. Pretty strongly so. If it's not a variant of a real character, it should not be an alternate of that character through an OpenType feature.\n\nIf I could deprecate one more feature from the OpenType spec, I'd do that to 'ornm' and put it in the same purgatory as 'crcy' and 'dpng'.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "4 Jun 2009 — 9:39pm",
+      "content": "Just a thought. If _ornm_ is used to 'link' ornaments to, say, the glyph encoded as bullet, then this feature has a useful function: to categorize otherwise unencoded ornaments as ornaments and allow applications to present them in 'controlled' manner (rather than exposing any glyph in a glyph palette). This of course requires that applications treat OT layout tables, if present, as kind of a _cmap_ extension rather than mere gimmickry.\n\n"
+    },
+    {
+      "time": "8 Jun 2009 — 10:41pm",
+      "content": "Karsten: That's the most reasonable implementation of 'ornm', if one is to do it at all... but it doesn't work well with non-OT-savvy representations of text. It relies on choose-one-of-many-alternates abilities that are lacking in too many places, and may continue to be lacking for another 5-10 years in some places, or even indefinitely in others.\n\nI think your option is every bit as theoretically valid as using PUA codepoints, but less useful in the real world. I came to this conclusion in large part from looking at real-world workflows and talking to engineers working on applications.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "9 Jun 2009 — 12:49am",
+      "content": "<cite>I think your option is every bit as theoretically valid as using PUA codepoints, but less useful in the real world.</cite>\n\nI am fully aware of this.  \nAs to the real world, it may be time to change the way we evaluate applications. Rather than regarding those that support OT as plus and those that don't as standard, we should regard OT-savvy ones as standard and all others as defective. It is a matter of awareness.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "43832",
+  "title": "Nested paragraph styles + hard return = tears",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "Has anyone ever had a problem using Indesign to set up a nested paragraph style and applying it to a question / answer format?  \nThe question would be in bold and have a hard return after the question mark, the answer would be in a regular face. My long document is however riddled full of hard returns.  \nbelow are my results. Any help would be amazing. Thank you.\n\n ![](http://web.archive.org/web/20140621034612im_/http:/typophile.com/files/nested01_5346.jpg)\n\n ![](http://web.archive.org/web/20140621034612im_/http:/typophile.com/files/nested02_6519.jpg)\n\n",
+  "author": "koop",
+  "time": "2 Apr 2008 — 11:24pm",
+  "uid": "17526",
+  "comments": [
+    {
+      "time": "2 Apr 2008 — 11:57pm",
+      "content": "I doubt this is possible with nested styles (but I'm not very experienced with them yet, so maybe a crack may can help you).\n\nWhat you could do: use the \"next style\" feature.\n\nDefine in your question style that the next style should be the answer style.  \nIf you assign the question style to a paragraph, the following paragraph will automatically be set in answer-style.  \nIt is not quite as fast, but at least it's semi-automatic.\n\nAs your document is not uniformly structured, I doubt full automation will be possible.\n\n"
+    },
+    {
+      "time": "3 Apr 2008 — 1:21am",
+      "content": "You may try to do this with find/replace method - since your questions end with question mark or colon, and your answers with full stop. You can find them and automatically change to different paragraph style. If you insist on using nested styles, you find them and automatically ad a mark that nested styles can recognize, eg. non-breaking space, em- or en-space, etc. and configure nested styles as img. below shows:\n\n ![](http://web.archive.org/web/20140621034612im_/http:/typophile.com/files/nested_4740.gif)\n\nAntoni\n\n"
+    },
+    {
+      "time": "3 Apr 2008 — 3:34am",
+      "content": "Hi Dustin,\n\nSebastian is right; this is a typical case for ‘Next Style’.\n\nTwo minor problems:\n\n1. You have an empty paragraph, separating an answer from the next question.  \nYou could introduce a third paragraph style (‘Separator’), and specify this sequence:\n\n‘Question’ followed by ‘Answer’ followed by ‘Separator’ (followed by ‘Question’ again).\n\nBut actually, that wouldn’t be very elegant. You should get rid off this extra paragraph (search for `^p^p` and replace by a single `^p`), and rather give the ‘Answer’ style a bottom margin (via paragraph style options).\n\n2. You must not have hard breaks within your paragraph (because they would trigger a new one). Thus, your ‘three things list’ should have soft breaks. And you don’t need soft breaks in your second-last answer (though they won’t hurt either).\n\nWhen you have set up your styles, select all your text and simply ctrl-click on on your first style (‘Question’) and choose ‘Apply this style and then the next style’ – or whatever it is called in the English menu.\n\nF\n\n"
+    }
+  ]
+}

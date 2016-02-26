@@ -1,0 +1,62 @@
+{
+  "id": "4243",
+  "title": "Ligatures in Windows?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I've only recently discovered that the fl and fi ligatures are not standard (I can't get to them!) on Windows type 1 fonts. Is there any way around this other than moving glyphs within the font? PopChar is now available for Windows, but I think it only allows the standard set of characters. Is there any difference with Windows TrueType?   \n   \nThanks,   \nAddison\n\n",
+  "author": "addison",
+  "time": "Mon, 2004-04-12 09:02",
+  "uid": "2412",
+  "comments": [
+    {
+      "time": " Mon, 2004-04-12 10:39",
+      "content": "If you've got a Unicode enabled application and a TrueType or OpenType font that actually has the ligatures, you should be able to get at them with PopChar or the Windows CharMap accessory.   \n   \nFor Type 1, the glyphs are normally unencoded even if present (they are present in pretty much all Adobe's Type 1 fonts). The only applications I know of that can access the ligatures in normal Type 1 fonts are InDesign (any version, will use them automatically) and Illustrator CS (but you need to use the Glyph Palette in Illustrator).   \n   \nHope that helps.   \n   \nT\n\n"
+    },
+    {
+      "time": " Mon, 2004-04-12 11:37",
+      "content": "Thanks, Thomas. Unfortunately, I'm using CorelDraw (please don't laugh...) and I'm not sure if it supports Unicode -- I'll have to find out.   \n   \n-Addison\n\n"
+    },
+    {
+      "time": " Tue, 2004-04-13 13:41",
+      "content": "Corel Draw 12 supports Unicode, but not the previous versions.   \n   \nAdam\n\n"
+    },
+    {
+      "time": " Tue, 2004-04-13 14:15",
+      "content": "Thanks, Adam. Naturally, I have version 11... and I've only had it about 3 months.   \n   \nDoes that mean version 12 supports OpenType?\n\n"
+    },
+    {
+      "time": " Tue, 2004-04-13 16:44",
+      "content": "Addison,   \n   \nit depends what you mean by \"supports OpenType\".   \n   \nIf you mean support for OpenType Layout, then the answer is no. But Corel Draw can render all characters from OpenType fonts that have Unicode indexes assigned.   \n   \nAdam\n\n"
+    },
+    {
+      "time": " Tue, 2004-04-13 19:35",
+      "content": "_f you mean support for OpenType Layout, then the answer is no. But Corel Draw can render all characters from OpenType fonts that have Unicode indexes assigned._   \n   \nWhich puts CorelDraw one step ahead of Quark Xpress, yes?\n\n"
+    },
+    {
+      "time": " Wed, 2004-04-14 07:00",
+      "content": "So where InDesign can insert ligatures and small caps and such with a menu command, CorelDraw cannot. But I could insert the characters with the character palette one at a time, right? I need to study up on OpenType...   \n   \nCorelDraw isn't bad (I haven't used Quark in ages) -- I got it to play on my wife's laptop. The suite was less than $300 and it came with a nice collection of Bitstream fonts. The version I bought, version 11, works on Mac OS X, too, but Corel has since dropped Mac support.\n\n"
+    },
+    {
+      "time": " Wed, 2004-04-14 08:07",
+      "content": "Addison,   \n   \nIn a font, each little \"picture\" (of a letter etc.) is called a glyph. In OpenType PS (.otf) and OpenType TT (.ttf) fonts, most of the glyphs have a Unicode index assigned (they represent default forms of a character). But some glyphs are unencoded and can be reached with a special OpenType Layout feature.   \n   \nFor example, normally, the ligatures fi, fl, ffl etc. would be unencoded and an OpenType-aware application would insert them when the user types the two or three combining letters (e.g. f,i) and has the \"ligatures\" feature activated in the application. This is how it works in InDesign or Illustrator.   \n   \nApplications that do support Unicode but don't support OpenType Layout can only access the glyphs that have Unicode indexes but cannot access these special \"smart\" features. So the ligatures would be inaccessible. Therefore, for these kinds of applications, some font vendors assign so-called Private Use Area indexes (custom Unicodes) to these glyphs. You can then enter the ligatures or alternates as \"symbols\" -- when inserted into text, they will most likely break hyphenation and spellcheck algorithms in the running text, but at least they will be visible. Corel DRAW 12 belongs to this category of programs.   \n   \nOther than that, I think Corel DRAW 12 is a great drawing program. Every time I try to do some simple layout in Illustrator, I get frustrated and revert to Corel DRAW ![:-)](http://web.archive.org/web/20050518052424im_/http:/www.typophile.com/forums/clipart/happy.gif)  \n   \nAdam\n\n"
+    },
+    {
+      "time": " Wed, 2004-04-14 09:04",
+      "content": "Thanks for the explanation, Adam. That's kind of what I was thinking. However, I didn't realize that when InDesign inserts ligatures, the glyphs you see are unencoded. So the ligature is an unencoded glyph that visually represents two or more encoded glyphs? Whoa...   \n   \nI agree about CorelDraw -- I bought it for the price, but it's impressed me so far.\n\n"
+    },
+    {
+      "time": " Wed, 2004-04-14 09:50",
+      "content": "The glyphs can be either encoded or unencoded, actually. Some of the f-ligatures have standard codepoints to enable compatibility with legacy encodings (like MacRoman which has fi and fl).   \n   \nOn top of this, Adobe has a possibly bad habit of encoding all glyphs in its fonts, to allow you to work more effectively with them in apps that are Unicode savvy but not OpenType savvy, such as CorelDraw 12. So you may be able to use the Windows CharMap to get at these glyphs in Adobe's OpenType fonts. This approach is not necessarily portable, and messes up the underlying text representation, but it does allow you to get at the glyphs you want.   \n   \nRegards,   \n   \nT\n\n"
+    },
+    {
+      "time": " Wed, 2004-04-14 09:51",
+      "content": "Ligatures, just like small caps and other \"variant\" glyphs may or may not be encoded in an OpenType font. If they're encoded, they have custom (Private Use Area) codepoints. Applications should not access these glyphs via these codepoints unless they can't manage otherwise. InDesign does it the right way -- it parses the OpenType Layout tables where you have substitutions like:   \n   \nfeature liga { # Ligatures   \n sub f i by fi;   \n} liga;   \nfeature smcp { # Small Caps   \n sub a by a.smcp;   \n} smcp;   \n   \n(The above is written in a sort of programming code used by Adobe FDK for OpenType, a free OpenType creation tool; of course in the font, the substitutions are stored as binary code).   \n   \nSo, in InDesign when ligatures are activated and the font contains the f i -\\> fi substitution, InDesign stores the underlying text as \"f\",\"i\" but \"on the fly\" displays the single \"fi\" ligature. Similarly, for small caps, InDesign internally stores the letter \"a\" but \"on the fly\" displays the \"a.smcp\" glyph.   \n   \nThis way, spellchecking or hyphenation that uses the underlying text still works. This is a great advantage of OpenType over primitive technologies such as \"expert Type 1 fonts\" used by QuarkXPress.   \n   \nI recommend that you read [http://www.myfonts.com/info/opentype/](http://web.archive.org/web/20050518052424/http:/www.myfonts.com/info/opentype/) for more information.   \n   \nAdam\n\n"
+    },
+    {
+      "time": " Wed, 2004-04-14 11:35",
+      "content": "Thanks, Thomas and Adam. I just looked over the info at MyFonts and I'm finally getting the big picture. I wonder how long it will take for other applications to catch on? This may deserve another thread...   \n   \nThanks again for the explanations,   \nAddison\n\n"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "id": "29100",
+  "title": "Advanced Encoding Question",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi,\n\nI have being blessed by PHP-driven TypeTester. (Thanks Dieter!) The typetester works exactly as I want it to if I genereate my fonts in TrueType format. Then the typetester displays all character sets correct. It displays å ä ö and all the mathematical and accented characters exaclty as they are.\n\nHowever, since I only produce OpenType fonts, I would very much be able to use OpenType fonts to render the images instead. But any OpenType font makes the TypeTester forget about the accented charachters, and some characters becomes mixed up with others.\n\nI think it’s about some encoding issue, but I havent got the slightes idea on what to do.\n\nIs there some \"trick\" I could do when exporting my OpenType fonts for the Typetester for it to work the same way as a TrueType font when it comes to displaying characters? Maybe some Encoding option in FontLab?\n\nIn that case I dont have to do a TrueType version of the font specific for the tester.\n\nThe OpenType rendered images also gets more smooth, so the font looks better with OpenType format...\n\nThe typetester can be seen at:  \n [http://autodidakt.se/index.php?page=autostyler](http://web.archive.org/web/20131108050852/http:/autodidakt.se/index.php?page=autostyler \"http://autodidakt.se/index.php?page=autostyler\")\n\nAnyone around here with these kind of knowledge?\n\nI’m forever grateful for all help.\n\n",
+  "author": "Goran Soderstrom",
+  "time": "26 Oct 2006 — 2:05pm",
+  "uid": "11526",
+  "comments": [
+    {
+      "time": "27 Oct 2006 — 6:42am",
+      "content": "Goran,  \nAre you sure that the problem is in your fonts and not in the TypeTester?  \nHave you tried your TypeTester with Minion, for example? Does it work?\n\n"
+    },
+    {
+      "time": "27 Oct 2006 — 7:44am",
+      "content": "Nope. No, OpenType font actually works with the tester fully. Well, it works, but some characters are missing and some gets mixed up.\n\nAt the same time it’s rather strange that if I just export as a .ttf it works fine. I dont need to do anything else, isnt that strange?\n\nI was thinking that \\_if\\_ I export an OpenType font with the same kind of encoding as a TrueType font, it may work, but I dont know the main principles on what differ them both.\n\nThe Typetester is written for TrueType fonts, I know that, but since \"half\" of the OpenType font works, it must be a way to make the whole work aswell. (?)\n\nI guess my main question really is, what is the real difference between a Truetype and an OpenType when it comes this matter?\n\nWhat’s the difference in the encoding-things? Is there some things that I could try perhaps in the Font options in Fontlab, I’ve seen there is a lot to choose (cmap etc...)\n\nMaybe it’s not that simple, but I’m just reaching out and trying to learn :)\n\n(The very helpful person who helped me create the tester is however going to give it a try and see if there is some code that could be re-written in the tester)\n\n"
+    },
+    {
+      "time": "27 Oct 2006 — 6:23pm",
+      "content": "I am supremely confident that someone will correct me if I'm wrong, but...\n\nThe Truetype fonts which Fontlab produces are, in fact, Opentype fonts, but TTF-flavored instead of CFF flavored. However, in order for the TTF fonts to carry the .otf extension, they must be digitally signed, while the CFF fonts do not require the dsig. In any event, it has been my experience the TTF-flavor fonts seems to behave better overall that the CFF versions. I suspect this may be because Adobe has a few bugs to work out...which is perhaps why a new and improved version of the OT FDK is under development.\n\nIn the meantime, why don't you go with what works? Generate TTF fonts to use on your website and continue to sell your OTF fonts.\n\n"
+    },
+    {
+      "time": "27 Oct 2006 — 11:50pm",
+      "content": "\\> _in order for the TTF fonts to carry the .otf extension_\n\nThis part is incorrect. An OpenTpe-TTF font will never have a .otf extension. One of the reasons why a TTF font needs to be digitally signed, is so it gets the correct icon under Windows.\n\n\\> _I suspect this may be because Adobe has a few bugs to work out…_\n\nYep, we spend a lot of time working out bugs, especially the ones in OSes and non-Adobe apps... :^/\n\n\\> _which is perhaps why a new and improved version of the OT FDK is under development._\n\nLike any other app, the FDK is (and has been) \\_always\\_ under development. The reason why you're currently hearing a lot of buzz about it, is because all the version between 1.6 and 2.0 were not made public. The last release (v1.6) before the current one, had been made available more than three years ago.\n\n"
+    },
+    {
+      "time": "28 Oct 2006 — 2:27am",
+      "content": "<cite>In the meantime, why don’t you go with what works? Generate TTF fonts to use on your website and continue to sell your OTF fonts.</cite>\n\nYeah I know, probably that is the best thing to do – but I’m the kind of person that sometimes just can’t let things be as they are or accept that it’s not optimal and adjust to that. It gives me some kind of \"itch\" ;-)\n\n"
+    },
+    {
+      "time": "28 Oct 2006 — 5:33pm",
+      "content": "\\> An OpenTpe-TTF font will never have a .otf extension.\n\nThis is an obscure trivia point, but... actually, it is perfectly legal for it to do so. The reason for it to have a .ttf extension is purely for backwards compatibility. Microsoft has often made noises that they may change all their .ttf extensions to .otf one of these days.\n\nT\n\n"
+    },
+    {
+      "time": "28 Oct 2006 — 11:31pm",
+      "content": "Thomas,\n\nthanks for bringing it up. Indeed, it is correct to assume and rely on the fact that a font file with a .ttf extension is an OpenType TT font, but a font file with an .otf extension may be either an OpenType PS font or an OpenType TT font. I haven't yet seen any retail OT TT fonts with an .otf extension but I'm sure it's only a matter of time until they appear.\n\nAdam\n\n"
+    }
+  ]
+}

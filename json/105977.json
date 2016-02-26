@@ -1,0 +1,174 @@
+{
+  "id": "105977",
+  "title": "MS Sitka",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Where can one learn as much as possible about MS Sitka?\n\nhhp\n\n",
+  "author": "hrant",
+  "time": "1 Sep 2013 — 7:31am",
+  "uid": "1250",
+  "comments": [
+    {
+      "time": "1 Sep 2013 — 8:42am",
+      "content": "Amsterdam... [http://www.atypi.org/atypi-amsterdam-2013/amsterdam-programme/activity?a...](http://web.archive.org/web/20150217005147/http:/www.atypi.org/atypi-amsterdam-2013/amsterdam-programme/activity?a=297 \"http://www.atypi.org/atypi-amsterdam-2013/amsterdam-programme/activity?a=297\")\n\n"
+    },
+    {
+      "time": "1 Sep 2013 — 3:05pm",
+      "content": "In the meantime, I've posted a [specimen](http://web.archive.org/web/20150217005147/http:/www.tiro.com/John/Sitka_Size_Specimen2.pdf) focusing on the size-specific design aspect of the project. [PDF, landscape letter, 2 pages]\n\n"
+    },
+    {
+      "time": "1 Sep 2013 — 10:19pm",
+      "content": "This is partly beside the point, but it's gorgeous.\n\nUnusual PDF behavior: it looks good when viewed in Safari, but crunchy when opened in Acrobat 8 on Mac OSX 10.6.8.\n\n"
+    },
+    {
+      "time": "1 Sep 2013 — 11:40pm",
+      "content": "I suggest printing the PDF: its a convenient format, but the screen rendering of TTFs can still be a bit weird, depending in part on how they're hinted. I'm not sure what Acrobat makes of the kind of hinting we used in Sitka. For best screen results, the fonts should be seen in a DWrite environment on Windows.\n\n"
+    },
+    {
+      "time": "2 Sep 2013 — 5:20am",
+      "content": "There was a small showing in the type gallery at TypeCon in Portland. When I asked Matthew about it, he was surprised to hear it was being shown and said he didn’t think he was allowed to talk about it yet. ;-)\n\n"
+    },
+    {
+      "time": "2 Sep 2013 — 5:21am",
+      "content": "Great thing! Looks amazing down to 4.25 pt!\n\nHowever, what John said is Hudsonese for: For best screen results _on Windows_, the fonts should be seen in a DWrite environment.\n\nBut for best screen results, period... there is no comparison to what one sees on an iPad, yet.\n\n"
+    },
+    {
+      "time": "2 Sep 2013 — 9:49am",
+      "content": "Kent, a version of Sitka was included in the free Windows 8.1 preview so it's available to anyone who wants to install and use that version of the OS. So it's kind of already out there.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "2 Sep 2013 — 11:07am",
+      "content": "So, this release suggests that there are or will be Microsoft apps which support the automatic selection of the size-specific styles?\n\n"
+    },
+    {
+      "time": "2 Sep 2013 — 12:03pm",
+      "content": "The fonts are built with that intention, but the layout support has not been implemented yet. The fallback support requires manual selection: depending on the environment, users will either see six separate families in font menus, one for each size, or a single 'Sitka' family with 24 members.\n\nIn case anyone is working with the fonts in Windows 8.1 preview, and wants to make size selections based on the same point size ranges as implemented in the fonts, here they are:\n\nSitka Small \\>0 \\<9.7  \nSitka Text ≥9.7 \\<13.5  \nSitka Subheading ≥13.5 \\<18.5  \nSitka Heading ≥18.5 \\<23.5  \nSitka Display ≥23.5 \\<27.5  \nSitka Banner ≥27.5 \\<∞\n\nI don't know what I am allowed to say at this time regarding the size selection mechanism in the fonts -- the first to be built in this way --, but presume I can at least confirm that it does _not_ involve the old, dead-on-arrival OTL 'size' feature.  \n\\_\\_\\_\\_\\_\n\nFolks might be interested in the development of the size-specific design instances and the determination of the ranges to which they apply. For one of the meetings with Matthew and the Advanced Reading Technologies team at MS, we prepared an initial pair of two intermediate interpolated instances between Matthew's 6pt and 36 pt designs, and produced print tests of a full range of integer point sizes, one per sheet, with overlaps in the ranges assigned to each instance. These were laid out in sequence around the large conference room, and reviewed by Matthew and the rest of the team. We identified two places in the sequence where there were apparent 'jumps', i.e. where the transition from one instance to the next broke the smooth progression of optical size increase. From this, we determined that two more intermediate instances would be needed, bringing the total number of size-specific designs to six.\n\nWhen the additional intermediate instances were produced, we reviewed print tests again, and this time looked at fractional point sizes in the transition areas to determine more precisely the size at which the smoothest progression could be made from one instance to the next. That gave us our initial size ranges and instances, and from there we proceeded to hinting, kerning, etc.\n\nAnd then something interesting happened. Initial testing of the fonts at Microsoft indicated concerns about the apparent size of the Sitka type relative to other fonts. Matthew had cast Sitka large on the body, to give it a legibility advantage over nominally same-size type. Now this looked like it might provoke complaints that Sitka was out-of-scale to other fonts, and would make it less easy to work with in typical layouts and templates that didn't take into account its larger optical size. So the decision was made to reduce the size of the type overall, despite the fact that hinting was already underway and the outlines were locked. This was done by increasing the UPM setting in the fonts, so that the scaling factor relative to nominal point size would be reduced. We tested a few different UPM settings, and settled on 2250 units-per-em. This worked well for most of the sizes, and achieved the desired goal, bringing the optical size of Sitka more in line with typical fonts. But it made the Small size fonts too little at their target sizes, affecting legibility. So we decided to differentially scale the Small fonts, using a UPM of 2200. This is why, if you look at the second page of my PDF, you will note a larger jump in height between the Text and Small fonts than between the others.\n\nWe then tested size range selection again, using the new scaling, and arrived at the final range settings documented above.\n\n"
+    },
+    {
+      "time": "2 Sep 2013 — 12:35pm",
+      "content": "Thanks for sharing those details John. Interesting stuff.\n\n"
+    },
+    {
+      "time": "4 Sep 2013 — 5:10am",
+      "content": "Sharing is good, I hope. :)\n\nJohn, you started with a smooth progression of 300 .1 pt sizes from 6-36 available via simple interpolation. What needed to be smoothed out?\n\nAnd:  \n\"Sitka Small \\>0 \\<9.7  \nSitka Text ≥9.7 \\<13.5  \nSitka Subheading ≥13.5 \\<18.5  \nSitka Heading ≥18.5 \\<23.5  \nSitka Display ≥23.5 \\<27.5  \nSitka Banner ≥27.5 \\<∞\"\n\nA size table might be better than a link to typophile.\n\n\"...so that the scaling factor relative to nominal point size would be reduced...\"\n\nI think you mean the scaling factor'll be increased. This leap, between the \"brass scale\" and \"glass scale\" is now clear? Size table values would be a better solution than amputation of the screen range, or you gonna listen to the young metrics sissies with 20/20 vision forever?\n\nCan you share the OS/2 weight values? (counting to 12, I left my fingers and the possible values behind).\n\n"
+    },
+    {
+      "time": "4 Sep 2013 — 10:18am",
+      "content": "[http://www.typografie.info/3/page/Schriften/fonts.html/\\_/sitka-r197](http://web.archive.org/web/20150217005147/http:/www.typografie.info/3/page/Schriften/fonts.html/_/sitka-r197 \"http://www.typografie.info/3/page/Schriften/fonts.html/\\_/sitka-r197\")\n\nhhp\n\n"
+    },
+    {
+      "time": "5 Sep 2013 — 3:18pm",
+      "content": "David: _John, you started with a smooth progression of 300 .1 pt sizes from 6-36 available via simple interpolation._\n\nNo. As explained, we started with two interpolated instances within that range, targeting text and heading sizes, looking at integer point sizes for most sizes, but .1 pt increments in the regions where we anticipated the change from one instance to another. The jumps that needed to be smoothed out occurred between the text instance and the heading instance, and between the heading instance and the 36pt (banner) master. Hence, the final set of size instances added subheading and display.\n\n_A size table might be better than a link to typophile._\n\nThe size selection data _is in the fonts_. It's not a separate size table, but new data fields in an existing table. As I wrote, I don't know how much I am allowed to say yet, since the spec has not been made public, and the layout API has not been implemented. I provided the size range data here, so that users wanting to test the fonts in the Win 8.1 preview could check them out at the intended sizes.\n\n_Can you share the OS/2 weight values? (counting to 12, I left my fingers and the possible values behind)._\n\nFrom a OS/2 WeightClass value perspective, the family consists of only two weights: regular (400) and bold (700). The Small, Text, Subheading etc. instances are _size_-specific variants within those two weight classes. Remember, the OS/2 WeightClass value records weight _class_ not absolute weight, and from a GDI family perspective there are six separate families, each with its own Regular and Bold weight class inclusions.\n\n"
+    },
+    {
+      "time": "5 Sep 2013 — 3:36pm",
+      "content": "PS: _Size table values would be a better solution than amputation of the screen range_\n\nI'm not sure I understand this statement. If you are referring to having ppem size range data in addition to point size range data -- such that the former might override the results of the latter at specific resolutions --, this is something I suggested to MS when discussing possible size selection mechanisms. They didn't bite.\n\n"
+    },
+    {
+      "time": "21 Sep 2013 — 7:46am",
+      "content": "The site performance went down the tubes and I lost track of wanting to waste time, but, ONE problem in making fonts that work optically mastered as your client's clients desire is documented here: [http://en.wikipedia.org/wiki/Dots\\_per\\_inch](http://web.archive.org/web/20150217005147/http:/en.wikipedia.org/wiki/Dots_per_inch \"http://en.wikipedia.org/wiki/Dots\\_per\\_inch\"),  \nin the&nbsp;Computer monitor DPI standards section, look for the word \"hack\".\n\n\"The size selection data is in the fonts.\"\n\nIn other words, another hack not to be disclosed until something worse comes out to make it look better.;)\n\n\"No. As explained, we started with two interpolated instances within that range, targeting text and heading sizes\"\n\nNo, as explained, it was a smooth variation with two interpolated instances that too were smooth. So what was NOT smooth?\n\n\"I'm not sure I understand this statement, \"Size table values would be a better solution than amputation of the screen range.\"\n\nI guess not. When one scales a font down on the body to please people (who've never held a 6 pt master in their hands, so of course it's metrics are out of the box), you raise the size mastering, eliminating the smallest end of the original master.\n\nThen, you try to introduce this into an environment with the dpi hack and size master hacks referred to above and still, I simply can't wait ;)\n\n"
+    },
+    {
+      "time": "23 Sep 2013 — 5:56pm",
+      "content": "_So what was NOT smooth?_\n\nAgain, what was not smooth was the transition from where we stopped using one instance and started using another. The character of the design changed too much from instance A at size X to instance B at size X+1. As I recall, one such a point occurred somewhere in the mid 20s pt range; we needed something between the initial 'subhead' instance and the 36pt master, because the change in design between those two was too abrupt. If that's not clear, ask Matthew.\n\n_...eliminating the smallest end of the original master._\n\nAs you note, it works well down to 4.5pt, so I'm really not too concerned about eliminating the smallest end of the original master, which was _nominally_ 6pt but actually significantly larger than most 6pt designs.\n\nAs regards hacks, I'd love to have a reliable way to target specific pixel per em sizes in the wild -- independent of screen resolution and nominal type size --, rather than point sizes, which is all the new MS mechanism currently allows. [The latter, by the way, I fully expect to see properly documented and added to the OTF/OFF specs; it's already implemented in one third party font tool. The only reason I'm being coy about it is that I'm presuming someone else wants to make an official announcement.]\n\nOn the subject of pixels and size-specific designs, I am wondering if you can explain how the RE fonts behave in this regard? From what I have understood of your explanations, and from the description in Sofie Beier's book, you are designing on a 512 UPM grid sub-divided into a grid corresponding to a particular ppem size (16 ppem according to Beier; is this standard for all the RE fonts?). That ensures fabulous results at the corresponding ppem size but, given the diversity of screen resolutions now in play, that ppem size is going to correspond to wide array of nominal type sizes. So when, on webtype.com, RE fonts are recommended for use at 'Small 9px-14px' sizes, that still implies a whole bunch of different ppem sizes at various resolutions, and only at some specific combination of nominal px size and resolution will you hit the ppem grid around which the RE outline is optimised. Right?\n\n"
+    },
+    {
+      "time": "28 Sep 2013 — 1:53pm",
+      "content": "Right. But Verdana is optimized for 11, works at a whole bunch more sizes, even unhinted. Right? right! Unitizing on 11s or on 16ths does not mean everything else in whole font is on that unit system. The RE fonts still have 512ths lurking and this allows one to organize the quantization we have elsewhere discussed.\n\nPlus, the only other choice is not to optimize to any size, which at that point in time would be stupid, seeing that the font were never be comparable to Verdana or Georgie, or anything else ever optimized, or hinted, ever. The night of the round table, (the long and current age of combined neglectful attitude of MS and Apple to the poor CVT, next table out?), has vast and sundry implications.\n\nThe presumed shelf- life of these fonts was four years. . . Which will be spring. We have no announcements, but i feel kind of sorry for foundries just adding this to their web offerings in 2013... In Spring, what with the MS announcement and Apple's developments, we'll see some changes.\n\n"
+    },
+    {
+      "time": "28 Sep 2013 — 1:58pm",
+      "content": "But Verdana is optimized for 11, works at a whole bunch more sizes, even unhinted. Right? right! Unitizing on 11s or on 16ths does not mean everything else in whole font is on that unit system. The RE fonts still have 512ths lurking and this allows one to organize the quantization we have elsewhere discussed.\n\nPlus, the only other choice is not to optimize to any size, which at that point in time would be stupid, seeing that the font were never be comparable to Verdana or Georgie, or anything else ever optimized, or hinted, ever. The night of the round table, (the long and current age of combined neglectful attitude of MS and Apple to the poor CVT, next table out?), has vast and sundry implications.\n\nThe presumed shelf- life of these fonts was four years. . . Which will be spring. We have no announcements, but i feel kind of sorry for foundries just adding this to their web offerings in 2013... In Spring, what with the MS announcement and Apple's developments, we'll see some changes.\n\n"
+    },
+    {
+      "time": "29 Sep 2013 — 9:59pm",
+      "content": "My point is that with the mix of screen resolutions in play and the redefinition of px as an absolute value independent of device pixels, it's now quite easy to 'optimise' a typeface for a ppem size that the majority of people will never see. This suggests to me that optimisation might be looked at in another way, and what makes Verdana 'work at a whole bunch more sizes, even unhinted', is tangential to its original optimisation for a particular ppem size. As you note regarding Sitka, it looks great down to really small sizes, despite, to my knowledge, _not_ being optimised for any particular quantized grid.\n\nBut maybe that's part of the changes.\n\n"
+    },
+    {
+      "time": "14 Oct 2013 — 1:52am",
+      "content": "Got the answer to the un smoothness. It was unsmoothed by the selection of unevenly spaced master sizes. That was easy.\n\n\"...what makes Verdana 'work at a whole bunch more sizes, even unhinted', is tangential to its original optimisation for a particular ppem size. \"\n\nThe optimization for small size use, lowering contrast of strokes, uncrowding single stroke glyphs and all the usual small size tricks, gobble up pixels at all ppm.\n\n"
+    },
+    {
+      "time": "14 Oct 2013 — 11:24am",
+      "content": "_The optimization for small size use, lowering contrast of strokes, uncrowding single stroke glyphs and all the usual small size tricks, gobble up pixels at all ppm._\n\nYes, optimisation _for small size use_, not optimisation for a _particular_ ppem size. It's a classic evolutionary adaptation scenario: deliberate selection for one trait -- specific ppem optimisation that happens to be small --, inherently involves selection for a range of traits (lowering contrast of strokes, uncrowding single stroke glyphs and all the usual small size tricks) that are not ppem specific and have an affect at all ppems. This is what I meant when I said that what makes Verdana work at a whole bunch of sizes is _tangential_ to its optimisation for a particular ppem size: that range of inherent traits can be arrived at other than by selecting for a particular ppem size (which is, in effect, what Matthew did when he revised the design for Meiryo, taking Verdana off the specific ppem grid but retaining lowered stroke contrast, open spacing, etc.).\n\n"
+    },
+    {
+      "time": "15 Oct 2013 — 7:56pm",
+      "content": "It could be tangential, depending on the design. However, since most Latin type for text has a very clear beat, i.e. strongly suggested design units, independent of ppm, and these are at the core of any small size of such type, and, design to no grid has consequences in family planning under size or resolution pressure, and I was doing both, the choice was, and still is quite clear.\n\nAnd since the beat was there before type, the grid was too. So, for Latin text I'm not sure how evolutionarily adaptive I'm being. Since I once could hint extra pixels into the smaller results size independently, by controlling minimum distances and rounding tendencies, and I now must draw those tendencies into the font, it actually feels devolutionarily maladaptive... But whatever works, we can screwed it all together as well as the next drill.\n\n"
+    },
+    {
+      "time": "15 Oct 2013 — 8:39pm",
+      "content": "Excellent comment, David. Alas, you've left me nothing with which to disagree.\n\n"
+    },
+    {
+      "time": "18 Oct 2013 — 12:07pm",
+      "content": "MS size-specific design selection mechanism now explained in more detail (over at t'other place, because I'm still iffy about Typophile's stability after recent slowdown):  \n [http://typedrawers.com/discussion/470/new-microsoft-size-specific-design...](http://web.archive.org/web/20150217005147/http:/typedrawers.com/discussion/470/new-microsoft-size-specific-design-selection-mechanism \"http://typedrawers.com/discussion/470/new-microsoft-size-specific-design-selection-mechanism\")\n\n"
+    },
+    {
+      "time": "21 Oct 2013 — 1:09am",
+      "content": "David: ‘_However, since most Latin type for text has a very clear beat, i.e. strongly suggested design units […]_’\n\nSee also, eh, …, nope, **especially** : [http://www.lettermodel.org](http://web.archive.org/web/20150217005147/http:/www.lettermodel.org/ \"http://www.lettermodel.org\")\n\nFEB\n\n"
+    },
+    {
+      "time": "21 Oct 2013 — 7:46am",
+      "content": "Frank: \"...especially:\"\n\nYa! especially text, especially x 2 older text faces. And that was before 5 ages of typographic flourishing. So, not only have the beats diversified as Latin spread and aged, but we're also finding that the optimal beat-per-reader diversifies according to age and reader-ability, and that a device's capability intruding into the process calls for the capability for very detailed beat management.\n\n"
+    },
+    {
+      "time": "16 Jan 2014 — 11:23pm",
+      "content": "Before there was a mechanism to specify behavior at different sizes, of course, there were typefaces designed to look good at different sizes.\n\nI had thought that the existing font hinting mechanism could make a typeface look different at different sizes without the need for more than one master built into a single font.\n\nIt is a very good thing that computer typefaces can now approach the behavior of traditional foundry typefaces which were designed to be very different at larger and smaller sizes - but the primary advantage of this will be when they're printed at high resolution, not when they're displayed on a screen.\n\n"
+    },
+    {
+      "time": "17 Jan 2014 — 8:49am",
+      "content": "There have actually been experiments with the use of hinting in that way, but I guess it was not viable?\n\nhhp\n\n"
+    },
+    {
+      "time": "17 Jan 2014 — 10:42am",
+      "content": "Hinting to achieve size-specific outlines is one of the methods investigated during development of Sitka. The problem is that the instruction that would enable us to query nominal size (as distinct from device size) is not widely or reliably supported, so would fail far more often than it would work.\n\nThe other single-outline-manipulation approach would be TrueType Variations.\n\n"
+    },
+    {
+      "time": "17 Jan 2014 — 10:51am",
+      "content": "What would it take to make the nominal size query reliable?\n\nhhp\n\n"
+    },
+    {
+      "time": "17 Jan 2014 — 2:59pm",
+      "content": "A Mac.\n\n"
+    },
+    {
+      "time": "17 Jan 2014 — 5:49pm",
+      "content": "Assuming by some freak of nature Apple is in fact taking type more seriously than MS:\n\nWhat about something enough people would seriously consider?\n\nhhp\n\n"
+    },
+    {
+      "time": "17 Jan 2014 — 7:37pm",
+      "content": "_What would it take to make the nominal size query reliable?_\n\nSupport in DWrite might have been enough to swing it. But then we'd still have needed to come up with a workflow to develop the hinting instructions to perform the size adjustments. Since Matthew was designing small and large master sizes, interpolation was always going to be key to production. So we'd need to develop tools to produce hints that accurately affected intermediate sizes between Matthew's master designs. Datawise, it would have been more efficient than the discreet instances we ended up producing, and it could have provided a smooth progression across the whole size range, but workwise I suspect it would have been a lot more problematic and doubt if we'd have shipped when we did.\n\n"
+    },
+    {
+      "time": "18 Jan 2014 — 6:07am",
+      "content": "And then what?\n\nI mean, you have not explained the reliable nominal size query on Windows.\n\nMaking masters for all or any \"point size\" is not the problem.\n\n"
+    },
+    {
+      "time": "19 Jan 2014 — 11:45am",
+      "content": "I can't remember the name of the query. You'd have to ask Greg H. By the time we got involved in the project, they'd already determined that the hinting approach wouldn't be an option because of lack of support for the query in DWrite.\n\n"
+    },
+    {
+      "time": "20 Jan 2014 — 12:11pm",
+      "content": "_Making masters for all or any \"point size\" is not the problem._\n\nJust to be clear: what the last few posts have been about is using TT instructions (hints) applied to a _single_ master to manipulate the outlines to affect the appropriate size-specific design _independent of resolution._ So this is not only different from making masters for arbitrary sizes, but also different from typical use of TT instructions, which are usually device (resolution) specific, i.e. applied to rasterised ppem sizes rather than to nominal point sizes, which would be the case here. Ideally, it would be possible in such a model to have resolution-specific hints applied on top hints that affect the size-specific design. So even if the necessary query for nominal size were reliably supported, making the hinting to do the work would be no doozy.\n\n"
+    },
+    {
+      "time": "20 Jan 2014 — 4:48pm",
+      "content": "Though \"independent of resolution\" hint manipulation is not possible. You can hint for two resolutions, the units per em, and the scaled ppm. If that's what you mean.\n\nWhat is a doozy again?\n\n"
+    },
+    {
+      "time": "21 Jan 2014 — 1:24pm",
+      "content": "You'd have to ask Greg and Mike what they had in mind, but I assumed it would involve some new kinds of hinting, because the idea was to use a query that enables one to check the nominal point size at which the type was being used, and then apply instructions to manipulate the outline accordingly, and this would be affecting high resolution output. As you say, I don't think this is possible with the existing instruction set, so presume some kind of new instructions whose affect would be akin to TT Variations. But as I said, this plan had been abandoned by the time we got involved with the project, so I don't know what the details would have been.\n\n_What is a doozy again?_\n\nGood question. Yesterday, I was thinking easy-peasy-lemon-squeezy, but today the word suggests something extraordinary.\n\n"
+    },
+    {
+      "time": "22 Jan 2014 — 5:00am",
+      "content": "Doozy, whopper, something extraordinary. Easy-peasy-lemon-squeezy in the d's, would be more like dandy. But then 'a dandy', is more like a doozy, unless it's wearing a top hat.\n\nThe industrial problem/opportunity with hinting for optical size, above what I'll get to in a second, is that we all saw the 'Godzilla's here' panic, screaming and running around when hinting was required for Windows web fonts. So, I hope what they had in mind was automatic variations-to-hints vacuforming of some kind, that no one would have to check.\n\nStoring variations as deltas with interpolation of the untouched points, is basically what GX did, while also offering all the possibilities for weights, widths, etc. as well as solving tricky parts of mostly non-Latin typography where glyph features vary in twining ($), and glyphs intertwine via tables beyond the glyph table (place worst graphemaniacal nightmare here).\n\nWe can get from a relatively tiny variation-bearing source to a subset font about the same size as the source for the new MS standard. But each time we add a true optical size, (weight, width or graphemaniacal option), we add the file size of another font to the family. For simple Latin designs, this is not a big deal, but what about a technology enough people would seriously consider globally?\n\nI think some new kinds of hints, as you suggest MS suggested, would only be the beginning of getting this to work on Windows. I know, the numbers in Windows menus do not represent points. That's just the start of font sizing issues on Windows, and font sizing is just the beginning of typography, and, it's 2014 now.\n\n"
+    },
+    {
+      "time": "26 Jan 2014 — 2:50pm",
+      "content": "Excellent post, David. Hard to disagree with, and not, for once, because I can't figure out what you're talking about. Also, graphemaniacal is the best new word I've learned in a long while.\n\n"
+    }
+  ]
+}

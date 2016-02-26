@@ -1,0 +1,54 @@
+{
+  "id": "13298",
+  "title": "Something about the number of kerning pairs in a font",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Recently I've made my first text font family of 5 weights. I've noticed that each weight of my font includes aproximatedly 3000-3500 kerning pairs (assuming that pairs like v+a, v+à, v+á, v+ã, v+ä, v+â, v+å count as one kerning pair each). I've used class-based kerning in Fontlab.\n\nThen, I've opened a few text fonts that I have in Fontlab, and I've noticed that in most of them the number of kerning pairs reaches something like 1000 pairs or a little more. But also, I've noticed that in most of them, for example, there are not kerning pairs for all diacritical variations of letter \"a\" (such as à, á, â, ã, ä, å etc).\n\nI know that a lot of kerning pairs is a problem of spacing, and certainly my font still has problems. But I'm wondering if there are kerning pairs missing in those fonts with aproximatedly 1000 kerning pairs.\n\nFernando\n\n",
+  "author": "fermello78",
+  "time": "25 Jun 2005 — 2:11pm",
+  "uid": "1333",
+  "comments": [
+    {
+      "time": "25 Jun 2005 — 2:22pm",
+      "content": "Something important that I forgot to tell: each weight of my font family has the basic latin characters of Mac OS Roman encoding (but not all of them - the characters are the uppercase and lowercase letters, their diacritical variations and basic signs and pontuation in a total of 193 glyphs).\n\nFernando\n\n"
+    },
+    {
+      "time": "25 Jun 2005 — 2:35pm",
+      "content": "Yes, 3000+ pairs for basic Latin stuff is excessive... especially since you say your spacing is still not good enough! Some people say that \"too many pairs\" is a sign that your base spacing is not good, but actually even a font with good base spacing can suffer from it. So what is \"too many\" anyway? It seems to me that between 1000-2000 is good (for basic Latin) but of course that depends on the design: something like Impact will need way less pairs than something like Zapfino. Also note that, really, a few hundred pairs is enough for 95% of text.\n\nhhp\n\n"
+    },
+    {
+      "time": "25 Jun 2005 — 2:55pm",
+      "content": "Hrant,\n\nYou say 1000-2000 pairs - does that include diacritical variations of letters?\n\nthanks\n\n"
+    },
+    {
+      "time": "25 Jun 2005 — 3:32pm",
+      "content": "Yes, the whole of ASCII-8 (or Unicode equivalent). I'm not talking about  \n\"exceptionless\" kerning though, just stuff 99% of humans might ever need.\n\nhhp\n\n"
+    },
+    {
+      "time": "25 Jun 2005 — 4:00pm",
+      "content": "Rework your spacing as to eliminate kerning between vowels.  \nWhy; because all vowels have accentuated variations.\n\n"
+    },
+    {
+      "time": "25 Jun 2005 — 4:18pm",
+      "content": "That sounds like an interesting tactic, but is it worth sacrificing spacing quality just to end up with fewer pairs? Think of round-rounds for example. A tight set of pairs is certainly a turn-on\\*, but good spacing is still the real point.\n\n\\* Don't you go there!\n\nhhp\n\n"
+    },
+    {
+      "time": "26 Jun 2005 — 4:17am",
+      "content": "I have posted a topic on General Discussions about bloated kerning tables when there are many accented glyphs. I should have looked here first.\n\nI agree with Hrant that good letter spacing can eliminate many kern pairs. However, even if this is done, you can still end up with thousands of kern pairs, because of the number of possible combinations of accented letters. The kerning table rapidly expands if you have a bigger character set, that covers Latin Extended A as well as Latin1, for example.\n\nUsing kerning by classes on font of mine that implements the first three Unicode blocks produced around 4500 kern pairs. This certainly looked excessive to me. I use Fontforge on Linux, by the way, rather than Fontlab, but it sounds like kerning by classes in Fontforge does similar things to Fontlab.\n\nMy point from the other post is that there are many feasible accented letter pairs that never actually occur in any real text, because no alphabet uses all possible glyphs for native words. I proposed a method for filtering a bloated kerning table, using a programme that scans spelling dictionaries in multiple languages for actual letter pairs.\n\nI have also looked at existing fonts, to get an idea of which letter pairs typically need kerning, and how big the kerning table would normally be. Many of these fonts (which are probably not of the best quality) did not have a kern pair for accented letters corresponding to the unaccented letter pair. For example, there would be a pair for T+e, but no T+eacute. T+eacute occurs at the start of quite a number of French words, and it looked like this pair wanted kerning, though not as much as T+e. I presume that there are many fonts that are kerned mainly for English, and so they have fewer kern pairs than they should have, given the glyphs that are implemented.\n\n"
+    },
+    {
+      "time": "26 Jun 2005 — 9:38am",
+      "content": "\\>\\> Many of these fonts (which are probably not of the best quality) did not have a kern pair for accented letters corresponding to the unaccented letter pair. For example, there would be a pair for T+e, but no T+eacute.\n\nThat´s exactly what I was trying to say... I also saw fonts that are not of the best quality (mainly some system fonts)and they showed this problem.\n\nToday I had the oportunity to look at TheSans Plain´s kerning table (which probably has more quality than those system fonts), and there I could find pairs for accented letters. The number of kerning pairs is a little more than 3000.\n\nFernando\n\n"
+    },
+    {
+      "time": "26 Jun 2005 — 5:44pm",
+      "content": "I must admit it was not a good idea, Hrant. It would be something to consider though, if we had technical limitations to the number of kerning pairs allowed/supported in a font. But now we have class-kerning in OpenType ( [this comment](http://web.archive.org/web/20140809002731/http:/www.typophile.com/node/8459#comment-56064) by T Phinney is relevant).\n\nSo, comparing the total number of kerning pairs in PS T1 fonts can be misleading. A possible 'ao' pair in a font results in more or less 50 additional pairs for the accentuated letters. For a quantitative comparison, it should be better to disregard the pairs with accentuated letters.\n\n"
+    },
+    {
+      "time": "28 Jun 2005 — 11:33am",
+      "content": "3000 kerning pairs! Gasp! Kerning can be more taxing than actually designing the glyphs!\n\n"
+    }
+  ]
+}

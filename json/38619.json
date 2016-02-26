@@ -1,0 +1,90 @@
+{
+  "id": "38619",
+  "title": "InDesign CS and font weirdness!!",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi Everybody\n\nNew to this forum. Thought that I might try to post a problem that we're having.\n\nWe have a new font from HTJ - it's the font Gotham in OTF, we are using for a client.\n\nThe problem is that we have made some documents with the font, using Gotham Book, Gotham Ultra and Gotham Bold.  \nSuddenly after a couple of days, the Gotham Book is displayed as a Gotham Black Italic on the screen , on print and PDF.\n\nHowever when you select the text, InDesign shows that it is a Gotham Book (as it's supposes to be). But text is Black Italic!  \nNow if you choose the \"Find font\" menu in InDesign the Gotham Book is named \"Gotham\" not Gotham Book or Black Italic!! Only Gotham. Wired. And if your try to replace the font - nothing happens.. even if you replace the font to eg. Times.. the font is replaced to Times. When trying to replace back to a Gotham Book, the displays as Black Italic.\n\nAny way, so we tryied to copy the contents to a new document, same, the problem is carried forward. However if you make a new text box in the new document, and aplly it a a Book it displays fine (only that text box) until you save the file and opens the file again, then the new textbox is Black Italic!!!!\n\nWe have found that exporting the document to an INX file and open the INX in InDesign again the fonts are correct. But this is not a solution since this we have a huge amount of documents that we copy from.\n\nWe're using Mac 10.4.9/10 and InDesign CS (not CS2 or CS3). Same things happens and on a windows pc. We have cleared every font cache, testet on 10.5 and a fresh install of 10.4 - moved all fonts out etc.  \nWe have opened the documents in CS2 and CS3 - here the problem is gone and everything is fine. We're using some automatic stuff which only works in CS...\n\nAnyone have any idea on wy this is happening?\n\nThanks\n\nThomas\n\n",
+  "author": "<a href=\"/web/20120104001432/http://typophile.com/user/23393\" title=\"View user profile.\">tomazdk</a>",
+  "time": "<br>",
+  "uid": "23393",
+  "comments": [
+    {
+      "time": "",
+      "content": "Have you contacted H&F-J?\n\n—K\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> We have opened the documents in CS2 and CS3 - here the problem is gone and everything is fine\n\nBeacuse of that -- contact Adobe.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Thomas,\n\nThis is the problem with which we've been in correspondence with you since October 19, is that correct? Our last note in the file says that we haven't been able to recreate the problem here, using the same builds of the software.\n\nThomas Phinney at Adobe has confirmed that there is a bug in InDesign which relates to weights called \"Book,\" but I don't know that this is connected with the problem you're having. I'm asking Andy in my office to follow up with you to see if there's a way we can confirm that this problem is, or is not, related.\n\nYours,\n\nJonathan Hoefler\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thomas, to clarify:\n\nI understand that you are NOT having this problem with new documents you create, but rather with specific documents supplied to you, is that correct?\n\n"
+    },
+    {
+      "time": "",
+      "content": "I can't see this as being the same as the known limitation Jonathan mentions above. (The known issue is that weights with names that InDesign cosiders \"the same\" as \"regular\" can get confused, such as \"book\" and \"regular.\")\n\nAlthough of course there are bound to be InDesign bugs I haven't heard of, I have not previously heard of this issue. At the very least, it is not a common problem across other fonts and installations.\n\nHave you tried purging all font caches, both Adobe and OS X?\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Th. Ph. -- I don't think it's a related bug either, but I was hoping that he might run some tests to confirm. But if new documents aren't exhibiting the problem, I'm really unsure how to proceed. I suppose purging the font caches couldn't hurt.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>We have found that exporting the document to an INX file and open the INX in InDesign again the fonts are correct. But this is not a solution since this we have a huge amount of documents that we copy from.</cite>\n\nYour problem sounds like file corruption to me. Have you considered using using Apple’s automator to automatically convert all of the files to Indesign interchange and then back to indesign and letting it process all of the files overnight or while you work on something else?\n\n"
+    },
+    {
+      "time": "",
+      "content": "I had exactly the same kind of problem (Bold being displayed as Bold Italic) on CS1/Win2000 with several of my fonts, which I solved with the INX export/import trick. So I assume it is not related to that particular font.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Here's my theory:\n\n ![](http://web.archive.org/web/20120104001432im_/http:/typophile.com/files/win_weights_4914_3908.png)\n  \nIn the above chart (kindly posted by Thomas to the Build forum earlier), note that for the horizontal grouping \"400 regular\", 900 heavy (also the value for Ultra) is outside the range.  \nTherefore, perhaps the application does not consider Ultra to be part of the \"Book=400\" family, and is looking for a \"Regular\" to go with Ultra, and the next number down, Black Italic (800), is being designated thus.  \nAnd, as a Gotham \"Regular\", it takes precedence over Gotham \"Book\", as the Regular of the family to display.\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Jonathan, Thomas and all others ;)\n\nYes , thanks for the testing you did for me, however I ended the test with Andy.  \nSince there was no more to test. And not really any clue to what was going on.\n\nYour are correct in a new document the font works, however somewhere in the start of the process,  \nthe font should have been changed. I can't reproduce that.\n\nTo Thomas Phinniy: Are any ways repair a InDesign document, without doing the INX thing? Or some other way of getting this font out of the system in InDesign?\n\nFor the INX part, the thing is that we have also been experinece problems when INX'ing the file, some textboxs might get smaller and and you get the overflow icon, which means there are more hidden text in the box, this is manual task to go through the documents...\n\nAnd yes were have tried everything in Mac OS X. Purging fonts from the application, caches folders etc... notthing seems to work.\n\nThanks all,\n\nThomas K.\n\n"
+    },
+    {
+      "time": "",
+      "content": "What I forgot to mention earlier: As far as I remember (but I am not sure), the problem did not occur in newly created files but it remained when I copy/pasted a \"corrupt\" text frame into a new file, or even when I copy/pasted text into a new file. This speaks against corrupt files, doesn't it? What happens if you paste into a new document, Thomas? You seem to be able to reproduce the problem.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Here is some information that might shine some light on the issue (but I don't know what the exact problem described here was).  \nIn InDesign, we wanted faces to be somewhat independent from the families. We didn't want the older style \"bold\" & \"italic\" toggles because they were too limited, but thought some separation between the 2 would be useful with character styles, etc. (_Today I think I would not have them separated at all._)  \nAnyway, in some fonts the regular face is called \"Regular\" in others, \"Roman\", in some it is an empty string. If we have text with \"Helvetica\" as the family, and \"\" as the face, we want it to work as expected when changing the family to \"Bembo\" which doesn't have a \"\" face, only \"Regular\". So, ... there are some synonyms for regular:  \n**Roman, Regular, Book, Plain, Normal, R** _(for J fonts)_  \nWe have a similar list of italic synonyms:  \n**Italic, Oblique, Slanted, Cursive, Inclined**\n\nIt sounds like there might have been strange issues with the default face (default = empty string).\n\n"
+    },
+    {
+      "time": "",
+      "content": "Eric,\n\nThanks for that explanation. That's very likely what may have happened, the text may have been formatted with a font that didn't have a style name for the regular weight before being switched to Gotham. Is there a known bug in InDesign CS that could cause this, considering the fact that it doesn't occur in CS2 or CS3?\n\nIs there any way to get InDesign CS un-stuck from looking for the font family \"Gotham\" with the style \"\"? In Thomas' case, attempting to replace the font in the Find Font dialog doesn't work, once you try to either find an instance of the font or replace the font nothing happens.\n\nThank you!  \nAndy\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Tim,\n\nTo answer your question:\n\n\"What happens if you paste into a new document, Thomas? You seem to be able to reproduce the problem.\"\n\nIf we paste text from a document, where the text is wrong, into a new document the problem is carried along into the document.  \nSomehow this tells me that InDesign have a problem with some styles or boxes in that document.\n\nThomas\n\n"
+    },
+    {
+      "time": "",
+      "content": "I corrected a typo in my previous post and it moved it to the end. Hmmm. Won't do that again.  \nThere are definitely bug fixes & heuristic improvements made to this area for CS2 & CS3 -- I couldn't list them off the top of my head, but this has been a problematic area over the years.  \nHere is some additional detail that may explain it:  \nFor each font family (e.g. Gotham) we create a table in the document that maps each face name to a postscript name. It sounds like in CS the table got screwed up somehow and the blank string got mapped to the postscript name for \"gotham black italic\". INX recreates this table from scratch. The bug appears to be that this table is bad. (Copying text to a document that never used gotham can copy the bad table.) Perhaps the document was modified on a machine without a full installation of the font?  \nEither way, it sounds like the correct answer is to upgrade if possible.\n\n"
+    },
+    {
+      "time": "",
+      "content": "On a side note, Nick's guess is an unrelated issue. That table had to do with style-linking in typical Windows GDI applications which limit themselves to four-member families, and has nothing to do with behavior on Mac OS, nor with InDesign on any platform.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Be that as it may, I have had some success getting all the members of an OpenType family to show up as a single entry, by changing the numerical value of the weights. It seems to be an OS X thing, rather than application related.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I am wondering if any of this is related to another misbehaviour in InDesign I noticed this week. I had to generate a number of fonts in Mac PS Type 1 format where roman and italic members are stylelinked. Some of these fonts have the words 'Pi' and 'Exp' in their familynames (e.g. 'Myfont Exp' and 'Myfont Pi').\n\nThese fonts function perfectly in regular Cocoa apps like Pages and TextEdit and also in Microsoft apps like Word X. But in InDesign CS/CS2/CS3 (and other Adobe apps too) the font menu did not display them properly. The other fonts I generated are perfectly fine - 'Myfont Txt-Regular' and 'Myfont Txt-Italic' have one entry in the font menu with 'Regular' and 'Italic' in a submenu– but the ones named Pi and Exp have seperate entries in the font menu, and are not stylelinked at all.\n\nIt appears to me that Adobe apps treat Exp and Pi fonts as something special, and I am curious what that is.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hello All,\n\nFirst time post. I am very interested in the font knowledge that is abundant on this site. I have a similar problem with the font family of Gotham. Except my issue is we receive the files from a publisher in PDF format. They are using CS2 and exporting from it to pdf. We are a little different from print in that we need fonts to be searchable and the need to be able to bookmark the text. For some reason we are experiencing more problems lately with bad encoding of some fonts. Gotham is on top of our list recently. Every time we try to highlight and paste the text or bookmark it, it is creates bad characters.\n\nWhat happens when we bookmark the Gotham font, is Acrobat's 8 version of bad font. It's the alien in a box. This is an issue that we are coming across more and more. A little background on the PDF's is they are untouched in the sense that we are not distilling, optimizing, enhancing, or any other compression. We are using the original files exported from InDesign CS2.\n\nThanks for any help or suggestions it would be greatly appreciated!\n\nErik\n\n"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "101320",
+  "title": "FontLab fatal, yet another compilation error:",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "[FATAL] aborting because of errors:  \nsyntax error at \"-\"  \n[/Users/andreasstotzner/Library/Application Support/FontLab/Studio 5/Features/fontlab.fea 24]\n\nThis is the message I get when compiling.  \nDoes anyone understand this? Help very much appreciated.\n\n",
+  "author": "Andreas Stötzner",
+  "time": "12 Mar 2013 — 9:13am",
+  "uid": "17347",
+  "comments": [
+    {
+      "time": "12 Mar 2013 — 9:43am",
+      "content": "I added the **ccmp** to the existing feature code. Now I wonder if the hyphens in my special glyphs names may have caused the trouble. The beginning looks as follows:  \n`\nfeature ccmp {# Dania Akzentkombinationen\n  sub uni0252 uni0324 by d-a2-1;\n  sub d-a4 uni030A by d-a4-1;\n  sub d-ae-1 uni030A by d-ae1-1;\n  sub d-ae-1 gravecomb by d-ae1-2;\n  sub d-ae2 uni030A by d-ae2-1;\n  sub d-c2 uni0307 by d-c2-1;\n`\n\n**d-a4-1** and the like are special custom glyphs in the font.\n\n"
+    },
+    {
+      "time": "12 Mar 2013 — 9:51am",
+      "content": "Yes, hyphens in glyph names could well be a problem. See section 4 of the relevant Adobe developer document:  \n [http://www.adobe.com/devnet-archive/opentype/archives/glyphnamelimits.html](http://web.archive.org/web/20140809101719/http:/www.adobe.com/devnet-archive/opentype/archives/glyphnamelimits.html \"http://www.adobe.com/devnet-archive/opentype/archives/glyphnamelimits.html\")\n\n"
+    },
+    {
+      "time": "12 Mar 2013 — 10:56am",
+      "content": "I did an alternative try out with all the hyphens in names eliminated.  \nThe same error.  \n– ?\n\n"
+    },
+    {
+      "time": "12 Mar 2013 — 11:25am",
+      "content": "Names changed not only in the glyphs but in any classes and OT features referencing them?\n\n"
+    },
+    {
+      "time": "12 Mar 2013 — 2:01pm",
+      "content": "Don't do things like this.\n\nMaybe, if your font is intended for dilettantes' only -- an author who will not ever make use of an editor, designer, or compositor, and whose work will **never, ever** be rendered in any font other than yours, and where no XML document will ever be needed, it is passable, but not really.\n\nUnicode is suppose to end all the nonsense of special encodings -- what character you get depends on what font you're in -- and that means ccmp should allow decompiling to canonical Unicode. Look up the proper form.\n\nAnd take some pity on the poor editor, designer, typesetter, too. The author will supply his/her text in Times, (or Gentium if everyone's terribly lucky), and someone's going to have to figure out how to use your font with the text string supplied.\n\nWith that in mind, what does\n\nsub d-ae-1 uni030A by d-ae1-1;\n\ninvolve?\n\na **d** , ligatured with an **ash** character (variant 1) with a **ring accent**?\n\nIf that's the case, I'd make up the ash with a ring & substitute variant one in the same set where I substituted the variant ash character, then lig it with the d.\n\nAnd if ae is a ligature rather than the ash character, make that clear (work), too.\n\nEverything should all work seamlessly with your font if the (original) text stream is in canonically correct Unicode, with the designer/typesetter having to figure out only which character variant to select. And once a pdf is made, extracting text should be seamless, too.\n\n\\* \\* \\*\n\nAs for debugging, the old rule is get something that works, and add one thing until that works, too. Then add the next. In a play file. You've got my sympathy here -- been there.\n\n"
+    },
+    {
+      "time": "12 Mar 2013 — 4:00pm",
+      "content": "\\> Names changed not only in the glyphs but in any classes and OT features referencing them?\n\nno classes involved but names changed for glyphs \\*and\\* in OT features.\n\n"
+    }
+  ]
+}

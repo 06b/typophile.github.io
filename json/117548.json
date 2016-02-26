@@ -1,0 +1,95 @@
+{
+  "id": "117548",
+  "title": "Creating MM fonts",
+  "forum": "Build",
+  "tags": [
+    "MM multiple master",
+    "Build"
+  ],
+  "content": "Hi all,\n\nI'm working on a student project for an optically responsive typeface design to be used in Adobe Indesign CS6. A little over-ambitious for my first ever type design project admittedly but I have made good progress up until this point. I now, however, have hit a complete dead end and desperately need some advice from typographic aficionados.\n\nSo far from research I understand that;  \nOpenType does support a 'size' tag but that this tag is not relevant to any desktop publishing software.  \nAdobe InDesign features a 'Automatically Use Correct Optical Size' preference, left over from the advent of Adobe MM typefaces, that never really took off as a format. But, however, will still work.\n\nBearing this in mind I have produced two compatible master fonts along an optical axis and exported them from Fontographer as a PST1 MM format file. From this master file I am able to produce the intermediate interpolations. The issue that I am now having is that I am unsure what file format/naming conventions I am required to use in order that InDesign automatically use the correct design for each optical size. I've gone back and forth on this for weeks and really should move on to other work but I'm a bit stubborn when it comes to this kind of thing! All the documentation that I am able to find doesn't make it clear enough for me what I need to do now and not owning any MM files myself I am unsure of what state they exist in…\n\nAre all of the interpolations stored within the MM as a single file or is it simply name tags that unite the family in desktop publishing software. If anybody has an old Adobe MM file that they wouldn't mind sending to me to scrutinise that would be amazing!\n\nMany thanks,  \nMatt\n\n",
+  "author": "MattDWoodman",
+  "time": "26 Jun 2014 — 7:17am",
+  "uid": "221103",
+  "comments": [
+    {
+      "time": "26 Jun 2014 — 7:46am",
+      "content": "Yes, quite ambitious! Two things:  \n1: [http://typophile.com/node/106887](http://web.archive.org/web/20150420225208/http:/typophile.com/node/106887 \"http://typophile.com/node/106887\")  \n2: [http://justanotherfoundry.com/size-specific-adjustments-to-type-designs](http://web.archive.org/web/20150420225208/http:/justanotherfoundry.com/size-specific-adjustments-to-type-designs \"http://justanotherfoundry.com/size-specific-adjustments-to-type-designs\")\n\nhhp\n\n"
+    },
+    {
+      "time": "26 Jun 2014 — 8:19am",
+      "content": "Thanks for your reply hrant but I see no answer to my predicament in these two links? I've created a compatible multiple master file containing two masters but am not aware of how to produce/format/name the interpolations so that Adobe Indesign will select them automatically. According to my research this should technically be feasable? Any thoughts?  \nM\n\n"
+    },
+    {
+      "time": "26 Jun 2014 — 9:23am",
+      "content": "Matt, all the masters are stored in a single file. For instance, my Adobe Jenson MM font file is named AJenMM and contains 6 masters. If you haven't already read it, the document at this link may provide the information you seek, particularly pages 19-20 concerning the Optical Axis Map.  \n [https://partners.adobe.com/public/developer/en/font/5091.Design\\_MM\\_Fonts...](http://web.archive.org/web/20150420225208/https:/partners.adobe.com/public/developer/en/font/5091.Design_MM_Fonts.pdf \"https://partners.adobe.com/public/developer/en/font/5091.Design\\_MM\\_Fonts.pdf\")\n\nAlso be sure and read the section on instance naming limitations although it may not apply in your case.\n\n"
+    },
+    {
+      "time": "26 Jun 2014 — 9:40am",
+      "content": "@George\n\nThat definitely gives me a better idea of the direction to head in though also confuses things somewhat. So now I need to know using what software I am able to create the correct MM file including interpolations? It seems to me that Fontographer only allows me to create a file with the initial masters at each opposite end of my optical axis. I've actually read that document a couple of times but can't find the information that I require.\n\nLong shot but is there any chance that you would be willing to share the AJenMM file? Purely for academic purposes, I think I need to have a closer look at a working model. If so would you mind emailing to [wasteofpaper@hotmail.co.uk](mailto:wasteofpaper@hotmail.co.uk) ?\n\nThanks in advance!\n\n"
+    },
+    {
+      "time": "26 Jun 2014 — 9:50am",
+      "content": "On second reading perhaps I have that confused. Your AJenMM file contains 6 masters but no interpolations. So what I still need to understand is the file type and correct naming conventions for my interpolations in order that InDesign may be able to 'Automatically Use the Correct Optical Size'?\n\n ![](http://web.archive.org/web/20150420225208im_/http:/typophile.com/files/Screen%20Shot%202014-06-26%20at%2017_4885.49.13.png)\n  \n\n ![](http://web.archive.org/web/20150420225208im_/http:/typophile.com/files/Screen%20Shot%202014-06-26%20at%2017_4032.49.35.png)\n  \nThese images show my current naming system and how this works in InDesign but still there is no automation… \n"
+    },
+    {
+      "time": "26 Jun 2014 — 11:45am",
+      "content": "I believe the way it works is that InDesign creates the instances on-the-fly, dependent upon point size, from the loaded masters. You don't need to furnish any instances, just the Postscript MM file with the masters.\n\nJust a FYI: it is considered bad form to ask for commercial fonts here and if I am not mistaken, prohibited.\n\n"
+    },
+    {
+      "time": "26 Jun 2014 — 11:59am",
+      "content": "What George said: You do not need to create any instances at all. Just have an MM optical size axis, and it should work. _Unless_, of course, the InDesign team has at some point removed that functionality. This may have happened at some point—I am sorry I do not remember specifically, but it would not surprise me if it did. Adobe officially ended support for multiple master fonts quite a few years ago, back when I was on the type team.\n\n"
+    },
+    {
+      "time": "26 Jun 2014 — 1:01pm",
+      "content": "@Thomas  \nIt still works in InDesign CS6.\n\n"
+    },
+    {
+      "time": "27 Jun 2014 — 4:23am",
+      "content": "Ok I understand, that makes things simpler! The only question I have now is surely there needs to be some kind of supporting file alongside the MM format to express to InDesign at which points on the optical axis an interpolation is necessary, otherwise how does the publishing software know the create an instance at \\*example 72pt for the top end of the axis. Is this what an .AMFM file does?\n\n@Thomas It definitely still works in CS6 and I believe CC too! [https://www.flickr.com/photos/nicksherman/9081693584/in/photostream](http://web.archive.org/web/20150420225208/https:/www.flickr.com/photos/nicksherman/9081693584/in/photostream \"https://www.flickr.com/photos/nicksherman/9081693584/in/photostream\")\n\n@George My sincere apologies, I'm nearing my wits end with this project and for academic purposes it would make my life a lot easier if I were able to study a commercial MM file. Your point is completely understood however.\n\nI currently have a 33kb Postscript Type 1 outline font file, set up as a MM with an optical axis but InDesign is recognising it in the 'fonts' folder. Something isn't right and I cannot work it out?!\n\n"
+    },
+    {
+      "time": "27 Jun 2014 — 5:00am",
+      "content": "\\*InDesign isn't recognising it in the 'fonts' folder\n\n"
+    },
+    {
+      "time": "27 Jun 2014 — 5:29am",
+      "content": "@Thomas Just discovered purely coincidentally whilst researching that you are now acting VP of FontLab! I have a compatible set of master outlines for my optical MM font but the file exported from Fontographer doesn't seem to be working at all. I'm going to try with FontLab instead. Is there any documentation support for doing this in FontLab?\n\n"
+    },
+    {
+      "time": "27 Jun 2014 — 6:23am",
+      "content": "You should only need two files: the Type 1 MM printer file and its accompanying metrics file. When you build your MM file you must define an optical map (explained on pages 19-20 in the document). Refer to the respective product manuals for Fontographer or FontLab Studio for instructions on how to accomplish that.\n\n"
+    },
+    {
+      "time": "27 Jun 2014 — 6:56am",
+      "content": "@Thomas\n\nThanks so much! Almost there. So the accompanying metrics file is the .AMFM file if I understand correctly? And this will need to be created from scratch?\n\nI actually managed to source the .AMFM file for AJenMM from here:\n\n[ftp://ftp.hs-heilbronn.de/system/postscript/adobe/type/mac/all/afmfiles/...](ftp://ftp.hs-heilbronn.de/system/postscript/adobe/type/mac/all/afmfiles/376-400/AJenMM.AMFM \"ftp://ftp.hs-heilbronn.de/system/postscript/adobe/type/mac/all/afmfiles/376-400/AJenMM.AMFM\")\n\nso presumably I can adjust all of the parameters, in TextEdit, to my own typeface and so long as they exist together in the same directory that should now work?\n\nCheers,  \nM\n\n"
+    },
+    {
+      "time": "27 Jun 2014 — 8:59am",
+      "content": "@Thomas & @George\n\nI've finally managed to achieve my goal in producing a responsive typeface that adjusts its design at varying optical sizes! Not bad for my first ever type design and a student project. It seems that Fontographer just wasn't giving me the control that I needed over variables to make this idea a reality. Once I started working on the design in FontLab it all fell into place relatively quickly. The Multiple Master options are a lot more detailed and customisable in this case.\n\nJust want to thank both of you guys so much for posting and bothering to reply to my incessant posting. I probably wouldn't have got here without yours and the support of a few others on various forums!\n\nCheers again,  \nM\n\n"
+    },
+    {
+      "time": "27 Jun 2014 — 9:41am",
+      "content": "Awesome. So I'm curious, how robustly does it work across platforms and applications?\n\nhhp\n\n"
+    },
+    {
+      "time": "27 Jun 2014 — 9:51am",
+      "content": "\\> Is there any documentation support for doing this in FontLab?\n\nQuite a bit in the manual, yes. But it seems you are good now. Yay!\n\nFontographer also has MM support, but I haven't generated an MM from that app in about 17 years, so my memory is a bit fuzzy.\n\nBroadly speaking, generating either a Mac or Windows (whichever platform you're on) Type 1 MM font from FontLab Studio should do everything you need, as long as InDesign still supports it.\n\nYou are lucky on that score. Because there is no real UI for it to speak of, the InDesign team hasn't felt any strong reason to pull the support (unlike the MM slider in Illustrator, which is long gone).\n\n"
+    },
+    {
+      "time": "27 Jun 2014 — 10:35am",
+      "content": "@hrant  \nAs far as I'm aware it may only be supported by Adobe Indesign (though notably it seems to be supported in almost all versions including the latest, CS6 and CC) as far as other desktop publishers go I don't know. Though I'm certain it obviously won't work in word processing. For my means I only really needed it to work in InDesign :)\n\n@Thomas  \nI found documentation on the FontLab manual to be immensely helpful. Fontographer on the other hand surprisingly not so much and quite misleading. I suppose being the platform for 'intermediate and beginner' type designers Fontographer just didn't provide the options that I needed to take this project forward. There seemed to be very little integrated control over the MM axis and the files MM PST1 file I exported from Fontographer wouldn't open in any other type applications (in addition to not being recognised by InDesign).\n\nAs you have already stated, however, the Type1 MM files from FontLab were perfect, though I did have to use TransType to convert them to a Mac friendly version as my model of FontLab doesn't seem to export Macintosh Multiple Masters! I've tested already and the optical axis is working perfectly in InDesign.\n\nIt's fortunate that the InDesign feature remains though kind of feels as though the technology is regressing in a way. It would be great to see more UI and support for Multiple Masters to allow for much more sophisticated typesetting (particularly for optical sizing) though having said that I can also see the downsides of such options being automated or presented to a less learned audience.\n\nEither way I've done what I set out to do and learnt a shit load in the process!\n\n"
+    },
+    {
+      "time": "27 Jun 2014 — 10:43am",
+      "content": "Thomas, do you happen to know what is the oldest version of InDesign that supports MM? I own CS2. :-/\n\nhhp\n\n"
+    },
+    {
+      "time": "27 Jun 2014 — 11:06am",
+      "content": "Raph's first comment here:  \n [http://typophile.com/node/20335](http://web.archive.org/web/20150420225208/http:/typophile.com/node/20335 \"http://typophile.com/node/20335\")\n\nstates that 'Automatically use correct optical size' dates back as far as InDesign 1.0 so suggests that MM support reaches that far back to legacy formats :)\n\nM\n\n"
+    },
+    {
+      "time": "27 Jun 2014 — 6:38pm",
+      "content": "That sounds right to me. It was certainly in 2.0, the version before CS1.\n\n"
+    }
+  ]
+}

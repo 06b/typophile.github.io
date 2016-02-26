@@ -1,0 +1,42 @@
+{
+  "id": "48828",
+  "title": "ATM Adobe Type Manager for Windows reinstall problem",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hello,  \nI had a bad day as my PC burned (really!!!)  \nHad to reinstall from scratch with my backups.\n\nHopefully, I had a copy of my C:\\PSFONTS folder.  \nI thought copying that folder to my fresh C:\\ and reinstalling ATM after, will just do find and ATM will have updated automatically the font list but it doesn't work. ATM just show up default font list from its install but it doesn't list my OT and PS fonts from the copied PSFONTS folder.  \nAm I missing some configuration file or database file somewhere ?  \nI have a image copy of my C:\\ that burned so I can go look after some files if needed.  \nI tried to find some config file in Application Data folders but without success, any clue ? Anyone already done that ?  \nThanks a lot.  \nI really don't want go trhought the process of reinstalling manually all my fonts as it was already setup find.\n\n",
+  "author": "absynthe",
+  "time": "27 Aug 2008 — 2:46am",
+  "uid": "8235",
+  "comments": [
+    {
+      "time": "27 Aug 2008 — 5:14am",
+      "content": "The downfall of all font management programs is the database. Bulletproof databases seem still embarrassingly difficult to build. ATM Deluxe on both Mac and Windows has always had the most robust database structure of comparable products. That said, I dimly recall there was some way you could manage to lose it. Let's hope someone from Adobe will be able to help. One problem is that nobody likes to have a database structure in simple ASCII (for space and time reasons), yet that is the best way to keep it clean and the only way it can be manually rebuilt if necessary.\n\n"
+    },
+    {
+      "time": "27 Aug 2008 — 5:45am",
+      "content": "That ATM database has to be located somewhere, any ideas ?\n\n"
+    },
+    {
+      "time": "27 Aug 2008 — 6:17am",
+      "content": "OK, I think I have located it, a file called ATMREG.ATM in C:\\Windows\n\n"
+    },
+    {
+      "time": "27 Aug 2008 — 4:37pm",
+      "content": "I don't think that is it. If I remember correctly, the ATM db file has an extension of .ini. If you don't have an answer by tomorrow I'll check on my Win machine at work and locate it for you.\n\nGeorge\n\n"
+    },
+    {
+      "time": "28 Aug 2008 — 12:57pm",
+      "content": "As far as I can see, the file is not pure ASCII, so I imagine if it is in the least damaged, it would be very difficult to reconstruct. But if all you need is to find the file on an old system, perhaps everything will work?\n\n"
+    },
+    {
+      "time": "29 Aug 2008 — 12:21am",
+      "content": "I believe that ATMREG.ATM has something to do with ATM database, as size increase while feeding my font list. Billtroop, you right, not the kind of file you want to reconstruct, I seriously doubt it can be. I had daily backups of my system so I can recover it from a previous working setup, that what I was looking after. I tried but without success, some troubles like trying to popup the ATM TT folder in C:\\windows\\fonts\\ that was set in my system before. May be I should try it by the recovery consol in DOS mode. That fonts folder in c:\\windows has special behaviour.  \nMajus, I'll be glade if you can take few minutes and look for that .ini file.  \nThanks.\n\n"
+    },
+    {
+      "time": "29 Aug 2008 — 5:05pm",
+      "content": "Absynthe, I finally remembered to look into the issue today and I was wrong. You have the right file (ATMREG.ATM). That is indeed the database file.\n\nYou didn't mention what version of Windows you are using or which version of ATM you are using. What I suggest doing is to do a search for ATMREG.ATM and determine its location, then replace it with a backup copy.\n\nI've been responding under the assumption that you have ATM Deluxe so my answers are aimed in that direction. In general, if you have to reinstall ATM Deluxe and you have a backup copy of the ATMREG.ATM file, then just replace the newly installed file with your backup copy, restart, and ATM Deluxe will list all your fonts as before.\n\nIf you don't have a backup copy of the database file, all your missing fonts probably will have to be added to ATM Deluxe manually. If you are using ATM Deluxe version 4.1, be absolutely sure that your font set names don't exceed 31 characters. If any set foldername does, all font sets after that point will disappear from view. While they will still be in the ATMREG.ATM database, ATM cannot manage them so you cannot use them.\n\nOnce you get back on track, make a copy of your database file and store it somewhere safe. Update it whenever you've added more fonts.\n\n"
+    }
+  ]
+}

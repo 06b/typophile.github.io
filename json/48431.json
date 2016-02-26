@@ -1,0 +1,62 @@
+{
+  "id": "48431",
+  "title": "fnt and bmap converter?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi,\n\nI have a few .fnt fonts and would like to convert them to TrueType TTF format... What program should I use?\n\nBest Regards,  \njch02140\n\n",
+  "author": "jch02140",
+  "time": "14 Aug 2008 — 6:16pm",
+  "uid": "33024",
+  "comments": [
+    {
+      "time": "14 Aug 2008 — 7:32pm",
+      "content": "Are .fnt fonts with vector or bezier curve outlines or bit map descriptions?\n\nTrueType TTF fonts only support outlines, and do not support bit map descriptions.\n\nIf rhe .fnt fonts have bit map descriptions, there is no inexpensive way to convert them to TrueType TTF fonts. Rather, a talented graphic artist and type designer must create outlines which match the bit map descriptions.\n\nThe cost of this kind of font conversion depends upon the experience and pricing structure of the graphic artist and type designer.\n\nI estimate that the cost per font will be about $2,000 per font, or a flat amount for many such fonts, as low as $500 to $750 per font, depending upon the number of fonts, and their resolution. If anyone quotes you much less, become very wary and expect to receive inferior workmanship.\n\n"
+    },
+    {
+      "time": "14 Aug 2008 — 8:02pm",
+      "content": "Hi gohebrew,\n\nThanks for the info on the fnt format. I am uncertain what kind of fnt files they. Is there a way to determine if a fnt is a vector or outline, etc?...\n\n"
+    },
+    {
+      "time": "15 Aug 2008 — 5:43am",
+      "content": "Here's a link to the format details from Microsoft:  \n [http://support.microsoft.com/kb/65123](http://web.archive.org/web/20141018045747/http:/support.microsoft.com/kb/65123)  \nThat will help you figure out what's in the font, if you open it up in a hex editor.\n\nIf it's a Windows pre-3.1 font, I think most of those were bitmap, in which case you're out of luck, but there were vector printer fonts also. I don't know of a converter for those, but it seems like something that ought to exist somewhere. If it's something else like a device font, I'd guess you should probably go to the vendor that produced it and see if they can convert it for you.\n\n"
+    },
+    {
+      "time": "15 Aug 2008 — 10:38am",
+      "content": "Hi archaica,\n\nThanks for the link. Though I am uncertain how I should use that tool since I am still trying to figure out how to use the tool...\n\nI am not very experience with hex editing so it might take me awhile too...\n\n"
+    },
+    {
+      "time": "15 Aug 2008 — 11:58am",
+      "content": "You don't want to edit it with a hex editor; it's just a way to check the file format, by looking at the location where the relevant information is stored (the 68th byte, it looks like). But on reading that page again, I realize that the FontFmt.exe tool probably tells you that. However, not having any \\*.fnt files to try it out on, I don't really know.\n\nIf \\*.fnt fonts still work on Windows, there's an easier way to guess whether it's bitmap or vector. Just install the font and try it out. If it looks horrible when used at an odd prime-number size like 17 points, it's probably bitmap.\n\n"
+    },
+    {
+      "time": "15 Aug 2008 — 8:43pm",
+      "content": "I have many progams it is Kilmacud Semifinals .exe How mayny font must be ripped?\n\n"
+    },
+    {
+      "time": "20 Aug 2008 — 2:24am",
+      "content": "Thanks for the help. I also want to know how I can convert .bmap font files...\n\nIt seems to be of Mac type... but I am uncertain...\n\n"
+    },
+    {
+      "time": "20 Aug 2008 — 10:30am",
+      "content": ".bmap files are most likely old (pre-OS X) Macintosh resource-fork bitmap fonts. If the goal is still to \"convert\" to TTF, gohebrew's original advice on converting to TTF outlines still applies\\*: there is no inexpensive way to convert bitmap/raster data into scalable outlines; at least not a way that will yield acceptable results.\n\n\\*One point to clarify though: it \\*is\\* actually possible to include (\"embed\") bitmap data in a TTF file. This is frequently done as a sort of cheap replacement for high-quality, manual TrueType hinting. Bitmaps in TTFs are usually provided as a supplement to outline data that doesn't render well at small sizes. However, it is possible to build a \"bitmap-only\" TTF, i.e. with only embedded bitmaps and no outline data. Not all operating systems and applications can make use of these effectively, though, and even those that can may encounter some problems. Bitmap-only TTF should not be viewed as anything more than a temporary solution.\n\n"
+    },
+    {
+      "time": "20 Aug 2008 — 11:04am",
+      "content": "Does the the new OS X still able to read .bmap font files?...\n\n"
+    },
+    {
+      "time": "20 Aug 2008 — 3:53pm",
+      "content": "If the resource fork is intact, yes, OS X should be able to read the files, though I don't think it actually makes use of them as installed fonts, unless combined with the corresponding PostScript Type 1 file (this is the old way that PostScript Type 1 outline fonts were supported under pre-OS X Mac). The old ResEdit utility, running under Classic, should be able to read them (and edit...sort of, though it usually mangles some contents; and it does not do any kind of conversion to other formats). Many font-editing applications can also read them.\n\nUnfortunately if the files have ever been stored on a filesystem that is not aware of resource forks (that is: nearly every non-Macintosh file system), or compressed/archived using a method that does not preserve resource forks (tar, rar, gzip, non-OS X zip), then the files will be useless since all of the useful information is included there.\n\n"
+    },
+    {
+      "time": "23 Aug 2008 — 12:14pm",
+      "content": "Hi,\n\nThanks for the help. I try to install the bmap fonts in Mac OS X but the system doesn't seems to recognize them... The files I copied are coming straight from a Mac font CD.. so I guess the resource forks should be included...\n\nThere are two files for each style of font: one with no extension and the other with .bmap as the extension name...\n\n"
+    },
+    {
+      "time": "28 Oct 2011 — 10:15am",
+      "content": "I'm having the same issue...\n\n"
+    }
+  ]
+}

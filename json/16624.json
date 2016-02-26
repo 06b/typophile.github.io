@@ -1,0 +1,26 @@
+{
+  "id": "16624",
+  "title": "creating a \"sometimes\" styalistic alternative?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "We have a job in to typeset, the first in what will be a long series, the letters of Henry James. It turns out that the publisher wants to use a special ampersand in some places where James used “his” ampersand. While the publisher has not yet found money for an XML version of the book(s), It does seem likely, especially since the eventual publication of all the letters will run many years.\n\nSo while it is not hard to create and set the “special” ampersand, if I put it as such in the composition file, there will be a problem downstream.\n\nI believe InDesign CS II does not support salt, which might be one way to typeset different ampersands, while retaining the general Unicode number for an ampersand.\n\nThe other way I can think of is to embed a “private use” character of zero width in the file before all the ampersands to be rendered with the special character, then use “contextual alternatives” to set the special ampersand in the book. From limited testing on another matter, the private use character will drop out in plain text, leaving just the call for the ampersand, so an XML file using any font will at least display an ampersand – though not, of course, James’ rendition.\n\nSill it bugs me to approach the matter this way. Anybody think of a better solution?\n\nTIA\n\n [‹ Making shapes of certain sizes in FontLab](http://web.archive.org/web/20071109102618/http:/www.typophile.com/node/16626 \"Go to previous forum topic\") [typeface testing ›](http://web.archive.org/web/20071109102618/http:/www.typophile.com/node/15453 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20071109102618/http://www.typophile.com/user/5094\" title=\"View user profile.\">charles_e</a>",
+  "time": "<br>",
+  "uid": "5094",
+  "comments": [
+    {
+      "time": " 5.Dec.2005 9.31pm",
+      "content": "InDesign CS2 supports Stylistic Sets (ss01 - ss20).\n\n"
+    },
+    {
+      "time": " 6.Dec.2005 6.41am",
+      "content": "Yes, thanks. I was thinking that the appropriate use of sets is\n\n“Function: In addition to, or instead of, stylistic alternatives of individual glyphs (see ’salt’ feature), some fonts may contain sets of stylistic variant glyphs corresponding to portions of the character set, e.g. multiple variants for lowercase letters in a Latin font.”\n\nThere aren’t going to be multiple variants, but I suppose this is a case of whatever works.\n\n"
+    },
+    {
+      "time": " 6.Dec.2005 9.54am",
+      "content": "You could also use the titl - Titling - feature, though that’s probably not as Kosher as a Stylistic Set, but it would be supported by Illustrator and Photoshop. (Stylistic Sets are presently only supported by InDesign CS2.)\n\nAs long as your alternate ampersand is named “right”, you shouldn’t have problems. The correct form would be ampersand.alt (or ampersand.James, or something like that, but I would stick with .alt.)\n\nAnother alternative might be to have a separate version of the face with the “basic” ampersand changed to the Jamesian ampersand, and use that font for all James quotations.\n\n"
+    }
+  ]
+}

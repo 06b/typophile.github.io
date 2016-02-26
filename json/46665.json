@@ -1,0 +1,42 @@
+{
+  "id": "46665",
+  "title": "Adding combining accents?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Combining accents\n\nI'm wondering how many people are adding the combining accents to their fonts and how they're being added. Are you creating additional characters for those unicode points or merely double coding the existing accents?\n\nAnd what sorts of problems, if any, are you finding with implementing the mark feature, besides combining accents not being placed correctly?\n\nGeorge\n\n[http://nobodoni.com](http://web.archive.org/web/20131014092550/http:/nobodoni.com/ \"http://nobodoni.com\")\n\n",
+  "author": "gthompson",
+  "time": "21 Jun 2008 — 9:09am",
+  "uid": "4883",
+  "comments": [
+    {
+      "time": "21 Jun 2008 — 4:11pm",
+      "content": "\\> _Are you creating additional characters for those unicode points or merely double coding the existing accents?_\n\nYou mean, use the same glyph for `U+00B4 ACUTE ACCENT` and `U+0301 COMBINING ACUTE ACCENT` ? AFAIK that shouldn't be done because combining diacritics are supposed to have 0 (zero) advanced width, whereas the standalone diacritics should have some advanced width.\n\n\\> _And what sorts of problems, if any, are you finding with implementing the mark feature, besides combining accents not being placed correctly?_\n\nIf the combining accents are not being placed correctly, it suggests that either a) the anchors aren't placed correctly, b) the 'mark' feature is not well implemented, or c) both. How are you putting the 'mark' feature into your fonts?\n\nIt's not possible to do the 'mark' feature with the current public AFDKO, but I'm using an internal version that does it, and I'm getting the expected results when the font is used in InDesign CS3.\n\n"
+    },
+    {
+      "time": "21 Jun 2008 — 4:58pm",
+      "content": "<cite>I’m getting the expected results when the font is used in InDesign CS3.</cite>\n\nYou are? I had a nasty surprise using [Legendum](http://web.archive.org/web/20131014092550/http:/home.kabelfoon.nl/~slam/fonts/fonts.html) -- in CS3, the mark function ceased to work properly whenever there was a font change at the next character. Very nasty, because I intended to use marktobase and marktomark for positioning _lots_ of linguistic accents on almost every character conceivable.\n\nI settled for a PS-type OTF with contextual alternates for the accents.\n\nID ME user Harbs said he didn't have any problems using that same Legendum; then again, the ME version has far better OTF support...\n\n"
+    },
+    {
+      "time": "21 Jun 2008 — 9:09pm",
+      "content": "_If the combining accents are not being placed correctly, it suggests that either a) the anchors aren’t placed correctly, b) the ’mark’ feature is not well implemented, or c) both. How are you putting the ’mark’ feature into your fonts?_\n\nIt's been mainly a problem that a particular anchor doesn't quite work for all accents. Some come out looking fine, some are a little off. For example the anchor point one one glyph works well for several accents, but not all, and moving the anchor for those accents creates problems with another glyph. So I'm wondering if it's a matter of compromise as to position or if I'm missing something obvious in setting the anchors.\n\n_AFAIK that shouldn’t be done because combining diacritics are supposed to have 0 (zero) advanced width, whereas the standalone diacritics should have some advanced width._\n\nI guess my question is if I'm pre-building accented characters according to unicode how necessary is it to have the zero width combining accents in addition to the standalone if I'm setting anchors for placement? And if the zero width is necessary why do some fonts not do it, eg. Arno Pro?\n\nGeorge  \nI felt bad because I had no shoes, until I met a man who had no Bodoni\n\n"
+    },
+    {
+      "time": "22 Jun 2008 — 1:46am",
+      "content": "\\> _You are? I had a nasty surprise using Legendum — in CS3, the mark function ceased to work properly whenever there was a font change at the next character._\n\nI didn't know about that problem. It's nasty indeed. Everything works as expected if no other font is used, though.\n\n\\> _ID ME user Harbs said he didn’t have any problems using that same Legendum; then again, the ME version has far better OTF support..._\n\nIt's true that the ME version supports more languages and OT features, but it's not immune to bugs. And I've seen a really nasty one too, where upon applying 'smcp' or 'c2sc' to a font containing proper small caps (e.g. Garamond Premier Pro), the Latin small caps would come out correct, but the Greek and Cyrillic small caps would simply be scaled down caps.\n\n"
+    },
+    {
+      "time": "22 Jun 2008 — 1:57am",
+      "content": "\\> _So I’m wondering if it’s a matter of compromise as to position or if I’m missing something obvious in setting the anchors._\n\nYou don't have to necessarily compromise. You can always add one more anchor to the base glyph, if that's required. But your problem might be related with the position of the anchor in the combining accent.\n\n\\> _And if the zero width is necessary why do some fonts not do it, eg. Arno Pro?_\n\nThat particular one is a known bug. But Arno has no 'mark' feature. Those combining mark characters are only there for the 'ccmp' feature.\n\n"
+    },
+    {
+      "time": "22 Jun 2008 — 3:02am",
+      "content": "<cite>So I’m wondering if it’s a matter of compromise as to position or if I’m missing something obvious in setting the anchors.</cite>\n\nAs Miguel said.\n\nMy impression is that if the positioning in a particular base/mark combination is wrong, then anchors may not be placed ideally in either base or mark glyph or both. It's like with spacing letters -- the better the sidebearing are, the less kerning is required. (And mark positioning _is_ a form of spacing, not only in x-direction but in x/y-direction. Think of an anchor's position as defining a \"sidebearing\". Also, an anchor defines not a mere x/y but a Dx/Dy, relative to the glyph's outlines.)\n\n"
+    },
+    {
+      "time": "23 Jun 2008 — 2:27pm",
+      "content": "Thanks for the info / help.\n\nGeorge  \nI felt bad because I had no shoes, until I met a man who had no Bodoni\n\n"
+    }
+  ]
+}

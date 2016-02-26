@@ -1,0 +1,86 @@
+{
+  "id": "36716",
+  "title": "Can I turn off outlines in Fontlab?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Is there a way to turn off the outlines in Fontlab so that I only see the fills when I have shapes overlapping?\n\n [‹ Help Generating Fonts for use in Europe on PCs (newbie in a bind)](http://web.archive.org/web/20080204005448/http:/www.typophile.com/node/36885 \"Go to previous forum topic\") [Buggy, Buggy Word ›](http://web.archive.org/web/20080204005448/http:/www.typophile.com/node/36564 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080204005448/http://www.typophile.com/user/14722\" title=\"View user profile.\">James Puckett</a>",
+  "time": "<br>",
+  "uid": "14722",
+  "comments": [
+    {
+      "time": " 2.Sep.2007 10.13am",
+      "content": "Mhh, if there is know outline, how do you want to edit it!?  \nTo preview the glyphs without an outline press the less than/greater than key.\n\nRalf\n\n"
+    },
+    {
+      "time": " 2.Sep.2007 11.29am",
+      "content": "go to  \nView \\> Show Layers \\> Fill Outline  \nor  \nCTRL + MAJ + P\n\n"
+    },
+    {
+      "time": " 3.Sep.2007 7.59am",
+      "content": "Perhaps the hirez proof would do what you want. Just press that key to the left of the 1, the key with the tilde and grave on it. (at least thats what is on my American keyboard)\n\n"
+    },
+    {
+      "time": " 3.Sep.2007 8.30am",
+      "content": "Thanks, James, that’s what I needed.\n\n"
+    },
+    {
+      "time": " 4.Sep.2007 7.06am",
+      "content": "I thought he meant simply to turn off the outline, so that one might only see the mask, or another layer, which does not seem to work, from any layer. And, any of you who feel “left” out by such placement, e.g. the key with the tilde and grave on it, take heart, customization is a mere 100 head scratches away.;)\n\nCheers!\n\n"
+    },
+    {
+      "time": " 4.Sep.2007 5.51pm",
+      "content": "Unfortunately, it is not possible to hide the Outline layer in FontLab Studio 5.  \nA.\n\n"
+    },
+    {
+      "time": " 5.Sep.2007 4.49am",
+      "content": "”...it is not possible to hide the Outline layer in FontLab Studio “\n\nDo you mean what we already know, that the UI prohibits it, or do you mean it is programatically impossible the way FL is designed?\n\nCheers!\n\n"
+    },
+    {
+      "time": " 5.Sep.2007 6.07am",
+      "content": "There is no UI for it (so you will have to use some Python script every time you want to hide or show outlines), but that is bit 0x00000200 or the options.PaintStyleEx:\n\nto hide outline:  \noptions.PaintStyleEx = options.PaintStyleEx | 0x00000200\n\nto show outline:  \noptions.PaintStyleEx = options.PaintStyleEx & ~0x00000200\n\nThis is a full list of “constants” to control apperance in the GW (all changes should be made before GW is open, use on your own risk, no additional description, no support provided, no questions answered)\n\n#define psNODES 0x00000001  \n#define psCONTROLVECTORS 0x00000002  \n#define psALIGNMENT 0x00000004  \n#define psNOCLOSEPATHS 0x00000008  \n#define psSELECTION 0x00000010  \n#define psEMPTYVECTORS 0x00000020  \n#define psCLOSEPATHARROWS 0x00000040  \n#define psIMAGE 0x00000080  \n#define psPREVIEW 0x00000100  \n#define psNOBODY 0x00000200  \n#define psNOCOMPOSITES 0x00000400  \n#define psGLYPHMETRICS 0x00000800  \n#define psFONTMETRICS 0x00001000  \n#define psTEMPLATE 0x00002000  \n#define psGROUPS 0x00004000  \n#define psNEIGHBOURS 0x00008000  \n#define psHINTS 0x00010000  \n#define psREPLACE 0x00020000  \n#define psGUIDES 0x00040000  \n#define psGRID 0x00080000  \n#define psMASK 0x00100000  \n#define psBLUES 0x00200000  \n#define psFONTAUDIT 0x00400000  \n#define psOPENTYPE 0x00800000  \n#define psNOPAINT 0x01000000  \n#define psNOLINKS 0x02000000  \n#define psPOSITIONS 0x04000000  \n#define psNOCOLORCLOSEPATH 0x08000000  \n#define psOPENCONTOURS 0x10000000  \n#define psCONTOURDIRECTION 0x20000000  \n#define psNODIGITS 0x40000000  \n#define psNOCONTOUR 0x80000000\n\n:-)\n\n"
+    },
+    {
+      "time": " 7.Sep.2007 7.44am",
+      "content": "Thanks Uri, I think I will just keep using the Tilde key as usual :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": " 7.Sep.2007 8.14am",
+      "content": "Btw, Yuri, would you pleeeease make keyboard shortcuts available again while the preview key is pressed?  \nThat possibility got lost not too long ago (late 2005 I think). It was incredibly helpful when you could do Undo/Redo or Mask to Master while the preview key was pressed!\n\n"
+    },
+    {
+      "time": " 8.Sep.2007 7.22am",
+      "content": "005400680061006e006b00730021  \n0043004800450045005200530021\n\n"
+    },
+    {
+      "time": " 8.Sep.2007 9.25am",
+      "content": "You could open the Metrics window and view the glyph there at the same time as you workon it in the Character window.\n\n"
+    },
+    {
+      "time": " 8.Sep.2007 9.31am",
+      "content": "“You could open the Metrics window and view the glyph there at the same time as you workon it in the Character window.”\n\nThis is the way I usually work. I have the several glyphs I am working on with appropriate neighbors between in the Metrics window while I make individual adjustments to glyphs. I need to see them in proximity to see how things are working.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 8.Sep.2007 9.46am",
+      "content": "I would edit my first post to read “Yuri” instead of “Uri” but then it would move to the bottom and make no sense. Sorry, Yuri! I screwed up.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 8.Sep.2007 11.38am",
+      "content": "Good point, Nick. Sometimes I forget that I have three screens on this desk so that I’m not limited to what fits on one.\n\n"
+    },
+    {
+      "time": " 8.Sep.2007 12.42pm",
+      "content": "You are welcome, David! :-)\n\nThe best way to preview glyphs while editing outline would be to use neighbours while right or left glyph is the same as one that you are editing. Unfortunately that is not working - it does not update neighbours in this case. We will fix this bug in the next update. Until that you can still use Preview panel which has some nice features that Metrics window misses. Takes less screen space too.\n\n"
+    },
+    {
+      "time": " 8.Sep.2007 12.47pm",
+      "content": "\\>three screens\n\nYou can have many FontLab windows open on one screen, and I think almost everybody works this way.\n\nFor example right now for working on a bold I have four metrics windows open—regular and bold-in-progress of my font, a similar set from a font I like for comparison, all with the same string of characters that I am working on.\n\nPlus the preview window with the @ sign between control letters (the character you are working on substitutes for the @ sign). And then I open a window to work on the glyph, still seeing its effect between control characters in the preview window, even when it’s relatively full screen.\n\nAnd I have a second screen with some tool pallets open.\n\nI think that’s normal. I don’t think I am particularly efficient, and I’m sure others have more clever working methods. I think it would be good to gather info on working methods. Maybe I should start a thread...\n\n"
+    },
+    {
+      "time": " 9.Sep.2007 6.53am",
+      "content": "Sounds good!\n\nOne thing I’d like to point out though, and I hate to seem like I’m trying to break the record for sounding like a broken record, but...The best way to preview glyphs while editing the outline should have two pair-o-modes; one where the user has turned off the nodes, in which case they should never appear, and one where the nodes are on, and they don’t disappear. The other mode pair being that the contour should fill with and without showing itself.\n\nSo what’s the broken record? FOG had this right. One turned off the nodes and could edit them “sight unseen”, i.e. the nodes never appeared when “turned off” even when selected. Later, PvB’s very first customization of FOG was a cmmd key to show a filled glyph in the glyph window. We felt this last little thing was the completion of a perfect letter drawing interface.\n\nWith the nodes hidden, a filled outline could be edited with the appearance of magic occurring — the designer waving and clickin’ around a glyph responding to seemingly invisible “strings”. Cool as it was, it was also the most transparent and comforting method I ever used to draw and shape letters: seeing whatever visual crutches one needed, or none, with a single key while still being able to edit.\n\nCheers!\n\n"
+    }
+  ]
+}

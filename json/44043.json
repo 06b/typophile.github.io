@@ -1,0 +1,42 @@
+{
+  "id": "44043",
+  "title": "Glyphname extension problems",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’ve got some odd behaviour testing my PostScript flavoured OpenType that I suspect is down to the naming of certain glyphs. I wondered if anybody could shed some light on where I’ve gone wrong. I spent a long time matching my glyphs to the exact spec in the FontLab manual too, so I’m a bit frustrated.\n\nIn InDesign some of my oldstyle numbers are jumbled. If I add a 1, say, I get a 2!\n\nIt could be down to bad Unicode names too. I used FontLab’s Generate Unicode tool to populate as many Unicode points as possible. I’m wondering if that was my bum move.\n\nTesting with FontQA does bring up naming issues though, listing the following as errors.\n\nAll my small caps, which are named, _A.smcp_ etc.  \nAll my proportional lining numbers, named _zero.fitted_ etc.  \nAll my tabular oldstyle numbers, named _zero.taboldstyle_ etc.  \nAnd all my proportional oldstyle numbers, named _zero.onum_ etc.\n\nLooking now, _zero.taboldstyle_ seems to be an erroneous format, but then, the others fail the FontQA test too. Maybe _zero.taboldstyle_ and _zero.onum_ are in fact equivalent, which may explain InDesign’s confusion.\n\nHmm. I’m stuck I suppose. Anyone able to suggest what the names should actually be?\n\n [‹ TTX install ?](http://web.archive.org/web/20080709013800/http:/www.typophile.com/node/44220 \"Go to previous forum topic\") [less and greater symbols in text ›](http://web.archive.org/web/20080709013800/http:/www.typophile.com/node/44074 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080709013800/http://www.typophile.com/user/26242\" title=\"View user profile.\">olho</a>",
+  "time": "<br>",
+  "uid": "26242",
+  "comments": [
+    {
+      "time": " 8.Apr.2008 5.00pm",
+      "content": "While I don’t much care for your naming scheme, I don’t think that is it. I think it is simply that you have a mixup in your classes, so that “two.something” is the second member of one class, where “one.somethingelse” is the second member of the others.\n\nJust a WAG.\n\nFor what it is worth, I (following John Hudson, I believe) use one.op (for one, oldsyle proportional), one.lp (for one, lining proportional), one.lt (one, lining tabular), and of course, one.ot (for one, oldstyle tabular)\n\nThere is a limit to the total length of the names, and if you get too prolix, you’ll hit it fast.\n\n"
+    },
+    {
+      "time": " 9.Apr.2008 2.46am",
+      "content": "The glyphname extension test in FontQA is tied to FontShop’s internal glyphname standards. Your glyphnames are perfectly fine.  \nA.\n\n"
+    },
+    {
+      "time": " 10.Apr.2008 7.43pm",
+      "content": "You say:  \n<cite>All my small caps, which are named, A.smcp etc.</cite>\n\nI think small caps are supposed to be mapped to lowercase character names (e.g., “a.smcp” instead of “A.smcp”), since that’s how they are generally used in text. I could be wrong.\n\n"
+    },
+    {
+      "time": " 11.Apr.2008 7.27am",
+      "content": "<cite>I think small caps are supposed to be mapped to lowercase character names (e.g., “a.smcp” instead of “A.smcp”), since that’s how they are generally used in text. I could be wrong.<cite></cite></cite>\n\nI’d say you’re wrong. As I understand it, the point is when, say, text is extracted from a PDF, the period & what follows drop out. So, if you had n.smcp c.smcp a.smcp a.smcp, you’d get ncaa. But N.smcp C.smcp A.smcp A.smcp would go to NCAA. Kansas would be happier.\n\nMost small caps should map to caps if small caps aren’t available.\n\n"
+    },
+    {
+      "time": " 11.Apr.2008 8.36am",
+      "content": "But thats just in the special case of initials/acronyms that for whatever reason are not written in all caps separated with periods (the grammatically correct but typographically ugly way). Any other situation where small caps are used for various sorts of emphasis or what have you, where they might appear along side a regular cap in proper nouns (or any noun in German), should the small caps then not map to the lower case?\n\n"
+    },
+    {
+      "time": " 12.Apr.2008 8.32pm",
+      "content": "\\> _Most small caps should map to caps if small caps aren’t available._\n\nSmall caps should map to whatever case they started from. If you’re getting small caps by styling lowercase, then the glyphs should map to lowercase. The same applies to uppercase. This is the reason why our fonts have two sets of small cap glyphs, which in terms of features are treated like this,  \n`\nfeature c2sc { # Small caps from caps\nsub A by A.sc;\n} c2sc;`\n\nfeature smcp { # Small caps from lowercase  \nsub a by a.sc;  \n} smcp;\n\n"
+    },
+    {
+      "time": " 13.Apr.2008 1.24pm",
+      "content": "Well, you’ve convinced me that my suffixes aren’t the problem. In the end I’ve opted for A.sc zero.ot etc. I appreciate the brevity.\n\nHaving changed these and recompiled the font my issues have resolved. Mind you I think the glyph palette in InDesign CS3 (Mac) is a bit buggy as it has crashed the entire app more than a couple of times now –- and not just using my own font.\n\nI’ve learnt, too having seen the discussion about small caps. So, thanks all.\n\n"
+    }
+  ]
+}

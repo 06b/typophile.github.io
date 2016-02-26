@@ -1,0 +1,42 @@
+{
+  "id": "64242",
+  "title": "Designing for a specific point size",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I just started working on a typeface for personal use and I want to design it work at a specific point size (11 pts to be exact). For this specific type project, it doesn't matter to me if it works at any other point or if it works in print, just on screen at 11pts.\n\nWith that in mind, how should I get started? I've been playing with UPM and different cap, x, ascender and descender heights in Fontlab but I haven't been able to settle on the right starting point. I guess my big question is, how would you get started on a project like this and what should I keep in mind to optimize a font for one really specific situation like this?\n\n",
+  "author": "mattmc",
+  "time": "13 Nov 2009 — 8:20pm",
+  "uid": "27718",
+  "comments": [
+    {
+      "time": "13 Nov 2009 — 9:48pm",
+      "content": "If you're shooting for a single PPEM size, you make a pixelfont.  \nYou use a 125 x 125 unit grid, and set the font at 8 pt (72 dpi)  \nno matter how big it actually is.\n\nhhp\n\n"
+    },
+    {
+      "time": "13 Nov 2009 — 11:38pm",
+      "content": "Despite the belief of many Mac users ;-) there is no exact pixel height for a given point size on screen. Different people have different monitors.\n\nAndreas\n\n"
+    },
+    {
+      "time": "14 Nov 2009 — 5:13am",
+      "content": "I think yo want to make a new font\n\nset units per em to 256, so as not to waste precious units per em.\n\nset grid step to 256/11, or 23 units per em, per pixel x and y.\n\nset metrics window to 11 pt.\n\ndraw... look... draw... look... until generation time.\n\nIt is true that the optimization may not always appear when any user selects \"11\", but this is just for you, and you are not just \"any user.\"\n\nCheers!\n\n"
+    },
+    {
+      "time": "14 Nov 2009 — 7:37am",
+      "content": "Andreas, as long as the dpi is fixed a  \ngiven point size maps to a specific PPEM.\n\nWindows can change the dpi (although it's very  \nrarely actually done). Can MacOS do that now?\n\n\\> set grid step to 256/11\n\n1)What about systems that assume an EM of 1000?  \nAre those safe to ignore these days?\n\n2) Since that's not a whole number, doesn't it all  \nend up looking blurry?\n\n--\n\nBTW, my view of good vertical proportions for an 11 PPEM font are:\n\nx: 7  \nascenders: 9  \ndescenders: -2  \ncaps: 8  \nlining nums: 8  \nOS\\* nums: 7\n\nIf you want a smaller x-height you can go to 6, but then I'd leave the  \nrest the same (in fact that makes the ascenders nicely longer than  \nthe descenders - a good thing).\n\n\\* No room for hybrids. :-(\n\nhhp\n\n"
+    },
+    {
+      "time": "14 Nov 2009 — 8:56am",
+      "content": "(I'm tracking this thread)\n\n"
+    },
+    {
+      "time": "14 Nov 2009 — 11:36am",
+      "content": "Hrant, the problem is, not every screen has the same dpi. I'm not sure the OP knows what he means by _\"just on screen at 11pts\"_ Many web designers are not really aware of how different their stuff will look on other computer screens. I for one have 97 dpi on my desktop and 133 dpi on my netbook.\n\n"
+    },
+    {
+      "time": "14 Nov 2009 — 12:10pm",
+      "content": "Oh, but the OS's dpi is what determines if the pixels in a pixelfont map correctly or not. It's just that on a higher-dpi display the pixels are smaller; so we're not (or rather, we shouldn't be) talking about actual height in inches. That's why it's less confusing to use \"PPEM\" instead of \"point size\".\n\nhhp\n\n"
+    }
+  ]
+}

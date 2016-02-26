@@ -1,0 +1,74 @@
+{
+  "id": "121311",
+  "title": "Concerning the háček...",
+  "forum": "Design",
+  "tags": [
+    "Caron",
+    "diacritics",
+    "háček",
+    "metrics",
+    "Design"
+  ],
+  "content": "I have a couple of questions about the háček and, whilst I'm sure the answers are buried in the forums here at typophile, I cannot find them.\n\nI know that for the /d/, /L/, /l/ and /t/, the háček takes an acute-type form. What I can't seem to find a consistent answer to is the question of what form the háček takes with the /h/, /I/ and /k/. The háček article at [http://diacritics.typo.cz/](http://web.archive.org/web/20150317060737/http:/diacritics.typo.cz/ \"http://diacritics.typo.cz/\") doesn't mention these other letters, but other online sources seem to suggest the háček is placed directly above the stem. Is this correct?\n\nAs a subsidiary question, what are the implications for the font metrics if it is placed above? For example, if my font currently has an EM Unit Size of 2048, would it be a problem if a vertically stacked háček forced my Ascent value beyond this?\n\nThanks in advance.\n\n",
+  "author": "Steve Gardner",
+  "time": "14 Nov 2014 — 2:35am",
+  "uid": "223948",
+  "comments": [
+    {
+      "time": "14 Nov 2014 — 12:25pm",
+      "content": "Steve,\n\nI hope this doesn’t get buried, because I’m interested to learn more about this topic as well. The potential pitfalls of going beyond the bounding box has been discussed before. A Google search (site:typophile.com) will turn up some discussions. [Here’s one of them.](http://web.archive.org/web/20150317060737/http:/typophile.com/node/72954)\n\nGeorgia (on my system) use these shapes:\n\nĎ ď Ȟ ȟ Ǐ ǐ Ǩ ǩ Ľ ľ Ť ť\n\nAs far as I know, the accent should be centered on the base glyph.\n\nIn the case of the alternate shape in d l L t, these are specific for the Czech and Slovak languages and “(…) related to these languages culture and typographical heritage. The same does not occur in other languages.” (Quote by Igor Freiberger.) Above capital L and T this shape would not make as much sense.\n\nOne possible solution, that I have used for other accented letters with ascenders, is to provide an alternate version of the base glyph that is slightly lower than other ascenders, and also a slightly compressed accent.\n\n"
+    },
+    {
+      "time": "15 Nov 2014 — 3:18am",
+      "content": "Hi Frode - thanks for your thoughts and for the link.\n\nI like the alternate 'short' glyph solution you mentioned. With the font I'm currently working on (which does not include the Vietnamese accents), the reduction will be relatively minor and I doubt it would be noticeable at text sizes. This should enable me to keep everything within 2048.\n\nAs a side note, is it bad practice to omit Vietnamese accents?\n\n"
+    },
+    {
+      "time": "15 Nov 2014 — 9:30am",
+      "content": "It is certainly bad practice if you are making a font intended for typesetting Vietnamese :)\n\n"
+    },
+    {
+      "time": "15 Nov 2014 — 9:35am",
+      "content": " ![](http://web.archive.org/web/20150317060737im_/http:/typophile.com/files/circumflex_4534.png)\n\nHere’s an example of how I’m treating the hcircumflex for Esperanto. (Without accents below, to show the full height of “h”).\n\n"
+    },
+    {
+      "time": "15 Nov 2014 — 10:44am",
+      "content": "> It is certainly bad practice if you are making a font intended for typesetting Vietnamese\n\nLOL... I'm not and I won't, no matter how much the Vietnamese beg me to do so! :)\n\nI've been experimenting with the hcaron along similar lines. I think it will work just fine once I find the right balance between ascender length adjustment and accent compression.\n\n"
+    },
+    {
+      "time": "15 Nov 2014 — 11:07am",
+      "content": "This is where my solution is right now:\n\n ![](http://web.archive.org/web/20150317060737im_/http:/typophile.com/files/Caron%20Variation_6181.png)\n\nThe /h/ ascender is a little lower and I've created two variations of the acute/grave and circumflex/caron; a taller version for lower case and a shorter version for caps, which I now also use for the /hcaron/, Icaron/ and /kcaron/.\n\nNow everything sits within the 2048 metric.\n\n"
+    },
+    {
+      "time": "15 Nov 2014 — 3:29pm",
+      "content": "Looks good. The circumflex above h appears heavier than the one above n.\n\n"
+    },
+    {
+      "time": "15 Nov 2014 — 4:03pm",
+      "content": "Grrrr... I think you're right. I'll fix them. Thanks!\n\n"
+    },
+    {
+      "time": "19 Nov 2014 — 6:02pm",
+      "content": "You could be using components, so that a difference between the two isn't possible. :)\n\nFrode: Note that we are NOT talking about bits of glyphs sticking outside the bounding box. The bounding box is, by definition, the farthest extant of any glyph feature in each direction. Rather we are talking about exceeding the em square (possibly a shifted em square).\n\n"
+    },
+    {
+      "time": "20 Nov 2014 — 2:30am",
+      "content": "Thank you, Thomas. Meaning was correct, wording was incorrect.\n\nI am using components in my example. The same accent shape does not work equally well in all situations (e.g. gcircumflex, idieresis). The extent to which one decides to make adjustments is of course personal, but I wouldn’t settle f0r a bad solution just because it makes my own job easier.\n\n"
+    },
+    {
+      "time": "22 Nov 2014 — 11:38am",
+      "content": "> You could be using components, so that a difference between the two isn't possible.\n\nWhat do you mean by that?\n\n"
+    },
+    {
+      "time": "23 Nov 2014 — 2:50pm",
+      "content": "You design a glyph once (e.g. combining circumflex) and then insert that as a component for all your accented glyphs.\n\nPersonally, I will usually do different versions of any accent for caps vs lowercase, but within each usage I'd like them all to be the same. Although I can certainly see the argument for further differences, such as narrower accents on the “i”\n\n"
+    },
+    {
+      "time": "23 Nov 2014 — 3:13pm",
+      "content": "> Personally, I will usually do different versions of any accent for caps vs lowercase\n\nI actually thought that's how most typefaces are done. I guess I just assumed because that's what I've been doing.\n\nOff-topic:  \nCould someone tell me how I check my messages? I just got an automatic mail that says I got a message on Typophile, but I just can't find where it goes. When I click on the link in the e-mail I get to a Typophile page that says I'm not authorized to access that page.\n\nBut to answer your question, Thomas, from what I understand my messages started having a pink background a while ago because I was being so active that the system flagged me as a potential spammer. I think the background signifies the message is under review by the admin. I reported it and I was told that this is a mistake. I don't quite know why my messages are still being flagged, or why not all of them are pink. I suppose in this case it might be because my message was short.\n\n"
+    },
+    {
+      "time": "25 Nov 2014 — 1:10pm",
+      "content": "Ah, I assumed the pink was something you were doing deliberately! Okay, I will bug the admins.\n\nDoing separate cap and lowercase accents is fairly common these days. But back in the early 1990s it was unusual. Even today, beginners will usually do just one set of accents unless somebody suggests otherwise to them.\n\n"
+    }
+  ]
+}

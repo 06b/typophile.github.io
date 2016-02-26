@@ -1,0 +1,110 @@
+{
+  "id": "227",
+  "title": "FOG vs. FL - lost tangent points",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm slowly trying to come to terms with [Fontlab](http://web.archive.org/web/20131101021851/http:/www.font.to/cgibin/at.cgi?a=227536), even though it's not a intinutive GUI.   \n   \nI still do most of my work in Fog and only use Fontlab for the last bits. However,   \nwhen opening my files in Fontlab, some of my tangent points   \nare gone and replaced. (see image below)   \n   \n ![Tangent Points](http://web.archive.org/web/20131101021851im_/http:/www.typophile.com/forums/messages/4101/11133.gif)   \nWhy is that? Is it just a preference that I missed?   \nOr doesn't Fontlab handle tangent points? How will I then be able to make smooth transitions?   \nAnyone out there with FL wisdom?\n\n",
+  "author": "peterbruhn",
+  "time": "24 May 2003 — 4:21am",
+  "uid": "799",
+  "comments": [
+    {
+      "time": "24 May 2003 — 5:22am",
+      "content": "Peter --   \n   \nI'm going to guess that what is happening is the translation from FOG to Postscript to FL. Postscript doesn't make a distinction about point types, coding only the coordinates of the on-curve points and the associated control points. If I'm not mistaken, PS doesn't handle decimal places, so coordinates are rounded to the nearest integer when a PS font is generated. Non-orthogonal curves and tangents are particularly susceptible to this.   \n   \nWhen FL reads the PS data from the font, I'm guessing that if the points aren't exactly colinear (due to rounding) that FL will not interpret them as tangent points per se. I would presume that your points and controls are still in the proper places (allowing for rounding). I'd be curious to see a screenshot with the control handles showing. For instance, did FL add a handle to the bottom side of that lower, outside curve point?   \n   \nI'm just starting the arduous transition to FL myself and am by no means an expert. Someone more technically savvy, like John Hudson, might have a better explanation.   \n   \n-- Kent.\n\n"
+    },
+    {
+      "time": "24 May 2003 — 7:15am",
+      "content": "Hi Kent,   \nI know I read somewhere about different types of round points in FL.   \nI thought I read it here at Typophile but I can't find it.   \nBut even if that's the case, I would   \nlike to know which curve points are tangent like points by just looking.   \n   \nHere's a closer example (Fog version to the left). ![tangent2](http://web.archive.org/web/20131101021851im_/http:/www.typophile.com/forums/messages/4101/11137.gif)   \nSorry about the large image, but otherwise it's hard to see.   \n/p\n\n"
+    },
+    {
+      "time": "24 May 2003 — 5:10pm",
+      "content": "Peter --   \n   \nI've been thinking about this and spending some time with the FontLab manual.   \nI had an insight that I think might help.   \n   \nThe FOG model is point-based. But the FontLab model is segment-based.   \n   \nWhat I mean is that in FOG you are usually focused on what kind of point   \nyou're placing. Whereas in FL, the emphasis is on what kind of line segment   \nis being operated on. FOG has three kinds of points -- corner, curve, and   \ntangent. FL doesn't make these distinctions.   \n   \nFL distinguishes between two different kinds of line segment -- a straight line   \n(which they also call a _vector_) and a curve (a bezier curve). A curve is described   \nby four points -- two end points on the curve (_nodes_) and the two bezier   \ncontrol points on the handles. A straight line is controlled by only two nodes --   \none at either end, with no control handles.   \n   \nFL also distinguishes two different kinds of transitions between line segments --   \na node can either be a smooth connection or a sharp connection.   \n   \nSo, if you have a curve meeting another curve, then the node will have two   \ncontrol handles, one contributing to each of the two curves. If the connection   \nis smooth, then the two handles will be co-linear -- that is, they are linked   \nand stay aligned with each other -- so this kind of node is what FOG would call   \na curve point.   \n   \nIf two curves meet and the connection is sharp, then the two control handles   \ncan be moved independent from one another. This node would then constitute   \na corner point in FOG.   \n   \nIf two straight line segments meet, then the node does not have any control   \nhandles and is necessarily sharp. This would also be considered a corner point   \nin FOG.   \n   \nIf a straight line meets a curve, then the node will have one control handle on   \nthe curve side. If the connection is sharp, then this control handle can move   \nany which way and the node would be considered a corner point in FOG.   \n   \nBut if the connection is smooth, then the control handle on the curve side   \nwill be co-linear with the vector segment meeting up with the curve and will   \nonly move in a line with this vector -- and this is what FOG would call   \na tangent point.   \n   \nDoes this help?   \n   \nSo, you need to notice whether the node between a straight line and a curve   \nis smooth or sharp. When it is selected, you will see off to the side of the   \nnode either a circle (smooth connection) or an x (sharp connection). You can   \nalso turn on all connection types for every node, whether selected or not, by   \nselecting the button from the View/Show Layers toolbar.   \n   \nSo, for example, if you select the node on the top of the inside of your   \ncounter, you will see whether it is a smooth connection or not. If it isn't,   \nthen double click the node to toggle the connection style. When the connection   \nis smooth, then you can change the \"curve\" on the right side to a straight line   \nby selecting the right control handle of the node and deleting it. (Deleting   \neither control handle of a segment will convert it to a straight line vector, since   \na curve needs to be defined by two control handles.)   \n   \nOnce the right-hand segment is a straight line and the left-hand segment is a   \ncurve and the node is a smooth connection, then the handle on the left will   \nonly move in line with the straight segment and you will have, in effect, a   \ntangent point.   \n   \nI hope this makes sense and is helpful.   \n   \n-- Kent.\n\n"
+    },
+    {
+      "time": "24 May 2003 — 6:55pm",
+      "content": "To follow up on Kent's thorough description, I wanted to add that FL has an excellent way of keeping users on their toes with regard to what is allowed in the world of PostScript Type 1 fonts:   \n   \nFL doesn't let you form a curve by anything other than two points with control handles. In Fontographer, you're allowed to create a curve that has a BCP handle on one end, and an \"empty\" point on the other end. But this can produce errors, since it is effectively creating a point-on-top-of-point situation. FL shows you that this is happening by immediately introducing a complimentary BCP handle when you create a curved segment. It invites you to define the curve properly.   \n   \nFL also makes you aware of the nature of Type 1 curves, by making the \"closepath\" and start/end points a tangible part of the path. This can be disorienting at first, and seem like a hassle, but it reveals the nature of the curves and allows greater control.   \n   \nLastly, if you turn on the \"connection type\" layer as Kent suggests, FL does another neat thing: when two consecutive BCP handles cross each other's paths, the connection type indicator flips to the opposite side of the point, notifying you that the curve is not constructed as well as it could be.   \n   \nLastly lastly, setting the preferences to show points in color is another handy visual cue.\n\n"
+    },
+    {
+      "time": "26 May 2003 — 1:13am",
+      "content": "Thank you Kent (and Alan) for the thorough explanation, I finally got it sorted out.   \nI realise that I will have to learn a whole new concept on how to work on my faces...sigh.   \nOr hoping for a more Fog-like interface in the upcoming versions. I guess it will have to be a gradual transition\n\n"
+    },
+    {
+      "time": "1 Jun 2003 — 4:07pm",
+      "content": "\\> In Fontographer, you're allowed to create a curve that has a BCP handle on one end, and an \"empty\" point on the other end.   \n   \nAnd this is \"illegal\"? Are you sure?   \nWhat a bummer. I use that structure all the time, mostly because it's much more elegant: less redundant data -\\> more control.   \n   \nOn the other hand, I have noticed that strange things happen when such structures are output as a TT font from Fog, for some reason.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "1 Jun 2003 — 5:47pm",
+      "content": "Yes, Hrant. To the best of my knowledge, that is considered a Type 1 no-no. It's my understanding that BCPs are considered points, along with vertices. When you create a one-sided curve, you are invisibly creating a BCP on the opposite end of the curve. That invisible BCP (invisible in Fog, at least) is located directly on top of the vertex, so then you have a point-on-point situation. Whether or not this is as likely to cause spiking as two vertices on top of each other, I'm not sure. But it's worth staying away from it (yeah, it's annoying, I agree).   \n   \nAlan\n\n"
+    },
+    {
+      "time": "2 Jun 2003 — 7:17am",
+      "content": "Alan, could you post an illustration? I'm having trouble visualizing the situation you describe.\n\n"
+    },
+    {
+      "time": "2 Jun 2003 — 8:25am",
+      "content": "Alan, Hrant --   \n   \nI'm not a real Postscript jockey, but to the best of my   \n understanding I'm not so sure that the one-bcp-handled   \ncurve is necessarily \"illegal.\" The thing is that the   \nvarious Postscript **curveto** commands require a   \nset number of arguments, based on the assumption of   \ntwo handles and endpoints (actually, the first point is a   \ngiven, so generally only six arguments are required.   \nYou can reference the T1 Font Format, Ch. 6, pg 52.)   \n   \nThe thing about FL is that it constructs curves with the   \nsame assumption. But if you create a single-handled   \ncurve in FOG, all that means is that the generated PS   \ninstruction will contain a few arguments whose values   \nare zero. There's no restriction or caution about these   \narguments being non-zero, as far as I can tell.   \n   \nI think that since these arguments only seem to be   \ncalculation values, this construction wouldn't constitute   \nany point-on-point sort of violation. But who knows   \nwhat happens when Hrant tries to convert to TT.   \n   \nBut Hrant, you don't gain any worthwhile savings in   \nterms of data points in the actual PS-generated font.   \nMaybe a digit here or there, but who's counting? Again,   \nI don't know about TT.   \n   \n-- K.\n\n"
+    },
+    {
+      "time": "2 Jun 2003 — 8:30am",
+      "content": "\\> you don't gain any worthwhile savings   \n   \nI didn't mean in the actual font data, but in the user's head: when you're making/adjusting a curve, there's less to handle (at least up to a point).   \n   \nhhp\n\n"
+    },
+    {
+      "time": "2 Jun 2003 — 1:03pm",
+      "content": "Mark - I've attached a series of images demonstrating the issue with the BCPs. The first image is how you might construct a curve in Fog (the point with the red circle is \"empty\"). The second image is how this exact outline opens in FL 4.5. The yellow dot you see in the middle of that point is a BCP that is lying directly on top of its vertex. (This is how FL translates the \"empty\" point when the other side has a BCP.) The third image is ideally how it should be constructed.   \n   \nHowever, if what Kent says is correct, then this is all a moot point. But this is just how I've learned it.   \n   \nAlan   \n   \n ![](http://web.archive.org/web/20131101021851im_/http:/www.typophile.com/forums/messages/4101/11330.gif)\n\n"
+    },
+    {
+      "time": "2 Jun 2003 — 1:59pm",
+      "content": "Even if it's actually legal, I guess it's still probably better to avoid \"empty\" curve-recieving points, at least in the final result. Hmmm, Python script, anyone?   \n   \nA similar thing (legal but ill-advised) is to leave off explicit inflection points (like in the spines of an \"s\"), although this is actually commonly done by some otherwise fine designers (if rarely in very obvious spots such as the \"s\" spines). One good reason to define all your inflection points explicitly is TT output/conversion - it consistently blows up, at least in Fog. But I think there are other reasons too. Fortunately, you can easily spot a missing inflection point: the BCPs will be on opposite sides of the curve.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "2 Jun 2003 — 2:38pm",
+      "content": "\\> Fortunately, you can easily spot a missing inflection point: the BCPs will be on opposite sides of the curve.   \n  \nFL 4.5 used to be able to point them out with the FontAudit layer turned on. But it doesn't work for me any more. Any idea why? (It also won't let me turn \\*off\\* checking for semi-horizontal and vertical vectors, even though it's unchecked in the prefs.)   \n   \nAlan\n\n"
+    },
+    {
+      "time": "2 Jun 2003 — 4:38pm",
+      "content": "Alan --   \n   \nI've been noticing the exact same problem with font   \naudit. I appreciate the feature, but I wish turning off   \nthe semi-horizontal and semi-vertical vector alert really   \nworked. Very annoying.   \n   \nFrom your diagram above, the Postscript instruction for   \nthe first would end up something like   \n   \n**0 0 -66 -81 -103 0 rrcurveto** \\*   \n   \n(Note: I'm assuming this is the bottom curve of a   \ncounter and thus the direction is clockwise. I don't   \nknow your actual coordinates, so this is just an   \napproximation based on the pixel dimensions of your   \nscreenshot.)   \n   \nThe instruction for the second would be more like   \n   \n**-33 -37 -60 -44 -76 0 rrcurveto**   \n   \nI don't really follow the \\*math\\* for applying the Bezier   \nequation, so I don't know if those initial zeros in the   \nfirst instruction would pose any potential weirdness.   \nI do know that trying to geometrically construct a   \nsingle-handled bezier is a little odd.   \n   \nFor whatever it's worth.   \n   \n-- K.   \n   \n\\* I suppose, technically, this first instruction could even   \nbe written as **0 -66 -81 -103 vhcurveto** , but I bet   \nthat would really lead to interpretive weirdness.\n\n"
+    },
+    {
+      "time": "2 Jun 2003 — 8:08pm",
+      "content": "_Even if it's actually legal, I guess it's still probably better to avoid \"empty\" curve-recieving points, at least in the final result._   \n   \nNot least because this is illegal in a TrueType font, so if your outline is going to be the source for any TT format conversion such constructions should be avoided. The MS Font Validator will report such constructions as outline errors.\n\n"
+    },
+    {
+      "time": "3 Jun 2003 — 2:44am",
+      "content": "FontLab will convert \"single-handed\" cubic curve into correct TT curve using the alternative curve conversion algorithm. There was a problem with version 4.0.x and maybe early releases of the 4.5, but now it works fine.   \n   \nThere is no trouble to render single-handed curve to series of short straight lines (as most rasterizes do before filling the outline), so I don't think PostScript or ATM will have any problems rendering these curves.   \n   \nTheoretically single-handed curves may cause a problem during conversion to the quadratics when this case is not separately handled, which means that I'd recommend to avoid this type of curves where possible.   \n   \nI think some algorithm may be developed which will convert single-handed curves to normal ones using some form of approximation. It might be a good example of nice Python programming in FontLab :-)\n\n"
+    },
+    {
+      "time": "3 Jun 2003 — 7:57am",
+      "content": "\\> I think some algorithm may be developed which will convert single-handed curves to normal ones   \n   \nBut above that you wrote: \"FontLab will convert 'single-handed' cubic curve into correct TT curve\" so don't you have the algorithm already?   \n   \nBTW, a possibly related question:   \nI'm curious, where did you get the factor of 0.55197 when making a \"perfect\" circle?   \n   \nhhp\n\n"
+    },
+    {
+      "time": "3 Jun 2003 — 9:29am",
+      "content": "\\>But above that you wrote: \"FontLab will convert 'single-handed' cubic curve into correct TT curve\" so don't you have the algorithm already?   \n   \nWell, you can convert single-handed curve to quadratic curve and back, but as a result you will get 2 cubic curves. I mean that I can imagine algorithm which will convert single-handed curve to one \"normal\" curve. Alan Dague-Greene provided good example of what I mean.   \n   \n\\>I'm curious, where did you get the factor of 0.55197 when making a \"perfect\" circle?   \n   \nDid we publish this number somewhere or you just draw a very big circle in FL? :-)   \n   \nActually I don't remember how it was calcualted in the early days of FL, but now I would do it this way (pardon my math): measure a distance (along x or y direction) from the point located at 45 degrees on a curve and a midlle point of the one-quarter curve. On a curve it is: R \\* (4 + 3 \\* X) / 8 [where X is a value we want to find], on a circle: R / sqrt(2).   \n   \nFinally our X is [in C math notation]: (8 / sqrt(2) - 4) / 3   \n   \nPrecise value is: 0.55228474983079339840225, which is quite close to the value we use in FL (and which history I don't remember).\n\n"
+    },
+    {
+      "time": "3 Jun 2003 — 9:36am",
+      "content": "\\> 0.55197   \n   \nI saw it in some Python scripts that come with FL.   \n   \n\\> now I would do it this way ....   \n   \nNice.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "3 Jun 2003 — 1:41pm",
+      "content": "Hmmm, I really want to follow this bit, but I'm not sure   \nwhat factor (= 0.55197) you're referring to, Hrant. So I   \ndon't quite follow Yuri's explanation. Could you back up   \na step and let me in on what you're calculating here?   \nThanks.   \n   \n-- K.\n\n"
+    },
+    {
+      "time": "3 Jun 2003 — 1:52pm",
+      "content": "There is no way to draw a precise circle with the cubic Bezier curve, but it is possible to approximate it. You can draw a 1/4 of a circle (90 degrees) with a single curve with a minimal error: to do that you need to set a length of each BCP to that magical factor multiplied to circle radius. As an experiment you can draw a circle in FL (it will produce 4 curves) and measure the length of each curve's BCP. Then take a calculator and divide it to half of the curve's diameter.   \n   \nBtw, it looks that calcualtion in my previous message may not give the best approximation. It will place the middle point of the curve exactly on the circle, but total approximation error may not be minimal. To calculate the ideal \"factor\" you need to render a curve and then approximate it with the curve minimizing the **total** error. As I understand it is how we got the original value.\n\n"
+    },
+    {
+      "time": "3 Jun 2003 — 1:53pm",
+      "content": "Well, it's probably not really related to the main issue. But here's an explanation: if you draw a \"perfect\" circle (using the application's tool, or maybe a physical one and then trace it), and you measure the length of the BCP arms in each quadrant, they are about 0.552 of the whole length. This is the value required in cubic bezier math to get a \"perfect\" circle. BTW, \"perfect\" is in quotes because you really can't represent a true circle in beziers (of any order).   \n   \nThe way this _might_ be related to the main issue is this: if you were to convert a one-sided curve to a near-equivalent two-sided one, some sort of preset factor values might be the trick.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "3 Jun 2003 — 4:42pm",
+      "content": "Okay, thanks; I thought that might be what you guys were talking about.   \n   \n(I still don't quite understand how you derived your formula, but that's okay.)   \n   \n-- K.\n\n"
+    },
+    {
+      "time": "13 Sep 2003 — 6:10pm",
+      "content": "Hi,   \n   \nI know that this is an old, dead thread, but I have an observation about tangent curves.   \n   \nAs far as I know, FreeHand and Fontographer (both developed by Alstys) were the only PostScript drawing programs that have ever supported tangent curves\n\n"
+    }
+  ]
+}

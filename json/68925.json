@@ -1,0 +1,18 @@
+{
+  "id": "68925",
+  "title": "Opentype Ranges Question",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi, I'm dropping some substitution features into a new font, and I'm wondering about how to code OpenType ranges.\n\nFor example: [a-z] will cover your basic alphabet, but won't cover accented characters.\n\nIs there a way to write out a range that includes, for example, all lowercase characters?\n\nIs there any documentation on this, or basic principles involved?\n\nObviously, I can do write out every character manually, but would rather do it efficiently if possib.e\n\nRob\n\n",
+  "author": "robarnow",
+  "time": "29 Mar 2010 — 11:57pm",
+  "uid": "41784",
+  "comments": [
+    {
+      "time": "30 Mar 2010 — 12:57pm",
+      "content": "Uppercase vs. lowercase is a somewhat fluid concept -- best illustrated by the [long-ongoing discussion](http://web.archive.org/web/20131016205912/http:/typophile.com/node/48746) on where to put the eszet, and now it officially (or semi-officially) has an uppercase form, what to do with existing fonts, or indeed, with new fonts, and with new fonts in old software (and presumably also the other way around).\n\nThe Unicode consortium lists per code point what they consider \"lowercase\" and \"uppercase\" (for an introduction, read [their view on Case Mapping](http://web.archive.org/web/20131016205912/http:/unicode.org/reports/tr21/tr21-3.html)). You can safely refer to the Unicode lists to decide which characters are uppercase or lowercase.\n\nFor example:  \nU+2C60 LATIN CAPITAL LETTER L WITH DOUBLE BAR  \nU+2C61 LATIN SMALL LETTER L WITH DOUBLE BAR\n\n(etc.) Once you have decided which characters to put into your font, define named glyph classes:\n\n@mylowercase = [a b c ... x y z uni2C61];\n\nIt sounds like a lot of work, but of course you only have to do this once. If you ever add an uppercase of lowercase glyph later on, you only have to add it to the right glyph class.\n\n"
+    }
+  ]
+}

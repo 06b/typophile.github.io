@@ -1,0 +1,34 @@
+{
+  "id": "52656",
+  "title": "Very strange VISTA problem. Need help",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Greetings all.  \nI have a very strange problem installing Type 1 fonts in my new Vista 64 bit.  \nI’ve long used Extensis Suitcase to install and uninstall all sorts of fonts, with no problems whatsoever. Recently, I migrated to Vista 64-bit, and Adobe CS4.\n\nI seem to have no problem installing and uninstalling True Type fonts via Suitcase 11, but when I install Type 1 fonts, it says the font is installed (there is a little yellow bullet next to the font to indicate that all is well), but the Type 1 font doesn’t actually get installed into Windows. Naturally, it does not show up in Photoshop’s font menu either.\n\nI also tried using several other font managers (AMP Font Viewer, Bitsteam Font Navigator), but with exactly the same results. I have no problem installing/uninstalling True Type fonts, but not Type 1.\n\nI then tried to manually install a Type 1 font, using Windows itself. That installed fine, and the font now showed up in Photoshop’s menu. However, I now can’t uninstall it.  \nWindows’ native font utility tells me the Type 1 font is uninstalled, but it still shows up in Photoshop’s font menu. I can’t get rid of it.\n\nCould anyone possibly tell me what’s going on? Are there gremlins in my computer?\n\nMany thanks.  \nD.\n\n",
+  "author": "<a href=\"/web/20090415163009/http://typophile.com/user/40673\" title=\"View user profile.\">bendingcaesar</a>",
+  "time": "<br>",
+  "uid": "40673",
+  "comments": [
+    {
+      "time": " 15.Dec.2008 3.08pm",
+      "content": "No, I have similar issues.\n\nExtensis doesn’t support x64. It’s on their website.\n\nI use Bitstream Font Navigator, but it won’t even pretend to install Type 1 fonts. I get an ATM error. TrueType and OpenType are fine.\n\n"
+    },
+    {
+      "time": " 15.Dec.2008 3.16pm",
+      "content": "A little searching brought this up from an Adobe Technote:\n\nType 1 fonts don’t list in Creative Suite 2 and 3 applications (Windows XP Professional x64 and Vista x64)  \nIssue\n\nType 1 fonts installed in the Fonts control panel on Windows XP Professional x64 or Windows Vista x64 do not list in the font menus of Adobe Creative Suite 2 applications.\n\nFonts display as expected in other Windows applications (for example,Character Map, Wordpad).  \nSolution\n\nMove copies of the Type 1 fonts to the Common Files\\Adobe\\Fonts folder.\n\n1. In the Fonts control panel, select the Type 1 fonts that you want to move.  \n 2. Select Edit \\> Copy.  \n 3. Open the Program Files (x86)\\Common Files\\Adobe\\Fonts folder.  \n 4. Select Edit \\> Paste to copy the font files into the Adobe\\Fonts folder.\n\nAdditional Information\n\nType 1 fonts installed in the Fonts control panel on Windows XP Professional and Vista x64 do not list in the font menus of Adobe Creative Suite 2 and Creative Suite 3 applications. Creative Suite applications can access Type 1 fonts installed in the Adobe\\Fonts folder.\n\nOpenType fonts from Adobe, both TrueType- and OpenType-flavored (.TTF and .OTF) display and work as expected in Creative Suite 2 and Creative Suite 3 applications when installed in the Windows Fonts control panel.\n\n"
+    },
+    {
+      "time": " 15.Dec.2008 3.18pm",
+      "content": "Type 1 fonts come with two files (at least): a PFB file that contains just the outlines, and a PFM file that contains metrics and kerning. It seems one of the two is deleted/moved/managed and the other stays put. I can imagine your system getting upset about that.\n\nInstalling/removing fonts under XP (my system) copies and deletes both files at the same time.\n\nIf you intend to use the fonts exclusively for CS4, you can locate the CS4 Fonts folder — somewhere inside the CS4 shared stuff — and put the Type 1’s there. They won’t be manageable, though.\n\n"
+    },
+    {
+      "time": " 15.Dec.2008 6.22pm",
+      "content": "Dima, have a look at this thread — [Unable to install Type 1 fonts in Windows XP](http://web.archive.org/web/20090415163009/http:/www.adobeforums.com/webx?128@@.59b61a73) — on Adobe’s User-to-user forums. It might we related with the problems you’re having.\n\n"
+    },
+    {
+      "time": " 20.Jan.2009 11.08pm",
+      "content": "<cite>If you intend to use the fonts exclusively for CS4, you can locate the CS4 Fonts folder — somewhere inside the CS4 shared stuff — and put the Type 1’s there. They won’t be manageable, though.</cite>\n\nThat’s great. Who’s to blame? Microsoft or Adobe?\n\nAnyone found a way to manage Type 1 fonts under XP/Vista x64?\n\n"
+    }
+  ]
+}

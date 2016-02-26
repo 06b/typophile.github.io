@@ -1,0 +1,22 @@
+{
+  "id": "122609",
+  "title": "Python, Trace and Image",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm having difficulty with adding an image to the background layer. I can create the image no problem with g.Rasterize(imagexyz), but I don't see anything about adding it to the glyph again.\n\nI'm doing some stuff with PIL, but I can't even get that far until I can add the image to the glyph to trace it.\n\nTrace(imagexyz) does not work. It appears there is a bug with Trace.\n\nrelevant documentation:  \n [http://www.e-font.de/flpydoc/html/Image.xml.html](http://web.archive.org/web/20150317224059/http:/www.e-font.de/flpydoc/html/Image.xml.html \"http://www.e-font.de/flpydoc/html/Image.xml.html\")  \n [http://www.e-font.de/flpydoc/xml/Glyph.xml](http://web.archive.org/web/20150317224059/http:/www.e-font.de/flpydoc/xml/Glyph.xml \"http://www.e-font.de/flpydoc/xml/Glyph.xml\")\n\nAny help is appreciated.\n\n",
+  "author": "Jeremy Dooley",
+  "time": "16 Jan 2015 — 10:24am",
+  "uid": "8555",
+  "comments": [
+    {
+      "time": "16 Jan 2015 — 1:00pm",
+      "content": "Here's the way:\n\nimagexyz.Trace(g)\n\nPython is somewhat idiosyncratic, at least from someone who only learned basic and C++\n\n"
+    },
+    {
+      "time": "16 Jan 2015 — 1:31pm",
+      "content": "Yeah, so this works, but the traced image gets put at (0,0)\n\nI thought about adding a pixel to fix the sidebearings, but glyphs with descenders get put in at 0,0 as well. Any ideas on how to fix this?\n\nManually tracing a background image works fine and inserts the trace results exactly where they should go.\n\n"
+    }
+  ]
+}

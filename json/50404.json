@@ -1,0 +1,18 @@
+{
+  "id": "50404",
+  "title": "Python/Robofab - Copy to composites",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Is it possible to use python or Robofab to replicate Fontlabs ’copy to composites’ command ?\n\nI know I could use something like this to update sidebearings of glyphs.\n\n`\nfrom robofab.world import CurrentFont\nf = CurrentFont()\n#\nE = ['Emacron','Ebreve','Edotaccent','Eogonek','Ecaron','Egrave','Eacute','Ecircumflex','Edieresis']\n#\nfor glyphName in E:\n        f[glyphName].leftMargin = f['E'].leftMargin\n\tf[glyphName].rightMargin = f['E'].rightMargin\n#\nf.update()\n#\nprint \"E composites updated\"\n`\n\nThis works fine until I get to the situation where the accents of glyphs over hang the sidebearing of the base glyph, this is where I would use the ’copy to composites’ command or the measurement line.\n\n ![](http://web.archive.org/web/20081012040800im_/http:/typophile.com/files/Picture-1_3563.jpg)\n\nUsing ’copy to composites’ is fine if not time consuming, but I have decomposed the composites in the process of generating the intermediate weight from a MM font. If I could write one macro that ensured all glyphs had the correct sidebearing it would save me loads of time.\n\nRr\n\n [Will hinting die before it kills me? ›](http://web.archive.org/web/20081012040800/http:/typophile.com/node/50417 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081012040800/http://typophile.com/user/16986\" title=\"View user profile.\">RachelR</a>",
+  "time": "<br>",
+  "uid": "16986",
+  "comments": [
+    {
+      "time": " 11.Oct.2008 7.39pm",
+      "content": "I recommend that you set up metric classes in the Classes panel and then use Tools / Metrics Assistance.\n\nAdam\n\n"
+    }
+  ]
+}

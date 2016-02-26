@@ -1,0 +1,58 @@
+{
+  "id": "56089",
+  "title": "Can't preview dlig",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I'm working on my first font containing open type features in which there is many discretionary ligatures. It seems like I can't preview the open type features. After compiling, a line is highlighted in the kern feature:\n\n",
+  "author": "<a href=\"/web/20100203180126/http://typophile.com/user/16659\" title=\"View user profile.\">Raphael Daudelin</a>",
+  "time": "<br>",
+  "uid": "16659",
+  "comments": [
+    {
+      "time": "",
+      "content": "You probably need to show more information for anyone to answer you.\n\nIf you got a warning message and can't preview that means it didn't compile and the highlight is to indicate the error. Sometimes those warnings are tricky too interpret. If its kerning there may be some kind of glitch in your kerning classes or something. Try posting screenshots of the warning and the highlighted part of the kern feature.\n\n"
+    },
+    {
+      "time": "",
+      "content": "You're right, a part of the post is missing.  \nThis is the line that is highlighted in the kern feature:\n\nenum pos @\\_A v -70;\n\n"
+    },
+    {
+      "time": "",
+      "content": "and this is what the output panel says:\n\n[FATAL] glyph class not defined (text was \"@\\_A\") [/Users/raphaeldaudelin/Library/Application Support/FontLab/Studio 5/Features/fontlab.fea 212]\n\n"
+    },
+    {
+      "time": "",
+      "content": "Well, does the glyph class @\\_A exist in your VFB?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Raphael,  \nIt is not the kern feature that is relavent. FL5 often shows the kern feature when the error is elsewhere.\n\nPost your code. There is probably a syntax error or omitted semicolon somewhere.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Check the class name you are siting as \\_A, it may be misstyped.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Well, does the glyph class @_A exist in your VFB?</cite>\n\nI'm not sure to get it. Like if a ligature between @ and A exists in my VFB?\n\n"
+    },
+    {
+      "time": "",
+      "content": " ![](http://web.archive.org/web/20100203180126im_/http:/typophile.com/files/Code-Grab-2_3814.jpg)\n\nHere's a grab of a part of the kern feature with the line that is highlighted when I'm trying to compile. It seems like as the kerning involves glyphs, in which I added anchors to build their accented versions, FL adds an @ glyph before the underscore. Is the @ glyph necessary in the code? I guess it is?\n\nI also realized that all the kerning classes I had defined previously disapeared from the classes window, it seems that the information has been transfered in the open type kern feature since the @ glyph is placed before all glyphs containing anchors. The thing is that I don't know how this happens\n\nAs I'm not familiar with Open Type encoding, I don't understand what \"pos\" stands for before both kerned glyphs. I don't get either what \"enum pos\" stands for.\n\nHope this will help\n\n"
+    },
+    {
+      "time": "",
+      "content": "I also realize that in a previous VFB file which is almost the same with less dlig edited, the kerning classes have not disappeared yet, everything works perfectly i.e. I'm able to compile and preview all the alternates and ligatures.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Seems like you have not perhaps rebuild/updated the kern feature, so try that first.  \nIf still problems, copy past all your code (the regular features) here and we can see the error.  \nNext step is to take a look at your classes.\n\nBtw, the @ stands for \"class\" –&nbsp;it means that it is a class that is kerned against 'v'.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks a lot to all of you. After updating the kern feature I still had some minor problems to fix in the code, but now, everything seems to work perfectly. I still don\"t understand how the kerning classes disappeared but since the opentype kern feature has been updated succesfully, I guess it's much of a problem.\n\n"
+    }
+  ]
+}

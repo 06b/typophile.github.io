@@ -1,0 +1,38 @@
+{
+  "id": "10304",
+  "title": "Pixel fonts",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi,   \n   \nI'm designing a pixel font in Fonotgrapher for use in flash.   \nI'm trying to find out what em units to use in Fontographer to make 8, 9 and 10 pixel fonts. I saw a tutorial about this matter a while ago but carn't find it. Can anyone help ?   \n   \ns.\n\n [‹ Sharptype has been updated to version 1.3](http://web.archive.org/web/20070819101303/http:/typophile.com/node/12642 \"Go to previous forum topic\") [is it possible? ›](http://web.archive.org/web/20070819101303/http:/typophile.com/node/12569 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20070819101303/http://typophile.com/user/5642\" title=\"View user profile.\">coop</a>",
+  "time": "<br>",
+  "uid": "5642",
+  "comments": [
+    {
+      "time": " 6.May.2005 1.53pm",
+      "content": "I suggest that you use 1000 UPM for 10 point & 900 for 9pt & 800 for 8pt with a 100 em unit pixel. You could also use 1000 for everything ( normal ) and then simply use fewer pixels for the 9 & 8. Use 10 point as your ’working’ size & name your fonts ’font10’ ’font9’ & ’font8’. Either strategy should work.\n\n"
+    },
+    {
+      "time": " 19.May.2005 2.15pm",
+      "content": "I would suggest using an EM of 1000, a nominal point size of 8, and a block size of 125x125, no matter what size your font is (except if it’s larger than 16). This reduces a good deal of confusion, especially on the user’s end.\n\nhhp\n\n"
+    },
+    {
+      "time": " 20.May.2005 5.12pm",
+      "content": "Hrant, how does that work exactly? I am really curious. I failed to say in my previous entry that it looks to me like like a single pixel is 75 em units on the PC... for what that is worth. Which makes Hrant’s idea all the more curious to me! I suspect he may be right, but I would like to know why because it doesn’t make any sense to me yet.\n\n"
+    },
+    {
+      "time": " 23.May.2005 1.37pm",
+      "content": "Well, first of all, it’s just a usability issue; you don’t have to follow my formula (which isn’t even mine) for your fonts to work.\n\nThe reason to use an EM of 1000 is probably a legacy thing - maybe it doesn’t matter any more. But just in case it does, on some backwards app on somebody’s old computer, you might as well use it, since it doesn’t have any drawbacks (that I know of).\n\nBut the reason to use a nominal point size of 8 has something to it: it’s what some users are most used to in pixelfonts (although calling it a “standard” might be pushing it), and you don’t want people fishing for the size your font snaps at (without you putting the size in the font’s name). Also, its 3/4 is a round number, which makes it work in “native Windows”\\*. And 12 might seem like a nicer nominal size to use, but it doesn’t divide into 1000.\n\n\\* There is however another problem with using a grayscale pixelfont in native Windows: the gamma gets thrown off (for some strange reason). Basically you need a separate (darker) version for that (which I provide for my stuff). The good news: Ultrafonts has this process automated; and the darker version is exactly what you need when you set the type light on a dark background! :-)\n\nAnd then the 125x125 comes from 1000/8 of course.\n\nhhp\n\n"
+    },
+    {
+      "time": " 23.May.2005 2.09pm",
+      "content": "I have asked around a bunch about the 1000 UPM thing and have been given many excellent answers. To summarize what I have heard- while there is no hard & fast rule everybody seems to agree that unless you have some overiding reason - like that you are making the font for microsoft and need to follow their UPM standard ( 2048 I think) - or you NEED more precision (maybe for a fab display face - in which case you might want 2000?)- that you should just use 1000 UPM.\n\nI guess the part that I still don’t understand is since 75em usits seems to map to a pixel so well ( on a PC not a mac ) and double that is 150. Still, I suppose that the outline scales as it goes from 8 to 9 & to 10 pt. I have been working to hit a 10pt target. So okay this is making some sense if 8pt=125em, 9=100em, & 10=75 em then maybe 11= 50? 12 might be 25?\n\nOr if not then - 1000 divided by 8 does equal 125, but 1000 divided by 10 = 100 ( which doesn’t work as an idividual pixel on the PC ), and I think Zuzana Licko talked about using 84em for 12pt (really 83.333333333+ and so on but font programs don’t allow that kind of coordinate number, just whole numbers ) but these all sound like Mac usable em numbers to me. Still, maybe 125 scales the 72/96 dpi issue better than the others.\n\nThe thing is fonts change size on screen ( but no in print ) when you go from mac to PC - I don’t think pixel fonts are immune from this. So if you are looking for identical \\*screen\\* behavior you would need two fonts - or at least as far I can see.\n\nI’ll have to try your number & see what happens.\n\nStill if you are making a tall/skinny font you would run out of vertical space with that 125 pretty fast!\n\n"
+    },
+    {
+      "time": " 23.May.2005 2.29pm",
+      "content": "\\> 75em usits seems to map to a pixel so well ( on a PC not a mac )\n\nYes, it comes out to 10 points in native Windows. But why choose something that causes problems on a Mac, when you don’t have to? And why deviate from the pseudo-standard of 8?\n\n\\> if you are looking for identical \\*screen\\* behavior you would need two fonts\n\nIt’s better just to make users aware of the difference. That’s a lot less hassle for everybody.\n\n\\> if you are making a tall/skinny font you would run out of vertical space\n\nMy experience is that you’re OK upto a span\\* of 16 pixels. Anything more and you really should use a larger nominal point size, probably 16. The thing is, above around 22 PPEM it’s hard to justify pixelfonts anyway (since the OS renderers start doing a decent job).\n\n\\* Lowercase ascender to descender.\n\nhhp\n\n"
+    }
+  ]
+}

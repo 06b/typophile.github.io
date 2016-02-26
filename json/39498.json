@@ -1,0 +1,46 @@
+{
+  "id": "39498",
+  "title": "Python Script for FontLab - Copy Metrics/Kerning Across Weights",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I'm getting close to the point where I'll be adding the next weight to my current typeface project. Ideally, I've always wanted to be able to set the kerning and metrics for the Regular weight, and then automatically apply that to the Light and Bold weights, with the values being adjusted accordingly to accomodate the new glyph widths.\n\nAs a result, I'm thinking about writing a script that will copy the metrics and kerning values from one font to another, expanding or contracting them by the difference in glyph widths on a per-glyph basis. Theoretically, assuming the fonts are simply different weights of the same typeface, this SHOULD work; there shouldn't be any need for additional hand tweaking, as the results should essentially be a perfect version of what I might have originally tried to do manually. Ultimately, since the glyphs are all identical aside from their heavier or lighter weights, the kerning and metrics should be identical too; just narrower or wider. In other words, it should all be relative.\n\nBefore I get started though, am I missing anything obvious? Is there any reason why this wouldn't work as smoothly as I'm assuming? I don't mean technical/coding concerns, I just mean problems with the overal strategy from a designer's perspective. I wanted to do a sanity check on the idea before I wasted my time actually implementing it.\n\n",
+  "author": "<a href=\"/web/20120312002416/http://typophile.com/user/23823\" title=\"View user profile.\">amv</a>",
+  "time": "<br>",
+  "uid": "23823",
+  "comments": [
+    {
+      "time": "",
+      "content": "depending of the nature of the glyphs it can be hard to \"calculate\" values for very small (weak) metrics values like 0 to 10 em or just negative values.\n\n-- [astype.de](http://web.archive.org/web/20120312002416/http:/www.astype.de/)--\n\n"
+    },
+    {
+      "time": "",
+      "content": "I don't think that would work, at least not better than copying exactly the kerning values. The kerning depends not on the advance width but on the shape of the glyphs.\n\nAnother question: which glyph of the pair would you use as a reference, the left or the right one? Probably the average, I guess.\n\nBtw, if you want to scale all kerning equally, disregarding the individual glyph widths, you can do that by changing the UPM value of the font. That probably brings better results than on a per-glyph basis.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Well this is operating under the premise that you're copying the kerning from one weight of the same typeface to another. Just to be clear, I'm not suggesting this would have any use if one were to copy the kerning and metrics from one typeface to an entirely different typeface. In other words, the shape of each glyph is the same; it's merely wider due to widened strokes and proportions. The idea isn't that the shapes are exactly identical, but rather that they're so similar, aside from their differences in width, that kerning and metrics from one weight to another are essentially the same, differing only by said difference in width.\n\nFor instance, the kerning distance between A and V in a bold weight should be the same as the light weight; this script would allow that to be ported over, adjusting the kerning numerically to compensate for the wider glyphs but ultimately producing the same visual distance. Likewise, the space between letters based on sidebearings should also be the same from one weight to another; it merely needs to be adjusted when copied to take into account the wider glyph the sidebearings are surrounding.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Alex, I suggest you check other fonts that have some relation to yours stylistically.\n\nIn general, bolder weights are spaced more tightly. For example, Minion's regular O has side bearings on both sides of 44. The bold O has 42 left and 41 right. According to Tracy's \"Letters of Credit\" this is recommended because the letter space should be related to the counter width, and the counters are generally narrower in bolder weights of the same type family. So Tracy does not accept your view that similar exterior shapes always take the same spacing.\n\nI think Tracy's view is accepted by most type designers today.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Makes sense. Looks like I was approaching the problem with too clinical a mindset. Oh well, my aim was to ensure consistency among weights, not to save myself work, so I have no problem performing the kerning manually in each case. It also saves me the time of writing the script. :)\n\nThanks for the insight, guys.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Same question at [http://typophile.com/node/38719](http://web.archive.org/web/20120312002416/http:/typophile.com/node/38719 \"http://typophile.com/node/38719\") -- some answers may be interesting to you.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Alex, I think your theory does not work for regular/bold.\n\nIt would work for copying between different widths of the same weight. Here, the slope of the A and V would actually change with the width of the letter. The \"sideways-pointing\" shape and width coincide.\n\nHowever, the fact that bold weights are generally wider does not mean that the \"sideways-pointing\" shape is any different. In fact, the A and V of a bold font can easily have precisely the same angle as in the regular – the only reason for the increase in width being the increase in stem weight. And if the angles of A and V stay the same you should probably not scale their kerning.\n\nBut as William mentioned, the bold is spaced more tightly, which changes everything anyway.\n\n"
+    },
+    {
+      "time": "",
+      "content": "In case you still want to try the method you described, here's a tiny [Expand Master's Kerning](http://web.archive.org/web/20120312002416/http:/www.kltf.de/downloads/KLTF-KerningTools.zip) script. Use it like this:  \nDo some kerning for one master in the Kerning Panel. Then run the script to 'expand' the current master's kerning to all other masters. Switch to another master and do some kerning. -- Each time you switch to another master, run this script first.  \nOnly if you find that kerning is ok in all masters (remember: as of yet a pair has the same kerning value throughout all masters!), you adjust individual masters' kerning _without_ running the script.\n\nKarsten\n\n"
+    }
+  ]
+}

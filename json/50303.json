@@ -1,0 +1,94 @@
+{
+  "id": "50303",
+  "title": "Opentype randomizing: success/horror stories?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m working on a font that I would like to use random character replacement scripting. There have been a couple scripts for this posted to Typophile in the past, and I wanted to know if anyone has used them in retail fonts, and if so, have there been any problems or was it a success?\n\n",
+  "author": "<a href=\"/web/20100214070959/http://www.typophile.com/user/14722\" title=\"View user profile.\">James Puckett</a>",
+  "time": "<br>",
+  "uid": "14722",
+  "comments": [
+    {
+      "time": "",
+      "content": "James, I think on some of the older threads on it there has been some discussion.\n\nI'm not personally a big proponent of randomization, but I think in some designs it could work fairly well. I guess its success would be determined by whether it achieves what you expect. I don't think too many fonts fool the reader into thinking its really hand made, although in short settings that may be achievable. When I design hand-lettered fonts, I just try to make the lettering set more convincingly and fluid.\n\nHave a look at Montague script (just released). It uses lots of contextual programing, but there is nothing random about it.\n\n[http://www.veer.com/products/typedetail.aspx?image=UMT0000367](http://web.archive.org/web/20100214070959/http:/www.veer.com/products/typedetail.aspx?image=UMT0000367 \"http://www.veer.com/products/typedetail.aspx?image=UMT0000367\")\n\nStephen\n\n"
+    },
+    {
+      "time": "",
+      "content": "I’m aware of the other posts. What I’m really looking for are posts from people who have actually implemented the various scripts and what the process and results were like.\n\n"
+    },
+    {
+      "time": "",
+      "content": "you can never have 'true' randomization with OT fonts, the best you can get is some kind of 'pseudo-randomization'. it's not really all that hard to accomplish, depending on how random you want your text to appear. P22 Cezanne Pro is pretty nice when you have contextual alternates turned on. It cycles through 3 variations of glyphs, but the cycles are thrown off by higher level glyph substitutions that happen first to solve for shaping problems (such as that problematic t). The interaction of the cycling and the pre-emptive glyph substitutions gives a fairly organic texture IMO. As with any OT scripting/regular programming, it's about problem solving and there are ususally more than one way to crack any specific nut.\n\n"
+    },
+    {
+      "time": "",
+      "content": "We've done pseudo-randomization on a couple of fonts ( [Lindsey Pro](http://web.archive.org/web/20100214070959/http:/www.ascenderfonts.com/font/lindsey-pro.aspx), [Captain Quill](http://web.archive.org/web/20100214070959/http:/www.ascenderfonts.com/font/captain-quill.aspx)).\n\nI think it can be a nice effect and is especially well-suited to handwriting or calligraphic faces. I don't think one should enter a project like this with the idea that they're going to fool people into thinking it's \"real\", but I think it's a good route for introducing variety which would not otherwise be present (or which would only be present by a lot of manual intervention on the part of the user). While it's true that it is not too hard to _accomplish_ (implement), we found it at times challenging to tweak and proof, to retain the pseudo-randomness while not introducing ugly or conflicting combinations. It is part design and part programming, and is probably best dealt with when both designer and programmer understand the goals and limitations of this effect going into the project (even when designer and programmer are the same person).\n\nAs to feedback: Lindsey Pro has been out for a while and I'm not aware of any negative comments on the pseudo-random feature, though I'm not sure whether a large percentage of our intended audience is able to make use of it. Captain Quill has only been out for a short while. I don't think we are in any giant hurry to do a lot of this. It's neat, and fun to play with, but I think it's best reserved for a few faces. One can end up spending a long time tinkering with no discernible improvement; only differences.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for the responses. FWIW, I’m working on a heavily distressed face and I want to use pseudo-randomization for letters that get used frequently.\n\n"
+    },
+    {
+      "time": "",
+      "content": "If it were really random, then there would occasionally be identical glyphs adjacent to one another, which is something these kind of fonts try to avoid.\n\n\\*\\*\n\nIf you have 4 sets of glyphs for each character, then there are 16 different combinations for each sequence of two characters.  \nThat really ramps up the considerations that have to be held in mind when designing any glyph.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I think Tal Leming and the House Industries folks have done the best job of pseudo-randomization, by having long contexts that stretch back to the beginning of the line (or pretty far, at least). The new Studio Lettering Swing font in particular is pretty impressive in this area.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "_The new Studio Lettering Swing font in particular is pretty impressive in this area._\n\nI thought this was something different that randomization? I thought the features developed for the Studio Lettering fonts were developed to mimic lettering logic, which is different from randomization. Please correct me if i'm wrong.\n\n_If it were really random, then there would occasionally be identical glyphs adjacent to one another, which is something these kind of fonts try to avoid._\n\nTrue. However, I believe the programming Tal did for Local Gothic is 'more random' in that it allows for these types of things.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Tal and I have used different approaches for randomization, I'm not sure which one was more effective. In Zapfino Extra Pro that I developed, there is actually quite a lot of randomization which works reasonably well (plus there is some rule-based code). The code was quite experimental in 2004 when I developed it and if I were to do this kind of work today, I would have taken a slightly different approach. But right now I'm not working on any new font engineering projects :)\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Paul: I believe (from seeing a couple of presentations on it) that Studio Lettering Swing uses (pseudo) randomization. That is, they have three sizes of letters, and which size the next one is appears to be random and unrelated to the size of the previous one - though this is of course a clever illusion. There are a few extra twists with ligatures and such, and they may add code to also ensure that if you have the same letter twice in a row it looks different, but the basic technique is the randomization.\n\n"
+    },
+    {
+      "time": "",
+      "content": "hmmm. i've seen the same presentations and got a different impression: that they were following a logic and not randomization. if you can try to recall Ken's slides, there is one that shows abstracted counter shapes of different sizes which form a kind of pattern similar to abacaba (i don't remember the pattern exactly, but that there was a pattern). I understood that it was this pattern that the contextual features were replicating, not a random pattern.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, in the ATypI 2008 lecture, Tal Leming talked about \"Randomness in Digital Type\" (that was his section title) and gave Local Gothic and Blaktür as examples (in the first, different weights were switching randomly, in the second, the dieresis appeared randomly over letters), while Ken Barber then talked about \"Determinism\" (\"proposition that every event is caused by an unbroken chain of occurrences that have preceded it\"). He used the PacMan world champion as an example and showed that the guy solved the PacMan mazes by pre-empting a huge series of events — similar to a chess play. He then made a point that a deterministically engineered typeface can appear \"organic\". He said that type is similar to lettering but is an even more controlled system than lettering system. He then said that the Studio Lettering project implemented rules based on deterministic behavior to achieve the goal of organic appearance, mimicking the lettering system they chose to follow.\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Right - and of course it can't be truly random, unless they were using the as-yet-unsupported 'rand' feature. The point is that they are doing a great job of \\*simulating\\* randomness. I think they do it better than anybody else.\n\nThis ties into a principle learned in cognitive psychology, which is that the human tendency to find patters is so strong that truly random data \\*seems\\* more patterned than well-done pseudo-random data.\n\nSo, are you more interested in true randomization, or in \\*appearing\\* random to human observers?\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "I’m not even especially interested in the \\*appearance\\* of real randomness, I just want to prevent unsightly repetitions that can be distracting in distressed type.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_repetitions that can be distracting_\n\nAs if.  \nI see \"hand-drawn\" and distressed type in ads and magazines all the time, but always just plain type with no alternates.  \nThe typographers don't even bother bumping the baseline shift.  \nThe only people who notice and care about this stuff are font developers interested in pseudo-randomness.  \nIn wordmarks for brand names, sometimes.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Single-glyph ligatures reduce pseudo-randomness, because they fix letter shapes relative to one another.  \nIn a four-alternates font, even with four versions of a ligature, that only produces four alternates for, say, f\\_i.  \nHowever, with no ligatures for that combination, there are 16 possible glyph-representations of the two character sequence.\n\nIf the intention is Thomas' \\*appearance\\* of randomness, which is to avoid repetitive sequences of glyphs AND keep identical glyphs as far apart as possible, there's only so much that can be done with a limited number of alternate sets. For instance, with four sets, I haven't beeen able to come up with a better cycle than this:  \n1234 1324 3142\n\nAs it cycles, there is repetition at the 13-character interval, but to avoid that by running a longer cycle, then you get sets repeating too closely.\n\nThe more sets in a font, the less the confliciting criteria interfere with one another. Five sets is much better, and six way better. However, in an extended Latin font, each extra set is another 300 glyphs (yes, all marks etc. are necessary), and quite apart from the extra glyph-drawing time, that creates kerning problems. I found that I really had to rationalize class kerning severely in a 4-set font, or else it wouldn't compile, so that dissuaded me from adding another set.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>I see “hand-drawn” and distressed type in ads and magazines all the time, but always just plain type with no alternates.<br>\nThe typographers don’t even bother bumping the baseline shift.<br>\nThe only people who notice and care about this stuff are font developers interested in pseudo-randomness.</cite>\n\nI have to agree 100%. So many graphic designers I've worked with don't notice these ugly repeats in typefaces that are meant to look distressed or organic. And when you leave the world of graphic design -- apparel designers, industrial designers, etc. -- their sense of type is just barely above that of the general public, in that they are aware of the existence of fonts and how to install them, but not too much beyond that. So I guess the question then is, \"Do people maybe pick up on this stuff at a subconscious level?\" I guess that really depends on the typeface and its application. Taking the above mentioned Montague Script, if you designed a wedding invitation in Montague and then designed another one in let's say Zapf Chancery, I think most people would identify the one designed in Montague Script as being somehow better, although they might not be able to tell you why. But\n\nI think of fonts right now as early synthesizer music. We'll look back in decades to come, when transparency, tonal gradation, faux paper weights and textures, and lots of other features will be supported in fonts, and laugh at a lot of the \"fancy\" tricks we used in 2008. It might be comparable to the $10,000 keyboards in 1985 that sort of sounded like a flute, and sort of sounded like a trumpet, but are pretty laughable now if you're trying to create the authentic sound of an instrument. Not that we should give up on new software and coding features -- I think with all the new technologies out there, the way type interacts with these applications and devices has barely been explored. But it definitely feels like we're in a transitional period, and font technology probably won't plateau for a couple of decades at least.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>it can’t be truly random, unless they were using the as-yet-unsupported ’rand’ feature</cite>\n\nAs I read it, even the 'rand' feature (as registered by Adobe and written in the [current OpenType spec](http://web.archive.org/web/20100214070959/http:/www.microsoft.com/typography/otspec/features_pt.htm#rand)) is only intended to be pseudo-random (or even less...stepping through a set is hardly random!):\n\n<cite>Application interface: For GIDs found in the rand coverage table, the application passes a GID to the rand table and gets back one or more new GIDs. The application selects one of these either by a <strong>pseudo-random</strong> algorithm, or by noting the sequence of IDs returned, storing that sequence, and <strong>stepping through that set</strong> as the corresponding character code is invoked.</cite>\n\n\"that is so _random_, dude!\"\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hey Josh,\n\nGood point that the 'rand' definition leaves it up to the app how to get \"randomness\" and offers the option to just cycle through the set.\n\nI remember assuming that the 'pseudo-random' reference there is simply due to the fact that computers don't generate \\*truly\\* random numbers. But given a seed they can produce something that can't usually be distinguished from truly random.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "I suppose eventually we'll see some enthusiastic developer employ something like [random.org](http://web.archive.org/web/20100214070959/http:/random.org/), keying off of atmospheric noise or some such, to make sure that we are getting a proper dose of randomness in our text :-)\n\n"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "103073",
+  "title": "Attempt to output 2147483647 into a 16-bit field",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi  \nI am editing an Arabic ttf unicode font in FontForge. After doing some lookup edit I get following error on generating TTF.\n\n\"Attempt to output 2147483647 into a 16-bit field. It will be truncated and the file may not be useful.\"  \nI am using Windows 7 Enterprise (64 bit)\n\nEverything was working fine an hour back and then it started giving above error.\n\nI have attached the options chosen while generating ttf.\n\n2nd issue:  \n========  \nI was trying to edit .fea file and merge it with FontForge but getting following error:\n\nThere were errors when parsing the feature file and the features have not been applied\n\nFeature file is also attached\n\n| Attachment | Size |\n| --- | --- |\n| [InPageQuranPublisher.txt](http://web.archive.org/web/20140809220012/http:/typophile.com/files/InPageQuranPublisher.txt) | 513.12 KB |\n| [save options.jpg](http://web.archive.org/web/20140809220012/http:/typophile.com/files/save%20options.jpg) | 796.96 KB |\n\n",
+  "author": "shahidr100",
+  "time": "16 May 2013 — 3:38am",
+  "uid": "211358",
+  "comments": [
+    {
+      "time": "16 May 2013 — 4:02am",
+      "content": "Look at your \"Warnings\" -\\> (glyph) name too long  \nThere is the limit - 31 characters\n\n"
+    },
+    {
+      "time": "16 May 2013 — 5:09am",
+      "content": "There are many fields (of type USHORT, SHORT, FWORD, UFWORD, uint16, offset ...) in opentype fonts that are 16 bits\n\n[https://www.microsoft.com/typography/otspec/otff.htm](http://web.archive.org/web/20140809220012/https:/www.microsoft.com/typography/otspec/otff.htm \"https://www.microsoft.com/typography/otspec/otff.htm\")\n\nYour Windows 7 Enterprise 64 bits won't help with that.\n\n"
+    },
+    {
+      "time": "16 May 2013 — 5:27am",
+      "content": "Thanks to both of you for the reply.\n\nWhat needs to be done to resolve it. There are so many glyphs with long names. How do I rename it?\n\nI am fairly new to Font technology and font forge too? Any other software which will help?\n\n@Mitchel Boyer -\\> Will it work in Winds 7 32bit? How do I resolve it?\n\n"
+    },
+    {
+      "time": "16 May 2013 — 5:52am",
+      "content": "Changing to another version of Windows or to the Mac or to Linux will change nothing if the problem is due to too many kerning pairs, or overflowing tables etc. The limitation comes from the original specification of the font files (truetype or opentype); with Fontlab, you would just get another message (that might be more meaningful to those populating this site).\n\n"
+    },
+    {
+      "time": "16 May 2013 — 6:36am",
+      "content": "Ok,  \nSo how would I know which lookup table is giving problem so that I can create another table and move some of the lookup in it. Will that solve the problem?\n\n"
+    },
+    {
+      "time": "16 May 2013 — 7:05am",
+      "content": "For the time being you have 2000 glyphs whose name is 98 characters long. You probably need first solve that problem; I have no experience whatsoever with a what you are trying to do.\n\n"
+    },
+    {
+      "time": "16 May 2013 — 7:11am",
+      "content": "How do I rename a glyph in fontforge. There is one glyph which show no combination and it does not have any name. How do I add combination. Before that I have to give a name to that glyph.\n\n"
+    },
+    {
+      "time": "16 May 2013 — 7:52am",
+      "content": "I don't know how to automatically build glyphs without python and fontforge scripts. Renaming is also easy with scripts.\n\n"
+    },
+    {
+      "time": "16 May 2013 — 8:56am",
+      "content": "Ok thanks. I will try and update.\n\n"
+    }
+  ]
+}

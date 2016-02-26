@@ -1,0 +1,30 @@
+{
+  "id": "128",
+  "title": "Flash doesn't keep text format",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Is your problem that you're hoping your device font will be Verdana?   \n   \nIf so, device fonts map to whatever system font on the users system is of the same \"type\" (serif, sans-serif or \"typewriter\"), according to the tech notes ( [http://www.macromedia.com/support/flash/ts/documents/flashfonts.htm](http://web.archive.org/web/20051127130434/http:/www.macromedia.com/support/flash/ts/documents/flashfonts.htm)) these will be Arial on a PC and Helvetic on a Mac.   \n   \nIf you want, you can embed Verdana and control its quality with actionscript. This will give you small, more readable, aliased text, but of course it will give you a bigger file.   \n   \n... or am I misinterpretting the problem?\n\n",
+  "author": "doc_apostrophe",
+  "time": "13 May, 2003 - 11:36pm",
+  "uid": "1409",
+  "comments": [
+    {
+      "time": " 17 May, 2003 - 9:13am",
+      "content": "O.K., once again I hope I'm getting the problem right.   \n   \nI think that \"device fonts\" is a fail-safe, so that if the machine doesn't have the specified font, it will still be displayed in the proper style. Could it be that you have all of those fonts loaded on your machine and therefore \"device fonts\" doesn't have to switch over to the default? Try turning off Baskerville and see what it looks like.   \n   \nThe filesize should tell you whether or not the font is being embedded.\n\n"
+    },
+    {
+      "time": " 17 May, 2003 - 1:20pm",
+      "content": "the difference you're seeing is between the font being anti-aliased or not. Flash makes device fonts non-antialiased by default. I don't know if there is a way around it, but at least in the cases of arial and verdana, i much prefer the crispy pixels.\n\n"
+    },
+    {
+      "time": " 3 June, 2003 - 10:15am",
+      "content": "I think his problem was not a lack of understanding about aliased and anti-aliased text, but rather a concern that if a user didn't have a particular font loaded on their machine and if \"Use device fonts\" was selected, the font wouldn't be mapped to the proper device font (i.e. Avenir mapped to \\_sans).   \n   \nA few tests I made seem to prove this true.   \n   \nHere is a screenshot of an .swf file using Avenir, with Avenir loaded on my system:   \n   \n ![Avenir in system](http://web.archive.org/web/20051127130434im_/http:/www.typophile.com/forums/messages/4101/11366.gif)   \n   \n... and here is a shot of the same file after I turned off Avenir:   \n   \n ![No Avenir in system](http://web.archive.org/web/20051127130434im_/http:/www.typophile.com/forums/messages/4101/11367.gif)   \n   \nApparently it maps to \\_serif as a device font. Can't think of a solution at the moment, except that if you want to use a device font, just use the device font (\\_sans in this case).   \n   \n~p\n\n"
+    },
+    {
+      "time": " 3 June, 2003 - 10:22am",
+      "content": "Kemie-   \n   \noff-topic: I see domokun on the pixilate web site. I've got lots of great Domokun propaganda, including a big, stuffed Domokun that terrifies drivers from the back window of my car! Good stuff.   \n   \n~p\n\n"
+    }
+  ]
+}

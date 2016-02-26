@@ -1,0 +1,38 @@
+{
+  "id": "62547",
+  "title": "The width of .null CR uni0017 and other blanks",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Does the character width of .null CR uni0017, uniF8FF and other blank glyphs matter?\n\n",
+  "author": "<a href=\"/web/20101227131112/http://typophile.com/user/14133\" title=\"View user profile.\">typodermic</a>",
+  "time": "<br>",
+  "uid": "14133",
+  "comments": [
+    {
+      "time": "",
+      "content": ".null -- properly ‘NULL’, but lots of people use .null to no ill effect -- should be zero-width.\n\nCR should be the same width as your ‘space’ glyph.\n\nWill anything break if you don't set these widths correctly? Probably not, but one can't be sure.\n\nOf course, you can't be sure that something won't break if you set the widths correctly, either; but you can be sure that it isn't your fault.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I know how they're supposed to be set, but does anyone know the actual effect?\n\nHow is the CR's width used? What if it's too wide or too narrow? What effect would a zero width CR have?\n\nIs the NULL being zero width really important? What if it has a width? What effect does it really have?\n\nKnowing this sort of thing could be useful in tracking down bugs.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The problem is, \"the actual effect\" can be very difficult to track down. There are tens of thousands of font-consuming apps on a wide variety of operating platforms and you don't always have control of which of those apps are going to use your font. While many of these will use system-provided text rendering, some don't. Some will have certain expectations about the width and glyph content of these characters, some won't.\n\nTo give a few actual examples related to this:  \n- I once dealt with a customer who was having trouble getting a certain character to render. It worked fine in one application but not in another. It turns out the character in question was encoded to the non-breaking space (U+00A0). Now, you're not really supposed to put glyph data in there, but for some reason the font in question had it. It turned out the \"problem\" app was ignoring glyph data (including width) for U+00A) (it just used the same advance from space/U+0020), while some other apps used it.\n\n- Line breaks of an allegedly monospaced font were inconsistent between regular and bold weights in one app. The glyphs were all on the same advance, except for the fact that the CR was a different width in the bold weight. Testing in the usual suspects didn't uncover this problem but in the problem app, the CR width entered the calculation for line breaks (this was before the days of Font Validator and other testing platforms which would have saved a lot of trouble).\n\nMy experience is: if you enjoy wasting a lot of time tracking down difficult-to-reproduce bugs whose symptoms may be unrelated to the actual problem, you should ignore convention and do stuff like give the NULL glyph a non-zero advance width, or set the CR to something other than the space or stuff along these lines. Planned experiments aside, I don't like doing that, so I follow convention unless there's a very clear and demonstrable benefit to doing so.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I've experienced the CR vs space discrepancy in monospaced fonts problem.\n\nYeah, well obviously \"don't make errors\" is always a good idea but I was wondering if anyone has noticed any other specific problems caused by incorrect widths on blank glyphs. I'm not trying to find out why I shouldn't make incorrect blank glyphs buy trying to shed light on the consequences to make these problems easier to isolate.\n\nA kind-of-related example: I received an email from someone who was working on their first font. It worked fine in some apps but in Adobe apps, the space appeared as a question mark. I knew right away that the problem was the space was named incorrectly. Abode cares about the name \"space\" being correct and most other apps don't. So having knowledge about how various apps react to non-standard fonts can help when it comes to tracking down font problems.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, \"don't make errors\" is always a great idea, but few of us are that lucky or blessed. In fact, I'd say no one is. That's where validation tools such as Adobe's compareFamily and Microsoft Font Validator (and other tools) can really help...they run tons of consistency checks amongst various font values and can help spot oddities, bad situations, and outright errors before bad fonts ever go out the door...obviating the need for worry about what a given app does with oddly-made data.\n\nI follow what you're getting at, and it's true that having application-specific knowledge of these things can help diagnose problems. But if one of the variables is bad or weird font data, it's probably going to result in fixing the font anyway, so it kinda doesn't matter what the app is doing with that (bad) data. I would question the value of a list of stuff like, \"this font bug makes BigCo's Awesome App do crazy stuff\". We do maintain a list of \\*application\\* bugs (or what we think are bugs, or strange behaviors), but that list is fairly short. Most of the font-related problems we encounter can eventually be tracked back to bad or at least odd font data (surprise, surprise)...and very few cases are things that didn't show up in validation tools.\n\n"
+    },
+    {
+      "time": "",
+      "content": ".\n\n"
+    }
+  ]
+}

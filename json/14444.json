@@ -1,0 +1,34 @@
+{
+  "id": "14444",
+  "title": "Specifying lining/ranging numerals in webpages",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "When creating a webpage, I specify an OpenType font that contains lining, ranging, and tabular numerals. How could I most easily take advantage of the extra numerals? Is there an HTML/CSS command to toggle numerals, or would i have to carefully translate individual numerals into Unicode (either by hand or with a webauthoring tool)?\n\n",
+  "author": "snsh",
+  "time": "8 Aug 2005 — 5:09am",
+  "uid": "6026",
+  "comments": [
+    {
+      "time": "8 Aug 2005 — 6:22am",
+      "content": "Are you authoring for the internet (rather than say corporate intranet)? You can't assume your reader will have that font installed, or indeed any font with those extended characters defined. If it's just an experiment, I'm pretty sure that referring to numeral styles is outside the current capabilities of CSS.\n\nI suspect that you could copy extended characters from say InDesign to Dreamweaver. It's a long time since I've used DW but I recall that it would automatically use Unicode encodings where it needed to.\n\n"
+    },
+    {
+      "time": "8 Aug 2005 — 6:28am",
+      "content": "Unless...\n\n- The Opentype font is installed on the user's local system; or\n- The Opentype font is available to the local system as a sIFR font, Embedded Opentype, Portable Font Resource or other similar embodiment...\n\n...it really doesn't matter whether or not CSS will support it. I'm fairly certain CSS2 doesn't support the option of such toggling; CSS3 may...\n\n"
+    },
+    {
+      "time": "8 Aug 2005 — 6:39am",
+      "content": "to turn on old style figures ... font = Georgia  \nto turn off old style figures ... font = Times New Roman.\n\nSimple as that ;-)\n\n"
+    },
+    {
+      "time": "10 Aug 2005 — 3:57am",
+      "content": "Assumptions: let us assume the visitor of the page has the font installed, or, the page has the font SRC set to a working URI, or the font is embedded, etc. In my particular case, everyone's using Longhorn beta 1.\n\nUnicode: this would get messy. Seems there are designated Unicode ranges for monospace numerals, but no Unicode ranges for ranging versus lining numerals. Looking at a variety of fonts that happen to contain both ranging and lining numerals, there is no methodology for organizing these numerals - all fonts seems to be organized differently. So, to use any extra numerals, one would have to manually write out glyph codes depending on the particular font. This is sorta crazy. Would be nice if the Unicode people created Unicode ranges for ranging/lining numerals.\n\nCSS: I can't find anything in CSS3 spec regarding numerals. It's too bad {text-transform: uppercase | lowercase} doesn't make numerals uppercase or lowercase. Would be elegant if it did, but that would require coordination among the Unicode people, CSS people, and the browser people.\n\nMathematical characters: It might work to use MathML and \\<math\\> tags, at least to turn off ranging numerals. Haven't tested it with the fonts I like to use.\n\nSolution: Simplest workaround seems to be to duplicate and rearrange and rename the fontfiles, swapping numerals as desired. Is there a better way? Am i missing something? I would think changing numerals would be a very basic thing.\n\n"
+    },
+    {
+      "time": "11 Aug 2005 — 9:24am",
+      "content": "Yes the easiest solution would be to have two fonts, embedded or installed on the client machine. One font could just contain the osf's (mapped to the regular fig code points) the other the complete font with the standard figs. Then use CSS to switch font when you need to use the OSF's. I think this is acceptable (providing the EULA lets you do this) and standards-compliant.\n\nCheers, Si\n\n"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "4173",
+  "title": "Too many points in an OT font?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Is it possible to have too many points in an OT font?   \nSeems unlikely as one can have some 65,000 odd characters.   \n   \nThe font in question fails to generate (Fontlab stalls while   \ngenerating the file - but doesn't crash). When I generate the   \nfile as a normal T1 file is generates fine. If I generate only   \ncaps and lowercase (by deleting all other characters) the file   \nmanages to generate - but very slowly.   \n   \n(the font has many many points)   \n   \nAny help would be greatly appreciated\n\n",
+  "author": "eolson",
+  "time": "7 Apr 2004 — 2:54pm",
+  "uid": "1087",
+  "comments": [
+    {
+      "time": "7 Apr 2004 — 3:03pm",
+      "content": "I had a similar problem once Eric. IIRC, I managed to 'solve' it by unchecking (in the _Tools \\> Options \\> OpenType_ panel) the 'Use subroutines to compress outlines in OTF fonts' box.   \n   \nThat's probably a very white trash solution - hopefully someone else has something more intelligent - but it got my font sorted.   \n   \nCheers.\n\n"
+    },
+    {
+      "time": "7 Apr 2004 — 3:08pm",
+      "content": "Hallo Eric,   \n   \nhim, I think your fontlab is not dead. It uses the adobe fdk to generate the CFF encoding. It seems you have turned on the option \"use subroutines to compress...\"   \n   \nTurn it off and it should work very fast. I have tested some complex fonts too, and the subroutinizing process can take a lot of time. My record was 9 hours on a 1GHz Athlon to encode.   \n   \nexample:   \nwithout compression 900 kb fontdata   \nwith compression 300 kb fontdata   \n   \nSo, if you made your final version, turn the compression on and next morning your font is done! ;-)\n\n"
+    },
+    {
+      "time": "7 Apr 2004 — 4:02pm",
+      "content": "Nathan and Andreas -   \n   \nThat was it!   \nThank you kindly.   \n   \nI'm interested to see how long the compressed version   \nmay take to generate...\n\n"
+    }
+  ]
+}

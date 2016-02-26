@@ -1,0 +1,74 @@
+{
+  "id": "69083",
+  "title": "Web fonts: small caps and ornaments",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "The \"font-variant: small-caps\" property doesn't actually map to the small caps, instead the browser scales the uppercase. The obvious solution for web fonts is keeping the small caps in a separate font file (sc instead of the lc). This causes a problem: someone using a browser that doesn't support @font-face will see lowercase characters where you intended uppercase characters. How would you solve it?\n\nAnother issue: I'm thinking about building a font with a set of ornaments for a web site project. A less updated user might end up with a system font instead, leaving the ornaments useless. One option might be using Wingdings or Webdings as fallbacks, but that restricts me to their character set. I'm not really sure how \"web safe\" those are anyway. Do I have other options?\n\n",
+  "author": "Frode Bo Helland",
+  "time": "3 Apr 2010 — 9:32am",
+  "uid": "17101",
+  "comments": [
+    {
+      "time": "3 Apr 2010 — 9:34am",
+      "content": "Btw: [This article](http://web.archive.org/web/20141008204123/http:/en.wikipedia.org/wiki/Wingdings) seems to indicate the glyph order of Wingdings is patented by Microsoft.\n\n"
+    },
+    {
+      "time": "3 Apr 2010 — 10:43am",
+      "content": "Frank,\n\nthe obvious solution is to use a webfont that includes smallcap glyphs in both uppercase and lowercase positions.\n\nAlso, please note that the [CSS3 Fonts proposal](http://web.archive.org/web/20141008204123/http:/dev.w3.org/csswg/css3-fonts/#small-caps) introduces the `font-variant-caps: small-caps` and `font-variant-caps: all-small-caps` properties to access OpenType Layout smallcaps, and also modifies the description of `font-variant: small-caps` to try OpenType Layout smallcaps first, and only apply uppercase downscaling as a fallback. Of course, it will take considerable time before this gets introduced.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "3 Apr 2010 — 12:28pm",
+      "content": "Since these are pure symbol fonts and _deliberately_ do not have Unicode values assigned to them, there is no way you can use a 'substitute' font ... On my Mac, all Webdings and Wingdings glyphs are encoded into the Unicode PUA.\n\nOn the other hand, the entire Zapf Dingbats set _has_ been mapped into UC, so these characters can be used \"safely\". Zapf Dingbats characters, or at least things that look exactly alike, appear in Arial Unicode MS from position U+2701 onwards, as well as correctly encoded in Zapf Dingbats (the fat parentheses are mapped to regular parentheses; from the scissors on, they are mapped similar to Arial UC).\n\n_.. the glyph order of Wingdings is patented by Microsoft._\n\nFortunately they didn't do that for Arial and TNR! :-D\n\n"
+    },
+    {
+      "time": "3 Apr 2010 — 12:34pm",
+      "content": "Thanks! Great answers. What about unicode small caps? And how is the support for unicode on mobile browsers?\n\n"
+    },
+    {
+      "time": "3 Apr 2010 — 3:07pm",
+      "content": "There are no Unicode small caps but Unicode support on mobile browsers is quite decent these days.\n\n"
+    },
+    {
+      "time": "3 Apr 2010 — 3:11pm",
+      "content": "Another option I've been considering (for the ornaments) is replacing text strings with png's using a server side language like PHP, but I'm not sure how to tell if @font-face isn't supported.\n\n"
+    },
+    {
+      "time": "3 Apr 2010 — 4:30pm",
+      "content": "[http://webfonts.info/wiki/index.php?title=@font-face\\_browser\\_support](http://web.archive.org/web/20141008204123/http:/webfonts.info/wiki/index.php?title=@font-face_browser_support \"http://webfonts.info/wiki/index.php?title=@font-face\\_browser\\_support\")\n\n"
+    },
+    {
+      "time": "4 Apr 2010 — 9:12am",
+      "content": "Adam: _..There are no Unicode small caps .._\n\nFrode: FYI, there _are_ a number of small caps characters defined in Unicode, but these describe the form, rather than the function. The _function_ is for phonetic transliteration of certain speech forms, and these are not to be confused with \"regular characters in a small caps form\".\n\nUnicode does not define any font appearance at all -- italics, bold, underline, outline, and so on.  \nIt has the advantage that this, combined with a Small Caps _feature_, will copy a small caps text from a PDF in its original 'lowercase' form. If the font has a c2sc (Caps to Small Caps) feature, the original case of the text will be preserved.\n\n"
+    },
+    {
+      "time": "5 Apr 2010 — 6:31am",
+      "content": "\\>\\>\\> but I'm not sure how to tell if @font-face isn't supported.\n\n[http://www.webfonts.info/wiki/index.php?title=Checking\\_@font-face\\_suppor...](http://web.archive.org/web/20141008204123/http:/www.webfonts.info/wiki/index.php?title=Checking_@font-face_support_with_Modernizr \"http://www.webfonts.info/wiki/index.php?title=Checking\\_@font-face\\_support\\_with\\_Modernizr\")\n\n"
+    },
+    {
+      "time": "5 Apr 2010 — 8:34am",
+      "content": "Thanks Ralf! That’s very helpful.\n\n"
+    },
+    {
+      "time": "9 Apr 2010 — 5:43am",
+      "content": "@frode\n\nYou've brought up an interesting problem that calls for an interrim solution because - as Adam observed - it's going to be a good long while before the specs and browser implementations make it clear how to handle small-caps.  \nAs you said, right now, most browsers deal with it by synthesizing small-caps.  \nI haven't looked into solutions to this problem but I did read somewhere that wherever font-variant small-caps is used, text-decoration:uppercase should also be specified.  \nIf I can remember the page where that advice was dispensed, I'll come back with the link.  \nI believe the point of doing that is to, at least, force uppercase in those browsers that don't synthesize. I haven't checked out the wisdom of that advice, I'm just passing it along - FWIW.  \nFor now, it's certainly clear that using a separate small-caps font is a necessity.  \nThat much is clear.\n\nRegards,\n\nRich\n\n"
+    },
+    {
+      "time": "10 Apr 2010 — 6:35am",
+      "content": "Correction: wrote \"text-decoration:uppercase\" meant \"text-transform:uppercase\".\n\n"
+    },
+    {
+      "time": "10 Apr 2010 — 7:24am",
+      "content": "Hi Richard. Thanks for pointing that out. I’m not sure how CSS deals with such conflicting styles though.\n\nDid you just change your profile picture? I seem to remember another Richard commenting a lot on the web fonts topic.\n\n"
+    },
+    {
+      "time": "10 Apr 2010 — 8:03am",
+      "content": "Last time I checked, the only way to fake small caps consistently cross-browsers (that is, including IE6) with CSS was to set text-transform:uppercase and font-size:80% (or whatever percentage seems fit).\n\n"
+    },
+    {
+      "time": "11 Apr 2010 — 5:41am",
+      "content": "@frode\n\nre: my profile picture  \nI'm going through an identity crisis. I'll probably change it again, soon.  \n(The cougar is the \"official\" icon of [EOTFAST](http://web.archive.org/web/20141008204123/http:/readableweb.com/))  \nJust playing around.\n\n@riccard0\n\nThanks for the idea on sizing. I'm making a note to work up a test page on this. Compare the fallbacks to a \"real\" small-caps. Probably be a while before I get to it, though.\n\n"
+    }
+  ]
+}

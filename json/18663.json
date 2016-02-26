@@ -1,0 +1,54 @@
+{
+  "id": "18663",
+  "title": "Adding custom Unicode values to FLS5's list...",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m not sure if Adam’s around, but maybe someone else might have an idea on this one. I’d like to add some custom Unicode codepoints to FontLab’s Unicode list so that rather than entering the codepoints for each individual smallcap glyph I can use the Glyph \\> Glyph Names \\> Generate Unicode command. I use Adobe’s values listed in their [Glyph List](http://web.archive.org/web/20081013185744/http:/partners.adobe.com/public/developer/en/opentype/glyphlist.txt) and I’d like to add all the smallcap glyph names and codepoints to FL’s list so that they’re available to the Generate Unicode command. So, my question is, where does FL store it’s Unicode list and can it be edited/added-to?\n\n [‹ Quick questions about Type-1 Unique IDs](http://web.archive.org/web/20081013185744/http:/typophile.com/node/18749 \"Go to previous forum topic\") [Font Agent Pro Workgroup Edition ›](http://web.archive.org/web/20081013185744/http:/typophile.com/node/18718 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081013185744/http://typophile.com/user/3771\" title=\"View user profile.\">jason</a>",
+  "time": "<br>",
+  "uid": "3771",
+  "comments": [
+    {
+      "time": " 19.Mar.2006 6.46pm",
+      "content": "Nevermind, found it. Looks like it’s either a matter of using the same glyph names as listed in FL’s Standard list (or one of the additional optional lists), or editing one of the lists to suit your own custom glyph naming (keeping a back-up of the edited file, of course).\n\n"
+    },
+    {
+      "time": " 19.Mar.2006 7.09pm",
+      "content": "If you’re on a Mac and FL5 then go to Library\\>Application Support\\>FontLab\\>Mapping and open the standard.nam file and save a copy of it. Don’t change it as FL allows you to have custom files elsewhere. Open the copy in a text editor and you’ll see a Unicode list in the format “0x000 glyph name”. For example: “0x0120 Gdotaccent.” Make your list in the same format by adding to the copy. Be sure and change the header to reflect that it’s a new file and save it as plain text under a new name with the extension .nam. Then put it in (User Name)\\>Library\\>Application Support\\>FontLab\\>Mapping. When you start FL it should reflect the additional names.\n\nOf course small caps — like any non-Unicode glyphs — don’t need Unicode points, and Adobe recommends not using numbers from the PUA since there is no standard for their use. This is despite the fact they use them. If you’re being anal about your small caps then you’re making two sets, one that maps to uppercase glyphs (c2sc) and one that maps to lower case glyphs (smcp) which runs into more work than you need in terms of codepoints. As long as your encoding includes the small caps you should be fine.\n\nWhat’s more important is have your own encoding that includes all the characters you want in your font. Once you have your full glyph set then in Names Mode save the encoding with a unique name and the extension .ENC to the folder (user name)\\>Library\\>Application Support\\>FontLab\\>Encoding. You can have several different encoding files reflecting different glyph sets say ones that includes Greek or Cyrillic or ornaments, etc.\n\nWhat’s also helpful is to have your own “alias.dat” file that includes all unique glyphs like the small caps accent glyphs. For instance if you create your small caps as glyphname.smcp or some other extension, this isn’t in the alias file so trying to generate atilde.smcp doesn’t work.\n\nMake a copy of the alias.dat file from Library\\>Application Support\\>FontLab\\>Data to (user name)\\>Library\\>Application Support\\>FontLab\\>Data, then open it in a text editor and follow the format of the file to add unique characters. It should be  \natilde.smcp a.smcp+tilde. This allows you to use Generate Glyphs command to make these. Again be sure you don’t overwrite the original alias.dat file.\n\nI hope I explained this satisfactorily; if not let me know. It isn’t that hard to do and as long as you don’t futz with the original files any mistakes are fixable.\n\nGeorge  \nI felt bad because I had no shoes, until I met a man who had no Bodoni\n\n"
+    },
+    {
+      "time": " 19.Mar.2006 8.50pm",
+      "content": "Hi George,\n\nThanks for all the input; as usual, shortly after posting I discovered most of what you’ve described, but your reply also raised another issue: making two sets of small caps. I’m unclear on this front. What I’ve done in the past is use the same set of small cap glyphs for both the c2sc and smcp OT features. Are you suggesting this is cheating? What, exactly, is the importance of having two sets of the same glyphs? (If that’s what you were suggesting.)\n\n"
+    },
+    {
+      "time": " 20.Mar.2006 1.26am",
+      "content": "Jason,\n\nI hope you are aware that Adobe Glyph List ( [http://partners.adobe.com/public/developer/en/opentype/glyphlist.txt](http://web.archive.org/web/20081013185744/http:/partners.adobe.com/public/developer/en/opentype/glyphlist.txt \"http://partners.adobe.com/public/developer/en/opentype/glyphlist.txt\") ) it not at all intended for developers of new fonts? Developers of fonts should use the Adobe Glyph List for New Fonts ( [http://partners.adobe.com/public/developer/en/opentype/aglfn13.txt](http://web.archive.org/web/20081013185744/http:/partners.adobe.com/public/developer/en/opentype/aglfn13.txt \"http://partners.adobe.com/public/developer/en/opentype/aglfn13.txt\") ).\n\nA.\n\n"
+    },
+    {
+      "time": " 20.Mar.2006 1.38pm",
+      "content": "Hi Adam,\n\nSo, essentially what you’re saying is don’t Unicode my small caps? (I don’t see any values for them in the AGLFN.) Is this because, somewhere down the line, Unicode values will actually be assigned to small caps and thus using custom values (or Adobe’s values) will eventually create a conflict?\n\n"
+    },
+    {
+      "time": " 20.Mar.2006 4.16pm",
+      "content": "Another question for you Adam,\n\nWhen merging fonts, is there a way to customize the suffix that FL appends to incoming glyphs? For instance, if I’m merging a font of small caps into the base font, and I select FL’s option to append the incoming glyphs, can I change the default suffix of .001 to, say, .smcp?\n\n"
+    },
+    {
+      "time": " 21.Mar.2006 2.33am",
+      "content": "Jason,\n\nno, but you after merging the font, you can select all .001 glyphs (manually or through Edit / Find / Name = Ends with = .001 / Select), from the right-click context menu in the Font Window choose: More / Add suffix to glyph name / Replace existing suffix and specify your new suffix there.\n\nAdam\n\n"
+    },
+    {
+      "time": " 21.Mar.2006 2.38am",
+      "content": "As for your first question, you can assign Private Use Area Unicode codepoints to all your unencoded glyphs such as small caps (it’s easiest through Glyph / Glyph Names / Generate Unicode / Assign PUA) but you don’t need to stick to any “standards” there, because there aren’t any. You may, if you really desperately want, assign the PUA codepoints that Adobe has specified in their Corporate Use Area as listed in the Adobe Glyph List, but even Adobe doesn’t stick to these assignments anymore. PUA assignments are by definition arbitrary and nobody relies, or should rely, on the fact that a particular kind of glyph gets a particular PUA codepoint that is consistent across fonts.\n\nAdam\n\n"
+    },
+    {
+      "time": " 21.Mar.2006 9.05am",
+      "content": "Great, thanks for the input on both fronts Adam.\n\n"
+    },
+    {
+      "time": " 22.Mar.2006 4.41am",
+      "content": "“Is this because, somewhere down the line, Unicode values will actually be assigned to small caps and thus using custom values (or Adobe’s values) will eventually create a conflict?”\n\nUnicode values will be universally assigned to small caps, approximately never, so don’t wait assign away. :)\n\n"
+    }
+  ]
+}

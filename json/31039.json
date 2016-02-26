@@ -1,0 +1,46 @@
+{
+  "id": "31039",
+  "title": "creatin ligatures with fontlab",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "hi there,  \ni'm actually creatin a new font and i want to create ligatures in the font. but i've problems with it. i am able to create ligatures as new characters but they doesn't work in the preview panel, not as fontlab data and neither as opentype or truetype. can anyone help me, what's my problem.  \nthx\n\n",
+  "author": "kasem3",
+  "time": "31 Jan 2007 — 9:49am",
+  "uid": "16574",
+  "comments": [
+    {
+      "time": "1 Feb 2007 — 1:37am",
+      "content": "Glyphs are just glyphs, you have to tell the font which substitutions to perform:  \nIn the OpenType panel, add a new feature (click the plus in the bottom left part of the panel) which creates a new empty feature (displayed in the top right part). There, enter something like:\n\nfeature liga {  \n&nbsp;&nbsp;&nbsp;sub f i by f\\_i;  \n&nbsp;&nbsp;&nbsp;sub f l by f\\_l;  \n&nbsp;&nbsp;&nbsp;[etc]  \n} liga;\n\nwhich tells the OpenType interpreter to replace single \"f\" and \"i\" by the ligature glyph named \"f\\_i\" (or \"fi\" if you call it like that).  \nYou can add other substitution commands by the same scheme.\n\nKarsten\n\n"
+    },
+    {
+      "time": "1 Feb 2007 — 2:48am",
+      "content": "Also, make sure that you have more than one feature; eg. kern, or it won't work when generated.\n\nNick Cooke\n\n"
+    },
+    {
+      "time": "1 Feb 2007 — 7:38am",
+      "content": "is it easily possible to have ligatures that involve three letters? i made a www-ligature for my grotesk in the making and remember reading here about not being able to make normal ligatures that involve three letters.\n\n"
+    },
+    {
+      "time": "1 Feb 2007 — 7:40am",
+      "content": "_is it easily possible to have ligatures that involve three letters?_\n\nyes.\n\n"
+    },
+    {
+      "time": "1 Feb 2007 — 9:43am",
+      "content": "thx for your replies. i'll try it.\n\n"
+    },
+    {
+      "time": "3 Feb 2007 — 6:58am",
+      "content": "three letter ligatures:\n\ni'd go like that with it?\n\nfeature liga {  \n sub w w w by lig\\_www;  \n} liga;\n\n(if the name of the glyph is lig\\_www)\n\non another note: if i do a www-lig, wouldnt it be good to make it \"www.\", because then i can make sure that there's not a strange word in a language that has three w's following each other and getting replaced - also, makes kerning easier.\n\n"
+    },
+    {
+      "time": "3 Feb 2007 — 7:33am",
+      "content": "Since glyph names still matter, you better name the glyph \"w\\_w\\_w\" so e.g. Acrobat knows it is a ligature and must be decomposed to w w w if you copy/paste text from a PDF. So:  \n&nbsp;&nbsp;&nbsp;sub w w w by w\\_w\\_w;\n\nOr, if you like:  \n&nbsp;&nbsp;&nbsp;sub w w w period by w\\_w\\_w\\_period;\n\nAlso, you can use contextual substitution:  \n&nbsp;&nbsp;&nbsp;sub w' w' w' period by w\\_w\\_w;  \nSo w w w will be substituted only if period follows, but the period itself remains.  \n(You could put w\\_w\\_w into your w kerning class. Might be that XPress7 ignores this then, I don't know, you have to try.)\n\nKarsten\n\n"
+    },
+    {
+      "time": "3 Feb 2007 — 8:34am",
+      "content": "\\> Or, if you like:  \n\\> sub w w w period by w\\_w\\_w\\_period;  \n\\> Also, you can use contextual substitution:  \n\\> sub w’ w’ w’ period by w\\_w\\_w;  \n\\> So w w w will be substituted only if period follows,  \n\\> but the period itself remains.\n\nBut note that not all OpenType-savvy applications support contextual substitutions. The contextual ligature will work in InDesign, Illustrator, Photoshop, QuarkXPress 7 but will not work in Apple TextEdit, Keynote or Pages (under Mac OS X 10.4), while the plain ligature will work in all of the above.\n\nAdam\n\n"
+    }
+  ]
+}

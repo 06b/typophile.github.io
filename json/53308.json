@@ -1,0 +1,58 @@
+{
+  "id": "53308",
+  "title": "Vertical Metrics Confusion",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I decided I wanted to configure the vertical metrics (TypoAscender, TypoDescender, etc.) instead of having fontlab do it manually. I'm very confused and after reading this: [http://typophile.com/node/13081](http://web.archive.org/web/20131017023942/http:/typophile.com/node/13081 \"http://typophile.com/node/13081\") even more confused.\n\n ![](http://web.archive.org/web/20131017023942im_/http:/typophile.com/files/verticalmetrics_6577.jpg)\n  \nHere's a picture of the metrics. One question I have is: should the TypoAscender + TypoDescender + TypoLineGap equal the UPM size of 1000? I have many other questions but I'll start there.\n\nShould I give up and go back to having it calculate the values automatically?\n\n",
+  "author": "bvfonts",
+  "time": "9 Jan 2009 — 5:26pm",
+  "uid": "2951",
+  "comments": [
+    {
+      "time": "9 Jan 2009 — 6:16pm",
+      "content": "After reading the pdf that Karsten wrote I think I got it.\n\n ![](http://web.archive.org/web/20131017023942im_/http:/typophile.com/files/verticalmetrics_improved_6040.jpg)\n  \nMaybe? Thanks for the pdf Karsten. \n"
+    },
+    {
+      "time": "11 Jan 2009 — 3:05am",
+      "content": "Yes, this is ok (A). Possibly adjust values a bit as described in footnote \\*\\*.\n\nAnother way (B) is what John Hudson describes in the Vertical Metrics How-to:\\*  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_\"ideal\" values:_  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypoAscender = Ascender = 750  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypoDescender = Descender = -250  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypoLineGap = LineGap = 200\\*\\*  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;_maximum extensions found in the font/family:_  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WinAscent = 850\\*\\*  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WinDescent = -350\\*\\*  \nThis is the way these values are defined in latest Adobe and Microsoft fonts.  \nIn this case, it is recommended\\*\\*\\* to also set the OS/2 table fsSelection bit 7 and increase the OS/2 table's version to 4. This will tell applications -- those that understand this setting -- that they should use Typo... values rather than Win... values to calculate the default line-to-line distance. (Please note that as soon as OS/2 table’s version is 4, bits 7-9 need to be set or not set intentionally because whether these bits are 0 or 1 has a special meaning. More in the [OS/2 table](http://web.archive.org/web/20131017023942/http:/www.microsoft.com/typography/otspec/os2.htm) and [name table](http://web.archive.org/web/20131017023942/http:/www.microsoft.com/typography/otspec/name.htm) specs.)\n\nSo both ways are possible, but for simplicity's sake I intend to either withdraw the PDF or change it so it reflects John Hudson's recommendation and Adobe's/Microsoft's practice, i.e. (B) -- much easier to describe and understand.\n\n\\* Especially see the \"Update to the Update to the Update\".\n\n\\*\\* If you set WinAscent/WinDescent and Ascender/Descender e.g. to 800/-400 or 850/-350 (maybe future additional diacritic letters will get taller?), and TypoLineGap to 200, you get an \"ideal\" default line-to-line distance of 120%, comparable to setting 10/12pt.\n\n\\*\\*\\* There are fonts that don't, and since your values match the equation  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TypoAscender - TypoDescender + TypoLineGap  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= WinAscent - WinDescent  \nthere's nothing to worry anyway.\n\nKarsten\n\n"
+    },
+    {
+      "time": "11 Jan 2009 — 10:15am",
+      "content": "I'm confused again. Maybe I should go back to selecting: Calculate values automatically. Does anyone know exactly how those values are calculated automatically? Can I trust the values that are calculated automatically?\n\n"
+    },
+    {
+      "time": "11 Jan 2009 — 11:35am",
+      "content": "Using ttx to see how fontlab calculates the vertical metrics. This is how it looks (I typed in manually what the ttx xml file printed out):\n\n ![](http://web.archive.org/web/20131017023942im_/http:/typophile.com/files/verticals_rec_6081.jpg)\n  \nIf I follow the next to the last paragraph on pg 303 of the FL manual. I'm guessing it would look like this:  \n\n ![](http://web.archive.org/web/20131017023942im_/http:/typophile.com/files/verticals_man_4423.jpg)\n  \nand the last line says as an alternative I could choose to set the LineGap to match the TypoLineGap  \nDoes anyone have a list of applications and operating systems that each vertical metric set is used in so that I can do my own testing? \n"
+    },
+    {
+      "time": "11 Jan 2009 — 11:58am",
+      "content": "No need to be confused. In essence what you did in your second post was ok!\n\n"
+    },
+    {
+      "time": "11 Jan 2009 — 12:03pm",
+      "content": "Tracking the words of the eminent Mr Luecke.\n\nChrisL\n\n"
+    },
+    {
+      "time": "13 Jan 2009 — 12:22pm",
+      "content": "\"This is the way these values are defined in latest Adobe and Microsoft fonts.\"  \nBut not all Adobe and Microsoft fonts are defined thus, and future Adobe and Microsoft fonts may not be, and this ideal/default is also the same as it was in Fontographer 1.0.\n\nAs I think we established some time ago, though I'm sure someone will correct me if I forgot, the Windows values were designed to inform applications of how much vertical space they have to write, (and erase) when composing text of a particular font. Some apps then took that for the em and confusion bestrode the issue.\n\nbvfonts, there are two options for the type designer, not as clearly put forth as they could be.\n\nBoth are based first on the principle that the EM is split by the baseline at a ratio of 3 above and 1 below. Altering this ratio is done for all sorts of reidealizational purposes. And second that line gap is better expressed as \"ideal leading\"\n\nThen one option says; Design your font on the 3/1 em but Put Guides at yyy and -yyy and make sure all glyphs Stay Inside the Lines without much if any padding. I think this is the \"something to worry about\" option.\n\nAnd the second option says; Design your font on the 3/1 em, make reasonably sized accents and other kerns as the y dimension is filled up and down, and then push the button for Windows values. And I think _this,_ is the \"nothing to worry about\" option, if it's not too late. ;)\n\nCheers!\n\n"
+    },
+    {
+      "time": "13 Jan 2009 — 2:09pm",
+      "content": "When you say \"push the button\" do you mean the recalculate button in fontlab and use those values for winasc and windesc? Do you think the Typoasc and Typodesc values should equal asc and desc in the key dimensions?\n\n"
+    },
+    {
+      "time": "13 Jan 2009 — 2:38pm",
+      "content": "D.B.: Yes! Vertical metrics -- or the relation of upm, ascenders, descenders, ideal leading -- were a trivial issue if type designers would only tame themselves and think of it before even starting to draw. But this seems more a wish than reality. You read the UPM=1100 thread too.&nbsp;&nbsp;:)\n\n"
+    },
+    {
+      "time": "14 Jan 2009 — 8:21am",
+      "content": "\"...do you mean the recalculate button in fontlab...\"\n\n...yes sir!\n\n\"You read the UPM=1100 thread too...\"\n\n...couldn't help it, voodoo is trying to eclipse reason. ;)\n\nCheers!\n\n"
+    },
+    {
+      "time": "15 Jan 2009 — 8:56am",
+      "content": "Thanks for the help Karsten & David. : )\n\n"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "17665",
+  "title": "Unicode OpenType and MS Word 2003 spell checking",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m still wrestling with a Unicode Opentype cross-platform font that will work in various apps. Although it is definitely a temporary ’hack’, I found that replicating the ccmp feature as liga, and placing it after ccmp, seemed to work as a temporary measure. The characters are now rendered properly in Word and InDesign. However, the problem I have now is with spell checking in MS Word 2003. When I attempt to add words created with the OpenType font, via the tools/options/spelling/custom dictionary dialog, Word complains that the ’word cannot be added because the speller cannot handle some of the characters it contains’. It was my understanding that using unicode characters with codepoints (versus PUA) will allow spell checkers to work properly.\n\nAm I missing something?\n\n [‹ Adding language/hyphenation dictionaries to InDesign](http://web.archive.org/web/20071017203219/http:/typophile.com/node/17681 \"Go to previous forum topic\") [Rebuilding Printer of Display Fonts ›](http://web.archive.org/web/20071017203219/http:/typophile.com/node/17673 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20071017203219/http://typophile.com/user/10195\" title=\"View user profile.\">fredjonze</a>",
+  "time": "<br>",
+  "uid": "10195",
+  "comments": [
+    {
+      "time": " 1.Feb.2006 1.04pm",
+      "content": "I’m checking with them on this - will let you know what I uncover.\n\n"
+    },
+    {
+      "time": " 1.Feb.2006 4.54pm",
+      "content": "Fred, what characters are you using? With what language are you identifying the text in Word’s languages setting?\n\n"
+    },
+    {
+      "time": " 1.Feb.2006 8.37pm",
+      "content": "Word from Word...\n\n\\>This is a known in issue in earlier versions of Office (Office 2003 and before). Since Custom Dictionary was ANSI, adding words from Unicode-only languages was not possible. (We made it work by putting some fixes for Indic languages where we knew the Unicode ranges of Indic scripts)\n\n\\>Good news is that this has been fixed in O12 where we have converted/made Custom Dictionary Unicode. This change will basically allow adding words from any languages with Unicode encoding.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": " 2.Feb.2006 9.44am",
+      "content": "Hi Si,\n\nThanks for verifying that for me. Any idea about the estimated release date for O12?\n\n"
+    },
+    {
+      "time": " 2.Feb.2006 7.33pm",
+      "content": "This year, it’s already in beta.\n\nSi\n\n"
+    }
+  ]
+}

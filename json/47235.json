@@ -1,0 +1,50 @@
+{
+  "id": "47235",
+  "title": "The turkish i story",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Could anyone tell me if this is a correct way to handle the turkish i problem.\n\nI put the locl feature on top so it overrides everything.\n\nI font know the language really, but tried to make some sense out of it.\n\nThe glyph \"i.dot\" is a copy of i.\n\nThanks in advance!\n\n ![](http://web.archive.org/web/20110617170403im_/http:/typophile.com/files/turskishi_5110.png)\n\n",
+  "author": "<a href=\"/web/20110617170403/http://typophile.com/user/11526\" title=\"View user profile.\">Goran Soderstrom</a>",
+  "time": "<br>",
+  "uid": "11526",
+  "comments": [
+    {
+      "time": "",
+      "content": "The underlying reasoning is that 'i' \"ee\" and 'ı' \"ih\" are two different characters. Capitalizing and small-capitalizing in a Western locale loses the dot, which makes it a different character in Turkish.\n\nYou don't really need an \"i.dot\" glyph (as dotted equivalent of \"dotlessi\"), you can use the regular latin 'i' for that. So the translation you specify is not necessary.\n\nThe only caveat is, for Turkish you should translate \"i\" to \"idotaccent.sc\" for small caps, and \"i\" to \"Idotaccent\" for capitals. The dotless 'i' can be converted to a 'regular' small cap I and capital I, for any locale, so it doesn't need a localized handling.\n\nYou _will_ get bonus points if you weed out the ligatures containing an \"i\" for Turkish, such as \"fi\" and \"ffi\" :-) (As a side note, your translation of 'i' to 'i.dot' may rule out that lookup; but I still think it makes life more complicated, instead of less.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> _You will get bonus points if you weed out the ligatures containing an “i” for Turkish, such as “fi” and “ffi”_\n\nThat's exactly what will happen.\n\n\\> _(As a side note, your translation of ’i’ to ’i.dot’ may rule out that lookup; but I still think it makes life more complicated, instead of less.)_\n\nI disagree. Taking care of the Turkish i upstream, in 'locl', makes the code for other features (e.g. 'liga', 'smcp') much much simpler.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Goran, your approach is good, but there are some issues,\n\n1. `languagesystem dflt dflt;` is incorrect.  \nIt should be `languagesystem DFLT dflt;`\n\n2. If you want to be thorough, you can include other languages that need the same treatment such as Azeri (AZE) and Crimean Tatar (CRT).\n\n3. You can actually remove the substitution  \n`sub i.small by idotaccent.small;`  \nfrom the 'locl' feature. The reasoning for this is, the glyph 'i.small' won't be in the glyph stream until 'smcp' is applied. Since 'locl' comes before 'smcp' (and assuming that the text engine will do the right thing which is apply the lookups in the order they appear in the font), at the time 'locl' is applied the glyph 'i.small' won't be available as input.  \nIn any case, don't forget to include the following substitution in 'smcp',  \n`sub i.dot by idotaccent.small;`\n\n4. `idotaccent.small` is not a good name because 'idotaccent' is not a standard name. ('Idotaccent' is, but that's different). You need to call it something like 'i.dotsmall'.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for helping out Miguel and Theunis! :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "When I write DFLT capitalized I get this warning, are you sure on the capitalization, Miguel?\n\n[WARNING] Use of DFLT tag has been deprecated. It will work, but please use 'dflt' instead. [/Users/goran/Library/Application Support/FontLab/Studio 5/Features/fontlab.fea 57]\n\n"
+    },
+    {
+      "time": "",
+      "content": "Goran,\n\nSee that thread — Script Tag + i dot:\n\n[http://typophile.com/node/29469](http://web.archive.org/web/20110617170403/http:/typophile.com/node/29469 \"http://typophile.com/node/29469\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "There's always a \"but\" with FontLab...\n\n"
+    },
+    {
+      "time": "",
+      "content": "And, what will exactly happen if I take away the DFLT tag and only put this in:\n\nlanguagesystem latn dflt;  \nlanguagesystem latn TRK;  \nWill this produce a completely useless font regarding language support?\n\n"
+    },
+    {
+      "time": "",
+      "content": "No, it won't be useless.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "id": "107953",
+  "title": "Reduce line height in font file",
+  "forum": "Build",
+  "tags": [
+    "TypeLight metrics software",
+    "Build"
+  ],
+  "content": "I've been tasked with making modifications to a Flash application which uses an embedded custom font. The font used in the first instance has since been lost: the version we have is a slight variation which displays a greater line-height, which breaks the fixed layout in many instances.\n\nI'm using _Type light 3.2_ — it seems to be the most stable free font editor available for Windows (_Font Forge_ crashes whenever I modify the font) — to try and modify the font metrics to reduce the line height. _Line Gap_ and _Typo Line Gap_ were set to `200`, which I reduced to `0` for each (this seemed the most obvious metric to try) in an attempt to see an immediate difference, however the new font doesn't appear any different in any software I use to render it across several lines.\n\nThere are other less obvious options: I could try reducing the various ascender and descender values, or reduce the EM unit size, but these seem overly invasive and contrived ways to get around what seems fairly conceptually simple. Am I missing something?\n\n",
+  "author": "Barney Carroll",
+  "time": "2 Jan 2014 — 5:06am",
+  "uid": "22603",
+  "comments": [
+    {
+      "time": "2 Jan 2014 — 7:09am",
+      "content": "You have made sure the line spacing is not hardwired in the app?\n\n"
+    },
+    {
+      "time": "2 Jan 2014 — 7:41am",
+      "content": "Hi Té,\n\nIt isn't. The app was actually created in an old version of Flash before it supported paragraph styles, so it's not even possible to specify the line spacing (!). After a bit more experimentation, it seems that modifying the font metrics via _Type light_ doesn't make any practical difference to the font's rendering — perhaps these values are here purely to provide visual aids for the designer in the glyph editor?\n\n"
+    },
+    {
+      "time": "2 Jan 2014 — 1:17pm",
+      "content": "For historical reasons, Windows and Mac obtain font-based line spacing from different tables: Mac gets it from the hhea table while Windows from the OS/2 table. See the section on **Baseline to Baseline Distances** in [Recommendations for OpenType Fonts](http://web.archive.org/web/20150419172754/http:/www.microsoft.com/typography/otspec/recom.htm).\n\nI don't know what fields _Type Light 3.2_ is adjusting, but perhaps it is adjusting some but not all of the relevant values.\n\n"
+    },
+    {
+      "time": "3 Jan 2014 — 3:22am",
+      "content": "Hi Bob,\n\nThe fields in question are _Line Gap_ and _Typo Line Gap_. I've since found a stable release of _FontForge_, if anybody's more familiar with that: this also exposes a «_Has Vertical Metrics_» boolean which I can tick (I thought this might cause the _Line Gap_ or _Typo Line Gap_ to take effect, but no dice).\n\nI'm willing to concede that I might be going about this completely the wrong way. Maybe there's a better method of reducing the default line-height without modifying the glyphs? Any suggestions welcome.\n\n"
+    },
+    {
+      "time": "3 Jan 2014 — 12:22pm",
+      "content": "I hope you will find this pdf quite helpful for line-height or leading adjustment  \n [http://kltf.de/downloads/FontMetrics-kltf.pdf](http://web.archive.org/web/20150419172754/http:/kltf.de/downloads/FontMetrics-kltf.pdf \"http://kltf.de/downloads/FontMetrics-kltf.pdf\")\n\n"
+    },
+    {
+      "time": "3 Jan 2014 — 1:05pm",
+      "content": "There are actually three sets of values, two in the os/2 and one in the hhea. Two of these use ascent, descent and linegap settings, while the third uses only two values (WinAscent and WinDescent). It's possible that your flash app is not using linegap information and simply using ascent+descent as the line height. In that case you'd have to modify one or all of these values.\n\nUnfortunately I don't use FontForge, so this is as far as I can go. Sorry about that.\n\nJason Campbell\n\n"
+    },
+    {
+      "time": "4 Jan 2014 — 1:12am",
+      "content": "Regarding Type light 3.2:\n\nAs long as you have \"calculate automatically\" unchecked in the advanced metrics dialog, you can input your own values for all of the standard font metrics and they will be saved with your font. ie:  \nwinascent  \nwindescent  \nhhea ascender  \nhhea ascender  \nhhea line gap  \ntypo ascender  \ntypo descender  \ntypo line gap\n\n"
+    }
+  ]
+}

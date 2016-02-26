@@ -1,0 +1,30 @@
+{
+  "id": "47346",
+  "title": "Ligature Marks",
+  "forum": "Arabic Typography & Type Design",
+  "tags": [
+    "Arabic Typography & Type Design"
+  ],
+  "content": "Hi  \nI have noticed that WPF Text Formatter does not show ligature marks in Arabic OpenType fonts correctly, that is when it tries to render a lam+kasra+alef+fatha, for example, it palces both kasra and fatha marks after lamalef ligature.  \nIt seems that WPF does not use Uniscribe and may be the ligature-mark feature of OpenType is not yet implemented in it or I am missing some point.  \nPlease advise me.  \nThanks\n\n",
+  "author": "heb",
+  "time": "12 Jul 2008 — 8:24am",
+  "uid": "33782",
+  "comments": [
+    {
+      "time": "4 Aug 2008 — 3:20pm",
+      "content": "As I understand it, WPF does not use Uniscribe, but its own text handler should produce the same results as Uniscribe. I will bring this discussion to the attention of Uniscribe and WPF engineers.\n\n"
+    },
+    {
+      "time": "4 Aug 2008 — 8:29pm",
+      "content": "WPF implements complete OpenType layout format specification. It is not using Unisribe and does not share code with it. There are may be bugs in it. Although we spent lots of time testing it and endure it produces the same results as Uniscribe, it is relatively new product and less people outside Microsoft had a chance to test it with various fonts and scripts.\n\nYou may want to provide more details about what is not working for you, so we can invesigate. Does it happen with all or only particular Arabic fonts? What is special about the string you are shaping?\n\nThanks,  \nSergey\n\n"
+    },
+    {
+      "time": "5 Aug 2008 — 4:32am",
+      "content": "Sergey, I've confirmed this bug in WPF Arabic handling. If you enter the characters لَاِ within WPF both marks are positioned relative to the left letter (alif) of the ligature, rather than the first, above marks being positioned relative to the right letter (lam). I tested this with a randomly selected Linotype Arabic font and also with Microsoft's own Arabic Typesetting font. It appears that WPF is failing to correctly enumerate ligature components.\n\n"
+    },
+    {
+      "time": "5 Aug 2008 — 7:21am",
+      "content": "I guess ZARNEGAR (old+new version) is the Middle east version of WPF.ME  \n [http://www.sinasoft.com/ZARNEGAR/index.asp](http://web.archive.org/web/20150414232949/http:/www.sinasoft.com/ZARNEGAR/index.asp \"http://www.sinasoft.com/ZARNEGAR/index.asp\")  \nIt is the most powerful Arabic Typesetting system ever developed.  \nVersion 6 can now handle M$OTFs besides its own OTFs.\n\n"
+    }
+  ]
+}

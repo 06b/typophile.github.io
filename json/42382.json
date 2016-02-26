@@ -1,0 +1,94 @@
+{
+  "id": "42382",
+  "title": "Kerning Missing From Truetype Using Fontlab 5.0",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm having this problem with the truetype fonts I'm generating using Fontlab 5.0 in Windows XP. The kerning is missing. I've tested them on Windows in Adobe Illustrator CS2, Corel Paint Shop XI and no kerning. On the Mac I tested them in Photoshop Elements 3 and the Font Book preview window and opened the ttf file in Fontographer 4.7.2 and no kerning. I tried every combination in the options \\> kerning window when generating and nothing works. The kerning is there in the metrics window. When I make the truetype font an opentype truetype and create a kerning feature it works fine but I don't want this to be an opentype font. The kerning in the postscript opentype version works fine in all programs. What could I be doing wrong? - Jess\n\n",
+  "author": "bvfonts",
+  "time": "22 Feb 2008 — 5:23pm",
+  "uid": "2951",
+  "comments": [
+    {
+      "time": "22 Feb 2008 — 6:54pm",
+      "content": "[http://www.fontlab.com/support/problem/](http://web.archive.org/web/20150420165439/http:/www.fontlab.com/support/problem/ \"http://www.fontlab.com/support/problem/\")\n\nA.\n\n"
+    },
+    {
+      "time": "22 Feb 2008 — 7:28pm",
+      "content": "I filled out the form. : ) - Jess\n\n"
+    },
+    {
+      "time": "28 Feb 2008 — 9:15am",
+      "content": "How long does it typically take to get an answer from fontlab support? Tomorrow will be a week. Should I consider generating an opentype truetype instead of a basic truetype? If anyone has any opinions on this I would appreciate it very much. Anyone else using fontlab 5.0.4 and generating basic truetype fonts with kerning? - Jess\n\n"
+    },
+    {
+      "time": "28 Feb 2008 — 9:32am",
+      "content": "Download [http://www.font.org/software/ttx/](http://web.archive.org/web/20150420165439/http:/www.font.org/software/ttx/ \"http://www.font.org/software/ttx/\") and then drag/drop your .ttf onto the TTX tool's icon. Open the text file and search for \"\\<kern\\>\", so you can at least see if FLS did generate a kern table or not.\n\n"
+    },
+    {
+      "time": "3 Mar 2008 — 12:49pm",
+      "content": "Fontlab support got back to me and tested my vfb files and had no problems with kerning when the truetype were generated so I figured it was my stupidity (I assumed this from the start) messing them up. So I tried disabling and enabling some things while reading about them in the manual. When Options\\> Generating Opentype & TrueType: Automatically reorder glyphs was disabled my problem was fixed. I'm not sure if this was on by default or I accidentally clicked it when messing around. -Jess\n\n"
+    },
+    {
+      "time": "3 Mar 2008 — 2:00pm",
+      "content": "Interesting. I thought that if you select options for both reordering glyphs and exporting a kern table and generate an OTF/TTF, FLS will shows a dialog urging you to reconsider your choice.&nbsp;&nbsp;:)\n\n"
+    },
+    {
+      "time": "3 Mar 2008 — 7:59pm",
+      "content": "I just did a test to see if I got an error message with both selected and I didn't get one with the truetype but I did get one with the opentype postscript. -Jess\n\n"
+    },
+    {
+      "time": "3 Mar 2008 — 10:40pm",
+      "content": "That makes sense. PostScript OpenType fonts are never supposed to have a kern table. A TTF can have both (indeed, some Microsoft fonts do, in order to provide kerning for the OpenType-challenged Office).\n\n"
+    },
+    {
+      "time": "4 Mar 2008 — 11:09am",
+      "content": "John, not according to what I've been reading here: [http://www.typophile.com/node/40041](http://web.archive.org/web/20150420165439/http:/www.typophile.com/node/40041 \"http://www.typophile.com/node/40041\")\n\n\"The kern-table kerning is not officially supported by the OpenType specification, but I don’t know of any situation where it would actually break anything (the principle behind the OpenType font format is that you can put whatever table you want into the font, and applications must ignore the tables they cannot process). - Adam Twardoch\"\n\nThis is why I always include a basic kern table in my ot ps fonts.\n\nI'm wondering if Adam could go into some detail about what the \"automatically reorder glyphs\" does and when you would actually need it and why did it mess with my kerning when it was enabled? The manual says:\n\n\"If this option is enabled, FLS will try to reorder glyphs to match the mac cmap encoding table. Technically, this is a requirement of the Apple TT specification but it is not required on Mac OS X or Windows\"\n\nWhat would happen to a mac font on an older system if the glyphs were not reordered?\n\n-Jess\n\n"
+    },
+    {
+      "time": "4 Mar 2008 — 11:11am",
+      "content": "And this from the fontlab support board:\n\n\"Including a flat kern table in an OpenType PS font de facto increases the chance for the kerning to work everywhere. FontLab Studio 5 includes an option to include the flat kern table in OpenType PS fonts. We encourage Adobe and Microsoft to allow the kern table in all OpenType fonts.\"\n\n-Jess\n\n"
+    },
+    {
+      "time": "5 Mar 2008 — 8:05am",
+      "content": "Try this trick:\n\nPreferences\\Generating OpenType and TrueType\\ Kerning...\n\nCheck only: Export old style non-OpenType \"kern\" table.  \nMake sure you Un check this: Generate OpenType Kern feature....\n\nTell me if it worked for you.\n\nRegards,\n\nDH\n\n"
+    },
+    {
+      "time": "6 Mar 2008 — 7:02am",
+      "content": "About glyph order:\n\nRather then reordering glyphs upon font generation (with the option switched on), you could as well order glyphs _before_, and generate fonts with the reorder option switched off.\n\nAFAIK, it is not required that glyph are in some 'standard' order. The single issue with CFF-OT fonts whose first hundred or so glyphs are not in 'standard' order only affects CFF-OT fonts in OS9: the _Euro_ cannot be accessed through the keyboard. Also see [http://typophile.com/node/30303](http://web.archive.org/web/20150420165439/http:/typophile.com/node/30303 \"http://typophile.com/node/30303\") and Thomas Phinney's comments.\n\n_But_ there is one requirement: In CFF-OT fonts, the first glyph must be _.notdef_. And in TT(-OT) fonts, the first four glyphs must be _.notdef_, _.null_, _CR_ and _space_, see [http://www.microsoft.com/typography/otspec/recom.htm](http://web.archive.org/web/20150420165439/http:/www.microsoft.com/typography/otspec/recom.htm \"http://www.microsoft.com/typography/otspec/recom.htm\")\n\n"
+    },
+    {
+      "time": "6 Mar 2008 — 9:24am",
+      "content": "I opened the fonts I generated without \"automatically reorder glyphs\" enabled and checked the index and everything looked in order. -Jess\n\n"
+    },
+    {
+      "time": "1 Oct 2008 — 3:18am",
+      "content": "Such a shame that my font will not work with OpenType feature Kern.. I gave up and set it to flat kerning only. I don't really care because this is not a open type font it's a open type / true type font. But the next problem I just noticed is that some programs will not work with flat kerning.\n\nNoticed OpenOffice can't handle flat kerning. Kerning is relativity new to that program though, It's only been supported for a few months so far.\n\nDoes anyone know what programs will work with flat kerning and what will not work?\n\nI don't have the Office program to test it. Flat kerning works perfectly in Photoshop and Indesign.\n\n"
+    },
+    {
+      "time": "11 May 2009 — 11:36am",
+      "content": "I have the same problem on the Mac. Using FontLab Studio version 5.0.4.\n\nThe kerning of my OpenType TT does not work in Microsoft documents.\n\nI try this...  \nOptions\\> Generating Opentype & TrueType: Automatically reorder glyphs was disabled my problem was fixed. Didn't worked\n\nAlso...  \nPreferences\\Generating OpenType and TrueType\\ Kerning...  \nCheck only: Export old style non-OpenType “kern” table.  \nMake sure you Un check this: Generate OpenType Kern feature....\n\nDid not work.\n\nI also sent technical support request but... Any Idea?\n\n"
+    },
+    {
+      "time": "12 May 2009 — 1:56pm",
+      "content": "\\> The kerning of my OpenType TT does not work in Microsoft documents.\n\nDid you enable kerning in Word?\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "15 May 2009 — 5:26pm",
+      "content": "I recently had the same problem with a new font. I did everything in Fontlab that has been mentioned in this thread, and also made sure the kerning was turned on in Word. I tried Word 2003 and 2007. Never succeeded in getting MS documents to read the kerning. I contacted Microsoft, too. They couldn't figure it out. The suggestion I received, from multiple sources, was that it was probably something in Word and I should not hold my breath expecting to see it fixed. The kerning worked in simpler text apps like Textedit and Notepad, as well as InDesign. My approach in kerning had been to set the spacing so the fewest kern pairs were needed. I redesigned the spacing in the font to look as good as possible without any kerning, then added kerning so it could look a little better in the apps that recognized it. This is not a economical an approach, but it made the font look better in Word.  \nJuliet\n\n"
+    },
+    {
+      "time": "30 Dec 2009 — 3:16pm",
+      "content": "Somehow stumbled on this thread trying to find out why my kerning wasn't working. Eventually I've fixed it. In case it's any use to others, I read somewhere that the OpenType kerning feature only works if there is some other OpenType feature defined. So I've put in a quick liga feature and hey presto, kerning now works in Adobe apps when exporting the .otf.\n\n"
+    },
+    {
+      "time": "31 Dec 2009 — 9:39am",
+      "content": "Yes, older Adobe applications check for the presence of a \"GSUB\" table only to enable OpenType Layout. Kerning is present in the \"GPOS\" table, but it is ignored unless a \"GSUB\" table is present. Any OpenType Layout feature that performs substitutions (such as \"liga\" for ligatures) will create a \"GSUB\" table, and then kerning will work as well.\n\nThis is a bug and I believe it has been fixed in newest Adobe apps (CS4).\n\nNote that this only applies to OpenType kerning done through the \"kern\" feature. Old-style kerning can be placed in the font file as well through the \"kern\" table. FontLab Studio allows you to control (in Preferences) whether to put both kinds of kerning, just one or none. Note that while OpenType \"kern\" feature kerning allows the use of classes, old-style \"kern\" table kerning only allows a flat pair list. So FontLab Studio allows you to decide how class kerning should be converted into flat kerning, i.e. whether all class kerns should be expanded into a flat table (which may result in a very long list if your font has many glyphs, which may overload some old applications such as QuarkXPress 4 or PageMaker), or if the old-style flat kerning should be a subset of the class kerning.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "7 Oct 2014 — 4:26pm",
+      "content": "@DotlessHyphen Your trick works fine for me... thanx.\n\n"
+    }
+  ]
+}

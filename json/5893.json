@@ -1,0 +1,58 @@
+{
+  "id": "5893",
+  "title": "Print screen on 300 dpi Print",
+  "forum": "Design",
+  "tags": [
+
+  ],
+  "content": "What's the best way to include print screens on a magazine/book without a low quality vibe? I guess it depends on the printing specs for the book/magazine.   \n   \nTake a look at the WEB DESIGN INDEX or any other simmilar book that has a print screen site/ interface (I saw a book yesterday with the photoshop interface on the cover).   \n   \nWhat's the best way? Hot to transform a 72dpi print screen on a good looking printed photo?\n\n",
+  "author": "<a href=\"/web/20111217181412/http://typophile.com/user/1735\" title=\"View user profile.\">adriano</a>",
+  "time": "<br>",
+  "uid": "1735",
+  "comments": [
+    {
+      "time": "",
+      "content": "A print screen contains exactly the number of pixels that there can be. You do not change the resolution of a screen capture. You just run it as-is. 'Upping' the resolution of a screen capture will do nothing but make it look blurry and not at all like a screen capture.   \n   \nSo, simple answer, just leave it as is.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Good point. I guess what I saw was a 640x480 print screen on a \\>21\" monitor. This way the photoshop toolbar and top left menu matches the book cover. Nice. ![:-)](http://web.archive.org/web/20111217181412im_/http:/www.typophile.com/forums/clipart/happy.gif)\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"If you shrink it down to about 2.5 inches it will interpolate up to 300dpi...\"   \n   \nIt won't interpolate at all. It will just print smaller.   \n   \nIf the screen shot is only 640 pixels wide, that's all you have to work with. If you print it at 1\", it will technically be 640 PPI. If you print it at 4\" in width, it will be 160 PPI.   \n   \nNow, if you tell Photoshop to print it at 4\", but at 300 DPI, that's when it WILL interpolate and, most likely, just give you a blurry, muddy image.   \n   \nI'd prefer crisp, albeit larger pixels when showing screen shots in print.\n\n"
+    },
+    {
+      "time": "",
+      "content": "If you're going to resize a pixellated image and retain the clarity, you need to resample using the Nearest Neighbour setting in Photoshop (as opposed to any of the different flavours of Bicubic), and you need to stick to values which are factors of both the horizontal and vertical dimensions (ie you can resize a 640 x 480 image to 320 x 240, but not 330 x whatever).   \n   \nThe other part of making screen graphics look good is the way you separate them to CMYK.   \n   \nWhen you convert an image from RGB (or L\\*a\\*b, for that matter) to CMYK, a black channel has to be generated. (We need a black channel in the first place because cyan ink reflects a lot of red light, so black generated from only C, M and Y looks muddy-brown.)   \n   \nBasically, the separating algorithm creates black where R, G and B are equal (or nearly equal). It then removes some of the CMY inks from those areas to avoid over-inking. The amount of CMY it removes can be controlled using Photoshop's Black Generation setting in the Custom CMYK set-up.   \n   \nWhen you separate an image with very definite areas of black -- a screen-grab is an ideal example -- you want to use Maximum Black Generation. This replaces all R=G=B areas with black and removes all CMY from those areas, and it aggressively replaces near-neutral mixes with black also.   \n   \nResult: you get nice clear black lines instead of slightly off-register CMYK mixes, and everything (text particularly) looks crisp and clear.   \n   \n(As an aside, when you separate images with very continuous tone -- like photographs -- you use a much, much lighter black generation. Printers call it 'Skeleton Black'. This preserves subtle tonal shifts and bright colour mixes and is more colour-controllable on press).   \n   \nHTH   \n   \nRob\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi, I wonder if someone knows where I can find more information about this topic in SPANISH.   \nAny help would be Greatly Appreciated.   \nthanks in advance   \n   \nMariano\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi, I wonder if someone knows where I can find more information about this topic in SPANISH.   \nAny help would be Greatly Appreciated.   \nthanks in advance   \n   \nMariano\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi, I wonder if someone knows where I can find more information about this topic in SPANISH.   \nAny help would be Greatly Appreciated.   \nthanks in advance   \n   \nMariano\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi, I wonder if someone knows where I can find more information about this topic in SPANISH.   \nAny help would be Greatly Appreciated.   \nthanks in advance   \n   \nMariano\n\n"
+    },
+    {
+      "time": "",
+      "content": "Does this work?   \n   \n [http://translate.google.com/translate?u=http%3A%2F%2Fwww.typophile.com%2Fforums%2Fmessages%2F4100%2F41961.html%3F1091718284&langpair=en%7Ces&hl=en&ie=UTF-8&ie=UTF-8&oe=UTF-8&prev=%2Flanguage\\_tools](http://web.archive.org/web/20111217181412/http:/translate.google.com/translate?u=http%3A%2F%2Fwww.typophile.com%2Fforums%2Fmessages%2F4100%2F41961.html%3F1091718284&langpair=en%7Ces&hl=en&ie=UTF-8&ie=UTF-8&oe=UTF-8&prev=%2Flanguage_tools)\n\n"
+    },
+    {
+      "time": "",
+      "content": "I like that it translates my name as 'Robo'.   \n   \nRob\n\n"
+    },
+    {
+      "time": "",
+      "content": "If I understand correctly, you have an image that is 640x480 @ 72 dpi and you'd like it to be 300 dpi?   \n   \nIf you shrink it down to about 2.5 inches it will interpolate up to 300dpi...\n\n"
+    }
+  ]
+}

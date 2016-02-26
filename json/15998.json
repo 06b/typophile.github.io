@@ -1,0 +1,138 @@
+{
+  "id": "15998",
+  "title": "FontLab Interpolation: Straight Lines -\\> Curves",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "why does FontLab interpolation turn my straight lines in to curves? is there any way to keep this from happening? and where's that thread on weights?\n\n",
+  "author": "<a href=\"/web/20110703012728/http://typophile.com/user/7006\" title=\"View user profile.\">paul d hunt</a>",
+  "time": "<br>",
+  "uid": "7006",
+  "comments": [
+    {
+      "time": "",
+      "content": "It gives the little red arrows something to do when they are bored?\n\nSeriously, I would like to know, too.\n\n"
+    },
+    {
+      "time": "",
+      "content": "has anyone on these boards used [superpolator](http://web.archive.org/web/20110703012728/http:/typophile.com/wiki/superpolator)? i'm wondering how easy it is to use if you haven't actively used RoboFab tools before.\n\nOh, and i found the thread i was looking for:  \n [Family How-To](http://web.archive.org/web/20110703012728/http:/typophile.com/wiki/Family%20How-To)\n\nLOL that sounds like a cource on procreation, sorry.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I get tired of using the eraser tool on all my straight lines gone curvd too.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "straight lines gone wild? :^P\n\n"
+    },
+    {
+      "time": "",
+      "content": "so how does one use interpolation to good effect? another weird think i noticed: FontLab won't interpolate composite characters. Anyone know the easy way round this?\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> so how does one use interpolation to good effect?\n\nGood question. I don't use interpolation (I tried, but then - a lot of problems + work)\n\nI have FL 4.6 (Mac)\n\n"
+    },
+    {
+      "time": "",
+      "content": "I don't have a problem with straight lines turning into curves in interpolation. Of course, I'm using FLS 5, using the option \"Do not interpolate compatible outlines\" in the \"blend fonts\" dialog.\n\nMind you, this does require that you make the outlines compatible first. :/\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Paul,\n\nIf you ever used interpolation or blending in FOG, you would have seen very different behavior and different options. I used the interpolate and MM options in FOG to great effect; they have saved me a ton of work.\n\nI've asked Ted and Yuri about the strangely-worded option \"Do not interpolate compatible outlines\", because not only does it do something different than it implies, it's the opposite of what I want: I _want_ to interpolate the compatible outlines (which FOG does), and those that aren't compatible, shouldn't interpolate (which also works in FOG).\n\nBasically there are a lot of bugs in the way FL handles this and I'm hoping they get them cleared up. Meanwhile if you really need reliable interpolation, go back to FOG.....\n\n"
+    },
+    {
+      "time": "",
+      "content": "Didn't they fix all that in 5?\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> Didn’t they fix all that in 5?\n\nAnother good question.\n\nPaul,\n\nyou have FL5 Win, right?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Bump!\n\nI found many of the same bad behavior in FLS5 for Windows. I fear it will all end up in the Mac version as well. Points being added, points being removed, no clear way to do straight linear interpolation without some weird Font Chameleon-like behavior. My outlines are already compatible; Can I just blend them normally, like FOG did?\n\nAdam, Yuri, any news here?\n\n"
+    },
+    {
+      "time": "",
+      "content": "This is behaviour which is still in FLStudio5Mac, and which has been reported to Yuri Yarmola and Alex Petrov at FontLab by Peter Bil'ak, James Montalbano, and myself. The latest Beta still shows this problem, but there is hope in my heart that this issue will be addressed. Perhaps the program can check target glyphs for BCPs, and if none are present any BCPs created duting a Blend are retracted...\n\n"
+    },
+    {
+      "time": "",
+      "content": "The Blend function does add extra points, but I have been making MM databases in FL for years using Mask-to-Master and as long as my glyphs are compatible (and I instruct FL never to add points), FL never does add any points. It is a bit more work than using Blend, but the results are excellent.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I recommend to make MM fonts with Blend feature instead of just blending them to new single-master design. Algorithms are slightly different and MM version just works better. Then you can use Make instance command to create \"fixed\" version.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"“Do not interpolate compatible outlines” ??? Tom, that's all we want to do...\n\n\"Agorithms are slightly different and MM version just works better. \"  \nYuri! Just make one that works, everywhere, please. An interpolation that takes compatible outlines as input, and outputs a compatible outline is a fundamental right of all type designers since 1989, 1 9 8 9 !! I promise to give it compatible outlines or it's my problem, you hear?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Totally.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Well, in most cases latest version of the algorithm (in FLS5) will make compatible outline out of 2 source compatible outlines. Take Myriad and Myriad Bold and blend them - you'll get 100% green output.\n\nBut what means \"compatible\"?\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"But what means “compatible”?\"\n\nThe same number and type of points in a given glyph. Position may vary as well as BCP extension. Begin point target and end point target vary by extension of the variable (i.e., weight)\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Take a perfect circle. Copy it to the same glyph in another font. Rotate 180 degrees. Are they compatible?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, they are compatible.\n\nBut this would be a stupid thing to do if you were making a font, as I would supect the glyph to make an ugly overlapping flip in the middle weights.\n\nI'd think most designers would expect the above behavior given that you've moved the location of the start node so drastically. In most cases we're talking weight, width, and optical scale changes, not turning an n into a u between light and bold. If a designer wants to do that, let them call Letterror.\n\nR\n\n"
+    },
+    {
+      "time": "",
+      "content": "Or Luc[as]. Think of his great old animated MM porn.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "But what should do the algorithm with two 'O' glyphs made from 8 curves with incorrect placement of startpoints or incorrect ordering of contours? Formally these two 'O' are compatible - they have same type of points in the same order, but in reality they are not. Algorithm that we use tries to detect such situations and fix them.\n\nIn any case, I will always recommend to build MM font using Blend feature - in this case you will minimize chances for rounding errors.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"I will always recommend to build MM font using Blend feature \"\n\nIs there another way?\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "I mean that instead of \"fixed blend\" I recommend to make MM font with the Blend dialog box and then create instance.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Yuri, that is what I hoped you meant.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"But what means “compatible”?\"\n\nYIKES!!!!!!\n\n\"In any case, I will always recommend to build MM font using Blend feature - in this case you will minimize chances for rounding errors.\"\n\nI'm not experiencing \"rounding errors\". FL is adding and deleting unnecessary points when blending two COMPLETELY COMPATIBLE outlines. See definition below.\n\n\"But what should do the algorithm with two ‘O’ glyphs made from 8 curves with incorrect placement of startpoints or incorrect ordering of contours? Formally these two ‘O’ are compatible - they have same type of points in the same order, but in reality they are not. Algorithm that we use tries to detect such situations and fix them.\"\n\nA-HA!\n\nI use the term compatible to mean that situations such as you describe here are already corrected by the designer. In other words, the designer has spent a lot of time to make sure that the two fonts being blended have outlines that:\n\nHave matching path order  \nHave correct path directions  \n\\*Have corresponding (matching) start points, in correct matching locations\\*\n\nso compatible means there isn't anything left for the software to do but mathematically average the data between the two masters. No added points, no \"corrections\", no detecting and fixing. I think of interpolation as a very simple operation. FL seems to be making it more complicated than it needs to be.\n\nFont Chameleon was the tool to use when blending two completely unrelated sets of outlines (like Garamond and Futura). But we are designing various weights like Light and Bold from the ground up to be compatible. Sometimes we make one master from the outlines of another master, ensuring compatibility from the beginning. I want FL to correctly blend compatible outlines (per definition above), OR, give a message that the two outlines are not compatible and refuse to blend. Nothing in between helps me, because it requires manual cleanup to correct the bad resulting shapes.\n\n"
+    },
+    {
+      "time": "",
+      "content": "OK. So you need an option which will just to the interpolation without thinking about anything. Good, it can be done without much programming. Basically it can be very easily done with Python by anybody :).\n\nWhat about line vs curve? Are they compatible? (In FLS we have true lines as opposed to Fog which is all-curves).\n\n"
+    },
+    {
+      "time": "",
+      "content": "One more thing: please, send me two sample \"compatible\" outlines that FLS refuses to blend green. It is yar [at] fontlab [dot] com.\n\n"
+    },
+    {
+      "time": "",
+      "content": "True, shmrue. A vertex has two BCPs (one incoming and another outgoing) each one being an X-Y pair defining a vector; each X or Y can be anything from minus-whatever to zero to plus-whatever; and you just interpolate them. A so-called \"line\" is just a curve between two vertices that \"abut\" zero-X&Y BCPs; I can't think of a reason to treat it any differently than a curve (especially since FontLab actually provides EXTRApolation too).\n\nBTW (as David once conjectured) didn't you  \nacquire the Fontographer interpolation code?\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Crossgrove --  \n<cite><br>\nI use the term compatible to mean that situations such as you describe here are already corrected by the designer. In other words, the designer has spent a lot of time to make sure that the two fonts being blended have outlines that:<br>\n</cite>\n\nI'm not sure how comfortable you are with Python, but have you had a look at using RoboFab's interpolation with FontLab? [http://www.letterror.com/code/robofab/howto/interpolate.html](http://web.archive.org/web/20110703012728/http:/www.letterror.com/code/robofab/howto/interpolate.html \"http://www.letterror.com/code/robofab/howto/interpolate.html\")\n\nRoboFab won't do any interpolation if the source glyphs aren't strictly compatible in the way you describe what compatible should be, and its method `isCompatible()` is able to report back to you what the incompatibilities between glyphs are (if any) before interpolating. I think RoboFab's introduction script for Interpolation would do exactly what you're looking for without any editing other than maybe changing the interpolation factor.\n\n-- Andy\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Andy,\n\nI do know about this script and have tested it out. I can use it to do simple blends, but if I need to set up a MM file with several masters, I'd like to be sure FL isn't 'helping' me by adding points and changing my outlines.\n\nMore than this, I think FL should offer the option to interpolate without changes, and also, clearly labeled, the option to blend incompatible fonts if the designer wanted it. I can see uses for either method, but both should be included and clearly differentiated.\n\n"
+    }
+  ]
+}

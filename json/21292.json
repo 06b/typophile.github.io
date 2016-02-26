@@ -1,0 +1,62 @@
+{
+  "id": "21292",
+  "title": "Double Mapping Greek Glyphs?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Is [double-mapping](http://web.archive.org/web/20071104014528/http:/www.typophile.com/wiki/double-mapping) a bad thing? And secondly, if i want to avoid double mapping, which unicode points should i use for things like [Delta](http://web.archive.org/web/20071104014528/http:/www.typophile.com/wiki/Delta)/ [Increment](http://web.archive.org/web/20071104014528/http:/www.typophile.com/wiki/Increment), [Omega](http://web.archive.org/web/20071104014528/http:/www.typophile.com/wiki/Omega)/ [Ohm](http://web.archive.org/web/20071104014528/http:/www.typophile.com/wiki/Ohm), [mu](http://web.archive.org/web/20071104014528/http:/www.typophile.com/wiki/mu)/ [micron](http://web.archive.org/web/20071104014528/http:/www.typophile.com/wiki/micron), &c? (for the standard Mac Roman Codepage)\n\n [‹ Hamburgefonstiv](http://web.archive.org/web/20071104014528/http:/www.typophile.com/node/34493 \"Go to previous forum topic\") [How bold of me? ›](http://web.archive.org/web/20071104014528/http:/www.typophile.com/node/35263 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20071104014528/http://www.typophile.com/user/7006\" title=\"View user profile.\">paul d hunt</a>",
+  "time": "<br>",
+  "uid": "7006",
+  "comments": [
+    {
+      "time": " 14.Jul.2006 2.36pm",
+      "content": "double mapping is only bad in contexts where an application needs to reverse map a glyph name\\* to a Unicode code-point. Can cause search problems in some PDFs.\n\n\\*edited - originally typed “glyph ID”.\n\n"
+    },
+    {
+      "time": " 14.Jul.2006 4.09pm",
+      "content": "Why would you want to use non-standard names like Increment, Ohm and micron?\n\nU+03BC mu  \nU+0394 Delta  \nU+03A9 Omega\n\nAGLFN is your friend ;^)  \n [http://partners.adobe.com/public/developer/en/opentype/aglfn13.txt](http://web.archive.org/web/20071104014528/http:/partners.adobe.com/public/developer/en/opentype/aglfn13.txt \"http://partners.adobe.com/public/developer/en/opentype/aglfn13.txt\")\n\n"
+    },
+    {
+      "time": " 14.Jul.2006 4.23pm",
+      "content": "i didn’t say i wanted to name the characters this, it just that that is what they are. isn’t it? i mean, these aren’t really Greek character. sure, they could double for Ohm/Omega, but i guess i always assumed that these were actually math operators. (or is my assumption wrong?) if these truly are math symbols, isn’t it kind of silly to assign the greek unicode values to these characters? shouldn’t they have the proper unicode values associated with them? I suppose for OT fonts you could have your Delta with the Greek unicode value and a separate character called Delta.math or something with the unicode value for Increment. But how should you resolve this for simple PS fonts? i DID read the adobe glyph list info on this before posting, but was unable to decipher the aswer to these questions from:\n\n`# 1.5 [23 November 2005]\n# - removed duplicated block at end of file\n# - changed mappings:\n# 2206;Delta;INCREMENT changed to 0394;Delta;GREEK CAPITAL LETTER DELTA\n# 2126;Omega;OHM SIGN changed to 03A9;Omega;GREEK CAPITAL LETTER OMEGA\n# 03BC;mu;MICRO SIGN changed to 03BC;mu;GREEK SMALL LETTER MU`\n\ndoes this mean that at one time PS fonts did encode these characters with math unicode points and switched to greek unicode points? anyhow, just trying to figure this all out...\n\n"
+    },
+    {
+      "time": " 14.Jul.2006 4.24pm",
+      "content": "_Why would you want to use non-standard names like Increment, Ohm and micron?_\n\nGlyph names aside, there are a number of reasons you might want to have separately mapped glyphs for the actual Greek letters and the Greek letters used as symbols for increment, ohm and micro:\n\n1. You want to be able to reverse map from a glyph name to a specific Unicode character (Adobe’s reason).\n\n2. You want to vary the spacing of the symbol glyphs to better suit them to mathematical or scientific typesetting.\n\n3. You want to vary the form or scale of the symbol glyphs.\n\nPersonally, unless I’m making fonts for Adobe, I only provide separate glyphs if I am varying the design and/or spacing of the symbol glyphs, otherwise I double-map them.\n\nPaul, for increment, ohm and micro, respectively, these are the Unicode values and glyph names you should use:\n\nU+2206 uni2206  \nU+2126 uni2126  \nU+00B5 uni00B5\n\n"
+    },
+    {
+      "time": " 14.Jul.2006 4.27pm",
+      "content": "aha! uni-names. i should have remembered that.\n\n"
+    },
+    {
+      "time": " 14.Jul.2006 4.30pm",
+      "content": "\\> _Paul, for increment, ohm and micro, respectively, these are the Unicode values and glyph names you should use:  \nU+2206 uni2206  \nU+2126 uni2126  \nU+00B5 uni00B5_\n\nYou took the words right out of my mouth :)\n\n"
+    },
+    {
+      "time": " 14.Jul.2007 11.06am",
+      "content": "So, according to Thomas’ [“Facelift” presentation](http://web.archive.org/web/20071104014528/http:/blogs.adobe.com/typblography/typotechnica2007/Facelift.pdf), i’m assuming that Adobe now considers double mapping a “less-than-optimal” solution. Is this a fair statement? Taking this further, would double-mapping now be “discouraged, or is it out-and-out a “Bad Idea” to be avoided at all costs?\n\n"
+    },
+    {
+      "time": " 14.Jul.2007 12.04pm",
+      "content": "The [Glyph Naming Standards](http://web.archive.org/web/20071104014528/http:/blogs.adobe.com/typblography/typotechnica2007/Glyph%20names.pdf) presentation is a bit more explicit, i.e. relative:\n\n<cite>Why glyph names?</cite>  \n<cite>— PDF creation</cite>  \n<cite>— Due to legacy elements of certain workflows, </cite>sometimes<cite> only glyph names are left when PDF generated</cite>  \n<cite>— Users want better quality underlying text in PDF for text searchand extraction</cite>  \n<cite>— So, sometimes need to get Unicode from glyph names</cite>\n\n“Due to legacy elements of certain workflows” seems to refer to generating PDFs via PS.  \nAnother take: Very few glyphs in a font are actually double mapped. Those may not be used often in texts. And PDFs are not necessarily generated via PS. These are quite a few conditions to be met so that text extraction problems occur at all.\n\nDo the fonts of which you speak only cover the roman/western alphabet, or a full Greek alphabet too?  \nIf roman/western-only fonts, it is not really important whether Greek/math glyphs are double mapped or not, as long as you give these glyphs a uniXXXX name which is derived from the <cite>math</cite> glyphs’ names (the ones provided by John Hudson). This because if someone uses these glyphs in such a font, most likely he wants to address math symbols, not Greek letters.\n\n"
+    },
+    {
+      "time": " 14.Jul.2007 1.03pm",
+      "content": "makes sense. thnx, karsten.\n\n"
+    },
+    {
+      "time": " 18.Jul.2007 1.45pm",
+      "content": "Karsten has neatly summarized the issue, drawing on a presentation of mine on the subject. As he says, if you don’t have full Greek support you don’t need to cover multiple Unicodes with those glyphs anyway.\n\nAt Adobe, we never double-map glyphs today. We did briefly in our very earliest release of OpenType fonts around 2000, but quickly changed that practice.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": " 19.Jul.2007 11.06am",
+      "content": "This might be a semi-offtopic in this thread, but I would like to point out that the Greek set in Unicode has much better candidates for double mapping than 3 glyph pairs discussed here. I mean the accented combinations with polytonic oxia which are canonically decomposed to the corresponding combinations with tonos and actually are exact duplicates of them. Note that in this particular case double mapping will not break PDF searching capability, but rather benefit the user by removing an unnecessary ambiguity.\n\n"
+    },
+    {
+      "time": " 23.Jul.2007 5.09am",
+      "content": "So ain’t that correct?\n\nLetters  \nU+03A9 “Omega”  \nU+0394 “Delta”  \nU+03BC “mu”\n\nMathematical  \nU+2126 “uni2216”  \nU+2206 “uni2206”  \nU+00B5 “uni00B5”\n\nSomeone told me Adobe uses different names in Hypatia Sans.\n\n"
+    }
+  ]
+}

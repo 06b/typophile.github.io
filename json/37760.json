@@ -1,0 +1,30 @@
+{
+  "id": "37760",
+  "title": "apple, pages and justification bug",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi everybody: first font, first problem, first post.  \nI’ve worked my way designing the glyphs in illustrator and assembling everything in fontlab, compiling metrics and kerning. I’m now in the testing phase (I’m on a mac) and I noticed a software specific bug, which seems to come up only in some apps, namely apple pages and linotype fontexplorer x. Here’s the problem:\n\n ![](http://web.archive.org/web/20080821125420im_/http:/www.typophile.com/files/justified_6504.gif)\n\nas you can see, everything’s fine in the first unjustified paragraph, but when I test a justified paragraph - the one below - the software screws the tracking (mainly the one of the ’i’) to evenly space the rows. In a former version of the font the same problem affected the letter ’b’, so I deleted the ’b’ glyph and re-pasted from illustrator, re-defined kerning and metrics and recompiled, only to have the ’i’ freaking out this time.\n\nAnother couple of things to be noted: if I tweak the tracking a little in pages, the problem seems to fix itself at random values; using the same font in NeoOffice and making a justified paragraph doesn’t cause any problems or visible bugs.\n\nSo, has anybody any idea of what might be the cause of this bug? Any thoughts or suggestions?\n\nThank you in advance!\n\n [‹ Equivalence between In Design tracking and FontLab?](http://web.archive.org/web/20080821125420/http:/www.typophile.com/node/37753 \"Go to previous forum topic\") [Curve compensation methods ›](http://web.archive.org/web/20080821125420/http:/www.typophile.com/node/37778 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080821125420/http://www.typophile.com/user/22384\" title=\"View user profile.\">nicola</a>",
+  "time": "<br>",
+  "uid": "22384",
+  "comments": [
+    {
+      "time": " 3.Oct.2007 12.09pm",
+      "content": "Could be a font cache problem. To prevent this I give my fonts always a new family name (MyName 001, MyName 002) when I export it. So I am always sure nothing gets mixed up in the various font caches on Mac OS X.\n\n"
+    },
+    {
+      "time": " 4.Oct.2007 1.51am",
+      "content": "Thanks for the tip!  \nI rebuilt from scratch the ’i’ glyph, changed family name and recompiled the font file. Then I cleared the system-font cache, rebooted, and fired up pages. The problem was there again, but this time affected the ’l’ glyph. I also checked for the bug in InDesign, Illustrator and Photoshop CS3: none of them showed the bug. I’m beginning to think that it could be something with apple’s justifying module, which could be shared by some apps (pages, numbers, fontexplorer x...).  \nGiven the market share of these apps I think I could easly leave things as they are, but this problem bugs me a lot!  \nIf anybody has encountered something similar or has any other ideas, you’re very welcome!\n\n"
+    },
+    {
+      "time": " 4.Oct.2007 4.47am",
+      "content": "What format have you created your font in? Does your font have all the necessary blanks and default glyphs? .notdef, space, nbspace for PS. .notdef, space, nbspace, CR, .null for TT.\n\n"
+    },
+    {
+      "time": " 4.Oct.2007 6.36am",
+      "content": "...and we have a winner! I left the ’Automatically add “.null”...’ option unchecked in the Font Info panel; now paragraph justification works fine even in apple pages. Thank you very much!\n\n"
+    }
+  ]
+}

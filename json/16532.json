@@ -1,0 +1,74 @@
+{
+  "id": "16532",
+  "title": "All kerning lost after generating Truetype font for PC",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Since this is my first post I'll say \"Hi all\" first.\n\nHi all,\n\nI'm creating a script font in Fontographer for PC and I've put quite some time in manually kerning almost every pair imaginable. After generating the font I opened the .ttf file to find all kerning is lost! The font looks like a mess and it seems like the kerning wasn't exported at all.  \nCould anyone tell me what might have gone wrong and/ or how to generate a .ttf from Fontographer that includes my kerning?\n\nThanks a lot.\n\nRegards,  \nJoe\n\n",
+  "author": "Joebob",
+  "time": "30 Nov 2005 — 1:58am",
+  "uid": "10380",
+  "comments": [
+    {
+      "time": "30 Nov 2005 — 2:29am",
+      "content": "If you open a file in Fontographer it never imports the kernmetrics data – just the spacing . You'll have to do that yourself – \"Import Metrics–kern\".\n\nCheck the font in a software like InDesign instead if you are unsure about the kerning being there or not.\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 2:42am",
+      "content": "Thanks for your quick reply,  \nI haven't opened a file in Fontographer though... I've created a new font. And I've checked the font in photoshop and it's kerning sucked.\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 4:31am",
+      "content": "Unless I'm mistaken, the TrueType format simply doesn't have kerning pairs.\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 5:09am",
+      "content": "TrueType format has kerning pairs.\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 6:10am",
+      "content": "Do not certain Windows applications ignre kerning? Word, for example.\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 6:37am",
+      "content": "Certain Mac applications, too. In Word, auto kerning is off by default (both Mac and Windows), but you can enable it at a specified minimum point size.\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 6:48am",
+      "content": "That's all very interesting, but we're wandering of the subject; I don't want to use my font in Word, but mostly in Photoshop and Illustrator. The problem is that the kerning I've done is lost even in the generated truetype file itself!\n\nHow come and what to do to prevent this?\n\nPlease tell me how to properly generate a PC truetype file that is kerned the way I kerned it.\n\nMaybe I can insert an image to make things clearer....\n\n ![](http://web.archive.org/web/20131107220000im_/http:/typophile.com/files/metrics%20in%20Fontographer.jpg)\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 6:49am",
+      "content": "...and this is what the generated .ttf file looks like:\n\n ![](http://web.archive.org/web/20131107220000im_/http:/typophile.com/files/generated%20ttf%20dump.jpg)\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 7:05am",
+      "content": "Joebob, unless I can poke around with the font, I'm afraid I can't offer a solution. Perhaps if you import the kerning as an OpenType kern feature and compile that - while keeping the traditional kern table - it would work. If you'd like to send me your font I can do this for you. chester at vllg dot com.\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 7:06am",
+      "content": "Another possibility: the name of your font might be screwing things up. Try naming it \"Dear Joe Four\" instead.\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 7:54am",
+      "content": "Hi Chester,\n\nthanks for your reply. I've changed the name into dearJoe four, but that doesn't make any difference. I trust you won't abuse my font, so I'm willing to send it to you. Do you want the .fog file or the .ttf file?\n\ngrt, Joe\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 8:24am",
+      "content": "Correct me if I'm wrong, but it appears that you have set things up so that kerning is required for nearly every letter pair; that you are using kerning to do the basic spacing for the font. In the second screen shot, you are showing the \"waterfall\" sample that Windows displays when you open a font. As far as I know, kerning is never shown in that sample window.\n\nSpacing should be worked out as far as possible by adjusting the sidebearings. Kerning is intended to be used only for exceptions (like \"AT\" or \"r.\") where the combination of certain characters creates spacing problems. That way, in cases when kerning is not supported, the font will still be mostly well spaced, with a few problem combinations here and there.\n\nMy apologies if I have jumped to the wrong conclusion about your case.\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 9:02am",
+      "content": "I have poked around with Joe's font, and indeed, there are 2621 kern pairs. This includes kerning between UC/UC, UC/lc, lc/lc, lc/UC, and #/#. The accented letters aren't kerned. There are a few \"ridiculous\" kerns, such as -1, -3, and 1. Which makes me think that the font has been auto-kerned.\n\nI imported the kerning as a feature, and fixed naming conventions, then generated the font as a TT-flavoured OTF..\n\nThe kerning showed up perfectly in Font Book and Text Edit, but was NOT there in InDesign, which is something I have never seen in my life!\n\nSo, I agree with Mark that Joe should spend some time re-spacing the font, then get the kern table down to the minimum. Is it possible that the 2621-strong kern table is simply too much for type-handling engines to handle? Might the complexity of the paths contribute to this failure?\n\n"
+    },
+    {
+      "time": "2 Dec 2005 — 4:06am",
+      "content": "Yeah, I was getting a bit carried away with the kerning, but I thought it would result in an awesome real-looking script... I hadn't begun kerning the numbers yet so that explains why those look strange. Every other kerning pair was manually done (really!)\n\nThe remark about the windows display of a font being not-representative is interesting though....\n\nI'll start over with an auto-kern and some pairs that are problematic. Will show the results once I'm done.\n\nThanks everyone for your input.\n\n"
+    },
+    {
+      "time": "21 Apr 2006 — 6:43am",
+      "content": "I know this is an old thread, but I'm having the same problem.\n\nThe font I've made in (not imported into) Fontographer doesn't seem to be exporting any kerning information when I publish it as a TrueType font, and the PostScript fonts it generates don't work on my Mac. Any ideas how to remedy this?\n\n"
+    }
+  ]
+}

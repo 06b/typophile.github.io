@@ -1,0 +1,38 @@
+{
+  "id": "40669",
+  "title": "hinting and metrics problem",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I posted the text below a month ago in the fontlab msn group but got no answer. I am posting it again here and hopefully I will get some answer.\n\n“I have a problem with a monospaced font. I have manually hinted the font using the Bitmap Tool in the TrueType Tools. The problem is thatin some applications (like Flash - see the corresponding picture) the hinted version of the font (from 9px to 16px) is monospaced (which is correct) while in other applications (like Photoshop CS - see the corresponding picture - or even Notepad) the hinted version of the font is NOT monospaced! I can’t understand why this happens. All glyphs have a width of exactly 600px and the font works great while aliased.”\n\n ![](http://web.archive.org/web/20080705145041im_/http:/www.typophile.com/files/BPmonoBold%20(flash)_5269.png)\n  \n\n ![](http://web.archive.org/web/20080705145041im_/http:/www.typophile.com/files/BPmonoBold%20(photoshop)_3419.png)\n\n [‹ WEB DESIGN- Can CSS be used to provide frame designs?](http://web.archive.org/web/20080705145041/http:/www.typophile.com/node/40210 \"Go to previous forum topic\") [Best software for editing fonts on Mac ›](http://web.archive.org/web/20080705145041/http:/www.typophile.com/node/2850 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080705145041/http://www.typophile.com/user/10933\" title=\"View user profile.\">gtrianta</a>",
+  "time": "<br>",
+  "uid": "10933",
+  "comments": [
+    {
+      "time": " 8.Jan.2008 8.59am",
+      "content": "It looks like you may have hinted the advance widths of the characters accidentally at 14 ppm. Flash doesn’t show this because it’s not going to allow hinted advance widths (at least not the most current versions.)\n\n"
+    },
+    {
+      "time": " 8.Jan.2008 9.17am",
+      "content": "Hello,\n\nI think the source of the problem are the bitmaps not the hints. The Bitmap Tool does not create any hints (or better instructions).  \nTry to generate the font without the option “Export embedded bitmaps”. You find it in _Options - Generating OpenType & TrueType - OpenType/TrueType (.ttf)_\n\nRegards  \nEigi\n\n"
+    },
+    {
+      "time": " 8.Jan.2008 1.41pm",
+      "content": "Did you set the checkbox “Font is monospaced” in Font Info?\n\nA.\n\n"
+    },
+    {
+      "time": " 8.Jan.2008 2.58pm",
+      "content": "Adam, yes this option was constantly checked.\n\nWell, I followed eigi’s advice but it didn’t work. Then, I thought that I only have bitmaps and not hints or instructions, so I did the opposite. That is, I left the “Export embedded bitmaps” option checked, but I unchecked the “Export hinted TrueType fonts” option (together with all its sub-options). And it worked ... (see the new picture)! I am not sure whether this is acceptable, but as I understand it, in this way all hinting information in the font (if there are any) are replaced by the bitmaps.\n\nShall I leave it this way, or do you think that it could cause problems?\n\n ![](http://web.archive.org/web/20080705145041im_/http:/www.typophile.com/files/BPmonoBold_6336.png)\n\nGeorge Triantafyllakos - backpacker.gr\n\n"
+    },
+    {
+      "time": " 9.Jan.2008 7.35pm",
+      "content": "Does the Panose number also reflect that the font is monospaced?\n\nT\n\n"
+    },
+    {
+      "time": " 10.Jan.2008 4.32am",
+      "content": "No it didn’t. I corrected that, but it still isn’t working.\n\nThe only way I got it to work is the one I am describing in my previous post.\n\nGeorge Triantafyllakos - backpacker.gr\n\n"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "113866",
+  "title": "Combining or non-spacing marks",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "There are a number of Unicode characters called combining or non-spacing marks. Here's a link to a list of them: [http://bit.ly/1bVPnBU](http://web.archive.org/web/20150419015943/http:/bit.ly/1bVPnBU \"http://bit.ly/1bVPnBU\").\n\nThey appear to be nothing more than repeats of other unicode diacritics. For example the ogonek and ring (Unicode 02DB and 02D8) appear to be the same as Unicode 0328 and 030A. Some fonts, I've noticed, contain one range of these Unicode characters while others contain the other range.\n\nI'm confused as to why separate unicode designations exist for, what appears to be, the same characters. Maybe this is an obscure question, but can anyone here shed some light on it? Both Google and the search feature here seems to be failing me?\n\n",
+  "author": "Thylacine",
+  "time": "3 Feb 2014 — 10:47am",
+  "uid": "16338",
+  "comments": [
+    {
+      "time": "3 Feb 2014 — 11:27am",
+      "content": "The spacing accent marks such as 02DB are legacy characters, included only for backwards compatibility with pre-Unicode standards. Unicode's preferred mechanism for handling diacritics is with non-spacing combining marks. If you look at precomposed diacritic characters in Unicode, you'll see that they all have canonical decompositions to base letters plus combining marks.\n\n"
+    },
+    {
+      "time": "4 Feb 2014 — 9:55am",
+      "content": "I have a slightly different take on the characters in 02B0-02FF. As John says, when used as accents, the combining diacriticals should used. But remember that some of the \\*glyphs\\* in the Spacing Modifiers have dual uses (I suppose a few do not), and such usage may call for a different \\*character\\*. Different character, different encoding, just like the Latin Capital Letter A and the Greek Capital Letter Alpha are always different characters, but often the same glyph.\n\nSecondly, if I am **referring to** an ogonek rather than using it -- as in \"the ogonek is used in Polish, Navajo, and a few other languages\" I would set that ogonek (reference) using U+02DB. Otherwise, you're left with setting an extra space and the combining diacritic (U+0328), or using a huge kern with the combining diacritic (still probably preferable to putting it over a word space). As far as syntactic meaning goes, I think this better preserves things. YMMV.\n\n"
+    },
+    {
+      "time": "4 Feb 2014 — 3:49pm",
+      "content": "Given that the fonts I opened with diacritics in the 02B0-02FF range were all older Type 1 fonts, I had a hunch a legacy issue was responsible. Thanks John!\n\nCharles, are you suggesting that it would be useful to include both in a font? I haven't done an extensive search, but I haven't stumbled across any that do.\n\n"
+    },
+    {
+      "time": "4 Feb 2014 — 4:39pm",
+      "content": "Both U+0328 and U+02DB are included in Arial, Batang, Calibri, Candara, Consolas, Constantia, Corbel, Gabriola, Gulim, Meiryo and Times New Roman in my Microsoft fonts. If you are on a mac and if you have the Apple font tools installed, you can list installed fonts having those two characters with the line command\n\n    ftxinstalledfonts -U 'U+0328,U+02DB' -f -l | grep YES\n\n"
+    },
+    {
+      "time": "4 Feb 2014 — 10:35pm",
+      "content": "Charles is right. I should have paid more attention to the original post. Many of the 02xx block characters are spacing modifiers, used in various notation systems. I was thinking primarily about the legacy spacing characters in the basic ANSI Latin set.\n\nFonts would mostly only need to support the 02xx characters if it were intended for specialist publishing in linguistics. The 03xx combining characters are more widely useful. I recommend including at least those that correspond to precomposed diacritics in a font, and to use these in composites rather than spacing characters. This will make future extensions of the font to support GPOS mark positioning easier.\n\n"
+    },
+    {
+      "time": "4 Feb 2014 — 11:22pm",
+      "content": "Very useful information. Thank you all.\n\nI should have looked a bit harder. Using Apple font tools, as Michel suggested, I turned up several fonts installed on my Mac with various equivalents in the 02xx and 03xx ranges.\n\nI'm assuming that the combining marks do not need widths assigned since it would seem to be irrelevant, whereas those in the 02xx range would need those widths, like other glyphs. Correct?\n\n"
+    },
+    {
+      "time": "5 Feb 2014 — 12:53pm",
+      "content": "> Charles, are you suggesting that it would be useful to include both in a font? I haven't done an extensive search, but I haven't stumbled across any that do.\n\nThings are only \\*useful\\* when you need them. Most of the 100 or so publishers in the Association of American University Presses would find them useful. The people pushing whiter than white laundry products likely would not. Who are you aiming your fonts at?\n\n"
+    },
+    {
+      "time": "5 Feb 2014 — 3:26pm",
+      "content": "Charles, I'm working on a general-purpose font family that includes Western/Central European, Cyrillic and Greek characters. That's really neither here nor there, but the diversity of the project, I suppose, has caused me to dig a little deeper than usual into things. It's mostly a combination of curiosity and making sure that I wasn't assuming something to be one thing and then finding out later on that it was actually something else.\n\n"
+    },
+    {
+      "time": "6 Feb 2014 — 11:19am",
+      "content": "> I'm assuming that the combining marks do not need widths assigned since it would seem to be irrelevant, whereas those in the 02xx range would need those widths, like other glyphs. Correct?\n\nYes. Combining mark characters are specifically intended to be zero-width; it isn't just that there is no need for them to have widths, but they really shouldn't.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "31298",
+  "title": "Blue icon in glyph window",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi all,\n\nWhat does it mean when there is a blue icon in the bottom right of the glyphs windows ?\n\nI have them cos I have a vfb. file that I'm using to generate opentype fonts both PS and TT flavours. The blue icons appear if I generate the TT opentype font and then open that font file with Fontlab.\n\nIs it possible to generate TT fonts with the same vfb I'm using to generate the PS font, or do I have to do something to the vfb to make it generate TT opentype fonts.\n\nc.\n\n",
+  "author": "coop",
+  "time": "9 Feb 2007 — 5:13am",
+  "uid": "5642",
+  "comments": [
+    {
+      "time": "9 Feb 2007 — 8:27am",
+      "content": "They indicate that the font has stored native hinting.\n\nIn principle, it's possible to generate PS and TT from the same source. However, sometimes it's useful to save a separate .vfb, convert outlines to TT, convert hints to instructions (both can be done using Tools / Action Set), and then using the TrueType Hinting tool, review the screen appearance of the font.\n\nA.\n\n"
+    },
+    {
+      "time": "9 Feb 2007 — 9:25am",
+      "content": "Twardoch,\n\nwill convert outlines to TT, convert hints to instructions, set the correct path direction or do I need to do that seperate\n\n"
+    },
+    {
+      "time": "11 Feb 2007 — 4:09am",
+      "content": "You need to set the correct path direction separately, after converting to TT outlines but before converting hints to instructions. Indeed, the three steps:\n\n1. Outline to TT  \n2. Path direction  \n3. Hints to instructions\n\nare necessary. In addition, you may want to expand kerning if you defined class kerning. Note that OpenType TT (.ttf) fonts can use old-style \"kern\" table kening as well as new-style OpenType GPOS \"kern\" feature kerning. OpenType PS (.otf) fonts can officially only use the latter (although it is possible to put the former in as well) and Type 1 fonts can only use the former.\n\nThere are some implications involving kerning in OpenType TT (.ttf) fonts such as that some applications will only see the old-style kerning and some will only see the new-style kerning. If your kerning table is really extensive, you may want to generate your \"kern\" feature explicitly (using the OpenType panel), then expand kerning using Kerning Assistance while subsetting it to a specific codepage. In Kerning export options, you'd need to allow both types of kerning to be included.\n\nRegards,  \nAdam Twardoch  \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": "11 Feb 2007 — 5:24am",
+      "content": "Adam,\n\nI seem to going across two post here - sorry I didn't mean to do that.\n\nYour list:\n\n1. Outline to TT  \n2. Path direction  \n3. Hints to instructions\n\nwould that relate to :\n\n1. Curves to TrueType  \n2. Contours direction [T1]  \n3. Convert to instructions\n\nin the Action set window\n\n"
+    },
+    {
+      "time": "11 Feb 2007 — 7:32am",
+      "content": "Indeed, but \"2. Contours direction [TT]\", i.e. with the setting \"TrueType\".\n\nA.\n\n"
+    }
+  ]
+}

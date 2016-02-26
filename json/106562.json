@@ -1,0 +1,18 @@
+{
+  "id": "106562",
+  "title": "Building AAT kerning with a Kerning Input File",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I’m sure many of you have worked with Morph Input Files. Not so many, I suppose, with the so-called Kerning Input Files. One possible reason might be that the file format has never been actually released by Apple, and no apparent support exist in OS X Font Tools. I’ve heard the format itself was once mentioned in Apple’s docs, but it was all redacted afterwards.\n\nI needed to build some state machine kerning for few of my projects, and I was tired of writing it in hex by hand, so I wrote a shell script that does exactly that. It reads an approximation of the mythical Kerning Input File and prints out hex data for a whole kerning table that can be fused into a font with Apple's tools as generic table data. The input syntax is based on the Morph Input File, and should be easy enough for people that ever worked with MIF itself.\n\nThere are two gotchas though. First, the script expects state machine kerning only. Dealing with other formats shouldn't be hard to implement, but it's not a priority for me. Second, the recently introduced extended kerning table (kerx) is not yet fully documented, so you get the old kern table for now. Still, this shouldn't be considered an issue, as the old table works well in CoreText on both OS X and iOS.\n\nThe script is called kiftohex and you can find it with all the details and sample code at [https://github.com/grzegorzrolek/kiftohex/](http://web.archive.org/web/20150420170252/https:/github.com/grzegorzrolek/kiftohex/ \"https://github.com/grzegorzrolek/kiftohex/\"). Hope somebody will find it useful.\n\n",
+  "author": "Grzegorz Rolek",
+  "time": "29 Sep 2013 — 1:31pm",
+  "uid": "19493",
+  "comments": [
+    {
+      "time": "28 Sep 2014 — 8:11am",
+      "content": "I moved the whole thing to [a new repo](http://web.archive.org/web/20150420170252/http:/github.com/grzegorzrolek/kif-compiler/) and made it build both `kerx` and `ankr` tables during the past year. It means you can work with both state machine-based kerning and the new control-point positioning as found in those tables.\n\nThis was before John Jenkins from Apple announced an upcoming update to their Font Tool Suite, a release that I assume will be pushing forward Apple’s new input format for building AAT, the Advanced Typography Input File, or ATIF, which is probably better-suited for the more common use cases. Nevertheless, when it comes to state machines with non-trivial state chains, I still find MIF, or for that matter KIF, often much easier to follow at a glance than ATIF.\n\n"
+    }
+  ]
+}

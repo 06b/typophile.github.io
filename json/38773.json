@@ -1,0 +1,98 @@
+{
+  "id": "38773",
+  "title": "Fontlab Opentype Class Kerning",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi,\n\nMight as well say Hi, as I just registered. I have only been reading here previously. My Name is Gustaf, currently Studying my last year on a BA Graphic Design course in the Uk.\n\nTo my question;\n\nI am producing an Opentype typeface as a part of a University Project using FontLab 5 for Win. As I have come to set kerning for it, iv run into some trouble. From some reading, as I understand it, class based kerning is the better alternative and then complimenting with pairs for those which does not fit in a class with any other. I created a few classes manually with a few glyphs each. I understand that it should be done via the OpenType window but not sure how.\n\n`feature xxxx {\n  sub by ;\n} xxxx;`\n\nGet how to add that, and that the feature should be kern, but not how to set the actual kerning between the different classes. Is the a full list of the Opentype feature tags with how they are used anywhere? How do I set the opentype kerning of single pairs as a compliment to the classes?\n\nThanks in advance.\n\n// Gustaf\n\n",
+  "author": "Gus",
+  "time": "3 Nov 2007 — 11:52am",
+  "uid": "23549",
+  "comments": [
+    {
+      "time": "3 Nov 2007 — 12:11pm",
+      "content": "Make sure \"class kerning\" is selected in the Metrics panel window.  \nWindows\\>Panels\\>Classes, and make a kerning class, eg \"o\". Say it includes o' and c.  \nNow in the Metrics window, kern between T and o.  \nAutomatically, the same value is applied to T and c.  \nTools\\>Kerning Assistance\\>Update will turn both your individual and class kerns into a \"kern\" feature.  \nWindows\\>Panels\\>OpenType and see.\n\nnb, the quirk is, you need at least one other Feature for OT kerning to work in a font.\n\n"
+    },
+    {
+      "time": "3 Nov 2007 — 3:14pm",
+      "content": "Okay I think I am a bit more in the right direction.\n\nI made a class like this (Like page 588 in the manual):\n\n`_A: A' Agrave Aacute Acircumflex Atilde Adieresis Aring`\n\nIn the metrics window for kerning I set A A 400 just to make it easy to see.\n\nThen \\> Generate kern feature\n\nOpentype window:\n\n`feature kern {\n   subtable;\n   pos @_A @_A 400;\n} kern;`\n\nSo far it looks all good, shows up correctly with 400 space in metrics and preview window. Then Export Font \\> OpenType PS. But then when I attempt to use it in t.ex. Photoshop CS2, it does not give me anything new. The AA glyphs still overlap at the bottom.\n\nIs this an issue with just Photoshop CS2 and Opentype? I assumed it would be new enough to handle it.\n\n// Gus\n\n<cite>nb, the quirk is, you need at least one other Feature for OT kerning to work in a font.</cite>\n\n??\n\nI was reading some here, but it didnt really help me that much.. reading the last 3 comments. [http://www.typophile.com/node/17113](http://web.archive.org/web/20131014090757/http:/www.typophile.com/node/17113 \"http://www.typophile.com/node/17113\")\n\n"
+    },
+    {
+      "time": "3 Nov 2007 — 7:11pm",
+      "content": "I think he means that you need another, different OT feature in your font, for OT kerning to work?\n\nBtw, isn't there somesort of tutorial somewhere? I can sort off make classes, but when I add kerning between two key glyphs, I can't get it to apply that same kerning to all child glyphs...\n\n"
+    },
+    {
+      "time": "3 Nov 2007 — 7:43pm",
+      "content": "This one answers your main question about the \"other\" feature:  \n [http://typophile.com/node/32929](http://web.archive.org/web/20131014090757/http:/typophile.com/node/32929)  \nRight from the start, you should set up separate classes for the left and right side, and attach \"\\_1ST\" to the class which will be leftside of a pair, and \"\\_2ST\" to the class which will be rightside of a pair. In a feature, the result would look like this:  \n&nbsp;&nbsp;&nbsp;pos @\\_A\\_1ST @\\_A\\_2ND 20;  \nThis makes sure that you don't run into subtable break error messages.\n\nGoogle a bit with \"kerning site:typophile.com\" or \"class kerning site:typophile.com\" as search string -- there have been some threads on class based kerning which cover most issues that one may run into. Some for a start:\n\nThis thread contains a collection of links to other class kerning threads (as of August 2006):  \n [http://typophile.com/node/27424#comment-151733](http://web.archive.org/web/20131014090757/http:/typophile.com/node/27424#comment-151733)\n\nAnd some more recent ones, but no really new information:  \n [http://typophile.com/node/30567](http://web.archive.org/web/20131014090757/http:/typophile.com/node/30567)  \n [http://typophile.com/node/33284](http://web.archive.org/web/20131014090757/http:/typophile.com/node/33284)  \n [http://typophile.com/node/34109](http://web.archive.org/web/20131014090757/http:/typophile.com/node/34109)\n\n"
+    },
+    {
+      "time": "4 Nov 2007 — 3:05pm",
+      "content": "_Right from the start, you should set up separate classes for the left and right side, and attach ... This makes sure that you don’t run into subtable break error messages._\n\nAre subtable breaks errors?\n\nIf that is the case, why does FontLab allow a class to be \"active\" on both sides?\n\n"
+    },
+    {
+      "time": "4 Nov 2007 — 3:55pm",
+      "content": "\\> _Are subtable breaks errors?_\n\nNo. What Karsten was referring to is the infamous `Start of new pair positioning subtable; some pairs may never be accessed: ...` error. An example here: [http://typophile.com/node/37959](http://web.archive.org/web/20131014090757/http:/typophile.com/node/37959 \"http://typophile.com/node/37959\")\n\n\\> _If that is the case, why does FontLab allow a class to be “active” on both sides?_\n\nThere's no problem with using the same class on both sides, but that increases your chances of running into the subtable error above, specially if you're working on a font with a large character set.\n\n"
+    },
+    {
+      "time": "4 Nov 2007 — 9:52pm",
+      "content": "Right Miguel, as you say in that thread, \"...each glyph should only be included in one left kern class, and one right kern class, maximum.\"\n\nHowever, there is no problem with including different characters in a \"both sides\" class, if their left sides all have similar kerning behaviour, and their right sides all have similar kerning behaviour. For instance:\n\n`O' Q`\n\nhyphen' endash emdash\n\nperiod' comma ellipsis\n\nquoteright' quotedblright\n\nand of course\n\n`A' Adieresis Aring Agrave Atilde Acircumflex Aacute Amacron Aogonek Abreve`\n\n"
+    },
+    {
+      "time": "5 Nov 2007 — 12:53am",
+      "content": "\\> _However, there is no problem with including different characters in a “both sides” class_\n\nI agree, and it's very tempting to make only one class — which will be used on both sides — for glyphs that are symmetrical, such as 'A', 'T' or 'V'. But things can get out of control pretty quickly if your glyphset contains an 'AE' glyph or a 'T\\_h' ligature, for example. In this case, if you don't separate those \"both sides\" classes it's likely you're going to have a bad time...\n\nMy point is, although it might sound like it's more work if one has to explicitly create left and right classes, that extra effort may in the end payoff, as it helps keeping you away from class kerning errors. And if you run into one of those, it will be easier to find the problem, IMO.\n\n"
+    },
+    {
+      "time": "5 Nov 2007 — 3:10am",
+      "content": "K.L. -- <cite>that you don’t run into subtable break error messages</cite>  \nM.S. -- <cite>What Karsten was referring to is the infamous \"Start of new pair positioning subtable; ...\"</cite>\n\nYes, that's it. Thank you, Miguel, for providing the background!\n\nNick, yes: For my fonts, I strictly set up classes as either leftside or rightside classes in FLS, even if some leftside and rightside classes share the same set of glyphs -- and upon generating fonts I automatically \"merge\" classes with identical content into a single class. This may illustrate that the separation helps avoid (or track down) errors during production <cite>but is not at all a requirement as regards OT fonts.</cite>\n\nI thought it's better to mention this trick right away since I anticipated that \"Start of new pair positioning subtable\" would be next weeks thread.&nbsp;&nbsp;;-)\n\nLet me also point to the AFDKO2's FLS script for generating the kern feature. It does a better job than FLS5's \"Update kern feature\" function (though the difference may become evident only with larger or heavily kerned fonts).\n\nKarsten\n\n"
+    },
+    {
+      "time": "5 Nov 2007 — 12:42pm",
+      "content": "Okay, im getting there.\n\nSo each glyph can appear in both a left class and a right class.  \nWhen I set up a class, does the width of the glyph matter? Or would N and I go into the same left class as they have identical sides?\n\nThis other OT feature required im still not ok with, like i'd need,\n\n`liga (\n  sub aring by aring;\n) liga;`\n\nWould I have one like that for earch glyph? class?\n\nAnd i get this, `[FATAL] expecting EOF (text was \"liga\")`\n\nWhen it put it into a new window in the opentype panel, it just stays as xxxx and doesnt change its name like kern did, reason?\n\n//Gustaf\n\n"
+    },
+    {
+      "time": "5 Nov 2007 — 12:38pm",
+      "content": "2nd feature: \"liga\"\n\n`sub f i by fi;`\n\nThat's all it needs.  \nApparently, Kern can't get into the club unless accompanied by an adult.\n\n"
+    },
+    {
+      "time": "5 Nov 2007 — 2:59pm",
+      "content": "In passing:\n\nI wouldn't have a class with \"quoteleft\" and \"quotedblleft\" as members. Too many times when you want to do something with one, but not the other -- or the opposite with the other -- for example, kern (negative) two successive quotelefts, but postive kern the string \"quoteleft\" quotedblleft\", \"quotedblleft\" \"quoteleft\" and, \"quotedblleft\" \"quoteright.\"\n\n\"Comma\" and \"peroid\" are another favorite class that probably shouldn't be made. If you do this, compromises will abound. In fact, major punctuation probably shouldn't be combined for good kerning, though it is tempting.\n\nWith vowels, watch combining grave accents with the basic vowel, or be prepared for a lot of exceptions -- \"f\" \"agrave\" usually won't take a negative kern -- in fact, a lot of pairs that normally take a negative kern get gefuched with an accented vowel.\n\nI'm probably one of the few people here who is not a fan of class-based kerning. It can be helpful, just don't make establishing large classes to get the fewest number of kerning commands a goal. Back in the 1985 or so, our first PC version of TeX would only allow about 100 kerning/ligaturing commands (I forget the actual number). However, within a command, you could group characters -- sort of an early \"class kerning.\" I was very happy when we got Y&Y TeX and I could use straight pairs kerning . . .\n\n"
+    },
+    {
+      "time": "5 Nov 2007 — 3:04pm",
+      "content": "You forgot the \"feature\" in the first line:\n\n`feature liga {\n   sub aring by aring;\n} liga;`\n\nThe width of glyphs does not matter. What matters in kerning classes is the leftside and/or rightside shape of letters. (So, if you do a serif type and the 'I' has a serif bottom right while the 'N' does not, then you may consider using different classes. In a sans they can be in the same class. It is a design decision.)\n\n[Edit: Hello Charles! These are indeed tricky cases and require exceptions when using class kerning.]\n\n"
+    },
+    {
+      "time": "5 Nov 2007 — 4:02pm",
+      "content": "Marking\n\nChrisL\n\n"
+    },
+    {
+      "time": "5 Nov 2007 — 4:09pm",
+      "content": "Okay Thanks.\n\nMy typeface is a Geometric SansSerif.\n\nThe classes do make it a bit confusing i must say. I wouldnt really mind going through the different combinations that I could make and set the kerning per pair, but it would be a lot of pairs, and not so good for the opentype, right?\n\nAre there any classes tables for known typefaces out there that I could have a look at to see what has been grouped together and so?\n\nThanks all of you for helping out!\n\n//Gus\n\n"
+    },
+    {
+      "time": "5 Nov 2007 — 5:37pm",
+      "content": "Well, if you have a normal amount of glyphs, kerning it per pair isn't too bad. At least, I don't think it is.\n\n"
+    },
+    {
+      "time": "5 Nov 2007 — 8:53pm",
+      "content": "_kern (negative) two successive quotelefts_\n\nCharles, when do two successive quotelefts occur in text?\n\n_“Comma” and “peroid” are another favorite class that probably shouldn’t be made._\n\nI don't see why not. The only place that period and comma may differ is following a double-bowl g, or maybe an ogonek-accented character, but those are the characters I would always design the comma to fit with anyway, not solve lax design with a kern.\n\nIn general, too much kerning is detrimental, but one wants to be able to handle the fundamental letter-punctuation kerns (P, T, V, W, Y, f, r, v, w, y) in a straightforward and efficient manner.\n\n"
+    },
+    {
+      "time": "6 Nov 2007 — 2:37pm",
+      "content": "Nick,\n\nWell, I've been know to use two single quotes kerned, back in the days when digital fonts were proprietary, (like Linotron 202), when (1) you couldn't get at the characters themselves, and (2) the spacing between the quotes in a double quote wasn't what you liked. Just about every 202 font was that way . . .\n\nI know. Now is different. Except it is still hard for most typesetters to get at the characters to fix them; a bit easier to get a third-party kerning program . . .\n\nAs to commas & periods, well, they take their space from the flow of the text, adding time as needed. They are also found in numbers (e.g., 17,421.76); abbreviations, U.S.A., D.C., G.E.M. Amscombe; etc. I'll confess I usually make up tabular commas and periods, but the other uses are kerned depending on the type of work one most often does. I often kern a quotedblright differently following a period than a comma; I suppose it depends on the sidebearings, but they aren't always (or shouldn't be) the same.\n\nI agree you can do pretty good with \"class-based kerning with exceptions.\" It is just very hard to go back later and rework such kerning, and I'm not good enough to get it exactly right the first time.\n\n"
+    },
+    {
+      "time": "6 Nov 2007 — 4:40pm",
+      "content": "_I’ll confess I usually make up tabular commas and periods_\n\nInteresting. So those would be the same width as tabular figures?  \nCould I include them in the OpenType tabular figure features?  \n(But only if the default is proportional.)\n\n_I often kern a quotedblright differently following a period than a comma_\n\nCan you post an example?\n\n"
+    },
+    {
+      "time": "7 Nov 2007 — 1:52pm",
+      "content": "Nick,\n\nI don't make tabular commas and periods the full width of the figures. Usually around 3/5ths. For not too good reasons, I make them both the same setwidth. I fiddle with the sidebearings (& even the set) in the metrics window, so that both the comma & period look OK with all numeric combinations. Yes, I swap them in with the \"tabular\" feature. I also set U+2008 to that width -- even with InDesign's table features, I sometimes find padding a single entry the fastest way to decimal align a column.\n\nI also try to make the tabular figures all have the same setwidth, lining and oldstyle, in both roman & italic & even bold, as all will come up in a table from time to time. A number of fonts have a different setwidth for tablular numbers in roman than in italic. Makes for a mess.\n\nBTW, for a number of fonts, I also make up both lining and oldstyle arithmetic operators (plus, minus, equal, multiply, divide, greater, less), and occasionally currency symbols, (dollar, sterling). These are switched with the lining/oldstyle feature. A few fonts also need a lining/oldstyle endash, though at some point you get absurd, because emdashes & endashes should have the same height, and work with lower-case letters to boot.\n\nSince the fonts I work on are only used with InDesign, I have far fewer things to worry about than a font designer worrying about multiple applications programs.\n\nSomeday though, it would be fun (maybe in the Design Forum?) to go over a list of niceties for fonts to be used only for, or essentially for, long texts, such as books.\n\nOh, we got in a new journal yesterday, which used Franklin Gothic Heavy in some display elements. I kerned \"comma\" \"quotedblright\" -130; \"period\" \"quotedblright\" -100. I'll allow that a single compromise value would likely be OK in this case, but in other, text fonts, I'd take more control over the sidebearings & thus the kerning.\n\nFWIW\n\n"
+    },
+    {
+      "time": "7 Nov 2007 — 2:56pm",
+      "content": "\\>Someday though, it would be fun (maybe in the Design Forum?) to go over a list of niceties for fonts to be used only for, or essentially for, long texts, such as books.\n\nI would love to see your list, Charles! Do favor us with it, if you've got the time to put it down.\n\n"
+    }
+  ]
+}

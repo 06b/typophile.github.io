@@ -1,0 +1,74 @@
+{
+  "id": "64742",
+  "title": "Binary or Compiled message in Fontlab when trying to save as OpenType",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "hi everyone,\n\nI'm having some questions about a warning that i keep getting in Fontlab when trying to save my font as OpenType. Actually today is the first time i ever had this attention window popping up every time I'm trying to save it and to my knowledge.\n\nhere's the message i keep getting:\n\n\"Current font contains both OpenType features definition and imported binary OpenType tables.Whitch data you want to use while generating OpenType\n\n(then theres 2 options) \"Binary\" or \"Compiled\"\n\nwhat exactly do they mean here by this and how come i never had this message before but now i do...should i pick Binary or Compiled?\n\nreally hope someone finds some time to help me understand this a little better.\n\nthnx very much everyone\n\n",
+  "author": "Evie",
+  "time": "26 Nov 2009 — 4:20am",
+  "uid": "49778",
+  "comments": [
+    {
+      "time": "26 Nov 2009 — 4:30am",
+      "content": "Search for \"binary compiled\" on the Fontlab forum or here.\n\n[http://forum.fontlab.com/fontlab-studio/binary-vs-compiled-t48.0.html](http://web.archive.org/web/20141020010224/http:/forum.fontlab.com/fontlab-studio/binary-vs-compiled-t48.0.html \"http://forum.fontlab.com/fontlab-studio/binary-vs-compiled-t48.0.html\")\n\n"
+    },
+    {
+      "time": "26 Nov 2009 — 4:55am",
+      "content": "thnx for replying Arno, but i'm afraid i don't really get it...how come i wasn't getting this message before...to my knowledge i haven't changed or imported any OT code.\n\ncan't find anny info in the manual on when or why to choose for binary or compiled...whats the safest way to save the font and make sure all OT features work?\n\n"
+    },
+    {
+      "time": "26 Nov 2009 — 3:19pm",
+      "content": "@ Evie\n\nCheck your Fontlab options ‘Opening OpenType & TrueType’and ‘Generate OpenType & TrueType’. If ‘Read OpenType layout tables’ is activated and if you have opened an OpenType font in FontLab, FontLab has automatically imported the tables.\n\n<cite>whats the safest way to save the font and make sure all OT features work?</cite>\n\nIf you have not changed OT features or kerning, I would say, that the safest way is, to choose binary. But at the moment I am not sure, what would happen, if you change anything in the kerning, because the kern feature is stored in the GPOS table, while the glyph substitution features are stored in the GSUB table.\n\nI assume, that this also was answered before. Either on Typophile or on the Fontlab forum.\n\n"
+    },
+    {
+      "time": "27 Nov 2009 — 2:12am",
+      "content": "<cite>If you have not changed OT features or kerning, I would say, that the safest way is, to choose binary.</cite>\n\nWhat's more important:  \nIf you have not changed the glyph set and glyph order, [...]\n\nOtherwise you may get funny feature effects.\n\n"
+    },
+    {
+      "time": "27 Nov 2009 — 4:16am",
+      "content": "True, Karsten. But the problem is, that you cannot trust, that Fontlab correctly interprets the features.\n\nIt’s a dilemma. I simply try to avoid changing anything in existing OT fonts or I try to solve problems with the help of TTX. What would you do?\n\nThe substitution features – do they make use from the glyph index/order or from the glyph names/Unicode in the GSUB table? I have to check that.\n\n"
+    },
+    {
+      "time": "27 Nov 2009 — 4:01pm",
+      "content": "There is no dilemma.\n\nWhen choosing \"binary\", FLS will simply include OTL tables \"as is\" in the OTF to be generated. In this case, the glyph set and glyph order better not be changed after having imported the font, for the simple reason that OTL tables are glyph index based.\n\nOne may blame FLS for strange behavior, but not in this case.\n\n"
+    },
+    {
+      "time": "27 Nov 2009 — 4:49pm",
+      "content": "@ Karsten\n\n<cite>In this case, the glyph set and glyph order better not be changed after having imported the font, for the simple reason that OTL tables are glyph index based.</cite>\n\nIf Fontlab would compile the features, that it has decompiled, in the same way (with regard to their meaning) as they were compiled in the imported font, you could choose the option ‘compile’. Isn’t this a dilemma? Maybe _dilemma_ is the wrong term. You have to decide between two options and both of them are a risk. So a general recommendation can not be given with regard to Evie’s question. It is dependent from the complexity of the features and from the compiler/decompiler module. Fontlab still uses an old version of the module. What is the name of the module by the way? It is also part of the AFDKO, isn’t it?\n\n<cite>Otherwise you may get funny feature effects.</cite>\n\nIf the features are not recompiled correctly (with the option ‘compile’, they do not necessarily work. Then you also may have funny effects or not the intended effects. Please correct me, if I am wrong.\n\n"
+    },
+    {
+      "time": "28 Nov 2009 — 1:31am",
+      "content": "In both of my posts I was only speaking about the \"binary\" option.\n\n"
+    },
+    {
+      "time": "28 Nov 2009 — 4:02am",
+      "content": "@ Karsten\n\n<cite>In both of my posts I was only speaking about the “binary” option.</cite>\n\nYes, and I have interpreted your first one in this way: You are not necessarily on the safe side, if you choose the “binary” option.\n\nHave I misunderstood you? I only did add, that you likewise are not necessarily on the safe side, if you choose the “compile” option.\n\nBut I have decompiled the GSUB table of a font with TTX now. There you find lines like these:\n\n`<SingleSubst index=\"0\" Format=\"2\">\n<Substitution in=\"cent\" out=\"cent.superior\"/>\n<Substitution in=\"comma\" out=\"comma.superior\"/>\n<Substitution in=\"dollar\" out=\"dollar.superior\"/>\n</SingleSubst>`\n\nNow I am not sure, what you meant with “index”, because the glyphs seem to be substituted with the help of their names, but not with the help of numbers. “I am not sure” does not mean, that I know it better. So please don’t misunderstand me.\n\n"
+    },
+    {
+      "time": "28 Nov 2009 — 4:26am",
+      "content": "<cite>Yes, and I have interpreted your first one in this way: You are not necessarily on the safe side, if you choose the “binary” option.</cite>\n\nNowhere did I say which option is to be preferred.\n\n<cite>because the glyphs seem to be substituted with the help of their names</cite>\n\nOT fonts' tables, including OTL tables, identify glyphs by their index. TTX files display glyph names only for the user's convenience. TTX files are not font data 'converted' to text but involve interpretation of the data.\n\n"
+    },
+    {
+      "time": "30 Nov 2009 — 10:40am",
+      "content": "@ Karsten\n\nI have experimented a bit with TTX 2.2 (contained in the AFDKO 2.5 21898) and FLS 5.0.4.\n\n1. Reset the options of FLS to default.\n\n2. Open MinionPro and generate MinionPro-FLS-compiled. Choose the compile option, when you are asked.\n\n3. Change to the index mode and substitute a and b. Generate MinionPro-abSubstituted-FLS-compiled.\n\n4. Decompile both files with TTX.\n\n5. Compare the files. You will find changes in three tables (except from the table, in which the checksum is stored): GlyphOrder, GPOS and GSUB.\n\n6. Now I have played a bit around. If you decompile the original Minion and substitute a and b in the GlyphOrder table only, you will either get an invalid font or the order will be reset, dependent from the way, in which you recompile the font. (Decompile the GlyphOrder table only, substitute a and b and merge the GlyphOrder table into the original font file; or decompile all tables, substitute a and b in the GlyphOrder table and recompile the font.) But forget this for a moment.\n\nIf you substitute a and b in the GlyphOrder **and** the GPOS table, the recompiled font works. And although the positions of a and b have changed – check it in FontLab or decompile the GlyphOrder and the GPOS table of the compiled font again –, the small capital feature seems to work correctly in Indesign. \"a\" is substituted by \"a.sc\" and \"b\" by \"b.sc\".\n\nDo you have any explanations for this behavior?\n\nIt seems to indicate, that the GSUB table is independent from the GlyphOrder and the GPOS table. May it be, that the GSUB table uses its own (internal) glyph order/index?\n\n------------------------\n\nI have forgotten to write in the beginning, that the binary/compile option is obsolete, if you change the glyph order in FontLab, because FontLab deletes the stored binary layout tables in this case.\n\n"
+    },
+    {
+      "time": "1 Dec 2009 — 1:31am",
+      "content": "@ Karsten\n\nI have opened a font with stylistic features this morning and messed up the index in FontLab (those characters, that are involved in the stylistic feature). Then I have generated the font and have merged the original GSUB table, which I had decompiled before, into the generated font. And the features work!\n\nI already wrote, that the question \"binary/compile\" is obsolete, if you mess up the index in FontLab, because FontLab deletes the imported GSUB table. But it seems to be untrue, that a glyph order, which was changed in FontLab, can result in funny features, at least not, if you have meant the substitution features.\n\n"
+    },
+    {
+      "time": "1 Dec 2009 — 6:32am",
+      "content": "As I said, OTL tables including GSUB and GPOS are glyph index based. It is thanks to TTX that despite your changes things still work.\n\n"
+    },
+    {
+      "time": "1 Dec 2009 — 8:44am",
+      "content": "@ Karsten\n\nThis would mean, that, if I replace the GlyphOrder table with useless data (I remove everything except from one line of the GlyphOrder table.), TTX makes use from what, if I **merge** the GSUB table in? I will try to compare the hexdata. I can merge in fantasy tables with TTX. I could, for example, merge in a Kars(ten)-table, that contains a hexdata encoded short novel. Maybe it also is possible to merge in the hexdata of a GSUB table. You know the merge in option of TTX, don’t you? The parameter is \"-m\". In my post from 28/11 I quoted a few decompiled lines and made a logical mistake. My result did not allow a logical conclusion. I try to check, if I have made the same logical mistake again.\n\n"
+    },
+    {
+      "time": "1 Dec 2009 — 3:59pm",
+      "content": "@ Karsten\n\nI probably made the same logical mistake again. And because I am unable to find the GPOS table in the hexdata, I cannot search for changes in the compiled GPOS table. By the way you cannot merge in hexdata of tables, that are officially specificated, except from those tables, that TTX stores as hexdata, when it decompiles them, the DSIG table for example. Fantasy tables like the KARS(TEN) table can be merged in only, if you put a hexdata tag with a bit hexdata into the KARS(TEN) tag.\n\nBut it is nice to see, that you can preserve the features by merging the GSUB table into the font, in which you have changed the GLYPH order.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "45886",
+  "title": "Building accents",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hey all,\n\nI have downloaded Ben Kiels great BuildingAccents-scripts, but I can't get it work properly.  \n(Maybe I'm a tech-idiot ;-) but are there somebody who can help me with this issue:\n\nThe script only create new characters (composites) but it doesn't place the accents over these characters. Why not??  \nWhere do I exactly place the anchors on glyphs and accents, to get this script works correctly?\n\nThanks in advance!\n\nMorten\n\n",
+  "author": "morten",
+  "time": "30 May 2008 — 1:27am",
+  "uid": "2642",
+  "comments": [
+    {
+      "time": "30 May 2008 — 2:54am",
+      "content": "Put all you accents on their exact glyph cells(,center align)and also make sure you have assigned unicode values to them. Run the Macro.\n\n"
+    },
+    {
+      "time": "30 May 2008 — 3:31am",
+      "content": "Satya:\n\nWell, it's still don't working...and what about the anchors?? Where shall I place them?  \nThanks for helping!\n\nBest,  \nMorten\n\n"
+    },
+    {
+      "time": "30 May 2008 — 3:29pm",
+      "content": "I've found that the \"Generate Glyphs\" command in Fontlab is as useful as anything. I keep a list of characters in a text file and paste them into the Generate Glyphs dialog. The hard part is placing the anchors. I published a simple script to place commonly needed anchors here: [http://betatype.com/node/12](http://web.archive.org/web/20140807054825/http:/betatype.com/node/12)\n\n"
+    },
+    {
+      "time": "30 May 2008 — 8:08pm",
+      "content": "To explain a little more, here is my process:\n\n1. Generate common anchors using script  \n2. Do any necessary tweaking to anchors (sometimes you don't want them centered)  \n3. Select the Glyph \\> Generate Glyphs... command from the menu.  \n4. Paste glyph list into field.  \n5. Voilá\n\nHere is a good place to start for a list of glyphs to paste into the input field:\n\n`Aacute Abreve Acircumflex Adieresis Agrave Aogonek Aring Atilde Cacute Ccaron Ccedilla Dcaron Eth=Dcroat Eacute Ecaron Ecircumflex Edieresis Egrave Eogonek Iacute Icircumflex Idieresis Igrave Lacute Lcaron Nacute Ncaron Ntilde Oacute Ocircumflex Odieresis Ograve Ohungarumlaut Otilde Racute Rcaron Sacute Scaron Scedilla Tcaron T+comma=Tcommaaccent Uacute Ucircumflex Udieresis Ugrave Uhungarumlaut Uring Yacute Ydieresis Zacute Zcaron Zdotaccent aacute abreve acircumflex adieresis agrave aogonek aring atilde cacute ccaron ccedilla dcaron d+macron=dcroat eacute ecaron ecircumflex edieresis egrave eogonek germandbls hungarumlaut iacute icircumflex idieresis igrave lacute lcaron nacute ncaron ntilde oacute ocircumflex odieresis ogonek ograve ohungarumlaut otilde racute rcaron sacute scaron scedilla tcaron t+comma=tcommaaccent uacute ucircumflex udieresis ugrave uhungarumlaut uring yacute ydieresis zacute zcaron zdotaccent`\n\nNote: There are several lesser known features available in the Generate Glyphs dialog. For example, t+comma=tcommaaccent joins t and comma into the tcommaaccent glyph. Fontlab knows which glyphs to join for all of the other characters. To create ligatures with Generate Glyphs simply type glyph1name\\_glyph2name=finalglyph name. For example f\\_f=ff will create an ff ligature.\n\nAlso note that generating the diacritics is often the last thing you want to do before you master the font. It makes it easier to manage things if you don't have a ton of diacritics hanging around.\n\n"
+    },
+    {
+      "time": "1 Jun 2008 — 4:01am",
+      "content": "Christian,\n\nThanks for guiding me – now it works!\n\nBest,  \nMorten\n\n"
+    },
+    {
+      "time": "1 Jun 2008 — 2:03pm",
+      "content": "Be careful, when using Generate Glyphs in FontLab, \"tcaron\", \"dcaron\", \"lcaron\" and \"Lcaron\" can't create correct glyphs. All those four glyphs must have a special version of caron looking like a steep acute or an apostrophe. You could create \"caron.alt\" first and then build \"d+caron.alt=dcaron\" etc.\n\n"
+    },
+    {
+      "time": "1 Jun 2008 — 2:54pm",
+      "content": "It is a bit weird but the T and t with a cedilla are actually Tcommaaccent and tcommaaccent, so the input shoud be like this:\n\nT+cedilla=Tcommaaccent  \nt+cedilla=tcommaaccent\n\nThe T an t with commaaccent can be generated with this:\n\nT+commaaccent=uni021A  \nt+commaaccent=uni021B\n\n"
+    },
+    {
+      "time": "1 Jun 2008 — 6:26pm",
+      "content": "I wrote my set of accent building scripts before the release of FL5, which does let one build things quicker with how Christian outlined the Generate Glyphs dialog. You won't have the control over exactly how things are placed, but it is easier to use.\n\nHowever, if one is still interested in using the set of scripts, two things need to be done before running the Build Accents script. Anchors need to be placed on both the accent marks and the base glyphs for the accented glyphs. Anchors need to be named for where they are on a glyph and where the accent is to attach. For example, to have the script build an eacute, an anchor needs to be placed on the e at the location where one wishes the acute mark to be. This anchor can be called anything, but I usually call it 'top', as it is for accents that attach above the glyph. Then on the acute mark, a corresponding anchor, also called 'top', need to be placed where one wants the acute to attach to the anchor on the e. This would be at the visual center of the acute and at the bottom of the acute. The easiest way to think of this is that the anchors are the points where the e and the acute will snap together. Because placing anchors can be tedious, there is a Place Anchors script for placing anchors on the selected glyphs in the font window. (Removing anchors is also tedious, so there is a Remove Anchors script also).\n\nHope that helps anyone who may be interested in using those scripts.\n\n"
+    },
+    {
+      "time": "2 Jun 2008 — 5:03am",
+      "content": "_FL5, which does let one build things quicker with how Christian outlined the Generate Glyphs dialog. You won’t have the control over exactly how things are placed_\n\nYes, you have! You can control where the accents are placed if you add anchors to your base glyphs and accents and name them right:\n\nThe name of the anchor on the accent must be the name of the anchor on the base glyph prefixed with an underscore.\n\nE.g. you have an \"o\" with a \"top\" anchor and an \"acute\" with a \"\\_top\" anchor. Now writing \"o+acute=oacute\" into the \"Generate Glyphs\" dialog will place the accent according to your anchors.\n\nAnother way to generate accented glyphs using this anchor naming scheme: Select your base glyph in the Font window, open a Preview window and there go to the tab called \"Anchors\". The Preview window will show you all glyphs you can compose from your selected base glyph. Generate them by clicking on the \"Â\" Icon.\n\ncf. FL manual from page 504 ...\n\n"
+    }
+  ]
+}

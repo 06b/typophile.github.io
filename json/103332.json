@@ -1,0 +1,39 @@
+{
+  "id": "103332",
+  "title": "OpenType Rule - SCALE",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions",
+    "opentype rule"
+  ],
+  "content": "Hello!\n\nIn OpenType – if I understand well – there are only two possible rules - SUBSTITUTION and POSITION (either/or/both).\n\nWhy isn't there a rule for SCALE?\n\nFor example, when the ALL CAPS \"TT\" is triggered in InDesign, scale the glyphs \"(\", \")\", \"{\" and \"}\" up to 110% (from zero point/from centre/from cap height/from ascender height etc).\n\nIf such a rule does not exist, it's either because it defeats some other purpose, or is unnecessary or is carried out by something else... and that I'm missing a point.\n\nThanks!\n\n",
+  "author": "RG",
+  "time": "27 May 2013 — 10:37pm",
+  "uid": "86549",
+  "comments": [
+    {
+      "time": "28 May 2013 — 4:29am",
+      "content": "Simply scaling would change the weight relationship and in most situations would make things look wrong. Witness the disdain for faux small caps and faux fractions. A more sophisticated rule could probably be devised (probably relying upon hints), but would require a sophisticated implementation built into layout and rasterizing engines and would be highly unlikely to gain any traction I suspect.\n\nBTW, parentheses and braces are generally scaled down (in size, but not weight) for all-caps settings, not up.\n\n"
+    },
+    {
+      "time": "28 May 2013 — 12:01pm",
+      "content": "Thank you\n\n"
+    },
+    {
+      "time": "28 May 2013 — 8:45pm",
+      "content": "I'm not certain of the coding, but couldn't you use contextual alternates for substitution with alternate glyphs?\n\n"
+    },
+    {
+      "time": "29 May 2013 — 1:04am",
+      "content": "That would still require creating new glyphs instead of applying an action/effect to existing glyphs.\n\n"
+    },
+    {
+      "time": "29 May 2013 — 5:33am",
+      "content": "It does solve the problem in the absence of other options. Or, am I missing something. Even if there is an operation for scale, existing software has to support it.\n\n"
+    },
+    {
+      "time": "29 May 2013 — 8:16am",
+      "content": "> That would still require creating new glyphs instead of applying an action/effect to existing glyphs.\n\nYes, it entails applying an action/effect to existing glyphs on the design end, where you have greater opportunity to evaluate and refine the results on a situational basis, rather than at the rasterization end where you will have little control and where one size rarely fits all.\n\nFor alternative approaches, you can explore parameterized design and the Metafont format developed by Knuth for use in conjunction with TeX.\n\n"
+    }
+  ]
+}

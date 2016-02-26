@@ -1,0 +1,46 @@
+{
+  "id": "16274",
+  "title": "Embedding fonts in Microsoft Office",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hello all. I hope that someone can help me solve an annoying problem I am having. (Especially Si Daniels. Hi Si.)\n\nWe have a client who has fully licensed one of our fonts, and wishes to embed those fonts in internal Microsoft Word documents. This is allowed under the terms of our EULA.\n\nThis client is having a hard time getting the fonts to embed in Microsoft Word 2002 and 2003, running on Windows XP. The software is probably localised for Norway.\n\nI have generated the fonts in CFF-flavoured and TT-flavoured OpenType, as well as \"traditional\" TrueType without any OT features. The embedding was, of course, turned on when generating.\n\nI have generated the fonts every way 'til Sunday, including using FontLab 45M, FontLab Studio 5W and 5MBeta, and have tried using TransType Pro 3M starting from every conceivable source: VFB, WinTTF, MacTTF, MacPST1, WinPST1...\n\nIn other words, I have jumped through every hoop, to no avail.\n\nIs it possible that embedding in Word is a problem?  \nIs it possible that the client's font cache is now completely full of conflicting fonts?  \nIs it possible that FontLab and TransType are incorrectly saving embedding settings?\n\nAny help would be massively appreciated. Any off-list emails can be sent to chester (at) vllg.com.\n\nThanks a bundle, phellow typophiles. (Can you believe that this is my first ever topic submission?)\n\n",
+  "author": ".",
+  "time": "16 Nov 2005 — 6:55am",
+  "uid": "1336",
+  "comments": [
+    {
+      "time": "16 Nov 2005 — 8:59am",
+      "content": "Hi,\n\nWord will only embed TTF fonts (OT or TT) not PostScript Type 1 or OpenType CFF.\n\nTo check the embedding permissions of your fonts you can use... [http://www.microsoft.com/typography/TrueTypeProperty21.mspx](http://web.archive.org/web/20150414121825/http:/www.microsoft.com/typography/TrueTypeProperty21.mspx \"http://www.microsoft.com/typography/TrueTypeProperty21.mspx\")\n\nAlso check the font in Font Validator to make sure there are no serios errors as they may cause the font to be rejected by the embedding code.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "16 Nov 2005 — 9:22am",
+      "content": "\\>Is it possible that the client’s font cache is now completely full of conflicting fonts?\n\nOne way to isolate naming problems is to rename and renumber the font every time you do a version. Not just the suffix part, but the begining of the word. Yeah, you end up with some silly names...\n\n"
+    },
+    {
+      "time": "17 Nov 2005 — 1:12pm",
+      "content": "No luck...\n\nI have done the suggested things, and the fonts' Properties say \"Installable embedding allowed\", but my client says that they don't.\n\nThis is a family of 6 un-harmonisable fonts. Is that a problem?\n\nSi, could I possibly send you the fonts to test at your end? I've run Validator, and none of the errors appear to be fatal to me.\n\nSigh,  \nc\n\n"
+    },
+    {
+      "time": "17 Nov 2005 — 1:47pm",
+      "content": "I can't say I carried out the most comprehensive programme, but I tested font embedding of my employer's new custom TT family and didn't find it reliable within Word, although it worked OK in Powerpoint. A bit of digging around on the web seemed to indicate a suspicious lack of detailed infomation, particularly on how the different levels of font embedding (print, editable, installable) work in practice. I'm not sure that it really works as described.\n\nPlease correct me if I am wrong, though.\n\n"
+    },
+    {
+      "time": "17 Nov 2005 — 3:33pm",
+      "content": "Chester, I'd be happy to give 'em a test - only have easy access to Office XP though. Send them to simonda@ you know where.\n\nElliot is correct that embedding is more reliable in PPT than Word. If the fonts embed fine in PPT but not Word then Word would likely be the culprit.\n\nSi\n\n"
+    },
+    {
+      "time": "18 Nov 2005 — 2:51am",
+      "content": "Is there a convincing need to embed them at all? I've never found one for Word.\n\nIf they're for internal distribution as editable docs can't they just all have the fonts purchased and installed company wide? Or if for read-only distribution, use PDFs.\n\nRemember that font embedding will increase the size of documents and is not controllable on a font by font basis - you can easily end up with 1Mb 1 page docs if you embed a few large fonts.\n\n"
+    },
+    {
+      "time": "18 Nov 2005 — 10:35am",
+      "content": "I would tend to agree, especially today with PDF being such an established standard.\n\n"
+    },
+    {
+      "time": "18 Nov 2005 — 11:45am",
+      "content": "I would also tend to agree. But the customer is always right.\n\nSi has been helping me out with this, and I'm in the midst of doing some things now which should hopefully fix the issue. I will, of course, post with a full report when The Affair of the Embedded Fonts draws to a close.\n\nThanks all.\n\n"
+    }
+  ]
+}

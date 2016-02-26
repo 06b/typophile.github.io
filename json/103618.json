@@ -1,0 +1,111 @@
+{
+  "id": "103618",
+  "title": "Glyph renaming",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions",
+    "Glyph rename script"
+  ],
+  "content": "Hi,\n\nI have around 2000 glyphs which needs to be renamed totally as most of them are more than 32 chars and truncated to 32 chars automatically by FontForge. This has created duplicate entries i think.\n\nWhat I need to do is give them a friendly name like GLYPH0001 - GLYPH2000.\n\nIs there any script which can do this. I will select the glyphs which i want to change and run the script in order todo so.\n\nPlease help.\n\nThanks & Regards\n\nNOTE: I am a newbie in fonts and fontforge.\n\n",
+  "author": "shahidr100",
+  "time": "6 Jun 2013 — 12:18am",
+  "uid": "211358",
+  "comments": [
+    {
+      "time": "6 Jun 2013 — 10:14am",
+      "content": "try maybe my quick script\n\n    # -*- coding: utf-8 -*-\n    import fontforge;\n    \n    def change_name_XXXX00001(arg1,font):\n       prefix=fontforge.askString(\"Prefix..\",\"Prefix:\",'GLYPH');\n       numer=1;\n       for i in font.selection.byGlyphs:\n          i.glyphname=prefix+(\"%04d\" % numer);\n          numer+=1;\n    \n    def EnableSel(arg1,font):\n       for i in font.selection.byGlyphs:\n          return True;\n       return False;\n    \n    fontforge.registerMenuItem(change_name_XXXX00001,EnableSel,None,\n    \"Font\",None,\"Glyph_names\",\"Change to XXXX00001\");\n\nSave code to file or download it from:  \n [www.glukfonts.pl/temp/gluk\\_names.py](http://web.archive.org/web/20130822060208/http:/www.glukfonts.pl/temp/gluk_names.py)\n\n"
+    },
+    {
+      "time": "6 Jun 2013 — 1:23pm",
+      "content": "I take it you don't need or care about glyph-to-Unicode mapping in situations where the original encoding is lost? (Notably PDF creation workflows where the PDF is created from a PostScript file without the original font.)\n\nIf you \\*do\\* care about such things, glyph names are important and need to be done correctly.\n\n"
+    },
+    {
+      "time": "6 Jun 2013 — 7:10pm",
+      "content": "@ Thomas Phinney  \nI've read that before, but I'm not certain exactly what correct naming conventions might be. I use, as a example, a.salt, a.salt2 a.salt3 etc, but what do you do with the glyph which has no parent glyph - so to speak. Does it really matter as long as you assign unicodes (from the private range.)\n\n"
+    },
+    {
+      "time": "6 Jun 2013 — 10:17pm",
+      "content": "Thanks a lot gluk.\n\nI am new in FontForge. How do I run the script. I am using Windows 7 64 bit.\n\nThanks  \nShahid\n\n"
+    },
+    {
+      "time": "6 Jun 2013 — 11:00pm",
+      "content": "I selected 2000 glyphs. Selected \"Execute Script\" from File menu. Pasted the script above and pressed ok but nothing happened. I dont know whether I have done right or not??\n\nThanks\n\n"
+    },
+    {
+      "time": "6 Jun 2013 — 11:55pm",
+      "content": "If You want make it through \"Execute Script..\", You should paste this:\n\n    import fontforge;\n    n=fontforge.activeFont();\n    prefix=fontforge.askString(\"Prefix..\",\"Prefix:\",'GLYPH');\n    numer=1;\n    for i in n.selection.byGlyphs:\n       i.glyphname=prefix+(\"%04d\" % numer);\n       numer+=1;\n\n"
+    },
+    {
+      "time": "7 Jun 2013 — 1:52am",
+      "content": "Wow...thanks so much gluk. It worked like a charm....you saved me lots and lots of time.\n\nIs there any site where I can get more info on FontForge scripts. Their site does not cover in detail.  \nThanks once again.\n\n"
+    },
+    {
+      "time": "7 Jun 2013 — 7:33am",
+      "content": "@shahidr100: you are welcome.\n\nInfo about Python scripts in Fontforge:  \n [fontforge.org/python.html](http://web.archive.org/web/20130822060208/http:/fontforge.org/python.html)\n\n"
+    },
+    {
+      "time": "7 Jun 2013 — 11:13am",
+      "content": "\\> what do you do with the glyph which has no parent glyph - so to speak. Does it really matter as long as you assign unicodes (from the private range.)\n\nIf they are private use area encoded, then they could have uniXXXX names.\n\n"
+    },
+    {
+      "time": "21 Jun 2013 — 4:46am",
+      "content": "Hi all, I just posted [this](http://web.archive.org/web/20130822060208/http:/typophile.com/node/104013) and was wondering if anyone could help with a fontforge shell script that renames the Glyph Name from the Unicode?\n\nmuch thanks\n\n"
+    },
+    {
+      "time": "21 Jun 2013 — 5:22am",
+      "content": "Here is a script that renames all glyphs to uniXXXX\n\n    for g in fnt.glyphs():\n      if g.unicode != -1:\n        g.glyphname = \"uni%04X\" % (g.unicode)\n\nHere is one that renames all afii to uni:\n\n    import string\n    for g in fnt.glyphs():\n      if string.find(g.glyphname,'afii') == 0:\n        g.glyphname = \"uni%04X\" % (g.unicode)\n\nI would personally not rename A to uni0041 but I rename all afii.\n\n"
+    },
+    {
+      "time": "25 Jun 2013 — 6:33am",
+      "content": "Michel\n\nThanks for your help, I ran the scripts, however they don't do the renaming required.\n\nLet me clarify: I wanted to rename the \"Glyph Name\" (that's not the same as afii is it?) which currently is \"uni0061\" (instead of \"a\") and so on, back to \"a\" from reading the glyph's unicode number.\n\nthanks  \nWei\n\n"
+    },
+    {
+      "time": "25 Jun 2013 — 7:21am",
+      "content": "Oh, then you use\n\n    g.glyphname=fontforge.nameFromUnicode(g.unicode)\n\non the glyphs `g` you want to rename; cf [http://fontforge.org/python.html](http://web.archive.org/web/20130822060208/http:/fontforge.org/python.html).\n\n"
+    },
+    {
+      "time": "25 Jun 2013 — 10:20am",
+      "content": "Of course that will not work for glyph names like `uni0061.sc` (or `uni0061_uni1DC8` or `u00611DC8`) that return `-1` as unicode value. You then need to parse the glyph name in order to rename it.\n\n"
+    },
+    {
+      "time": "25 Jun 2013 — 10:19pm",
+      "content": "> I ran the scripts\n\nWhat I wrote needs to be completed according to the way you use the code. I use such code in python scripts I call from bash shells. Above, Grzegorz wrote the script so as to call it from the GUI, using the \"Execute script\" window. Let me just add his lines to get a complete script to use that way:\n\n    ---\n    fnt=fontforge.activeFont()\n    for g in fnt.selection.byGlyphs:\n      if g.unicode != -1:\n         g.glyphname= fontforge.nameFromUnicode(g.unicode)\n    ---\n\nYou first select the glyphs to rename and then, in the \"Execute script\" window with that script in it you click ok. That script renames according to the unicode value, not to the hex digits that follow the uniXXXX name; it does not look at the name at all.\n\nNow here is a script that looks at the uniXXXX name. It will rename only glyphs with a name of the form uniXXXX and it assumes glyph names that start with uni are followed by a valid hex number, nothing else; it does not check that what follows uni is a valid hex number.\n\n    ---\n    import string\n    fnt=fontforge.activeFont()\n    for g in fnt.selection.byGlyphs:\n      name=g.glyphname\n      if string.find(name,'uni') == 0:\n        g.glyphname=fontforge.nameFromUnicode(int(name[3:],16))\n    ---\n\nAgain, you select the glyphs to rename, and click ok in the \"Execute script\" window.\n\nWhen you have many scripts, it is not handy to copy them all the time in the \"Execute script\" window. What you can do is save them in some file, say `unicode2name.py` and `uniname2name.py`. You then click \"File \\> Preferences \\> Script menu\" and give a name for the menu name, say \"Unicode to name\"; then you click on the three dots, go to the folder containing the script, put \"\\*.py\" in the the line just above \"Filter\" and click \"Filter\"; you will see the files .py appear. You select the one you want to associate to the given menu name.\n\nAfter, you can execute the script on the selected glyphs by clicking on \"File \\> Script Menu\" and the appropriate name associated to the script. You can also execute with some key combination (it is control alt digit on my mac).\n\nA script that checks that the hex values are valid and that handles alternates (.sc, .alt, .ss02 etc) and also glyph names separated by an underscore requires splitting the glyph name and handling piecewise. Here is one that checks that the hex is valid and that can handle names of the form uniXXXXX.sc.ss02 i.e. alternames of uniXX...X\n\n    ---\n    import string\n    ff=fontforge\n    fnt=ff.activeFont()\n    \n    def ishex(h):\n      return all(c in string.hexdigits for c in h)\n    \n    def gname(altname):\n      l = string.split(altname,'.')\n      name=l[0]\n      if string.find(name,'uni') == 0:\n        hexd=name[3:]\n        if ishex(hexd):\n          l[0]= ff.nameFromUnicode(int(hexd,16))\n          return '.'.join(l)\n      return altname\n     \n    for g in fnt.selection.byGlyphs:\n      g.glyphname=gname(g.glyphname)\n    ---\n\n"
+    },
+    {
+      "time": "26 Jun 2013 — 7:12am",
+      "content": "btw, Michael\n\n> [...] When you have many scripts, it is not handy to copy them all the time in the \"Execute script\" window [...]\n\nYou can define own scripts in 'Tools' menu. For example first script:\n\n    import fontforge;\n    \n    def rename_unival(arg1,font):\n      for g in font.selection.byGlyphs:\n        if g.unicode != -1:\n          g.glyphname= fontforge.nameFromUnicode(g.unicode);\n    \n    def EnableSel(arg1,font):\n       for g in font.selection.byGlyphs:\n          return True;\n       return False;\n    \n    fontforge.registerMenuItem(rename_unival,EnableSel,None,\n    \"Font\",None,\"Glyph_names\",\"Rename to unicode value\");\n\nSave them in change2uni.py in .Fontforge/python/ directory, and now You have new menu item 'Rename to unicode value' in a submenu 'Glyph\\_names' of the 'Tools' menu (of the Font window).\n\n"
+    },
+    {
+      "time": "26 Jun 2013 — 7:29am",
+      "content": "That's certainly better looking than in the File menu but the documentation says there is then no shortcut. Those in \"File \\> Script Menu\" have a shortcut. Unless you have lots of them, I don't see the advantage but, since I use scripts almost exclusively from the command line, maybe I am missing something expert GUI users appreciate.\n\n"
+    },
+    {
+      "time": "26 Jun 2013 — 7:54am",
+      "content": "Yo can define shortcut (for example key / ) in last line:\n\n    fontforge.registerMenuItem(rename_unival,EnableSel,None,\n    \"Font\",\"/\",\"Glyph_names\",\"Rename to unicode value\");\n\nI personally think, there are many advantages in 'Tools' menu.\n\n"
+    },
+    {
+      "time": "26 Jun 2013 — 7:50am",
+      "content": "> Yo can define shortcut\n\nOh, I had missed that; it is just the example in the doc that had none.\n\n"
+    },
+    {
+      "time": "4 Jul 2013 — 10:22am",
+      "content": "I would like to execute these scripts in the terminal as shell scripts... however something is wrong on my end (I'm using mf2pt1 to convert Metafonts into TrueType/Otf and FontForge is part of the process). When I try to run this script inside the FontForge gui as Execute Script:\n\n    fnt=fontforge.activeFont()\n    for g in fnt.selection.byGlyphs:\n      if g.unicode != -1:\n         g.glyphname= fontforge.nameFromUnicode(g.unicode)\n\nI get the following error:  \n`No built-in function or script-file Called from...`\n\nIf it helps this is the part of the perl script that executes FontForge:  \n``\n\n    # Use FontForge to autohint the result.\n    my $user_script = 0; # 1=script file was provided by the user; 0=created here\n    if (defined $ffscript) {\n        # The user provided his own script.\n        $user_script = 1;\n    }\n    else {\n        # Create a FontForge script file.\n        $ffscript = $filebase . \".pe\";\n        open (FFSCRIPT, \">$ffscript\") || die \"${progname}: $! ($ffscript)\\n\";\n        print FFSCRIPT <<'AUTOHINT';\n    Open($1);\n    SelectAll();\n    RemoveOverlap();\n    #AddExtrema();\n    #Simplify(0, 2);\n    CorrectDirection();\n    #Simplify(0, 2);\n    RoundToInt();\n    AutoHint();   \n    Generate($1);\n    Generate($1:r + \".otf\");\n    Generate($1:r + \".ttf\");\n    Quit(0);\n    AUTOHINT\n        ;\n        close FFSCRIPT;\n    }\n\nmuch appreciated.\n\n"
+    },
+    {
+      "time": "4 Jul 2013 — 7:11am",
+      "content": "Run this in a terminal window\n\n    fontforge -lang=ff -c 'Print($haspython)'\n\nand if you get `0` then your FontForge was not compiled to use Python scripts. You should get `1` for python scripts to work.\n\nAlso put your code between the tags \\<pre\\> and \\</pre\\> else it is unindented and unreadable.\n\n"
+    },
+    {
+      "time": "4 Jul 2013 — 8:08am",
+      "content": "Here is a native fontforge script that does the renaming\n\n    Open($1)\n    SelectWorthOutputting()\n    foreach\n      SetCharName(NameFromUnicode(GlyphInfo(\"Unicode\")))\n    endloop\n    Save($2)\n\nIf you call it `renam.pe` then the call\n\n    fontforge -lang=ff -script renam.pe infile.sfd outfile.sfd\n\nshould do about the same as the python script you appear to be having trouble with. In fact, I just tried that script and it even renamed `uni004F_uni0045.sc` to `O_E.sc`. I don't know much native fontforge scripting and I am somewhat surprised that it did that.\n\n"
+    },
+    {
+      "time": "4 Jul 2013 — 10:33am",
+      "content": "My shell version of FontForge does run Python (not sure about my [Beta](http://web.archive.org/web/20130822060208/http:/fontforge.github.io/en-US/downloads/mac/) Packaged version though).\n\nThe new script you wrote worked a treat though,  \nThanks Michel.\n\n"
+    },
+    {
+      "time": "4 Jul 2013 — 11:04am",
+      "content": "The [FontForge on Mac Ports](http://web.archive.org/web/20130822060208/http:/www.macports.org/ports.php?by=name&substr=fontforge) can be installed for python2.6 or python2.7. Of course, it is not as recent as the github version but it does what I need.\n\n"
+    }
+  ]
+}

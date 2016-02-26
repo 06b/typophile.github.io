@@ -1,0 +1,28 @@
+{
+  "id": "115819",
+  "title": "FontLab 5.2.1 Output: GSUB feature 'ÿÿÿÿ' causes overflow of offset to a subtable",
+  "forum": "Build",
+  "tags": [
+    "error",
+    "feature",
+    "fontlab",
+    "GPOS",
+    "Open Type",
+    "overflow",
+    "Build"
+  ],
+  "content": "Hi all,\n\nI'm designing a handwriten font wich contain many alternate sets of characters and I programmed a calt feature to randomize it. The feature contains a lot of lines mixing and conditioning the substition of each character. I thing the sintaxis is fine and the replacement works fine too, but when I increase the number of characters in each of the classes used in the code the output panel shows the following warning:\n\n[FATAL] GSUB feature 'ÿÿÿÿ' causes overflow of offset to a subtable (0x1140a)\n\n(I don't know why the name of the feature is swhown without the correct name).  \nI guess it means the code becomes too heavy but searching and reading a lot of posts of similar bugs I concluded that the responsible of this issue was the program. So I decided to try compiling the font in an older version (FL 5.0) and there aren't any problem and the compiled font works fine.  \nPlease tell me what can I do to improve my version of FL to avoid this issue. Any comment will be appreciated.\n\n",
+  "author": "manuelcorradine",
+  "time": "16 Apr 2014 — 12:41pm",
+  "uid": "21283",
+  "comments": [
+    {
+      "time": "17 Apr 2014 — 4:59am",
+      "content": "I think you can fix this by defining several lookup tables in the calt feature and specifying the useExtension keyword in each of the lookups.  \nSomething like this:\n\n`\nfeature calt { # Alternates\n  lookup calt_1 useExtension {\n\t  ...\n  } calt_1;\n  lookup calt_2 useExtension {\n\t  ...\n  } calt_2;\n  lookup calt_3 useExtension {\n\t  ...\n  } calt_3;\n} calt;\n`\n\nJohnych\n\n"
+    },
+    {
+      "time": "22 Apr 2014 — 5:54am",
+      "content": "Thank you johnych for your suggestion but I also tried it and doesn't work.\n\n"
+    }
+  ]
+}

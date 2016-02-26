@@ -1,0 +1,126 @@
+{
+  "id": "5890",
+  "title": "Postscript & truetype hinting in Fontlab",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm making a 4 font family (R,I,B & BI) for a customer.   \n   \nWhat I didn't realise in the beginning , due to vague job descriptions, is that the font needs to be TrueType hinted ( it's primarily is going to be used on screen).   \n   \nAnd, since that's something I know almost nothing about I'm asking this:   \n   \nCan I somehow \"postscript hint\" the font, open it in Fontlab, and then convert the settings to truetype hinting? With a good result?   \n   \nOr shoudl I just try to auto-tt-hint it?   \n   \nOr get someone to do the hinting for me?   \n   \n/peter\n\n",
+  "author": "peterbruhn",
+  "time": "3 Aug 2004 — 6:14am",
+  "uid": "799",
+  "comments": [
+    {
+      "time": "3 Aug 2004 — 8:22am",
+      "content": "What is the target rendering environment and at what size does the font need to be readable on screen?\n\n"
+    },
+    {
+      "time": "3 Aug 2004 — 8:59am",
+      "content": "Assuming we're talking about normal onscreen reading sizes:   \nThe only substitute for TT superhinting is embedded bitmaps, but that only works on Windows. But come to think of it, since MacOS now ignores hinting anyway, that's not so bad! If you need help embedding bitmaps (and you have a budget :-) please contact me.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "3 Aug 2004 — 8:59am",
+      "content": "mobile screen, 18-22p\n\n"
+    },
+    {
+      "time": "3 Aug 2004 — 9:03am",
+      "content": "Well, at those large sizes\\* you might get away with TT autohinting, although it depends on the design.   \n   \n\\* Suspiciously large for the typical mobile device... Sell them Mana-16, man. :-\\>   \n   \nhhp\n\n"
+    },
+    {
+      "time": "3 Aug 2004 — 9:07am",
+      "content": "\" If you need help embedding bitmaps (and you have a budget :-) please contact me.\"   \n   \n   \n   \nAll I know at this time is that it's for very high resloution mobile phone screens, and that they don't want a bitmap soltion.   \nHad it been a a solution I promise I would've conacted you, Hrant :-D\n\n"
+    },
+    {
+      "time": "3 Aug 2004 — 9:37am",
+      "content": "\"Suspiciously large for the typical mobile device\"   \n   \nYes, I thought so too, but that's what they said.\n\n"
+    },
+    {
+      "time": "3 Aug 2004 — 9:42am",
+      "content": "BTW, why not pixelfonts? Hinting-free.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "3 Aug 2004 — 9:45am",
+      "content": "I asked them but they didn't want it. It's going to be for both print & mobile screen. I still haven't got a \"don't -tell -the -secret-idea-paper \" to sign so i just know this.\n\n"
+    },
+    {
+      "time": "3 Aug 2004 — 9:49am",
+      "content": "If they want max design fidelity between device and print, you might mention grayscale rendering.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "3 Aug 2004 — 10:38am",
+      "content": "Mobile - doesn't really give a lot of information - Windows CE, Linux - FreeType rasterizer? If you're talking recent CE based devices then you should get ClearType, so some light hinting may suffice.   \n   \nCan you provide a bit more detail? b/w, grayscale, ClearType, ClearType clone, also target platforms, style of design (serif/sans) Also resolution of the device would be useful.   \n   \nCheers, Si\n\n"
+    },
+    {
+      "time": "3 Aug 2004 — 12:00pm",
+      "content": "I'm doing the work through the ad agency & they haven't informed about who their client is yet. It's very hush-hush for some reason. I'm hoping to learn more soon. But it's a very tight dealine.   \n   \nAll I know is that the end format should be TrueType unicode & that it's for the new upcoming mobile screens with higher resolution (that's what the guy said today). and also work in ordinary vector print.   \n  \nIt's a very plain condensed \"swiss\" sans that I'm making for them.\n\n"
+    },
+    {
+      "time": "3 Aug 2004 — 2:48pm",
+      "content": "It looks like you're working blind here.   \n   \nOne suggestion is if you've already hinted the PostScript fonts get hold of a Windows NT4 machine and use its Type1 installer to convert the font (including hints) to TrueType - this used to give the best (free) results. The converter pre-dates ClearType so won't give good results in this is the target.\n\n"
+    },
+    {
+      "time": "3 Aug 2004 — 2:59pm",
+      "content": "Peter,   \n   \nIn FontLab 4.6:   \n   \n1. Start with Type 1 autohinting, do Autoreplacing.   \n2. Refine your Type 1 hints manually.   \n3. Go to Font Info and do Auto Zones and Auto Stems.   \n4. Refine your stems settings.   \n5. Convert the outlines to TrueType, the contour direction to TrueType and hints to TT instructions.   \n6. Review the results in the TrueType Hinting window. Check the TrueType stems settings, esp. the thresholds where the stems turn from one pixel to two pixels etc.   \n7. Refine the hinting manually if needed.   \n   \nThis should give you the quickest results. Note that due to a bug in FontLab 4.6 for Mac, step 6 cannot be easily completed so you may want to use the Windows version.   \n   \nRefer to [http://www.myfonts.com/activity/hinting/](http://web.archive.org/web/20130915050931/http:/www.myfonts.com/activity/hinting/) for more links about TrueType and Type 1 hinting. Check Victor Gaultney's notes on hinting in FontLab.   \n   \nFinally, you may want to consult any of the people listed there who specialize in TT hinting.   \n   \nRegards,   \nAdam Twardoch   \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": "3 Aug 2004 — 3:12pm",
+      "content": "An educated guess is that you're probably looking at a Symbian based device, which seems to use Freetype...   \n  \n [http://www.freetype.org/pipermail/devel/2003-January/008759.html](http://web.archive.org/web/20130915050931/http:/www.freetype.org/pipermail/devel/2003-January/008759.html)   \n   \nWith Freetype the devs may have turned off support for hinting to avoid the documented Apple patent issues. You might want to ask Graham Asher, the guy who posted the linked message if he has any details about if Symbian uses hinting and or the ClearType like sub-pixel rendering supported by Freetype. This should give you some background to the rendering environment.   \n   \nCheers, Si   \n   \nI don't know much about Symbian, and it may be something else entirely. It's a shame the client can't reveal more of the technical details.\n\n"
+    },
+    {
+      "time": "12 Aug 2004 — 8:49am",
+      "content": "Hello guys, Thank you all for your help. I'm sorry for not replying before, I've been squeesing out some more vacation time.   \n   \nI'm waiting for more info on monday about the platform a.s.o.   \n   \nI hope/think I can manage this now... I'll also use Leslie Carbarga's book as a reference (since I only done postscript hinting in fog before.)   \n   \nAdam, a quick question:   \nShould I do a conversion to 2048 UPM's any time during the process or should I just keep the 1000 UPM?   \n   \n/peter\n\n"
+    },
+    {
+      "time": "12 Aug 2004 — 9:22am",
+      "content": "Peter,   \n   \nAre you building fonts that you will license directly to Microsoft so that they can include it in some of their applications?   \n   \nI guess not ![:-)](http://web.archive.org/web/20130915050931im_/http:/www.typophile.com/forums/clipart/happy.gif) In this case, leave the UPM = 1000 in all your fonts and never convert to 2048. It is not necessary!   \n   \nBest,   \nAdam\n\n"
+    },
+    {
+      "time": "12 Aug 2004 — 1:10pm",
+      "content": "\"...In this case, leave the UPM = 1000 in all your fonts and never convert to 2048. It is not necessary!\"   \nI thought so.   \nI'mgetting old - the things I learned years ago doesn't apply anymore ;-D   \n   \n/peter\n\n"
+    },
+    {
+      "time": "12 Aug 2004 — 4:05pm",
+      "content": "In TrueType and TrueType-based fonts, a UPM size that is power of two (1024, 2048, 4096 etc.) gives microscopic performance gain when rasterizing, as opposed to 1000 or 2000. This performance gain was minimally noticable on computers with a 8 MHz clock, but certainly not anymore with a 800 or 1600 MHz clock.   \n   \nThe TrueType specification \\*always\\* allowed the use of any UPM from the range 0-16384, including 2048, 1000 and any other. 2048 was Microsoft's choice in their own fonts, while 1000 was the UPM size for Type 1 fonts. Since currently most fonts (Type 1, OpenType PS, TrueType/OpenType TT) are produced from the same source, it doesn't make sense whatsoever to scale the glyphs by 204.8 % (from 1000 to 2048) because it introduces a lot of trouble and rounding errors.   \n   \nI guess it will still take a LOT of typing to get the \"2048 myth\" from people's heads.   \n   \nBest,   \nAdam\n\n"
+    },
+    {
+      "time": "12 Aug 2004 — 4:15pm",
+      "content": "I'll just add that the available evidence is that this performance gain was related to \"bit-shifting\" operations specific to the 68000 series of CPUs.   \n   \nMicrosoft suspects that it is still relevant, but have been unable to provide any evidence for this viewpoint that I have seen. However, they make it a requirement for fonts being bundled with Windows or Microsoft applications.   \n   \nIf one \\*was\\* going to scale the font up from 1000 units, and didn't have to worry about compatibility between 1000-unit and 2048-unit versions, I'd suggest scaling it by 2x and then setting the em-square to 2048.   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "17 Aug 2004 — 5:43am",
+      "content": "Simon wrote:\"An educated guess is that you're probably looking at a Symbian based device, which seems to use Freetype... \"   \n   \nsofar I've found out that it's for a symbian device & uses 8bit antialiasing.   \n   \nI hope it's freetype2 that's the renderer , since that would make it a bit easier.\n\n"
+    },
+    {
+      "time": "19 Aug 2004 — 7:03am",
+      "content": "hmm freetype2 doesn't render as well as I had hoped.   \nOpentype - CFF didn't seem to work at all. I had hoped that it would since I could've used the PS hinting.   \n   \nCan anyone recommend someone who does TT hinting for a living? And who's the least expensive ;)\n\n"
+    },
+    {
+      "time": "19 Aug 2004 — 9:34am",
+      "content": "Anybody who does TT hinting _for a living_ will probably not be inexpensive! :-) But I've done   \nsome of it (most notably for IKEA), and maybe we can agree on a fair price. Just gimme a buzz!   \nhrant\\_thatsymbol\\_inverselogic\\_dot\\_corn   \n   \nhhp\n\n"
+    },
+    {
+      "time": "20 Aug 2004 — 12:25pm",
+      "content": "\\>Can anyone recommend someone who does TT hinting for a living?   \n   \nI've worked with Vinnie Connare (now with Dalton Maag), Laurence Penney, Diane Collier, Ross Mills (Tiro), lots of people at Agfa Monotype, Ascender, Font Bureau (sorry if I've missed anyone) also might want to contact Bitstream, ParaType, Luc (de)Groot. There are others I'm sure that I'm forgetting.   \n   \nHowever I think everyone seems to be pretty busy right now.   \n   \nSi\n\n"
+    },
+    {
+      "time": "1 Sep 2004 — 8:18am",
+      "content": "Thank you again for all the help.   \n   \nMaybe this is helpful for other designer making fonts   \non a Symbian devices using Freetype 2:   \n   \nDon't hint at all!   \n   \nThe font looks \"better\"without hinting.   \nFreetype uses it's own autohinting and antialias, it's not good, and uses a lot of grayscale. but compared to properly hinted letters, it actually looks better. At least if you don't enlarge it.\n\n"
+    },
+    {
+      "time": "7 Sep 2004 — 1:03pm",
+      "content": "Peter, I'm curious why you say OT/CFF with FreeType doesn't work for you. Is that specific to the FT version on the Symbian system, or in general? My OT/CFF font with PS hints renders fine with FreeType, especially at sizes larger than 18 points (hinting active, autohinting off).\n\n"
+    },
+    {
+      "time": "7 Sep 2004 — 1:12pm",
+      "content": "Hello Sergej, this was plain PC TT fonts, not OTF/CFF, since that was the customer wanted.   \n   \nMaybe PS hints works better.\n\n"
+    },
+    {
+      "time": "8 Sep 2004 — 12:33am",
+      "content": "How should I interpret your earlier statement, then?\n\n"
+    },
+    {
+      "time": "8 Sep 2004 — 12:50am",
+      "content": "The developers are using an emulator for their software, which I'm not allowed to use, since it's top secret.   \nTherefor I've been sending them the fonts to test themself and give me feedback, in some cases I've gotten screendumps.   \n   \nJust to test in the beginning I did OT/CFF (and OTF/TT) and sent them. But they where unable to install them. why this is I don't know.   \nIt could be that I didn't generate them properly (but i'm sure I did, plus there's no scripting), or it could be that the had a new employee that was unexperienced in installing fonts especially OTF. I have no idea. I just got the message that it didn't work. I must presume they know what they are doing.   \n   \nI thought it was a bit weird though because Freetype2 should support OT/CFF.\n\n"
+    }
+  ]
+}

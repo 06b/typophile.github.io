@@ -1,0 +1,50 @@
+{
+  "id": "114988",
+  "title": "Checking ascender height",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Is there a way to find out ascender height, either as a percentage, or in points for a given point size?\n\n",
+  "author": "inktrap",
+  "time": "14 Mar 2014 — 9:10pm",
+  "uid": "176144",
+  "comments": [
+    {
+      "time": "15 Mar 2014 — 4:44am",
+      "content": "Lots of ways, and different ways for different font formats, for different programming languages/environments/font editors, and different levels of expertise.\n\nOne such way would be to open an associated .afm file with a plain text editor, find the string \"Ascender\", and divide the number right after it by 10 to get a value as a percentage. Will of course only work for Type 1 fonts, but on the plus side, it's so easy anyone can do it.\n\n"
+    },
+    {
+      "time": "15 Mar 2014 — 11:13am",
+      "content": "How about OTF and TTF?\n\n"
+    },
+    {
+      "time": "15 Mar 2014 — 11:54am",
+      "content": "Again, It Depends. I have no problem reading raw data straight out of the TTF/OTF `hhea` table, where you can find various measurements, but then again I know where to look for them.\n\nWhat is your ultimate purpose? Your platform? Programming language or other way or means you intend to use?\n\n"
+    },
+    {
+      "time": "15 Mar 2014 — 7:53pm",
+      "content": "Also: are we talking about the numeric value in the font file, or the actual height of the ascenders? Noting that (unless it's an RdR revival) you can't be totally sure of the latter.\n\nhhp\n\n"
+    },
+    {
+      "time": "16 Mar 2014 — 7:20am",
+      "content": "If you have it opened in a font drawing program, you can just read the coordinates of the nodes. Otherwise, just blow it up on screen, and measure.\n\n"
+    },
+    {
+      "time": "16 Mar 2014 — 10:25am",
+      "content": "The only thing is that the typical slanted head-serifs can make it a bit fuzzy.\n\nhhp\n\n"
+    },
+    {
+      "time": "18 Mar 2014 — 11:53am",
+      "content": "What I'm trying to do is align text to baseline grid in InDesign, but also have the ascenders touch the top of the text frame.\n\n"
+    },
+    {
+      "time": "18 Mar 2014 — 11:54am",
+      "content": "I think you can only do this reliably by going into the font. And if the ascenders have slanted head-serifs, you're going to have to decide where their _visual_ top is.\n\nhhp\n\n"
+    },
+    {
+      "time": "18 Mar 2014 — 4:23pm",
+      "content": "inktrap: InDesign lets you choose the top offset for a text frame. See \"First baseline offset options\" on [the online Help](http://web.archive.org/web/20140803214353/http:/help.adobe.com/en_US/indesign/cs/using/WSa285fff53dea4f8617383751001ea8cb3f-6fb2a.html).\n\nFor this to work, you cannot use a document-wide baseline grid (unless you \"manually\" set its starting position). Since the position of your first line is going to depend on the ascenders in the first line _of your current text frame_, they may differ from frame to frame; and hence, the position of the baseline grid, which starts at the bottom of that same first line.\n\nStore these settings in an Object style, so you can apply it to every frame where you need it.\n\n"
+    }
+  ]
+}

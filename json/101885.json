@@ -1,0 +1,55 @@
+{
+  "id": "101885",
+  "title": "Unicode console font",
+  "forum": "General Discussions",
+  "tags": [
+    ".notdef",
+    "General Discussions",
+    "monospaced",
+    "Perl",
+    "Unicode",
+    "Unifont"
+  ],
+  "content": "I put the pre-alpha (but very usable for low enough resolutions) version of monospaced scalable variant of Unifont font to [http://ilyaz.org/software/fonts](http://web.archive.org/web/20140702064638/http:/ilyaz.org/software/fonts).\n\nIt is constructed by a scanner/stroke-designer backend running over the 16×8, 16×16 bitmaps of Unifont. The scanner/designer are written in Perl; the scanner is ready, the designer 70% ready. (Of course, it turned out to be a much more complicated task than I expected at the start — 6 months ago!)  \nThe frontend converting strokes to a font is EXTREMELY primitive (cooked in a day, and hitting new and new bugs in FontForge — sigh…). So I'm afraid any critique at this moment would be very premature…  \nI'm hitting my head again and again with `.notdef`; it does not work in Windows console if I include U+0000 and U+0001 glyphs. So currently I just omit these glyphs — is there any alternative? The recommendations in [http://www.microsoft.com/typography/otspec/recom.htm](http://web.archive.org/web/20140702064638/http:/www.microsoft.com/typography/otspec/recom.htm) are not very helpful: how can one include `.null` into a monospaced font?  \nAny help with this would be greatly appreciated.\n\n",
+  "author": "ilyaz",
+  "time": "31 Mar 2013 — 11:39am",
+  "uid": "210314",
+  "comments": [
+    {
+      "time": "31 Mar 2013 — 5:28pm",
+      "content": "I think .null and .notdef are perfectly valid in a monospaced font. Apparently Consolas includes them...\n\n"
+    },
+    {
+      "time": "31 Mar 2013 — 6:08pm",
+      "content": "Maybe I just cannot find the magic incantation in FontForge. If I use the sequence `.notdef/0002/0003/0004/0005/`etc, everything works OK. Inserting glyphs named `0000/0001` after .notdef makes the glyph `0000` used instead of `.notdef`.\n\nConsolas has\n\n> StartChar: .notdef  \n> Encoding: 65536 -1 0  \n> Width: 1126\n> \n> StartChar: glyph1  \n> Encoding: 0 -1 1  \n> AltUni2: 000000.ffffffff.0  \n> Width: 1126\n> \n> StartChar: uni000D  \n> Encoding: 13 13 2  \n> Width: 0\n> \n> StartChar: space  \n> Encoding: 32 32 3  \n> AltUni2: 0000a0.ffffffff.0  \n> Width: 1126\n\nwhich, on the surface, is contrary to M$ recommendations: CR should have non-0 width, second glyph should be named .null and it should have 0-width. Moreover, M$ says that a console font should be monospaced — but above CR has width 0….\n\n"
+    },
+    {
+      "time": "1 Apr 2013 — 10:38am",
+      "content": "In a monospaced font, \\*all\\* glyphs should have the same advance width, and this overrides other recommendations such as that which says NULL should be zero-width. If a monospaced font contains glyphs that do not share the common width, it can cause major problems, because software tends to cache the width value for monospaced fonts.\n\nNote also that the proper name of this glyph is NULL, not .null. The only glyph in a font whose name begins with something other than A-z is .notdef.\n\n"
+    },
+    {
+      "time": "1 Apr 2013 — 1:13pm",
+      "content": "Thanks, John! The question remaining is: what you say, is it just “common knowledge”, or is it documented somewhere? What I was quoting was the cited MS's document; one does not expect it to be even close to being perfect, but it would be nice if one knew something more authoritative, and still kind of comprehensive.\n\nI do not say that your word is less authoritative than the MS's document; it it just that what you say is one (or two) tidbits at a time ;-).\n\nPlease bear with me, this is my first foray into non-bitmap world…. Of course, in what I released every char is of the same width — I just was not sure which card bits which when different recommendations are concerned. ― And note that in Consola 000D has width 0, contrary to “consoleness” — which for me implies being monospaced; and the recommendation above says that 000D should be non-0 width….\n\n"
+    },
+    {
+      "time": "1 Apr 2013 — 4:15pm",
+      "content": "On my mac (Office 2011, Consolas version 5.22), all glyphs in Consolas have width 1126 except the following (obtained from a ttx output with `grep '<mtx' Consolas.ttx | grep -v 1126` and then some clean up):\n\n    \"afii299\" width=\"0\" lsb=\"-36\"\n        \"afii300\" width=\"0\" lsb=\"-431\"\n        \"afii301\" width=\"0\" lsb=\"-219\"\n        \"afii61664\" width=\"0\" lsb=\"-36\"\n        \"glyph00002\" width=\"0\" lsb=\"0\"\n        \"uniFEFF\" width=\"0\" lsb=\"0\"\n\nAs for NULL, it is called `uni0000` according to ttx but Fontforge and DTL OT Master give me some different information... Hmm.\n\nAnd as for proper documentation, if you find any, please tell us.\n\nPS. [Raph Levien](http://web.archive.org/web/20140702064638/http:/levien.com/)'s font [Inconsolata](http://web.archive.org/web/20140702064638/http:/www.levien.com/type/myfonts/inconsolata.html) defines no NULL character.\n\n"
+    },
+    {
+      "time": "1 Apr 2013 — 5:15pm",
+      "content": "With regard to glyph names, Consolas, like the other CT fonts, has a format 3 post table, so does not contain any glyph names. The names you see in TTX or other tools are being generated by that software.\n\n"
+    },
+    {
+      "time": "2 Apr 2013 — 1:18am",
+      "content": "``\n\n    \"afii299\" width=\"0\" lsb=\"-36\"\n        \"afii300\" width=\"0\" lsb=\"-431\"\n        \"afii301\" width=\"0\" lsb=\"-219\"\n        \"afii61664\" width=\"0\" lsb=\"-36\"\n        \"glyph00002\" width=\"0\" lsb=\"0\"\n        \"uniFEFF\" width=\"0\" lsb=\"0\"\n\nJust to have reference nearby (from [http://partners.adobe.com/public/developer/en/opentype/aglfn.txt](http://web.archive.org/web/20140702064638/http:/partners.adobe.com/public/developer/en/opentype/aglfn.txt)):  \n``\n\n    200E;afii299;LEFT-TO-RIGHT MARK\n    200F;afii300;RIGHT-TO-LEFT MARK\n    200D;afii301;ZERO WIDTH JOINER\n    200C;afii61664;ZERO WIDTH NON-JOINER\n    \n    FEFF\tZERO WIDTH NO-BREAK SPACE ; from NamesList.txt\n\nDo not know what glyph00002 is used for….\n\n**Update:** doing `grep -B 5 -A 5 \"Width: 0\" Consolas.sfd `, I see  \n``\n\n    StartChar: uni000D\n    Encoding: 13 13 2\n    Width: 0\n    GlyphClass: 2\n    Flags: W\n    LayerCount: 2\n    EndChar\n\nwhich, by exclusion, must be what you see as glyph00002….\n\n"
+    },
+    {
+      "time": "2 Apr 2013 — 4:23am",
+      "content": "Concerning `glyph00002`, the sfd file produced from Consolas on my mac gives this:\n\n> StartChar: glyph1  \n> Encoding: 1 -1 1  \n> AltUni2: 000000.ffffffff.0  \n> Width: 1126  \n> GlyphClass: 2  \n> Flags: W  \n> LayerCount: 2  \n> EndChar\n> \n> StartChar: glyph2  \n> Encoding: 2 -1 2  \n> Width: 0  \n> GlyphClass: 2  \n> Flags: W  \n> LayerCount: 2  \n> EndChar\n> \n> StartChar: uni0009  \n> Encoding: 3 9 3  \n> AltUni2: 0000a0.ffffffff.0 000020.ffffffff.0 00000d.ffffffff.0  \n> Width: 1126  \n> GlyphClass: 2  \n> Flags: W  \n> LayerCount: 2  \n> EndChar\n\nand `glyph00002` is simply `glyph2`.\n\nThe `uni0000` produced by ttx must come from `AltUni2: 000000.ffffffff.0`\n\nAnd concerning `uniFEFF ZERO WIDTH NO-BREAK SPACE` it has width 1233 in DejaVuSansMono.ttf version 2.33.\n\n"
+    },
+    {
+      "time": "12 Jun 2014 — 9:35pm",
+      "content": "Update to my initial post: [http://ilyaz.org/fonts](http://web.archive.org/web/20140702064638/http:/ilyaz.org/fonts) — now it contains the **really** working versions of the fonts (it was not so a year ago!).  \n • 3 flavors of the de-rasterized Unifont (latest, so it contains the full BMP of Unicode 6.3); including:  \n • DejaVu with missing glyphs overlaid from Unifont (glyphs massaged to match DejaVu better);  \n • Versions which work in Windows’ console, and versions for more flexible environments;  \n • Now useful at, I would say, pixel sizes 8–40.\n\nAdditionally, I put there a fixed version of George Douros’ Symbola v7.12. A PREP table is added, so that it shows now nicely even in GDI applications on Windows.\n\nEnjoy,  \nIlya\n\n"
+    }
+  ]
+}

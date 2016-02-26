@@ -1,0 +1,82 @@
+{
+  "id": "14961",
+  "title": "Cleartype hinting questions",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Has anybody here hinted for cleartype?\n\nWould you be willing to describe how it is the same as & how it differs from hinting for true type? Also, does anybody know if it is basically the same hinting data? So for example - if it is the same data, then theoretically you cannot have a font hinted for both true type & clear type at the same time without making a compromise in each. Correct? ( Or making two fonts - hinted one way & another one hinted the other way).\n\nAlso any hints about a baseline setup in terms of equipment & software would be good to know about too. I was thinking of buying a LCD screen to replace my CRT but I want to make sure it will be useful for checking my hinting. I think you need a minimum ppi of 120+ or so. Correct? Since the ppi shifts on monitors now alot what is a good strategy if you are not going to buy 3 reference monitors? ( check your enighbor's?)\n\nIf I am not mistaken all the talk on typophile about cleartype so far has been in reaction to it rather than talking about how to do it. Did I miss somehing?\n\nThanks!\n\n",
+  "author": "<a href=\"/web/20100901110347/http://typophile.com/user/2942\" title=\"View user profile.\">Eben Sorkin</a>",
+  "time": "<br>",
+  "uid": "2942",
+  "comments": [
+    {
+      "time": "",
+      "content": "I've never hinted cleartype, but, I've been close to those who have...\n\n\" if it is the same data, then theoretically you cannot have a font hinted for both true type & clear type at the same time without making a compromise [to one or the other].\"\n\nI think that's what you mean....?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes. That's what I meant. True type hinting is geared to b/w bitmaps and is somewhat heavy handed at times where as ClearType hinting would be softer - so the hinting (if it is the same data source) could probably not do double duty.\n\nDo you think you could talk to your fellow hinters a bit & see what they say?\n\nI have been sent a little info too which I will post here soon.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I have and if you are manually hinting with Microsoft's Visual TrueType there are 2 things you can do.\n\nIt helps to have the ClearType version of VTT and know how to do low level TrueType.\n\nYou need to check the rasterizer with code to see if 'you are in ClearType'. This is a standard function in the 'fpgm' that VTT has and what you need to do is do the same thing as is done for Greyscale checking in VTT's function 84.\n\nThen in the glyph's instruction that you would like to alter you would have to use low level TrueType to call function 77. That is the function used in VTT for binary or grey scale delta hints.\n\nBy adding to function 84 and copying the same method that VTT does for Grey and using the GETINFO instruction and the value 8192 instead of 4096 for grey, you can hint for grey, binary or CT.\n\nAlso CT ignors Delta hints. You can force it to not ignores them by sticking this in the 'prep'\n\n/\\* use Deltas in ClearType \\*/  \n#PUSHOFF  \n#PUSH, 4, 3  \nINSTCTRL[]  \n#PUSHON\n\nthis is a bit dangerous because most Deltas are for Grey or binary.\n\nvincent\n\n"
+    },
+    {
+      "time": "",
+      "content": "Wow! Vince, thats so awesome. Thank you!\n\n"
+    },
+    {
+      "time": "",
+      "content": "One thing to watch is spacing. You get the best results if you design and lightly hint a font with ClearType in mind, taking advantage of sub-pixel spacing as well as rendering - the ClearType Collection approach. But if you then decide that b/w rendering is important you can add contextual non-CT hints to improve the b/w rendering, but in the cases I've seen the spacing suffers under b/w even if the bitmaps are nice.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks! Simon!\n\nBTW - any equipment related hints?\n\n- or - process/design/testing hints?\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>BTW - any equipment related hints?\n\nwhat set up do you have now? A cheapy laptop might be a good basic investment if you don't have one already. To be honest I wouldn't spend anything until you're up to speed with VTT - if you can't get there perhaps CT hinting is not a good hobby.\n\nSi\n\n"
+    },
+    {
+      "time": "",
+      "content": "Also as Si said hinting for CT is 'light' hinting. The hints in the Y direction are used and in the X direction they are not for the most part. Many people hinting for CT are hinting in Y and not doing much in X.\n\nAlso it's not worth spending too much time messing around with tweaking for a specific CT display (such as the normal CT mode in VTT). You don't know what kind of CT display the font will be used on. Or has the user tweaked their CT settings? Is the display horizontal or vertical? Is it a tablet PC ?\n\nGenerally all I've done is address some problems that CT creates such as diagonals have a tendancy to become heavy (as apposed to in Grey they are light). Some stems like the Capital H, I , L maybe light or heavy because they have a sub pixel that is darker than others. In these cases I use function 77 in the glyphs local instructions to move the outline. Function 77 acts like a delta hint and moves a point through a range of sizes. it checks a flag that is set by function 84 to see what mode the rasterizer is in. If we are in CT then the exception is processed.\n\nvincent\n\n"
+    },
+    {
+      "time": "",
+      "content": "An example of a hinted font, showing binary, grey and Cleartype then the final image is with the UC V using the above conditional change to move the points to fix the problem of the 'V' being too light and appearing short.\n\n[http://www.connare.com/cleartype\\_2.jpg](http://web.archive.org/web/20100901110347/http:/www.connare.com/cleartype_2.jpg \"http://www.connare.com/cleartype\\_2.jpg\")\n\nThis is the VTT version of the UC 'V' with the original V on the left and the changed 'V' on the right.\n\n[http://www.connare.com/cleartype\\_1.jpg](http://web.archive.org/web/20100901110347/http:/www.connare.com/cleartype_1.jpg \"http://www.connare.com/cleartype\\_1.jpg\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"True type hinting is geared to b/w bitmaps and is somewhat heavy handed\"\n\nWell, the hints are the same in TT and CT, as you know 'tis one hinting language...\n\nThe two rasterizers use incongruent theories of pixel recognition and don't interpret the hints the same. I find the whole CT activities list to be wanting from the failure to recognize an important typographic principle of low resolution being: that you can't hint parts of a font (safely) any more than you can stop part of a train, (safely). But they will try.\n\nAnd, \"don't worry\" about spacing 'cause there is nothing you can do about it, MS's \"quadrupled\" the resolution and \"solved\" that problem, meaning you can't even control it if you want to...;) But VC's comments are, though masking some bias, accurate. E.G. when he says the diagonals get heavy, he's right!\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>By adding to function 84 and copying the same method that VTT does for Grey and using the GETINFO instruction and the value 8192 instead of 4096 for grey, you can hint for grey, binary or CT.\n\nI am hinting Devanagari font using VTT and have 1 problem with cleartype only deltas (function 77). As I understand it is enough to change the definition of function 84 to make function 77 work for cleartype as for greyscale. I tried to do this but my knowledge is not enought - the change of value to 8192 is not enough, other selectors also must be changed.\n\nBy defoult the definition of 84 is such -\n\nFDEF[],84  \n#BEGIN  \n#PUSHOFF  \n#PUSH,2,0  \nWS[] /\\* s[2] = grey scaling: off (by default) \\*/  \n#PUSH,35,1 /\\* 35 = MS Rasterizer version 1.7 \\*/  \nGETINFO[] /\\* 1 = tell GETINFO to give us the rasterizer version \\*/  \nLTEQ[] /\\* 35 \\<= version ? \\*/  \n#PUSH,64,1 /\\* 64 = highest rasterizer version assigned to MS \\*/  \nGETINFO[] /\\* 1 = tell GETINFO to give us the rasterizer version \\*/  \nGTEQ[] /\\* 64 \\>= version ? \\*/  \nAND[] /\\* 35 \\<= version && version \\<= 64 ? \\*/  \nIF[] /\\* if so, we're running MS rasterizer version 1.7 or higher \\*/  \n #PUSH,4096,32 /\\* 4096 = flag returned by GETINFO if grey scaling bit is on \\*/  \n GETINFO[] /\\* 32 = tell GETINFO to give us the grey scaling bit \\*/  \n EQ[] /\\* 4096 == flag ? \\*/  \n IF[] /\\* if so, we're running under grey scaling \\*/  \n #PUSH,2,1  \n WS[] /\\* s[2] = grey scaling: on (by now) \\*/  \n EIF[]  \nEIF[]  \n#PUSHON  \n#END  \nENDF[]\n\nIn glyph program function 77 is written in this way - CALL[], 33, 64, 11, 2, 77 but visually do not take any effect.\n\nMaybe somebody can help me - what must be changed in this definition to make function 77 work for cleartype?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Mike?\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "It is still my headache - how to make cleartype only deltas.\n\n"
+    },
+    {
+      "time": "",
+      "content": "hi Mihail, can you tell me what the Version is of the VTT that you are using. Di you get the VTT software with the files that accompany it? In making your font, did you begin by importing the tables including the Font Program?\n\nany details will help, and I will follow up with you\n\nthanks\n\nmike\n\n"
+    },
+    {
+      "time": "",
+      "content": "Michael, thanks for reply and attention,\n\nI have received VTT 4.4 from MS Typography recently with templates files. I started working with \"Prepare font\" option - so all templates were imported in the font including the Font Program. I only entered my cvt's with cvt-deltas, so the font program and prep programs are not manually changed (I tried but not cuccessfully to modify definition of function 84). When I use greyscale-only deltas (right-click and drag) all works properly (CALL to function 76), but cleartype-only deltas are displayed only in VTT Talk and Glyph program (CALL to function 77) without any visual result - I think they will work when function 84 will ask and report selector of cleartype rasterizer (now it is asking about greyscale and report 32 selector).\n\nSo I simply don't know how to change this definition of 84 function - it must ask about rasterizer and report rasterizer's selector when CALL to function 77 is working. Or maybe I don't understand this question correctly.\n\n"
+    },
+    {
+      "time": "",
+      "content": "It seems that nobody hints for cleartype.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>It seems that nobody hints for cleartype.\n\nWell, you can only really hint in the y dimension.\n\nI don't understand what Simon is saying here:\n\n\\>One thing to watch is spacing.\n\nVTT, as generally available, does not allow the right side bearing, that which defines the set width of the glyph, to be hinted.\n\n\\>You get the best results if you design and lightly hint a font with ClearType in mind...\n\nCan you clarify this?\n\n\\>... taking advantage of sub-pixel spacing as well as rendering - the ClearType Collection approach.\n\nHow exactly?\n\nCheers!\n\n"
+    }
+  ]
+}

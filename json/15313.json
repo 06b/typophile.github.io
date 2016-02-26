@@ -1,0 +1,62 @@
+{
+  "id": "15313",
+  "title": "long s substitution??",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi!\n\nIm working on a distressed font based on  \ncharacters from an ancient tombstone for my diploma.\n\nDoes anyone have tips on how to implement  \nconextually glyph substitution for long s?\n\nId like to have it done automatically but there are  \njust too many exceptions to the rules and im quite  \nnew to opentype programming, so maybe i’d just  \nstick with including it as a special character which  \ncan be accessed via glyph pallette?\n\nwhat do you think?\n\nthanks a lot, this forum has already been extremely useful!  \nhannes.\n\n",
+  "author": "<a href=\"/web/20091212144408/http://typophile.com/user/7497\" title=\"View user profile.\">polenimschaufenster</a>",
+  "time": "<br>",
+  "uid": "7497",
+  "comments": [
+    {
+      "time": " 23.Sep.2005 12.26pm",
+      "content": "I think [Adam Twardoch](http://web.archive.org/web/20091212144408/http:/typophile.com/wiki/Adam%252BTwardoch) answers the problems to this quite well [in an old thread on a similar topic](http://web.archive.org/web/20091212144408/http:/typophile.com/node/5663#comment-40329).\n\n"
+    },
+    {
+      "time": " 23.Sep.2005 1.36pm",
+      "content": "Should be a pretty simple OT feature:  \nMake “tall s” the s in your font. (Mapped to lowercase s.)  \nCreate a new glyph using the “regular s” and call it “s.alt”.  \nCreate a class with space, all punctuation, and “s”.  \nWhenever “s” is followed by your class, use “s.alt”.\n\n"
+    },
+    {
+      "time": " 23.Sep.2005 4.37pm",
+      "content": "As explained by Adam (and as we found in our own research), it isn’t that simple. The correct usage of the long s varies by location and time. Chester’s code example would work well enough for latter-day English usage of the long s, though.\n\nT\n\n"
+    },
+    {
+      "time": " 24.Sep.2005 2.03am",
+      "content": "Chester’s advice is good.  \nOr do it the other way round —\n\nGlyph names: “s” remains the round/end s and “longs” is the long s.  \nDefine a class containing all lowercase (ligatures included), say @LC\\_for\\_longs.\n\nMake a “hist” feature with a contextual substitution:  \nsub s’ @LC\\_for\\_longs by longs;\n\nThis means: Long s replaces normal s only if another lowercase follows. Not so if any other letter (uppercase, punctuation & spaces included) follows. Same result as with Chester’s sample, but it’s easier to collect lowercase than all possible exceptions (like quotation marks &c).  \nMoreover, you can also use the font without long s. E.g. if the app doesn’t support any features.\n\nWorks well for English which has very simple long s rules: always except at the end of a word.  \nFor German, you create a paragraph style with this feature switched on, and create a character style with this feature switched off. Then go through your text manually to apply the character style to normal s’s that should be round/end s ...\n\nKarsten\n\n"
+    },
+    {
+      "time": " 25.Sep.2005 1.37am",
+      "content": "thanks for all the posts,  \nI think I’ll stick with Karstens method,  \nit seems to work pretty well!\n\nthanks again!  \nhannes\n\n"
+    },
+    {
+      "time": " 25.Sep.2005 7.56am",
+      "content": "Indeed, my feature is very simple, and is meant to be used for English. Karsten is your man for OpenType coding; he takes a great deal of care in making his types so that they can be beautifully set in many languages and idioms. Hi Litteratra typeface is bursting with alternates, ligatures, contextual alternates and contextual positioning options. (He uses Stylistic Sets very well.)\n\n"
+    },
+    {
+      "time": " 26.Sep.2005 1.07am",
+      "content": "well, I still seem to have some problems.\n\nIn fontlab the hist feature works well,  \nin IndesignCS2 it doesnt seem to work at all,  \ncontextual substitution and ligatures work well.\n\nI only have the three features\n\nliga  \ncalt  \nhist\n\nand somehow the hist feature gets lost  \nin indesign?\n\ngreetigs and thanks,  \nhannes.\n\n"
+    },
+    {
+      "time": " 26.Sep.2005 1.49am",
+      "content": "InDesign doesn’t support the hist feature by any type of automatic substitution. See page 14 of Adobe’s [OT User’s Guide](http://web.archive.org/web/20091212144408/http:/store.adobe.com/type/browser/pdfs/OTGuide.pdf) for a list of currently supported features.\n\n"
+    },
+    {
+      "time": " 26.Sep.2005 2.42am",
+      "content": "I see, so which feature is most useful to implement long\\_s substitution?\n\nshould I just go with contextual alternates?\n\nthanks,  \nhannes.\n\n"
+    },
+    {
+      "time": " 26.Sep.2005 6.36am",
+      "content": "You could do contextual alternates, but that is ON by default, so you have to want the feature to be ON unless you specifically turn it OFF. What you should do (in any event) is duplicate that hist feature and have the second version as “ss01”: you’ll be able to turn the feature ON using InDesign, which supports Stylistic Sets. If you also want to use the feature in Illustrator, you might consider making it a “titl”: Titling Alternates.\n\nIt’s annoying that Adobe released a generation of products together as Creative Suite 2, but that they all have different type handling. I hope that they get their act together in the next version and all play nice and adopt the InDesign model.\n\nFYI, I have posted screengrabs of CS2’s OpenType “interfaces” here:  \n [http://vllg.com/files/cs2/](http://web.archive.org/web/20091212144408/http:/vllg.com/files/cs2/ \"http://vllg.com/files/cs2/\")\n\n"
+    },
+    {
+      "time": " 26.Sep.2005 9.56am",
+      "content": "Sorry yes, I forgot to mention that ID doesn’t support hist ...  \nAs Chester said, mirroring unsupported features (ornm is  \nanother one) in an ssXX helps.\n\nIf it shall work in old ID (non-CS) 2 or other apps too,  \nyou need to use one of the standard features indeed.  \nID CS2 is the only application so far which supports ssXX  \nfeatures.  \nWhich one, depends —  \nmaybe not liga as you type might have ligatures,  \nmaybe not dlig as your type might have abbreviations,  \n&c  \n— titling is really a good choice!\n\nKarsten\n\n"
+    },
+    {
+      "time": " 28.Sep.2005 4.51am",
+      "content": "thanks!\n\nTitling seems to be the right descision, that way I can also avoid any problems between the contextual subs and the long s sub.\n\nworks well!\n\nthanks for your help again!\n\n"
+    }
+  ]
+}

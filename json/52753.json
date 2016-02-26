@@ -1,0 +1,38 @@
+{
+  "id": "52753",
+  "title": "Web Fonts - Is this legal?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Hello :) I'm a bit new to the web development world, but I had two questions regarding Web Fonts that I ask with the desire to follow the rules...in general, if I want to use a unique font on my website, does your average font license allow me to install it on my web server if:\n\na) I'm the only one that is making dynamic design changes (like I'm adding new forum topics and I want those forum names to be displayed in the special font for my site visitors), or\n\nb) Users can make their own personal pages on my site, and the names of their usernames are displayed in the special font (so in this case another person is playing a role in the customization of my website but they can't choose the font, only the text itself of their username).\n\nPlease share your wisdom...thanks so much!!! PS -- I realize that certain fonts have different licenses, just trying to understand in general...thanks!\n\n",
+  "author": "FrankBoutant1",
+  "time": "17 Dec 2008 — 9:57am",
+  "uid": "40819",
+  "comments": [
+    {
+      "time": "17 Dec 2008 — 10:14am",
+      "content": "You’ll get a lot more out of this thread is you copy/paste the web/embedded use sections of the licenses of the relevant fonts.\n\n"
+    },
+    {
+      "time": "17 Dec 2008 — 10:18am",
+      "content": "I'm assuming that you're not talking about the new @font-face command, since that's not supported but by like 2 browsers. That being the case, you're probably using something like sIFR? (My link goes to jQuery sIFR, much better than the original...) If that's the case, then you are technically embedding the typeface into the flash file. Many licenses allow for that, but not all.\n\nIf, however, you are using something like [Facelift](http://web.archive.org/web/20120703011642/http:/facelift.mawhorter.net/), then the rules are different. You are not embedding or distributing a typeface, so you can use almost any font you want. (That being said, make sure the permissions on the font folder are correct to prevent unauthorized access) What this does is use PHP to dynamically replace your text with a PNG image, not any different at all from using any font on your computer in Photoshop, a practice that is universally accepted.\n\nThat's my two bits at least.\n\n"
+    },
+    {
+      "time": "17 Dec 2008 — 11:39am",
+      "content": "OK that's definitely helpful, because I know this project will be built in PHP.\n\nSo what your saying is that my developers install the font on our web server, make sure the permissions on our web server's font folder are restricted, and then use something like Facelift or its PHP equivalent to dynamically create PNG files. This way, the font manifestation is just embedded as an image within my site, which is in essence a static publishing of an image and the font is not being distributed or available for use by the average web user as an actual stand alone font, which is generally accepted.\n\nIf we apply a gradient layer to the text in the original Photoshop design, I wonder if the same PHP process can programatically apply this gradient as well to the final PNG file of the resultant image....\n\nThanks again so much!\n\n"
+    },
+    {
+      "time": "17 Dec 2008 — 11:48am",
+      "content": "Facelift uses PHP and the GD library. Anything you can do with the GD library can be done using the Facelift software if your programmers know how to modify it properly.\n\n"
+    },
+    {
+      "time": "17 Dec 2008 — 11:59am",
+      "content": "<cite> This way, the font manifestation is just embedded as an image within my site, which is in essence a static publishing of an image and the font is not being distributed or available for use by the average web user as an actual stand alone font, which is generally accepted.</cite>\n\nWell, it depends. You need to check the EULAs. For many foundries any server use at all is prohibited, no matter if the output of the rendering are just bitmap images.\n\n"
+    },
+    {
+      "time": "17 Dec 2008 — 12:30pm",
+      "content": "In my experience most EULAs are silent on server based rendering, and others restrict it (in your option b each Web site member would be counted as a \"user\"). I don’t recall any commercial font EULAs that specifically say it’s okay. Having said that server generated bitmapped text is as old as the (graphical) Web so the standard advice “ask the vendor” holds true, at least they’ll have been asked this question before.\n\n"
+    }
+  ]
+}

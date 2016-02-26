@@ -1,0 +1,30 @@
+{
+  "id": "105056",
+  "title": "Creating arabic fonts using font lab - (Ligatures) - help needed",
+  "forum": "Arabic Typography & Type Design",
+  "tags": [
+    "alternate ligatures",
+    "Arabic Typography & Type Design",
+    "fontlab",
+    "Fontographer 5",
+    "ligatures",
+    "Open Type",
+    "Standard Ligatures",
+    "VOLT",
+    "VOLT code"
+  ],
+  "content": "Dears Typophilers,  \nI'm new in the typography design.  \nI did an arabic font with Fontographer 5 but I didn't finish because I need some help.\n\nI need to know how I can create Open type standard ligatures feature with Fontographer 5, font lab or Volt.\n\nor I need to know how I can create ligatures feature.. when I type some letters together the glyph replaces.. for example AL-JALALAH WORD (ALLAH), in some fonts if you type LAM LAM HAA it will have specific shape.\n\nany tutorials, lessons or hints will be very helpful.\n\nRegards,  \nMohammed  \n [mohammed.faqier@gmail.com](mailto:mohammed.faqier@gmail.com)\n\n",
+  "author": "im7md",
+  "time": "30 Jul 2013 — 3:16am",
+  "uid": "213519",
+  "comments": [
+    {
+      "time": "30 Jul 2013 — 12:23pm",
+      "content": "You have to create glyphs in fontlab and insert the Open Type tables (Unicode values, characters substitutions, ligatures, marks positioning etc.) through MS Volt. Fontlab is unable to handle all Arabic lookups. Microsoft has also provided a sample Arabic Naskh font (named as Arabic Typesetting font) with Volt project file. It contains almost all the required features and lookups needed for an Arabic font. If you open this font in Volt and look through this font features and lookups you can learn how to use ligatures.\n\nHere is the sequence\n\n1- create glyphs in Fontlab and generate a font file.  \n2-open the font in Volt and insert OT features and lookups (or use the **Import Project** command if you already have a saved Volt project file to use it with this font file).  \n3-use **Ship Font** command in Volt to create the final font containing Open Type tables.\n\n_Note:_ Be careful, before shipping font always use the **Export Project** command to save the volt project as a separate file or you will lose all your volt work. Later you can use the **Import Project** command to open your work with any font file in Volt.\n\nAlong with Typophile forum you will also get a great help from [Volt forum](http://web.archive.org/web/20150415201004/http:/forum.fontlab.com/microsoft-visual-opentype-layout-tool-%28volt%29/?PHPSESSID=54680a4dfe4b5fc0a4a8efd2849ec6a7)\n\nRegards,  \nZ.\n\n"
+    },
+    {
+      "time": "31 Jul 2013 — 1:32pm",
+      "content": "Hello,\n\nI mostly follow the same steps outlined by brother Zuhair.\n\nYou will first need to add \"Arabic\"language in VOLT (first pane towards left).  \nThen add \"rlig\" features under Default item.  \nNext, add substitution lookup namely RLIG for \"Allah\" ligature (middle pane).  \nOpen the lookup by double clicking it.  \nSet \"Process Marks\" to NONE and choose RTL where it says LTR (far right)  \nThen drag that lookup on the corresponding feature.\n\nSave, Compile, Export Project and Ship font (don't forget to save the font with different name eg. don't overwrite your original TTF or OTF file).\n\nBest of luck.\n\nMoiz.\n\n"
+    }
+  ]
+}

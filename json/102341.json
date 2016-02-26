@@ -1,0 +1,32 @@
+{
+  "id": "102341",
+  "title": "Font with Kerning only works in TextEdit",
+  "forum": "Build",
+  "tags": [
+    "Adobe",
+    "fontlab studio",
+    "kerning",
+    "mac",
+    "Microsoft Word",
+    "textedit",
+    "Build"
+  ],
+  "content": "Hello!\n\nI am trying to generate my new font I have created, but am having serious trouble with the kerning. I have tried a plethora of different options, but nothing seems to be working. Basically, I export my font, but the kerning rarely shows up in applications. I know there is a kerning table, though, because the font works correctly in TextEdit (mac).\n\nI am using Fontlab Studio. When I try the font in Photoshop and Microsoft Word, it does not kern. Are there any ideas as to why this would be? Thank you very much in advanced.\n\n",
+  "author": "TitanVex",
+  "time": "16 Apr 2013 — 6:50pm",
+  "uid": "210740",
+  "comments": [
+    {
+      "time": "16 Apr 2013 — 8:54pm",
+      "content": "is there only a kern table, or OT kerning as well?\n\n"
+    },
+    {
+      "time": "17 Apr 2013 — 2:12am",
+      "content": "Thanks for commenting. I am not sure how to check whether or not a kern table/OT kerning exists.\n\nHowever, I have figured out how to make the font work in Adobe products and TextEdit, so now Microsoft Word is the only application that it doesn't work in. Any ideas as to why that would be? Thanks again.\n\n"
+    },
+    {
+      "time": "28 Apr 2013 — 1:11pm",
+      "content": "Depend on the format. TrueType requires certain tables, and if your font has too many pairs, many apps won't read it _at all_ (Word, I'm looking at you). PostScript fonts work similarly, but I don't know if there is a limit to the pairs.\n\nOpenType is another critter altogether. It supports the kern table, but it also has a kern feature which is infinitely more powerful (class-based kerning is just the beginning), but only in certain ways. Combine these with these two formats with the two font formats (TrueType and PostScript), and you've got lots of ways to lose. TT-flavored OT can use the kern feature, but apps have to be built to see it: InDesign can, but Word can't. PS-flavored OT interacts differently. If all you use if the kern feature, everything can read it just fine, even apps which aren't coded to do so -- the OS creates tables automagically for the default (Latin 1? English, really) language, so even Word works well enough. You can even add the old-style TT kerning tables to a PS OT font, but many apps choke and can't see the kern feature -- I once built things that way, and while Word could read the kerning, InDesign couldn't. Here's a handy table:\n\nTT + kern table: everything works, as long as you have few pairs  \nTT + kern feature: Word gets confused, InDesign works  \nTT + both: everything is groovy, as long as you have few pairs, but  \nPS + table: works in Word (broken as designed?), seems to work nowhere else  \nPS + feature: everything works, and you get those nice PS curves  \nPS + both: works in Word (broken as designed?), seems to work nowhere else\n\nAs the lady said, _I love standards; there are so many to choose from..._\n\nYour best bet is to use PS-flavored OT with the kern feature but not the table, and use the autohint from Adobe's AFDKO. You'll have fewer headaches that way. Or if you can get away with fewer pairs, go with TT and the smaller kerning table.\n\n"
+    }
+  ]
+}

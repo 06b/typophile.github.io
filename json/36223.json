@@ -1,0 +1,30 @@
+{
+  "id": "36223",
+  "title": "Unicode Capitalization and Small Capitals",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "How do people deal with letters with no upper-case form, or where the upper-case is comprised of multiple glyphs? Two cases I’ve seen on this board are the Greenlandic Kra (ĸ maps to K‘) and German Esszet (ß usually maps to SS, but a true capital ß has been proposed; see the [Wikipedia entry](http://web.archive.org/web/20120414234420/http:/en.wikipedia.org/wiki/Capital_%C3%9F) and the 2004 [Unicode proposal](http://web.archive.org/web/20120414234420/http:/std.dkuug.dk/jtc1/sc2/wg2/docs/n2888.pdf) and its 2007 [resubmission](http://web.archive.org/web/20120414234420/http:/std.dkuug.dk/jtc1/sc2/wg2/docs/N3227.pdf)).\n\nWhere should software handle these distinctions? Are the [small capitals](http://web.archive.org/web/20120414234420/http:/typophile.com/wiki/small%20capitals) graphical variations on the minuscule or majuscule letters, and so where should the capitalization happen, in the typesetting program or in the font?\n\n",
+  "author": "JCSalomon",
+  "time": "17 Aug 2007 — 8:08am",
+  "uid": "19836",
+  "comments": [
+    {
+      "time": "17 Aug 2007 — 9:13am",
+      "content": "Many Linotype OpenType fonts that include small caps include small cap glyphs for ß fi fl and ij. In the case of ß, the glyph is two small cap s forms (SS). Same for the ligatures (FI FL IJ).\n\nI have heard that, even if a cap ß comes into use, recommended capitalization will still be SS. For one thing, you don't want pre-existing documents to reflow! Old documents will have to be edited to have the SS replaced with the capital ß; new documents will have to physically enter the capital ß in somehow, i.e., selecting a text with an ß in it and capitalizing that text completely will probably swap that ß with SS. Don't know how the user will actually type in the capital ß yet. There is always the glyph palette…\n\n"
+    },
+    {
+      "time": "17 Aug 2007 — 9:47am",
+      "content": "For small caps you don't need capitalization. In OpenType fonts you have two different features to turn lowercase letters into small caps [smcp] and to turn uppercase letters into small caps [c2sc]. You may also have two different sets of small cap glyphs in a OpenType font, one to represent the lowercase as small caps, another for the uppercase.\n\n"
+    },
+    {
+      "time": "19 Aug 2007 — 9:08am",
+      "content": "The trouble (as I saw it) with small-caps de-ligaturization where the capital or small-caps form is not a ligature (as in ß ↔ SS, ﬁ ↔ FI, &c.), is that the letter spacing becomes hard to adjust. I wasn't aware of the [c2sc] feature in OpenType, though; the standard Unicode capitalization routines followed by [c2sc] are what I was hoping existed. Thanks.\n\n"
+    },
+    {
+      "time": "19 Aug 2007 — 8:20pm",
+      "content": "Some engines do it exactly the way JC describes. This is probably the most reliable approach overall.\n\nCheers,\n\nT\n\n"
+    }
+  ]
+}

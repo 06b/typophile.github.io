@@ -1,0 +1,26 @@
+{
+  "id": "101468",
+  "title": "Leading issues in Fontlab studio.",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "Hello everyone,  \nI have an issue with leading in the font I'm creating right now\n\n ![](http://web.archive.org/web/20150419200744im_/http:/typophile.com/files/Clasing%20characters_5914.png)\n\nMy metrics are as follows:\n\nTh highest point on the accents is 901(tops of accents and carons etc.) (my UPM is 1000)  \nThe lowest point on descender is -250  \nx height: 480  \ncap height 675  \nAre my accents too big? Are they placed too far away from the base glyph?\n\nThanks\n\n",
+  "author": "Typogruffer",
+  "time": "16 Mar 2013 — 11:31pm",
+  "uid": "200825",
+  "comments": [
+    {
+      "time": "18 Mar 2013 — 3:07am",
+      "content": "Your vertical metrics values exceed the UPM (901+250=1151) and this behaviour would indicate that you have not balanced the metrics accordingly. If you read through [Karsten Luecke's guide to font metrics](http://web.archive.org/web/20150419200744/http:/www.kltf.de/downloads/FontMetrics-kltf.pdf) carefully and adjust your settings accordingly you should find that the vertical metrics start behaving as you would expect. At the very least you will have a greater understanding of what those settings change.\n\nAdditionally, the Typophile threads listed below all deal with this issue in detail:\n\n[http://typophile.com/node/77906](http://web.archive.org/web/20150419200744/http:/typophile.com/node/77906 \"http://typophile.com/node/77906\")  \n [http://typophile.com/node/13081](http://web.archive.org/web/20150419200744/http:/typophile.com/node/13081 \"http://typophile.com/node/13081\")\n\n"
+    },
+    {
+      "time": "18 Mar 2013 — 5:02pm",
+      "content": "If I read correctly, 901 is the maximum ascender value, i.e. WinAscent, not the TypoAscender (which the OP does not mention). I've always understood that it's TypoAscender and TypoDescender that should fit within the UPM, not WinAscent/Descent.\n\nTypogruffer, what is your actual character ascender value, i.e. the highest point of any base (non-accented) character? And do your OS/2 and hhea table metrics match it and the other values mentioned (as described in the referenced PDF)?\n\n"
+    },
+    {
+      "time": "18 Mar 2013 — 9:42pm",
+      "content": "Hey altsan, my TypoAscender value is 750. I have to modify my metric values using Karsten's PDF as a guide. I will get back to you with the results.\n\n"
+    }
+  ]
+}

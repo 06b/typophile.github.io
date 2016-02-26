@@ -1,0 +1,214 @@
+{
+  "id": "40729",
+  "title": "Any text faces being designed now with contextual alternates to improve fit?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "I am working on a proposal for a talk and I wanted to get the up to the minute info - So, ( and assuming it doesn't violate an NDA!)...\n\nAre you, or do you know of anyone making text faces with contextual alternates to improve letter fit? This could be anything from ligatures beyond the call of Unicode, to Sliced off serifs, to even deeper changes in letterforms.\n\nI know many people are and have made Display faces that do this - I am asking specifically about Text faces.\n\nThanks!\n\n",
+  "author": "ebensorkin",
+  "time": "9 Jan 2008 — 8:21pm",
+  "uid": "2942",
+  "comments": [
+    {
+      "time": "9 Jan 2008 — 10:20pm",
+      "content": "Eben, Yes. Froggy has several uses like that using calt. I have alternate T Y V Z g y glyphs to avoid holes and collisions.\n\nHere is a snippet of my calt code:\n\nfeature calt { # Contextual Alternates  \n script latn; # Latin  \n sub T' [Y] by T.Lft;  \n sub T' [V] by T.Lft;  \n sub T' [W] by T.Lft;  \n sub T' [Z] by T.Lft;  \n sub T' [h] by T.Lft;  \n sub [Y] T' by T.Rgt;  \n sub [V] T' by T.Rgt;  \n sub [W] T' by T.Rgt;  \n sub [C] T' by T.Rgt;  \n sub [T] Y' by Y.alt;  \n sub [T] V' by V.alt;  \n sub [I] Y' by Y.alt;  \n sub [I] V' by V.alt;  \n sub [T.Lft] Y' by Y.alt;  \n sub [T.Lft] V' by V.alt;  \n sub [C] Y' by Y.alt;  \n sub [Z] Y' by Y.alt;  \n sub [Z] V' by V.alt;  \n sub T.sc' [Y.sc] by T.sc.Lft;  \n sub T.sc' [V.sc] by T.sc.Lft;  \n sub T.sc' [W.sc] by T.sc.Lft;  \n sub T.sc' [Z.sc] by T.sc.Lft;  \n sub [Y.sc] T.sc' by T.sc.Rgt;  \n sub [V.sc] T.sc' by T.sc.Rgt;  \n sub [W.sc] T.sc' by T.sc.Rgt;  \n sub [C.sc] T.sc' by T.sc.Rgt;  \n sub [T.sc] Y.sc' by Y.sc.alt;  \n sub [T.sc] V.sc' by V.sc.alt;  \n sub [I.sc] Y.sc' by Y.sc.alt;  \n sub [I.sc] V.sc' by V.sc.alt;  \n sub [T.sc.Lft] Y.sc' by Y.sc.alt;  \n sub [T.sc.Lft] V.sc' by V.sc.alt;  \n sub [C.sc] Y.sc' by Y.sc.alt;  \n sub [Z.sc] Y.sc' by Y.sc.alt;  \n sub [Z.sc] V.sc' by V.sc.alt;  \n} calt;\n\nChrisL\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 1:13am",
+      "content": "Hi Eben,  \nyou are aware of Jos’ first attempt to text faces, [Calluna](http://web.archive.org/web/20131013144832/http:/typophile.com/node/40440).  \nIn [this thread](http://web.archive.org/web/20131013144832/http:/www.typophile.com/node/40439), Karsten mentioned he’s using contextual alternates, though he doesn’t say which font. [Grotext](http://web.archive.org/web/20131013144832/http:/www.kltf.de/kltf_grotext.htm) has contextual alternates: it will use an ‘f’ with a longer ear if context allows.  \nF\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 2:38am",
+      "content": "Eben, there are many typefaces that do this to some small extent, but I don't think there are many that do so in a thorough, consistent manner, as i think you're wanting to find. What i think the best approach to implementing contextual alternates in this manner is to fix as many fit problems as possible before you begin fixing problems using kerning. so the fitting priorities would be to 1) ensure good fitting of default letterforms to avoid as many spacing problems as possible 2) once fitting is set, provide contextual alternates in as many places as possible to resolve fitting problems 3) as a final resort, use kerning to solve the most difficult problems. This is not to say that kerning is undesirable and may actually be a better option than 2 in many cases. in the most difficult cases 1, 2, & 3 might need to be employed. of course i haven't had a chance to put this to the test in my current work yet, but i intend to experiment with this as much as time will allow for as i'm developing my typeface project this year.\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 6:32am",
+      "content": "Chris, you could save yourself some typing. Instead of...\n\nsub T’ [Y] by T.Lft;  \nsub T’ [V] by T.Lft;  \nsub T’ [W] by T.Lft;  \nsub T’ [Z] by T.Lft;  \nsub T’ [h] by T.Lft;\n\n...you can do this:\n\nsub T' [Y V W Z h] by T.Lft;\n\nPutting glyphs in brackets means, in effect, \"any one of these glyphs\". So, the brackets are unnecessary if there is only one glyph between them.\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 7:31am",
+      "content": "_Are you, or do you know of anyone making text faces with contextual alternates to improve letter fit? This could be anything from ligatures beyond the call of Unicode, to Sliced off serifs, to even deeper changes in letterforms._\n\nOne of my proprietary linears will be upgraded \"soon\" (ha-ha, hee-hee, ha), and possibly released as a retail font \"complete\" with a calt feature that takes care of embarassing collisions like this **i g** smash that took place the other day on the album cover meme thread:\n\n ![](http://web.archive.org/web/20131013144832im_/http:/typophile.com/files/twentyfivecover_4889.gif)\n\nIn this particular font, **a d i l u** need g-insurance---a set of auto-retractable curls ;^)\n\nj a m e s\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 8:07am",
+      "content": "Thanks everybody! That's great.\n\nWhat I wanted to do with this thread was see if there were any more Calluna like examples that I might have missed. Because this is an emerging thing it would be easy to miss something.\n\nChris, would you be willing to let me show some of Froggy's Alts during a talk?\n\nPaul, I didn't think that I would find anybody doing anything in a 'thorough manner' yet. 'Thorough manner' meaning letting nearly all glyphs be contextually shaped. That would be too complicated and is too large a cultural shift to have happened yet, if indeed it is desirable at all. As far as best courses I am not sure. What you are describing makes sense - or perhaps even a less aggressive model where you kern before you look for contextual Alts to solve problems.\n\nLong term I hope we will just keep sharing and then it may emerge that certain letters in pairs & tripples become common targets for alteration. And maybe later still contextual alteration will become integral to our thinking & design rather than being a tacked on way of killing pesky spacing problems. Maybe.\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 8:09am",
+      "content": "James, Thanks!\n\nWould you be willing to let me see a rough version of your solution? Would let me show it as well?\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 8:18am",
+      "content": " **The curly a-d-i-l-u principle**  \nHow it works, the curls serve to emulate the presence of serifs. In theory they help form better bouma. In practice they work very well as a stylistic attraction and a fairly transparent structural readability enhancement device.\n\nThe calt feature will substitute straight-stemmed **a-d-i-l-u** for **g**.\n\n**g** is the only exception. For every other combination the curls are useful.\n\nj a m e s\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 8:23am",
+      "content": "_Would you be willing to let me see a rough version of your solution? Would let me show it as well?_\n\nHi Eben :^) Sure. I will have to give you a rain check for the moment as I'm buried under a pile of work. I can prepare a working version for demonstration purposes. When will you be giving your talk?\n\nWhat are your thoughts on the curly a-d-i-l-u principle?\n\nj a m e s\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 8:25am",
+      "content": "Mark,  \nTHANKS!!! It sure helps having folks like you around to help me learn the easy ways. The disadvantage in just trying to figure stuff out on your own is that I am more likely to find the hard way :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 8:27am",
+      "content": "_And maybe later still contextual alteration will become integral to our thinking & design rather than being a tacked on way of killing pesky spacing problems._\n\nhmmm. that's not really how i see the issue. i hope i didn't come across that way (although i guess i might have inadvertantly). more than a fitting issue, i see the use of contextual alternates as a possible solution to problems in notan/bouma formation.  \non another note, perhaps you're right that my sugguestions above were overagressive.\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 8:28am",
+      "content": "\"Chris, would you be willing to let me show some of Froggy’s Alts during a talk?\"\n\nEben,  \nThat probably can be arranged :-)  \nWhere are you giving your talk? You can email me offline with the details.\n\nChrisL\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 8:35am",
+      "content": "_And maybe later still contextual alteration will become integral to our thinking & design rather than being a tacked on way of killing pesky spacing problems. Maybe._\n\nI am already onto it. Tomorrow's graphic design and fonts will need to be flexible, and more significantly---adaptable, because the rate of change will accelerate. If you read Edward DeBono's books such as Thinking for the New Millenium, he is onto a very real thing in saying \"solutions that worked yesterday or today might not work tomorrow\" and the answer is to \"design a way forward\".\n\nj a m e s\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 9:35am",
+      "content": "<cite> hmmm. that’s not really how i see the issue. </cite>\n\nI didn't mean to imply that you see the issue as a 'pesky problem'. If that's the impression that you or anyone else had I apologize for putting words in your mouth.\n\nMy intent was to rhetorically contrast what I think we have to begin with - which is looking at the problem from the position we occupy now in which contextual shapes are a new idea/opportunity that we are starting to wrap our heads around. A position in which contextual shapes is a question that is likely to be considered near the end of a font's development when we find we could alter our basic shape to solve a problem, or kern or both. Or we could make an Alt. And maybe Kern it if it's used more than once.\n\nThis would be in contrast with a point that we might occupy later where practical experience allows us to integrate what we have learned much earlier on in new fonts design. Maybe even at the earliest moments where we are sketching out ideas. Once we are doing that we might start to include new less obviously problematic letter pairs in our thinking because context has become something we take for granted not something exceptional.\n\n<cite> overagressive </cite>\n\nSorry, I didn't mean to cast judgement there either; just to characterize one process as more confident/intgrated in it's approach than another. In other words I didn't meant to use aggressive in the pejorative sense of the word.\n\n<cite> i see the use of contextual alternates as a possible solution to problems in notan/bouma formation.</cite>  \nAgreed!\n\n<cite> Edward DeBono </cite>\n\nI am pretty sure that old solutions will keep working! ;-)\n\nOn the other hand I also think that people gravitate to what feels good and it may be that like real wood vs fake the subtle improvements that I suspect can be brought about by using contextual shapes in a body of text may simply be more pleasant and come to dominate because they are feel better. Maybe. Contextual shapes won't ever be the only factor in what feels good in text but it seems to me like it could be a factor in time.\n\nThanks Chris!\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 9:39am",
+      "content": "\"And maybe later still contextual alteration will become integral to our thinking & design rather than being a tacked on way of killing pesky spacing problems. Maybe.\"\n\n“solutions that worked yesterday or today might not work tomorrow”\n\nJust think back a few decades to hot metal type. Kerning was nearly impossible and side-bearings were one-size-fits-all. Then. phototype and later digital came along and these old patterns were broken, albeit oftentimes abused. OpenType brings potential for both terrific solutions as well as overuse and butchery. After that experimental plunge, the future will be better. If we don't push the envelope however, we will be stuck with the limitations of yesterday. Old farts like me won't be the ones who make the difference though. Young people who have never experienced the limitations impost by type frozen in metal form will not be stymied by the appearance of a closed door. They will just walk through and do new and better things with type than my generation because they see no boundaries and have no fear to overcome.\n\nChrisL\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 10:01am",
+      "content": "I think that the old fi & fl ligatures were nothing more then contextual alternates. With OpenType we have the opportunity to extend it's tradition wisely ... or not :-)\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 10:12am",
+      "content": "I've not read the thread (yet), but you might want to look at some of the Arabic work of Tom Milo et al.\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 10:26am",
+      "content": "There are many characters that present problems in certain combinations or sizes. I am very fond of serifs on i and j, but they do make bad combinations with r, g and others with a protruding top right. Or the double-decker g (whatever you want to call it): starts getting blotchy at certain sizes, which is what automatic optical sizing could take care of, but also a replacement below a certain size. Or insert one or two different g's in the gg combination. The get really noticeable, and in English, double-g appears frequently. In German, ch, sch and ck are pronounced as one sound, as ck is in English. The c always looks too far from the h or the s, and in metal we had ligatures for these (as for tz by the way), also a time-saving device. I cannot kern the c for these combinations, as they would look bad in all the other languages.\n\nWhen we designed the typeface for Glasgow in 1999, I wanted to have different combinations – kind of ligatures – for the different ways certain diphtongs are pronounced in English. Like ea as in reading or in leading (the typographic type), ow as in low or cow, o as in rose or in lose, etc. Not new signs as in some attempts for more phonetic English, but just different ways to show these letters in context. At the time that would have meant calling up a dictionary and then insert glyphs from separate fonts. That was deemed to difficult for your ordinary graphic designer, as it would have forced him to install many fonts for just the one weight. Today that would be quite reasonable to implement.\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 10:29am",
+      "content": "BTW. The talk I am planning on giving is in Buffalo at Typecon. It will be my framing of the question what Contextual Alternates can do for Text. Right now my plan is to give an overview of the question ( probably not soooo different from what I have written here ) and then go through what I currently think are leading candidates to consider using in a text face using examples from the scribal tradition, from lettering, stone carving, and of course what has been done already in Opentype. The deadline for submitting materials is coming up so I am gathering up what I have. Lida Cardozo has agreed to help me as well which is very exciting.\n\n<cite> Old farts like me won’t be the ones who make the difference though. </cite>\n\nI don't know about that. You have seized the bull by the horns as far as I can see!\n\nBut I do agree that especially when it comes to text it is hard to shift from an old reliable system/approach into a new and not fully explored area. And when you are making text it's also appropriate worry that what you are doing may end up being showy rather helpful. So with text we are culturally hemmed in by the apparent success that exists ( which is I think substantial! ), and the real danger of the new upsetting the apple cart. Still, obviously I think it's worth the attempt.\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 11:34pm",
+      "content": "Eben, I just shipped a beta version of a new typeface to a client. I can't show it yet, but it includes a lot of contextual lookups including many that are designed to improve fit. Technically it is a display face, in the sense that it is intended to use at larger sizes, but the contextual rules are worked out with text in mind. There are contextual substitutions for fit in Latin, Greek and Cyrillic. In the Latin and Cyrillic these involve variants with entry serifs removed for use after certain letters (f,g,r,x,y); in the Greek, there are variants of pi, sigma and tau with shorter horizontal extensions to reduce the white space between certain combinations of letters. [This is only scratching the surface of what this font does though: the compiled font is almost 2MB and 40% of the font size is taken up by the GSUB table. There were times working on the contextual rules when I thought my head might explode.]\n\nSi mentioned Tom Milo's work with Arabic. Regarding fit, you might take a look at his illustration of the ruqah style on page 125 of the _Language Culture Type_ book, showing five different variations of the same words, each of a different horizontal length. Obviously, this suggests interesting solutions for justified text.\n\nTom asked me a very similar question to yours at a Unicode conference a couple of years ago, wondering if there were any types that applied variation for fit to the Latin script. At the time I wasn't aware of any, other than the above mentioned display face that I was already working on at that time.\n\n"
+    },
+    {
+      "time": "10 Jan 2008 — 11:36pm",
+      "content": "The implementation of the 'liga' feature in Jelle Bosma's Cambria typeface may qualify for your interest Eben. Although the 'liga' layout feature is used, since it emulates the effect of ligatures on ff, fi, etc. combinations, the implementation actually uses a variant f and contextual lookups.\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 3:46am",
+      "content": "\"On the other hand I also think that people gravitate to what feels good and it may be that like real wood vs fake the subtle improvements that I suspect can be brought about by using contextual shapes in a body of text may simply be more pleasant and come to dominate because they are feel better. Maybe. Contextual shapes won’t ever be the only factor in what feels good in text but it seems to me like it could be a factor in time.\"\n\nOr maybe not. People don't gravitate to what feels good, but what is simple (to use). Otherwise the figure of documents in TNR or Arial would be closer to a figure like 10-20% rather than 90%.  \nIf a font with alternate lookups will ship with some 'standard' software, it will prevail. Else the chances are low. (IMHO)\n\n\"I think that the old fi & fl ligatures were nothing more then contextual alternates.\"\n\nSo do I think.\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 5:15am",
+      "content": "Eben,  \nmy sans text face [Facit](http://web.archive.org/web/20131013144832/http:/justanotherfoundry.com/Facit/index.htm) has a shortened r and f as contextual alternates.  \nMy [Lapture](http://web.archive.org/web/20131013144832/http:/justanotherfoundry.com/Lapture/index.htm) has contextual alternates for v w y with shortened serifs, and a contextual f. See page 9 in the PDF for an illustration.\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 9:03am",
+      "content": "John, I am really looking foreward to seeing that eventually! Do you think there is a chance that it might be available to show by the time Typecon rolls around?\n\nThanks also for the heads up about Cambria. That's a great example I think because it doesn't ligate and so the face is more robust in use as a result. You seem to feel the same way judging by what you wrote here:  \n [http://www.typophile.com/node/39473](http://web.archive.org/web/20131013144832/http:/www.typophile.com/node/39473 \"http://www.typophile.com/node/39473\") <cite> I think ligatures are essentially an artifact of metal type, and probably not very helpful moving forward.</cite>\n\nTim, may I use the Lapture example in my talk? Would you be willing to make a graphic showing the r & F feature for Facit for the same purpose? This stuff is wonderful!\n\n<cite> Else the chances are low. </cite> I suppose I was thinking across a long timescale like the next 15 years rather than say the next 3 years. But you make a great point. I hope that the various powers that be will make calt a default standard for the display of glyphs in ther OS' and their Apps.\n\n<cite> nothing more then contextual alternates </cite> Well obviously not technically but in principle yes. Getting good letter relationships is what they are for.\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 10:01am",
+      "content": "\"Getting good letter relationships is what they are for.\"\n\nInitially, calt was for non-Latin scripts where typical type techniques were unable to adequately display the language. The use for better looking Latin typography was a side benefit that was welcomed by many.\n\nChrisL\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 11:42am",
+      "content": "Chris: _Initially, calt was for non-Latin scripts where typical type techniques were unable to adequately display the language._\n\nI don't think that is the case with the calt feature, Chris, although the statement is true of OpenType as a whole, in the sense that Microsoft originally developed the technology with a focus on complex scripts. If you look at the calt feature description in the OpenType Layout tag registry, you will see that it was registered by Adobe. When looking at the early registered tags, i.e. those registered by Adobe and Microsoft often prior to any actual implementation in either fonts or software, one can usually guess what the initial intent of the tag was based on who registered it. Adobe's tags largely cover features that they anticipated needing for fonts in their library, and the only non-Latin scripts they were dealing with at that time were East Asian. Microsoft's tags were much more focused on non-Latin fonts, but they tended, at that time, to define specialised tags for specific script purposes rather than generic tags that could be used in variable ways for different scripts (hence the dedicated Indic layout features).\n\nAlso note that the calt feature, while on by default, may be turned off by the user, so it is ill-suited to situations in which a layout feature is needed 'to adequately display the language'. The calt feature is great for discretionary contextual variants, things that enliven or improve the display of text, but it shouldn't be relied upon for anything like basic text shaping of the sort that makes text decipherable.\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 12:01pm",
+      "content": "\"...but it shouldn’t be relied upon for anything like basic text shaping of the sort that makes text decipherable.\"\n\nJohn, Is that because some applications don't support it well or because it can't perform the needed functions?\n\nChrisL\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 12:45pm",
+      "content": "I'm not sure that contextual alternates improve fit, as a general principle, although they can be used to that effect.\n\nConsider the comparison with kerning.  \nSure, you can tighten up \"holes\" in many text combinations, but not all of them.  \nSo doing it in some places may draw attention to where it's not done, which is counterproductive.  \nOne has to be very thorough with the use of alternates.\n\nNonetheless, like kerning, contextual alternates enables a new kind of fit, or colour, for text.\n\nAnother issue is the very nature of type as standard shapes.  \nI suspect there is something useful to the perceptual process of reading in having character shapes consistent from one instance to the next, because if differences are detected, that may prompt a regressive saccade.  \nNonetheless, type design is an agglomeration of deviations from basic forms, little \"cheats\" -- making the crossbar slightly higher than centre, vertical strokes thicker than horizontal, etc., etc.--to pre-empt the eye's susceptibility to optical illusion. So the question is, how much tweaking is too much, and like all good type design, it becomes a matter of the designer's discretion, not rule-of-thumb.\n\n\\*\\*\\*\n\nEben, your subject is Softmachine's raison d'être.  \nAlthough primarily not conceived of as a text face, it does work as such, better than I would have expected.  \nEven colour is considered essential for text setting, and Softmachine achieves this -- though not in the usual manner. It is generally considered that even colour depends on a balance of variety in internal and external negative and positive space; however, Softmachine's consistency is in the uniformity of proximity spacing. IMO, this uniformity provides a sufficient matrix for readability.\n\nI conclude that a uniform matrix of some kind is required for reading, a background field upon which the variety of informational form can make sense. The eye/mind being flexible, it can adapt to different visual premises for typographic text (Hudson's Readerability Principle).\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 1:35pm",
+      "content": "i had forgotten about softmachine! glad you reminded us, nick.\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 3:46pm",
+      "content": "<cite>Tim, may I use the Lapture example in my talk? Would you be willing to make a graphic showing the r &amp; F feature for Facit for the same purpose?</cite>\n\nEben, no problem. I will contact you by email in the next couple of days.\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 3:48pm",
+      "content": "Nick, you know how much I like softmachine. But I confess that originally I wasn't thinking of softmachine in this case because it isn't doesn't superficially look like a 'text' font. Nevertheless I would be extremely pleased to include it in my talk. Would you send me the font ( non-commercial use only!) or a PDF ( or what you deem best ) to demonstrate the relevant features?\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 4:19pm",
+      "content": "_Another issue is the very nature of type as standard shapes.  \nI suspect there is something useful to the perceptual process of reading in having character shapes consistent from one instance to the next, because if differences are detected, that may prompt a regressive saccade.  \nNonetheless, type design is an agglomeration of deviations from basic forms, little “cheats” — making the crossbar slightly higher than centre, vertical strokes thicker than horizontal, etc., etc.—to pre-empt the eye’s susceptibility to optical illusion. So the question is, how much tweaking is too much, and like all good type design, it becomes a matter of the designer’s discretion, not rule-of-thumb._\n\nIs this curls retract feature bad then, too much tweaking, too selective? I try to use my designer's discretion.\n\n ![](http://web.archive.org/web/20131013144832im_/http:/typophile.com/files/curltract_5392.gif)\n\nj a m e s\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 5:18pm",
+      "content": "Another nifty example. How cool!\n\nI am curious what the other think but I would probably sooner see you pare back the tails than get rid of them altogether. I think the tails adds something.\n\nI would also consider making a shape that is even more specific. So in the case of the ag I might pull it back less than I would with the dg or ig or lg which seem more similar to my eye. I think is if you are going to go to the trouble to do this why not be really sensitive and get the balance to be 'just so'. Also, as I see it the benefit of being subtle and specific about it is that what you are doing isless likely to be noticed which in text is ideal.\n\nThe other thing is I don't know if I am 100% sold on the g somehow. Not generally - it's nice to be sure - but in combination with these other forms. The first turn of the tail of the g attracts my eye a bit too much in comparison with the other forms I think.\n\nWhat do y'all say?\n\nThanks Tim!\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 5:44pm",
+      "content": "James are those tail changes in the alternates? I'd say it isn't too much. Unless it is automatic. Then it is . . .\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 6:31pm",
+      "content": "_too much tweaking...?_\n\nJames, I don't know.  \nI was musing theory--quite another thing to see this fully developed, and become acclimatised to it.\n\nIn the past, the solution was to cinch in the waist of the g, as in Gill Sans.  \nContextual alternates change the rules of the game.\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 8:12pm",
+      "content": "@Eben: _I think is if you are going to go to the trouble to do this why not be really sensitive and get the balance to be ’just so’._\n\nGood suggestion, thanks.\n\n@Eben: _Also, as I see it the benefit of being subtle and specific about it is that what you are doing is less likely to be noticed which in text is ideal._\n\nI think so too. \"Fly under the reader's radar\", or something to that effect.\n\n@Eben: _The first turn of the tail of the g attracts my eye a bit too much in comparison with the other forms I think._\n\nI can put that down to my inexperience with text type design.\n\n@Tiffany: _James are those tail changes in the alternates? I’d say it isn’t too much. Unless it is automatic. Then it is . . ._\n\nThe tails retracting for those combinations only is the contextual alternates feature. It can be turned on or off to make it automatic or manually applied.\n\nNick, thanks for the theoretical musing. It helps to be philosophical about type design, and what I find even more helpful is to live with an innovation for a while to find out how it works subliminally.\n\nj a m e s\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 10:01pm",
+      "content": "Chris, re. the 'calt' feature: _John, Is that because some applications don’t support it well or because it can’t perform the needed functions?_\n\nThe 'calt' feature is discretionary. It is recommended to be on by default but an app with a decent OpenType Layout UI will make it possible for the user to turn off the calt feature (as e.g. InDesign does). You do not want to associate any layout that is necessary for normal display of a complex script language with a feature that can be turned off, because turning off the feature would render the text unreadable.\n\nAside from that, though, most complex scripts require a number of different features for language shaping and, typically, interaction between those features and the shaping engine. In theory one could use something like the 'calt' feature, only permanently active, to perform Arabic script shaping. But it is faster (character processing is faster than glyph processing) and more reliable to allow the shaping engine to analyse the text and call appropriate features such as 'init', 'medi' etc, rather than have the font analyse the glyph string and perform contextual lookups.\n\n"
+    },
+    {
+      "time": "12 Jan 2008 — 7:07am",
+      "content": "_...making text faces with contextual alternates to improve letter fit,_   \nTo improve 'reading', maybe different, but it could be the same thing as you're talking about.\n\n_You do not want to associate any layout that is necessary for normal display of a complex script language with a feature that can be turned off,_ [i f] _turning off the feature would render the text unreadable.\"_  \n\"if\" not \"because\"? If it doesn't render the text unreadable, then caltify it, being the implication.\n\nObviously not Eriks, but for reading people, this issue is much like kerning. The reading people are somewhat used to text type composed without, if they must read it...they read it. It'd be nicer if a few dozen kerning pairs were there, but, eh.\n\nIt's when reliable kerning pairs & resolution are taken away from text... a fact borne out by the reading people's preference for sans online, that gulfs have come to exist between print and online, serif and sans, and me and...others.\n\nSo, calt if you heart serifs online, pray for 'the next sdk', and remember typography. :-)\n\nCheers!\n\n"
+    },
+    {
+      "time": "12 Jan 2008 — 9:18am",
+      "content": "Erik,\n\nYou said: <cite> I am very fond of serifs on i and j, but they do make bad combinations with r, g and others with a protruding top right.</cite>  \nSo it sounds like in this place at least you could be in favor of seeing contextual shapes become more common for text. I will be sure to provide an example of this combination in my talk then. Thanks!\n\nYou also said <cite> Or insert one or two different g’s in the gg combination</cite>  \nI agree in a big way. I think subtly different repeating characters is a great use of contextual scripting. Looking at ff combinations and then other letters I started to wonder if there was any point in considering other letters too. Then I started looking at scribal books from the 15th c. and found that I really liked what they were doing with doubled letters. Partly what happening of course is natural variation; but in the best examples I felt like they were in fact making a deliberately better word form with their variation. Most of the time I found that the 2nd letter is slightly more exuberant than the 1st.\n\n<cite> In German, ch, sch and ck are pronounced as one sound, as ck is in English. The c always looks too far from the h or the s, and in metal we had ligatures for these (as for tz by the way), also a time-saving device. I cannot kern the c for these combinations, as they would look bad in all the other languages.</cite>  \nWould a German local (locl) feature that made these relationships space in the manner you describe be a satisfactory solution?\n\n<cite> When we designed the typeface for Glasgow in 1999, I wanted to have different combinations – kind of ligatures – for the different ways certain diphtongs are pronounced in English. </cite>  \nThis is the bit of your post that delayed my response. O wanted to try to get what you meant... I think I do now. Maybe. I suspect that for a native reader this sort of thing would be of limited use. But for a reader with english as a second or third language it might be quite useful. I base this assertion ( maybe foolishly) on not having seen what you have in mind. Do you have any images?\n\nBTW - I sent you a email with some images of contextual r+a combinations a little while ago. Did you get it? Should I resend it?\n\n"
+    },
+    {
+      "time": "12 Jan 2008 — 9:25am",
+      "content": "David, You wrote <cite> To improve ’reading’, maybe different, but it could be the same thing as you’re talking about. </cite> I am definitely interested in reducing reader fatigue with the improved fitting I think is possible. I also think that the greater variation will have a positive knock on effect as long as it is unobtrusive.\n\nJohn H, what was the reason for your project's contextual variations?\n\n"
+    },
+    {
+      "time": "12 Jan 2008 — 10:33am",
+      "content": "_Would a German local (locl) feature that made these relationships space in the manner you describe be a satisfactory solution?_  \nAbsolutely.\n\nAnd I did get your mail, but it'll have to wait until I’ve got all the business stuff out of the way.  \nI’ll try and find my original Glasgow proposal. It was only one page of analog sketches, that's why I cannot find it easily.\n\n"
+    },
+    {
+      "time": "12 Jan 2008 — 11:33am",
+      "content": "Eben: _what was the reason for your project’s contextual variations?_\n\nThere are several different classes of contextual variations in the new display face, but the ones that relate most directly to the topic of this thread either remove serifs selectively to avoid ugly combinations, or reduce the size of word-internal white spaces, or both. The design is based on an expansion stroke model, with some natural variation in the presence/absence of serifs anyway (the ascenders in the basic style do not have serifs, for example, following the French rondo model), so removing serifs and changing the way strokes start makes more sense than merely shortening the serifs.\n\n"
+    },
+    {
+      "time": "12 Jan 2008 — 8:36pm",
+      "content": "<cite> Absolutely. </cite> Great! This is obviously addressed to Erik, but if others want to answer as well please do. Where would you best go to see the a really well made German, ch, sch and ck & tz for German use?\n\nErik, also thanks for letting me know about the email. I had worries my had been relegated to a spam folder somewhere. ;-) Thanks again for looking at it whenever you do. And thanks for looking for the Glasgow proposal!\n\n<cite> or reduce the size of word-internal white spaces </cite> This sounds almost like a style selection but I understand you to mean that it is being done to create better word forms. What kinds of context might cause you reduce the internal white space of a letter in a word? I am imagining something unlikely such as an o that varies... but maybe that's the wrong direction. Maybe it's a CAP L in an all caps setting next to an N or M or something like that. In any event, if would expand on this line I would of course be most interested!\n\n"
+    },
+    {
+      "time": "12 Jan 2008 — 10:40pm",
+      "content": "_What kinds of context might cause you reduce the internal white space of a letter in a word?_\n\nWhere a letter with a long left entry letter follows an r the serif is dropped. This does two things: it clears up the ugly collision of the serif with the top of the r and it also allows me to position the letters closer together, reducing the white space caused by the shape of the r.\n\nA similar thing happens following the г (ghe) in the Cyrillic portion of the font.\n\nThe Greek implementation is different, because there are no serifs, but certain letters create lots of white space when adjacent to each other, e.g. the combination στ as in the word Χριστου. So I have variants with shorter horizontal bars that are used contextually.\n\nI should mention again that I'm talking here about something that is intended as a display face, and it has design features that are more exaggerated than they would probably be in a text face, e.g. the serifs are longer.\n\nBut this leads me to wonder if perhaps you are asking your question backwards? Instead of asking if anyone is making fonts that use contextual alternates to improve letter fit, you could ask if anyone is deliberately breaking the canons of text face design, e.g. with regard to serif length, in the knowledge that such alternates can be used to adjust the resulting word shaping. In other words, are people deliberately setting out to make letter fit more challenging in order to collect stylistic dividends in other areas?\n\n"
+    },
+    {
+      "time": "13 Jan 2008 — 12:02pm",
+      "content": "\"In other words, are people deliberately setting out to make letter fit more challenging in order to collect stylistic dividends in other areas?\"  \nYou mean like Cleartype?\n\nCheers!\n\n"
+    },
+    {
+      "time": "13 Jan 2008 — 2:07pm",
+      "content": "_You mean like Cleartype?_\n\n:)\n\nNot what I had in mind: the exchangeables in ClearType involve different currencies. But if one is wondering how to handle fit without knowing whether subpixel positioning will be active in target environments, then all things, including contextual variants, should be on the table.\n\n"
+    },
+    {
+      "time": "13 Jan 2008 — 8:17pm",
+      "content": "_Where would you best go to see the a really well made German, ch, sch and ck & tz for German use?_\n\nI'll have to dig up some old specimens. I'm flying back to Berlin (actually: in 90 minutes) and will have to look there.\n\n"
+    },
+    {
+      "time": "14 Jan 2008 — 3:13am",
+      "content": "I see another issue specific to German: We have lots of prefixes and compound nouns written in one word and you could argue that you should not use ligatures \"across the border\" of two parts of a word. In Fraktur this is even obligatory as far as I know.  \nThen, if you do not use ligatures in some cases an alternative, shorter f can be handy for combinations such as fl fi fb and so on. I personally would never include an fb or fk ligature in my fonts.  \nYou could try something similar in English: whereas an fl ligature makes sense in \"flying\" it looks somehow odd to me in \"briefly\" because the fl does not really \"belong together\". But you can certainly argue whether visual, linguistic or consistency matters are most important.\n\n"
+    },
+    {
+      "time": "14 Jan 2008 — 6:28am",
+      "content": "John, _\"...the exchangeables in ClearType involve different currencies....\"_  \nYou mean the addition of 'color' to a 'b&w' specification? otherwise, No comprendo. The 'exchange rate' may be different, and the 'granularity' may be reduced, but the issues are identical in all Latin text - big things, little things, inside, outside, black space, white space & round-eyed brains.\n\n_\"...to handle fit without knowing whether subpixel positioning...\"_  \n...is to mentally fuse rendering and layout — something I've already defused to prove cleartype non-useless.\n\n_\"...then all things, including contextual variants, should be on the table.\"_  \nAnd to paraphrase from _Jaws_, you're gonna need a bigger table.\n\nRead Eriks, not to mention our typographic past, carefully. fi fl ch ck tz. What do they have in common? A stroke with a tiny remainder, then a stroke (or significant remainder) following. cfijklrstvwyz plenty-trouble. abdeghmnopqu not so much trouble. Which leaves the 'x' factor. :-)\n\nWhy do you think I'm 'so opposed' to Kevlar's letter-only-reading theory and them thar read-a-hillbillies insistence on readability as 'exclusively' a software engineering problem? lol, It's certainly not because my opinion counts outside of mine own clientele — it's because I can count in 'alphabet arithmetic' and apply it to the issue, everywhere it exists. You do to, if you think about it.\n\nTim, _\"an fl ligature makes sense in “flying” it looks somehow odd to me in “briefly” because the fl does not really “belong together”_  \nYou're young, so I'll not give up, but honestly I think that's not real.\n\nCheers!\n\n"
+    },
+    {
+      "time": "14 Jan 2008 — 3:40pm",
+      "content": "Eben,\n\nCheck your email.\n\nChrisL\n\n"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "43575",
+  "title": "Mime types for fonts",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Someone asked me what the appropriate MIME type was for a FontForge sfd file.\n\nI can't find any MIME types for any font formats. The IANA registry list does not include any  \n [http://www.iana.org/assignments/media-types/](http://web.archive.org/web/20100526161114/http:/www.iana.org/assignments/media-types/ \"http://www.iana.org/assignments/media-types/\")\n\nI see at one point there were discussions about getting a top-level MIME type for fonts  \n [http://www.w3c.org/Printing/chase.html](http://web.archive.org/web/20100526161114/http:/www.w3c.org/Printing/chase.html \"http://www.w3c.org/Printing/chase.html\")  \nbut I presume that has since foundered as nothing seems to have come of it.\n\nSo are there any existing standards I can't find?  \nIf not, would\n\n1. application/vnd.opentype\n2. application/vnd.truetype\n3. application/vnd.pstype1\n\nseem reasonable MIME types to try and register?\n\n",
+  "author": "<a href=\"/web/20100526161114/http://typophile.com/user/28793\" title=\"View user profile.\">fontforge</a>",
+  "time": "<br>",
+  "uid": "28793",
+  "comments": [
+    {
+      "time": "",
+      "content": "Are you talking about the SFD (FontForge internal file format) or for the fonts generated (or both?)\n\nSince FontForge's file format is cleartext, the MIME type could any of the following I think\n\ntext/x-fontforge  \napplication/x-fontforge  \napplication/vnd.fontforge-sfd  \napplication/vnd.fontforge.sfd\n\nAlthough I think one of the latter two would be prefered in modern day coding.\n\n_«El futuro es una línea tan fina que apenas nos damos cuenta de pintarla nosotros mismos». (La Luz Oscura, por Javier Guerrero)_\n\n"
+    },
+    {
+      "time": "",
+      "content": "Well the thing which started me looking into this was someone involved with freedesktop asking about fontforge's sfd. That seemed pretty simple, something like application/vnd.fontforge-sfd.\n\nBut if there were a convention for font types, then I should follow that. And if there is no convention for font types there should be.\n\nAnd that is really my question:  \nNo one seems to have registered MIME types for the standard font formats with IANA. I think that should happen, otherwise there will be a proliferation of \"x-\" types with no consistency. Given that no one has done this, should there be a standard format like\n\napplication/vnd.font-truetype  \napplication/vnd.font-opentype  \n...\n\nor should things be just\n\napplication/vnd.truetype\n\n"
+    },
+    {
+      "time": "",
+      "content": "George,\n\nI think application/vnd.font-truetype is somewhat superflous. application/vnd.font-opentype obviously applies to both .otf and .ttf, and I can't think of a font that would need to have the MIME type application/vnd.font-truetype without it just being application/vnd.font-opentype.\n\nOn the other hand, PostScript Type 1 is by no way a standardized data structure. You have the Mac FFIL and LWFN resource fork structures, you have the .pfb and .pfa data fork structures along with the auxiliary files .pfm, .inf and .afm.\n\nI think it would do good to just forget any attempt to clean the old Type 1 mess up and just proposed one MIME type for the one font format that is currently of interest, that is ISO/IEC 14496-22 (Open Font Format), also known as OpenType.\n\nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Adam, that's a good point.\n\nApple might disagree, since their TrueType 2.0 extentions are not part of OpenType, but for most purposes an 'sfnt' is an 'sfnt'. Best to avoid proliforation of MIME types.\n\nI still think there is a use to having a MIME type for type1 pf[ab], because there are still a lot around and the distinction between ASCII and Binary doesn't affect most font consumers (and the less common formats are ignorable).\n\nBut you are right that an OpenType MIME is the most important.\n\n"
+    },
+    {
+      "time": "",
+      "content": "If OpenType is vendor inspecific (which AFAIK is correct), then it shouldn't be vnd- rather:\n\napplication/x-opentype\n\nWhereas with the truetypes you would have\n\napplication/vnd-apple.fubar  \napplication/vnd-microsoft.fubar  \napplication/vnd-adobe.fubar\n\netc etc\n\n_«El futuro es una línea tan fina que apenas nos damos cuenta de pintarla nosotros mismos». (La Luz Oscura, por Javier Guerrero)_\n\n"
+    },
+    {
+      "time": "",
+      "content": "Guifa,\n\nOpenType is a Microsoft registered trademark but the OpenType format has been standardized as Open Font Format (ISO/IEC 14496-22).\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "There's an ongoing discussion on the OpenType List adressing this.\n\nsubscribe: [opentype-migration-sub@indx.co.uk](mailto:opentype-migration-sub@indx.co.uk)\n\n. . .  \nBert Vanderveen BNO\n\n"
+    },
+    {
+      "time": "",
+      "content": "The \"x-\" namespace is inappropriate for opentype. It is for experimental stuff. And OpenType does not qualify as experimental.\n\nYes, a better approach would be to get someone from the ISO opentype group to register  \n application/font-opentype.  \nAnd even better approach would be for someone from the ISO group to register a top-level MIME type for fonts and then register  \n font/opentype  \nBoth of these require someone in an established standards group to spearhead the effort. The IANA will not accept requests from random people for such things.\n\nWhich is why I suggested \"vnd.\" -- because it is something which I could do without depending on others.\n\n"
+    }
+  ]
+}

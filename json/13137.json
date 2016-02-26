@@ -1,0 +1,26 @@
+{
+  "id": "13137",
+  "title": "Width-Hinting a Pixelfont",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m making a (grayscale) pixelfont of an existing outline/print font.\n\nAlthough the bitmaps of the glyphs can only occupy integer pixel  \nwidths, I need to assign to each glyph the non-pixel-integer set  \nwidth from the outline font, which will (assumedly) be additioned  \ncumulatively by the typesetting application, causing an occasional  \nextra pixel shift, in order to match linebreaks/the\\_right\\_rag with  \nthe equivalent setting in the “source” outline/print font.\n\nI assume the only way to do this is by assigning width adjustments  \nto each glyph via hinting. I’m wondering if anybody can offer help  \nin how best to do that, and what to worry about.\n\nhhp\n\n [‹ Best Mac to PC font converter?](http://web.archive.org/web/20071017181159/http:/typophile.com/node/9696 \"Go to previous forum topic\") [Paths, Scaling, Import and Fontographer ›](http://web.archive.org/web/20071017181159/http:/typophile.com/node/12873 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20071017181159/http://typophile.com/user/1250\" title=\"View user profile.\">hrant</a>",
+  "time": "<br>",
+  "uid": "1250",
+  "comments": [
+    {
+      "time": " 17.Jun.2005 2.53pm",
+      "content": "Question: When the hinting is applied it will need to be in whole pixel width increments - no? If that’s the case maybe you can’t match the source - you just have to improve the pixelfont directly. Or are you using some kind of substition of alternative greyscale bitmaps for sets of common combinations of characters...\n\nI am probably missing something since I haven’t even seen a greyscale font in use yet ( that I know of ).\n\n"
+    },
+    {
+      "time": " 17.Jun.2005 3.16pm",
+      "content": "I realized this morning that the issue simply is not an issue. I thought that a character in a pixelfont that has a non-pixel-integer width would cause subsequent glyphs to get misaligned... but they don’t! So it turns out hinting is not even necessary. BTW, I also noticed -more like was reminded of- something else: apps like Photoshop use only the pixel-integer values from the bitmaps/rendering (not the actual em values) to place glyphs, while Word for example does use the underlying “true” width value (resulting in occasional unsightly gaps, but accurate line ends/breaks).\n\nhhp\n\n"
+    },
+    {
+      "time": " 17.Jun.2005 5.56pm",
+      "content": "Hmm Interesting. I have been looking at the way my monotype is rendered across platforms & in different apps. I had no idea how many wacky things would turn up. What I have been reading here on typophile about tuning the type to the method of delivery, paper, screen, & even to a rendering environment is SO TRUE.\n\n"
+    }
+  ]
+}

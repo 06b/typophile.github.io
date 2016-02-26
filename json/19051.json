@@ -1,0 +1,38 @@
+{
+  "id": "19051",
+  "title": "crashing on OT 'generate font'",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "i'm trying to generate an open type font file, and fontlab keeps hanging up on me. the same file worked fine before i merged all of my contours. so now i have nice clean simplified outlines (presumably) but can't make an OT font. i am able to generate OT files from other vfb files.\n\ni also tried to generate a mac suitcase, which seems successful. but indesign says the outline is not available for the installed font.\n\nwhat am i missing here? the only thing i can somewhat pinpoint is that the paths may be corrupted somehow from when they were 'simplified'.\n\n",
+  "author": "tylerg",
+  "time": "5 Apr 2006 — 12:48pm",
+  "uid": "1116",
+  "comments": [
+    {
+      "time": "5 Apr 2006 — 2:48pm",
+      "content": "Check to see you have no paths where there are two BCPS at the same position -- indicated by the point being \"open\". Squeeze that zit.\n\n"
+    },
+    {
+      "time": "6 Apr 2006 — 7:54am",
+      "content": "nick -- thanks for the input. i looked at each glyph and don't see any stray points or unclosed paths. i turned on 'font audit' which only indicated a few flat spots. are there any other tools or methods for checking my outlines? i understand that once a path is closed, the shape becomes a black fill, at least with how my preferences are set.\n\n"
+    },
+    {
+      "time": "6 Apr 2006 — 11:09am",
+      "content": "I'm just passing on a similar problem I had that was solved by replacing a corrupt outline.  \nI discovered it by a process of trial and error, by deleting half the glyphs in the font and seeing if it would compile, and so on. Another thing you can do is go round each path \"next point\" at a time, and if you click and there's no movement, then you know there is a double-point. All this is assuming that a corrupt path somewhere is the source of your difficulty, and not something else!\n\n"
+    },
+    {
+      "time": "9 Apr 2006 — 10:18pm",
+      "content": "Had a similar problem a while ago. Don't know if this could be it, but since you do not mention this, you must give your font a name. FontLab will not warn of this and give an error in return...\n\n"
+    },
+    {
+      "time": "12 Apr 2006 — 6:10am",
+      "content": "reg, it definitely has all the naming info -- i am able to export a few characters, but that is it. nick, i tried your method of deleting characters until it exports. the problem is totally random it seems. i have successfuly exported up to about 15 glyphs, but i can also export with basically any single glyph left in the set. for instance, if i delete everything except the 'a', i can export. if i delete everything but the 'b', same deal. it can't be a memory issue -- i have over a gig of ram, and have quit all other programs. arg!\n\n"
+    },
+    {
+      "time": "12 Apr 2006 — 8:29am",
+      "content": "_if i delete everything except the ‘a’, i can export. if i delete everything but the ‘b’, same deal_\n\nWell, start from scratch and copy your glyphs in to a new vfb file. See if that works.  \nThe import the metrics.\n\nOh, and you need more than just the kern feature.\n\n"
+    }
+  ]
+}

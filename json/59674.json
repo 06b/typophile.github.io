@@ -1,0 +1,34 @@
+{
+  "id": "59674",
+  "title": "Need Help with contextual susbstitution",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Hello,\n\nI'm developing an Arabic font.\n\nI want to achieve a substitution like the one shown in the attached image.\n\nI want \"be\" to change to \"be.alt\" when it is before \"noon\", then I want to change the \"noon\" to change to \"noon.alt\" when it comes after \"be.alt\".\n\nI know that this has something to do with Contextual Substitution.\n\nMy question is how to write the lookups, and in which order the lookups should be placed?\n\nThanks and regards.\n\n| Attachment | Size |\n| --- | --- |\n| [contextual substitution.jpg](http://web.archive.org/web/20150415032756/http:/typophile.com/files/contextual%20substitution.jpg) | 602.99 KB |\n\n",
+  "author": "moiz217",
+  "time": "6 Jul 2009 — 7:05am",
+  "uid": "45719",
+  "comments": [
+    {
+      "time": "6 Jul 2009 — 8:38am",
+      "content": "Which program are you using?\n\n"
+    },
+    {
+      "time": "6 Jul 2009 — 8:42am",
+      "content": "I've never designed an Arabic font, but as far as I know you can use Arabic OpenType feature tags like 'isol', 'fina', 'medi', 'init', etc to help your substitution.\n\nHope this links help:  \n [http://29letters.wordpress.com/2007/05/15/generating-arabic-fonts/](http://web.archive.org/web/20150415032756/http:/29letters.wordpress.com/2007/05/15/generating-arabic-fonts/ \"http://29letters.wordpress.com/2007/05/15/generating-arabic-fonts/\")  \n [http://typophile.com/node/16288](http://web.archive.org/web/20150415032756/http:/typophile.com/node/16288 \"http://typophile.com/node/16288\")\n\n"
+    },
+    {
+      "time": "6 Jul 2009 — 1:15pm",
+      "content": "_Which program are you using?_\n\nI'm using Fontlab and MS VOLT. I prefer doing all the OT related work in VOLT.\n\nالخط هندسة روحانية ظهرت بآلة جسمانية\n\n"
+    },
+    {
+      "time": "6 Jul 2009 — 8:25pm",
+      "content": "Dear معز\n\nThese Microsoft tutorials will be a good starting point.  \nDeveloping OpenType Fonts for Arabic Script (1 of 3): Introduction  \n [http://www.microsoft.com/typography/OpenType%20Dev/arabic/intro.mspx](http://web.archive.org/web/20150415032756/http:/www.microsoft.com/typography/OpenType%20Dev/arabic/intro.mspx \"http://www.microsoft.com/typography/OpenType%20Dev/arabic/intro.mspx\")\n\nand\n\nCreating and supporting OpenType fonts for the Arabic script  \n [http://www.microsoft.com/typography/otfntdev/arabicot/default.htm](http://web.archive.org/web/20150415032756/http:/www.microsoft.com/typography/otfntdev/arabicot/default.htm \"http://www.microsoft.com/typography/otfntdev/arabicot/default.htm\")\n\nYou can also download some freely available (with open VOLT project) fonts from  \n [http://www.crulp.org/software/localization.htm](http://web.archive.org/web/20150415032756/http:/www.crulp.org/software/localization.htm \"http://www.crulp.org/software/localization.htm\")\n\nBest regards,  \nAtif\n\n"
+    },
+    {
+      "time": "6 Jul 2009 — 8:56pm",
+      "content": "You will need two separate lookups for this, and you will need to apply them in sequence. The normal layout feature to use for such lookups with be Contextual Alternates 'calt'.\n\nLookup 1, using VOLT syntax, will be like this\n\nbe -\\> be.alt\n\nwith the context string\n\n| noon\n\nLookup 2 will be like this\n\nnoon -\\> noon.alt\n\nwith the context string\n\nbe.alt |\n\nNote that you can foolproof the first lookup by putting both noon forms in the context like this:\n\n| {noon, noon.alt}\n\n"
+    }
+  ]
+}

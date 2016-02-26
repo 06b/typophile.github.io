@@ -1,0 +1,62 @@
+{
+  "id": "5011",
+  "title": "Problems with dynamic text in Flash",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I've got a problem with this typeface that was designed as a bitmap font - whenever it is rendered as dynamic text, it blurs. I have read the FontLab manual, and the FontFlasher manual, followed the directions to the letter, and still the typeface blurs when used dynamically in Flash.   \n   \nI would be eternally grateful to anyone with advice on how to solve this problem. I am completely at a loss and very frustrated.   \n   \nHere is a sample of the typeface in action (on the right is a sample of one that works correctly in Flash) -   \n [http://www.stereotypography.com/bfuq2/](http://web.archive.org/web/20081121091508/http:/www.stereotypography.com/bfuq2/)\n\n [‹ Can&#39;t generate OpenType font from FontLab](http://web.archive.org/web/20081121091508/http:/www.typophile.com/node/5215 \"Go to previous forum topic\") [New Java-based Font Editor ›](http://web.archive.org/web/20081121091508/http:/www.typophile.com/node/5229 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081121091508/http://www.typophile.com/user/569\" title=\"View user profile.\">Corey Holms</a>",
+  "time": "<br>",
+  "uid": "569",
+  "comments": [
+    {
+      "time": " 31.May.2004 7.11pm",
+      "content": "Sucks, doesn't it?   \n   \nThere are only two ways to fix this that I know of:   \n   \n1. Use FlashMX 2004 and switch aliasing ON for the text field. The drawback is that you if you export this for pre-Flash 7 players, it doesn't work.   \n   \n2. Set the quality setting for the movie to LOW. This is the only way to do it for pre-MX 2004 versions. Unfortunately, this affects everything, not just the text field.\n\n"
+    },
+    {
+      "time": " 31.May.2004 7.17pm",
+      "content": "Hmm. Now that I look at your example again, I'm not sure I'm understanding what's happening. It works okay for one font, but not the other? Any other details you can provide about the fonts? (PostScript, TrueType, etc.) In other words, I'm not sure how it's even working in the lower right text box. It seems like it shouldn't...\n\n"
+    },
+    {
+      "time": " 31.May.2004 10.14pm",
+      "content": "Thank you for helping Mark, the typeface is TrueType, but I've also supplied a PS1 version in the hopes that he could jettison the PS data and only use the bitmap information. He has tried this with both versions, but I believe we are looking at the TTF version. I assumed that the problem was metrics causing the blurring, but my flash programmer says that no metrics are involved at all. Does that help clarify?   \n   \nI generated the typeface using FontLab and FontFlasher with Python. I have generated a TTF and a PS1 version with an 8pt bitmap for him to use, both generate the exact same problem with the blurring that we see in the example above.\n\n"
+    },
+    {
+      "time": " 1.Jun.2004 8.15am",
+      "content": "Which version of Flash are you using? If you're using MX 2004, have you tried turning the font aliasing feature on for the text boxes?\n\n"
+    },
+    {
+      "time": " 1.Jun.2004 9.52am",
+      "content": "I will ask him which version of Flash is being used and will link this thread in the email hoping that he can join in on the conversation. Again, thanks for taking time to look into this for me!\n\n"
+    },
+    {
+      "time": " 4.Jun.2004 8.44pm",
+      "content": "Have you followed all the instructions to the letter? If the text field is nested inside a movieclip both the movieclip and the text field need to be set to a whole pixel. This can get complicated with multiple lists. I'd write a global to local script to force the textfield to a whole pixel position on the root timeline.   \nAlso use Math.floor to fix that floating point integer bug.   \nAnd make sure your text isn't center justified or anything like that.\n\n"
+    },
+    {
+      "time": " 5.Jun.2004 9.47am",
+      "content": "Corey and I corresponded by email after he posted here and he sent me the font. It turns out that the space character had a width that was not a multiple of the basic \"pixel\" unit in the font. I haven't heard back from him, but I think that was the problem and he was able to get it to work right.\n\n"
+    },
+    {
+      "time": " 16.Jun.2004 9.54am",
+      "content": "Mark, I am a very rude person.   \n   \nI apologize for not getting back to you - your suggestion solved the problem! I was so excited that it worked, I ended up forgetting my manners. Thank you!\n\n"
+    },
+    {
+      "time": " 16.Jun.2004 10.41am",
+      "content": "No problem. I'm glad it turned out to be such a simple solution.\n\n"
+    },
+    {
+      "time": " 16.Jun.2004 10.48am",
+      "content": "Very interesting. I have seen this same problem with other   \nVector \"bitmap\" fonts when pulled dynamically into Flash.   \n   \nThe only fix I've found is to use fonts from [Miniml](http://web.archive.org/web/20081121091508/http:/www.miniml.com/). You can see   \nStandard working on the Typophile home page. Even Unibody   \n(Underware) and various FontsForFlash faces produce the   \nblurring when the text is dynamic.   \n   \nMakes me wonder if these other fonts have the same word   \nspacing issue.\n\n"
+    },
+    {
+      "time": " 16.Jun.2004 10.54am",
+      "content": "\\> use fonts from Miniml.   \n   \nOr go another step up to: [http://www.ultrafonts.com](http://web.archive.org/web/20081121091508/http:/www.ultrafonts.com/)   \n   \nhhp\n\n"
+    },
+    {
+      "time": " 16.Jun.2004 12.33pm",
+      "content": "_Makes me wonder if these other fonts have the same word   \nspacing issue._      \n   \nIf you have the font, open it up in a font editor. The space should be a multiple of the \"pixel\" unit size. It may or may not be the problem.   \n   \nI just checked Unibody myself, and the space is correct. It must be something else.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "64147",
+  "title": "Dumping a TTF to editable text in Windows?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Does anyone have any free or paid Windows XP utilities they can recommend that will dump a TTF font file to editable text?\n\nIdeally, I want an extensive Asian Unicode font (like SimHei for example) to be dumped to a text file that looks just like the Character Map (a grid that's 10 or so characters wide and several hundred rows tall), but in editable text (DOC, RTF, TXT, whatever works).\n\nI'm trying to do it using the copy and paste function in Character Map but it's taking way too long. Is there a utility out there that will do something like this for me in an automated manner? I'm willing to pay a decent price.\n\n",
+  "author": "jasonmenzies",
+  "time": "11 Nov 2009 — 3:22pm",
+  "uid": "50088",
+  "comments": [
+    {
+      "time": "11 Nov 2009 — 6:45pm",
+      "content": "What do you plan to do with the editable text file?\n\n"
+    },
+    {
+      "time": "11 Nov 2009 — 7:05pm",
+      "content": "This is a job for [TTX](http://web.archive.org/web/20130824222546/http:/letterror.com/code/ttx/).\n\n"
+    },
+    {
+      "time": "12 Nov 2009 — 1:47am",
+      "content": "@jasonmenzies\n\nThere is a command \"fontplot\" contained in the Adobe Font Development Kit for OpenType. It might help:\n\n<cite>fontplot</cite>\n\n<cite>Make a pdf file showing all the glyphs in the font. This fills a page with many glyphs, and shows just the filled outlines at a small point size, with some info around each glyph. Works with OpenType fonts and Type 1 fonts.</cite>\n\n<cite>\"charplot\", \"digiplot\", \"fontplot\", \"hintplot\", and \"showfont\" are all command files that call the ProofPDF script with different options. ProofPDF takes as options a list of fonts, and an optional list of glyphs, and prints a PDF file for the specified font. showing the glyphs as specified by options.</cite>\n\nDo you want to print the character map or do you want to dump the font file? If you want to dump (decompile) it, TTX is right. Otherwise I don’t know, in which way TTX should be a help there.\n\n**I am not sure, whether fontplot works with TrueType fonts.** I assume, it does not, although OpenType fonts can be TrueType flavored.\n\n"
+    },
+    {
+      "time": "12 Nov 2009 — 11:46am",
+      "content": "Thanks for the suggestions and assistance everyone. None of these ideas helped but maybe with a bit more refinement of my original question, someone will have a different suggestion.\n\nAric, I work in home video subtitling so all my text needs to be rendered as a bitmap or other graphic image for client delivery. I need all the characters dumped from a font to text so I can load them into my rendering engine (which runs on proprietary Unicode text-based files), render them out to graphics, and QC the outputs.\n\nAntonio, thanks for the suggestion. TTX seems helpful, but I think it's giving me all the stuff behind the scenes to make the characters work (for programming, compiling, etc), whereas I just need the characters themselves.\n\nArno, thanks to you for the suggestion as well. I think I found a couple of other programs that do the same thing yesterday (dump to a printable PDF), but again since I can't actually use the text from the PDF in my editing software, it isn't exactly what I need.\n\nIdeally I just need content like this:\n\n!\"#$%&'()\\*+,-./01234\n\nThat's the first row of the character map from Arial, copied one-by-one with the select button and then copied to the clipboard, and pasted here.\n\nFor Arial, it won't be such a big deal, but SimHei has 16,000 characters, so I was hoping to find something that would do it a bit quicker.\n\nAny further ideas would be warmly welcomed. I thank you all for your time thus far.\n\n"
+    },
+    {
+      "time": "12 Nov 2009 — 1:37pm",
+      "content": "@jasonmenzies\n\nI think I have an idea:\n\nDecompile the CMAP-table of the font file with TTX (-t cmap). Then use a search&replace tool.\n\nExample:  \n\\<cmap\\>  \n \\<tableVersion version=\"0\"/\\>  \n \\<cmap\\_format\\_4 platformID=\"0\" platEncID=\"3\" language=\"0\"\\>  \n \\<map code=\"0x20\" name=\"space\"/\\>\\<!-- SPACE --\\>  \n \\<map code=\"0x21\" name=\"exclam\"/\\>\\<!-- EXCLAMATION MARK --\\>  \n \\<map code=\"0x22\" name=\"quotedbl\"/\\>\\<!-- QUOTATION MARK --\\>\n\nshould look like this (without underscores):  \n&\\_#x20;  \n&\\_#x21;  \n&\\_#x22;\n\nOpenOffice Writer wants to have them at least in a html element. So you should have this in the end (without underscores):  \n\\<p\\>&\\_#x20;&\\_#x21;&\\_#x22;\\</p\\>\n\nStore it as html file and open it in Word or OpenOffice Writer or anything comparable and save it as doc or rtf file. Word and Writer will display the glyphs then (and naturally your browser), as long as the font is installed and selected (with the font menu or a CSS declaration).\n\nFor the case, that this does not work, it might help you to find the right way. I am not sure, whether the cmap table necessarily contains the Unicode positions of all characters of the font. But I assume, you neither would be able to get access to characters, that are not in the CMAP table with their Unicode positions, with the help of the clipboard.\n\nAnd probably there is a more elegant way.\n\n"
+    },
+    {
+      "time": "12 Nov 2009 — 2:57pm",
+      "content": "Arno, you are correct: Window's Charmap utility does not display \"all\" characters in a font, just those with a valid Unicode mapping (it does not show OTF substitution results). I agree that it's a moot point, since the _input_ of Jason's program should be Unicode :-)\n\nA one-step solution could be a program that immediately dumps the Unicode CMAP to a file (there might be more than one encoding in any font). I wrote lots of little programs to examine TTFs and OTFs -- I'll have a quick look-see if it's possible to re-purpose one to do this. Hold on a minute.\n\n"
+    },
+    {
+      "time": "12 Nov 2009 — 4:21pm",
+      "content": "There you go.  \nDownload \"cmaptofile.zip\" from [my site](http://web.archive.org/web/20130824222546/http:/www.jongware.com/binaries/cmaptofile.zip). Extract to a suitable place.\n\nIt's a console program; usage:\n\n`cmaptofile font file name [-utf8 | -buc] [-llnumber]`\n\nDefault output is Unicode, little endian. Use `-buc` to toggle to big endian. Use `-utf8` to output as UTF8 encoded file (not thouroughly tested ;-). Use `-llnumber` to set the line length in characters -- default is `-ll32`.\n\nOutput goes to the same folder as the program is in, to a file with the same name as the font plus \".txt\" appended.\n\nIdeally, it oughta use the largest CMAP it finds -- any unicode one. If the font doesn't have a unicode map .. well, anyone's guess what happens then. I think it fails silently. OTOH, if it _does_ work, you'll see a complete dump of the UC characters it writes to the file.\n\nTested with a handful of PFB, OTF, and TTFs -- still, no guarantees, it was a real quick hack.\n\n"
+    },
+    {
+      "time": "12 Nov 2009 — 6:14pm",
+      "content": "Here are things that work best (and most easily) on Linux, that I use on a Mac and that may work on a PC with Cygwin.\n\nI always use small scripts. The following one outputs the unicode numbers (in hex format) in a font; it requires Fontforge, the Python Fontforge module and, of course, Python. Copy what is between the cut lines and paste in a terminal window (Cygwin, mac or Linux), and this creates the executable file `lstucodes` in the current directory.\n\n`\n----\ncat > lstucodes <<'EOF'\n#!/usr/bin/env python`\n\nimport fontforge,sys  \nfnt=fontforge.open(sys.argv[1],1)\n\nfor g in fnt.glyphs():  \n&nbsp;&nbsp; if (g.unicode \\>= 0x21):  \n&nbsp; &nbsp; &nbsp; print \"%04X\" % (g.unicode)  \nEOF  \nchmod 755 lstucodes  \n----\n\nIf `simhei.ttf` is also in the current directory then\n\n`./lstucodes simhei.ttf |sort > simhei.txt `\n\noutputs all the unicode values of the characters in simhei.ttf, sorts them and puts the result in `simhei.txt`.\n\nTo format, I usually use sed and awk but young people use other things now. Anyway, here is my script (if I want 10 characters per line); again, copy and paste in the terminal window to get hex2html:\n\n`\n---\ncat > hex2html <<'EOF'\n#!/bin/sh`\n\nawk 'BEGIN{print \"\\<html\\>\\<body\\>\"}{  \n&nbsp; printf \"&#x%s;\\n\", $0  \n&nbsp; n = n+1  \n&nbsp; if (n == 10) {  \n&nbsp; &nbsp; printf \"\\<br\\>\\n\"  \n&nbsp; &nbsp; n=0  \n&nbsp; }  \n}END{ printf \"\\</body\\>\\</html\\>\\n\"}'&nbsp; $1  \nEOF  \nchmod 755 hex2html  \n---\n\nNow `./hex2html simhei.txt > simhei.html` gives the file that you can find here: [**simhei.html**](http://web.archive.org/web/20130824222546/http:/www.iro.umontreal.ca/~boyer/typophile/simhei.html).\n\nCharacters with a unicode number above FFFF cause problem. If you find other problems, I'd like to be told.\n\nMichel\n\n"
+    },
+    {
+      "time": "12 Nov 2009 — 6:15pm",
+      "content": "Theunis, you are my hero! This is absolutely FANTASTIC! This is exactly what I needed and will save me hours of work.\n\nPlease feel free to contact me through my profile if you are seeking any level of compensation for this. I would be happy to pay you for your efforts due to the amount of labor this will save me.\n\nI am so happy that I came to this site for assistance. You have all been so helpful and I really appreciate it!\n\n"
+    },
+    {
+      "time": "13 Nov 2009 — 6:14am",
+      "content": "<cite>Characters with a unicode number above FFFF cause problem.</cite>\n\nThey were causing problems (due to Python) on the Mac (not on Linux) in different circumstances but not here, or so it seems. I remplaced 04X by 05X in lstucodes (just so that those characters come at the end of the file) and tried on STHeiti and, when viewed with the STHeiti font, the resulting file [**STHeiti.html**](http://web.archive.org/web/20130824222546/http:/www.iro.umontreal.ca/~boyer/typophile/stheiti.html) looks fine to me (but I dont' know Chinese).\n\n"
+    },
+    {
+      "time": "13 Nov 2009 — 6:39am",
+      "content": "Michel,\n\nGood point. My quick hack does not support codes \\>0FFFFh -- I cannot write these to a regular UC file as hi/lo bytes (but I think there are code extensions for that). The UTF8 web page I used to implement this _did_ show how to write them. Then again, I don't know how these huge codes are coded in the CMAP, so I cannot read them anyway.\n\nI don't think I even have fonts with such huge codes. Does this STHeiti thingy have them? (Not that I have that font either.) (Ah -- stupid remark: your HTML shows the last 5 characters to be in the x20000 range.)\n\n"
+    },
+    {
+      "time": "13 Nov 2009 — 8:22am",
+      "content": "The font may have a format 12 cmap subtable, which will complicate things further.  \nHmm, not that I have a solution for you however.\n\n"
+    },
+    {
+      "time": "13 Nov 2009 — 1:02pm",
+      "content": "On OS X 10.5.8 (on my MacBook Pro) there is a font named STXihei in /System/Library/Fonts that appears to be seen as \"STHeiti Light\" in the character palette. According to the FontForge dump, that font contains 4241 characters in CJK Unified Idiographs Ext.B range 20000-2F7FF. That font is /System/Library/Fonts/华文细黑.ttf. The characters I checked (just a few, of course) are seen in the character palette and in the dump to be seen here: [**stxihei.html**](http://web.archive.org/web/20130824222546/http:/www.iro.umontreal.ca/~boyer/typophile/stxihei.html).\n\nMy guess is that FontForge does well its jobs.\n\nMichel\n\n"
+    },
+    {
+      "time": "14 Nov 2009 — 4:33pm",
+      "content": "The ­­`lstucodes` script above is something I had in my `~/bin` folder.\n\nI now took the time to compare with Arno's method. On tens of thousands of characters, comparing outputs can be quite instructive. Looking at `stxihei.ttx`, I see only one cmap table, of type 12; there are 34962 character codes (and 31 multiply encoded glyphs).\n\nFor each line containing `'map code'` we want the string enclosed between the first and the second quote character. That can be done with `awk`, telling it to use quote as a field separator. In any unix-like shell, typing\n\n`\ngrep 'map code' stxihei.ttx  | awk -F\\\" '{print $2}' | sed 's/0x//' > stxihei.txt\n`\n\ndoes it (and removes the leading 0x). Then (using the hex2html script above)\n\n`hex2html stxihei.txt > stxihei.html`\n\ngives the desired html file, 10 characters per line.\n\nAfter comparing the output from FontForge and the above, one can see that on multiply encoded glyphs in stxihei, FontForge outputs only one unicode value per glyph (I checked with a script). Arno's method based on the ttx output gives all the unicode values in that font and that may be what you want.\n\nOn other ttx files, with multiple cmap tables, I don't know what may occur. For some other font, I saw unicode points with `.notdef` glyphs (that would need to be discarded with grep -v). What else?\n\nMichel\n\n"
+    },
+    {
+      "time": "14 Nov 2009 — 7:14pm",
+      "content": "Just for fun, added a few more options to the quick-and-dirty proggie (most recent version: [cmaptofile101.zip](http://web.archive.org/web/20130824222546/http:/www.jongware.com/binaries/cmaptofile101.zip)).\n\n- `-html` Write a HTML file, with the character codes in full decimals\n- `-cr`, `-lf`, `-crlf` and `-lfcr` change line ending mode\n- `-ofilename` set output file name\n- `-name` (just for fun) show the name of each character\n\nI removed the worthless long listing of the character names while processing.  \nI changed the default line length to 10 characters (should've done that right away).\n\nIf you feed it a TTC, it writes out one file per sub-font (although I seem to get the same files -- my few TTCs must all have the same CMAP).\n\nI added a GetWindowsFolder call -- if you need a font from your Windows folder, you don't have to explicitly prepend \"c:\\windows\\fonts\", it'll automatically check in there if the file is not found in your currect folder.\n\nOh -- and I added CMAP12 support, for those \\*huge\\* codes. If present, the program uses this. Couldn't really check; it seems to work with LastResort though.\n\nThe program is hardwired not to add null characters, U+FFFE, U+FFFF, and U+D800..U+DFFF (but these really should not be present in the file anyway).\n\n"
+    },
+    {
+      "time": "26 Nov 2009 — 4:24pm",
+      "content": "Just for fun, I compiled a Mac version!  \nDirect link: [cmap2file\\_mac.zip](http://web.archive.org/web/20130824222546/http:/www.jongware.com/binaries/cmap2file_mac.zip)\n\nDownload it and put it somewhere you can reach using Terminal. Then run, using\n\n`./cmap2file font_file_name[*] [options ... see previous mails]`\n\n[\\*] Typically, your installed fonts can be found in either /Library/Fonts or in ~/Library/Fonts.\n\nI added support for the old(!) versions of TTF that start with 'true', rather than \"ttcf\", 0x10000 (Windows TTF), or \"OTTO\". dfonts are _not_ supported!  \nI also added another option: `-name` inserts the name per character, taken from the file if present, synthesized otherwise.  \nBe sure to use the `-ofilename` option to put the output somewhere you can find it later -- remember, default output is where the font file was found.\n\nDisclaimer: It appears to work just fine on my Mac OSX 10.6, but I set the minimal target to 10.4. Still, your mileage may vary.\n\n"
+    },
+    {
+      "time": "28 Nov 2009 — 6:23am",
+      "content": "I know of a utility that can dump an Adobe Type Manager font to an editable text file, and read it back in again - it was on the Garbo CD ROM from Walnut Creek - but not one for TrueType.\n\n"
+    }
+  ]
+}

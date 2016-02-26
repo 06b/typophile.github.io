@@ -1,0 +1,44 @@
+{
+  "id": "114334",
+  "title": "Type dimensions",
+  "forum": "Design",
+  "tags": [
+    "metrics",
+    "Type dimensions",
+    "Design"
+  ],
+  "content": "Hello,\n\nI was just reading [this thread](http://web.archive.org/web/20150416013333/http:/typophile.com/node/104308) and Catharsis said \"The font is now 1050 ems tall; that's no problem these days, right?\". This again made me aware that despite my experience with type design, I still have no idea what the dimensions of a typeface should be.\n\nI made quite [comprehensive images to illustrate such things as the anatomy of typography](http://web.archive.org/web/20150416013333/http:/fc04.deviantart.net/fs70/i/2012/305/0/7/typography_series ___01___ anatomy_of_typography_by_martinsilvertant-d5g8ulm.jpg) and others, but I don't think I've found a source where the metrics are explained.\n\nWhen I start a new typeface, I always type a few capital letters in a few different typefaces and take the average weight of these typefaces to be roughly the starting point of my own, unless I have something specific in mind which requires a lighter or darker weight than Regular (which could be called Book and Medium I suppose).\n\nSo, is there a standard when it comes to the weight and dimensions of typefaces? Judging from other typeface there doesn't really seem to be.\n\nAnd also, does it really not matter if a font is 1050 ems tall? Doesn't it scale, resulting in the weight becoming a tad lighter than Regular?\n\n",
+  "author": "Martin Silvertant",
+  "time": "19 Feb 2014 — 7:57pm",
+  "uid": "52182",
+  "comments": [
+    {
+      "time": "19 Feb 2014 — 8:24pm",
+      "content": "Hrant, if you read this, I saw you said \"I like leaving ~25 units up top and ~10 at the bottom (in an Em of 1000).\" in [this thread](http://web.archive.org/web/20150416013333/http:/typophile.com/node/104308). Could you tell me why that is?\n\nI suppose it's about time I learn more about the technicalities of font making, especially scripting actually.\n\n"
+    },
+    {
+      "time": "19 Feb 2014 — 9:42pm",
+      "content": "Some legacy systems will not like an Em other than 1000.\n\nA font needs an upper talus\\* and a lower talus, so it doesn't bump itself when set flush (plus people expect the apparent size to fall within a certain range). The upper talus should be larger because there's more action above the x-line than below the baseline, plus the UC accents always go beyond the top and/but the less they go the better. There are no (or extremely few) accents below the descenders.\n\n\\* AKA internal leading.  \nBTW see James Mosley's post here: [http://typophile.com/node/90717?page=1](http://web.archive.org/web/20150416013333/http:/typophile.com/node/90717?page=1 \"http://typophile.com/node/90717?page=1\")\n\nhhp\n\n"
+    },
+    {
+      "time": "19 Feb 2014 — 9:59pm",
+      "content": "I have a hard time visualizing what \"bumping itself when set flush\" looks like. Is it a leading issue?\n\n\"Plus people expect the apparent size to fall within a certain range\"  \nIs there a defined range?\n\nI'm currently working on adding language support to a typeface I'm working on for a client and I already noticed my diacritics are sometimes a bit high compared to some typefaces I'm using for reference to the dimensions. Could that be a problem? I'm using an Em of 1000 though. Here are the other dimensions:  \nAscenders: 728  \nCaps height: 680  \nX-height: 519  \nDescenders: -188\n\nThe acute accent for example touches the 770 line at the top.\n\nBy the way, since I design my letters in Illustrator and then scale them into FontLab, I will always have an Em of 1000. However, if the dimensions of my letters are off I guess it will scale the weight. I don't think I'm having this problem, but I just like to make sure that I'm not doing anything strange with the dimensions.\n\n"
+    },
+    {
+      "time": "19 Feb 2014 — 10:12pm",
+      "content": "If there's no talus, when you set it with zero leading (not so rare) the descenders of a line will touch the ascenders of the next.\n\nThere's no definite range in terms of expected apparent size, but I think a talus of about 5% is usual. It comes from the metal days, where it was mostly a physical issue (since there had to be a slope from the face to the shoulder).  \n [http://typophile.com/node/91336](http://web.archive.org/web/20150416013333/http:/typophile.com/node/91336 \"http://typophile.com/node/91336\")  \nDo note BTW that apparent size is mostly affected by something not close to the top and bottom bounds: the x-height!\n\nSo your combined talus is 84, which is pretty high. But if you do raise the ascenders you'll be close to what I myself (generally) recommend.\n\nThe reason to allow some extreme stuff like cap accents to overshoot the bounds is that it's all about compromises anyway, and it's not worth making everything tiny just to avoid \\*nothing\\* going over.\n\nhhp\n\n"
+    },
+    {
+      "time": "19 Feb 2014 — 10:21pm",
+      "content": "Oh I forgot to mention, the acute accent I'm talking about is for lowercase. I think the acute accent for the capitals could reach 950 at the top. Could that be a problem?\n\nI'm also not quite grasping what a talus is. I thought I understood, but how did you get the number 84?\n\nAlso, is there a particular reason why one would set the leading to 0? I mean, if the ascenders and descenders do touch, it shouldn't be a problem to just increase the leading, but I have the feeling there's something I fail to take into consideration here.\n\n"
+    },
+    {
+      "time": "19 Feb 2014 — 10:48pm",
+      "content": "I think 950 (combined with the 188 below) for something common like an acute is indeed a bit much. BTW it's common practice to make cap accents flatter (and tighter with the letter) to reduce their overshooting of the top.\n\n84 = 1000 - (728 + 188)  \nThe talus is the emptiness within the EM, above the ascenders and/or below the descenders.\n\nA leading of zero isn't very common, but in narrow columns it can make sense.\n\nhhp\n\n"
+    },
+    {
+      "time": "20 Feb 2014 — 3:29am",
+      "content": "I already took the flattening of the cap diacritics into account, otherwise it would reach 980 perhaps.\n\nI will probably show you the typeface later today. Perhaps you can help me point out which dimensions are being exaggerated, if any. I guess I could flatten all diacritics a bit more as well.\n\nThanks for the help and explanations.\n\n"
+    }
+  ]
+}

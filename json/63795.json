@@ -1,0 +1,42 @@
+{
+  "id": "63795",
+  "title": "CSS \"Features\"",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I put features in quotes, because that's our word for them. I'm trying hard to follow a discussion on [http://lists.w3.org/Archives/Public/www-font/](http://web.archive.org/web/20100203143507/http:/lists.w3.org/Archives/Public/www-font/ \"http://lists.w3.org/Archives/Public/www-font/\"),  \n...where the discussion, not to mention the specification, seems to be veering in an odd direction.\n\nRight now, the specification says \"small caps\" is \"font-variant\", and as far as I can tell, the pattern is being set, it seems, to rename all of the font features. As far as I can tell, according to JK:\n\n\"One of the reasons to propose specific properties (font-variant-\\* or whatever) for \"well-known\" features is that it allows the CSS to be less closely tied to the underlying font technology.\"\n\nBut these names do not come from an underlying font technology, or any font technology. These names come from years of education.\n\nSo, while I'm busy trying to figure out how to save size, scale and render, can someone else explain either to me, or to them what the hell is going on?\n\nCheers!\n\n",
+  "author": "<a href=\"/web/20100203143507/http://typophile.com/user/2969\" title=\"View user profile.\">dberlow</a>",
+  "time": "<br>",
+  "uid": "2969",
+  "comments": [
+    {
+      "time": "",
+      "content": "Yikes  \nThis sounds like a disaster in the making...\n\nWill the \\* in font-variant-\\* be replaced with \"font-variant-smallcaps\"?\n\nStill sounds like the geeks are loose in the composing room. Unfortunately, there's little or no awareness that type existed a long time before programmers.\n\nP\n\n[http://slowprint.com/](http://web.archive.org/web/20100203143507/http:/slowprint.com/ \"http://slowprint.com/\") Letterpress for Typographers!  \n [http://alphabets.com/](http://web.archive.org/web/20100203143507/http:/alphabets.com/ \"http://alphabets.com/\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "David,\n\nI guess you misinterpreted this particular part of the discussion. It was exactly about avoiding use of 4-letter tags (as coming from underlying font technology) and use \"well-known\" features (aka common names).\n\nI am not sure why you call it renaming. There is nothing to rename in the first place, set of CSS properties and names is in process of being defined. Names and set of features+values are not fixed, there are at least two proposals. If you have problems with particular property definition, name, or available values, tell us and we can look at it.\n\nDisclaimer: I realize that OpenType being de facto standard had inspired people to start working on CSS typographic features and, therefore, there is a certain bias in including features that are available only in OpenType. But it does not mean that we are targeting OpenType specifically. I am looking at OpenType feature registry just as organized set of possibilities available to define and implement.\n\nThanks,  \nSergey\n\n"
+    },
+    {
+      "time": "",
+      "content": "In a page layout application, when you want to use smallcaps, you select a smallcap function from the UI, you don't input an OTL four-letter feature tag. The application then applies smallcaps according to what the font supports and how it supports it: it might be the OTL ‘smcp’ feature or it might be outline scaling or it might be via some other smart font format (e.g. AAT) that the application recognises and knows how to process. The CSS discussion is about the same higher-level function approach, so instead of using a font format-specific tagging system, it will use its own syntax which can then be interpreted according to the feature systems of any smart font format supported by the browser. [And in a web authoring tool or environment the function may be presented as a UI option, hiding the CSS syntax, as exists for e.g. bold and italics in such tools.]\n\nAlso note that application layout functions call more than one OTL feature, e.g. an allcaps function might call both the OTL ‘case’ feature and the ‘cpsp’ feature. Same with CSS.\n\n"
+    },
+    {
+      "time": "",
+      "content": "IMHO, CSS needs a very expensive type and typography nanny.\n\n[http://dev.w3.org/csswg/css3-fonts/](http://web.archive.org/web/20100203143507/http:/dev.w3.org/csswg/css3-fonts/ \"http://dev.w3.org/csswg/css3-fonts/\") ...the latest now in \"last call\"\n\n...contains some fabulous, fabulous baby steps. But there are at least two smelly diapers, a couple spilled bottles and a window smeared with blueberry cranberry cereal to clean up.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> If you have problems with particular property definition, name, or available values, tell us and we can look at it.\n\nYes I do. The syntax \"invented\" for CSS, as I read it, is that a typeface family is called a \"font\" and a typeface style is called a \"face\". So, within this syntax, a \"font-variant\" is a poor description for a glyph variant. The user has already, (presumably) selected a script and language, and (definitely) a font and a face. So why, if the user is already down to glyphs, are CSS calling a glyph-variant a font-variant?\n\nLater in the [same page](http://web.archive.org/web/20100203143507/http:/dev.w3.org/csswg/css3-fonts/), you see:  \n\"Appendix A: Mapping _font features_ to CSS properties\", (my italics)\n\nI read this hoping it would describe how the mis-named font-variant(s) would be mapped to OT features.  \nSurprise! this section is almost exclusively discussing \"font face\" mapping issues.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "@dberlow\n\nDB\\>_\"The syntax “invented” for CSS, as I read it, is that a typeface family is called a “font” and a typeface style is called a “face”._\n\nA typeface family is called a \"font-family\". \"face\" to my knowledge, appears only in the @font-face declaration. It has no special meaning, just a label with a vague connection to \"typeface\".  \nIn CSS, a declaration with an @ in front of it works like a wrapper containing yet more declarations that are applied only under certain or under all conditons. For example, to apply a set of rules only for when the web page is printed:  \n@media print{  \n... put the print-only rules here. For example, this next declaration:  \nbody{font-family:constantia, georgia, serif;}  \n}\n\nBasic CSS properties like word-spacing, letter-spacing, line-height, etc... probably don't map in the ways you might expect if you come from a print design background.  \nFor example, there is no property that corresponds exactly to leading in CSS.  \nThe space between lines is the value of the line-height property minus the bounding box created by the choice of font-family and font-size.\n\nCSS is up and working on a billion desktops. You might find the nomenclature silly, or stupid - and it may be - but you're hopelessly outnumbered. Mohammed **must** go to the mountain because this mountain is really friggin' huge and there's no going back and changing any of it. There is only adding to it. And that's what's being worked out with the font features discussions.\n\n@anyone at all:\n\nI don't know if there's a tutorial along the order of, \"CSS for Print Designers\" which maps the various properties to their equivalents in print and desktop publishing terminology but if not, well, quite a worthwhile project if ever there was one.  \nIf I can't find anything, if someone gives me the list of print/desktop publishing terms I'll map 'em to the CSS equivs.  \nAny takers?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hmmmm\\>\\>\\>\"A font provides a resource containing the visual representation of characters. At a minimum it contains information that maps character codes to shapes (called glyphs) for displaying these characters. Fonts sharing a common design style are commonly grouped into font families classified by a set of standard font properties. Within a family, the shape displayed for a given character can vary by stroke weight, slant or relative width, among others. A given font face is described by a unique combination of these properties. For a given range of text, CSS font properties are used to select a font family and a specific font face within that family to be used when rendering that text.\"\n\n\\>CSS is up and working on a billion desktops.\n\nlol, a billion people have acne too. Is that working?\n\nCheers!\n\n"
+    }
+  ]
+}

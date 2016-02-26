@@ -1,0 +1,138 @@
+{
+  "id": "17113",
+  "title": "Fontlab 5 font file ignores kerning values",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hello,\n\nThis is my first post. I hope someone can help.\n\nI am using Fontlab 5 to produce a type face. I currently have all upper and lower case glyphs created. I have set the metrics for each of these so the default spacing is pretty good. There are currently 562 kerning pairs which have been kerned appropriately.\n\n**THE PROBLEM...**\n\nWhen I install the font file and open up some content in a word document the font does not use any of the kerning values, it just ignores them. The kerning in Fontlab comes up correctly when using the metrics window.\n\nAny help would be great, I am stuck until this is sorted.\n\nThanks,\n\nHenry.\n\n",
+  "author": "heners",
+  "time": "6 Jan 2006 — 7:27am",
+  "uid": "10877",
+  "comments": [
+    {
+      "time": "6 Jan 2006 — 8:11am",
+      "content": "I think I remember something along these lines on another thread. If I'm remembering correctly Word doesn't use kerning pairs when in its default settings.\n\nI'm sure someone with a better memory can confirm this or tell me I'm talking rubbish...\n\nTry it in a page layout program and see if the same thing happens\n\n"
+    },
+    {
+      "time": "6 Jan 2006 — 8:14am",
+      "content": "Henry, what kind of font are you generating? I have seen lack-of-kerning in fonts with a standard kern table generated as OTF, even with \"generate kern feature\" enabled.\n\nIn these cases, I open the OpenType panel and in the file pulldown select \"Generate kern feature\". Then I compile the feature, and try to generate the font again.\n\nAnother case of lack-of-kerning seems to have been due to over-complexity in the glyphs themselves: too many nodes.\n\nIf neither of these is the issue, maybe you can send your file and I'll troubleshoot it for you. chester[at]vllg.com\n\n"
+    },
+    {
+      "time": "6 Jan 2006 — 8:14am",
+      "content": "Oh. Duh. Word. Forget your kerning in Word, because it will.\n\n"
+    },
+    {
+      "time": "6 Jan 2006 — 8:47am",
+      "content": "Hi,\n\nThanks for responding. I am generating a TrueType/OpenType font. I have tried the font in Photoshop and still get the same issue with Kerning. I am going to have a look at the Glyphs, I know there are a couple which I am unable to fix (click and fix node), do you know why?\n\nThank you for offering to troubleshoot the font. I would really appreciate this. Are you sure you have the time?\n\nHenry.\n\n"
+    },
+    {
+      "time": "6 Jan 2006 — 8:54am",
+      "content": "Henry, there is never and always time to help out. I'll have a look at those problem nodes, too. Are they being flagged by Font Audit?\n\nc\n\n"
+    },
+    {
+      "time": "6 Jan 2006 — 9:16am",
+      "content": "Tools\\> Kerning Assistance\\> Apply and Save  \n...is necessary, even if there is no class kerning.  \nAfter you've done it, you will see that there is now a \"kern\" feature in the OpenType panel, with the values you've entered in the metrics window.\n\n(This is for FL4.6, but I'm assuming v.5 is the same.)\n\n"
+    },
+    {
+      "time": "6 Jan 2006 — 9:16am",
+      "content": "Hi,\n\nNot sure what Font Audit is? What is your email address so I can send the file?\n\nHenry.\n\n"
+    },
+    {
+      "time": "6 Jan 2006 — 9:24am",
+      "content": "Henry, Font Audit is FontLab's tool which goes through your Glyphs and picks out problems like two nodes on top of each other, lack of extrema nodes, nearly-horizontal/vertical lines, etc.  \nMy address is chester{at}vllg.com. Please change the [at} into an @. I'm not giving the spam crawlers anything to latch onto.  \nBest, c\n\n"
+    },
+    {
+      "time": "6 Jan 2006 — 9:29am",
+      "content": "Hi Nick,\n\nThat has worked just about. The majority of the kerning has been assigned but there a couple of pairs which still ignore. I am going to review the glyphs as chester recommended. IF I further problems I will post them. Thanks v.much. Cheers Chester.\n\nHenry.\n\n"
+    },
+    {
+      "time": "6 Jan 2006 — 11:45am",
+      "content": "_Oh. Duh. Word. Forget your kerning in Word, because it will._\n\nnot true. it's just not on by default at certian point sizes.\n\n"
+    },
+    {
+      "time": "9 Jan 2006 — 6:10am",
+      "content": "Hi Nick,\n\nI am still getting the same problem. The kerning is ignored. I have tested by increasing the kerning on some pairs. The font is not using the kerning values. I have done Tools\\> Kerning Assistance\\> Apply and Save and then updated the kern feature, but still have no joy.\n\nAny other ideas?\n\nHenry.\n\n"
+    },
+    {
+      "time": "9 Jan 2006 — 7:26am",
+      "content": "Sorry, I'm not using FL5 yet.  \nThe only thing I can think of is that perhaps it is a conflict problem with previous versions of the font.\n\n"
+    },
+    {
+      "time": "9 Jan 2006 — 7:33am",
+      "content": "no worries nick. thanks for your help.\n\n"
+    },
+    {
+      "time": "9 Jan 2006 — 7:48am",
+      "content": "Try this:\n\nIn the kern feature, about every 100 lines, insert this line:\n\nsubtable;\n\nIt worked for me when I had (possibly) the same problem.\n\n"
+    },
+    {
+      "time": "9 Jan 2006 — 8:22am",
+      "content": "hi, thanks but the file still ignores the kern values. arhh what is going on.\n\n"
+    },
+    {
+      "time": "9 Jan 2006 — 11:03am",
+      "content": "Hopefully, Adam Twardoch will drop by with some wisdom...\n\n"
+    },
+    {
+      "time": "24 Feb 2006 — 4:18pm",
+      "content": "Hello there everyone... this is also my first post here, and it is all about ttf font with kerning pairs that don't show up in Photoshop CS2! The excact same problem that Heners had.\n\nLet's start from scratch!\n\n- Win XP SP2  \n- FontLab v.5 (Demo),  \n- Type Tool 2 (Demo),  \n- ttf files tested in Photoshop CS2 / Flash 8 when installed.\n\nI know that the demo versions of Fontlab and Type Tool have limitations as it concerns the number of glyphs/metrics exported/saved in a vfb file ect.\n\nI have also read the manual but didn't really get any help...\n\nLet's start all together like a tutorial... (and that's what i did)\n\n**Step 1:**\n\nI created a new font (unicode - MS Windows 1252Western) from scratch at **Fontlab 5 (Demo)**, and only draw with the rectangular tool 3 letters D, E and F with only one kerning pair E F +1500 (yes so large number in order to easily see that the kerning will be embended). I can see the pair in the table at the right side of kerning window and i then choose \"Generate kern feature\"...\n\n ![](http://web.archive.org/web/20150317232949im_/http:/typophile.com/files/mypreviewmetrics3fv.gif)\n\n...so as to be saved in the opentype panel too with the code **feature kern {}**.\n\nI then saved the vfb file... and chose to Generate font (ttf) with the default values in the options.\n\n ![](http://web.archive.org/web/20150317232949im_/http:/typophile.com/files/fontlabgenerateoptions6je.gif)\n\nBefore i install it, i opened the generated ttf in Fontlab 5 again just to be sure that the 1 pair i created was still there... and yes i could see it in the kerning window.\n\nSo i installed it in the system... but the kerning pair was not shown in Photoshop CS2 (Metrics was the selection for kerning in the PS type tool) :(\n\n**Step 2:**\n\nI created a new font (unicode - MS Windows 1252Western) from scratch at **Type Tool 2 (Demo)**, and again draw with the rectangular tool 3 letters D, E and F with only one kerning pair E F +1500 (for the same reason as Step 1). I can see the pair in the status bar of the Metrics window as there are no tables in TypeTool.\n\n ![](http://web.archive.org/web/20150317232949im_/http:/typophile.com/files/typetoolmetrics8mc.gif)\n\n...and then chose Generate ttf with the default values at the options\n\n ![](http://web.archive.org/web/20150317232949im_/http:/typophile.com/files/typetoolgenerateoptions9mu.gif)\n\n... and when i installed the font on the system... Photoshop could write with the right value (+1500) of the kerning pair i created!!! :) Hoorey! for the cheaper Type Tool!\n\n**Step 3:**\n\nI took the generated ttf file from Step 2 (that Type Tool 2 had created) and opened it in FontLab... i could see the kerning pair there too, and i decided to generate a ttf from that file again (with different file/font/family name) just to see the results! Once again Fontlab failed in generating a ttf that Photoshop CS2 could write with the kerning pair included in the font. :o(\n\n**Step 4:**\n\nI then took the ttf that FontLab created (Step 1) and opened it in TypeTool 2, to see once again that there was a kerning pair included... i chose Generate ttf with the default values and a warning window came up!\n\n ![](http://web.archive.org/web/20150317232949im_/http:/typophile.com/files/warning.gif)\n\nI press the Continue button with the GPOS table selected (without knowing what this is all about)... and for this reason TypeTool 2 failed for the first time to generate a ttf that PS could write with the kerning pair included!!!\n\nWhen at the warning window chose not to select the GPOS - 80 table... then PS could write with the kerning pair included!!!\n\nSo what this is all about?? any hints? If someone knows something i would be glad if he shared his thoughts... if he will say to me \"RTFM\", at least tell me the page where i can read that info... that explains it all... and how to create a font with kerning pairs that will work...\n\nSo far so good with my 4 Steps tutorial... and neither of them was able for FontLab to Generate a font that will produce ttf that would have a working pair in Photoshop CS2...\n\nSo here comes a \"free\" font from [www.backpacker.gr](http://web.archive.org/web/20150317232949/http:/www.backpacker.gr/ \"www.backpacker.gr\") **BPpong - download TrueType** that amazed me...!\n\n**Step 5:**\n\nI downloaded the BPpong ttf file... opened it in FontLab (Demo) and chose save as vfb. Once again warning windows came up telling me all about the Demo restrictions and the final vfb was saved with fewer glyphs than the original. It's ok with me... i will only need 1 kerning pair and a couble o glyphs to work. The BPpong ttf had many pairs already included (~2.200) which i deleted them all from the table in the kerning/metrics window and also from the opentype panel... I then created my good old kerning pair E F +1500 :o) and then selected the \"Generate kern feature\" so as to be the only pair in the feature kern in opentype panel. I cliked at Generate font (with default settings) and a new warning came up to me...\n\n ![](http://web.archive.org/web/20150317232949im_/http:/typophile.com/files/attention4oe.gif)\n\n!?! if anyone knows what this also means... i'm all ears (eyes)!!\n\nAnyway binary and compiled worked just the same!!! I saw Fontlab for the fist time giving me a ttf with the ability to have the kerning pair included and Photoshop could show it right!!!!\n\nSo what special settings does this font has?\n\nI'm so confused.... i just need to have Fonlab to work like TypeTool does... create fonts with embended kerning pairs...\n\nThank you for reading till down here... :o)\n\nHope someone can help...\n\n"
+    },
+    {
+      "time": "24 Feb 2006 — 5:03pm",
+      "content": "I have experienced a problem in the past with FontLab where an OT font with only a kern feature will not work. If there is also a liga(ture) feature, everything's golden. It's important that the kern feature be the last one in the list, too...\n\n"
+    },
+    {
+      "time": "25 Feb 2006 — 3:27am",
+      "content": "Hmm well Chester i don't think this is logical for a 6 times expensive software compared to TypeTool...\n\nYou mean that if i want to buy the great FontLab Studio for 645$ and i want to create a font with only having some kerning pairs, i have to add ligature features too? wow... Then i should better buy the 6 times cheaper typetool to do my job, although its interface / tools aren't so rich and productive...\n\nAnyway i hope that someone who really knows what this is all about will read this thread... and i'm sure that it is all about options and OT technology that TypeTool doesn't let the user do the adjustments...\n\nIf anyone knows a url that shows a tutorial about creating a simple font in FontLab with some kerning pairs that will show up in major software, i would be glad...\n\nAt least anyone can try the Steps above and see for himself if that works or not...\n\nCheers!\n\n"
+    },
+    {
+      "time": "25 Feb 2006 — 7:55am",
+      "content": "You don't need to use the \"kern\" feature to have kerning in a TrueType font.\n\nThe \"kern\" feature is a more advanced and efficient way to set up kerning and is used only in OpenType fonts. It allows the use of something called \"class kerning\" which lets you group similar glyphs into classes for kerning purposes, which is especially fonts with large multi-lingual character sets which would have unreasonably large kerning tables otherwise.\n\nIf you remove the \"kern\" feature (or disable the inclusion of OT features when you generate the font), you should get a standard kern table instead when you generate the font.\n\n"
+    },
+    {
+      "time": "25 Feb 2006 — 8:04am",
+      "content": "BTW, if you're serious about learning to use FontLab, I would recommend Leslie Cabarga's book Learn FontLab Fast. It cuts to the chase and gives you step by step recipes for making fonts. It covers TypeTool, FontLab 4.x, and FontLab Studio 5 (though I don't know if the FLS5 information is complete since the book came out before it was released).\n\n"
+    },
+    {
+      "time": "25 Feb 2006 — 11:01am",
+      "content": "tyfont, in my experience, there are always little hiccups in typeface development. It's not like Lego, with a binary relationship betwen parts, but is much more organic, temperamental and difficult to wrangle. I have spent some time wrestling with font files - mine and other people's - trying to figure out why one seemingly-simple thing won't work, and answers are sometimes elusive. I'm sure that many people here can tell horror stories. And the larger your type families get, the harder it is to get everything working consistently.\n\nIf you think of FontLab or TypeTool as being hammers, you'll have a better appreciation for them. You need a hammer to hang a painting; the hammer being the tool you use to force the nail into the wall. But depending upon who is holding the hammer, how firmly they're holding the nail, where in the wall they're banging the nail... Well, the hammer becomes simply a component in the huge operation. You might bend 100 nails and blame the hammer, when in fact the problem is that the wall is made of concrete. If you want that nail to stick in the wall, you'll need to drill a hole first.\n\nSo, while my suggestion may be a workaround, it also happens to have proved successful for me in the past, and I was sharing my knowledge. Hopefully someone who knows what s/he is talking about will materialise and fix your problem for you. Have a nice weekend.\n\n"
+    },
+    {
+      "time": "26 Feb 2006 — 12:26pm",
+      "content": "Thank you very much Chester for your really great explanation to my issue... :o)\n\nI hope i will find out what my wall is made of, or find someone who can tell me some tips on that matter...\n\n\\*I will try ASAP the tip that Mark wrote above...\n\nNick :o)\n\n"
+    },
+    {
+      "time": "27 Feb 2006 — 2:43am",
+      "content": "Yes!!! I finally did it!!\n\nThanx a lot Mark and your precious tip!!\n\nAll i did was to also uncheck the [**Generate \"kern\" feature if it is not defined**] at **Tools / Options / Generating OpenType & TrueType / Kerning**! Because if this thing was turned on... even if i didn't have kerning in the opentype panel... this was created at the \"Generate font\" procedure!\n\nAs i also read in the FL5 Manual at page 110...\n\n ![](http://web.archive.org/web/20150317232949im_/http:/typophile.com/files/it_worked.gif)\n\nSo many options... it is just like a cockpit there...\n\nThanx again guys!! hope this will work for others too!\n\n"
+    },
+    {
+      "time": "3 Mar 2006 — 8:17am",
+      "content": "\\> You mean that if i want to buy the great  \n\\> FontLab Studio for 645$ and i want to create  \n\\> a font with only having some kerning pairs,  \n\\> i have to add ligature features too? wow…\n\nNo. He means that if you want to make an OpenType PS font that has kerning in Adobe InDesign CS/CS2, Illustrator CS/CS2 or other Adobe applications, you also need to add another OpenType Layout feature into the font. This has nothing to do with \"the great FontLab Studio for 645$\". If your OpenType PS font only contains the \"kern\" OTL feature and no other features, you will get no kerning in Adobe applications — no matter whether you build your font using FontLab 4.x, FontLab Studio 5, DTL FontMaster or Adobe FDK for OpenType. It's a bug in Adobe applications that Thomas Phinney hopes will be fixed in future releases.\n\nOpenType PS fonts with just the \"kern\" OpenType Layout feature and no other features work fine in other OpenType Layout-savvy environments, e.g. Windows Presentation Foundation (aka Avalon) or Mellel.\n\nAdam\n\n"
+    },
+    {
+      "time": "3 Mar 2006 — 8:25am",
+      "content": "\\> All i did was to also uncheck the [Generate “kern” feature  \n\\> if it is not defined] at Tools / Options / Generating  \n\\> OpenType & TrueType / Kerning!\n\nYes, this is on by default because novice users will just specify their kerning in the Metrics Window and don't want to be bothered with manually editing stuff in the OpenType panel. But if you compile your features yourself using \"Build kern feature\" in the OpenType panel or \"Apply and Save\" in Kerning Assistance, then you'll most likely will want to turn this feature off.\n\n\\> So many options… it is just like a cockpit there…\n\nA very good comparison. If you learn to be an airplane pilot, you'd better read the plane's manual and learn to work with the cockpit. If you want to develop OpenType fonts, it's just the same thing. Fonts are not trivial things and no matter how much we'd like to make their creation simple, it won't become simpler below a certain level.\n\nMany people long for the simplicity of Fontographer 3.5 but forget that that application was only good for creating Adobe Standard-encoded Type 1 fonts with 230 or so glyphs. For anything else, it was useless or at least very cumbersome.\n\nThe goal of OpenType fonts is to reduce complexity of typographic design on the \\*user side\\*. But nothing gets lost in Nature: the overhead of complexity gets loaded off the final user towards the font developer.\n\nIn short: read the manual, guys! :) We \\*did\\* improve it in FontLab Studio 5.\n\nA.\n\n"
+    },
+    {
+      "time": "3 Mar 2006 — 10:18am",
+      "content": "Why not design FL so that the \"Generate Kern Feature\" turns off automatically when the \"Apply and Save\" feature is used?\n\n"
+    },
+    {
+      "time": "25 Feb 2008 — 8:50am",
+      "content": "Mark\n\nChrisL\n\n"
+    },
+    {
+      "time": "7 Dec 2008 — 11:52pm",
+      "content": "Here's what you did:  \n1. Pressed Win R.  \n2. Cutted mspaint.  \n3. Typed in C:\\Program Files.  \n4. Double clicked Fontlab directory.  \n5. Double clicked directory, \"Studio5 trial\".  \n6. Double clicked uninstall.exe.  \n7. It popped up with the installation wizard, which it didn't uninstall.  \n8. Reinstalled Fontlab Studio.\n\n"
+    },
+    {
+      "time": "18 Jan 2015 — 6:29am",
+      "content": "So many years after your original posts I came across them because I have a similar problem in my font creation. I have over 1000 manually made kerning pairs but none of them show in my Adobe applications after I save the font as either TrueType/OpenType TT or OpenType PS in FontLab. I have also also unchecked the [generate “kern” feature] but that didn't do the trick for me. I'm also not sure I understand what twardoch is trying to say through \"add another OpenType Layout feature into the font\". I'm new to font creation, this is my first font and believe it or not I've been working on it over a year in my spare time. I'm also learning FontLab as I go but I couldn't find anything in the manual. I'm also reading Leslie Cabarga's book Learn FontLab Fast but still couldn't find anything. So any help will be greatly appreciated and if any of you has new information or input on this problem pleas drop a line.\n\nThank you in advance!\n\n"
+    },
+    {
+      "time": "25 Jan 2015 — 10:16am",
+      "content": "...\n\n"
+    }
+  ]
+}

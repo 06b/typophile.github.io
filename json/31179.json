@@ -1,0 +1,42 @@
+{
+  "id": "31179",
+  "title": "Programmers, please help - getting the right characters to appear with \"cmap\" and \"post\"",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m writing a program to convert/promote old MacTurkish encoded fonts to Unicode, and convert newer Unicode/MacRoman only fonts to MacTurkish. I’ve been working with the cmap tables. Things work fine in TextEdit and Freehand, but Adobe applications seem to ignore the Turkish characters in the Unicode tables, even though ftxdumperfuser says they match the MacTurkish tables.\n\nI figured something was up with the post table, so I fixed that as well. Nothing’s happening. What else do I need to change?\n\nI can email some sample input/output files in a few hours if you like.\n\n",
+  "author": "<a href=\"user/11893\" title=\"View user profile.\">Altan Orhon</a>",
+  "time": "<br>",
+  "uid": "11893",
+  "comments": [
+    {
+      "time": " 6 February, 2007 - 5:04pm",
+      "content": "Merhaba Altan Orhon, who coded the old MacTurkish encoded fonts ?\n\n"
+    },
+    {
+      "time": " 6 February, 2007 - 6:24pm",
+      "content": "Generally, Adobe apps don’t care about glyph names and the post table for Unicode encoding - that’s a Mac OS X bug, that we hope Apple will fix some day. For Adobe’s apps that share the core Adobe font engine, the cmap encoding is all that matters for this purpose.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": " 6 February, 2007 - 6:28pm",
+      "content": "Here’s a sample. It’s not actually a font that I’d use as input or output normally, but my main problem seems to be getting any kind of Turkish glyphs (Gbreve, gbreve, Idotaccent, dotlessi, Scedilla, scedilla) to appear in Adobe applications. If I can figure out how to make it work in Photoshop, I can just make my code do that.\n\nThe font looks okay with Fontforge and ftxdumperfuser. I haven’t tested it with Freehand (uses MacTurkish 1-byte encoding) but it’s easy to make it work. This is a brand new file in Fontforge, I just copied over the 6 glyphs.\n\nIt is a sample from some version of AcademyEngraved belonging to my company. The file only includes 6 glyphs, I don’t want to get into any trouble for sharing copyrighted fonts!\n\n[http://academic.evergreen.edu/o/orhmeh09/TestAca.ttf.zip](http://web.archive.org/web/20070217102023/http:/academic.evergreen.edu/o/orhmeh09/TestAca.ttf.zip)\n\n"
+    },
+    {
+      "time": " 6 February, 2007 - 6:39pm",
+      "content": "I’m pretty sure my program encodes the cmap tables correctly, and Fontforge should be doing it right as well. Still doesn’t work in CS2. What’s strange is that with the 6-glyph test fonts I’m using, all the correct characters show up in the font preview dropdown in Photoshop. When I try to use them in a text field, the typeface switches to Myriad Pro.\n\nHere’s another test: [http://academic.evergreen.edu/o/orhmeh09/ZTFUpdaterTest.ttf.zip](http://web.archive.org/web/20070217102023/http:/academic.evergreen.edu/o/orhmeh09/ZTFUpdaterTest.ttf.zip)\n\nIncidentally, working with TrueType data makes me want to throw everything I own off a bridge.\n\n"
+    },
+    {
+      "time": " 7 February, 2007 - 9:04pm",
+      "content": "A curiosity - I’ve been told the font works fine in CS3 beta.\n\n"
+    },
+    {
+      "time": " 8 February, 2007 - 2:18am",
+      "content": "Have you tried to run your fonts through [Microsoft Font Validator](http://web.archive.org/web/20070217102023/http:/www.microsoft.com/typography/FontValidator.mspx)?\n\n"
+    },
+    {
+      "time": " 8 February, 2007 - 12:45pm",
+      "content": "I’m afraid I don’t have a Windows machine nearby, but I have run the fonts through ftxvalidator and they check out.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "68112",
+  "title": "Coding osf fractions",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi. I’m using this OT code for my fractions, but it returns an error message when I add “zerooldstyle oneoldstyle twooldstyle …” to the numbers class. Any ideas why?\n\nAlso, I’m having some trouble figuring out how I can change the slash to a osf specific fraction bar when onum is activated.\n\nfeature frac {  \n@numbers = [zero one two three four five six seven eight nine] ;  \n@numerators = [zero.numr one.numr two.numr three.numr four.numr five.numr six.numr seven.numr eight.numr nine.numr] ;  \n@denominators = [zero.dnom one.dnom two.dnom three.dnom four.dnom five.dnom six.dnom seven.dnom eight.dnom nine.dnom] ;  \n@predenominators = [slash fraction onehalf onequarter threequarters zero.dnom one.dnom two.dnom three.dnom four.dnom five.dnom six.dnom seven.dnom eight.dnom nine.dnom] ;\n\nsub one' [slash fraction]' two' by onehalf ;  \nsub one' [slash fraction]' four' by onequarter ;  \nsub three' [slash fraction]' four' by threequarters ;\n\nsub @numbers by @numerators ;  \nsub @predenominators @numerators' by @denominators ;  \nsub slash by fraction ;  \n} frac;\n\n",
+  "author": "<a href=\"/web/20100309134056/http://www.typophile.com/user/17101\" title=\"View user profile.\">frode frank</a>",
+  "time": "<br>",
+  "uid": "17101",
+  "comments": [
+    {
+      "time": "",
+      "content": "You could place your onum feature after your frac feature. Then all you have to do is substitute the figures and fraction bar with their onum versions.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Didn’t even know you could sort them in a different order. Thanks Mark!\n\n"
+    },
+    {
+      "time": "",
+      "content": "The order makes a difference, and you can use it to your advantage (or at least need to be aware of the implications). You can change the order (in FontLab) by dragging the features up and down in the list on the left side of the OpenType Panel.\n\nBTW, when you add a new feature, it gets placed just before (above) the currently selected feature. If you know where you want it to go in the list, you can use this to save the step of moving it. Note: You need to hit the \"compile\" button to get it to stay in this initial spot, otherwise it will get moved to the end when you save. I have no idea why, but that's how it works.\n\n"
+    },
+    {
+      "time": "",
+      "content": "@ frode frank\n\nI think, it is a bad idea to substitute \"numr fraction dnom\" by prebuilt fractions, because the user can’t change the kerning to the fraction anymore.\n\nMy code:\n\n`@lnum=[zero.fitted one.fitted two.fitted three.fitted four.fitted five.fitted six.fitted seven.fitted eight.fitted nine.fitted];\n@t_lnum=[zero.tab one.tab two.tab three.tab four.tab five.tab six.tab seven.tab eight.tab nine.tab];\n@onum=[zero one two three four five six seven eight nine];\n@t_onum=[zero.taboldstyle one.taboldstyle two.taboldstyle three.taboldstyle four.taboldstyle five.taboldstyle six.taboldstyle seven.taboldstyle eight.taboldstyle nine.taboldstyle];`\n\n`@numr=[zero.numerator one.numerator two.numerator three.numerator four.numerator five.numerator six.numerator seven.numerator eight.numerator nine.numerator];\n@dnom=[zero.denominator one.denominator two.denominator three.denominator four.denominator five.denominator six.denominator seven.denominator eight.denominator nine.denominator];`\n\n`@prebuilt_frac = [onequarter onehalf threequarters];`\n\n`feature numr {#G_S_U_B-Tag\n\tlookup NUMR {\n\t\tsub @onum by @numr;\n\t\tsub @lnum by @numr;\n\t\tsub @t_onum by @numr;\n\t\tsub @t_lnum by @numr;\n\t} NUMR;\n} numr;\n#---Numerators`\n\n`feature dnom {#G_S_U_B-Tag\n\tlookup DNOM {\n\t\tsub @onum by @dnom;\n\t\tsub @lnum by @dnom;\n\t\tsub @t_onum by @dnom;\n\t\tsub @t_lnum by @dnom;\n\t} DNOM;\n} dnom;\n#---Denominators`\n\n`feature frac {#G_S_U_B-Tag\n\tlookup NUMR;\n\tsub slash by fraction;\n\t#Alternatively to sub slash by fraction\n\t#ignore sub [one.numerator two.numerator three.numerator four.numerator five.numerator six.numerator seven.numerator eight.numerator nine.numerator] slash' zero.numerator;\n\t#sub slash' by fraction;\n\t#sub slash zero.numerator' by question;\n\tsub zero.numerator fraction zero.numerator zero.numerator by perthousand;\n\tsub zero.numerator fraction zero.numerator by percent;\n\tsub [fraction @dnom @prebuilt_frac] @numr' by @dnom;\n} frac;\n#---Fractions`\n\n"
+    },
+    {
+      "time": "",
+      "content": "Frode, I think your frac code is fine. You can safely leave out the section that forces pre-built fractions to be used if you think users might want to manually kern them.\n\n"
+    },
+    {
+      "time": "",
+      "content": "BTW, Tal Lemming has an interesting post about improving the on the usual coding of the frac feature:\n\n[http://talleming.com/2009/10/01/fraction-fever-2/](http://web.archive.org/web/20100309134056/http:/talleming.com/2009/10/01/fraction-fever-2/ \"http://talleming.com/2009/10/01/fraction-fever-2/\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "The code isn’t mine. I found it in a discussion on fractions on Typophile (I also found and read Tal’s article via the same thread). It does make sense to not force the pre built fractions. Thank you, Mark and Arno.\n\nIf anyone know why I can’t add to the classes, I would be very grateful. I’ll never learn Opentype if I just copy someones code everytime I run into a problem.\n\n"
+    },
+    {
+      "time": "",
+      "content": "By adding glyphs to the classes are you making it so that the classes that are being substituted have different numbers of glyphs in them? That will cause an error.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Right, but what I was saying in my first reply is that you can avoid the whole problem with adding figure variants to the fraction code by putting the frac feature before features like onum, etc. That way, the frac feature only has to deal with the default figures. Adding all the different figure styles to the frac feature would add some unnecessary complexity to the feature code (unless maybe you have fractions with old style figures or something, which I don't think is the case, right?).\n\n"
+    },
+    {
+      "time": "",
+      "content": "I understood your solution, Mark. I’m just saying this is how I go about learning stuff: Asking “why”. I do have fractions with hybrid figures, but there’s no reason I can’t change them the same way I’m changing the lining figures.\n\nThanks Craig, that was it.\n\n"
+    }
+  ]
+}

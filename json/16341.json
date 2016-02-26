@@ -1,0 +1,26 @@
+{
+  "id": "16341",
+  "title": "no ligatures in flash mx?",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "I just spent the last week learning how to create a font so that I can create a fully functional arabic font with ligatures and diacratic marks and an Open Type library etc....  \nWell, I just tried to enter arabic text from the \"Times New Roman\" font into a static text box in macromedia flash, and the characters would not merge(i.e. the glyph's did not automatically change to the correct contextual ones).  \nAfter hours of searching, I'm assuming its hopeless, but as a last ditch effort, I'd like to know if there is something I can possibly do when building my font to make the ligatures and diacratic marks appear as I want them to in Macromedia Flash (rather than as separate letters, I'd like them to join together, much like this:  \n با = ا + ب\n\nwell, if anyone knows of anything that I can do when creating my font, I would appreciate it.  \nthnx\n\n",
+  "author": "<a href=\"/web/20111225221728/http://typophile.com/user/10168\" title=\"View user profile.\">irf2k</a>",
+  "time": "<br>",
+  "uid": "10168",
+  "comments": [
+    {
+      "time": "",
+      "content": "I'm no expert here, but I don't believe you have any control over which glyphs or OpenType features an application can/will display. For example, InDesign CS2 is the ONLY application I know of that will recognize and implement stylistic sets; all other applications simply don't recognize this feature. Similarly, accessing non-default numbers, small caps, alternate glyphs, etc., in an OpenType font is all but impossible except in the most recent & specialized applications. This is simply a matter of the application catching up to OpenType/Unicode.\n\nMy guess is that MM simply didn't think Flash users were big on advanced typography, so didn't bother to build in the necessary glyph palette (hell, even some Adobe CS2 applications keep you from accessing many glyphs & features). So, it seems your only option is to nag MM/Adobe to improve this in the next version of Flash (or whatever it might be called now that Adobe has it).\n\n"
+    },
+    {
+      "time": "",
+      "content": "Irfan, I have not worked with MM Flash in this regard, so can't provide any personal insights, but it looks like this page might have some useful information:\n\n[http://www.macromedia.com/support/flash/languages/unicode\\_in\\_flmx/](http://web.archive.org/web/20111225221728/http:/www.macromedia.com/support/flash/languages/unicode_in_flmx/ \"http://www.macromedia.com/support/flash/languages/unicode\\_in\\_flmx/\")\n\nSee also the demos on this page\n\n[http://www.productbeta.com/tutorials/show.php?goomba=1&](http://web.archive.org/web/20111225221728/http:/www.productbeta.com/tutorials/show.php?goomba=1& \"http://www.productbeta.com/tutorials/show.php?goomba=1&\")\n\nwhich demonstrate that correct Arabic is apparently possible.\n\nIf you google Flash Arabic you might find additional information.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Note that most basic Arabic script shaping does not involve ligatures per se, but applies the 'init' 'medi' and 'fina' features as appropriate based on analysis of the character string. The 'rlig' feature should be used for the obligatory لا and any other ligature that you want to be on by default. On Windows, most applications rely on the MS Uniscribe script engine for Arabic shaping; I'm afraid I don't know what Flash does or how it provides cross-platform capability. The Uniscribe engine will automatically apply both the 'rlig' and 'liga' features for Arabic text.\n\n"
+    }
+  ]
+}

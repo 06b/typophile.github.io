@@ -1,0 +1,66 @@
+{
+  "id": "4636",
+  "title": "Question about windows postscript fonts",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm trying to install a multiple font family in windows that is postscript. I'm not using any font management software, just dragging and dropping. When I try to install multiple bitmap files, after the first file is installed, it won't let the rest of the bitmap files install. Is there a way/program to consolidate the bitmap fonts into one file? Is this the problem?\n\n",
+  "author": "matt_desmond",
+  "time": "6 May 2004 — 11:45am",
+  "uid": "2919",
+  "comments": [
+    {
+      "time": "6 May 2004 — 5:16pm",
+      "content": "Matthew, do you mean M$ Windows? Which wersion are you using? Win2K and latter have built in PS driver, I'm not sure about WinMe. For Win95 - Win98Se you'll need adobes type manager. It's not clear from your post in what way the PS fonts are buging you.   \n   \nIf you want to install fonts \"by the book\":   \n 1. Open Windows Explorer   \n 2. browse to fonts folder, usually C:\\Windows\\Fonts   \n 3. File-\\>Install New Font   \n   \nAs for your second question, I cannot help you there ![:-(](http://web.archive.org/web/20131106080149im_/http:/www.typophile.com/forums/clipart/sad.gif)   \n   \ng\n\n"
+    },
+    {
+      "time": "6 May 2004 — 5:35pm",
+      "content": "Matthew,   \n   \nwhat exactly are you trying to install on Windows? Mac Type 1 fonts? Or Windows Type 1 fonts? Windows Type 1 fonts don't have any sort of \"bitmap files\".   \n   \nThe primitive necessity to have mandatory bitmaps along with Type 1 fonts is a MacOS-only limitation.   \n   \nMacOS supports Mac Type 1 fonts (suitcases with LWFN printer files). Windows supports Windows Type 1 fonts (.pfb and .pfm files). Please be more specific on what you are trying to achieve, on what (exactly) system and how you are proceeding (step by step).   \n   \nAdam\n\n"
+    },
+    {
+      "time": "6 May 2004 — 7:27pm",
+      "content": "They are Windows type 1 fonts in one family.   \n   \nI'm running MS Windows 2000.   \n   \nSo, I think the problem is that I'm trying to install bitmap fonts when windows doesn't need them. To get this straight, I only need to install the .pfm and .pfb files for the fonts to work right? I was putting in the .fon and .24 sized bitmaps also.   \n   \nAlso, for the kerning to work, will I need to drag the .afm file in there as well?   \n   \nSorry for the noobish windows font questions.\n\n"
+    },
+    {
+      "time": "6 May 2004 — 11:54pm",
+      "content": "All you need on Windows are _either_   \n   \nPFB + PFM   \n_or_   \nPFB + AFM + INF   \n   \nThe PFB file contains the outlines. The other files contain metrics, kerning and other information. The PFM essentially contains the same information as the AFM and INF, but in a different form. The PFM is always what is registered as an installed font (although both it and the PFB are actually installed); if you install using the AFM + INF combination, Windows will generate a PFM during the install process.\n\n"
+    },
+    {
+      "time": "7 May 2004 — 8:04am",
+      "content": "Thanks for the help. :-)\n\n"
+    },
+    {
+      "time": "7 May 2004 — 10:27am",
+      "content": "The only reason to install ATM Light on Windows 2000 (or XP) is if you need support for \"multiple master\" Type 1 fonts.   \n   \nAlso, if you've installed and deinstalled some older version of ATM Light, you may have broken Windows native support for both Type 1 and PostScript flavored OpenType fonts. You'll know because you won't be able to install them and will get error messages. In that case, you need to install a patch available from Adobe to fix the problem. Installing the latest ATM (Light or Deluxe) will also fix the problem.   \n   \nT\n\n"
+    },
+    {
+      "time": "7 May 2004 — 12:08pm",
+      "content": "Sure:   \n   \n\\< [http://www.adobe.com/support/downloads/detail.jsp?ftpid=1552](http://web.archive.org/web/20131106080149/http:/www.adobe.com/support/downloads/detail.jsp?ftpid=1552)\\> for ATM Light. That also has a link to the updater for ATM Deluxe. Read the details there, but this patch is also what you need if you uninstalled an older version of ATM Light or Deluxe.\n\n"
+    },
+    {
+      "time": "22 Jun 2004 — 2:20pm",
+      "content": "I recently designed a brochure on my MACG4 using Illustrator. I originally thought the client wanted me to send the files to press, however I learned after-the-fact that they were going to print from their destop-printer and gbc-bind for their presentations. They couldn't use my MAC fonts and I purchased fonts from FONTS.COM that matched my font names... the client could use a few of them, the ones that came in with .TTF (True Type Fonts), however a couple of the most important fonts came in as Windows Postscript Fonts. The client couldn't install for some reason on his PC. QUESTION. If I buy OpenType Fonts with same names as my original fonts, can I use them on both my MAC and their PC platforms? Also, is it possible to use TrueType on the MAC... I always thought NO, but who knows?\n\n"
+    },
+    {
+      "time": "22 Jun 2004 — 10:52pm",
+      "content": "Thomas, would ATM Deluxe be a useful tool in W2K or XP?\n\n"
+    },
+    {
+      "time": "23 Jun 2004 — 12:23am",
+      "content": "Tar:   \n   \nApple invented TrueType, and all the Mac system fonts are TrueType, so you can definitely use TrueType on a Mac! However, both Type 1 and TrueType fonts come in Mac and Windows flavors. Mac OS X can use Windows style TTF fonts, but they don't work with applications running in \"Classic.\"   \n   \nAs for OpenType, Adobe carefully changed all the names for their OpenType format fonts relative to the Type 1 versions. So you couldn't just substitute without updating the file.   \n   \nNote that the client should be able to use Windows Type 1 fonts on just about any version of Windows. They may need to install ATM Light if they have something quite old, or perhaps they need the same patch mentioned earlier in this thread.   \n   \nT\n\n"
+    },
+    {
+      "time": "23 Jun 2004 — 12:45am",
+      "content": "Hector,   \n   \nATM Deluxe is a font management utility. If you need a font management utility for 2000 or XP, you should consider ATM Deluxe and Suitcase. It's just the font rasterizer part of ATM Light that's redundant with the native support in 2000 and XP (and OS X for that matter).   \n   \nRegards,   \n   \nT\n\n"
+    },
+    {
+      "time": "7 May 2004 — 7:16am",
+      "content": "I remember reading problems re installing PostScript Type 1 fonts in Windows 2000 and the solution was to install ATM light.   \n   \nNigel\n\n"
+    },
+    {
+      "time": "7 May 2004 — 11:48am",
+      "content": "Thomas   \n   \nCan you provide the URL for the patch from Adobe.   \n   \nNigel\n\n"
+    }
+  ]
+}

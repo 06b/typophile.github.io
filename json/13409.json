@@ -1,0 +1,94 @@
+{
+  "id": "13409",
+  "title": "creating a keyboard layout",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I want to create a keyboard layout for Mac and PC. Mac OS X uses XML .keylayout files. I am not sure but I think windows also uses XML.\n\nI am creating the file using a tool on the web found at [http://wordherd.com/keyboards/](http://web.archive.org/web/20100202005602/http:/wordherd.com/keyboards/ \"http://wordherd.com/keyboards/\")\n\nMy question is about some of the settings. I think I need a Unicode layout, it is for Armenian, but which unicode Script/Resource ID should I select? What are the differences?\n\nIs there a better tool for creating the keyboard layout?\n\n",
+  "author": "<a href=\"/web/20100202005602/http://www.typophile.com/user/5971\" title=\"View user profile.\">levonk</a>",
+  "time": "<br>",
+  "uid": "5971",
+  "comments": [
+    {
+      "time": "",
+      "content": "On Windows, the best thing is to use the [Microsoft Keyboard Layout Creator](http://web.archive.org/web/20100202005602/http:/www.microsoft.com/globaldev/tools/msklc.mspx) tool. This produces keyboard drivers that can be directly installed in the system. I've used it for Biblical Hebrew, and have been very happy with it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks John,\n\nI will try that tool.\n\n"
+    },
+    {
+      "time": "",
+      "content": "On the same webpage that John mentioned you'll find a link to a paper in PDF format named \"Unicode and Keyboards on Windows\", that will probably answer some of your questions.\n\nTo create custom keyboard layouts under MacOSX you have [Ukelele](http://web.archive.org/web/20100202005602/http:/scripts.sil.org/cms/scripts/page.php?site_id=nrsi&item_id=ukelele) available, which was updated recently.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Mike.\n\nThe new version of Ukelele is good.\n\nMy main question now is about the Keyboard ID. For unicode it should be a negative number, but is there any rule to follow for the number?\n\n"
+    },
+    {
+      "time": "",
+      "content": "As long as the ID is negative, it will work. If the ID conflicts with another layout, it'll be automatically assigned a new one at runtime (i.e. I don't think this affects the actual file). Keep in mind, though, that a Unicode keyboard layout won't be available in non-Unicode programs. It may be helpful in certain situations (it depends on what characters you want) to give it an ID for the MacRoman encoding. That way, the layout will be available in any program, but the Unicode characters just may not work. Again, this depends on just how many of the characters are going to require Unicode.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I am still looking for a keyboard creator for the PC. The MSKLC although seems a good choice proved to be impossible to get, or at least very very difficult. My PC is not connected to the internet, so I use the Mac for downloads. Microsoft does not allow you downloading this app unless you are running an authentic windows. I couldn't even download with VPC (not sure if this was due to something wrong on my VPC system). Is there any other way to get this app?\n\nHrant mentions ResEdit in another [post](http://web.archive.org/web/20100202005602/http:/typophile.com/node/351). I thought ResEdit was for Mac OS 9 or older. Is there a PC version?\n\nIs there an app that will convert a Mac .keylayout file, which is an XML file, to a windows keyboard? This would be vey good because I wouldn't need to create the keyboard twice.\n\n"
+    },
+    {
+      "time": "",
+      "content": "ResEdit is for Mac OS only. It wouldn't do any good with Windows, anyway. It edits the part of a file known as the \"resource fork\" (as opposed to the \"data fork\"), which Windows doesn't normally use.\n\nI don't know of any way to convert Mac .keylayout files to Windows format. I suppose it's possible, but probably quite difficult.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi John,\n\nI started using MSKLC and found that I can only assign a single Unicode codepoint to the SGCAP + value. What I'm trying to do is have a touchtype keyboard for characters with diacriticals. Do you know if this a bug with MSKLC or a limitation of Microsoft Keyboards?\n\nThanks,\n\n"
+    },
+    {
+      "time": "",
+      "content": "[http://blogs.msdn.com/michkap/](http://web.archive.org/web/20100202005602/http:/blogs.msdn.com/michkap/ \"http://blogs.msdn.com/michkap/\") has lots of posts on MSKLC, he even talks about the secret Tahoma font that's used in the tool.\n\nSi\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Si,\n\nDidn't see what I was looking for. However, I've found another apparent oddity. When I set multiple codepoints in MSKLC for a single key, sometimes (in Word 2003) characters with a 'dotbelowcomb' (for innstance U+004C U+0323) will not render properly on screen. The dotbelowcomb appears to the right of the 'L'. What is interesting is that if I follow that particular composite character with another composite (say a U+0070 U+0313) the previous composite character will re-render properly. I get the same behavior in WordPad. When I type the characters in NeoOffice or TextEdit on MacOSX everything works OK. I've rechecked all the OT features and the MSKLC settings and everything looks OK. Other diacriticals, such as a caroncomb or commaabove don't exihibit this problem...just the dotbelowcomb.\n\nAny ideas?\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'll ask Michael to take a look at this thread.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "",
+      "content": "Fred, have you tested this dotbelowcomb behaviour in Notepad? If something works correctly in Notepad, but consistently incorrectly in Wordpad or Word, that usually indicates a problem in the RichEdit engine.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi all,\n\nI think I fixed the problems I was having by creating composite characters for the intermediate characters (such as U+004B U+0313) and assigning a Unicode codepoint (1E32). Also, I found that my combination of tools didn't like the Capital W space modifier character (1D42). When I changed the modfier for my uppercase characters to the lowercase w space modifier (02B7) that solved the problems with incorrect word wrap.  \nMy goal is to have a keyboard where users can type Roman characters in the plain and shifted states, and type the specialized language characters in the Caps Lock and Caps Lock shifted states. I'm using MSKLC and was hoping to use the SGCaps feature to accomplish this. However, I've found that I can only enter a single Unicode codepoint in the SGCaps field. In my case, I want to type in the character, diacriticals and space modifiers so that a single keypress will enter all the characters and let OpenType composite them. When I do this in the normal and shifted states it works fine...but I lose the ability to type Roman characters.  \nI sent an message to the MSKLC group listed above...but it appears that responses are only generated periodically.  \nAny ideas on how I can do this in Windows? I've done this same thing with Ukelele on Mac OSX and it works great. Instead of switching keyboards continually the users can just set the Caps Lock key.  \nOn Windows I also tried Keyboard Layout Manager...but it doesn't appear to support mulitple codepoints in any state and relies upon dead keys.  \nThanks for any suggestions...this forum has been great for helping me get started!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Michael Kaplan has answered the initial question on his blog...\n\n[http://blogs.msdn.com/michkap/archive/2006/01/16/513088.aspx](http://web.archive.org/web/20100202005602/http:/blogs.msdn.com/michkap/archive/2006/01/16/513088.aspx \"http://blogs.msdn.com/michkap/archive/2006/01/16/513088.aspx\")\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "",
+      "content": "I am a Mac novice, forgive my terminology ignorance. I have created a custom keyboard layout for Hungarian using Ukelele. It works great. The question is: How to create a custom flag to show up when this keyboard layout is activated? The reason being that I also need to make a custom Ukrainian layout and want to be able to distinguish them easily (Custom, because I just don't like and am not used to the default layouts).\n\n"
+    },
+    {
+      "time": "",
+      "content": "How on earth do I actually install Armenian fonts and be able to type in them on here or in my emails? Please, can someone tell me how?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Я могу писать на русском языке. Мне нужно писать на армянском языке, тоже.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Bitte, ich kann in russischer Sprache schreiben. Ich möchte, dass in der armenischen auch zu schreiben.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Regarding Armenian: if you're using Windows, you might start here:\n\n[http://www.armunicode.org/en/armkbd-win/](http://web.archive.org/web/20100202005602/http:/www.armunicode.org/en/armkbd-win/ \"http://www.armunicode.org/en/armkbd-win/\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "GrandpaMike, to add a menu flag for Mac OS X, create an .icns icon file, with the same filename as the keyboard layout and the suffix .icns. Put it in Library/Keyboard Layouts, next to your keylayout file.\n\nI use [Iconographer](http://web.archive.org/web/20100202005602/http:/www.mscape.com/) to make icon files. For a keyboard layout, the file only needs to contain a \"small\" 16×16-pixel colour layer, and 1-bit mask.\n\nFor an example, see my [Ukrainian Dvorak keylayout](http://web.archive.org/web/20100202005602/http:/zajac.ca/dvorak-uk/).\n\n"
+    }
+  ]
+}

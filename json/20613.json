@@ -1,0 +1,58 @@
+{
+  "id": "20613",
+  "title": "Standalone diacritics etc",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I tried to figure it out logically, but cant seem to understand.\n\nWhy are these available both as fixed accented letters\n\náàâäãåçéèêëóòôöõú etc...\n\n...but also “standalone”-figures in a font?\n\nˆ˜¯˘˙˚¸˝˛ˇ\n\nAre they ment to be kerned with a very big minus against certain letters or how do other languages use them? (the standalone-versions, that is).\n\nThanks.\n\nPS: Am I asking to many questions...?\n\n [‹ FontLab 5.0.2 – Crashing constantly!](http://web.archive.org/web/20080624181251/http:/www.typophile.com/node/20543 \"Go to previous forum topic\") [Why not Cyrillic Glyph Names instead of afii00xx? ›](http://web.archive.org/web/20080624181251/http:/www.typophile.com/node/20508 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080624181251/http://www.typophile.com/user/11526\" title=\"View user profile.\">Goran Soderstrom</a>",
+  "time": "<br>",
+  "uid": "11526",
+  "comments": [
+    {
+      "time": " 12.Jun.2006 5.38am",
+      "content": "French silence can be just as effective.\n\n"
+    },
+    {
+      "time": " 12.Jun.2006 6.10am",
+      "content": "Goran,  \nI believe that some applications and keyboards allow for combining characters so that individual diacritics are needed to create the composite character. John Hudson or Adam Twardoch would be better able to answer though.\n\nChrisL\n\nPS: There is no such thing as asking too many questions—ask all you want :-)\n\n"
+    },
+    {
+      "time": " 12.Jun.2006 6.54am",
+      "content": "And programs like FontLab and Fontographer need those individual diacritics to create the composite characters.\n\n"
+    },
+    {
+      "time": " 12.Jun.2006 6.57am",
+      "content": "Thanks for letting me ask questions, I promise when I get old enough to know all these things myself - I will be the one who answers instead of asking ;-)\n\nOk, let’s hope the experts jump in here then. But I guess if the user want to create composite characters (that are not standard) one should kern them like -500 or something to certain letters, otherwise there would be no real effect?\n\nThe sidebearings for these ones, I have noticed, is also very different in different fonts aswell, so I guess there is no standard here. Some has very much space and some are tight like hell.\n\n“French silence” ;-)\n\n"
+    },
+    {
+      "time": " 12.Jun.2006 6.59am",
+      "content": "Pieter, do they really? I mean, I could just place them on the right positions on the characters that need them, couldnt I? I dont really need to link them from these individual places where the characters are… The composite characters do have their own places - that’s whats bugging me..\n\nEDIT: Hmm, I understand the logic here now, it would be very hard to do them all separete, if you want to edit one diacritic. Thanks.\n\n"
+    },
+    {
+      "time": " 12.Jun.2006 7.02am",
+      "content": "Having separate accents is also handy for putting accents over characters arbitrarily, for example, in the name Spinal Tap, which gets an dieresis over the n. (There is no such character in Unicode.)\n\nProbably the most common use is by type designers. FontLab will automatically create accented characters for you by combining components taken from upper and lowercase characters and the floating accents. Even better, by adding anchors, you can control exactly how the accents are positioned.\n\nI take it from your earlier posts that you are using Fontographer, though. In this case, you can do a similar thing, albeit more manually. Select each of the upper or lowercase character and copy it using “Copy Reference” and then paste into the appropriate accented character slots. (It’s possible to do them all at once by selecting them all before pasting.) Do the same for the accents. When you are finished, all your accented characters will be composed of references to the source characters (or components, as FontLab calls them) instead of the actual outlines. The advantage of this is that if you later modify the source characters, the accented characters are also modified automatically.\n\n"
+    },
+    {
+      "time": " 12.Jun.2006 7.15am",
+      "content": "Mark, thanks for your reply. I know how this works with the reference copying - and everything is fine with the “linked” reference characters and such. My headache was rather if these “standalone” diacritics also were used on other letters.\n\nAs your example Spinal Tap – shouldnt I make it more comfortable and make a kern pair of dieresis + n in that case - so the dieresis will be automatically placed right? In that case, the user dont have to kern manually. Exactly this is what I wonder, if there are such combinations that I should kern like -500 or something.\n\nThanks all for good advice.\n\n"
+    },
+    {
+      "time": " 12.Jun.2006 7.35am",
+      "content": "Sure, you could do that, but where would you stop? In the realm of non-standard accented characters, there are no standards (literally). In other words, Spinal Tap are on their own.\n\nThe normal thing to do is leave the standalone accents unkerned—and don’t use negative sidebearings, either. In cases when people will use them in some non-standard way (e.g., Spinal Tap), your font will behave as expected.\n\n"
+    },
+    {
+      "time": " 12.Jun.2006 8.03am",
+      "content": "OK, great then I don’t have to bother about them anymore. Thanks again Mark.\n\n"
+    },
+    {
+      "time": " 12.Jun.2006 11.38am",
+      "content": "For those wondering what Mark means with Spinal Tap, here’s the thread:  \n [http://typophile.com/node/16229](http://web.archive.org/web/20080624181251/http:/typophile.com/node/16229 \"http://typophile.com/node/16229\")\n\nAnd still related with this topic:  \n [http://typophile.com/node/17517#comment-106385](http://web.archive.org/web/20080624181251/http:/typophile.com/node/17517#comment-106385 \"http://typophile.com/node/17517#comment-106385\")\n\n"
+    },
+    {
+      "time": " 12.Jun.2006 11.34pm",
+      "content": "The ’stand-alone accents’ you find in typical 8-bit fonts and those derived from them, e.g. Adobe’s OT fonts, are spacing accents, and the only good reason for them to be included in fonts is because they were included in a pile of standard 8-bit character sets and codepages. Whether there was ever a good reason to include them in those character sets seems lost in the proverbial mists of time.\n\nThey are not combining marks, which are accents with zero widths and which are separately encoded in the 0300-range of Unicode. Combining mark characters are much more useful than these odd spacing accents, and there are also many more of them. Unicode does not encode any more spacing accents, so if you want a spacing version of a combining mark you — ta-da! — combine it with a space character.\n\nYou can’t kern either spacing accents or combining marks to sit over or under base glyphs, because such kerning affects subsequent glyphs in the text string. Combining marks must be handled either by mapping to precomposed base+mark glyphs in an OT ccmp feature, or by using GPOS mark positioning. The latter is my preferred method, since it is so much more flexible and extensible.\n\n"
+    }
+  ]
+}

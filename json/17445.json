@@ -1,0 +1,146 @@
+{
+  "id": "17445",
+  "title": "Quark 7 public beta - let your opentype fonts test it",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Today Georg Seifert posted on the OpenType developer list, his fraction feature will work in Adobe applications, but not in Quark 7. So I checked it for myself.\n\nHere is the link for public beta registration. [http://www.quark.com/products/xpress/seven/beta.html](http://web.archive.org/web/20101204134942/http:/www.quark.com/products/xpress/seven/beta.html \"http://www.quark.com/products/xpress/seven/beta.html\")\n\nAfter a short sign up you can download a 111MB beta version.\n\nUnder some circumstances, Quark 7 (win) seems to build the fractions not by using the compiled fraction feature, it uses the Denominator (dnom) and Numerator (numr) feature to build fractions by itself. If these features will be absent, but the fraction feature is still in the font data, Quark looses his ability to build fractions. Strange!\n\nSo maybe this a good time for all OpenType fighters to check out this beta and bombard the Quark staff with bug reports, to the good of our font customers.\n\nAn other strange thing is, Quark is not able to use the OpenType family name fields and stays on the old windows four style name order.\n\nedit: Quark handels Numerator and Denominator right, my fault.\n\n",
+  "author": "<a href=\"/web/20101204134942/http://www.typophile.com/user/655\" title=\"View user profile.\">andreas</a>",
+  "time": "<br>",
+  "uid": "655",
+  "comments": [
+    {
+      "time": "",
+      "content": "This actually is not strange at all. As far as I remember Quark's announcement (though I have not yet tried the beta), QuarkXPress 7 will not support contextual OpenType features. \"frac\" is contextual while \"numr\" and \"dnom\" are not.\n\nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'm downloading the file now, but have heard reports that ALL features are off by default. Which, I assume, includes \"kern\". For Quark to start supporting OpenType completely all-at-once is asking too much; that's not how they roll. Contextual features are obviously overrated.\n\nSo, really, the title of this thread should be: Quark 7 public beta / let your opentype fonts test it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"So, really, the title of this thread should be: Quark 7 public beta / let your opentype fonts test it.\"\n\nOr perhaps the thread should be called, \"Quark 7 public beta OpenType Crap-shoot\"  \n:-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Topic is changed...\n\nI installed the Passport Version for Windows. The OpenType kerning option is on by default and available on the global project settings and its working.\n\nContextual substitution worked for a complex script font using alternates for beginning and end glyphs too. Only the fraction feature seems buggy to me on some fonts. Denominators and Numerators feature have to be present since fraction feature is not directly supported. Scientific Inferiors are not activ in the menu but available in the font data.\n\nI'm not a fan of this software, but for all the quark users this version will be a step forward and it will grow the base for opentype fonts.\n\n-- [astype.de](http://web.archive.org/web/20101204134942/http:/www.astype.de/)--\n\n"
+    },
+    {
+      "time": "",
+      "content": "Okay, having had the chance to try a few fonts, I am delighted to say that Andreas is right: kerning appears to be on by default. Although the oldest of the fonts I tested did not have its kerning in place. (InDesign does read the kerning from this font.)\n\nThe contextual alternate function DOES work with simple and slightly complex lookups, but NOT very complex lookups. Unlike InDe, calt is off by default.\n\nAs for those pesky \"style\" buttons...  \nClicking the underline button does NOT access the actual underline thickness and location specified in the font's code.  \nClicking the StrikeThru [sic] button does NOT access the actual strikethrough thickness and location specified in the font's code.  \nClicking the All-Caps button DOES invoke the case feature.  \nClicking the Small Caps button creates FAKE small caps instead of invoking the smcp feature.  \nClicking the Superscript, Subscript, and Superior buttons simply scale and baseline shift, and do NOT access any feature code.\n\nSo, one of the stylistic buttons now actually does something right. Fantastic!\n\nThe OpenType menu is in a different order from the one in InDe; different strokes for different folks:\n\n ![](http://web.archive.org/web/20101204134942im_/http:/typophile.com/files/QXP7_OpenType_menu.png)\n\nYou can compare that with Adobe CS2's OpenType menus posted here: [http://vllg.com/files/cs2/](http://web.archive.org/web/20101204134942/http:/vllg.com/files/cs2/ \"http://vllg.com/files/cs2/\")\n\nThe numerals all switch as expected, although the interface is different from that of InDe.\n\nBesides the fact that I'm going to have to revise a year-old OT family so that the kerning works in QXP - which might be a FL45 vs FLS5 issue, not a QXP issue - I'm surprised and delighted. If Quark chooses to support Stylistic Sets, that would be tremendous. And they need to do something about those style buttons. Seriously. Hook them up right, or lose 'em.\n\nNOTE: I updated this posting after seeing that very complex contextual alternate code didn't work correctly.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"An other strange thing is, Quark is not able to use the OpenType family name fields and stays on the old windows four style name order.\"\n\nWorse [Mac version]:  \n-- control palette shows (Mac) ID4  \n-- its font-list popup-menu shows ID1; in case only one style is installed, it shows ID4  \n-- the next-level style popup-menu shows (Mac) ID4\n\nI'd wish it would, as other applications too, show:  \n-- control palette: ID16+ID17 (if unavoidable: ID4)  \n-- its font-list popup-menu: ID16  \n-- its style-list popup-menu: ID17  \nHonestly, in OT-savvy apps I don't want to see ID1, ID2 and even ID4. Maybe it is possible to combine ID16+space+ID17 if there are no separate fields?\n\nIn addition to Chester's post, also features \"liga\" and \"calt\" should be on by default.\n\nWho's going to report it?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Everyone can write an report if you logged in the beta quark side. The best thing we could hope for is, that some of the developers in india read typophile too. :-)\n\n-- [astype.de](http://web.archive.org/web/20101204134942/http:/www.astype.de/)--\n\n"
+    },
+    {
+      "time": "",
+      "content": "Andreas, I plan to send my reports to QuarkXPress. They'll never improve (unless we help them).\n\nHere's a fun bug: I've got a family with 7 weights in Roman + Italic. The real order, as it shows up in InDe, ImageReady, TextEdit, everything else compliant:  \nThin  \nThin Italic  \nLight  \nLight Italic  \nBook  \nBook Italic  \nMedium  \nMedium Italic  \nBold  \nBold Italic  \nHeavy  \nHeavy Italic  \nUltra  \nUltra Italic\n\nIn Quark 7 it's:  \nThin Italic  \nUltra Italic  \nLight  \nLight Italic  \nBook  \nBook Italic  \nMedium  \nMedium Italic  \nBold  \nBold Italic  \nHeavy  \nHeavy Italic  \nThin  \nUltra\n\nWhat the?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Chester you are right, I was just joking. This is exactly why I set up the thread. The beta is out and its in our best interest that quark will handle opentype like the custumers could expect. I have done my report too, but I expect not too mutch from this standard answer html form. I thought its best we collect most of the issues in one thread and direct it to some of the lead developers. The world is small and I hope for the best.\n\n-- [astype.de](http://web.archive.org/web/20101204134942/http:/www.astype.de/)--\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hello  \nI got into this topic and posted it firts to the Opentype list. Two days later I had a direct email from one of the quark developers asking about my font. So they seem to follow this forums and are interested in fixing the bugs.\n\nYes, to include numr/dnom feature solved my original problem.\n\nGeorg S\n\n"
+    },
+    {
+      "time": "",
+      "content": "_Clicking the Small Caps button creates FAKE small caps instead of invoking the smcp feature._\n\nThis is actually a good idea, because it distinguishes between a faux feature and an OpenType feature. With the small caps feature in InD (at least, in CS1) there's no distinction.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> This is actually a good idea\n\nNo, it is not. It would have been a good idea if the Small Caps button only invoked OpenType smallcaps and would be otherwise disabled, while a \"Faux\" submenu would invoke faux small caps. Just like Photoshop CS/CS2 has \"Faux Italic\" and \"Faux Bold\".\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"It would have been a good idea if the Small Caps button only invoked OpenType smallcaps and would be otherwise disabled\"  \nA better solution would be for a dislogue box to appear when no real small caps were available saying:  \n \"There are no designed small caps available in this font. Would you like InD to create an approximation of small caps for you? (and the caveat: Results may vary, Adobe takes no responsibility for ugly small caps generated in this way. Press 'continue' only if you are the type of person who squooshes type regularly. )\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Chester, I'm getting the same menu list re-shuffle with all of my OT fonts too. Seems to happen with Adobe OT fonts as well.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'm noticing that style links are not working for my fonts (Regular -\\> Bold, Regular -\\> Italic, etc.). I get fake bold and fake italic instead of the real bold and real italic. The Adobe OT fonts I have don't have this problem, except for Adobe Jenson Pro. The style linkings in my fonts work correctly in all other applications that I have tested, so I assume this is a bug, perhaps related to some of the other name problems discussed above.\n\nAlso, all OT fonts I have tried print out as Courier on my PostScript (clone) printer if I print directly from Quark. If I export to PDF, the fonts are correct in the PDF and print correctly from the PDF.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I've also noticed that one common kerning pair (AT) is ignored in one of my fonts. All the other pairs I've tried work as expected. I have not seen this in any other programs.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_It would have been a good idea if the Small Caps button only invoked OpenType smallcaps and would be otherwise disabled, while a “Faux” submenu would invoke faux small caps._\n\nTake another look at the interface, Adam, that's the way it is! --\n\nThere are two main ways to specify \"small caps\" in Quark 7. One is from an icon on the tools palette -- this is a legacy \"word processing\" feature of Quark that's always been there. If you click on this with an OT font that has true small caps, you will get faux.\n\nThe other way is to go to the OT submenu on the tools palette, and scroll to the \"small caps\" command, where you will get true small caps in an OpenType font that has them, or nothing. Naux faux.\n\nThis arrangement makes more sense than InD (CS1, at least), where the Small Caps command will give you, for instance, Adobe Caslon OT true small caps, but Adobe Caslon Italic OT faux small caps, and no indication that they are faux.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Kerning is inconsistent -- some values are implemented, others ignored.\n\nThe Scientific Inferior feature doesn't seem to be supported -- \"subscript\" is bracketed out.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\\\\\ There are two main ways to specify “small caps” in Quark 7. One is from an icon on the tools palette — this is a legacy “word processing” feature of Quark that’s always been there. If you click on this with an OT font that has true small caps, you will get faux. ///\n\nNot in my OT fonts. I get the small caps I created and coded when I hit the small caps button in InDe.\n\nI agree with Adam: If there are \"stylistic buttons\" in an application which call up standard OT features, they should invoke the features in fonts where they are coded. If someone hits the \"Caps\" button in InDesign, any caps and case features should be invoked, which would make all-caps setting look better.\n\nI am in favour of things looking better.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_Not in my OT fonts._\n\nJust to clarify that chester; when you select an OT font that contains true small caps, and you click on the \"small k\" button in the Quark 7 tools palette, you get true small caps?\n\n_I am in favour of things looking better._\n\nGood for you. But surely the situation with Adobe Caslon Pro Small Caps would go against that: if someone clicks on the InD \"small caps\", they will end up with faux, perhaps under the assumption that they're getting true small caps, as they do with the roman -- it would be mortifying to only discover this once the job is in print.\n\nI too, agree with Adam, that the Photoshop palette, where Faux is named Faux, is the best way to call it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Nick, when I have an OT font with coded small caps - Apex New in this case (plug plug plug!) - and I select some text and click the small k button, the coded small caps are NOT called. I'm pretty sure they were the first/last time I used the app, but today it's no-go. Very odd.\n\nHOWEVER, when I click the Big K button for All Caps, I get all caps, as well as the caps variants of punctuation which I coded into the font.\n\nWhen I select Small Caps from the OpenType menu, the ligatures do NOT revert to single letters as they should, as they do in InDe. This is a gigantic bug.\n\nI definitely hear what you're writing about the small caps switching to faux small caps with a change of face, or within a(n inconsistent) family. But I would rather the idle user invokes an OpenType feature by mistake than doesn't invoke it from ignorance.\n\nThat being said; clicking a style button should turn on the corresponding OpenType feature in the OT menu. InDesign does this. QXP doesn't have any \"real\" OT features doubled in their stylistic buttons and OpenType menu. You can only get All Caps by clicking the Big K button, which invokes OT code. You can't select All Caps from the OpenType menu. You can only get true small caps through the OpenType menu, and the little k button makes faux small caps.\n\nMy initial delight is changing to annoyance.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Adobe and Quark are trying to be too clever in their OpenType support.\n\nThe simplest and best thing to do would be to have two type palettes, one for basic typographic styling, and one for OT features.  \nThe OT feature list would be confined to those features present in the selected font (no greying out or bracketing).\n\nIf the \"all caps\" button were clicked in the basic styling palette, and the OT case feature is present, then the Case button will light up in the OT panel. Similar thing with small caps.\n\nThe OT palette should also be available as a permanent display palette, not in a drop-down menu. Then users could highlight a piece of text and see what features are applied, and experiment with turning some on and off easily.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I have discovered another problem with OpenType features in QXP 7. For example, if you use Central European accented glypgs (ccaron, uring...) in OT small caps or OT swash, the text is displayed correctly in an exported PDF. But if you try to copy-paste such text, you will get absurd glyphs, you can't also find the text string containing CE small caps glyphs using search tools in Acrobat. Basic Latin glyphs are not affected.\n\n"
+    },
+    {
+      "time": "",
+      "content": "For the record, the style linking problems I reported in Quark 7 beta were caused by something else, probably a font cache issue. This also seems to be the case with the printing issue. False alarm.\n\nThe kerning inconsistency is still there, though.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Filip, which OT font were you using? Is it all properly-Unicode indexed? Are the glyphs named things like \"ccaron\\_smcp\", or is it \"ccaron.smcp\"?\n\nAll of these problems with Quark make me think that it's definitely ready for release!  \n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^  \nIRONY IRONY IRONY IRONY IRONY IRONY IRONY IRONY IRONY IRONY IRONY\n\n"
+    },
+    {
+      "time": "",
+      "content": "I used several different fonts, mostly Adobe Pro fonts, with same result. I am sure, all glyphs had proper names. The problem doesn't probably affect printed results, but it leads to PDF you can't index or search through.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Adobe and Quark are trying to be too clever in their OpenType support.</cite>\n\n<cite>The simplest and best thing to do would be to have two type palettes, one for basic typographic styling, and one for OT features.</cite>\n\nI completely agree with this, and I think Adam is basically saying the same thing above about small caps. The fake styles should be clearly labled as such, with perhaps some other visual clue to the user that the OpenType feature is the default, intended method for applying styles.\n\nDoes anyone know of an application that currently does this?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Filip, since the fonts are Adobe Pro, and almost certainly have proper Unicode indexing and glyph-naming, the problem must be with Quark's engine. The last time I used Quark much it was really hard to make PDFs from the application. What happens if you generate a PS file, and then use Acrobat Distiller?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Chester, to tell you the truth, I am not interested in Quark at all. I was just curious, how it can handle Czech language. I've tested also Storm's and Brousil's OpenType fonts with same results. When I try to copy-paste Czech text set in small caps from the PDF in Acrobat 7, the application even crashes. I don't want to spend more time with it. I don't plan to use Quark 7 in future.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Filip,\n\nI think you have discovered the shortcomings of Adobe's use of the PUA to encode their stylistic variant glyphs.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I don't think that's it, or at least it's not the whole story. Else why would the Latin small caps - which also have PUA encodings - be unaffected?\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "so has anyone been reporting their OT issues to Quark? If so, are you contacting them directly or using their Quark beta forums? Just wondering how best to contact them...\n\n"
+    },
+    {
+      "time": "",
+      "content": "Myfonts has posted a letter to all font sellers to test their fonts including a personal contact to Quark.\n\n\\*\\*\\*  \nQuark's own forum about Quark 7 is here:\n\n[http://www.quark.com/service/forums/viewforum.php?f=34](http://web.archive.org/web/20101204134942/http:/www.quark.com/service/forums/viewforum.php?f=34 \"http://www.quark.com/service/forums/viewforum.php?f=34\")\n\nQuark's Scott Wieseler tells us the feedback is already proving useful, and that he \"would be very interested in receiving fresh fonts for testing. We have seen some of the feedback already and are looking into it.\" If you'd like to send your OpenType fonts to Scott, he welcomes them at **swieseler AT quark DOT com**.\n\nThe beta will stop working on March 31, but Scott says he'll be happy to discuss extensions with foundries who are still working on compatibility.  \n\\*\\*\\*\n\n-- [astype.de](http://web.archive.org/web/20101204134942/http:/www.astype.de/)--\n\n"
+    }
+  ]
+}

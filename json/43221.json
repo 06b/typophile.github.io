@@ -1,0 +1,38 @@
+{
+  "id": "43221",
+  "title": "How to program \"Alternates for Selection\" for the Indesign Glyph Palette",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hello,\n\nI’m in the process of digitising handwriting into a font with 3 alternates for each glyph. I already have the opentype coding for the “randomnisation” coverd. The problem now is, that my glyphs don’t get combined in the Indesign glyph palette, as is automatically the case, when I design smallcaps. Is this because the opentype feature is programmed as contextual alternates? Or is this because of a different reason?\n\nAny help appreciated,  \nDries\n\n [‹ Standard practice for unicase font.](http://web.archive.org/web/20081006023944/http:/typophile.com/node/43227 \"Go to previous forum topic\") [Scaling up an entire font ›](http://web.archive.org/web/20081006023944/http:/typophile.com/node/42930 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081006023944/http://typophile.com/user/9633\" title=\"View user profile.\">D. Wiewauters</a>",
+  "time": "<br>",
+  "uid": "9633",
+  "comments": [
+    {
+      "time": " 16.Mar.2008 7.51am",
+      "content": "Do you have it listed in your {aalt} feature?\n\nChrisL\n\n"
+    },
+    {
+      "time": " 16.Mar.2008 7.56am",
+      "content": "Currently it’s a Calt feature, I’ll try it now as a Aalt feature.\n\n"
+    },
+    {
+      "time": " 16.Mar.2008 8.04am",
+      "content": "Doesn’t work, it disturbs the look-up feature of my randomnisation.\n\nMissing glyph: A  \nMissing glyph: A.alt1  \nMissing glyph: A.alt2  \nMissing glyph: A.alt3  \nMissing glyph: space.alt1  \nMissing glyph: space.alt2  \nMissing glyph: space.alt3  \n[ERROR] “lookup” use not allowed in ’aalt’ feature [C:/Documents and Settings/Gebruiker/Mijn documenten/FontLab/Studio5/fontlab.fea 50]  \n[ERROR] “lookup” use not allowed in ’aalt’ feature [C:/Documents and Settings/Gebruiker/Mijn documenten/FontLab/Studio5/fontlab.fea 56]  \n[ERROR] “lookup” use not allowed in ’aalt’ feature [C:/Documents and Settings/Gebruiker/Mijn documenten/FontLab/Studio5/fontlab.fea 57]  \n[ERROR] “lookup” use not allowed in ’aalt’ feature [C:/Documents and Settings/Gebruiker/Mijn documenten/FontLab/Studio5/fontlab.fea 58]  \n[ERROR] “lookup” use not allowed in ’aalt’ feature [C:/Documents and Settings/Gebruiker/Mijn documenten/FontLab/Studio5/fontlab.fea 59]  \n[ERROR] “lookup” use not allowed in ’aalt’ feature [C:/Documents and Settings/Gebruiker/Mijn documenten/FontLab/Studio5/fontlab.fea 60]  \n[ERROR] “lookup” use not allowed in ’aalt’ feature [C:/Documents and Settings/Gebruiker/Mijn documenten/FontLab/Studio5/fontlab.fea 61]  \n[ERROR] “lookup” use not allowed in ’aalt’ feature [C:/Documents and Settings/Gebruiker/Mijn documenten/FontLab/Studio5/fontlab.fea 62]  \n[ERROR] “lookup” use not allowed in ’aalt’ feature [C:/Documents and Settings/Gebruiker/Mijn documenten/FontLab/Studio5/fontlab.fea 63]  \n[ERROR] “lookup” use not allowed in ’aalt’ feature [C:/Documents and Settings/Gebruiker/Mijn documenten/FontLab/Studio5/fontlab.fea 64]  \n[ERROR] “lookup” use not allowed in ’aalt’ feature [C:/Documents and Settings/Gebruiker/Mijn documenten/FontLab/Studio5/fontlab.fea 65]  \n[ERROR] “lookup” use not allowed in ’aalt’ feature [C:/Documents and Settings/Gebruiker/Mijn documenten/FontLab/Studio5/fontlab.fea 66]  \n[ERROR] “lookup” use not allowed in ’aalt’ feature [C:/Documents and Settings/Gebruiker/Mijn documenten/FontLab/Studio5/fontlab.fea 67]  \n[FATAL] aborting because of errors\n\nI’ve turned it back to calt now.\n\n"
+    },
+    {
+      "time": " 16.Mar.2008 8.46am",
+      "content": "You just list calt in your aalt features, you don’t replace your calt with the aalt.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 16.Mar.2008 9.08am",
+      "content": "What Chris Lozos means is that, in addition to the ’calt’ feature which you already have, you need to create an ’aalt’ feature looking like this:\n\n&nbsp;&nbsp;&nbsp;&nbsp;feature aalt {  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feature calt;  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feature onum;  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feature lnum;  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feature tnum;  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feature pnum;  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# and other substitution feature ...  \n&nbsp;&nbsp;&nbsp;&nbsp;} aalt;\n\nUpon compiling features, AFDKO will check all features listed in the ’aalt’ feature and create substitutions like\n\n&nbsp;&nbsp;&nbsp;&nbsp;# single alternate ...  \n&nbsp;&nbsp;&nbsp;&nbsp;sub a from [a.alt.1 a.alt.2 a.alt.3];  \n&nbsp;&nbsp;&nbsp;&nbsp;# multiple alternates ...  \n&nbsp;&nbsp;&nbsp;&nbsp;sub b by b.alt.1;\n\nso that InDesign’s Glyph Palette can show _a.alt.1_, _a.alt.2_ and _a.alt.3_ as alternates to _a_. If you find that some alternates are missing from the Glyph Palette, you may add substitutions like the above one manually to the ’aalt’ feature. I think they should follow the _feature aalt;_ etc statements.\n\nThere’s one thing to keep in mind. You can add, but not omit, the presentation of certain alternates in InDesign’s Glyph Palette!  \nEven if you omit statements like _feature calt;_ and write all alternate substitutions manually (with the ’by’ or ’from’ syntax), InDesign is clever enough to analyze all your other features to find alternates by itself. There does not seem a way around this. So InDesign may show more alternates than you would like it do do.  \n(Advantage: InDesign is capable to show alternate glyphs even with fonts that lack an ’aalt’ feature. Disadvantage: The type designer does not have full control over alternates shown in the Glyph Palette. — My suggestion would be that InDesign checks whether an ’aalt’ feature is present, if yes then it would switch off its automatism, if no then switch it on.)\n\n[Edit: Didn’t see your last post while writing mine ...]\n\nKarsten\n\n"
+    },
+    {
+      "time": " 16.Mar.2008 10.07am",
+      "content": "Chris and Karsten, thank you very much for the replies.  \nNow it works like a charm.\n\nDries\n\n"
+    }
+  ]
+}

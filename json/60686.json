@@ -1,0 +1,38 @@
+{
+  "id": "60686",
+  "title": "AFDKO autohint on a command line",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Pls forgive this old fogey if this has been answered before: Does the authohint script accept wildcards (or a directory) or does it have to be entered again for each font? Also, should I always run it with the -a switch to replace the FLS5 hints altogether?\n\n",
+  "author": "<a href=\"/web/20100203105811/http://typophile.com/user/40601\" title=\"View user profile.\">paragraph</a>",
+  "time": "<br>",
+  "uid": "40601",
+  "comments": [
+    {
+      "time": "",
+      "content": "I had trouble running it with wildcards so I run it in a loop:  \nfor i in ./\\*.otf ; do autohint -a $i \\> $i.log ; done\n\n"
+    },
+    {
+      "time": "",
+      "content": "James Puckett\n\n\"for i in ./\\*.otf ; do autohint -a $i \\> $i.log ; done\"\n\nWhich scripting language is that? Batch for the Mac?\n\n"
+    },
+    {
+      "time": "",
+      "content": "That’s just simple bourne/korn/bash scripting. You can run it at the command line.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"You can run it at the command line.\"\n\nBut probably not on a native Windows.\n\nMy batch scripts (Windows):\n\n`@echo off\ncall FDKvars\ncopy Input\\*.* Output\ncd %FDK%\nfor %%f in (%~dp0Output\\*.otf; %~dp0Output\\*.pfb; %~dp0Output\\*.pfa) do %autohintCom% -q -a \"%%f\"`\n\nWhile FDKvars.bat is:\n\n`@echo off\nset \"FDK=C:\\FDK_25_21898\\Tools\\win\"\nset \"autohintCom=autohint.cmd\"\n`\n\nThe folder, that contains the two batch files, must also contain the folders \"Input\" and \"Output\".\n\nI have created the FDKvars.bat, because now I only have to make slight corrections in that file, when Adobe updates the FDK. And I renamed the folder FDK to FDK\\_25\\_21898, because I am using three versions of the FDK at the moment.\n\n**paragraph**\n\nRemember to deactivate the FLS option \"Use subroutines to compress outlines in CFF table\".\n\n\"Also, should I always run it with the -a switch to replace the FLS5 hints altogether?\"\n\nWell, I prefer to remove all hints in FLS, before I autohint a font, but if you don’t remove them, it should be the -r option, shouldn’t it? I am not sure at the moment, because the autohint help says \"has effect only, if the history file is being used.\"\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, Arno. James, your tidbit works like a charm! I'll have to buy you a drink sometime :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>That’s just simple bourne/korn/bash scripting. You can run it at the command line.</cite>\n\n... on Unix/Linux/Mac. Not Windows.\n\nAnd do put the word \"shell\" in after \"bourne/korn/bash.\"\n\nCheers,\n\nT\n\n"
+    }
+  ]
+}

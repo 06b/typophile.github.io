@@ -1,0 +1,70 @@
+{
+  "id": "5663",
+  "title": "Long s in OT hlig feature",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "okay, maybe there's another forum that deals specificaly with OT development, but i haven't got hooked on it yet... so i'll post this one here untill i find a better place to post such questions.   \n   \nso my trouble is this... i'm working on a blackletter that incorporates the long s into the design. what are the rules for using the long s? are they really hard and fast or were/are they up to the discression of the scribe/designer. if i understand correctly the only constant is that the small s is used at the end of words, which leads into my problem...   \n   \nis the best way to incorporate the long s simply to   \n_sub s by longs_ in the hlig feature? i've tried _sub s' @classX by longs_ where classX is any letter and this seems to work fine, but when there are two s's at the end of a word this doesn't work as it ends in long s followed by an s and it just looks goofy.   \n   \nanyhow, any help or suggestions would be helpful. thnx in advance.\n\n",
+  "author": "pablohoney77",
+  "time": "16 Jul 2004 — 1:06pm",
+  "uid": "2910",
+  "comments": [
+    {
+      "time": "16 Jul 2004 — 5:01pm",
+      "content": "The long s substitution should be in hist, not hlig.   \n   \nhlig is really for ct and st ligs. You do however also need a \"long s + s\" lig, as you have discovered. That might as well go in regular old liga, since if you've already got the long s in there, you want it to be a default ligature.   \n   \nThe long s + s ligature is also the origin of the German double s character (eszett).   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "16 Jul 2004 — 5:13pm",
+      "content": "Note that long s + i, long s plus f, and double-long-s are all also helpful.   \n   \nAlthough there are plenty of OT experts on Typophile, there's a dedicated OpenType mailing list as well. Just send an email to get on it.   \n   \nSubscribe: [subscribe-opentype@indx.co.uk](mailto:subscribe-opentype@indx.co.uk)   \nUnsubscribe: [unsubscribe-opentype@indx.co.uk](mailto:unsubscribe-opentype@indx.co.uk)   \nSet list to inactive: [inactive-opentype@indx.co.uk](mailto:inactive-opentype@indx.co.uk)   \nSet list to active: [active-opentype@indx.co.uk](mailto:active-opentype@indx.co.uk)   \nMessage mode: [messages-opentype@indx.co.uk](mailto:messages-opentype@indx.co.uk)   \nDigest mode: [digests-opentype@indx.co.uk](mailto:digests-opentype@indx.co.uk)\n\n"
+    },
+    {
+      "time": "16 Jul 2004 — 5:28pm",
+      "content": "thnx again for your help, thom. now i have more questions...   \n   \nwhat does the \"long s + s\" lig actually look like/consist of?   \nwhen is it used?   \nI was actually aware of the origin of the eszett, but the long s followed by the short s looks funny in English. What i'd like to happen is for the substitution to be ignored when two s's fall at the end of the word, is that where the \"long s + s\" lig comes in?   \n   \nMore about OT programming... what is the best way to get up to speed in learning some of the more complicated stuff? and learning about such tricks as special ligatures? is that all on the OT FDK forums? Are there any other resources on the web or in print that i can get my hands on? I'm aware of Adobe's forum, that Microsoft has quite about about font development on their pages and that there is another forum for OT development on MSN... am i just not taking good enough advantage of these resources? is there something i'm missing here? any insight/explanation of these resources (and others i may have missed) would help a lot. thanks again for your help.   \n   \nVOLT... that must be the MSN group i'm thinking of...\n\n"
+    },
+    {
+      "time": "16 Jul 2004 — 7:13pm",
+      "content": "Hmmm. I'm not sure I can describe it really easily.   \n   \nHuh. I just went to look at it in one of our glyph complement PDFs, and it seems that isn't a ligature in Adobe Jenson Pro (although there are a ton of long s ligatures). I wonder if I am completely hallucinating this.... It isn't as if I've done any work in this genre myself in the last 5-6 years.   \n   \nAs for the OT programming aspect, this forum is pretty good. The FontLab forum on MSN is good. The OT mailing list is decent. The VOLT forum isn't bad. There are also occasional workshops and stuff at type conferences.   \n   \nT\n\n"
+    },
+    {
+      "time": "16 Jul 2004 — 11:50pm",
+      "content": "i got it to work just how i wanted to with this:   \n   \nfeature hist { # Historical Forms   \n # Latin   \nlookup hist0 {   \n sub s' @class3 by longs;   \n} hist0;   \nlookup hist1 {   \n sub longs' s by s;   \n} hist1;   \n} hist;   \n   \ni guess i was too tired to come up with this last nite, i needed some additional help from you, thom. i figgered if using an s\\_s lig would work this above would work too.   \n   \n_There are also occasional workshops and stuff at type conferences._   \nToo bad i won't join you all at typecon this year... maybe next! i hope all of you that make it to sanfran this next week have a loverly time while i fly overhead on my way to seattle. ;^)\n\n"
+    },
+    {
+      "time": "17 Jul 2004 — 10:36am",
+      "content": "Paul,   \n   \nI don't think it's a good idea to incorporate contextual substitutions of the long-s. Depending on the language used, the rules were very different. So for English, the rules are fairly simple, but for example for German, they aren't. The short s is not only used at the end of words, but also, in compound words, the short s is used where a prefix or a stem ends. For example, in \"ansteigen\" (because it's \"an|steigen\"), you would have a long s but in \"austrinken\" you would have a short s (as it's \"aus|trinken\"). Similarly, there are special rules for French, or Polish, or other languages that used long s in the past.   \n   \nTherefore, it's impossible to build a proper universal contextual substitution mechanism. IMVHO, it doesn't make sense to make rules that would only work in one language (e.g. English) but perhaps actually break other languages.   \n   \nAs for the correct form of a ligature long s + short s, I do recommend to look at \\_well-designed\\_ sharp s (\n\n"
+    },
+    {
+      "time": "17 Jul 2004 — 1:32pm",
+      "content": "Thomas, does the OT mailing list have an archive?\n\n"
+    },
+    {
+      "time": "17 Jul 2004 — 2:18pm",
+      "content": "I don't \\*think\\* so, but I'm not sure. It recently moved (formerly on Topica). The previous version had an archive, but I can't find one for the new version.   \n   \nT\n\n"
+    },
+    {
+      "time": "17 Jul 2004 — 4:43pm",
+      "content": "Is it possible to access the old archive?\n\n"
+    },
+    {
+      "time": "19 Jul 2004 — 10:25am",
+      "content": "hey adam,   \nthanks for enlightening me further on the troubles with automated long s substitutions. but i thought with OT one could implement different rules for different languages? how does the hist feature work anyway? is it automatic? or does it work more like the salt function where the user has to select the long s from from a glyph palete? or is it sometimes automatic?\n\n"
+    },
+    {
+      "time": "20 Jul 2004 — 5:07am",
+      "content": "Paul,   \n   \nthere is no such thing as \"how does the hist feature work anyway\" ;) Application developers may choose several ways to implement the feature.   \n   \nThe OpenType specification:   \n [http://www.microsoft.com/typography/otspec/features\\_fj.htm#hist](http://web.archive.org/web/20131106150949/http:/www.microsoft.com/typography/otspec/features_fj.htm#hist)   \nsays that the feature should work as a GSUB lookup type 1, i.e. a simple substitution. This means that contextual substitutions should not be used.   \n   \nMicrosoft's Longhorn OpenType Layout implementation enumerates HinstoricalForms as \"boolean\" so it will be just an on/off function, just like ligatures in InDesign.   \n [http://longhorn.msdn.microsoft.com/lhsdk/graphicsmm/overviews/text/typography\\_ovw.aspx](http://web.archive.org/web/20131106150949/http:/longhorn.msdn.microsoft.com/lhsdk/graphicsmm/overviews/text/typography_ovw.aspx)   \n   \nAFAIK, Adobe InDesign doesn't currently support the \"hist\" feature other than by the Glyphs palette, but may add an \"on/off\" support in future.   \n   \nIt is possible to implement different substitutions rules for different languages. However, (1) the OpenType specification recommends using only GSUB lookup type 1, i.e. simple substitutions (not contextual substitutions) for the feature. (2) As I explained earlier, a properly working contextual \"hist\" feature for many languages would be simply impossible to build, just like a properly working contextual ligatures feature that would substitute \"fi\" or \"fl\" ligatures -- in German, you are allowed to put the \"fl\" ligature in \"anfliegen\" but not in \"auflegen\", because the former is \"an|fliegen\" and the latter is \"auf|legen\". You are not allowed to put ligatures between a prefix and a stem. Supporting this in an automatic way would require dictionary support so it's not really possible to solve it within a font.   \n   \nTherefore, I recommend implementing the \"hist\" feature just using a simple substitution:   \n   \nsub s by long   \n   \nand let the user turn it on and off locally where required.   \n   \nRegards,   \nAdam\n\n"
+    },
+    {
+      "time": "20 Jul 2004 — 8:03am",
+      "content": "_there is no such thing as \"how does the hist feature work anyway\"_   \n   \ni realised this as i thought about it a bit longer yesterday. thanks for taking your time to make sure i really understand this issue. anyway a simple \"sub s by long s\" is a lot easier to implement.   \nand who needs a workshop when you've got Adam T. to answer all your silly questions. ;^) thanks again!   \n   \nand i've got another question... is \"Longhorn\" the next generation of Windows? or did i get that wrong too?\n\n"
+    },
+    {
+      "time": "11 Oct 2004 — 6:21pm",
+      "content": "I do not know what the legit method of implementation is, but I got the ligature subsitutions to work the way I have see it most often done by programming a series of substitutions in the calt feature. (I used calt because that is one that is easily accessible in InDesign.) Of course, I am free to program this however I want since this font is only for personal use anyway, so my method might not be appropriate for you. Let me know if you want to see how I wrote the subs. ![Contextual longs ligature substitution](http://web.archive.org/web/20131106150949im_/http:/www.typophile.com/forums/messages/4101/50998.gif)\n\n"
+    },
+    {
+      "time": "5 Apr 2006 — 6:24am",
+      "content": "Hi J P,\n\nIt's perhaps a bit late, but I would like to see your subs because it looks great.\n\nThnx,  \n®\n\n[www.characters.nl](http://web.archive.org/web/20131106150949/http:/www.characters.nl/ \"www.characters.nl\") { Dutch typography to express yourself }\n\n"
+    }
+  ]
+}

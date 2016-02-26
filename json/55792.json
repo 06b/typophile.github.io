@@ -1,0 +1,38 @@
+{
+  "id": "55792",
+  "title": "OpenType Features order (related to Stylistic Sets)",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Sorry, but I'm here with another (probably) semi-dumb question.\n\nI was reading a presentation by Christopher Slye about features, and while I see there is no single rule in the order in which OpenType features are placed (for an optimal behavior), I was wondering: is generally better to have the Stylistic Sets features (ss01, ss02 etc.) placed at the end of the Features, or at the beginning?  \nI understand it all depends on how you want the other features to affect the already transformed glyphs, but if I have, let's say, a few ordinary features like [liga] or [smcp], do you usually place eventual ssXX sets after or before them?\n\nI am a born-bugger, I know…\n\n",
+  "author": "piccic",
+  "time": "12 Mar 2009 — 9:02am",
+  "uid": "1316",
+  "comments": [
+    {
+      "time": "13 Mar 2009 — 8:52am",
+      "content": "I know my questions are often embarassingly silly, but isn't there anyone willing to share his more common apporach? :=)\n\n"
+    },
+    {
+      "time": "13 Mar 2009 — 9:52am",
+      "content": "It makes a difference if two different features affect the same glyphs. For example, let's say you have a normal and and alternate \"f\" and there is also a corresponding normal and alternate \"fi\" ligature. Let's say the alternate \"f\" is part of stylistic set 1. If `liga` comes before `ss01`, you would do it like this:\n\n`feature liga {\n  sub f i by fi ;\n} liga;`\n\nfeature ss01 {  \n&nbsp;&nbsp;sub f by f.alt ;  \n&nbsp;&nbsp;sub fi by fi.alt ;  \n} ss01;\n\nIf `ss01` comes first, and you don't change the code, `ss01` would never encounter an \"fi\" ligature to transform. You would need to do it like this to get the same effect:\n\n`feature ss01 {\n  sub f by f.alt ;\n} ss01;`\n\nfeature liga {  \n&nbsp;&nbsp;sub f i by fi ;  \n&nbsp;&nbsp;sub f.alt i by fi.alt ;  \n} liga;\n\nMake sense?\n\n"
+    },
+    {
+      "time": "13 Mar 2009 — 9:58am",
+      "content": "By the way, in the example above, I would put `liga` first because there are other ways to generate an \"fi\" ligature than via the OT feature. For instance, if someone types opt-5 on a Mac to get an \"fi\" ligature, the `ss01` code in the second example would have no effect on it.\n\n"
+    },
+    {
+      "time": "13 Mar 2009 — 10:08am",
+      "content": "Ha! I see John Hudson said almost the same thing in a thread yesterday:\n\n[http://typophile.com/node/55805](http://web.archive.org/web/20150416061713/http:/typophile.com/node/55805 \"http://typophile.com/node/55805\")\n\n"
+    },
+    {
+      "time": "13 Mar 2009 — 10:22am",
+      "content": "Piccic,\n\none rule of thumb is that the features that are more semantic, orthographic or linguistic should be processed as early as possible, while the features that are more visual or typographic should be processed later.\n\nAnother rule of thumb is that within the visual features, the features that perform a more dramatic visual change to the whole of text should be processed earlier than those that only perform minor changes.\n\nFor example, when a feature such as \"locl\", \"sups\", \"sinf\", \"subs\" or \"frac\" is applied, the underlying text changes its meaning in some way (there is linguistic adaptation through localized forms, or some scientific meaning induced through superscript or subscript or fraction etc.). This means that such features should be processed as early as possible and if multiple features are applies, those features should take precedence — so their features definitions should be placed higher in FontLab Studio's OpenType panel.\n\nA feature such as \"smcp\" or \"c2sc\" is somewhat visual but also somewhat semantic — setting some text in small caps often conveys some change of meaning. And also, applying \"smcp\" or \"c2sc\" performs a more dramatic change to the text than, say, \"liga\". So when mixing \"smcp\" with \"liga\", you'd normally want \"smcp\" to take precedence — so the feature definitions should be placed higher in FontLab Studio's OpenType panel, but only AFTER the purely semantic features. For example, if the user applies both \"smcp\" and \"sups\" to a number, \"superscript\" will probably be more important to him than \"small caps\" because \"superscript\" is more semantic, i.e. it conveys a stronger change in meaning.\n\nThe same principle applies to ordering stylistic sets. If you have some stylistic sets that perform some linguistic or semantic actions (such as changing, say, \"Russian\" Cyrillic forms to \"Bulgarian\" forms), those should be placed tentatively higher. If you have some stylistic sets that completely exchange the uppercase letters with completely different shapes (e.g. engraved or ornamental), those should be tentatively high. And if you have some stylistic sets that only exchange your standard \"R\" and \"Q\" by variants with a long tail — which is a purely visual change, and fairly minor in its effect to the overall look of the text — those features should be further down the row.\n\nI hope this helps.\n\nBest,  \nAdam\n\n"
+    },
+    {
+      "time": "14 Mar 2009 — 9:38am",
+      "content": "Adam: thank you!\n\nI have no strong semantic features in my current typeface, since it's mostly for epigraphy and titling, so I'm just trying to avoid one Set \"disturbing\" the other.  \nIn fact I've seen that [dlig] [salt] and [calt] are better processed after my alternate sets that are not semantic, but in the end I see it's all related to which non-semantic set you wish to have precedence over the others (and in general ligatures affecting them should necessarily come after).\n\nMark: thanks, precisely the more recurring problem I have, since the few ligatures I have are unusual and would not affect some combinations if placed first.\n\nNow I hope my \"simple\" question won't trigger another unending discussion over the Ultimate Logical Solution to Functional Problems™. :ROFL:\n\n"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "116736",
+  "title": "Stylistic Alternates on Non-OpenType Software?",
+  "forum": "Build",
+  "tags": [
+    "OpenType",
+    "Stylistic Alternates",
+    "Build"
+  ],
+  "content": "I want to use Stylistic Alternates on a program without OpenType support; namely, the alternate a and W/w on Raleway.  \nSo I would like to make a copy of Raleway where the a and W/w are their alternates.  \nIs there a way to do it without expense, or is there another workaround solution?\n\n",
+  "author": "JapanYoshi",
+  "time": "21 May 2014 — 8:16pm",
+  "uid": "216591",
+  "comments": [
+    {
+      "time": "21 May 2014 — 10:05pm",
+      "content": "You could learn FontForge (not a walk in the park though, from what I've heard) and do it yourself. Or barter something with somebody who can do it for you.\n\nhhp\n\n"
+    },
+    {
+      "time": "22 May 2014 — 5:10am",
+      "content": "Well, there's Type 3.2, free-beer and an easy install on my old WinXP machine.\n\n"
+    },
+    {
+      "time": "22 May 2014 — 5:55am",
+      "content": "The easiest way I see to do that without breaking spacing and kerning is to use ttx which comes for instance with [AFDKO](http://web.archive.org/web/20140702160350/http:/www.adobe.com/devnet/opentype/afdko.html) and modify appropriately the ttx files you will get as follows.\n\nI will assume you have sed (that comes with OS X and Linux). You could also use perl. The substitutions to make, in the sed syntax, are\n\n    s/Raleway/RalewayW/g\n    s/\"w\"/\"w.ORIG\"/g\n    s/\"w.alt\"/\"w\"/g\n    s/\"w.ORIG\"/\"w.alt\"/g\n    s/\"W\"/\"W.ORIG\"/g\n    s/\"W.alt\"/\"W\"/g\n    s/\"W.ORIG\"/\"W.alt\"/g\n\nwhere the first line changes the font name so as to be able to have both Raleway and RalewayW (the modified font) installed on your system. The other lines just swap the glyph names w.alt with w and W.alt with W.\n\nYou put those lines in a file, say mods.sed.\n\nIn order to get your modified version of Raleway-Regular.ttf you execute (in the railway font folder) the lines (with unix syntax, so that it works on OS X or Linux)\n\n    ttx -t cmap -t GSUB Raleway-Regular.ttf\n    mv Raleway-Regular.ttx Raleway-RegularW.ttx\n    ttx -x cmap -x GSUB Raleway-Regular.ttf\n    sed -f mods.sed Raleway-Regular.ttx > modfont.ttx\n    ttx modfont.ttx\n    ttx -m modfont.ttf Raleway-RegularW.ttx\n    rm -f *.ttx modfont.ttf\n\nOn the Mac, you can just copy and paste those lines in the Terminal window. After a few seconds, you get your new font Raleway-RegularW.ttf and the kerning should work fine. Since there is no alternate for the small cap, it will stay as is but that probably makes no difference for your program.\n\nYou do the same with all the other fonts and you get your family. That can all be done on all 18 font files with a script if you are familiar with unix.\n\n"
+    }
+  ]
+}

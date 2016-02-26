@@ -1,0 +1,50 @@
+{
+  "id": "56534",
+  "title": "How is glyph order determined?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Is there any particular standard for glyph order that should be adhered to when producing fonts or is it up to the designer? In particular I’m interested in glyph order for accented characters in Latin fonts; it seems that some designers follow Latin-1 and then let anything additional come in alphabetical order after the Latin-1 glyphs, but I have also seen some fonts that put all accented characters in alphabetical order.\n\n",
+  "author": "<a href=\"/web/20100203165839/http://typophile.com/user/14722\" title=\"View user profile.\">James Puckett</a>",
+  "time": "<br>",
+  "uid": "14722",
+  "comments": [
+    {
+      "time": "",
+      "content": "There is really no single right way to order glyphs. There are lots of different strategies that have arisen over the years (Unicode order, grouped by base shape similarity, etc.) to solve specific problems or work around technological roadblocks, but not one single way that works for every situation.\n\nIn the absence of any such force, you should devise something that makes sense to you and is easy to extend and maintain (i.e. if/when you add new glyphs or whatever)...maybe something that is easy to explain to others, should you need to have other people work on your data at some point in the future.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, Josh. So aside from sticking to a convention that users seem happy with, is there a reason to not order accented glyphs in exact alphabetic order as opposed to some of the other schemes?\n\n"
+    },
+    {
+      "time": "",
+      "content": "alphabetic order according to PostScript names? I think that's a bit silly as these may seem canonical to a typeface designer they're really only arbitrary and this sorting would not necessarily be logical to anyone else.\n\nIf you're going to do your own sorting scheme, you may as well group accented glyphs by visual similarity or by most frequently used or some combination of the two.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I vastly prefer \"unicode order.\" If you sort by alphabetical order, when you spool through the characters in the metrics window for kerning, you get, for example, all the a's, then all the b's, etc. I've too many years with a workflow where the sequence goes a-b-c-d etc. Kerning the accented & other letters comes later. For the unencoded characters, I set the index (order) by hand; I like the numbers to run from 0 through 9, and the proportionals not be scattered with the tabular. Etc.\n\nAnyway, bear in mind that the sort order will affect what the next character will be in the metrics window.\n\nFWIW\n\n"
+    },
+    {
+      "time": "",
+      "content": "James, a warning also regarding fiddling with the glyphs order: I ended up with two or three different glyph orders inside the same family, by stumbling through the learning process. The fonts worked OK in all the software, only the MyFonts character renderer just would not show them right. Re-encoding, generating Unicode and Names did not fix the problem. In the end, the solution was to sort them all in _Index_ view by Unicode, then re-encode on FreeFont.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Charles, as far as kerning, note that Metrics Machine has a lot of 'smart' capability to automatically generate pair lists of a variety of specifications--cap to lower case, lc to quotes, cap to diacritics, etc., etc.--that you can scroll through in test strings (prebuilt or user specified) for kerning.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_is there a reason to not order accented glyphs in exact alphabetic order as opposed to some of the other schemes?_\n\nI'm sure someone can think of _some_ reason :-)\n\nSeriously though: with a few technology-based exceptions, glyph order should be mostly transparent to any users. Some things I've seen and used over the years that have forced a particular ordering are:  \n- need to keep the font size as small as possible: ordering in Unicode order helps keep the 'cmap' subtables small  \n- complex OpenType Layout functionality: ordering by similarity of base forms helps to find things when looking through the glyphs (I think Calibri is or at least was arranged this way, for the most part)  \n- avoiding backwards-compatibility issues: adding new glyphs to the end of the existing order helps when comparing old \\<\\> new  \n- many glyphs (50000+) with very extensive GSUB lookups, needed to place certain glyphs at a certain place within the order to avoid overflows of certain variables.\n\nOthers have suggested other reasons, though I'm a bit puzzled by the MyFonts thing...I suspect something else had gone awry there.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Joshua, I would sleep better if I knew what it was. Could you tell from the fonts themselves (might still have some copies somewhere)?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Can't guarantee anything as I don't really know the inner workings of MyFonts nor what might cause fonts not to work there, but if you can get the fonts to me somehow (I think you can get in touch with me via my forum contact form) I can poke around and see if there's anything obvious. If possible I'd like to see before and after versions.\n\n"
+    }
+  ]
+}

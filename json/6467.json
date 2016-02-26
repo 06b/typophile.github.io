@@ -1,0 +1,26 @@
+{
+  "id": "6467",
+  "title": "Bitmap Font help (fontographer)",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hey there!   \n   \nForgive any noobie questions, but I'm at a bit of a loss and I don't know where to turn... Here's my situation:   \n   \nI work for a book publishing company. We've set up a system where researchers enter information into an online database which we can then export, import into Quark, run some formatting programs, and have a fully-formatted book. The only thing that's holding us up is handling icons.   \n   \nCurrently, we have to hand-place icons in the book. I would like to fully-automate the process by creating a custom font that has these icons in it. Then all I'd have to do is have the database spit out a string of letters and the row of icons would pop up, correctly spaced and formatted.   \n   \nIf the icons were vector, I don't think I'd have any troubles. However, since the icons are hand drawn and do not lend themselves to vector design, I need to do them as bitmaps. Here's where I'm running into troubles.   \n   \nI'm using Fontographer, and I've figured out how to create the necessary bitmap version of the icons, but whenever I export the font and try to use it, the bitmap doesn't show up. It's as if the program is looking for a vector version of the font that doesn't exist and won't see the bitmap version.   \n   \nSo basically my question is: is there any way to create a bitmap-only font using Fontographer?   \n   \nThanks very much!   \n   \n--eric\n\n",
+  "author": "erico564",
+  "time": "31 Aug 2004 — 7:43pm",
+  "uid": "4564",
+  "comments": [
+    {
+      "time": "31 Aug 2004 — 10:08pm",
+      "content": "What's Fontographer?   \n   \nIf at all, BitFonter should probably be your choice for bitmap fonts ( [http://www.fontlab.com/html/bitfonter.html](http://web.archive.org/web/20131022034228/http:/www.fontlab.com/html/bitfonter.html) ) as it supports the widest range of bitmap font formats. However, I think most bitmap fonts work on screen, but not necessarily in print.   \n   \nAdam\n\n"
+    },
+    {
+      "time": "31 Aug 2004 — 10:23pm",
+      "content": "\"True\" bitmap fonts (either stand-alone like FON or NFNT, or embedded like in a TT font) have sort of become bastard children, especially on the Mac side. Your best bet is to make what are called pixelfonts: outline fonts that mimic a bitmap font when used at a certain single point size. They contain blocky paths that snap to the \"intended grid\", causing the outlines to render out exactly as the bitmaps would be. They're supported better than true bitmap fonts because the OSes can't tell they're anything besides outline fonts and hence can't discriminate against them.   \n   \nNote: another option is to use hinting to get an outline font to render well onscreen, but that's a lot more work, although it allows a single font file to address more than one size.   \n   \n--   \n   \nIf your application is narrow enough to accomodate true bitmap fonts however, you can either use BitFonter to generate a FON\\* file (Adam, is that a supported format?), or if you're stuck with Fontographer you can generate a BDF, embed it into a dummy (or even legit) TrueType font using the SBIT utility (free from MS), and use that TT file.   \n   \n\\* There are cheaper options to do this than BitFonter (possibly including other Pyrus products), but BF is the most complete, powerful true bitmap font product out there.   \n   \nIf you get stuck, and you have a budget for consulting, give me a ring, since I'm in LA too. :-\\>   \n818.507.6907   \n   \nhhp\n\n"
+    },
+    {
+      "time": "1 Sep 2004 — 10:33am",
+      "content": "Thanks very much for all your help! It looks like the best bet is for me to recreate the icons in Illustrator, since the bitmaps probably won't look good enough for print, no matter what I do.   \n   \nThanks everyone for your input! And hhp - I'll hold onto your number; we may need consulting on other projects in the future ;)   \n   \nBest,\n\n"
+    }
+  ]
+}

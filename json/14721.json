@@ -1,0 +1,58 @@
+{
+  "id": "14721",
+  "title": "Powerbook rendering / Fontlab / hinting / Grid Steps",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Some context:\n\nI am using FL 4.6 on a Mac 15” laptop\n\nI am working on a monospaced font that is meant to look good in hinted b/w on PC, in anti-aliased mode on PC & in Anti-alised mode on a mac running OSX. My primary target size is 10pt PC / 13 pt mac.\n\nI would like to see good results outside of this ( in 9pc/12mac for instance ) but I want 10/13 to be as crisp as possible on screen.\n\nWhen I am hinting my font and I look at it in the hinting window I get boxes that are there to tell me where the pixels will be at a particular pt. size. 12 pt, 13 pt etc. When I set my glyph’s width metrics to match a multiple this of this size, and match my vertical stems to these (77em); I seem to get an good horizontal pixel match on screen at that size. Which is great.\n\n\\*But\\* the vertical match is not good - eg I don’t get exact pixel matching by the 4th pixel or so. The 5th one is about 1/2 of a pixel off.\n\nSo, could it be the 13 pt interacting with the 1000 em square?\n\nMaybe : Here is the math\n\nThe Grid I am using is 77em units in a 1000 em sq. The 77 comes from dividing the 1000 by 13 & rounding up to the whole number em…\n\nNote: 76.92 would be the exact # ideally I guess, but that isn’t possible in FL or with fonts…\n\nSo back to the discrepancy: The difference left over each time is 0.08 em units, which gives me 0.32 units in 4 pixels or 1/3 of 1 em unit difference. Should this make a big difference? I don’t think so because 1/3 of an em is 100x less than 33em units+ difference which is what I seem to see.\n\nSo I don’t really think so.\n\nAm I figuring this wrong? If not, … What else could it be?\n\nIs this an LCD screen difference? eg Are my pixels not square? I think they are square & maybe there is another explanation.\n\nI am pretty sure the pixel boxes generated when hinting based on 72dpi on the Mac version of Fontlab. In which case, hinting at 13 pt in the dialog would give me what I would see at 10 pt. on a PC\n\nThis seems to have been bourne out nicely in my testing.\n\nAny other ideas?\n\nAlso, has anyone changed the hinting grid on Mac Font Lab to reflect a 96 dpi ( or other setting ) ?\n\nSorry about the hairball of questions. They seem inter-dependent to me & won’t comb out!\n\n",
+  "author": "Eben Sorkin",
+  "time": "19 August, 2005 - 3:31pm",
+  "uid": "2942",
+  "comments": [
+    {
+      "time": " 19 August, 2005 - 4:59pm",
+      "content": "FYI: The em square does not have to be 1000 units.\n\n"
+    },
+    {
+      "time": " 22 August, 2005 - 3:04pm",
+      "content": "\\> FYI: The em square does not have to be 1000 units.\n\nTrue! I guess I could change the Em to fit 13 more perfectly…\n\nBut I didn’t need to. I got a scoop of info from Apple! And best of All \\*it worked\\*. Anybody want to know what I found out?\n\n"
+    },
+    {
+      "time": " 22 August, 2005 - 3:44pm",
+      "content": "I do! :)\n\n"
+    },
+    {
+      "time": " 22 August, 2005 - 5:15pm",
+      "content": "I found out that yes, he was correct! OSX will take that set of data seriously, and if you say the Ascender value is 663, and you are on the money with your outlines ( pixel perfect) in terms of height and that is that is say 693em, the render engine will make it look (at 12 or 13 pts) like you are overshooting 693 by 30em even though you are technically bang on the pixel! If you fix it so the Ascender value is correct that smudge at the top of your ascender goes away.\n\nThis also means that (in the reverse of what I did, but more normally) you can tweak your ascender value to make a clearer screen render in OSX even if your font does not match a pixel perfect height for a particular pixel res pt size in it’s ascender outlines.\n\nWindows uses hints instead.\n\nBoth cases involved TT fonts - I haven’t checked the PS Type 1 font to see if it is true there too. I suspect it is.\n\nLater on I will have to write to this fellow again & ask if there is a paper of FAQ on the OSX render engine & font design so I can design with it’s features in mind. If I find it helpful would you like to know about it as well?\n\nIf this is confusing to folks, I can post images later.\n\n"
+    },
+    {
+      "time": " 22 August, 2005 - 5:16pm",
+      "content": "Lauri, your new icon is very cool !\n\n"
+    },
+    {
+      "time": " 22 August, 2005 - 6:01pm",
+      "content": "Eben,\n\nThanks for all the information! I won’t need it right now, but I’ll make a mental note of it for future use when I’m doing hinting or wanting pixel-perfection at different point sizes. I’m always interested in all the nitty-gritty small details, and I always end up using a calculator when I’m designing fonts. I haven’t really finished any fonts yet, I’m working on a blocky stencil font similar to Futura Black at the moment, we’ll see how that turns out.\n\nYou’re putting a lot of work into Software Developer, and it’s looking really good, I bet you’ll find a lot users for it.\n\nI’m glad you liked the icon, I thought I’d give it some subtle movement that isn’t distracting.\n\n"
+    },
+    {
+      "time": " 22 August, 2005 - 11:09pm",
+      "content": "Lauri,\n\nI hope I do find those users! I hope the font is useful.\n\nI have an idea I may figure out a few more things. If I do I’ll post them here or in a new thread.\n\nWill you post some preliminary images of your font?\n\nI like the surprise of the icon. the way it seems to be normal & then suddenly isn’t. That seems quite a bit better than an icon which just pulses!\n\n"
+    },
+    {
+      "time": " 23 August, 2005 - 2:33am",
+      "content": "Eben,\n\nI’m certain you’ll find users for your font. There has to be tons of programmers and html coders that are tired of the standard Windows/Mac fonts, and want to use something more exciting in their text editors.\n\nI will post some images of the font I’m working on when I have put some more time into it, but if you’re interested I’ll e-mail you a couple of preliminary images.\n\nHave you thought about how you’ll distribute your font? Own website, MyFonts, T.26, Veer, etc?\n\n"
+    },
+    {
+      "time": " 23 August, 2005 - 1:36pm",
+      "content": "Eben, nice detective work on the OS X font renderer.\n\n"
+    },
+    {
+      "time": " 23 August, 2005 - 3:20pm",
+      "content": "Lauri, I hope you are right. I am going to do it in any event. I am pretty committed now. And I have been given some great help here & else where. As far as distribution I am totally open. I suppose some part of me would like to ( hubris here ) see a maximum distibution if it turns out to be really useful which would argue for attempting to get the font integrated into an OS. That’s pretty far fetched I know! After that I am not sure what makes the most sense. Some other exclusive license to a company would make the most sense as far as being paid… I don’t know. I need to make the font excellent & test it really well before I worry too much about that.\n\nI would love to see your images. Please let me know if you want feedback, questions or if I should keep my trap closed. ;-)\n\nMark, Thanks!\n\n"
+    },
+    {
+      "time": " 23 August, 2005 - 3:50pm",
+      "content": "Eben,\n\nFor maximum distribution through foundries, I’d probably shoot for FontFont or Linotype. And if you’d want you font integrated into an OS you could always talk to Simon Daniels or John Hudson for Windows; not sure who to talk to for other OS’s. If I recall correctly there’s already a new monospaced typeface created for Longhorn/Vista so that might be a tough sell.\n\nIf you don’t care about making money on the font you could talk to the people distributing different Linux versions, they’d probably be happy to have an extra typeface, and it could lead to commisions. [This might be bad advice with all the talk on free fonts.]\n\nAnother option would be to talk to software companies and see if they would want to license the typeface for any of their products (programming related).\n\nI’ll shoot you an e-mail, thanks!\n\n"
+    }
+  ]
+}

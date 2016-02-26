@@ -1,0 +1,46 @@
+{
+  "id": "1816",
+  "title": "Cross-platform font families (in TTF/OTF)",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I have tried to create TTF and OTF fonts (using FontLab for Mac) that would work cross-platform. Everything is perfectly fine until I come to the part where the grouping in font families does come in. Is there a way to create a TTF/OTF font file that would show up with a submenu (say Helvetica Neue as the main font menu item and then 33 variations of it as its submenu items) so that it would work the same way in BOTH Mac and PC?   \n   \nI have tried many different combinations but there's always a problem on one of the platforms. If I get decent submenus on the Mac, the font won't work on a PC (it can then only have 4 submenu items). And if I name the fonts so that they show up on a PC (basically fill all the font info into all the name fields in FontLab - i.e. 'HelveticaNeue-LightExtended' for every field), the Mac font menu becomes huuuuuge.   \n   \nIs there some way to solve this problem? Maybe you can briefly explain the standards (if there are any?) of naming decent cross-platform fonts? Or point out some tutorials?   \n   \nThanks!\n\n",
+  "author": "zilmer",
+  "time": "Mon, 2003-10-27 01:38",
+  "uid": "2045",
+  "comments": [
+    {
+      "time": " Mon, 2003-10-27 03:46",
+      "content": "Most PC applications, and indeed windows itself only recognise 4 members of any given family. AFAIK, only Adobe programmes can recognise more, but they use their own font technology.\n\n"
+    },
+    {
+      "time": " Mon, 2003-10-27 06:34",
+      "content": "\"4 members of any given family\" ?   \nthis is totally new to me. i never noticed it, as i don't use that huge families. is there some more info on this? thanks: lars\n\n"
+    },
+    {
+      "time": " Mon, 2003-10-27 07:19",
+      "content": "Yes, 4 members: Regular, Italic, Bold and Bold Italic.   \nI guess the only to workaround this restriction is by using some \"font naming strategy\".\n\n"
+    },
+    {
+      "time": " Mon, 2003-10-27 07:29",
+      "content": "Take a look [here](http://web.archive.org/web/20050518123133/http:/www.typophile.com/forums/messages/4101/12984.html?1060134744) too.\n\n"
+    },
+    {
+      "time": " Mon, 2003-10-27 14:21",
+      "content": "Typical Windows apps have a fixed family size of 4 or less fonts: regular, italic, bold and bold italic. If you have a larger family, you need to creatively name the fonts into discreet four-font families, e.g.:   \n   \nMyFont   \n MyFont-Regular   \n MyFont-Italic   \n MyFont-Bold   \n MyFont-Bold Italic   \n   \nMyFont Light   \n MyFontLight-Regular   \n MyFontLight-Italic   \n   \nMyFont Bold   \n MyFontBold-Regular   \n MyFontBold-Italic   \n   \nHowever, while you still need to do this for any TT and OT font, the latest versions of the name table specification include a second set of OpenType preferred family and subfamily names, which are what Adobe apps reference in menus and what future MS and other apps will use. Using the same example as above, the OT preferred family name could be set to 'MyFont', with the preferred subfamily names as indicated in brackets below:   \n   \nMyFont   \n MyFont-Regular [Regular]   \n MyFont-Italic [Italic]   \n MyFont-Bold [Semibold]   \n MyFont-BoldItalic [Semibold Italic]   \n   \nMyFont Light   \n MyFontLight-Regular [Light]   \n MyFontLight-Italic [Light Italic]   \n   \nMyFont Bold   \n MyFontBold-Regular [Bold]   \n MyFontBold-Italic [Bold Italic]   \n   \nYou can set OT preferred family and subfamily names in FontLab, on the second panel of the FontInfo window.\n\n"
+    },
+    {
+      "time": " Tue, 2003-10-28 00:00",
+      "content": "Hey, that old thread is pretty informative. I think I already said most of what I wanted to back then in July/August.   \n   \nI just remembered that I have a PDF from a presentation specifically on the name table that I put together fresh and updated for the OpenType workshop at ATypI Vancouver. I'll see about getting it posted here or on the Adobe Web site (or perhaps both).   \n   \nT\n\n"
+    },
+    {
+      "time": " Tue, 2003-10-28 01:15",
+      "content": "\"I'll see about getting it posted here or on the Adobe Web site (or perhaps both).\"   \n   \nlooking forward to it. thanks: lars\n\n"
+    },
+    {
+      "time": " Tue, 2003-10-28 12:17",
+      "content": "I sent it to Priidu, and she has posted it here for now (thanks!):   \n [http://www.zilmer.com/nametable/](http://web.archive.org/web/20050518123133/http:/www.zilmer.com/nametable/)   \n   \nAfter I get back to San Jose next week I'll find it a more permanent home, probably on the Adobe Web site somewhere.   \n   \nCheers,   \n   \nT\n\n"
+    }
+  ]
+}

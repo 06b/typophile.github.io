@@ -1,0 +1,134 @@
+{
+  "id": "30913",
+  "title": "UPM value of 1000 set in stone?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Greetings!\n\nI have been working for the past few months in Illustrator on a display family with lots of alternate glyphs and ligatures and would like to begin the process of creating a fully functioning OT font in FontLab 5.0.2. (on Mac X)\n\nI have never used FontLab before and this business of a [UPM](http://web.archive.org/web/20150223110030/http:/www.typophile.com/wiki/UPM) value of 1000 throws me already off. The number 1000 seems such a unyielding beast regarding it's compatibility with other numbers. It cannot be cleanly divided by 3 to start with. Could I use 1080, for instance? (With the exception of 7, it is divisible by any number between 1 and 10 and by 12, 15, 18, etc.)\n\nOr is s there a way to get around those rounding errors by choosing a number lower than 1000? In my case, the number 864 would allow all points in all weights to fall precisely on the grid. (the design has a few decorative elements, like seamless patterns for each weight, for instance, which I would like to remain seamless)\n\nAny input on this would be greatly appreciated!\n\nThanks,  \nPeter\n\n",
+  "author": "truecolors",
+  "time": "26 Jan 2007 — 5:10pm",
+  "uid": "2559",
+  "comments": [
+    {
+      "time": "26 Jan 2007 — 5:23pm",
+      "content": "This question has been asked answered in detail on Typophile many times. The short answer is you can use a huge variety of UPMs - but as you have guessed the math can matter. In general 1000 is the size used but for instance Microsoft fonts are made to 2048. You can also use 1080 - not a problem. But for the max info enter this into google:\n\nsite:typophile.com UPM\n\nAll the details to this question are there. BTW Typophiles search doesn't always work for me and I have not spent time working out if the page the browser or what so save that Search. You can substitute new search terms for 'UPM'.\n\nAny chance that you will post an image of what your up to?\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 5:25pm",
+      "content": "BTW your site is not showing up for me.\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 5:40pm",
+      "content": "Hi Eben,\n\nthanks for the search tip. The results give me plenty to ponder. My site is inactive right now.\n\nP\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 7:04pm",
+      "content": "I've used UPM up to 16000 (for personal use)\n\n"
+    },
+    {
+      "time": "26 Jan 2007 — 7:47pm",
+      "content": "Your icon is cool so I wanted to see more...\n\n"
+    },
+    {
+      "time": "27 Jan 2007 — 3:42am",
+      "content": "thanks – I will show, but need more time...\n\n"
+    },
+    {
+      "time": "28 Jan 2007 — 2:40pm",
+      "content": "Writing off the top of my head now:\n\nThe maximum UPM size permitted by the OpenType and TrueType specifications is 16,384 ( [http://www.microsoft.com/OpenType/OTSpec/head.htm](http://web.archive.org/web/20150223110030/http:/www.microsoft.com/OpenType/OTSpec/head.htm \"http://www.microsoft.com/OpenType/OTSpec/head.htm\")), and this is the value that FontLab Studio also permits as a maximum.\n\nYou need to keep in mind that the UPM size controls how glyphs will be sized at a specific point size (i.e. the point size chosen by the user in an application always corresponds to the UPM size of the font). If your UPM size is 2,000 and the user chooses 10 pt type, any glyph that will be 1,000 units high in your font will be exactly 5 pt high in print. Typically, in text fonts, the height of flat uppercase Latin letters such as E, H or I is 70% of the UPM size. So if you pick a non-1000 UPM size but you want for your font to go well with other fonts available on the user’s system (i.e. so that it’s not untypically small or untypically large in relation to other fonts), you should make your uppercase letters roughly 1,400 units high in a 2,000 UPM font. Of course this is just a rough estimation -- it can range from 1,100 to 1,600 units and will still be within the normal range. If your lowercase is quite large, you may want to make the uppercase appropriately smaller, somewhere around the 1,100 end. (For a 1,000 UPM font, all these values should be cut by half, obviously.)\n\nThe Type 1 specification states that absolute glyph coordinates must not exceed the range of –2,000 to +2,000, in both x and y directions ( [http://partners.adobe.com/public/developer/en/font/T1\\_SPEC.PDF](http://web.archive.org/web/20150223110030/http:/partners.adobe.com/public/developer/en/font/T1_SPEC.PDF \"http://partners.adobe.com/public/developer/en/font/T1\\_SPEC.PDF\") section 3.3). This means that according to this specification, \\*regardless of the UPM size\\*, none of your extrema points should have the x or y position larger than ±2,000 units.\n\nWhile in the Type 1 specification states that the general limitation is ±2,000, the Type 1 spec supplement states that the most important implementations have higher limites: the Adobe PostScript RIP that is built into printers and imagesetters supports glyph coordinates up to ±4,095 and the Adobe screen font driver (ATM/CoolType) supports coordinates up to ±8,191. So these are the more important limitations to observe.\n\nAll those limitations are also valid for OpenType PS fonts as they are being converted to Type 1 fonts when sent to a PostScript printer.\n\nAdobe recently released a set of OpenType PS fonts with the UPM size of 2,048 (Adobe Arabic, Adobe Hebrew, Adobe Thai) in which there are a few very wide glyphs in which the x coordinate is about 3,500. This exceeds the original Type 1 limitation of ±2000 but is still within the Adobe PostScript RIP limitation of ±4095.\n\nIt seems that, regardless of the chosen UPM size, the maximum glyph coordinates in an OpenType PS (.otf) and Type 1 font is ±4095.\n\nIn FontLab Studio, you can check the maximum glyph coordinates in Font Info / Metrics and Dimensions / Key Dimensions / Font BBox. The values listed there are in order: (minimum x, minimum y) - (maximum x, maximum y). Make sure that the absolute value of neither of the numbers is larger than 4095.\n\nFontLab Studio currently has an internal implementation limit for glyph coordinates of –32,767 to +32,767. This means that very high coordinate values (e.g. over 10,000) might cause problems at geometric transformations (scaling, rotating etc.). You can observe the effect easily if you scale something in FontLab by 1000% several times -- you will see that the glyphs \"implode\".\n\nAltogether, it is not possible to give one definitive answer of what the maximum UPM size and maximum glyph coordinates should be. For reasons of conciseness (one of the glyph design principles recommended by the Type 1 specification), the designer should not choose a larger UPM size than is needed for the precision he’s looking for. If the precision offered by the UPM of 1000 is not sufficient, the designer should choose 2000, and failing that, higher values such as 3000 or 4000 — while on the other hand keeping in mind that all glyph coordinates should fit within the ±4095.\n\nDepending on the font format (OpenType PS or TT) the tool choice (Fontographer or FontLab Studio) and backwards-compatibility concerns (does the font really have to print on printers or imagesetters made in 1992?) the limits are different. Also, many of those limits are not \"hard\" or specified by any vendors, they’re empirical estimates that people found after struggling with some bugs in specific devices.\n\nAdam\n\n"
+    },
+    {
+      "time": "28 Jan 2007 — 3:49pm",
+      "content": "Having said that, using a UPM size that is \\*lower\\* than 1000 is absolutely no problem, and using a UPM size that does not end with three zeros, and is not a power of two, is also no problem. So using the UPM size of 864 is just as fine as 1080 or 997 or 115, or even 13. In fact, I have seen pixelfonts designed on a 13 unit UPM size, with each \"pixel\" square was exactly one font unit high and wide.\n\nA.\n\n"
+    },
+    {
+      "time": "28 Jan 2007 — 5:07pm",
+      "content": "If you want a UPM value higher than 1000 keep in mind the rounding errors when you scale the font up or down.  \nI typically use a UPM of 3000 as this is obivously lossless when scaling up (all values are multiplied by 3), and when scaling down the maximum rounding error is only 1/3, which is the lowest possible maximum rounding error you can get when scaling down.\n\n"
+    },
+    {
+      "time": "28 Jan 2007 — 5:27pm",
+      "content": "Tim, what do you mean by \"scale the font up or down\"?\n\nA.\n\n"
+    },
+    {
+      "time": "29 Jan 2007 — 1:59am",
+      "content": "I was assuming that fonts with an UPM of 1000 are to be generated in the end and also that you might only temporarily want to increase the UPM value for certain operations or design steps. In that case, when changing the UPM you would check the \"Scale all glyphs according to UPM size change\" checkbox because otherwise you would not effectively change the \"resolution\". This implies \"scaling\", i.e. multiplying the coordinates of every node by a certain number - which can lead to rounding errors and stem weight inconsistencies.\n\nIf you only want a slightly different UPM you may not need to scale the glyphs. However, I do not understand what would be the benefit of that.\n\nPeter, what do you mean by \"the number 864 would allow all points in all weights to fall precisely on the grid.\"? What grid are you talking about?\n\n"
+    },
+    {
+      "time": "29 Jan 2007 — 4:36am",
+      "content": "Back in 1995; I wrote something about UPEM for Microsoft. This was in relation to the 'head' table in a TrueType font and why 2048 was chosen for TrueType by Sampo Kaasila and Apple Computer. Basically it is because division on a computer (especially when TrueType was made) is slow and division can be achieved quickly by shifting bits if the values are powers of 2.\n\n\\* unitsPerEm should be a power of 2 (2048 ideally).\n\nWhat is a power of 2?  \nA value that is the product of 2 to the power of 'n'. For example, the ideal value of unitsPerEm is 2048. This is the product of 2 to the power of 11.\n\nWhy a power of 2?  \nDivision on computers is a very slow operation. One way programmers get around this problem is to use a technique of shifting bits for division. When a value is a power of 2, division can be performed by simply shifting the bits in the binary of that number. This is extremely fast and efficient.\n\nThis method is similar to dividing by ten in a decimal system. To divide 1000 by 10, you only need to move the decimal place one value to the left. The result is the same as 1000 divided by 10 or 100.0.\n\nWhy 2048?  \n2048 units were chosen for a few reasons:\n\n\\* It is a power of 2 (2 to the 11th power).  \n \\* 2048 is a high enough value for good precision in rendering.  \n \\* 2048 is a low enough value to be processed efficiently by microcomputers.\n\nIn the Asian fonts for Windows, MS Mincho and MS Gothic, it was necessary (at the time of their release) to choose a lower value (256 units) because of the file size of these font files.\n\nThe actual units per em value is a balance between the amount of processing power, the complexity and size of the font file, and the amount of precision that can be obtained with this value. A low units per em value would result in less quality in the output, but be faster to process. A high units per em value would produce a higher quality output, but be slower in processing.\n\nToday, computers are more powerful than ever and the use of large fonts with thousands of glyphs is becoming more common, especially with Unicode and OpenType fonts. With today's computers, we suggest the 2048 units per em value as still the best value for all fonts of any size, including large Latin or non-Latin script fonts.\n\n"
+    },
+    {
+      "time": "29 Jan 2007 — 11:40am",
+      "content": "If you have designed legacy fonts at 1000 units and later decide you need more precision, you can double the UPM to 2000 units in FontLab without any rounding errors. If you go to 2048 from 1000, won't there be rounding errors to contend with? Is the computation speed difference between 2000 and 2048 enough better, given todays computers, that it is worth the tweaking of outlines to overcome rounding errors?  \nAssume this would be a font with extended Latin, Greek, and Cyrillic scripts only--no Asian font complexity.\n\nChrisL\n\n"
+    },
+    {
+      "time": "29 Jan 2007 — 1:34pm",
+      "content": "<cite>Is the computation speed difference between 2000 and 2048 enough better, given todays computers, that it is worth the tweaking of outlines to overcome rounding errors?</cite>\n\nGood question!\n\nMaybe it's a choice: Either you care less for speed (provided there is still a significant difference). Or you care less for metrical identity of possible .otf and .ttf versions (or make a .ttf version only). In the latter case you could use 2048 instead of 2000 without rescaling outlines, which makes the .ttf version look a bit smaller.\n\n"
+    },
+    {
+      "time": "29 Jan 2007 — 2:05pm",
+      "content": "Thanks Karsten! I didn't realize all ttf fonts had to be 2048 to scale properly. Would a .otf font on Windows also have to be scaled to 2048?\n\nChrisL\n\n"
+    },
+    {
+      "time": "29 Jan 2007 — 10:23pm",
+      "content": "Karsten, you are not saying you have to pick 2000, 2048 or 1000 UPM for any format are you? What I think you are saying is just that if you do choose 2048 for speed in TT & 1000 ( or 2000 or whatever but not say 1024...) in OTF (type one flavour) you will be choosing speed over exactly identical data eg 'metrical identity'. Or if you choose to keep identical or proportional sizes, eg 1000 & 1000 or 1000 & 2000 or even 3000 you are choosing exactness. If you choose 2048 for both TT & OTF then you get both too. But maybe I am not getting you here.\n\nFor instance: when you write, 'which makes the .ttf version look a bit smaller.' do you mean that the 2000 UPM font will look smaller than the 2048 fonts? Or that it will look smaller than the 1000 UPM version? In either case I don't follow your thinking because isn't visual size vs. stated size (pt em etc) exclusively a question of the glyph's proportion in comparison to the chosen UPM itself?\n\n"
+    },
+    {
+      "time": "29 Jan 2007 — 10:24pm",
+      "content": "BTW, Adam, thanks for yet further subtle distictions on this topic! Awesome.\n\n"
+    },
+    {
+      "time": "29 Jan 2007 — 11:48pm",
+      "content": "Hello Eben, I only addressed Mr Lozos question, how to change the UPM but avoid rounding errors if you <cite>want</cite> to change it. So it was a what-if thing.  \nThat UPM be a power of 2 is a recommendation for TT-OpenType fonts, but not for OT-OpenType fonts. (As far as I know.)  \nI think if I had a font with PostScript-outlines and UPM of 1000, I would not change the UPM for generating a TrueType-outline version. So I am myself curious about the actual speed advantages of, say 2048 vs 2000 in a TT-OpenType font.\n\nWhat I mean with \"looks smaller\" is: Imagine the same outline (not rescaled) once on an em-square/body of 2000, once on an em-square/body of 2048. In an application, if you choose 12 pt with both versions, the latter will look a bit smaller since the body is larger.\n\nKarsten\n\n"
+    },
+    {
+      "time": "30 Jan 2007 — 1:33am",
+      "content": "Just to clarify this:  \nWhat Karsten means would be done in FL in two steps:  \n1. changing the UPM from 1000 to 2000 with “Scale all glyphs according to UPM size change” checked.  \n2. In a second step, changing it from 2000 to 2048 without that checkbox checked.\n\nI think this is quite an elegant solution to the problem.\n\n"
+    },
+    {
+      "time": "30 Jan 2007 — 4:56am",
+      "content": "Eureka! Thanks Tim! That certainly makes the light come on in my aging cranium! The amount smaller would be insignificant.  \nKarsten, that is a brilliant solution!\n\nChrisL\n\n"
+    },
+    {
+      "time": "30 Jan 2007 — 6:33am",
+      "content": "Isn't 2%--48/2000--significant when it comes to typefaces?\n\nIf you just tell FontLab to generate a TT font from a font with Bezier curves at 1000 UPM, it will convert the outlines and keep the 1000 UPM, right? Is this a problem? What does FontLab recommend?\n\n"
+    },
+    {
+      "time": "30 Jan 2007 — 7:59am",
+      "content": "\\> Adobe recently released a set of OpenType PS fonts with the UPM size of 2,048  \n\\> (AdobeArabic, Adobe Hebrew, Adobe Thai) in which there are a few very wide  \n\\> glyphs in which the x coordinate is about 3,500.\n\nWhat does it mean? Fonts with the UPM size of 2,048 in which the x coordinate is about 3,500? I understand UPM 2,048 is the total number of points?\n\n\\> Adobe PostScript RIP limitation  \n\\> of ±4095.\n\nHow does it translate to the UPM size?\n\nThanks.\n\n"
+    },
+    {
+      "time": "30 Jan 2007 — 8:06am",
+      "content": "Karsten, & Tim:\n\nThanks! Okay, that's what I thought! Whew. I feel better.\n\nWhat I especially want to know is what in your wisdom do you choose to work in today? 1000 UPM? 2048? Why?\n\nAre you considering a change?\n\nWhat about the rest of you? As far as I can recall I have not read of any disadvantages to working in 2048 so given it's advantages - why not? So far I have really only worked in 1000.\n\nI have to admit that the idea of giving a customer two diferent 'sizes' of fonts in TT & OT or t1 seems like a really bad idea. Or phrased differently It seems like maintaining preceived size is a good idea. But so does maintaining ( as much as possible ) identical data/forms accross formats.\n\n"
+    },
+    {
+      "time": "30 Jan 2007 — 8:27am",
+      "content": "<cite>What I especially want to know is what in your wisdom do you choose to work in today?</cite>\n\nWhich UPM is ideal to <cite>work in</cite>, meaning the design work regardless of technical issues, that is an interesting question. I typically switch between UPM of 1000 and 3000. As said before, scaling up is lossless as all coordinates are multiplied by three and scaling down to 1000 has relatively small rounding errors. Keep in mind that scaling from an UPM 2000 down to 1000 is the worst case: about every other value has a rounding error of 0.5, which can esily add up to stem inconsistencies. So generally avoid scaling things by exactly 50%.\n\nOn the other hand, it is easy to forget that even a UPM of 1000 is much more than the typical printing resolution: For example, at 1200 dpi and a type size of 60 pt you have a 1:1 relation between dots and font units. This means that in order to change something only by one dot at, say 10 pt you need at least 6 units in Fontlab, even if that looks very much on the screen.\n\n"
+    },
+    {
+      "time": "30 Jan 2007 — 9:10am",
+      "content": "For me, the difference between 1000 and either 2000 or 2048 matters only in certain situations. More-so in very light weights and with italics and scripts. Cases where a join is being made and a hotspot is the demon to avoid. a fine hairline script would be in most need. You just need those between angles of control handles to manage the diagonal intersections pleasantly. Your average weight vertical font won't be a problem at 1000.\n\nChrisL\n\n"
+    },
+    {
+      "time": "30 Jan 2007 — 9:13am",
+      "content": "\"So I am myself curious about the actual speed advantages of, say 2048\"\n\nMS says it is \"substantial\". What makes it not worth investigating further, is that scaling Up is hardly a type-shattering problem in type design. If someone is concerned about scaling from 1000 to 2048, see your local FL Constabulary for Up scaling with hinting in FL. On the other hand to be fair, they are supplying hinting of the output to solve the more generally problematic Down scaling of type.\n\n\"changing the UPM from 1000 to 2000 with “Scale all glyphs according to UPM size [...then] changing it from 2000 to 2048 without that checkbox checked.  \nI think this is quite an elegant solution to the problem.\"\n\nThis is a solution. It's best employed on 1000 dpi fonts that have no metric history in the outside world as it leaves 1000 and 2048 fonts unmatched vertically. It also says you didn't care for the original relationship twixt design and em by a specific factor. ;)\n\nThere have been a lot of threads here, but fabric fails to form. ;)\n\nThere are two variables in the designer's UPM decision tree: the memory and processing of the composition system, and the characteristics of the type design.\n\nThe OS's big problem with \"real Typography\" was always that the UPM's size alone is not enough of answer upfront \"how big?\" how much memory and etc. ... So, to handle Typography, there are now more numbers and tables in the font formats to answer the question in enough detail. But still, there's got to be a gross maximum unit system upon which, the UPM exists, and the type occupies, mostly within, but not exclusively within the em. That's the truce — we have 16,384 to build: an em (TT) and all the extent we need. But if you use it all on the em! (8x2048 you fools!), don't go outside of that 16,384, please, it could have consequences for all of us. . .\n\nDesign's big problem with the EM is when the level of detail is under-whelmed by resolution. 1000 rarely needs to change for \"normal\" design detail. 2048 rarely needs to change for \"any\" design detail. The Linotype library was built on 8000 something. The Bitstream Library was built on 4320, and the Adobe Library was built on 1,000. So, a designer's got to have something very special to render in a master (small relative to the upm, or large relative to the user), to make one choose something beyond 2048.\n\nI hope that's all true, still.\n\n"
+    },
+    {
+      "time": "13 May 2009 — 5:03pm",
+      "content": "Some clarification from Microsoft's Greg Hitchcock:\n\n_I'm fairly sure the reasoning in TrueType was all about performance. Integer math was much quicker than floating point. TrueType fonts preferred having the Units per EM (UPM) as a power of two because in all of the scaling of the outlines, one has to continually divide by the UPM. When that is a power of two it is much quicker and can be implemented with a \"shift right\" instruction._\n\nOf course higher UPM size give greater accuracy to the outline data, giving the equivalent of fixed fractional precision, but there is a trade-off in data size. For TrueType, outline data is typically stored as relative distances from the previous point. If the relative distance could be stored in a byte, it would be, otherwise it was stored in a 16-bit value.\n\nThe higher the UPM, the less likely relative distances would fit into a byte. For some of our early Japanese fonts, we used 256 UPM in order to reduce the outline data size. 2048 UPEM was common in TrueType because it seemed like a good balance between data size and accuracy. The range for TrueType and OpenType is between 16 and 16,384 inclusive.\n\nAlso see:  \n [http://typophile.com/node/30727](http://web.archive.org/web/20150223110030/http:/typophile.com/node/30727 \"http://typophile.com/node/30727\")\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "28 Oct 2010 — 10:40am",
+      "content": "<cite>Keep in mind that scaling from an UPM 2000 down to 1000 is the worst case: about every other value has a rounding error of 0.5, which can esily add up to stem inconsistencies. So generally avoid scaling things by exactly 50%.</cite>\n\nA question for Tim (assumed he will some day pass here again… :-) ):  \nIf I have upscaled my EM size to 2000 from an original of 1000, and then I scale it again to 1000, stem size would be kept consistent, if I have not modified it, right?  \nI mean, the rounding error applies only where there is a value which you can’t scale at 50%.\n\n"
+    },
+    {
+      "time": "29 Oct 2010 — 1:34am",
+      "content": "Yes, scaling down anything that was scaled up should result in exactly the same (not only consistent stems) if it was not modified. This applies even if it was scaled by an odd value, say, scaling from 1000 to 1250 and back.\n\n"
+    },
+    {
+      "time": "29 Oct 2010 — 4:54am",
+      "content": "Hello Tim, thank you. For this typeface I am working on I had to choose a UPM of 2000, otherwise curves become disharmonic (it’s quite condensed). I started at 1000, then I modified some curves after scaling it to 2000, but scaling down back to 1000 produces some breaks in curves, and the curves end up being not harmonic and unpleasant.  \nI think I will keep the UPM at 2000, even if it is in an Opentype-flavored format. Since I have no intention to produce a Truetype-flavored, I choose 2000, so – just in case – I could scale down.  \nI would prefer to keep 2000, anyway.\n\nSomeone knows which software could have problems with a Type1 or Type2 font with an UPM of 2000? Is the issue mostly related to printing engines or even to software? Thanks.\n\n"
+    }
+  ]
+}

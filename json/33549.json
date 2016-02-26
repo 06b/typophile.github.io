@@ -1,0 +1,66 @@
+{
+  "id": "33549",
+  "title": "FontLab: Preview panel missing!?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Panic!!\n\nMy preview panel is completely lost!(?) When I click on the button to activate it, it looks as if it’s activated but nowhere to be found.\n\nAnyone know how to fix this, or perhaps get rid of the preferences for FontLab so it wil behave as new, without having to install it from start?\n\nFontLab 5.02, I am on OSX.\n\n",
+  "author": "<a href=\"/web/20100608163534/http://typophile.com/user/11526\" title=\"View user profile.\">Goran Soderstrom</a>",
+  "time": "<br>",
+  "uid": "11526",
+  "comments": [
+    {
+      "time": "",
+      "content": "You could try two things:\n\n1. Apply the highest screen resolution to your monitor. You may catch the edge of it off to the right. Drag it into the centre, then restore your screen resolution to your preferred setting.\n2. Go to Window \\> Workspace \\> CurrentWorkspace. Its edge may appear off to the right. Drag it into the centre.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi There,\n\nI had a similar problem with the class panel. I was changing it size and by mistake I ended up with a weird bar that can not be modified at all:\n\nSee image: [http://www.re-type.com/notaweblog/images/class-panel.gif](http://web.archive.org/web/20100608163534/http:/www.re-type.com/notaweblog/images/class-panel.gif \"http://www.re-type.com/notaweblog/images/class-panel.gif\")\n\nI have tried everything (re instaling the program, etc) and nothing changes. Finally I had to install FL under a different user in my computer. Now I have to log in as a different user which is really bothering.\n\nAny idea of how to solve this problem IN MY ORIGINAL USER PROFILE?\n\nI work with OSX...\n\nThanks.\n\nR.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Try this:\n\nChoose Window\\>Workspace\\>Export Workspace...\n\nFontLab will suggest the name \"UserWorkspace.rc\". If you're already using this name, you might want to use a different name.\n\nQuit FontLab.\n\nIn the Finder, navigate to [your home folder]/Library/Application Support/FontLab/Studio 5/Workspaces/ and find the file you just created. Open the file in a plain text editor such as TextEdit.\n\nSearch for \"33296\\_Left\" and \"33296\\_Top\". The numbers to the right of these entries are the left and top coordinates of the Preview panel (relative to the top left corner of the menu bar). Change both of these coordinates to 100. Save the file.\n\nOpen FontLab. Select the file you saved from the list of workspaces in Window\\>Workspace\\>. If it isn't already open, open the Preview panel. It should now be positioned near the top of your screen.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks a lot for quick and great help. I tried both methods, and didnt really knwo which one did the trick, but the panel is there again :)  \nBack to labbin’\n\n"
+    },
+    {
+      "time": "",
+      "content": "Ramiro--The entries pertaining to the Class panel all begin with the number 33305 (33305\\_Width, 33305\\_Height).\n\n"
+    },
+    {
+      "time": "",
+      "content": "I’ve never been brave enough to delve into the (wonderful) world of program code. I think I’ll begin to tinker a tad.\n\n"
+    },
+    {
+      "time": "",
+      "content": "It's not really program code. FontLab's workspace files are just lists of things in FontLab's interface, sometimes with numbers for coordinates or dimensions. It's \"human readable\" xml, so a lot of it is self-explanatory. The panels, however, were not so simple. They are listed with meaningless number codes in a section called \"@DOCKING\\_PANELS\". I was able to figure out what a few of them were by saving the current workspace, moving a panel, saving another workspace, and then comparing the two in a text editor.\n\nThere's normally no reason to edit these files directly--most of it can be changed from within FontLab--but it's nice to know you can.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hey! It worked! Thanks a lot, Mark!\n\nCheers.\n\nR.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Could any one inform me of the entry numbers pertaining to the \"Preview panel\" contained within the “UserWorkspace.rc” file, found in the \"/Library/Application Support/FontLab/Studio 5/Workspaces/\" directory.\n\nAs my Preview panel has collapsed, same as RamiroE's class panel. On MacOS.\n\nThx for any suggestions.\n\n"
+    },
+    {
+      "time": "",
+      "content": "`\n\t33296_Top 285\n\t33296_Left 478\n`\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thx for the coordinate numbers that relocate the preview panel within the screen's boundaries, which is good, but the preview panel has been collapsed in dimension (unknowingly) with only half of the panels top bar in view, where ever located on screen.\n\n ![](http://web.archive.org/web/20100608163534im_/http:/typophile.com/files/Preveiw-Panel_4149.gif)\n\nCan the dimensions of these panels be changed within the “UserWorkspace.rc” file? as I have run through all of the 'deleting prefs'/'program re-installation'/'rebooting' ...etc. to no avail.\n\nThx for any suggestions.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I guess it'd be these:  \n`33296_Width 809\n33296_Height 429\n`\n\nThere's also `33296_State 0` which probably controls if the window is visible (1) or hidden (0).\n\nYou can also try to reset the workspace by doing this:  \n1. Launch FontLab and press the 'ctrl' key.  \n2. Keep holding until the \"Reset Workspace\" window appears.  \n3. Select \"Reset UI to default state\" and press the \"Reset UI\" button.\n\nHope it helps.\n\n ![](http://web.archive.org/web/20100608163534im_/http:/typophile.com/files/ResetWorkspace_4460.png)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yeh! That did just the job!\n\nThanks again.\n\n"
+    }
+  ]
+}

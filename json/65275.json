@@ -1,0 +1,66 @@
+{
+  "id": "65275",
+  "title": "Fontlab & TTC",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Quick question: I have Snow Leopard now, so [some of] the system fonts are TTCs. Since I'm very much a type design learner I like to open fonts and study the outlines up close; but now FontLab says it can't handle TTCs. :-( Is there any way to make Fontlab accept these files? Or do I need to revert to typing the glyphs in question in Illustrator and converting to outlines to see them up close?  \nThanks for input.\n\n",
+  "author": "nina",
+  "time": "11 Dec 2009 — 5:08am",
+  "uid": "13487",
+  "comments": [
+    {
+      "time": "11 Dec 2009 — 5:10am",
+      "content": "from what i know illustrator sometimes changes the outlines when converting, so that may not the your best option.. i can't help with the original question though.  \ngreetings from bern :)\n\n"
+    },
+    {
+      "time": "11 Dec 2009 — 5:11am",
+      "content": "Ah, I was wondering about that. Bummer :-\\\n\nGreetings back from Basel!\n\n"
+    },
+    {
+      "time": "11 Dec 2009 — 5:39am",
+      "content": "A TTC is a regular TTF and then some more: it contains the usual tables for one single TTF, _plus_ any number of additional font sections that share some of its tables with the 'base' font and have some private tables.\n\n(And I am surprised FontLab didn't know that. Perhaps they _do_, but it's too hard to switch from a one-file-one-font-outline paradigm. (They could do something like, on opening a TTC, ask \"What section do ya want?\"))\n\nI'm fairly familiar with the TTC tables; perhaps it's not too difficult to write a 'converter' that creates at least a single file of the 'base font' (and perhaps (oh my!) of the other fonts as well).\n\n... No promises, though.\n\n...... Besides, I bet this is one of those forbidden things you sometimes hear about.\n\n"
+    },
+    {
+      "time": "11 Dec 2009 — 5:59am",
+      "content": "There is a converter, a little pricey for what you need:  \n [http://www.macupdate.com/info.php/id/26678/fontxchange](http://web.archive.org/web/20140309064915/http:/www.macupdate.com/info.php/id/26678/fontxchange \"http://www.macupdate.com/info.php/id/26678/fontxchange\")\n\n"
+    },
+    {
+      "time": "11 Dec 2009 — 6:28am",
+      "content": "I think you can use ttx.py (from the [Robofab](http://web.archive.org/web/20140309064915/http:/www.robofab.org/download/index.html) Python module library) to dump a TTC into xml. And then probably rebuild separate TTFs from there.\n\n"
+    },
+    {
+      "time": "11 Dec 2009 — 6:40am",
+      "content": "<cite>... fontxchange ...</cite>\n\nColour me unimpressed. 30MB! \"So much knowledge has been lost.\"\n\n(It seems you pay for the MBs, not for any intellectual investment. A cursory glance shows it's a complete [FontForge](http://web.archive.org/web/20140309064915/http:/fontforge.sourceforge.net/) distro -- fontforge, fontimage, fontlint, and sfddiff --, glued together and given a nice interface with RealBasic. Even comes with all original FF interface icons and man pages. Note To Self -- try to run it!)\n\n"
+    },
+    {
+      "time": "11 Dec 2009 — 8:48am",
+      "content": "Hm, thanks guys. I guess hoping for an easy and legal solution was a bit too optimistic :-\\ … I guess I'll just look at these fonts in Illustrator for now – most times that should be sufficient for what I need, if not as convenient.\n\nDoes anyone know if FontLab 6 will have TTC support?  \nAnd can FontForge open TTCs? Maybe I should just install that too.\n\n"
+    },
+    {
+      "time": "11 Dec 2009 — 12:51pm",
+      "content": "<cite> .. can FontForge open TTCs? Maybe I should just install that too.</cite>\n\nSure. Opening: [FontForge -\\> Open](http://web.archive.org/web/20140309064915/http:/fontforge.sourceforge.net/filemenu.html#Open)\n\n(coincidentally addressing what I said about FontLab: \"When opening a TTC file, or a mac dfont -- files which potentially contain several fonts -- you will be given a dlg showing a list of all fonts in the file, you get to pick which you want to open.\")\n\nSaving: [FontForge -\\> Generate Fonts (Generate TTC)](http://web.archive.org/web/20140309064915/http:/fontforge.sourceforge.net/generate.html#GenerateTTC)\n\nGetting the thing to run seems to be a hit-and-miss affair. I had mixed feelings about my trying to run it under Cygwin (my Windows machine). It froze up every 30 sec, and boy! was it ever **ugly**! Perhaps I'll try again on my Mac.\n\n"
+    },
+    {
+      "time": "11 Dec 2009 — 2:25pm",
+      "content": "Hmm, that sounds promising, if a bit scary. I should give it a try. Thanks for the pointers :)\n\n"
+    },
+    {
+      "time": "14 Dec 2009 — 5:18am",
+      "content": "Just to clarify some things.\n\n1. Fontlab Studio was never supposed to support TTC fonts. There is another product from Fontlab to do this: [http://www.fontlab.com/fontlab-products/compare/](http://web.archive.org/web/20140309064915/http:/www.fontlab.com/fontlab-products/compare/ \"http://www.fontlab.com/fontlab-products/compare/\")  \n2. New TTC fonts introduced in Snow Leopard are a little bit different from those on Windows. Apple took font data from the data fork, compressed it and put in the 'cmpf' resource in the resource fork of the file. So new ttc fonts are now resource-based files.\n\n<cite>Does anyone know if FontLab 6 will have TTC support?</cite>\n\nNobody knows. ;)\n\nRegards,  \nJohnych\n\n"
+    },
+    {
+      "time": "15 Dec 2009 — 4:25am",
+      "content": "Apart from the difficulty of running it on a Mac or PC, Font Forge is quite ugly, compared to the elegant GUI and user-friendly functions of Fontlab. But from my limited experience FF seems strictly professional in treating the basics, for example it lets the user see which tables are associated with which font. Font Forge installs with one click on any Linux operating system and runs smoothly in its native habitat. I tried it from a Ubuntu OS installed temporarily from a USB key on a homeless PC laptop that does not even have a hard disc - and it is all open source. See [http://www.linuxliveusb.com/](http://web.archive.org/web/20140309064915/http:/www.linuxliveusb.com/ \"http://www.linuxliveusb.com/\") . FF is downloaded as a package from within Ubuntu.\n\n"
+    },
+    {
+      "time": "26 Dec 2009 — 3:50pm",
+      "content": "It is very likely that Fontographer 5 will open .ttc fonts, and FontLab Studio 6 will certainly open .ttc fonts.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "12 Jan 2012 — 9:40am",
+      "content": "It has been almost 2 years, but here is a little something to extract the TTC fonts.  \n [http://peter.upfold.org.uk/projects/dfontsplitter](http://web.archive.org/web/20140309064915/http:/peter.upfold.org.uk/projects/dfontsplitter \"http://peter.upfold.org.uk/projects/dfontsplitter\")\n\nBut I cannot find a way to make a TTC font (apart from fontforge…&nbsp;but cannot find the right way) and Fontlab does not handle it :(\n\n"
+    }
+  ]
+}

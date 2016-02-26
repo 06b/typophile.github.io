@@ -1,0 +1,50 @@
+{
+  "id": "43147",
+  "title": "Font coversion scenario",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "Our company recently redesigned a weekly publication and in that design we used a font called Sans Serif FLF - [http://www.moorstation.org/typoasis/designers/casady\\_greene/r\\_z.htm](http://web.archive.org/web/20111225033640/http:/www.moorstation.org/typoasis/designers/casady_greene/r_z.htm \"http://www.moorstation.org/typoasis/designers/casady\\_greene/r\\_z.htm\") - as a major part of it. Headlines, the logo, and many other features.\n\n ![](http://web.archive.org/web/20111225033640im_/http:/typophile.com/files/sansserif_5884.gif)\n\nThe problem is, we are dropping our old Type1 font library and converting to OT. We have found out since then that this foundry is no longer in business and there's no more support for this font. This leaves us with 3 scenarios that I can see:\n\n1) Leave the font as is, keep using the Type 1 and hope it lasts with no compatibility issues.\n\n2) Convert the font with a 3rd party program to OT. Is there any way to quality control this or just hope there aren't any reflow issues? Also continues us using an unsupported font.\n\n3) Redesign everything associated with the font with something we have or is readily available. Problems with this is we lose the identity we just created with the old font and also trying to figure out what font could be a suitable replacement and give the same feel.\n\nSuggestions?\n\n",
+  "author": "<a href=\"/web/20111225033640/http://typophile.com/user/27041\" title=\"View user profile.\">jgillispie</a>",
+  "time": "<br>",
+  "uid": "27041",
+  "comments": [
+    {
+      "time": "",
+      "content": "If you used a paid professional to do the conversion I'd say Option 2 is your best bet. In the short term it might seem more expensive than using a new font, but in the long term I think, if you think you need to stay with the old font, you'll be happy for the money spent.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'll add another line of thinking.\n\nNow could be the best time to freshen things up a bit too. It seems you do like Sans Serif, so I'm not suggesting a totally new approach, but you might consider:\n\n[Proxima Nova](http://web.archive.org/web/20111225033640/http:/www.fontshop.com/fonts/downloads/mark_simonson/proxima_nova_ot/) by Mark Simonson  \n [Avenir](http://web.archive.org/web/20111225033640/http:/www.fontshop.com/fonts/downloads/linotype/avenir_std_ot_virtual/) by Adrian Frutiger  \n [Gotham](http://web.archive.org/web/20111225033640/http:/www.typography.com/fonts/font_overview.php?productLineID=100008) by Hoefler & Frere-Jones  \n [Futura](http://web.archive.org/web/20111225033640/http:/www.fontshop.com/fonts/downloads/urw/futura/) by Paul Renner (URW) (This is the font your version was based on to begin with.)  \n [Hypatia Sans Pro](http://web.archive.org/web/20111225033640/http:/www.adobe.com/type/browser/landing/hypatia/hypatia.html) by Thomas Phinney (Even closer to your original if you use some of the stylistic sets.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for the responses so far. I kind of doubt a professional job is going to be in the budget. If it were to happen it would be an in-house Fontlab job or something along those lines. I noticed Futura Std 2 in our Font Folio package which seemed in my opinion a fairly good replacement, although the designer of the publication that chose the old font disagreed.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'll just add that you can do this conversion in a few hours with FontForge — and it costs nothing but the time it takes to learn how to use it. (It works in the X11 environment.)\n\nI say this because your budget seems to be very tight — but I rather agree with Miss Tiffany that shelling out for a replacement font is by far the most sensible option (though you seem to have a designer who is digging his heels!)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Should I be worried about possible reflow errors or compatibility issues doing a conversion?\n\nI suppose thats a dumb question and would all be based on the quality of the conversion.\n\n"
+    },
+    {
+      "time": "",
+      "content": "If the UPM & The glyph width don't change then no. The other thing is maybe Richard Ware is still out there. He might be pleased to do the job. Aesthetically speaking I would concur with Tiff that the fonts she mentioned will very probably be of much higher quality.\n\n"
+    },
+    {
+      "time": "",
+      "content": "As for reflow, it can be hard to say with certainty, but I'd agree with Eben Sorkin. That does leave kerning; if you were using Quark for example, and had any kerning beyond what was imported from the foundry font metrics, it will not be included in the new OT font unless you add it.\n\nIf there was no external kerning, all you need do is to make a kern feature for the OT version (and have at least one GSUB feature in case the font winds up being used with an older Adobe program).\n\nConceivably, if you combine two fonts into one, there could be some differences. For example, if you had a regular font and a separate \"expert\" font in Type 1 format, and now put those glyphs into a single OT font, there might be some differences with any kerning involving spaces. For example, if there was a \"space\"-\"a\" kern in the Type 1 expert set, but in using it, you put in a font change just after the space & before the \"a\", the kern probably wouldn't take effect. But if they are now in one font, and the \"a\" is small-capped by an attribute change, the kern would take effect.\n\nThink of it like this: essentially, a .otf opentype font is a just a wrapper around a PostScript font. You control the wrapper, and except for any GPOS features you might add, or fail to add, all the metrial data should stay the same.\n\nBut layout programs can have bugs too, so some small reflow changes just might occur. But if you change fonts there will certainly be reflow, so how big an issue can this be?\n\nFWIW\n\n"
+    },
+    {
+      "time": "",
+      "content": "I think your first scenario (_Leave the font as is, keep using the Type 1 and hope it lasts with no compatibility issues_) is reasonable for the time being.\n\nI know of only one current Type 1 compatibility issue: Type 1 fonts will not show up in the font menus of applications written to take advantage of the Windows Presentation Foundation, the graphical subsystem that ships with Windows Vista and can be installed on Windows XP SP2 and Windows Server 2003. The earlier graphical subsystem, GDI, is still available under Vista, and applications using GDI still work.\n\nAs far as I know, if you are not using Windows, compatibility issues are not yet a concern. If you are using Windows, compatibility issues will not be a concern until you acquire or upgrade to applications written for the Windows Presentation Foundation. Even then, if your publishing applications are from Adobe, there is a chance that Type 1 fonts will still be supported (see Thomas Phinney's blog: [http://blogs.adobe.com/typblography/2005/10/phasing\\_out\\_typ.html](http://web.archive.org/web/20111225033640/http:/blogs.adobe.com/typblography/2005/10/phasing_out_typ.html \"http://blogs.adobe.com/typblography/2005/10/phasing\\_out\\_typ.html\")).\n\nI understand why you want to drop your old Type 1 font library, but I think you have plenty of time to decide whether scenario 2 or 3 is the better replacement option for the Casady and Greene San Serif.\n\nBy the way, you may have one more option, depending on your platform. Fluent Laser Fonts for Windows were issued in TrueType as well as Type 1. Instead of converting your Type 1 fonts, you could try to locate the existing TrueType versions, which will continue to work under Windows Presentation Foundation,\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for the responses everyone. I will try and hunt down those truetypes in the mean time until we figure out our long term plan.\n\n"
+    }
+  ]
+}

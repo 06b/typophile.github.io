@@ -1,0 +1,41 @@
+{
+  "id": "67919",
+  "title": "OpenType comes to CSS3",
+  "forum": "General Discussions",
+  "tags": [
+    "CSS",
+    "css3",
+    "General Discussions",
+    "OpenType"
+  ],
+  "content": "Nobody else seems to have posted this, so I will: The current [CSS3 Fonts Module](http://web.archive.org/web/20131014051941/http:/dev.w3.org/csswg/css3-fonts/ \"CSS3 Fonts Module\") provides a syntax to use CSS to declare use of a few dozen OpenType properties. If I have the list correct, they are:\n\n1. `afrc`\n2. `calt`, `clig`\n3. `calt`, `clig`\n4. `cswh `\n5. `dlig`\n6. `dlig`\n7. `frac`\n8. `fwid`\n9. `hist`\n10. `hlig`\n11. `hlig`\n12. `hojo`\n13. `jp04`\n14. `jp78`\n15. `jp83`\n16. `jp90`\n17. `liga`\n18. `liga`\n19. `lnum`\n20. `nalt `\n21. `nlck`\n22. `onum`\n23. `ornm `\n24. `pcap`\n25. `pnum`\n26. `pwid`\n27. `ruby`\n28. `salt `\n29. `smcp`\n30. `smpl`\n31. `ss`\n32. `swsh `\n33. `titl`\n34. `tnam`\n35. `tnum`\n36. `trad`\n37. `unic`\n38. `zero`\n\nRemember: This is merely a proposal. CSS3 has been broken into modules so that that makers of browsers (etc.) can pick and choose which modules to support rather than being offered a package deal of every single CSS feature, which, experience proves, is too much to handle at once. (Hence it is impossible to state that a browser “supports CSS3.”)\n\nNonetheless, this is surely a useful development. The [acknowledgements](http://web.archive.org/web/20131014051941/http:/dev.w3.org/csswg/css3-fonts/#acknowledgments \"Acknowledgements\") on the page will reveal a few Usual Suspects.\n\n",
+  "author": "joeclark",
+  "time": "1 Mar 2010 — 1:48pm",
+  "uid": "7076",
+  "comments": [
+    {
+      "time": "1 Mar 2010 — 2:08pm",
+      "content": "Thanks for this list — I've been wondering about using Opentype features in CSS. Could you point to or provide a few code snippets demonstrating the use of these properties?\n\n"
+    },
+    {
+      "time": "1 Mar 2010 — 5:25pm",
+      "content": "It's worth noting that the typography properties themselves are at a higher level than the OTL features, i.e. the latter represent one possible way of implementing a CSS3 typography property; the same property could also be implemented with equivalent e.g. AAT or Graphite features.\n\nI note that there doesn't seem to be support for caps as smallcaps (OTL=c2sc), which is a problem. This is probably a distinction that needs to be made at the caps-value level. [The same is true for caps as petite-caps, of course.]\n\n"
+    },
+    {
+      "time": "2 Mar 2010 — 8:46am",
+      "content": "Yes, the CSS properties merely correspond to OpenType. They could correspond to other implementations. In practice, will they, though?\n\nNow, since I’m one of those people who does _not_ sit down to read the OpenType specification over coffee, which is odd because I have done exactly that with many other specifications, do please explain, John, if `c2sc` means “every single letter becomes small caps, whether originally capitalized or not.”\n\n"
+    },
+    {
+      "time": "2 Mar 2010 — 10:23am",
+      "content": "Do you know if they will get the number weights to correspond to fonts?\n\nexample:  \nfont-weight:300;\n\nYou know how they have 100, 200, 300, ..., 900\n\nThen again I'm not sure what the fonts have to do, to be able to do that. Would be interesting to find out.\n\n"
+    },
+    {
+      "time": "2 Mar 2010 — 10:38am",
+      "content": "see: [http://dev.w3.org/csswg/css3-fonts/#descdef-font-weight](http://web.archive.org/web/20131014051941/http:/dev.w3.org/csswg/css3-fonts/#descdef-font-weight \"http://dev.w3.org/csswg/css3-fonts/#descdef-font-weight\")\n\n"
+    },
+    {
+      "time": "2 Mar 2010 — 3:07pm",
+      "content": "Joe, c2sc converts uppercase letters (and potentially lining figures and some punctuation) to smallcaps, and smcp converts lowercase letters to smallcaps. Practically, c2sc isn't expected to be applied independently of smcp, so I would expect the CSS3 caps-value to have options similar to InDesign's smallcaps (smcp) and all-to-smallcaps (c2sc+smcp) distinction.\n\n"
+    }
+  ]
+}

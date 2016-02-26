@@ -1,0 +1,18 @@
+{
+  "id": "62758",
+  "title": "IndexError: list index out of range (Solved)",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi guys,\n\nJust keep getting error messages after running the following code:\n\n`\nfrom robofab.world import CurrentFont`\n\nmyFont = CurrentFont()\n\nfor myGlyph in myFont:  \n print myGlyph.name  \n myGlyph.autoContourOrder()  \n myGlyph.correctDirection()  \n myGlyph.update()  \n for myContours in myGlyph.contours:  \n myContours.autoStartSegment()\n\nprint \"done now\"\n\nThis is the error message:  \n`\nTraceback (most recent call last):\n  File \"\", line 16, in ?\n  File \"/System/Library/Frameworks/Python.framework/Versions/2.3/lib/python2.3/site-packages/RoboFab/robofab/objects/objectsBase.py\", line 2129, in autoStartSegment\n    on = segment.onCurve\n  File \"/System/Library/Frameworks/Python.framework/Versions/2.3/lib/python2.3/site-packages/RoboFab/robofab/objects/objectsBase.py\", line 2330, in _get_onCurve\n    return self.points[-1]\n  File \"/System/Library/Frameworks/Python.framework/Versions/2.3/lib/python2.3/site-packages/RoboFab/robofab/objects/objectsFL.py\", line 1942, in _get_points\n    node = self._node\n  File \"/System/Library/Frameworks/Python.framework/Versions/2.3/lib/python2.3/site-packages/RoboFab/robofab/objects/objectsFL.py\", line 1880, in _get__node\n    return glyph.nodes[self._nodeIndex]\nIndexError: list index out of range\n`\n\nThe weird thing is (after running it a second time) it will not bump into the same problem again, but rather continues to the next problem, if that makes sense. After a while the script runs fine. Really have no clue here.\n\nThanks,\n\nBruno\n\n",
+  "author": "Bruno Bruno",
+  "time": "6 Oct 2009 — 5:30am",
+  "uid": "43018",
+  "comments": [
+    {
+      "time": "6 Oct 2009 — 6:07pm",
+      "content": "Ok, for the interested:  \nFollowing should work, cheers\n\n`\nfrom robofab.world import CurrentFont`\n\nmyFont = CurrentFont()  \nprint myFont.info.postscriptFullName\n\nmyGlyph = myFont.keys\n\nfor myGlyph in myFont:  \n\\> print myGlyph.name  \n\\> myGlyph.autoContourOrder()  \n\\> myGlyph.correctDirection()  \n\\> \\> for myContours in myGlyph:  \n\\> \\> myContours.autoStartSegment()  \n\\> myGlyph.update()\n\nprint \"done now\"\n\n"
+    }
+  ]
+}

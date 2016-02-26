@@ -1,0 +1,38 @@
+{
+  "id": "55442",
+  "title": "Maximum character width?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Is there a maximum allowable character width for any given glyph position?  \nalso  \nIs there a maximum area beyond the side-bearings that a character can extend?\n\n",
+  "author": "<a href=\"/web/20100203161853/http://typophile.com/user/1334\" title=\"View user profile.\">kegler</a>",
+  "time": "<br>",
+  "uid": "1334",
+  "comments": [
+    {
+      "time": "",
+      "content": "Yes, there are maximums defined for these. Maximum width is given by the 'hhea' table and is stored as an unsigned 16-bit integer with maximum capacity of 65535 (em units). Max left and right sidebearings (which are actually named 'minLeftSideBearing' and 'minRightSidebearing') are given by \\*signed\\* 16-bit integers, so the allowable range is -32768 to +32767 (again, in em units).\n\nHowever, you should note that these are merely the limits of the OpenType data structures. The actual/practical limits imposed by operating systems, font-creating applications, and font-consuming applications may be smaller. There are also other values within the 'hhea' table and within other tables that probably prevent you from, say, starting a glyph at the furthest possible point left of the LSB and extending across the max advance width to the furthest possible point right of the RSB.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"Is there a maximum allowable character width for any given glyph position?  \nThere are maximums for each of the kinds of glyph data in fonts.\n\nEach glyph of the Type 1 font must exist in a maximum 8,000 X 8,000 space with a 1000 unit em. How the glyph relates to the em is up to the designer as long as they stay within the 8,000.\n\nEach glyph of the TrueType font must exist in a maximum 64,000 X 64,000 space (divided evenly between - and +), with an adjustable em. How the em and glyphs relate to the 64k space is up to the designer as long as they stay within the 64k.\n\nThe maximum area beyond the side-bearings that a character can extend must fit in this description.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "_However, you should note that these are merely the limits of the OpenType data structures. The actual/practical limits imposed by operating systems, font-creating applications, and font-consuming applications may be smaller._\n\nI was a little concerned about this when designing some of the large flourish ornaments for Gabriola, the widest of which is 11,796 units. This is well-within the limits of the TT spec, but since I hadn't seen any glyphs that wide in other fonts I wasn't sure what might happen ‘in the wild’. So far, so good, and I have not encountered any problems in apps etc.\n\nI also have zero-width combining versions of these flourishes, and again I have not encountered any problems with the massive negative side-bearings.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_So far, so good, and I have not encountered any problems in apps etc._\n\nThat's good to hear.\n\nI would expect most modern apps and systems should be able to handle such beasts, but at the same time I wouldn't be shocked if there were problems (display glitches) somewhere.\n\n"
+    },
+    {
+      "time": "",
+      "content": "We had planned a full page width (at approx 42 pt) musical staff, over which the notes could be \"composed\". This was planned for a basic ttf font, but OSs and apps were not cooperating with our idea, so we modified things a bit, here is the end result:  \n [http://www.p22.com/blog/2009/03/musical-march-madness.html](http://web.archive.org/web/20100203161853/http:/www.p22.com/blog/2009/03/musical-march-madness.html \"http://www.p22.com/blog/2009/03/musical-march-madness.html\")\n\nThe flourishes on our next script release may also prove problematic, but as a T1 OTF only it may be just fine. So far, so good there.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Interesting idea, Rich. I use a Gregorian notation font that works in a similar way:  \n [http://www.marello.org/projects/caeciliae](http://web.archive.org/web/20100203161853/http:/www.marello.org/projects/caeciliae \"http://www.marello.org/projects/caeciliae\")\n\n"
+    }
+  ]
+}

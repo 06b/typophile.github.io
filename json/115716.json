@@ -1,0 +1,44 @@
+{
+  "id": "115716",
+  "title": "Can I implement this in opentype: an overbar if a \"t\" is in a word",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions",
+    "gsub",
+    "OpenType"
+  ],
+  "content": "I'm prototyping a cursive font where, at least on paper, any word with a \"t\" in it has the crossbar on the t extended to the left and right over letters as long as this fits; verticals in h, l, d, etc. will cut off the bar, so something like:\n\n![](http://web.archive.org/web/20140803141752im_/http:/pomax.github.io/Cursive-swash-typeface/images/01.jpg)\n\nbecomes something like:\n\n![](http://web.archive.org/web/20140803141752im_/http:/pomax.github.io/Cursive-swash-typeface/images/02.jpg)\n\nI'm not entirely sure how to implement this, though. I was thinking of using many-to-many GSUB rules based on glyph classes, but no matter how I look at it, it turns into needing recursive GSUB behaviour...\n\n1) t [low] -\\>[t with bar that continues right] [low with left-connecting overbar]  \n2) [low with left-connecting overbar] [low] -\\>[low with fully connecting overbar] [low with left-connecting overbar]  \n3) [low with left-connecting overbar] [high] -\\> [low with fully connecting overbar] [high with lef-connecting overbar stub]\n\nand rule 2 would have to recursively kick in... and that's just in one direction.\n\nHas anyone every tried something like this before? Or does anyone have thoughts on how this might be achieved?\n\n",
+  "author": "Pomax",
+  "time": "11 Apr 2014 — 11:14pm",
+  "uid": "62738",
+  "comments": [
+    {
+      "time": "12 Apr 2014 — 6:12am",
+      "content": "My feature file:  \n [https://dl.dropboxusercontent.com/u/19437300/Exp1.fea](http://web.archive.org/web/20140803141752/https:/dl.dropboxusercontent.com/u/19437300/Exp1.fea \"https://dl.dropboxusercontent.com/u/19437300/Exp1.fea\")\n\nSomething like this?\n\n ![](http://web.archive.org/web/20140803141752im_/http:/typophile.com/files/Metrics_4872.jpg)\n  \nOf course it is POC, you need to add some glyphs and substitute i,j with dotless i,j  \n\n ![](http://web.archive.org/web/20140803141752im_/http:/typophile.com/files/Untitled_3918.jpg)\n\n"
+    },
+    {
+      "time": "12 Apr 2014 — 9:46am",
+      "content": "awesome, thanks! although I'm curious why the feature cuts off on the 'u' in ligatures, but not the 'u' in features.\n\n"
+    },
+    {
+      "time": "12 Apr 2014 — 10:22am",
+      "content": "Because I was lazy and did not make one line of the code and one glyph (3 letters, t, 4 letters)...  \nTo be honest, much more is required, e.g. \"transparency\" - t11.\n\n"
+    },
+    {
+      "time": "12 Apr 2014 — 11:15am",
+      "content": "If I'm reading this correctly, the substitutions are simpy t's with longer bars, right? They're fixed length and you might have iiiiit have an overhang to the left compared to aaaaat due to the glyph width of 'i' being a fraction of 'a'?\n\n"
+    },
+    {
+      "time": "12 Apr 2014 — 11:31am",
+      "content": "Yes; I don't know any better solution to do this..\n\n"
+    },
+    {
+      "time": "12 Apr 2014 — 12:05pm",
+      "content": "Another option I was considering was a substitution for every low class glyph with a macron counterpart, so that [t] + [low] contextually becomes [t-extended] + [low with macro], then simply have a huge block that goes [low macron] + a → [same] + ā, and repeat the block a stupid number of times to get the \"recursive\" length desired, with terminations like ā + l → [l with a left-terminator], etc.\n\nBut they're both not ideal solutions =/\n\n"
+    },
+    {
+      "time": "13 Apr 2014 — 11:44am",
+      "content": "{.}\n\n"
+    }
+  ]
+}

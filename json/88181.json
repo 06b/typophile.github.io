@@ -1,0 +1,94 @@
+{
+  "id": "88181",
+  "title": "New web-based font editor in alpha",
+  "forum": "Release",
+  "tags": [
+    "Release"
+  ],
+  "content": "I have teamed up with rummik (rummik.com) to make an online font editor called [Fontclod](http://web.archive.org/web/20150414112931/http:/www.fontclod.com/) (with a purposed typo of 'cloud'). Alpha 0 was released earlier today as a proof-of-concept, and includes placing, deleting, moving points, and basic save/load (copy/paste in the upper-right text-box).\n\n![](http://web.archive.org/web/20150414112931im_/http:/www.fontclod.com/screenshots/alpha0.png)\n\nWe want to develop it into a fully featured font editor, with optimization for mobile platforms like iPad. But to do so in a relatively short time frame, we need financial backing. At present, higher sums = higher priority on feature requests, but you can pledge any amount. Those who are willing to pledge sums of 150+ USD will also get free access for unlimited font hosting when this feature is implemented. There is a support button on the bottom right.\n\nTo make the best editor possible, we need your input! If you have any features you would really like to see, or any misgivings about other font editors, please list them here! Also please feel free to use this as much as you can for testing, just let us know when you spot bugs! Feel free to discuss here.\n\nWe plan on trying to have at least one release in any given work-week.\n\n**Some planned features of Fontclod:**  \nWe plan to keep all the basic editing functions free  \nMultiple font editing  \nInterpolated editing tool (like interpolated nudge or Fontlab's interpolate function)  \nImporting and exporting to UFO  \nMost functions supported by UFO\n\n**What we don't plan on doing at this point:**  \nNon-cubic contours  \nHinting  \nBitmap fonts\n\nRight now we want to focus on basic editing functions, so we wont be doing importing or exporting to standard formats yet. The format is just a JSON representation of the internal data structure. If you would like to tackle a simple converter, please contact us.\n\nSoon we will be having some surveys to help us decide the best interface layouts. (You can tell us your opinion right now if you want.)\n\nIf you would like to recieve updates on Fontclod, [circle me on Google+](http://web.archive.org/web/20150414112931/https:/profiles.google.com/artistenator/), I will be making announcements there. [A changelog](http://web.archive.org/web/20150414112931/http:/www.fontclod.com/text/changelog) is available by clicking the version number at the top. (Which also includes known bugs, and contact information.)\n\n**Links:**  \n [Fontclod](http://web.archive.org/web/20150414112931/http:/www.fontclod.com/)  \n [Updates on Google+](http://web.archive.org/web/20150414112931/https:/profiles.google.com/artistenator/)  \n [Changelog](http://web.archive.org/web/20150414112931/http:/www.fontclod.com/text/changelog)  \n [Introduction to editing](http://web.archive.org/web/20150414112931/http:/www.fontclod.com/text/helpintro)\n\n",
+  "author": "brianskywalker",
+  "time": "8 Dec 2011 — 5:56pm",
+  "uid": "39424",
+  "comments": [
+    {
+      "time": "8 Dec 2011 — 10:03pm",
+      "content": "Hey,Cool!  \nGet in touch with Raph Levien, he is also working in a spiro webfont editor.\n\n"
+    },
+    {
+      "time": "9 Dec 2011 — 2:54am",
+      "content": "Yup – you guys should totally merge your project with Raph’s.\n\n"
+    },
+    {
+      "time": "9 Dec 2011 — 3:49pm",
+      "content": "Is Ralph Levien project still alive? Haven't heard of it.  \nJust on your Alpha version of Fontclod.  \nDifficult to work with it on Mac as you should implement a key bindings for Mac to use Cmmd as Ctrl is for contextual menu and can't be used as a click modifier.  \nOtherwise, seems nice as a demo.\n\n"
+    },
+    {
+      "time": "9 Dec 2011 — 3:56pm",
+      "content": "I like this, but playing devil's advocate:  \nwhat's the point of an online font editor?  \nI mean in the medium-term.\n\nhhp\n\n"
+    },
+    {
+      "time": "9 Dec 2011 — 11:29pm",
+      "content": "Nice but, uhm, no undo?\n\n"
+    },
+    {
+      "time": "10 Dec 2011 — 6:46am",
+      "content": "Just to focus my \"issue\" here:  \nWhat I'm getting at is, this type of activity seems too \"casual\" to  \ntypically lead to an entire font; it's hard to see anybody who makes  \nfonts be seriously opposed to installing an editor on his computer.  \nSo maybe the relevance of something like this is at the glyph level...  \nwith Glyphclod being a better name! :-)\n\nhhp\n\n"
+    },
+    {
+      "time": "10 Dec 2011 — 5:27pm",
+      "content": "\\> you guys should totally merge your project with Raph’s\n\nThere is one problem with merging Fontclog and Fontly: licencing. Part of the framework Fontclog is using is closed source, and Fontly will be presumably released under the GPL license. The viral nature of GPL prevents us from using it. I did contact Raph, though he hasn't gotten back to me. Fontly does appear to be dead right now.\n\nThe font format, and almost all of our drawing and editing functions will be available free (libre) in libraries, probably under either the LGPL or BSD license. We'd like to release a stand-alone version using XULRunner eventually, allowing anyone to contribute to the codebase. All the libraries would be shared, so most of the functions on the web will be available open-source, on your own computer (without the use of PHP).\n\nTouching Spiros: We very much would like to use Spiro splines eventually. There really needs to be a better Spiro implementation than fontforge's. To move font editing along further, we also need to get beyond beziers. To do this, unless Raph releases part of Fontly (there's a pseudo-working online Spiro example here: [http://fontly.com/sandbox/spiro.html](http://web.archive.org/web/20150414112931/http:/fontly.com/sandbox/spiro.html \"http://fontly.com/sandbox/spiro.html\")) in a more friendly license, like LGPL or BSD, we'll have to write our own Spiro interpreter completely from scratch. There's no reason the two projects shouldn't be able to share code, though.\n\n\\> What I'm getting at is, this type of activity seems too \"casual\" to  \ntypically lead to an entire font; it's hard to see anybody who makes  \nfonts be seriously opposed to installing an editor on his computer.\n\nI can see your point, but I would beg to differ. For those of us who use multiple computers day-in-day-out, not having our software on every system is frustrating, and there are times that we can't install the software on every system because of licensing issues, build problems because of OS, or inability because of outside restrictions. An online font editor (coupled with cloud hosting for fonts) would allow you to edit fonts from _anywhere_ I would take this very seriously. And this would allow use, out-of-the-box, of editing on mobile platforms like iPad and Zoom. This also removes cross-platform development woes all together.\n\nImagine this: A man works on his font project before work, on his Mac, then continues work on his iPad riding on the sub, at work he's able to continue during his break on Windows. All the while he doesn't have to worry about copying font files between devices. While most of us probably don't want to drink type in the way, the possibilities are all there.\n\nWhat I mean is, there's no reason to call this a toy. :)\n\n\\> Difficult to work with it on Mac\n\nA fix for this will be in the next version. :) I do have a Mac, but mainly I'm using Linux now.\n\n\\> Nice but, uhm, no undo?\n\nWe're going to try and squeeze this into the next release also.\n\nThe main reason we've posted it this early in development was in order to get some alpha funding to help pay for development, but so far no one's taken the bait! Our time isn't free here. :)\n\n"
+    },
+    {
+      "time": "14 Dec 2011 — 7:55pm",
+      "content": "![](http://web.archive.org/web/20150414112931im_/http:/21326.info/work/alpha1.png)\n\nReleased alpha 1! Most of the bugs from the last release are fixed. Rendering of the glyph being edited is rewritten, so it's a lot faster. The ability to select multiple handles, and nudging has been added! You can remove handles by selecting them and pressing backspace. Press space to move the view. Also: preliminaries for multiple glyphs (no UI yet), and undo. Read the changelog for everything else. Note: point adding is missing from this version, it'll be back next week! :)\n\n![](http://web.archive.org/web/20150414112931im_/http:/21326.info/work/alpha1-1.png)  \nMoving multiple handles at once.\n\n"
+    },
+    {
+      "time": "17 Dec 2011 — 5:05pm",
+      "content": "Eventually all our heads will be in the clouds...\n\nHowever, type design isn't something that everyone is going to be doing.\n\nIt's a specialized field... I think you need some serious funding in order to finance this type of endeavor.\n\nAnd besides, I cannot imagine anyone who wants to work on fonts, in the shower, or multi-tasking from different locations.\n\nEventually, you are right, all software will migrate to the clouds...\n\nI like the 'open source' concept. Good luck.\n\n"
+    },
+    {
+      "time": "17 Dec 2011 — 5:21pm",
+      "content": "clod/kläd/  \nNoun:\n\n1. A lump of earth or clay.  \n 2. A stupid person (often used as a general term of abuse).\n\nThe clay metaphor is nice. But, alas, most are more familiar with the second definition.\n\n"
+    },
+    {
+      "time": "17 Dec 2011 — 5:29pm",
+      "content": "Hey, what about FontClaude? (As in Garamont.)\n\nBTW, next year there will be a highly typographic Formula-1 driver: Romain Grosjean!  \nHe'll need a primer to handle the curves, but hopefully he won't be a minion.\n\nhhp\n\n"
+    },
+    {
+      "time": "9 Mar 2012 — 2:57pm",
+      "content": "I'm working on the interface for [Fontclod](http://web.archive.org/web/20150414112931/http:/fontclod.com/). Would anyone mind giving some input here?\n\n![](http://web.archive.org/web/20150414112931im_/http:/21326.info/fontclod/mockup-b.png)\n\nI decided to go with a more \"minimal\" styling which I thinks work better for most webapps. I also decided to go with a more traditional menu structure because of the nature of a font editor. Both the tool palette and palettes on the right are quite WIP. I haven't decided on a default set of tools or palettes yet. The glyph chooser at the bottom will be expandable, and be subset with filters.\n\nAnyway, thoughts on this mockup would be highly appreciated. :)\n\nBrian\n\n"
+    },
+    {
+      "time": "9 Mar 2012 — 5:19pm",
+      "content": "Hi Brian,\n\nLooks great. One thing, and maybe you've already got it: keyboard command equivs... Especically for next and prev glyphs.\n\nI hate having to use a menu command when all I want to do is step through a sequence.\n\nI will need to log into the app and give it another run through before making further comments!\n\nMany thanks for the cool app.  \nI'm a professional user of FontLab et al for decades, but I really think this is a fantastic experiment and proof of concept for Web 3 application development AND a real gift to the non-professional who can't pony up the cash for a dedicated application.\n\nI also don't recall offhand what the output formats are...\n\nCheers  \nPeter  \nslowprint.com  \nalphabets.com\n\n"
+    },
+    {
+      "time": "11 Mar 2012 — 1:06pm",
+      "content": "Thanks, Peter. By the way—the current web app doesn't look quite like this. It's just a mockup of what we're headed towards. :)\n\nlol @ Hrants previous post.\n\n"
+    },
+    {
+      "time": "11 Mar 2012 — 1:29pm",
+      "content": "<cite>current web app doesn't look quite like this</cite>\n\nAbout that, the link at the bottom of the page ( [http://www.fontclod.com/editor/](http://web.archive.org/web/20150414112931/http:/www.fontclod.com/editor/ \"http://www.fontclod.com/editor/\")) is wrong.\n\n"
+    },
+    {
+      "time": "11 Mar 2012 — 1:36pm",
+      "content": "Hum. You are correct, it gets our fancy throwback 404 page. I'll get that fixed right away.\n\n"
+    },
+    {
+      "time": "3 Jul 2013 — 11:16pm",
+      "content": ".\n\n"
+    },
+    {
+      "time": "3 Jul 2013 — 6:58am",
+      "content": "Great work, was curious about this kind of application and why it hasn't happened before. Any progress recently?\n\n"
+    },
+    {
+      "time": "3 Jul 2013 — 7:36am",
+      "content": "They don't offer a lot of details, but H&FJ say that their new ScreenSmart webfonts were designed in the browser, using their \"own suite of font development tools directly on top of the Webkit layout engine.\"  \n [http://www.typography.com/cloud/the-fonts/#ssm-design](http://web.archive.org/web/20150414112931/http:/www.typography.com/cloud/the-fonts/#ssm-design \"http://www.typography.com/cloud/the-fonts/#ssm-design\")  \nProof of concept for (the clumsily named, IMHO) FontClod, perhaps?\n\n"
+    },
+    {
+      "time": "4 Jul 2013 — 6:27am",
+      "content": "Looking great!\n\n"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "59394",
+  "title": "Supported codepages and OpenType fonts",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Do I need to set the supported codepages before generatin OpenType fonts, or is this a TrueType only feature?\n\n",
+  "author": "<a href=\"/web/20100203092252/http://typophile.com/user/14722\" title=\"View user profile.\">James Puckett</a>",
+  "time": "<br>",
+  "uid": "14722",
+  "comments": [
+    {
+      "time": "",
+      "content": "It's relevant for OpenType CFF as well.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Ok, so if I’m not completely supporting a codepage—I leave out some of the math characters in the “standards” do I not set the supported codepages, or do I set them for the codepages that I provide language support for and let applications throw in .notdef on the off chance someone tries to typeset equations with my fonts?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Similar to the UnicodeRange fields, the [OpenType spec](http://web.archive.org/web/20100203092252/http:/www.microsoft.com/typography/otspec/os2.htm#cpr) is pretty vague on this:  \n<cite>If the bit is set (1) then the code page is considered functional. If the bit is clear (0) then the code page is not considered functional. Each of the bits is treated as an independent flag and the bits can be set in any combination. The determination of “functional” is left up to the font designer, although character set selection should attempt to be functional by code pages if at all possible. </cite>\n\nOur practice has been to only set a given bit if \\*all\\* characters from the code page are present, except in the case when no code pages have all characters: then the Latin-1 bit is set. I am not sure whether it is still the case but I think this practice goes back to a recommendation by Microsoft for correct functionality under Windows...must have at least one CP bit set.\n\n"
+    },
+    {
+      "time": "",
+      "content": "There is a bug or \"feature\" in some of the older versions of InDesign for Windows. If you don't set Central European Latin 2 codepage for fonts containing CE characters, you won't be available to type CE characters using your keyboard, although you will be able to apply the font on a text containing CE glyphs. I didn't test this issue with CS4 yet.\n\n"
+    }
+  ]
+}

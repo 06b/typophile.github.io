@@ -1,0 +1,55 @@
+{
+  "id": "68743",
+  "title": "Interpolation curve for multiple weights",
+  "forum": "Build",
+  "tags": [
+    "curve",
+    "interpolation",
+    "master",
+    "multiple",
+    "weight",
+    "Build"
+  ],
+  "content": "Hello everyone!\n\nI've already read Luc de Groot's stuff and these forum's related topics, but I'm still wondering about this.\n\nWhat's the best way to calculate the values between two [weights](http://web.archive.org/web/20150414223640/http:/typophile.com/wiki/weight)?\n\nFor instance: I have a Harline and a Heavy cut as my two extremes and I want to generate instances for the other weights. The thing is that I was these instances to be optically appealing.\n\nThank you in advance.\n\n",
+  "author": "scannerlicker",
+  "time": "24 Mar 2010 — 10:27am",
+  "uid": "10256",
+  "comments": [
+    {
+      "time": "24 Mar 2010 — 10:39am",
+      "content": "First, you aren’t going to interpolate optically appealing weights between two such extremes; you’ll need a properly balanced regular weight in there somewhere or the horizontals and curves coming from them are going to be a mess. The upside is that if your extremes are well-drawn you can get pretty close by using anisotropic interpolation to start a regular master and finishing it manually.\n\nAs for determining your in-between weights, it comes down to how you want the final fonts to work. If you want a more contemporary feel create a lot of instances based on whatever mathematical relationship that you like (Lucas math, or just ten or twenty even steps, etc) and start testing them against each other to see what works. Then tweak/refine/repeat. Or you can study the proportions in older typefaces, compare them (spreadsheets work well) and then start calculating what would work well in your design. In the latter case you won’t get the smooth stepping that comes from the former, but there’s nothing wrong with that if it’s what you desire.\n\n"
+    },
+    {
+      "time": "24 Mar 2010 — 10:51am",
+      "content": "@James  \nThank you for replying. In the first process you mention, how can I get that regular master? Can you describe it?\n\nCheers!\n\n"
+    },
+    {
+      "time": "24 Mar 2010 — 11:03am",
+      "content": "Interpolate your regular master with the vertical stem weights set to whatever weight would be appropriate for your typeface (if you don’t know what weight to use, get an appropriate height/width ratio from a similar design). Use anisotropic interpolation to get horizontals as close as they can be without being too screwed up (read the software documentation for more on anisotropic interpolation, or google the Superpolator video from Robothon). Depending on how different your extremes are you may need to do this multiple times to get the uppercase, lowercase, figures, etc.. Put the resulting fonts back together, refine the forms and proof them as you would normally. From there either add the regular master to Superpolator or create two new MM fonts, one for light extremes and one for heavy extremes.\n\nYou’ll also probably find that certain characters, such as **y** need to be draw differently on the extremes. If using multiple MM fonts you can use the appropriate design for light/heavy versions, in Superpolator just create alternates that will interpolate and use them to replace the missing incompatible glyphs.\n\n"
+    },
+    {
+      "time": "24 Mar 2010 — 11:13am",
+      "content": "_The thing is that I was these instances to be optically appealing._\n\nif you want to make something optically appealing, use your eyes.\n\n"
+    },
+    {
+      "time": "24 Mar 2010 — 11:20am",
+      "content": "@James  \nToo bad that Superpolator is a Mac-only software. I'll try to get a way around.\n\n@Paul  \nI do, Paul, I'm just interested on the best automated approximation possible.\n\n"
+    },
+    {
+      "time": "24 Mar 2010 — 11:29am",
+      "content": "Some of these questions have been discussed here:  \n [http://typophile.com/node/39376](http://web.archive.org/web/20150414223640/http:/typophile.com/node/39376 \"http://typophile.com/node/39376\")\n\n"
+    },
+    {
+      "time": "24 Mar 2010 — 11:45am",
+      "content": "This one also deals with the subject:  \n [http://typophile.com/node/32313](http://web.archive.org/web/20150414223640/http:/typophile.com/node/32313 \"http://typophile.com/node/32313\")\n\n"
+    },
+    {
+      "time": "24 Mar 2010 — 12:21pm",
+      "content": ".\n\n"
+    },
+    {
+      "time": "25 Mar 2010 — 5:41am",
+      "content": "@Tim  \nThanks, but I've already read the first one.  \nThe second seems interesting, I'll read it now and I'll notice back here any doubts.\n\nCheers!\n\n"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "58676",
+  "title": "How should I configure a font with extreme ascenders/descenders?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I am working on a simple font of signatures and corporate graphics, and I would like to keep them all at a similar scale, but some of the signatures will shoot a few hundred units far above or below a standard 1000-unit em quad. What is the best practice for configuring a font like this to work properly—specifically with the MS Office apps?\n\n",
+  "author": "<a href=\"/web/20100203091159/http://typophile.com/user/14722\" title=\"View user profile.\">James Puckett</a>",
+  "time": "<br>",
+  "uid": "14722",
+  "comments": [
+    {
+      "time": "",
+      "content": "Make sure that the WinAscent and WinDescent values in the OS/2 table metrics exceed the height of the tallest glyphs in the font. This will prevent the extenders from being clipped.\n\nBy default, most apps on Windows will also use the WinAscent and WinDescent values to calculate default linespacing. You probably want to make the TypoAscender + TypoDescender + TypoLineGap (and corresponding hhea metrics) sum to the same number of units as WinAscent + WinDescent. This will give you the best all-round compatibility between different apps and platforms. The neatest way to do this is to make the TypoAscender + TypoDescender sum to the UPM value (treating all values as positive for the purpose of this calculation), and then set the TypoLineGap to equal the difference between the UPM value and the sum of the WinAscend + WinDescent.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Perfect summary by John Hudson just as you would expect from him ;-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Is there some sort of practical limit to how big the Winascent, Windescent, HHEA Ascender and HHEA Descender can actually be? Mine are 1325 and -1290. The font appears to be fine, it works in TextEdit and Indesign, it validates as fine in Fontbook, but if I try using the font in Word it insists that the font is bad and disables it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Nevermind. It turns out that my problems have something to do with Mac Word going bonkers when it sees extremely wide/complex characters that pop up in logo fonts. There’s a day I’m never getting back…\n\n"
+    }
+  ]
+}

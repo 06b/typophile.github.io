@@ -1,0 +1,50 @@
+{
+  "id": "61738",
+  "title": "Kerning classes export problem",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I'm having some trouble exporting my kern classes. They work well in Fontlab, but when I export the only letter responding is the “king” of the class. I've clicked \"generate kern feature\" and \"compile\". Does anyone know what's causing it?\n\n",
+  "author": "<a href=\"/web/20101103230013/http://www.typophile.com/user/17101\" title=\"View user profile.\">frode frank</a>",
+  "time": "<br>",
+  "uid": "17101",
+  "comments": [
+    {
+      "time": "",
+      "content": "The \"king\" of the class? Wasn't there any error message at all?\n\n"
+    },
+    {
+      "time": "",
+      "content": "No error message. Here's the kern feature:\n\n`feature kern {\n   enum pos @_A V -50;\n   enum pos @_A Y -80;\n   enum pos @_A T -60;\n   enum pos @_A W -60;\n   enum pos @_L T -100;\n   enum pos @_L Y -100;\n   enum pos @_L V -80;\n   enum pos @_L W -70;\n   subtable;\n   enum pos P @_A -50;\n   enum pos T @_lowercasexheight -75;\n   enum pos T @_A -60;\n   enum pos V @_lowercasexheight -50;\n   enum pos V @_A -50;\n   enum pos W @_lowercasexheight -50;\n   enum pos W @_A -60;\n   enum pos Y @_lowercasexheight -50;\n   enum pos Y @_A -80;\n   subtable;\n} kern;`\n\nAnd an example of a class:\n\n`_lowercasexheight: o' a c d e g m n p q r s t u v w x y z`\n\nThe only one kerned in the exported font is o.\n\n"
+    },
+    {
+      "time": "",
+      "content": "You need at least one more OpenType feature for class based kerning to work. The kern table all on its own won't work. So, add a fractions feature, ligatures or something else. Then it should kick in.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes. And perhaps you better avoid generating a kern table (check the export options) especially if you do not decompress kerning when you risk getting different kerning in different environments.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_Yes. And perhaps you better avoid generating a kern table (check the export options) especially if you do not decompress kerning when you risk getting different kerning in different environments._\n\nExplain!\n\n"
+    },
+    {
+      "time": "",
+      "content": "[See here.](http://web.archive.org/web/20101103230013/http:/www.kltf.de/stuff/fls5_exportkern.jpg) First option \"Export old-style [etc]\" should be deactivated. Or if you cannot resist, then at least activate the sub-option \"expand class kerning while [etc]\".\n\n"
+    },
+    {
+      "time": "",
+      "content": "Would you care to explain why? And perhaps what you mean by decompressing kerning and why that might give different kerning in different environments?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Ray. That worked like a charm. Is this one of the legendary FL errors they never get around to fix?\n\n"
+    },
+    {
+      "time": "",
+      "content": "(What Mr Larabie alludes to is not an FLS5 bug but a bug in your version of InDesign.)\n\nAn OpenType-savvy application is expected to read kerning from the GPOS table, from one or more lookups associated with the kern feature. Defining a kern feature (which goes into the GPOS table) should do.  \nIf you provide kerning both in the GPOS table and in a kern table, and if you do not decompress the kerning that goes into the kern table, then you have different kinds of kerning at two places in the font: full kerning in the GPOS table, keyglyph-only kerning in the kern table. And depending from which place an application takes the information, it will either get this or that kerning.\n\nWhat you define in the Metrics Window is kerning for keyglyphs and perhaps exceptions. You kern only A-V but not Adieresis-V Aacute-V and expect that class definitions will care for the latter two pairs.  \nIf you generate a kern feature and then generate an OpenType font, the GPOS table will contain full kerning as results from both your keyglyph kerning and your class definitions.  \nIf you also generate a kern table, then FLS5 will by default only consider kerning as defined in the Metrics Window but ignore the classes. Which means that the kern table will contain kerning only for keyglyphs (and exception), kerning for A-V but not for Adieresis-V Aacute-V.\\*  \nDepending on whether an application picks the kerning from the GPOS table or from the kern table, the user will get more (GPOS) or less (kern) kerning -- and as you noticed this can be fewer kerning pairs than you want ...\n\n\\* For the kern table to contain the full kerning, you need to activate the additional \"decompress\" option. But as said, I consider it as a bad idea to provide kerning in both the GPOS and the kern table. If an application cannot deal with OT layout tables, then the application has a problem, not the font.\n\n"
+    }
+  ]
+}

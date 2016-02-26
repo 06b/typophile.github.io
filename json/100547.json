@@ -1,0 +1,50 @@
+{
+  "id": "100547",
+  "title": "How do I sort this when generating in FontLab?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "This warning always appears when I generate an otf in FL 5.1. It never appeared in FL5.0.4.\n\n[WARNING] [internal] Feature block seen before any language system statement. You should place languagesystem statements before any feature definition [/Users/nickcooke/Library/Application Support/FontLab/Studio 5/Features/fontlab.fea 6]\n\nHow do I place the languagesystem statements before any feature definition?\n\nThanks.\n\n",
+  "author": "Nick Cooke",
+  "time": "15 Feb 2013 — 3:19am",
+  "uid": "3834",
+  "comments": [
+    {
+      "time": "15 Feb 2013 — 5:04am",
+      "content": " ![](http://web.archive.org/web/20150416095856im_/http:/typophile.com/files/langSys_6342.png)\n  \nBest  \nEigi \n"
+    },
+    {
+      "time": "15 Feb 2013 — 10:24am",
+      "content": "These may help:  \nThis link has a lengthy explanation of why it is happening and tells you how to fix it manually.  \n [http://forum.fontlab.com/index.php?topic=8278.0](http://web.archive.org/web/20150416095856/http:/forum.fontlab.com/index.php?topic=8278.0 \"http://forum.fontlab.com/index.php?topic=8278.0\")  \nThat page also has a broken link to a Python script called Update\\_Fea.zip which will fix the problem for you.\n\nThe script can be found now at this link:  \n [http://forum.fontlab.com/index.php?topic=8203.0](http://web.archive.org/web/20150416095856/http:/forum.fontlab.com/index.php?topic=8203.0 \"http://forum.fontlab.com/index.php?topic=8203.0\")\n\nGeorge\n\n"
+    },
+    {
+      "time": "15 Feb 2013 — 10:36am",
+      "content": "...\n\n"
+    },
+    {
+      "time": "15 Feb 2013 — 10:35am",
+      "content": "...\n\n"
+    },
+    {
+      "time": "15 Feb 2013 — 12:46pm",
+      "content": "Sorry about all the extra posts. Initially, because I included links my comment got flagged as spam and in attempting to get that resolved, the duplicate ones showed up so I edited them out to the extent I could.\n\n"
+    },
+    {
+      "time": "27 Feb 2013 — 7:32am",
+      "content": "Thanks Andreas, but that doesn't mean anything to me.\n\nThanks George, but I still can't find \"Upgrade\\_FEA\" on that site.\n\nHello? Anyone from FontLab? How do I sort this?\n\n"
+    },
+    {
+      "time": "27 Feb 2013 — 5:05pm",
+      "content": "In that lower right part of the OT Panel, you need to add at least this:\n\nlanguagesystem DFLT dflt;  \nlanguagesystem latn dflt;\n\nAdd others if your font support other language systems.\n\nThis is all related to the fact that the more recent versions of FontLab include a more recent version of the Adobe Font Development Kit for OpenType (AFDKO), which requires these language systems to be declared. It used to be optional.\n\nAnything you type in the lower right portion of the OT Panel in FontLab gets inserted at the beginning of all your OT code when it is compiled, and that's where you put the language system declarations.\n\n"
+    },
+    {
+      "time": "28 Feb 2013 — 4:24am",
+      "content": "Thanks Mark. That seems to have sorted the problem.\n\n"
+    },
+    {
+      "time": "27 Jun 2014 — 9:33am",
+      "content": "i’ve got only a very faint clue of what i hacked here, but your input worked for me as well [aalt]:  \n`\n@zero_target = [\n#\nzero.zero ];\nlanguagesystem DFLT dflt;\nlanguagesystem latn dflt;\n`  \nthanks!\n\n"
+    }
+  ]
+}

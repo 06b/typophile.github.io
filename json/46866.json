@@ -1,0 +1,58 @@
+{
+  "id": "46866",
+  "title": "Improving OpenType support in free software: your requests?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hey, all.\n\nI’m looking to improve support for OpenType features in free/open-source software. While strong support for Unicode and internationalization is starting to appear, the more advanced features for Latin alphabets have yet to be tackled.\n\nI’m going to begin work on fixing the more glaring (and trivial) oversights, like the unimplemented support for true small caps in Pango (a library which powers a number of free programs like Inkscape). After that, however, things get more challenging—so I want to make sure I’m fulfilling the most-wanted features.\n\nA quick search indicates that free software applications aren’t widely used by members of this forum, most likely due to their inferior feature-sets when it comes to typography. Here’s a chance to change that. If you’ve tried Inkscape, Scribus, OpenOffice.org, or similar programs in the past, and found them wanting, please let me know what missing or broken features caused you to switch away. If you’ve never given these applications a spin, consider doing so, and let me know what you’d like to see in them.\n\nThanks for your help!\n\n [‹ OpenType & Classes panels don't show](http://web.archive.org/web/20081205033946/http:/typophile.com/node/49649 \"Go to previous forum topic\") [FontExplorerX Nightmare: Help Me Wake Up! ›](http://web.archive.org/web/20081205033946/http:/typophile.com/node/49497 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081205033946/http://typophile.com/user/33068\" title=\"View user profile.\">srobertson</a>",
+  "time": "<br>",
+  "uid": "33068",
+  "comments": [
+    {
+      "time": " 28.Jun.2008 2.09am",
+      "content": "- Small-caps (of course)\n- Different figure sets (oldstyle, capital etc.)\n- Contextual ligatures\n- Discretionary ligatures\n\nI use OpenOffice on a regular basis, for those times when typographic detail is not my top concern.\n\n/Måns\n\n"
+    },
+    {
+      "time": " 28.Jun.2008 2.37am",
+      "content": "Kerning (kern)  \nStandard ligatures (liga)  \nSmall caps (smcp & c2sc)  \nFractions (frac)  \nSuperscripts (sups)  \nSubscripts (subs)  \nOrdinals (ordn)  \nFigure styles (onum, lnum, tnum, pnum)  \nStylistic Sets (ss01-ss20)  \nContextual Alternates (calt)\n\n"
+    },
+    {
+      "time": " 28.Jun.2008 7.36am",
+      "content": "Features that should be applied by default to simple scripts (Latin, Cyrillic, Greek etc.), even if there are no UI controls for advanced typographic features: `kern, mark, mkmk, mset, ccmp, rlig, liga, clig, calt`. If the application offers the ability to specify the language of a certain text run, also `locl`.\n\nIf there are UI controls, the following should be on by default and have no UI controls to turn off: `kern, mark, mkmk, mset, ccmp, rlig, locl`.\n\nThe following should be on by default but have UI controls to turn off: `liga, clig, calt`.\n\nAt least the following should be off by default but should have UI controls to turn on: `smcp, smcp+c2sc, sups, subs, sinf, onum, lnum, tnum, pnum, salt`.\n\nIt would be also great if the following had UI controls, off by the default, `frac, numr, dnom, ordn, ss01-ss20, swsh+cswh, titl, case+cpsp, dlig, hist+hlig, pcap, pcap+c2pc, unic, zero, ornm` as well as “positional forms” which would apply `isol, init, medi, fina` at the appropriate positions within words.\n\nAdam\n\n"
+    },
+    {
+      "time": " 28.Jun.2008 11.56am",
+      "content": "Bearing in mind that while many font developers understand what these OpenType abbreviations mean, that cannot be assumed of the general end-user population; therefore a brief description or expansion of the feature abbreviation should be displayed in the user interface where applicable.\n\n"
+    },
+    {
+      "time": " 28.Jun.2008 12.41pm",
+      "content": "I want it all!\n\nMikey :-)\n\n"
+    },
+    {
+      "time": " 28.Jun.2008 3.55pm",
+      "content": "<cite>[..] mark, mkmk [..]</cite>\n\n— that would put InDesign CS3 to shame :o)\n\nPango uses FreeType 2.0 for drawing, doesn’t it? I was a bit disappointed by the lack of OTF support for FreeType, although that gets a fairly reasonable explanation in their documentation.\n\nA robust OTF engine should have no problem with RTL languages, although — as with some more OTF features — that overlaps with User Interface, physically drawing strings, way of data storage, etc..\n\n<cite>[..]what these OpenType abbreviations mean [..]</cite>\n\nI wouldn’t have no problem with selecting the correct abbreviation per feature (not being part of the “general end-user population”), but I’m pretty sure Adam didn’t mean quite that.\n\nBest would be a single general programming library that does all of the above!\n\n"
+    },
+    {
+      "time": " 28.Jun.2008 8.52pm",
+      "content": "Thanks for your opinions! Adam, I’m particularly grateful for your careful suggestions.\n\nTheunis, regarding the single library: HarfBuzz implements a lot of the OpenType layout features missing from FreeType. The software is an unglamorous bit of code shared between Pango and Qt4, with little documentation or development at the moment, but it does its job; and the developers of the two libraries (and myself, if I can be proficient enough) want to make it the standard way of doing OpenType magic across all FLOSS, even on non-FLOSS operating systems.\n\nPango currently has almost everything sitting on the cusp of implementation. It seems the current developers haven’t seen much demand for these features, or at least have (quite justifiably) been focusing on getting basic support for all languages before concentrating on advanced features for Latin scripts. Currently, I’m working on finding the best way to alter the Pango API to enable access to the OpenType features; I’ve got a couple good ideas, but since Pango is used by thousands of applications, there’s probably going to be some back-and-forth before an API is settled on. In any case, this API will allow access to and inspection of any OpenType feature listed in the OpenType specs, and will also include some short aliases in order to let non-typographically-inclined developers use “small-caps” to get real small caps.\n\nImplementing this in Pango-based applications should be relatively straightforward from that point. The biggest challenge has nothing to do with typography, actually: the file formats will most likely have to be changed to accommodate the additional information, and that always involves a lot of testing to ensure no corruption (and backwards-compatibility, if possible). In any case, I’ll start with Inkscape (I use it myself frequently) and move on from there.\n\nOf course, many excellent applications aren’t Pango-based (notably Scribus, OpenOffice.org, and the KOffice suite). I’ll tackle these after working on Inkscape, along with Win32 and OSX support if it is necessary.\n\n"
+    },
+    {
+      "time": " 16.Jul.2008 2.08pm",
+      "content": "Pango 1.17 and newer support the locl tag. Vesion 1.x of freetype used to do this, but in version 2 the authors decided that glyph substitution and the like are better hadled a layer above. So, Pango now implements support for OpenType features itself! See brief [demo](http://web.archive.org/web/20081205033946/http:/en.wikipedia.org/wiki/Pango#Support_for_OpenType_features).\n\n"
+    },
+    {
+      "time": " 13.Sep.2008 4.12pm",
+      "content": "Hi,\n\nMaybe a bit late to revive this old thread, but let’s try...\n\nI’ve been looking for a font rendering engine with OpenType support myself when I came across this thread. I suppose “rendering” is the wrong word, since Freetype2 already does rendering, but what is missing is a way to look up the font features that Miguel Sousa posted above.\n\nHas anybody come across any sort of open source library at all that allows something even as basic as loading the ligature table from a font?\n\nThe idea would be to write a typesetting library that takes an input character string and performs all the necessary lookups in the font to create a glyph string, which then in turn will be kerned and rendered by Freetype2. I would appreciate any previous experience or information you might have on that matter.\n\nThanks!\n\n"
+    },
+    {
+      "time": " 18.Sep.2008 6.20pm",
+      "content": "From way back in this thread:\n\n<cite></cite>\n\n[..] mark, mkmk [..]\n\n- that would put InDesign CS3 to shame :o)\n\nSay what? Those features are quite well-supported in InDesign CS3. There’s no UI for them, but they are present and on, which is what Adam is recommending.\n\nT\n\n"
+    },
+    {
+      "time": " 18.Sep.2008 6.21pm",
+      "content": "From way back in this thread:\n\n\\> [..] mark, mkmk [..]\n\n\\> - that would put InDesign CS3 to shame :o)\n\nSay what? Those features are quite well-supported in InDesign CS3. There’s no UI for them, but they are present and on, which is what Adam is recommending.\n\nT\n\n"
+    }
+  ]
+}

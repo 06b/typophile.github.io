@@ -1,0 +1,22 @@
+{
+  "id": "61710",
+  "title": "Fontlab crashes: \"multiple glyphs mapped to code\"",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi,  \nMaybe someone can help!\n\nMy Fontlab Studio 5.0.4. keeps crashing. I did quite a lot of copying and pasting glyphs with a handdrawn font. Now I'm ready to generate the font, but it freezes on 98% and says:  \n'multiple glyphs oslash \\_191 mapped to code'.\n\nI'n thinking of applying the command  \nGlyph \\> Glyph names \\> Generate names or 'Generating unicode'  \nbut I'm not sure if these commands mix everything up.\n\nAnybody knows the best solution?\n\nPierre\n\n",
+  "author": "<a href=\"/web/20100203114751/http://typophile.com/user/47745\" title=\"View user profile.\">pierre84</a>",
+  "time": "<br>",
+  "uid": "47745",
+  "comments": [
+    {
+      "time": "",
+      "content": "Unless you have custom named glyphs it's probably okay to wipe out the Unicode table and start anew. Save a backup though. As long as the glyphs are named correctly, you'll be okay. If you have glyphs with custom names you may not be able to do this.\n\nGenerate Unicode  \nstandard table  \nDON'T try to keep unicode indexes\n\nSort glyphs by Unicode when you're done. Switch to Names mode and make sure the names correspond with the proper glyphs.\n\n. . . or this could be your problem:\n\nI've come across a rare case where I get an error message that multiple glyphs are mapped to the same code but it's not indicated by FontLab in names mode or codepage mode. If you check the supposedly offending glyph, the Unicode is set correctly, the name is set correctly, everything seems fine. If you look around for a duplicate glyph, it can't be found. Mark the glyph with a color then switch to index mode. Now you can find the duplicate glyph. You'll find two identical glyphs wityh the same name and Unicode but two unique index positions. It's only happed to me around five or six times.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Ray,\n\nThe first solution did the trick... simply wiping out the existing Unicode table and start anew without checking that little box (!). Thank you very much!\n\nYour description of the 'rare case' is also interesting: I'll keep that in mind (just like all Fontlab users have grown accustomed to all those 'rare cases'... ;-)\n\n"
+    }
+  ]
+}

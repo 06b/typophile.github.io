@@ -1,0 +1,86 @@
+{
+  "id": "62142",
+  "title": "Kozuka Gothic in smaller file size?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "I know it shouldn't concern me, but I have a problem with Kozuka Gothic (KozGoPro) from Adobe requiring so much file space. Is there a font that matches the English KozGoPro yet with a much smaller file size? Here's a spec sample of KozGoPro Medium, which just by itself occupies 5.3 MB:\n\n ![](http://web.archive.org/web/20141018045558im_/http:/typophile.com/files/KozGoPro_350x200_6243.jpg)\n\n",
+  "author": "processcamera",
+  "time": "17 Sep 2009 — 10:12pm",
+  "uid": "43374",
+  "comments": [
+    {
+      "time": "18 Sep 2009 — 1:51am",
+      "content": "As you can embed subsets of the font in any final product, I don't see why file size should be an issue. Can you elaborate a bit on what the problem is?\n\n"
+    },
+    {
+      "time": "18 Sep 2009 — 2:03am",
+      "content": "Hi Jeff,  \nbasically, the Latin part of Kozuka Gothic is Myriad. However, it doesn’t match precisely – in terms of weight and metrics.  \nMyriad is (has been) available as a [Multiple Master](http://web.archive.org/web/20141018045558/http:/typophile.com/wiki/Multiple%20Master) font. Maybe you can generate your own Myriad that matches Kozuka?\n\n ![](http://web.archive.org/web/20141018045558im_/http:/typophile.com/files/koz-myriad_3459.png)\n\n"
+    },
+    {
+      "time": "18 Sep 2009 — 3:01am",
+      "content": "Useful to learn that the Latin bit of Kozuka Gothic is derived from Myriad; what's the Latin bit of Kozuka Mincho based on?\n\n"
+    },
+    {
+      "time": "18 Sep 2009 — 3:22am",
+      "content": "I agree, Christian, the file size shouldn't be a concern. And I noted that. Still, it makes no sense to me why the whopping 5.3 MB is required for a medium weight font that looks similar to a number of others. For example, thanks to Florian, I see where KozGoPro is a near match with Myriad Pro, yet my open type file for Myriad Pro-Regular requires only 78 KB. I guess what it comes down to is that I'm compulsive about wanting to keep my installed fonts as lean as possible.\n\n"
+    },
+    {
+      "time": "18 Sep 2009 — 3:44am",
+      "content": "<cite>it makes no sense to me why the whopping 5.3 MB is required for a medium weight font that looks similar to a number of others</cite>\n\nKozuka Gothic is a typeface intended for setting _Japanese_ text. The number of glyphs it contains is at least an order of magnitude bigger than the one for a latin script font like Myriad.\n\n"
+    },
+    {
+      "time": "18 Sep 2009 — 9:25am",
+      "content": "What Riccardo said. In numbers: Kozuka Gothic contains 15.713 glyphs, Myriad a mere 842. By the way, Myriad is not just ‘Latin’, it covers Greek and Cyrillic aswell. And the file size of Kozuka Gothic is not just due to the East-Asian characters (although that makes for most of it). It also holds scads of circled, squared, bracketed and reversed figures and letters, box drawing glyphs, full sets of rotated glyphs and italics, etc.\n\n@Dave (dtw), I doubt that there’s such a direct link to a ‘stand-alone Latin’ for the Laton part of Mincho, as it is the case with KG and Myriad. If there was any Adobe typeface involved at all, it might have been Utopia.\n\n"
+    },
+    {
+      "time": "18 Sep 2009 — 10:00am",
+      "content": "All six weights of Kozuka Gothic Pro (and Kozuka Mincho Pro for that matter) are based on the Adobe-Japan1-4 character collection, and include 15,444 glyphs. However, the font being discussed is the \"Pro-VI\" version, which is based on the much larger Adobe-Japan1-6 character collection that includes 23,058 glyphs. (The \"Pro-VI\" versions have since been replaced with \"Pr6N\" versions that include the same glyphs, but are JIS2004-savvy.)\n\nAnyway, about Myriad being used for the Latin glyphs of Kozuka Gothic, that is true. And, I should point out that Myriad MM was used, and in addition to selecting an appropriate instance, the resulting glyphs were also scaled. Below is what we used for each of the six weights:\n\nExtraLight Myriad MM Weight=140 Width=600 Scale=112% (102% vertical)  \nLight Myriad MM Weight=250 Width=580 Scale=113% (102% vertical)  \nRegular Myriad MM Weight=340 Width=560 Scale=113% (102% vertical)  \nMedium Myriad MM Weight=480 Width=530 Scale=114% (102% vertical)  \nBold Myriad MM Weight=620 Width=500 Scale=114% (102% vertical)  \nHeavy Myriad MM Weight=750 Width=470 Scale=115% (102% vertical)\n\nBut, back to the original question and concern: if you want to use the Latin glyphs in Kozuka Gothic, the easiest path is to simply use Myriad Pro. ;-)\n\nDr. Ken Lunde  \nSenior Computer Scientist, CJKV Type Development  \nAdobe Systems Incorporated  \n [lunde@adobe.com](mailto:lunde@adobe.com)\n\n"
+    },
+    {
+      "time": "18 Sep 2009 — 4:05pm",
+      "content": "\\> _what’s the Latin bit of Kozuka Mincho based on?_\n\nI think it's [Adobe Serif](http://web.archive.org/web/20141018045558/http:/typophile.com/wiki/Adobe%20Serif).\n\n"
+    },
+    {
+      "time": "19 Sep 2009 — 4:23am",
+      "content": "Oh yes! [Adobe Serif](http://web.archive.org/web/20141018045558/http:/www.flickr.com/photos/adamt/288174344/in/set-72157594316204316/), of course.\n\n"
+    },
+    {
+      "time": "19 Sep 2009 — 5:51am",
+      "content": "Yes, the Latin portions of Kozuka Mincho are based on Adobe Serif MM.\n\nInstead of creating six separate instances, we created two, for the two weight extremes, using the following parameters:\n\nExtraLight Adobe Serif MM Weight=180 Width=500 Scale=104%  \nHeavy Adobe Serif MM Weight=445 Width=300 Scale=106%\n\nWe then interpolated to get the four intermediate weights, as follows:\n\nExtraLight 0  \nLight 95  \nRegular 200  \nMedium 362  \nBold 619  \nHeavy 1000\n\nDr. Ken Lunde  \nSenior Computer Scientist, CJKV Type Development  \nAdobe Systems Incorporated  \n [lunde@adobe.com](mailto:lunde@adobe.com)\n\n"
+    },
+    {
+      "time": "19 Sep 2009 — 8:50am",
+      "content": "Thanks for sharing this information!\n\n"
+    },
+    {
+      "time": "21 Sep 2009 — 1:25am",
+      "content": "Indeed, thanks.\n\n"
+    },
+    {
+      "time": "14 Mar 2014 — 4:33pm",
+      "content": "Hi,\n\nI would like to recreate Kozuka Gothic Pro but only the Latin part and only in Extra Light. I plan on using Myriad MM (Multiple Master) as explained in this article and a tool such as Typetool [http://www.fontlab.com/font-editor/typetool/](http://web.archive.org/web/20141018045558/http:/www.fontlab.com/font-editor/typetool/ \"http://www.fontlab.com/font-editor/typetool/\") that should be able to do so as mentioned on page 80 of its manual : [http://www.dtpsoft.de/downloads/manuals/TT3MacMan.pdf](http://web.archive.org/web/20141018045558/http:/www.dtpsoft.de/downloads/manuals/TT3MacMan.pdf \"http://www.dtpsoft.de/downloads/manuals/TT3MacMan.pdf\")\n\nHowever, I can't find Myriad MM font anywhere. Or at least the real one. I've been able to download so-called Myriad-MM.ttf but I am not sure they actually are real Multiple Master fonts. When I open them with Typetool I don't get the pop-up I'm supposed to have if I trust what's written on the manual.\n\nIf anyone has any idea where I can find the real Myriad MM ? If you can tell me how can I check if the font I found is indeed a Multiple Master font ? What is multiple master fonts file extension by the way ? is .ttf possible ? If you can tell me how I am supposed to use Typetool or any other tool out there that could help me.  \nI read that Open Type fonts are the next generation of Multiple Master fonts... can this be achieved using Myriad Pro ? Or do I really need to find Myriad MM if I want to recreate Kozuka Gothic Pro Extra Light ?\n\nThanks in advance, I am completely lost, I've been looking for a long time and I can't find any answer...\n\nNick\n\n"
+    },
+    {
+      "time": "14 Mar 2014 — 4:51pm",
+      "content": "And there's this also... [http://manpages.ubuntu.com/manpages/maverick/man1/mmafm.1.html](http://web.archive.org/web/20141018045558/http:/manpages.ubuntu.com/manpages/maverick/man1/mmafm.1.html \"http://manpages.ubuntu.com/manpages/maverick/man1/mmafm.1.html\")  \nmmafm that creates afm files... I have downloaded the pack with MyriadMM.fm with one .mmafm file and several .afm files but I don't understand how I can use them. This is really complicated !\n\n"
+    },
+    {
+      "time": "15 Mar 2014 — 4:22pm",
+      "content": "Ok I finally was able to get what I wanted —&nbsp;only latin characters of Kozuka Gothic Pr6n Extra Light — thanks to the Glyphs app. [http://www.glyphsapp.com/](http://web.archive.org/web/20141018045558/http:/www.glyphsapp.com/ \"http://www.glyphsapp.com/\")\n\nI was able to open the font even it is 5Mo and contains 23000 glyphs, copy only the 340 latin glyphs I needed into a new Glyphs project that I then exported into an .otf font file.\n\n"
+    },
+    {
+      "time": "15 Mar 2014 — 7:51pm",
+      "content": "Does Kozuka's EULA permit that sort of thing?\n\nhhp\n\n"
+    },
+    {
+      "time": "19 Mar 2014 — 2:25am",
+      "content": "> Does Kozuka's EULA permit that sort of thing?\n\nAccording to [Adobe's font permissions list](http://web.archive.org/web/20141018045558/http:/www.adobe.com/products/type/font-licensing/additional-license-rights.html) modification is permitted. Sadly no guidelines are offered on what kind of modification is permitted or how it should be implemented.\n\n"
+    },
+    {
+      "time": "19 Mar 2014 — 8:50am",
+      "content": "Oh, I didn't realize Kozuka was Adobe! Adobe is very gracious about allowing modification (I know because I've done it a couple of times). The only caveat is that anybody who receives the font must have a license to the original.\n\nhhp\n\n"
+    }
+  ]
+}

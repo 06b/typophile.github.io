@@ -1,0 +1,30 @@
+{
+  "id": "69140",
+  "title": "'Thin space' in OT-feature calt.",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I have problem with automatic contextual replacement in InDesign f.e. with such code\n\nsub space b' by b.alt;\n\nit works only after usual or non-breaking space, but when after a 'emdash' is inserted thin space — the replacement not works automatically, then I must insert alternate manually via 'glyphs palette'. What can I do to resolve this problem? Or it's impossible?\n\n",
+  "author": "Henyk",
+  "time": "6 Apr 2010 — 6:36am",
+  "uid": "9584",
+  "comments": [
+    {
+      "time": "6 Apr 2010 — 6:39am",
+      "content": "you could write more code with the necessary lookups or switch your b and b.alt\n\n"
+    },
+    {
+      "time": "6 Apr 2010 — 6:51am",
+      "content": "'more code with the necessary lookups'\n\nHow exactly?\n\nSwitching alternates does not look as good decision because I already have about five alternatives for b in this font...\n\n"
+    },
+    {
+      "time": "6 Apr 2010 — 7:47am",
+      "content": "I think you better go by the reverse logic. Identify the beginning of a word not by presence of space but by absence of letters:\n\n@anyLetter = [a b c ...];  \nignore sub @anyLetter b';  \nsub b' b.alt;\n\nThis makes it easier to deal with different spaces, punctuation marks, numbers, currency symbols, math symbols, etc.  \nIn case you do _not_ want to see the b-to-b.alt replacement if, for example, a period precedes the word, then simply include period in the @anyLetter class.\n\n"
+    },
+    {
+      "time": "6 Apr 2010 — 7:51am",
+      "content": "Thank You, k.l., it's interesting idea :)\n\n"
+    }
+  ]
+}

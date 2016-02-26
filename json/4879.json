@@ -1,0 +1,42 @@
+{
+  "id": "4879",
+  "title": "Arabic Opentype features",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Dear all   \n   \nI am an historian who has drawn a font for very specific purposes, ie a sogdian font, reproducing the main script used along the Silk Road between the Vth and Xth century. Sogdian is based on aramaic, and the sogdian script gave birth to the medieval uighur one which itself is stil alive through the manchu and mongol scripts.   \nThere is no unicode encoding for sogdian and, althoughh it was used from India to China and from Samarkand to the crimea, with extensive textual remains, I am not aware of any plan to have a unicode encoding for it (very strange to see that even in what should be a world project, we are still narrowly westerners. No old or middle iranian script is encoded (thousands of texts) while the Phaestos disk (one text) is !! but it is not the question\n\n",
+  "author": "vaissi",
+  "time": "21 May 2004 — 2:51pm",
+  "uid": "3818",
+  "comments": [
+    {
+      "time": "22 May 2004 — 1:42pm",
+      "content": "Why do you need to pretend it's an Arabic font and lie about the encoding? Why not use PUA codepoints instead? Is it because apps won't handle the language corretly (LTR instead of RTL)?   \n   \nPretending that the font is Arabic is almost certainly going to cause you a lot of grief, I'm thinking.   \n   \nT\n\n"
+    },
+    {
+      "time": "22 May 2004 — 1:55pm",
+      "content": "(Huh, I'd flagged this, but then lost track of it - so thanks Thomas).   \n   \nI think considering that Sogdian comes from Aramaic (same as Arabic), and that apparently it has similiar contextual features, and that there's no Unicode for it, it's not so bad that Etienne is doing this hack. You could say it's like a piggy-back script. In fact this is what non-Latiners did consistently in the Age of ASCII.   \n   \nSo I hope somebody can help.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "22 May 2004 — 2:04pm",
+      "content": "It is exactly because of that (LTR/RTL) and because the arabic script is present on every computers. I want to be able to switch to arabic script in Mac or Windows Word and just begin typing in sogdian. If there is an other simple solution, i am ready to try to implement it, but i want that, with my font (and my font only, something which exclude Word macro), colleagues can type directly in sogdian with tools (arabic or farsi script) they will find on all their computers (at least recent ones). It works perfectly with textedit on a mac. But I want to use it also on Office XP.   \n   \nBasically, I do not understand the way GSUB works and I would need a tutorial designed for contextual left-to-right script.   \n   \nEtienne\n\n"
+    },
+    {
+      "time": "22 May 2004 — 2:43pm",
+      "content": "Hmmm. Seems like there are several problems. No matter what you do, probably you wouldn't be able to make a \"real\" Sogdian font and type in Sogdian in Office XP. You'd need Sogdian to be in Unicode and Office or Windows to have the Unicode properties for those codepoints to have much of a chance. With the OpenType approach to language support, the OS or app needs to \"know\" the language.   \n   \nSo I can see why you'd be tempted to break down and make a fake Arabic font as an alternative.   \n   \nI will caution that part of your rationale for making a font that lies about its encoding is that you don't want people to install anything other than the font. That would apply for any language that doesn't have built-in keyboard support, including many that might otherwise work fine as long as somebody bothered to make a keyboard for them (which is a lot less work than making a font).   \n   \nFrom my point of view, lying about codepoints in a font is a Bad Thing. It creates text that is font-specific, and can be easily misinterpreted. Not wanting folks to have to install a custom keyboard isn't really a good enough rationale in the Unicode era. People who made hacked fake encodings in the single-byte era were working around some nasty problems, but it was a choice between several evils.   \n   \nHowever, in your case, where getting correct glyph processing might be difficult or impossible without a hacked encoding, I can understand the temptation. (I'll note that it is unnecessary in an AAT environment, where the processing is all built into the font.)   \n   \nYou don't need to only understand GSUB, but also to understand how substitution is handled by your tool of choice. What tool you need depends somewhat on what you need to do.   \n   \nDoes Sogdian require mark positioning and attachment, like Arabic?   \n   \nDo you have a preference between TrueType and PostScript types of outlines?   \n   \nRegards,   \n   \nT\n\n"
+    },
+    {
+      "time": "23 May 2004 — 3:00am",
+      "content": "dear Thomas   \n   \nWhat I need is to insert sogdian in articles or books, most of which are written with Word. I already know that my font cannot be used directly with Word for Mac as it does not handle at all RTL scripts (even the new Word 2004). It works with textedit and I am wondering if by cutting and pasting from textedit in the new Word 2004 (which is unicode) I might insert sogdian text in word (not yet tried).   \n   \nBut I made the assumption that Word XP, which handles RTL and Unicode, would rely on the GSUB table of the font to handle the substitution. So your phrase \"I'll note that it is unnecessary in an AAT environment, where the processing is all built into the font.\" is frightening for my idea: do you mean that it is not the case in Word XP ? Word XP does not use the GSUB but its own system ?   \nIf not, you are right that I should think to another solution. With a specific keyboard can I insert easily anything RTL ?   \n   \nSogdian does not require mark positionning. It is a cursive script with different shapes at the beginning, middle and end of the word, that is all. No diacritics or subscript vowels.   \n   \nEtienne\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 10:53am",
+      "content": "(tracking)\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 7:21pm",
+      "content": "Vaissi,  \nI initially wanted to write to say faking a code point is a very bad idea. But when I tried to find a solution for you I realized that you understood your dilemma fully and your solution might be the only one. Specially when it comes to Windows platform. But you should make sure that the Soghdian font that works correctly on TextEdit, is indeed using OpenType specific (init-medi-fina-isol) features and tables and not AAT ones. Such font can then be used by an Arabic or Persian keyboard which will be identified as such by Word and the correct directionality will be provided... at least, this is your best chance!  \nI hope you push Unicode to encode those characters. It has to happen.  \nBest of luck,  \nBehnam\n\n"
+    }
+  ]
+}

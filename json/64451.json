@@ -1,0 +1,214 @@
+{
+  "id": "64451",
+  "title": "Web fonts - IE moving to DirectWrite...",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "For those following issues related to rendering type in Windows browsers...\n\n[http://blogs.msdn.com/ie/archive/2009/11/18/an-early-look-at-ie9-for-dev...](http://web.archive.org/web/20120415225736/http:/blogs.msdn.com/ie/archive/2009/11/18/an-early-look-at-ie9-for-developers.aspx \"http://blogs.msdn.com/ie/archive/2009/11/18/an-early-look-at-ie9-for-developers.aspx\")\n\nBased on comments at ATypI, Firefox seems to be going down the DirectWrite path too.\n\nCheers, Si\n\n",
+  "author": "Si_Daniels",
+  "time": "19 Nov 2009 — 6:56am",
+  "uid": "1049",
+  "comments": [
+    {
+      "time": "19 Nov 2009 — 7:43am",
+      "content": "Using the graphics card to render type, rather than the CPU: is that how Apple's Quartz rendering works?\n\n"
+    },
+    {
+      "time": "19 Nov 2009 — 8:29am",
+      "content": "In the text sample \"96 point Gabriola on a Lenovo X61 ThinkPad at 100% Zoom: Direct2D (without jaggies):\" on the page, sub-pixel rendering is no longer used. Is that the way it's is going to be?\n\n"
+    },
+    {
+      "time": "19 Nov 2009 — 8:40am",
+      "content": "\\>on the page, sub-pixel rendering is no longer used\n\nTo me that screen grab seems to be primarily demonstrating the y-direction antialiasing rather than sub-pixel positioning. However this suggests that IE will be exploiting DWrite's sub-pixel positioning.\n\n\"In addition to better performance, this technology shift also increases font quality and readability with **sub-pixel positioning** :\"\n\n"
+    },
+    {
+      "time": "19 Nov 2009 — 9:42am",
+      "content": "Claus, I confused sub-pixel \"positioning\" with \"rendering\" in your question. So ignore my answer above. I know that DWrite has various modes - not sure if the screen grab represents the future IE rendering. I’ll see if I can find out.\n\n"
+    },
+    {
+      "time": "19 Nov 2009 — 10:05am",
+      "content": "Haven't had a chance to follow the links yet but, Si, do you know if this kind of rendering is something that's going to be triggered by the developer via CSS or some other mechanism or is it just going to happen?  \nOr is it going to be a part of the user-settings either in the OS or IE?  \nAnd will it be applied to all text at any size or will there be breakpoints?\n\nLastly, Hallelujah. About time. Flash or VML-like but without the hassles. No accessibility issues. Wonderful.\n\nrich\n\n"
+    },
+    {
+      "time": "19 Nov 2009 — 1:41pm",
+      "content": "I'll just note that DirectWrite does pretty much just as nice a job with OpenType CFF as it does with TrueType outlines, even applying ClearType. It uses what is essentially the OpenType CFF rendering Adobe and Microsoft developed for WPF (technically something immediately descended from it).\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "19 Nov 2009 — 2:09pm",
+      "content": "I'm very glad to hear this.\n\n"
+    },
+    {
+      "time": "19 Nov 2009 — 8:00pm",
+      "content": "I can confirm that build demonstrated at PDC is doing sub-pixel layout and positioning. If you look at the video, you can see smooth scaling and tracking which would not be possible otherwise.\n\nIE8 used high-resolution layout, but it did not affect text where glyphs always had integral pixel width. Using Dwrite for rendering only in this case would remove jagginess, but would not improve spacing. It requires real sub-pixel text layout to make it work.\n\nRegarding ways to switch rendering modes, this is not determined yet. There are different factors to take into account: technology available on client machine, user preferences, backward compatibility of page layout. At least my opinion is that rendering mode should not be exposed to web designer to control.\n\nThanks,  \nSergey\n\n"
+    },
+    {
+      "time": "19 Nov 2009 — 11:07pm",
+      "content": "@sergeym  \n_\"At least my opinion is that rendering mode should not be exposed to web designer to control.\"_\n\nSergey, I'm fearful of just letting the OS make all the decisions. It hasn't worked out all that perfectly with ClearType.  \nHow does the Dwrite rendering look at smaller text sizes?  \nI know it's early on, I hope the team will be keeping interested parties in the loop with more detailed examples.  \nThanks.\n\nRegards,\n\nRich\n\n"
+    },
+    {
+      "time": "20 Nov 2009 — 12:27am",
+      "content": "It is not the OS making all decisions. Users already tuned ClearType to their eyes, DWrite applied its rasterization algorithms, IE chooses to use different layout parameters depending on font/size/scenario, font designer expressed his intent in hinting.\n\nWhat kind of control page author do you think should have? Will this control available for every page be better than user settings applied to whole Web inside your browser?\n\nUnfortunately, I can't give you build of IE using DWrite to play with right now. FireFox is experimenting with DWrite to, although I did not see any, even experimental, build available publicly. You can check out few FireFox screenshots at [http://blog.mozilla.com/nattokirai/2009/10/22/better-postscript-cff-font...](http://web.archive.org/web/20120415225736/http:/blog.mozilla.com/nattokirai/2009/10/22/better-postscript-cff-font-rendering-with-directwrite/ \"http://blog.mozilla.com/nattokirai/2009/10/22/better-postscript-cff-font-rendering-with-directwrite/\").\n\nThanks,  \nSergey\n\n"
+    },
+    {
+      "time": "20 Nov 2009 — 3:38am",
+      "content": "If you look at the Firefox example [http://blog.mozilla.com/nattokirai/files/2009/10/waterfallcomparison.png](http://web.archive.org/web/20120415225736/http:/blog.mozilla.com/nattokirai/files/2009/10/waterfallcomparison.png \"http://blog.mozilla.com/nattokirai/files/2009/10/waterfallcomparison.png\") neither the Windows XP GDI nor the Windows 7 GDI Cleartype is using sub-pixel rendering. Is that normal?\n\n"
+    },
+    {
+      "time": "20 Nov 2009 — 3:56am",
+      "content": "Sergey: _What kind of control page author do you think should have?_ (over rasterization methods)\n\nI think none. I really wouldn't want a web author to mess with my rasterization settings ;) For users who don't care about customizing their settings, sensible system defaults should be applied (as it is now).\n\nClaus: _neither the Windows XP GDI nor the Windows 7 GDI Cleartype is using sub-pixel rendering. Is that normal?_\n\nThey used an OT-CFF font for the comparison, insofar it is misleading to speak of \"ClearType there. (Because OT-CFF could not use ClearType at all prior to DirectWrite.)\n\n"
+    },
+    {
+      "time": "20 Nov 2009 — 9:03am",
+      "content": "\\> really wouldn’t want a web author to mess with my rasterization ...\n\nI'm curious as to what you consider \"your rasterization\" to be?\n\nAlso, \"sensible system defaults\" seems sensible, but it is how we got to a web where sizing, scaling and rendering of type are so diverse web design is constricted and type design is nearly impossible.\n\nCheers!\n\n"
+    },
+    {
+      "time": "20 Nov 2009 — 9:10am",
+      "content": "\"...note that DirectWrite does pretty much just as nice a job with OpenType CFF as it does with TrueType outlines, even applying ClearType. \"\n\nThanks, Thomas!\n\nChrisL\n\n"
+    },
+    {
+      "time": "20 Nov 2009 — 12:14pm",
+      "content": "This is very excellent news. Thanks, Si.\n\nThis morning I met with my clients in Leiden and among other things showed them comparisons of their new CFF fonts in a variety of rendering environments. They were unanimous that the WPF/DirectWrite rendering was by far the best, so I'm very happy to be able to report back to them now that IE -- and probably Windows Firefox -- will be taking this path.\n\nAnd, of course, DirectWrite provides full OpenType Layout capabilities.\n\n"
+    },
+    {
+      "time": "20 Nov 2009 — 12:33pm",
+      "content": "<cite>If you look at the Firefox example ... neither the Windows XP GDI nor the Windows 7 GDI Cleartype is using sub-pixel rendering. Is that normal?</cite>\n\nGDI is not capable doing sub-pixel in any Windows version. You need WPF or Avalon to render sub-pixel.\n\n<cite>I’m curious as to what you consider “your rasterization” to be?</cite>\n\nAlso, “sensible system defaults” seems sensible, but it is how we got to a web where sizing, scaling and rendering of type are so diverse web design is constricted and type design is nearly impossible.\n\nMaybe we just need ability to embed rasterizer into web page. This way, web designer will be sure it is working as he intended it to.\n\n"
+    },
+    {
+      "time": "20 Nov 2009 — 7:23pm",
+      "content": "\\>Maybe we just need ability to embed rasterizer into web page. This way, web designer will be sure it is working as he intended it to.\n\nIf only things were this simple. There's screen resolution, gamma and orientation, viewing distance, ambient lighting etc., etc., things the browser and Web designer know little, if anything, about.\n\n"
+    },
+    {
+      "time": "21 Nov 2009 — 5:01am",
+      "content": "\\>Maybe we just need ability to embed rasterizer into web page.\n\nA Sizer, Scaler and Rasterizer must be supplied for Windows users.\n\n\\>This way, web designer will be sure it is working as he intended it to.\n\nIt's much easier to make stuff up about fairy resolution, write fake sci-fi patents and study people's reactions to flash cards.\n\n\\>...things the browser and Web designer know little, if anything, about.\n\n...but should know. Maybe it'd be easier to bring the info to the font. WOW, a font media query.\n\nExcept for distance which can either be solved by the user moving the user, or by the user scaling the type.  \nExcept, oh I forgot, no one wants the user to even do font sizing correctly-ish.\n\nWelcome to the \"if it ain't as robust as Verdana, make it so\" generation of type design.. ;) How long will it last? That's the new lottery. I'm nearly certain that it'll go away as soon as I finish making a dozen families of 5 pt designs. Place your bets!\n\nCheers!\n\n"
+    },
+    {
+      "time": "21 Nov 2009 — 10:09am",
+      "content": "\"...it’ll go away as soon as I finish making a dozen families of 5 pt designs.\"\n\nWould they be rendered useless with the next technology to follow? :-)\n\nMy guess is that something new needs to come along that reinterprets outlines for screen use on the fly but is not part of the typeface. The easy answer to envision is higher screen resolution but this comes at a high price. The person who invents a software interpreter that can mimic resolution enhancement and optical sizing will become a wealthy soul.\n\nChrisL\n\n"
+    },
+    {
+      "time": "21 Nov 2009 — 11:57am",
+      "content": "sergeym wrote:\n\n<cite>GDI is not capable doing sub-pixel in any Windows version. You need WPF or Avalon to render sub-pixel.</cite>\n\nThat's not true at all. All versions of Windows from Windows XP on fully support subpixel rendering of TrueType fonts via native GDI.\n\nHere's the relevant MSDN documentation page for the GDI function [CreateFont](http://web.archive.org/web/20120415225736/http:/msdn.microsoft.com/en-us/library/dd183499%28VS.85%29.aspx). Note the <cite>CLEARTYPE_QUALITY</cite> parameter, which was introduced with Windows XP.\n\nIf ClearType weren't supported by GDI, almost nothing on your screen would be able to use it.\n\n"
+    },
+    {
+      "time": "21 Nov 2009 — 2:03pm",
+      "content": "_The person who invents a software interpreter that can mimic resolution enhancement and optical sizing will become a wealthy soul._\n\nI don't know about a software interpreter, but the human interpreter could increase font size and sit further away from his screen. :)\n\n"
+    },
+    {
+      "time": "21 Nov 2009 — 3:29pm",
+      "content": "Neither my monitor nor my house is big enough, John :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "21 Nov 2009 — 9:26pm",
+      "content": "\\>GDI is not capable doing sub-pixel in any Windows version.\n\n\\>That’s not true at all. All versions of Windows from Windows XP on fully support subpixel rendering of TrueType fonts via native GDI.\n\nI think Sergey is talking about sup-pixel \"positioning\", not sub-pixel \"rendering\". Although i don't know if sub-pixel positioning can't be done by GDI.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "22 Nov 2009 — 4:44am",
+      "content": "I wrote: _really wouldn’t want a web author to mess with my rasterization ..._\n\nDavid wrote: _I’m curious as to what you consider “your rasterization” to be?_\n\n\"My rasterization\" would be the one I chose, be it thoughtfully or by chance, through my choice of operating system, anti-aliasing settings and maybe more display tuning (e.g. ClearType tuner ...).\n\nI'm comfortable working both on Windows and Mac OS. The different text displays don't bother me, perhaps they are even helpful to remind me inside which system \"frame\" I am right now. I guess if somebody (e.g. a web author) could break this consistency, it would irritate me.\n\n"
+    },
+    {
+      "time": "22 Nov 2009 — 12:33pm",
+      "content": "<cite>It’s much easier to make stuff up about fairy resolution, write fake sci-fi patents and study people’s reactions to flash cards.</cite>\n\nMy question was very simple: what control _web developer_ should have over rasterization parameters. And I said none, because I think web browser should be just transport mechanism, delivering font to OS rednering system. Whatever information is needed to produce best type on screen should be inculded into font, system parameters and user settings. What this information should include is critical, but completely different, question, independent from whether you use local or embedded fonts.\n\n<cite>I think Sergey is talking about sup-pixel “positioning”, not sub-pixel “rendering”. Although i don’t know if sub-pixel positioning can’t be done by GDI. </cite>\n\nYes, I should have been more clear. I mean sub-pixel positioning of glyphs, which is not available in GDI.\n\nThanks,  \nSergey\n\n"
+    },
+    {
+      "time": "22 Nov 2009 — 1:07pm",
+      "content": "Sergey: _I think web browser should be just transport mechanism, delivering font to OS rendering system._\n\nBut is that what is currently happening? IE8 rendering of CFF fonts is completely different from Firefox rendering of the same fonts, so it seems clear that different rendering systems are being used. And of course the OS itself may employ more than one rendering system. I don't mind the multiplicity so much as I mind the lack of documentation.\n\n"
+    },
+    {
+      "time": "22 Nov 2009 — 2:44pm",
+      "content": "First, someone alert the media: \"Berlow And Fink In Substantial Agreement\"  \n(Or, at least, our concerns and suspicions are the same, I think.)\n\nSergey and Sii,\n\nYes, it's going to be very difficult to analyze this without an Alpha to play around with.  \nTwo questions:\n\n1) When do you think an Alpha will be available. (If you can share that publicly, here.) Much salivating as you can see.\n\n2) What's the minimum hardware or will any Win 7 capable box be up to the task?\n\n@all\n\nMake sure to view the channel9 video - [link](http://web.archive.org/web/20120415225736/http:/channel9.msdn.com/posts/Charles/IE-9-Surfing-on-the-GPU-with-D2D/) listed on the [IE Blog](http://web.archive.org/web/20120415225736/http:/blogs.msdn.com/ie/archive/2009/11/18/an-early-look-at-ie9-for-developers.aspx) - for a screen demo and some chatter from the IE devs about this. Worth a look, absolutely.\n\nRegards, Rich\n\n"
+    },
+    {
+      "time": "23 Nov 2009 — 1:53pm",
+      "content": "sergeym \\>what control [should the] web developer have over rasterization parameters. And I said none,\n\nI guess, this is what is at the heart of my request for the quest for a typographic media query in CSS.\n\nIf a web developer could: either have control via query over the OS's rasterization parameters and only in the browser set them to the web publisher's desires, or use a media query to deliver font software sensitive to the apparent preferences of the user, or some combination of each — some web design would flourish.\n\nThen \"all we'd have to deal with\" are the multitude of web developer's size and style habits for type, and the fact that the users defaults should never be confused with their true preferences.;)\n\nBut I grant that just saying \"No\", is easier on everyone but the user.\n\nJH\\>I don’t mind the multiplicity so much as I mind the lack of documentation.\n\nAnd even if you have \"documentation\", well, see MS white paper on CT. We're perfectly free to do anything we want except the right thing. Give it time, you'll mind the multiplicity. Perhaps even enough to someday want variation technology on the client side.\n\nend part I\n\n"
+    },
+    {
+      "time": "23 Nov 2009 — 1:54pm",
+      "content": "It was too long.\n\nFrom Sii's link:  \n\\>In addition to better performance, this technology shift also increases font quality and readability with sub-pixel positioning:\n\nSo, sub-pixel positioning used on text means the the image of the glyph changes from position to position among the text, for \"better spacing\". Adobe does this in text rendering and it works 'perfectly well\" for print preview on screens in zoomable apps.\n\nsergeym \\>I mean sub-pixel positioning of glyphs, which is not available in GDI.\n\nGood. The only sub-pixel position I'm interested in, for text type in these resolutions, is under the control of glyph subsitution.\n\nJens\\>The different text displays don’t bother me, perhaps they are even helpful to remind me inside which system “frame” I am right now.\n\nThanks for the complete answer. Your rasterization, which I'll call \"cross-platform/differential-required\" in a very small minority I believe, who can I believe set their preferences to maintain said requirement. So, I believe, your requirement is quite well met today and for the long term future. . . But the counter irritated majority, I believe, is immense including those who don't think their lap should have to change size to be at the right distance from their type, depending on the OS frame.\n\nIn any case, it looks to me like DirectWrite continues the long running disunification of type handling on Windows?\n\nWe have one more issue to deal with, and one more query to make a quest for.\n\nCheers!\n\n"
+    },
+    {
+      "time": "23 Nov 2009 — 2:19pm",
+      "content": "<cite>In any case, it looks to me like DirectWrite continues the long running disunification of type handling on Windows?</cite>\n\nI would like to suggest that if Microsoft is going to continue using this confusing jumble of type handling methods it produce a book about designing and hinting for Windows rendering—with designers and not programmers in mind—and publish it through Microsoft press. There’s not much point throwing millions of dollars at text rendering every year if only foundries with large budgets can afford to pay experts to figure out how to make fonts look good on your OS.\n\n"
+    },
+    {
+      "time": "24 Nov 2009 — 4:53pm",
+      "content": "Two things there:\n\n@DaveB: DirectWrite is continuing to use WPF rendering. Microsoft can't just take GDI away, but they can encourage people to use something better, which is what they're doing. Of course, they could also improve GDI, which they seem to be less interested in, beyond turning (an earlier version of) ClearType on by default.\n\n@James: I think Microsoft believes that most fonts look better under DirectWrite than under GDI. For OpenType CFF, that's certainly true. I don't think anybody needs to pay experts to make fonts look good under DirectWrite... only if the foundry wants to really maximize the potential rendering quality. But that has always required expert help.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "25 Nov 2009 — 7:38am",
+      "content": "_.I think Microsoft believes that most fonts look better under DirectWrite than under GDI. For OpenType CFF, that’s certainly true._\n\nThis is a test of different Windows rendering environments that I made to show clients a few days ago. This is a CFF font with PS autohinting using the AFDKO script within FontLab (the final version will be manually hinted, because I'm not happy with all the autohinting results; see top of q for example). This is a typeface that was designed primarily for print use in book publishing, not optimised for screen reading.\n\n ![](http://web.archive.org/web/20120415225736im_/http:/typophile.com/files/Rendering_6441.gif)\n\n"
+    },
+    {
+      "time": "25 Nov 2009 — 7:44am",
+      "content": "PS. The Safari rendering in that comparison is using the ‘medium’ subpixel rendering setting that Apple recommend for LCD screens. It looks like crap, and the Safari rendering is better in ‘light’ mode or even in greyscale mode as recommended for CRT screens.\n\nOf course, user preference of Safari rendering mode is likely to be both display and gamma specific _and also typeface specific_. In other words, it is possible for a webpage to contain two fonts that each look better in different rendering settings.\n\n"
+    },
+    {
+      "time": "25 Nov 2009 — 9:45am",
+      "content": "John -- Which do you consider to be the most \"accurate\" rendition of your design intent, in this case?\n\n"
+    },
+    {
+      "time": "25 Nov 2009 — 10:02am",
+      "content": "The WPF rendering is closest to the typeface design, in terms of both letter representation and spacing. PDF is second best.\n\n[One thing I note is that the WPF rendering doesn't look nearly as good when I look at it on a different screen from the one on which I made the screenshot. When I met with my clients last week, I took the same laptop on which I had made the screenshots, so they were able to judge the comparison properly.]\n\n"
+    },
+    {
+      "time": "25 Nov 2009 — 10:04am",
+      "content": "Sergey, can you explain how IE8 is rendering CFF fonts? Obviously it isn't using the same Windows PS rasteriser as Firefox, but nor is it using the WPF renderer. It appears to be applying subpixel rendering (CT?) in the x-direction, but no y-direction antialiasing.\n\n"
+    },
+    {
+      "time": "25 Nov 2009 — 11:01am",
+      "content": "Thanks John.\n\nThis is interesting though I wish they were unlabeled.\n\nAnd why do we care about CFF cross-platform/browser rendering?\n\nCheers!\n\n"
+    },
+    {
+      "time": "27 Nov 2009 — 1:43pm",
+      "content": "What did you use to get the WPF/DirectWrite sample?\n\nI'm doing an article in which I want to show essentially all the above, plus a similar variety of TrueType rendering as well, for comparison. I imagine I'll start with a different typeface....\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "27 Nov 2009 — 2:30pm",
+      "content": "For the WPF sample, I used a test tool from MS. You could also do this with XAML in e.g. [Kaxaml](http://web.archive.org/web/20120415225736/http:/www.kaxaml.com/).\n\n"
+    },
+    {
+      "time": "28 Nov 2009 — 2:11pm",
+      "content": "Thanks, that's helpful.\n\nT\n\n"
+    },
+    {
+      "time": "29 Nov 2009 — 7:05pm",
+      "content": "@johnhudson  \n_\"In other words, it is possible for a webpage to contain two fonts that each look better in different rendering settings.\"_\n\nThis cracked me up. So chaotic. And no cross-browser, cross-platform answer in sight.  \n(Sounds like we should get some of them outside standards agitators agitatin' about this. What we have heah, is a failyuh to specificate.)  \nBut that's way premature. What is/are going to be the digital equivalents of paper and ink?  \nAh, well. Implementations first. Thanks for a peek at the test shots.\n\n@thomasphinney  \n_if the foundry wants to really maximize the potential rendering quality. But that has always required expert help._  \nMust we be resigned to the \"expert help\" part. (I mean, there are ordinary experts, and then there are the \"where the frack do I find somebody, anybody who knows how to do this?\" kind of expert.)  \nOr, in your opinion, can the tools be vastly improved with effort and the learning curve significantly lowered?\n\n@sergey and sii,\n\nBased on the video presentation on Channel 9, I'm led to believe that DirectWrite will respect the current behavior of fonts - such as line breaks, word spacing, etc...  \nTrue? Not counting the inevitable edge cases - will it be essentially backwards compatible? Dare I say \"seamlessly\" so?\n\nRegards,  \nRich\n\n"
+    },
+    {
+      "time": "30 Nov 2009 — 7:27am",
+      "content": "Egads, I see.\n\n[http://www.w3.org/2009/11/05-webfonts-minutes.html](http://web.archive.org/web/20120415225736/http:/www.w3.org/2009/11/05-webfonts-minutes.html \"http://www.w3.org/2009/11/05-webfonts-minutes.html\")\n\n\\>Fonts MIME type\n\nTT hints are information one does not know about but ones system does, and it's a possible attack vector.\n\nThere is no end to the entertainment of font standards wrestling. :)\n\nCheers!\n\n"
+    },
+    {
+      "time": "30 Nov 2009 — 11:09am",
+      "content": "<cite>Sergey, can you explain how IE8 is rendering CFF fonts? Obviously it isn’t using the same Windows PS rasteriser as Firefox, but nor is it using the WPF renderer. It appears to be applying subpixel rendering (CT?) in the x-direction, but no y-direction antialiasing.</cite>\n\nInteresting. IE8 is using only GDI for text rendering. I have to look at this closer to understand what the differences are between us and FireFox. And I’ll prepare few screenshots showing DWrite in IE9, to show sub-pixel rendering of TrueType and CFF fonts.\n\n<cite>Based on the video presentation on Channel 9, I’m led to believe that DirectWrite will respect the current behavior of fonts - such as line breaks, word spacing, etc...<br>\nTrue? Not counting the inevitable edge cases - will it be essentially backwards compatible? Dare I say “seamlessly” so?</cite>\n\nI am not ready now to talk about compatibility story in relation to DWrite. The best answer I can give you is that we are aware of this issue and looking at it. At least there is an ability in Dwrite to use glyph metrics compatible with GDI. There are other aspects other than compatibility, e.g. transforms, animations, SVG, that make using subpixel positioning the best option.\n\nThanks,  \nSergey\n\n"
+    },
+    {
+      "time": "2 Dec 2009 — 6:26pm",
+      "content": "@Sergey\n\nEagerly awaiting the screen shots.  \nThanks.\n\n"
+    },
+    {
+      "time": "3 Dec 2009 — 8:03am",
+      "content": "<cite>Eagerly awaiting the screen shots.</cite>\n\nMe to :).\n\nAs soon as I find some time, I'll do that.\n\nThanks,  \nSergey\n\n"
+    },
+    {
+      "time": "3 Dec 2009 — 8:35am",
+      "content": "It makes sense to me that depending on how powerful my computer and graphics card were, I might like to turn off such amenities as ClearType, and if the web designer might prefer his page to look prettier on my computer, that should be just too bad.\n\nThat's what \"your rasterization\" means.\n\n"
+    },
+    {
+      "time": "10 Dec 2009 — 9:40pm",
+      "content": "@Richard:\n\nThe need for expert help to do high end TT hinting isn't going away any time soon. With some investment, TT autohinting could be significantly improved, raising the baseline and reducing the relative advantage of manual high-end hinting (with tools like VTT). The other thing that can be done is to develop auto-hint assistance that feeds into the manual tools, reducing the amount of expert work required to get to the best results. I've heard of multiple folks investigating or doing both approaches, but so far it's all proprietary (in the stricter sense of tools not being available to the public, not just that they're not open source).\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "14 Dec 2009 — 8:19am",
+      "content": "@TP\n\nThanks for the info.  \n_With some investment, TT autohinting could be significantly improved, raising the baseline and reducing the relative advantage of manual high-end hinting (with tools like VTT)._\n\nNo push for open-source. Open, proprietary, whatever. I'm just concerned about \"available\".  \nWhen Adobe tells me that they don't use Fontlab, they use \"in-house\" tools - well, why are they being kept in-house?  \nThey have every right to do so, of course. Just as MSFT has every right to keep VTT's learning curve high - as long as, I presume, they have access to people who've climbed that curve and can do the work. But that helps them, not me or anybody else.  \nAnd it leaves fonts in general looking that much worse.\n\nBut I'm glad to hear your opinion that a substantial improvement can be achieved. I'm hoping it's just a matter of time.\n\nrich\n\n"
+    },
+    {
+      "time": "14 Dec 2009 — 10:36am",
+      "content": "Rich, Adobe make their OpenType FDK code available for free as both a stand alone tool set and for use by FontLab, DTL FontMaster, and anyone else who wants it.\n\nI don't understand what you mean by 'keeping VTT's learning curve high'. The learning curve seems to me to be as high as the software demands, and isn't some kind of artificial construct. Also note that VTT represents a significant investment by MS in _reducing_ the difficulty of TT hinting, which previously was done by writing code.\n\n"
+    },
+    {
+      "time": "14 Dec 2009 — 12:25pm",
+      "content": "\\>I’m hoping it’s just a matter of time.\n\nTime alone?\n\nCheers!\n\n"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "id": "56936",
+  "title": "Prevent a single last paragraph word on a new line",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Hi,  \n I have a problem with (and now I try to explain it in my best Englisch) a single last paragraph word on a new line. I work in InDesign CS3 and I don't want that the last word of a paragraph starts on a knew line. I now the ways of correcting this manually, but I am looking for a way to prevent this. Any one a good idea /tip?\n\n| Attachment | Size |\n| --- | --- |\n| [Afbeelding 2.png](http://web.archive.org/web/20150408010048/http:/typophile.com/files/Afbeelding%202_1.png) | 8.27 KB |\n\n",
+  "author": "west_46",
+  "time": "13 Apr 2009 — 4:36am",
+  "uid": "14995",
+  "comments": [
+    {
+      "time": "13 Apr 2009 — 6:14am",
+      "content": "Hallo Hans,\n\nyou can use GREP to solve this issue.  \nIn the search/replace window (in InDesign CS ≥3), there’s a tab called ‘GREP’. Search for `\\s\\w+?\\W+?$`\n\n`\\s` is a placeholder for ‘any space character’. (That’s the last word space in your paragraph.)  \n`\\w+?` stands for ‘one or more word characters’. (Matches the last word.)  \n`\\W+?` is for ‘one or more non-word characters’: it matches the dot, but also the question mark, exclamation mark etc. Why ‘one or more’? Because your paragraph could end with a closing quotation mark **and** a punctuation mark. Maybe there’s even an additional superscript character, indicating a footnote.  \nThe final `$` stands for: ‘look at paragraph endings only’.\\*\n\nNow you can easily add the ‘no break’ property (directly or via character style) to the hits.  \nF\n\n\\*) Maybe there’s a more elegant way; I’m still getting used to GREP. Love to hear ideas.\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 7:02am",
+      "content": "Upgrade to CS4 :-)\n\nThe paragraph formatting routines in CS3 (and earlier versions) contain a somewhat odd artefact, that tends to create such last word endings more often than statistically probable. CS4 uses a different formatting.\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 7:07am",
+      "content": "You could also try using the paragraph Keep Options (cmd-option-K)\n\n ![](http://web.archive.org/web/20150408010048im_/http:/typophile.com/files/keep-options_3885.gif)\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 7:41am",
+      "content": "theunis said:  \n\\> The paragraph formatting routines in CS3 (and earlier versions)  \n\\> contain a somewhat odd artefact, that tends to create such  \n\\> last word endings more often than statistically probable.  \n\\> CS4 uses a different formatting.\n\nmaybe cs5 will contain a setting to avoid such ugliness automatically.  \nor cs6. always gotta save those reasons to get people to buy upgrades.\n\n-bowerbird\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 8:14am",
+      "content": "Ken, with the ‘Keep’ options, one can address a different problem: avoiding orphans and widows, i.e. keeping the first/last _n_ lines of one paragraph within the same column or frame. (It’s not a very sophisticated approach, but it might be of value in some situations.)\n\nBowerbird, your sarcasm aside, please define ‘ugliness’. A single word in the last line of a paragraph is often the lesser evil, depending on column width, word length/language etc. If there was an automatism, it better should be very intelligent – and customizable.\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 10:21am",
+      "content": "I can add nothing to the InDesign discussion.\n\nBut I am curious to know why a single word on a last line of a para is considered undesirable. I have never felt this to be a bad thing except on some occasions during my stint as an advertising type director. Most book typographers and compositors I've worked with do not see this as a thing to be gotten rid of. At a given size and measure and face, we will often be faced with a single-word exit line on a para. I do not like to see very short single words in that position, for sometimes they can be shorter than the para indent, and that does look bad. Otherwise, let them flow.\n\nAnd what should be done about an exceptionally long word in such a position? How should, say, the word \"typographically\" be handled if it is the last word in the para and starts a line?\n\npowers\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 10:35am",
+      "content": "florian said:  \n\\> Bowerbird, your sarcasm aside\n\nwait! no fair! you can't ignore the best part! :+)\n\n\\> please define ‘ugliness’.\n\nwell, in this case, i'm referring to the topic-at-hand,  \nwhich is a one-word line at the end of a paragraph...\n\nbut you and i both know there are all kinds of ugliness.\n\nstill, let's limit it to this one thing for right now, ok?\n\n\\> A single word in the last line of a paragraph is  \n\\> often the lesser evil, depending on column width,  \n\\> word length/language etc.\n\ni will agree with you on that.\n\nso where does that leave us?\n\nare you implying that it would be beyond adobe's ability  \nto puzzle through the various aspects to get a solution?\n\ni will agree with you on that too. (see?, that's sarcasm!)\n\nbut seriously, you would think that adobe would have  \ncome to the realization that this is a concern in layout,  \nand they would have done \\_something\\_ to address it...\n\nwouldn't you?\n\nand heck, maybe adobe does have something, i don't  \neven own a copy of indesign, maybe it's right \\_there\\_,  \nburied in some preference dialog for the cognoscenti.\n\nor maybe they've never thought about it.\n\nor maybe they've thought about it -- a whole lot --  \nand they've come to the conclusion that it's simply  \ntoo darn complicated, and it's been the subject of  \nmuch infighting within the indesign design team,  \nand it's gotten to the point that nobody even dares  \nto \\_mention\\_ it anymore, because it just means that  \neverybody is going to start yelling at everybody else,  \nand then they all go home and kick their poor dogs...\n\ni don't know.\n\nmaybe someone from adobe will come tell us what's up.  \nseems like they should have an evangelist here, right?,  \nlistening to the customers who buy and use their stuff...\n\n\\> If there was an automatism, it better should be  \n\\> very intelligent – and customizable.\n\nyou want \"very intelligent\" \\_and\\_ \"customizable\"? both?  \nyou're right. adobe can't do that... ;+)\n\non the other hand, how does your grep approach do both?  \nseems to me that it's neither intelligent nor customizable...\n\n-bowerbird\n\np.s. on a serious note, i think it'd be easy enough to create  \na routine that would do the right thing some 99% of the time.  \nif you wanna be really productive, we could brainstorm it now.\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 10:45am",
+      "content": "You have a point, Will.  \nThe GREP query can be refined to account for that:  \n`\\s\\w{1,4}\\W+?$`\n\n`\\w{1,4}` is for ‘one or up to four adjacent word characters’, or, in plain English, ‘words with less than 5 characters’.\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 10:48am",
+      "content": "will said:  \n\\> But I am curious to know why a single word  \n\\> on a last line of a para is considered undesirable.\n\nit's only undesirable if it's ugly.\n\nand, for the most part, it's ugly if it's fairly short...  \nfirst of all, that makes it look stubby, by definition.\n\nwhat's worst is when it's about the same length as  \n(or shorter than) the paragraph-indented next line,  \nwhere it then causes some attentional confusion...\n\nthere might be other cases where it's ugly too, but  \ni trust that you will know them when you see them.\n\n\\> Most book typographers and compositors I’ve  \n\\> worked with do not see this as a thing to be gotten rid of.\n\nin the situations i outline above, they would/should.\n\n\\> At a given size and measure and face, we will often  \n\\> be faced with a single-word exit line on a para.\n\nthat's the reason you use multi-line breaking routines,  \nto avoid the situations where you'd get such ugliness...\n\n\\> I do not like to see very short single words in that position,  \n\\> for sometimes they can be shorter than the para indent,  \n\\> and that does look bad. Otherwise, let them flow.\n\nok, so we're in agreement.\n\n\\> And what should be done about an exceptionally long word  \n\\> in such a position? How should, say, the word “typographically”  \n\\> be handled if it is the last word in the para and starts a line?\n\nthat's fine, typographically.\n\nbut a one-word line in the \\_middle\\_ of a paragraph can be bad,  \nif you do justification, because there's no place to put the slop.\n\nif you're hyphenating at the same time -- with a short measure,  \nand justification, you'd better be hyphenating too -- you'd then  \ntry to hyphenate that baby across two lines, to get some spaces.\n\n-bowerbird\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 12:02pm",
+      "content": "I've often found that a very short last word looks bad, particularly if it is shorter than the following paragraph indent.\n\nThe problem with a \"no last word on a line\" rule, whether done manually or by computer, it that there are exceptions. If the last word is exceptional long, it should be able to stand alone. And sometimes there will be two or three two letter words, and they can look bad. The computer, or the rule, will not deal with these.\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 2:15pm",
+      "content": "don said:  \n\\> sometimes there will be two or three two letter words,  \n\\> and they can look bad. The computer, or the rule,  \n\\> will not deal with these.\n\ndepends on how sophisticated we  \nmake the rule, or the computer...\n\n-bowerbird\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 3:07pm",
+      "content": "I'd echo what Will said. Moreover, we'll even hyphenate the last word of a paragraph, unless the customer specifically prohibits it. If they prohibit it, they pay the price of gappier word spacing.\n\nOur rule is that the end of a paragraph must be visually longer than the paragraph indent of the following paragraph, again as Will said. You can find hyphenated words that have more characters taken down than two words, e.g., \"of it.\" If I had to, I'd break \"preconceived;\" \"-conceived\" is significantly longer than any reasonable paragraph indent.\n\nThere are places where I'd work real hard to avoid this -- right before a subhead, for example, especially a centered one.\n\n\\* \\* \\*\n\nI keep saying it, but there are always compromises to the \"do nots.\" Usually, they come out of \"tight and even word spacing.\" It isn't that comps are lazy, they are honoring the more basic \"do\" of tight & even word spacing. As always, there are those who speculate and theorize, and those of us who work for a living.\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 11:04pm",
+      "content": "charles\\_e said:  \n\\> I’d echo what Will said.\n\nwill was echoing what everyone else said, right?\n\n\\> It isn’t that comps are lazy, they are honoring  \n\\> the more basic “do” of tight & even word spacing.\n\nwell, in the absence of specific examples,  \nit's hard to say, one way or the other, but...\n\ni would stress that no one is saying that  \nyou should not \"honor\" the \"more basic\"  \nrules that call for tight, even word-spacing.\n\nas i said explicitly above, that's why you  \nutilize multi-line breaking routines, so  \nyou don't get yourself painted into a corner  \nwhere you'll sacrifice one rule for another...\n\n\\> As always, there are those who  \n\\> speculate and theorize, and  \n\\> those of us who work for a living.\n\nas always... :+)\n\n-bowerbird\n\n"
+    },
+    {
+      "time": "14 Apr 2009 — 1:01am",
+      "content": "Hi again,\n\nThanks for your ractions.\n\nI have no problem with a longer single word on a last line. But I don't like a short word (about 5 characters) on that position. I use left alingment and I like regular hyphenation. In my opinion the right gap/indent is to big when a single word on a last line is to short.\n\nMaybe I had to high expectations of InDesign. But there is nothing wrong with doing it manually. I only hoped to save some time.\n\n"
+    },
+    {
+      "time": "14 Apr 2009 — 2:06am",
+      "content": "Hans, did you try the GREP?\n\n"
+    },
+    {
+      "time": "14 Apr 2009 — 2:42am",
+      "content": "Hi Florian,\n\nNot yet, but I am certainly going to try this. I am not familiar with the GREP, so thanks for your input.\n\nI am also interested in other opinions about single words on al last line as being something to avoid or not? What are the typographical 'rules' about this?\n\n"
+    },
+    {
+      "time": "14 Apr 2009 — 3:16am",
+      "content": "I think most general rules or thoughts about this have all already been mentioned:  \nWhen working with indents, the ending line better should be longer than the indent below.  \nIn justified setting, the most important aspect is even spacing. Applying a ‘no-break’ attribute to the last two words might counteract that goal.  \nCertain circumstances (e.g. before subheads, as Charles mentioned, or your example with repeating words; ‘zijn’) are especially unfortunate and might demand a workaround.  \nIn ragged-right settings, things can be handled more permissively. If it’s the last paragraph of the column or page, I try to achieve an ending line with more than one word, ideally filling half the column width or more.\n\n"
+    },
+    {
+      "time": "14 Apr 2009 — 5:21am",
+      "content": "<cite>I use left alingment and I like regular hyphenation. In my opinion the right gap/indent is to big when a single word on a last line is to short.</cite>\n\nAh, if you're setting flush-left/ragged-right text, then you can try applying InDesign's \"Balance Ragged Lines\" command (found in the menu off the Paragraph palette, or the menu off the Control panel when the text tool is active).\n\nAs the name implies, this command only takes effect when the text is unjustified.\n\nYou may or may not like the overall results for the paragraph, but it will fill out a disproportionately short last line.\n\n-- Kent.\n\n"
+    },
+    {
+      "time": "14 Apr 2009 — 12:45pm",
+      "content": "west\\_46 said:  \n\\> What are the typographical ’rules’ about this?\n\nwell, the closest you'll get to a \"rule\" is bringhurst, who says this:  \n\\> 2.4.2. avoid leaving the stub end of a hyphenated word, or any  \n\\> word shorter than four letters, as the last line of a paragraph.\n\nbut bringhurst also says you must always trust your own judgment.\n\nhe even ends the section on hyphenation and pagination with this:  \n\\> 2.4.11. avoid any and all rules of hyphenation and pagination  \n\\> that fail to serve the needs of the text\n\nso i'd say you have the latitude to be more or less strict if you like.\n\n-bowerbird\n\n"
+    },
+    {
+      "time": "15 Apr 2009 — 11:29am",
+      "content": "The hard and fast rule of never allowing a single word on a line is often imposed by somebody in Editorial or up the chain of command who once heard that one word on a line is a bad idea. So the question of whether it's a good rule is unfortunately not left to the designer.\n\nI think the grep as it is now will miss situations with multiple punctuation marks at the end of the paragraph, or other unusual characters...\n\nMaybe grep\n\n\\s(?=\\S+$)\n\nand replace with non-breaking space?\n\n"
+    },
+    {
+      "time": "15 Apr 2009 — 12:40pm",
+      "content": "Alas, P.P. GREP is kind of magic but your expression is not valid (non-GREPpers are excused from reading on). The lookahead stuff does not allow variable lengths.\n\nYou need the 2nd part to be variable;\n\nSearch: \\s(\\S+)$\n\nReplace: ~s$1\n\nmight work -- but again, it'll happily swallow everything at the end of a line, no matter how long the word.\n\nPers'nally, I like to do this stuff by hand, so I can choose between either running in (to gain a line on a page), or let it run out with a very modest tracking, making the last line longer.\n\n"
+    },
+    {
+      "time": "15 Apr 2009 — 2:09pm",
+      "content": "I think a bigger problem with the last word in a paragraph is in justified copy where the h&j setting allows letterspacing.\n\nSo what happens is that the last line of a paragraph is set flush left, with no letterspacing of course, and the adjacent lines may be quite letterspaced. I would apply extra tracking manually to even out the discrepancy.\n\n"
+    },
+    {
+      "time": "15 Apr 2009 — 2:32pm",
+      "content": "Just to throw in another $0.02:\n\n@Nick, if you can see any letterspacing (for justification) at all, it is too much.\n\n@pica pusher, I have been known to spend considerable time going over with designers, or editors if necessary, the results of such a rule. Sometimes they insist, and we do as they wish. In such cases, we also try to make sure our name isn't listed as on the copyright page as the typesetter. Telling them that sometimes gets their attention.\n\nTheunis brings up an interesting point -- reasonably often, you have to make or loose a line for pagination. While I'd still not have the last line of a paragraph shorter than the paragraph indent, I will either take up or bring down a word to make/loose a line.\n\n"
+    },
+    {
+      "time": "15 Apr 2009 — 3:30pm",
+      "content": "<cite> &gt; In such cases, we also try to make sure our name isn’t listed as on the copyright page as the typesetter. Telling them that sometimes gets their attention.</cite>\n\nI have used such a ploy in other situations as well: \"I will gladly make the [inane] changes you request to your cover, I only ask that you make sure that I \\*do not\\* get a credit line, as I have a reputation to uphold.\" ;-)\n\n-- K.\n\n"
+    },
+    {
+      "time": "15 Apr 2009 — 8:27pm",
+      "content": "I've done the same thing as Charles and Kent: take no credit for work I feel is not up to snuff because of \"rules\" imposed by a client.\n\npowers\n\n"
+    },
+    {
+      "time": "15 Apr 2009 — 9:48pm",
+      "content": "_@Nick, if you can see any letterspacing (for justification) at all, it is too much._\n\nNot all typography is book work, Charles.\n\nBut speaking of book typography and wide columns, what do you do when the last line of a paragraph is flush left with \"normal\" word space widths, and just about every other line has much wider word spaces? Don't you think that looks odd?\n\n"
+    },
+    {
+      "time": "16 Apr 2009 — 5:10am",
+      "content": "<cite>what do you do when the last line of a paragraph is flush left with “normal” word space widths, and just about every other line has much wider word spaces? Don’t you think that looks odd?</cite>\n\nYes, you're right. And it does happen. The frequency depends on the text of course, but also on the layout program. For instance, I find that InDesign does this -- and other infelicities -- if (1) you use the paragraph composer, and (2) you don't get good values for min-ideal-\"not honored\" (aka max) spacing. The \"best\" values can change a bit with the size of the type and the measure.\n\nNot to pick on InDesign, TeX had a its oddities too. The penalty for increasing the word space was the same as for decreasing the word space, on a percentage basis. Well, using real numbers, if you set the minimum spaceband to 180 and the maximum (which TeX somewhat honors) to 400, using any value other than 290 as \"ideal\" (halfway in between) would skew the results, based on change penalties computed as a percentage. But 290 is too big; 240 is more like it. Since using TeX with these parameters \"encouraged\" adding space to justify, we wrote another routine adding a demerit for setting more lines that absolutely needed in a paragraph. The value you used for this demerit would control the spacing behavior.\n\nToo much information, I know. The point is, for setting extended text, you have to understand how your layout program works, & adapt it to your needs/desires.\n\n"
+    },
+    {
+      "time": "16 Apr 2009 — 10:27am",
+      "content": "\\> @Nick, if you can see any letterspacing (for justification) at all, it is too much.\n\nI think Nick does newspaper work, and there narrow columns, combined with the inane editor's idea of insetting a photo into half to a third of that column, and you will definitely get letterspacing that you can see. In some cases, it is too much.\n\nThe problem with Nick's solution to this (letterspacing the stub) is that design on the newspaper seldom happens within the production schedule. It is too rushed to get the damn page on the press. Going back and tracking a stub is not going to get priority.\n\n"
+    },
+    {
+      "time": "16 Apr 2009 — 11:01am",
+      "content": "_...inane editor..._\n\nMore likely a designer/art director who breaks up the rigidity of the grid by having an image straddle a gutter. So, not so much an image that is a fraction of a column, but an image that is one and a bit columns, or two and a bit columns, etc.\n\nIt's not unusual, given the ease with which layout applications can cause text to wrap around a clipping path or picture box.\n\nAnd not just an image. It could be a pull-quote that's being wrapped around. Or a drop cap.\n\nIt's a design issue for any kind of publication that has justified body copy, but of course, if you're going to wrap text round an image, you should be extra careful with how it breaks.\n\n"
+    },
+    {
+      "time": "16 Apr 2009 — 12:23pm",
+      "content": "in the must-reflow-to-current-viewport online world,  \nyour program must adjust to any possible line-width,  \nand there is no \"i'll check exceptions manually\" option.\n\nand yes, i agree with nick: if the next-to-last line of a  \nparagraph has a larger wordspace due to justification,  \nit looks weird for the last line to have normal wordspace.\n\n-bowerbird\n\n"
+    },
+    {
+      "time": "17 Apr 2009 — 8:28am",
+      "content": ".\n\n"
+    },
+    {
+      "time": "17 Apr 2009 — 10:08am",
+      "content": "\"\n\n"
+    },
+    {
+      "time": "17 Apr 2009 — 10:47am",
+      "content": "A\n\n"
+    },
+    {
+      "time": "17 Apr 2009 — 1:33pm",
+      "content": "z\n\n"
+    }
+  ]
+}

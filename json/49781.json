@@ -1,0 +1,26 @@
+{
+  "id": "49781",
+  "title": "Ligatures and SmallCaps ?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m working on a font that contains Smallcaps and a number of ligatures - fi fl ff ffi ffl ft fb fh fk fy ty.\n\nWhen testing the font and selecting small caps some of the ligatures return to there small cap glyphs, but ligatures fi fl ff ffi ffl do not change.\n\nWhats the normal practise for this situation - Is it best to create small cap versions of FI FL FF etc.\n\nAlso why do ligatures like ft fb change to the small cap glyphs but not fi fl ?\n\nRr.\n\n [‹ To autohint, or NOT to autohint...](http://web.archive.org/web/20081201171519/http:/www.typophile.com/node/15436 \"Go to previous forum topic\") [Illustrator/FontLab workflow questions ›](http://web.archive.org/web/20081201171519/http:/www.typophile.com/node/49715 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081201171519/http://www.typophile.com/user/16986\" title=\"View user profile.\">RachelR</a>",
+  "time": "<br>",
+  "uid": "16986",
+  "comments": [
+    {
+      "time": " 23.Sep.2008 8.28am",
+      "content": "I’m not all that sure, but I believe those f ligs are unicode. You might just try putting smcp feature above liga feature in the OT window so it gets 1st priority.\n\n"
+    },
+    {
+      "time": " 23.Sep.2008 4.48pm",
+      "content": "If you included the characters fi fl ffi ffl and ff (I forget their Unicode number), it should be for legacy purposes only. You should also have f\\_i, f\\_l, f\\_f, f\\_f\\_i, and f\\_f\\_l as unencoded glyphs, and use these in your liga feature. And Stephen Rapp said, liga should be after smcp and c2sc in your features file.\n\n"
+    },
+    {
+      "time": " 25.Sep.2008 11.20am",
+      "content": "Regardless of encoding, you need to order the small cap feature lookups ahead of the ligature feature lookups, then it should all work as desired.\n\nCheers,\n\nT\n\n"
+    }
+  ]
+}

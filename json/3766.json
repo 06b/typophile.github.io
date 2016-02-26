@@ -1,0 +1,74 @@
+{
+  "id": "3766",
+  "title": "Catalan middot (periodcentered ) unicode",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I've asked this already on FL list, but now think that this might be a more better platform fot my question.   \n   \nI have a question concerning Catalan middot in PC TTF. I generated fonts in FL with a standard Latin 1,   \n1252 encoding, and the middot (aka periodcentered) had 00B7 unicode value, yet it seems that it doesn't function properly on a PC. Now I am looking around and see that other values e.g., 22C5, 2219 are also used. Does anyone know where are these values coming from? Is it necessary to encode the middot to all three of them?   \n   \nIs there a know issue about using middot in various PC applications? Does anyone have experience with this?   \n   \nThank you, Peter\n\n",
+  "author": "<a href=\"/web/20100905061749/http://typophile.com/user/3279\" title=\"View user profile.\">peter bilak</a>",
+  "time": "<br>",
+  "uid": "3279",
+  "comments": [
+    {
+      "time": "",
+      "content": "\\> it doesn't function properly on a PC   \n   \nWhat do you mean by \"it doesn't function\"?   \nDo you mean that a Catalan keyboard isn't picking it up?   \n   \nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Correct. The Catalan keyboard cannot access it, and when trying to type it get only missing glyph symbol.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I believe the correct codepoint for the Catalan middot is U+2219. I usually double-encode the /periodcentered/ glyph as U+00B7 and U+2219.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I figured that it is safer to double/triple encode the periodcentred, but is there any particular reason why is it done? John, do you know of any application that needs different codepoint than the standard U+2219? I am just wondering why the standard Latin 1 encoding would include 'wrong' codepoint. Or is periodcentred used in also another language than Catalan?   \n   \np\n\n"
+    },
+    {
+      "time": "",
+      "content": "Peter,   \n   \n1. Instead of using arbitrary names for your glyphs (\"middot\"), I suggest that you use standardized names listed in the Adobe Glyph List For New Fonts 1.1 (in your case, \"periodcentered\").   \n   \nYou will find all the Adobe Glyph List For New Fonts 1.1 at [http://partners.adobe.com/asn/tech/type/aglfn13.txt](http://web.archive.org/web/20100905061749/http:/partners.adobe.com/asn/tech/type/aglfn13.txt)  \n   \n2. For glyph names that are not in the Adobe Glyph List For New Fonts, check whether the glyph is a basic (default) form of a character encoded in the Unicode Standard. If so, use the Unicode-based glyph name:   \na) for BMP Unicode codepoints, use the name \"uniXXXX\" where XXXX are the 4 hexadecimal digits representing the codepoint.   \nb) for non-BMP Unicode codepoints, use the name \"uXXXXX\" where XXXXX are the 5 hexadecimal digits representing the codepoint.   \n   \n3. If a glyph is an alternate form of a character that is encoded in the Unicode Standard or is listed in the Adobe Glyph List For New Fonts 1.1, use the glyph name of the basic form followed by a period, followed by a suffix. For the suffix, use the name of the OpenType Layout feature that you would most likely access that glyph through.   \n   \nFor example, for a small-caps A, use \"A.smcp\", for a styllistic alternate R use \"R.salt\", for a swash Q use \"Q.swsh\", for a superior m use \"m.sups\", for a tabular 5 use \"five.tnum\" etc. If there are multiple OpenType Layout features that can be used to access a glyph, pick one of your liking.   \n   \n4. If a glyph is a ligature that is not found in the Adobe Glyph List For New Fonts, use the glyph names of the glyphs that form the ligature, concatenated using underscore. For example, for a ct ligature, use \"c\\_t\", for an ffi ligature use \"f\\_f\\_i\", for a ligature of long s and i use \"longs\\_i\".   \n   \n5. If a glyph is an ornament, a non-textual symbol etc., use a glyph name of your liking.   \n   \n6. Assign proper Unicode indexes to the glyphs discussed in (1) and (2). If the same glyph represents more than one Unicode character:   \na) create multiple glyphs with identical content but different names, and assign one Unicode codepoint per glyph; for example, create a \"periodcentered\" glyph and encode it as U+00B7, and create a \"uni2219\" glyph and encode it as U+2219.   \nb) alternatively, either assign multiple Unicode codepoints to your glyph; for example, for \"periodcentered\", assign U+00B7 and U+2219.   \n   \n7. For glyphs discussed in (3), (4), (5), you may but don't have to assign custom codepoints from the Unicode Private Use Area (PUA): from U+E000 to U+F8FF. I recommend against assigning these codepoints, but for some applications (e.g. Microsoft Word 2003 for Windows), assigning PUA codepoints may be the only way to display such glyphs in your font.   \n   \nRegards,   \nAdam Twardoch   \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Another \"Golded Post\" from Adam. Thank you!   \n   \nBTW, I'm thinking Typophile needs some kind of repository for extremely valuable posts. Not only would it help existing users, but it would certainly attract new ones as well.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Nice post from Adam. Just a couple of comments.   \n   \n3) Although it's good to use consistent suffixes, people should be aware that from a technical perspective the suffix is irrelevant.   \n   \n5) Some symbols have Unicode codepoints, and if so one should use the appropriate uniXXXX/uXXXXX name. Otherwise, as Adam says, one can name them whatever one likes (as long as it doesn't conflict with names that have defined meanings).   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "I have added a slightly extended version of my posting to:   \n [http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mview=0&ID\\_Message=3065](http://web.archive.org/web/20100905061749/http:/groups.msn.com/fontlab/tipsandtricks.msnw?action=get_message&mview=0&ID_Message=3065)   \n   \nOther than that, the front page of the FontLab forum:   \n [http://groups.msn.com/fontlab/](http://web.archive.org/web/20100905061749/http:/groups.msn.com/fontlab/)   \njust got a brief \"recommended reading\" list showing the most important postings that deal with FontLab.   \n   \nRegards,   \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "_I figured that it is safer to double/triple encode the periodcentred, but is there any particular reason why is it done? John, do you know of any application that needs different codepoint than the standard U+2219? I am just wondering why the standard Latin 1 encoding would include 'wrong' codepoint. Or is periodcentred used in also another language than Catalan?,_   \n   \nI'm not sure that the Latin 1 encoding claims support for Catalan. I've looked into this some more, and I think I may be mistaken in my identification of 2219 as the correct codepoint for the Catalan dot. I thought this was noted on the MST website somewhere, but I cannot find the reference now and instead note this, from the [Diacritics Design Standards](http://web.archive.org/web/20100905061749/http:/www.microsoft.com/typography/developers/fdsspec/diacritics.htm):   \n   \n_**L or l Catalan (L with mid dot)**    \nThis character is actually a compound character made from a base character and an additional punctuation character. The mid dot is used in the Catalan language to separte two lowercase l or two uppercase L characters that are not part of the same syllable in a word.   \n   \nThe mid dot is commonly made from the overdot diacritic U+02D9 or a character made specifically for this purpose. Often the period U+002E, period centered U+2219 or mid dot U+00B7 are not an appropriate size for this character. The dot in the L or l Catalan character should be positioned to center vertically on the uppercase height and center horizontally when followed by another L or l._      \n   \nThis seems to me very unsatisfactory, because although the U+02D9 _glyph,_ is an appropriate size for the Catalan dot, it is not necessarily the appropriate character code to use.   \n   \nPeter, try this: In WordPad on Windows, enter the Catalan dot from your Catalan keyboard -- resulting in a .notdef glyph I presume -- and then enter alt+X this will convert the preceding character to a hexadecimal character code, so you can confirm exactly what Unicode value is input from the Catalan keyboard.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I just checked the Unicode standard, which includes a precomposed L=middot for Catalan (based on some old 7- or 8-bit Spanish standard), and the compatability decomposition for this indicates that the dot is, in fact, U+00B7. So please ignore my previous advice re. U+2219.   \n   \nWhat Catalan keyboard driver are you using? My Windows XP does not ship with a Catalan keyboard.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Adam, John thanks for your answers. I figured how it could be solved, but I was wondering why there would be different codepoints for the same glyph, and whether it is the same glyph or it is also used in different languages or situations. Some foundries, for example, add U+2219 as a supplement for the space character when 'show invisibles' is turned on in some applications.   \n   \nI cannot answer in detail right now what didn't work about 00B7, because I can't test it myself, and rely on my Catalan contact. I will check and get back.\n\n"
+    },
+    {
+      "time": "",
+      "content": "There are tons of cases in Unicode where you have what could be the same glyph at different codepoints. Some of these are purely for historical encoding reasons (capital letter A with ring above versus Angstrom symbol). Some of them have linguistic differences (English, Greek and Cyrillic have different characters, but in each case one of those language-specific characters might look an awful lot like an \"A\").   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "I just found this..   \n   \nThe referrence to the catalan in the MS document referring to x02C9 (overdot) is saying that the catalan dot should be a punctutation character similar to the way the over dot x02C9 was designed and NOT a MATHEMATICAL operator which is what both X00B7 and x2219 are.   \n   \nx2219 is in 'Mathematical Operators' in unicode and xB7 is part of the ASCII set that comes from earliest technical keyboards and all the character in there are Math characters not pubishing characters, ie. ASCII Tilde (used in programming), ASCII circumflex (used in Pascal for pointers), middot (used as a mathematical operator for muliplication).   \n   \nI did a test back then and just did now and xB7 is mapped in the catalan keyboard.   \n   \n ![catalan shift three](http://web.archive.org/web/20100905061749im_/http:/www.typophile.com/forums/messages/4101/43049.gif)   \n   \nI believed technically x2027 'Hyphenation point' in the x2000..x206F 'General Punctuation' section of Unicode is more correct as the Catalan dot than either the historical middot or math operator periodcentered...   \n   \nBut they pull x00B7.   \n   \nBack in the Ikarus days for lazer imagesetters we use to make a Capital Catalan dot and a small Catalan dot that were on different widths and spaced differently so when they were composed with the Capital L or small l they would center correctly. The Capital L dot would need to have a negative left sidebearing for it to center between L's.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I should mention I tested this on Window 2000.   \n   \nIn 1999 I talked to the person who wrote the keyboard table that maps the character codes to unicode. I found it coming out as x2219. And told her that that is a 'math operator' and in that section of unicode and is probably wrong.   \n   \nBack then I was testing it on Windows 95 and I have it recorded in the MS document that x2219 came up in Win95 and xB7 in Win2000.   \n   \nxB7 is more correct so I hope that is what changed.   \n   \nI'm sure this adds to the confusion but never trust a programmer so always test it against what they do...\n\n"
+    },
+    {
+      "time": "",
+      "content": "Agreed. Another job for the impending intern.\n\n"
+    }
+  ]
+}

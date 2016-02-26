@@ -1,0 +1,78 @@
+{
+  "id": "41544",
+  "title": "How to display Text NOT antialiased on a webpage (HTML)",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi there!\n\nFirst of all: I know nothing whatsoever about Internet programming. I just want to give a hint to a guy who do me a favour with an internet project.\n\nOK. I want the text on my webpage to appear NOT antialiased, but sharp just with black pixels for example.  \nIs that possible with Monaco, Andale Mono etc. Or do I have to use something special?  \nIs there a certain adjustment in the stylesheet?\n\njust like here:\n\n[http://www.blanka.co.uk/](http://web.archive.org/web/20080706173850/http:/www.blanka.co.uk/ \"http://www.blanka.co.uk/\")\n\nor here:\n\n[http://www.plusminus.ca/](http://web.archive.org/web/20080706173850/http:/www.plusminus.ca/ \"http://www.plusminus.ca/\")\n\nCan anybody please give me a hint how to achieve that?\n\nThanks!\n\nJuergen\n\n [‹ Editing Open Type fonts](http://web.archive.org/web/20080706173850/http:/www.typophile.com/node/42036 \"Go to previous forum topic\") [Importing potrace/ghostscript eps files into Fontlab ›](http://web.archive.org/web/20080706173850/http:/www.typophile.com/node/41976 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080706173850/http://www.typophile.com/user/12099\" title=\"View user profile.\">Jui</a>",
+  "time": "<br>",
+  "uid": "12099",
+  "comments": [
+    {
+      "time": " 30.Jan.2008 8.15am",
+      "content": "I think the only way you could achieve this is by using images of the text, or coding the site in flash.  \nIf you’re gonna use images, remember to set the alt attribute!\n\n"
+    },
+    {
+      "time": " 30.Jan.2008 8.15am",
+      "content": "Hmm. Or I might be wrong. This doesn’t seem to be any of the two.\n\n"
+    },
+    {
+      "time": " 30.Jan.2008 8.21am",
+      "content": "I think he wants the opposite of images of text. Or maybe a better way to explain it is he seems to want a pixelated look. Is that correct? Are you basically trying to get the strokes of the letter forms to be about one pixel wide?\n\nIf you increase the size of the text on those Web pages (command +), you’ll see that the type maintains its crispness and the strokes get larger than a single pixel or two in width.\n\nCheck out the CSS for those two sites to see what size they set the type in question. I feel the look they’ve achieved is based on the type size because it actually is just HTML and not a jpeg.\n\n"
+    },
+    {
+      "time": " 30.Jan.2008 8.21am",
+      "content": "double post..\n\n"
+    },
+    {
+      "time": " 30.Jan.2008 8.22am",
+      "content": "You might also wan’t to look into Sifr. It’s a method using flash to embed fonts. I think you can’t define text size in pixels though, so using a pixel font tends to cause problems.\n\n"
+    },
+    {
+      "time": " 30.Jan.2008 8.49am",
+      "content": "The stylesheet of [http://www.blanka.co.uk/](http://web.archive.org/web/20080706173850/http:/www.blanka.co.uk/ \"http://www.blanka.co.uk/\") sets the text size at 9px. If you see the site in FireFox or Safari you can enlarge or reduce the text size (command +, command -) and, you see that the text rendering become ’antialiased’. If you use Explorer you can’t make the text bigger since it is set in pixel. So you can only set the text as small as you can in pixels and hope that the user doesn’t enlarge the text size.\n\n"
+    },
+    {
+      "time": " 30.Jan.2008 9.09am",
+      "content": "anti-aliasing is an end-user browser/OS setting. So, no, you have no control over that at the site author.\n\nYour only option, as stated, is to put your text into an image or flash file. There are usability/accessibility issues with that that you’ll want to take into consideration that may or may not be an issue with your particular project.\n\n"
+    },
+    {
+      "time": " 30.Jan.2008 2.50pm",
+      "content": "Hmmm... Yes but on plusminus.ca for example there is no flash. And it’s real Text and not images.\n\nAnother friend told me, if I use Pixel (.px) instead of Point in the HTML code to discribe the text size the text will appear pixelated....?\n\nits a mystery : )\n\n"
+    },
+    {
+      "time": " 30.Jan.2008 3.20pm",
+      "content": "All of the text on http://plusminus.ca/ is anti-aliased on my system (Windows Vista with ClearType enabled).\n\nFrode is correct: Short of embedding images or objects such as Flash, there’s no way to guarantee that your text will not be rendered with anti-aliasing.\n\n"
+    },
+    {
+      "time": " 30.Jan.2008 6.41pm",
+      "content": "Well here’s an answer: The sites you list don’t necessarily display their type anti-aliased. Scale your type larger, it will alias. The trick is simply to keep the type small, use typefaces that are predisposed to this behavior, such as courier, lucida sans, consolas, or Times New Roman at very small sizes.  \nUsing images in place of functional text (on the web) is a bad practice. That stuff doesn’t get indexed, isn’t selectable, isn’t accessible to viewers with (some) disabilities and if it’s small, isn’t even legible to many sighted web users.\n\n"
+    },
+    {
+      "time": " 30.Jan.2008 9.51pm",
+      "content": "This is something that it’s a Bad Idea to try to control. Web design is not print design; you do not have and cannot take complete to-the-pixel control of what your users see when they look at a proper web site.\n\nI turn off anti-aliasing on my computer because that’s what I want. Other people turn it on because that’s what they want. Some people have no choice in the matter and always have it on (Mac users), and seeing non-anti-aliased text would be a jarring and uncomfortable experience for most of them.\n\nThe ways of cheating around this are just as bad. If you use images or Flash, people can no longer do things they can do with proper web sites. They may not be able to resize your text to suit them; they may not be able to copy and paste text at will; blind people’s screen-readers may not work, or middle-clicking links to open in a new tab may be broken (like with the Typophile front page), or any number of other things may break that work with proper web sites.\n\nI know it kinda sucks that you can’t make it look Exactly How You Want It, but that’s simply inherent to the web, and you need to embrace it rather than fight it.\n\n"
+    },
+    {
+      "time": " 31.Jan.2008 12.36am",
+      "content": "\\> The trick is simply to keep the type small, use typefaces that are predisposed to this behavior.... \\<\n\nThat won’t do diddly if the viewer is on a Mac, or is on Windows with ClearType on, or....\n\nThis really is an issue of OS/browser settings, and there is no reasonable way for a Web designer to control it. (I don’t consider using Flash or bitmaps reasonable if all you’re trying to do is get aliased text.)\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": " 31.Jan.2008 3.43am",
+      "content": "Jui,\n\nI’m having problems locating the non-antialiased type on the pages you referenced. Here are the screenshots showing how those render on my screen. Looks quite antialiased to me.\n\n ![](http://web.archive.org/web/20080706173850im_/http:/www.typophile.com/files/blanka_6123.png)\n  \n\n ![](http://web.archive.org/web/20080706173850im_/http:/www.typophile.com/files/plusminus_3793.png)\n\nA.\n\n"
+    },
+    {
+      "time": " 31.Jan.2008 5.59am",
+      "content": "I just stumbled across this website and was a little surprised to find that no-one had recommended bitmap or raster fonts to Jui?\n\nThe following code snippet works under Vista + IE7 + “Always use cleartype rendering”.  \n`<p style=\"font: System\">testing 1,2,3, over.</p>`  \nUnder vista there’s also: MS Serif, MS Sans Serif, Modern and Courier.\n\nLinux has a bunch of bitmap fonts to choose from.\n\nBut apple could be a problem. According to the apple developer website ...\n\n“Note: Bitmap font resources are not supported in Mac OS X. Font families that consist entirely of bitmap font resources are ignored by Quartz-based applications that use Cocoa, Apple Type Services for Unicode Imaging (ATSUI), or Multilingual Text Engine (MLTE). These font families are not available for use in such user interface elements as menus, windows, and static and editable text controls.”\n\nSo if Safari uses ATSUI or MLTE to generate the web-page then your out of luck there. Perhaps someone could confirm with a standard apple bitmap font (if one exists)?\n\nHTH\n\n"
+    },
+    {
+      "time": " 31.Jan.2008 12.32pm",
+      "content": "Hi all!  \nThanks for so many suggestions.\n\nJuergen\n\n"
+    },
+    {
+      "time": " 13.Feb.2008 4.11am",
+      "content": "that’s because by default in os x ant-aliasing is turned off for sizes less than 4 or 5 points, can’t remember right now.\n\n"
+    }
+  ]
+}

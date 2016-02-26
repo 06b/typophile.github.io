@@ -1,0 +1,46 @@
+{
+  "id": "101014",
+  "title": "Create Unicode for new glyphs",
+  "forum": "Build",
+  "tags": [
+    "alternative",
+    "change glyph",
+    "change weight",
+    "fontlab",
+    "glyph",
+    "swash",
+    "Unicode",
+    "weight",
+    "Build"
+  ],
+  "content": "Hi! I'm designing a layered typeface with three weights and some extra glyphs (ligatures, swashes and some weird alternates). I made open type feature for ligatures and kerns but I let some extra glyphs without feature. When I use those glyphs and I change the weight, the glyph doesn't change. For example, if I write \"BARCELONA\" with one of my extra B's, and I change the weight, it change all the word except the B.  \nI've been looking the generated file and it seems that those extra glyphs without feature doesn't have UICODE names, so when we change the weight, they doesn't change. I've tryied to use the option GLYPHS\\>GLYPHS NAME\\>GENERATE UNICODE but it doesn't work.  \nAnyone knows what can I do to generate the same UNICODE names on the three weights.  \nThanks for your help and sorry for my english!\n\n ![](http://web.archive.org/web/20141021031915im_/http:/typophile.com/files/Imagen-31_4053.jpg)\n\n",
+  "author": "wete1984",
+  "time": "2 Mar 2013 — 4:12am",
+  "uid": "204622",
+  "comments": [
+    {
+      "time": "2 Mar 2013 — 5:11am",
+      "content": "You can assign Private Use Area codes to those glyphs. Or you make those glyphs OpenType alternates to existing glyphs: sub B by B.alt  \nSo if you change the font, it can change to the respective B.alt in the new font or fall back to B if there is no B.alt.\n\n"
+    },
+    {
+      "time": "2 Mar 2013 — 6:14am",
+      "content": "Thanks for your quick reply Ralph! Yes, I think the best option is to make some features, the problem is that I have three alternates of B, so I don't really know how to make it. Anyway, thank you so much.\n\n"
+    },
+    {
+      "time": "2 Mar 2013 — 7:36am",
+      "content": "Generally, I think the designer calls the glyphs B.alt1, B.alt2, etc. and on into private use unicode they go until the designer then assigns one alternate version of any character to each Opentype stylistic set, which are like a private features area. Then the designer, or their support, show/tell your users which stylistic set contains which alternate(s). The fonts are installed, and the stylistic sets then appear in menus familiar with opentype, where your users who listened or looked at a guide, can select which stylistic set to change the B to.\n\nI may sound harder than taking a train to Fiji, but it's pretty easy.\n\n"
+    },
+    {
+      "time": "2 Mar 2013 — 8:58am",
+      "content": "<cite>he problem is that I have three alternates of B</cite>\n\nThat's not a problem. For example, check examples for the SALT and AALT feature. They are specifically meant to offer access to different alternates.  \nYou can also distribute the alternates among the stylistic sets 1 to 20 as bbg mentioned.\n\n"
+    },
+    {
+      "time": "2 Mar 2013 — 12:52pm",
+      "content": "Well, with using stylistic sets, it can be like taking a train to Fiji. There are only 20 stylistic sets. If you want each set to control a single character alternate, and there are (for example) 3 variants each of 26 caps, you can't get there -- you run out of track at Arica...which looks like a lovely spot if you have Spanish & some money...\n\nFurther, I can't see how SALT will let you have individual control over which of three variants for however many caps...\n\nPrivate use encoding has it's own problems, but (forgive me) since yours doesn't seem like a font to be used for a multipurpose document, you could do that, and let the user hunt & peck from the glyph pallet. As long as you use the same Unicode number (in PU) for each variant across the weights, it should work.\n\n"
+    },
+    {
+      "time": "2 Mar 2013 — 4:34pm",
+      "content": "The real problem here is lack of adequate application support. Any layout feature can, in theory, support type 3 one-to-one-of-many subsitutions, as Ralf suggests using with 'salt', but that in turn requires an application to be able to access enumerated GSUB variants.\n\nAs Charles notes, there are only 20 stylistic sets, which is probably plenty for the intended use of those features, i.e. to access sets of related glyph variants, not variants of individual glyphs. For the latter, the Character Variant features exist, there are 100 of them and they are explicitly intended to be used with type 3 lookups, but that takes us back to where we are in the first paragraph: lacking appropriate application support.\n\nThe good news, such as it is, is that support for enumerated variants is built into CSS3's typography support, so this is an area in which browsers are leapfrogging existing layout apps. We built a font for Byzantine sigillography that makes extensive use of the character variant features, and its very cool to see it [working in Firefox](http://web.archive.org/web/20141021031915/http:/people.mozilla.org/~jdaggett/tests/byzantineseal.html).\n\n"
+    }
+  ]
+}

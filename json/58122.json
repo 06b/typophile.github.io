@@ -1,0 +1,22 @@
+{
+  "id": "58122",
+  "title": "(Too) Complex Contextual Alternatives?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Here's the situation and I'm not sure if it can be done or if I'm just losing myself.\n\nGiven two base glyphs, I'd like to change the first one if the second has a combining mark. However, the first one can have 0-∞ combining mark.\n\nHence my problem. In this case I'd like to ignore combining marks on one part and ignore the base glyph on the second part, which would leave me with a simple \"when X is followed by [list of combining marks], change to Y\".\n\nIn regex it'd be `(B1)[`´¨]*B2[`´¨]+`. Do I ask too much of OpenType?\n\n",
+  "author": "guifa",
+  "time": "18 May 2009 — 2:27pm",
+  "uid": "16708",
+  "comments": [
+    {
+      "time": "18 May 2009 — 4:23pm",
+      "content": "This is a really difficult one. There's two possible approaches:\n\n1. Presuppose a limit on the number of combining marks that might be applied to the first glyph, and then include multiple context strings along the lines of\n\n[process -marks-]  \nX -\\> Y  \n...  \n| -marks- -marks- -marks- -marks- Z -marks-  \n| -marks- -marks- -marks- Z -marks-  \n| -marks- -marks- Z -marks-  \n| -marks- Z -marks-  \n| Z -marks-\n\n2. Include duplicate glyphs for the Z triggers and first perform a separate substitution when Z is followed by a mark:\n\n[process -marks-]  \nZ -\\> Z.premark  \n| -marks-\n\n[process NONE]  \nX -\\> Y  \n| Z\n\n"
+    },
+    {
+      "time": "18 May 2009 — 5:41pm",
+      "content": "Those were the two that came to mind, though I was hoping to nail it with just one. The first one would probably work for all intents and purposes, but the programmer in me hates it. I guess I'll go ahead with the second one, as I suppose it's not too much messier than ligatureless ligatures when you have a three-deep f design.\n\nI wonder if such regex-style matching could be added into an OpenType 1.7 (image what you could do with it) or if we'll have to look beyond OT. I can think of quite a few uses beyond my eample and a few handwriting things.\n\n"
+    }
+  ]
+}

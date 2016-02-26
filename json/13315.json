@@ -1,0 +1,22 @@
+{
+  "id": "13315",
+  "title": "Need help with contextual ligatures",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I could use an extra dose of wisdom on a handwriting font that I'm working on. It's a \"flipper\" font (like FF Kosmik), with regular ligatures, inits, finals, and cligs.\n\nThe flipping is done with 'calt' like this:\n\nfeature calt {  \n lookup FLIP {  \n sub @SET\\_ZERO @SET\\_ZERO' by @SET\\_ONE;  \n sub @SET\\_ONE @SET\\_ZERO' by @SET\\_TWO;  \n sub @SET\\_TWO @SET\\_ZERO' by @SET\\_THREE;  \n sub @SET\\_THREE @SET\\_ZERO' by @SET\\_FOUR;  \n sub @SET\\_FOUR @SET\\_ZERO' by @SET\\_FIVE;  \n sub @SET\\_FIVE @SET\\_ZERO' by @SET\\_SIX;  \n sub @SET\\_SIX @SET\\_ZERO' by @SET\\_SEVEN;  \n sub @SET\\_SEVEN @SET\\_ZERO' by @SET\\_EIGHT;  \n } FLIP;  \n} calt;\n\nSo, when it's laying down a glyph, it looks at the previous glyph to see to what set it belongs. Then it increments the set number, and puts down the appropriate glyph from that next set. The result is that typing \"mmmm\" will yield \"m m.alt1 m.alt2 m.alt3\".\n\nNow comes the 'clig' feature:\n\nfeature clig {  \n lookup TU\\_LIG {  \n sub t.alt1' u.alt2' by t\\_u.alt1;  \n sub t.alt2' u.alt3' by t\\_u.alt2;  \n sub t.alt3' u.alt4' by t\\_u.alt3;  \n sub t.alt4' u.alt5' by t\\_u.alt4;  \n sub t.alt5' u.alt6' by t\\_u.alt5;  \n } TU\\_LIG;  \n} clig;\n\nThis particular ligature (and many like it) cannot exist in the regular 'liga' feature, because it only occurs in specific places.\n\nThe problem is that any combination of \"tu\" resolves to that first ligature specified: t\\_u.alt1 ... no matter what glyph preceeded it. The strange thing is that the feature works correctly in FontLab 4.6 Mac (in the OT preview window), but it does not work in InDesign CS, which is what I'm using to test. I know that InDesign renders features a bit differently (like displaying a finial alternate before it really knows if that we've reached the end of the word), but this 'clig' feature just doesn't work.\n\nI can't seem to attach the VFB, but I will email it to someone if it helps. I'm just testing features before I clean up the outlines and complete the character set, so the only working glyphs are: a, b, c, d, e, t, u, period, space. I would greatly appreciate any insight.\n\nThanks,  \nAlan\n\n",
+  "author": "alan",
+  "time": "27 Jun 2005 — 6:20am",
+  "uid": "749",
+  "comments": [
+    {
+      "time": "27 Jun 2005 — 7:11am",
+      "content": "it may be easier to put your ligature subtitutions in first and then include the ligatures as part of your flipper sets.\n\n"
+    },
+    {
+      "time": "27 Jun 2005 — 8:36am",
+      "content": "True, and I have done that for some of the ligatures. But that only applies to those ligatures that occur indiscriminately; that is, they always appear, regardless of context.\n\nPerhaps I left out the most important piece of information. In the example above, it doesn't look like this ligature would need to be in the 'clig', it could just as well be in the 'liga' feature. But the reason it has to be here is that it actually looks like this:\n\nsub t.alt1’ u.alt2’ [@LETTERS @WORD\\_BREAKS] by t\\_u.alt1;\n\nSince there are an arbitrary number of t\\_u ligatures (not enough to fill all the slots seen by the flipper), then t\\_u cannot belong to a set of variations. It has to live outside @SET\\_ONE, @SET\\_TWO, etc. In order, then, for the character that follows to pick up on continuing the sequence established by the flipper, there has to be a letter typed _after_ the ligature before the ligature even forms. That way, there is a letter after the ligature that is part of one of the sets, and the flipping sequence can continue as planned, even though the ligature itself does not belong to a set.\n\nDoes that make sense? So, odd as it may seem, the ligature's context matters, even though the context is: \"as long as it's followed by anything at all\".\n\nAlan\n\n"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "id": "101799",
+  "title": "Custom fallback font in Windows?",
+  "forum": "Build",
+  "tags": [
+    "Chinese",
+    "fallback",
+    "Unicode",
+    "Build"
+  ],
+  "content": "My client has a corporate font (Unit Pro). The company produces many multilingual documents in languages using Latin script as well as in Chinese. Is there a way to tell Windows something like: _if Unit Pro is selected and some characters are missing, use \"Custom Chinese Font\" instead_? In other words, is there a way how to define custom fallback font for Chinese glyphs under Windows? Any help appreciated.\n\n",
+  "author": "filip blazek",
+  "time": "28 Mar 2013 — 3:36am",
+  "uid": "1344",
+  "comments": [
+    {
+      "time": "28 Mar 2013 — 5:35am",
+      "content": "In what program/format are the documents produced?\n\n"
+    },
+    {
+      "time": "28 Mar 2013 — 6:01am",
+      "content": "Mostly MS Office and Adobe Creative Suite.\n\n"
+    },
+    {
+      "time": "28 Mar 2013 — 9:46am",
+      "content": "I realize the request is for a fall-back at the operating-system level, but I wonder whether MS Word would honor it: I've tried repeatedly to disable MS Word's penchant for silently swapping fonts when it encounters a missing character, and would be glad to learn how. I work mostly in InDesign, mostly in English but with bits of other languages, which I distinguish with character styles, in part to apply the correct hyphenation (via the language attribute). Western languages I generally eye-ball, but I can isolate CJK strings with a GREP search: [\\x{2E80}-\\x{9FBB}]+ This doesn't get everything, but I usually want to know about the chars. it misses; and I still must distinguish C, J, and K myself.\n\nCJK versions of InDesign offer a fancier way to control font usage, \"composite fonts\" (an unfortunate re-defininition of an existing term). In-Tools' [World Tools Pro](http://web.archive.org/web/20150405122941/http:/in-tools.com/products/plugins/world-tools-pro/) brings this feature to western-language versions OF IDCS5 and later: according to the manual, \"Composite fonts allow you to select which fonts should be used for specific Unicode ranges to correctly display characters in many different languages while using only a single font.\" (Note that standard Western-language installations of ID don't offer CJK language attributes, but they are carried along when one imports formatted text that includes the attribute.)\n\n"
+    },
+    {
+      "time": "28 Mar 2013 — 10:50am",
+      "content": "David, thanks for your contribution, the plugin might be a solution, at least for Adobe CS.\n\n"
+    },
+    {
+      "time": "28 Mar 2013 — 2:41pm",
+      "content": "\"an unfortunate re-definition of an existing term\"\n\nThis meaning of the term dates back at least as far as the OCF (Original Composite Font) format introduced in 1991, long before Adobe InDesign.\n\nWhat's the other meaning you have for \"composite fonts\"?\n\n"
+    },
+    {
+      "time": "28 Mar 2013 — 8:25pm",
+      "content": "Maybe I'm wrong, but I always thought the \"composite fonts\" users can make on the fly in CJK versions of InDesign were a different animal from the pre-Unicode CJK fonts sold by various foundries in the 1990s. The alphanumerics in those early CJK fonts tended to be pedestrian, so this method of swapping in a western foundry font was a real convenience. I always assumed such ID-made composite fonts could not be used outside of ID.  \nI note that in his wonderful 2007 book, <cite>Fonts &amp; Encodings</cite>, Yannis Haralambous writes (p. 684):\n\n> The “composite” fonts were then given a new name: OCF (for “original composite fonts”), where “original” was a synonym for “obsolete”. To this day, Adobe has never stopped denigrating OCF and singing the praises of CID.\n\nDavid\n\n"
+    },
+    {
+      "time": "29 Mar 2013 — 7:26am",
+      "content": "Just generally:\n\nThere must be a setting with InDesign that controls whether or not it will substitute fonts. With our jobs, and with CS2, 3, 4, and 6, if a font does not have a particular character, it shows in salmon on the screen, and generates an error in the preflight panel. I believe preflight in CS6 will generate a printable report of \"missing characters\" -- we use to have to run a home-grown script.\n\nThere are a huge number of bugs in InDesign, and it just gets worse. CS6 reminds me of the reports about PageMaker 6. Having said that, with Windows, a few of the font handling bugs are bypassed by having the fonts one uses in a document located in in the applications font directory --\n\nProgram Files \\> Adobe \\> Adobe InDesignCS6 \\> fonts.\n\n"
+    },
+    {
+      "time": "29 Mar 2013 — 6:50am",
+      "content": "There must surely be a way. I found this text in an old IBM document describing how OS/2 implements this feature, so clearly Windows has a similar one (or had at the time this was written).\n\n> Windows 95 has a font association function. OS/2 is required to have a equivalent function to the Windows 95 font association.\n> \n> If a user creates a document using the 'Times New Roman' font (that usually does not include DBCS), with font association the user can actually display and print DBCS on Windows 95 with the document. However, the user will neither be able to display nor print DBCS for the document if the user bring it from Windows 95 to OS/2. If we have an equivalent function to the Windows 95 font association in OS/2, the user will be able to show DBCS with the document.\n> \n> Users would like to display or print DBCS documents even if a SBCS font is selected.\n> \n> — _Combined Font / Pre Combine Rule / FontAssocation_ (internal IBM document). 10 December 1997\n\n(DBCS == double byte character set, i.e. characters not normally encoded in a 256-byte codepage; in this context it's essentially synonymous with \"Asian/CJK text\")\n\nAnyway, you might try searching for \"font association\".\n\n"
+    },
+    {
+      "time": "29 Mar 2013 — 6:54am",
+      "content": "Another thought: If your client uses Unit Pro as a \"corporate font,\" they probably have a site license from FontFont. And as I understand it, FF is usually quite happy to modify their fonts for a fee. As long as the \"Custom Chinese Font\" has no restrictions, you could just have FF populate your Unit Pro with the characters from the Custom Chinese font. I would assume (but only that) that if your client is paying for a site license, the charge shouldn't be too much.\n\n"
+    },
+    {
+      "time": "29 Mar 2013 — 10:13am",
+      "content": "Charles, unfortunately, they use one of the common fonts provided by system or Adobe.\n\n"
+    },
+    {
+      "time": "29 Mar 2013 — 10:17am",
+      "content": "Adobe does allow their fonts to be modified (bless them).\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Mar 2013 — 11:44am",
+      "content": "It is true that there are some big differences between OCF and the composite fonts currently used by InDesign and other Adobe apps.\n\nHowever, the notion was by no means new with InDesign. PageMaker used a similar composite fonts function; I do not recall if the format was identical or not.\n\nPerhaps Ken Lunde can comment on all this. He will have the straight scoop.\n\n"
+    },
+    {
+      "time": "29 Mar 2013 — 1:08pm",
+      "content": "> Charles, unfortunately, they use one of the common fonts provided by system or Adobe.\n\nI'm a little confused. You mean the font with the Chinese characters is is an Adobe font? Unit Pro is, best I can tell from a Google search, a FontFont font.\n\nI'll stand by the notion, the easiest way to keep any layout program from going & looking for a character in another font is to have it in the base font. If this is for \"corporate identity,\" perhaps they'll just have to pay the various font makers -- the Latin based & the Chinese -- for the privilege of making one font out of the two.\n\n(Note: For Cheap-A$$ed corporations, best would be to use OpenSource fonts. For our company, for example, I use a modified Charis for a number of our forms, invoices, etc.)\n\n"
+    },
+    {
+      "time": "29 Mar 2013 — 1:21pm",
+      "content": "Both fonts have to allow modification, because otherwise pulling out any outlines is a copyright violation. Unless there's a way to apply Fair Use to fonts. :-)\n\nSo basically the new font will be a modified version of _both_ fonts, as far as _each_ original font house is concerned.\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Mar 2013 — 1:33pm",
+      "content": "> So basically the new font will be a modified version of both fonts, as far as each original font house is concerned.\n\nYes. So in this case, you pay FontFont for the modified font, but not Adobe, and perhaps put a note in the corporate file for \"instructions to graphic designers\" to never, ever again buy/use one of the FontFont fonts. When it's your money, you get to make such decisions.\n\n"
+    },
+    {
+      "time": "29 Mar 2013 — 1:39pm",
+      "content": "As everybody knows I'm no fan of the no-mod clause, but stating that no font with such a EULA is worth buying is too extreme. Legato for one is worth about half of the entire Adobe library. And I _like_ the Adobe library. :-)\n\nBTW, depending on who you are FontFont might not charge anything extra. Just like with your own experience with certain designers.\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Mar 2013 — 5:43pm",
+      "content": "Yes, of course. And if it is a multi-office, or multi-national corporation, the Adobe license requirements need to be checked as well. I would imagine site licenses would be needed, and with them, the charges for modification could well be negligible.\n\nThe point in passing is simply a corporation's performance better not be linked to something like a typeface, and they will know this. For branding, hire someone who hand letters. For work involving fonts, if you're large enough, either get a site license, or if you want to avoid such issues, hire graphic designers who will use fonts that don't lead you down such paths. Part of what you pay them for. And we're beginning to see this in University Press publishing, admittedly a market where no font publisher expects to find riches.\n\nThe whole notion is just \"needed\" as a bullet proof way around a technical problem. Technical situations/solutions are ever more encountered. Sometimes they're a way around a modification clause, sometimes modification solves a general non-geekiness of users, like me.\n\n\\* \\* \\*\n\nBTW, I even got the OK to modify the initial portion of two FF font families, Scala & Quadraat. It was the very early days -- early-mid 1990s? -- and there was only one FontShop outlet in the States, in San Francisco. Time was of the essence -- a journal was involved -- & everything was new, so they said, basically, \"Oh, just do what you need.\" Never happen today.\n\n"
+    },
+    {
+      "time": "29 Mar 2013 — 5:58pm",
+      "content": "> For work involving fonts, if you're large enough, either ....\n\nI would add my favorite option: commission a custom font - it'll be all yours. You can even sell it. And it can even cost less than a site license.\n\nhhp\n\n"
+    },
+    {
+      "time": "1 Apr 2013 — 12:23am",
+      "content": "David W. Goodrich,\n\nI think the CJK versions of Word behaves differently when dealing with CJK characters. You can choose an \"East Asian Font\" and a \"Western Font\" at the same time.\n\n"
+    },
+    {
+      "time": "1 Apr 2013 — 7:00am",
+      "content": "@ahyangyi  \nI am well aware that Word text formatting allows an \"Asian text font\" to be included as part of a style definition for Latin text, as well as in searching. In my work, whatever benefit that might have is undone by Word's \"helpfully\" but silently swapping in another font when the desired font lacks the intended character, regardless of language/script. For me, the classic cases are macron vowels for romanizing Japanese, or _pinyin_ tones not included among \"European\" accented vowels; or in CJK fonts, swapping in a font to access the 40,000 chars. added with CJK Ext. B. InDesign, in contrast, highlights those situations with the \"dreaded pink boxes,\" and its Find Font feature makes it easy to track down and address every instance.\n\nI've also wondered whether MS Word's dual-language assignment might be what causes ID to screw up the language attributes when importing MS Word files: applying \"Chinese\" to alphabetic text of course has the effect of disabling hyphenation. But ID's problems importing Word formatting are well known, and I generally don't get to ask authors and editors how they handle files.\n\nDavid\n\n"
+    },
+    {
+      "time": "1 Apr 2013 — 5:11pm",
+      "content": "> But ID's problems importing Word formatting are well known, and I generally don't get to ask authors and editors how they handle files.\n\nWell, we're a typesetting house, and I would say that generally, neither authors nor editors \"handle\" it. Of course, they also don't take the files to InDesign. One thing we do is to make an .rtf version of the text. We then import both the .docx and the rtf versions, and make a quick judgement about which to use -- based on which seems less screwed up at the start. It runs about 50-50...\n\n"
+    }
+  ]
+}

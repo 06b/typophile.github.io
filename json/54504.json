@@ -1,0 +1,42 @@
+{
+  "id": "54504",
+  "title": "Kerning tip for Fontlab needed",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I am checking kerning on an old four-master MM font that will shortly go into production as separate masters. Let us suppose that I change a kerning value in one master and wish to proliferate the same version to the other masters. What is the easiest way of doing this?\n\n(Shades of my old request: Fontlab needs a 'magic' button which, when active, performs the following function: 'whatever I am doing in one master - - changing spacing, a point, a BCP, kerning - - do the same thing in all the other masters.)\n\n",
+  "author": "billtroop",
+  "time": "6 Feb 2009 — 12:21pm",
+  "uid": "4019",
+  "comments": [
+    {
+      "time": "7 Feb 2009 — 12:41am",
+      "content": "Slightly off topic sorry but could you explain the reason for having a four-master MM font. I've only just started using MM fonts to interpolate the intermediate weights where I have 2 masters - a light weight and a bold weight. Do your masters account for other dimensions ?\n\nRr\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 4:55am",
+      "content": "Bill, your magic button idea is a good one. I don't know of any short cut to your request. I just switch the master view in the metrics window and edit the value. I wonder if the python wunderkind have a solution.\n\nRachelR, you can have up to 16 masters in a MM font. Bill's four master font might include weight and width. If he added optical size to his four master font he would have to add four more masters. Then if he wanted to something that altered a feature, say serifs he would have to ad eight more masters.\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 5:55am",
+      "content": "Bill,\n\nHaven't worked with MM font metrics, so this may not apply. With that caveat, if you want to selectively say yes or no to a kerning change for all masters, I don't know a fast way. But if the changes in one are to be global, that is, apply to all masters, why not write off AFM files, put in the new kerning data, and import for each?\n\nI've found using an AFM file and a good text editor useful for all sort of \"kerning-copying.\" Easy to edit, and if you think about it, easy to make an \"old\" and \"new\", put an asterisk after each pair on the \"new\", combine, sort, & delete all multiples without an asterisk, whatever . . .\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 7:41am",
+      "content": "Charles, I've done that, and it is a good way. But I've also found that unless you're really awake, it's perilously easy to make an error. That said, it might be the fastest way around my problem, even though you'd have to generate the separate AFMs, etc. etc.\n\n"
+    },
+    {
+      "time": "8 Feb 2009 — 6:11am",
+      "content": "Here's one clumsy way of proliferating identical values through masters: edit one master; export it as a single master; add axes as necessary to match the original; expand master. You can now copy the values from one font to the other using paste special.\n\n"
+    },
+    {
+      "time": "12 Apr 2009 — 1:56am",
+      "content": "This is what I would do:\n\n1. Go to the Metric Window.  \n2. Activate the \"source\" master.  \n3. Export a (single master) AFM file. This only exports the active master.  \n4. Activate the \"target\" master.  \n5. Import the AFM file, replace all kerning but not the metrics. This only affects the active master.\n\nNo text editor, no multiple AFM files, not error-prone.\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 1:55pm",
+      "content": "\"... whatever I am doing in one master - - changing spacing, a point, a BCP, kerning - - do the same thing in all the other masters.\"  \nAny time you want you can ditto the kerning and spacing. But I'm not familiar with this particular need, and suspect most are not. The reason is, I've never wanted to exactly ditto an edit among all the other masters. In many instances, as I've been adding masters, I've found the source to be incorrect in some detail, wanted to change that and echo it into other masters, but not ditto. Adding a bcp, I do all of the time from improper vision in the first master's digitization, but again, each point added in a pole is an echo from the master and not a ditto. The making of the difference between the ditto and the echo is our job, one I don't think I'd like to try and keep track of ex post magic buttono. ;)\n\n\"Then if he wanted to [do] something that altered a feature, say serifs he would have to add eight more masters.\"  \nS/he would have to add eight more masters, true, but to be clear, not eight new masters. Adding only by doubling the masters is required for the mechanism, and may not be for the design. So e.g. one could only need 6 unique masters in a 16 style MM space to reach a set of stylistic options, as you know.\n\nCheers!\n\n"
+    }
+  ]
+}

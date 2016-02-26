@@ -1,0 +1,26 @@
+{
+  "id": "41745",
+  "title": "SMALL CAPS!!!",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi im doing an OpenType font on FontLab5.0\n\nThere are some glyphs that allow you to create the small caps  \nthey are called: “Asmall, Bsmall, Csmall, Dsmall, etc...”\n\nThe problem is that when I go to IndesigCS2 it doesent recongnise the smallcaps I made.\n\nAnd I wonder...\n\nIs there a code that I have to put on the OpenType pannel on Fontlab to make the small caps function?\n\nI hope someone can answer :)\n\nPS: I also want to activate the numbers called “oldstyle” (smallcaps)\n\nThanks\n\nFerch\n\n [‹ Italic Spacing](http://web.archive.org/web/20081203233250/http:/www.typophile.com/node/41734 \"Go to previous forum topic\") [Cannot intsall open type or postscript fonts ›](http://web.archive.org/web/20081203233250/http:/www.typophile.com/node/41730 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081203233250/http://www.typophile.com/user/19457\" title=\"View user profile.\">strass</a>",
+  "time": "<br>",
+  "uid": "19457",
+  "comments": [
+    {
+      "time": " 5.Feb.2008 5.15pm",
+      "content": "Yes,\n\nFirst turn your “Asmall” into “A.smcp” etc.\n\nin your classes panel make  \n3 new opentype classes:  \none being \\_ smcp1: “a.smcp b.smcp c.smcp d.smcp e.smcp f.smcp g.smcp h.smcp i.smcp j.smcp k.smcp l.smcp m.smcp n.smcp o.smcp p.smcp q.smcp r.smcp s.smcp t.smcp u.smcp v.smcp w.smcp x.smcp y.smcp z.smcp”  \nand the second being \\_ “upca1: A B C D E F G H I J K L M N O P Q R S T U V W X Y Z”  \nand the last one \\_ “lowca1: a b c d e f g h i j k l m n o p q r s t u v w x y z”\n\nin the opentype panel add 2 new featues.  \nthe first one:  \nfeature smcp {  \n sub @lowca1 by @smcp1;  \n} smcp;  \nthe second one  \nfeature c2sc {  \n sub @upca1 by @smcp1;  \n} c2sc;\n\nThe smcp feature changes your lowercase glyps in that class into smallcaps. And the c2sc feature kicks in when you select all smallcaps in indesign. You can add glyphs into the groups but make sure that there is an equal amount of glyphs in each group. Then compile and export your font. Should work.\n\n"
+    },
+    {
+      "time": " 5.Feb.2008 5.38pm",
+      "content": "Thanks a lot!\n\nim starting to understand a little bit about codes in Fontlab :D\n\nill try it tomorrow, and i’ll tell you how it work\n\nThxs!!\n\nFerch\n\n[Tipografía-Montevideo](http://web.archive.org/web/20081203233250/http:/www.tipografia-montevideo.info/)\n\n"
+    },
+    {
+      "time": " 5.Feb.2008 6.59pm",
+      "content": "It worked perfectly\n\nI added the lower case numbers to “@smcp1” so i can have both,\n\nim starting to learn XD\n\nthanks\n\nFerch\n\n[Tipografía-Montevideo](http://web.archive.org/web/20081203233250/http:/www.tipografia-montevideo.info/)\n\n"
+    }
+  ]
+}

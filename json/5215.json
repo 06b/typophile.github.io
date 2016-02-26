@@ -1,0 +1,22 @@
+{
+  "id": "5215",
+  "title": "Can't generate OpenType font from FontLab",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I am using FontLab 4.6 to create versions of existing OpenType fonts.   \nWhen attempting to generate the font files I am receiving the following error.   \n   \n\"ERROR: There was a problem while compiling OpenType font. Final .otf font is not saved. Please, check OpenType features definition for errors\".   \n   \nI receive this message even if I make no changes to the font.   \n   \nThanks\n\n",
+  "author": "<a href=\"/web/20100824111045/http://typophile.com/user/3977\" title=\"View user profile.\">seths</a>",
+  "time": "<br>",
+  "uid": "3977",
+  "comments": [
+    {
+      "time": "",
+      "content": "Try to generate the font into another folder or with different file name. This happens when you test your fonts - the system sometimes locks the file even if it is not activated.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Seth,   \nIt happens when you have syntax error in OTF features. It can be virtually everywhere, so it is difficult to guess where it is exactly. But when you try to compile OTF features first, compiling stops on the first line with error and if you know OTF feature syntax, you will easily find it.   \nIn my case it is typically missing semicolon at the end of line.   \n   \nI bet you have tried to open an Adobe OTF in FL. There is a problem with frac feature because Adobe uses chaining contextual substitution (GSUB Type 6) like this:   \nsub [zero zero.taboldstyle]' [slash fraction]' [zero zero.taboldstyle]' [zero zero.taboldstyle]' by [perthousand perthousand];   \nwhich is (according to my knowledge) wrong (or at least it is not implemented in FL4.6).   \nYou can get the same result using GSUB lookup type 4:   \nsub [zero zero.taboldstyle] [slash fraction] [zero zero.taboldstyle] [zero zero.taboldstyle] by perthousand;   \n   \nHope it helps.   \nRegards,   \nPavel\n\n"
+    }
+  ]
+}

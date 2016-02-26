@@ -1,0 +1,74 @@
+{
+  "id": "45395",
+  "title": "Getting a string of all defined characters?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi all,\n\nI’ve been looking for an easy, fast, automatic way to get all defined characters of a font, preferably just as a unicode string. Does anyone here know a trick?\n\nCheers,\n\nNick\n\n [‹ Subscript and Superscript in FontLab Metrics and Dimensions window](http://web.archive.org/web/20080706105718/http:/www.typophile.com/node/45402 \"Go to previous forum topic\") [Computer generated text art ›](http://web.archive.org/web/20080706105718/http:/www.typophile.com/node/45299 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080706105718/http://www.typophile.com/user/3586\" title=\"View user profile.\">mummla</a>",
+  "time": "<br>",
+  "uid": "3586",
+  "comments": [
+    {
+      "time": " 15.May.2008 10.38am",
+      "content": "I’m not sure if this is what you’re asking, but in illustrator and indesign, you just have to open the glyphs pallette by going to TYPE\\>GLYPHS.\n\nYou can click each one to get it’s unicode, or double-click it to put it into a selected text field.\n\nAlso, Apple’s TextEdit has a similar window EDIT\\>SPECIAL CHARACTERS (cmnd+opt+t). This will actually give you a lot more information than illustrator or indesign do.\n\nI’m sure there’s a way to do it in word, but I never use it.\n\n"
+    },
+    {
+      "time": " 15.May.2008 11.07am",
+      "content": "Hi,\n\nThanks for your answer but it was not really what I was looking for - to clarify I need a string of all characters that are defined in a particular font. For example:\n\n!”#$%&’()\\*+,-./0123456789:;\\<=\\>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^\\_‘abcdefghijklmnopqrstuvwxyz  \n{|}~¡¢£¤¥¦§¨©ª«¬­®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõ  \nö÷øùúûüýþÿĆćČčđĞğİıŁłŒœŞşŠšŸŽžƒˆ˜–—‘’‚“”„†‡•…‰‹›€™\n\nMaintype for example gives me a good visual overview of all the characters but I have yet to find a way to automatically create a string like the above...\n\n"
+    },
+    {
+      "time": " 15.May.2008 11.43am",
+      "content": "I don’t think it will be easy to do this without some programming, or a repetitive motion injury-inducing amount of mouse clicking.\n\nYou basically need to loop through the entries in the cmap and produce a string corresponding to each character code, appending to an output string. It seems like it should be possible to do something like this in FontLab using Python. As I am fairly non-Pythonic I cannot offer any specific advice (I achieve the same thing using tools written in another programming language instead), but I can suggest this non-language-specific pseudo-code:  \n`\n     for each characterCode in fontUnicodeArray:\n          set myString to myString + unichr(characterCode)\n     next`\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print myString\n\n“unichr” is a function that converts a number (i.e. character code value) into a Unicode string. I believe Python has a something like that ;-) Maybe you or someone else can fill in the other bits in proper Python (and FontLab) form and get what you’re after...\n\n"
+    },
+    {
+      "time": " 15.May.2008 2.28pm",
+      "content": "If you use Windows, there’s a program called [JFont](http://web.archive.org/web/20080706105718/http:/www.jlion.com/docs/jFont.aspx) that claims it can print a character map report to an RTF file.\n\n"
+    },
+    {
+      "time": " 15.May.2008 4.00pm",
+      "content": "The character map sample of Algerian on that JFont site looks a bit suspicious, mixing hex and decimal ...\n\nIt depends on what tools you have at hand. Python and FontLab sure sounds like a feasible combination. Maybe the Adobe FDK (also through Python) — there’s bound to be something useful in that.\n\n"
+    },
+    {
+      "time": " 15.May.2008 5.52pm",
+      "content": "If you are not afraid of line commands, here is a script that works with [FontForge](http://web.archive.org/web/20080706105718/http:/fontforge.sourceforge.net/) (no need to install X-Windows; works on Mac or Pc with Cygwin and Python):  \n`\n#!/usr/bin/python`\n\nimport fontforge,sys  \nfnt=fontforge.open(sys.argv[1])\n\nvalidranges = range(0x20,0x500)+range(0x1E00,0x2700)+range(0xFB00, 0xFB50)\n\ns=''  \nfor g in fnt.glyphs():  \n&nbsp;&nbsp;if (g.unicode in validranges):  \n&nbsp;&nbsp;&nbsp;&nbsp;s=s+unichr(g.unicode)  \nprint s.encode('utf-8')\n\nIf you call that script “listchars” then  \n`\nlistchars 2>/dev/null font_file\n`\n\nwill give you the string on the output. You can also output in a file with `printchars 2>/dev/null font_file > string.txt`.\n\nIf you don’t don’t like line commands, and if you are on a mac, you can also use [this little application](http://web.archive.org/web/20080706105718/http:/www.iro.umontreal.ca/~boyer/typophile/typophile/listchars.zip) which is just the above wrapped in a clickable thing. It should ask you to install FontForge if you do not have it (it takes seconds); then you can select your font file and you get the string in a window.\n\nMichel\n\n"
+    },
+    {
+      "time": " 16.May.2008 10.21am",
+      "content": "Thanks for all your answers!\n\nWhen investing jFont I came across a nifty windows utility called [BabelMap](http://web.archive.org/web/20080706105718/http:/www.babelstone.co.uk/Software/BabelMap.html) that has a font analysis function that does this and more - the actual output is made in a non-selectable textfield though. I wrote the developer about this.\n\nFor now, I settled for the fontforge solution, even though it meant getting my feet wet with cygwin and python. Works great. Thanks for that Michel.\n\n"
+    },
+    {
+      "time": " 16.May.2008 11.01am",
+      "content": "Welcome! By the way, the above script should translate easily to one for FontLab; I don’t use FontLab but that looks obvious from what I could see in Haralambous’ book “Fonts and Encodings”.\n\nMichel\n\n"
+    },
+    {
+      "time": " 17.May.2008 10.06pm",
+      "content": "Michel, your link to the little application appears to be broken\n\n"
+    },
+    {
+      "time": " 18.May.2008 5.57am",
+      "content": "<cite>Michel, your link to the little application appears to be broken</cite>\n\nLink unbroken. Weird. I am sure I had checked it.\n\n"
+    },
+    {
+      "time": " 18.May.2008 7.10am",
+      "content": "The ranges above miss Hebrew and Arabic characters. If you code yourself, you must add them. I just modified the little application; instead of using ranges, I generated a list of all the characters from 0020 to 00FF that are not control and that are listed in [http://www.unicode.org/Public/UNIDATA/NamesList.txt;](http://web.archive.org/web/20080706105718/http:/www.unicode.org/Public/UNIDATA/NamesList.txt; \"http://www.unicode.org/Public/UNIDATA/NamesList.txt;\") now Hebrew and Arabic characters should be there (and everything else defined from 0020 to 00FF).\n\nMichel\n\n"
+    },
+    {
+      "time": " 18.May.2008 7.30am",
+      "content": "s/00FF/FFFF/ I meant FFFF and not 00FF of course (15 minutes over, no way to correct).\n\n"
+    },
+    {
+      "time": " 18.May.2008 10.20am",
+      "content": "Hmm. typophile included the semicolon in the link to the NamesList, which is thus also broken. This links works\n\n[http://www.unicode.org/Public/UNIDATA/NamesList.txt](http://web.archive.org/web/20080706105718/http:/www.unicode.org/Public/UNIDATA/NamesList.txt \"http://www.unicode.org/Public/UNIDATA/NamesList.txt\")\n\n"
+    },
+    {
+      "time": " 19.May.2008 7.21am",
+      "content": "For the record, here is the my final script. You may jazz it as you want.\n\nI finally remembered that with the Python `unicodedata` module one can check for the name of a unicode character (but with the narrow build of Python on the Mac, one cannot process that way characters above 0xFFFF). That can be quite handy. Here is an example:  \n`\n>>> from unicodedata import *\n>>> name(unichr(0x05D0)); name(unichr(0x0627)); name(unichr(0x0905))\n'HEBREW LETTER ALEF'\n'ARABIC LETTER ALEF'\n'DEVANAGARI LETTER A'\n>>>\n`  \nThe script thus simply outputs the unicode characters in the font whose code is in the range `0x0020` — `0xFFFF` and that have a name in the unicode namelist (according to the `unicodedata` function “`name`”). Here it is:  \n`\n----\n#!/usr/bin/python\nimport fontforge,sys\nfrom unicodedata import *\nfnt=fontforge.open(sys.argv[1],1)`\n\ns=''  \nglyphset=fnt.glyphs()  \nfor g in glyphset:  \n&nbsp;&nbsp;&nbsp;cdg=g.unicode  \n&nbsp;&nbsp;&nbsp;if (0x20 \\<= cdg \\<= 0xFFFF):  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;uni=unichr(cdg)  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (name(uni,\"noname\") != \"noname\"):  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;s=s+uni  \nprint s.encode('utf-8')  \n----\n\nMichel\n\n"
+    },
+    {
+      "time": " 21.May.2008 6.07am",
+      "content": "If you have FontLab Studio:\n\n1. Open the font.  \n2. Choose Tools / Quick Test As / OpenType TT (.ttf)  \n3. In the Quick Test window choose Content / All Characters.  \n4. Copy and paste the contents of the window into your favorite text editor.\n\nNote that only encoded glyphs (Unicode and PUA) are shown.\n\nAdam\n\n"
+    }
+  ]
+}

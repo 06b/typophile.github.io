@@ -1,0 +1,55 @@
+{
+  "id": "122639",
+  "title": "TransType 4 is great but I do not want it to autohint webfonts.",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions",
+    "TransType webfont hinting Arabic"
+  ],
+  "content": "Hi - I bought TransType 4 and am very happy with its functions. It lists the fonts nicely, converts ttf into otf and lets you overlap the fonts over each other in colored transparencies for checking, etc. With the click of a button it creates all the files woff, eot, etc. needed for webfonts. It also autohints the webfonts without being asked! I did not check the quality of the autohinting in the Latin characters, but I definitely do not want it in the Arabic glyphs. Is there a way to delete this function? Or to remove hinting from relevant file(s) in the finished webfont folder? Thanks.\n\n",
+  "author": "Vladimir Tamari",
+  "time": "18 Jan 2015 — 4:35am",
+  "uid": "23584",
+  "comments": [
+    {
+      "time": "23 Jan 2015 — 7:40am",
+      "content": "For TTFs, ttfautohint has an option to strip all hinting from the font.\n\n"
+    },
+    {
+      "time": "23 Jan 2015 — 8:09pm",
+      "content": "Apologies!! The autohinting happens when converting TTF to OTF not for webfonts! Perhaps a clearer head than mine can confirm that. Anyway it would be great if TransType gives you a choice in its preferences about autohinting. Now how to remove hinting from OT? Thanks.\n\n"
+    },
+    {
+      "time": "25 Jan 2015 — 2:49pm",
+      "content": "I'm sure there must be some way to automate that, but I don't know of a simple one without introducing scripting or other commercial tools.\n\nI am curious... so, you dislike the effect of the autohinting on the Arabic, and want it unhinted instead? In what rendering environments is it better?\n\n"
+    },
+    {
+      "time": "26 Jan 2015 — 5:06am",
+      "content": "Thanks Thomas  \nwish I had extensive experience in hinting / unhinting to justify my preference for unhinted Arabic. An experienced Arabic type designer and another well-versed in under-the hood programming advised against it. The latter did not like how it ironed out quirky details in his Latin font. For myself I experimented for a while with Fontlab's autohinting, looked at the hinting waterfall effect and saw drastic distortions as size diminishes. The dots, essential information carriers in half the Arabic letters in particular suffer the most.  \nSomething related I often wondered about - are there hybrid fonts whereby an outline font functions normall but then a pixel font kicks in and displays below a given small size?\n\n"
+    },
+    {
+      "time": "5 Feb 2015 — 4:16pm",
+      "content": "Currently, just about all rendering environments ignore the bitmaps in such hybrid fonts. So, functionally, no.\n\nI'd like it if you could send me an example of an autohinted font that's performing badly. I'd like to look at the hints. But broadly speaking, FontLab's autohinter for PostScript outlines is pretty darn good. It's only a tiny bit behind the Adobe PS autohinter, which is the gold standard.\n\nAlso, as an aside (and not meant to sidestep the issue): why are you creating OTF from TTF for webfonts? Is it because you can get smaller sizes out of them?\n\n"
+    },
+    {
+      "time": "6 Feb 2015 — 12:55am",
+      "content": "Hi Thomas  \nToo bad about hybrid fonts - it would seem an ideal solution for tiny texts.  \nI apologise for the misleading topic headline. Perhaps I have waded in too deep and above my head into these technicalities!\n\nI guessed perhaps wrongly that FL's autohinter is fine-tuned to Latin script with its well-defined Asc and Desc and x heights. Arabic outlines go all over the place. In Arabic my main concern was the dots - which are the only way to distinguish various letters in half the alphabet! A dots should reduce to a single well-defined pixels at minimum size. The autohinter however turned two dots, for example into two lines at an angle, or made three dots stick together into one square as in the example below.\n\nI like OT because it preserves the PS outlines with which I designed my fonts in the belief - again perhaps mistaken - that that will better preserve them on display.\n\nThe two images are of the same letter - a direct photo of the screen of the unhinted glyph displayed in Text Edit at 10 points is more or less recognisable. The Fontlab screenshot of the TT hinting of the same letter the three dots and three 'teeth' become unrecognisable. It would be wonderful if this can be improved. Thanks.\n\nVladimir\n\n ![](http://web.archive.org/web/20150317203041im_/http:/typophile.com/files/FullSizeRender_5846.jpg)\n\n ![](http://web.archive.org/web/20150317203041im_/http:/typophile.com/files/Screen%20Shot%202015-02-06%20at%205_5989.23.00%20PM.png)\n\n"
+    },
+    {
+      "time": "7 Feb 2015 — 11:28am",
+      "content": "I could have sworn you said you didn't like the PS hinting in FontLab, but you're showing the TT hinting.\n\nI'd also be curious to know whether adding a blue zone at the height of those three stems would help.\n\nT\n\n"
+    },
+    {
+      "time": "7 Feb 2015 — 7:21pm",
+      "content": "Thomas -\n\nRight. I am learning bout hinting as I go along - it was the last step of designing my fonts.  \nI did not pay attention and in the example used a version with TT outlines from one of the fonts converted to TT en route to VOLT . I prefer PS for its economy of dots. Would FL autohinting treat PS outlines differently than those converted to TT?  \nI have not tried adding blue lines - there are just too many levels for the dots and other marks in my fonts. Newfangled Arabic fonts and webfonts that have changed the Arabic letters to give them a level x-height. Those do have the dots on the same level - but they are all but unreadable for the design changes and tiny dot size.\n\nV\n\n"
+    },
+    {
+      "time": "12 Feb 2015 — 11:10am",
+      "content": "\"Would FL autohinting treat PS outlines differently than those converted to TT?\"\n\nYes, radically differently. There is no choice. PS hinting and TT hinting are quite different things. PS and TT rendering are done by different rasterizers, as well.\n\n"
+    },
+    {
+      "time": "12 Feb 2015 — 5:58pm",
+      "content": "\"PS hinting and TT hinting are quite different things. \"\n\nWow it does make a difference - Type 1 autohinting of PS outlines keeps the dots in their proper places- up to a point. It works for this one glyph but I have to see what happens with the entire font. Thanks Thomas\n\n ![](http://web.archive.org/web/20150317203041im_/http:/typophile.com/files/Screen%20Shot%202015-02-13%20at%2010_4913.52.08%20AM.png)\n\n"
+    }
+  ]
+}

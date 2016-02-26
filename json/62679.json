@@ -1,0 +1,46 @@
+{
+  "id": "62679",
+  "title": "Check glyph compatibility script ?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I'm trying to write a script that checks the compatibility of glyphs before generating a MM font.\n\nI wrote this which works for single glyphs\n\n`\n========================\nfrom robofab.world import OpenFont\nlightFont = OpenFont(None)\nboldFont = OpenFont(None)\n#\n#\nprint lightFont.info.fullName,\"/\",boldFont.info.fullName`\n\nprint lightFont[\"A\"].isCompatible(boldFont[\"A\"], True)  \n========================\n\nI really wanted to do it with a loop, and loop through the whole font.\n\nI tired this, but it gives me a list saying all the glyphs are compatible but I know they are not.\n\n`\n========================\nfrom robofab.world import OpenFont\nlightFont = OpenFont(None)\nboldFont = OpenFont(None)\n#\n#\nprint lightFont.info.fullName,\"/\",boldFont.info.fullName`\n\nfor glyph in lightFont:  \n print lightFont[\"glyph\"].isCompatible(boldFont[\"glyph\"], True)\n\nprint lightFont[\"B\"].isCompatible(boldFont[\"B\"], True)\n\n========================\n\nI changed the outline of the \"B\" and tested the compatibility after the loop and it tells me they are not compatible but the loops tells me they are\n\nHow can I loop through both fonts and test there compatibility ?\n\n",
+  "author": "<a href=\"/web/20120111122547/http://typophile.com/user/48062\" title=\"View user profile.\">Smitchell</a>",
+  "time": "<br>",
+  "uid": "48062",
+  "comments": [
+    {
+      "time": "",
+      "content": "I would suggest to loop through the \\*glyph names\\* instead of the \\*glyph objects\\*:  \n`\nfrom robofab.world import OpenFont\nlightFont = OpenFont()\nboldFont = OpenFont()`\n\nprint lightFont.info.fullName, \"/\", boldFont.info.fullName\n\nfor glyphName in lightFont.keys():  \n\\> lightGlyph = lightFont['glyphName']  \n\\> boldGlyph = boldFont['glyphName']  \n\\> print lightGlyph.isCompatible(boldGlyph, True)\n\n-Paul van der Laan  \n [www.type-invaders.com](http://web.archive.org/web/20120111122547/http:/www.type-invaders.com/ \"www.type-invaders.com\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "PvdL\n\nThank you for the code\n\nHow reliable is the isCompatible() method in RoboFab ?\n\nTo test it I put in some extra points so they the outlines would be incompatible, but the script still says they are compatible.\n\n"
+    },
+    {
+      "time": "",
+      "content": "PvdL\n\nThank you for the code\n\nHow reliable is the isCompatible() method in RoboFab ?\n\nTo test it I put in some extra points so they the outlines would be incompatible, but the script still says they are compatible.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Unless you have a glyph named \"glyphName\" the script above should toss you an error:  \n`\nfor glyphName in lightFont.keys():\n> lightGlyph = lightFont[glyphName]\n> boldGlyph = boldFont[glyphName]\n> print lightGlyph.isCompatible(boldGlyph, True)\n`\n\n"
+    },
+    {
+      "time": "",
+      "content": "I don't know if it's working as I aspected it to, but I'm not getting an error.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The only difference between the chunk of script I posted and Paul's is that you don't have to call a particular glyph called glyphName each time but you just have to refer to the item in the font.keys() iterable. So no '' in the square brackets.\n\n"
+    },
+    {
+      "time": "",
+      "content": "That should teach me never to post code without testing it... :)\n\nIndeed folengo is right, there should be no quotes:  \n`\n> lightGlyph = lightFont[glyphName]\n> boldGlyph = boldFont[glyphName]\n`\n\nI just tested the script with two of my own files and it works fine here - it happily reports any incompatibility errors.\n\n-Paul van der Laan  \n [www.type-invaders.com](http://web.archive.org/web/20120111122547/http:/www.type-invaders.com/ \"www.type-invaders.com\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thank you forlengo and PvdL\n\nI didn't notice the quotes where removed from forlengo's code - Yes it does now work\n\n"
+    }
+  ]
+}

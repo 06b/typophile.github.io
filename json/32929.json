@@ -1,0 +1,50 @@
+{
+  "id": "32929",
+  "title": "Kerning in OTF and InDesign",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hello all, I'm new here and very happy to find you with thanks to Thomas Phinney for pointing the way. Most of my font creation experience is with Type 1 PC fonts, but I'll try and contribute all I can as I learn the OTF format.\n\nI'm currently updating a Type 1 font we created a loooonnng time ago by opening the Type 1 files in FontLab 4 to create an OTF that we'll use in InDesign for Windows and pass off to a designer for InDesign on the Mac.\n\nInDesign, however, isn't using the kern pairs in the OTF font. If I generate new PC Type 1 files from FontLab InDesign uses the kern pairs, but not in the OTF font. Other programs including Word 2003 are seeing the kern pairs.\n\nI have a hunch it may be because InDesign is \"smarter\" with the OTF than the other programs, but I've not been able to find what it's looking at that is preventing the kerning.\n\nMany thanks,  \nKen\n\n",
+  "author": "<a href=\"/web/20101104062132/http://typophile.com/user/17947\" title=\"View user profile.\">Ken Krugh</a>",
+  "time": "<br>",
+  "uid": "17947",
+  "comments": [
+    {
+      "time": "",
+      "content": "Hello,\n\nFL4 is not really a good choice any more and if possible, you should update to FLS5.  \nI assume you already have used the \"update kern feature\" button in the Kerning Assistance, so that a 'kern' feature shows up in the OpenType Panel.  \nHowever, you also need to add a substitution feature. This can be something as simple as\n\nliga (  \n&nbsp;&nbsp;sub aring by aring;  \n) liga;\n\nIt doesn't do anything visible, it's just for the sake that it's there. (Please exchange the parentheses in the code by braces. Of course this requires that there is an 'aring' glyph in the font.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks VERY much K.L., I will update to the new FontLab.\n\nIt seems odd to me that I had to add the substitution as well. Is that a bug in FL4 or something with the OTF format.\n\nThanks again.\n\n"
+    },
+    {
+      "time": "",
+      "content": "In addition to this issue with the kern feature, you also need to be sure InDesign isn't using it's own kerning algorithm. Set kerning to \"Metrics\" rather than \"Optical\". Optical kerning in InDesign means the built-in kerning is being ignored, and the kerning engine of InDesign is adjusting things on the fly. The kerning (and general fit) of everything under Optical kerning also changes depending on the size you set your type, so for type designers doing fit and kerning testing, you should avoid InDesign's Optical kerning.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> _Is that a bug in FL4 or something with the OTF format._\n\nNeither. It was a bug (fixed in CS3) in CoolType, a library for enumerating and rendering fonts used by InDesign.\n\n"
+    },
+    {
+      "time": "",
+      "content": "K.K. -- <cite>Is that a bug in FL4 or something with the OTF format.</cite>  \nM.S. -- <cite>Neither.</cite>\n\nSorry if my \"better update to FLS5\" in this context suggested that it's an FL4 issue.\n\nThe fact that 'kern' feature is not recognized in InDesign is one thing, as Miguel said. (Good to hear this is fixed in the new version!)\n\nThe \"update to FLS5\" suggestion is unrelated to this.  \nSome things have been much refined in FLS5, like the way FL4 generates font names for OTFs, or the way FL4 generates the 'kern' feature. -- However, these are <cite>not serious</cite> issues if I correctly understand your description of your use of FontLab. E.g. it seems you don't use classes for kerning, and in this case the 'kern' feature which FL4 generates should be ok.  \nBut then, the update is a real bargain ... (If you don't plan to include OT features in future, TypeTools 3 looks like a great tool too. Fewer options, thus less confusing than FLS5 may be at times. I just had a quick look into the demo yesterday.)\n\nKarsten\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks again to everyone, great info.\n\nI've only used FL4 with any kind of regularity for a couple of weeks, but for what it's worth, I've already upgraded to 5 and would highly recommend anyone considering it to do so.\n\nKen\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> _The fact that ‘kern’ feature is not recognized in InDesign_\n\nWhat was happening was that GPOS data was being treated as a subset of GSUB data. So if no GSUB table was included in the font, the GPOS table would be ignored.  \nInterestingly, if the font was processed through VOLT, the bug wouldn't be triggered, because VOLT always creates a GSUB table, even if it ends up empty.\n\n"
+    },
+    {
+      "time": "",
+      "content": "If anyone is interested to know what such an empty VOLT-generated GSUB table looks like (Karsten was), here is how it looks in a TTX dump:\n\n ![](http://web.archive.org/web/20101104062132im_/http:/typophile.com/files/ZeroGSUBdump_4289.gif)\n\n"
+    },
+    {
+      "time": "",
+      "content": "I have a question which is partially related to this discussion. I'm trying to kern a hebrew font in fontlab (I know how to do it in VOLT, but for my purposes, fontlab is easier). The tip on GSUBs helped the kerning take, but it only works properly on som pairs. With others, instead of kerning the correct letters, it kerns the one before the pair. I don't see any clear pattern. What could be causing this? Also, in VOLT, you can control the values of both letters in the pair, can the same be done in fontlab?\n\n"
+    }
+  ]
+}

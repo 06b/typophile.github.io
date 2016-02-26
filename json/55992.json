@@ -1,0 +1,46 @@
+{
+  "id": "55992",
+  "title": "Accents on discretionary ligatures",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm adding Opentype features to a font for the first time. I have already added two sets of alternates and a set of discretionary ligatures. Most of the ligatures I want are made and I would like to add accents on some of them using anchors. Here's an example:\n\n ![](http://web.archive.org/web/20131021152737im_/http:/typophile.com/files/MultiLigature1_4990.gif)\n\nWhen I look at the preview, everything seems to be ok, but when I'm trying to generate composite, it doesn't work as you can see in the next picture.\n\n ![](http://web.archive.org/web/20131021152737im_/http:/typophile.com/files/MultiLigature2_4729.gif)\n\nThe accents are positioned correctly but the ligature are replaced by both glyphs.\n\nWhen I'm trying to positioned the accent on the second letter within the ligature. The preview is still correct:\n\n ![](http://web.archive.org/web/20131021152737im_/http:/typophile.com/files/MultiLigature3_5884.gif)\n\nWhen I generate composite, the ligature is still replaced by both glyphs, the position of the accent is not above the right part of the ligature and is too low:\n\n ![](http://web.archive.org/web/20131021152737im_/http:/typophile.com/files/MultiLigature4_4634.gif)\n\nAnyone knows what I'm doing wrong  \nThanks\n\nRaphael\n\n",
+  "author": "Raphael Daudelin",
+  "time": "17 Mar 2009 — 11:21pm",
+  "uid": "16659",
+  "comments": [
+    {
+      "time": "18 Mar 2009 — 2:54am",
+      "content": "As regards the wrongly placed accents (your last screenshot):  \nIf you add a tilde before each accent name in your glyph composition text like  \n&nbsp;&nbsp;&nbsp;&nbsp;_C\\_A+~acute=C\\_Acute_  \nthis will prevent FLS5 from performing some positioning tricks. If you click the green button with a questionmark in it (bottom right of the _Generate Glyphs_ ... dialog), a dialog will show some more information.\n\nAs regards decomposition of ligature into individual glyphs:  \nFLS5's glyph generation mechanism has a built-in trick that, if you provide a glyph name that involves underscores like  \n&nbsp;&nbsp;&nbsp;&nbsp;_C\\_A+dieresis_  \nthen FLS will ignore the part after the '=' and instead use the 'components' as found in the 'C\\_A' name, i.e. 'C' and 'A'. I have not found a way to avoid this -- except for, temporarily, replacing the underscore in the ligatures' glyph names by another character or string.\n\n"
+    },
+    {
+      "time": "18 Mar 2009 — 4:14pm",
+      "content": "I've tried to add the tilde before each accent name in the glyph composition text and it didn't work. But when I changed temporarily the glyph name for ’CA’ instead of ’C\\_A’ the composite were generated perfectly. Of course, it's not the best solution because I have to rename each composite but at least it works.\n\nThanks\n\n"
+    },
+    {
+      "time": "18 Mar 2009 — 4:37pm",
+      "content": "You could use a little script like:\n\nsr = (\"\\_\",\"!!!\")  \n#sr = (\"!!!\",\"\\_\")  \nfor g in fl.font.glyphs: g.name = str(g.name).replace(sr[0],sr[1])  \nfl.UpdateFont(fl.ifont)  \nprint \"done!\"\n\nCopy/paste into the Macros Panel. You'll need to replace typographic quotes by simple ones.  \nBefore generating glyphs, run the script with the second \"sr = ...\" line commented out. After generating glyphs, run it again but with the first \"sr = ...\" line commented out. (Of course you'll need to do a search/replace in your glyph composition text too.)\n\n"
+    },
+    {
+      "time": "18 Mar 2009 — 4:43pm",
+      "content": "this is why i actually prefer visually ligating contextual alternates rather than single glyphs to solve problems such as these.\n\n"
+    },
+    {
+      "time": "18 Mar 2009 — 7:34pm",
+      "content": "Regarding the script. I'm really not sure to get it, never worked with macros before. This script is made for renaming the font before generating composite and then renaming them again when the composite have been generated???\n\nI paste it in the macro panel, but as soon as I replace the typographic quotes by simple quotes the first line:\n\nsr = (“\\_”,”!!!”)\n\nbecomes red.\n\nI'm not sure either of what you mean by saying to run the script with the second “sr = ...” line commented.\n\nWell, I guess I still have a lot of reading to do about macros\n\n"
+    },
+    {
+      "time": "18 Mar 2009 — 8:00pm",
+      "content": "This is a bug. We will need to correct it in FLS6.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "18 Mar 2009 — 8:38pm",
+      "content": "Ok Sorry about my last post. I may sounded really lost. After examining the script better I get it. It works!\n\nNow I do understand that the first line of the script says to replace underscore in all glyph names by !!!, and that the second line is says to replace !!! by the underscore. I also get what meant first line commented out.\n\nI'm still a bit lost when I try to understand what everything stands for in the last three lines of the script, but I'll try to sort it out.\n\nAnyway, thanks for that scripting introduction. I understand that it can saves me a lot of time.\n\nRaphael\n\n"
+    },
+    {
+      "time": "19 Mar 2009 — 1:59am",
+      "content": "Good you found out how to make it work!\n\n<cite>this is why i actually prefer visually ligating contextual alternates rather than single glyphs to solve problems such as these.</cite>\n\nI prefer (individual) contextual alternates too, but because it is the more elegant solution on the font level (as to the ligatures shown above, the one-glyph solution is fine), not because of an editor's restrictions and so have my own method for glyph composition.\n\n"
+    }
+  ]
+}

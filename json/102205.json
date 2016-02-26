@@ -1,0 +1,38 @@
+{
+  "id": "102205",
+  "title": "Unicode Reserved Codepoints",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "While there are many unallocated codepoints in the Unicode Standard, some codepoints are specifically listed as \"reserved\" in the code charts.\n\nSince AFAIK all unallocated codepoints are effectively reserved, I was wondering if anyone knows why some codepoints are explicitly indicated as such. I can't find anything in the unicode documentation (<cite>The Unicode Standard v6.2</cite>).\n\nJust curious,\n\nAndré\n\n",
+  "author": "agisaak",
+  "time": "11 Apr 2013 — 4:31am",
+  "uid": "31798",
+  "comments": [
+    {
+      "time": "11 Apr 2013 — 4:49am",
+      "content": "There are 2 different types of \"Reserved\". From \"2.13 Special Characters and Noncharacters\":\n\n> The Unicode Standard contains a number of code points that are intentionally not used to represent assigned characters. These code points are known as noncharacters. They are permanently reserved for internal use and should never be used for open interchange of Unicode  \n> text.\n\n(Note the _permanently reserved_ here.) This is used for 'internal use only', for codes that would \\*never\\* indicate a displayable glyph, such as the BOM and the codes for switching RTL/LTR.\n\nThe other kind of \"reserved\" is simply 'not (yet) in use'. Most blocks contain some reserved -- unassigned -- codes at the end, which is probably just to align the start of the _next_ code block on a round hexadecimal number. Also, this free space can be used to add one or two useful characters to an existing block.\n\n"
+    },
+    {
+      "time": "11 Apr 2013 — 4:48am",
+      "content": "Hi Theunis,\n\nThanks for the response.\n\nI wasn't actually thinking of noncharacters here. As an example, within the Greek block, there are some characters listed as \"reserved\" (e.g. U+03A2) and other characters which are not so listed, but which are still unassigned (e.g. U+0378).\n\nAndré\n\n"
+    },
+    {
+      "time": "11 Apr 2013 — 4:59am",
+      "content": "It seems the committee had been contemplating a possible future use for \"U+03A2\":\n\n> From: Michael Everson ( [xxx@xxx.com](mailto:xxx@xxx.com))  \n> Date: Fri Aug 02 2002 - 19:12:46 EDT  \n> At 11:13 +0200 2002-08-01, Otto Stolz wrote:\n> \n> \\>I have selected U+03A2 with care: this code point covers the place  \n> \\>of a non-existing \"Greek capital letter final sigma\". I think that  \n> \\>this code-point -- while, admittedly, unsafe as any other unassigned  \n> \\>one -- is rather unlikely to get assigned a character, in the fore-  \n> \\>seeable future.  \n> \\>  \n> \\>Please do not promote an assignation to U+03A2 just do make a point :-)\n> \n> Do not tempt us. Oh, do not tempt us. If ever GREEK CAPITAL LUNATE  \n> SIGMA needed a place to hang its curvy hat, it is surely U+03A2.\n\nThere is no rhyme or reason to individual glyph assignments. In this case, someone thought it might be possible for a valid character to appear -- an uppercase equivalent of the lowercase pair \"final sigma/regular sigma\". In other cases, code points may simply have been removed from the specification.\n\n"
+    },
+    {
+      "time": "11 Apr 2013 — 5:04am",
+      "content": "Ah, wait: you are wondering when a code points is \"officially _declared_ reserved\"!\n\nWell ... in the example of U+03A2 above, the codes clearly run parallel from uppercase to lowercase, per design. So the code point U+03A2 would _logically_ be 'uppercase terminal sigma'; but, because there is no such beast (as yet), the code point is \"reserved for (possible) future use\". Whereas other code points are simply 'left over' and could be used for anything.\n\n"
+    },
+    {
+      "time": "11 Apr 2013 — 5:19am",
+      "content": "OK, that makes sense.\n\nThanks,  \nAndré\n\n"
+    },
+    {
+      "time": "11 Apr 2013 — 9:24am",
+      "content": "\\> (Note the _permanently reserved_ here.) This is used for 'internal use only', for codes that would \\*never\\* indicate a displayable glyph, such as the BOM and the codes for switching RTL/LTR.\n\nA minor correction: Unicode “reservation” has nothing to do with whether the _glyph_ (I would say _character_) is “displayable”. The codes for switching RTL/LTR are just “normal” Unicode characters.\n\n"
+    }
+  ]
+}

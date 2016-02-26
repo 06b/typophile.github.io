@@ -1,0 +1,98 @@
+{
+  "id": "44074",
+  "title": "less and greater symbols in text",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "We are starting to see a significant number of bibliography entries of the form\n\n ![](http://web.archive.org/web/20080821131631im_/http:/www.typophile.com/files/less_6002.gif)\n  \nYou could argue that the “less” and “greater” characters really don’t belong, but when editorial says they do, that’s that; you set them. In most fonts, the less & greater glyphs may work OK with numbers, but look awful in text. It is easy enough to make up an alternative pair that work with such text.\n\nBUT:\n\nAs best I can tell, there are no greater or less characters in the Mathematical Operators portion of Unicode (2200-22FF), or in the supplement (2A00-2AFF) — or anywhere else. All we have are U+003C and U+003E, so that rules out using the ASCII greater and less for text, and another pair for math.\n\nNor can I think of a contextual substitution that is foolproof. You could switch them to less.alt and greater.alt when preceded by or followed by an alpha character or punctuation, but there are cases where alphas are a part of an expression that should take the mathematical form.\n\nMy current notion is to put them in a stylistic set, but that means the typesetter will have to remember to switch it on for such citations, and that too has its perils.\n\nAnybody have a better solution?\n\n [‹ Glyphname extension problems](http://web.archive.org/web/20080821131631/http:/www.typophile.com/node/44043 \"Go to previous forum topic\") [å showing up with “stroked” a ›](http://web.archive.org/web/20080821131631/http:/www.typophile.com/node/44167 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080821131631/http://www.typophile.com/user/5094\" title=\"View user profile.\">charles_e</a>",
+  "time": "<br>",
+  "uid": "5094",
+  "comments": [
+    {
+      "time": " 9.Apr.2008 4.04pm",
+      "content": "Maybe 27E8 and 27E9 from [http://www.unicode.org/charts/PDF/U27C0.pdf](http://web.archive.org/web/20080821131631/http:/www.unicode.org/charts/PDF/U27C0.pdf \"http://www.unicode.org/charts/PDF/U27C0.pdf\") (called $\\langle$ and $\\rangle$ in LaTeX) ?\n\n ![](http://web.archive.org/web/20080821131631im_/http:/www.typophile.com/files/angles_4151.jpg)\n\n"
+    },
+    {
+      "time": " 9.Apr.2008 4.06pm",
+      "content": "I’ve had to use the “greater than” and “less than” too. They stand out in many typefaces. I’m not sure these, Michel, stand out enough though.\n\n"
+    },
+    {
+      "time": " 9.Apr.2008 4.12pm",
+      "content": "Here is what it looks like in LaTeX with the package MinionPro\n\n ![](http://web.archive.org/web/20080821131631im_/http:/www.typophile.com/files/iro_4574.jpg)\n\n"
+    },
+    {
+      "time": " 9.Apr.2008 4.41pm",
+      "content": "These are angle brackets, now for mathematics — there is a text angle bracket now encoded in the 3XXX range. As such, they have to pair with parentheses, square brackets, curly braces, etc. — in both text and math.  \nI condidered them, but don’t think they are right, esp. as they have another, “proper” usage.\n\nIf there were mathematical greater & less codepoints, we could use the ASCII greater & less for text constructions, but I don’t think there are. Switching to an .alt seems the best solution to me (if ther is no math greater/less); the question is whether or not someone can think of a way of coding it to make it automatic.\n\nBut thanks . . .\n\n"
+    },
+    {
+      "time": " 9.Apr.2008 5.20pm",
+      "content": "Here is another trial, this time with XeTeX, the characters used are 2039 and 203A, Large, with explicit kerning. Maybe there is something to do with that? (Minion Pro again)\n\n ![](http://web.archive.org/web/20080821131631im_/http:/www.typophile.com/files/2039_5485.jpg)\n\n"
+    },
+    {
+      "time": " 9.Apr.2008 5.26pm",
+      "content": "Yes, I have used the left & right single guillemet a few times. They don’t always look good — the Minion looks OK — and of course, syntactically they are wrong. As long as I have to manually search & replace a manuscript, I might as well draw up what is needed. As you know, the .alt will drop out, leaving the “greater” & “less”, which seems to be the actual character.\n\nThe right answer, I think, is that these are not a part of the URL, but are in fact delimiters. What is needed is a better editorial solution. But that’s usually considered too deep a matter for a compositor . . .\n\nBTW, your (their?) /slash /slash needs kerning, as does g/slash ;-)\n\nEdit: If anyone cares, I can post what I came up with when I get into work tomorrow, it is switched by a stylistic set, though, and that’s not ideal . . .\n\n"
+    },
+    {
+      "time": " 10.Apr.2008 4.38am",
+      "content": "<cite>BTW, your (their?) /slash /slash needs kerning, as does g/slash ;-)</cite>\n\nI can’t say if it’s theirs or just that I was careless with some macro. This is what hyperref gave me with the \\href macro, because when I write a url, I want it to be clickable, even in a pdf file. This is badly kerned indeed.\n\n[edit, the morning after...] By the way, I have never spent time trimming an otf font. Personally, I would format the bibliography without those “less than” and “greater than” that are not part of the url. I would just choose a font for which the url does not look too awful. I have never seen them look right. I would probably make do with something like this, though I would have to check for the weights on paper. Here the serif is light, maybe the regular would have been better. This being said, all I do is for personal or class use, and it always ends on a laser printer or just as a pdf for the web; I am no editor.\n\n ![](http://web.archive.org/web/20080821131631im_/http:/www.typophile.com/files/biblio_5139.jpg)\n\n"
+    },
+    {
+      "time": " 10.Apr.2008 7.36am",
+      "content": "<cite>Personally, I would format the bibliography without those “less than” and “greater than” that are not part of the url. I would just choose a font for which the url does not look too awful.</cite>\n\nYes, that would be nice. Unfortunately, in book publishing the typesetter can’t make those decisions. Really, not even the designer could decide this, it will take a combination of design & editorial acting in concert to get any change.\n\nWhat I finally came up — with for this time anyway — is modified greater & less symbols, to be used only with text. They are switched on by a stylistic set, and using InDesign paragraph styles, you can do this for the entire bibliography without having to manually search & replace.\n\n ![](http://web.archive.org/web/20080821131631im_/http:/www.typophile.com/files/less1_4143.gif)\n  \nFor a contextual substitution to work, we’d probably need to use regular expressions, and I don’t believe they can currently be used in OpenType features.\n"
+    },
+    {
+      "time": " 10.Apr.2008 7.47am",
+      "content": "Quoting URLs using brackets that look like HTML tags is awkward at best in print.\n\nI assume it’s a remnant of how older email apps used to parse out URLs for linking?\n\nI’d argue it’s also a bad idea to cite specific URLs that point to static pages. Better to say ’from site’ and list the TLD.\n\nBut neither of those address your question. I think both of Michaels examples work the best.\n\n"
+    },
+    {
+      "time": " 10.Apr.2008 9.48am",
+      "content": "<cite>I’d argue it’s also a bad idea to cite specific URLs that point to static pages. Better to say ’from site’ and list the TLD.</cite>\n\nI agree. But in book publishing, that isn’t an option until the whole method of citation containing URLs is addressed.\n\n<cite>But neither of those address your question. I think both of Michaels examples work the best.</cite>\n\nHere, I have a problem. A book is frequently “repurposed.” It is important that the character names stay the same. For example, we just had an inquiry from a publisher who had bought the rights for a book from another publisher. To bring out the new edition, the text will either have to be rekeyed, or extracted from an exiting PDF file. This extraction isn’t an automatic process, and I guess you could argue that whoever is doing the work could be on the lookout for this sort of thing — angle brackets or guillemets that really should be greater/less. But it is best not to add to the problems of whoever is extracting the text (probably us in this case).\n\nI suppose by now I’m just back on my tired old horse of trying to inform the type design world that they cannot dictate things; that aside from any preferences of end users of type, editors <cite>really</cite> rule the roost.\n\nWhat I was looking for was a better way to code a features file, but I do thank you all for the suggestions.\n\nCharles\n\n"
+    },
+    {
+      "time": " 10.Apr.2008 10.31am",
+      "content": "<cite>It is important that the character names stay the same. </cite>\n\nAgreed. That is one reason I like TeX and LaTeX. All you need to do is define a macro at the top of the file, say \\starturl and \\endurl and then use the macro in the text. You are then free to change the shape of those characters at will. When you “reprocess” the text, you need only redefine the macro. Years ago, many math characters were done that way.\n\n"
+    },
+    {
+      "time": " 10.Apr.2008 10.39am",
+      "content": "In fact, I use LaTeX and to insert a url in the text, I just use the macro \\url{...}. To get the opening and closing “thing” (whatever it is meant to be), I would just redefine the macro \\url{...} or give myself a custom one.\n\n"
+    },
+    {
+      "time": " 10.Apr.2008 11.07am",
+      "content": "Michel, you’re preaching to the choir. We used TeX (plain, with our extensive set of macros) from about 1985 until 2007. We even used it to set a number of AAUP Book Show books, see\n\n[http://www.tsengbooks.com/](http://web.archive.org/web/20080821131631/http:/www.tsengbooks.com/ \"http://www.tsengbooks.com/\")\n\nOver the years, there were many more titles in the show than we put on this website. But our TeX, based on Y&Y’s implementation for the PC, just couldn’t handle color management very easily, and Berthold Horn quit the TeX business.\n\nThere were a few other reasons, but the final problem was that publishers wanted “applications files,” and wouldn’t accept TeX. That is still the case. The only thing we won’t cave on is when they also want the fonts. “Nope,” I say “not allowed with the font licenses.”\n\n"
+    },
+    {
+      "time": " 10.Apr.2008 11.59am",
+      "content": "Charles, I had seen that Book Show (there was a link to your URL from CTAN). Those books look just great! I see that you now need to find new means to get what you are used to. Good luck.\n\n"
+    },
+    {
+      "time": " 10.Apr.2008 9.53pm",
+      "content": "You could put the alternate symbols in the “old-style, proportional” feature, on the assumption that such figures would never be used in math. And if they were, well the user might like the alt symbols.\n\n"
+    },
+    {
+      "time": " 11.Apr.2008 6.17am",
+      "content": "The LaTeX package [MinionPro](http://web.archive.org/web/20080821131631/http:/www.ctan.org/tex-archive/fonts/minionpro/) (for mathematical typesetting) uses “old-style proportional” in mathematical formulas by default. That would not have been my choice.\n\n ![](http://web.archive.org/web/20080821131631im_/http:/www.typophile.com/files/osf_4544.jpg)\n\n"
+    },
+    {
+      "time": " 11.Apr.2008 7.15am",
+      "content": "Nick, when I’m designing — as opposed to just setting type — I’ll use oldstyle figures for “math” as long as (1) there aren’t multilevel equations, (2) there aren’t many expressions with exponents, or (3) I think the audience would be upset. There are any number of books that use simple “math” constructions with plus, minus, equals, greater/less, etc. I’ll use oldstyle numbers, and also make up a set of plus-minus-equal-divide-greater-less etc. glyphs to match them. With that set, the “greater” and”less have to match the other conjunctors, and are still too long for a good URL delimiter.\n\nBut when, as most of the time, we’re setting books designed by the publisher’s designer, they specify figure style. Some will use old style figs as above, some switch to lining as soon as they see an equal sign.\n\nMoreover, publishers have house rules, too. For example, one allows small caps in the text, but requires full caps in the back matter (notes & bibliography). There is a certain rationale to this, notes and bibliographical entries are almost by definition “interrupted.” Further, the editors don’t have to go through them & worry about GmbH, MoMA, etc. Frequently, when I design for this publisher, I switch to lining figures in the backmatter, so you don’t have citations from newspapers with a cap for the section coupled with an old-style number <cite>New York Times,</cite> C1.\n\nAgain, the point is the type designer can think up all sorts of neat tricks that work in some idealized world, but won’t work given the practices of publishers.\n\nThe beginning of a URL is http. You also see ftp & a few others — easy to identify. If you could somehow jump to the matching “greater than” from the beginning “less” in a OT feature, this is a solvable problem. Easy to do with regular expressions, but I don’t believe you can use them.\n\n"
+    },
+    {
+      "time": " 11.Apr.2008 7.30am",
+      "content": "According to [this pdf text](http://web.archive.org/web/20080821131631/http:/www.chabotcollege.edu/Library/onlineref/MLAWorksCited.pdf) (that gives some references), the glyphs would be “angle brackets”.\n\n ![](http://web.archive.org/web/20080821131631im_/http:/www.typophile.com/files/angle_5247.jpg)\n\nI have no time to search for more official references.\n\n"
+    },
+    {
+      "time": " 11.Apr.2008 10.32am",
+      "content": "Here is from the [Wiki entry “Bracket”](http://web.archive.org/web/20080821131631/http:/en.wikipedia.org/wiki/Bracket):\n\n<cite>The mathematical or logical symbols for greater-than (&gt;) and less-than (&lt;) are inequality operators, and are not punctuation marks when so used. Nevertheless, since true angle brackets are not available on a typical computer keyboard, the “less than” and “greater than” symbols are often used instead. These are often loosely referred to as angle brackets when used in this way. For example, the symbols &lt; and &gt; are often used to set apart URLs in text, such as “I found it on Example.com &lt;http://www.example.com/&gt;”. It may also often be found to indicate an e-mail address, such as “This photo is copyrighted by John Smith &lt;john@smith.com&gt;”, and is the computer-readable form for such in message headers as specified by <a href=\"http://web.archive.org/web/20080821131631/http:/tools.ietf.org/html/rfc2822\">RFC 2822</a>.</cite>\n\nFrom the same entry we read:\n\n<cite>True angle brackets are available in Unicode at code points U+27E8 and U+27E9 (for mathematical use) and or U+3008 and U+300[9] (for East Asian languages). A third set of angle brackets are encoded at U+2329 and U+232A, but officially “discouraged for mathematical use”[5] because they are canonically equivalent to the CJK code points U+300… and thus likely to render as double-width symbols.</cite>\n\nContrary to “less than” and “greater than”, code points for angle brackets are thus numerous and the use of “less than” or “greater than” for URLs comes from our limited keyboards, or so it seems.\n\nMichel\n\n"
+    },
+    {
+      "time": " 11.Apr.2008 1.40pm",
+      "content": "Dare I suggest something really different? How about a subtle underscore for the URL’s? It’s widely recognized on account of webusage and could translate well to print.\n\n. . .  \nBert Vanderveen BNO\n\n"
+    },
+    {
+      "time": " 13.Apr.2008 7.14am",
+      "content": "<cite>How about a subtle underscore for the URL’s?</cite>\n\nThose angle brackets seem to be the standard on my own campus too. Students in library and information science are told to use them. Here is an example from their student guide:\n\n ![](http://web.archive.org/web/20080821131631im_/http:/www.typophile.com/files/urlcite_4616.jpg)\n  \nI would just put some appropriate angle brackets at uni2329 and uni232A (or uni2329.alt and uni232A.alt if needed) and I would use the Unix command `sed` on the input file to replace U+003C (\\<) and U+003E (\\>) surrounding “http”, “telnet” and “ftp” by U+2329 and U+232A. That looks semantically correct, and quite easy to do.\n"
+    }
+  ]
+}

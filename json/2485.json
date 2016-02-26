@@ -1,0 +1,110 @@
+{
+  "id": "2485",
+  "title": "How does the number of points in a glyph correlate to quality?",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "I've been comparing differing versions of a font from two different foundry sources, Folio from Adobe in Open Type format and Folio BQ from Berthold in Type 1 format.   \n   \nAfter converting some letters in each font to outlines, I noticed that while the overall shapes are near identical the amount of points used to define each glyph is significantly greater in Folio BQ than it is in the Adobe version, even on seemingly simple glyph shapes.   \n   \nHow does this information correlate to quality, i.e. how well will each typeface stand up to different printing/viewing conditions? My (layman's) guess would be that a greater number of points suggests a sloppier digitization process but I'd appreciate the opinions of the cognoscenti. Thanks...   \n   \n ![Folio - Adobe and Berthold](http://web.archive.org/web/20051125085231im_/http:/www.typophile.com/forums/messages/30/22731.gif)\n\n",
+  "author": "refusenik",
+  "time": "19 December, 2003 - 6:06pm",
+  "uid": "2509",
+  "comments": [
+    {
+      "time": " 19 December, 2003 - 6:30pm",
+      "content": "Since you perceive that the glyph shapes are identical does it really matter about different digitization techniques?   \n   \nPostScript, TrueType, IK, they all have their advantages and disadvantages. I would never use the term sloppy to describe the Folio BQ example, even if it has a few more points.   \n   \nIt is the result of the rendered glyph that matters. No?\n\n"
+    },
+    {
+      "time": " 19 December, 2003 - 6:35pm",
+      "content": "James,   \n   \n\\>Since you perceive that the glyph shapes are identical does it really matter about different digitization techniques?   \n   \nNo, you misunderstood me. I was not trying to pass judgement on the font or the digitization process, in fact (although I did use the term 'sloppy', which I already regret) I pointed out that I didn't know the answer myself.   \n   \nI was merely trying to find out what difference (if any) the number of points used to define a glyph might make in the life of a typeface.   \n   \n\\>It is the result of the rendered glyph that matters. No?   \n   \nWell, yes, exactly. So how does the amount of points affect said rendering?\n\n"
+    },
+    {
+      "time": " 19 December, 2003 - 6:42pm",
+      "content": "Usually but not always more points means sloppiness. And in this case I think that's what it is, unfortunately. Sometimes though more points means greater fidelity. It depends on the design too, like a highly geometric sans will be more in tune with bezier-ness, so to speak.   \n   \nAnd other times too few points are a problem as well. For example in that Adobe \"a\" there are a couple of missing inflection points: usually this doesn't matter, but for conversion to TT for example it can matter bigtime (especially in Fog). Other cases of extra points being good is for stroke modulation and trapping.   \n   \nOn the other hand, when you apply transformations to outline, the fewer the points the better, usually - because the bezier math will take care of it more elegantly than explicit points.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " 19 December, 2003 - 6:53pm",
+      "content": "\\>For example in that Adobe \"a\" there are a couple of missing inflection points:   \n   \nOk, that sounds interesting. What exactly are inflection points?   \n   \n\\>On the other hand, when you apply transformations to outline, the fewer the points the better, usually - because the bezier math will take care of it more elegantly than explicit points.   \n   \nYes, that logic is what I based my original (layman's) guess on - at least that's how it would work with the (admittedly non-typographic) vector graphics I have had experience with.\n\n"
+    },
+    {
+      "time": " 19 December, 2003 - 7:06pm",
+      "content": "Anyone who has used IKARUS to hand digitize artwork would recognize the point placement of the bottom example as the result of the translation of IK to PostScript.   \n   \nNot sloppy, just a translation of one format to another.\n\n"
+    },
+    {
+      "time": " 19 December, 2003 - 7:13pm",
+      "content": "Inflection points are where a curve changes concavity direction. Missing inflection points are easy to spot in cubic bezier (Postscript) curves: the BCPs will be on opposite sides of the curve. As for quadratic beziers (TT), they simply can't go missing.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " 19 December, 2003 - 7:22pm",
+      "content": "\\>Anyone who has used IKARUS to hand digitize artwork would recognize the point placement of the bottom example as the result of the translation of IK to PostScript.   \n   \n   \nOk, now \\*that\\*'s what I call an explanation, thanks. Sadly, I have never yet digitized any type at all, much less used Ikarus, thus my original question. I think we can stop discussing the \"sloppy\" comment now... ![:-)](http://web.archive.org/web/20051125085231im_/http:/www.typophile.com/forums/clipart/happy.gif)   \n   \nOTOH, the discussion was heading off into an interesting direction, namely what advantages if any are achieved by the minimalistic point usage of, say, Adobe versus the way that Ikarus turns out Folio BQ.   \n   \nTo my (uneducated) eyes, it seems that there is not one single point in the Adobe version of the font that is not absolutely crucial and that could be removed without completely wrecking the glyph, yet in the BQ version there are additional points galore.\n\n"
+    },
+    {
+      "time": " 19 December, 2003 - 7:26pm",
+      "content": "Ok, thanks for the explanation, Hrant. Would that then be the reasoning behind the addition of the extra points in the BQ version, apparently produced by Ikarus?\n\n"
+    },
+    {
+      "time": " 19 December, 2003 - 7:27pm",
+      "content": "There are two concerns with large numbers of unnecessary points. The first is font size: every point is a certain number of bytes. The more points you have, the bigger the font. This may not be a significant factor in 8-bit fonts, but when you start including a few thousand glyphs in an OpenType font, the impact can be quite considerable.   \n   \nThe second concern is in TrueType fonts in which stray points can cause spikes in delta hinting. If you want to delta a small detail to turn a pixel on or off at particular sizes, you ideally want to touch only one point, not have to delta three separate points.\n\n"
+    },
+    {
+      "time": " 19 December, 2003 - 8:30pm",
+      "content": "\\> Would that then be the reasoning behind the addition of the extra points in the BQ version   \n   \nNo, there's way too many points, and in funny places. I think the conversion algorithm needs work. On the other hand, as James says most of the time it doesn't matter.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " 19 December, 2003 - 10:32pm",
+      "content": "worth noting that Georgia has a lot of extra points.\n\n"
+    },
+    {
+      "time": " 19 December, 2003 - 10:37pm",
+      "content": "Are you loading it up in Fog? That won't do.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " 19 December, 2003 - 10:46pm",
+      "content": "I'll retract that about Georgia until I get back to the office   \nand check it out. I created outlines in illustrator and   \nnoticed tons of extra points.\n\n"
+    },
+    {
+      "time": " 19 December, 2003 - 10:52pm",
+      "content": "That's the conversion from quadratic to cubic beziers. In native quadratic, Georgia has about as few points as it would need if it were in cubic. But converters can't replicate \"design intent\", they can only work \"literally\": stay within a given error tolerance.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " 20 December, 2003 - 3:50pm",
+      "content": "\\>Usually but not always more points means sloppiness.   \n   \nDoes this mean that, generally, less points means better font/performance? If so why?   \n   \n   \n\\>That's the conversion from quadratic to cubic beziers.   \n   \nDoes that mean different methods of encoding vector information, in the same sense as one might decide to encode information in hexedecimal or binary?\n\n"
+    },
+    {
+      "time": " 20 December, 2003 - 4:12pm",
+      "content": "Yes. The more points there are, the more work the computer has to do to image the letter.   \n   \nThey are different means of mathematically describing curves, but not quite in the way you're thinking. You can convert from TrueType style quadratic curves to PostScript style cubic beziers without loss of information, but not the other way. (A really high-fidelity conversion in the second case will require a fair number of added points.)   \n   \nAdditionally, it is common, though not required, to change the em-square scale between 1000 and 2048 when going between the two styles of curves. This can add slight rounding errors and further loss of fidelity.   \n   \nRegards,   \n   \nT\n\n"
+    },
+    {
+      "time": " 20 December, 2003 - 6:07pm",
+      "content": "I've created fonts in many different genres (using Fontographer, 1000 unit em), and I've found that it's rarely necessary to insert more than one point (if that) between the horizontal and vertical extrema of a curve, in order to sufficiently define that curve for aesthetic accuracy.   \n   \nHowever, there are some situations where it's necessary, and one of them was the top of my Jenson (Goodchild) \"a\", where I found it impossible to get close to the old master's form without plenty of points.   \n ![JenA](http://web.archive.org/web/20051125085231im_/http:/www.typophile.com/forums/messages/30/22780.jpg)\n\n"
+    },
+    {
+      "time": " 20 December, 2003 - 6:52pm",
+      "content": "Wow, lots of good information in this thread, thanks everyone.   \n   \n\\>However, there are some situations where it's necessary, and one of them was the top of my Jenson (Goodchild) \"a\", where I found it impossible to get close to the old master's form without plenty of points.   \n   \nWell, obviously you have to use whatever number of points it takes to achieve the degree of fidelity you are after, so while it has become clear in this thread that less points mean smaller files and better performance, I was by no means trying to suggest a general minimalist imperative.   \n   \nHowever, the initial question was about a direct comparison of pretty-damn-near-identical glyph shapes with a significant difference in the amount of points used. As it turns out, this appears to be the result of an automatic conversion process, which may in turn adversely affect performance.   \n   \nI would be interested to find out if folks here know of existing guidelines or in-house standards for designers or foundry employees concerning point usage in the digitization process.   \n   \nHas it happened to anyone, that a large open type file had to be tidied up afterwards in order to improve performance, or is this not a big deal? When is a font file too big?\n\n"
+    },
+    {
+      "time": " 20 December, 2003 - 7:12pm",
+      "content": "_Has it happened to anyone, that a large open type file had to be tidied up afterwards in order to improve performance, or is this not a big deal? When is a font file too big?_   \n   \nThis is more of an issue in East Asian fonts, where conscientious developers tend to do everything they can to keep the file size down (subroutines, small em size, minimum number of points, etc.)   \n   \nWhen MS released my Sylfaen font, they ran it through a tool called SplineLab (originally from Project Solutions, not sure if it is available from anywhere; was expensive) which can automatically clean up excessive points within parameters set by the user. I have to say, I'm not very happy with the results, and some of my curve quality was lost. Now when I'm developing TT fonts, I usually clean up the converted PS-\\>TT outlines manually and leave points if they are necessary to maintain the curve quality. In a longish curve, e.g. a quadrant of the O, I can usually reduce the number of FL inserted points from 4 to 2, and on short segments from 2 to 1, without a major problem. The longer curves won't be a true match to the original cubic PS outline, but I can control the result and it is better than what SplineLab does. Once you get into the habit of doing this, it doesn't take long for each glyph, and I consider it part of the design process.   \n   \nA bigger concern in developing OpenType fonts is optimising performance in the OTL GSUB and GPOS tables. Things like contextual mark positioning can slow down processing speeds significantly, so it pays to have a good strategy for minimising the number of lookups. Also, GSUB is more efficient than GPOS, so it makes sense to try to strike a balance between the efficient development and flexibility of GPOS and the faster processing of glyph composition with GSUB. In future versions of my Biblical Hebrew font, I'm considering making a few hundred of the most commonly occuring letter + mark(s) combinations into precomposed glyphs, as this should speed up overall processing.\n\n"
+    },
+    {
+      "time": " 20 December, 2003 - 9:35pm",
+      "content": "\"I would be interested to find out if folks here know of existing guidelines or in-house standards for designers or foundry employees concerning point usage in the digitization process.\"   \n   \nRefusenik, \"Fontographer: Type by Design\" by Stephen Moye has a very illustrative chapter on how to build postscript outlines and determine the necessary points on a curve:   \n   \n [http://members.xoom.virgilio.it/dtp/papers/type\\_by\\_design/manuale.htm](http://web.archive.org/web/20051125085231/http:/members.xoom.virgilio.it/dtp/papers/type_by_design/manuale.htm)\n\n"
+    },
+    {
+      "time": " 20 December, 2003 - 10:07pm",
+      "content": "\\> Does that mean different methods of encoding vector information, in the same   \n\\> sense as one might decide to encode information in hexedecimal or binary?   \n   \nNo because curve-fitting is generally lossy, while pure data conversion isn't (except in cases like JPEG). Thomas, are you sure even going from quadratic to cubic is lossless?   \n   \n--   \n   \n\\> Syflaen/SplineLab   \n   \nBTW, were the Latin and Armenian components \"processed\" differently? Because the former's outlines are really much cleaner than the latter's. Like some of the serifs in the Armenian are missing that trademark \"micro-rounding\" you use in the Latin.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " 20 December, 2003 - 11:19pm",
+      "content": "Re. Sylfaen Armenian: Geraldine Wade drew the Armenian, Georgian and Greek. I was only responsible for the massive extended Latin set (most of which is not included in the current release) and the Cyrillic. It's important to remember when looking at Sylfaen that it was originally intended only for an internal MS glyph database, and not as a release font. I was rather shocked when they released it, because neither Geraldine nor I considered it finished and only some parts were properly polished.\n\n"
+    },
+    {
+      "time": " 20 December, 2003 - 11:29pm",
+      "content": "_I would be interested to find out if folks here know of existing guidelines or in-house standards for designers or foundry employees concerning point usage in the digitization process._   \n   \nThe _Adobe Type 1 Font Format_\\* is available as a PDF from the [Adobe developer site](http://web.archive.org/web/20051125085231/http:/partners.adobe.com/asn/tech/type/ftechnotes.jsp). See the section on 'Technical Design Considerations' starting on page 29 for Adobe's advice on point placement in PS fonts.   \n   \n\\* This specification is commonly known as 'The Black Book', in reference to the top part of the cover of the original print edition and to distinguish it from ['The Red Book'](http://web.archive.org/web/20051125085231/http:/www.amazon.com/exec/obidos/tg/detail/-/0201379228/002-6544174-0751247?v=glance).\n\n"
+    },
+    {
+      "time": " 22 December, 2003 - 5:13pm",
+      "content": "Thanks for the great resource suggestions, everyone. Lots to read up on over the festive season.\n\n"
+    }
+  ]
+}

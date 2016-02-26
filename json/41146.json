@@ -1,0 +1,50 @@
+{
+  "id": "41146",
+  "title": "Metrics works fine in Fontlab 5, NOT in WordPad / MS Word 2007",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi all,\n\nCan someone please help with a kerning problem or at least point me in the right direction? I am creating a cursive font. (apologies for the lengthily explanation below, I hope it makes sense!!)\n\nAttached are three screenshots – 1) showing the two glyph variations of the letter ‘a’ joining up smoothly within the metric window 2) showing the preview panel correctly substituting the second glyph and smoothly joining up and 3) the output in MS WordPad when I try to get the same result as above. As you can see, the ‘calt’ substitutions work correctly, as all the glyphs displayed are the ones without an entry stroke, except for the first character. However, as you can see, the spacing is not correct for every glyph displayed after the second character. The fact that the spacing is correct between the first two characters seems to show that it is possible for WordPad to pick up on the kerning, I just can’t figure out how to do it for EVERY glyph instance repetitively. The same issue applies to Word 2007.\n\nIf anyone has any idea why I am getting this problem or where I can go to find a solution I would be most grateful – I have searched through this forum, the FL Manual, the Fontlab msn user group, VOLT user group, and various other reference sites. I really need to get this sorted urgently as other people are relying on the finished font.\n\nIs the issue associated with using PUA glyphs? I have tried including the kerning encoding MAC with PUA (also attached as screenshot) but this didn’t help. I’m using FL 5.04. Surely if PUA is the issue, the first substitution would not join correctly?  \nI have read the other posts in this forum but nothing suggested there helped.\n\nIf you need a sample font / .vfb file, I cam mail it.\n\nThank you so much in advance,\n\nNikki\n\n ![](http://web.archive.org/web/20081203211951im_/http:/www.typophile.com/files/Fontlab_Preview_5516.JPG)\n\n ![](http://web.archive.org/web/20081203211951im_/http:/www.typophile.com/files/Metrics_window_5782.JPG)\n\n ![](http://web.archive.org/web/20081203211951im_/http:/www.typophile.com/files/WordPad_screenshot_4288.JPG)\n\n ![](http://web.archive.org/web/20081203211951im_/http:/www.typophile.com/files/kerningOtpions_window_4827.JPG)\n\n [‹ Multiple diacritics](http://web.archive.org/web/20081203211951/http:/www.typophile.com/node/42992 \"Go to previous forum topic\") [RoboFab Sidebearings Script ? ›](http://web.archive.org/web/20081203211951/http:/www.typophile.com/node/42955 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081203211951/http://www.typophile.com/user/26175\" title=\"View user profile.\">nikki_w</a>",
+  "time": "<br>",
+  "uid": "26175",
+  "comments": [
+    {
+      "time": " 21.Jan.2008 9.57am",
+      "content": "As far as I know, Word has always had kerning turned off by default. I don’t know if that is still the case in the newest version though. Wordpad probably as well, if it even supports kerning.\n\nEdit: I should read better. You are talking metrics. Oh well, it seems it doesn’t use those either.\n\n"
+    },
+    {
+      "time": " 21.Jan.2008 11.10am",
+      "content": "WordPad is an RTF editor, so there might be something in the [Microsoft Word 2007 Rich Text Format Specification](http://web.archive.org/web/20081203211951/http:/download.microsoft.com/download/2/f/5/2f599e18-07ee-4ec5-a1e7-f4e6a9423592/Word2007RTFSpec9.doc). A possibility might be ANSI versus Unicode kerning pair information (see the entry for \\krnprsnet at the bottom of page 65).\n\n"
+    },
+    {
+      "time": " 22.Jan.2008 9.28am",
+      "content": "Thats great guys, thanks a million. I’ll look at the spec and see where it leads.\n\nNikki\n\n"
+    },
+    {
+      "time": " 24.Jan.2008 8.50am",
+      "content": "Does it work as expected in InDesign for instance?\n\n"
+    },
+    {
+      "time": " 26.Jan.2008 1.43pm",
+      "content": "Nikki,\n\nRead the bottom message from Adam in this thread:  \n [http://www.typophile.com/node/32319](http://web.archive.org/web/20081203211951/http:/www.typophile.com/node/32319 \"http://www.typophile.com/node/32319\")  \nI mean you may need to activate multilingual complex script support in Windows.\n\nRegards,  \nJohnych\n\n"
+    },
+    {
+      "time": " 26.Jan.2008 1.53pm",
+      "content": "WordPad does not support OpenType Layout features such as “calt”.\n\nA.\n\n"
+    },
+    {
+      "time": " 10.Feb.2008 6.05am",
+      "content": "Hi again,\n\nFirst off, thanks for all the comments, I am new this area and really appreciate all the help.\n\nYes the kerning works as expected in InDesign - see attached screenshot.\n\nI am not too worries about the application of the calt feature; it is the kerning I am worried about.\n\nI have the complex script support activated and it still does not work within Notepad / Wordpad or Word. Although I do need to get the kerning working without support for complex script activated (is this even possible???)\n\nSince it seems to be a Microsoft issue, I think I’ll try doing the kerning within VOLT...\n\n ![](http://web.archive.org/web/20081203211951im_/http:/www.typophile.com/files/In_Design_screenshot_5175.JPG)\n\n"
+    },
+    {
+      "time": " 10.Feb.2008 7.18am",
+      "content": "Nikki,\n\nthere are two types of kerning: OpenType (kern feature in GPOS table) and TrueType (old-style kern table). FontLab Studio lets you specify which type of kerning (just one or both) you are including in your font (Preferences / Generating OpenType & TrueType / Kerning).\n\nA.\n\n"
+    },
+    {
+      "time": " 9.Mar.2008 3.07am",
+      "content": "All the spacing works in notepad, still not in word, but that is ok as we wrote a custom application to use the font in.  \nIn case anyone else is interested, we use a rich edit control text box, which seems to handle the spacing perfectly.\n\nThanks for all your help.\n\nNikki\n\n"
+    }
+  ]
+}

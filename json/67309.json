@@ -1,0 +1,54 @@
+{
+  "id": "67309",
+  "title": "Type Controller",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hello all interested readers,\n\nI've been working on a script, build in Processing Java, that enables me to draw lines on another line. I created a \"skeleton\" as a typeface in XY-code. These lines will connect other lines that will give some sort of weight to the shapes.\n\nVisual example of the story I am telling above this line:\n\n ![](http://web.archive.org/web/20100214222916im_/http:/typophile.com/files/lijnoplijn_6665.jpg)\n\nThrough a device that I build I can send values (from 0 till 1023 because of the 10k system) to my serial port (USB). I attached 4 potentiometers to my IO-board that I will use to remodel the shapes I show above. I also have a red button to make a tiff file.\n\nhere's a small preview of that device I built:\n\n ![](http://web.archive.org/web/20100214222916im_/http:/typophile.com/files/post_01_6310.jpg)\n\nI programmed the software to give the shorter lines, as you can see at the top of this topic, an variable angle. This angle is based on the input of the potentiometers. I can also make the lines larger so that it creates a bolder version.\n\nI just drag one end of the line and change the XY-position. This wil result in: changing the angle and the total lenght of the line itself.\n\nI also wanted to program an italic function for the whole letter. I didn't want to just angle the entire shape, I wanted to make a \"good\" italic.\n\nIt took me some math skills, and a lot of time to program it. I also connected the value of a potentiometer to the italic function, so you can shape it all by turning the knobs.\n\n\\*No keyboard or mouse involved, except for typing your texts\\*\n\nI also managed to let the serifs \"shrink\" as the italic kicks in.\n\nItalics:\n\n ![](http://web.archive.org/web/20100214222916im_/http:/typophile.com/files/post_02_3517.jpg)\n\nThe results:\n\n ![](http://web.archive.org/web/20100214222916im_/http:/typophile.com/files/post_typecontroller_3668.jpg)\n\n ![](http://web.archive.org/web/20100214222916im_/http:/typophile.com/files/post_typecontroller2_5232.jpg)\n\n ![](http://web.archive.org/web/20100214222916im_/http:/typophile.com/files/post_typecontroller3_6317.jpg)\n\nI hope that this topic will generate a discussion that will help me to expand the functions.\n\n",
+  "author": "<a href=\"/web/20100214222916/http://typophile.com/user/55632\" title=\"View user profile.\">Joshua_Koomen</a>",
+  "time": "<br>",
+  "uid": "55632",
+  "comments": [
+    {
+      "time": "",
+      "content": "Here's the code that explains why the 'a' changes when it's slanted/italic...\n\nvoid draw\\_a () {\n\nsensorValue = arduino.analogRead(sensorPin); // reads the knob  \nint range = ((sensorValue)/19); // range for the italic function\n\nif (range \\> 20) { // if the range is greater then 20, then the shape should be like this\n\nint y;  \n y = 100 - range; // 100 is x height\n\nrLine( 20 , 100 , 70+ range\\*(100-y)/60 , y );  \n rLine( 20+range , 40 , 20 , 100 ); //range is controlled by knob  \n rLine( 20+range , 40 , 70+range , 40 ); //range is controlled by knob  \n rLine( 70+range , 40 , 70 , 100 ); //range is controlled by knob  \n rLine( 70 , 100 , 80 , 100 );\n\ntranslate(spacing+11, 0);  \n }\n\nif (range \\< 20) { // if the range is lower then 20, then the shape should be like this\n\n// now the xy coordinates to make the letter\n\nrLine( 20+range , 40 , 70+range , 40 ); //range is controlled by knob  \n rLine( 20+range/2 , 70 , 70+range/2 , 70 ); //range is controlled by knob  \n rLine( 20 , 100 , 80 , 100 );  \n rLine( 70+range , 40 , 70 , 100 ); //range is controlled by knob  \n rLine( 20+range/2 , 70 , 20 , 100 ); //range is controlled by knob\n\ntranslate(spacing+11, 0); // spacing system\n\n}\n\n}\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hey, nice gadget!  \n(Can't help thinking a pure software/mouse version would be easier, but then it wouldn't be as much fun.)\n\nCan we expect a Wii version soon? Make Font Creation a game for the masses!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Theunis,\n\nYes, I realise that a pure software/mouse version would be easier, but I must admit, I love to build installations.\n\nThat Wii version is a good idea... it makes me want to look for possibilities (I'm sure I can hack a Wii-mote for input).\n\nI'm using an Arduino IO-board for controlling the electronics. There are several tutorials about hacking the Wii-mote for use in an Arduino installation.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I don't understand any of the technical stuff, but that thing is seriously cool! As for expanding the functions, how about some general size knobs (height, width), colour knob, rotation knob (so you can make a [rotalic](http://web.archive.org/web/20100214222916/http:/www.pilcrowtype.com/blog/archives/114)). If you could make different sizes of type in different colours, this would be a neat way to produce flyers or posters etc.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I love the analog dials controlling the digital creation. It's like an old mixing board for type.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>- As for expanding the functions, how about some general size knobs (height, width), colour knob, rotation knob (so you can make a rotalic). If you could make different sizes of type in different colours, this would be a neat way to produce flyers or posters etc. -</cite>\n\nHello Kottis,\n\nYes it would be nice to build in a height and width function. I already thought about colour and rotation, but I don't want to make a \"design machine\" of it. I think colour could be fun, but rotation is, for my taste, a bit to much.\n\nWhen I push the red button the scripts writes a vector PDF of the typed and modelled letters. So I can do advanced tricks in Indesign/Illustrator with the letters.\n\nThanks for the suggestions.\n\n"
+    },
+    {
+      "time": "",
+      "content": "[http://en.wikipedia.org/wiki/GRASS\\_%28programming\\_language%29](http://web.archive.org/web/20100214222916/http:/en.wikipedia.org/wiki/GRASS_%28programming_language%29 \"http://en.wikipedia.org/wiki/GRASS\\_%28programming\\_language%29\")\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "I am not sure how you input the skeleton, (Looks like hard coding points) but it seems quite possible to do curves.\n\n"
+    },
+    {
+      "time": "",
+      "content": "And I love your italic idea, (to generate an italic from a roman)!\n\nI do have a question about that: Is the top of the italic a still a combination of two lines overlapping each other, because your skeleton still has three \"horizontal\" lines?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Bruno <cite>- Is the top of the italic a still a combination of two lines overlapping each other, because your skeleton still has three \"horizontal\" lines? -</cite>\n\nAll I do is lower (or rise) one end of the line when I turn the knob. I programmed the lines so that there's always a connection between the lines. So when you make an italic, the lines stick together, thanks to this line of code:\n\ny = 100 - range; // 100 is x height\n\nrLine( 20 , 100 , 70+ range\\*(100-y)/60 , y );  \nrLine( 20+range , 40 , 20 , 100 ); //range is controlled by knob  \nrLine( 20+range , 40 , 70+range , 40 ); //range is controlled by knob  \nrLine( 70+range , 40 , 70 , 100 ); //range is controlled by knob  \nrLine( 70 , 100 , 80 , 100 );\n\nIf you draw it on a, for example, grid paper you will see the appearing of an 'a'. The range part will change the values by adding up.\n\nExample:\n\n70+ range\\*(100-y)/60 , y )\n\n=\n\n70+ 59\\*(100-y)/60, y // 59 will be the range data.\n\nI hope I answered your question correctly.\n\nThanks for your input.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "43476",
+  "title": "Font Agent Pro 4.0 and length of PSName",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’ve been doodling around with font managers recently and found this interesting quirk in Font Agent Pro (FAP).\n\nIf an OpenType/CFF font has a PostScript name longer than 28 characters, FAP does not recognize it as a font.\n\nFontBook handles the font fine, as does dropping it directly into the various font folders on OSX. And when running the name audit in FontLab, PS names longer than 28 characters (29 and 30 char. in my examples) are deemed to be fine. The font also work fine in WIndows XP.\n\nIf I remember correctly this 28 character limit was an old spec. Hasn’t this changed? What are current best practices?\n\nJames\n\n [‹ Creating TeX Fonts and Symbols](http://web.archive.org/web/20080821152108/http:/www.typophile.com/node/43489 \"Go to previous forum topic\") [display problem ›](http://web.archive.org/web/20080821152108/http:/www.typophile.com/node/43456 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080821152108/http://www.typophile.com/user/1947\" title=\"View user profile.\">terminaldesign</a>",
+  "time": "<br>",
+  "uid": "1947",
+  "comments": [
+    {
+      "time": " 22.Mar.2008 9.56am",
+      "content": "To my eyes it also proves that FAP handles font names the old-fashioned way. PSNames may be an old spec but is still used in some apps (Word Mac 2004, FileMaker etc.) and is one of the most constraining parameters in namings. I find it actually weird that FAP looks for PS names in an OTCFF font, where it should at least look for OT Names/Mac Names (the latter has the same flavour of length limits by the way)\n\nOn Windows XP I found some fonts with PS names longer than 28 chars that simply wouldn’t install. (plain drag n drop install, no fancy FAP stuff.)\n\n"
+    },
+    {
+      "time": " 22.Mar.2008 6.06pm",
+      "content": "The limit on length of a PostScript FontName is 31 characters. FontAgent Pro seems to have a bug.\n\nIn OpenType CFF fonts, Adobe has historically chosen to limit our own PostScript FontNames to 27 characters, so we can fit names of the form “PSFontName.otf” within 31 characters (old Mac Classic filename limit). However, this is not a requirement of the format.\n\nAt some point, we’ll decide we’re no longer worried about Mac OS 8/9/Classic, and we will start having longer PS FontNames when it seems helpful.\n\nSide note: Classic Mac font menu name (name.ID=18) also has a limit, which is 63 characters, but there are limitations in old versions of Mac Office which require that the name have unique characters within the first 31 characters, as Mac Office would ignore anything after that. (Serious bug!)\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": " 22.Mar.2008 7.02pm",
+      "content": "Thank you Thomas.\n\n"
+    },
+    {
+      "time": " 24.Mar.2008 4.10pm",
+      "content": "I contacted FAP to express my displeasure at their 28 glyph PSFontName limitation and they informed me that this was going to change in version 4.1.\n\nJames\n\n"
+    }
+  ]
+}

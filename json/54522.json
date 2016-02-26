@@ -1,0 +1,86 @@
+{
+  "id": "54522",
+  "title": "Metrics bug in Fontlab? - and what constitutes 'percentage' of sidebearings?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Here's something really annoying. Suppose you have some small caps and you want to make a rough pass at spacing them more generously.\n\nFontlab, like Fontographer, has a provision for increasing spacing of selected or all glyphs by x units or x percent.\n\nYou will obviously choose percent - - if you're me - -\n\nProblem is, Fontlab, unlike Fontographer if my memory is correct, doesn't understand 0 or negative sidebearing values, so simply does nothing to these glyphs. Astonishing.\n\nOK. Just checked with Fog. Fog understands that decreasing Left SB of -10 by 30% results in a value of -7. But Fog doesn't do anything with 0. And a sidebearing of 1, decreased by 50%, results in a useless value of 0.5\n\nSo maybe Fontlab is right to ignore these values?\n\nBut that leaves a question: what _does_ constitute my request: 'increase the spacing of A-Z by 30%' ? And how do I achieve it? Obviously the machines don't understand what 'percentage' means in this context, but then, neither do I, so I can't complain. But I would like to get there, just the same. Any ideas?\n\n",
+  "author": "billtroop",
+  "time": "7 Feb 2009 — 7:58am",
+  "uid": "4019",
+  "comments": [
+    {
+      "time": "7 Feb 2009 — 8:37am",
+      "content": "Here's one try at reasoning it out. Suppose you have H with sidebearings of 40 and 40, and you have V with sidebearings of 0 and 0. Increasing the value of 40 by 25% would give you 50. So how do we determine the percentage of increase for V? Do we have to consider V in relation to H? Should the 'percentage' be derived from H, with the left sidebearing being considered 100%? In which case where is 0%? Suppose we obtain our value by subtracting the SB with a 0 or negative value from the value of H? Would that work?\n\nWhat happens when layout programs do tracking? For example, suppose you had the string HHVHVVH. How would Quark and InDesign apply positive tracking to this string?\n\nI'm ashamed to admit that after all these years in font design I have no answers to these very basic questions!\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 8:38am",
+      "content": "It's been a while since I messed around with this, and I seem to recall that FontLab was confused by negative values: it would adjust the value itself, which would make the spacing wider if you were trying to make it tighter and vice versa.\n\nOne thing I would advise is to use the measurement line option when performing these kinds of operations, because then you can increase or decrease the sidebearings relative to stems and bowls, rather than to the extremes of the glyph. First position the measurement line at an appropriate height (typically a little more than halfway up the x-height for a Latin typeface) and then adjust metrics using the Action Set dialogue, checking the 'Use the measurement line option'. Note that some letters such as _a_ and c will need either manual adjustment or a separate pass with the adjust metrics tool, since the measurement line won't intersect the outline in a useful place.\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 8:40am",
+      "content": "Adjusting left and right sidebearings by 30% or -30% works fine on positive and negative sidebearings for me.\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 8:41am",
+      "content": "Tracking adds a fixed amount to the advance width of each glyph, regardless of the shape of the glyph: the more tracking you apply the worse the relative spacing of divergently shaped glyphs becomes. It is a pretty crude mechanism.\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 8:45am",
+      "content": "James, yes, this seems to work in the current version of FontLab Studio. A negative percentage adjustment always decreases the sidebearing, even if the sidebearing is a negative value.\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 9:00am",
+      "content": "In the case of a zero sidebearing that generates no change I think that Fontlab should provide a warning and offer to mark those glyphs for the user to tweak manually. Finding a solution to this for sans, serifs, H, and V doesn’t seem possible, and in most fonts there will not be enough problem characters that this will really be an issue.\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 9:21am",
+      "content": "\\>One thing I would advise is to use the measurement line option when performing these kinds of operations, because then you can increase or decrease the sidebearings relative to stems and bowls,\n\nBut John, that won't work for V, W, X, etc. Nor will it work for O shapes, all of which vary according to where the line is. Or L. In fact it will only predictably work for H, I, etc. as far as I can see.\n\n\\>Adjusting left and right sidebearings by 30% or -30% works fine on positive and negative sidebearings for me.\n\nJames, you're right about the negative values, I see, but only for _some_ negative values. For example, try adjusting A sidebearings of 3,3 by 30%. Fontlab does nothing! (Fog would probably give you something close to a 1-unit change, which is not helpful.) That means when you select A-Z, and tell Fontlab (or another program) to add 30% to the amount of sidebearings, H will change a lot, and A not at all. If you use the measuring line for A, the value will change all over the map, depending on where the measuring line happens to hit the diagonal. So that doesn't work for me at all. All it means is that for larger values, there is a very large shift in units, whereas for small values, there is a disproportionately tiny shift in values. Whatever happens, you are _not_ getting a proportional increase or decrease of spacing in the range of glyphs e.g. A-Z.\n\nThis leaves the question: what constitutes a percentage of metrics in terms that are useful to a typeface designer?\n\nAgain: I can't think of anything better, conceptually, than using the value of H in some sort of equation. But there must be something better!\n\nIn the meantime, it is clear that doing percentage changes is almost valueless. I would have been better off just adding 10 units to everything.\n\nAH: I think I have it. Kind of. When we say we want A-Z with thirty percent more spacing, do we mean that we want the total width to be 30% greater? Even if we did (and I now begin to doubt this), we would still be faced with the problem of getting the glyph back into the proper proportional placement within the glyph. There are many glyphs that we don't want 'centred'.\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 9:49am",
+      "content": "Another illustration of the problem. Suppose F has sidebearings of 45,11. We apply a 30% change and get 58,14. So left side has changed by 13 units while right side has changed by only 3 units. Obviously something is wrong here, because these values are of no interest to a type designer.\n\nDid I mention that this font is an old one of mine where I made the huge conceptual mistake of using Berthold-style kerning? Multiply that by four masters and you can see what kind of trouble I'm in.\n\nWhen I was designing the font, I looked at many of the metrics files for the Adobe Berthold fonts. There wasn't a single one that didn't have at least one obvious kerning mistake -- and that was after they had fixed the pretty dodgy data that came from Berthold. Instead of accepting the reality that Berthold kerning is just too much trouble for anyone, I said to myself, well, I will just be more careful than Adobe and I won't make any mistakes. Hmph. I could not have been more wrong.\n\nTo add to the fun, 5.04/Vista just crashed when I attempted to export metrics - - I wanted to see what would happen when you export metrics from an MM - - oh yeah, you just get a binary .mmm file. Would be nice to have a wonderful MM-style AFM format. I wonder if anyone at Adobe ever worked on this? Or is there any way to convert a .mmm file into readable/editable ASCII?\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 2:56pm",
+      "content": "I have been running into the exact same problem lately with my small caps spacing. I wasn't happy with the results of increasing by fixed units, so I thought percentages would be the better route. But as you point out, this method doesn't really help.\n\nOne thing I'm curious is how InDesign tracks vs. adding or subtracting spacing the glyph data in Fontlab. It seems like if you track-in a set of caps 30 units in InDesign the result looks different than if you reduced your sidebearings in Fontlab 15 units on each side. I'd be curious to do a visual test of this and compare the lengths of lines done either way.\n\nI think when it comes to tracking new sidebearings you just have to do it manually. There is just a traditional look to how things should space wide vs tight that I don't think corresponds to any particular relation to sidebearing data, measurement line wise or otherwise. Without getting into ridiculous kerning schemes, there is a limit to negative metrics value you can have to glyphs like V and R. So these limits affect how tight you can make other letters. This is particularly true with all caps. The sidebearings of capital letters just don't relate in a linear way between loose and wide spacing schemes. Or so it seems to me.\n\nI have never worked with MM metrics and kerning... the thought frightens me!\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 7:45pm",
+      "content": "I think increasing or decreasing sidebearings by percentage is inherently problematic. I wouldn't do it.\n\nThe way I think about spacing is this: The sidebearing is the sum of two fixed values: a constant amount of space between characters plus a positive or negative adjustment for optical alignment, which depends on the profile of each character. One of these is global, while the other varies from character to character. Both of these are fixed values, but they are not stored separately in a font, rather, they are stored as an aggregate value in the sidebearings. Changing the sidebearings by a percentage destroys the independent nature of these two values since it acts on both at the same time. You really want to only change the global inter-character space constant, not the optical adjustment of individual characters. Increasing or decreasing by a fixed amount (globally), in effect, does this.\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 7:55pm",
+      "content": "Bill, as I wrote, some letters need either manual adjustment or separate passes. But the measurement line, if set at an appropriate height, works well for both straight stems and bowls, presuming your glyphs are well spaced, relative to each other, to begin with. Even odd shapes like the right side of B will work pretty well; it is only shapes with deep distances such as C and L that are likely to be thrown massively out of whack.\n\nAlso note that when I say 'pretty well', I mean in the context of automated spacing adjustment. I don't use automated spacing adjustment.\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 8:01pm",
+      "content": "That's an interesting way of conceptualizing what's being done when spacing is being calculated for sidebearings. But unless you actually set these values numerically in a table somewhere, does this really help in making the calculations? I'm imagining that one would calculate the optical value relative to the minimum global spacing you can get away with? I'll have to try that and see how it works out.\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 8:11pm",
+      "content": "It's just a conceptual model. I brought it up as a way to explain what I think is the problematic nature of adjusting sidebearings by percentage.\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 8:36pm",
+      "content": "Mark's thinking about is also a view David Kindersley argued for in his writing about spacing.\n\n"
+    },
+    {
+      "time": "7 Feb 2009 — 8:47pm",
+      "content": "Oh, interesting. I've heard that Kindersley had a method, but I've never actually looked it up. I think I got the idea from a book about lettering I saw in a book store years ago. I can picture the diagrams vividly, and it made a lasting impression, but I didn't buy the book and don't remember the title or author.\n\n"
+    },
+    {
+      "time": "11 Feb 2009 — 1:08am",
+      "content": "I'm not sure if this will do the trick but this is how I scale sidebearings:\n\nMake a copy of the font, scale the whole font. Copy and \"paste special\" right and left sidebearings back to the original font. I usually decompose the copy to prevent sidebearing freakouts on composites.\n\n"
+    },
+    {
+      "time": "12 Feb 2009 — 9:26am",
+      "content": "\\>scale the whole font\n\nThat is absolutely brilliant! But if that copes with 0 and negative sidebearings properly, you would think the ordinary 'features' could. I am anxious to try it out.\n\nKerning import is another problem area . . . .\n\n"
+    },
+    {
+      "time": "16 Feb 2009 — 12:39pm",
+      "content": "\"But John, that won’t work for V, W, X, etc. \"  \nWhat will? Annoying Hu?\n\n\"Make a copy of the font, [stop right there, take the needle out of your idea]:  \n...scale a whole 'glyph group' in x (or x and y) from the center of each width at the baseline by T H E single variable (P) that brings the largest kern in the group to Zero side bearing... change new all positive sbs proportionally but a variable (N), and then scale up by the reciprocal of P from the same proportional spot in each glyph as the original P scale...\n\nThat should theoretically work with N twiddling and would save time unless you actually have to l o-o k at it all anyway, (and, How Annoying is That!;) If something's not right, or I'm aiming a design to another target, I select the first, last and in-between glyphs of the group, create and size a metrics window to see 'em all, and let my fingers do the math for my eyes to see and be done with it.\n\nThat's just one way of doing 't though, I can imagine preferring some magic button with glowing dials.\n\nCheers!\n\n"
+    }
+  ]
+}

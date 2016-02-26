@@ -1,0 +1,58 @@
+{
+  "id": "104290",
+  "title": "Cannot force substitution feature to work",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "The problem:  \nI want sequence of U+0435 (CYRILLIC SMALL LETTER IE, name \"uni0435\") and U+00A8 (name \"dieresis\") chars to be substituted by U+0451 (CYRILLIC SMALL LETTER IO, name \"uni0451\") char.  \nI want sequence of U+F0987 (Supplementary Private Use Area, name \"uF0987\") and U+100987 (Supplementary Private Use Area, name \"u100987\") chars to be substituted by \"myglyph1\" glyph (\"myglyph1\" has no Unicode position).  \nI want sequence of U+F0986 (Supplementary Private Use Area, name \"uF0986\") and U+100986 (Supplementary Private Use Area, name \"u100986\") chars to be substituted by \"myglyph2\" glyph (\"myglyph2\" has no Unicode position).  \nI want sequence of \"uni0451\", \"myglyph1\" and \"myglyph2\" glyphs to be substituted by \"myglyph3\" glyph (\"myglyph3\" has no Unicode position).\n\nSo that if I have uni0435 + uni00A8 + uniF0987 + uni100987 + uniF0986 + uni100986 sequence, I want it all to be substituted by \"myglyph3\" glyph.\n\nI thought about this kind of opentype code:\n\n`\nlanguagesystem DFLT dflt;\nlanguagesystem cyrl dflt;\nlanguagesystem latn dflt;\nfeature ccmp { # Glyph Composition / Decomposition\n # DEFAULT\nlookup ccmp0 {\n    sub uni0435 dieresis by uni0451;\n    sub uF0987 u100987 by myglyph1;\n    sub uF0986 u100986 by myglyph2;\n    sub uni0451 myglyph1 myglyph2 by myglyph3;\n} ccmp0;\n script cyrl; # Cyrillic\nlookup ccmp0;\n script latn; # Latin\nlookup ccmp0;\n} ccmp;\n`  \n(or feature \"dlig\")\n\nand MS VOLT lookup source:\n\n`\nDEF_LOOKUP \"l002\" PROCESS_BASE PROCESS_MARKS ALL DIRECTION LTR\nIN_CONTEXT\nEND_CONTEXT\nAS_SUBSTITUTION\nSUB GLYPH \"uni0435\" GLYPH \"dieresis\"\nWITH GLYPH \"uni0451\"\nEND_SUB\nSUB GLYPH \"uF0987\" GLYPH \"u100987\"\nWITH GLYPH \"myglyph1\"\nEND_SUB\nSUB GLYPH \"uF0986\" GLYPH \"u100986\"\nWITH GLYPH \"myglyph2\"\nEND_SUB\nSUB GLYPH \"uni0451\" GLYPH \"myglyph1\" GLYPH \"myglyph2\"\nWITH GLYPH \"myglyph3\"\nEND_SUB\nEND_SUBSTITUTION\nEND\n`\n\nand I tried to ship font using MS VOLT, but this compiled feature becomes unavailable in Chrome browser (Firefox is OK, I didn't test IE10). How can I solve the problem with Microsoft VOLT or FontLab?\n\n",
+  "author": "PhysicallyReal",
+  "time": "1 Jul 2013 — 8:40pm",
+  "uid": "212725",
+  "comments": [
+    {
+      "time": "4 Jul 2013 — 9:41pm",
+      "content": "Actually, I don't even know what software should I use to add substitution feature to the font.  \nFor example, I just want to substitute uni0435+dieresis by uni0451, that's all.  \nIf I want to use MS Volt or Fontforge, then what exactly should I do so my browser could access this feature (using CSS \"font-feature-settings\")?\n\n"
+    },
+    {
+      "time": "17 Jul 2013 — 12:52pm",
+      "content": "I don't see any reason that your code and approach shouldn't work. If it works without applying any explicit features in Firefox, but not in Chrome, then it sure sounds like Firefox is behaving correctly, and Chrome has a significant bug in not applying required features.\n\n(On the side, \"substitute uni0435+dieresis by uni0451\" doesn't sound quite right. The dieresis encoded at U+00A8 is not the combining dieresis, that would be U+0308.)\n\n"
+    },
+    {
+      "time": "17 Jul 2013 — 2:07pm",
+      "content": "I believe the dieresis at U+00A8 is what most of us think of as a \"legacy\" dieresis. It originated back when only the first 127 characters of ASCII were fixed. In many 8-bit ASCII encodings, there was a dieresis at A8.\n\nIt should live on only for the proper reading of older texts, before Unicode. (Unless there is any need for a spacing modifier dieresis, as I don't believe Unicode has one.) Any new use as a combining diacritical should be U+0308.\n\nHaving said that, most font designer's don't bother with including **any** of the combining diacritics, which makes their fonts not proper Unicode.\n\n"
+    },
+    {
+      "time": "29 Jul 2013 — 6:07pm",
+      "content": "\\> which makes their fonts not proper Unicode\n\nI was in 100% agreement with you until that phrase. I might say instead \"which means they have a pretty stupid character set.\"\n\n"
+    },
+    {
+      "time": "30 Jul 2013 — 4:14am",
+      "content": "> If it works without applying any explicit features in Firefox, but not in Chrome, then it sure sounds like Firefox is behaving correctly, and Chrome has a significant bug in not applying required features. [Thomas Phinney]\n\nThomas, concerning the characters in the extended private user area, at the end of the unicode consortium file [http://www.unicode.org/Public/UNIDATA/NamesList.txt](http://web.archive.org/web/20150426231702/http:/www.unicode.org/Public/UNIDATA/NamesList.txt \"http://www.unicode.org/Public/UNIDATA/NamesList.txt\") it is explicitly written\n\n> @+ These codes are intended for process-internal uses, but are not permitted for interchange.\n\nIf those codes are provided as input to Chrome and the consortium says they are not permitted for interchange, why would Chrome not be allowed to consider them as garbage?\n\n"
+    },
+    {
+      "time": "30 Jul 2013 — 12:30pm",
+      "content": "Concerning the original question, I suggest having a look at [Opentype features in web browsers](http://web.archive.org/web/20150426231702/https:/www.typotheque.com/articles/opentype_features_in_web_browsers) by Gustavo Ferreira on typotheque. There is a [series of tests](http://web.archive.org/web/20150426231702/https:/www.typotheque.com/articles/opentype_features_in_web_browsers_-_tests), and in particular for [liga](http://web.archive.org/web/20150426231702/https:/www.typotheque.com/articles/opentype_features_in_web_browsers_-_tests#liga), standard ligatures. Unfortunately, the syntax varies from browser to browser. I managed to get the ligatures working with Chrome on Mac OS X 10.8 (with a webkit font) with the following settings (a list copied from the site so as to cover most browsers and situations)\n\n    font-feature-settings: \"liga\" on;   \n    /* vendor-prefixes */\n    -moz-font-feature-settings: 'liga=1';\n    -ms-font-feature-settings: \"liga\" on;\n    -webkit-font-feature-settings: \"liga\" on;\n    -o-font-feature-settings: \"liga\" on;\n\nand Chrome even accepted those weird ligatures I imagined as some kind of test after reading the initial post:\n\n    lookup ligaStandardLigaturesinLatinloo {\n      lookupflag 0;\n        sub \\A \\B by \\C;\n        sub \\uF0987 \\u100987 by \\Z;\n    } ligaStandardLigaturesinLatinloo;\n    \n    feature liga {\n      script DFLT;\n         language dflt ;\n          lookup ligaStandardLigaturesinLatinloo;\n      script latn;\n         language dflt ;\n          lookup ligaStandardLigaturesinLatinloo;\n    } liga;\n\nThe font was made with FontForge (with the graphic interface) and the above feature file is the output from FontForge (and such a feature file can also be used in FontForge with Merge feature file; I prefer using feature files for contextual ligatures and alternates but for liga, the graphic interface works comfortably). As a conclusion, ligatures are not automatic, and also Chrome does not reject disallowed input (I am not sure I like that).\n\nAll that being said, I must confess I am also puzzled by the original post. Concerning the letter uni0451, it is normally obtained using a keyboard by first typing a key corresponding to dieresis, and then the key corresponding to uni0435; the final effect is that a single character is entered into the text, and it is uni0451. There is no need of a feature file for that, the keyboard layout sends the right character, uni0451, to the text editor. Everything works fine as long as those three characters are in the font (and you have the appropriate keyboard).\n\n"
+    },
+    {
+      "time": "30 Jul 2013 — 8:14pm",
+      "content": "@Thomas,\n\nI agree it's \"stupid\" (\"not the sharpest knife in the drawer\" is gentler, maybe?), but I'll stick with it not being proper Unicode, for the following reason. Remember, the consortium put their foot down on assigning any more codepoints to accented characters. IIRC, at that time, they allowed they'd never intended to give so many accented characters codepoints anyway, such characters were **suppose** to be constructed using base characters and combining diacritics.\n\n"
+    },
+    {
+      "time": "2 Aug 2013 — 9:52am",
+      "content": "Michel: Look at the codepoints that comment is applied to more carefully. That comment is applied to explicitly unassigned blocks which are never supposed to be used. It is NOT applied to the three Private Use Area code blocks. At least, that's how I read it. As the characters under discussion are in PUA, and not in any of these reserved non-character blocks, I don't see how this is relevant.\n\nExamples of reserved non-characters: FDDO, 2FF80-2FFFF, EFF80-EFFFF....\n\nThe three PUA blocks:\n\nU+E000..U+F8FF (though some of these have been used for Variation Selectors and other oddities)  \nU+F0000..U+FFFFD (Supplemental Private Use Area A)  \nU+100000..U+10FFFD (Supplemental Private Use Area B)\n\n"
+    },
+    {
+      "time": "2 Aug 2013 — 11:41am",
+      "content": "The characters used were indeed not touched by the \"ban\" which concerned only a limited portion of the areas namely (from the last lines of [NamesList.txt](http://web.archive.org/web/20150426231702/http:/www.unicode.org/Public/UNIDATA/NamesList.txt))\n\n    @@\tFFF80\tSupplementary Private Use Area-A\tFFFFF\n    @@\t10FF80\tSupplementary Private Use Area-B\t10FFFF\n\nI am afraid I was also misled by the meaning I was giving to the word \"private\" (that has a completely different meaning in cryptography).\n\n"
+    },
+    {
+      "time": "3 Aug 2013 — 2:50pm",
+      "content": "Ah! I see.\n\nYes, in Unicode the \"Private Use Areas\" are special zones for people to use the character codes for basically whatever they want. Apps are generally expected to be able to handle and process PUA characters. They are not unusual in the field—particularly the first Private Use Area in the Basic Multilingual Plane has been used pretty extensively....\n\n"
+    },
+    {
+      "time": "3 Aug 2013 — 3:10pm",
+      "content": "I would rather call those areas \"Public playground\" than \"Private user area\". I wonder where those that chose the terminology are from.\n\n"
+    }
+  ]
+}

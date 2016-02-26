@@ -1,0 +1,30 @@
+{
+  "id": "106666",
+  "title": "Microsoft again: What's wrong with WordPad?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Does anybody have any idea why is Microsoft doing this? Why can't it render the font as Lucida and instead chooses Arial if the typeface has the characters?\n\n ![](http://web.archive.org/web/20140804203614im_/http:/typophile.com/files/monte%201_3704.png)\n\n ![](http://web.archive.org/web/20140804203614im_/http:/typophile.com/files/monte%202_5445.png)\n\n",
+  "author": "Sylph",
+  "time": "8 Oct 2013 — 12:49am",
+  "uid": "29977",
+  "comments": [
+    {
+      "time": "8 Oct 2013 — 4:00pm",
+      "content": "This is presumably due to RichEdit's font fallback mechanism. I'm guessing there is some piece of metadata missing in the Lucida font that RichEdit is looking for as an indicator of support for particular Unicode ranges. So eveb though the font contains cmap support for the characters you want, RichEdit is switching to a fallback that it knows supports them. Yes, 'tis frustrating.\n\n"
+    },
+    {
+      "time": "12 Oct 2013 — 11:54am",
+      "content": "Thank you!\n\nThat is what I needed – an expert explanation.\n\nAll what you tell me won't change if I try to “trick” WordPad and save the file as .docx?\n\n"
+    },
+    {
+      "time": "12 Oct 2013 — 5:03pm",
+      "content": "The font switching is something that happens at text input time. You should be able to select all the text you have input and apply the font you want, and it should work correctly. Also, you should be able to input text in a plain text editor and then paste it into WordPad with the font set as you want.\n\n"
+    },
+    {
+      "time": "13 Oct 2013 — 3:03am",
+      "content": "Yep, I tried that, tried pasting unformatted text, but nothing.\n\nIt seems that some editors render fonts differently, they try to condense Lucida:\n\n ![](http://web.archive.org/web/20140804203614im_/http:/typophile.com/files/non%20wordpad_5900.png)\n\n ![](http://web.archive.org/web/20140804203614im_/http:/typophile.com/files/wordpad_6696.png)\n\n"
+    }
+  ]
+}

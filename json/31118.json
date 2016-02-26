@@ -1,0 +1,170 @@
+{
+  "id": "31118",
+  "title": "Font naming system",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi all,\n\nI searching for a definitive system for naming opentype font families in Fontlab that works accross platforms. Problems I've experienced are mainly to do with the font list in applications, font styles in families not appearing in the correct order, so instead of Light, Regular, Medium, Bold I have Bold, Regular, Medium, Light. Sometimes I have the situation where the lIght will appear at the bottom of the list seperate from the rest of the family. I just what the font family name to appear alphabetically and then within the font style names to appear in order.\n\nI have read many post on this subject and the fontlab manual, but I still don't have a definitive answer that works accross platforms.\n\nAny help would be GREATLY appreciated\n\nc.\n\n",
+  "author": "coop",
+  "time": "3 Feb 2007 — 2:38am",
+  "uid": "5642",
+  "comments": [
+    {
+      "time": "3 Feb 2007 — 4:01am",
+      "content": "FontLab Group, Tips and Tricks : [Font Family Naming in FontLab](http://web.archive.org/web/20140721053322/http:/groups.msn.com/fontlab/tipsandtricks.msnw?action=get_message&mview=0&ID_Message=2843).\n\n"
+    },
+    {
+      "time": "3 Feb 2007 — 5:00am",
+      "content": "Coop,\n\nthe \\*definitive\\* solution to the problem is:\n\n1. If your family has more than four members, split it into style-linked groups with up to four members.\n\n2. Never use any of the \"OT\" names (i.e. OT Family Name and OT Style Name).\n\n3. In the Style Name field, have only one of the four basic values (\"Regular\", \"Italic\", \"Bold\", \"Bold Italic\").\n\n4. Your Family Name should include the name of the style-linked group, i.e. may be identical only for up to four fonts that have different Style Name. Different style-linked groups can use different suffixes to differentiate, e.g. one oculd be \"Coop Sans\", another \"Coop Sans Lt\", another \"Coop Sans Blk\", another \"Coop Sans Disp\" etc.\n\n5. Remember that your Family Name field may not exceed 31 characters, better be even shorter.\n\n6. Your PS Font Name and your Full Name may reflect the true typographic name of the font, e.g. the font with Family Name \"Coop Sans Lt\" and Style Name \"Regular\" could have the Full Name \"Coop Sans Light\" and the PS Font Name \"CoopSans-Light\".\n\nIf you follow this scheme, all your OpenType fonts will appear as style-linked groups on Windows, Mac and in Adobe applications. This somehow limits the typographic freedom of how the user will see your family, but guarantees cross-platform compatibility.\n\nIf you use the Adobe-style OpenType family naming, i.e. choose to place the alternative \"true typographic\" family naming in the OT Family Name and OT Style Name fields (e.g. for the example mentioned above it would be \"Coop Sans\" and \"Light\"), you will have \"prettier\" font menus in Mac and Adobe applications, but you won't get 100% cross-platform compatibility of documents.\n\nAdam\n\n"
+    },
+    {
+      "time": "3 Feb 2007 — 8:53am",
+      "content": "Adam,\n\nThanks for your reply, You say :\n\n2. Never use any of the “OT” names (i.e. OT Family Name and OT Style Name).\n\nbut in your plan here.\n\n[http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mvie...](http://web.archive.org/web/20140721053322/http:/groups.msn.com/fontlab/tipsandtricks.msnw?action=get_message&mview=1&ID_Message=2843 \"http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mview=1&ID\\_Message=2843\")\n\nPut Long Family in the OT \"Family Name\" field (on the OpenType-specific names pane).\n\nc.\n\n"
+    },
+    {
+      "time": "4 Feb 2007 — 6:20am",
+      "content": "Yes, my \"plan\" there describes the Adobe-style OpenType family naming. You asked for a cross-platform one, which is something different. As I stated above:\n\n_If you follow this scheme, all your OpenType fonts will appear as style-linked groups on Windows, Mac and in Adobe applications. This somehow limits the typographic freedom of how the user will see your family, but guarantees cross-platform compatibility._\n\nIf you use the Adobe-style OpenType family naming, i.e. choose to place the alternative “true typographic” family naming in the OT Family Name and OT Style Name fields (e.g. for the example mentioned above it would be “Coop Sans” and “Light”), you will have “prettier” font menus in Mac and Adobe applications, but you won’t get 100% cross-platform compatibility of documents.\n\n"
+    },
+    {
+      "time": "4 Feb 2007 — 6:38am",
+      "content": "Another piece to the puzzle solved by Adam :-)\n\nThanks!\n\nChrisL\n\n"
+    },
+    {
+      "time": "4 Feb 2007 — 9:24am",
+      "content": "Twardoch,\n\nThanks again for the reply, but I'm still not getting this.  \nIf I have an opentype font called Coop and I have.\n\nCoop Light  \nCoop Light Italic  \nCoop Regular  \nCoop Italic  \nCoop Medium  \nCoop Medium Italic  \nCoop Bold  \nCoop Bold Italic\n\nWhat names should I put in the Fields\n\nFamily Name  \nWeight  \nWidth\n\nStyle Name  \nPS Font Name  \nFull Name  \nMenu Name  \nFOND Name\n\nTo make the font appear in the right place in the font list and have all the styles appear in the correct order accross plaltforms.  \nI'm sorry to ask like this but I don't know what else to do.\n\nThis is the last piece of a long puzzle - Help\n\nAny help greatly appreciated.\n\nc.\n\n"
+    },
+    {
+      "time": "4 Feb 2007 — 2:48pm",
+      "content": "For an example, you can look at page 5 of [this](http://web.archive.org/web/20140721053322/http:/www.kltf.de/downloads/FontNaming-kltf.pdf). Replace \"Semibold\" by \"Medium\" and it should resemble your family.\n\nIf you will generate OpenType fonts only (which I get from your very first post), you do not need to fill in the \"Menu Name\" and \"FOND Name\".\n\nIf you make PS-OpenType fonts, you can use \"Coop-Regular\" in \"PS Font Name\".  \nIf you make TT-OpenType fonts too, you should use \"Coop\" (and \"CoopLight\" for the other sub-family) in \"PS Font Name\". (This name will not be displayed but is used for identifying the font.)\n\nSince it seems that you want the family to appear as identical as possible in all applications: Leave \"OT Family Name\", \"OT Style Name\" and \"Compatible Menu Name\" empty.\n\nVery important: In FLS5 Options/Preferences, section \"Generating OpenType PS (.otf)\", you must activate \"Use PostScript FontName as FullName on Windows\" if you are generating PS-OpenType fonts.\n\n**And then: Double-check if all of Adam's requirements for absolute platform-compatibility are met!**\n\nAnd do many tests.\n\nKarsten\n\n"
+    },
+    {
+      "time": "5 Feb 2007 — 5:20am",
+      "content": "Karsten,\n\nThanks for the reply - thats a great document.\n\nI still have a problem of the Light and Light Italic being seperate and they appear at the bottom the fontlist in all adobe products on the mac, I haven't tested on a PC yet.\n\nc.\n\n"
+    },
+    {
+      "time": "5 Feb 2007 — 7:54am",
+      "content": "This rather sounds like your font cache is corrupt.  \nTry this (in this order):\n\n(1) Quit all applications.  \n(2) Search for \"AdobeFnt\", then delete all files looking like \"AdobeFnt10.lst\" (if you have CS2), the number may differ. These are Adobe-app font caches.  \nBut do NOT delete files ending with\".db\".  \n(3) Use [Font Finagler](http://web.archive.org/web/20140721053322/http:/homepage.mac.com/mdouma46/fontfinagler/) or a similar tool to delete the Mac OSX system font caches. This requires a restart of the system.\n\nDoes this work?\n\n(You can contact me offline through my Typophile user page.)\n\nKarsten\n\n"
+    },
+    {
+      "time": "5 Feb 2007 — 7:55am",
+      "content": "Karsten,\n\nI tried your method on page 5 of your document, but in the font list I get two font names Coop and Coop Light within each of these are the same styles Light, Regular, Bold and Bold Italic. The onlt thing I've changed from your example is to subistute semibold for Medium..\n\nc.\n\n ![](http://web.archive.org/web/20140721053322im_/http:/typophile.com/files/coop_3595.gif)\n\n"
+    },
+    {
+      "time": "5 Feb 2007 — 7:59am",
+      "content": " **VARIANT 1**  \n**PS Font Name\\* | _Family Name_ | Style Name | _OT Family Name\\*\\*_ | OT Style Name\\*\\* | Is Bold | _Is Italic_ |**   \nCoop-Lig | _Coop Lig_ | Regular | _Coop_ | Light | N | _N_ |  \nCoop-LigIta | _Coop Lig_ | Italic | _Coop_ | Light Italic | N | _Y_ |  \nCoop-Reg | _Coop_ | Regular | _Coop_ | Regular | N | _N_ |  \nCoop-Ita | _Coop_ | Italic | _Coop_ | Italic | N | _Y_ |  \nCoop-Med | _Coop Med_ | Regular | _Coop_ | Medium | N | _N_ |  \nCoop-MedIta | _Coop Med_ | Italic | _Coop_ | Medium Italic | N | _Y_ |  \nCoop-Bol | _Coop_ | Bold | _Coop_ | Bold | Y | _N_ |  \nCoop-BolIta | _Coop_ | Bold Italic | _Coop_ | Bold Italic | Y | _Y_ |\n\n**VARIANT 2**  \n**PS Font Name\\* | _Family Name_ | Style Name | _OT Family Name\\*\\*_ | OT Style Name\\*\\* | Is Bold | _Is Italic_ |**   \nCoop-Lig | _Coop Lig_ | Regular | _Coop_ | Light | N | _N_ |  \nCoop-LigIta | _Coop Lig_ | Italic | _Coop_ | Light Italic | N | _Y_ |  \nCoop-Reg | _Coop_ | Regular | _Coop_ | Regular | N | _N_ |  \nCoop-Ita | _Coop_ | Italic | _Coop_ | Italic | N | _Y_ |  \nCoop-Med | _Coop Lig_ | Bold | _Coop_ | Medium | Y | _N_ |  \nCoop-MedIta | _Coop Lig_ | Bold Italic | _Coop_ | Medium Italic | Y | _Y_ |  \nCoop-Bol | _Coop_ | Bold | _Coop_ | Bold | Y | _N_ |  \nCoop-BolIta | _Coop_ | Bold Italic | _Coop_ | Bold Italic | Y | _Y_ |\n\nThe two variants differ in how Coop-Med and Coop-MedIta are style-linked. In the first variant, they create a style-linked group of their own, in variant 2 they are linked as bold counterparts to the Light styles.\n\n\\*) To simplify things, Full Name to be same as PS Font Name.\n\nI also recommend that the style elements in PS Font Name are always abbreviated to three letters (i.e. \"Lig\" for Light, \"Med\" for Medium, \"Bol\" for Bold etc.) In the Family Name field, you may use those abbreviations or full names, i.e. either \"Coop Lig\"/\"Coop Med\" or \"Coop Light\"/\"Coop Medium\" or even \"Coop Lt\"/\"Coop Md\". Sometimes it's wiser to use the shorter names because this leaves you room for a bunch of other suffixes that indicate the character set and your foundry, e.g. \"Coop Lig FL Pro\" etc.\n\n\\*\\*) You can either fill these fields in, then you'll get \"prettier\" Adobe-style font menus in Adobe and Apple applications, but no 100% cross-platform compatibility, or you can omit these fields entirely, then you'll get Bitstream-style \"grouped into four styles per style-linked group\" font menus and 100% cross-platform compatibility.\n\nRegards,  \nAdam Twardoch  \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": "5 Feb 2007 — 8:05am",
+      "content": "For Weight and Width use the predefined selectors (selecting true values that best match your design), but do not use a weight number lower than 250.\n\nA.\n\n"
+    },
+    {
+      "time": "5 Feb 2007 — 8:47am",
+      "content": "Twardoch,\n\nThanks for this great explanation. Final question I think - What should I be doing with the Non-English or special font names: [name] table. Do I just click on the import and leave the information or alter it or leave it blank.\n\nc.\n\n"
+    },
+    {
+      "time": "5 Feb 2007 — 11:07am",
+      "content": "Why does the FontLab user have to enter full separate information for these two variants?\n\nWhy can't I just enter one set of information, and then just click a button for either Variant 1 or Variant 2?\n\n"
+    },
+    {
+      "time": "5 Feb 2007 — 12:12pm",
+      "content": "<cite>but in the font list I get two font names Coop and Coop Light within each of these are the same styles Light, Regular, Bold and Bold Italic.</cite>\n\nYes, this is correct, and this matches Adam's Variant 2, whereas Variant 1 would give you three family names in the font list: \"Coop\", \"Coop Lig\", \"Coop Med\" -- this means, if you <cite>omit</cite> OT Family Name and OT Style Name.  \nIf you <cite>do</cite> provide OT Family Name and OT Style Name, you will see only <cite>one</cite> family (\"Coop\") in Adobe applications but two/three families e.g. in Word. (To this however applies what Adam said in the same post in footnote \\*\\* about \"prettier Adobe-style font menus\".)\n\nYou can leave the Non-English/special font name table empty, but in the options/preferences, section \"Generating OpenType PS, OpenType TT and TrueType\", select \"Do not export OpenType name records\".\n\nNice that after the many \"ifs\" it comes down to a specific solution!  \nBut the \"ifs\" are important since every little difference will make a difference later: e.g. choosing Adam's variants 1 or 2, or providing OT names or not, already results in 4 different appearances of the font family in different applications ...\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 12:26am",
+      "content": "<cite>Very important: In FLS5 Options/Preferences, section “Generating OpenType PS (.otf)”, you must activate “Use PostScript FontName as FullName on Windows” if you are generating PS-OpenType fonts.</cite>\n\nWhat's the actual effect of activating/deactivating this option?\n\nRalf\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 3:26am",
+      "content": "Oh my god, it works\n\nThank you all so much for your help and input.\n\nNot too such how and why it does, but I can work that out backwards.\n\nc.\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 4:08am",
+      "content": "Spoke too soon !\n\nOn Windows in Adobe applications the font list is fine but the Medium Italic weight is missing form the list.\n\nIs there something else I need to check in the perferences, or clear the cache on the PC - Is it possible to clear the Font cache on a PC and if so how would I do that.\n\nc.\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 7:59am",
+      "content": "\\> Why does the FontLab user have to enter full separate  \n\\> information for these two variants?  \n\\> Why can’t I just enter one set of information, and  \n\\> then just click a button for either Variant 1 or Variant 2?\n\nI don't understand the question. Those two variants are the designer's discretion, and are just examples. There are many other variants possible, and it's the designer who must make a choice how he \\*wants\\* his font menus to be structured. There are numerous limitations given by the spec, but there still is a lot of what the designer has to decide.\n\n\\>\\> Very important: In FLS5 Options/Preferences, section  \n\\>\\> “Generating OpenType PS (.otf)”, you must activate “Use  \n\\>\\> PostScript FontName as FullName on Windows” if you are  \n\\>\\> generating PS-OpenType fonts.  \n\\> What’s the actual effect of activating/deactivating this option?\n\nThis option should be always on. I think we will remove it from future releases.\n\n\\> What should I be doing with the Non-English or special  \n\\> font names: [name] table\n\nLeave it blank.\n\nRegards,  \nAdam Twardoch  \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 8:01am",
+      "content": "Hey all.\n\nI have created a script type face. Converted it all in Fontographer. It loads fine but I am having no luck when I type and use the space bar.\n\nany HELP is needed.\n\nthanks  \nR\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 8:09am",
+      "content": "Richard you should start a new thread for this. --The first thing I would check is that your \"space\" character has something other than a zero width.\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 8:17am",
+      "content": "William,\n\nThank you BIG time. Simple and it worked.\n\nRichard\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 9:33am",
+      "content": "Please advise.  \nI am new to this forum. (thanks again William).  \nHow do I create a new thread with ? about fontographer?\n\nthanks  \nR\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 10:14am",
+      "content": "_I don’t understand the question. Those two variants are the designer’s discretion, and are just examples. There are many other variants possible, and it’s the designer who must make a choice how he \\*wants\\* his font menus to be structured._\n\nThe operative word is \"choice\".  \nI would like to be able to \\*choose\\* from a selection of established, robust family name formats that I know will work, rather than spend ages inputting values, with the discretion to make all kinds of mistakes that will only become apparent after protracted trial and error testing.\n\nFontLab Family Formats? --That would certainly be useful for foundries making retail typefaces, and surely for OpenType, where the premise is ONE.\n\nAdmittedly, \"Claptrap Condensed Bold\" doesn't roll so easily off the end-user's tongue as \"Claptrap Bold Condensed\", but fonts should be organized around the way people use them, not whim or what sounds best.\n\nOf course, lower-level, manually editable naming controls will always be indispensible for custom font development, or those who want to stick with Bold Condensed.\n\n\\*\\*\\*\n\nHowever, here is a solution for the FontLab interface that would offer the designer maximum \\*choice\\*:  \n**Virtual Menus** that show how a particular family-naming scheme will display in different applications on different platforms.\n\nSo I, the designer, would enter my family naming scheme in the left fields.  \nThe right fields would show how that scheme displays in different menus, by clicking on, for instance, the [] Word [] Windows 98 buttons, or the [] Quark XPress 7 [] OS X buttons.\n\nWith such a system, I would be able to interactively fine-tune the family names for a variety of applications, without having to generate fonts, load them, and boot up applications to see how they display.\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 10:21am",
+      "content": "\\>How do I create a new thread with ? about fontographer?\n\nClick on the 'build' forum. Scroll to the bottom. You will see the button for creating a thread.\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 10:42am",
+      "content": "Nick,\n\nI will be giving some careful thought to redesigning the family naming settings for the next editions of our font editors. I will consider your suggestions.\n\nHowever, I very much doubt that Fontlab Ltd. will ever dare to provide naming suggestions \"for QuarkXPress 7\" or \"for Word XP\" or something like that. This would mean that we assume responsibility for knowing \"for sure\" exactly how these various applications recognize and organize names. It would mean that we'd need to track potential behavior changes and bugfixes made by vendors of those applications.\n\nWe're sufficiently busy in keeping track of what other companies are doing and trying to make sure that our tools are compatible with what Adobe, Apple, Microsoft, Quark etc. are doing. But it would be a different pair of shoes if we'd go from that to actually giving the customer a \\*promise\\* that certain settings will create a font that is compatible with Quark 7 or Word XP or something or other. And most certainly, we wouldn't build in hacks that would attempt to work around certain bugs in certain versions of certain applications -- only to potentially discover that their bug has been fixed in the next release and our hack is doing more harm than good.\n\nWe don't have insight into these companies source code. The companies don't publish the implementation details of their font engines. Their font people as well as Fontlab Ltd. simply do not have the resources to create a \"perfect font world\". It's as good as it gets. Adobe and Microsoft develop and publish the OpenType specification, and our mission is to be compatible with that. So is Quark's, Adobe's, Microsoft's, btw. The only promise that Fontlab Ltd. can give its customers is that our tools are compatible with OpenType. But not with Word, Quark or InDesign -- simply because we would not be able to reliably fulfil that promise.\n\nAdam\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 10:42am",
+      "content": "thanks\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 11:00am",
+      "content": "Yet another informative thread to bookmark. :)\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 12:34pm",
+      "content": "I agree, font family naming is just one of these topics, where FontLab Studio could give the user some more help. I can understand if such things as a live menu preview are hardly possible, but what about a \"naming assistant\", \"export assistant\" and so on.\n\nFontLab has a very good usability when it comes to the design of the font, but to master these hundrets of checkboxes you almost have to be a software engineer …  \nI especially love this one checkbox »Use this one only if you know what you are doing«. ;-)\n\nRalf\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 12:47pm",
+      "content": "»Use this one only if you know what you are doing«\n\nor \"Don't try this at home\" :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 1:35pm",
+      "content": "_trying to make sure that our tools are compatible with what Adobe, Apple, Microsoft, Quark etc. are doing._\n\nI think you should take a more proactive role.  \nThose guys will always be doing things different ways.  \nHowever, Fontlab is more dominant in its field than any of them are in theirs, so is ideally placed to establish some sensible family naming formats, and have the behemoths conform.  \nThat would be particular useful in weaning Microsoft from its \"a family is four\" prejudice, which is both ante-deluvian and anti-typographic.\n\nI'll repeat: such family naming standards would be primarily for retail fonts, and hence of great benefit to the end-user massive. For more specialized concerns, e.g. custom fonts for proprietary system users, there's always the \"lower\" level of manual inputting for those who know what they're doing.\n\nThanks for your consideration, Adam.\n\n\\*\\*\\*\n\nKarsten:  \nNice work on _Font Naming,_ very useful, and such exquisite typography! (Except for the annoying Th ligs... :-)\n\n"
+    },
+    {
+      "time": "6 Feb 2007 — 3:44pm",
+      "content": "And the other thing is vertical metrics.\n\nTypoascender, WinAscender, typolineheight and all that BS have absolutely nothing to do with type design--all that matters are the top and bottom of the emsquare, and the baseline.\n\n"
+    },
+    {
+      "time": "7 Feb 2007 — 4:59am",
+      "content": "(Just a post to keep this thread in my \"Track\")\n\n"
+    },
+    {
+      "time": "7 Feb 2007 — 6:20am",
+      "content": "Does font naming have anything to do with how certain programs \"understand\" fonts? For example...if I have a face called \"Biddy Sans\" and I'm using Microsoft Word, can I hit command-B and Word knows to access \"Biddy Bold\" from the family instead of outlining it?\n\nOr is this a totally unrelated question?\n\n"
+    },
+    {
+      "time": "7 Feb 2007 — 8:32am",
+      "content": ".\n\n"
+    },
+    {
+      "time": "7 Feb 2007 — 12:21pm",
+      "content": "biddy, i'm in no way as experienced as nick, adam and the other people that have joined this thread so far, but, yes, font naming is crucial for the usability within the applications. if you have two fonts \"biddy sans\" and \"biddy sans bold\" and they are not within the same family, and/or \"bold\" has not been checked when creating the font, word won't access the real bold style and electronically fatten the regular one instead. adobe applications, however, just wouldn't allow to use a bold style. you would see the bold font as a separate font in the fontmenu.\n\n// alex\n\n"
+    },
+    {
+      "time": "7 Feb 2007 — 12:27pm",
+      "content": "It's related. You need to follow the recommendations I posted in order for your style-linking to work properly.\n\nAdam\n\n"
+    },
+    {
+      "time": "7 Feb 2007 — 12:44pm",
+      "content": "Nice...thanks Adam...again with the save! :)\n\n"
+    },
+    {
+      "time": "7 Feb 2007 — 2:45pm",
+      "content": "I'm glad Microsoft has made naming so complicated with their quaint nuclear family conception of typography. (So very bourgeois, pronounced \"Bur-joyce\", of course).\n\nIt gives me the opportunity to charge my clients big bucks for making the large-family, cross-plaform font solutions they require.~\n\nI could do without the hair-tearing though (metaphoric term, hair already dispensed with).\n\nYesterday I was making an OpenType font family of two, Regular and Light. How gay.  \nBut the damn thing wouldn't even work in InDesign on OS X -- it kept giving me two separate menu entries. Somewhere in the labyrinth of code is Wintel stuff that has infected my Mac and its apps, some \"logic\" saying \"what, no bold? -- therefore the lightest weight must be regular, as well as the regular regular,\" or some such thing.\n\nThe only way I could get it to work as a single menu entry was was by naming the light weight \"Fine\" and giving it a manual numerical value of 250, and giving the Regular a manual value of 600. That produces two entries on PCs, but you get Light as a separate \"family\" there anyway.\n\nThanks, Thomas and Typophile! -- an earlier thread here helped me sort that out.\n\n"
+    }
+  ]
+}

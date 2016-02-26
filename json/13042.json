@@ -1,0 +1,74 @@
+{
+  "id": "13042",
+  "title": "Anchors in Fontlab?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Dear Typophiles,\n\nI have a few questions for those of you who are experienced in using \"Anchors\" in Fontlab.\n\nI am a student of linguistics (Comparative Indo-European Linguistics, that is). At our institute we are currently trying to make a font with advanced accent capabilities. For instance we'd like to have a simple way for putting multiple accents (\\>2) on a base glyph (see attached picture of a \"long syllabic stressed r\").\n\nFor this purpose the \"Anchors\" feature seems very useful. It seems to me, though, that anchors work only within Fontlab and cannot be understood by an ordinary word-processing program. Is that true?\n\nWhat has OpenType got to do with anchors or how could I make use of OpenType features for solving the problem (smartly and elegantly, may I add?)?\n\nThank you,  \nDavid\n\n| Attachment | Size |\n| --- | --- |\n| [r.jpg](http://web.archive.org/web/20110410172132/http:/typophile.com/files/r.jpg) | 9.6 KB |\n| [ie\\_fun.jpg](http://web.archive.org/web/20110410172132/http:/typophile.com/files/ie_fun.jpg) | 24.38 KB |\n\n",
+  "author": "<a href=\"/web/20110410172132/http://www.typophile.com/user/7689\" title=\"View user profile.\">davidb</a>",
+  "time": "<br>",
+  "uid": "7689",
+  "comments": [
+    {
+      "time": "",
+      "content": "I think that you would have to use Microsoft VOLT for this. It can export fonts with multiple anchors, as far as I know.\n\n\\_\\_  \n [www.typeoff.de](http://web.archive.org/web/20110410172132/http:/www.typeoff.de/ \"www.typeoff.de\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "I've just checked the VOLT website.  \nThat seems to be quite useful but I doubt there are any sensible applications that support these tables? I mean, it's a Microsoft thing, so how and when will I be able to actually use these features? Well, I may be not getting something here ...\n\nAny VOLT experts around? Is it possible to use VOLT in Fontlab?  \nAt least I have applied for joining the VOLT community, which is closed to a critical public.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I've never used VOLT, but I know several who do. It is a separate program. You work on your font files in it outside of FontLab (or any other app).\n\nI'm sure that there are some applications that you can test these fonts in, althought you might have to track down InDesign CE (not CS, CE) or InDesign ME (Middle East). Or maybe some Vietnamese software…\n\n\\_\\_  \n [www.typeoff.de](http://web.archive.org/web/20110410172132/http:/www.typeoff.de/ \"www.typeoff.de\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "I think I understand better now.\n\nThe table of interest here is the GPOS table which is in binary form. In order to compile such a table it is necessary to write a little bit of code in the OpenType features window using lookups. Unfortunately, Fontlab 4 \"can support only ... single and pair positioning. We expect to support cursive and mark attachment lookups in one of the next releases of FontLab.\" (says the manual). Hmm ...\n\nAuf jeden Fall, vielen Dank für deine Hilfe, Dan.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Kein Problem. Sorry, dass ich nicht weiter helfen könnte!  \n\\_\\_  \n [www.typeoff.de](http://web.archive.org/web/20110410172132/http:/www.typeoff.de/ \"www.typeoff.de\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hoping for more interesting contributions by whoever I have had some fun faking a few cool accented glyphs. Check them out ^. (And see the pompous, no, majestic diacritic décor of indo-europeanist glyphs.)\n\n(The three roots at the top are _father_, _name_, and _dog_.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "It's me again! OK:\n\nI did further reading, and learned that \"Apple Advanced Typography\" (AAT), which is in fact an equivalent tool to Microsoft VOLT, may be able to do what I need, too.  \nSince I am working with a Mac it makes sense to work with AAT from the start.\n\nI'm sure there are people around here who have some experience with diacritics and the related problems, so feel free to add some comment here.\n\n"
+    },
+    {
+      "time": "",
+      "content": "After some advice.\n\nI realise Fontlab is a fairly complex app to learn. Using \"Learn Fontlab Fast\", would a user be able to learn a good slice of Fontlab within 8 days?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes.\n\n\\_\\_  \n [www.typeoff.de](http://web.archive.org/web/20110410172132/http:/www.typeoff.de/ \"www.typeoff.de\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "David, I've done a lot of work with complex script fonts involving OpenType GPOS mark anchoring (Hebrew, Arabic and Thai), and also know the people who have added IPA support to a lot for fonts for the next versions of Windows.\n\nI make the outlines in FontLab, but do all the mark positioning and other OT Layout stuff in VOLT. This is the only tool that supports all the OTL lookup types that you will need to do dynamic mark positioning.\n\nThe version of the Uniscribe shaping engine that ships with MS Office 2003 on Windows (and I believe the one that ships with Windows XP Service Pack 2), supports such GPOS mark positioning for that Latin script, including the IPA extension. So if you have a font that supports the and features you should be able to use it effectively in Word and other Office apps right now.\n\nNote that the Mac version of Office does not support OTL features yet. On the Mac side you could try Mellel, which has pretty decent OTL support, or any other software that uses the OpenSource ICU library for text layout.\n\nBefore heading off down the AAT path, you should check what applications are actually going to be available to work with the font. Although AAT support is built into Mac OS, it is not actually used by many applications. Also, note that AAT does not use anchor mark positioning, so you have to include dozens of different mark glyphs at different heights and horizontal offsets and contextually substitute them. This aspect of AAT is particularly poor.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks a lot, John.\n\nIt was quite a surprise for me to learn that Word 2004 (for Mac) is in fact inferior in functionality to Word 2003 (for Windows). I was suspecting that, though.\n\nI have never fully understood \"activation\" of OpenType features, perhaps you can help me there: As far as I know, features must be switched on or off, eg through a drop-down menu (in InDesign). In Word 2003 you can't do that! Does that mean the _mark_ and _mkmk_ features are \"on\" by default?\n\nThen there's the lack of detailed manuals or documentation. I am no professional type engineer so I am dependent on those. Most examples I have encountered are the \"easy\" ones, a _liga_ feature perhaps and an _onum_ feature and the regular developer is set. I haven't found much information on the features important for my project (using latin script). Well, I guess it takes some time to get accustomed to VOLT, I have only just started. Unfortunately, VOLT does not support Type-1 fonts nor CFF-Flavoured OpenType fonts, does it?\n\nRe AAT: I won't go \"down that path\" for now.\n\n"
+    },
+    {
+      "time": "",
+      "content": "VOLT only support TrueType or TTF-Flavored OpenType.\n\nJohn Hudson has a work-around for CFF, though. He presented it in Prague last September. It went over my head, but maybe he'll say something about it here.  \n\\_\\_  \n [www.typeoff.de](http://web.archive.org/web/20110410172132/http:/www.typeoff.de/ \"www.typeoff.de\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "OpenType layout features are expected to be in one of three states: on by default and impossible to turn off (e.g. for the Arabic lam\\_alif ligature); on by default but able to be turned off (typical for 'standard' ligatures such as ffi, fi, etc.); off by default but able to be turned on (typical for discrtionary ligatures such as ct, st).\n\nThe individual feature descriptions generally indicate in what state a feature should normally be, but this needs to be intepreted by applications, and may be subject to the limitations of their user interfaces.\n\nIn the case of Word 2003, you have pretty good language processing support, but poor typographic support. So this means that features that should be on by default, which include the 'mark' and 'mkmk' features, because they are essential for proper language display, are supported, but because of the UI limitations they cannot be turned off even if this would normally be expected. So, for example, Word support for the Arabic script includes implementation of the 'rlig' and 'liga' features, but the latter cannot be turned off (other than by inserting a control character between the component characters of a ligature).\n\nIt is also important to note that Word implements OTL support via the Uniscribe script engine, which includes separate shaping engines for different scripts. So the layout features applied to support language shaping will vary from script to script.\n\nYou might find it helpful to read my essay on [Windows glyph processing](http://web.archive.org/web/20110410172132/http:/www.microsoft.com/typography/Glyph%20Processing/intro.mspx).\n\n"
+    },
+    {
+      "time": "",
+      "content": "Making CFF OpenType fonts with VOLT:\n\nVOLT uses the TIDE, which is a font tool development environment that includes its own TT rasteriser. As far as I know, VOLT is the only tool that uses TIDE, which seemed like a good idea at the time, but no one else has implemented anything in it. One of the attractions of TIDE was that one was not limited to using the system rasteriser, but could plug in other rasterisers. However, TIDE does not include a PS rasteriser, which is why one can't work directly on CFF fonts in VOLT.\n\nHowever, the problem is only in the display of glyphs in VOLT windows. _You can open CFF fonts in VOLT and compile OTL tables to them._\n\nSo the work-around is to make a dummy TTF font that will be your VOLT working file. This needs to have exactly the same glyph set and order as the final CFF font, and also needs to have the same UPM value if you are doing any GPOS work. Generate this dummy TTF from your FontLab source, and open it in VOLT. Do all your VOLT development on this dummy TTF and, when you are done, _export a VOLT project file._ You can now open the CFF version of the same font in VOLT, import the project file, compile and ship a CFF master font containing the OTL tables that you developed using the TTF dummy.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Sounds great, thanks!\n\n"
+    }
+  ]
+}

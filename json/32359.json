@@ -1,0 +1,30 @@
+{
+  "id": "32359",
+  "title": "Font Embedding + Security",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi,\n\nIs font embedding is totally secure?\n\nWould you please suggest me the most secure way to present a font on the web? Other than pdf.\n\nBest regards,  \nAtif\n\n",
+  "author": "Atif",
+  "time": "19 Mar 2007 — 3:45am",
+  "uid": "16620",
+  "comments": [
+    {
+      "time": "19 Mar 2007 — 6:42am",
+      "content": "Secure in what way?\n\n"
+    },
+    {
+      "time": "19 Mar 2007 — 9:23am",
+      "content": "Pdf is hardly secure. You can outline any typefaces in a pdf, but those will still be vectors.\n\n"
+    },
+    {
+      "time": "19 Mar 2007 — 9:27am",
+      "content": "How is that possible? Without having the font on your own machine?\n\n"
+    },
+    {
+      "time": "19 Mar 2007 — 10:18am",
+      "content": "Atif,\n\nno font embedding can be \"totally secure\". If fonts need to be displayed on screen, one can produce a bitmap (which will only work in one size) or one can produce a digital document with outlines embedded (e.g. Flash, PDF, PostScript, OpenXML, SVG etc.). In the latter case, some software needs to access the font outlines in order to draw them on screen (or perhaps print it as well). If there are font outlines and there is software that draws them on screen, then there can be no \"total security\", especially if the formats are published. PDF, Flash, PostScript, OpenXML, SVG are all publicly specified formats so anybody can write software that reads the font information embedded in them, and produces a more-less functioning font out of them. In fact, I have seen various pieces of software that is able to extract font information out of every single document format I have listed above. This is normal: as a format developer, if you publish the specification so people can write software that displays those formats on screen or prints them, it is not possible to \"magically\" prevent other people from writing software that just extracts the fonts.\n\nNote however, that in many countries, developing or using such software -- to extract copyrightable fonts -- may be illegal. So in some cases, people \"can\" (technically) develop such software but \"may not\" (legally) do that.\n\nAlso, in many cases, fonts embedded in digital documents are only subsets of the original, fully-functional fonts. For example, in some formats only a small part of the glyph set is embedded in the document. Also, usually, information such as kerning, OpenType Layout tables and sometimes hinting does not get embedded. In other words, the extracted \"fonts\" will usually not be functionally equivalent to the original fonts, they will always be crippled versions of the true things. Apart of a small group of hardcore font collector geeks, I very much doubt that anyone would be interested in pirating such fonts. After all, it is mostly easier to get ahold of the original fonts and pirate these, rather than dealing with awkward font extraction processes.\n\nBest,  \nAdam\n\n"
+    }
+  ]
+}

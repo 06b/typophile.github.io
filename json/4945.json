@@ -1,0 +1,126 @@
+{
+  "id": "4945",
+  "title": "Illustrator CS + Text Styles",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Hey. Do any of you know whether you can create a text style that has three layers of type?   \n   \nI am designing a DVD menu system and each menu item has a top layer, a middle outline layer, and a bottom offset layer for a drop shadow effect. I have to translate this system into three languages and it's turning out to be a big pain in the  to edit three type layers for every item x three languages!   \n   \nI tried making a text style but it only works on one layer of type.   \n   \nAny suggestions?   \n   \nThanks,   \npeter\n\n",
+  "author": "markatos",
+  "time": "26 May 2004 — 3:16pm",
+  "uid": "1839",
+  "comments": [
+    {
+      "time": "26 May 2004 — 4:40pm",
+      "content": "I think maybe you're going at the problem backwards.   \n   \nThere's no reason you need to use more than one layer for this. Use a stroke on the type, and use Illustrator's own drop shadow capabilities.   \n   \nThe stroke will tend to erode the type. If Illustrator doesn't have the option to simply place the stroke behind the object (not sure), you can set the path offset to half the stroke thickness, and that should eliminate the problem.   \n   \nRegards,   \n   \nT\n\n"
+    },
+    {
+      "time": "26 May 2004 — 5:00pm",
+      "content": "Same way as if it were outlines. Go to path - offset. (Is that on the effects menu? I forget.)   \n   \nThere are a surprising number of things that work on live text these days, in Adobe apps.   \n   \nT\n\n"
+    },
+    {
+      "time": "26 May 2004 — 5:05pm",
+      "content": "\\> I wish it were that easy tom, but I can't find how to stroke the \\> letter the way you recommended.\n\n"
+    },
+    {
+      "time": "26 May 2004 — 5:14pm",
+      "content": "Peter --   \n   \nIn illustrator   \nset three layers, but don't create outlines.   \nYou can still use your Character palette   \nto change the font, the size, etc.   \n   \nIn your three-item cluster ...   \n   \n1. Top, non-eroded   \n2. Outline   \n3. Drop shadow, nudged 1 pt down, 1 pt. right   \n   \ncopy the three-item cluster each time you need it.   \n   \nNow, to change the words ...   \nuse your 'A' or Type tool and click on the   \nmass of three elements and it'll select the   \ntop one by default. Make the changes to the top layer, then immediately   \nLOCK that top version. (OBJECT \\> LOCK)   \nRepeat on Layer 2 with the Type Tool.   \nLOCK.   \nRepeat on layer 3.   \n   \nThen Unlock ALL and move the cluster   \naround as a GROUP.   \n   \nbj   \n   \neasier demonstrated ![:-)](http://web.archive.org/web/20140507001419im_/http:/www.typophile.com/forums/clipart/happy.gif)\n\n"
+    },
+    {
+      "time": "26 May 2004 — 5:25pm",
+      "content": "\\> Thanks bj, that is what I figured out. Would be sweet to do that with \\> one layer, but letters get mangled. I looked into what tom was \\> talking about but that yielded unsatisfactory results. At least for \\> me.   \n   \nAnyways, gotta sludge forward.\n\n"
+    },
+    {
+      "time": "26 May 2004 — 5:40pm",
+      "content": "I did actually try it before I recommended it, so I can swear that it works.   \n   \nType the text.   \n   \nSelect the text block with the regular pointer.   \n   \nAdd a stroke by double-clicking on the stroke icon in the tool palette (or typing shift-x). If needed, adjust stroke thickness and color using the stroke palette, and text fill color using the fill palette.   \n   \nStill with the text block(s) selected, go to Effect - Path - Offset Path, and set the offset to half the stroke thickness.   \n   \nMaintaining selection, go to Effect - Stylize - Drop Shadow and add your drop shadow.   \n   \nYou know have the entire effect working on the live text in one layer.   \n   \nT\n\n"
+    },
+    {
+      "time": "26 May 2004 — 6:15pm",
+      "content": "\\> set the offset to half the stroke thickness.   \n   \nthat's where I was going wrong. that works pretty well. the drop shadow is a tad different than the \"paste behind\" method, but all in all I will keep this in mind next time around (almost done with this gig).   \n   \nOne thing I am slightly annoyed with...if I do what you did and then make a new character style, the effects aren't retained. Tell the Illustrator folks to work on that one.   \n   \nThanks for all your help folks.\n\n"
+    },
+    {
+      "time": "26 May 2004 — 7:08pm",
+      "content": "Incidentally, InDesign is a little easier and slicker for this sort of thing. They have the option to put the stroke behind the text (no resorting to the offset hack), and you can stick all this stuff into character or paragraph styles. Sweet.   \n   \nT\n\n"
+    },
+    {
+      "time": "26 May 2004 — 8:29pm",
+      "content": "You could record all the steps as an action. It wouldn't be quite as quick as applying a style, but would probably save _some_ time, at least.\n\n"
+    },
+    {
+      "time": "26 May 2004 — 9:06pm",
+      "content": "Huh. I've been playing around with this in Illustrator and you **can** do exactly what you want.   \n   \nThe key is to modify the appearance of the text by selecting it as an **object** (using the arrow tool), not as **text** (using the text tool). When it is in object mode, you can change the stacking order of the stroke and fill in the appearance palette. You can't when the text is selected as text.   \n   \nDoing it this way means that the effects will apply to the whole text block, but that would only be a problem if you wanted to use the style within a text block. It doesn't sound like that's the case.   \n   \nYou change the stacking order of the strokes and fills by dragging them up and down in the Appearance palette. Also, you can add as many strokes and fills as needed and modify them with the Effects menu. With the appropriate stroke or fill selected in the Appearance palette, use Effects -\\> Distort & Transform -\\> Transform to do the dropshadow effect.\n\n"
+    },
+    {
+      "time": "26 May 2004 — 10:07pm",
+      "content": "What version of AI are you using? When I click on a text object with an arrow, the appearance pallet just says, \"Type: Characters, Default Transparency\"   \n   \nIf I double click on \"Type\" I then open up the specific attributes of the objects appearance. It is true, I can move the stroke and the fill around, BUT they snap back to their previous positions and I am all of a sudden using the type tool and not the arrow.   \n   \nWhat am I missing?\n\n"
+    },
+    {
+      "time": "27 May 2004 — 7:01am",
+      "content": "I tried it in both 10 and CS and it works the same. Try this:   \n   \n1. Set some large text.   \n2. Switch to the solid arrow tool. (The text should now be selected as an object.)   \n3. In the Appearance palette, do Add New Stroke and set the stroke thickness to 6 points and the color to red (to make it easier to see what's going on).   \n4. Illustrator automatically adds an empty Fill layer to the appearance palette. Click on it and change it to yellow.   \n5. In the Appearance palette, drag the yellow Fill layer to above the Stroke layer. You now have the Fill in front of the Stroke, just as if you had pasted a stroked copy of the text behind the filled text.   \n6. Switch to the text tool again, select the text and type something else to see that it worked.   \n   \nOf course, use whatever attributes you want for colors, etc. The ones I chose were just to show how it works.   \n   \nTo add a dropshadow:   \n   \n1. Swith back to the solid arrow tool. Make sure the text block is selected.   \n2. In the Appearance palette, do Add New Stroke.   \n3. Change the color of the new stroke to black.   \n3. Rearrange the layers in the Appearance palette so the new stroke is below the other stroke and fill.   \n4. With the new stroke selected in the Appearance palette, do Effect \\> Distort & Transform \\> Transform. Type 3 pt and -3 pt in the Move area of the dialog box and click OK.   \n   \nNow you've got a dropshadow. Here's what mine looks like:   \n   \n ![foo](http://web.archive.org/web/20140507001419im_/http:/www.typophile.com/forums/messages/30/36865.gif)   \n   \nHere's the Illustrator CS file:\n\n<!--attachment: foo-36866.ai*attachment_icon.gif*application/postscript*444.2*foo2*foo%2eai --><!--attachment: foo-36866.ai*attachment_icon.gif*application/postscript*444.2*foo2*foo%2eai -->\n\n<center>\n<br>\n<table border=\"1\">\n<tr>\n<td>\n<img src=\"http://web.archive.org/web/20140507001419im_/http:/www.typophile.com/forums/icons/attachment_icon.gif\" align=\"left\" alt=\"application/postscript\">foo2<br><a href=\"http://web.archive.org/web/20140507001419/http:/www.typophile.com/forums/messages/30/foo-36866.ai\" target=\"_blank\"><b>foo.ai</b></a> (444.2 k)</td>\n</tr>\n</table>\n<p></p>\n</center><!--/attachment--><!--/attachment-->\n\nYou can also change the stroke characteristics, transparency, etc. Just be sure to select the proper component in the Appearance palette first.   \n   \nOnce you have everything set up, you can drag the appearance into the Style palette so it can be applied to other text.\n\n"
+    },
+    {
+      "time": "27 May 2004 — 7:50am",
+      "content": "Here, I've added a dark fill shadow offset behind the yellow, and changed the Transform parameters for the black dropshadow to .5pt down and right, with 20 copies:   \n   \n ![foo3](http://web.archive.org/web/20140507001419im_/http:/www.typophile.com/forums/messages/30/36870.gif)   \n   \nOh, and I changed the font, too. This is zoomed in to 200%.   \n   \nThis is live text. I can still change the font, adjust spacing and kerning, or type some other word, etc.\n\n"
+    },
+    {
+      "time": "27 May 2004 — 8:45am",
+      "content": "\\<font class=\"dontLookLikeCrap\"\\>Mark,   \n   \nWho you calling a foo! ;)   \n   \nYou have officially opened up a whole new realm for me in Illustrator (and I've been using this app for 4 years). I wasn't adding the stroke through the Appearance pallete before. That's why I couldn't get it to work.   \n   \nIt would be really nice if AI could then create a text style from this, but for some reason the strokes and effects don't translate.   \n   \nEither way this is a perfect solution. Just wished I would have known this two days ago.   \n   \nThanks for looking into this.   \n   \nBest,   \nPeter   \n   \n   \n\\</font\\>\n\n"
+    },
+    {
+      "time": "27 May 2004 — 9:03am",
+      "content": "_You have officially opened up a whole new realm for me in Illustrator (and I've been using this app for 4 years)._   \n   \nSame here (except I've been using it since version 1.0). I kinda knew this was possible but hadn't really investigated it fully until you asked. I think all this carries over to After Effects intact, but I haven't had time to try it.\n\n"
+    },
+    {
+      "time": "27 May 2004 — 12:29pm",
+      "content": "One thing to note. The styles you saved in Illustrator 10 won't work for Illustrator CS, you have to recreate them.\n\n"
+    },
+    {
+      "time": "27 May 2004 — 12:47pm",
+      "content": "Thanks Peter for alerting me to this thread!   \nMy book ( [http://www.logofontandlettering.com](http://web.archive.org/web/20140507001419/http:/www.logofontandlettering.com/)) was completed just as Adobe released Illustrator CS. I was able to acknowledge--somewhat in passing--that the new AI version had 3-D extrude tools, but I couldn't say more.   \n   \nI just played around with Appearance and 3D extrude with ambient shading in AI CS and yes, they add a whole new dimension. It's a miracle!   \n   \nThere are a few problems, though. The shading gets put in as bands that are too low res. Each band is an individual object which makes editing difficult (too many points flying around) and gets us into issues of trapping if we're doing this for publication.   \n   \nAlso, I tried a couple of layers of fills and strokes followed by a 3D extrude and when it was done, 3 of my letters ended up behind the top fill layer, so this is a bug, I presume.   \n   \nThe revision of my book--eventually--will have to cover these new AI features, though! However, I'm thinking that I would still very likely build my own shadows because there's always a superficial feeling to out-of-the-box features like these. But maybe   \nI'm just futilely trying to resist progress.   \nLeslie\n\n"
+    },
+    {
+      "time": "27 May 2004 — 2:03pm",
+      "content": "Also, one caveat about the \"cast shadow\" effect I did in the second sample... It's made of individual copies of the black stroke layer, so if you zoom in or print it out you would see tiny stair steps. One way around this is to increase the number of steps and reduce the distance between them. The other would be to not rely on such a short cut and actually draw it. The 3-d extrude can do it too, but it tends to be a little imprecise for this kind of shadow and the artwork you get when you expand the appearance is a little, I don't know, messy.\n\n"
+    },
+    {
+      "time": "27 May 2004 — 3:17pm",
+      "content": "great tips here.   \n   \nI like the stairstep method, but often, it can work with just 2 stairs. It depends on the shapes   \nsometimes.   \n   \nIf you do a 20 stairstep and you do   \nhave extra stairs, you can delete   \nstairs 2-19 and get a straight line from 1 to 20.   \n   \nthe most efficient way to delete is to open lasso the   \nextra points, hit delete, then Pathfinder \\> Unite   \nand move to the next staircase. ![:-)](http://web.archive.org/web/20140507001419im_/http:/www.typophile.com/forums/clipart/happy.gif)   \n   \nhere is a pdf \\_ should be openable in Illustrator.\n\n<!--attachment: type-36920.pdf*mime_pdf.gif*application/pdf*99.1 **type%2epdf --><!--attachment: type-36920.pdf*mime_pdf.gif*application/pdf*99.1** type%2epdf -->\n\n<center>\n<br>\n<table border=\"1\">\n<tr>\n<td>\n<img src=\"http://web.archive.org/web/20140507001419im_/http:/www.typophile.com/forums/icons/mime_pdf.gif\" align=\"left\" alt=\"application/pdf\"><br><a href=\"http://web.archive.org/web/20140507001419/http:/www.typophile.com/forums/messages/30/type-36920.pdf\" target=\"_blank\"><b>type.pdf</b></a> (99.1 k)</td>\n</tr>\n</table>\n<p></p>\n</center><!--/attachment--><!--/attachment-->\n"
+    },
+    {
+      "time": "27 May 2004 — 6:49pm",
+      "content": "A handy technique, BJ. But there probably isn't a way to do it with live text.\n\n"
+    },
+    {
+      "time": "27 May 2004 — 7:14pm",
+      "content": "Also, I checked and all this neat stuff **does** carry over to After Effects. If it matters.\n\n"
+    },
+    {
+      "time": "30 May 2004 — 11:25am",
+      "content": "It does! Whee! I wish I had known this three weeks ago..\n\n"
+    },
+    {
+      "time": "30 May 2004 — 12:36pm",
+      "content": "![](http://web.archive.org/web/20140507001419im_/http:/www.typophile.com/forums/messages/30/37082.gif)\n\n"
+    },
+    {
+      "time": "30 May 2004 — 11:42am",
+      "content": "seriously one of the most informative threads here. don't know if it is possible but I think it would be great to have a forum just for advanced workflow techniques.   \n   \nbut that maybe another site altogether\n\n"
+    },
+    {
+      "time": "30 May 2004 — 12:36pm",
+      "content": "![yerwelcome](http://web.archive.org/web/20140507001419im_/http:/www.typophile.com/forums/messages/30/37085.gif)   \n   \n...and thanks to Peter for asking about it in the first place.\n\n"
+    },
+    {
+      "time": "26 May 2004 — 4:47pm",
+      "content": "ok. i'm curious. how do you offset the stroke without turning the type to outlines?\n\n"
+    },
+    {
+      "time": "27 May 2004 — 12:23pm",
+      "content": "You, Mark Simonson, are amazing. I was always afraid of the appearance window. Now I know I have wasted many hours.\n\n"
+    },
+    {
+      "time": "27 May 2004 — 12:52pm",
+      "content": "Leslie --- more important than the 3D extrude (because I do agree that it has less of a manual feel for whatever reason) is showing people how to appreciate the use of \"appearances\" in illustrator. i don't remember reading about those in your book. i hope i'm not sticking my foot in it.\n\n"
+    }
+  ]
+}

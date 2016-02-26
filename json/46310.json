@@ -1,0 +1,34 @@
+{
+  "id": "46310",
+  "title": "RoboFab Kerning - Add Pair ?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Is it possible to add a kerning pair using RoboFab ?\n\nI'm using class kerning but I quickly wanted to add kerning for pairs like AC, DA, AG, AQ, QA once I have kerned OAO\n\nI was thinking something like\n\n'pseudocode'  \n``\n\naddpair('A','C') = AO\n\n",
+  "author": "ReginaldV",
+  "time": "11 Jun 2008 — 12:49am",
+  "uid": "29224",
+  "comments": [
+    {
+      "time": "11 Jun 2008 — 4:26am",
+      "content": "Have you checked the RoboFab site? The RoboFab documentation at [http://www.robofab.com/objects/index.html](http://web.archive.org/web/20130823053850/http:/www.robofab.com/objects/index.html \"http://www.robofab.com/objects/index.html\") is pretty good.  \nAs regards kerning, see especially [http://www.robofab.com/objects/font.html](http://web.archive.org/web/20130823053850/http:/www.robofab.com/objects/font.html \"http://www.robofab.com/objects/font.html\") and [http://robofab.com/objects/kerning.html](http://web.archive.org/web/20130823053850/http:/robofab.com/objects/kerning.html \"http://robofab.com/objects/kerning.html\")  \nI haven't used it for some time now, but in a RoboFab font object, kerning is a dictionary which you access like this\n\n`# import the font class:\nfrom robofab import CurrentFont\n# turn the current FLS font into a RoboFab font object:\nf = CurrentFont()\n# get at kerning in the current font:\nkerning = f.kerning`\n\nand then you should be able to either directly add kerning to this kerning object/dict like\n\n`# note that the key is a tuple:\nkerning[('glyphA','glyphB')] = 10`\n\nor, alternatively, create a new temporary kerning dictionary which you feed with additional kerning pairs, and finally update the font's kerning dictionary with the new one\n\n`newKerning = {}\nnewKerning[('glyphA','glyphB')] = 10\nkerning.update(newKerning)`\n\nand don't forget to update the font\n\n`f.update()`\n\n"
+    },
+    {
+      "time": "11 Jun 2008 — 8:11am",
+      "content": "k.l.\n\nThanks for your reply - Yes I've been to the Robofab site and got all the documentation. I got the code working to create a new pair but I still need to work out how capture a value that already exists.\n\nIn my example here I'm trying to use the kerning value for 'AO' and create a new pair for 'AC' with the same value.\n\nThe Robofab documentation says that get(aPair) is used to get a value for a pair, I don't know if my syntax is wrong or this is the wrong way to do it.\n\n`\n#Kerning---------------\n#\nfrom robofab.world import CurrentFont\nf = CurrentFont()\nkerning = f.kerning\n#\nAO = kerning.get('A','O')`\n\nkerning[('A','C')] = AO\n\nf.update()\n\n"
+    },
+    {
+      "time": "11 Jun 2008 — 8:51am",
+      "content": "Since the kerning object works like a standard Python dictionary you don't have to use get(), you can call a value out like this:\n\n`AO = kerning[('A', 'O')]\n`\n\n...or even better, combine that with making a new dictionary entry:\n\n`kerning[('A', 'C')] = kerning[('A', 'O')]\n`\n\nIf an entry already existed for `('A', 'C')` then it would now be replaced, or if there wasn't an entry yet a new one would have been created. Then, check your work to see if it did what you wanted:\n\n`print kerning[('A', 'C')]\nprint kerning[('A', 'O')]\n`\n\n...the two of those should now be the same.\n\nHope that helps,  \nAndy\n\n"
+    },
+    {
+      "time": "11 Jun 2008 — 9:06am",
+      "content": "andy Thanks for the reply - I just worked out how to do.\n\nI did it slightly differently from the way you said to make it easier to read.\n\n`\n#Kerning---------------\n#\nfrom robofab.world import CurrentFont\nf = CurrentFont()\nkerning = f.kerning\n#\nOA = kerning[('O','A')]\nAO = kerning[('A','O')]\nOV = kerning[('O','V')]\nVO = kerning[('V','O')]\nOW = kerning[('O','W')]\nWO = kerning[('W','O')]\nOY = kerning[('O','Y')]\nYO = kerning[('Y','O')]\nOX = kerning[('O','X')]\nXO = kerning[('X','O')]\nOT = kerning[('O','T')]\nTO = kerning[('T','O')]\nKO = kerning[('K','O')]\n#\n#\nkerning[('A','C')] = kerning[('A','G')] = kerning[('A','Q')] = kerning[('A','OE')] = AO\nkerning[('D','A')] = kerning[('Q','A')] = OA\n#\nkerning[('V','C')] = kerning[('V','G')] = kerning[('V','Q')] = kerning[('V','OE')] = VO\nkerning[('D','V')] = kerning[('Q','V')] = OV\n#\nkerning[('W','C')] = kerning[('W','G')] = kerning[('W','Q')] = kerning[('W','OE')] = WO\nkerning[('D','W')] = kerning[('Q','W')] = OW\n#\nkerning[('Y','C')] = kerning[('Y','G')] = kerning[('Y','Q')] = kerning[('Y','OE')] = YO\nkerning[('D','Y')] = kerning[('Q','Y')] = OY\n#\nkerning[('X','C')] = kerning[('X','G')] = kerning[('X','Q')] = kerning[('X','OE')] = XO\nkerning[('D','X')] = kerning[('Q','X')] = OX\n#\nkerning[('T','C')] = kerning[('T','G')] = kerning[('T','Q')] = kerning[('T','OE')] = TO\nkerning[('D','T')] = kerning[('Q','T')] = OT\n#\nkerning[('K','C')] = kerning[('K','K')] = kerning[('K','Q')] = kerning[('K','OE')] = KO\n#√ç\n#\nf.update()\n`\n\n"
+    },
+    {
+      "time": "6 May 2012 — 6:21pm",
+      "content": "Awesome, thanks!\n\n"
+    }
+  ]
+}

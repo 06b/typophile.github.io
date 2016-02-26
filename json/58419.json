@@ -1,0 +1,66 @@
+{
+  "id": "58419",
+  "title": "Make an .otf from Type1 or TT hinted font?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "If you make a .otf file from a TT hinted font, does it convert TT into Type 1? What gives a better result, a Type 1 or TT hinted font to make a .otf file?\n\n",
+  "author": "-Rudy-",
+  "time": "27 May 2009 — 1:15am",
+  "uid": "44027",
+  "comments": [
+    {
+      "time": "27 May 2009 — 2:38am",
+      "content": "A TTF font is \\*already\\* an OTF font. Just change the extension, and you have an OTF font. It doesn't have what typophiles might call \"OpenType goodness\" -- contextual alternates, ligatures, etc. -- and it won't have the OT logo on Windows -- only \"signed\" fonts get that -- but every TTF is technically an OTF.\n\nAn OTF can also encapsulate all the data from a Type 1 font, so a conversion can be lossless. Whether this is actually the case depends on the tool you're using for the conversion.\n\n"
+    },
+    {
+      "time": "27 May 2009 — 5:54am",
+      "content": "<cite> A TTF font is *already* an OTF font. Just change the extension, and you have an OTF font. It doesn’t have what typophiles might call “OpenType goodness” — contextual alternates, ligatures, etc. — and it won’t have the OT logo on Windows — only “signed” fonts get that — but every TTF is technically an OTF. </cite>\n\nYes this I know, but I mean something else, let me explain it in an other way:  \n(btw I'm using fontlab) I made two .vfb files for my font. I did Type 1 hinting on one of them and on the other I did TT hinting.  \nFrom the one I TT hinted, I generated a .ttf font. I also want to generate an .otf font (with OT logo). Now my question is: which .vfb file should I use to make an (\"official\") .otf font, the one that has been Type 1 hinted or the one that has been TT hinted?\n\nRudy\n\n"
+    },
+    {
+      "time": "27 May 2009 — 6:00am",
+      "content": "It still doesn't matter.\n\nOTF fonts come in two major types: TrueType (which is why any TTF is also an OTF) and Type 1. I assume FontLab will choose the actual type from the hinting in the font, but for the end user it **really** doesn't matter.\n\n\\>an (“official”) .otf font ...\n\nLet's not complicate it any further. There simply are no \"unofficial\" otf fonts.\n\n"
+    },
+    {
+      "time": "27 May 2009 — 8:14am",
+      "content": "From a more \"official\" point of view:\n\nA font file with the .otf suffix is normally a Postscript flavoured OpenType font and has Postscript outlines and postscript hintning.\n\nA font file with the .ttf suffix is normally a TrueType flavoured OpenType font and has TrueType outlines and TrueType hinting.\n\nMakes sense?\n\n"
+    },
+    {
+      "time": "27 May 2009 — 8:26am",
+      "content": "For the end user the distinction between OT/TTF and OT/CFF (PS Outlines) matters with regard of outline quality and screen display.\n\nUnneccessary outline conversions should be avoided, otherwise the outline quality may suffer. That means, if you already have TT outlines with TT hints, use \"Generate fonts -\\> TrueType/OpenType TT\" in FL Studio (and check that you want to include OT features and kerning as an OT feature).\n\nIf you have PS outlines, the easiest would be to generate the format \"OpenType PS\" from FL Studio. If you generate \"TrueType/OpenType TT\" from PS outlines, an automatic conversion to TT outlines and TT hint will take place. It's better to convert manually and then make adjustments before generating.\n\nIf the fonts will be used on Windows, TT outlines may have a better screen quality, but more manual hinting corrections are needed for that.\n\n"
+    },
+    {
+      "time": "27 May 2009 — 1:37pm",
+      "content": "So basicly you can better use a Type 1 hinted font file to generate an Opentype PS format. Generating an Opentype PS format from a TT hinted font would be allot of manual converting and will not guarantee a better screen quality.\n\nTo sum it up, use:  \n- a font with TT hints to make an OT/TTF format, and  \n- a font with Type 1(PS outlines) to make an OT/Opentype PS format.\n\nRight?\n\nRudy\n\n"
+    },
+    {
+      "time": "1 Jun 2009 — 9:32pm",
+      "content": "Rudy,\n\nthat is the right summary.\n\nOne more thing to add is that:\n\n**OpenType PS fonts** , i.e. PostScript-flavored OpenType fonts, also known as OpenType CFF fonts (made out of Type 1-hinted PostScript-curve-based VFBs) **must carry the .otf file extension.** They always get a green \"O\" OpenType icon in Windows. They always are labeled \"OpenType font\" by Mac OS X.\n\n**OpenType TT fonts** , i.e. TrueType-flavored OpenType fonts (made out of TT-hinted TrueType-curve-based VFBs) **can have either the .ttf file extension or the .otf file extension.**\n\nIf OpenType TT fonts have the .otf file extension, they always get a green \"O\" OpenType icon in Windows, and they always are labeled \"OpenType font\" by Mac OS X.\n\nIf OpenType TT fonts have the .ttf file extension, then on Mac OS X they will always be labeled \"Windows TrueType font\". On Windows, they will get the green \"O\" OpenType icon only if the font has a digital signature (DSIG, which you can add in FontLab Studio, but you must purchase an Authenticode code signing Class 3 Standard certificate\\*). If the font doesn't have a digital signature, it will be shown with a blue \"TT\" TrueType icon on Windows.\n\nWhether an OpenType TT font has a blue \"TT\" or green \"O\" icon on Windows, and whether it is called \"OpenType font\" or \"Windows TrueType font\" on Mac OS X, has **nothing** to do with its functionality. It will rasterize the same way, the OpenType Layout features will work the same way. The only difference is the label that appears in Finder, and the icon the font gets in Windows.\n\nThis is something that you need to explain to your customers if you make OpenType TT fonts. If you don't want to explain it to the customers, then always use the .otf file extension or put a digital signature into your fonts.\n\nBTW, putting a digital signature into your fonts is **advisable for both OpenType PS and OpenType TT fonts**. A digital signature certifies that the font has been created by a certain foundry, and it cannot be forged. So if someone modifies your font, the digital signature will be removed, or will become invalid, or the person who modified the font will have to sign it with their own digital signature (for which they will need to buy their own digital certificate under their own name). Digital signatures won't help you to protect your fonts from being pirated, but at least they are a proof that a certain font is original.\n\n\\*) The [Adobe guide to OpenType font signing](http://web.archive.org/web/20131107234449/http:/www.adobe.com/devnet/opentype/afdko/topic_digital_sig_guide.html) is helpful, but note that you only need to complete step 1 described there. The rest is done automatically in FontLab Studio if you install your certificate in FontLab Studio's preferences.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "2 Jun 2009 — 2:09pm",
+      "content": "Thanks Adam! This is some very useful information. The digital signature can be a good addition in protecting your font. It is costly though, $499 for 1 font, for only 1 year... with the family I'm working on now this will cost me a minimum of $8000 and then I haven't earned anything yet :P  \nAny chance they have a family discount? ;)\n\n"
+    },
+    {
+      "time": "2 Jun 2009 — 5:28pm",
+      "content": "Rudy,\n\none clarification: the digital certificate is for one year, but you can sign as many fonts as you want with it. That means: one certificate, many signatures. So the cost is $499 per year, no matter how many fonts you produce. I agree that this still is costly.\n\nA more affordable option is to create a \"self-signed certificate\" -- which can be done **for free**. You will be able to digitally sign your fonts although to the users, the signer will appear as \"untrusted\". But well, the contents of the digital signatures in fonts isn't really actually checked by any software at this time, Windows only check for their presence.\n\nPlease check the Microsoft [Digital Code Signing Step-by-Step Guide](http://web.archive.org/web/20131107234449/http:/msdn.microsoft.com/en-us/library/aa140234(office.10).aspx) document.\n\nYou only need to complete steps 1-3 (Download the code signing executables needed to digitally sign code files, Create a test certificate, Create a Software Publishing Certificate (SPC) file). And you will need to use a Windows machine to do that (or the free [DOSbox](http://web.archive.org/web/20131107234449/http:/www.dosbox.com/) emulator on Mac OS X -- which is actually quite cool). Once you have the private key file and the .spc certificate file that you produce in this process, you can link these files to the Digital signatures section of FontLab Studio’s Preferences/Options dialog box.\n\nBTW, I just realized that I already answered this on Typophile, but it was three years ago:  \n [http://typophile.com/node/29770](http://web.archive.org/web/20131107234449/http:/typophile.com/node/29770 \"http://typophile.com/node/29770\")\n\nYou can check that discussion for more information.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "3 Jun 2009 — 1:11am",
+      "content": "Sorry I misunderstood you back there, $499 for as many fonts you want is allot more reasonable, now I will actualy consider purchasing a digital certificate.\n\nThe free “self-signed certificate” sounds interesting. Will a non-programmer be able to make a certificate using the guide from Microsoft?\n\n"
+    },
+    {
+      "time": "3 Jun 2009 — 1:32am",
+      "content": "\\> Will a non-programmer be able to make a certificate using the guide from Microsoft?\n\nI guess it depends on the non-programmer, but generally, yes.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "3 Jun 2009 — 2:42am",
+      "content": "I will give it a try ;-)\n\nI've read your older post on the subject. The pricing list for code signing certificates has changed allot in the past 3 years:\n\nThawte: US$299/year  \n [http://www.thawte.com/code-signing/index.html](http://web.archive.org/web/20131107234449/http:/www.thawte.com/code-signing/index.html \"http://www.thawte.com/code-signing/index.html\")\n\nGlobalSign: US$229/year  \n [http://www.globalsign.com/developer/code-signing-certificate/index.htm](http://web.archive.org/web/20131107234449/http:/www.globalsign.com/developer/code-signing-certificate/index.htm \"http://www.globalsign.com/developer/code-signing-certificate/index.htm\")\n\nComodo(now selling as instantSSL): €180/year(don't know the US$ pricing)  \n [http://www.instantssl.com/code-signing/index.html](http://web.archive.org/web/20131107234449/http:/www.instantssl.com/code-signing/index.html \"http://www.instantssl.com/code-signing/index.html\")\n\nVeriSign: US$499/year  \n [http://www.verisign.com/code-signing/content-signing-certificates/index....](http://web.archive.org/web/20131107234449/http:/www.verisign.com/code-signing/content-signing-certificates/index.html \"http://www.verisign.com/code-signing/content-signing-certificates/index.html\")\n\nVeriSign's certificates are almost twice the price of the others listed. Is this only because of the name \"VeriSign\" or do they provide a better service/product?\n\n"
+    },
+    {
+      "time": "5 Jun 2009 — 11:43am",
+      "content": "VeriSign is the most popular brand name. I've never compared any of the products or services.\n\nCheers,  \nAdam\n\n"
+    }
+  ]
+}

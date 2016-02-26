@@ -1,0 +1,34 @@
+{
+  "id": "43161",
+  "title": "Uncommon diacritics placement",
+  "forum": "Design",
+  "tags": [
+
+  ],
+  "content": "For the U+0334 to U+0338 Combining overlays, what is the prefered placement (or is there any?). Besides most fonts not really including them, it seems like those that do have either followed two rules in their placement irrespective of the form of the letters to be placed on. Eithe A- they remain at a consistent height both for letters with and without ascenders, or they are placed at exactly one half the total height of the character (making different heights for dotted and dotless lowercase I).\n\nIn both cases, a number of letters end up with basically invisible overlays, most especially those non-ascending letters with horizontal strokes in the middle (two-tier A, S, E). While I’m sure these are basically unused combinations, I wonder, what would the best placement options be for such a hypothetical character?\n\nHere’s the three options I see for a two-tier A, and in all situations at least one of them appears nearly identical to the original. Maybe if each of the overlays has a very light negative outline? (not sure if you can have diacritics “chop out” their base glyphs anyways)\n\n ![](http://web.archive.org/web/20081202133417im_/http:/www.typophile.com/files/overlaying_diacritics_test_4748.png)\n\n [‹ Information about typeface Chaparral](http://web.archive.org/web/20081202133417/http:/www.typophile.com/node/44446 \"Go to previous forum topic\") [First time design font ›](http://web.archive.org/web/20081202133417/http:/www.typophile.com/node/44544 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081202133417/http://www.typophile.com/user/16708\" title=\"View user profile.\">guifa</a>",
+  "time": "<br>",
+  "uid": "16708",
+  "comments": [
+    {
+      "time": " 22.Apr.2008 11.42am",
+      "content": "According to this page, [SIL Unicode Roman Fonts – FAQ and Known Issues](http://web.archive.org/web/20081202133417/http:/scripts.sil.org/cms/scripts/page.php?site_id=nrsi&item_id=ComplexRomanFontFAQ#c5c3c031), “For various technical reasons it is best to avoid using overlay combining marks.”\n\n"
+    },
+    {
+      "time": " 22.Apr.2008 4.12pm",
+      "content": "Hrm, and what would those technical reasons be do you think?\n\nI think the most annoying part of them is simply adding in yet another connection point to Every. Single. Letter. but, since I doubt anyone is ever really going to use it I was more asking the question as one of those academic theoretical hypothetical questions :)\n\n_«El futuro es una línea tan fina que apenas nos damos cuenta de pintarla nosotros mismos». (La Luz Oscura, por Javier Guerrero)_\n\n"
+    },
+    {
+      "time": " 22.Apr.2008 7.41pm",
+      "content": "\\> _Hrm, and what would those technical reasons be do you think?_\n\nDid you read the additional information on that page?\n\n_That is why, for instance, Unicode does not define a decomposition  \nof U+026B LATIN SMALL LETTER L WITH MIDDLE TILDE  \nto U+006C LATIN SMALL LETTER L + U+0334 COMBINING TILDE OVERLAY._\n\n"
+    },
+    {
+      "time": " 23.Apr.2008 1.13am",
+      "content": "Yeah, those overlays make only sense with specific letters, and I think one should create specific glyphs for those letter+overlay combinations which are targeted. They are of interest of very specific user groups and IMHO concern only for special fonts created with the respective user bases in mind. Once you design such a commission, you clearly can consult them on their placing preference.\n\n"
+    },
+    {
+      "time": " 23.Apr.2008 4.35am",
+      "content": "Miguel, I did read the information, but I only considered that as a practical reason not to include them, not a technical reason. To me, a technical reason would be that (for instance) they were not coded as a combining diacritic and thus couldn’t be combined without manual user placement, or that programs ignored their codepoints or something of that sort.\n\nMy understanding of the reason that they are not decomposed in Unicode is because they reside in the IPA section, where each codepoint is considered a letter. Looking at the code chart you see that none of the IPA characters decompose, not even the two-letter combinations, whereas elsewhere digraphs are decomposed as normally would be:\n\n0167 LJ LATIN CAPITAL LETTER LJ  \n≈ 004C L OO4A J\n\nBUT\n\n02A4 ʣ LATIN SMALL LETTER DZ DIGRAPH  \n· voiced dental affricate\n\nThe DZ digraph isn’t aliased as a DZ ligature, as in the case of the AE lig, in effect is and always is a single letter within phonetic transcription, same as an l with combining tilde overlay.\n\nIn any case, I recognize they’re hardly ever used, I’m looking at it as a practice in design/balance than a practice in practicality.\n\n_«El futuro es una línea tan fina que apenas nos damos cuenta de pintarla nosotros mismos». (La Luz Oscura, por Javier Guerrero)_\n\n"
+    }
+  ]
+}

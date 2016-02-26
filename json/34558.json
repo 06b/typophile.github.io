@@ -1,0 +1,90 @@
+{
+  "id": "34558",
+  "title": "MAJOR Bug with kerning in FontLab 5.0.3",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "This happens in FL 5.0.3 for Mac:\n\nAbout half of the kerning is lost (mostly the pairs that are not classes) when having OT-classes also in the font.\n\nThe kerning looks OK in the metrics panel, but when generated or updating the kern feature it shows that all kerning is not present anymore.\n\nIf I take away the OT-classes, the whole kerning is back again when I generate \"kern\" feature.\n\nIn this case it was smcp1 + smcp2.\n\nCould anyone try and see if they have the same bug?\n\n",
+  "author": "Goran Soderstrom",
+  "time": "18 Jun 2007 — 11:24am",
+  "uid": "11526",
+  "comments": [
+    {
+      "time": "18 Jun 2007 — 11:50am",
+      "content": "It seems as it **only** activate the \"Class VS Class\" kerning and not the Single glyph VS Class, or Class VS single glyph.\n\n"
+    },
+    {
+      "time": "26 Jun 2007 — 1:44am",
+      "content": "OK, this is a major bug that makes it impossible to produce fonts. Strange that no one else has discovered it yet. No reply from FontLab either, maybe they are working to fix it.\n\n"
+    },
+    {
+      "time": "26 Jun 2007 — 1:50am",
+      "content": "This happens in my 5.0.3 too.\n\n"
+    },
+    {
+      "time": "26 Jun 2007 — 1:56am",
+      "content": "Great to hear that I’m not dreaming Peter ;-)\n\nEasiest way of discovering the bug is to open an old font with classes and full kerning.\n\nThen make the kern feature visible and again do \"generate \"kern\" feature.\n\nIt takes away all kern pairs that are not class VS class.  \nOSX 10.4.9\n\n"
+    },
+    {
+      "time": "26 Jun 2007 — 9:54am",
+      "content": "Goran,\n\ndid you [report](http://web.archive.org/web/20130815091226/http:/www.fontlab.com/support/problem/) the problem?\n\nA.\n\n"
+    },
+    {
+      "time": "26 Jun 2007 — 2:00pm",
+      "content": "Yes, they were going to send it further to the team leader. This was about a week ago.\n\n"
+    },
+    {
+      "time": "26 Jun 2007 — 6:02pm",
+      "content": "I've had funnies with revisiting a font in FontLab 5.0.2 on a PC as well, but thought it was just me. Instead of losing pairs, I usually gain them -- but the new ones are unwanted & wrong. May just be something I do & not a bug.\n\nAnyway, my solution is to always save the features file, and put any new kerning in that file, read it back in & recompile. I put my classes in the feature file as well, so my starting point in a \"revisit\" situation is always a .vfb with no classes.\n\nIf I add kerning by using the FL metrics window (when revisiting), I write off an .AFM for pairs kerning, search & replace to get it into the proper syntax, & paste into the features file. For new classes or expanding existing classes, I just use the metrics window to determine the values. Then write these values into the features file \"kern\" feature in the appropriate places, read the features back into the .vfb, & recompile. Takes time, but seems to work. Just remember to say \"NO\" when the program tells you the \"features file & metrics window kerning don't agree, do you want to rebuild?\"\n\n"
+    },
+    {
+      "time": "27 Jun 2007 — 9:29am",
+      "content": "Reports were recieved and the bug has been fixed.  \nIs there any more to fix in the next build?\n\nRegards,  \nJohnych\n\n"
+    },
+    {
+      "time": "27 Jun 2007 — 2:12pm",
+      "content": "I would very much be glad if the \"Sort classes\" command would be available for mac also.\n\nIn 5.0.2 and 5.0.3 it doesnt do much...\n\nYou are saying that the bug has been fixed?!\n\nThen, when could I get a new build of 5.0.3? Havent got an answer yet...\n\n/ G\n\n"
+    },
+    {
+      "time": "28 Jun 2007 — 1:57am",
+      "content": "One more thing on my \"to-solve-wish-list\":\n\nThe problem when tangent points (if they are startpoints) automatically convert themselves into sharp nodes. This happens when you close the font and open it next time.  \nSee illustrated example.\n\nThis has been discussed before also.\n\n ![](http://web.archive.org/web/20130815091226im_/http:/typophile.com/files/tangents_4686.png)\n\n"
+    },
+    {
+      "time": "4 Jul 2007 — 10:41am",
+      "content": "Thank you for this one, Goran! Will be fixed in 5.0.4 (and global guides and kerning bugs too).\n\n"
+    },
+    {
+      "time": "5 Jul 2007 — 10:30am",
+      "content": "Ok, great. Will 5.0.4 be out soon?\n\nHow about the \"sort classes alphabetical\" in the class-panel? Could you please fix that bug to, it would be great.\n\nAnother nice thing you should put in the metrics window, is an integrated OT-feature window aswell. In that case, small caps could be kerned visually so much more easier? Just type a word and click \"small caps\" and the small caps can be kerned in the same window. Or any other feature aswell.\n\nThanks for a wonderful application otherwise! It is my best friend nowadays.\n\n"
+    },
+    {
+      "time": "6 Jul 2007 — 8:43am",
+      "content": "Goran,\n\n5.0.4 will be out very soon.\n\nFor a future major release, we are considering an extension of the Metrics Window that would improve handling of glyphs accessed through the OpenType Layout features.\n\nA.\n\n"
+    },
+    {
+      "time": "8 Jul 2007 — 4:54am",
+      "content": "it happened to windows version too, i kerned each letter carefully and it still gets me when generated!\n\n"
+    },
+    {
+      "time": "10 Jul 2007 — 7:39am",
+      "content": "I'm glad to report that the bug has been fixed in FontLab Studio 5.0.4 that was just released:\n\n[http://typophile.com/node/35006](http://web.archive.org/web/20130815091226/http:/typophile.com/node/35006 \"http://typophile.com/node/35006\")\n\nA.\n\n"
+    },
+    {
+      "time": "19 Jul 2007 — 11:11am",
+      "content": "_I would very much be glad if the “Sort classes” command would be available for mac also._\n\nis there a sort classes feature? i'd like to see it!\n\n"
+    },
+    {
+      "time": "19 Jul 2007 — 2:32pm",
+      "content": "This is how it looks, the checkbox becomes visible when you go and “clean up classes”.\n\n ![](http://web.archive.org/web/20130815091226im_/http:/typophile.com/files/sortclasses_5409.png)\n\n-  \nI have however doubts that I have completely understood this function. What I would **desire** it to do, is to sort the **classes** alphabetical in the list of classes. That is what it means to me.\n\nNow, other people have said it sorts the **letters** inside the classes but that have never happened in my FontLab and just by reading it, at least I get the feeling that it will sort the classes, and not the letters inside them.\n\nSo, what is it? Could Adam shed some light? :)\n\n"
+    },
+    {
+      "time": "19 Jul 2007 — 6:47pm",
+      "content": "hmmm, i've never noticed this before. i just tried it and it didn't seem to have any effect on my classes. It'd be handy if it worked as you described and sorted the classes alphabetically.\n\n"
+    },
+    {
+      "time": "28 Jul 2007 — 11:36pm",
+      "content": "For sorting classes properly, I recommend the \"kern\" feature generation macro for FontLab Studio that ships with the newest version of AFDKO (Adobe FDK for OpenType).\n\nA.\n\n"
+    }
+  ]
+}

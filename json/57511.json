@@ -1,0 +1,30 @@
+{
+  "id": "57511",
+  "title": "correct use of rlig?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I was looking at the Charis font, and in the features, found\n\nfeature rlig { # Required Ligatures  \n # from AAT 'morx'; type 1, sel: 0, cvrg: 20000002  \n # Latin  \nlookup rlig35 {  \n sub equal uni0338 by notequal;  \n sub A acutecomb by Aacute;  \n sub A gravecomb by Agrave;  \n sub A uni030F by uni0200;  \n sub A uni0302 by Acircumflex;  \n sub A uni0311 by uni0202;\n\netc. . .\n\nIs this considered appropriate for rlig, or should it really be in a ccmp feature? Does anyone care? (Hey, at least I didn't ask \"What does it all mean?\")\n\nBTW, does anyone know of a discussion forum for working on Charis?\n\nTIA,\n\nCharles\n\n",
+  "author": "<a href=\"/web/20100203075839/http://typophile.com/user/5094\" title=\"View user profile.\">charles_e</a>",
+  "time": "<br>",
+  "uid": "5094",
+  "comments": [
+    {
+      "time": "",
+      "content": "I would say these definitely belong in ccmp, rather than rlig. I can imagine that SIL might have decided to put them in rlig for compatibility reasons with some software that didn't support ccmp but did support rlig (I'm not sure what software that would have been).\n\n"
+    },
+    {
+      "time": "",
+      "content": "John,\n\nThe comment line  \n`# from AAT ’morx’; type 1, sel: 0, cvrg: 20000002`  \nreveals that the OpenType Layout feature definition was not taken directly from the OpenType Layout tables but instead, was converted from the AAT \"morx\" table. For this conversion, FontLab Studio is mapping some morx functions into OTL features with the approximately same functionality, which in this case happens to be \"rlig\". This conversion never is perfect or accurate, since AAT and OpenType Layout use entirely different models.\n\nWe do have the AAT -\\> OTL conversion practically just for the handful of developers who would like to develop AAT tables and then semi-automatically create matching OTL tables. However, since Mac OS X 10.4 added OpenType Layout support, the necessity of creating AAT tables is of less and less importance. It only makes sense now for complex script fonts, as long as Apple does not implement all the major complex scripts in OpenType Layout. In Mac OS X 10.5, basic support for Arabic has been added and I hope that in 10.6, more will be done (but I don't know anything specific).\n\nCharles,\n\nSome fonts made by SIL contain both OTL and AAT code. To just get the OTL code, disable \"Interpret GX/AAT mort & morx tables\" in FLS Preferences, and re-open the font again.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, Adam. I made the change and the features file (as seen by FontStudio) is much better.\n\nPerhaps there is another switch that I need to change? With neither setting did the lookups come through, so of course the features won't compile.\n\nI am trying to get Charis in shape to use for bookwork when the general topic is linguistics. I have made up a fair number of extra glyphs in Minion, but there are several problems, including (1) There are some glyphs I do not have the skill to draw well, (2) The final fonts cannot in any case be released to a customer for \"repurposing,\" and (3) certain ideosyncrocies of Minion, such as the differing accents on caps from lower case -- make some people prefer a more regularized font.\n\nWith kerning and old-style numbers, Charis should function well for linguistics. I notice SIL has just released a version with small capitals.\n\nIf I have to start over with the OT features I will, but it seems a shame to not incorporate what has already been done.\n\nThanks again,\n\nCharles\n\n"
+    },
+    {
+      "time": "",
+      "content": "Charles,\n\nperhaps you can ask SIL to send you the source files, including the source files for the OpenType Layout tables? Working with original files is usually less problematic than decompiling and recompiling feature definitions.\n\nCheers,  \nAdam\n\n"
+    }
+  ]
+}

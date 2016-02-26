@@ -1,0 +1,50 @@
+{
+  "id": "41369",
+  "title": "OpenType in InDesign via scripting",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hey, I just compiled a list of all the JavaScript commands to apply/remove OpenType features in InDesign through scripting. They should work in both CS2 & CS3, except the ones marked as ’CS3 only’.\n\n`myObject` can be anything that accepts the properties, from a whole Story to a single Character. So, if you want to apply the properties to the first story in the document, you’ll need to declare ’myObject’ as:  \n`var myObject = app.documents[0].stories[0];`\n\nIf you only want to change the first line of text in a document, ’myObject’ should be declared like:  \n`var myObject = app.documents[0].stories[0].lines[0];`\n\nAnd if what you want to change is the first character in a document, ’myObject’ should be:  \n`var myObject = app.documents[0].stories[0].characters[0];`\n\nThe properties can also be applied to paragraphs, text frames, words, etc.\n\nHappy coding!!\n\n`################\n// All Caps (case+cpsp)\nmyObject.capitalization = Capitalization.ALL_CAPS;`\n\n// Small Caps (smcp)  \nmyObject.capitalization = Capitalization.SMALL\\_CAPS;\n\n// All Small Caps (c2sc+smcp)  \nmyObject.capitalization = Capitalization.CAP\\_TO\\_SMALL\\_CAP;\n\n// to reset capitalization  \nmyObject.capitalization = Capitalization.NORMAL;\n\n// Ligatures (liga)  \nmyObject.ligatures = false; // to turn off  \nmyObject.ligatures = true; // to turn on\n\n###\n\n// Discretionary Ligatures (dlig+hlig)  \nmyObject.otfDiscretionaryLigature = true;\n\n// Fractions (frac)  \nmyObject.otfFraction = true;\n\n// Ordinal (ordn)  \nmyObject.otfOrdinal = true;\n\n// Swash (swsh+cswh)  \nmyObject.otfSwash = true;\n\n// Titling Alternates (titl)  \nmyObject.otfTitling = true;\n\n// Contextual Alternates (calt+clig)  \nmyObject.otfContextualAlternate = true;\n\n// Slashed Zero (zero)  \nmyObject.otfSlashedZero = true;\n\n// Stylistic Sets (ssXX)  \nmyObject.otfStylisticSets = 8; // to apply Set 3 (ss03)  \n/\\*  \n0 = None  \n2 = ss01  \n4 = ss02  \n6 = ss01+ss02  \n8 = ss03  \n10 = ss01+03  \n12 = ss02+03  \n14 = ss01+02+03  \n16 = ss04  \n32 = ss05  \n64 = ss06  \n128 = ss07  \n...  \nOR  \n1 = None  \n3 = ss01  \n5 = ss02  \n7 = ss01+02  \n9 = ss03  \n11 = ss01+03  \n13 = ss02+03  \n15 = ss01+02+03  \n17 = ss04  \n19 = ss01+04  \n21 = ss02+04  \n...  \n\\*/\n\n// Positional Forms (init, medi, fina, isol) -- CS3 only  \n//// General Form  \nmyObject.positionalForm = PositionalForms.NONE;  \n//// Automatic Form  \nmyObject.positionalForm = PositionalForms.CALCULATE;  \n//// Initial Form  \nmyObject.positionalForm = PositionalForms.INITIAL;  \n//// Medial Form  \nmyObject.positionalForm = PositionalForms.MEDIAL;  \n//// Final Form  \nmyObject.positionalForm = PositionalForms.FINAL;  \n//// Isolated Form  \nmyObject.positionalForm = PositionalForms.ISOLATED;\n\n###\n\n// Superscript/Superior (sups)  \nmyObject.position = Position.OT\\_SUPERSCRIPT;\n\n// Subscript/Inferior (subs if present, else sinf)  \nmyObject.position = Position.OT\\_SUBSCRIPT;\n\n// Numerator (numr)  \nmyObject.position = Position.OT\\_NUMERATOR;\n\n// Denominator (dnom)  \nmyObject.position = Position.OT\\_DENOMINATOR;\n\n// to reset position  \nmyObject.position = Position.NORMAL;\n\n###\n\n// Tabular Lining (tnum+lnum)  \nmyObject.otfFigureStyle = OTFFigureStyle.TABULAR\\_LINING;\n\n// Proportional Oldstyle (pnum+onum)  \nmyObject.otfFigureStyle = OTFFigureStyle.PROPORTIONAL\\_OLDSTYLE;\n\n// Proportional Lining (pnum+lnum)  \nmyObject.otfFigureStyle = OTFFigureStyle.PROPORTIONAL\\_LINING;\n\n// Tabular Oldstyle (tnum+onum)  \nmyObject.otfFigureStyle = OTFFigureStyle.TABULAR\\_OLDSTYLE;\n\n// Default Figure Style  \nmyObject.otfFigureStyle = OTFFigureStyle.DEFAULT\\_VALUE;\n\n### Not available through the UI\n\n// Historical Forms (hist)  \nmyObject.otfHistorical = true;\n\n// Localized Forms (locl) -- CS3 only  \nmyObject.otfLocale = true;\n\n// Mark Positioning, Required Ligatures,  \n// Glyph Composition / Decomposition  \n// (mark, mkmk, mset, rlig, ccmp) -- CS3 only  \nmyObject.otfMark = true;\n\n// Access any feature available in the font  \n// and specify the index of the alternate glyph  \nmyObject.opentypeFeatures = [[\"salt\", 0]]; // default glyph  \nmyObject.opentypeFeatures = [[\"salt\", 1]]; // 1st alternate glyph\n\n [‹ Ligatures on PC](http://web.archive.org/web/20081102221942/http:/typophile.com/node/41398 \"Go to previous forum topic\") [OT Case Feature ›](http://web.archive.org/web/20081102221942/http:/typophile.com/node/41081 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081102221942/http://typophile.com/user/1844\" title=\"View user profile.\">Miguel Sousa</a>",
+  "time": "<br>",
+  "uid": "1844",
+  "comments": [
+    {
+      "time": " 25.Jan.2008 3.30pm",
+      "content": "Not sure what these do, Miguel, but thanks for sharing!\n\nChrisL\n\n"
+    },
+    {
+      "time": " 25.Jan.2008 4.12pm",
+      "content": "Hey thanks!\n\n"
+    },
+    {
+      "time": " 25.Jan.2008 4.27pm",
+      "content": "You’re welcome!\n\nBTW, I’ve added a few lines to the Stylistic Sets section.\n\n"
+    },
+    {
+      "time": " 26.Jan.2008 1.26pm",
+      "content": "<cite>I’ve added a few lines to the Stylistic Sets section.</cite>\n\nYou didn’t even give me a chance to ask.&nbsp;&nbsp;:)&nbsp;&nbsp;Indeed\n\n<cite>2 = ss01  /  4 = ss02  /  6 = ss01+ss02</cite>\n\nmakes more sense to me than\n\n<cite>3 = ss01  /  5 = ss02  /  7 = ss01+02</cite>\n\nbecause 2+4=6 looks fine, while 3+5=7 ...\n\n"
+    },
+    {
+      "time": " 27.Jan.2008 12.21am",
+      "content": "The list with even numbers is the “official” one (Thanks Eric!). I kept the other list just for the sake of completeness.\n\n"
+    },
+    {
+      "time": " 27.Jan.2008 5.39am",
+      "content": "Miguel, does `opentypeFeatures` allow the use of fully arbitrary features such as `pcap` or `unic`?\n\nA.\n\n"
+    },
+    {
+      "time": " 28.Jan.2008 4.05am",
+      "content": "Eric,\n\nwhich version of InDesign was first to support the opentypeFeatures property?\n\nA.\n\n"
+    },
+    {
+      "time": " 28.Jan.2008 8.41am",
+      "content": "Yes, you can use any OpenType feature and InDesign will apply them blindly. However, you can have trouble if you apply a feature (example ’swsh’) that InDesign has an alternate way of applying — in this case, InDesign may turn it off. Both GPOS & GSUB features should work. Of course, any 1:many glyph substitutions will still fail.  \nAlso, you can create character or paragraph styles and modify them via scripting to add features using the code above — a style is another “text target” for these commands. Or, you can apply the feature to text and it the “new style” button which will load these attributes into the style, even though the UI doesn’t support them.  \nWARNING: this is a way to confuse less savvy users who may get the documents later...\n\n"
+    },
+    {
+      "time": " 28.Jan.2008 8.51am",
+      "content": "There was an older mechanism that was replaced by the syntax above in CS2. I think the older one was “OpenTypeFeatures” (not sure how the capitalization is done between the different scripting systems). It specified 2 integers instead of a string & an integer, so it would be harder to use.  \nNew  \n`myObject.opentypeFeatures = [[\"salt\", 0], [\"pcap\", 0] ];`\n\nOld (something like this)  \n`myObject.openTypeFeatures = [0x81617282, 0, 0x7a63617a, 0];`\n\nI made up those hexadecimal numbers, but you get the drift.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "id": "65456",
+  "title": "Generating shapes starting from the counters - an experiment",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I want to describe an 'idea' I had for a tool to be implemented.\n\nThe idea is to have a tool for generating shapes in that order:  \nyou give the tool a 'counter' an a set of 'rules'  \nthe tool apply the 'rules' to the counter and generate the final shape.\n\nIn the image below the rules are represented as vectors that map points on the inner contour to points on the outer contour. If the rules are changed the outer shape change, accordingly, if the 'counter' is changed the same rules generate another shape (in my image you see the difference of scaling the counter and scaling the resultant shape.)\n\n ![](http://web.archive.org/web/20130819161836im_/http:/typophile.com/files/counters_5621.gif)\n\nTo test the concept I've written a script (too ugly to show) in python and, using fontforge (as a python module), I generated a 'font' (actually three letters: I'm lazy).\n\nThe script roughly performs the things I've described (it takes a shapes – the counter – and a set of rules for each node, and outputs the glyph).  \nWhile I was trying to write this script I realized that everything could be parametrized, so that you can make changes manipulating 'meaningful' parameters. The 'rules' can be as well thought as functions that respond to inputs from that parameters, and at the end you have two elastic boundaries tied together by some law.\n\nIdeally you can reuse a counter, transform it and attach new rules to define another glyph, etc.\n\nBelow you can see some test:  \nchanging the 'offset' (i.e. changing the stem width)  \nchanging the width of counters  \ntesting for extreme cases (almost Klimax-esque)  \nchanging the defined 'contrast' parameter (horizontal/vertical offsets)\n\n ![](http://web.archive.org/web/20130819161836im_/http:/typophile.com/files/variation_4865.jpg)\n\nEvery variation required only one or two parameters to be modified.\n\n",
+  "author": "daniele capo",
+  "time": "17 Dec 2009 — 10:39am",
+  "uid": "24678",
+  "comments": [
+    {
+      "time": "17 Dec 2009 — 12:53pm",
+      "content": "This is extremely significant work.  \nPlease take it as far as you can.\n\nhhp\n\n"
+    },
+    {
+      "time": "17 Dec 2009 — 2:51pm",
+      "content": "Being code-illiterate, I have no idea what you just said, but it sure looks interesting.\n\n"
+    },
+    {
+      "time": "17 Dec 2009 — 2:58pm",
+      "content": "Impressive.\n\n"
+    },
+    {
+      "time": "18 Dec 2009 — 1:40am",
+      "content": "The idea of applying (variable) vectors to counters (i.e. generating ‘counter points’) to represent (combinations of) certain contrast sorts (‘translation’, ‘expansion’, [‘transpansion’, ‘exlation’]), contrast flows (vector length, angle and rotation) and contrast as an alternative to the more traditional (and in some cases questionable) approach of applying the same effects to a ‘skeleton’ or ‘heart’ line is interesting, but also raises a few questions.\n\nThe three letters shown are simplified forms, because the counters don't provide any information about the stems top left. This seems to limit the possible variants to the presented ones. At the other hand there is the descender of the ‘p’, which is not described by the counter itself. I am also curious about how letters with multiple counters , like ‘a’ and ‘e’ will be handled by this system.\n\nThe counter oriented model also seems to exclude serifs by definition, and assuming that serifs are an indicator/representation of the contrast sort, contrast flow and, of course, the contrast (not to mention the relation to the ‘stem interval’), this seems to limit the system to letters with low contrast. The relatively high contrast pointed pen (‘expansion’) variants (bottom left) require for instance serifs in my opinion.\n\n"
+    },
+    {
+      "time": "18 Dec 2009 — 2:01am",
+      "content": "Ok, now I made some observation about this.  \nFirst: the idea came in my mind while I was reading Smeijers Counterpunch  \nTo make things clearer (I suspect that one thing that makes my writing unclear is my funny english): what happens if drawing a glyph you are _forced_ to draw the 'counterpunch' first?  \nMoreover, what if you the only thing you can really define is the counterpunch itself? Now you have a shape (te counterpunch) and you need to draw something around it in a different way. I discovered that you can do that by saying: move this point on the counter in such a way, move the other point etc.\n\nThis is what I meant with the first image. The inner shape is the counterpunch and the arrows are the displacements that 'generate' the outer contour.\n\n(I call the displacements \"rules\" because I needed to generalize the concept.)\n\nThen I realized that this kind of constraint (drawing the counterpunch and then defining displacements to generate the other contour) was very useful to define a parametric glyph.  \nFor example, the displacement of the lateral point of the counter of lowercase o is related to the weight of the glyph. And the displacement of the points in lowercase n, define the 'stem'. And the relation between the two displacement I mentioned is the difference of straight line to curves etc.\n\nSecond:  \nAt this point for me there is a conceptual problem: because if you 'parametrize' something you have to parametrize almost everything (the reason is clear when you think at the relation between horizontal and vertical: if the horizontals change with the verticals, you can: a. change the height of the counter (i.e. parametrize this as well) or b. change the x-height of the glyph.)  \n_But this move blurs the difference between drawing glyph in this way and drawing the usual way_ (again, the vertical proportions problem)\n\nThird:  \nThis tool is very impractical since you can do the same thing with interpolation etc. Moreover I really cannot see any way to trasform my awful python script into something more functional, like a software with a graphic interface etc. (here the problem is also being a really unskilled programmer).\n\n"
+    },
+    {
+      "time": "18 Dec 2009 — 2:25am",
+      "content": "Thanks for you comment Frank,  \nI drawn the simplified shapes because it is much easier :) but I made also other experiments with serifs etc:\n\n ![](http://web.archive.org/web/20130819161836im_/http:/typophile.com/files/serif1_6257.jpg)\n\n ![](http://web.archive.org/web/20130819161836im_/http:/typophile.com/files/serif2_5505.jpg)\n\nWhen I said that every point in the counter is mapped to a point in the contour I was imprecise: you can generate 0, 1 or even more than one point, i.e. you can attach more than one 'rule' to a point.  \nBut this way of defining descender and ascender is impractical: In the examples I used more than one \"counter\" (notice also that I have closed and open counters), the descender being a line (this is cheating I know).\n\nTo draw serifs I decided to also have simple contour (parametrized as well) that I can attach to the glyph (again this is cheating.)  \n(Yes, the glyphs have overlapping contours at the end, but my 'tool' is just a way to experiment, not a way to really draw a real font)\n\nedit: you can see the overlapping in the images.\n\nBeing a piece of software you can also write a conditional statement to attach serifs when, for example, the contrast is greater than a threshold.\n\n"
+    },
+    {
+      "time": "18 Dec 2009 — 3:27am",
+      "content": "I like the idea of starting font construction from the counters and I also like the way this results in quick and basic glyph shapes that can be developed.\n\nIt looks like you are also able to determine the angle of contrast by including a rotation in the algorithm on your last image?\n\nCan you show an example of what happens with other letters?\n\n"
+    },
+    {
+      "time": "18 Dec 2009 — 9:29am",
+      "content": "I think that by trying to define everything starting from counters you probably end up with very impractical results, as you already noticed.\n\nIn this sense I don't see the other workarounds as _cheating_ but as different solutions that may be needed by the system (if you're looking for the development of a handy tool, of course).\n\n"
+    },
+    {
+      "time": "5 Jan 2010 — 8:23am",
+      "content": "Ben, Paolo,  \nI've made other experiments with relative rotation and with lowercase 'a' (a rather complex letter).  \nRotations are easy, the big problem is when you have serifs and 'multiple' counters, but it is interesting because this 'force' you to see things from a different angle.  \nI'm not sure if it is a way to draw quickly, you have to carefully 'plan' your shapes, maybe avoiding curves…  \nI'm still trying to imagine how to (and if) develop my 'tool'.\n\n ![](http://web.archive.org/web/20130819161836im_/http:/typophile.com/files/o-variation_5675.jpg)\n\n ![](http://web.archive.org/web/20130819161836im_/http:/typophile.com/files/a_4220.jpg)\n\n"
+    },
+    {
+      "time": "5 Jan 2010 — 12:17pm",
+      "content": "This is fascinating. I'm looking forward to seeing how this develops. Thanks for sharing.\n\n"
+    },
+    {
+      "time": "2 Feb 2010 — 4:04am",
+      "content": "I second all the good things said about your experimentation. (I saw this thread only now.) I hope you're still working on this, you may have begun a piece of very valuable work.\n\n"
+    },
+    {
+      "time": "2 Feb 2010 — 7:03am",
+      "content": "@ MiseEnAbime: Can you project how long it would take you to design a complete set of characters?\n\n@ All type designers: Is this number more or less that your averaged estimates to complete the same task.\n\n"
+    },
+    {
+      "time": "2 Feb 2010 — 7:22am",
+      "content": "Christopher: I'm not able to make an estimate of the time to make a complete set of characters, I can imagine that the usual process with interpolation etc. is (and will be) faster than trying to parametrize everything 'by hand'.\n\nSindre: This project is 'in pause' but I really want to work again on it.\n\n"
+    },
+    {
+      "time": "2 Feb 2010 — 8:46am",
+      "content": "Christopher, the intentions of that train of thought are admirable; but the practical dimension of it is non-existent.\n\nDaniele: This is the sort of thing that I feel _requires_ pauses, even hibernations.\n\nhhp\n\n"
+    },
+    {
+      "time": "2 Feb 2010 — 9:25am",
+      "content": "I understand it as a way of testing concepts and their limitations.\n\n"
+    },
+    {
+      "time": "2 Feb 2010 — 10:16am",
+      "content": "I am not a type-designer, but practically I think there could be massive benefits. If a type designer could articulate the \"permissions\" or aspects of a typeface to a developer such as Daniele through the design of a few key glyphs, who could then develop an algorithm to produce an entire character set, production time (and profits as a result) could improve significantly. Granted, there would need to be some review and tweaking by the type designer.\n\nIf we wanted to be altruistic, we could pass the cost-savings back to our clients who could then re-invest their resources into other things like solar panels.\n\nI have a small amount of experience collaborating with a python developer in an effort to design a typeface so I know it's possible, but I am not familiar enough with the business of type design to know it it is actually practical (or profitable) but you never know until you try.\n\nRegardless of it's potential practicality, I think it worthy of exploration. I look forward to the results.\n\n(does anyone know of typefaces produced by automated processes?)\n\n"
+    },
+    {
+      "time": "2 Feb 2010 — 10:42am",
+      "content": "I would consider the Knuth \"augmented skeletons\" approach a form  \nof automation. Of course complete automation would require AI! :-)\n\nhhp\n\n"
+    },
+    {
+      "time": "2 Feb 2010 — 11:49am",
+      "content": "[Knuth \"augmented skeletons\" approach](http://web.archive.org/web/20130819161836/http:/en.wikipedia.org/wiki/Metafont)\n\n"
+    },
+    {
+      "time": "2 Feb 2010 — 12:45pm",
+      "content": "Some time ago I was bookmarking everything about parametric font systems: [link](http://web.archive.org/web/20130819161836/http:/delicious.com/my_name_is_unwriteable/parametric). There are links for books, code, fallen concepts or just ideas.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 1:33am",
+      "content": "[tracking]\n\n"
+    },
+    {
+      "time": "5 Feb 2010 — 11:07pm",
+      "content": "Also, Gustavo Ferreira's [Elementar, a flexible bitmap type system](http://web.archive.org/web/20130819161836/http:/www.hipertipo.org/pdfs/ElementarTYPO27.pdf) [PDF]\n\n"
+    }
+  ]
+}

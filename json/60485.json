@@ -1,0 +1,34 @@
+{
+  "id": "60485",
+  "title": "OpenType features for geeks",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "hi, everybody  \ni’m a fontlab beginner and i would like to know if there is any way to understand all that “chinese” code input for OpenType features. Spending a day to understand how to “ignore a substitute” (from FontLab manual) but nothing!!! Any help for the complete idiot?\n\nKonstantinos Siskakis  \nAnagrafi  \nGreece\n\n",
+  "author": "kostas",
+  "time": "31 Jul 2009 — 1:27am",
+  "uid": "46559",
+  "comments": [
+    {
+      "time": "31 Jul 2009 — 10:13am",
+      "content": "The logic for \"ignore\" can be confusing. It's best to think of it as a filter that excludes things. Or as an \"if not\" statement.\n\n"
+    },
+    {
+      "time": "31 Jul 2009 — 1:21pm",
+      "content": "Since FontLab uses the AFDKO, the Adobe site is a good resource (IIRC, the FontLab manual _does_ mention a few deviations). Your ignore line can be found here:\n\n[Specifying exceptions to the Chain Sub rule](http://web.archive.org/web/20140809141133/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#5.f.ii)\n\nThe most confusing part of it is it also needs a at least one part tagged with a ' (in regular substitutions this marks the to-be-replaced glyph(s)).\n\n"
+    },
+    {
+      "time": "1 Aug 2009 — 10:13pm",
+      "content": "Speaking of those 'ignore sub' statements: Within any lookup in a features file (which often means within a feature, unless you've specified lookups within a feature), scanning stops at the first match. So, in OpenType layout, if 'sub f i by f\\_i' matches, then that substitution is made, and everything in the lookup after that is ignored/skipped. The 'ignore sub' statements function exactly like any other 'sub' statement in this regard, except that instead of performing a substitution, nothing is done.\n\nSo, the statement 'ignore sub x f' i' by f\\_i' can be read as \"if f and i is preceded by x, do nothing.\" This is a match, like everything else, and subsequent lines in the lookup are skipped.\n\nDon't know if that actually helps! :)\n\n"
+    },
+    {
+      "time": "2 Aug 2009 — 5:06pm",
+      "content": "While we're on the topic, anyone know how to get at OpenType features in [Pages](http://web.archive.org/web/20140809141133/http:/www.apple.com/iwork/pages/)?\n\n(Mac, iWork)\n\n"
+    },
+    {
+      "time": "2 Aug 2009 — 8:11pm",
+      "content": "Sure: Select the text, open the Fonts panel (command-T), and choose \"Typography...\" from the the pop-up menu at the bottom with the gear icon. If the text is set in an OT font, the features will show up there.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "id": "18896",
+  "title": "Dominant Opentype ligatures?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm working on a typeface at the moment that uses plenty of ligatures (in the style of [Ed Interlock](http://web.archive.org/web/20131020160718/http:/www.houseind.com/index.php?page=showfont&id=150&subpage=viewfontsinuse)) and I'm wondering if there's any way to make certain ligatures be dominant over others? For example, for SHI I have an SH ligature and a HI ligature, and because SH comes first as you're typing, it turns into the ligature and the I is left alone. Without having to make an SHI ligature, can I make the HI ligature dominant over SH in the case of SHI?\n\nAnd pardon me if that makes no sense at all. I'm just curious if I can make certain ligatures bow down to more dominant ones.. If there's any code or such.\n\nAlso, while I'm here and asking, can you include spacebar in ligature replacements? Say, for example, you have an S and when it's at the end of a word (marked by a spacebar following the S) you want it to do a swashy thing, is that possibe? like a \"sub S [SPACE] by SSpace.li\" thing..?\n\nThanks!\n\n",
+  "author": "claes",
+  "time": "29 Mar 2006 — 6:41am",
+  "uid": "11945",
+  "comments": [
+    {
+      "time": "29 Mar 2006 — 7:25am",
+      "content": "im sure zapfino OT has it, if you type the name all the glyphs change constantly, and there's even a full glyph just to write \"zapfino\" in a beautiful way :)\n\n ![](http://web.archive.org/web/20131020160718im_/http:/typophile.com/files/zapfino.png)\n\ni remember a gif showing it, but cant find it anymore. this image is a bit of a preview, as you see the glyphs change.\n\ni cant tell you how to do it, but its possible for sure.\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 8:02am",
+      "content": "I think you can find some information on the personal site of [Tal Leming](http://web.archive.org/web/20131020160718/http:/www.talleming.com/).\n\nA few threads:  \n [http://www.typophile.com/node/17177](http://web.archive.org/web/20131020160718/http:/www.typophile.com/node/17177 \"http://www.typophile.com/node/17177\") -- [http://www.typophile.com/node/6638](http://web.archive.org/web/20131020160718/http:/www.typophile.com/node/6638 \"http://www.typophile.com/node/6638\")\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 8:58am",
+      "content": "whichever ligature you list first is dominat. so if you want HI to trump SH, in your liga feature put:\n\n`\nliga {\nsub H I by H_I;\nsub S H by S_H;\n} liga;`\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 9:31am",
+      "content": "are you sure about that Paul?\n\ni have the HI ligature earlier in the list than the SH ligature.. they aren't adjacent to each other in the list, so it seems (like i wrote above) that the ligature that's activated first (SH in this case) overrides any such list order.\n\nanyway, i'll check out those links.\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 9:58am",
+      "content": "What if you make 2 groups of liga features? would the first group trump the second?\n\nChrisL\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 10:01am",
+      "content": "_so it seems (like i wrote above) that the ligature that’s activated first (SH in this case) overrides any such list order._\n\nthe rule is what is first trumps what comes after. this is true of single lookups or of features. do you have the SH ligature lookup in any other feature lookups before you get to the HI ligature lookup?\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 10:04am",
+      "content": "What about:  \nsub SHI by S H\\_I;\n\n?\n\nChrisL\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 10:35am",
+      "content": "what are lookups? \\*embarrassed\\*\n\nall i've got so far is:\n\nfeature liga {  \nsub X Y by XY.li;  \nsub ...  \nsub ...  \n} liga\n\nwith all the ligature replacements all under there.\n\nshould i STFU and RTFM? (;\n\ni only got FontLab yesterday, literally, so i am a complete newbie.\n\noh, by the way the \"sub SHI by S HI.li;\" didn't work. it gave me an error message when i compiled.\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 10:41am",
+      "content": "can you post your ligature featue exactly as you have it now? it'll be easier to spot problems that way.\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 10:51am",
+      "content": "oh it's a complete disarray (i've basically added them on on top of another as i've made the ligatures.. no order at all). everything works though, i can compile and the ligatures work.. i'm just wondering if there are any other tricks to use which might put certain ligatures in a higher level of sorts and override other combinations.\n\nanyway.. here it is.\n\nfeature liga {  \n sub R O by RO.li;  \n sub E R T by ERT.li;  \n sub H I by HI.li;  \n sub L E Y by LEY.li;  \n sub I T C by ITC.li;  \n sub H U M by HUM.li;  \n sub M A C by MAC.li;  \n sub L A by LA.li;  \n sub I N by IN.li;  \n sub T W O by TWO.li;  \n sub F O by FO.li;  \n sub T H by TH.li;  \n sub E E S by EES.li;  \n sub A W by AW.li;  \n sub E R by ER.li;  \n sub L L by LL.li;  \n sub H E by HE.li;  \n sub R A by RA.li;  \n sub K I by KI.li;  \n sub W A by WA.li;  \n sub E E by EE.li;  \n sub H T by HT.li;  \n sub L E by LE.li;  \n sub E A by EA.li;  \n sub O H by OH.li;  \n sub H A by HA.li;  \n sub T T by TT.li;  \n sub M O by MO.li;  \n sub O N by ON.li;  \n sub N O by NO.li;  \n sub H A M by HAM.li;  \n sub L M by LM.li;  \n sub L N by LN.li;  \n sub U N by UN.li;  \n sub W U by WU.li;  \n sub R T by RT.li;  \n sub W R by WR.li;  \n sub E L by EL.li;  \n sub F A by FA.li;  \n sub I T by IT.li;  \n sub I T I by ITI.li;  \n sub T T A by TTA.li;  \n sub A T T A by ATTA.li;  \n sub R Y by RY.li;  \n sub L O by LO.li;  \n sub E H by EH.li;  \n sub T S by TS.li;  \n sub I T S by ITS.li;  \n sub A T S by ATS.li;  \n sub K A by KA.li;  \n sub T W by TW.li;  \n sub F F by FF.li;  \n sub M O N by MON.li;  \n sub N I by NI.li;  \n sub O T T by OTT.li;  \n sub S T by ST.li;  \n sub S P by SP.li;  \n sub E D by ED.li;  \n sub U T by UT.li;  \n sub D R by DR.li;  \n sub L D by LD.li;  \n sub F I by FI.li;  \n sub B Y by BY.li;  \n sub W I by WI.li;  \n sub T O by TO.li;  \n sub S H by SH.li;  \n sub W R Y by WRY.li;  \n sub E Y by EY.li;  \n sub M A by MA.li;  \n sub A N by AN.li;  \n sub M A N by MAN.li;  \n sub O W by OW.li;  \n sub W S by WS.li;  \n sub I P by IP.li;  \n sub R U by RU.li;  \n sub P R by PR.li;  \n sub P R O by PRO.li;  \n sub P R A by PRA.li;  \n sub W N by WN.li;  \n sub F R by FR.li;  \n sub F R E by FRE.li;  \n sub R E by RE.li;  \n sub D U by DU.li;  \n sub U C by UC.li;  \n sub C K by CK.li;  \n sub O Y by OY.li;  \n sub O Y S by OYS.li;  \n sub A Y by AY.li;  \n sub A Y S by AYS.li;  \n sub O F by OF.li;  \n sub A T T by ATT.li;  \n sub A V by AV.li;  \n sub A V A by AVA.li;  \n sub V A V by VAV.li;  \n sub B E by BE.li;  \n sub E S by ES.li;  \n sub S N by SN.li;  \n sub S N T by SNT.li;  \n sub N T by NT.li;  \n sub E N T by ENT.li;  \n sub A P by AP.li;  \n sub V O by VO.li;  \n sub A T by AT.li;  \n sub I V by IV.li;  \n sub I V E by IVE.li;  \n sub S U by SU.li;  \n sub U B by UB.li;  \n sub S U B by SUB.li;  \n sub J E by JE.li;  \n sub I E by IE.li;  \n sub I E S by IES.li;  \n sub I D by ID.li;  \n sub U P by UP.li;  \n sub I F by IF.li;  \n sub T I by TI.li;  \n sub T Y by TY.li;  \n sub N T Y by NTY.li;  \n sub Y T by YT.li;  \n sub Y T H by YTH.li;  \n sub F L by FL.li;  \n sub F L A by FLA.li;  \n sub F L O by FLO.li;  \n sub F L E by FLE.li;  \n sub N G by NG.li;  \n sub I R by IR.li;  \n sub U S by US.li;  \n sub W A Y by WAY.li;  \n sub T A by TA.li;  \n sub A G by AG.li;  \n sub E V by EV.li;  \n sub E V E by EVE.li;  \n sub V E by VE.li;  \n sub E N by EN.li;  \n sub V E N by VEN.li;  \n sub V E R by VER.li;  \n sub E E N by EEN.li;  \n sub R M by RM.li;  \n sub O U by OU.li;  \n sub M E by ME.li;  \n sub E M by EM.li;  \n sub S T U by STU.li;  \n sub U M by UM.li;  \n sub U M P by UMP.li;  \n sub M P by MP.li;  \n sub A S by AS.li;  \n sub Y P by YP.li;  \n sub I T T by ITT.li;  \n sub O R by OR.li;  \n sub T R by TR.li;  \n sub T O R by TOR.li;  \n sub A D by AD.li;  \n sub O T by OT.li;  \n sub L O T by LOT.li;  \n sub M B by MB.li;  \n sub R N by RN.li;  \n sub N A by NA.li;  \n sub A N T by ANT.li;  \n sub E T by ET.li;  \n sub V A by VA.li;  \n sub T E by TE.li;  \n sub Y M by YM.li;  \n} liga;\n\nshould the triple/quad ligatures be in their own section, or ordered above the doubles..? alphabetized perhaps?\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 11:04am",
+      "content": "a few suggestions:\n\nnaming: name a ligature of X & Y X\\_Y;  \nput longer ligatures first so quads, triples and then doubles.  \nif you have no preference of order, alphabetise ligatures just for easy (human) referencing\n\ndo you recompile your OT features after adding new lookups to test how they're working? you need to do this each time you change your code before you preview.\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 11:51am",
+      "content": "so it's better to use \"A\\_B\" instead of \"AB.li\" for the A B ligature? or it doesn't really matter?\n\nand yes, i promise to alphabetise in due time. right now i'm just adding them as a go along/come up with new ones and that means they're added in random chunks so i can see what i've go so far.. and yeah, i recompile after each (chunk) addition.\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 12:21pm",
+      "content": "Alphabetic ordering is for your own convenience. Ordering ligatures by length in descending order, however, is a generic rule. If f\\_f ligature would be in the list before f\\_f\\_i, latter one would never be substituted.\n\nBut ordering does not solve your problem of prioritization. If your lookup contains ligatures A\\_B and B\\_C, whatever goes first in the list -- \"A B C\" will be substituted to \"A\\_B C\". To allow B\\_C to work over A\\_B two separate lookups are required (or contextual substitutions, which seem to be overkill here).\n\nIn VOLT you create two lookups and put ligatures into them according to their priority. FDK also allows to specify separate lookup for the feauture, but I am not sure if it won't compile them into subtables of a single lookup. Syntax would look like this:\n\n``\n\n<dl>feature liga {\n<dt>lookup liga.Pri1 {</dt>\n<dd>sub B C by B_C</dd>\n<dt>} liga.Pri1;</dt>\n<dt>lookup liga.Pri2 {</dt>\n<dd>sub A B by A_B</dd>\n<dt>} liga.Pri2;</dt>\n</dl>\n\n} liga;\n\nThanks,  \nSergey\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 12:45pm",
+      "content": "yep. i just reorganized the whole list, which should definitely make it much easier to overview and figure out which ligatures i should do next.. speaking of that, does anyone know of any free web tool that can sort lines alphabetically? (o: kind of a hassle to sort out all those lines alphabetically.\n\nbut anyway, Sergey, i will look into making priority lists. thanks for the tip!\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 1:25pm",
+      "content": "TexEdit Plus\n\n[http://www.tex-edit.com/](http://web.archive.org/web/20131020160718/http:/www.tex-edit.com/ \"http://www.tex-edit.com/\")\n\nChrisL\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 1:38pm",
+      "content": "thanks, i'll look that up.\n\nby the way, i've put up a sample of the font i'm working on (that this thread is in regards to). [here's the thread](http://web.archive.org/web/20131020160718/http:/typophile.com/node/18903).\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 2:45pm",
+      "content": "_oh, by the way the “sub SHI by S HI.li;” didn’t work. it gave me an error message when i compiled._\n\nsub S H' I' by S H\\_I.li;\n\nChris is right, but you have to tell it what is getting substituted in the string by adding ' after. Get an OpenType font and open it in FontLab and look at the code. That's the easiest way to figure it out.\n\nGeorge\n\nI felt bad because I had no shoes, until I met a man who had no Bodoni\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 2:54pm",
+      "content": "aha! okay. i'll try that out as well. thanks for the help.\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 4:06pm",
+      "content": "_But ordering does not solve your problem of prioritization. If your lookup contains ligatures A\\_B and B\\_C, whatever goes first in the list — “A B C” will be substituted to “A\\_B C”. To allow B\\_C to work over A\\_B two separate lookups are required (or contextual substitutions, which seem to be overkill here)._\n\nduh. i wasn't thinking. i shouldn't reply when i'm preoccupied.\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 6:20pm",
+      "content": "_feature liga {  \nlookup liga.Pri1 {  \nsub B C by B\\_C  \n} liga.Pri1;  \nlookup liga.Pri2 {  \nsub A B by A\\_B  \n} liga.Pri2;  \n} liga;_\n\nIf you Type A B first I doubt the B C sub will work. The lookup for A B will kick in before you get to B C and if you don't have a sub for A B C you don't change anything. You should start with the sub of the long (complete) string first. I think it should be:\n\nfeature liga {  \nlookup liga.Pri1 {  \nsub A B' C' by A B\\_C  \nsub A B by A\\_B  \n} liga.Pri1;  \n} liga;\n\nOnce the B C sub is done the following A B sub won't change it since it's now A B\\_C, not A B C. It's the same as the f ligatures, f\\_f\\_i comes first, then f\\_i and f\\_f.\n\nAt least this is my understanding of how the GSUB works.\n\nGeorge  \nI felt bad because I had no shoes, until I met a man who had no Bodoni\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 6:58pm",
+      "content": "_oh, by the way the “sub SHI by S HI.li;” didn’t work. it gave me an error message when i compiled._\n\nYou can't do many-to-many substitutions in OpenType. So if your input is multiple glyphs, then the output has to be a single glyph (i.e. a ligature lookup).\n\nRegarding ligature names, you should definitely use the underscore notation, so H\\_I, not HI.li\n\nA period . indicates that the glyph is a variant of a glyph, e.g. a.alt is an alternate form of a. But there is not HI glyph for HI.li to be a variant of.\n\nThe underscore \\_ notation is parseable by an application that implements the Adobe glyph naming rules.\n\n"
+    },
+    {
+      "time": "29 Mar 2006 — 7:32pm",
+      "content": "No. Processing is going like this:  \n`\nFor each lookup\nFor each position where lookup is applied,\nFor each 'rule' in the lookup.\nIf rule matches the context do what it says, move to the next position\nIf rule does not match the context, try next rule.\n`\n\nSo lookup order has higher priority than position.\n\nAbout your approach, it won't work because 'position' in your contextual substitution starts from B' (A is just backtrack context). So A\\_B will work first according to the algorithm above.\n\nIt also misses another entry for B\\_C ligature, without context. And this example contains only two ligatures, in the real font more contexts may be needed for ligatures conflicting with B\\_C -- looks like supportability case for me. Adding one ligature may cause changing everything around.\n\nThanks,  \nSergey\n\n"
+    },
+    {
+      "time": "30 Mar 2006 — 6:01am",
+      "content": "i just tried out the\n\n\"sub S H' I' by HI.li;\"\n\ncommand and it works like a charm. very nice that it can do that without having to create a SHI ligature. it sure opens up a whole new can of worms (or possibilities) though, but at least now i know how to pull off that trick.\n\nthanks everyone for the help!\n\n"
+    },
+    {
+      "time": "31 Mar 2006 — 5:10pm",
+      "content": "Claes,\n\nstill, you should name your ligature H\\_I or H\\_I.li or H\\_I.liga, but \\*not\\* HI.li. It does matter. Please read the FontLab Studio 5 manual for extensive glyph naming suggestions.\n\nRegards,  \nAdam Twardoch  \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": "31 Mar 2006 — 5:50pm",
+      "content": "i already did. (o:\n\n"
+    },
+    {
+      "time": "2 Apr 2006 — 7:00pm",
+      "content": "i just thought i'd let you all know that i tested the use of seperate lookup groups, and it gives me just the effect i was looking for. if i place the H\\_I ligature in the top group and have the S\\_H ligature in the one below it'll override the S\\_H ligature and go to the H\\_I ligature even when writing SHI.\n\nso thanks again everyone who helped out! it's much appreciated.\n\nby the way, why isn't there some resource with examples of various effects one can achieve with Opentype? i had an idea about having the upper and lowercase alternate (LiKe So AnD sO oN, though i'd use it as a sort of randomizer), and i actually figured out how to achieve it eventually.. but it's stuff like that you'd wish there was some website resource for where people could send in their tricks and tips. too bad, really. very little about Opentype out there it seems, or everyone's sitting on their own coding and not wanting to share.. maybe? or wanting money for it, perhaps..\n\nuh.. anyway.\n\n"
+    },
+    {
+      "time": "5 Apr 2006 — 8:11am",
+      "content": "Hi kesh!\n\nI found the image you were talking about: (its from Linotype.com)\n\n ![](http://web.archive.org/web/20131020160718im_/http:/typophile.com/files/zapfino_teaser_d16957i97.gif)\n\nBye: Steven\n\n"
+    },
+    {
+      "time": "16 Apr 2006 — 7:13pm",
+      "content": "_by the way, why isn’t there some resource with examples of various effects one can achieve with Opentype? i had an idea about having the upper and lowercase alternate (LiKe So AnD sO oN, though i’d use it as a sort of randomizer), and i actually figured out how to achieve it eventually.. but it’s stuff like that you’d wish there was some website resource for where people could send in their tricks and tips. too bad, really. very little about Opentype out there it seems, or everyone’s sitting on their own coding and not wanting to share.. maybe? or wanting money for it, perhaps.._\n\nYour best source is workshops at the conferences like SOTA and ATypI. People are happy to show you how to do stuff. Nick Shinn did one on stylistic alternates in a script font and Thomas Phinney has demoed some amazing stuff with relatively easy code including random things. He also has an OT font that replaces profanity in text.\n\nGeorge  \nI felt bad because I had no shoes, until I met a man who had no Bodoni\n\n"
+    },
+    {
+      "time": "16 Apr 2006 — 7:22pm",
+      "content": "If your interested in learning more on this subject, there is still time, and there is still room at the [TDC Font Tech Weekend](http://web.archive.org/web/20131020160718/http:/tdc.org/events/2006events/2006stdcfonttech.html) starting this Friday evening.\n\n"
+    },
+    {
+      "time": "17 Apr 2006 — 4:35am",
+      "content": "\\> _Thomas Phinney has demoed some amazing stuff with relatively easy code including random things. He also has an OT font that replaces profanity in text._\n\nAre you talking about Amy Papaelias' [TypeTalk Fonts](http://web.archive.org/web/20131020160718/http:/www.typetalkfonts.com/)?\n\n"
+    },
+    {
+      "time": "17 Apr 2006 — 4:55am",
+      "content": "Amy showed her work at TypeCon NY last summer. She has a thread here somehere where she discusses it. Interesting stuff and she was an entertaining speaker as well as informative.\n\nChrisL\n\n"
+    },
+    {
+      "time": "24 Apr 2006 — 7:24pm",
+      "content": "_you’d wish there was some website resource for where people could send in their tricks and tips. too bad, really. very little about Opentype out there_\n\ntrue...and typophile's the best place for that on the web...\n\n[PicLig](http://web.archive.org/web/20131020160718/http:/www.piclig.net/) by Christina Schultz is a great project too.\n\n_Thomas Phinney has demoed some amazing stuff with relatively easy code including random things. He also has an OT font that replaces profanity in text._\n\nTom used the TypeTalk project as inspiration to build his example using some very excellent contextual alternates...and to think i wasted away hours upon hours of grad school making ligatures! :)\n\n_she was an entertaining speaker as well as informative._\n\nthanks chris! it was a great experience, although i don't remember any of it (i was too busy being paralyzed with fear!)...BTW, we met briefly, i believe, when you and gerry leonidas were shaming me for my abysmal knowledge of Greek...\n\ni'll be making a short presentation next week at SUNY New Paltz (where I developed the typetalk project) on 5/5. see the promo poster...\n\n ![](http://web.archive.org/web/20131020160718im_/http:/typophile.com/files/amy_intro_small.jpg)\n\n"
+    },
+    {
+      "time": "25 Apr 2006 — 8:29am",
+      "content": "\"...BTW, we met briefly, i believe, when you and gerry leonidas were shaming me for my abysmal knowledge of Greek…\"\n\nI remember it well. I was surely joking (which is most of the time in my case). My Greek vocabulary is very limited and I would be the last person to point shame at anyone else. I really did enjoy your presentation and your \"paralized with fear\" part did not show.\n\nBTW, I just attended a Fontech session in NYC at TDC where Thomas Phinney was one of the presenters. He was bragging on you and showing your work to some of the attendees who had not seen it. Your many hours in graduate school did not go in vein!\n\nHope you will be able to come to TypeCon Boston and join us all.\n\nChrisL\n\n"
+    }
+  ]
+}

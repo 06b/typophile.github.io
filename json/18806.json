@@ -1,0 +1,26 @@
+{
+  "id": "18806",
+  "title": "OS X font problems",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Howdy,\n\nI’m looking for help with a font installation problem in OS X.\n\nI’m an editor currently doing a job in InDesign. The chapters are coming to me via ftp...no problems there. However, I don’t have some of the fonts I need. The designer (who’s also using OS X) has uploaded them to her ftp site, where each displays as a series of stuffed files and a few empty files (e.g., “0 KB”)\n\nWhen I download them and run them through Stuffit Expander, I end up with LWFN files which the computer refuses to recognize. They’re greyed out in Font Book’s selection window, so adding them that way doesn’t work. Dragging them to the various folders doesn’t work, either. I’m assuming I need FFIL files, but so far neither I nor my designer have been able to dig them up.\n\nObviously, we’re doing something wrong, and it’s probably something pretty basic. But I have no clue what it is. I’d be eternally grateful for any advice anyone might have.\n\nThanks!\n\n [‹ Value of fsType](http://web.archive.org/web/20070808070110/http:/typophile.com/node/18777 \"Go to previous forum topic\") [true type to open type ›](http://web.archive.org/web/20070808070110/http:/typophile.com/node/18697 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20070808070110/http://typophile.com/user/12195\" title=\"View user profile.\">BK</a>",
+  "time": "<br>",
+  "uid": "12195",
+  "comments": [
+    {
+      "time": " 25.Mar.2006 1.00pm",
+      "content": "Sounds like you’re using old OS9 fonts. Ask the designer to Stuffit the fonts before he/she uploads them. (This way the information contained in the resource fork of the font files won’t be lost when they are uploaded. Stuffing the files will temporarily transform their resource fork into a data fork ’format’, which other OSes can read. In other words, the files won’t show up having a zero KB size.)\n\n"
+    },
+    {
+      "time": " 25.Mar.2006 1.15pm",
+      "content": "Here’s the short explanation of what’s going on:  \n**Resource Fork:** The PC and Mac differ in the way they store files. On a Mac [Classic] each file can have two parts called forks. The _data fork_ holds data (text, images, etc.). The _resource fork_ holds resources (icons, fonts, menus, sounds, etc.). There are actually two files linked to one name in the file system. PCs only have one file linked to each name.  \n**Fork:** A fork is a stream of data associated with a file name in a file system. Macintosh HFS files have two forks. PC FAT and FAT32 files have one fork. NTFS files can have many forks.  \n [http://www.asy.com/glossary.htm](http://web.archive.org/web/20070808070110/http:/www.asy.com/glossary.htm \"http://www.asy.com/glossary.htm\")\n\nAnd here’s the long one:  \n [http://en.wikipedia.org/wiki/Resource\\_fork](http://web.archive.org/web/20070808070110/http:/en.wikipedia.org/wiki/Resource_fork \"http://en.wikipedia.org/wiki/Resource\\_fork\")\n\n"
+    },
+    {
+      "time": " 25.Mar.2006 2.07pm",
+      "content": "Thanks a million, Miguel. That did the trick! I areally appreciate it.\n\n"
+    }
+  ]
+}

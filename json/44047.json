@@ -1,0 +1,46 @@
+{
+  "id": "44047",
+  "title": "opentype compatibility",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi everybody,\n\nI'm kind of stumped on a technical issue here, and was wodering if anybody could help.\n\nI'm trying to wrap up my first font, and it has some alternates, like so:\n\nfeature calt {  \n sub [fshort lshort] l' [b f h k l] by l;  \n sub [fshort lshort] f' [b f h k l] by f;\n\nsub l' [b f h k l] by lshort;  \n sub f' [b f h k l] by fshort;\n\n} calt;\n\nIt also has some oldstyle numerals:\n\nfeature onum {  \n sub zero by zero.onum;  \n sub one by one.onum;  \n sub two by two.onum;  \n sub three by three.onum;  \n sub four by four.onum;  \n sub five by five.onum;  \n sub six by six.onum;  \n sub seven by seven.onum;  \n sub eight by eight.onum;  \n sub nine by nine.onum;  \n} onum;\n\nWhen I test my font in Illustrator CS3 at home, it works file; I can use the OpenType panel to use my alternates, and when I select Proportional Oldstyle I get my oldstyle numerals.\n\nBut, in Illustrator CS at work, the alternates button is disabled and selecting different figure options doesn't do anything.\n\nI'm using FontLab Studio 5.0.2 for Windows, if that's important.\n\nAny thoughts?\n\n",
+  "author": "oogby",
+  "time": "8 Apr 2008 — 6:16pm",
+  "uid": "1138",
+  "comments": [
+    {
+      "time": "8 Apr 2008 — 7:05pm",
+      "content": "It's kind of tangential, but I don't understand the first two lines of your 'calt' code - looks like you're substituting a glyph with itself for both l and f. Whassup with that?\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "8 Apr 2008 — 7:18pm",
+      "content": "Hi Tom,\n\nI don't entirely understand that myself.\n\nIf you hop on over to [http://pics.livejournal.com/oogby/pic/0000x4bw/](http://web.archive.org/web/20150420163328/http:/pics.livejournal.com/oogby/pic/0000x4bw/ \"http://pics.livejournal.com/oogby/pic/0000x4bw/\") , you'll see what the alternates do: they shorten f's and l's when they're followed by a lowercase letter with an ascender.\n\nOn the word 'wallflower', the 'llfl' bit goes short-normal-short-normal, which I think is pretty spiffy. Without those first two lines, it's short-short-short-normal in FontLab, which looked kind of funny to me.\n\nThough... I just tested that in Illustrator CS3, and it's doing the short-short-short-normal thing. I'll have to fix that...\n\n"
+    },
+    {
+      "time": "8 Apr 2008 — 7:42pm",
+      "content": "It's a bit picky & doesn't address you problem, but your alternate glyphs should be .short -- as in l.short and f.short.\n\nAs to the behavior of CS opposed to CS3, Does CS support OpenType?\n\n"
+    },
+    {
+      "time": "9 Apr 2008 — 4:51am",
+      "content": "AFAIK, Illustrator CS and CS3 have essentially the same OpenType support. Mind you, there will have been some bugs fixed in there somewhere.\n\nI understand the net effect of the code, but the first two lines of substitutions take l and f and replace them with themselves. In any case, the latter two lines are completely adequate to achieve the desired effect if you just want the letter styles to alternate. If you wanted to get the shortened form to repeat, then you would need to chain the letters or write the code differently.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "9 Apr 2008 — 6:22am",
+      "content": "Thanks for the tips.\n\nSeems I've found an odd quirk of FontLab, though I should really get the latest patch and see if that changes things.\n\nI'll have to remove those lines tonight and see if if behaves differently in Illustrator than it does in FontLab.\n\n"
+    },
+    {
+      "time": "9 Apr 2008 — 4:46pm",
+      "content": "To continue on the tangent...\n\nI tried removing the odd calt lines, and it's not alternating in Illustrator (or Fontlab anymore). Bummer. I should probably read more about how this stuff works.\n\nBut, I finally requested the 5.0.4 patch, so maybe that will make FontLab and Illustrator behave consistently, at least.\n\n"
+    },
+    {
+      "time": "9 Apr 2008 — 5:18pm",
+      "content": "Well, if anybody's curious, I seem to have solved my alternation problem like this, after having discovered the existence of 'ignore' statements:\n\nfeature calt {  \n ignore substitute [l.short f.short] l' [b f h k l];\n\nsubstitute l' [b f h k l] by l.short;  \n substitute f' [b f h k l] by f.short;  \n} calt;\n\nStill no lock with Illustrator CS though.\n\n"
+    },
+    {
+      "time": "30 Apr 2008 — 7:23pm",
+      "content": "I finally got around to testing this on a different computer with Illustrator CS installed, and got the same problem I had originally. Here's my current code:\n\nfeature calt {  \n ignore substitute [l.short f.short] l' [b f h k l];  \n substitute l' [b f h k l] by l.short;  \n substitute f' [b f h k l] by f.short;  \n} calt;\n\nfeature onum {  \n sub zero by zero.onum;  \n sub one by one.onum;  \n sub two by two.onum;  \n sub three by three.onum;  \n sub four by four.onum;  \n sub five by five.onum;  \n sub six by six.onum;  \n sub seven by seven.onum;  \n sub eight by eight.onum;  \n sub nine by nine.onum;  \n} onum;\n\nAny thoughts?\n\n"
+    }
+  ]
+}

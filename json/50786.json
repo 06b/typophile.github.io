@@ -1,0 +1,102 @@
+{
+  "id": "50786",
+  "title": "Strange behaviour in MM-project",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Suddenly when I remove overlap (“Merge Countours”) in a MM-font it makes something similar to “Expand Masters” and I cant figure out why. Before, it always kept the original masters but removed the overlap, now it takes the master I have visible and make that one as master on every master.\n\nIs this some preference in FontLab that I happen to click “on” or “off”?\n\nDesperately Thanks!\n\n/ G\n\n [‹ Will hinting die before it kills me?](http://web.archive.org/web/20081028162600/http:/typophile.com/node/50417 \"Go to previous forum topic\") [reaaally good font design software ›](http://web.archive.org/web/20081028162600/http:/typophile.com/node/50819 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081028162600/http://typophile.com/user/11526\" title=\"View user profile.\">Goran Soderstrom</a>",
+  "time": "<br>",
+  "uid": "11526",
+  "comments": [
+    {
+      "time": " 22.Oct.2008 3.49am",
+      "content": "I don’t know how to solve that issue, but I’m looking forward for an answer.  \nThe same happens to me and I thought it was something to do with FontLab.\n\nDino\n\n"
+    },
+    {
+      "time": " 22.Oct.2008 4.36am",
+      "content": "No, it should work in FontLab, and has for like 1,5 years now. Suddenly stopped and it kills me slowly...\n\n"
+    },
+    {
+      "time": " 22.Oct.2008 9.28am",
+      "content": "Most interesting. Doesn’t the same annoying thing happen if you invoke the change weight command? Have you upgraded recently? For those who need to, several different versions of Fontlab 5 can be installed on the same machine according to a technique Adam Twardoch has devised - - at least on Win. Must be possible on Mac too, I just haven’t tried it.\n\n"
+    },
+    {
+      "time": " 22.Oct.2008 10.57am",
+      "content": "No upgrade, just my plain old 5.04 since it came out. Must be some preference-issue. But which, cant seem to find anything on this anywhere.\n\n"
+    },
+    {
+      "time": " 22.Oct.2008 11.45am",
+      "content": "Goran,\n\nI’m quite surprised that you’re saying it ever worked. I don’t remember that it ever worked. The problem is: imagine an MM glyph with two squares (so there are 8 nodes in the glyph). In the first master the squares are small and do not overlap, in the second master the squares are larger and overlap. A perfectly normal case. Now if you’d try to remove the overlaps, the first master should not change but in the second master it would have to remove some nodes, so you’d end up having incompatible masters.\n\nThis is why remove overlap in FLS is not MM-compatible. I agree it would be nice if the function was written so that it removes overlap in each master and then blends the masters together, and “fails” only if the final masters are not compatible. I’ll suggest that to our developers.\n\nIn the meantime, I suggest that you leave the overlaps in your MM and remove them only in the generated instances.\n\nAdam\n\n"
+    },
+    {
+      "time": " 22.Oct.2008 2.30pm",
+      "content": "Adam, trust me it works. Of course it does not work in your example above, but if the masters are compatible and is constructed in the same way it works great. Look at this example, doing it live at this very moment:\n\n ![](http://web.archive.org/web/20081028162600im_/http:/typophile.com/files/before_5389.png)\n\n ![](http://web.archive.org/web/20081028162600im_/http:/typophile.com/files/after_6531.png)\n\nBut.. suddenly it stopped working...  \nI wonder if it’s because I now have four masters instead of two?\n\n"
+    },
+    {
+      "time": " 22.Oct.2008 2.39pm",
+      "content": "It never worked with me.  \nThat’s why I found interesting Goran’s post,  \nbecause this would be a wonderful time saving procedure.\n\nRight now I’m working with 6 masters and it would be nice to have this feature for glyphs that has cedillas,  \ncarons, slashes and so on.\n\nAdam,  \nthis would be a nice improvement for the next FontLab update.\n\nDino\n\n"
+    },
+    {
+      "time": " 22.Oct.2008 4.50pm",
+      "content": "Hm... Please have a look at the settings you have in the “Blend Fonts” dialog:\n\n ![](http://web.archive.org/web/20081028162600im_/http:/typophile.com/files/Picture5_4937.png)\n\nand see if changing any of those influences FontLab’s functionality in this respect. Please let us know of your findings.\n\nA.\n\n"
+    },
+    {
+      "time": " 23.Oct.2008 4.29am",
+      "content": "The “Blend Font” dialog is not available. I have not blended this fonts, I’ve added more masters and developed the new weights manually after that. If I try to reach the “Blend Font” option I have to open another font, and then I can only do “Cancel” since I dont want to blend my MM with another font :)\n\nBUT.. I noticed that if I take away two masters, from my existing four-master project, it works again. So I guess the functionality is built in in FontLab but does not work with more than two masters.\n\n"
+    },
+    {
+      "time": " 24.Oct.2008 2.44am",
+      "content": "For compatible outlines, in the way Göran describes, it has worked for all 5.x-releases for fonts with two masters but not for more.\n\nA workaround if you work with a 4+ master font is to generate an single master instance for each master, do the merging on each one of them, go back to the MM font and assign masks from on single master at a time and use the mask to outline function for that master. It works if the outlines are compatible,\n\n"
+    },
+    {
+      "time": " 24.Oct.2008 3.28am",
+      "content": "Adam, please implement this in “VFBs-with-more-than-two-masters” aswell :)\n\n"
+    },
+    {
+      "time": " 24.Oct.2008 7.01am",
+      "content": "I second your thoughts, Goran, but sometimes is better not to merge the contours.  \nIt works good on the Eth, hbar and dcroat, for instance, but with the Oslash and the Euro, I think it’s better when you do it in each generated instance, because sometimes the interpolation of round/straight connections don’t work quite well.\n\nDino\n\n"
+    },
+    {
+      "time": " 24.Oct.2008 10.13am",
+      "content": "Göran,\n\nplease change those settings on some simple one-master fonts. I’m not saying you should blend any fonts, just change the settings.\n\nAlso, what settings do you have there right now?\n\nA.\n\n"
+    },
+    {
+      "time": " 24.Oct.2008 12.33pm",
+      "content": "\\> _Right now I’m working with 6 masters_\n\nThat’s not possible. You either have 4 (2²) or 8 (2³). The number of masters is always equal to 2 raised to the number of axes.\n\nAre you using “intermediate masters”?\n\n"
+    },
+    {
+      "time": " 24.Oct.2008 2.27pm",
+      "content": "You’re right Miguel. 8 masters indeed!\n\nDino\n\n"
+    },
+    {
+      "time": " 24.Oct.2008 2.56pm",
+      "content": "Adam, the settings are only available when blending fonts. And the only way to say “OK” to these settings is to blend fonts, so I must indeed blend two fonts in order to make any changes on this setting, otherwise the other alternative is to press Cancel.\n\nBut, I have the same setting as default as you showed above, and whatever changes I do on these dont affect these issues on the output, blended fonts. Still works on two masters, but not more.\n\nDino, yes I agree :) Unfortunately I have a habit on working with contours like this when designing and devloping (and now everybody understands why I want to merge the countours now and then):\n\n ![](http://web.archive.org/web/20081028162600im_/http:/typophile.com/files/bbbb_3851.png)\n\n"
+    },
+    {
+      "time": " 25.Oct.2008 1.14am",
+      "content": "<cite>&gt; That’s not possible. You either have 4 (2²) or 8 (2³). The number of masters is always equal to 2 raised to the number of axes.</cite>\n\n_Working_ with 3 or 6 masters is possible, that’s what I’m doing right now having intermediate masters. This is often a good approach for families going from thin to black. As you say, the total number of masters in the font is always 2 raised to the number of the axes but you don’t have to utilize all the masters.\n\n"
+    },
+    {
+      "time": " 25.Oct.2008 2.03am",
+      "content": "Same here. I often work with 3 masters. Unfortunately this means that two of the four masters have to be identical, and redundancy is never good. I wrote a small macro that simply copies everything from one master to the other (redundant) one, which I occasionally run.\n\n"
+    },
+    {
+      "time": " 25.Oct.2008 3.02am",
+      "content": "For the latter task you may try [this](http://web.archive.org/web/20081028162600/http:/www.kltf.de/downloads/KLTF-MasterToMaster.zip).\n\nKarsten\n\n"
+    },
+    {
+      "time": " 25.Oct.2008 9.15am",
+      "content": "Tim wrote:  \n<cite> &gt; Unfortunately this means that two of the four masters have to be identical</cite>\n\nNot necessarily, it depends on how you set up the masters. I have a 4 master project where the third master is never in use at all. It might influence operations such as auto-hinting, but not the final outlines in the single masters.\n\nThe third master can have square shaped o’s or whatever without interfere with the outlines that goes from thin (first master) to regular (second master) and from regular (second master) to ultra (fourth master).\n\n"
+    },
+    {
+      "time": " 27.Oct.2008 3.13am",
+      "content": "Karsten,\n\ncool, looks like a more advanced version of what I have written. Mine also copies kerning, though. I can send you the code and you can merge it into yours if you want.\n\nMårten,\n\n<cite>I have a 4 master project where the third master is never in use at all.</cite>\n\nYes, if you always keep one axis slider at 0 then the fourth master is actually irrelevant and can be ignored. However, if you want to mix the three masters at an arbitrary ratio with FontLab then all four masters will be used even if you only want to mix three of them.\n\n"
+    },
+    {
+      "time": " 27.Oct.2008 3.33am",
+      "content": "For each task, there must be as many scripts as there are scripters ... I will add kerning-copying and can reuse code from a recent project. Since the script deals with individual glyphs, and even with selected nodes from individual glyphs, I need to find a solution especially for the latter option.  \n(Grrr, some MM-related parts of FLS’s Python API drive me crazy right now.)\n\n"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "1161",
+  "title": "Non-Latin Design",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "Hi,   \n   \nI just bought FontLab 4.6, and I'd like to know more info about Non-Latin design.   \n   \nWhat software do I need to buy? e.g: with English there's no problem. But with Arabic, Hebrew there's a problem.   \n   \nHow do I know where to draw each letter? (\"A\" - Arabic = \"A\" English cell; \"A\" - Hebrew = \"A\" English)   \n   \n   \nThank You\n\n",
+  "author": "anonymous",
+  "time": "5 Sep 2003 — 8:40am",
+  "uid": "1203",
+  "comments": [
+    {
+      "time": "5 Sep 2003 — 11:29am",
+      "content": "I'm no \"non-latin guru\" (although they do populate this board), but there seem to be a lot of folks using Davkawriter (for Hebrew) and Adobe InDesign ME (Middle Eastern version) for setting right-to-left scripts. Some of the discussion on [this thread](http://web.archive.org/web/20131014201409/http:/www.typophile.com/forums/messages/29/13499.html?1061608620) might be of interest. You might also check out the [Unicode charts](http://web.archive.org/web/20131014201409/http:/www.unicode.org/charts/) online.\n\n"
+    },
+    {
+      "time": "5 Sep 2003 — 11:54am",
+      "content": "You can design and build non-Latin typefaces in FontLab. You can define your own glyph sets using .enc files (a plain text glyph list, stored in the FontLab/Encoding folder, that determines the cells you see in the FL Font Window when in Names mode -- see the FL manual more more information). I typically build a spreadsheet for complex script fonts, in which I keep track of glyph name, correct Unicode encoding (note that not all glyphs will be encoded, only base 'default' forms for each character), and any other information about individual glyphs (including design notes, mapping for OpenType feature lookups, etc.), and make a .enc file from the list of glyph names in this spreadsheet.   \n   \nThe only thing you can't do in FontLab is build OpenType Layout table data that includes anchor positioning, one-to-many substitutions and other lookup types not supported by the Adobe FDK code on which FontLab's OT support is based. So for making complex script fonts for Arabic, Hebrew, etc. you need to use [MS VOLT](http://web.archive.org/web/20131014201409/http:/www.microsoft.com/typography/developers/volt/default.htm) (Windows only, but runs under emulators on a Mac, I understand).   \n   \nI design my fonts and define all font properties etc. in FontLab, and then build my OT table data in VOLT. The VOLT user community site includes downloadable examples of Arabic and Devanagari fonts, and a sample Hebrew font will probably be available in the next few months.   \n   \nIf you want a better understanding of the relationship of characters and glyphs in OpenType, and how complex scripts are processed by applications, see this article: [Windows Glyph Processing](http://web.archive.org/web/20131014201409/http:/www.microsoft.com/typography/developers/opentype/default.htm).\n\n"
+    },
+    {
+      "time": "5 Sep 2003 — 1:37pm",
+      "content": "The only problem with VOLT, unless they changed it, is that you can only make/use Truetype Opentype fonts, not the postscript flavour.\n\n"
+    },
+    {
+      "time": "5 Sep 2003 — 4:31pm",
+      "content": "Ah, I worked out a way around that limitation. The problem is that VOLT cannot \\*display\\* CFF (PS)outline data, because it uses its own internal rasteriser, and this only handles TrueType. However, you can open a CFF outline font in VOLT, you just can't do anything that requires displaying glyphs. So what you do is:   \n   \n1. Make a dummy TrueType font based on your CFF FontLab source (note that if you are using GPOS features, you must ensure that the UPM value of the dummy font to matches that of the eventual CFF font).   \n   \n2. Open the dummy font in VOLT and build your OT Layout table data. Export this data as a VOLT project file. Save the dummy font in case you need to edit the OTL stuff later.   \n   \n3. Make your CFF OpenType font, being sure to keep exactly the same glyph order as in the dummy TT font.   \n   \n4. Open the CFF font in VOLT, _but do not open any VOLT windows except the main one._ Import the VOLT project exported from your dummy font. Compile and 'ship' the font from VOLT.   \n   \nHey presto! One CFF OT font with VOLTR-generated OTL tables. For a while I thought this would be more complicated than it is, and had Adam Twardoch write a Python script to copy tables between TT and CFF fonts, but recently I realised just how easy it is, in fact, just using VOLT.\n\n"
+    },
+    {
+      "time": "5 Sep 2003 — 4:35pm",
+      "content": "One other note: there is a kind of attachment GPOS lookup type that uses TT outline points as anchors (the advantage of this being that you can delta hint the position of the attachment points, which is more efficient than using device dependent adjustments in VOLT). This kind of lookup type is not supported in VOLT yet, but probably will be eventually. Obviously this lookup type only works with TT fonts, so you would avoid using it in VOLT data if you wanted to be able to output a CFF font.\n\n"
+    },
+    {
+      "time": "5 Sep 2003 — 9:01pm",
+      "content": "Damn, that's great to know. There are a few fonts that I want to make opentype so I don't have to select the expert sets and such. I'll have to give it a try.\n\n"
+    },
+    {
+      "time": "25 Jan 2005 — 9:07am",
+      "content": "Wasn't sure where best to mention this, so...   \n [http://cgi.ebay.com/ws/eBayISAPI.dll?ViewItem&rd=1&item=6943359431](http://web.archive.org/web/20131014201409/http:/cgi.ebay.com/ws/eBayISAPI.dll?ViewItem&rd=1&item=6943359431)   \nLess than 2.5 hours left.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "5 Sep 2003 — 11:02am",
+      "content": "Try opening up an Opentype Unicode font like Arial in FontLab. You'll see that each language has its own glyph range, and you could use Arial as a template. With Unicode and Opentype fonts, there's no need to overlap letters from different scripts.   \n   \nPaul\n\n"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "id": "116307",
+  "title": "Tabular unit symbols",
+  "forum": "Build",
+  "tags": [
+    "fixed width",
+    "mono-spaced",
+    "tabular",
+    "tnum",
+    "unit symbol",
+    "Build"
+  ],
+  "content": "Assuming a typeface which defaults to proportional figures, do you think it’s sane and user-friendly to adjust more characters than just digits when fixed-width, tabular `tnum` numerals get activated? I’m thinking about making currency and other symbols the same width as figures then, so they align properly.\n\n    feature tnum {\n      @digits = [zero one two three four five six seven eight nine];\n      @digits.pnum = @digits;\n      @digits.tnum = [zero.tnum one.tnum two.tnum three.tnum four.tnum five.tnum six.tnum seven.tnum eight.tnum nine.tnum];\n      sub @digits.pnum by @digits.tnum;\n      lookup units {\n        @currencysymbols = [dollar cent sterling currency yen Euro]\n        @unitsymbols = [percent @currencysymbols]\n        @currencysymbols.tnum = [dollar.tnum cent.tnum sterling.tnum currency.tnum yen.tnum Euro.tnum]\n        @unitsymbols.tnum = [percent.tnum @currencysymbols.tnum]\n        sub @digits @unitsymbols' by @unitsymbols.tnum;\n        sub @digits @spaces @unitsymbols' by @unitsymbols.tnum;\n        sub @unitsymbols' @digits by @unitsymbols.tnum;\n        sub @unitsymbols' @spaces @digits by @unitsymbols.tnum;\n      } units;\n    } tnum;\n\nI also have written code to deal with rather simple SI unit symbols including prefixes.\n\n",
+  "author": "Crissov",
+  "time": "6 May 2014 — 6:15am",
+  "uid": "219592",
+  "comments": [
+    {
+      "time": "6 May 2014 — 6:40am",
+      "content": "In general I always try to make currency characters the same width as tnum figures if the design allows it. There are some that can not be done that way without distortion of their traditional appearance. The ones you show in your code usually will work well with the exception of the percent character.\n\nPercent does not need such treatment because it doesn't usually need to align with any character other than another percent in tabular typesetting. I would not force it into a width it doesn't look good in.\n\n"
+    },
+    {
+      "time": "6 May 2014 — 6:55am",
+      "content": "If you take the typeface's position and not the user's, you can only guess. If you ask one user and they say what they want, the font is one more informed. Timetables point to one set, including punctuation, while size charts point to another set including fractions, (the inevitable control character of which is the percent). Monetary symbols are an obvious target for some kinds of settings, but not without proper fractions, dashes, spaces and punctuation for others. If you gather that all together, it can be quite disruptive if not properly used. Linotype developed a system based on the em, 3/4s, 1/2, and 1/4 of it, and mixed glyphs for different uses, knowing their users had secure access to all the right dashes and spaces. Today, not so much.;)\n\n"
+    }
+  ]
+}

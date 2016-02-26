@@ -1,0 +1,26 @@
+{
+  "id": "68281",
+  "title": "TrueType Vendor ID",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "How can I put my TrueType vendor ID to work on FontLab Studio for mac?\n\nThanks in advance  \nDino dos Santos  \nDSType\n\n",
+  "author": "dstype",
+  "time": "11 Mar 2010 — 4:33am",
+  "uid": "9946",
+  "comments": [
+    {
+      "time": "12 Mar 2010 — 2:50am",
+      "content": "The ideal way is that you register on Microsoft list (I think),\n\nhowever, you could append manually your code to the vendor.dat file:  \nMacintosh HD/Library/Application\\ Support/FontLab/Data/vendor.dat\n\nOr put it by Python:  \n`\nfrom robofab.world import CurrentFont\nf = CurrentFont()\nf.info.openTypeOS2VendorID = \"CODE\"\nf.update()\n`\n\nem.\n\n"
+    },
+    {
+      "time": "12 Mar 2010 — 3:57am",
+      "content": "Thanks a lot Eduardo!  \nAll the best!\n\n"
+    },
+    {
+      "time": "13 Mar 2010 — 7:51pm",
+      "content": "Registering it with Microsoft is a good idea. FontLab periodically updates the alias.dat from the Microsoft [master list](http://web.archive.org/web/20130818214000/http:/www.microsoft.com/typography/links/VendorList.aspx), and so do vendors of font managing applications. If you register, other apps will at some point \"know\" what your Vendor ID stands for.\n\n"
+    }
+  ]
+}

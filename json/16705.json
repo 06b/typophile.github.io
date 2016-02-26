@@ -1,0 +1,66 @@
+{
+  "id": "16705",
+  "title": "'locl' Opentype feature sample code",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I have 3 questions related to the Open type feature 'locl'\n\n1. It seems that there is no application support for the 'locl' feature yet. Thomas Phinney agrees that there is none in Adobe products ( yet). But is it in Microsoft Vista/longhorn?\n\n2. Henadij posted some locl feature code here:\n\n[http://www.typophile.com/node/15506](http://web.archive.org/web/20150421064146/http:/www.typophile.com/node/15506 \"http://www.typophile.com/node/15506\")\n\nDoes anybody know if that code was written correctly? Is there is any sample code for this feature? I have been googling but to no avail.\n\n3. Would anybody share their code? I wanted to build some Polish & Czech localization into a font!\n\nThanks!\n\n",
+  "author": "ebensorkin",
+  "time": "8 Dec 2005 — 2:17pm",
+  "uid": "2942",
+  "comments": [
+    {
+      "time": "8 Dec 2005 — 3:22pm",
+      "content": "Eben,\n\nthe code Henadij posted is principally correct but it is better to name the glyphs according to the Adobe/FontLab naming conventions: baseglyphname.suffix. Fontlab Ltd. recommends that the suffix for localized forms corresponds either to the primary OpenType feature name that the localized glyph is associated with (that would be \"locl\") or to the OpenType language tag of the primary language that the localized form is associated with (that would be \"PLK\" for Polish in Henadij's example).\n\nSo if I wrote the code, it would be:\n\n@loclPLK1 = [cacute nacute oacute sacute zacute];  \n@loclPLK2 = [cacute.PLK nacute.PLK oacute.PLK sacute.PLK zacute.PLK];\n\nfeature locl { # Localized Forms  \n language PLK exclude\\_dflt; # Polish;  \n sub @loclPLK1 by @loclPLK2;  \n} locl;\n\nAlternatively, the glyph names \"cacute.PLK\" etc. could be \"cacute.locl\".\n\nAdobe software does not parse the glyph suffixes into anything meaningful yet, but Fontlab Ltd. does plan to have some smart algorithms that takes notion of properly formed glyph name suffixes.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "8 Dec 2005 — 4:03pm",
+      "content": "Eben, it doesn't hurt to have a locl feature in yout font. And you can also \"double-up\" the feature as a Stylistic Set, which will allow present users of InDesign CS2 access to it.\n\n"
+    },
+    {
+      "time": "8 Dec 2005 — 4:18pm",
+      "content": "Adam, Wow! So clearly put & so fast! Awesome.\n\nChester, can you point me at some feature code for a 'stylistic set'? Is the feature called 'ss01'? Or is it 'salt?' I bet it's ss01 ( ss02, etc) There is probably some discustion of this feature here on typophile. I'd better search for it.\n\nThanks to you both!\n\n"
+    },
+    {
+      "time": "8 Dec 2005 — 4:25pm",
+      "content": "ssXX is it. The first one in your font will be ss01. And the way it would look, borrowing Adam's code above:\n\nfeature ss01 { # Polish Localized Forms  \nlanguage PLK exclude\\_dflt; # Polish;  \nsub @loclPLK1 by @loclPLK2;  \n} ss01;\n\n"
+    },
+    {
+      "time": "8 Dec 2005 — 5:04pm",
+      "content": "So then the complete code would look like this :\n\n@loclPLK1 = [cacute nacute oacute sacute zacute];  \n@loclPLK2 = [cacute.PLK nacute.PLK oacute.PLK sacute.PLK zacute.PLK];  \nfeature ss01 { # Polish Localized Forms  \n language PLK exclude\\_dflt; # Polish;  \n sub @loclPLK1 by @loclPLK2;  \n } ss01;\n\nOr do you only need the code you showed if the locl feature precedes the ss01 feature?\n\n"
+    },
+    {
+      "time": "8 Dec 2005 — 5:08pm",
+      "content": "Also I noticed that when I test The locl or the langage feature in Fontlab that my calt features are not available to be applied at the same time. It seems to be either or in the Fontlab preview. Willl it be like that in Indesign or other apps too?\n\n"
+    },
+    {
+      "time": "8 Dec 2005 — 5:29pm",
+      "content": "Nothing wrong with also putting this in a stylistic set, but you should certainly do it in 'locl' as well.\n\nT\n\n"
+    },
+    {
+      "time": "8 Dec 2005 — 5:33pm",
+      "content": "_Will it be like that in Indesign or other apps too?_\n\nIt certainly shouldn't be. Microsoft's approach, which I hope other layout engine developers will follow, is to apply the 'locl' feature before any other layout feature, thereby setting the localised input glyphs for all subsequent features. Then the 'ccmp' feature is applied, and then the other supported features in the order in which the lookups are ordered in the font (with some exceptions for complex script handling, e.g. for Indic scripts, in which language shaping features are strictly ordered by the shaping engine). Once the 'locl' feature has been applied, you should be able to apply any other features to the results: the 'locl' feature is certainly not supposed to be exclusive.\n\n"
+    },
+    {
+      "time": "8 Dec 2005 — 5:52pm",
+      "content": "Paul Nelson showed a demonstration of 'locl' feature support in MS Publisher at the ATypI conference in Rome in 2002 (specifically, substitution of preferred Urdu forms of Persian numeral characters). This has not been released though, and the fact that he demo'd it doesn't necessarily mean it will be in Office 12. MS, like most software companies, won't commit to or comment on functionality of unreleased products. They test a lot of things internally that might not show up in published software for two or three versions, if at all.\n\nOn 25 February 2005, Paul noted on the OpenType developer list that APIs for calling language system tags had been added to Uniscribe (the MS Unicode Script Processor), so the back end will be in Windows Vista. But applications will need to take advantage of the new APIs.\n\n"
+    },
+    {
+      "time": "8 Dec 2005 — 10:22pm",
+      "content": "Thanks for the clarification John! I have been to the official adobe feature request page to ask for locl support. Is there a MS equivalent? I have no idea if it means anything but I figure I have to try...\n\n"
+    },
+    {
+      "time": "8 Dec 2005 — 11:19pm",
+      "content": "I'll note that it would be a wise precaution to order the locl and ccmp lookups in the same order as well, in case one puts the font in some environment that relies strictly on the order of lookups in the font. Microsoft themselves have been making noises about going to that approach in the future.\n\nI can't say when or where Adobe will support 'locl', but it is very reasonable to assume that we will get there eventually.\n\nT\n\n"
+    },
+    {
+      "time": "9 Dec 2005 — 6:10pm",
+      "content": "Chester, this is wrong:\n\nfeature ss01 { # Polish Localized Forms  \nlanguage PLK exclude\\_dflt; # Polish;  \nsub @loclPLK1 by @loclPLK2;  \n} ss01;\n\nMaybe not wrong, but doesn't make much sense. You want the \"locl\" feature to work in the Polish language context but you want the stylistic set work regardless of the language context.\n\nHere is an example how locl, ss01, ss02 and salt could work for Polish and Romanian localized forms.\n\n# START\n\n# Define classes for substitutions  \n@loclPLK1 = [Cacute Nacute Oacute Sacute Zacute cacute nacute oacute sacute zacute];  \n@loclPLK2 = [Cacute.PLK Nacute.PLK Oacute.PLK Sacute.PLK Zacute.PLK cacute.PLK nacute.PLK oacute.PLK sacute.PLK zacute.PLK];  \n@loclROM1 = [Scedilla scedilla];  \n@loclROM2 = [Scommaaccent scommaaccent];\n\n# Define locl (Localized Forms) feature  \nfeature locl {  \n# Latin script, this is optional  \nscript latn;  \n# Next lookup applies to Romanian language context only  \nlanguage ROM exclude\\_dflt;  \n# Define and implement loclROM lookup  \nlookup loclROM {  \nsub @loclROM1 by @loclROM2;  \n} loclROM;  \n# Next lookup applies to Polish language context only  \nlanguage PLK exclude\\_dflt; # Polish;  \n# Define and implement loclPLK lookup  \nlookup loclPLK {  \nsub @loclPLK1 by @loclPLK2;  \n} loclPLK;\n\n} locl;\n\n# Define ss01 (Stylistic Set 1) feature for Polish localized forms  \nfeature ss01 {  \n# Next lookup applies to the default language context only  \nlanguage dflt;  \n# Refer to the loclPLK lookup defined earlier  \nlookup loclPLK;  \n# The lookup above also applies to the Polish language context  \nlanguage PLK include\\_dflt; # Polish;  \n# The lookup above also applies to the Romanian language context  \nlanguage ROM include\\_dflt; # Romanian;  \n} ss01;\n\n# Define ss02 (Stylistic Set 2) feature for Romanian localized forms  \nfeature ss02 {  \n# Next lookup applies to the default language context only  \nlanguage dflt;  \n# Refer to the loclROM lookup defined earlier  \nlookup loclROM;  \n# The lookup above also applies to the Polish language context  \nlanguage PLK include\\_dflt; # Polish;  \n# The lookup above also applies to the Romanian language context  \nlanguage ROM include\\_dflt; # Romanian;  \n} ss02;\n\n# Define salt (Stylistic Alternates) feature for all stylistic substitutions  \n# This feature defines and implements just one lookup  \n# that applies to all language contexts  \nfeature salt {  \nsub @loclROM1 by @loclROM2;  \nsub @loclPLK1 by @loclPLK2;  \n} salt;\n\n# END\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "9 Dec 2005 — 6:16pm",
+      "content": "_I’ll note that it would be a wise precaution to order the locl and ccmp lookups in the same order as well, in case one puts the font in some environment that relies strictly on the order of lookups in the font._\n\nYes, absolutely. The original intent of OpenType was that lookups would be applied in the order in which they occur in the font. The only reason why Microsoft decided to overide this for certain features is the some font developers, who shall remain nameless, were getting the ordering wrong for Indic fonts that require very strict feature processing for correct display.\n\n"
+    }
+  ]
+}

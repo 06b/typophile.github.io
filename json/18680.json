@@ -1,0 +1,42 @@
+{
+  "id": "18680",
+  "title": "Fontlab Vector import problem",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hello!  \nI am new in Fontlab and have problems when importing Freehand mx or Illustrator cs eps-files. the same problem appears when i copy/paste the letters from freehand or illustrator. (On a Mac newest OS)\n\nThe shapes of the letters are sometimes a little deformed when pasted or imported in Fontlab.\n\nDoes anybody know this Problem?  \nIs there something i have to pay attention to when copying or exporting files from freehand or illustrator?\n\nThanks in Advance,  \ngreetings from Cologne\n\nJuergen\n\n",
+  "author": "<a href=\"/web/20090601064644/http://typophile.com/user/12099\" title=\"View user profile.\">Jui</a>",
+  "time": "<br>",
+  "uid": "12099",
+  "comments": [
+    {
+      "time": " 20.Mar.2006 11.13am",
+      "content": "Yes Jürgen, this is common. Since the resolution is smaller you have to fine tune your outlines. Please have a look to the tips in the FL forum.\n\n[http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mvie...](http://web.archive.org/web/20090601064644/http:/groups.msn.com/fontlab/tipsandtricks.msnw?action=get_message&mview=0&ID_Message=2675 \"http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mview=0&ID\\_Message=2675\")\n\n— [astype.de](http://web.archive.org/web/20090601064644/http:/www.astype.de/)—\n\n"
+    },
+    {
+      "time": " 21.Mar.2006 12.18am",
+      "content": "Thanks, Andreas, that will help!\n\n"
+    },
+    {
+      "time": " 5.Jul.2007 3.26am",
+      "content": "Hi  \n-  \nRather than starting a new thread I thought I would outline my issue here. I think I have a similar problems to Juergen with distortions. I have read this forum and the FL post above and i think my issue is to do with rounding intergers as outlined there but am not sure. I am attempting to make a typeface made of dots (that shows faces) similar in style to flek/plek.\n\nExample: [http://www.bbsaunders.com/ftp/ego1.jpg](http://web.archive.org/web/20090601064644/http:/www.bbsaunders.com/ftp/ego1.jpg \"http://www.bbsaunders.com/ftp/ego1.jpg\")\n\nAll the faces are rendered in Illustrator then I am importing them into FontLab. This is where the issue starts, the circles are distorted in the import. I have tried a copy/paste and import from Illustrator and Freehand. Also tried Illustrator 8 file.\n\nExample: [http://www.bbsaunders.com/ftp/ego2.jpg](http://web.archive.org/web/20090601064644/http:/www.bbsaunders.com/ftp/ego2.jpg \"http://www.bbsaunders.com/ftp/ego2.jpg\")\n\nI can’t draw them in fontlab as they are rendered and not hand drawn. Are there any solutions to this issue?  \nI am importing the glyphs at 400pt, if I chose another size might this help?\n\nThanks for any feedback or help.  \n-  \nJames\n\n"
+    },
+    {
+      "time": " 6.Jul.2007 2.18am",
+      "content": "Andreas: Thanks for the quick and detailed response. I was only planning 26 uppercase charecters so hopefully this may eliviate the crashes. I will also try a version with less dots as well. I guess like all things throwing yourself in at the deep end is the best way to learn and test the limitations of what you can and can’t do.\n\n"
+    },
+    {
+      "time": " 6.Jul.2007 6.07am",
+      "content": "Todays font technology is not suited to handle such a massive amount of paths. It will slow down every font rendering engine and will turn into mysterious software crashes.\n\nI would limit the amount of points to 1000 per glyph.\n\nA.  \n1000 points = 250 dots = 15x16 dot matrix (15x16 pixel source bitmap graphic)\n\nMaybe you can shift this value a bit.\n\nB.  \n1200 points = 300 dots = 15x20 dot matrix (15x20 pixel source bitmap graphic)\n\nTo get more resolution in FontLab you should use an other font UPM size (usualy 1000em). Try 4000,6000 - maximum is round about 16000 or so.\n\nAn other trick is to use more glyph cells for one illustration. So you can enlarge the grid. On example A, two glyphs give you a dot grid of 30x16 (2x(15x16)).\n\n— [astype.de](http://web.archive.org/web/20090601064644/http:/www.astype.de/)—\n\n"
+    },
+    {
+      "time": " 6.Jul.2007 8.54am",
+      "content": "When Andreas says “1000 points per glyph”, he means “1000 point coordinates”. Point coordinates in outline fonts must be integer, i.e. you can place a point at the coordinate (150,20) or (151,20), but not anywhere in-between. In other words, outline points are always placed on an invisible grid.\n\nThe UPM (units per em) size in Font Info controls the “fineness” of this grid. By default, you get 1000 grid units per glyph, but you can increase it to 2000, 3000, 4000 or even (max.) 16,000 grid units per glyph.\n\nHowever, PostScript Type 1 fonts or OpenType PS fonts cannot have the UPM size larger than 4000 (effectively), while TrueType fonts can go up to 16,000.\n\nRegards,  \nAdam Twardoch  \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": " 6.Jul.2007 8.57am",
+      "content": "Gradiate,\n\ngiven the limitations described above, a suitable solution for you, of course, would be to use a rendering algorithm that creates circles that snap to those UPM units perfectly. Since 1 UPM unit in the font corresponds to 1 PostScript point in Illustrator/EPS, the halftoning algorithm that you’re using should only render the circles so that they’re 2, 4 6, 8, 10 etc. points wide (in diameter) and their centers should sit exactly on integer coordinates as well.\n\nA.\n\n"
+    }
+  ]
+}

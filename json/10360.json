@@ -1,0 +1,30 @@
+{
+  "id": "10360",
+  "title": "Opentype Fontlab Standard ligatures problem",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi together,   \n   \nI have a problem. I build a typeface and generate it as Opentype (Postscript) on MacOSX with fontlab 4.6.   \nthe problem is, that the standard ligatures (fi, fl) doesnt apear in InDesignCS. I checked everything, export options, UNICODE, indesign, etc. i have no problem with other fonts generated with fontlab, they (the standard ligatures) all work. but not in that font.   \nthe strange thing is, if i make a new font and copy all letters from the problem font to the new font and generate it again as opentype i got the same problem, that the fi and fl ligatures are not used by indesign (or textedit) under osx. so, my theory is that there is something in the font itself that surpress the use of ligatures in such programs.   \n   \nhas anyone an idea where the problem could be?   \n   \nagain, I do not changed the unicode or added new ligatures into fontlab. i just used the 2 standard ligatures in fontlab (fi, fl).   \n   \nthanks   \nThomas   \nCape-Arcona.com\n\n",
+  "author": "kingofcapearcona",
+  "time": "17 Apr 2005 — 3:14am",
+  "uid": "6421",
+  "comments": [
+    {
+      "time": "11 Nov 2008 — 11:31am",
+      "content": "You'll have to script the changes yourself, using the OpenType panel in FontLab.\n\n"
+    },
+    {
+      "time": "12 Nov 2008 — 12:56pm",
+      "content": "Better late than never?\n\nI'm pretty positive ID uses 'fi' and 'fl' named characters automatically as ligatures, OpenType font or not. Well, perhaps it did not in ID 2.0 (or what was it, back 'den?)\n\n"
+    },
+    {
+      "time": "12 Nov 2008 — 1:22pm",
+      "content": "I'm sure InDesign (and Quark) use the fi and fl ligatures automatically if they are included in POSTSCRIPT TYPE 1 fonts.  \nBut in OpenType fonts I guess you HAVE TO define the liga feature and include the ligatures there.  \nFontLab does this automatically when importing Postscript Type 1 fonts as default - which may be the reason some of your fonts have this feature, but a font you've made all by yourself from scratch doesn't have it.  \nCopying the glyphs from one font to another does not copy the OpenType features, so that explains why this doesn't work...  \nSo make sure you make the liga feature before you export your OpenType font.\n\n"
+    },
+    {
+      "time": "12 Nov 2008 — 1:24pm",
+      "content": "Just discovered how old the initial post was... D'oh!  \nOh, well... :\\*)\n\n"
+    }
+  ]
+}

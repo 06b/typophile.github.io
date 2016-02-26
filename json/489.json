@@ -1,0 +1,42 @@
+{
+  "id": "489",
+  "title": "Leading Headache",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I've just finished a 3 fonts typeface with all the settings (kerning pairs and so on), and I really feel frustrated when I see the result in Illustrator. The leading is awful and I can't figure it out setting it in fontographer.   \n   \nPlease somebody help me !   \n(Tips in Fontlab are also welcome)\n\n",
+  "author": "gberry",
+  "time": "30 June, 2003 - 8:58am",
+  "uid": "693",
+  "comments": [
+    {
+      "time": " 2 July, 2003 - 5:44pm",
+      "content": "Guillaume --   \n   \nI really can't help, as I have very little experience w/ fontlab, but I don't understand your question: what do you mean \"the leading is awful?\" Are you using Illustrator to proof blocks of type? If so, does the same thing happen in other applications?   \n   \nIf you could post some screen shots, that might help...\n\n"
+    },
+    {
+      "time": " 3 July, 2003 - 3:06pm",
+      "content": "Yes, it's the auto leading that Illustrator is giving the text.   \n   \nmy font is all designed in Illustrator, then import in fontographer without dealing with ascent & descent parameters. Import is made with a \"module\" that is the same for each element of the font.   \n   \nI can't post a sample of this font because it has been design for a single client and we prefer to keep it safe before final release.   \n   \nHope you can help me. Thanks\n\n"
+    },
+    {
+      "time": " 4 July, 2003 - 3:46pm",
+      "content": "You could just change the leading instead of doing auto leading.\n\n"
+    },
+    {
+      "time": " 6 July, 2003 - 4:59am",
+      "content": "As I said before, it's a font design for a company, and it will be used by several people. The **leading** has to be well set so that the global layout that we build could be respected. And Illustrator is not the only software that is in use for this font.\n\n"
+    },
+    {
+      "time": " 6 July, 2003 - 11:00am",
+      "content": "Different applications handle default interlinear spacing in different ways. It is a while since I used Illustrator, but I'm presuming that it works much the same way as other Adobe software; that is, it probably handles default leading as a percentage of the body height of the text. So, for example, default leading for 12pt type is likely to be 120%, i.e. 14pt leading. If you have a problem with interlinear spacing in such a program, it is because your glyphs are actually scaled incorrectly relative to the body height (i.e. the UPM value). If your fonts are Type 1 format, they will have a UPM value of 1000, which means that you need to make your tallest glyphs fit within that height, or they will extend beyond the nominal body and may clash with other lines of text.   \n   \nMany other applications, e.g. MS Word, do not calculate default linespacing as a percentage of body height, but instead use 'logical unit' font metrics that are provided by the system font renderer and based upon explicit values in the font. This is why the default linespacing between one font at 12pt and another font at the same size may vary. For Type 1 fonts, the logical metrics are calculated from the bounding box values. For TrueType fonts they are usually calculated from the OS/2 table vertical metrics on Windows and the hhea table vertical metrics on the Mac.   \n   \nUnfortunately, I've no idea how to go about editing these values in Fontographer, since I don't use that tool. It is possible to directly edit the values in FontLab.\n\n"
+    },
+    {
+      "time": " 8 July, 2003 - 4:45pm",
+      "content": "hello, Guillaume,   \n   \nsorry for the delay in getting back to you. In Fontographer, go to the �Element� menu and select �Font Info...�. This will bring up a dialog box that has spaces for Ascent, Descent, and Em Square, and even Leading. Fontographer usually calculates the total height of a font as 1000 em units (usually it is the sum of ascent and descent), but you can change that, or the Ascent, for example.   \n   \nHere are some tips from the Fontographer manual:   \n   \nIf you want an em square that is NOT equal to the sum of the ascent plus the descent, deselect the box �Automatically compute em square from ascent + descent�.   \n   \nIf �Retain path coordinates when changing em square� is checked, the entire font will look smaller if you make the em square larger.   \n   \nLeading is normally left at 0 (zero), but if you must set it, a good setting is 10% of the sum of the ascent and descent.   \n   \nThat�s what I can tell you. I�m quite new at this, so I hope these tips work. And if you need it, you can get a PDF of the Fontographer manual here:   \n   \n [http://members.xoom.virgilio.it/dtp/papers.html](http://web.archive.org/web/20051125095808/http:/members.xoom.virgilio.it/dtp/papers.html)   \n   \nBest of luck with your job!\n\n"
+    },
+    {
+      "time": " 10 July, 2003 - 3:53am",
+      "content": "Thanks for the replies.   \nI'll try to figure it out with these tips,   \nand get back to you later   \nfor a debriefing. And also some example   \nof the font.   \n   \n ![:-)](http://web.archive.org/web/20051125095808im_/http:/www.typophile.com/forums/clipart/happy.gif)\n\n"
+    }
+  ]
+}

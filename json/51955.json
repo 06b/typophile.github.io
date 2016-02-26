@@ -1,0 +1,26 @@
+{
+  "id": "51955",
+  "title": "Simple Contextual Substitutions",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I am setting up a font that I hope will look somewhat hand written when set. I have a stylistic alternate for every glyph with just slight changes in hand variance and attitude.\n\nI would like to set up an OT feature where whenever two of the same glyphs are repeated side by side, the second glyph switches to the alternate.\n\nI have page 868 of the FontLab manual open. But it is not making a lot of sense to me right now.\n\nFirst, what would I call this feature in the OT window?\n\nWould the code look something like this?:\n\nSub e e’ by e.alt;\n\nAnd then set that up for every glyph. Or am I confused?\n\nAnd then, how would that feature be turned on and off in the app?\n\nI have it set up to where I can switch out the alternates by hand, but other users will be lazier than me and I would love to see some kind of automatic feature.\n\nAs long as my head doesn’t explode trying to code it…\n\n",
+  "author": "Robby Woodard",
+  "time": "21 Nov 2008 — 10:02am",
+  "uid": "703",
+  "comments": [
+    {
+      "time": "21 Nov 2008 — 10:29am",
+      "content": "Yes that's it, You have it right.\n\nThere is also a alternate way of doing it with very large sets of substitutions and that is with classes.\n\nBasically you just drag and drop all the sets into classes and as long as they are in the correct order and size the code would be as follows:\n\nfeature calt { # Or whatever feature you choose.  \n sub @letter @letter2' by @letter3 ;\n\n} calt;\n\nSo you would make open type classes and drag all the first letters into one called  \nletter into it and make a new open type class called letter2 and drag all the second letters into it and then make a third class called letter3 and drag in all the replacement glyphs into that.\n\nNow that is not exactly correct but I'm pretty sure Fontlab will change and compile it correctly when you make the font. It will run in the open type preview correctly inside Fontlab as written just fine for debugging.\n\nIf you do it your way I'm pretty sure Fontlab will make it sort of like my way on compiling the font. It will try to add them all to classes to make the code much smaller. You just have to make sure they are all in the correct order and that all three classes have the same exact amount of glyphs. It will not compile and give you a warning if that is not the case.\n\n"
+    },
+    {
+      "time": "21 Nov 2008 — 10:43am",
+      "content": "I just finished a font like this. I used three of every glyph in the font (including punctuation, spaces, nonbreaking spaces, and soft hyphens) in three classes; default, alt1, and alt2. My code ( [based on older code by Tom Phinney and others](http://web.archive.org/web/20131108030953/http:/www.adobeforums.com/cgi-bin/webx?50@755.561rfSM0Gas.1@.3bbc5ea4)) is:\n\nfeature calt {  \nlookup rotate {  \n sub @default @default' by @alt1;  \n sub @alt1 @default' by @alt2;  \n} rotate;  \nlookup rotate;  \n} calt;\n\nTo make it work in Indesign one has to use CALT (contextual alternates), because Indesign does not support SALT ( [complain about that here](http://web.archive.org/web/20131108030953/http:/www.adobe.com/cfusion/mmform/index.cfm?name=wishform)).\n\nYou also need to set up kerning classes to control interaction between the different character sets (unless all of the characters vary enough to require manual kerning of everything). I recommend that you set up all of the classes in a text editor, proof them, and then import them. Otherwise you’ll have to find your mistakes by looking at the errors the Opentype compiler generates, which can be a PITA because errors fonts with large classes can cause the compiler to mangle the classes.\n\n"
+    },
+    {
+      "time": "21 Nov 2008 — 11:47am",
+      "content": "I think this is working....\n\nThanks, guys!\n\n"
+    }
+  ]
+}

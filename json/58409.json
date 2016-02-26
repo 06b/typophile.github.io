@@ -1,0 +1,26 @@
+{
+  "id": "58409",
+  "title": "what is the point of aalt feature",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I think this is probably a dumb question but here goes anyway... Is there any point in adding the [aalt](http://web.archive.org/web/20131016013805/http:/typophile.com/wiki/aalt) feature? Say it was:\n\nfeature aalt {  \n feature liga;  \n feature calt;  \n feature salt;  \n} aalt;\n\nmy fonts seem to work the same whether I put it in or not. The only reason I can think of for it is to order the other features - ie ligatures get processed before contextual alternates, but they seem to anyway, regardless of the position of the liga feature in the aalt feature.\n\nWhat am I missing?\n\n",
+  "author": "daverowland",
+  "time": "26 May 2009 — 4:16pm",
+  "uid": "44740",
+  "comments": [
+    {
+      "time": "26 May 2009 — 4:26pm",
+      "content": "The 'aalt' feature was originally defined by Adobe because they wanted a way for glyph insert palettes, such as that in InDesign, to be able to present all the variant forms of a given glyph in a fly-out UI. At the time, they thought the way to do this would be to put all the variants into a single feature, so that the glyph palette could simply query that feature to present the variants.\n\nBut some of use didn't play ball :) -- and started shipping fonts without implementing the 'aalt' feature, and Adobe's app developers did the sensible thing: they wrote the glyph palette code to query all the GSUB layout features and harvest the one-to-one variants that way.\n\nSo, from my perspective, there is no need to implement the 'aalt' feature. That said, Adobe continue to put this feature in all their fonts, and I'm guessing there is probably a processing benefit, in terms of speed and memory resources, if the glyph palette can grab the variants from this one feature. It also probably means you have some control over what variants are presented in the glyph palette.\n\n"
+    },
+    {
+      "time": "26 May 2009 — 4:33pm",
+      "content": "Thanks for the answer!\n\n"
+    },
+    {
+      "time": "27 May 2009 — 5:54pm",
+      "content": "<cite> It also probably means you have some control over what variants are presented in the glyph palette.</cite>\n\nNot only _which_ alternates, but how they appear. In cases where, for whatever reason, the various alternates appear in the Glyphs palette in a strange order, we can specify all the alternates in a specific order in 'aalt'.\n\nI can't remember exact cases, or if it's even much of an issue anymore... but we did this most often with the various figure styles, where we might have three alternates like fitted oldstyle, etc., and also numerators, etc. We would sometimes see these alternates appearing in an unpleasant order in the Glyphs flyout. We would \"hardcode\" the desired order in 'aalt' to solve the problem.\n\nThere was also a time when we would put certain alternate substitutions in 'aalt' if we wanted to see them but they didn't appear in other features. Eventually we decided that such substitutions should find a home in some \"real\" layout feature rather than 'aalt', so we try not to do that anymore.\n\n"
+    }
+  ]
+}

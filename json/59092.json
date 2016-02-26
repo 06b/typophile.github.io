@@ -1,0 +1,82 @@
+{
+  "id": "59092",
+  "title": "OpenType feature to flip between two sets",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi all,\n\nI'm working on a typeface with two versions of each character. I made two sets and called them @set1 and @set2. Every set has five characters after which I like to 'swap' to the other set. The characters are C E J S Z and c e j s z.  \nFor example. I like to go like this: ABCdeFGHIJklmnopqrsTUVWXYZabcDE etc  \nI can't get the code working, can somebody help me?  \nThanks!\n\nPieter\n\n",
+  "author": "Pieter van Rosmalen",
+  "time": "16 Jun 2009 — 9:21am",
+  "uid": "5585",
+  "comments": [
+    {
+      "time": "16 Jun 2009 — 9:54am",
+      "content": "This is the feature I wrote:\n\n`\nfeature liga {\n# Latin\n\tsub C @set1' by @set2;\n\tsub E @set1' by @set2;\n\tsub J @set1' by @set2;\n\tsub S @set1' by @set2;\n\tsub Z @set1' by @set2;\n\tsub c @set2' by @set1;\n\tsub e @set2' by @set1;\n\tsub j @set2' by @set1;\n\tsub s @set2' by @set1;\n\tsub z @set2' by @set1;\n\tsub @set2 @set1' by @set2;\n\tsub @set1 @set2' by @set1;\n} liga;\n`\n\nPieter\n\n"
+    },
+    {
+      "time": "16 Jun 2009 — 10:10am",
+      "content": "You might need to show us what your classes are, but from the get go this doesn't look like it belongs in the liga feature, but rather calt.\n\n"
+    },
+    {
+      "time": "16 Jun 2009 — 10:11am",
+      "content": "Are you saying you want to use those letters as a switch to change all the letters that appear after them?\n\n"
+    },
+    {
+      "time": "16 Jun 2009 — 10:53am",
+      "content": "@ Stephen: I know, but I choose the liga feature because it's on at default in a few programs.\n\n@ Jackson: Yes, that's what I like.\n\nclasses:  \n`\n@set1 = [A B C D E F G H I J K L M N O P Q R S T U V W X Y Z];\n@set2 = [a b c d e f g h i j k l m n o p q r s t u v w x y z];\n`\n\nThanks!  \nPieter\n\n"
+    },
+    {
+      "time": "16 Jun 2009 — 11:24am",
+      "content": "The main problem is that the trigger glyphs were in the classes you were switching. Try this:\n\nfeature CALT {\n\n@set1 = [A B D F G H I K L M N O P Q R T U V W X Y];  \n@set2 = [a b d f g h i k l m n o p q r t u v w x y];  \n@trip1 = [C E J S Z];  \n@trip2 = [c e j s z];\n\nsub @trip1 @set1' by @set2;  \nsub @trip1 @set2 @set1' by @set2;  \nsub @set2 @set2 @set1' by @set2;  \nsub @set2 @set2 @trip1' by @trip2;\n\nsub @trip2 @set2' by @set1;  \nsub @trip2 @set1 @set2' by @set1;  \nsub @set1 @set1 @set2' by @set1;  \nsub @set1 @set1 @trip2' by @trip1;\n\n} CALT;\n\n"
+    },
+    {
+      "time": "16 Jun 2009 — 1:23pm",
+      "content": "Hello Jackson,\n\nThanks for the code, but unfortunately it's not working: ABCdefghijklmnopqrstuvwxyz  \nIt's not flipping back to @set1 anymore.\n\nThis is what I like to happen: ABCdeFGHIJklmnopqrsTUVWXYZabcDEfghijKLMNOPQRSTuvwxyzAB etc\n\nPieter\n\n"
+    },
+    {
+      "time": "16 Jun 2009 — 2:28pm",
+      "content": "feature CALT {\n\n@set1 = [A B D F G H I K L M N O P Q R T U V W X Y];  \n@set2 = [a b d f g h i k l m n o p q r t u v w x y];\n\n@trip1 = [C E J S Z];  \n@trip2 = [c e j s z];\n\nsub @set1 @trip1 @set1' by @set2;  \nsub @set2 @trip2 @set2' by @set1;\n\nsub @trip1 @trip1' by @trip2;  \nsub @trip2 @trip2' by @trip1;\n\nsub @set2 @set1' by @set2;  \nsub @set2 @trip1' by @trip2;\n\nsub @set1 @set2' by @set1;  \nsub @set1 @trip2' by @trip1;\n\n} CALT;\n\nI should've paid more attention to your string...\n\n"
+    },
+    {
+      "time": "16 Jun 2009 — 2:31pm",
+      "content": "Err.. needed one more thing:\n\nfeature CALT {\n\n@set1 = [A B D F G H I K L M N O P Q R T U V W X Y];  \n@set2 = [a b d f g h i k l m n o p q r t u v w x y];\n\n@trip1 = [C E J S Z];  \n@trip2 = [c e j s z];\n\nsub @set1 @trip1 @set1' by @set2;  \nsub @set2 @trip2 @set2' by @set1;\n\nsub @trip1 @trip1' by @trip2;  \nsub @trip2 @trip2' by @trip1;\n\nsub @set2 @set1' by @set2;  \nsub @set2 @trip1' by @trip2;  \nsub @trip1 @set1' by @set2;\n\nsub @set1 @set2' by @set1;  \nsub @set1 @trip2' by @trip1;  \nsub @trip2 @set2' by @set1;\n\n} CALT;\n\n"
+    },
+    {
+      "time": "16 Jun 2009 — 2:31pm",
+      "content": "Err.. needed one more thing:\n\nfeature CALT {\n\n@set1 = [A B D F G H I K L M N O P Q R T U V W X Y];  \n@set2 = [a b d f g h i k l m n o p q r t u v w x y];\n\n@trip1 = [C E J S Z];  \n@trip2 = [c e j s z];\n\nsub @set1 @trip1 @set1' by @set2;  \nsub @set2 @trip2 @set2' by @set1;\n\nsub @trip1 @trip1' by @trip2;  \nsub @trip2 @trip2' by @trip1;\n\nsub @set2 @set1' by @set2;  \nsub @set2 @trip1' by @trip2;  \nsub @trip1 @set1' by @set2;\n\nsub @set1 @set2' by @set1;  \nsub @set1 @trip2' by @trip1;  \nsub @trip2 @set2' by @set1;\n\n} CALT;\n\n"
+    },
+    {
+      "time": "16 Jun 2009 — 11:59pm",
+      "content": "\"@ Stephen: I know, but I choose the liga feature because it’s on at default in a few programs.\"\n\nSo is calt.\n\nT\n\n"
+    },
+    {
+      "time": "17 Jun 2009 — 12:31am",
+      "content": "Hello Jackson,\n\nIt's working! Thank you very much! You made me a happy man.\n\nPieter\n\n"
+    },
+    {
+      "time": "17 Jun 2009 — 12:32am",
+      "content": "Hello Thomas,\n\nI didn't know that. Thanks!\n\nPieter\n\n"
+    },
+    {
+      "time": "17 Jun 2009 — 5:20am",
+      "content": "Hello Jackson,\n\nI like to thank you again! :) It's perfect!\n\nPieter\n\n"
+    },
+    {
+      "time": "17 Jun 2009 — 6:23am",
+      "content": "No problem, that was a fun distraction on a lazy working day.  \nI'm curious how this is going to translate into a design, look forward to seeing it.\n\n"
+    },
+    {
+      "time": "17 Jun 2009 — 7:15am",
+      "content": "Hello Jackson,\n\nI will show you later. It's for a client and I'm not allowed to show it before the official introduction.\n\nPieter\n\n"
+    },
+    {
+      "time": "17 Jun 2009 — 7:47am",
+      "content": "Awesome, good luck!\n\n"
+    },
+    {
+      "time": "18 Jun 2009 — 8:24am",
+      "content": "...  \nChrisL\n\n"
+    }
+  ]
+}

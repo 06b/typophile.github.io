@@ -1,0 +1,50 @@
+{
+  "id": "100739",
+  "title": "Create component from mask?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi all\n\nI know this is a long shot but is there a macro or method to create glyph components from a mask. I have a large italic font, the accents glyphs were made up from components of the base glyph and accent. These glyphs have been mistakenly decomposed but I need them as components. I could generate the glyphs again with Glyph \\> Generate Glyphs… , this would give me the components but the accents would be the wrong places. Any ideas.\n\n",
+  "author": "RachelR",
+  "time": "21 Feb 2013 — 1:33pm",
+  "uid": "16986",
+  "comments": [
+    {
+      "time": "21 Feb 2013 — 7:31pm",
+      "content": "I'd second a plea for an answer. I have a few fonts where glyphs got decomposed, and I'd like to make some changes in the accents -- or occasionally the base character -- & not have to reposition everything.\n\n"
+    },
+    {
+      "time": "21 Feb 2013 — 7:59pm",
+      "content": "Alas, I don't know of any way to do this from a mask layer. In theory, I suppose a script could analyse foreground outlines in selected glyphs, find matching outlines elsewhere in the font, and make composites, but I've not seen this done.\n\n"
+    },
+    {
+      "time": "22 Feb 2013 — 11:52am",
+      "content": "You might try this: Per each glyph, select the outline which you want to convert into a component and then choose \"Contour \\> Convert \\> Selection to Component\". If you use the shortcut for this, and also use a shortcut for \"Next Glyph\" (go to \"Tools \\> Customize\" which has a search box) to quickly switch from one glyph to the other, you can revert to components with not too much work. I have done this a few times in the past. (I don't understand the mask part. Does \"Tools \\> Mask \\> Swap Outline with Mask\" help? Again \"Tools \\> Customize\" allows you to assign a shortcut.)\n\n"
+    },
+    {
+      "time": "22 Feb 2013 — 12:38pm",
+      "content": "Thanks, Karsten, that will be quick enough for me. I hope it will work for Rachel as well...\n\n"
+    },
+    {
+      "time": "22 Feb 2013 — 2:14pm",
+      "content": "You are looking for this?  \n [https://github.com/houseind/robothon/blob/master/recomponent.py](http://web.archive.org/web/20140810034623/https:/github.com/houseind/robothon/blob/master/recomponent.py \"https://github.com/houseind/robothon/blob/master/recomponent.py\")\n\n"
+    },
+    {
+      "time": "22 Feb 2013 — 2:39pm",
+      "content": "k.l., thanks I never knew you could do that\n\nPabloImpallari, how do I use this ?\n\nI tried downloading the raw code and placing it in the macros folder. If I run the macro I get and error.\n\nTraceback (most recent call last):  \n File \"\", line 3, in  \nImportError: No module named defcon\n\n"
+    },
+    {
+      "time": "22 Feb 2013 — 3:38pm",
+      "content": "Defcon is available here: [http://code.typesupply.com/](http://web.archive.org/web/20140810034623/http:/code.typesupply.com/ \"http://code.typesupply.com/\")\n\n"
+    },
+    {
+      "time": "23 Feb 2013 — 12:04am",
+      "content": "PabloImpallari do I need to use the command line to install this.\n\nI have downloaded the folder defcon-0.1. I double clicked the setup.py which looked like it installed.\n\nI tried the macro again in FL but I still get the same error\n\n`\nTraceback (most recent call last):\nFile \"\", line 3, in\nImportError: No module named defcon`\n\n"
+    },
+    {
+      "time": "24 Feb 2013 — 6:53am",
+      "content": "<cite>Per each glyph, select the outline which you want to convert into a component and then choose \"Contour &gt; Convert &gt; Selection to Component\".</cite>\n\nJust a note: you can't select the whole glyph, say eacute, run the routine above, and wind up with two components. You have to run the routine on each component, selected separately.\n\nDone this way, a change to either of the components will be reflected in all the composites based on it.\n\nExample: if you want to change the \\*e\\* glyph and all the e-accent glyphs, then **if** all the e-accent glyphs are composites, the change to the base glyph will reflect that change in all of them. The same thinking if you want, say, to change the length or thickness of a macron diacritical. The po0sitioning of each component will (essentially) remain.\n\nGiven most text editing and layout software today, as long as authors use Unicode's precomposed accented characters rather than a base character and a combining diacritic, this becomes an important tool.\n\nEdit:\n\nActually, since most font publishers -- including the major ones such as Adobe and Monotype -- don't bother with the combining diacritics, authors aren't to blame for not following the Unicode consortium's stated preference...\n\n"
+    }
+  ]
+}

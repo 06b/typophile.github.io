@@ -1,0 +1,62 @@
+{
+  "id": "61129",
+  "title": "Attempting to build ttc files/ Font Book hates them",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I'm attempting to build ttc files.\n\nThey work on windows, and the windows font validator finds no problems with them.  \nThey work with freetype.  \nMy own validation tools can find no problems (but that may not say much).\n\nThey don't work on the mac. The mac somewhat randomly picks a few fonts in the ttc file and adds them to its font list. Font Book's Validation command claims that all the fonts in the ttc have \"Serious Problems\" in \"System Validation\" -- whatever that may mean.\n\nIf I extract a font from the ttc file, including all tables unchanged, then Font Book will happily validate the resultant ttf file.\n\nIf I take a standard ttc font (I used gulim.ttc) and subjected it to Font Book I got exactly the same problems.\n\nI have tried this on 10.4 and 10.5 with similar results.\n\nAnyone know what might be going on?\n\n",
+  "author": "<a href=\"/web/20120217045515/http://typophile.com/user/28793\" title=\"View user profile.\">fontforge</a>",
+  "time": "<br>",
+  "uid": "28793",
+  "comments": [
+    {
+      "time": "",
+      "content": "Try it on 10.6, where Apple is shipping its own TTC files with the OS?\n\nI know 10.4 and 10.5 nominally support TTCs, but I was wondering how solid that support is, and I fear you've answered the question. :/\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": ":-) I intend to try 10.6 when I get my grubby little hands on it, for me that means whenever it ships...\n\nThis work was to prepare for the ttc usage in 10.6.\n\nI have seen a few ttcs which actually worked (most don't) in 10.5, but I couldn't figure out why. I guess no one else knows either...\n\n"
+    },
+    {
+      "time": "",
+      "content": "Unfortunately, getting useful information out of Apple about the nature of Font Book errors is sometimes challenging....especially around the time of a new Mac OS Release :-)\n\nI've had similar experience with TTCs under 10.5: some are okay, some raise vague errors like \"missing OpenType data\" with no detail as to what is missing, and there does not seem to be any publicly-accessible documentation on the errors.\n\nOne possibility: are the TTCs you're testing all \"large\" (many glyphs)? At one time I was going to look into the possibility of a format 2 'post' table with name indices \\>= 32768 being an issue, based on a very strict interpretation of the OpenType spec (\"Index numbers 32768 through 65535 are reserved for future use\") but I never chased that down to confirm.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Did you try ftxvalidator from [http://developer.apple.com/textfonts/download/](http://web.archive.org/web/20120217045515/http:/developer.apple.com/textfonts/download/ \"http://developer.apple.com/textfonts/download/\") ?\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "I've tested ttcs with less than 32767 (and one with more 32768). Failure has occurred in both.\n\nI doubt ftxvalidator works for ttc, it crashes with:  \n ====== CaslonRoman.ttc ============================================  \n ------ sfnt: , sfnt ID: 58 ------  \n Error: Required table(cmap) is missing.  \n Error: Required table (glyf) is missing!  \n Something's wrong!!!  \n Error: No 'head' table present in this font.  \n Error: 'head' table is needed for 'hhea' test.  \n Error: 'loca' table is needed for 'hhea' test.  \n Error: Required table(hhea) is missing.  \n Error: missing required 'name' table  \nBus error\n\n(all fonts contain cmap, glyf, head, loca, hhea and name tables. I presume it is treating the ttc as a ttf.\n\nThanks for the suggestions.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I am happy to say that the problems I was having with ttc files on the mac have vanished with 10.6.\n\nSo I conclude that 10.5 (and 10.4) do not fully support ttc files, but that 10.6 seems to.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Oh, yes, and Apple seems to support ttc files containing a CFF table.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for the update re: 10.6, I was going to ask about that :-)\n\nInteresting about CFF-based TTCs. Wonder if that will ever take off? Seems unlikely as long as Windows doesn't support it but who knows...\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>Interesting about CFF-based TTCs. Wonder if that will ever take off? Seems unlikely as long as Windows doesn’t support it but who knows...\n\nDo we know they don't work? Has anyone tried them? Happy to investigate if people are interested.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Do we know they don’t work?</cite>  \nI am reasonably sure they don't work in XP and Vista at least\n\n<cite>Has anyone tried them?</cite>  \nYes, in XP and Vista\n\n<cite>Happy to investigate if people are interested.</cite>  \nMight be good to know if they work in Win7...\n\n"
+    },
+    {
+      "time": "",
+      "content": "Please send one along and we'll take a look.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "",
+      "content": "It took a while to track this down. As documented in the OpenType and Open Font Format specs\\* the CFF rasterizer we include in Windows does not support CFF TTC's. However other implementations (such as Mac OS) are certainly free to support them.\n\n\\*See [http://www.microsoft.com/typography/otspec/otff.htm](http://web.archive.org/web/20120217045515/http:/www.microsoft.com/typography/otspec/otff.htm \"http://www.microsoft.com/typography/otspec/otff.htm\")\n\n\"The CFF rasterizer does not currently support TTC files.\"\n\nScroll down to the section \"TrueType Collections\" third paragraph immediately before the sub-section \"The TTC File Structure\".\n\n"
+    }
+  ]
+}

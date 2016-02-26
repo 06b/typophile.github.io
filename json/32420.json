@@ -1,0 +1,118 @@
+{
+  "id": "32420",
+  "title": "proper implementation of numr and dnom OpenType features",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Greetings. I can't seem to get the typophile search function to work, or I probably would have already found the answer to my question. It also doesn't appear to be in the Fontlab 4.6 manual.\n\nCan anyone show me an example of proper implementation of the [numr](http://web.archive.org/web/20101213232847/http:/typophile.com/wiki/numr) and [dnom](http://web.archive.org/web/20101213232847/http:/typophile.com/wiki/dnom) OpenType features? I can get the frac feature to do basic substitutions for the standard set of fractions, but it seems that the frac feature can call the numr and dnom features, but I haven't seen anywhere a specific example of how to make that work. I'd be most grateful for some insight into that mysterious process.\n\nBelow is the code I'm currently using to get the [frac](http://web.archive.org/web/20101213232847/http:/typophile.com/wiki/frac) feature to work, in case it gives you some idea where I'm at.\n\nfeature frac {  \n sub [one one.lnum] [slash fraction] [two two.lnum] by onehalf;  \n sub [one one.lnum] [slash fraction] [four four.lnum] by onequarter;  \n sub [one one.lnum] [slash fraction] [three three.lnum] by onethird;  \n sub [one one.lnum] [slash fraction] [eight eight.lnum] by oneeighth;  \n sub [two two.lnum] [slash fraction] [three three.lnum] by twothirds;  \n sub [three three.lnum] [slash fraction] [four four.lnum] by threequarters;  \n sub [three three.lnum] [slash fraction] [eight eight.lnum] by threeeighths;  \n sub [five five.lnum] [slash fraction] [eight eight.lnum] by fiveeighths;  \n sub [seven seven.lnum] [slash fraction] [eight eight.lnum] by seveneighths;  \n} frac;\n\n",
+  "author": "<a href=\"/web/20101213232847/http://typophile.com/user/3267\" title=\"View user profile.\">ahleman</a>",
+  "time": "<br>",
+  "uid": "3267",
+  "comments": [
+    {
+      "time": "",
+      "content": "Hi Andrew. I'm a little confused by your message. I don't think you want to try to call 'numr' and 'dnom' with 'frac' -- at least for simple, prebuilt fractions like in your example. Your code seems fine for what you're trying to do.\n\nIt can be useful to \"call\" the 'numr' feature in 'frac' with arbitrary fractions. This is an example of what I mean:\n\n`feature frac {\n  lookup NUMR;\n  sub [@SLASH @FIG_DENOMINATOR] @FIG_NUMERATOR' by @FIG_DENOMINATOR;\n} frac;`\n\nThe 'numr' and 'dnom' features are starting to look unnecessary, since there is usually little reason to create numerators or denominators without creating a whole fraction -- which is what 'frac' does all by itself. So I recommend putting 'numr' and 'dnom' in fonts, but not consider them components or \"sub-features\" of 'frac'.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_but it seems that the frac feature can call the numr and dnom features_\n\nThe official feature descriptions are a bit confusing in this regard. When Adobe first registered the frac, numr and dnom features, they had this idea that frac would 'call' the other two features. And this combination of features would allow for arbitrary fractions. As I understand it, the idea was that the application or layout engine would perform the feature calls to the numr and dnom features, based on a character level analysis (numerals before the slash get the numr feature applied to them, numerals after the slash get the denominator feature applied to them). But no one had got around to implementing this in a layout engine by the time I came along with a scheme building arbitrary fractions contextually, directly within the frac feature. Which is what pretty much everyone has been doing ever since.\n\nI believe Adobe make the arbitrary fraction code available with the FDK.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Doesn't Quark do it differently?  \nI haven't checked this recently, but I recall that in the demo of Quark 7, the fraction feature was ignored, and the fractions built on the fly from numr, fraction character, and dnom. At least that was my understanding, and I assumed it was done for backwards-compatability of older files.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The font I'm working on has `frac` but not `numr` or `dnom` and the fraction feature works fine in Quark 7.\n\n"
+    },
+    {
+      "time": "",
+      "content": "IMO, \"numr\" and \"dnom\" should implement simple subsitutions: digits by numerator figures in \"numr\" and digits by denominator figures in \"dnom\". The \"frac\" feature can be implemented completely separately. It may or may not re-use some lookups that were also used in numr or dnom.\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "OK resurrecting yet another old thread...  \nI have the following:\n\n`\nfeature frac {\n    sub zero' [slash fraction]' zero' zero' zero' by uni2031;\n    sub zero' [slash fraction]' zero' zero' by perthousand;\n    sub zero' [slash fraction]' zero' by percent;\n    sub one' [slash fraction]' four' by onequarter;\n    sub one' [slash fraction]' two' by onehalf;\n    sub three' [slash fraction]' four' by threequarters;`\n\nlookup numr0;  \nsub [slash @dnom] @numr' by @dnom;  \n} frac;\n\nBut of course the lookup in the second section replaces all default numerals with numerators, so the substitutions above don't work to produce permille, perthousand, percent and the prebuilt fractions.\n\nHow can I ask the second part of code to ignore the prebuilt fractions? (I only know what I'm learning here so there could be some vital command I don't know about.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Or maybe it's best to try and put the prebuilt fractions in a `liga` feature instead?\n\nBTW the second half of the feature currently reads: `\nlookup numr0;\n    sub [fraction @dnom] @numr' by @dnom;\n    sub @numr slash' by fraction;\n} frac;\n`\n\n"
+    },
+    {
+      "time": "",
+      "content": "Here's the code I use:\n\n`feature frac {\n  @numbers = [zero one two three four five six seven eight nine] ;\n  @numerators = [zero.numr one.numr two.numr three.numr four.numr five.numr six.numr seven.numr eight.numr nine.numr] ;\n  @denominators = [zero.dnom one.dnom two.dnom three.dnom four.dnom five.dnom six.dnom seven.dnom eight.dnom nine.dnom] ;\n  @predenominators = [ slash fraction onehalf onequarter threequarters\n  zero.dnom one.dnom two.dnom three.dnom four.dnom five.dnom six.dnom seven.dnom eight.dnom nine.dnom ] ;`\n\nsub one' [slash fraction]' two' by onehalf ;  \n sub one' [slash fraction]' four' by onequarter ;  \n sub three' [slash fraction]' four' by threequarters ;\n\nsub @numbers by @numerators ;  \n sub @predenominators @numerators' by @denominators ;  \n sub slash by fraction ;  \n} frac;\n\nIf I recall, this was based somewhat on the code Adobe uses. I can't remember for sure.\n\nTal Lemming has a detailed discussion about frac feature strategy here:\n\n[http://talleming.com/2008/04/16/fraction-fever/](http://web.archive.org/web/20101213232847/http:/talleming.com/2008/04/16/fraction-fever/ \"http://talleming.com/2008/04/16/fraction-fever/\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "Elegant code. Thanks :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Mark your code works a dream. Thanks again.\n\nShould the `percent` glyph be identical to a `zero.numr fraction zero.dnom` sequence? My percent is a bit lighter.\n\n"
+    },
+    {
+      "time": "",
+      "content": "It can be. In many fonts, the percent sign does not match the look of the fractions. Even if it does match, I don't think it needs to be included in the frac feature. If a user wants a percent sign, it's right there on the keyboard. I can't imagine someone going to the trouble to type zero slash zero, select it, and then apply the Fraction feature, just to get a percent sign. If they are using 0/0 as a fraction, that would be semantically different from the percent sign anyway, and the Fraction feature would still work on it just like any other arbitrary combination.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>I can’t imagine someone going to the trouble to type zero slash zero, select it, and then apply the Fraction feature, just to get a percent sign.\n\nThat is a good point. I was thinking it might be useful for the permille U+2031, but I guess that's so rare that it can be found on the glyph palette when needed. Will remove these ones.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Doesn't Tal's feature require a space in the search?\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes. Tal is trying to find a better method than the usual one (which mine generally follows). He admits his solution has some drawbacks and doesn't necessarily recommend it. Looks like it's still a work in progress.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Big thanks to Mr. Simonson for the code. I've been pondering how to most effectively code a fraction feature. Your code... its a beautiful thing. Again thanks.\n\n"
+    },
+    {
+      "time": "",
+      "content": "No problem. As I mentioned, I think I cribbed it partly from Adobe's code.\n\nNote that if you have other pre-built fractions, you can add those in as well in the first section.\n\nAlso, Bendy, you mention the idea of using liga for the pre-built fractions. That would be a bad idea. Ligatures are usually on by default, so the fraction sequence would be converted indiscriminately. Thus, if the user typed \"9/11/2001\" they would get \"9/1½001\". :-0\n\n"
+    },
+    {
+      "time": "",
+      "content": "Arh, yes, erm, well maybe not then. :S\n\n"
+    },
+    {
+      "time": "",
+      "content": "Mark Simonson -- (about Tal's fraction feature) <cite>He admits his solution has some drawbacks and doesn't necessarily recommend it. Looks like it's still a work in progress.</cite> (about your fraction feature) <cite>Ligatures are usually on by default, so the fraction sequence would be converted indiscriminately. Thus, if the user typed \"9/11/2001\" they would get \"9/1½001\".</cite>\n\nIn both cases, the drawback is the same: indiscriminately applying the feature to strings that should not be touched. In case of Tal's suggestion, this drawback is easily addressed by adding a few \"ignore\" statements which make sure that dates and other strings following the pattern slash--digit(s)--slash are left intact. Btw, the free style of FF Dagny shows that FontShop has adopted Tal's approach including a safety belt like I mentioned, so obviously they consider this approach as safe enough, like I do too.\n\nAs to the second part, it is not necessary to deal with prebuilt fractions in frac. These exist for legacy reasons, so add them to the font but then leave them alone. A frac feature can compose a ½ from numerator-one plus fraction-slash plus denominator-two, the same way it would compose any other arbitrary fraction.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hm. Good point about the pre-built fractions. I copied that concept from Adobe's code, and (obviously) didn't think to question it.\n\nRegarding Tal's fraction feature idea: Reading it over again, he is more positive about it than I remembered when I first read it a few months ago. I might use that in my next fonts. Have you actually come up with code to handle date exceptions?\n\n"
+    },
+    {
+      "time": "",
+      "content": "The following is completely untested hack, but might work and deal correctly with dates. Unfortunately, the current version of FontLab doesn't support ` rsub ` so it isn't viable for those who would prefer not to deal with ADFKO directly (which, unfortunately, includes me or I would have tested this).\n\n``\n\n@Figures = [zero one two three four five six seven eight nine];  \n@Numerators = [zero.numr one.numr two.numr three.numr four.numr five.numr six.numr seven.numr eight.numr nine.numr];  \n@Denominators = [zero.dnom one.dnom two.dnom three.dnom four.dnom five.dnom six.dnom seven.dnom eight.dnom nine.dnom];\n\n# perform initial substitutions\n\nsub @Figures' [slash fraction] by @Numerators;  \nrsub @Figures' @Numerators by @Numerators;  \nsub [slash fraction] @Figures' by @Denominators;  \nsub @Denominators @Figures' by @Denominators;\n\n# fix dates\n\nsub [slash fraction] @Numerators' by @Figures;  \nsub @Figures @Numerators' by @Numerators;  \nsub @Numerators' [slash fraction] @Figures by @Figures;  \nrsub @Numerators' @Figures by @Figures;  \nsub @Figures [slash fraction] @Denominators by @Figures;  \nsub @Figures @Denominators' by @Figures;\n\nsub @Numerators slash' @Denominators by fraction;\n\n"
+    },
+    {
+      "time": "",
+      "content": "That probably needed to be broken into several separate lookups to work properly -- I leave that as an exercise for the reader :)\n\nAndré\n\n"
+    },
+    {
+      "time": "",
+      "content": "What's rsub?\n\n"
+    },
+    {
+      "time": "",
+      "content": "reversesub (rsub) parses the input string from right to left rather than left to right (or from left to right in Hebrew or Arabic).\n\nAndré\n\n"
+    },
+    {
+      "time": "",
+      "content": "Tal has just posted an update to the Fractions Fever article which explains the addition: [http://talleming.com/2009/10/01/fraction-fever-2/](http://web.archive.org/web/20101213232847/http:/talleming.com/2009/10/01/fraction-fever-2/ \"http://talleming.com/2009/10/01/fraction-fever-2/\")\n\nTrick is to catch cases with multiple slashes via [ignore](http://web.archive.org/web/20101213232847/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#5.f.ii) (to make sure these cases are not turned into fractions), then substitute slash by fraction-slash, then substitute numerals by numerators and denominators if in context of fraction-slash.  \n [reversesub](http://web.archive.org/web/20101213232847/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#5.h) would indeed save some lines of code, but better test this lookup type in a couple of applications first, including in XPress ...\n\n"
+    },
+    {
+      "time": "",
+      "content": "Very nice solution!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Indeed. Leming’s solution seems to work fine here, too. :D\n\n"
+    }
+  ]
+}

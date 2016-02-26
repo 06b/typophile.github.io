@@ -1,0 +1,20 @@
+{
+  "id": "102563",
+  "title": "Contextual alternate feature – confusion",
+  "forum": "Build",
+  "tags": [
+    "alternate",
+    "calt",
+    "contextual",
+    "feature",
+    "OpenType",
+    "Build"
+  ],
+  "content": "Hello,\n\nI have a font that i'd like to utilise the calt feature, and have found Thomas Phinney's article [http://forums.adobe.com/thread/395648], among others [http://typophile.com/node/19625] to be most helpful. YET I still can't get my head around writing the feature so that it creates a more 'random' outcome.\n\nThe details are:  \n– x3 variants for all characters  \n– x3 classes [00 / 01 / 02] including one of each character, 79 characters in total [A–Z, a–z, 0-9, punctuation]  \n– feature currently looks like:\n\nfeature calt {  \nlookup calt\\_one {  \nsub @set\\_00 @set\\_00' by @set\\_01;  \nsub @set\\_01 @set\\_00' by @set\\_02;  \n} calt\\_one;\n\nlookup calt\\_two {  \nsub @set\\_02 @set\\_00' by @set\\_02;  \nsub @set\\_01 @set\\_02' by @set\\_00;  \nsub @set\\_01 @set\\_00' by @set\\_02;  \nsub @set\\_00 @set\\_01' by @set\\_02;  \n} calt\\_two;\n\nsub @set\\_00 space @set\\_00' by @set\\_01;  \nsub @set\\_01 space @set\\_00' by @set\\_02;  \n} calt;\n\n– the result being:\n\n00 02 02 02 01 00 00 02 02 02 01 00 ...\n\n+ after a 'space' the pattern resets\n\n– I also have a fourth alternate for a handful of characters. I've not yet put them into the equation, is this something that is possible or do I have to have the same number of alternates for each character regarding this contextual random feature?\n\nI just wondered if it's seemingly obvious what the mistake is that i'm making, and if anyone could possible help...?!\n\nThanks,\n\nemma\n\n",
+  "author": "emmeridge",
+  "time": "26 Apr 2013 — 7:56am",
+  "uid": "211019",
+  "comments": [
+
+  ]
+}

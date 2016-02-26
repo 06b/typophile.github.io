@@ -1,0 +1,26 @@
+{
+  "id": "10845",
+  "title": "Overline behavior problem",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I've tried posting this question to the Fontographer and FontLab mail lists with no answers. I'm hoping someone here can help!   \n   \nIn testing my font in HTML, the overline does not appear as expected. In the image at [http://parthia.com/fonts/images/overline\\_error.gif](http://web.archive.org/web/20131026215825/http:/parthia.com/fonts/images/overline_error.gif) you can see the problem: each character of the properly behaved overlined Arial font is followed by the \"collapsed\" overlined font character of my sans serif font, Numismatica. The same is illustrated for TNR.   \n   \nWhat design defect causes the collapsed overline, and where should I begin in order to correct the problem? I want my font to mesh seamlessly with Times New Roman, including overlines and underlines in the same line of HTML text.   \n   \nI've been searching the specs and studying the tables, but haven't figured this out. Please help if you can!   \n   \nThanks,   \n   \nCharax\n\n",
+  "author": "charax",
+  "time": "28 Mar 2003 — 10:24am",
+  "uid": "1687",
+  "comments": [
+    {
+      "time": "28 Mar 2003 — 4:14pm",
+      "content": "I don't know the answer to your question, but I will suggest a couple of things.   \n   \nUnderline and overline are different. The TT file contains information about the underline position and thickness, and FontLab has a dialog box where you can set this information. There is no comparable overline feature.   \n   \nSo the web browser must be doing something like analyzing the highest character in the font and putting a line at some distance above that. What I'd do is compare your font and Times and Helvetica. Open up each and make note of a) the cap height b) the ascender height) and c) the top of accents over capital letters. Fonts also contain additional vertical metrics information, which you can see in FontLab. I'm not an expert in this but even by comparing the three fonts you may be able to get an idea of what is happening. You might also try an HTML experiment using capitals with acccents--do they get overridden by the overline?   \n   \nI hope that somebody who really knows will give an answer, but clearly the browser must be reading some piece of information from the font. The FontLab manual has some information about the various vertical metrics which might be helpful.   \n   \nDavid\n\n"
+    },
+    {
+      "time": "29 Mar 2003 — 6:47am",
+      "content": "Hi, David, nice to hear from you again.   \n   \nI've been comparing my fonts in some older font utilities and I notice that a character in my font appears to sit noticeably higher in the bounding box than the same character from Arial TTF or Arial Rounded BT Type 1. In applications, all sit properly on the baseline.   \n   \nThis suggests to me it has something to do with the baseline or math related to the baseline or position of the glyph in the box. I've looked at the metrics of dozens of fonts in Fontographer and FontLab, but I see nothing unusual when compared with mine.   \n   \nSuch a mystery to me. I hope someone can help.   \n   \nCharax\n\n"
+    },
+    {
+      "time": "7 May 2003 — 7:27pm",
+      "content": "David was right on target.   \n  \nAfter troubleshooting the font and comparing my font with structure of well-behaved fonts, I discovered that not having a high-positioned character like Yacute caused the problem. It is the top of the Yacute's accent -- well above the ascent line -- that evidently sets the position for the HTML overline. By drawing a 1-pixel square with its top at the same height as the capital acute accent in TNR and Arial, the problem disappeared.   \n  \nMany thanks for the help.   \n  \nCharax\n\n"
+    }
+  ]
+}

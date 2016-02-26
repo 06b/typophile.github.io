@@ -1,0 +1,38 @@
+{
+  "id": "58144",
+  "title": "Superscript and subscript positions",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "How does the information in the \"Superscript and subscript positions\" table from the font info window relate to the position of the Super/Subscript ?\n\nIs the Y pos taken from the bottom of the glyph ?\n\nAre the X size and Y size average sizes ?\n\n ![](http://web.archive.org/web/20141020005850im_/http:/typophile.com/files/Picture-1_5603.gif)\n\n",
+  "author": "RachelR",
+  "time": "19 May 2009 — 3:35am",
+  "uid": "16986",
+  "comments": [
+    {
+      "time": "19 May 2009 — 7:55am",
+      "content": "X/Y size values are scale factors relative to the em. e.g. a value of 700 on a font that is on a 1000-unit em would result in characters scaled to 7/10 size.\n\nY pos values are relative to the baseline; for subscript, positive values move \\*downward\\* from the baseline.\n\nNormally leave X pos values at zero except for italics, where you generally want to calculate along the italic angle.\n\nMore detailed info on these settings at [http://www.microsoft.com/typography/otspec/os2.htm#subxs](http://web.archive.org/web/20141020005850/http:/www.microsoft.com/typography/otspec/os2.htm#subxs \"http://www.microsoft.com/typography/otspec/os2.htm#subxs\")\n\n"
+    },
+    {
+      "time": "19 May 2009 — 12:15pm",
+      "content": "Thanks for that.\n\nI'm still slightly confused as to the factor I should use. I am using a UPM of 1000. The ascender height of the subscript is 541 and the x height is 394\n\nWhat should this work out to????\n\n"
+    },
+    {
+      "time": "19 May 2009 — 12:55pm",
+      "content": "Since these values only control the \"fake\" super/subscripts, the easiest thing to do is include real super and subscript glyphs and control their behavior with some OpenType programming. Then ignore these values (leave them as is as a default).\n\n"
+    },
+    {
+      "time": "19 May 2009 — 1:05pm",
+      "content": "I have drawn the superscipt and subscript - can you tell me which OpenType programming you mean please?\n\nThanks\n\n"
+    },
+    {
+      "time": "19 May 2009 — 2:13pm",
+      "content": "While it's true that these control the \"fake\" super/subs, many apps and operating systems \\*still\\* don't support super/subs via OpenType. So the best thing to do is at least take a decent whack at setting these values. At minimum, try to test in apps that use them (e.g. MS Word) and verify that the defaults are giving reasonable results.\n\nAs to the specifics:  \nThe X/Y size values represent a scale factor. Since X and Y are separated, this allows you to scale the width differently than the height, which you might want to do to give more weight to the stems, rather than just a straight scale. To figure out the values to use, look at your real, designed sups/subs, and calculate what percentage they are of the original (i.e. \"zero superior is 65% of the size of the normal zero\", use 650 for the size).\n\nPer the spec: the Y pos (\"offset\") values \"specif[y] a font designer's recommended vertical offset from the character baseline to the character baseline for subscript characters\". So, work out where you want the baseline of the superscripts to be, relative to the normal baseline of the font, in em units, and enter that value. For example, if the superscript baseline is at 400 units above the normal baseline, enter 400. The only slightly odd thing as I mentioned above is that + values mean \"down\" for Y subscript pos...so if the subscript baseline is at -300, you'd just use 300 for that value.\n\nThe X pos values are used for italics, to control positioning along the italic angle. You can use some simple trigonometry to calculate that (using the Y pos value + italic angle).\n\n"
+    },
+    {
+      "time": "22 May 2009 — 6:38am",
+      "content": "<cite>I have drawn the superscipt and subscript - can you tell me which OpenType programming you mean please?</cite>\n\n[http://typophile.com/node/16879](http://web.archive.org/web/20141020005850/http:/typophile.com/node/16879 \"http://typophile.com/node/16879\")\n\n"
+    }
+  ]
+}

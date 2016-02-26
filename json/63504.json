@@ -1,0 +1,66 @@
+{
+  "id": "63504",
+  "title": "InDesign not kerning ff ligature",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi\n\nWe have seen in many fonts of ours that the ff ligature looses kerning information in Adobe InDesign CS3 and CS4.\n\nWe put the ff ligature inside the same class as the lowercase f, but usually only the f will show kerning. This is only for the GPOS kern feature.\n\nHas anyone else come across this and found a solution?\n\nthanks\n\n",
+  "author": "malcolm",
+  "time": "26 Oct 2009 — 7:54am",
+  "uid": "3320",
+  "comments": [
+    {
+      "time": "26 Oct 2009 — 8:26am",
+      "content": "I've run across this as well, always assumed it was a bug caused by the backwards way Indesign handles f-ligatures.\n\n"
+    },
+    {
+      "time": "27 Oct 2009 — 9:12am",
+      "content": "Just a thought -- instead of using class kerning for f & f\\_f, have you tried pairs kerning -- that is treating f & f\\_f as exceptions?\n\n"
+    },
+    {
+      "time": "29 Oct 2009 — 2:24pm",
+      "content": "Jackson - You could be right. I've checked some Adobe fonts and they have the same problem.\n\nCharles - I have tried that and the kerning still does not work.\n\nMiguel, if you read this can you comment?\n\n"
+    },
+    {
+      "time": "29 Oct 2009 — 3:01pm",
+      "content": "I wonder if this is related to the indesign bug/feature that disallows cap eszetts.\n\n"
+    },
+    {
+      "time": "29 Oct 2009 — 6:18pm",
+      "content": "I think we've visited this issue already. Please read [http://typophile.com/node/55929](http://web.archive.org/web/20130825041656/http:/typophile.com/node/55929 \"http://typophile.com/node/55929\") . In sum, the ligatures are kerned, but the value shown in the character panel is zero.\n\n\\> _the indesign bug/feature that disallows cap eszetts._\n\nCould you explain this bug? Thanks.\n\n"
+    },
+    {
+      "time": "29 Oct 2009 — 8:14pm",
+      "content": "You know when indesign transforms eszett to SS even if you use an OT lookup to sub a cap eszett. Maybe I've been doing it wrong.\n\n"
+    },
+    {
+      "time": "30 Oct 2009 — 8:32am",
+      "content": "@Jackson:\n\nNo -- you haven't been doing it wrong. I've run into the same problem. My less-than-ideal solution was to duplicate my case/small caps features as stylistic sets.\n\nI doubt that this is restricted to InDesign since most fonts lack uppercase ß, and since until recently there wasn't even a unicode value assigned to this character, apps wouldn't have had a way to even check for its presence in a font.\n\nNote also that the 'case' feature as described by adobe/microsoft doesn't actually change lowercase letters into uppercase -- it affects punctuation and figures. While I can't see any harm in also converting letters, applications can't rely on this feature to do so, so they must implement their own all-caps routine.\n\nAndré\n\n"
+    },
+    {
+      "time": "30 Oct 2009 — 10:05am",
+      "content": "That's a great explanation, thanks André.\n\n"
+    },
+    {
+      "time": "31 Oct 2009 — 2:58am",
+      "content": "jackson: <cite>You know when indesign transforms eszett to SS ...</cite>\n\nWhich btw is correct behavior, regardless of uppercase eszett having its own Unicode codepoint. Also see [the Unicode site](http://web.archive.org/web/20130825041656/http:/www.unicode.org/versions/Unicode5.1.0/#Tailored_Casing_Operations) which says:  \n<cite>In contrast, standard German orthography uses the string \"SS\" as uppercase mapping for small sharp s. Thus, with the default Unicode casing operations, capital sharp s will lowercase to small sharp s, but not the reverse: small sharp s uppercases to \"SS\".</cite>\n\n"
+    },
+    {
+      "time": "31 Oct 2009 — 7:43am",
+      "content": "If by 'correct behaviour', you mean 'correct behaviour for an application' I agree with you fully -- even if a capital eszett is present, the application should treat SS as the default uppercase form.\n\nOn the other hand, if by 'correct behaviour', you mean 'correct behaviour for a font', I think this really would depend on the font. If one were to include a capital eszett in a text face, I'd think it would be wise to treat the uppercase form as a discretionary variant; in a display face, though, I'd think the designer could for some faces decide that the uppercase form is integral to the face and should be used as the default form.\n\nOf course, this is currently moot since there isn't any facility in place to allow a font to provide its own all-caps mapping, but I've wondered on various occasions why the 'case' feature wasn't defined in a way which allowed for this functionality (where an application would call the case feature to create all-caps if it was present and then use its own mechanism as a fall-back for fonts which didn't implement this feature).\n\nI've run into a few applications which handle all-caps correctly for common bicameral scripts (latin, greek, cyrillic), but which don't handle it at all for less common bicameral scripts (e.g. Armenian). If a way were provided for all-caps functionality to be provided by the font, this would provide a way for a font designer of less-common scripts to ensure that lowercase-to-uppercase mappings were performed correctly (here of course I'm envisioning a future in which all applications are OT-savvy) as well as a way for designers to devise their own solutions to 'problematic' characters like eszett.\n\nAndré\n\n"
+    },
+    {
+      "time": "31 Oct 2009 — 11:31am",
+      "content": "The quote from the Unicode site should make it clear that the application's casing is correct according to German orthography.\n\nIn your argument, InDesign's eszett casing which is _correct_ according to German orthography and some applications' casing of other scripts which is _incorrect_ according to the respective orthographies are treated as the same, which seems an odd way to make a point. Even more so since you suggest font-level (= _glyph-level_) fixes for what is an application-level (= _character-level_) operation: casing.  \nConsequently if there were an option for eszett casing, this would be an application-level option too.\n\nEszett is not a problematic character and I wonder what makes you think it is. Referring to the Unicode link again: Correct casing is from eszett to two uppercase S. If a user wants to use the uppercase eszett, he needs to enter the according uppercase eszett _character_ rather than perform a mere _glyph_ substitution via OTL feature.\n\n"
+    },
+    {
+      "time": "1 Nov 2009 — 7:17am",
+      "content": "Just to clarify, I wasn't so much trying to make a specific point as I was thinking out loud.\n\nWhen I say that ß is a problematic character, I should perhaps have been clearer: it is problematic in the sense that, unlike most other alphabetic characters, ToLower(ToUpper(X)) is not an identity function with respect to ß, which occasionally means that it needs to be treated as a special case in code (application or OpenType) which deals with case-relations.\n\nJust to do some more thinking out loud, the distinction between characters and glyphs is somewhat less than clear-cut, and an argument could be made that the distinction between upper and lowercase letters is somewhat intermediate between the two. There are cases where the two clearly function as different characters (e.g. in mathematical notions, or when used to identify (proper) names), but when all-caps is applied for stylistic purposes there is certainly a sense in which this is closer to a glyph-level operation than it is to a character-level one (which is why 'sub a by A' makes considerably more sense as a GSUB rule than, say 'sub a by b' does).\n\nAnd the contexts in which one applies all-caps are almost invariably those contexts in which caps serve a more stylistic than semantic function -- while I could see myself typing my name in and applying all-caps to it, I couldn't see myself setting it in lowercase and then applying all-caps to the first character.\n\nFor this reason, it doesn't seem entirely clear to me that all caps shouldn't be implemented as a glyph-level operation within a font.\n\nAs for the 'correct' uppercase of ß, I agree that SS is correct, but I disagree that this implies that for a font to use an uppercase form of ß (when such a form is part of the design) would be incorrect (which you do not say, but which you seem to be hinting at).\n\nAndré\n\n"
+    },
+    {
+      "time": "2 Nov 2009 — 5:22am",
+      "content": "Miguel  \nThanks for your earlier answer. You are quite right of course, the value is just not showing and the situation has been explained before.\n\nthanks  \nMalcolm\n\n"
+    }
+  ]
+}

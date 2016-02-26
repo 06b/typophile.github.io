@@ -1,0 +1,35 @@
+{
+  "id": "68438",
+  "title": "Detecting Reverse PS Hints with Python",
+  "forum": "Build",
+  "tags": [
+    "fontlab",
+    "hints",
+    "postscript",
+    "pytthon",
+    "reverse",
+    "Build"
+  ],
+  "content": "Hey Everyone,\n\nI'm stumped. Does anyone here know how to detect reversed postscript hints using Python in FontLab?\n\nHere's what I tried:  \n`\nfont = fl.font\nglyphs = font.glyphs`  \n`\nfor index in range(len(fl.font)):\n\tglyph = fl.font[index]\n\tvhw = glyph.vhints.width\n\tif len(vhw) < 0:\n\t\tprint glyph.name, vhw\n`\n\nI find there are two things wrong here (but I don't know how to fix them).  \n1. FL py reports width as not being an attribute of hhints  \n2. `len(vhw) < 0` returns nothing even when I know those instances are present\n\nAny help is appreciated.\n\n",
+  "author": "delve",
+  "time": "15 Mar 2010 — 4:25pm",
+  "uid": "910",
+  "comments": [
+    {
+      "time": "18 Mar 2010 — 12:27pm",
+      "content": "Delve,\n\nglyph.vhints is a list. You need to iterate through it as in:  \n`for vhint in glyph.vhints:\n  print vhint.width`\n\nAdam\n\n"
+    },
+    {
+      "time": "19 Mar 2010 — 1:18pm",
+      "content": "Thanks Adam!\n\nThat makes sense. I tried what you recommended and now it gives me an error that vhints is not an attribute of glyph (?).\n\nD\n\n"
+    },
+    {
+      "time": "19 Mar 2010 — 2:59pm",
+      "content": "The [Unofficial FontLab/Python Ref](http://web.archive.org/web/20131013030813/http:/www.e-font.de/flpydoc/html/Glyph.xml.html) suggests it is ...\n\n"
+    },
+    {
+      "time": "19 Mar 2010 — 5:59pm",
+      "content": "You may need to define the list first as in:\n\nfor v in range len(glyph.vhints):\n\nor\n\nverthints = glyph.vhints  \nfor v in range len(verthints):\n\n"
+    }
+  ]
+}

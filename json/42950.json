@@ -1,0 +1,30 @@
+{
+  "id": "42950",
+  "title": "FontLab Studio 5.0 help",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "Hi everyone,\n\nI’ve just started using FontLab Studio and I’m working on a new typeface, but I am having a few problems. I have 3 variations of each character. These variations would be used according to the preceding character. For example, variation 1 of the character a would always be used after the character b, but variation 2 would be the one always used after the character c.\n\netc, for the entire alphabet.\n\nI’ve figured out how to create ligatures, but the problem is .. if I were to maanually create ligatures, I would have to make every combination of characters (which is like millions).\n\nI can get ligatures of ab, bc, cd etc .. But I would like to find a way to program the font so that I can get “abc” ... without having to make an actual glyph consisting of the letters a, b, and c.\n\nI hope that makes sense, and that it is possible to achieve this in FontLab Studio.\n\nThanks,  \nVeronica\n\n",
+  "author": "<a href=\"/web/20090828154219/http://typophile.com/user/26901\" title=\"View user profile.\">supervee</a>",
+  "time": "<br>",
+  "uid": "26901",
+  "comments": [
+    {
+      "time": " 7.Mar.2008 6.49pm",
+      "content": "I’ve actually been thinking of doing the same thing with serifs on my font, except with two types (a: rimshot, B: top and bottom start), with the added problem that the the influence a letter has on the one following it depends on its type, so that there would be three or four letter combos.  \nI have no idea how to even make ligatures.\n\n"
+    },
+    {
+      "time": " 7.Mar.2008 7.50pm",
+      "content": "Very briefly, you need to add features. For ligatures, add a ’liga’ feature:\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feature liga {  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub f l by f\\_l;  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub f i by f\\_i;  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} liga;\n\nTo replace glyphs by alternate versions in specific contexts, you need to add a ’calt’ feature:\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feature calt {  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub b a’ by a.calt.1;  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub c a’ by a.calt.2;  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} calt;\n\nThe _a_ marked with a single quote (Typophile may have turned this into an apostrophe ...) will be replaced by _a.calt.1_, but only if it is preceded by the glyphs(s) not marked that way — non-marked letters are considered as ’context’ which must be present so that marked glyphs will be replaced.  \nRather than defining context glyphs individually, you can also create a class and refer to this:\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@CALT\\_BEFORE\\_A1 = [b d f]  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@CALT\\_BEFORE\\_A1 = [c e g]  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feature calt {  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub @CALT\\_BEFORE\\_A1 a’ by a.calt.1;  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub @CALT\\_BEFORE\\_A2 a’ by a.calt.2;  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} calt;\n\nOr define classes in FLS’s Classes Panel, but omit the _@_ there.\n\nAlso try to google for phrases like “feature site:typophile.com”, “feature syntax site:typophile.com”, “calt site:typophile.com”, etc. Feature issues have been dealt with extensively on Typophile.\n\n"
+    },
+    {
+      "time": " 8.Mar.2008 10.07am",
+      "content": "Connecting you with [http://typophile.com/node/42886](http://web.archive.org/web/20090828154219/http:/typophile.com/node/42886 \"http://typophile.com/node/42886\")\n\n"
+    },
+    {
+      "time": " 10.Mar.2008 4.18pm",
+      "content": "K.L.\n\nThank you for your info, but actually I am so at the beggining that it is really hard for me to understand how the whole structure works.  \nI tried to create a class for some glyphs and assign the calt feature your refer to but actually when I try to generate the .otf font an error doesn’t let it to be generated.  \nWould it be possible for you to be more specific on how to do it?  \nAs you sugested, I googled the phrases and there is lots of information on this subject but because it is not in a sistematic text it is very difficult for me to build the puzzle...\n\nHope my begginer questions are not too much...\n\nThanks a lot  \na.\n\n"
+    }
+  ]
+}

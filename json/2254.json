@@ -1,0 +1,30 @@
+{
+  "id": "2254",
+  "title": "Poorman's UTF-16 How To?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Anyone know how to make a utf-16 font without buying the $2000 Asia Font Studio? I'm doing a [Deseret Alphabet](http://web.archive.org/web/20050518123346/http:/en.wikipedia.org/wiki/Deseret_alphabet) font (Unicode 10400-1044F) complete with an OSX keyboard layout for a research project. I've played around a little bit with Apple's command line font tools, dumping out xml, editing, then reincorporating, but it always chokes when I try to change the unicode hex values to anything higher than 8 bit. Letterror's TTX has the same problem. (I even downloaded and applied their patch--it still chokes with a long integer error) Anyone have any ideas?   \n   \nPoint of interest: OSX comes with a Deseret Alphabet font included--who knew? Hint: it's in the Symbols font. It's very ugly, but cool that it's there. I just need to figure out how to reencode a utf-8 font into a utf-16...\n\n",
+  "author": "Christian Robertson",
+  "time": "Sun, 2003-11-30 14:58",
+  "uid": "1",
+  "comments": [
+    {
+      "time": " Sun, 2003-11-30 15:27",
+      "content": "You can do non-BMP Unicodes in FontLab. You just have to give the glyphs names in the format \"u10412\" etc. You can't see the non-BMP Unicode correctly in FontLab, but it should work in the exported font.   \n   \nNote that the title of your post is a little off; UTF-16 is simply one of the ways of representing Unicode (and requires two code points to represent a non-BMP code). From a font perspective, you don't use two code points to represent a non-BMP Unicode, but instead use a 32-bit cmap (UTF-32). The font itself will actually have both a 16-bit cmap and a 32-bit cmap.   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": " Sun, 2003-11-30 19:16",
+      "content": "Thomas: Thanks for the pointers. I didn't know that about unicode fonts. I guess I need to read up on the unicode standard. I've never really worried about it up to this point. I tried your fontlab tip, and it didn't work. The characters come out mapped differently. Any other ideas?\n\n"
+    },
+    {
+      "time": " Sun, 2003-11-30 20:44",
+      "content": "Nope. That was my understanding of how to do it. Maybe I got some key detail wrong. You could try browsing the FontLab user forum on MSN. I know this has been discussed there.   \n   \nRegards,   \n   \nT\n\n"
+    },
+    {
+      "time": " Mon, 2003-12-01 00:16",
+      "content": "If you have a Windows machine, you can run the fonts through Microsoft's free [VOLT](http://web.archive.org/web/20050518123346/http:/www.microsoft.com/typography/developers/volt/default.htm) tool. This is a program for adding OpenType Layout features to a font, but it also rewrites cmap tables, so you can use it to map glyphs to non-BMP characters. However, you have to use surrogate pair values, not 32-bit scalar values, so [this convertor](http://web.archive.org/web/20050518123346/http:/trigeminal.com/16to32AndBack.asp) will be useful.\n\n"
+    }
+  ]
+}

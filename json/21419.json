@@ -1,0 +1,42 @@
+{
+  "id": "21419",
+  "title": "Cross-platform CE font format for Quark 6 in OS X, Quark 4 in Windows 98?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I have a customer in Poland (a newspaper), with the following setup:\n\nmac: Quark 6.5, OS X10.4  \npc: Quark 4.1, OS Windows 98\n\nI’m having difficulty with the appropriate font formats, especially as I don’t have a version of Quark 6 to test fonts on.\n\nI figured that a TrueType flavored OpenType font would work in both platforms, but apparently Quark 6 in OS X doesn’t recognize the necessary CE characters in my fonts.\n\nWhat’s the answer?\n\n [‹ X-tra Small Caps in Open Type](http://web.archive.org/web/20080906210911/http:/www.typophile.com/node/21293 \"Go to previous forum topic\") [Combining Text Objects in Illustrator ›](http://web.archive.org/web/20080906210911/http:/www.typophile.com/node/21383 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080906210911/http://www.typophile.com/user/2021\" title=\"View user profile.\">Nick Shinn</a>",
+  "time": "<br>",
+  "uid": "2021",
+  "comments": [
+    {
+      "time": " 21.Jul.2006 8.36am",
+      "content": "I think they’re out of luck...\n\n[http://www.quark.com/service/desktop/support/techinfo/kbase\\_view.jsp?faq...](http://web.archive.org/web/20080906210911/http:/www.quark.com/service/desktop/support/techinfo/kbase_view.jsp?faq_id=1504 \"http://www.quark.com/service/desktop/support/techinfo/kbase\\_view.jsp?faq\\_id=1504\")\n\n"
+    },
+    {
+      "time": " 21.Jul.2006 8.51am",
+      "content": "Thanks Si.\n\n"
+    },
+    {
+      "time": " 21.Jul.2006 5.31pm",
+      "content": "Nick,\n\nI’ve successfully built Central European OpenType TT fonts with “massaged” encoding vectors (well, let’s call it “hacked”), where one and the same font works fine on QuarkXPress 4.x, 6.x and 7 on both Mac and Windows, as well as in Adobe Creative Suite applications, Macromedia applications and Microsoft applications.\n\nOtherwise, you may want just deliver Mac Type 1 fonts encoded as Mac CE and Windows Type 1 fonts encoded as Windows CE.\n\nAdam\n\n"
+    },
+    {
+      "time": " 21.Jul.2006 5.50pm",
+      "content": "_“massaged” encoding vectors_\n\nWhatever turns you on, dude.  \nNot my thing, really — I’m more into the glyph vector scene.\n\n\\*\\*\\*\n\nSo, I have to make Mac CE fonts with FontLab:\n\nFont Info \\> Encoding and Unicode  \n\\> Supported codepage: 1250 Latin 2: Eastern European  \n\\> Microsoft Character Set: Central (Eastern) European, (Latin 2) CP1250  \n\\> Mac script and FOND ID: Central European Roman 30970\n\nWill that work?\n\n"
+    },
+    {
+      "time": " 22.Jul.2006 1.59am",
+      "content": "Yeah. With these Font Info settings, you select “MS Windows 1250 Central European” in Names mode, generate a Windows Type 1 font, then select “MacOS Central Europe” and generate a Mac Type 1 suitcase.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": " 22.Jul.2006 2.02am",
+      "content": "BTW, if the Polish customers are complaining that they need a font in the “Western” script rather than in the “Central European” script on the Mac, you set Mac script and FOND ID to “Roman” rather than “Central European Roman” and generate the Mac Type 1 suitcases. Of course, you should also make sure that the FOND IDs are not 30970 in all the fonts. They should be different but still within the respective range (Central European Roman or Roman).\n\nAdam\n\n"
+    },
+    {
+      "time": " 22.Jul.2006 8.39am",
+      "content": "Thanks Adam!\n\n"
+    }
+  ]
+}

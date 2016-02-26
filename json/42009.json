@@ -1,0 +1,90 @@
+{
+  "id": "42009",
+  "title": "OpenType programming",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm new at [OpenType](http://web.archive.org/web/20150421054923/http:/typophile.com/wiki/OpenType) well... really new.. i don't know how to do anything.  \nThe question i have is for the \" \" how can i change the first one for a glyph and the last one for other glyph so it will have like a \"open\" and a \"close\"  \nCan anyone tell me?\n\n",
+  "author": "sendoushi",
+  "time": "12 Feb 2008 — 10:45am",
+  "uid": "24330",
+  "comments": [
+    {
+      "time": "12 Feb 2008 — 11:03am",
+      "content": "Left and Right quotes are not OpenType specific. You'll find quotedblleft and quotedblright glyphs in PostScript and TrueType formats.\n\n"
+    },
+    {
+      "time": "12 Feb 2008 — 11:47am",
+      "content": "I see... hmm but why then when i go to the preview and do \" still ask me for the glyph quotedbl? I've done those glyphs you said already...\n\nDo you know where i can learn \"OpenType\" language?\n\nJoel Santos // youremin  \nsound & visual\n\n"
+    },
+    {
+      "time": "12 Feb 2008 — 11:47am",
+      "content": "I see... hmm but why then when i go to the preview and do \" still ask me for the glyph quotedbl? I've done those glyphs you said already...\n\nDo you know where i can learn \"OpenType\" language?\n\nJoel Santos // youremin  \nsound & visual\n\n"
+    },
+    {
+      "time": "12 Feb 2008 — 2:15pm",
+      "content": "Joel,\n\nsince the \"plain\" pseudo-quotes are separate characters from the \"typographic\" quotes, separately encoded in Unicode, a transformation from \"plain\" pseudo-quotes to \"typographic\" quotes should be done on the character level, by an application -- not on the glyph level in your font. Note that quotation rules are different for different languages. If your text is in English, then the typographic quotes “are like this” but if your text is in German, then the typographic quotes „are like this“. Each language has its own specifics, and it is up to the application's (or up to the keyboard driver) to take those specifics into account. It would be very inefficient to expect that every OpenType font should carry quotation rules for dozens or even hundreds of languages, and it would be very difficult to maintain/fix/update this kind of information once the font is released. This is why the stuff does not belong in the font.\n\nFontLab Studio uses the AFDKO (Adobe FDK for OpenType) syntax for defining the OpenType Layout features.\n\n**Some pointers for learning the \"OpenType language\"**\n\n- Your starter may be [Leslie Cabarga's \"Learn FontLab Fast\"](http://web.archive.org/web/20150421054923/http:/www.fontlab.net/Typographic-Resources/Font-Typography-Books/Learn-FontLab-Fast/) book.\n- Secondly, there is a chapter [FontLab Studio manual](http://web.archive.org/web/20150421054923/http:/www.fontlab.net/font-editor/fontlab-studio/download-fontlab-studio/).\n- John Hudson's article [Windows Glyphs Processing](http://web.archive.org/web/20150421054923/http:/www.microsoft.com/typography/Glyph%20Processing/intro.mspx) provides a good overview of the OpenType technology.\n- [Typotheque](http://web.archive.org/web/20150421054923/http:/www.typotheque.com/fonts/opentype_feature_support/) provides a useful reference of Layout features used by different applications.\n- The [OpenType tag registry](http://web.archive.org/web/20150421054923/http:/www.microsoft.com/typography/otspec/ttoreg.htm) provides an overview of all registered OpenType Layout features.\n- Microsoft provides an overview of the system support for OpenType Layout features [for Latin, Cyrillic, Greek and other \"standard\" writing systems](http://web.archive.org/web/20150421054923/http:/www.microsoft.com/typography/OpenType%20Dev/standard/intro.mspx).\n- [Karsten Luecke](http://web.archive.org/web/20150421054923/http:/kltf.de/kltf_otproduction.htm) collected his various useful OpenType production notes.\n- Adobe published the [AFDKO source code for the Bickham Script Pro and Minion Pro](http://web.archive.org/web/20150421054923/http:/del.icio.us/adamtwar/opentypedev/) OpenType fonts they published.\n- Adobe's [Christopher Slye](http://web.archive.org/web/20150421054923/http:/blogs.adobe.com/typblography/atypi2006/slye_lisbon-05.pdf) and [Miguel Sousa](http://web.archive.org/web/20150421054923/http:/blogs.adobe.com/typblography/atypi2006/atypi_Adventures_in_class_kerning.pdf) published useful slides.\n- There are numerous [threads on Typophile](http://web.archive.org/web/20150421054923/http:/www.google.com/search?q=site%3Atypophile.com+feature+sub) that discuss specific quesions and issues.\n- Finally, the [AFDKO feature file syntax](http://web.archive.org/web/20150421054923/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html) is the ultimate reference for the language.\n- The [OpenType font format specification](http://web.archive.org/web/20150421054923/http:/www.microsoft.com/typography/otspec/) is an important reference.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "12 Feb 2008 — 7:21pm",
+      "content": "Hey Adam, can you move all of that over to the Wiki?\n\n"
+    },
+    {
+      "time": "13 Feb 2008 — 1:52am",
+      "content": "Thanks twardoch didn't know that it was diffferent for other languages here in Portugal we use the same method as English ( i think).  \nA lot of people of told me about Leslie's book but it is kind of expensive for someone that is starting... at least i find it in amazon for 100 dollars ( [http://www.amazon.com/Learn-FontLab-Fast-Leslie-Cabarga/dp/0965762858/re...](http://web.archive.org/web/20150421054923/http:/www.amazon.com/Learn-FontLab-Fast-Leslie-Cabarga/dp/0965762858/ref=pd_bbs_7?ie=UTF8&s=books&qid=1202896136&sr=8-7 \"http://www.amazon.com/Learn-FontLab-Fast-Leslie-Cabarga/dp/0965762858/ref=pd\\_bbs\\_7?ie=UTF8&s=books&qid=1202896136&sr=8-7\") ). Here in Portugal I can't even find it. I'm starter and i just study don't have much money, the money from the works i do on youremin isnt much since the work isn't much and when i got the money i have to buy a lot of stuff. But about books what you council me? What books should i get for design or for typo ?\n\nJoel Santos // youremin  \nsound & visual\n\n"
+    },
+    {
+      "time": "13 Feb 2008 — 2:16am",
+      "content": "‘[…] FontLab Studio uses the AFDKO (Adobe FDK for OpenType) syntax for defining the OpenType Layout features. [...]’\n\nAnd so does DTL FontMaster. It generates the applicable OpenType Layout features like:\n\n# --- FEATURE SUMMARY  \n# --- Substitution  \n# aalt: access all alternates  \n# smcp: lc to smallcaps  \n# c2sc: caps to smallcaps  \n# case: uppercase, math and punct shift up  \n# titl: replaces default glyphs with .titling variations  \n# onum: changes to oldstyle figures  \n# lnum: changes to lining figures  \n# pnum: changes to proportional figures  \n# tnum: changes to tabular figures  \n# crcy: replaces any currency char with any other  \n# sups: makes numbers superior  \n# sinf: makes numbers inferior  \n# numr: replaces selected figures with numerators  \n# dnom: replaces selected figures with denominators  \n# frac: substitutes the existing fractions  \n# dpng: dipthong subs  \n# liga: standard lig replacement  \n# salt: replaces glyphs with alternate variations  \n# dlig: discretionary ligatures  \n# ordn: subs ordinal glyphs after numbers  \n# ornm: allows access to ornaments  \n# zero: slashed zero\n\nautomatically if there are matching characters in the font. All other features will be removed during generation. Basically one can use any features file that uses the AFDKO syntax and has a matching character naming convention after adding three lines. Everything that is covered by the FDK/SDK will be in the font then, as I showed during the presentation together with Miguel Sousa at the ATypI TypeTech Forum in Brighton last year.\n\n"
+    },
+    {
+      "time": "13 Feb 2008 — 4:59am",
+      "content": "Frank,\n\nyou do know that the \"crcy\" and \"dpng\" features have been removed from the OpenType specification version 1.25 back in July 2000? Generating fonts with those features makes them contradict the current OpenType standard, so I'm puzzled why DTL FontMaster tries to make them. If it really does generate them, it looks like all fonts made with DTL FontMaster so far that carry those features are not compliant with the most recent OpenType specifications 1.25, 1.3 and 1.4.\n\nAdam\n\n"
+    },
+    {
+      "time": "13 Feb 2008 — 5:18am",
+      "content": "‘[…] FontLab Studio uses the AFDKO (Adobe FDK for OpenType) syntax for defining the OpenType Layout features. [...]’\n\nAnd so does DTL FontMaster. It generates the applicable OpenType Layout features like:\n\n# —- FEATURE SUMMARY  \n# —- Substitution  \n# aalt: access all alternates  \n# smcp: lc to smallcaps  \n# c2sc: caps to smallcaps  \n# case: uppercase, math and punct shift up  \n# titl: replaces default glyphs with .titling variations  \n# onum: changes to oldstyle figures  \n# lnum: changes to lining figures  \n# pnum: changes to proportional figures  \n# tnum: changes to tabular figures  \n# sups: makes numbers superior  \n# sinf: makes numbers inferior  \n# numr: replaces selected figures with numerators  \n# dnom: replaces selected figures with denominators  \n# frac: substitutes the existing fractions  \n# liga: standard lig replacement  \n# salt: replaces glyphs with alternate variations  \n# dlig: discretionary ligatures  \n# ordn: subs ordinal glyphs after numbers  \n# ornm: allows access to ornaments  \n# zero: slashed zero\n\nautomatically if there are matching characters in the font. All other features will be removed during generation. Basically one can use any features file that uses the AFDKO syntax and has a matching character naming convention after adding three lines. Everything that is covered by the FDK/SDK will be in the font then, as I showed during the presentation together with Miguel Sousa at the ATypI TypeTech Forum in Brighton last year.\n\n"
+    },
+    {
+      "time": "13 Feb 2008 — 5:34am",
+      "content": "interesting...\n\nJoel Santos // youremin  \nsound & visual\n\n"
+    },
+    {
+      "time": "13 Feb 2008 — 10:26am",
+      "content": "@youremin  \nOrder the book directly through [Leslie himself](http://web.archive.org/web/20150421054923/http:/www.logofontandlettering.com/bookorder.html). Here's the prices through him, AND you get his nice signature on the book:\n\n**Shipping prices outside USA:**  \n(I'll add in the shipping cost myself when I process your order. It's low-tech but it works) Learn FontLab Fast sent Air Mail to EU and Scandinavia: $36.95 total\n\n"
+    },
+    {
+      "time": "13 Feb 2008 — 2:19pm",
+      "content": "But will he take back what he said about old style numbers & ligatures -- or was he just spoofing & I'm too much an old rube to know . . .\n\n"
+    },
+    {
+      "time": "13 Feb 2008 — 2:53pm",
+      "content": "What did Leslie say?\n\n"
+    },
+    {
+      "time": "5 Mar 2008 — 8:46pm",
+      "content": "I am having a similar problem to youremin.\n\nConverting a postscript outline font to otf using FontForge (yes, I have permission to do this) and I find that the typesetting program (in this case XeLaTeX) does not correctly substitute the curled quote marks that are at U+2018 and U+2019 for the vertical \"apostrophe quote\". Yet with standard (bought) open type fonts it works fine. So there must be some flag somewhere in the font that the typesetting program reads to know to do this. And that flag must not be being set correctly in the conversion process. Does anyone know what that is and how I can correct it?\n\nThe curled quotes are definitely present in the font.\n\n(Tearing my hair out!)\n\nEl.\n\n"
+    },
+    {
+      "time": "5 Mar 2008 — 10:39pm",
+      "content": "Sorry guys — scratch my question. The problem is in XeLaTeX. Some fiddling uncovered it.\n\n"
+    },
+    {
+      "time": "7 Jul 2008 — 12:49pm",
+      "content": "lets reavive this.  \ni still don't know the capabilities of opentype, i first bought 3 books of calligraphy that are more important than opentype on my point of view but i know a thing. It is possible to compare sides for kerning. For example saying that Right side of M is equal to the right side of N so we just need to kern M for example...  \nhow can i do that?\n\nJoel Santos // youremin  \nsound & visual\n\n"
+    },
+    {
+      "time": "8 Jul 2008 — 1:12am",
+      "content": "Joel,\n\nJust send me a personal email and we can arrange a coffee, so I can explain you a few things about OT capabilities,  \nincluding layout features, kerning features, and so on.\n\nDino\n\n"
+    },
+    {
+      "time": "8 Sep 2009 — 1:08pm",
+      "content": "Jan, simply commenting in the thread doesn't help get rid of the spam quickly. Feel free to email me if you find any spam and I'll remove it as soon as possible.\n\n"
+    },
+    {
+      "time": "8 Sep 2009 — 5:06pm",
+      "content": "Thanks, Tiffany. Shall do.\n\n"
+    }
+  ]
+}

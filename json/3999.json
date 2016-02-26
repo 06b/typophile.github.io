@@ -1,0 +1,90 @@
+{
+  "id": "3999",
+  "title": "Optical Adjustments",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hello,   \n   \nI know that it's possible to have differents drawings for each size, in a OT font. But I don't understand how does it work. Which fonction handle with it ? It is possible to create it with FontLab, or Volt ?   \n   \nthanks a lot !\n\n",
+  "author": "<a href=\"/web/20100316121313/http://typophile.com/user/3290\" title=\"View user profile.\">elena</a>",
+  "time": "<br>",
+  "uid": "3290",
+  "comments": [
+    {
+      "time": "",
+      "content": "It is possible to create the \"size\" OpenType Layout feature in FontLab. Please refer to:   \n [http://partners.adobe.com/asn/tech/type/opentype/appendices/features\\_pt.jsp#size](http://web.archive.org/web/20100316121313/http:/partners.adobe.com/asn/tech/type/opentype/appendices/features_pt.jsp#size)   \n [http://partners.adobe.com/asn/tech/type/otfdk/techdocs/OTFeatureFileSyntax.jsp#8.b](http://web.archive.org/web/20100316121313/http:/partners.adobe.com/asn/tech/type/otfdk/techdocs/OTFeatureFileSyntax.jsp#8.b)   \nThe second document describes the syntax that you should use in FontLab's OpenType panel.   \n   \nRegards,   \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Elena, note that the OT size feature does not involve 'differents drawings for each size in a OT font'. Rather, you make different fonts for each size, and put information in each font that specifies for what point size or range of point sizes it should be used.\n\n"
+    },
+    {
+      "time": "",
+      "content": "And then no app will bother using them. :-/   \n   \nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks everyone.   \nAnyway it's so bad that there's no app that support this option yet...!   \n   \nRegards\n\n"
+    },
+    {
+      "time": "",
+      "content": "As far as I know, it DOES work in InDesign 2.0 or CS.   \n   \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "So you're saying that if somebody uses an Adobe OT font with different optical sizes, InDesign will automatically choose the correct size based on the point size? So is each discrete optical size defined to cover a certain point size range?   \n   \nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"The fourth and fifth values represent the small end of the recommended usage range (exclusive) and the large end of the recommended usage range (inclusive), stored in 720/inch units (decipoints). Ranges must not overlap, and should generally be contiguous. \" -- [http://partners.adobe.com/asn/tech/type/opentype/appendices/features\\_pt.jsp#size](http://web.archive.org/web/20100316121313/http:/partners.adobe.com/asn/tech/type/opentype/appendices/features_pt.jsp#size)   \n   \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'm afraid that this is not yet supported in InDesign.   \n   \nRegards,   \n   \nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Oh, I'm sorry for misleading. I see.   \n   \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "So wipe that smug smile off your face! ;-\\>   \n   \nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "There is a 'Use optical size' preference setting in InDesign 2.0 (I presume it is still there in CS also, but I have not upgraded yet\\*), but this is for activating MM optical instances. Never tried it.   \n   \n\\*I was holding out for InDesign ME CS, but am now thinking I'll probably get both for testing purposes.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> for activating MM optical instances.   \n   \nSo you're saying it works with an MM font with an optical axis, but not an OT font with optical masters? I'm confused.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, that's exactly correct.   \n   \nThis was a feature that was put into InDesign 1.0, before Adobe moved away from MMs. The feature has not (yet) been extended to apply to OpenType.   \n   \nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hmmm - fascinating.   \n   \nSo Thomas:   \n1) What are the chances this feature (I mean specifically the handling of the MM optical axis) will be _removed_ from future versions of InDesign? Might it happen when support for OT optical instances gets _added_, or do you think it'll stay in there even then?   \n2) What does InDesign need to see to recognize an optical axis? Just see \"Optical\" as the name, or is there some encoding in the background?   \n   \nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "1) Hard to say. Perhaps it will get removed when or after Adobe completely drops support for multiple master fonts. No date has yet been announced for this.   \n   \n2) MM axes have short names (\"Op\") and long names \"Optical Size\"). Presumably InDesign is keying off one of these. Axes do not have any other kind of encoding AFAIK.   \n   \nRegards,   \n   \nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "ok, novice type question coming up. apologies for off-topic   \n   \ni've got some MM instances installed on C:\\Program Files\\Common Files\\Adobe\\Fonts (i'm on windows). they're installed in the control panel font folder as well).   \n   \nHow do I get indesign (using CS)to display these instances? the styles list just has regular, italic etc\n\n"
+    },
+    {
+      "time": "",
+      "content": "no takers then :?\n\n"
+    },
+    {
+      "time": "",
+      "content": "First, you should try to avoid having the fonts installed in two different places. It just causes confusion (for apps as well as people trying to figure out your problem).   \n   \nSecond, would I be correct in thinking that those are the only styles that show in other applications as well?   \n   \nMy guess is that you are running Windows 2000 or XP. To get full MM support on those OSes, you have to install ATM. Unless you want to pay for ATM Deluxe, install ATM Light 4.1, and the patch to 4.1.2.   \n   \nAlternatively, if you don't want to access the MM instances in apps other than Adobe's InDesign/Illustrator/Photoshop, just remove the fonts from the system fonts folder. Then the ones in the private Adobe location will get used, and you don't need the system level support.   \n   \nRegards,   \n   \nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "many thanks for this, thomas!   \n   \nseems to work.\n\n"
+    }
+  ]
+}

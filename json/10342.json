@@ -1,0 +1,30 @@
+{
+  "id": "10342",
+  "title": "Correcting Path Direction In Fontlab 4.6",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I know this HAS to be a \"stupid\" question, but here goes: How do I correct path directions?   \n   \nMore specifically, let's say I duplicate part of a glyph and flip it horizontally. I now want to place the two pieces together, but when they overlap, they cut one another out. In Fontographer, you'd just select the whole \"negative\" area and reverse the paths to get it to work -- but doing that in Fontlab doesn't do anything at all.   \n   \nWhat am I doing wrong?   \n   \nTIA,   \nMaury\n\n [‹ Illustrating OpenType Substitutions for Users](http://web.archive.org/web/20080615180953/http:/www.typophile.com/node/10431 \"Go to previous forum topic\") [Class spacing/metrics in Fontlab ›](http://web.archive.org/web/20080615180953/http:/www.typophile.com/node/10315 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080615180953/http://www.typophile.com/user/6396\" title=\"View user profile.\">railheaddesign</a>",
+  "time": "<br>",
+  "uid": "6396",
+  "comments": [
+    {
+      "time": " 16.Apr.2005 7.39am",
+      "content": "there are three actions wich reverse contours somehow   \n   \none is: tools -\\> operations -\\> reverse contours another is: tools -\\> outline -\\> reverse all contours wich both reverse ALL the contours in the glyph and just reverse your problem :|   \n   \nthe this should be the one you need: don't select a contour in your glyph, just right-click on one of the nodes of the outline you want to revert and choose \\>revert contour\\< you see, the missing of the magic little s in the end does the job ;)\n\n"
+    },
+    {
+      "time": " 16.Apr.2005 5.55pm",
+      "content": "Thanks for the info -- I'll give it a go!   \n   \nMaury\n\n"
+    },
+    {
+      "time": " 20.Apr.2005 7.38am",
+      "content": "Ute, Maury,   \n   \nto correct path directions in one or more glyphs automatically, choose Tools / Transform / Contour / Reverse all [N], then choose \"Set counterclockwise (Type 1) direction\" if you're making a font with PostScript outlines (Type 1, OT PS) or \"Set clockwise (TrueType) direction\".   \n   \nThis operation will automatically correct path direction, not just reverse it. If the automatic correction has not produced the results you desire, you can manually reverse single contours by right-clicking (or Cmd-clicking) on a node and choosing using Reverse Contour.   \n   \nIn FontLab Studio 5, the operation to correct contour direction automatically will be more readily available.   \n   \nRegards,   \nAdam\n\n"
+    },
+    {
+      "time": " 20.Apr.2005 1.36pm",
+      "content": "\\>In FontLab Studio 5, the operation to correct contour direction automatically will be more readily available.\\<   \nExcept on the Mac where it is not ready to be readily available until \"some even later date\" :-)   \nAh, life as a second class citizen, shunned by even the type design developers.\n\n"
+    }
+  ]
+}

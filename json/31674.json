@@ -1,0 +1,42 @@
+{
+  "id": "31674",
+  "title": "Naming Capital variants",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m working on a font that has (like Fournier) a set of tall capitals. The final font must be usable in InDesign. What I plan to do is to have a set of caps named A.tall B.tall . . . Z.tall and implement them through a stylistic set, rather than fib about the “normal” caps by calling them “petite.” (I don’t think InDesign supports the petite caps feature yet, does it?) Can anybody think of why this won’t work, or a better solution?\n\nTIA\n\n [‹ Fontlab Encoding ?](http://web.archive.org/web/20080615181217/http:/www.typophile.com/node/31657 \"Go to previous forum topic\") [More TT hinting help ! ›](http://web.archive.org/web/20080615181217/http:/www.typophile.com/node/31483 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080615181217/http://www.typophile.com/user/5094\" title=\"View user profile.\">charles_e</a>",
+  "time": "<br>",
+  "uid": "5094",
+  "comments": [
+    {
+      "time": " 21.Feb.2007 7.44pm",
+      "content": "Yes, a stylistic set will work (in InDesign, at least), and yes, InDesign doesn’t support the ’pcap’ feature yet.\n\n"
+    },
+    {
+      "time": " 21.Feb.2007 9.43pm",
+      "content": "It would be easier to make a separate Tall Caps font. That way all you would have to do is substitute the gylphs in the normal cap spots, and you’d get features like c2sc, smcp and case without a lot of messing around with classes and coding.\n\nAnd you would be able to recognize and specify the different versions at the top level of the app, without having to dive down into the OT menu.\n\nThat is the benefit of the feature being named in plain English, as part of the font name. Stylistic sets are problematic because they are an uninformative code number: a descriptive name field which shows in the application menu would be helpful, but it hasn’t been implemented yet. So the typographer has to play “spot the difference” or, heaven forbid, consult a reference document, to figure out what the feature does.\n\n"
+    },
+    {
+      "time": " 21.Feb.2007 10.37pm",
+      "content": "<cite>Stylistic sets are problematic because they are an uninformative code number</cite>\n\nUnfortunately.  \nAny news about descriptive names for Stylistic Set features?\n\n"
+    },
+    {
+      "time": " 21.Feb.2007 11.46pm",
+      "content": "The titling substitution feature —\\> ’titl’  \nshould be exactly what you are looking for.  \nIt’ supported by InDesign.\n\n"
+    },
+    {
+      "time": " 22.Feb.2007 4.53am",
+      "content": "I’d name the capital glyphs “A.titl”, “B.titl” etc., and would associate them with three features: “titl”, “ss01” and “salt”:\n\n`@UC = [A B C ...];\n@UC_TITL = [A.titl B.titl C.titl ...];`\n\nfeature titl {  \n lookup titl1 {  \n sub @UC by @UC\\_TITL;  \n } titl1;  \n} titl;\n\nfeature ss01 {  \n lookup titl1;  \n} ss01;\n\nfeature salt {  \n lookup titl1;  \n} salt;\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": " 22.Feb.2007 5.22am",
+      "content": "Thanks.\n\nNick, it all depends on what you are doing. As a font user rather than a font maker, I really prefer all glyphs in one font. Suppose, for example, that I need to go back to a font and change kerning between two lower-case pairs. Or add a character. Or change a character. Or. . . With one font, you make the change(s) and are done with it. With split fonts, you have to remember to make it in both. That is the primary reason I made up database fonts when we were using the Type 1 format. More work starting out, but a lot less work in font maintenance.\n\nI can live without case. As for cpsp, most book designers specify the amount of letterspacing for caps & small caps, and it is hardly every the amount you build in with cpsp. c2sc is nice, but there is 10+ years of authors & editors putting (eventual) small caps in the lower case due to the Type-1 font structures. Yes, it makes the downstream document harder to prepare, but you know history.\n\nI’ll take a look at titl, though.\n\nThe cpsp code reminds me of a funny story. Sumner Stone, trying to save the ignorant from themselves, built in a rather generous right sidebearing with the small caps in a font (Type 1). The small caps set by themselves did look pretty good. But when you had Cap-small caps, things went to hell in a hurry — the letter following a cap was tighter to it than to the following letter. Punctuation also was a problem — which would include abbreviations that used the period (e.g., B.C.).\n\nMoral: you can’t save the ignorant from themselves, and for the moment anyway, there is still a bit of use for compositors.\n\nThanks to all\n\n"
+    },
+    {
+      "time": " 22.Feb.2007 5.31am",
+      "content": "Adam,  \nA month or more ago, when I first joined the opentype list, I made a post to it in support of your stylistic set naming scheme. Did it ever show up? I never saw it but since I was new to the list, I thought itmay have been posted before I got my first Sunday night group post.\n\nIf it didn’t make it. I will post to it again.\n\nChrisL\n\n"
+    }
+  ]
+}

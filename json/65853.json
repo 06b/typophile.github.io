@@ -1,0 +1,78 @@
+{
+  "id": "65853",
+  "title": "Mysterious Lines over Glyphs",
+  "forum": "Build",
+  "tags": [
+    "fontlab",
+    "glyph",
+    "lines",
+    "mysterious",
+    "Build"
+  ],
+  "content": "I'm currently working on a font and I've found an issue which baffles me, shown here: [http://members.optusnet.com.au/d-esign/misc/brushy\\_glitch.png](http://web.archive.org/web/20131011150553/http:/members.optusnet.com.au/d-esign/misc/brushy_glitch.png). As you can see there are these out of place lines over the \"u\" and \"y\" glyphs, and they're not the only affected glyphs. The issue crops up in Photoshop when the font is displayed at small sizes or has anti-aliasing off. What's weird is that the lines don't actually exist on the vectors, FontLab renders them appropriately and there's nothing suspect on the offending glyphs which sets them appart from the others that render properly.\n\nHelp would be much appreciated.\n\nThanks,  \nDomenico.\n\n",
+  "author": "Domenico",
+  "time": "2 Jan 2010 — 11:45pm",
+  "uid": "51646",
+  "comments": [
+    {
+      "time": "3 Jan 2010 — 7:39am",
+      "content": "I suspect that you never disabled automatic glyph hinting and that Photoshop does not like whatever hints FontLab came up with. Try deleting all of the hints in the fonts and turn off the automatic hinting options in Fontlab preferences, then generate a new font.\n\n"
+    },
+    {
+      "time": "3 Jan 2010 — 11:35am",
+      "content": "It has nothing to do with hinting. It is poor node placement as caused by auto tracing. turn on the font audit too in fontlab and get rid of all of the bad and excessive nodes.\n\n"
+    },
+    {
+      "time": "3 Jan 2010 — 12:12pm",
+      "content": "Yeah, there must be some bad vector paths there. Sometimes insanely sharp angles in the outline can cause those sorts of rendering artifacts.\n\nT\n\n"
+    },
+    {
+      "time": "3 Jan 2010 — 3:52pm",
+      "content": "Thank you all for the replies.\n\n@ James: I disabled automatic glyph hinting and generated an OT PostScript font to no avail.\n\n@ Richard: Illustrator does create some poorly placed and voluminous amounts of nodes but it's the only way to achieve the desired brush effect. FontAudit was unable to find any problems.\n\n@ Thomas: The paths are a little awkward but nothing like this has cropped up in my past experiences with more complicated paths.\n\nI found that saving the font as OT TrueType solves the problem, irregardless of whether auto hinting was set on or off [http://members.optusnet.com.au/d-esign/misc/brushy\\_glitch\\_2.png](http://web.archive.org/web/20131011150553/http:/members.optusnet.com.au/d-esign/misc/brushy_glitch_2.png). Because my technical knowledge is a little bleak and you're the experts, what fixed the problem by changing formats?\n\n"
+    },
+    {
+      "time": "4 Jan 2010 — 4:12am",
+      "content": "\\> saving the font as OT TrueType solves the problem\n\nsounds like a \"quick and dirty\" solution to me. Maybe you can find the problem nodes examining the glyphs manually. BTW the spacing between h and y is too tight. Andreas\n\n"
+    },
+    {
+      "time": "4 Jan 2010 — 5:25am",
+      "content": "\"sounds like a “quick and dirty” solution to me\"  \nI know that's why I'm hoping someone can impart what saving as TrueType may have done differently.\n\nDon't worry I'm still looking at the nodes, although I don't know what I'm looking for; as I mentioned above \"there’s nothing suspect on the offending glyphs which sets them appart from the others that render properly\".\n\nThank you for the pick-up on the spacing, although the font is far from completion; I still need to create more glyphs, and metrics and kerning won't be touched until I can definitively find what's wrong.\n\n"
+    },
+    {
+      "time": "4 Jan 2010 — 7:23am",
+      "content": "In FontLab goto \"Generating OpenType PS (otf) and uncheck \"use subroutines to compess outlines in the CFF table\". Helped me a lot when having big fontfiles.\n\ngood luck,  \nMicha\n\n"
+    },
+    {
+      "time": "4 Jan 2010 — 8:29pm",
+      "content": "Thanks Micha, I gave your solution a try but still no change when generating a PostScript file [http://members.optusnet.com.au/d-esign/misc/brushy\\_screenshot.png](http://web.archive.org/web/20131011150553/http:/members.optusnet.com.au/d-esign/misc/brushy_screenshot.png).\n\n"
+    },
+    {
+      "time": "5 Jan 2010 — 4:44am",
+      "content": "that's funny....  \ncould it be that the old fontfile is still in the fontcache?? And is the new fontfile much bigger than the old one??? Should be about 2 times the size of the original.\n\n"
+    },
+    {
+      "time": "5 Jan 2010 — 5:27am",
+      "content": "Since you still don't believe Thomas or myself with our advice, you can send the file to me and for $100 per glyph (donated to charity) I will fix each one for you.\n\n"
+    },
+    {
+      "time": "5 Jan 2010 — 7:12am",
+      "content": "Richard. I have had similar experiences with a 3000+ glyph font. Funny things like disappearing glyphs and for example an 'à' without the hole, but a perfect 'a'. I don't know if there is a maximum OTF-fontsize, but in CS applications there seems to be a maximum fontsize when you use subroutines to compress the outlines (with FontLab). The problem described above didn't occur in Quark and also didn't happen when I made the font into an OpenType TT.\n\n"
+    },
+    {
+      "time": "5 Jan 2010 — 5:01pm",
+      "content": "Although I suppose anything is possible, I would be very surprised if subroutinization was responsible for the rendering issues seen in the original post.\n\nI wasn't saying the \\*complexity\\* of the paths was a problem, but having an extremely acute angle in the outline can definitely create the kinds of \"spikes\" you are seeing in that screen shot. I remember the first time I saw what looks to me like the same problem, during development of Chameleon fonts for PostScript 3 printer ROMs....\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "5 Jan 2010 — 5:32pm",
+      "content": "@ Micha: When it comes to re-installing fonts I always make sure to delete the installed files, restart the system (if necessary, when some files don't delete) and install. I also tried the OTF font without subroutines on an Windows XP system that has never seen the file before and still the same issue [http://members.optusnet.com.au/d-esign/misc/brushy\\_screenshot\\_2.png](http://web.archive.org/web/20131011150553/http:/members.optusnet.com.au/d-esign/misc/brushy_screenshot_2.png).  \nThe OTF font file without subroutines is 164KB and the OTF font file with subroutines is 152KB.\n\n@ Richard: You're hilarious.  \nI'll give you one glyph for $0 and you can fix it without removing detail from it. I'll keep the $100 to buy a pretty badge for my Typophile avatar.  \nOK jokes aside, I'm reluctant to remove nodes because I don't want to sacrifice detail and because the font as is, shows no artefacts when saved in TrueType. Because you insist, I'll pick at the glyphs and see how much needs to be changed to get it rendering properly, if there's too much detail lost I'll move on or stick with the (as Andreas put it) \"quick and dirty\" TrueType solution.\n\n@ Thomas: Subroutinisation isn't the problem as the lines still crop up irregardless of whether the outlines are non-compressed or compressed as shown in the screenshots. I'll be on a particular lookout for sharp angles.\n\n@ All: Thanks for the help, it's much appreciated.\n\n"
+    },
+    {
+      "time": "6 Jan 2010 — 12:44am",
+      "content": "I've been chipping away at the glyphs and the results are quite pleasing with minimal effect on detail [http://members.optusnet.com.au/d-esign/misc/brushy\\_lines.png](http://web.archive.org/web/20131011150553/http:/members.optusnet.com.au/d-esign/misc/brushy_lines.png) (What a relief; I won't have to pay Richard $230,000 to fix my glyphs).  \nA key to the above linked image: The red dots represent clearly shown lines, yellow dots represent hidden lines which come up when the font size is reduced or when a block of text is in edit mode and the green dots represent resolved glyphs.\n\n"
+    },
+    {
+      "time": "7 Jan 2010 — 10:41pm",
+      "content": "The spikes showing up only at certain ppem sizes or ranges is another identifying characteristic of the issue Richard Kegler and I were writing about... I will be somewhat surprised if that is not the cause of the problem.\n\nCheers,\n\nT\n\n"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "67739",
+  "title": "Using Unregistered Opentype Features",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I've run into a bit of a feature-ordering dilemma, where two features can't be consistently ordered to produce the desired results. I'd thought of a rather ad-hoc hack to solve this, but was wondering whether this might potentially cause problems.\n\nWhat I'd thought of doing was something along the lines of the following, where a 'dummy' feature is declared simply as a placeholder for a lookup:\n\n` feature QRXC { # dummy feature`\n\n&nbsp;&nbsp;&nbsp;lookup X {  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# do X  \n&nbsp;&nbsp;&nbsp;} X;\n\n} QRXC;\n\nfeature ss01 {  \n&nbsp;&nbsp;&nbsp;# do Y  \n} ss01;\n\nfeature ss02 {\n\n&nbsp;&nbsp;&nbsp;lookup X;  \n&nbsp;&nbsp;# do Z\n\n} ss02;\n\nThis would force the relevant lookups to be ordered such that feature 'ss02' would be able to do some stuff both before and after feature 'ss01' is applied. Feature 'QRXC' presumably would never be activated on its own since 'QRXC' isn't a registered feature and presumably therefore no application will be aware of it.\n\nHas anyone ever made use of this approach? Are there potential problems which might arise from using 'dummy' features (apart from the obvious problem that someone might someday register such a feature)?\n\nAndré\n\n",
+  "author": "<a href=\"/web/20100226141641/http://www.typophile.com/user/31798\" title=\"View user profile.\">agisaak</a>",
+  "time": "<br>",
+  "uid": "31798",
+  "comments": [
+    {
+      "time": "",
+      "content": "Why not use a tool like VOLT that allows you to order lookups independently of features? This is how the GSUB and GPOS table architecture is actually arranged, so tools that force you to order features discreetly are putting a limitation on OpenType fonts that are not part of the format.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'm on a Mac, so VOLT isn't really an option (I tried to get it to run once under Darwine (a Mac version of wine), but without success). I'm aware that I can do this if I compile my features directly under the most recent AFDKO, but I'm more comfortable working within FontLab. As I said, the solution above is a cheap hack -- it works, but it results in a superfluous feature hanging around inside the font.\n\nAndré\n\n"
+    },
+    {
+      "time": "",
+      "content": ".\n\n"
+    }
+  ]
+}

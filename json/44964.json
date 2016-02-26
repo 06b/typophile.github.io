@@ -1,0 +1,30 @@
+{
+  "id": "44964",
+  "title": "Clever way to make a font with only uppercase letters?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "When generating an OpenType font that only contains uppercase letters, is there some clever trick to avoid redundant information/data?\n\n1) If one makes the font without glyphs in the lowercase slots, the user will get “missing glyphs” when typing without Caps Lock on - not good.\n\n2) If one copies the uppercase glyphs to the lowercase slots, one have to take care to make the kerning work between the sets - effectively doubling the outline data and quadrupling the kerning data. I don’t like this redundancy and would prefer to avoid it. But as I use class-kerning anyway this is probably the solution I’ll end up using...\n\n3) One could use the uppercase glyphs as composites in the lowercase slots, but this may perhaps create problems (I don’t think I’ve ever encountered a font with composites in the basic ASCII set - so I guess this is not good...). This would still need 4 times the kerning pairs, but at least the outline data will not be double.\n\n4) In OpenType one could use glyph substitution to map all lowercase input to the uppercase letters. This would still require the lowercase glyphs to be present, but they could just be empty. But what OpenType feature should then be used to make this switch? - it would have to be always-on...\n\nSo... have anyone found a clever way to make an uppercase-only OpenType font?  \nWhat is your preferred method?\n\n [‹ Fontlab question-what makes the red guides appear in the metrics window?](http://web.archive.org/web/20080709015832/http:/www.typophile.com/node/44970 \"Go to previous forum topic\") [Line End Cursor Position ›](http://web.archive.org/web/20080709015832/http:/www.typophile.com/node/44885 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080709015832/http://www.typophile.com/user/27336\" title=\"View user profile.\">Roger S. Nelsson</a>",
+  "time": "<br>",
+  "uid": "27336",
+  "comments": [
+    {
+      "time": " 4.May.2008 10.22am",
+      "content": "5) You can assign more than one Unicode point to a glyph. The code field for “B” would show “0062 0042”. I’m not sure if there are any problems inherent in the fact that it can have only one glyph name.\n\n"
+    },
+    {
+      "time": " 4.May.2008 12.24pm",
+      "content": "#2/#3 are the most sensible solutions, considering platform and user frailties. There is no restriction on composites in the ASCII set.\n\n"
+    },
+    {
+      "time": " 4.May.2008 5.31pm",
+      "content": "Undurprisingly, I agree with Josh. A few more detailed comments.\n\n2) If you use class kerning, there’s zero increase in the amount of kerning data, so I don’t understand the concern. The “kerning pairs” are purely virtual.\n\n3) Composites is a fine idea for OT-TT. For OT-CFF, if the font is built with subroutinization, the duplicate glyphs will add next to nothing to the total size, and you don’t need even need to use composites (though it might help you keep things straight during development).\n\n4) That’s a pretty weird choice. And in general, OT features should not map from one character to a different one.\n\n5) You can assign more than one Unicode point to a glyph, but this has some unfortunate side effects for backtracing Unicode codepoints from glyphs. Given (3), this would seem unnecessary.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": " 5.May.2008 8.01am",
+      "content": "Thanks for the extra suggestion and comments. Much appreciated.  \nAnd if not even Adobes own font expert knows of a special clever way to make uppercase-only fonts, then probably no-one does. ;)\n\nAs I thought: I’ll make, kern and space the uppercase, and then copy them to the lowercase slots before adding the diacritics as composites - using class-kerning based on the kerning of the uppercase glyphs. This will leave \\_some\\_ “redundant” data, but is probably the best option compatibility- and encoding-wise... Better to make a normal, working font, than risk trouble by being “clever”. :)\n\nRoger\n\n"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "19552",
+  "title": "AFM's...",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "It appears that AFM files only hold the kerning information, and not the character spacing metrics… So the PFB stores the outline and spacing info — can anyone confirm this?\n\n",
+  "author": "<a href=\"user/2193\" title=\"View user profile.\">dux</a>",
+  "time": "<br>",
+  "uid": "2193",
+  "comments": [
+    {
+      "time": " 27 April, 2006 - 10:58am",
+      "content": "How did you find it out ?\n\n"
+    },
+    {
+      "time": " 27 April, 2006 - 11:17am",
+      "content": "I’d always assumed it was just kerning pair info.\n\n"
+    },
+    {
+      "time": " 27 April, 2006 - 2:13pm",
+      "content": "A bit more than that. Just have a look into any AFM.\n\n(a)&nbsp;&nbsp;In the header there are things like font names, italic angle, underline position and thickness, vertical dimensions, bounding box, &c. [All that you would determine in the FontInfo dialog.]  \n(b)&nbsp;&nbsp;Then, name and metrics for every glyph. Metrics are given as total width of glyph (including side bearings), and then: glyph’s outer left point, glyph’s outer bottom point, glyph’s outer right point, glyph’s outer top point — measured from character origin. [An effect of this: When copying metrics from font to font via AFM in Fontographer or FontLab, if both fonts’ glyphs had different total widths, then the right side bearing was messed up. Because FOG and FL were just copying each glyph’s total width and left side bearing.]  \n(c)&nbsp;&nbsp;Finally, kerning information.\n\nSo an AFM contains almost a complete font — except glyphs’ outline descriptions and hints.\n\n"
+    }
+  ]
+}

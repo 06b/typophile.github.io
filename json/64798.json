@@ -1,0 +1,50 @@
+{
+  "id": "64798",
+  "title": "Script to use old style figures in non-OpenType fonts?",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "Is there some way to easily use old style figures in non-OpenType fonts that support small caps and old style figures without having to format the number individually?\n\nThis can be very time consuming in text that has a lot of numbers.\n\nAny suggestions for a quick formatting approach would be appreciated . . . is there some kind of script out there?\n\nDavid\n\n",
+  "author": "<a href=\"/web/20100131105118/http://typophile.com/user/50678\" title=\"View user profile.\">David R. Fideler</a>",
+  "time": "<br>",
+  "uid": "50678",
+  "comments": [
+    {
+      "time": "",
+      "content": "There are quite a few faces that have non-OpenType versions with both lining and oldstyle figures, in separate fonts--especially FontFonts.\n\nI've published a few typefaces, prior to OpenType, where the default is oldstyle figures e.g. [Bodoni Egyptian](http://web.archive.org/web/20100131105118/http:/www.shinntype.com/bodoni.html), [Paradigm](http://web.archive.org/web/20100131105118/http:/www.shinntype.com/paradigm.html), [Preface](http://web.archive.org/web/20100131105118/http:/www.shinntype.com/preface.html).\n\nThere are also many OpenType fonts that have oldstyle figures as the default.\n\n"
+    },
+    {
+      "time": "",
+      "content": "What kind of program(s) are you using to set the text?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Nick, many thanks for the response.\n\nIt's easy to use oldstyle figures in OpenType fonts, because you can turn the setting on for an entire chapter of a book. But if I wanted to use oldstyle figures in an non-OpenType font with both lining and oldstyle figures in separate fonts, is there an efficient way to convert the lining figures to oldstyle figures without having to individually format each number?\n\nThat actually was my question, but I may not have stated it clearly.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'm using InDesign and create a lot of books.\n\n"
+    },
+    {
+      "time": "",
+      "content": "What I'm referring to is U&lc fonts where the ONLY difference is that one has old style figures as the default, and the other has lining figures. So, a different beast than the \"SC + OSF\" font.\n\nBut even if you are using \"U&lc + LF\" and you want to convert the figures to those in the SC+OSF font, you could use \"find/replace\" (if your app has a change-font component in that search feature.\n\n"
+    },
+    {
+      "time": "",
+      "content": "If your version of InDesign happens to be the latest -- CS4 -- you can simply use a GREP style to toggle a font for digits only.\n\nIn short: create a _character style_, only defining the font for the alternate digits; then, in the appropriate paragraph styles, create a new GREP style. Coincidentally, these are predefined with \"\\d\" -- i.e., \"all digits\" -- so all you have to do is set the character style.\n\nAnd for older versions of ID, I'd suggest creating a character style and simply use search-and-replace to find all digits -- use \"^9\" as search code -- and replace with no text, and in formatting: your character style.\n\nNote that _both_ options heavily rely on the fact that the digits should have the regular character codes (as you are only changing the font). If you have a font with both lining and oldstyle digits, you cannot use this trick and have to manually replace each digit one by one.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Another option is to have someone (or ask the foundry) to generate a custom version of the font for you with the oldstyle figures in the U&lc font. I used to do this for some of my book work -- after either ascertaining that the standard EULA allows such modifications (i.e. Adobe fonts) or contacting the foundry for permission to do so.\n\nIt was precisely this frustrating experience that led me to develop Whitman with two different figure style fonts and convince FB to release it that way. (This was prior to OpenType.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for the suggestions everyone. I'm using InDesign CS3 and will try the ^9 replacement shortcut.\n\nI use Macs, and was wondering if I could use a program like this to convert typefaces with separate sc/oldstyle figure fonts into a singe OpenType font that would allow me to quickly select oldstyle figures for an entire document?:\n\n[http://www.fontlab.com/font-converter/transtype/](http://web.archive.org/web/20100131105118/http:/www.fontlab.com/font-converter/transtype/ \"http://www.fontlab.com/font-converter/transtype/\")\n\nIf so, it would be worth the cost to me.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I doubt that TransType will automatically combine two separate fonts into a single OT font and write the appropriate OTL features for accessing SC and OsF through the relevant InDD commands.\n\nSomeone with more experience will have to tell us whether it provides tools for doing so manually.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "id": "44316",
+  "title": "OT Font Naming",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m currently having trouble with a OpenType family of six weights (ExtraLight, Light, Regular, Medium, SemiBold, Bold) where I’ve tried different naming options (AT’s MSN Forum naming guide) yet no matter what changes I make the sub-menu omits Light and Medium styles. (I’ve never had problems with up to three styles it’s the six that is troubling)\n\nEverything looks good and consistent with the naming and all the styles show up under one family in Font Explorer… any ideas of what could be the problem?\n\nMike\n\n [‹ FontLab's blinkenlights](http://web.archive.org/web/20080706173049/http:/www.typophile.com/node/44464 \"Go to previous forum topic\") [Non-Extractable Outlines in PDF ›](http://web.archive.org/web/20080706173049/http:/www.typophile.com/node/44411 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080706173049/http://www.typophile.com/user/17099\" title=\"View user profile.\">Mike Jarboe</a>",
+  "time": "<br>",
+  "uid": "17099",
+  "comments": [
+    {
+      "time": " 16.Apr.2008 1.20pm",
+      "content": "\\> _the sub-menu omits Light and Medium styles._\n\nWhich sub-menu is this? Which application?\n\n"
+    },
+    {
+      "time": " 16.Apr.2008 4.13pm",
+      "content": "CS apps Illustrator and InDesign v CS3 I’ve been trying different variations (going over font naming guides) for awhile now and still somehow stuck with Light and Medium not showing up, yet they show as a group in Font Explorer…\n\n"
+    },
+    {
+      "time": " 16.Apr.2008 6.43pm",
+      "content": "Miraculously after working all day between the Learn Fontlab Fast, Adam Twardoch’s MSN Group Naming Thread, and Karsten’s Font naming pdf (All which have slightly different methods to this mysterious process — and having no prior problems with font families less than six styles) I’ve managed to export my OpenType font family and have it preview with all but the ’Light’ weight missing in the sub-menu (CS).\n\nI’m to the point I’d be willing to pay and/or hire someone briefly to look at my .vfb files of all six styles to give me some insight into what might be wrong with the current naming conventions I’m using.\n\nI’m curious as to what the magic key is to successfully generate a PS OpenType font family consisting of six styles is. (And have them ALL actually show up in the sub-menu)\n\nI apologize for my lack of expertise with this, it is a problem I just ran into recently and due to the constrains of time and my focus on creative work I haven’t had the opportunity to focus as much on coding or software engineering literature in order to increase my competence in some of the advanced subject’s within Fontlab. (Such as simply trying to name a font family of six styles and have it actually work).\n\n"
+    },
+    {
+      "time": " 16.Apr.2008 7.44pm",
+      "content": "Infuriating, isn’t it? This topic is probably one of the more challenging things facing font developers, apart from the actual design part. I would say, “something needs to be done” but I fear that might result in another half-dozen name table fields that need to get added to fonts.\n\nAnyway: I’m not sure if you’ve seen Thomas Phinney’s bit on this which includes some screen captures for FontLab settings: [http://blogs.adobe.com/typblography/typotechnica2007/Font%20names.pdf](http://web.archive.org/web/20080706173049/http:/blogs.adobe.com/typblography/typotechnica2007/Font%20names.pdf \"http://blogs.adobe.com/typblography/typotechnica2007/Font%20names.pdf\") ... it might help but don’t be surprised if there are still some oddities in some application somewhere.\n\nAlso: under Mac OS X you may find it helpful to delete your font caches and reboot. In fact that may be the problem, especially if you’ve been installing and uninstalling your fonts as you work on them. The FontNuke app at [http://www.jamapi.com/](http://web.archive.org/web/20080706173049/http:/www.jamapi.com/ \"http://www.jamapi.com/\") is useful for this.\n\nGood luck.\n\n"
+    },
+    {
+      "time": " 16.Apr.2008 8.35pm",
+      "content": "Joshua,\n\nThanks for the heads up, I just tried FontNuke, restarted and now all six styles show up properly. Up until now I had always relied on Font Explorer’s ’Clean application font caches…’ to quickly make changes/edits and re-install a freshly ’generated’ type family.\n\nNow it makes me wonder how many times I had the font naming conventions correct earlier only to have it possibly be a cache issue?\n\nThis is an interesting topic, if anyone has any insight into these issues, and or their own process for naming-testing-clearing-reinstalling let us know.\n\nThanks…\n\n"
+    },
+    {
+      "time": " 16.Apr.2008 11.30pm",
+      "content": "Glad to hear that you seem to have it sorted out. We use (and recommend) Font Nuke quite a bit.\n\nMy only advice is to test on as many platforms and in as many applications as you possibly can. The ones you don’t test in are always the ones where it doesn’t work :-)\n\n"
+    },
+    {
+      "time": " 17.Apr.2008 5.20pm",
+      "content": "\\> _I’m curious as to what the magic key is to successfully generate a PS OpenType font family consisting of six styles is. (And have them ALL actually show up in the sub-menu)_\n\nThe magic is, **use the AFDKO !** At this point I probably sound like a broken record, but I still haven’t seen a tool that does the [Font Naming](http://web.archive.org/web/20080706173049/http:/www.typophile.com/wiki/Font%252BNaming) correct and effortlessly like the [AFDKO](http://web.archive.org/web/20080706173049/http:/www.typophile.com/wiki/AFDKO) does. And if you find this hard to believe, ask the [Type & Media](http://web.archive.org/web/20080706173049/http:/www.typophile.com/wiki/Education) or the [Reading](http://web.archive.org/web/20080706173049/http:/www.typophile.com/wiki/Education) students. I was over there a couple of months ago giving a workshop on how to use the AFDKO tools, and we probably spent like 10 minutes(!!) setting up the naming. And half of that time was actually just typing.\n\nAre you planning to attend [TypeCon](http://web.archive.org/web/20080706173049/http:/www.typophile.com/wiki/TypeCon) this year? I’m going to give a full-day workshop there about using some of the AFDKO tools.\n\n\\> _This topic is probably one of the more challenging things facing font developers_\n\nI completely agree. Getting the ’name’ table right is not an easy task. Fortunately there are (free) tools out there that simplify the whole process. Have I mentioned the [AFDKO](http://web.archive.org/web/20080706173049/http:/www.typophile.com/wiki/AFDKO)? :) I just don’t understand why FontLab hasn’t taken advantage of this yet...\n\n"
+    },
+    {
+      "time": " 17.Apr.2008 11.26pm",
+      "content": "Miguel,\n\nCould you give some quick pointers here how AFDKO is used in the naming process ?\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 2.11am",
+      "content": "Read here [http://www.typophile.com/node/15485#comment-193430](http://web.archive.org/web/20080706173049/http:/www.typophile.com/node/15485#comment-193430 \"http://www.typophile.com/node/15485#comment-193430\")\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 2.56am",
+      "content": "Miguel,\n\nI’ve just sorted out my naming (I think) - PC Word was the problem.\n\nMakeOTF looks great, could you point me in the direction of documentation for MakeOTF. I have AFDKO Installed and I’m comfortable(ish) using command line stuff.\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 4.05am",
+      "content": "A nice MakeOTF manual should be on your HD already, being part of the AFDKO download. I think it gives very detailed information.&nbsp;&nbsp;;-)\n\nRegarding Miguel’s link to his post in the other thread:  \nTo understand the relation of MakeOTF’s FontMenuNameDB to FLS5’s naming interface, just bear in mind that MakeOTF’s “FamilyName”/”StyleName” roughly matches FLS5’s “OT Family Name”/”OT Style Name” (“long family” in Adam Twardoch’s naming how-to), while MakeOTF’s “WindowsCompatibleMenuName” matches FLS5’s “Family Name” (“short family”).  \nThis equation is not absolutely true, but may help get the idea.\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 4.44am",
+      "content": "Speaking of naming, what do you people think of Fontshop’s naming routines where every font in a family (unless in OT-compatible-menues) are treated as they were their own typeface?\n\nLike this (I opened up Meta in FontLab)\n\n ![](http://web.archive.org/web/20080706173049im_/http:/www.typophile.com/files/meta1_4493.png)\n\n ![](http://web.archive.org/web/20080706173049im_/http:/www.typophile.com/files/meta2_5673.png)\n  \nIsn’t that a good way of making cross platform compatible fonts, that never mess things up?\n"
+    },
+    {
+      "time": " 18.Apr.2008 5.53am",
+      "content": "With my limited experience I think it’s horses for courses. The different naming systems will have different pros and cons. I’m not 100% but I think in some apps the fontshop way of naming the fonts will mean they won’t appear in alphabetical order and the fonts will appear down the bottom of the list\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 10.03am",
+      "content": "This is such an interesting topic, being that there are numerous font output formats, naming conventions, and each foundry and designer having their own method’s… it makes this topic very complex. Not to mention the different applications for font generation, platforms, software makers and applications for using fonts. The variables are endless… Thanks for the feedback.\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 10.13am",
+      "content": "Miguel… thanks, I’m going to look into AFDKO, looks pretty simple and if that’s how Adobe does it…&nbsp;how does AFDKO effect what would already be in your Fontlab files in the naming info sections if they are already filled out? And what about the weight input such as Regular - 400, and in situations where you need to manually correct ExtraLight, to make it 250 instead of 200?\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 12.51pm",
+      "content": "It would be nice if Fontlab had a way to ’lift up the hood’ so to speak… similar to the way in OpenType Features before font ’generation’ you can manually go in and make any changes, it would be nice to be able to go into the code for the naming and look over it manually (if it would be displayed similar to the AFDKO code looks) and make any changes.\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 1.02pm",
+      "content": "Shortly after Adobe upgraded the old FDK to ADFKO, FontLab said they were going to incorporate much of it in a future release. I think that was 2 years ago? I think the future is now and I wish FontLab would do it already. Yuri made some hints about a future release coming here on Typophile a month or so ago but not a peep has been heard since. I wish he or Adam would come forward with what is in the offing.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 1.18pm",
+      "content": "\\> _Like this (I opened up Meta in FontLab)_\n\nDon’t trust in everything you see on those two panes. When opening a non-VFB font, FontLab fills in some fields with values that were not present in the font. If you want to analyze the contents of the ’name’ table, you should look at the 3rd pane (Additional OpenType names/Non-English or special font names: [name] table), or use tools like ttx, tx, spot, all available in the AFDKO.\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 1.27pm",
+      "content": "Ok, I thought that fields was to be trusted.\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 1.49pm",
+      "content": "\\> _how does AFDKO effect what would already be in your Fontlab files in the naming info sections if they are already filled out?_\n\nThe workflow we use for generating the OTFs (described here [Font Production at Adobe](http://web.archive.org/web/20080706173049/http:/blogs.adobe.com/typblography/typotechnica2007/TypoTechnica2007_FontProduction_at_Adobe.pdf)) involves generating a Type 1 font (.pfa) from the VFB. That font will only contain certain values from the fields on FontLab’s Font Info panes. In terms of naming, you just need to worry about these fields: Family Name, Weight, PS Font Name and Full Name. These need to match the information you put on the FontMenuNameDB file. This file is used for building the ’name’ table, whereas the names you type in FontLab go into the ’CFF ’ table.\n\nThere’s other Font Info data that goes into the Type 1 font, like the Copyright, the Notice, the Version number, the Italic angle, the Hinting, etc., but these don’t affect the naming.\n\n\\> _And what about the weight input such as Regular - 400, and in situations where you need to manually correct ExtraLight, to make it 250 instead of 200?_\n\nThose values don’t end up in the Type 1 font. That data is put in the ’features’ file, in the form of a table declaration,  \n`\ntable OS/2 {\n   CapHeight 650;\n   XHeight 440;\n   TypoAscender 709;\t# top of ascenders\n   TypoDescender -291;\t# TypoAscender-UPM\n   TypoLineGap 200;\t# 20% of UPM\n   WeightClass 400;\t# Normal (Regular)\n   WidthClass 5; # Medium (Normal)\n   Vendor \"ADBE\";\n   FSType 8; # Editable embedding\n   Panose 2 4 5 3 5 2 1 2 2 3;\n} OS/2;\n`\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 1.51pm",
+      "content": "Miguel,\n\nShould the Additional OpenType names panel always be filled in. I think like Goran I have been opening fonts in FL to try and work out there naming and noticed that panel empty.  \nIf you say FL fills in values that are not present in the font, does it also leave the Additional OpenType names panel empty when in the original VFB for that font it would have been completed.\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 2.02pm",
+      "content": "I just check myself and FL does leave the Additional OpenType names panel empty when opening a font, but the original VFB that created the font had the panel completed.\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 2.08pm",
+      "content": "It depends on the Preferences you have set for opening and/or generating OpenType fonts.\n\n ![](http://web.archive.org/web/20080706173049im_/http:/www.typophile.com/files/OT_open_5889.png)\n\n ![](http://web.archive.org/web/20080706173049im_/http:/www.typophile.com/files/OT_generate_6628.png)\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 4.40pm",
+      "content": "Can someone explain how to ’Run the FinishInstallOSX command file on MacOSX’… I’m confused as to what exactly I’m supposed to do when ’running scripts’, if I can figure this out I think I can move forward… or maybe not, this is some crazy programming stuff that doesn’t make much sense at all, I would just like it to create the naming as that is pretty straightforward.\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 4.53pm",
+      "content": "What does everyone think of Fontshop’s naming that Goran mentioned? I just tried it and it worked well… I did notice that the order of the sub-menu was slightly different than what I am used to.\n\nThe order being:\n\nMedium  \nLight  \nExtraLight  \nRegular  \nSemiBold  \nBold\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 4.56pm",
+      "content": "It’s interesting also that a program as simple as TextEdit (OS X) lists the styles in the actual weight order:\n\nExtraLight  \nLight  \nRegular  \nMedium  \nSemiBold  \nBold\n\nI give TextEdit a thumbs-up!\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 6.26pm",
+      "content": "\\> _Can someone explain how to ’Run the FinishInstallOSX command file on MacOSX’…_\n\nHave you tried following the instructions at [http://typophile.com/node/20078](http://web.archive.org/web/20080706173049/http:/typophile.com/node/20078 \"http://typophile.com/node/20078\") ?\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 6.30pm",
+      "content": "\\> _I did notice that the order of the sub-menu was slightly different than what I am used to._\n\nIs this on CS3 apps again? If so, the the Weight values in the fonts might not be quite right.\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 6.40pm",
+      "content": "\\> _this is some crazy programming stuff that doesn’t make much sense at all_\n\nI agree that if you saw someone doing it at least once, everything would be a lot simpler and easier to understand. Perhaps I should really consider making videocasts of the different steps: Installing the AFDKO, Making the First Font, Naming the Family, ...\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 8.31pm",
+      "content": "_Have you tried following the instructions at [http://typophile.com/node/20078](http://web.archive.org/web/20080706173049/http:/typophile.com/node/20078 \"http://typophile.com/node/20078\") ?_\n\nYes, but I get kind of lost within the terminal application, it’s bizarre to be working with an application that is a text window running commands. If I saw a live example I think I would have a better understanding and the ability to get through it.\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 8.34pm",
+      "content": "_I agree that if you saw someone doing it at least once, everything would be a lot simpler and easier to understand. Perhaps I should really consider making videocasts of the different steps: Installing the AFDKO, Making the First Font, Naming the Family, ..._\n\nYes, that would be great, I briefly had that thought when I was looking at how complex AFDKO seems to be (coming from the more creative side of things as opposed to programming). Making it to TypeCon would be great but a videocast would be really helpful in the meantime. Thanks Miguel…\n\n"
+    },
+    {
+      "time": " 18.Apr.2008 8.45pm",
+      "content": "_Is this on CS3 apps again? If so, the the Weight values in the fonts might not be quite right._\n\nYes, it is on CS3 apps, although I’m positive the weight values are correct, in a descending order from lightest to heaviest as I’m very careful with these details after having gone over and over them.\n\nWhat is interesting, is, shortly after trying the Fontshop naming convention, I went back in for further testing and re-named all styles similar to (A Twardoch’s naming how-to and kl’s), yet I eliminated the ’Menu Name’, ’FOND Name’, and on the next page, ’Mac Name’ was left blank as well.\n\nI then re-generated the ’Additional OpenType Name’ panel for each and the generated font family worked excellent, with the sub-menu styles in order from lightest to heaviest (and all styles showing up in the sub-menu correctly).\n\nIn a way, I’ve come full circle with this issue, coming to understand what fields are most important and what role they play. As of now, I plan to sticking to the convention I just mentioned as it seems to work best, and it splits the 6 styles into 2 sub families for MS.  \nThe ExtraLight and Light styles have the ’Family Name’ of Myfont Lt and the other four weights the family name of Myfont Rg and every other field is consistent within this family.\n\n"
+    },
+    {
+      "time": " 19.Apr.2008 3.33am",
+      "content": "Don’t get carried away on “the” FontShop naming convention. Naming conventions are always evolving, and Meta OT is quite old and an easy case namewise, because none of the strings needs to be shortened in order to meet some character count limits in the name records.\n\n"
+    },
+    {
+      "time": " 19.Apr.2008 3.45am",
+      "content": "OK, but are not almost all FontFonts (even the older postscript versions) considered more as separate fonts than as families, strictly technical that is? I remember older postscript fonts also having this approach, sometimes ending up with rather long font menues with no sub-menues at all.\n\nI kind of like this, as a matter of fact, because it force the user to actively chose the right weight manually, and by that there will be no confusion what so ever.\n\n"
+    },
+    {
+      "time": " 19.Apr.2008 6.14am",
+      "content": "Yeah, but users in Windows GDI apps will be getting faux bolds all the time.... It’s a tradeoff.\n\nT\n\n"
+    },
+    {
+      "time": " 19.Apr.2008 9.06am",
+      "content": "Message to Microsoft: The 4 unit family of fonts has far outlived its usefullness and is now a real pain in the tuchus. Don’t you think it is time for a change? Just think of the 4 font limit as MSDOS, it had its time but then you moved on.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 19.Apr.2008 10.55am",
+      "content": "Yeah, I don’t have much respect for MS or the world of PC’s, it all just seems overly complicated and non user friendly on all levels.\n\n"
+    },
+    {
+      "time": " 19.Apr.2008 11.20am",
+      "content": "MS has made great strides since Windows 3.1 in many areas. They have even made great strides in language support for OpenType but they have not done jack with that antiquated 4 number family limit on fonts.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 20.Apr.2008 5.37am",
+      "content": "Here is another recent thread on a very similar question of font naming. The emphasis here was my wanting to get rid of ’fake bolds’ generated in MS Word.  \n [http://typophile.com/node/44050](http://web.archive.org/web/20080706173049/http:/typophile.com/node/44050 \"http://typophile.com/node/44050\")\n\n"
+    },
+    {
+      "time": " 20.Apr.2008 12.28pm",
+      "content": "Actually, Microsoft _has_ changed their font menu name handling dramatically, in Windows Presentation Foundation (WPF), their new API. (They couldn’t change it in GDI without breaking existing apps.) WPF is available in Vista, and can optionally be installed on XP.\n\nNow the problem is that no major office type apps have moved to WPF. Actually, hardly any major apps of any type.\n\nMy latest version of my [font naming presentation](http://web.archive.org/web/20080706173049/http:/blogs.adobe.com/typblography/typotechnica2007/Font%20names.pdf) includes WPF info, and I’ve spoken about it at ATypI TypeTech and TypoTechnica. [MS has plenty of info](http://web.archive.org/web/20080706173049/http:/blogs.msdn.com/text/attachment/2249036.ashx) on it as well.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": " 20.Apr.2008 12.59pm",
+      "content": "Since MS also makes the most used office apps in the world, one might expect that they have a huge say in getting WPF applied in MS-Office?\n\nChrisL\n\n"
+    }
+  ]
+}

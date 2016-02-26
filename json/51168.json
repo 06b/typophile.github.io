@@ -1,0 +1,42 @@
+{
+  "id": "51168",
+  "title": "frontends/interfaces for using freetype in a web app",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "i assume that freetype2 can do a decent job of rasterizing type. but using it through the GD extension in PHP i’m not satisfied. attached is an example with too much space around the numeral 1.\n\ni’m guessing that ft2 could do better but the interface (i.e. [imagefttext()](http://web.archive.org/web/20081206132756/http:/us2.php.net/manual/en/function.imagefttext.php)) provides minimal control.\n\nwhat other freetype front-ends should i consider? command-line tools, perl/ruby scripts, php extensions etc. are fine but i’m not going to program my own front-end in C.\n\nalternatively, are there other rasterizes i should consider?\n\n| Attachment | Size |\n| --- | --- |\n| [example.gif](http://web.archive.org/web/20081206132756/http:/typophile.com/files/example.gif) | 4.18 KB |\n\n [‹ Need Help PLEASE! Understanding Opentype Fonts](http://web.archive.org/web/20081206132756/http:/typophile.com/node/51126 \"Go to previous forum topic\") [FontLab exporting issues ›](http://web.archive.org/web/20081206132756/http:/typophile.com/node/51179 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081206132756/http://typophile.com/user/35080\" title=\"View user profile.\">thefsb</a>",
+  "time": "<br>",
+  "uid": "35080",
+  "comments": [
+    {
+      "time": " 1.Nov.2008 1.10pm",
+      "content": "Are you sure that space around the numeral 1 isn’t due to the font metrics themselves? Fonts with [tabular figures](http://web.archive.org/web/20081206132756/http:/typophile.com/wiki/tabular%252Bfigures) always have more space around the 1 because the numerals are monospaced. To set text and headlines I would use a font with [proportional figures](http://web.archive.org/web/20081206132756/http:/typophile.com/wiki/proportional%252Bfigures).\n\n"
+    },
+    {
+      "time": " 1.Nov.2008 6.01pm",
+      "content": "stephen, thanks for the tip. i’m embarrassed to discover that i failed to consider this possibility when selecting type font.\n\nthis is ITC Highlander® by ITC Std Bold Italic. i just generated this sample from the linotype web site.\n\n ![](http://web.archive.org/web/20081206132756im_/http:/typophile.com/files/mls-1_5660.png)\n\nso the numerals are not exactly monospaced but the pitch of the 1s on the top row surprisingly low, lower even than that of the 2s. and the 1 at the end of the last four lines looks like the beginning of a new word.\n\ni’m really not sure what to make of this. i’ll be very disappointed if i need to scrap this choice of font.\n\n"
+    },
+    {
+      "time": " 1.Nov.2008 6.12pm",
+      "content": "I think the vast space around the ’1’s indicates that Highlander’s figures are indeed tabular, as is the case with most fonts in the ITC range. Not sure what is happening in the ’2’ and ’5’ rows.\n\nHere are two alternatives to consider that have proportional figs:\n\n[ITC Legacy Sans](http://web.archive.org/web/20081206132756/http:/www.fontshop.com/fonts/singles/itc/itc_legacy_sans_bold_italic_osf/?sample_text=Legacy%201234567890&sample_size=48)  \n [Sauna](http://web.archive.org/web/20081206132756/http:/www.fontshop.com/fonts/singles/underware/sauna_bold_italic/?sample_text=Sauna%200123456789&sample_size=48)\n\nYou’ll note that these are _oldstyle_ or text figures, which means they descend and ascend like lowercase letters. Your options of fonts with proportional _lining_ figures (numerals of the same height) will increase substantially if Freetype can take advantage of the figure options in OpenType fonts. Can it?\n\n"
+    },
+    {
+      "time": " 2.Nov.2008 5.37am",
+      "content": "hi stephen,\n\nthanks. and again, i think you’re right. concerning the odd misalignments in the sample i posted above, i’d guess the linotype.com sample renderer left aligned bounding boxes rather than the glyph origins.\n\none important application i have is radio station IDs as web page title in a banner box. surrounded by a 4-capital call sign and a 2-capital waveband, oldstyle figures for the frequency look rather odd — as though a beret or turtleneck-wearing designer might have been involved;-)\n\ni read the freetype documentation now. it loads font files, handles their info and renders glyphs. laying out a string is done by the library’s client so my original question was confused. [GD’s string renderer](http://web.archive.org/web/20081206132756/http:/www.libgd.org/Font#char_.2AgdImageStringFT.28gdImagePtr_im.2C_int_.2Abrect.2C_int_fg.2C_char_.2Afontname.2C_double_ptsize.2C_double_angle.2C_int_x.2C_int_y.2C_char_.2Astring.29_.28FUNCTION.29) accepts utf8 and html entities so i could use osf if i really wanted to.\n\nbut i think basically GD/freetype are doing what they are supposed to do given the font’s design. my obvious choices seem to be: 1) choose another font; 2) find another text layout library that allows some kind of kern tagging of the string (i looked and didn’t find); or 3) keep the font, GD and freetype and use a hack in my php script to effectively trim the bearing and advance of 1 numerals and perhaps decimal points.\n\n"
+    },
+    {
+      "time": " 2.Nov.2008 8.51am",
+      "content": "option 3) from my list above wasn’t so hard. i shaved 8% and 10% (of ptsize) off the bearing and advance (respectively) off numeral 1. and 3% and 0% from decimal point. looks ok now.\n\n ![](http://web.archive.org/web/20081206132756im_/http:/typophile.com/files/Picture_6071.png)\n\ncritique, anyone?\n\n"
+    },
+    {
+      "time": " 2.Nov.2008 8.56am",
+      "content": "Personally, I think Highlander looks a little dated in this context, but you fixed the spacing.\n\n"
+    },
+    {
+      "time": " 2.Nov.2008 11.50am",
+      "content": "looks dated to me too. my upcoming logo looks even more dated. if i could afford to hire one of these artists to design my site, i would:\n\n- [Shag](http://web.archive.org/web/20081206132756/http:/www.shag.com/index.html)\n- [Derek Art](http://web.archive.org/web/20081206132756/http:/www.derekart.com/)\n\n“There’s nothing so fashionable as nostalgia.”\n\n"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "58627",
+  "title": "Adobe FDK autohint",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I am trying to use the autohint script from the Adobe FDK (OSX). It seems to work better than the FL5 built in script and I really like the checking feedback about the outlines — however, I am not a nerd anymore (too old), so here are two really dumb questions:\n\n1. I cannot find a way to enter the metrics and standard stems info into the script. Does it come from the font itself?  \n2. I also installed the FL5 scripts in the macros directory. Is the AutoHint.py that the same script with same functionality?\n\n",
+  "author": "<a href=\"/web/20100203093802/http://typophile.com/user/40601\" title=\"View user profile.\">paragraph</a>",
+  "time": "<br>",
+  "uid": "40601",
+  "comments": [
+    {
+      "time": "",
+      "content": "1. Yes, the font needs to have those set before using the autohint tool on it.\n\n2. The FL macro won't generate flex hints. Apart from that the two are essentially the same, AFAIK.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, Miguel. So, is running the script with the -nb switch the default? Is that not strange?\n\n"
+    },
+    {
+      "time": "",
+      "content": "No, the default is to run the tool with no switches.\n\nThe autohint tool requires the font to have stem widths and alignment zones (AKA blue values). These enable the tool to do a good \"automatic hinting job\". Use the font editor to set these parameters.\n\nIf you try to ran a font without stem widths and alignment zones through the autohint, the tool will simply complain and quit. The -nb switch will prevent the tool from quitting, but the hinting result will obviously be not as good.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks very much, Miguel.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_The FL macro won’t generate flex hints._\n\nDoes the stand-alone tool generate flex hints automatically, or does this require a specific parameter to be set?\n\n"
+    },
+    {
+      "time": "",
+      "content": "What do you mean by -nb switch ?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Rachel, the switch or option is entered on the command line before the arguments:\n\nautohint -nb myfont.otf\n\nI cannot make the script run without it, although it has metrics and standard stems defined. The font I am working on has no overhangs though, so ‘blue zone’ is not defined (it's zero). Perhaps that's the culprit. Anyway, the result is very good even with the -nb switch.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I don't mean to hijack your post paragraph but does the autohint macro work the same as autohint from the terminal window ?\n\n"
+    },
+    {
+      "time": "",
+      "content": "As Miguel says above, it is not quite the same.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The autohint command-line tools will generate flex hints unless you specifically supress it with the '-nf' option.\n\nNote: it generates flex hints everywhere where they are legal. This is way too many. This does no harm, but is surprising when you look closely at the font. I will eventually fix this, but since autohint has been doing this since 1986, the priority is low.\n\n- Read\n\n"
+    }
+  ]
+}

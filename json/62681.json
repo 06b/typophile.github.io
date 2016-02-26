@@ -1,0 +1,62 @@
+{
+  "id": "62681",
+  "title": "Font Names in MS Word 2008 for Mac",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I recently upgraded to MS Word 2008 and I find that some italic versions of my font fails to be listed in the font menu. They still function via style command. Not all the italics fail to list, only the lighter weights.\n\nSo I was wondering what, if anything, has changed in this version of Word to cause this?\n\n",
+  "author": "<a href=\"/web/20100203125034/http://typophile.com/user/1947\" title=\"View user profile.\">terminaldesign</a>",
+  "time": "<br>",
+  "uid": "1947",
+  "comments": [
+    {
+      "time": "",
+      "content": "James\n\nDo you have checked the weight classes of the (linked) styles?\n\n[http://forum.fontlab.com/fontlab-studio-tips-and-tricks/font-family-nami...](http://web.archive.org/web/20100203125034/http:/forum.fontlab.com/fontlab-studio-tips-and-tricks/font-family-naming-in-fontlab-studio-5-t313.0.html;msg23823#msg23823 \"http://forum.fontlab.com/fontlab-studio-tips-and-tricks/font-family-naming-in-fontlab-studio-5-t313.0.html;msg23823#msg23823\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "My weight classes are fine. The style linking actually works in Word 2008, it just that some of the italic fonts do not appear in the font menu. When I apply the Italic style to a regular weight it does change to the proper italic. Even though that italic is not in the font menu.\n\n"
+    },
+    {
+      "time": "",
+      "content": "So maybe that's on purpose? It always worked like this in Word on Windows with style-linked fonts.\n\n"
+    },
+    {
+      "time": "",
+      "content": "But only some of the italic fonts are missing from the menus, not all of them.\n\n"
+    },
+    {
+      "time": "",
+      "content": "That would typically indicate some naming incompatibility in the families, such that some italic fonts are being recognised as style-linked variants within families and others are being recognised as individual typefaces.\n\n"
+    },
+    {
+      "time": "",
+      "content": "No, I checked. Everything is as it should be. Everything works fine except on MSWord 2008 Mac.\n\nI will continue to explore.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I have also witnessed some strange behavior, very similar to what's described, in Word 2008 Mac. It seems to affect only \"super-families\", that is, families with more than the usual 4 members. Have not found anything wrong with the font data despite numerous investigations of naming, weight class values, PANOSE, etc... It really seems to be something with Word 2008 Mac (only).\n\nWe haven't found a workaround; fortunately the actual style-linking seems to function correctly...it's just the Font menu entry issue that is a problem.\n\n"
+    },
+    {
+      "time": "",
+      "content": "i believe there is a bug that limits the number of characters for font names within Mac Word. Could this perhaps be the problem?\n\n[mac+word+OT=?](http://web.archive.org/web/20100203125034/http:/typophile.com/node/15485)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Paul: _i believe there is a bug that limits the number of characters for font names within Mac Word. Could this perhaps be the problem?_\n\nI reckon that to be absolutely sure that the _PostScript name_ will not generate errors, it should be limited to 28 characters. For at least older Mac versions of MS Word the _Full font name_ (nameID 4) should not contain more than 32 characters. One way to circumvent this, is to limit the _Compatible Full name_ (nameID 18) for the Mac to this number.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The name length thing may _also_ be a problem, and should be checked out, but I have also seen this behavior in Word 2008 with names that are well within those limits.\n\nOne thing I've noticed is that it is not necessarily predictable or even repeatable: for example, installing a family with members Light, Light Italic, Regular, Italic, Medium, Medium Italic, Bold, and Bold Italic, in one instance it might be the Light Italic that doesn't show in the menu. A separate install could omit the Medium Italic. It is this apparent randomness that leads me to believe there's a Word 2008 issue at play, and not necessarily a font naming or styling issue.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Joshua: _It is this apparent randomness that leads me to believe there’s a Word 2008 issue at play [...]_\n\nAfter running some extra tests in Word 2008 for Mac, version 12.2.1, under Leopard 10.5.4. (Server, because of image file), I tend to agree with Joshua. By removing fonts (after quitting Word) that didn't appear initially in the Word font menu and reinstalling these (without cleaning caches), the fonts in question showed up after a spinning wheel session in the restarted Word. Therefor it looks to me a matter of font menu refreshment, especially because the ‘hidden’ fonts seem to work via the style keys. Also the problem does not seem to be restricted to OpenType (CFF/TTF) fonts.\n\n"
+    },
+    {
+      "time": "",
+      "content": "James,\n\nDid you run your family through the CompareFamily tool of the AFDKO?\n\nT\n\n"
+    }
+  ]
+}

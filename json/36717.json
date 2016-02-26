@@ -1,0 +1,50 @@
+{
+  "id": "36717",
+  "title": "Opentype Woes... Crashing when creating EPS",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I like to open the program we use at work, Multi-Ad Creator, and type my specimens for print in that program (for two reasons: I like using it, and my fonts are for work, so they need to work with this program). However, with one font I have been creating, I have a problem with the program crashing while trying to create an EPS. At first I thought it was a problem with the program, but it appears to be a problem with a few of the number characters in my font. As long as I don't type any of the certain numbers that cause the problem, the EPS comes out fine and Distiller makes a PDF with no issues. I have examined and re-examined the numbers, I cannot find anything different in these shapes than every other glyph in the font. Does anyone have any ideas as to what might be causing these crashes?\n\n",
+  "author": "soidjte",
+  "time": "2 Sep 2007 — 11:11am",
+  "uid": "19799",
+  "comments": [
+    {
+      "time": "2 Sep 2007 — 7:21pm",
+      "content": "Which number characters, which font, from what vendor?\n\nIt would be interesting to open the font in a font editor and see if there is anything unusual about those particular glyph outlines - overlapping paths or some such.\n\nT\n\n"
+    },
+    {
+      "time": "2 Sep 2007 — 10:02pm",
+      "content": "It's not a commercial font, just something I've been working on. The 2, 3 and 4 all crash Multi-Ad when I make an EPS, although they seem to work in Illustrator CS2 just fine. Creator is usually a pretty reliable program, hence why we use it in our workflow. I see nothing wrong with any of these glyphs in fontlab, for instance, the 4 below.\n\nI am very much an amateur at type design; I will most likely redraw all these characters anyway, but I'd like to figure out what's wrong with these to avoid it in the future.\n\n ![](http://web.archive.org/web/20131019061008im_/http:/typophile.com/files/lnght4_5741.jpg)\n\n"
+    },
+    {
+      "time": "3 Sep 2007 — 5:56am",
+      "content": "The arrows in your screenshot suggest that your Postscript outlines are going in the wrong direction. (Quick fix in FLS5: Contour menu \\> Paths \\> Set PS Direction.) Also check the outlines with the FontAudit tool if you haven't already.\n\n"
+    },
+    {
+      "time": "4 Sep 2007 — 9:19am",
+      "content": "Okay, I tried that and while I'm sure it's beneficial overall, it sadly did not fix the issue with the Creator crash.\n\n"
+    },
+    {
+      "time": "4 Sep 2007 — 5:00pm",
+      "content": "The blue boxes show where your outlines are missing orthogonal extrema (nodes whose control points are either perpendicular or parallel to the baseline)...\n\n ![](http://web.archive.org/web/20131019061008im_/http:/typophile.com/files/foobar_5149.gif)\n\n"
+    },
+    {
+      "time": "4 Sep 2007 — 5:57pm",
+      "content": "Will a lack of node placement at extremes cause crashes as described? I've since learned to do so, just haven't cleaned this one up b/c I have started over on it.\n\n"
+    },
+    {
+      "time": "5 Sep 2007 — 9:51am",
+      "content": "oddly enough, I opened this font on my Mac at work and made the .otf there (instead of on my home PC) and it works just fine, with no modifications versus the .otf I generated at home.\n\n"
+    },
+    {
+      "time": "5 Sep 2007 — 5:16pm",
+      "content": "Are the Preferences of the two installations (work & home) exactly the same?\n\n"
+    },
+    {
+      "time": "5 Sep 2007 — 6:03pm",
+      "content": "Unless there are different settings on install for Mac versus PC, they should be identical.\n\n"
+    }
+  ]
+}

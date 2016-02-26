@@ -1,0 +1,22 @@
+{
+  "id": "58507",
+  "title": "Strange problem with RockoFLF",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I recently downloaded a font, [RockoFLF](http://web.archive.org/web/20120110102244/http:/www.fontsquirrel.com/fonts/RockoFLF), and have been loving it, except that I've noticed one small problem with it.\n\nBasically, when using the font in Illustrator CS4 (PC), I notice that sometimes the counters of the \"a\" and other letters go a bit crazy, and it makes the weight vary in some point sizes. But then the effect disappears in other point sizes. The screenshot below shows you what I'm talking about. The letters in black are how they should be, but the ones in pink show the errors. And the funny thing is it all corrects itself if I convert the text to paths.\n\nI'm wondering if this is a hinting problem with the font, and if it's possible to correct something like this in a free program like Fontforge?\n\n ![](http://web.archive.org/web/20120110102244im_/http:/typophile.com/files/rocko_4566.png)\n\n",
+  "author": "<a href=\"/web/20120110102244/http://typophile.com/user/44975\" title=\"View user profile.\">daydream</a>",
+  "time": "<br>",
+  "uid": "44975",
+  "comments": [
+    {
+      "time": "",
+      "content": "Yes, bad TrueType hinting. Should be fixable in FontForge (but I have never used FF for hinting).\n\n"
+    },
+    {
+      "time": "",
+      "content": "Daydream,\n\nif you want to use a free tool, you could either use FontForge to regenerate the TrueType hinting, or you could do something else: use Adobe FDK for OpenType to convert the font into OpenType PS (.otf) and autohint it at the same time. After installing the Adobe FDK for OpenType from [http://www.adobe.com/devnet/opentype/afdko/](http://web.archive.org/web/20120110102244/http:/www.adobe.com/devnet/opentype/afdko/ \"http://www.adobe.com/devnet/opentype/afdko/\") just type in Terminal/commandline the two lines one by one:\n\n`makeotf -f RockoFLF.ttf\nautohint -nb RockoFLF.otf`\n\nand use the final RockoFLF.otf. The PostScript hinting model used in OpenType PS fonts tend to be more robust and less prone to \"strange errors\" caused by automatic hinting.\n\nCheers,  \nAdam\n\n"
+    }
+  ]
+}

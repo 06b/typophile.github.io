@@ -1,0 +1,56 @@
+{
+  "id": "67359",
+  "title": "How do I script Swash letters, alternates etc.?",
+  "forum": "Build",
+  "tags": [
+    "Contextual Ligatures",
+    "Discretionary Ligatures",
+    "fontlab",
+    "Fractions",
+    "Ordinals",
+    "script",
+    "Standard Ligatures",
+    "Stylistic Alternates",
+    "swash",
+    "Titling Alternates",
+    "Build"
+  ],
+  "content": "I've recently learned how to use Fontlab Studio 5, and I also learned how to script ligatures. But I noticed Illustrator for example has more buttons in the type tool section: Standard Ligatures, Contextual Ligatures, Discretionary Ligatures, Swash, Stylistic Alternates, Titling Alternates, Ordinals and Fractions.\n\nSo out of that list, I only know how to script the standard ligatures. Does anyone know how to script the others, or do you know a source to learn about it? Most font families contain all the ligatures and swash letters as seperate fonts rather than putting it into a single font (OpenType). Is there a reason for doing this?\n\n",
+  "author": "Martin Silvertant",
+  "time": "12 Feb 2010 — 7:34am",
+  "uid": "52182",
+  "comments": [
+    {
+      "time": "13 Feb 2010 — 8:27pm",
+      "content": "here is a technical answer.  \nThe technique is the same as the ligature, using the FEATURE.  \nOf course you need new \"generated glyph\" for the subtitution (eg: \"f\\_f\\_l\", \"T\\_h\").\n\nFEATURE  \nfor ligature is LIGA  \nfor Discretionary ligature is DLIG  \nfor Contextual ligature is CALT  \netc.  \nWiki can help: [http://en.wikipedia.org/wiki/OpenType\\_feature\\_tag\\_list](http://web.archive.org/web/20150311183618/http:/en.wikipedia.org/wiki/OpenType_feature_tag_list \"http://en.wikipedia.org/wiki/OpenType\\_feature\\_tag\\_list\")\n\nhere is some example:  \nfeature liga {  \n sub f f b by f\\_f\\_b;  \n sub f f h by f\\_f\\_h;  \n sub f f i by ffi;  \n} liga;\n\nfeature dlig {  \n sub T H by T\\_H;  \n sub T T by T\\_T;  \n sub T h by T\\_h;  \n sub s p by s\\_p;  \n sub s t by s\\_t;  \n} dlig;\n\nfeature calt {  \n sub T H E by T\\_H\\_E;  \n} calt;\n\n"
+    },
+    {
+      "time": "13 Feb 2010 — 9:05pm",
+      "content": "\\> Most font families contain all the ligatures and swash letters as seperate fonts rather than putting it into a single font (OpenType). Is there a reason for doing this?\n\nMost of those fonts are pre-OpenType. The preferred way to go these days is to put all these alternates into a single font… unless your users are in a software who doesn’t know how to handle OpenType features.\n\n"
+    },
+    {
+      "time": "14 Feb 2010 — 10:44am",
+      "content": "Thank you for your answers. It was most helpful.\n\nI'm wondering if anyone knows why Photoshop doesn't support OpenType, or did I just not see it? I also can't find the function in InDesign. I'm sure it will be available in Photoshop CS5.\n\n"
+    },
+    {
+      "time": "11 Mar 2010 — 6:00pm",
+      "content": "in CS4 open type is supported into Photoshop, Illustrator and InDesing\n\nin photoshop it's more basic an option is apply to all your text.  \nIn InDesign you can you do it on a single Glyph\n\nin design go to main menu: WINDOW / Type & Table / Glyphs\n\n ![](http://web.archive.org/web/20150311183618im_/http:/typophile.com/files/up-kyra-open-type-font_5375.png)\n\n"
+    },
+    {
+      "time": "12 Mar 2010 — 4:28am",
+      "content": "I haven't checked this thread in a while. Meanwhile I found out where to find OpenType in Photoshop. I didn't know how to use it in InDesign yet though. Thanks a lot for the information!\n\n"
+    },
+    {
+      "time": "15 Feb 2012 — 2:23am",
+      "content": "Indesign has a special interface for that, called \"Opentype panel\". The same as in Illustrator, really\n\n"
+    },
+    {
+      "time": "15 Feb 2012 — 2:29am",
+      "content": "and about applying them - this might help: [http://ilovetypography.com/OpenType/opentype-features.html](http://web.archive.org/web/20150311183618/http:/ilovetypography.com/OpenType/opentype-features.html \"http://ilovetypography.com/OpenType/opentype-features.html\")\n\n"
+    },
+    {
+      "time": "18 Feb 2012 — 1:00am",
+      "content": "Thanks but this threat is very old. That last comment of mine was sent 2 years ago. Meanwhile I've had several jobs where I had to use InDesign daily.\n\nThis is pretty amusing though. When I was still studying I was the go-to guy in the class for tips on typography and InDesign functionality while two years ago I couldn't even find the OpenType panel.\n\n"
+    }
+  ]
+}

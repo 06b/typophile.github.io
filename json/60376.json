@@ -1,0 +1,26 @@
+{
+  "id": "60376",
+  "title": "Uppercase version of superscript and subscript punctuation marks",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Is there some proper way in OpenType to change a punctuation mark that usually cames in superscript or subscript form by default in the fonts to an \"uppercase\" version? Like the asterisk, that in some context may look better if looks lining and I don't know if the U+2217 ASTERISK OPERATOR character is appropriate to use in all cases, since a glyph variant of the default asterisk is much likely to be used. Same with the quotation marks ornaments encoded in the dingbats block (U+275B, U+275C, U+275D and U+275E), since [a recent proposal](http://web.archive.org/web/20131106093557/http:/std.dkuug.dk/jtc1/sc2/wg2/docs/n3565.pdf) for \"low\" version for these characters for use in German and other languages was accepted, with the rationale that these characters are not merely glyphs variants for compatibility with the Zapf Dingbats font but rater to markup quotations in a prominent way, as in pull quotes. But in those cases, when the quotes are used inside the text instead of floating around, they use the uppercase size mostly, as seen in the examples of the proposal.\n\n",
+  "author": "Peroyomas",
+  "time": "27 Jul 2009 — 10:09pm",
+  "uid": "22817",
+  "comments": [
+    {
+      "time": "28 Jul 2009 — 6:12am",
+      "content": "_Is there some proper way in OpenType to change a punctuation mark that usually cames in superscript or subscript form by default in the fonts to an “uppercase” version?_\n\nPut it in the \"case\" feature?\n\n_...a recent proposal for “low” version for these characters for use in German and other languages was accepted..._\n\nThat's ridiculous.\n\n"
+    },
+    {
+      "time": "28 Jul 2009 — 7:55am",
+      "content": "Visual reference in case I wasn't too clear:\n\n ![](http://web.archive.org/web/20131106093557im_/http:/typophile.com/files/NUPP_4007.png)\n\n"
+    },
+    {
+      "time": "28 Jul 2009 — 10:26am",
+      "content": "Just make alts and name them accordingly and put in a stylistic set.\n\nfeature ss01 { # big asterisk  \n sub asterisk by asterisk.alt\\_big;  \n} ss01;\n\nBest to keep such eccentricities optional, in my opinion.\n\n"
+    }
+  ]
+}

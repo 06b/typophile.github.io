@@ -1,0 +1,126 @@
+{
+  "id": "16229",
+  "title": "Are some glyphs rendered useless in Open type?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "This may be pretty obvious but I am not sure...\n\nAre some glyphs rendered useless in Open type?\n\nFor instance, the standard 'macintosh roman' glyph set has 'macron' or '00AF' in unicode.\n\nThis glyph would be combined with another glyph (perhaps a 'U') to create a combined letter in the pre-Unicode world.\n\nHowever, in Unicode you can actually incude all the glyphs as fully formed or complete single glyphs.\n\nSo does this mean that 'macron' is not needed anymore - at least in an Open type font that includes all the instances of macron use you want to support?\n\nOr are there any arguements for keeping 'macron'?\n\nDo you for instance, need it on some keyboards and/or OSs to invoke the new complete Unicode glyph?\n\nFor bonus points, how do you safely add glyphs from additional code areas in fontlab? Having re-read the documentation I am still feeling oddly sqeamish.\n\n",
+  "author": "ebensorkin",
+  "time": "13 Nov 2005 — 5:52pm",
+  "uid": "2942",
+  "comments": [
+    {
+      "time": "13 Nov 2005 — 7:12pm",
+      "content": "You never know what users may want to do. For example, there is no such Unicode point for \"ndieresis,\" and yet, you have no doubt seen this:\n\n ![](http://web.archive.org/web/20131021233428im_/http:/typophile.com/files/SpinalTapLogo.jpg)\n\n_how do you safely add glyphs from additional code areas in fontlab?_\n\nSimple. Select \"Unicode ranges\" mode in the font window, choose a code range from the pop-up menu and start adding glyphs.\n\n"
+    },
+    {
+      "time": "13 Nov 2005 — 10:37pm",
+      "content": "When writing about diacritics like the macron (¯) or others, it may be necessary to show them without combining them. This is especially useful in educational texts on languages.\n\nI always make sure to include any non-combining diacritics in my fonts primarily for this purpose.\n\n"
+    },
+    {
+      "time": "13 Nov 2005 — 11:44pm",
+      "content": "The macron and other accent characters in the Mac Roman and other 8-bit codepages are spacing characters. In other words, they are not meant to be combined with base letters, and have advanced widths greater than zero. Proper combining mark characters are in the Unicode 0300 block, and are zero-width characters that can be combined on base letters or in mark stacks. A non-combining mark is canonically equivalent in Unicode to the space character plus a combining mark, so either method is accepted to display the mark without a visible base.\n\nNot all combinations of base + mark are separately encoded in Unicode; indeed, most are not. The expectation is that combining marks will be used with base characters to form additional diacritic combinations, using OpenType GPOS and features to correctly position the marks.\n\nIn the interests of processing efficiency, if text contains e.g. A plus a combining acute character, and the font used includes the precompose Aacute character, this will be autuomatically mapped on Windows in applications using the Unscribe text processor. This is a buffered character level mapping, which is faster than glyph level mapping in the layout feature or GPOS mark positioning,\n\n"
+    },
+    {
+      "time": "14 Nov 2005 — 12:43am",
+      "content": "Mark, that quip kept me laughing for way too long. Thanks for the reasurance. Can I go back to Names mode afterwards? Or is that unimportant, because it's just a 'lens' for viewing whatever glyphs are there in the font?\n\nJoseph, that's a good point.\n\nJohn, that was the complete kind of explanation I was hoping for! Thanks very much! I wondered if the old ways were granfatherered in. But you mean \"Not all combinations \" rather than \"Note all\" - right?\n\n"
+    },
+    {
+      "time": "14 Nov 2005 — 3:34am",
+      "content": "Yes. Duly edited. Witness the dangers of tired people typing after several glasses of wine.\n\n"
+    },
+    {
+      "time": "14 Nov 2005 — 5:17am",
+      "content": "_Can I go back to Names mode afterwards? Or is that unimportant, because it’s just a ‘lens’ for viewing whatever glyphs are there in the font?_\n\nThere are some situations where having it set to Names mode makes a difference when generating a TrueType font. I'm not sure if there are similar issues with Unicode Range mode. I generally leave mine set to Codepage mode.\n\n"
+    },
+    {
+      "time": "14 Nov 2005 — 8:00am",
+      "content": "Mark,\n\nfor OpenType fonts, there is no difference at all when generating fonts in Unicode or Codepage mode. Only Names mode matters in FontLab 4.6, but matters far less in FontLab Studio 5.\n\nJohn,\n\n\\> if text contains e.g. A plus a combining acute  \n\\> character, and the font used includes the  \n\\> precompose Aacute character, this will be  \n\\> autuomatically mapped on Windows in  \n\\> applications using the Unscribe text  \n\\> processor.  \n\\> This is a buffered character level mapping,  \n\\> which is faster than glyph level mapping  \n\\> in the layout feature or GPOS mark positioning,\n\n...but which will only work on one particular operating system that supports OpenType layout features. Cocoa in Mac OS X needs the \"ccmp\" feature to correctly render canonically decomposed text. Adobe applications currently don't do anything (neither apply ccmp nor character-level composition) but this may change in future.\n\nAdam\n\n"
+    },
+    {
+      "time": "14 Nov 2005 — 8:19am",
+      "content": "_for OpenType fonts, there is no difference at all when generating fonts in Unicode or Codepage mode. Only Names mode matters in FontLab 4.6, but matters far less in FontLab Studio 5._\n\nThat's what I thought. I have always found this sometimes dependency on current glyph viewing mode to be irksome. It has fostered a certain superstitiousness in my use of FontLab. Good to know this has been addressed in FLS5. Can't wait for the Mac version.\n\n"
+    },
+    {
+      "time": "14 Nov 2005 — 10:21am",
+      "content": "Indeed, all accents should be available to users to roll their own - with some kerning - versions of non-standard accents. Although the ndieresis which Mark mentions is necessary for the setting of Malagasy, the language of Madagascar, which is why I have it in my glyphset.\n\nThis site is a very useful tool for type types:  \n [http://www.eki.ee/letter/](http://web.archive.org/web/20131021233428/http:/www.eki.ee/letter/ \"http://www.eki.ee/letter/\")\n\nThanks to OpenType, \"Obsolescence is obsolete\"; all of the old stuff can sit alongside the new.\n\n"
+    },
+    {
+      "time": "14 Nov 2005 — 10:59am",
+      "content": "An in production version of TNR showing combining mark positioning via OpenType. I've turned on Word's coloured diacritics feature so the marks (in particular combining ogonek) show up.\n\n ![](http://web.archive.org/web/20131021233428im_/http:/typophile.com/files/otcombiningmarks.jpg)\n\n ![](http://web.archive.org/web/20131021233428im_/http:/typophile.com/files/otcombiningmarks2.jpg)\n\n"
+    },
+    {
+      "time": "14 Nov 2005 — 11:08am",
+      "content": "That \"d\" is a Vietnamese kickboxer overdosing.\n\nhhp\n\n"
+    },
+    {
+      "time": "14 Nov 2005 — 5:11pm",
+      "content": "_Indeed, all accents should be available to users to roll their own - with some kerning..._\n\nAck! This is how we used to do it, but mark positioning really should be independent of kerning. If you kern a mark over a base, then you need to positively kern the mark to the next base to restore the spacing between the bases. It's a mess, and if the user applies tracking you are screwed.\n\nFor this was GPOS mark positioning invented, and you should hammer on your favourite app developers until the lazy buggers support it.\n\n"
+    },
+    {
+      "time": "14 Nov 2005 — 5:16pm",
+      "content": "Dropping the dot from the i in Spın̈al Tap to emphasise the mëtäl umlaut was genius. I think I'll make this a contextual lookup in all my fonts from now on...\n\ni -\\> dotless i  \nS p | n dieresisiscomb a l space T a p\n\n"
+    },
+    {
+      "time": "14 Nov 2005 — 6:26pm",
+      "content": "Looks like you've tapped into a new realm :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "14 Nov 2005 — 6:47pm",
+      "content": "Great idea, John! Every OT font should have that feature. :-)\n\n"
+    },
+    {
+      "time": "14 Nov 2005 — 8:54pm",
+      "content": "Perhaps we should get this over with now... eleven things the Spinal Tap font should have. I'll start you off...\n\n11. Ligature for the number '11'  \n10. contextual glyphs that form Stonehenge when typed.  \n9. a \"None more black\" weight.\n\ner, actually this isn't such a good idea. Forget the whole thing.\n\nSi\n\n"
+    },
+    {
+      "time": "19 Nov 2005 — 1:36am",
+      "content": "Since some OS's will automatically build some combinations of of roman letters and diacritics some of the time ( if you use the fontlab anchor technique ) ; but not all OSs do it ...\n\nIs there any point in making ligature features ( liga ) for combinations to make things a bit easier for typists? I don't mean inventing new custom glyphs - just using 'liga' to point to the correct & intended Unicode glyph.\n\nIt would be pretty easy to do in the font itself - but would it help?\n\nIt could be complicated.\n\nFor instance, do Polish keyboards offer all the ogonek combinations as single characters? Or is there an one ogonek to combine with the other letters? Or some mixture? If there is an just the one ogonek then 'ligatures' or rather using the liga feature might make sense. Unless you could rely on the OS to do it. Which it sounds like you can't really do - yet.\n\nWhat about other languages and other diacritics? What's true for one diacritic in one case may not be for the next. Or for that same diacritic may be treated differently in another language's keyboard.\n\nWhen an OS handels this do you type the letters first & then the diacritic/accent? Or the other way round? And is that true in all languages & in all OSs?\n\nAnd when an OS does automatically combine a given set of letters & diacritics for you; would a liga feature conflict with that OS's type handeling feature? Could reversing the order of input ( diacritic & then letter or the reverse) allow both to co-exist?\n\n"
+    },
+    {
+      "time": "19 Nov 2005 — 10:39am",
+      "content": "Eben,  \nyou should definitely spend some time with the Unicode table PDFs, as well as checking out the sites devoted to The World of Diacritics. I spend a lot of time on these sites:  \n [http://www.unicode.org/charts/](http://web.archive.org/web/20131021233428/http:/www.unicode.org/charts/ \"http://www.unicode.org/charts/\")  \n [http://www.eki.ee/letter/](http://web.archive.org/web/20131021233428/http:/www.eki.ee/letter/ \"http://www.eki.ee/letter/\")  \n [http://diacritics.typo.cz/index.php?id=1](http://web.archive.org/web/20131021233428/http:/diacritics.typo.cz/index.php?id=1 \"http://diacritics.typo.cz/index.php?id=1\")\n\nThere are Unicode indices for hundreds of accented glyphs, and different keyboard layouts map to accents differently, but the usual way things work is request accent, then request letter, which triggers the single glyph \"letteraccent\".\n\nWhich is why you can't just ask for a di(a)eresis + n to get the ndieresis accent needed for Spinal Tap: that glyph isn't mapped to a Unicode index, and system sotware doesn't recognise this as a valid combination. Hell, even with REAL accents, like lacute (uni013A), you can't use your U.S. keyboard layout and ask for an acute with an l under it. (This glyph is used in Slovak, and is supported by the 8859-2 character map.)\n\nAnother reason not to try to make accented glyphs using liga is that some accents come in a few different forms. Adam very kindly showed me how one should make ogoneks, and the \"standard\" ogonek one uses in a sans font is usually too wide for the I and i, so you have to tweak.\n\nYet another reason: Tracking. When you track text in InDesign - by request or as a function of justified setting - at a certain point the ligas will \"split\" back into their component parts. Otherwise it would look silly. (I'm sure we've all seen loosely tracked text with fi and fl ligatures, which look like little siamese twins...) One exception to this rule is the Dutch \"ij\", which is actually a descendent of ydieresis, and is always a single character, even when tracked. Here's the sign for the local butcher:  \nS L A G E R IJ\n\nAs always when developing type, you have to follow certain conventions, and you have to follow the standards. Not because slavishness is good, but because software and wetware (aka \"users\") know how to do things one way, and you shouldn't ask them to learn a new way of doing things just for your font. Build your types to be out-of-the-box usable by anyone, and if you have \"special\" functionality, make it available for expert users.\n\n"
+    },
+    {
+      "time": "19 Nov 2005 — 11:43am",
+      "content": "Eben, no you would not use the 'liga' feature to access precomposed diacritic glyphs from base + combining mark sequences, you would use the 'ccmp' feature, which is designed for this purpose. I would include 'ccmp' feature lookups for all precomposed diacritic glyphs in the font, despite the fact that some applications may use character level composition for diacritics with their own Unicode values. This provides fallback for an application that supported 'ccmp' but did not do such character level processing. Of course, 'ccmp' must be used for any diacritic glyph that does not have its own Unicode value.\n\n'liga' is a bad idea for diacritic composition because the user can turn it off. 'rlig' would be better in that regard, but 'ccmp' is expressly designed for this purpose (and can also be used for glyph decomposition).\n\n"
+    },
+    {
+      "time": "21 Nov 2005 — 5:01pm",
+      "content": "John,\n\nI think your message got somehow truncated.\n\nChester,\n\nthe legitimate way of encoding an \"n with tilde\" is to use \"n\" followed by the \"combining tilde\". The layout system should take care of the proper rendering of that combination -- either by appropriately positioning the tilde over n, or by substituting the sequence by a precomposed glyph.\n\nThis is discussed in my article:  \n [http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mvie...](http://web.archive.org/web/20131021233428/http:/groups.msn.com/fontlab/tipsandtricks.msnw?action=get_message&mview=0&ID_Message=3403 \"http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mview=0&ID\\_Message=3403\")\n\nThe appropriate feature for that use is \"ccmp\", not \"liga\".\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "21 Nov 2005 — 7:13pm",
+      "content": "_I think your message got somehow truncated._\n\nOh yes, so it did. I have fixed it now. I keep forgetting that Typophile treats anything withing pointy brackets as HTML. Which is a Very Annoying Thing.\n\n"
+    },
+    {
+      "time": "21 Nov 2005 — 7:29pm",
+      "content": "Thanks for clarifying, Adam. Of course one doesn't use liga for accented glyphs; I was responding to Eben's question, although your article is complete and trumps my little comment all to heck.\n\nWhich raises a point: the E with acute and dotbelow which is needed for Yoruba should get a Unicode index ASAP, as should n with dieresis. As should every accented glyph used in every language. (Proper languages, that is. Not Klingon.)\n\nIn the meantime, we should assign such glyphs private use area Unicode indices so that they can be accessed the annoying way in a pinch.\n\nMy fiftieth of a dollar.\n\n"
+    },
+    {
+      "time": "21 Nov 2005 — 8:01pm",
+      "content": "Thanks everybody!\n\n"
+    },
+    {
+      "time": "22 Nov 2005 — 8:28pm",
+      "content": "<cite>Which raises a point: the E with acute and dotbelow which is needed for Yoruba should get a Unicode index ASAP, as should n with dieresis. As should every accented glyph used in every language.</cite>\n\nActually, that would go against one of the principles of Unicode. Unicode explicitly says that they only encode precomposed accented glyphs for purposes of compatibility with existing standard encodings. For all such combinations outside of common/standard encodings, they expect dynamic composition of accented characters.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "22 Nov 2005 — 9:28pm",
+      "content": "Further to what Thomas just wrote: it is pretty much guaranteed that no more precomposed diacritic characters will be added to Unicode, not only for the reasons that Tom indicates, but also because of stability agreements with other standards organisations that prevent addition of any new canonical decompositions.\n\n"
+    },
+    {
+      "time": "22 Nov 2005 — 9:32pm",
+      "content": "Sorry Yorubans! That sucks for them. And for the Malagasy. They should just change their orthography like the residents of Koeln and Duesseldorf have. Maybe the French will also drop their accents. (Yeah, right.)\n\nI guess I'm a Polyanna for thinking that the Unicode Consortium was actually interested in documented all of the written languages of the world. I though that was their goal. Silly me.\n\n"
+    },
+    {
+      "time": "22 Nov 2005 — 11:13pm",
+      "content": "Chester, there is no significant difference between having precomposed diacritics in Unicode and having sequences of bases and combining marks. Many hundreds of languages rely on combining mark sequences, and these languages are fully supported by Unicode and by Unicode-savvy systems and applications. Keyboard layouts frequently make the encoding model invisible to the user: he presses a key and gets Ẹ́ and that gets rendered using one of several possible character-\\>glyph options. He may neither know nor care whether that diacritic is encoded as one, two or three characters.\n\nThe only reason there are _any_ precomposed diacritic characters in Unicode is for one-to-one backwards compatibility with pre-existing character set standards which, unsurprisingly, happen to be mainly for majority writing systems of industrialised nations. But if you take into account some of the Unicode normalisation forms, even these writing systems may end up being largely encoded using combining mark sequences in future. The W3C consortium, for example, recommends a normalisation form that involves canonical decomposition, so it is quite likely that future browsers and XML document handlers will break down even common European diacritics like é into e plus combining acute.\n\nNormalisation is the process of determining a standard encoding for character clusters that could be encoded in multiple ways. That Ẹ́ diacritic, for instance, could be encoded in three different ways: ‹0045, 0323›, ‹00C9, 0301, 0323› or ‹00C9, 0323, 0301›, all of which should be rendered identically and all of which have totally equivalent semantics for the reader. But if you want to search, sort or compare text strings, it is essential that a single canonically correct, normalised order is used to encode Ẹ́, and for this purpose fully decomposed combining mark sequences are highly desirable. From a text processing perspective, combining mark sequences are actually preferable to precomposed diacritic characters, since the latter need to be decomposed for the most efficient normalisation.\n\n"
+    },
+    {
+      "time": "23 Nov 2005 — 6:12am",
+      "content": "In addition to what Tom and John wrote, I should mention that adding new precomposed characters has one more disadvantage: if you add a single codepoint, say for the Yoruba E with acute and dot below, then for all existing applications and systems that use older versions of the Unicode Standard, the codepoint is just an opaque codepoint with no meaning. At best, they will recognize that it's a letter at all but will no nothing about a resonable sorting order or the mapping between a lowercase and the uppercase variant. If you encode the character in the normal (decomposed) way, then even older applications will know that we are talking about a Latin E with a bunch of diacritics. Even if they won't necessarily know it's Yoruba, they'll be able to infer many more properties that from a new precomposed codepoint. For example, an application will most likely sort the word starting with such character somewhere after the plain \"E\", it will figure out that the lowercase counterpart is \"e\" followed by the respective diacritics etc.\n\nTypesetting applications should take care of the correct presentation and of the fact that the character should be treated as one character and not three when moving cursor, selecting text, counting letters etc. This has nothing to do with the way the text is encoded.\n\nAdding more codepoints to Unicode will not help Yoruba -- on the contrary, it will marginalize it more!\n\nRegards,  \nAdam\n\n"
+    }
+  ]
+}

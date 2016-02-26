@@ -1,0 +1,50 @@
+{
+  "id": "55929",
+  "title": "Dlig = No kerning in InDesign?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I cant seem to get any discretionary ligatures (dlig) work with kerning in InDesign CS3, is this a known bug?  \nIt is not anly my own fonts that doesnt seem to work – that's why I ask.\n\n",
+  "author": "Goran Soderstrom",
+  "time": "16 Mar 2009 — 1:09pm",
+  "uid": "11526",
+  "comments": [
+    {
+      "time": "16 Mar 2009 — 1:42pm",
+      "content": "What kind of font? GPOS or kern table kerning?\n\n"
+    },
+    {
+      "time": "16 Mar 2009 — 2:05pm",
+      "content": "Arno Pro has a few Discretionary Ligatures and AFAICT they all seem to be getting kerned in InDesign CS3. (The 'ck' dlig below is only available to German).\n\n ![](http://web.archive.org/web/20131015060749im_/http:/typophile.com/files/dlig_kerning_5221.png)\n\n"
+    },
+    {
+      "time": "17 Mar 2009 — 1:46am",
+      "content": "It's an OpenType PS font with OT kern feature, the c\\_t ligatures are in the classes and work in FontLab.\n\nAdobe Jenson Pro Regular doesnt work either. They seem to be working on the left side like your example above, but not on the right side of the ligature. Look here, for instance.\n\n ![](http://web.archive.org/web/20131015060749im_/http:/typophile.com/files/fontlab_6072.png)\n\n ![](http://web.archive.org/web/20131015060749im_/http:/typophile.com/files/indesign_5139.png)\n\nAll my fonts have the same behaviour, they work on the left side, but not on the right.\n\n"
+    },
+    {
+      "time": "17 Mar 2009 — 4:36am",
+      "content": "Ok, it must a bug. Arno Pro and Meta doesnt either have the kerning on the c\\_t ligature. I have not opened them up in FontLab, but since the \"t\" have kerning against \"o\" I guess the developers of such great fonts must have put the \"c\\_t\" in the proper class.\n\n ![](http://web.archive.org/web/20131015060749im_/http:/typophile.com/files/metaarno_6221.png)\n\nBugger!\n\n"
+    },
+    {
+      "time": "17 Mar 2009 — 11:03am",
+      "content": "Is this definitely limited to dlig ligatures, or are other variant feature glyphs affected?\n\n"
+    },
+    {
+      "time": "17 Mar 2009 — 11:12am",
+      "content": "Yes there's a bug, but the Discretionary Ligatures are getting kerned on the right side. Just look at this other example:\n\n ![](http://web.archive.org/web/20131015060749im_/http:/typophile.com/files/dlig_kerning2_5342.png)\n\nThe overlay clearly shows that there's the same amount of kerning between 'pV' and 's\\_pV'.\n\nThe bug is that the kerning value is being incorrectly displayed as zero in the UI.\n\n"
+    },
+    {
+      "time": "17 Mar 2009 — 11:58am",
+      "content": "Thanks pointing this out!\n\n"
+    },
+    {
+      "time": "17 Mar 2009 — 3:29pm",
+      "content": "Ah, great! It is kerned, but it doesnt show. Well, that is so much better than if it was not kerned at all.\n\nGood you sorted this out Miguel – thanks :)\n\n"
+    },
+    {
+      "time": "17 Mar 2009 — 8:22pm",
+      "content": "Goran,\n\nfor a moment, I thought that the bug is about the horribly huge gap between \"a\" and \"c\" that shows in Meta, but I guess that one is not a bug, it's a feature :)\n\n"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "id": "123623",
+  "title": "Is it possible to hint in OTF?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi there!\n\nI usually export 2 formats: OTF without hinting, and TTF for web (with TTFAutohint).  \nA client asked me if I could send the OTF , with the TTF hinting for web.\n\nIs that possible?\n\nWhen I open the TTF file created with TTFAutohint in FontLab I don't see any hinting insructions... so I can't copy them to the OTF file... but it still works perfect for the web...\n\nThank you guys.\n\n",
+  "author": "ferfolio_2",
+  "time": "4 Mar 2015 — 2:08pm",
+  "uid": "209335",
+  "comments": [
+    {
+      "time": "4 Mar 2015 — 8:59pm",
+      "content": "TTF hints won’t work for OTF. They are completely different outline formats.\n\nTTF uses TrueType quadratic Bézier curves, OTF (also known as CFF for Compact Font Format) uses PostScript cubic Bézier curves. They are related, but not the same, so the hints are not compatible or transferable.\n\nThat said, you can autohint an OTF font using the autohint tool that comes with the AFDKO (Adobe Font Development Kit for OpenType) or the autohint command in FontLab. (You can also run the Adobe autohinter from within FontLab using a script that comes with the AFDKO.) The results won’t be the same as a hinted TTF font because the format and the way hinting works is different.\n\n"
+    },
+    {
+      "time": "5 Mar 2015 — 7:52am",
+      "content": "> ... OTF (also known as CFF for Compact Font Format) uses PostScript cubic Bézier curves.\n\nOuch. The OpenType format is actually a _unification_ of Microsoft/Apple's TrueType, and Adobe's Type 1 (CFF) format. The file header indicates what sort of outlines the font contains - it can be either one.\n\nWith that in mind, \"OTF without hinting, and TTF for web\" makes no sense without specifying what kind of OTF it is.\n\n"
+    },
+    {
+      "time": "5 Mar 2015 — 8:33am",
+      "content": "@Theunis  \nYou are right in a technical sense, but 99% of fonts with the suffix OTF are in fact CFF-based, while TrueType flavoured fonts use TTF. So Mark’s comment just reflects what people understand when these terms and abbreviations are used. Also note that Mark actually said “OTF” (referring to the file suffix) — it was you who then talked about “OpenType format”. Those things belong together, but there effectively not the same thing.\n\n<cite>A client asked me if I could send the OTF , with the TTF hinting for web.</cite>\n\nI would ask them what he is trying to achieve. I am pretty sure he is himself confused about those technical details and therefore makes this rather strange request.\n\n"
+    },
+    {
+      "time": "5 Mar 2015 — 10:34am",
+      "content": "Nope. The client will have to go with OTF hints instead.\n\n"
+    },
+    {
+      "time": "6 Mar 2015 — 6:35am",
+      "content": "Thanks everyone for the answers!\n\nI have PC and Fontlab, and I've tried to do the AFDKO autohinting a couple of times, but it's a nightmare to install! But if it's the only option I guess I'll do it.\n\nWhat the client wants is to see my typeface in InDesign better while he works on screen.\n\n"
+    },
+    {
+      "time": "6 Mar 2015 — 7:02am",
+      "content": "TTF fonts work perfectly fine in InDesign. Just sayin'...\n\n"
+    },
+    {
+      "time": "6 Mar 2015 — 7:08am",
+      "content": "Yes riccard0, but he wants to use the OTF files,  \nbecause it's better for printing media and has all the OpenType features.\n\n"
+    },
+    {
+      "time": "6 Mar 2015 — 7:34am",
+      "content": "> because it's better for printing media\n\nThat's a self perpetuating myth which had no raison d'être for decades now.  \nMoreover, as already mentioned by others, file extensions and outlines and features are different things. And, for what I know, TTF fonts can have OpenType features.\n\n"
+    },
+    {
+      "time": "6 Mar 2015 — 7:51am",
+      "content": "Yes, the TTF format has opentype features,  \nBut OTF PostScript curves are better for printing, since is the same language as most printers. Right?\n\n"
+    },
+    {
+      "time": "6 Mar 2015 — 8:10am",
+      "content": "No, for several reasons.\n\nFirst, I don't think \"most\" printers use PostScript natively. There is a thick layer of driver software between the font file and the printer.\n\nSecond: font formats may be changed by the OS, by user-end software, or by printer drivers to suit the destination device.\n\nThird: native support for TrueType fonts has actually been added to PostScript, years ago :P\n\nFor everyday practical purposes there really is no difference between TrueType and PostScript flavour fonts -- especially when both are wrapped inside an OTF. A designer may have a preference (me, I can't wrap my head around quadratic curves) and some older tools such as MS Volt work on a TTF format only -- but even that can be worked around.\n\n"
+    },
+    {
+      "time": "6 Mar 2015 — 8:14am",
+      "content": "<cite>I have PC and Fontlab, and I've tried to do the AFDKO autohinting a couple of times, but it's a nightmare to install! But if it's the only option I guess I'll do it.</cite>\n\nFontLab Studio can do autohinting without additional software. But the results depend on your setting on the font and character level.\n\n<cite>But OTF PostScript curves are better for printing …</cite>\n\nI wouldn’t know why. There were a RIPs in the early 1990s which couldn’t handle TrueType, but that was a long time ago.  \nThe only argument against TrueType outlines is that the designer has probably done the design in PostScript and the automatic conversion could lead to outlines which are not identical to the original. But that isn’t even a limitation of TrueType, but only a problem of the conversion process.\n\n"
+    },
+    {
+      "time": "6 Mar 2015 — 8:25am",
+      "content": "Thanks for the info guys! I guess my knowledge comes from books and websites that are 10 years ago.\n\nPerhaps the conversion from bezier to cuadratic might not be that bad if you use 2048 UPM's (that's what I'm using).\n\nDo you guys give your fonts to the clients only in TTF?  \nPerhaps it's the best option to do from no on.  \nHow does TTF work in Office?\n\n"
+    },
+    {
+      "time": "6 Mar 2015 — 9:34am",
+      "content": "<cite>How does TTF work in Office?</cite>\n\nUsually better! It’s the PS-OTs which regularly cause trouble outside of the DTP apps, e.g. font embedding in office apps, not printing or wrong glyph scaling in recent versions of Mac OS X.  \nTTF is still the standard format for companies such as Apple and Microsoft and it’s much better tested in software of these companies than PS-OTs.\n\n"
+    },
+    {
+      "time": "6 Mar 2015 — 10:51am",
+      "content": "The problem is that MyFonts and many other distributors ask for OTF & TTF.  \nSo yes... I do Fontlab Autohinting for OTF... and try instaling AFDKO for the autohint only\n\nThanks guys\n\n"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "3788",
+  "title": "Calt on fontlab",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Bonjour,   \n   \nI'm working on an experimental font for titling, using Fontlab with the calt feature (ot).   \nPlease have a look to the attached files to see how i'm trying to do... \"Abracadabra\" version is less important, it will be the result of a random feature.   \nTo obtain the effect of deformation that you can see in the \"colonel\" exemple, I've created 5 sizes in the same font. First I digit my word with lowercases, then I choose one letter (in the middle of the word) and I change it in capitals (the biggest size).   \nI've created five classes for each sizes (from the very small to the biggest : minuscules, petites, moyennes, grandes, capitales), and I've tried to apply calt feature to make contextual substitutions.   \nThe code :   \n   \nfeature calt {   \n sub @minuscules' @capitales by @grandes; #first level of sub.   \n sub @capitales @minuscules' by @grandes;   \n sub @minuscules' @grandes by @moyennes; #second level of sub.   \n sub @grandes @minuscules' by @moyennes;   \n sub @minuscules' @moyennes by @petites;   \n sub @moyennes @minuscules' by @petites;   \n} calt;   \n   \nThe problem is that the program consider only the first substitution. The second and the third substitution refer to the first substitution, but it doesn't works because everything is in the same feature. I don't know if it's quite clear for you, it's so difficult to explain in my bad english... My question is : do I need to put some lookups to make that the first level of substitution takes effect, so the second will may refers to...   \n   \nThank you so much for your patient attention   \n   \nE.A. ![colonel](http://web.archive.org/web/20150113011459im_/http:/www.typophile.com/forums/messages/4101/29230.jpg) ![abracadabra](http://web.archive.org/web/20150113011459im_/http:/www.typophile.com/forums/messages/4101/29231.jpg)\n\n",
+  "author": "elena",
+  "time": "25 Mar 2004 — 8:03am",
+  "uid": "3290",
+  "comments": [
+    {
+      "time": "10 Oct 2007 — 3:41pm",
+      "content": "I just found this. Apparently everybody else missed it too. As it happens I am looking for similar info today.\n\n"
+    },
+    {
+      "time": "11 Oct 2007 — 12:30am",
+      "content": "Try this:\n\nfeature calt {\n\nlookup calt1 {  \nsub @minuscules' @capitales by @grandes; #first level of sub.  \nsub @capitales @minuscules' by @grandes;  \n} calt1;\n\nlookup calt2 {  \nsub @minuscules' @grandes by @moyennes; #second level of sub.  \nsub @grandes @minuscules' by @moyennes;  \n} calt2;\n\nlookup calt3 {  \nsub @minuscules' @moyennes by @petites;  \nsub @moyennes @minuscules' by @petites;  \n} calt3;\n\n} calt;\n\n"
+    }
+  ]
+}

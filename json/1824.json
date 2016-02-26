@@ -1,0 +1,122 @@
+{
+  "id": "1824",
+  "title": "Any update on fixing the awful line-lenghts on Typophile?",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "I know this has been brought up before with some response, but it never seems to go anywhere. So I'll ask again ;o)   \n   \nIs there anything we can do to fix the fact that if one posts a wide image it completely messes up the entire layout of the thread with extremely-wide-impossible-to-read line lengths?   \n   \nIt seems the easy solution would be to wrap each comment in it's own table and/or div instead of putting them all in one containing table.   \n   \nJust a thought. It'd sure make reading some threads a lot easier.\n\n",
+  "author": "aluminum",
+  "time": "Mon, 2003-10-27 13:35",
+  "uid": "1461",
+  "comments": [
+    {
+      "time": " Tue, 2003-10-28 08:52",
+      "content": "the problem with wrapping manually is that it produces clumsy markup/content stored in the database. Not a huge deal, but it's something to consider. Plus, it's more work for the people posting, not to mention that everyone has their own preferred line-lenght ;o)   \n   \nAs for volunteers, send the templates my way. I'd be glad to take a crack at it.\n\n"
+    },
+    {
+      "time": " Tue, 2003-10-28 09:32",
+      "content": "yeah, seriously. we need to find some genius css guy to do the grunt work. i work stephen like a slave maintaining the site as it is!\n\n"
+    },
+    {
+      "time": " Wed, 2003-10-29 11:04",
+      "content": "While you are doing fixes...the email notification   \ndoesn't send me new threads from   \nGeneral Discussions.   \nI have the proper radio button clicked.   \n   \n   \nAnybody else?\n\n"
+    },
+    {
+      "time": " Wed, 2003-10-29 11:10",
+      "content": "Maybe if i start a petition...   \n   \nbj\n\n"
+    },
+    {
+      "time": " Wed, 2003-10-29 11:14",
+      "content": "Brian, all's OK on this end.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Wed, 2003-10-29 11:58",
+      "content": "Okay. Hmmm. I'll just use the Last, 1, 3, 7 ...   \n   \nthanks...\n\n"
+    },
+    {
+      "time": " Wed, 2003-10-29 12:12",
+      "content": "Aargh! What's happened to Typophile? Someone has been playing with the style sheet, and suddenly the message type is 6pt, half my screen is wasted, things are colliding, it's a mess.   \n   \nGuys, fixed pixel type sizes = Really Bad Thing. Those of us with 133+ dpi screens will go blind with this tiny type.   \n   \nSure the line length thing was was annoying, but the way to fix that is to specify text blocks as divs with widths in ems.   \n   \nIt is 6:00 here in Vancouver, and the General Discussion list looks like this (if your resolution is less than 133 dpi, imagine that this graphic is only 5.75 inches wide and the type correspondingly small; the type in threads is about 2pts smaller):   \n   \n ![Typophile at 18:00 hours](http://web.archive.org/web/20050518123141im_/http:/www.typophile.com/forums/messages/30/19500.gif)\n\n"
+    },
+    {
+      "time": " Wed, 2003-10-29 22:21",
+      "content": "As for what John said about the posts contained in   \ndivs with widths set in ems. Here's a few links that   \ngive examples of the technique.   \n   \n [http://www.maxdesign.com.au/presentation/em/](http://web.archive.org/web/20050518123141/http:/www.maxdesign.com.au/presentation/em/)   \n [http://www.svendtofte.com/code/max\\_width\\_in\\_ie/](http://web.archive.org/web/20050518123141/http:/www.svendtofte.com/code/max_width_in_ie/)   \n   \nThat would probably be a good solution. I might be   \nable to lend a hand with some stuff too.   \n   \nMitchell\n\n"
+    },
+    {
+      "time": " Thu, 2003-10-30 10:50",
+      "content": "Just went to edit this double post and noticed the class name for the threads is \"dontLookLikeCrap.\" Perhaps if you added a please?   \n   \n:-)   \nRandy\n\n"
+    },
+    {
+      "time": " Thu, 2003-10-30 12:26",
+      "content": "Tinker away! It is kinda fun to hit refresh and find the whole site set in [Sand](http://web.archive.org/web/20050518123141/http:/www.myfonts.com/fonts/apple/sand/). Ok, that hasn't happened yet. See what you can do? I think you change the 0 to a 1 after the 72nd comma on line 8342 of the script.   \n   \nWhoops! File lock! That must be the 71st comma. :-)   \n   \nThanks.   \nRandy\n\n"
+    },
+    {
+      "time": " Thu, 2003-10-30 13:55",
+      "content": "Well, here's the maths:   \n   \npoint size = (pixel size / resolution) x 72   \n   \nSo 12 pixel type at 72 dpi approximates 12pt type. 12 pixel type at the old typical Windows standard of 96 dpi is approximately 9 pt type.   \n   \nOn my 133 dpi screen, 12 pixel type is about 6.5 pt. On the popular new Del laptops with 145 dpi screens, it is a little smaller than 6 pt.   \n   \nOn the IBM 200 dpi screens (now down to $7,500 US! -- when I started paying attention they were $22,000), 12 pixel type is 4.3 pt.   \n   \nNow what does this tell you about the wisdom of using a non-fixed unit to specify fixed sizes of specify type?\n\n"
+    },
+    {
+      "time": " Fri, 2003-10-31 04:46",
+      "content": "200 dpi screens:   \n   \nviewsonic's 200 dpi is a little bit cheaper than the ibm one:   \n   \n [http://www.viewsonic.com/products/lcd\\_vp2290b.htm](http://web.archive.org/web/20050518123141/http:/www.viewsonic.com/products/lcd_vp2290b.htm)   \n   \nlars\n\n"
+    },
+    {
+      "time": " Fri, 2003-10-31 08:28",
+      "content": "\"The page width is set at 780 pixels. If people post big graphics IE will still maintain the page width, but Safari doesn't. What do you think?\"   \n   \nI think that's simply too wide for comfortable reading lengths for a lot of people. Plus, I normally browser with my window at roughtly 5/600 pixels wide. I think the problem is how the template is spit out.   \n   \nThe code is also INCREDIBLY messy, redundant and bloated with all sorts of font tags and such. On this page, I see 16 closing font tags in a row (yikes!):   \n   \n\\</font\\>\\</font\\>\\</font\\>\\</font\\>\\</font\\>\\</font\\>\\</font\\>\\</font\\>\\</font\\>\\</font\\>\\</font\\>\\</font\\>\\</font\\>\\</font\\>\\</font\\>\\</font\\>   \n   \nThe problem is that the entire thread is in one table that is nested in another table. Each comment in the thread is a TR of the parent, so whatever the parent table's width is, each comment will be that width.   \n   \nIf you want to stick with tables, the fix (I think) is to get rid of the wrapper table and then allow each comment in the thread be it's own table, with a percentage width.   \n   \nThis isn't an uncommon problem with these types of forums that were built in the hey-day of 'let's do everything with a ton of tables' and it's really only a problem here due to the fact that we post rather large images.   \n   \n\"Arial, Helvetica, Sans-serif at 12pixels (not 12points).\"   \n   \nA typographic site spec'ing Arial? Gasp! Shock! Horror! ;o) ;o) ;o)\n\n"
+    },
+    {
+      "time": " Fri, 2003-10-31 11:32",
+      "content": "Joseph:   \n   \nI'm not sure you need to dump the system...   \nyou just need to tweak the template engine.   \n   \nNow, that may be very easy, or that may be   \nvery hard. It depends on how the system was   \ndesigned.   \n   \nMay we ask what BB system you are using?\n\n"
+    },
+    {
+      "time": " Fri, 2003-10-31 15:47",
+      "content": "Joseph, spec'ing type in pts or another resolution-independent measure is certainly the best idea. Yes, the results are going to vary across platforms, but they are not going to vary as greatly as fixed size pixel type across different resolutions. Personally, I think type size should not be spec'd at all, except as relative to body type, but should be determined by the user-side preferences, and all other measurements, e.g. text block width, should be spec'd in ems so that these too are relative to the body type. That way you have perfectly scaleable web pages.   \n   \nAbove, Darrel says that he thinks 780 pixels is 'simply too wide for comfortable reading lengths for a lot of people', but this observation is itself based on the assumption that the type is spec'd in pixels. If the type were spec'd in pts, then the number of words a on 780 pixel measure would depend on the resolution: it would probably be a bit narrow for comfort on my screen. But if the type were spec'd as pts and the measure spec'd in ems, then the number of words on a line would be the same regardless of the resolution.\n\n"
+    },
+    {
+      "time": " Sun, 2003-11-02 02:50",
+      "content": "The CSS max-width property may be pertinent here:   \n   \n [http://www.svendtofte.com/code/max\\_width\\_in\\_ie/](http://web.archive.org/web/20050518123141/http:/www.svendtofte.com/code/max_width_in_ie/)\n\n"
+    },
+    {
+      "time": " Mon, 2003-11-03 08:33",
+      "content": "Let me rephrase...780 pixels is just too wide for my browser regardless of the line length.   \n   \nMax-width won't remedy the current situation, which is images that are too wide that push the table to a certain width. Since every comment in the thread is part of the same table, they all inherit the widest post. (Plus, max-width doesn't work in IE/PC or Safari/Mac...\\*sigh\\*).\n\n"
+    },
+    {
+      "time": " Wed, 2003-11-05 00:14",
+      "content": "I don't know, Joseph.   \nIt looks fine here (1024x768).   \n   \nBTW, I too prefer Verdana. At least for me, the   \nforums are harder to read with Arial. It looks too   \nnarrow and tight.\n\n"
+    },
+    {
+      "time": " Wed, 2003-11-05 07:06",
+      "content": "I have the screen resolution as Eduardo, and for me, too, the Ariel is hard to read. I also much prefer the Verdana you had before.\n\n"
+    },
+    {
+      "time": " Wed, 2003-11-05 09:26",
+      "content": "The point being that the web is about USER   \npreferences...not creator preferences. You like   \nArial, he likes Verdana, she likes brush script.   \nShe has a gigantic monitor, he uses a PDA.\n\n"
+    },
+    {
+      "time": " Wed, 2003-11-05 10:24",
+      "content": "On my end, the Typophile Forums are notably worse now in terms of typography.   \nI can tangibly feel the stutters I've been making since the \"redesign\". Please put it back! :-)   \n   \nAnd I don't get this anti-Verdana business - it's so much better than Arial for this type of thing it's not even funny.   \n   \nIs there a platform difference perhaps?   \nLike for me [http://www.designobserver.com/](http://web.archive.org/web/20050518123141/http:/www.designobserver.com/) looks great, on both browsers.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Wed, 2003-11-05 11:28",
+      "content": "Joe and Jared,   \n   \nDo you use the optional MySQL back end? If so, it wouldn't be hard to write a different application using the same data as the Discus app. If you don't use MySQL, it would still be interesting to see how they store the data. It may not be too hard to migrate it to a database.   \n   \nI may be able to donate some time into writing a different system using the same data (right now I'm \"self employed\", to I have some time). Sometimes it's easier to rewrite something from scratch than trying to adapt someone elses clunky code to your needs. (The LettError guys have some inspiring [ideas](http://web.archive.org/web/20050518123141/http:/letterror.com/code/coding.html) about this)   \n   \nIf nothing else, I could rewrite the typophile map. I've been bitter ever since it put me in Idaho.\n\n"
+    },
+    {
+      "time": " Wed, 2003-11-05 11:32",
+      "content": "And there's nothing worse than a bitter potato.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Thu, 2003-11-06 01:35",
+      "content": "Darrel,   \n   \nIf you browse the article I linked, you'd see that you could implement a max-width solution by applying it to the \\<p\\> element. Even if an image is larger in width you could limit the width of a paragaph element's contents.   \n   \nSvend's article explains how to make it work in IE/PC. I don't know about Safari however.   \n   \nOf course this assumes that paragraphs are actually marked up with \\<p\\> tags in the posts -- which they're not. Maybe one day web standards will actually be _the_ standard.\n\n"
+    },
+    {
+      "time": " Thu, 2003-11-06 08:41",
+      "content": "Tim:   \n   \nYea, in theory that could work. But it'e be much easier just to kill the nested table template and apply the width attribute to individual comment wrappers (whether that remains a table or becomes a DIV/SPAN).\n\n"
+    },
+    {
+      "time": " Thu, 2003-11-06 08:52",
+      "content": "I'm pretty sure Gentium is not \"superhinted\".   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Thu, 2003-11-06 16:17",
+      "content": "Darrel,   \n   \nOf course -- I agree. I would love to see the Typophile forums make the leap to full CSS. The benefits are too numerous to discuss here, but you know it's true. _If_ I have time, I'd be willing to give a hand.\n\n"
+    }
+  ]
+}

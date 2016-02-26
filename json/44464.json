@@ -1,0 +1,22 @@
+{
+  "id": "44464",
+  "title": "FontLab's blinkenlights",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "So, I finally upgraded from TypeTool to FontLab. And it has all these handy little indicators that are trying to tell me... something. I've worked out that a red name/code bar in the font window means the name is not standard, and that a little blue square in the upper left corner means a glyph is being used at two codepoints. But I don't know what a little red hyphen underneath means, or why certain glyphs appear navy in the metrics window, or why certain kerning values are red, or why there's a little periwinkle rectangle next to certain characters in the kerning table... And it's really hard to find these things mentioned in the manual. It seems at least half of them must indicate something I need to do something about. Is there a key somewhere?\n\n",
+  "author": "cerulean",
+  "time": "20 Apr 2008 — 3:30pm",
+  "uid": "2462",
+  "comments": [
+    {
+      "time": "20 Apr 2008 — 4:10pm",
+      "content": "I can help with a few:\n\nRed bar beneath a glyph in the font window means it's the master glyph in a kerning class.  \nNavy glyphs in the Metrics window are non-master glyphs of a kerning class.  \nRed kerning pairs are defined exceptions in class kerning.\n\nYou should read the Class Kerning section of the manual, which covers all this comprehensively.\n\nI myself haven't figured out under what circumstance a hinting symbol is displayed under a glyph in the font window. Sometimes they're green, sometimes red. They only appear if there are overlapping hints, but I haven't yet figured out the colours.\n\nI should probably re-read the Hinting section of the manual I guess!\n\n"
+    },
+    {
+      "time": "20 Apr 2008 — 5:18pm",
+      "content": "@olho: I myself haven’t figured out under what circumstance a hinting symbol is displayed under a glyph in the font window. Sometimes they’re green, sometimes red. They only appear if there are overlapping hints, but I haven’t yet figured out the colours.\n\nRed H means you have overlapping hints. Green H means you have enabled _hint replacement_ to compensate for the overlapping hints. You don't want to have red H's--they should only be green. You can usually fix it by choosing Tools \\> Hints & Guides \\> Autoreplacing, but not always.\n\nRe-reading the hinting section would also be a good idea. :-)\n\n"
+    }
+  ]
+}

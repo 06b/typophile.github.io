@@ -1,0 +1,74 @@
+{
+  "id": "3265",
+  "title": "Automatic ligatures in fonts",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Does anyone know how to get an automatic ligature into a font. I recently learned how to insert ligatures into the AFM file, but I don't know how to make the AFM usable.\n\n",
+  "author": "mantz",
+  "time": "23 Feb 2004 — 6:42am",
+  "uid": "2941",
+  "comments": [
+    {
+      "time": "23 Feb 2004 — 7:13am",
+      "content": "Automatic ligature replacement is either a function of the software being used (that is, to recognize a specific sequence of characters and substitute the appropriate standard ligature), or a function programmed as a feature in an OpenType format font.   \n   \nFor a series of characters to be replaced by a ligature automatically, the font being used still needs to contain the ligature itself as a separate glyph. Inserting ligatures into the AFM file serves not purpose of the ligature itself does not exist as part of the character set in the font.\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 7:27am",
+      "content": "In this case, the ligatures (as glyphs) have already been drawn (The only one that is missing is the ff).   \n   \nOn many Adobe fonts, the ligature replacment seems to happen automaticaly (assuming my preferences are set correctly), but fonts from other foundries (ie Emigre or Storm) don't. I recently heard that by inserting code into the AFM file you can make ligature replacments happen, but my experiments have not yet yielded any results.   \n   \nMaybe the question could have been different: \"What is Adobe doing that no one else is?\"\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 7:33am",
+      "content": "Hmm... I've never heard of a technique where modifying the AFM would assist mapping of ligatures to individual characters. I was under the impression that no current applications refer to the AFM file in any way whatsoever (except perhaps under Windows in order to produce a PFM file if one was missing).\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 7:53am",
+      "content": "I assume that Robert is speaking of Quark's automatic ligature function, which automatically replaces fi and fl ligatures only. Unfortunately, it only does this with fonts that are encoded with Adobe Standard Encoding. Emigre, Storm, Font Bureau, Hoefler, and others do not always generate with Adobe Standard Encoding.   \n   \nThe AFM trick doesn't do any good on the Mac platform. I saw that documented in the Type 1 spec, but never got it to work either. I think it may only apply to Windows systems. (Note that the fi and fl ligatures themselves are not available from the Windows keyboard.)   \n   \nThe irony here is that fonts which have been made with the extra ff ligatures in some of the less frequently used character slots (which is why they don't use Adobe encoding) don't get the basic fi and fl ligs substituted, so it all has to be done manually.   \n   \nThis is undoubtedly due to the Quark implementation of its substitution algorithm. Presumably is assumes that if a font isn't encoded with Adobe Standard Encoding, then it might not be an alphabetic font, and so it doesn't do any f-lig substitution.   \n   \nThere is actually a workaround for this, which Cherie Cone applies to Carter & Cone fonts. It involves modifying a resource in the suitcase. She uses a proprietary utility (that only works on old Mac OSes, I think). I have info here somewhere, but I don't remember the details offhand. If I get a chance, I'll look it up.   \n   \nOn the flip side, Thomas Phinney tells me that InDesign will automatically replace not only the fi and fl ligs from a regular PS Type 1 font, but also ff-ligs, if they are present and named in a certain way. The downside is that they aren't actually encoded, so there can't be any kern pairs for them.   \n   \n-- K.\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 9:27am",
+      "content": "Yes, it's OK (I tried to post this in the build section and couldn't figure out how).   \n   \nYou've hit the nail on the head Kent; thanks for all the information! If you do find the information on the Carter & Cone workaround, I would be very interested to see it.\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 11:00am",
+      "content": "\\> _The AFM trick doesn't do any good on the Mac platform._   \n\\> _I saw that documented in the Type 1 spec, but never got it_   \n\\> _to work either. I think it may only apply to Windows systems._   \n   \nWell, I'll be blasted. Thanks for the elucidation, Kent.   \n   \nAs for the Carter & Cone method of modification of the suitcase data, this should work under Mac OS X, providing the format of the suitcase data (the glyph mapping tables, I am assuming) has not changed. I wonder if their utility runs in Classic?\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 11:06am",
+      "content": "I have a feeling it's just ResEdit.   \n   \nBTW, is Cherie Cone responsible for some technical aspects of type production?   \n   \nhhp\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 11:56am",
+      "content": "\\> _I have a feeling it's just ResEdit._   \n   \nGood point. Although it could be ResEdit employing a customized editor template, which would facilitate modification of the font data. The default FOND and NFNT resource templates in ResEdit are sadly lacking in depth.\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 12:13pm",
+      "content": "But don't you just love its keyboard creation part? Wonderful.   \n   \nBTW, does ResEdit work in X? If not, is there an equivalent for X?   \n   \nhhp\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 12:24pm",
+      "content": "I am about to reveal my ignorance but....   \n   \nWhat does ResEdit do? and what is a resource fork?   \n   \n(Maybe I should be posting such questions on a Macintosh utility site.)\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 1:34pm",
+      "content": "I'm not sure what the purpose of the \"AFM trick\" ever was. Maybe it was used by TeX? I don't think it does anything for any mainstream Windows applications.   \n   \nAs for ff-ligs in indesign, you can make them work for regular Type 1 fonts just by naming the glyphs ff, ffi and ffl. You can leave the glyphs unencoded.   \n   \nT\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 4:19pm",
+      "content": "\\> _What does ResEdit do?_   \n   \nResEdit is a resource editor developed Apple Computer. Resources contain bits of code and data related various attributes of a Macintosh-Based file or application. By modifying these resources with a utility such as ResEdit, you can change the behaviour, appearance or contents of the file or application your are editing.   \n   \nResEdit does indeed work under Classic in OS X.\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 5:20pm",
+      "content": "It's not ResEdit. It's a little application called FondModifier. It appears to have been written for them by some \"very bright fellow\" (Cherie's words) who used to work with them at Bitstream.   \n   \nI suppose you could make the modifications with ResEdit if you knew how to read the hexadecimal.   \n   \nBasically the change is to add back PS glyph name 222: fi and PS glyph name 223 : fl.   \n   \nUsing Apple's DumpFOND tool, I checked a C&C font and it shows:   \n   \n/\\* GLYPH REENCODING TABLE \\*/   \n   \nName for character code 0xDE: 'fi'   \nName for character code 0xDF: 'fl'   \n   \nMaybe you could use Apple's FuseFOND to make this change to the FOND. I think I tried it once and couldn't get it to work.   \n   \nI don't understand how or why this modification works. The fi and fl glyphs should be encoded to Dec 222 and 223 in the encoding array of the PS font. I don't know why a \"reencoding table\" is needed in the FOND.   \n   \nBut that's how it works.   \n   \n-- K.\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 9:14am",
+      "content": "Hope it was okay that I moved this to the \"BUILD\" area. ![:-)](http://web.archive.org/web/20120615081139im_/http:/www.typophile.com/forums/clipart/happy.gif)\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 1:42pm",
+      "content": "_\"BTW, does ResEdit work in X? If not, is there an equivalent for X?\"_   \n   \nI'm not sure about the font environment, but most resources in   \nOS X are much more accessible. The Finder contextual menu of   \nany application icon offers \"Show Package Contents\" which   \nreveals that app's editable resources directly in the Finder view.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "57698",
+  "title": "Fontlab - Changing diacritics' case",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "Well, this is probably a easy one:\n\nWhen working in FreeFont mode, how can I assign automatically a lower-case acute mark to a lower-case glyph and a upper-case mark to a upper-case glyph?\n\nFontlab insists on giving lower-case marks to all characters.\n\nThank you in advance.\n\n",
+  "author": "scannerlicker",
+  "time": "5 May 2009 — 3:33pm",
+  "uid": "10256",
+  "comments": [
+    {
+      "time": "5 May 2009 — 4:17pm",
+      "content": "Good question. This will also be helpful to me.\n\n"
+    },
+    {
+      "time": "5 May 2009 — 4:19pm",
+      "content": "Check out Ben Kiel's BuildAccent python library. Once you set up the build file it's easy. [http://benkiel.com/typeDesign/](http://web.archive.org/web/20150424141938/http:/benkiel.com/typeDesign/ \"http://benkiel.com/typeDesign/\")\n\n"
+    },
+    {
+      "time": "5 May 2009 — 5:34pm",
+      "content": "Question from non-user: If you have `acutecomb` and `acutecomb.cap`, for instance, in your `case` substitution, does it not automatically replace it when needed? FontForge does it for me...\n\n_«El futuro es una línea tan fina que apenas nos damos cuenta de pintarla nosotros mismos». (La Luz Oscura, por Javier Guerrero)_\n\n"
+    },
+    {
+      "time": "5 May 2009 — 6:31pm",
+      "content": "If you name your uppercase accents with a .case suffix FontLab will use most of them. You can customize all of this by editing the alias.dat file. You can go as far as using small cap accents named with a .smcp suffix and most of them will work as well. Watch out for those caron.case and caron.smcp uses. You really have to edit alias.dat for those to work.\n\n"
+    },
+    {
+      "time": "6 May 2009 — 4:05am",
+      "content": "OK, thank you guys!\n\nterminaldesign, can you provide me an explanation on how to do this?\n\nCheers!\n\n"
+    },
+    {
+      "time": "6 May 2009 — 6:39am",
+      "content": "It is a text edit procedure. Here are the first few lines of the alias.dat file:\n\n%%FONTLAB ALIASES  \n% Build 2005-09-05 for FontLab Studio 5.0 or higher  \nAE A\\_E  \nAEacute AE+~acute.case  \nAEacute AE+acutecomb  \nAEacute AE+acute  \nAEacute.small AE.small+~acute.small  \nAacute A+~acute.case  \nAacute A+acutecomb  \nAacute A+acute  \nAacute.small A.small+~acute.small  \nAbreve A+~breve.case  \nAbreve A+uni0306  \nAbreve A+breve  \nAbreve.small A.small+~breve.small  \nAcircumflex A+~circumflex.case  \nAcircumflex A+uni0302  \nAcircumflex A+circumflex  \nAcircumflex.small A.small+~circumflex.small  \nAdieresis A+~dieresis.case  \nAdieresis A+uni0308  \nAdieresis A+dieresis  \nAdieresis.small A.small+~dieresis.small  \nAgrave A+~grave.case  \nAgrave A+gravecomb  \nAgrave A+grave\n\nAs you can see there are several formulas for constructing the composite glyph. If the components are available for the first formula, it will be used. If not the the second formula will be tried, and finally the third.\n\nYou can edit these, so if you don't use .case, but use .cap instead, do a find and replace and change it.\n\nJust make sure you have a backup of the original in case you screw it up.\n\n"
+    },
+    {
+      "time": "6 May 2009 — 7:34am",
+      "content": "Useful info, thanks :)\n\n"
+    },
+    {
+      "time": "7 May 2009 — 4:15am",
+      "content": "Thanks terminaldesign, it worked and helped a lot!\n\n:)\n\n"
+    },
+    {
+      "time": "7 May 2009 — 7:23am",
+      "content": "Thanks, James! Works great.\n\nMaybe also (a tiny little) useful... to batch change suffixes:\n\n ![](http://web.archive.org/web/20150424141938im_/http:/typophile.com/files/more_5396.png)\n\n"
+    },
+    {
+      "time": "8 May 2009 — 6:10am",
+      "content": "Hey Jos!\n\nThat's soooo handy!\n\n"
+    },
+    {
+      "time": "9 May 2009 — 2:42am",
+      "content": "Thanks. I really took me some time to find out where this command resided.\n\n"
+    },
+    {
+      "time": "22 May 2009 — 11:44am",
+      "content": "James, thanks for this!!!\n\n"
+    },
+    {
+      "time": "22 May 2009 — 12:40pm",
+      "content": "What's that tilde before some of the components in the alias.dat file?\n\n"
+    },
+    {
+      "time": "22 May 2009 — 1:29pm",
+      "content": "The tilde before the component is an instruction not to reposition the component. One assumes that the .case or .small accents are designed at the appropriate height to correctly position over the glyphs. If you left the tilde out FontLab would raise the position of the accent assuming it was originally positioned for the lowercase.\n\n"
+    },
+    {
+      "time": "22 May 2009 — 1:36pm",
+      "content": "Adam Twardoch explains it all in depth here:\n\n[http://forum.fontlab.com/archive-fontlab-tips-and-tricks/tips-composites...](http://web.archive.org/web/20150424141938/http:/forum.fontlab.com/archive-fontlab-tips-and-tricks/tips-composites-generate-glyphs-tricks-t3171.0.html \"http://forum.fontlab.com/archive-fontlab-tips-and-tricks/tips-composites-generate-glyphs-tricks-t3171.0.html\")\n\n"
+    },
+    {
+      "time": "22 May 2009 — 1:39pm",
+      "content": "I see - thanks!\n\n"
+    },
+    {
+      "time": "22 May 2009 — 5:11pm",
+      "content": "Thanks, [track].\n\n"
+    },
+    {
+      "time": "25 Aug 2011 — 2:54am",
+      "content": "Awesome, I keep on learning new tricks!\n\nCan't seem to find that alias.dat file anywhere though? Am on a windows vista machine...\n\n"
+    },
+    {
+      "time": "26 Aug 2011 — 5:29am",
+      "content": "Try Program Files/Common Files/Fontlab/Data.\n\n"
+    },
+    {
+      "time": "27 Aug 2011 — 2:27am",
+      "content": "Yes, that's it! Awesome, thanks Ben!\n\n"
+    },
+    {
+      "time": "31 Jul 2014 — 9:11am",
+      "content": "Can someone explain what the alias.dat file does exactly? I mean, is it safe to replace the file once you're almost done with your font or should this be done at the beginning of the design process?\n\n<cite>Just make sure you have a backup of the original in case you screw it up.</cite>\n\nWhat can potentially go wrong?\n\n"
+    },
+    {
+      "time": "31 Jul 2014 — 9:33am",
+      "content": "alias.dat has no effect on the font file. You can modify it to change the automated building of composite glyphs, like for example doubleclicking the æ adds composites of a & e.\n\n"
+    },
+    {
+      "time": "31 Jul 2014 — 11:03am",
+      "content": "I had a look at the file and I'm puzzled as to what I actually need to change for cap diacritics, or is it just a matter of being consistent with the suffixes? Is there a preference between .case and .cap?\n\n"
+    },
+    {
+      "time": "31 Jul 2014 — 11:43am",
+      "content": "I'm trying to make the L-caron but can't get it to work. First off, since the caron in L-caron looks like a comma, I created a glyph called 'caroncomma'. I doubt this is how it's supposed to be done, so what's the correct way?\n\nI used caroncomma to generate l-caron and it works as I would expect. For L-caron I created a second caroncomma and tried the names caroncomma.cap, caroncomma.case and caroncommacap but in all cases the caron is placed too high in L-caron. So what do I change in alias.dat to fix this? Also, won't I run into problems when opening the font on a computer which has the unmodified alias.dat?\n\n"
+    },
+    {
+      "time": "31 Jul 2014 — 12:09pm",
+      "content": "Aacute A+~acute.case  \naacute a+~acute\n\nFrom the FontLab forum:  \n“You'll find it in the \"Creating Composites and Ligatures\" section in the manual:\n\nIn the composition recipe, the \"+\" command may be followed by one or  \ntwo alignment commands:  \n^ align component to the uppercase position  \n~ do not move component vertically  \n\\< align component to the left of the base glyph  \n\\> align component to the right of the base glyph  \n| center component horizontally\n\n[...]\n\nUse \"%=\" instead of \"=\" to decompose created composite glyph. For  \nexample:  \nA+^ring%=Aringdecomposed”\n\nYou won’t run into problems when opening the font on another computer.\n\n"
+    },
+    {
+      "time": "31 Jul 2014 — 12:47pm",
+      "content": "Ohh these are codes to be used for the Generate Glyphs command. For some reason I missed that. Thanks for elaborating.\n\nTwo question which went unanswered: is it better to use .case, .cap or doesn't it matter as long as you're consistent? What's the appropriate name of the caron that looks like a comma?\n\n"
+    },
+    {
+      "time": "6 Aug 2014 — 7:08am",
+      "content": "alias.dat is used for generate glyphs, and also when you double-click on an empty slot in the font window.\n\n.cap or .case doesn’t matter as long as there is the matching data in alias.dat. On a technical level, you could even use some of each, but that would probably get confusing!\n\nI’d name it the alternate caron... caron + some extension. Could be caron.commalike or caron.alt.\n\n"
+    }
+  ]
+}

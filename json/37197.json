@@ -1,0 +1,102 @@
+{
+  "id": "37197",
+  "title": "Font Remix Tools 1.0 now available",
+  "forum": "Tim Ahrens's blog",
+  "tags": [
+
+  ],
+  "content": "Hi all,\n\nI am happy to announce the first public version of my Font Remix Tools for FontLab.  \nIf you have an MM font with a weight axis these tools allow you to generate true small caps, tabular figures or even true condensed versions in a single step with an easy to use dialogue.  \nThe Remix Tools come with an installer so you do not need any FL scripting knowledge to get them to work.\n\nMore info and download at:  \n [http://justanotherfoundry.com/tools/RMX](http://web.archive.org/web/20081011052641/http:/justanotherfoundry.com/tools/RMX)\n\nSorry for crossposting if you have already read this.\n\nEnjoy!  \nTim\n\n",
+  "author": "<a href=\"/web/20081011052641/http://www.typophile.com/user/4763\" title=\"View user profile.\">Tim Ahrens</a>",
+  "time": "<br>",
+  "uid": "4763",
+  "comments": [
+    {
+      "time": " 17.Sep.2007 10.56am",
+      "content": "Interesting. Could you explain how your tool compares to Superpolator, and to existing FontLab tools?\n\n"
+    },
+    {
+      "time": " 17.Sep.2007 11.23am",
+      "content": "Difficult to make a comparison there. As far as I know, Superpolator improves interpolation and the like but does not aim at changing individual glyph shapes. It is a different tool for different tasks.\n\nThe Remix Tools essentially allow to scale glyphs while avoiding the nasty side effects that mess up stroke characteristics. This may not sound very exciting at first but it saves a great deal of time.\n\n"
+    },
+    {
+      "time": " 17.Sep.2007 12.31pm",
+      "content": "Very cool Tim.\n\nJust for clarification:  \n(EDITED) Just looked at the manual. And, yes it has width controls. I’ll be curious to see how it handles diagonals. I notice that manual features and H (for clarity I understand).\n\nThank you for making this available to other type designers.\n\nRandy\n\n"
+    },
+    {
+      "time": " 17.Sep.2007 12.43pm",
+      "content": "Thanks Tim!!!\n\nChrisL\n\n"
+    },
+    {
+      "time": " 18.Sep.2007 7.04am",
+      "content": "Thanks Tim :-) I have problems however to get it to work.\n\nI ran the installer and the scripts ended up in the top level. That didn’t work. So i made a folder for them. Still doesn’t work.  \nI press the Run button bit nothing happens.\n\nIs there something I’m missing?\n\n"
+    },
+    {
+      "time": " 18.Sep.2007 7.46am",
+      "content": "Really, <cite>nothing</cite> happens? Strange.\n\nDid you have a font open when you ran the macro?  \nWhether you put them in a subfolder or not does not matter.\n\n"
+    },
+    {
+      "time": " 18.Sep.2007 7.53am",
+      "content": "Yes, I made a weight MM. Maybe I have something installed that conflicts? I work on OSX 10.4.10.  \nI’ve re-booted too.\n\n"
+    },
+    {
+      "time": " 18.Sep.2007 8.08am",
+      "content": "Which of the tools is it you tried? Was there no error message either? Do other macros work normally on your system?\n\nAlso, FL tends to get confused as to which of the windows/pallettes has the focus. It may be worth clicking on the respective window (Font Window for Scaler and Monospacer; Glyph Window for the Tuner) once more before running the macro in order to make sure that window really has the focus.\n\n"
+    },
+    {
+      "time": " 18.Sep.2007 8.43am",
+      "content": "Macros usually works, but now I see that suddenly a whole bunch of my macros has stopped working (for instance your SC script). I can’t say that it happened today when I installed RMX or a few days ago. If it works for everyone else then it’s probably something with my machine. Bad permissions or something.\n\n"
+    },
+    {
+      "time": " 18.Sep.2007 12.43pm",
+      "content": "Same here, all errors.\n\nIn Glyph window, with an MM .vfb, activating the RMX Tuner gives:\n\nFile “\\< string \\>”, line 206\n\nSyntaxError: invalid syntax\n\nIn Font window, with an MM .vfb, activating the RMX Scaler gives:\n\nFile “\\< string \\>”, line 358\n\nSyntaxError: invalid syntax\n\n—K\n\n"
+    },
+    {
+      "time": " 18.Sep.2007 12.49pm",
+      "content": "tim, thnx for this! i’m on WinXP FLS5 and everything works as outlined in your PDF. just thought i’d chip in. :D\n\n"
+    },
+    {
+      "time": " 18.Sep.2007 2.07pm",
+      "content": "Good news, the “Reset macro” button when used inside the “Edit macro” window did the trick. Now I get both the panel, and a nicely generated test SC :-)\n\n"
+    },
+    {
+      "time": " 18.Sep.2007 3.16pm",
+      "content": "Cool, I’m going to try it out. I don’t have any experience with using add ons. You guys sound very programming savvy.\n\nDo you make a separate font for SC, alternates, etc., or do you use OpenType coding?\n\nThanks,  \nTerrance\n\n"
+    },
+    {
+      "time": " 18.Sep.2007 3.23pm",
+      "content": "Ahh, yes, weird. Running the macros from the macro editor works for me as well, but still not from the macro toolbar.\n\n—K\n\n"
+    },
+    {
+      "time": " 19.Sep.2007 5.01am",
+      "content": "Sorry for dropping out for a while.\n\nThanks to Kris’s report I think I could track down the problem. It seems different configurations are more fussy than others regarding empty lines at the end of a script.\n\nI have uploaded the fix as version 1.01, which you can get from the download page, [http://justanotherfoundry.com/tools/RMX](http://web.archive.org/web/20081011052641/http:/justanotherfoundry.com/tools/RMX \"http://justanotherfoundry.com/tools/RMX\")\n\nSorry for the inconvenience.\n\n"
+    },
+    {
+      "time": " 19.Sep.2007 5.11am",
+      "content": "Terrance:  \n<cite>Do you make a separate font for SC, alternates, etc., or do you use OpenType coding?</cite>\n\nNowadays these things would typically be implemented as OpenType features. If you use “add suffix” in the RMX Scaler this automatically generates the new glyphs such as small caps as copies in the same font.\n\nIn case you know that the application you use the fonts in does not support the necessary OpenType feature you may still want to use the “old-fashioned” system of putting the small caps or alternates into a separate font.\n\nAdam Twardoch made some interesting points in this thread: [http://typophile.com/node/32455](http://web.archive.org/web/20081011052641/http:/typophile.com/node/32455 \"http://typophile.com/node/32455\")\n\n"
+    },
+    {
+      "time": " 19.Sep.2007 8.59am",
+      "content": "Thanks Tim. Yeah, I’m still trying to figure out how to use OpenType features in FL. Thanks again for the tip, and the link.\n\nI’m working on an egyptian that has alternates, you can check it out at:  \n [http://typophile.com/node/34427](http://web.archive.org/web/20081011052641/http:/typophile.com/node/34427 \"http://typophile.com/node/34427\")\n\n"
+    },
+    {
+      "time": " 19.Sep.2007 3.51pm",
+      "content": "I’ve been using the Remix tools for a while, starting with various beta versions, and I must say: they are the coolest thing EVAR! TOTALLY L33T TULZ!\n\nSeriously, they are truly amazing. I’ve already saved vast amounts of time with these, and expect to save a lot more. They even make it practical to do some things I would never have taken seriously before.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": " 19.Sep.2007 4.02pm",
+      "content": "Thanks, Thomas!\n\nI have to say I would not have brought the tools to this stage without the valuable feedback from my beta testers Adam, Dario, Georg, José, Karsten and Thomas. Thanks to all!\n\n"
+    },
+    {
+      "time": " 21.Sep.2007 9.50am",
+      "content": "Tim - very impressive! You are right, this tool saves a real heap of time. The tools make available things that I remember doing with Ikarus on Unix a few years ago.\n\nM\n\n"
+    },
+    {
+      "time": " 21.Sep.2007 2.15pm",
+      "content": "Malcolm, do you mean the Ek module of the Ikarus system? The interesting thing is that the underlying system is radically different. Ikarus “knows” what stems are, and therefore preserves them. RMX has, to put it bluntly, not much idea what stems are. The whole power comes from the designed bold. One system cannot do without special hints, the other one needs a bold.\n\nI made a comparison between the results of the Ek module and the RMX tools.\n\nThis is the unscaled version, which I show here so you can see which of the differences in the condensed stem from the slightly different input shapes:\n\n ![](http://web.archive.org/web/20081011052641im_/http:/www.typophile.com/files/Leipziger_regular_5226.gif)\n\ntop: Ikarus, bottom: OpenType\n\nThis one is automatically condensed:\n\n ![](http://web.archive.org/web/20081011052641im_/http:/www.typophile.com/files/Leipziger_condensed_5741.gif)\n\ntop: Ikarus, bottom: Font Remix Tools\n\nThe results are surprisingly similar. However, I believe the results of the Remix Tools are better because the horizontal proportions are not chosen by an intelligent program but are influenced by the rhythm of black and white found in the manually designed bold. I like the overall rhythm of the RMX version better, although the g is somewhat too narrow. With the help of the RMX Tuner it is very easy to quickly and intuitively adjust the width of individual letters, though.\n\n"
+    },
+    {
+      "time": " 21.Sep.2007 7.57pm",
+      "content": "Your sample of Remix is certainly smoother than the Ikarus.\n\nChrisL\n\n"
+    }
+  ]
+}

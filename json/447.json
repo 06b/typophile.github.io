@@ -1,0 +1,42 @@
+{
+  "id": "447",
+  "title": "What causes 'rays' in Postscript font?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi folks! I am looking for a bit more information on Postscript drawing to help me troubleshoot my current font.   \n   \n ![Here's a picture of the problem.](http://web.archive.org/web/20131108172703im_/http:/www.typophile.com/forums/messages/4101/12179.gif)   \n   \nAs you can see, I have a few long, thin, unwanted lines across a few glyphs, i.e., 2, 7, 0, A, B, F, G, H, Q, R, U, W, X, Y, Z. Somewhere I picked up that those are called 'rays'.   \n   \nI understand that rays can be caused by open paths, overlapping points, lack of extrema or crossing BCP handles, but I can find none of those things in these (albeit extremely complex) glyphs.   \n   \nAnything else I can look for to fix?   \n   \nThanks in advance!   \n   \np.s. When printed or rendered anti-aliased, they disappear, but of course I want them to look right everywhere, y'know?\n\n",
+  "author": "abecedarienne",
+  "time": "24 Jun 2003 — 2:22pm",
+  "uid": "1629",
+  "comments": [
+    {
+      "time": "24 Jun 2003 — 2:37pm",
+      "content": "This is \"spiking\" caused by having an inordinate number of points in each character, or by having points on top of points (sometimes consecutive, sometimes not). The way to get rid of spiking is to drastically reduce the number of vertices in your outlines, and especially make sure that there aren't any points sitting on top of each other.   \n   \nOften the spiking disappears when printing, or when anti-aliased, as you mention. But it's not a sure thing, by any means. Spiking can show up in printed documents at unpredictable times.   \n   \nAlan\n\n"
+    },
+    {
+      "time": "24 Jun 2003 — 2:59pm",
+      "content": "Thanks, Alan!   \n   \nDo you know how many points is a good limit to prevent spiking?   \n   \nAnd does anybody know if FontLab can report the number of points in a glyph?   \n   \nCheers.\n\n"
+    },
+    {
+      "time": "24 Jun 2003 — 3:09pm",
+      "content": "I always try to stay under 300, even that is extremely rare and really pushing it. Thought it's my understanding that the real limit is around 1000 points.   \n   \nIf you select the outlines in FontLab and right-click, then go to \"Properties\", it will tell you how many outlines and points you have selected. Or if nothing is selected, you'll get window showing more info about the character, which also includes the number of points in the glyph (the first number in the upper left part where all the little numbers are).   \n   \nYou can also turn on FontAudit in FontLab to see if there are any point sitting on top of each other.   \n   \nAlan\n\n"
+    },
+    {
+      "time": "24 Jun 2003 — 3:45pm",
+      "content": "Thanks a million!   \n   \nYou've been a great help.\n\n"
+    },
+    {
+      "time": "29 Jun 2003 — 5:51pm",
+      "content": "Update:   \nI also found this helpful: [http://www.macromedia.com/support/fontographer/ts/documents/spike.htm](http://web.archive.org/web/20131108172703/http:/www.macromedia.com/support/fontographer/ts/documents/spike.htm)\n\n"
+    },
+    {
+      "time": "29 Jun 2003 — 8:08pm",
+      "content": "After all, I found that 95% of the time, the spikes would go away when I deleted these tiny little shapes with very few points.   \n   \nMaybe it has to do with the tiny angle of the curve handles?   \n   \nHere's an example:   \n   \n ![image of tiny problem-causing shape](http://web.archive.org/web/20131108172703im_/http:/www.typophile.com/forums/messages/4101/12310.gif)\n\n"
+    },
+    {
+      "time": "29 Jun 2003 — 9:03pm",
+      "content": "That's one good way to prevent the spiking. Too many of those tiny shapes might be more than the rasterizer can handle.   \n   \nBut also look at the structure of that little shape. It's breaking a few of the rules for Bezier drawing, so that could be it, too. It also looks like one of its points is sitting on top of a point on the other path.   \n   \nUltimately, I think the idea is that Type 1 fonts weren't meant to be so incredibly complicated, so it sometimes freaks out when you push it too far.   \n   \nAlan\n\n"
+    }
+  ]
+}

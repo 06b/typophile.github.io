@@ -1,0 +1,38 @@
+{
+  "id": "69178",
+  "title": "Style linking in Internet Explorer",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "I have read many sources that say Internet Explorer does not support style linking in connection with @font-face.  \nHowever, everything I tried (with IE8/WinXP) worked just like it should, with style-linked fonts, I simply cannot produce that alleged bug.\n\nHave the problems been fixed now? Or are they version-specific? Are there any online examples/demonstration websites that use style linking and are not displayed correctly in IE?\n\n",
+  "author": "<a href=\"/web/20100410144417/http://typophile.com/user/4763\" title=\"View user profile.\">Tim Ahrens</a>",
+  "time": "<br>",
+  "uid": "4763",
+  "comments": [
+    {
+      "time": "",
+      "content": "How are you defining “style linking”?\n\n"
+    },
+    {
+      "time": "",
+      "content": "The alleged problems relate to styles beyond the basic four that GDI understands. If you have @font-face working across a full set of weight classes would be cool to see a posted demo.\n\n"
+    },
+    {
+      "time": "",
+      "content": "@Tim\n\n\\>Internet Explorer does not support style linking in connection with @font-face.\n\nThis is incorrect, yes. font-style and font-weight are supported quite well. But in a different way than is proposed in the CSS3 spec. (In short, certain data must be congruent with the style and weight values in the @font-face declarations. Frankly, in some ways it is a more sure-footed system than what exists in the CSS3 proposal.)\n\nAs the co-creator of [EOTFAST](http://web.archive.org/web/20100410144417/http:/eotfast.com/) I've had a bit of leg up on this because I was able to create compressed EOT files very quickly and easily and therefore test quickly and easily.  \nSee the documentation for EOTFAST for more details on this.  \nIn fact, I'm proposing to deliver a paper on preparing fonts for IE 6, 7, and 8 at Atypi in Dublin later this year.\n\nAlso, here is a [test page](http://web.archive.org/web/20100410144417/http:/readableweb.com/fontface/sc/droidfamilytest.htm) with a complete font-family declared and, in IE, you'll see the regular, italic, bold, and bold italic faces appearing just as they should.  \nA more complicated page, featuring a wide variety of fonts in different weights and styles is here:  \n [Ten Great Free Fonts Cross Browser](http://web.archive.org/web/20100410144417/http:/readableweb.com/fontface/tenfree/tengreat.htm). (Informal notes on what was done to prepare the fonts are at the bottom of the page.)\n\nTip: There seems to be much blind ideological hatred of Microsoft and Internet Explorer. There is also a point of view that would like to see widespread use of @font-face postponed for as long as possible.  \nUnfortunately, in an effort to drive both agendas, it's gotten to the point where misleading statements like, \"IE does not support style linking in connection with @font-face\" are being made even by those who know it's inaccurate.\n\nRich\n\n"
+    },
+    {
+      "time": "",
+      "content": "@sii  \n_If you have @font-face working across a full set of weight classes would be cool to see a posted demo._\n\nSpeak of the devil. (No, not the company you work for.)  \nI happen to be working on a demo of this very thing. Will post when done.\n\nAlso, if memory serves me correctly, you will see numerical weights at work on the page I listed for Tim:  \n [Ten Great Free Fonts Cross Browser](http://web.archive.org/web/20100410144417/http:/readableweb.com/fontface/tenfree/tengreat.htm)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Si: Thanks for your concise answer. Looks like the style linking strategy for EOT will be the same as for normal fonts (at least with respect to those records intended for MS apps).\n\nRichard: I don't see any information beyond what Si said but your demos are interesting nevertheless. That Kaffeesatz example with four weights is obviously with a workaround trick, does it make sense? I would definitely not do it this way.\n\n"
+    },
+    {
+      "time": "",
+      "content": "@sii\n\n\\>The alleged problems relate to styles beyond the basic four that GDI understands.\n\nI don't understand. What is the meaning of the \"basic four styles\" in this context?  \nCSS allows only two values for font-style. Normal or italic(or oblique).  \nNumeric values for font-weight aside, are the four you are referring to the four produced by the combination of font-style and _font-weight_ which has \"bold\" and \"normal\"?  \nSo that the two combined like this will have IE apply the bold italic, or bold...\n\nFor Bold:  \nfont-weight:bold;  \nfont-style:normal;\n\nFor Bold Italic:  \nfont-weight:bold;  \nfont-style:italic;\n\nPlease explain.\n\n@tim ahrens  \nThe CSS for the \"Ten Great Free\" page was taken exactly from the original page which used \"raw\" TTF and OTF fonts only and so did not display in IE.  \nThe point of the page is to show that, as long as the fonts are appropriately prepared, exactly the same CSS will work cross-browser.  \nYes, the way the font families are declared is quite strange, but that's the way it was done, I just preserved it.\n\n_Looks like the style linking strategy for EOT will be the same as for normal fonts (at least with respect to those records intended for MS apps)._\n\nNot quite sure what this means without seeing the match-up between the CSS and the fonts.\n\nThe PDF documentation that accompanies [EOTFAST](http://web.archive.org/web/20100410144417/http:/eotfast.com/) might help some, too.\n\nRich\n\n"
+    }
+  ]
+}

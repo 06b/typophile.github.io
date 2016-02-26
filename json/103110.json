@@ -1,0 +1,42 @@
+{
+  "id": "103110",
+  "title": "Copy Glyph",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "Hi,  \nI have a font which has more than 65536 glyphs in it. Whenever I work on it, I get lots of issues. Sometimes the file does not save sometimes the glyph name error is displayed as its more that 32 chars.\n\nI want to create it from the scratch. I need to copy around 30000 glyphs from one sfd file to another. How do I do that? Any script?\n\nThe font I am working on is Arabic Unicode Font.\n\nI am using Windows 7 64 bit and new to FontForge.\n\nThanks and regards,  \nShahid\n\n",
+  "author": "shahidr100",
+  "time": "17 May 2013 — 5:10am",
+  "uid": "211358",
+  "comments": [
+    {
+      "time": "17 May 2013 — 5:24am",
+      "content": "Ok a simple copy paste worked. But will it copy the lookup and other data?\n\n"
+    },
+    {
+      "time": "17 May 2013 — 7:09am",
+      "content": "All of this sounds like a very bad idea. What are trying to achieve?\n\n"
+    },
+    {
+      "time": "17 May 2013 — 11:04am",
+      "content": "\\> I have a font which has more than 65536 glyphs in it.\n\nThe major font formats do not support more than 64K glyphs in a font. You have hit a hard limit.\n\nRather than copy/paste, you could duplicate the SFD file, and then delete unneeded glyphs. That way you could be sure not to lose any metadata or interglyph info such as kerning....\n\n"
+    },
+    {
+      "time": "18 May 2013 — 10:33am",
+      "content": "This is what I want to achieve:  \nI am working on The Holy Book of Quran. In India it has a specific style and format. The text in Black in the link below is what I want to achieve.\n\nThe text in red is the actual Unicode Arabic font and the words in black text is saved as glyphs. Each word in its own glyph. What I want to do is that when I type the word in Unicode Arabic font, corresponding glyph in black should be displayed. There are approx. 20000 such glyphs.\n\nThe current font has more that 65535 glyphs so I wanted to reduce it to 65535. Is there any way to do that.  \nI will write the lookup data for 20000 glyphs again. Can I share Unicode space of some other language and copy the glyphs in that location. I will share some codepoints frm Private area some from Bengali, Devnagari and some other scripts to cover 20000 approx. glyphs.\n\n[https://www.dropbox.com/l/g9fsy9QSMB6CsXZ2ejyLFe](http://web.archive.org/web/20140721203218/https:/www.dropbox.com/l/g9fsy9QSMB6CsXZ2ejyLFe \"https://www.dropbox.com/l/g9fsy9QSMB6CsXZ2ejyLFe\")\n\n"
+    },
+    {
+      "time": "18 May 2013 — 12:38pm",
+      "content": "You don't need 20000+ glyphs to display the Quran text correctly, you just need a font with appropriate layout technology to handly dynamic letter joining and mark positioning. See, for example, Muhammad Zuhair's impressive [Albazi Naskh](http://web.archive.org/web/20140721203218/http:/typophile.com/node/93945) font (Pakistan).\n\nEven if you do go the route of large numbers of word ligature glyphs, you do not need to encode these glyphs, and definitely should not hijack Unicode character codes from other languages and scripts to do so.\n\nI recommend that before you do any work on this project you properly research OpenType Layout and how it works.\n\n[You might also be interested to research DecoType's Arabic script layout technology, which although not as widely supported as OpenType is more powerful and better suited to Arabic script. DecoType are able to accurately display Quran text with fonts that contain only a few hundred glyphs.]\n\n"
+    },
+    {
+      "time": "19 May 2013 — 7:31am",
+      "content": "Ok thanks. I will try to do that. As I am new to Font Development it might take some time. I have already started copying individual glyphs to the new one.\n\nThere is one thing which I did not understand when i was working on the above mentioned font.  \nIn the font which I was trying to edit some of the glyphs are not displaying in other applications (specially Quran Publisher) but shows up perfectly in Word 2007. Actually there was no lookups defined for it so i renamed the glyph and added a lookup in FontForge. Am I missing something? D I have to click on \"Unlink Reference\". If my lookups are wrong then it should not work in Word also!! Any guess or ideas??\n\nThanks\n\n"
+    },
+    {
+      "time": "19 May 2013 — 7:46am",
+      "content": "I mean to say that the ligature combination is not showing the proper glyph in my Quran Publisher application\n\n"
+    }
+  ]
+}

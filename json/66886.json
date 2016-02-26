@@ -1,0 +1,194 @@
+{
+  "id": "66886",
+  "title": "In which languages are ligatures between word joints forbidden?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "In which languages, except from German, are ligatures between word joints (“Auflauf” for example) forbidden?\n\nI think about adding kerning for letters pairs like fl to a font. But only for German and other languages, in which ligatures between word joints are forbidden.\n\n(And I need help verifying **[a few bugs [?] of Quark XPress](http://web.archive.org/web/20120729231353/http:/typophile.com/node/66868)**.)\n\n",
+  "author": "Arno Enslin",
+  "time": "1 Feb 2010 — 2:53pm",
+  "uid": "45774",
+  "comments": [
+    {
+      "time": "1 Feb 2010 — 3:09pm",
+      "content": "I just saw this on Wikipedia (for what that's worth): in Turkish, since a dotless i and an i are distinct letters, the usual fi and ffi ligatures should be avoided.\n\n[http://en.wikipedia.org/wiki/Dotted\\_and\\_dotless\\_I#Consequence\\_for\\_ligatures](http://web.archive.org/web/20120729231353/http:/en.wikipedia.org/wiki/Dotted_and_dotless_I#Consequence_for_ligatures \"http://en.wikipedia.org/wiki/Dotted\\_and\\_dotless\\_I#Consequence\\_for\\_ligatures\")\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 3:32pm",
+      "content": "The German rule exists in Norwegian typography, but it's not much practiced anymore. I think it's to some extent still used in Denmark.\n\nPersonally, I think it's a useless rule. Typography comes after semantics. Compound words are written and read as one word in all Germanic languages (except English). Not using a ligature is like introducing some pseudo space between the elements of the word. Besides, it would be great to see a fff-ligature in Schifffahrt.\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 3:43pm",
+      "content": "I think that since most of the applications that recognize ligatures also make them optional, you can safely leave their use to the users. Therefore, provide both ligatures, such as the fi ligature, but also provide kerning.\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 3:54pm",
+      "content": "I'm not sure the rule is completely useless. Words/parts in compounds do seem very slightly harder to recognize to me when their boundaries are obfuscated by ligatures reaching across – I wonder, has this actually been researched/tested?\n\nIn any case:\n\n1) Instead of kerning, why not consider contextual alternates that avoid a crash without having to introduce a lot of white space? It bugs me when setting f + l/i/f without a ligature introduces large gaps; those combinations need to work without a ligature, too.\n\n2) Remember that [at least in German] the rule only really concerns «connected» ligatures. If you design your ligatures such that the involved characters don't touch (like with a shorter top on the «f»), I believe you can ignore the rule.\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 3:55pm",
+      "content": "@ Satyagraha\n\n<cite>Personally, I think it's a useless rule.</cite>\n\nI think, it is dependent from the typeface, the word, the look of the ligature, the distance between the letters. So it should be a case-to-case-decision.\n\n@ altaira\n\n<cite>If you design your ligatures such that the involved characters don't touch (like with a shorter top on the «f»), I believe you can ignore the rule.</cite>\n\nIn this case a ligature would be obsolete, wouldn’t it? But there are fonts, in which it is not possible to shorten the top of the f, because it would result in a deep disharmony with the other letters.\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 4:11pm",
+      "content": "<cite>\"In this case a ligature would be obsolete, wouldn’t it?\"</cite>  \n?  \nA well-designed «unconnected» ligature glyph (for example, but not limited to, a solution with a shortened «f») can solve the exact same problems as a connected ligature, namely avoiding a crash while not introducing a mile of white space.\\* And it is technically still a ligature. Very handy to use for German.  \nOf course I realize that doesn't work for all fonts. It's also potentially less pretty. But I think the option deserves to be mentioned.\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 4:40pm",
+      "content": "@ altaira\n\nI meant, that you don’t have to create a ligature fi, if the top of the f is shortened. You could just add a substitution rule for the f or a multiple substitution rule like “sub f i by f.alt i” (That does not work with the FontLab compiler, but with the actual version of the AFDKO.) or a contextual substitution rule like “sub f' i by f.alt”.\n\n"
+    },
+    {
+      "time": "2 Feb 2010 — 10:38am",
+      "content": "Three examples applicable to many languages:\n\n1. [URLs](http://web.archive.org/web/20120729231353/http:/www.flickr.com/photos/joeclark/tags/urlplusligature/ \"Flickr photo\") (cf. [this gem with ligatures in URL _and_ across morpheme boundary](http://web.archive.org/web/20120729231353/http:/www.flickr.com/photos/joeclark/2258982026/ \"ﬁftymilesoﬁdeas.com\"), which is what you’re asking about)\n2. [Monospaced fonts](http://web.archive.org/web/20120729231353/http:/www.flickr.com/photos/joeclark/3256362222/ \"Windlin example\") (edge case for your question)\n3. Computer code (arguably also edge case)\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 12:07am",
+      "content": "@ Joe\n\nIn case of URLs the ligatures maybe could be enabled or disabled by a contextual substitution rule. Replacing ligatures with a contextual rule, would be theoretically possible for all words, in which ligatures are forbidden. But then the font would contain a kind of dictionary or even dictionaries of different languages.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 5:23am",
+      "content": "I would just use a stylesheet.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 5:41am",
+      "content": "I think setting (or not) of ligatures is a decision that should be left up to the users. There are so many cases and conventions to consider that even a brave attempt at font-level automation will realistically still need manual intervention anyway. Plus, it's often not a clear-cut matter of right and wrong. I for instance cringe at ligatures in monospaced fonts like Joe's second example above, but I know other designers who think they're just dandy. Or even in German: the rule for «fi» has been eroded to a degree, and many people would now set words like «typografisch» with a ligature, which if you take the rule very seriously\\* should originally not be allowed and which I'm sure some purists still don't do.  \n(\\* since «-isch» and «-ig» etc. are suffixes just like «-lich» in, say, «höflich», where definitely no ligature should be used.)\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 5:53am",
+      "content": "<cite>since «-isch» and «-ig» etc. are suffixes just like «-lich» in, say, «höflich», where definitely no ligature should be used.)</cite>\n\nReally? This is quite surprising and fascinating. To my non-German-speaking mind, it just seems that affixes ought to be treated differently from free morphemes in compound words that can stand on their own.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 6:18am",
+      "content": "<cite>(* since «-isch» and «-ig» etc. are suffixes just like «-lich» in, say, «höflich», where definitely no ligature should be used.)</cite>\n\nI did not know or forget that. In case of höflich I would prefer not having a ligature (dependent from the font) and in case of typografisch the rule is absurd – When I spell it, I make a break between gra and fisch, but not between graf and isch.\n\n--------\n\nI just remember, that there is a bug in »The Elements of Typographic Style 3.1«. Bringhurst did not seem to know about the German rule. It was not in a suffix, but did really look brutal.\n\n@ altaira\n\nWhat would you do with “Sauerstoffflasche”? Creating a fffl-ligature? I mean, you would like to use a fff-ligature in “Schifffahrt”. That really looks bad in my eyes, although it probably is dependent from the font likewise.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 6:22am",
+      "content": "Arno, AFAIK the rule only regards morpheme boundaries; hyphenation breaks can differ from those, as you point out, but don't factor in the ligature question.\n\nSee «Detailtypografie» (p. 194): «Ligaturen werden an **Wortfugen von Zusammensetzungen** weggelassen. […] Ligaturen werden **auch über Trennfugen hinweg** gesetzt – wenn die oberen Regeln nicht greifen.»\n\nAlso see «Die Regel» and «Die Ausnahme» here (German):  \n [http://www.typografie.info/typowiki/index.php?title=Ligatur#Die\\_Regel](http://web.archive.org/web/20120729231353/http:/www.typografie.info/typowiki/index.php?title=Ligatur#Die_Regel \"http://www.typografie.info/typowiki/index.php?title=Ligatur#Die\\_Regel\")\n\nBrian, I agree it may seem strange; I think the idea is just to make it clear where the boundaries lie, no matter how «independent» the individual parts are.\n\n\\*\n\n<cite>\"What would you do with “Sauerstoffflasche”?\"</cite>  \nff + fl. The words are «Sauerstoff» and «flasche».\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 6:22am",
+      "content": "I think Sindre (Satyagraha) and not Nina (Altaira) was the one that wanted to see a fff ligature for Schifffahrt.\n\nI personally would rather not.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 6:23am",
+      "content": "Oh, no, I wouldn't want an fff lig in Schifffahrt.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 6:26am",
+      "content": "Thanks for the explanation, Nina. For English, too, one would use a ligature for \"briefly\" but hyphenate as \"brief-ly\".\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 6:31am",
+      "content": "That actually was only the much abbreviated (and probably confusing?\\*) version…  \nEvery time the subject of German ligature rules comes up, I wonder if there isn't some good comprehensive English-language explanation already that could just be linked to. Maybe this should be in the wiki?\n\n(\\* «briefly» would exactly _not_ have a ligature if it were a German word. :-)\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 6:45am",
+      "content": "Correct, I was just using the example to show that we shouldn't expect a correlation between hyphenation boundaries and boundaries for ligature rules.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 6:46am",
+      "content": "<cite> &gt; What would you do with “Sauerstoffflasche”? Creating a fffl-ligature?</cite>\n\nHard-core fans of Hoefler & Frere-Jones may recognize this from Requiem:\n\n ![](http://web.archive.org/web/20120729231353im_/http:/typophile.com/files/Requiem-Sauerstoffflasche_3901.png)\n\n&nbsp;  \nSee also: [http://www.typography.com/fonts/font\\_features.php?featureID=44&productLi...](http://web.archive.org/web/20120729231353/http:/www.typography.com/fonts/font_features.php?featureID=44&productLineID=100020 \"http://www.typography.com/fonts/font\\_features.php?featureID=44&productLineID=100020\")\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 6:57am",
+      "content": "Oh boy, that's groovy! Thanks a lot. I wasn't completely serious when I made that comment about triple-f ligature in _Schifffahrt_. (I'm not a fan of the new German spelling, by the way. I think the old _Schiffahrt_ made more sense. North-Germanic languages still forbids more than two equal consonants in compound words. That's a more elegant solution, in my opinion.)\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 7:16am",
+      "content": "Apart from ‘Sauerstoffflasche’, this ligature can be used for a second word: ‘Auspuffflamme’ – as [mentioned in the classic oodles of poodles thread](http://web.archive.org/web/20120729231353/http:/www.typophile.com/node/42815?from=0&comments_per_page=5000#comment-263936). The spelling on the H&FJ site is still wrong.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 7:31am",
+      "content": "We could think up some more of these. «Grifffläche» comes to mind. But, much as I hate being a partypooper, the ligature is still technically wrong there, no? \\<:-p\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 7:56am",
+      "content": "I just tried to find more words, that contain the string fffl, but neither Wikipedia nor Google seem to accept more than one joker an I found acronyms only. I could try to search in one of the German dictionaries for OpenOffice/Firefox. They are simple text files.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 8:10am",
+      "content": "From a grep on Thunderbird de-DE-comb.dic dictionary:\n\nAuspuffflamme  \nKunststoffflaschen  \nKunststoffflugzeug  \nKunststofffläche  \nNotsauerstoffflasche  \nSauerstoffflamme  \nSauerstoffflasche  \nSchlifffläche  \nSchmierstofffluss  \nSpaltstoffflusskontrolle  \nStickstoffflasche  \nStofffluss  \nStofffläche  \nTreibstofffluss  \nWasserstoffflamme  \nWasserstoffflugzeug  \nWerkstofffluss\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 8:26am",
+      "content": "Well, I seem to have a smaller dictionary. I did found Sauerstoffflasche only. So I searched for words, that end on ff. This was the result:\n\nArtillerieangriff  \nAtombombenangriff  \nAtombrennstoff  \nBegleitschiff  \nBergungsschiff  \nBetreff  \nBildungsstoff  \nBluff  \nBlutsauerstoff  \nDirektzugriff  \nDiskussionsstoff  \nDompfaff  \nDramenstoff  \nEckenschliff  \nElfmeterpfiff  \nEntlastungsangriff  \nErsatzstoff  \nExplosionsstoff  \nFährschiff  \nFliegerangriff  \nFlottenangriff  \nForschungsschiff  \nFremdstoff  \nGlanzstoff  \nGüterschiff  \nHalbzeitpfiff  \nHauptnährstoff  \nHemdenstoff  \nHotelschiff  \nHüttensauerstoff  \nIsolationsstoff  \nIsolierstoff  \nKhakistoff  \nKoffergriff  \nKonterangriff  \nKreuzfahrtschiff  \nKüstenmotorschiff  \nLesezugriff  \nMeutererschiff  \nMittelschiff  \nMittenabgriff  \nNachtangriff  \nNachtfliegerangriff  \nOberbegriff  \nOffensivangriff  \nPapierzellstoff  \nParallelzugriff  \nPatrouillenschiff  \nRechtsbegriff  \nRückgriff  \nSegelschulschiff  \nSheriff  \nSowjetangriff  \nSturmangriff  \nWikingerschiff  \nXoff\n\nSo I can add two more fffl-words: Dompfaffflügel and Dompfafffliegerei. And if your cat kills a young Dompfaff inside the house, you have a lot of Dompfaffflusen in your rooms.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 9:08am",
+      "content": "@satayagraha\n\nI'm apprenticing as a graphic designer in Denmark, and i've never ever heard of such a rule, not in my typography classes, not in my danish classes or at my workplace where i'm currently doing typesetting.\n\nbut if anyone can confirm that there is such a rule please do, cause i'd like to know :D\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 10:28am",
+      "content": "Arno wrote: _Elfmeterpfiff_\n\nI see some potential for a word with an fi, ff and fl ligature there :)\n\n_Well, I seem to have a smaller dictionary_  \n...  \n_Sowjetangriff_\n\nAnd probably a quite old one, too ;)\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 11:23am",
+      "content": "Jonas, this is a quote from Danish Wikipedia's [article on typography](http://web.archive.org/web/20120729231353/http:/da.wikipedia.org/wiki/Ligatur): \"I omhyggelig typografi anvendes ligaturen \"fi\" kun når de to bogstaver indgår i samme stavelse.\" (_\"In meticulous typography, ligatures are only used for two glyphs in the same syllable\"_). That's an even stricter rule than the German one.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 11:44am",
+      "content": "<cite>I see some potential for a word with an fi, ff and fl ligature there :)</cite>\n\nI don’t like soccer. Absolute no idea.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 1:44pm",
+      "content": "That Danish article only specifies the \"fi\" ligature for that rule, although it follows a discussion on the whole series of \"f\" ligatures; a more literal translation would be \"_In meticulous typography the ligature \"fi\" is used only when the two letters are included in the same syllable_\". It's hard to tell whether the same is implied for other ligatures.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 2:06pm",
+      "content": "You're right, that was a lazy translation. I must put the blame on a not so slight fever that struck me earlier today. But it seems odd that it's only the \"fi\" ligature that's treated this way.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 2:25pm",
+      "content": "I would try to look for a more definitive source, because it seems odd to me too. Wikipedia articles often are visibly hodgepodge, after all.\n\nI looked at the Wikipedia articles on ligatures from a number of different language editions, and just a couple mentions the restrictions on ligatures in German or Turkish. Dutch, interestingly, is one of them, with no word on such restrictions in Dutch itself.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 5:15pm",
+      "content": "altaira wrote:  \n<cite>Or even in German: the rule for «fi» has been eroded to a degree, and many people would now set words like «typografisch» with a ligature, which if you take the rule very seriously* should originally not be allowed and which I'm sure some purists still don't do.</cite>\n\nI don't agree with you on this. I'm pretty sure suffixes beginning with an i (as in _typografisch_ or _häufig_) have always been coupled up by a ligature, because they are spoken connectedly with the stem. So the traditional and still valid rule is, in my opinion:\n\n**Ligatures are to be used if the concerned letters are part of one morpheme or spoken connectedly.**\n\nCan you provide a sample of a suffix beginning with an i that is _not_ coupled up by a ligature?\n\n"
+    },
+    {
+      "time": "4 Feb 2010 — 12:52am",
+      "content": "Joshua, do you have a source for your version of the rule?\n\nI really don't think we should mix in how things are spoken (or hyphenated, see above). That only muddles things even more. But the «fi» does seem a strange exception.  \nFWIW [I asked a similar question on [German] typografie.info a while ago](http://web.archive.org/web/20120729231353/http:/www.typografie.info/typoforum/viewtopic.php?f=8&t=6493), and was directed to the Wiki resource I linked to above, which [also says](http://web.archive.org/web/20120729231353/http:/www.typografie.info/typowiki/index.php?title=Ligatur#Der_liebe_Duden) (regarding the Duden): «Die Erwähnung von Sprechsilben ist hier irreführend (wenn es nach Sprechsilben ginge, dürfte auch in _schaffen_, s. o., keine Ligatur gesetzt werden).»  \nDunno, I think that's a good point.\n\nMy (first ed.) copy of _Detailtypografie_ seems a bit vague on the subject, maybe newer editions have more?\n\n"
+    },
+    {
+      "time": "4 Feb 2010 — 3:24am",
+      "content": "In Sanskrit, which has many many conjunct consonants\n\nsee [www.sanskritweb.net/itrans/itmanual2003.pdf](http://web.archive.org/web/20120729231353/http:/www.sanskritweb.net/itrans/itmanual2003.pdf \"www.sanskritweb.net/itrans/itmanual2003.pdf\") (page 28 seq.)\n\nligatures must be avoided \"in pausa\", and a special sign, the \"virama\", is used in the Devanagari script to prevent such occurrences.\n\nI wrote a book on this topic, entitled \"Conjunct Consonants in Sanskrit\". This large monograph on consonantal ligatures has not yet been published.\n\nAs an aside, I mention that concerning this copyrighted book, which is not yet available to the public, a hacker attack was made on my hard disk by two Berlin law firms (Hertin Anwaltssozietät and JBB Rechtsanwälte).\n\nsee [www.chillingeffects.de/unerlaubt.pdf](http://web.archive.org/web/20120729231353/http:/www.chillingeffects.de/unerlaubt.pdf \"www.chillingeffects.de/unerlaubt.pdf\") (page 15 seq.)\n\n"
+    },
+    {
+      "time": "4 Feb 2010 — 8:20am",
+      "content": "Altaira, in the book “Vollständiges theoretisch-praktisches Handbuch der Typographie” from 1870, it is explained that Ligatures should not be used between syllables and coupled words. Given as examples are, among others, “wol-len” and “schif-fen”, which should be set without ligature. However, the author states that in these cases ligature are sometimes used (he says this about the double l examples only, but I think the other cases are meant, too). The book is available scanned online, you can read the passage hier: [http://www.archive.org/stream/vollstndigesthe00maragoog#page/n51/mode/1up](http://web.archive.org/web/20120729231353/http:/www.archive.org/stream/vollstndigesthe00maragoog#page/n51/mode/1up)\n\nThe ligature usage surely wasn’t uniform at the beginning; and, as you can see, syllables played a role. The now valid usage, following primarily morphemes, and no longer syllables, must have developed over time.\n\nI think the reason for the fi exception (using a fi ligature when a suffix begins with i) is, that the typesetters didn’t think, like linguists, about morphemes. They thought about “word parts”. Because suffices like “-lich” are spoken as separate syllables, they felt like separate word parts. The suffices beginning with i are spoken connected, and therefore just didn’t feel like separate word parts.\n\nBy the way, if the stem ends with an s, in Fraktur setting a long ſ is used, for example in “roſig”. (With a ligature, of course.) So you can see: the morpheme boundary between the stem and suffices beginning with i really isn’t treated as a “word part boundary”. And I believe the reason is: that it’s spoken connectedly!\n\nOf course, these are just my beliefs. I would really like to know what other books of that time (before 1900) say about the subject. Maybe someone can help us with some information?\n\n"
+    },
+    {
+      "time": "4 Feb 2010 — 8:58am",
+      "content": "balletttheater  \npappplakat\n\n[More three-in-a-row](http://web.archive.org/web/20120729231353/http:/www.proz.com/forum/linguistics/57496-looking_for_languages_that_permit_three_identical_letters_in_a_row-.html)\n\n"
+    },
+    {
+      "time": "4 Feb 2010 — 9:03am",
+      "content": "@satayagraha\n\nwow, thanks wasn't aware of such a rule.\n\n"
+    },
+    {
+      "time": "4 Feb 2010 — 9:41am",
+      "content": "Joshua, interesting find!  \nYes, looks like the rule really has changed quite a bit over time – then again, it's been 140 years, and especially the German language seems to have changed in all sorts of respects since then.\n\n<cite>\"roſig\"</cite>  \nWow, really? Crazy. Yes, there could be some connection there, possibly in terms of «-ig» and such not «counting» as «full» suffixes for some reason. We need German linguists in here!\n\n<cite>\"I would really like to know what other books of that time (before 1900) say about the subject\"</cite>  \nYes that would be interesting. Although I'd be even more interested in why exactly f\\_i is treated differently today. In a current context, I still doubt the syllable thing holds water, or at least that it is supposed to. (Your theory about typesetters «doing it wrong» so it became common usage sounds plausible to me.)\n\n"
+    },
+    {
+      "time": "4 Feb 2010 — 10:09am",
+      "content": "<cite>Of course, these are just my beliefs. I would really like to know what other books of that time (before 1900) say about the subject. Maybe someone can help us with some information?</cite>\n\nIn the French wiki on ligatures, it is said that _ligatures techniques_ (technical ligatures) are those ligatures that were used to avoid metal characters from breaking due to collisions: the dot on the i could break after an f if the letters were not melt together. Of course they could have had different looking combinations to take care of linguistic rules, but that may help understanding the context.\n\nEdit: they add \"En allemand, l’utilisation des ligatures esthétiques se doit de respecter des contraintes morphologiques i.e \"In German, aesthetic ligatures need to satisfy morphological constraints\". So there seems to be a difference between aesthetic ligatures and technical ligatures...\n\n"
+    },
+    {
+      "time": "4 Feb 2010 — 3:19pm",
+      "content": "`ffffound.com`: <cite>ﬀ</cite>+<cite>ﬀ</cite>, <cite>f</cite>+<cite>f</cite><cite>f</cite><cite>f</cite>, <cite>f</cite><cite>f</cite><cite>f</cite>+<cite>f</cite>, <cite>f</cite>+<cite>f</cite>+<cite>f</cite>+<cite>f</cite>?\n\nURLs are case-insensitive, so: `FFFFound.com`?\n\n"
+    },
+    {
+      "time": "10 Feb 2010 — 3:43am",
+      "content": "There are typefaces, in which letter combinations fl almost look like a ligature. I would like to know, if there is a way to turn the kerning of those letter pairs of or on with the help of an OT feature, independent from the language. A kind of anti-ligature-feature and anti-fake-ligature-feature.\n\nIn this context I wonder about the following: Where is the problem to program DTP software in a way, that it recognizes those features, from which the software knows, that they are registered; and the other features are simply listed by their custom name? Example: If Indesign would not recognize the dlig feature as a registered feature, it simply could add an item dlig to the OT menu. The programming language of features is the same in case of all features.\n\n"
+    },
+    {
+      "time": "23 Mar 2010 — 1:06am",
+      "content": "I meanwhile think, that it is needed to break the German ligature rule, if the ligatures are more legible than the single letters, if there is a big whole between them. But I would like to know from professional typographers of German texts, who is plucky enough to do that. Who has already done that? I mean, it is clearly a violation of German orthography rules (although it does not belong to the field of orthography in my opinion) and according to leading specialist in (German) typography, namely Forssmann and Willberg, they strictly avoid it. So these two are not plucky enough to break the rule, when breaking it improves the legibility. Even a word like Schifffahrt can be more legible with an fff-ligature in case of some fonts. I wonder, how much power typographers have in book projects. Who has the last word there, the editor (lecturer) or the typographer? And who is allowed to officially change those rules with regard to their strictness?\n\n"
+    },
+    {
+      "time": "31 Mar 2011 — 1:03pm",
+      "content": "Sprengstofffund\n\n"
+    }
+  ]
+}

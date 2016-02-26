@@ -1,0 +1,74 @@
+{
+  "id": "17855",
+  "title": "Using kerning assistance - Fontographer",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "I’m building a font using fontographer 4.15 on a mac and could use some advice. In my font the lowercase characters are exactly the same sizes but with some minor tweaks as the uppercase ones. I have kerned the uppercase charcters and want to apply the same kernning values to the lowercase characters without having to go through them all manually again. Is there a function to apply the values from the uppercase to the lowercase? Maybe using kerninng assistance can do it but I don’t know how to use it. Thanks for your time.\n\n [‹ Help me name my blog, win Adobe prize](http://web.archive.org/web/20071104142518/http:/www.typophile.com/node/15321 \"Go to previous forum topic\") [hello out there! ›](http://web.archive.org/web/20071104142518/http:/www.typophile.com/node/17807 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20071104142518/http://www.typophile.com/user/4093\" title=\"View user profile.\">howie</a>",
+  "time": "<br>",
+  "uid": "4093",
+  "comments": [
+    {
+      "time": " 11.Feb.2006 9.07am",
+      "content": "I could be mistaken, but it sounds like you want to adjust sidebearings—not kerning. (Kerning overrides the sidebearing values for specific character pairs.)\n\nYou can copy left or right sidebearing values from one character to any number of other characters using the “Set Metrics...” command. The options should be pretty easy to figure out.\n\n"
+    },
+    {
+      "time": " 11.Feb.2006 9.14am",
+      "content": "Thanks for this but what I want to do is to have all the kerning pairs that exist in the uppercase characters to also exist in the lowercase characters with the same values. I have already made the metrics the same values using the metrics assistance function, what I need is to do the same with kerning pairs.\n\n"
+    },
+    {
+      "time": " 11.Feb.2006 9.17am",
+      "content": "Okay, I just re-read your message, and I was mistaken about what you meant.\n\nI would suggest reading through the Kerning Assistance tutorial in the Fontographer manual.\n\n"
+    },
+    {
+      "time": " 11.Feb.2006 9.20am",
+      "content": "(I would go through the steps, but it’s been so long since I’ve used it that I would have to go through the tutorial myself to refresh my memory. I do remember enough to say it will let you do what you are trying to do. Maybe someone else who is more actively using FOG will rise to the occasion.)\n\n"
+    },
+    {
+      "time": " 11.Feb.2006 9.23am",
+      "content": "Believe me I tried but cant make head nor tail of it, I only have the manual in pdf format and the images used to illustrate the points are such low resolution that I cant see them. Do you have any knowledge of kerning assistance?\n\n"
+    },
+    {
+      "time": " 11.Feb.2006 9.33am",
+      "content": "(I think our posts are crossing...)\n\n_Do you have any knowledge of kerning assistance?_\n\nI did once, but I switched to FontLab two years ago and have barely touched FOG since then. It’s all kind of foggy now. :-P\n\n"
+    },
+    {
+      "time": " 11.Feb.2006 9.37am",
+      "content": "I see. I do have a copy of fontlab too, but dont really use it, i can find my way around it ok. Is there a way to do what i am asking in fontlab that you could tell me about?\n\n"
+    },
+    {
+      "time": " 11.Feb.2006 10.14am",
+      "content": "Unless you want to switch to FontLab, you’re probably better off learning how to do it in FOG. FOG’s Kerning Assistance feature is easier and more flexible than the equivalent FontLab feature. It’s the one big thing I miss.\n\nLet me get back to you on this.\n\n"
+    },
+    {
+      "time": " 11.Feb.2006 12.26pm",
+      "content": "Okay. It’s coming back to me.\n\nHere is the KA dialog box for an all caps font which has duplicate caps in the lowercase positions:\n\n ![](http://web.archive.org/web/20071104142518im_/http:/www.typophile.com/files/%20FontographerScreenSnapz001.png)\n\n(This is in FOG 4.7 (demo), but it works the same in any FOG 4.0 or later. I don’t know why there are some strange characters in some of the rows. Just ignore them.)\n\nNote that in the first field are a bunch of A’s, both upper and lowercase. The design of these characters is identical for kerning purposes, so they are “equivalent first letters”, the left-hand letter in a kerning pair. The field the two T’s is another set of equivalent characters for the right-hand position. Don’t worry about the “link all” check boxes for now.\n\nWhat this first row says is that every pair composed of a character from the left and one from the right will have the same kerning value. If you change the kerning value of any of these pairs (using the Metrics window), the others will change automatically, as if they are all marching in lock step. So, if you change AT, you are also changing At, aT, at, áT, Åt, etc. The reverse is also true.\n\nThe “link all” check boxes let you take a shortcut in certain situations. Let’s say you have the following pair equivalents set up:\n\nF&nbsp;&nbsp;&nbsp;&nbsp;[x]&nbsp;&nbsp;&nbsp;&nbsp;AÅÁÀÃ&nbsp;&nbsp;&nbsp;[x]  \nP&nbsp;&nbsp;&nbsp;&nbsp;[x]&nbsp;&nbsp;&nbsp;&nbsp;AÅÁÀÃ&nbsp;&nbsp;&nbsp;[x]  \nT&nbsp;&nbsp;&nbsp;&nbsp;[x]&nbsp;&nbsp;&nbsp;&nbsp;AÅÁÀÃ&nbsp;&nbsp;&nbsp;[x]\n\n(Pretend the x’s are the check boxes.) F followed by any of those As will have the same kerning value. Same with the P and T. This is a bit redundant, and it would seem that you need to do it this way unless you want FA, PA, and TA to have the same kerning value. BUT, by unchecking one of the “link all” boxes you can combine these into one row:\n\nFPT&nbsp;&nbsp;&nbsp;&nbsp;[&nbsp;&nbsp;]&nbsp;&nbsp;&nbsp;&nbsp;AÅÁÀÃ&nbsp;&nbsp;&nbsp;[x]\n\nThe F, P, and T are not linked to each other and will have independent kerning values with regard to the As. So, if you change the FA kerning pair, the FÅ pair will also change, but not PA, PÅ, TA, TÅ, etc. The limitation is that it’s an all or nothing proposition. If you want the F and T to be linked, but not the P, then you can’t put them in the same row. You would need one row with the F and T, and another row for the P.\n\nNote: At least one of the two check boxes should always be checked. If both boxes are unchecked, then nothing in that row will be linked, and whatever you put in that row will have no effect on the kerning, as if the row did not exist.\n\nNormally, you will want both boxes checked and not bother with this unlinking option. It just makes things more complicated and less flexible for very little gain.\n\nAlso, normally you will leave the “make new pairs” option checked. If it is off, KA will only affect existing kerning pairs and not generate new pairs, which is usually why you use KA in the first place. There are, however, situations in which you want to, say, clean up inconsistent kerning pairs without generating new ones. Also, using KA with “make new pairs” on can potentially generate a lot of pairs which will never be used in the real world. After you’ve used KA to generate all the pairs you need, you can turn this option off and delete the extraneous pairs. The pairs that are left will still be linked.\n\nOne other thing: Certain characters (single-straight-quote, exclamation, comma and hyphen) have special meanings in the KA window. As a result, you can’t include them in character lists just by typing them. There is a simple way around it: Just use a single quote before the character (” or ’- or ’, or ’!). You can see an example of this in the third row, second field (’,). [edit: Typophile’s formatting genie is messing with my straight quotes.]\n\n"
+    },
+    {
+      "time": " 11.Feb.2006 12.55pm",
+      "content": "A further note about the special characters:\n\nYou may notice this line in the screen shot above:\n\nAaÄÅ á-ã ÀÃÂÁ\n\nThis was originally entered something like this:\n\nAÄÅÀÃÂÁaááåäâã\n\nWhen you click “OK”, FOG rearranges the characters in ASCII order and compresses the list (if possible) using the special hyphen character. The hyphen means “through”. The run of a’s with accents I typed happen to be consecutive characters in the Mac Roman encoding when listed in ASCII order. The spaces separate the shorthand notation from the rest of the list.\n\nThe straight quote is the escape character. I’m not sure what the comma or exclamation point are used for.\n\n"
+    },
+    {
+      "time": " 11.Feb.2006 4.28pm",
+      "content": "\\> I only have the manual in pdf format and the images  \n\\> used to illustrate the points are such low resolution  \n\\> that I cant see them.\n\nI just checked the PDF manuals for Fontographer 4.1 and 4.7 that are published on our website (  \n [http://www.fontlab.com/Fontographer/Fontographer/Download-Fontographer/](http://web.archive.org/web/20071104142518/http:/www.fontlab.com/Fontographer/Fontographer/Download-Fontographer/ \"http://www.fontlab.com/Fontographer/Fontographer/Download-Fontographer/\") ) and somehow can’t figure out what you mean by the “low resolution”. Can you perhaps be more specific?\n\nRegards,  \nAdam Twardoch  \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": " 12.Feb.2006 5.07am",
+      "content": "Mark - thanks for that, your explanation has finally got me understanding the KA. Thanks very much for your help.\n\n"
+    },
+    {
+      "time": " 12.Feb.2006 5.12am",
+      "content": "Twardoch - I was refering to the pdf I have for the older version - 4.1 on mac. In this the images are very poor quality and you cant see things if they are small. I had a look at the pdf you have online which is much better but refers to the new version of fontographer although the information seems similar if not the same. I must say that the section on kerning assistance is fairly difficult to understand.\n\n"
+    },
+    {
+      "time": " 12.Feb.2006 8.55am",
+      "content": "Howie, for what it’s worth, most of the contents of the PDF manuals on FontLab’s site are virtually the same as the printed manual that Macromedia included with version 4, except that they are reformatted to FontLab’s standards and the screen shots have been updated for 4.7. The Kerning Assistance section in particular is almost identical.\n\nI remember the manual’s explanation being hard to understand, too. But once you play with it a bit it makes sense.\n\n"
+    },
+    {
+      "time": " 12.Feb.2006 9.05am",
+      "content": "The PDF manual for Fontographer 4.1 for Windows on our site is the original Macromedia manual which is good for both FOG 4.1 for Mac and Windows.\n\nA.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "121005",
+  "title": "Curious about automatic ligature error.",
+  "forum": "Build",
+  "tags": [
+    "aborting because of errors",
+    "Build"
+  ],
+  "content": "I figured this one out by messing around and realizing my stupid mistake.\n\nWhen working with automatic ligatures I tried doing:\n\nsub 4 5 by 45 ;\n\nThis caused error. When my dumb self realized the numbers went as: one, two, three, etc. I tried to do:\n\nsub four five by 45 ;\n\nStill error. So I did:\n\nsub four five by E45;\n\nAnd it worked. So my basic question is: Why does Font Lab ligature code not like numbers?\n\n",
+  "author": "Dismantle",
+  "time": "3 Nov 2014 — 10:30am",
+  "uid": "179702",
+  "comments": [
+    {
+      "time": "3 Nov 2014 — 10:50am",
+      "content": "You have to use glyph names, not literal characters. In the case of some glyphs, these happen to be the same (A, B, C, a, b, c, etc.), but most glyphs names are not the same as the literal character that you type (e.g., numbers). The other thing is that glyph names may not start with a number (e.g., A1 is allowed, 1A is not).\n\nThere are also conventions and recommendations for naming glyphs. You don't have to follow them, but it's usually best unless you have a good reason not to. It can make a difference when, for example, making a PDF that uses your font.\n\nGuidelines here (see section 6): [http://sourceforge.net/adobe/aglfn/wiki/AGL%20Specification/](http://web.archive.org/web/20150420170408/http:/sourceforge.net/adobe/aglfn/wiki/AGL%20Specification/ \"http://sourceforge.net/adobe/aglfn/wiki/AGL%20Specification/\")\n\n"
+    },
+    {
+      "time": "3 Nov 2014 — 11:10am",
+      "content": "Good reference. Thank you.\n\n"
+    }
+  ]
+}

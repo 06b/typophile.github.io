@@ -1,0 +1,34 @@
+{
+  "id": "16033",
+  "title": "Long question about MAC-PC/Type1-TrueType file conflicts",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I work in an in-house studio for an organization that uses a ‘corporate font’ (Azkidenz-Grotesk) for most of its communications, including work that comes out of the Design studio (on MACs) and desktop-published stuff from everyone else (on PCs). We were experiencing some conflicts with transferring files from PC to MAC, which as far as I’m aware were due to the individual font files being named differently between the two font formats. It is our IT department that is dealing with the font reseller in this case, but I’m not sure that they have the best knowledge at their disposal regarding the issues involved, so I’d like some input from anyone out there…\n\nThe solution from IT was to replace all the MAC fonts, which were previously Type1 Postscript, with TrueType versions. This caused some hiccups in our Postscript workflow, especially in relation to creating PDFs for approvals and for output. Another issue is that the TrueType ones appear in the font list as individual fonts, rather than faces within a family, a workflow problem for us when typesetting large amounts of text and converting from one font to another without loss of formatting.\n\nSo we went back to the reseller and asked them to resupply Type1 fonts for the MACs then create new TrueTypes for the PCs using Type1 filenames. They’ve done it the other way round and supplied us with Type1s created to match the TrueTypes, apparently saying to our IT folk that ‘the TrueTypes are superior anyway’.\n\nThe PDF bugs have gone away, because we are using PostScript fonts again, but the fonts still appear as individual faces in application font menus.\n\nSo the quick question at the end of the long story is… Is there a way to have the MAC Type1 fonts talk to the PC TrueTypes across the network, but also for them to work appropriately for us within the studio?\n\nPS: Another thing that might be relevant – we’re not using Suitcase or a similar app to manage fonts, they are put straight into the System Library by IT. (My workplace is a government department, where bureaucracy is valued over practicality)\n\n [‹ FontLab Studio 5 for OS X](http://web.archive.org/web/20071125181953/http:/www.typophile.com/node/16045 \"Go to previous forum topic\") [Best tool to convert fonts to OpenType? ›](http://web.archive.org/web/20071125181953/http:/www.typophile.com/node/16075 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20071125181953/http://www.typophile.com/user/9985\" title=\"View user profile.\">CameronM</a>",
+  "time": "<br>",
+  "uid": "9985",
+  "comments": [
+    {
+      "time": " 3.Nov.2005 9.00pm",
+      "content": "Is standardizing on Mac OS X, Windows XP, and Adobe CS2 an option? If so an OpenType version (either TTF or OTF) of the font will likely be your best bet.\n\nSi\n\n"
+    },
+    {
+      "time": " 3.Nov.2005 9.52pm",
+      "content": "Thanks Si,  \nNot entirely sure if there is an OpenType version of that particular font available, plus we’re trying to get this sorted out under our current font licensing, to avoid having to pay for more fonts. Will the OpenType versions only work in CS as opposed to pre-CS versions?\n\n"
+    },
+    {
+      "time": " 3.Nov.2005 11.02pm",
+      "content": "OpenType fonts will work with pre-CS Adobe applications (and other non-Adobe applications), but you won’t have access to many of the OpenType features. One problem you may encounter, however, is that if your older files make use of small-cap or “expert” characters, your documents will want to find those glyphs in separate font files; most OpenType fonts now include both within the glyph palette of the basic font style (roman, italic, bold, etc.). Your dilemma sounds to me like a royal headache, or, that is, a bureaucratic headache, because what it boils down to is the fact that your workflow is outdated and needs to let go of what was and accept that technology changes. I don’t envy your position.\n\n"
+    },
+    {
+      "time": " 4.Nov.2005 6.25pm",
+      "content": "Cameron,\n\nThe problem you’re encountering is not directly related to font format as such. You want to have the same menu names on Mac and Windows. This is possible regardless of font format involved, but it requires the font developer have considerable understanding of the menu name issues. These include the particular name structures (PostScript FontName, PostScript FullName) that Adobe applications use to generate their cross-platform menu names and determine family groupings in our font menus.\n\nAgain, it’s possible to do all this consistently, regardless of font format, and even across font formats and platforms. But the font developer needs to know what they’re doing. It’s not something you can solve as an end user - unless you count modifying the fonts yourselves, which may not even be permissible under the license agreement (EULA).\n\nRegards,\n\nT\n\nThomas Phinney  \nProgram Manager  \nFonts & Core Technologies  \nAdobe Systems\n\n"
+    },
+    {
+      "time": " 6.Nov.2005 6.00pm",
+      "content": "Thomas,\n\nThanks for your comments. It’s good to hear that it is possible, at least in theory. I would have thought that the font reseller would know what they are doing, but the situation certainly isn’t helped by having 3 degrees of separation between them and us in the studio...\n\nOnward and upward!\n\n"
+    }
+  ]
+}

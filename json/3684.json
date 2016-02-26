@@ -1,0 +1,82 @@
+{
+  "id": "3684",
+  "title": "InD Optical Spacing for FontLab: Marriage Made in Heaven?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I would ask this question at the FontLab forums but I think that   \nMSN Groups is poopy poop. So hopefully the beautiful minds of   \nAdam Twardoch and Thomas Phinney are tuned in...   \n   \nWhat are the chances that FontLab could license and incorporate   \nInDesign's optical kerning technology and use it in place of the   \nrather useless auto-kern feature? It could offer a great starting   \npoint for kerning work and with some fine-tuning controls (such   \nas locking control characters, specifying a typeface's optimum   \nsize, and the creation of chains of similar shapes for consistency)   \ntake a lot of the hard labor out of font production.   \n   \nWhat do you think? Am I out of my technolovin' mind?\n\n",
+  "author": "Stephen Coles",
+  "time": "19 Mar 2004 — 7:21am",
+  "uid": "103",
+  "comments": [
+    {
+      "time": "19 Mar 2004 — 9:54am",
+      "content": "\\>I think the algorithm discards the base spacing info when it does its thing.   \n   \nAre you sure about this Hrant? I know that if you use optical kerning, then place the cursor between a character pair, a value shows up in the kerning window: e.g., (-17). I'd assumed that the value was based on the original spacing in the font.   \n   \nBut of course I could be way off.\n\n"
+    },
+    {
+      "time": "19 Mar 2004 — 10:00am",
+      "content": "Sorry, Stephanopolis.   \n   \n1) There are people who think they can do better than Indy's spacing? Yeah, Carter. Actually, it's not _that_ good, but it's still better than what 90% of designers seem to manage.   \n3) I guess you could write code that subtracts the human-determined sidebearings from Indy's inter-character values, using those for kerning. The problem is you'd end up with too many pairs. So you need a cutoff. Or you could write code that optimizes the base spacing itself by looking at what Indy has done - but then you're getting into a complexity that would make simply licensing sensical anyway (and you might still need a cutoff).   \n   \n\\> a value shows up in the kerning window   \n   \nBut that could just be calculated based on the old default spacing values - it doesn't mean the algorithm is using the original sidebearings.   \n   \nThat said, no, I'm not sure at all.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "19 Mar 2004 — 10:35am",
+      "content": "Of course one can debate just how good InD's optical kerning is. But other than that, I believe Hrant is dead on. I don't think the original sidebearings have much effect on how the spacing ends up.   \n   \nI happen to have had some other questions about optical kerning recently, from somebody doing a book on typography, so I am off to learn more so I can better answer these sorts of questions.   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "22 Mar 2004 — 11:42pm",
+      "content": "The sidebearings do have an effect on the result of ID optical kerning, Thomas. I tested this when ID first came out, by making a font that contained the same glyph with variant sidebearings. The optical kerning feature does not completely override the sidebearings but somehow seems to take them into account. If, for example, you have a letter with an abnormally huge left sidebearing, and the same letter shape with an anbormally narrow left sidebearing, ID will not equalise them; rather, it will adjust both but keep one looser and one tighter. Actually, this is very clever: much cleverer than simply overriding the metrics.\n\n"
+    },
+    {
+      "time": "23 Mar 2004 — 12:01am",
+      "content": "You're right that the sidebearings \\*influence\\* the spacing. What I should have said is that the optical kerning can have the effect of making the spacing overall tighter or looser, which is why I don't think it's practical to just take some of the optical kern values and use them as the kerning values in your font, unless you are also going to adjust the spacing to match the basic spacing established by the optical kerning.   \n   \nI hope that made sense. Anyway, I found out who the two people I need to talk to about it are, and just have to make time for a chat.   \n   \nT\n\n"
+    },
+    {
+      "time": "23 Mar 2004 — 4:45am",
+      "content": "Thomas, I asked Eric about this back in Vancouver. He looked into it a little and sent me the following last October:\n\n> \"I looked at the code and it looks like the optical kerning algorithm looks at the native white space area between oo and OO to determine an optimal 'whiteness' factor of the font as a whole. It then fits 2 characters together by trying to match in some way the white space area of the appropriately 'cased' pair of O's.   \n> \"You could probably mess around with it by changing the default fit of the oo & OO in a font.\"\n\nI'm sure there's much more to it, and I look forward to hearing what you find out.   \n   \n-- Kent.\n\n"
+    },
+    {
+      "time": "23 Mar 2004 — 9:22am",
+      "content": "\\> .... it will adjust both but keep one looser and one tighter.   \n   \nBut we don't know if it's _adjusting_ or if it's simply taking the values into account, dumping them and coming up with a good gap specifically for that pair (which is what I think Thomas was getting at). BTW, don't rely on the positioning of the cursor when it's placed between two characters: that could simply be calculated from the proportions of the original sidebearings - it doesn't mean new sidebearings are available for extraction.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "23 Mar 2004 — 10:37pm",
+      "content": "I think you misunderstand me, Hrant. By 'adjusting' I meant adjusting the inter-glyph space with kerning, not adjusting sidebearings. The 'good gap' for a given pair of glyphs, as arrived at by the optical kerning feature, is determined by their sidebearings as well as by their form. If the optical kerning was based only on form, pairs of otherwise identical glyphs with variant spacing would end up kerned to be evenly spaced: they are not. In other words, InDesign's optical kerning to some degree relies on the font being decently spaced to begin with.\n\n"
+    },
+    {
+      "time": "15 Apr 2004 — 5:38pm",
+      "content": "I've been comparing InDesign's optical kerning to _my_ optical kerning, i.e. to how I kern glyphs by eye in FontLab. Using lists of sample words in both FontLab and InDesign, I have been manually spacing pairs in FontLab and then comparing them to what InDesign's optical kern feature does. Some kinds of pairs are handled very well by InDesign, and the results are very close to what I do by eye; other kinds of pairs, especially in fonts with fairly long serifs, get pushed apart by InDesign and look too loose. However, what really caught my attention today was that InDesign does not kern consistently across different scripts, even if the glyphs and metrics are identical.   \n   \nThe illustration below shows four pairs, using the Latin uppercase _T_ (U+0054), the Latin lowercase _a_ (U+0061), the Cyrillic uppercase _T_ (U+0422), and the Cyrillic lowercase _a_ (U+0430). In this font, as in most other biscript, Latin+Cyrillic fonts (ignoring for now my Hrant's perennial debate about whether this is a good thing), the Latin and Cyrillic _T/T_ and _a/a_ are perfect cognates: they are identical glyphs with identical sidebearings. As you can see, InDesign's optical kern feature applies different kerning depending whether the pair is Latin, Cyrillic or a mix of scripts.   \n ![ID opetical kerning](http://web.archive.org/web/20131108044022im_/http:/www.typophile.com/forums/messages/4101/33609.gif)   \nThis is disturbing, not least because it indicates another significant whole in our understanding of how the optical kern feature works. It also makes it impossible to predict how the optical kern feature will handle different scripts.\n\n"
+    },
+    {
+      "time": "15 Apr 2004 — 7:14pm",
+      "content": "I suspect it's either:   \n   \n1) a bug   \n   \n2) a side effect of different vertical metrics for the different scripts or something weird like that.   \n   \nBy (2) I mean that the kerning has to decide what vertical extant (+/- in Y direction) to take into consideration. I had assumed this would be font-specific, based on the Y-min and Y-max of the entire font.   \n   \nIt had not occurred to me, but it's possible this could be specific to different subsections of the font, so as to ensure that the extremes of certain scripts do not affect each other's kerning. Otherwise adding different scripts could affect the kerning of the scripts already in the font.   \n   \nJust a guess....   \n   \nBy the way, in case you were wondering, I have dug up the original patent we acquired from URW (got it from our lawyers, actually). My goal was to read it, so I would know what was public knowledge that I could freely talk about. However, it's in German, which I do not read nearly well enough. I have to get the main portion translated, which I have not yet done.   \n   \nRegards,   \n   \nT\n\n"
+    },
+    {
+      "time": "15 Apr 2004 — 8:36pm",
+      "content": "Setting indesign's optical kerning aside for a moment...   \n   \nAnyone know how Carter spaces his fonts? Have his meathods ever been documented? I suppose it comes from a lot of practice and knowing spacing issues in advance while designing glyph proportions. Is there a book? and forum? article? anything? Or do I have to enroll at Yale :-)   \n   \nThis is an area where I really want to improve. It is so much of how a font functions.   \n   \nRandy\n\n"
+    },
+    {
+      "time": "16 Apr 2004 — 4:00am",
+      "content": "\\> Anyone know how Carter spaces his fonts?   \n\\> Have his meathods ever been documented?   \n   \nSure, just like Mozart's methods of composing. Sit down and do. ![:-)](http://web.archive.org/web/20131108044022im_/http:/www.typophile.com/forums/clipart/happy.gif)  \n   \nGeniuses don't document their methods.   \n   \nAdam\n\n"
+    },
+    {
+      "time": "16 Apr 2004 — 12:46pm",
+      "content": "Wow, a first: Thomas giving his company too _little_ credit! ;-)   \n   \nActually, of course I can't know if the Indy boys were thinking what I'm thinking (admittedly it does seem like a big stretch - plus I can't explain the behavior in the mixed-script settings), but John, I keep warning you about this Modernist cognate fetish, and here I go again:   \n   \nThe more I think about it (especially after your recent posts on Typophile about what pairs of scripts have cognates), the more I'm realizing that cognates might be nothing more than theoretical play. Like \"the Latin and Cyrillic T/T and a/a are perfect cognates\" falls apart when you consider the simple fact that the _rest_ of those two alphabets have many non-cognates, and they combine (think spacing) with those cognates to actually convey language. A font is a little machine, remember? :-) It's not a bunch of cognates and a bunch of non-cognates playing in opposite ends of the playground.   \n   \nIn fact there IS a solid reason to make the Cyrillic \"Ta\" looser than in Latin: Cyrillic has proportionally more verticals compared to Latin. In effect this means that overall spacing needs to be looser, even among identical structures\\*. When I was making Nour&Patria it hit me very strongly: the Armenian \"vo\" and the Latin \"n\" have the same shape\\*\\*, but if you equalize their sidebearings and then propagate the sidebearing values to the other glyphs (as you normally would), you end up with unbearably-tight Armenian setting. This is also manifest in the need to the make the sidebearings of round profiles in Latin tighter than control strings would indicate (optionally subsequently loosening round-round pairs) - because actual setting (where verticals are more common than rounds) benefits.   \n   \n\\* And due to notan, a difference in the White must mean a difference in the Black.   \n   \n\\*\\* You might say that historically they're not cognates however, but really, the user comes before history.   \n   \nAnd John, one other thing: Indy's optical spacing is size-specific. So the only way to really evaluate it is to print out your test settings (as opposed to looking onscreen).   \n   \n--   \n   \nCarter's spacing: although some geniuses _do_ document their thoughts (especially in a craft, versus Adam's musical example), it's probable that Carter might keep the overall strategy only in his head, but surely does also have lists and such for testing.   \n   \nI myself have two small (and possibly stale) anecdotal clues, which are however admittedly possible to read in very different ways:   \n   \nDuring TypeCon98, I was on a panel discussion (I think besides the moderator -Brian Sooy- only one other panelist showed up) about kerning, and as I was describing my own \"base\" strategy (making two lists, one for right-profile exceptions and another for left-profile, then pairing up all the combos and kerning as needed), I noticed\\* Carter nodding. (BTW, I also noticed a guy in a PsyOps t-shirt massively furrowing his brows in confusion. :-) Then when the moderator asked if there's anything \"special\" I wanted to say about kerning, I pointed out that the letter shapes themselves had to be open to consideration based on their potential spacing issues, citing the \"r\" as a particular problem-child, and I noticed Carter nodding again. That's all I have, Randy, sorry. :-/   \n   \n\\* Through parafoveal vision, of course. :-\\>   \n   \nhhp\n\n"
+    },
+    {
+      "time": "16 Apr 2004 — 3:06pm",
+      "content": "I think I'll just ask him. :-)   \nIf I find out anything I will share.   \n   \nRandy\n\n"
+    },
+    {
+      "time": "19 Mar 2004 — 8:33am",
+      "content": "Nice idea, Mr. Coles. But doesn't this belong in the BUILD area?\n\n"
+    },
+    {
+      "time": "19 Mar 2004 — 9:44am",
+      "content": "I know you mean no harm, but I can't abide the name 'Steve'. Not sure why.   \n   \n1 - Ahh. I should have known you'd already looked into it. You   \nare one of the only folks I know who really see the benefit in   \nInD's spacing.   \n2 - Like I said, there could be a setting to pick the optimal   \nsize for the font in question. For example, 11 pts. for a text font.   \n3 - Seems easy to resolve with new code, no?\n\n"
+    },
+    {
+      "time": "19 Mar 2004 — 9:38am",
+      "content": "Steve, I've actually talked to Adam about this.   \n   \nHere are some things to consider:   \n1) Indy's Optical spacing is bilinear - a flat segment between 4 and 12, another between 12 and 72. They did this to reduce the impact on performance. An ideal version of the algorithm would be on a smooth (possibly quadratic) curve.   \n2) The spacing depends on point size.   \n3) I think the algorithm discards the base spacing info when it does its thing. This would mean it can't simply replace the kerning in a font.   \n   \nI think it would be nice to include the technology at the font app level (95% of fonts would end up with better spacing), but actually if you don't mind reverse-engineering it you don't need a license: you just set all pairs of characters, get Indy to do its thing, output a PDF, then take (automated) measurements between all the characters. For a give target point size though.   \n   \nhhp\n\n"
+    }
+  ]
+}

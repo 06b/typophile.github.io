@@ -1,0 +1,87 @@
+{
+  "id": "56836",
+  "title": "Is it a font problem?",
+  "forum": "Build",
+  "tags": [
+    "General Discussions",
+    "Build"
+  ],
+  "content": "I have made an Arabic font. In Word 2007 when I apply low, medium or high justification the Kashidah i.e. the stretching line within the words sometimes appear at wrong places as shown by the red arrows in the picture below. Is it a font problem? what would be the solution ?\n\n ![](http://web.archive.org/web/20130822161021im_/http:/typophile.com/files/Word%202007_4660.jpg)\n  \nWhen I tried in OpenOffice there appear three problems.  \n1). The kashida appeared at wrong places as indicated by green arrows in the 2nd picture below.  \n2). The Marks disappeared from the last letters of each line as indicated by red arrows.  \n3). The last marks of some words slipped forward from their respective places as shown by orange arrows.  \nIs there any solution for these problems ?  \n\n ![](http://web.archive.org/web/20130822161021im_/http:/typophile.com/files/OpenOffice%203_5537.0.jpg)\n\n",
+  "author": "Zuhair Albazi",
+  "time": "9 Apr 2009 — 8:43am",
+  "uid": "43535",
+  "comments": [
+    {
+      "time": "9 Apr 2009 — 9:15am",
+      "content": "Have you tried setting the same text in a different font (e.g. the Microsoft Arabic Typesetting font)? That will determine whether the problem is in your font or in the way the application handles Arabic justification.\n\nSee this MS document for explanation of what Word should be doing:  \n [http://www.microsoft.com/middleeast/msdn/JustifyingText-CSS.aspx](http://web.archive.org/web/20130822161021/http:/www.microsoft.com/middleeast/msdn/JustifyingText-CSS.aspx \"http://www.microsoft.com/middleeast/msdn/JustifyingText-CSS.aspx\")\n\n[This discussion probably belongs in the Build forum.]\n\n"
+    },
+    {
+      "time": "11 Apr 2009 — 12:29am",
+      "content": "Respected Typophiles !  \nI tried with Microsoft Arabic Typesetting font in Word 2007, there is same problem in that font.  \nBut I have made the font with FontLab & put the OpenType Tables with VOLT and there I have not applied Kashida in any combination in any Lookup.  \nSo why the wrong Kashida appears after some Ligatures & do not appear after other ligatures.  \nIn Adobe Arabic font this problem also appears but only after some of these ligatures not after all of these.  \nIn Traditional Arabic there is no problem but it has very few Ligatures, almost all words has only four shapes i.e. initial, medial, final & isolated.  \nI have observed that the wrong kashida appears only after the end of these ligatures\n\n ![](http://web.archive.org/web/20130822161021im_/http:/typophile.com/files/After%20words%20wrong%20Kashida_3500.jpg)\n  \nWhile the wrong kashida appears in the centre of only one word that is \"meeminitial meemaleffinal\" as shown below  \n\n ![](http://web.archive.org/web/20130822161021im_/http:/typophile.com/files/Iside%20words%20wrong%20Kashida_6496.jpg)\n\n"
+    },
+    {
+      "time": "12 Apr 2009 — 3:13pm",
+      "content": "It appears that the problem is in Microsoft VOLT because when I used the FontLab to make Ligature subtitutions the problem disappeared and the Kashida appeared at correct places in Word 2007 as shown by the image below.\n\n ![](http://web.archive.org/web/20130822161021im_/http:/typophile.com/files/Font%20created%20with%20FontLab_3961.jpg)\n  \nKeep in mind that this problem do not accur in Normal Justification. Instead it appears only in Low, Medium & High Justification and in all those Fonts which have large Number of Ligatures i.e Adobe Arabic, Microsoft Arabic TypeSetting Font etc.  \nWhen I used the Microsoft VOLT to create the same font the problem appeared as shown in the 2nd image given below.  \n\n ![](http://web.archive.org/web/20130822161021im_/http:/typophile.com/files/Font%20created%20with%20VOLT_6106.jpg)\n  \nBut I am bound to VOLT because I do not know how to use LookUps, Anchor attachment for Marks and Accurate Kerning in FontLab. In this respect FontLab is very difficult while the Volt is much easier.  \nIs there any solution Typophiles ?  \nI think to Inform the Volt Developing Team. But I do not know about them. How Should I inform them?  \nPlease Help me ..............  \nThanks \n"
+    },
+    {
+      "time": "12 Apr 2009 — 4:12pm",
+      "content": "Moved to \"build\"\n\n"
+    },
+    {
+      "time": "12 Apr 2009 — 7:53pm",
+      "content": "Zuhair, it may not be a VOLT fault per se, but I will bring this thread to the attention of Sergey Malkin, the VOLT developer.\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 8:49am",
+      "content": "Without having looked into it yet I naively ask: Does this version of Word support all of the OT calls being made as well? It may not be a VOLT problem.\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 9:38am",
+      "content": "Eben, Word 2007 supports all the layout features necessary for Arabic shaping. It doesn't support purely discretionary features such as [dlig], but it supports all the required features and also those features such as [liga] and [calt] that should be on by default. The Uniscribe Arabic shaping engine takes care of all this.\n\nWhat Zuhair's screenshots indicate is a problem between certain states of the Word Arabic justification algorithm and some fonts. The fact that there seems to be a difference in behaviour between fonts with OTL tables generated by VOLT and those generated by FL/FDK certainly is intriguing.\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 9:52am",
+      "content": "This is known problem of Uniscribe shipped with Windows Vista and Office2007. If font forms a ligature consisting of letters on both sides of expected justification point, Uniscribe will ask kashida to be inserted after the ligature.\n\nTher is no problem in VOLT, difference in behavior should be caused by different layout tables produced by VOLT and AFDK.\n\nThanks,  \nSergey\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 2:33pm",
+      "content": "Thank you so much.  \nIt means the problem is in Word 2007 not in my font & not in VOLT.  \nBut one thing is still confusing that why this problem do not occur in the Font at same Ligatures created by Fontlab as shown by my last 2 images. Why Word 2007 differentiate between the two fonts, one by FontLab & the other by VOLT.\n\nAlso I want another question. I downloaded the \"save as PDF\" add-on for Word 2007 but when I try to create a PDF. Some ligatures do not appear in PDF correctly. Then I tried with the Adobe Arabic Font, the same problem occured there.  \nIs there something wrong?\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 2:39pm",
+      "content": "One more thing I want to ask that I also made justification alternates [jalt] in Volt but It do not work in Word 2007. Whether the WORD do not support [jalt] or something wrong in the Font?\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 3:11pm",
+      "content": "<cite>But one thing is still confusing that why this problem do not occur in the Font at same Ligatures created by Fontlab as shown by my last 2 images. </cite>\n\nIf exactly the same glyphs are formed by both fonts, there should not be difference in layout and justification, it happens on higher level. Check again if results produced by font are exactly the same.\n\n<cite>Some ligatures do not appear in PDF correctly</cite>\n\nPDF contains glyph indices produced by Word, it is not doing its own shaping again. What is wrong with PDF, are ligatures not formed, or it is some random glyph displayed, or it comes from some other font?\n\n<cite>Whether the WORD do not support [jalt] or something wrong in the Font?</cite>\n\nYes, Word does not support 'jalt' feature. I actually do not know application that currently supports 'jalt'.\n\nThanks,  \nSergey\n\n"
+    },
+    {
+      "time": "13 Apr 2009 — 4:27pm",
+      "content": "Sergeym, thank you so much for your kind guidance.\n\nI could not understand your qoute \"If exactly the same glyphs are formed by both fonts, there should not be difference in layout and justification, it happens on higher level. Check again if results produced by font are exactly the same.\"  \nI have given the images of 2 fonts one made by VOLT & other by Fontlab. Same Font & same Ligatures as shown in the last two images.\n\nIn the PDF file random ligatures appear from the same font at some places instead of the right ligatures.\n\nThanks,  \nZuhair Albazi\n\n"
+    },
+    {
+      "time": "14 Apr 2009 — 7:53am",
+      "content": "I can't tell you much more without looking at the font. If you are willing to send me your fonts for inevstigation, connect me offline at sergeym at microsoft.com\n\nThanks,  \nSergey\n\n"
+    },
+    {
+      "time": "15 Apr 2009 — 5:43am",
+      "content": "Very kind of you Sergey!\n\n"
+    },
+    {
+      "time": "14 Jul 2012 — 10:16pm",
+      "content": "Sergey,\n\nI have sent you the font.\n\nThanks,  \nZuhair Albazi\n\n"
+    },
+    {
+      "time": "18 Jul 2012 — 4:19am",
+      "content": "Is this fixed? :)\n\n"
+    },
+    {
+      "time": "19 Jul 2012 — 3:18pm",
+      "content": "Frankly, I am totally clueless on this particular subject.\n\nOn the other hand, if the worst problem we had to deal with was a font problem, what a wonderful world this would be.\n\nWith apologies to Sam Cooke…\n\n"
+    },
+    {
+      "time": "20 Jul 2012 — 5:26am",
+      "content": "Actually it is a MS Word problem as described by Sergey. It is even Present in MS Word 2010. There are four levels of justifications in MS Word 2010.  \n1-Justify  \n2-Justify Low  \n3-Justify Medium  \n4-Justify High  \nIn the first level no kashida is inserted, only the inter-word spacing is increased. This works fine with all the fonts. While the other three levels of justification destroy most of the text shape in Calligraphic Fonts. These levels work only with linear fonts.\n\nThanks,\n\n"
+    }
+  ]
+}

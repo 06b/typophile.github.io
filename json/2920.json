@@ -1,0 +1,34 @@
+{
+  "id": "2920",
+  "title": "Nonstandard encodings (GreekKeys)",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "[x-posted to FontLab group]   \n   \nI'm new to all this, so any help is much appreciated.   \n   \nFor non-Unicode applications, there is a common keyboard layout for polytonic Greek called GreekKeys (Macintosh). It dates back to the mid-80s, along with fonts that have a non-standard encoding (e. g., Athenian).   \n   \nI have Type 1 fonts from Agfa Monotype which I need to match to this layout and encoding, but I keep running into difficulties.   \n   \n1. I opened the GreekKeys font in FontLab 4.5 and saved the encoding.   \n   \n2. I then created a new document, put it in Names mode and selected the GreekKeys encoding.   \n   \n3. I then cut and pasted the glyphs from the Monotype font to match the GreekKeys font.   \n   \n4. In the FontInfo, under Encodings, I selected Western Latin 1 as the Microsoft Character set, but did not select any codepages as supported. (I also copied all the hinting data from the Monotype font.)   \n   \n5. I generated a MacIntosh suitcase, with the option to always use custom encoding.   \n   \nBut the font that results is erratic, producing different results from the GreekKeys fonts, and different ones in different applications.   \n   \nThe original GreekKeys font also has a number of problems on OS X: persistent difficulty over the glyph in \"currency\" slot, also one which is in the \"nbspace\" slot.   \n   \nIf I leave the glyphs there (for legacy documents) and put another copy of each into the one or two existing free slots, all sorts of weird behavior occurs in documents.   \n   \nIt all seems so unpredictable. Can anyone help?   \n   \nThanks.   \n   \nVictor\n\n",
+  "author": "victor",
+  "time": "Fri, 2004-01-30 22:41",
+  "uid": "1754",
+  "comments": [
+    {
+      "time": " Sat, 2004-01-31 10:10",
+      "content": "You are making a Type 1 font, yes? In FontInfo/Encodings try selecting 'Bitstream Font Set' in the Microsoft Character Set. This is a strict cell-by-cell encoding of what you have in your FontLab font window in Names mode.\n\n"
+    },
+    {
+      "time": " Sat, 2004-01-31 10:17",
+      "content": "Right, Type 1 -- I thought that way I could just keep Monotype's hinting and not worry about it.   \n   \nThanks for the tip. I'll definitely try that.   \n   \nI'm a little lost on what it actually means, though. What does the Character Set option do to the encoding? And how does one decide which set to select?\n\n"
+    },
+    {
+      "time": " Mon, 2004-02-02 13:28",
+      "content": "The Character Set option determines how the first 256 characters in the font are interpreted, and whether they are re-ordered. If, for example, you select 'Western (Latin 1)...' the characters will be re-ordered to match that character set. The Bitstream Font Set is a fixed encoding that is not re-ordered, hence its usefulness for making custom fonts.   \n   \n\\<i\\>And how does one decide which set to select?\\</i\\>   \n   \nYears of painful experience.\n\n"
+    },
+    {
+      "time": " Mon, 2004-02-02 14:44",
+      "content": "But why does the ordering matter?   \n   \nI thought the point of the encoding table was to match a standard set of names with glyphs. Unless the ordering alters which name is paired with which glyph, how does it affect the application?   \n   \nI tried your advice, and using the Bitstream Character Set results in a font that works fine for applications that operate under Classic in OS X. But it still produces weird results in OS X proper (in both Carbon and Cocoa apps). E. g., the same file comes up correct in Endnote 5, but not in Endnote 6. It's even worse in Mellel and Word.   \n   \nFor some reason, InDesign seems to get everything right, EXCEPT the character that was mapped to nbspace (00A0).   \n   \nUnfortunately, until everything is Unicode compatible, I have to find a solution.\n\n"
+    },
+    {
+      "time": " Sun, 2004-02-15 14:52",
+      "content": "OK, I've made some headway on this.   \n   \nTwo things that helped:   \n   \n1. I went back to an old postscript Type 1 version of the font issued with GreekKeys, \"Athenian\" (circa 1991) and saved the encoding, which I then used for the new remapped fonts.   \n   \n2. Following John Hudson's advice, I changed the Microsoft Character Set in Font Info (under Encoding and Unicode) to \"Bitstream Font Set,\" to enforce the encoding.   \n   \n   \nThis was sufficient to get rid of the problem with iota acute and the Euro symbol swap. (In the old encoding, iota acute is in the \"currency\" slot.)   \n   \nBut it did not get rid of the missing omega lenis acute (which occupies the nbspace slot) in certain applications. After extensive testing, here is what I discovered:   \n   \n   \nA. What is crucial to the GreekKeys keyboard is the \\*index\\* number of the glyph. Therefore, you have to have a glyph for every glyph in the Athenian font (all 217 of them), and they have to be in the right order.   \n   \nTo get this, you have to start by appending an empty slot named \".notdef\" which has the first index; and then paste each of the glyphs into a new font window, in the order their names appear in the GreekKeys encoding in Names mode.   \n   \nB. But it also appears that the font can \\*not\\* have \\*more\\* than 217 glyphs. (When I did, the letters collapsed on each other in both Word X and FrameMaker 7. I still don't understand why this happened.)   \n   \nSo to solve the omega lenis acute problem, you have to replace an existing character, such as the backslash, in Names mode; then switch to Index mode, and drag and drop the appended glyph to the index slot occupied by backslash (59); and then \\*delete\\* the backslash glyph, which is not in index slot 60. Then return to Names mode and generated the Mac suitcase.   \n   \nAnyway, that's what I did. Here are the results:   \n   \n   \nEverything works fine in BBEdit, Word X, FrameMaker 7, and Endnote 6. The normal omega lenis acute is missing in InDesign and Mellel, but the secondary one substituting for backslash works fine. (Iota acute, as noted, works fine.)   \n   \nOne oddity is that Mellel screws up on two other characters: eta acute iota subscript and eta asper iota subscript. (It swaps them with pi and Omega, respectively, from some symbol font.)   \n   \nOn the other hand, my legacy documents are likely to go straight into InDesign. In Mellel, one can (and should) use a unicode version.   \n   \nBest, Victor\n\n"
+    }
+  ]
+}

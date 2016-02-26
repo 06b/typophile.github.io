@@ -1,0 +1,214 @@
+{
+  "id": "59489",
+  "title": "Revised Web Fonts Proposal",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Following [our proposal](http://web.archive.org/web/20131014143948/http:/blog.fontembedding.com/post/2009/06/29/Revised-Web-Fonts-Proposal.aspx) for a Web specific OpenType-based font format (which we named OTW), we received a lot of feedback from type designers, web designers and publishers. Most of the feedback was positive. People saw that differentiating web fonts from desktop fonts, and including licensing information in the font file was a step in the right direction.\n\nMoving the plan forward, we felt that with the support of browser makers we could have OTW standardized within two years, and have the majority of installed browsers supporting it within five to six years, based on current browser upgrade rates.\n\nHowever, web designers want to use commercial fonts today. They don’t want to wait five or six years. This is evident from the use of Flash-based solutions, and the interest in commercial services like TypeKit. So we took a step back and asked ourselves what can we do to accelerate the rate of adoption? With this in mind we decided to take another look at EOT.\n\nMicrosoft’s EOT format has a large installed base and is supported in every version of Internet Explorer since IE version 4. And as IE users are typically the slowest to upgrade, adding EOT support to other browsers would provide a quicker adoption of a single web font standard because the other browsers have much faster upgrade rates. However, we know that the other browser makers don’t like EOT because it includes URL binding, proprietary compression and gives Microsoft a head-start.\n\nWith this in mind we propose “EOT Lite”. Essentially EOT minus URL binding and compression, but with the addition of licensing information. The benefits are obvious, EOT Lite fonts will work with IE4 and above, can be easily supported in other browsers, and with their faster upgrade rates, we could see 90% of installed browsers supporting the format within a year. EOT Lite would still have the benefits of OTW: a font file that is differentiated from desktop fonts and containing license information.\n\nIn summary, and as a result of a significant dialogue with many stakeholders, we believe EOT Lite is the right solution for web fonts. We encourage everyone to support this solution with us.\n\n",
+  "author": "billdavis",
+  "time": "29 Jun 2009 — 8:54am",
+  "uid": "3095",
+  "comments": [
+    {
+      "time": "29 Jun 2009 — 1:01pm",
+      "content": "Bill,\n\nHow will your EOT Lite handle OT fonts with PS outlines?\n\n"
+    },
+    {
+      "time": "29 Jun 2009 — 2:00pm",
+      "content": "James - good question! I assume \"Yes\" is the answer you are hoping for?\n\nThe current public EOT specification is at [http://www.w3.org/Submission/EOT/](http://web.archive.org/web/20131014143948/http:/www.w3.org/Submission/EOT/). There is nothing in there to prohibit CFF being stored in the FontData section.\n\n"
+    },
+    {
+      "time": "29 Jun 2009 — 2:10pm",
+      "content": "<cite>The benefits are obvious, EOT Lite fonts will work with IE4 and above, can be easily supported in other browsers, and with their faster upgrade rates, we could see 90% of installed browsers supporting the format within a year.</cite>\n\nDoes that mean that the non-Microsoft web browser programmers are willing to implement EOT Lite regardless of their suspicions about Microsoft standards, DRM, etc?\n\n"
+    },
+    {
+      "time": "29 Jun 2009 — 2:51pm",
+      "content": "<cite>we could see 90% of installed browsers supporting the format within a year.</cite>\n\nHave the other browser makers already been heard about that? I mean, who (beyond Microsoft, of couse) is interested in implementing a support for this format in the next browser versions? Once again, I think it will be crucial for the success or fail of any format.\n\n"
+    },
+    {
+      "time": "29 Jun 2009 — 3:00pm",
+      "content": "We can't speak for all browser programmers, but we believe most developers would be willing to implement a webfonts solution that:\n\n1) provides web designers and developers access to the fonts they are clamoring for\n\n2) does so without having to wait years for it to be supported in all browsers\n\n3) does so in a format that major commercial font developers support\n\n4) does so without JavaScript, Flash or other hacks\n\nWe believe EOT Lite is that solution.\n\n"
+    },
+    {
+      "time": "29 Jun 2009 — 3:49pm",
+      "content": "_The benefits are obvious, EOT Lite fonts will work with IE4 and above, can be easily supported in other browsers, and with their faster upgrade rates, we could see 90% of installed browsers supporting the format within a year. EOT Lite would still have the benefits of OTW: a font file that is differentiated from desktop fonts and containing license information._\n\nWhile I applaud & dream of that kind of adoption rate. How open is the EOT format? Can Microsoft start making selfish changes that will hurt other adopters down the line, one adoption has reached critical mass? I feel that is really the question needing answered. I really don't feel Mozilla/Opera/Google will jump onto a standard Microsoft controls given the track record of the company in the past (regarding to standards).\n\n"
+    },
+    {
+      "time": "29 Jun 2009 — 5:20pm",
+      "content": "I know there will definitely be an OS vs. MS challenge there. But fingers crossed...\n\n"
+    },
+    {
+      "time": "29 Jun 2009 — 6:53pm",
+      "content": "Oh. Ummm... OK. Here's hoping that Mozilla and/or Opera are willing to add EOT lite support...\n\n"
+    },
+    {
+      "time": "29 Jun 2009 — 7:09pm",
+      "content": "The t2embed library used to support embedded font usage on Windows does not support CFF fonts, so no version of IE will load them.\n\nWhat exactly is the \"licensing information\" that you describe? How do you expect it to be used? Why do you need a new format for licensing information when the license record in the name table already exists?\n\n"
+    },
+    {
+      "time": "29 Jun 2009 — 9:18pm",
+      "content": "I'm a little foggy on how previous versions of IE will, with seeming magic, ignore some of the restrictions built into EOT. If this is the case, and it has intrinsic advantages, why doesn't IE support this new lite format already?  \nAnd a lack of support for CFF fonts - as John Daggett points out - is so backwards-looking that I have trouble NOT seeing it as a deal-breaker.  \nI echo his concerns and questions.  \nI'm not saying this is a fudge-job interim solution, but it kind of looks that way at first glance.  \nIt also ignores compression, even as an optional feature.\n\nI think there is patience (albeit limited) among designers and developers as long as it means a dependable, interoperable, long-term solution that isn't going to leave us with the need for yet another format five years down the road.  \nIMHO.\n\nI'd like to hear more before giving any firm feedback.\n\n"
+    },
+    {
+      "time": "30 Jun 2009 — 7:43am",
+      "content": "<cite> lack of support for CFF fonts</cite>\n\nThe EOT \\*format\\* supports CFF OT just fine. But neither WEFT nor IE have yet done so. Unfortunately, nothing anyone does is going to magically get CFF support into old versions of IE. Standardizing on some stripped down EOT gives an option for folks who want to get web fonts working today, and certainly doesn't preclude supporting OT CFF as well.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "30 Jun 2009 — 9:59am",
+      "content": "Wouldnt CFF fonts look like garbage on the web, since they lack TT hinting? As web fonts take off, is it worth it to try and convince designers to make TTF-flavored OT, with delta hints?\n\n"
+    },
+    {
+      "time": "30 Jun 2009 — 10:08am",
+      "content": "<cite>Wouldnt CFF fonts look like garbage on the web, since they lack TT hinting?</cite>\n\nThat will depend on the font and operating system. Lighter weights of sans fonts work pretty well on Mac OS, but bold weights render poorly at small sizes. Hinting will be the next big stumbling block for web fonts: designers are going to go up in arms when they realize how bad the fonts look and blame font designers, but they won’t want to pay for well-hinted screen fonts because so few exist that there’s really no baseline for what they should cost. On the upside, I think many experienced web designers learned to think about legibility issues when nobody could read all those eight-pixel bitmap fonts that were hot in Flash sites a few years back, so hopefully we won’t have to live through two years of godawful unhinted serif faces.\n\n"
+    },
+    {
+      "time": "30 Jun 2009 — 10:20am",
+      "content": "No baseline? Foundries large (and a few small ones, too) have been licensing well-hinted fonts to corporate clients for office use for like a decade, if not longer. And if you want to know how cheap a well-hinted font license can be, look no further than that recent Spiekermann...\n\n"
+    },
+    {
+      "time": "30 Jun 2009 — 10:33am",
+      "content": "<cite>Foundries large (and a few small ones, too) have been licensing well-hinted fonts to corporate clients for office use for like a decade, if not longer.</cite>\n\nI was referring to retail fonts. Corporate licensing pricing is not especially applicable to the many small jobs that have a total budget much smaller than the cost of a well-hinted corporate font license.\n\n<cite>Look no further than that recent Spiekermann...</cite>\n\nBut how many type designers sell enough fonts to recoup the costs of TrueType hinting a four-weight family for $80?\n\n"
+    },
+    {
+      "time": "30 Jun 2009 — 10:46am",
+      "content": "It isn't just corporate sales. Monotype tt fonts with esq hinting and Linotype tt fonts with xsf hinting are just slightly more expensive than their non-hinted versions iirc. I'm sure that these aren't the only instances.\n\nAs for the pricing sinking issue and distributors' prices... Well, not every font that could be used on the web should be used on the web. Especially for smaller text.\n\n"
+    },
+    {
+      "time": "30 Jun 2009 — 10:55pm",
+      "content": "<cite>Wouldnt CFF fonts look like garbage on the web, since they lack TT hinting?</cite>\n\nOn Mac OS using the system rasterizer, hinting is irrelevant or nearly so.\n\nClearType is capable of working very nicely with CFF OpenType, as demonstrated by the WPF rasterizer for CFF. But this is hardly mainstream, I guess.\n\n<cite>As web fonts take off, is it worth it to try and convince designers to make TTF-flavored OT, with delta hints?</cite>\n\nDelta hints are not of much interest for web fonts any more, because most are ignored by ClearType, and all are irgnored by the Mac OS rasterizer. At least, that's my impression. (With the possible exception in ClearType of deltas on Y-direction CVTs rather than directly on points, which could increase x-height at some key sizes or the like.)\n\nI could be mistaken about the degree of uselessness of delta hints, and am open to being corrected.\n\nNote also that regular GDI ClearType is turned on in IE 6 and higher, even when not on at the OS level.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "30 Jun 2009 — 11:31pm",
+      "content": "Will browsers support some OpenType features too?\n\n"
+    },
+    {
+      "time": "1 Jul 2009 — 2:35am",
+      "content": "@ray: Yes, there is on going current discussion of how to support features in CSS3 :-)\n\n"
+    },
+    {
+      "time": "1 Jul 2009 — 3:27am",
+      "content": "\\>I could be mistaken about the degree of uselessness of delta hints, and am open to being corrected.\n\nBoth Windows and Mac ignore x hints but not y. Delta instructions are ignored on the Mac. Windows only ignores them if they are 'out of line.' But since deltas can be used in the places other than glyph instructions and in ways other than to disturb the priceless rendering of ClearType, they are neither totally useless nor completely ignored.\n\nBoth of these OS have fallen qualitatively behind places like Pre and soon, some other vendors who use FreeType.\n\n\\>Wouldnt CFF fonts look like garbage on the web, since they lack TT hinting?  \nMost will. But the true garbage time comes when people start using fonts that are not as robust as the few they have now, i.e. hints wouldn't even help.\n\nCheers!\n\n"
+    },
+    {
+      "time": "1 Jul 2009 — 11:54am",
+      "content": "@dberlow: _Both of these OS have fallen qualitatively behind places like Pre and soon, some other vendors who use FreeType._ - er, are you saying that FreeType is the best quality renderer?\n\n"
+    },
+    {
+      "time": "1 Jul 2009 — 2:15pm",
+      "content": "I think Dave is saying that FreeType is going to soon outpace the OS vendors. Certainly it was well behind the last time I saw it, but these things change.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "1 Jul 2009 — 2:35pm",
+      "content": "<cite>Both of these OS have fallen qualitatively behind places like Pre and soon, some other vendors who use FreeType.</cite>\n\nCan we expect FreeType to exceed the quality of the OS Rendering on all LCD screens in the near future or is the rendering quality due to customizing FreeType to work well with the specific devices?\n\n"
+    },
+    {
+      "time": "1 Jul 2009 — 4:47pm",
+      "content": "@thomas  \n\\>_\"The EOT \\*format\\* supports CFF OT just fine. But neither WEFT nor IE have yet done so. Unfortunately, nothing anyone does is going to magically get CFF support into old versions of IE. Standardizing on some stripped down EOT gives an option for folks who want to get web fonts working today, and certainly doesn’t preclude supporting OT CFF as well.\"_\n\nI'm still not getting it. At least not easily. And if I'm not, then I'm assuming a similar reaction from others like me who understand browsers, standards, but are not overly technical with regards to the subtleties and differences betweeen font formats.  \nWhat I'm hearing is: \"EOT Lite will give us backward compatibility but yet in some ways it won't.\"  \nHuh?\n\n@Billdavis or anybody: Can you clear up this confusion?\n\n"
+    },
+    {
+      "time": "1 Jul 2009 — 5:00pm",
+      "content": "@tphinney: I thought he might be saying that FreeType had ALREADY outpaced them, which would be news to me! :) I think James has the right idea though; since possible to customize FreeType to work well with specific devices, so its likely that \"freetype is highest quality\" will become a kind of urban legend...\n\n"
+    },
+    {
+      "time": "2 Jul 2009 — 12:53am",
+      "content": "With the release of Firefox 3.5, don't we effectively already have font linking/embedding, since every major browser now has some kind of support? - All it requires is a couple of lines of code to determine whether the browser is IE or other: if so use EOT font, otherwise use TTF/OTF. [Either do this yourself or get a service like _TypeKit_ to do it for you].\n\nHaven't we lost the plot? Shouldn't we be talking about the licensing model not the format? In the long run, is any web-only font format going to be any more effective at \"protecting\" fonts than various digital audio formats have been at \"protecting\" music? If there was going to be a special font format as standard for the web, shouldn't that have been sorted out \\*years\\* ago?\n\nUnlicensed use of fonts on the internet should be \\*far\\* easier to police than unlicensed use of fonts in printed publications as you can devise a bot to search for them. Isn't it going to be much easier to search for and find sites using your fonts (legally or illegally) where the original un-obfuscated, un-subsetted fonts are being used?\n\nNo reputable commercial site is going to use unlicensed fonts - and those are the people who will actually pay for fonts. Won't the increased licensing fees for use of fonts on these sites far outweigh decreased sales (if any) from increased piracy?\n\n- C\n\n"
+    },
+    {
+      "time": "2 Jul 2009 — 1:19am",
+      "content": "cflynn: _\"Won’t the increased licensing fees for use of fonts on these sites far outweigh decreased sales (if any) from increased piracy?\"_ I don't think so, no, and it seems almost no one does.\n\n"
+    },
+    {
+      "time": "2 Jul 2009 — 1:51am",
+      "content": "Richard Fink -- <cite>I’m still not getting it.</cite>\n\nEOT, in the most simple case, is nothing but a wrapper around a TTF/OTF, more exactly a few header data which are followed by the actual TTF/OTF font data. (Font data _can_ be compressed, or _can_ be modestly obfuscated, but do not need to. Actually it would be easier especially for smaller foundries to do without these two options and just add the header.)  \nThat certain browsers only support one flavor but not the other is hard to understand. If an issue, it is a browser issue rather than a font format issue. As simple as that.\n\nChristopher Fynn -- <cite>Haven’t we lost the plot?</cite>\n\nYes.  \nSince @font-face is not heavily used yet (is it used at all), it is not too late to agree on supporting only EOT rather than also TTF/OTF. It is be a clean solution, and with information given in the EOT header, services like TypeKit were mostly superfluous.  \nDiscussions -- including on www-style and www-font list -- do not make any sense to me. The funny thing is that my own position has changed thanks to said discussions. Before, I was all for plain TTF/OTF. But web guys' \"for free\" and \"-anti\" ideology and fabricated arguments showed me how they tick.  \nThe point is that EOT's header info expressly states who may use the font (by URL info as well as by EOT \"format\" itself which tells a OS \"that's not for you\") -- which additional information prevents abuse in the first place. No need for policing which I am not particularly fond of.\n\nIn so far, I welcome the new proposal.\n\n"
+    },
+    {
+      "time": "2 Jul 2009 — 2:26am",
+      "content": "Karsten Luecke — _Since @font-face is not heavily used yet (is it used at all), it is not too late to agree on supporting only EOT rather than also TTF/OTF._\n\nAre Safari, Opera, Mozilla going to _remove_ support for TTF/OTF? — _hardly seems likely._\n\nMozilla says patented technology used in EOT is _\"a show stopper\"_. Are the patent holders concerned going to free these patents — or Mozilla and other like minded parties going to change their minds? — _hardly seems likely._\n\nEventually won't someone with a substantial library of fonts decide to license their fonts for web use in both TTF & EOT formats? There are one or two companies with large clone libraries I can think of that might see this as worth their while - and, in the short term at least, the first ones to jump could make substantial sales.\n\nEither that, or a service like TypeKit might buy up or license such a font library.\n\n- C\n\n"
+    },
+    {
+      "time": "2 Jul 2009 — 3:15am",
+      "content": "me — _“Won’t the increased licensing fees for use of fonts on these sites far outweigh decreased sales (if any) from increased piracy?”_\n\nabattis — _\"I don’t think so, no, and it seems almost no one does.\"_\n\nSince the advent of the `alt.fonts.binary` group on Usenet, and now with peer-to-peer file sharing, unlicensed copies of almost every digital font have been easy enough for people to obtain without paying for them. On the internet at least, substantial font piracy may be older than music piracy. It's hard to imagine how TTF / OTF embedding could make the situation substantially any worse.\n\nPeople who now pay for commercial fonts will continue to pay for them. Those who don't want to pay for commercial fonts, and think they can get away using them without paying, will continue to do so - though using an unlicensed font on a web site would be pretty stupid since it is so likely you'll get found out. A few people will link/embed only FOSS fonts - and that number may grow if commercial vendors continue not to license fonts for web use, or if licensing fees are felt to be too high.\n\n- C\n\n"
+    },
+    {
+      "time": "2 Jul 2009 — 3:18am",
+      "content": "\\>Since @font-face is not heavily used yet (is it used at all), it is not too late to agree on supporting only EOT rather than also TTF/OTF\n\nDo you actually think there is any way the OT format will be REMOVED by the W3C recommendation? I laugh at this ridiculous notion.\n\nLaudable thoughts on this topic can only start with an addition to the OT format.\n\n\\>since possible to customize FreeType to work well with specific devices, so its likely that “freetype is highest quality” will become a kind of urban legend...\n\nReword...since it is possible to customize FreeType to work well with specific fonts... and I don't live in a city.\n\nCheers!\n\n"
+    },
+    {
+      "time": "2 Jul 2009 — 4:38am",
+      "content": "C.F. -- <cite>Mozilla says patented technology used in EOT is \"a show stopper\".</cite>\n\nAccording Mr Levantovsky this is a non-argument, see his post of 25.6.2009 to the www-style list.\n\nC.F. -- <cite>Are Safari, Opera, Mozilla going to remove support for TTF/OTF? — hardly seems likely.</cite>  \nD.B. -- <cite>Do you actually think there is any way the OT format will be REMOVED by the W3C recommendation? I laugh at this ridiculous notion.</cite>\n\nAdmitted.\n\nD.B. -- <cite>Laudable thoughts on this topic can only start with an addition to the OT format.</cite>\n\nIf normal TT/OT fonts are supported too, then _additional_ tables/data or even _additional_ formats/wrappers are nothing but small print that nobody reads.\n\n"
+    },
+    {
+      "time": "2 Jul 2009 — 11:48am",
+      "content": "@Christopher Fynn — _Shouldn’t we be talking about the licensing model not the format?_\n\nI want to see a web font format that does not allow anyone with a browser to easily download a free copy of one of my fonts used in a web site.  \nAlthough I may be able to track unauthorized use online, what particularly concerns me is offline usage, which is presently the bulk of my market.\n\nI will aim to publish each of my typefaces in two formats: EOT (or OTW, .wtf, or whatever) and .otf, with different price points, licenses, and features--each addressing its own tranche.\n\n"
+    },
+    {
+      "time": "2 Jul 2009 — 11:57am",
+      "content": "\"I want to see a web font format that does not allow anyone with a browser to easily download a free copy of one of my fonts used in a web site.\"\n\nWell, I don't think we're going to be able to reinvent the web.\n\nAlas, that's a basic functionality of the web. We download code, images, text, and then it's stored on our machine and presented to us in the browser.\n\nI concede that there are ways to make files harder to re-use, but I'm still not understanding why we think this is a concern, as the font files are already easily downloadable by those that want in completely unencumbered original formats.\n\nAnyone that would be willing to spend the time fishing files out of their browser's cache would surely be the type of person that already knows how to find the original font files easily anyways, no?\n\n"
+    },
+    {
+      "time": "2 Jul 2009 — 2:42pm",
+      "content": "Darrel, this was addressed by Ray Larabie in Bill's previous thread.\n\n"
+    },
+    {
+      "time": "2 Jul 2009 — 3:07pm",
+      "content": "Nick, have a link?\n\nI know there is concern about a lack of attribution in that when using @font-face there is no indication of copyright or notice of an EULA with the font being used. I understand that argument, though I'm not sure if that's the one you are referring to.\n\n"
+    },
+    {
+      "time": "2 Jul 2009 — 10:58pm",
+      "content": "[http://www.typophile.com/node/58922](http://web.archive.org/web/20131014143948/http:/www.typophile.com/node/58922 \"http://www.typophile.com/node/58922\")\n\n"
+    },
+    {
+      "time": "3 Jul 2009 — 5:24am",
+      "content": "If I understand what Ray is saying, to paraphrase, being able to grab a font via @font-face may be 'too easy' in that people won't realize it's illegal to use the font elsewhere.\n\nI'm not convinced, though, that people that would think it's 'so easy it must be legal' would have been paying customers of that typeface otherwise.\n\nI guess it boils down to the old issue of how many paying customers would one gain vs. how many would one lose.\n\n"
+    },
+    {
+      "time": "4 Jul 2009 — 7:56pm",
+      "content": "I don't know if this is helpful as bricks/mortar vs virtual and often not fair analogies: Let's say you two tool stores.\n\nTool store A has only one employee, an inattentive cashier with poor eyesight. The tools have price tags on them.\n\nTool store B doesn't use price tags and they leave all the tools out on the sidewalk.\n\nIt's fairly easy to steal from store A but only certain kinds of people would do that. They would use the tools with the full knowledge that they are stolen tools. In this example, the\n\nIt's just as easy to pick up tools from the sidewalk in front of Store B. Some people would assume that they're supposed to be free. There's no price tag and they're just sitting there. They might assume that it's okay to use those tools since they're not stolen . . . they were sort of found. Some people would assume the unmarked sidewalk tools belong to a store, some wouldn't.\n\nThe tools are fonts. The price tag is the EULA. I'm not saying piracy and stealing are the same thing; they're not. If somebody deliberaately took an drill from Store A without paying, we'd call them a shoplifter. If someone spotted a drill on the sidewalk with no price tag and picked it up we wouldn't call them a shoplifter.\n\nSo it's not about how many paying customers are lost to piracy. That's not the issue. Piracy can't be stopped. If people want to pirate fonts, they can pirate fonts. If you bring that into it, you're clouding the real issue which is: the difference between Store A and Store B. It's not just about how easy it is to get at the fonts. It's about the difference between having to defeat security using a font ripper browser plugin or just straight downloading from a URL.\n\nThe EULA, to me is very important. Whatever embedding solutions people come up with, that's the most important factor to me. At the very least, I deserve to be protected by a liability disclaimer, no?\n\n"
+    },
+    {
+      "time": "4 Jul 2009 — 9:31pm",
+      "content": "@typodermic\n\nYou've got it about right.  \nNow, font-makers as a group need to swiftly move towards a consensus and begin to speak - at least publicly - with one voice on this issue.  \nThose who don't quite understand the technical barriers to unlicensed use need to defer to trusted colleagues who do.  \nJust as in a labor dispute - say, the Writers Guild of America strike a few years ago that stopped TV and Film production - fragmentation is enemy number one.\n\n(Just my humble opinion. But an informed one.)\n\n[Richard Fink](http://web.archive.org/web/20131014143948/http:/readableweb.com/)\n\n"
+    },
+    {
+      "time": "5 Jul 2009 — 4:51am",
+      "content": "The Writers Guild is a union right? International screenwriters, like those who work in Britain, France, or Germany, aren't covered, I think. TV didn't stop over here in Europe when the Americans went on strike…\n\nMy point is that typeface designers, font developers, and font distributors are a diverse bunch, internationally scattered. Speaking for all of them would be difficult. There isn't a union, in the US or otherwise. The ATypI, which you might be able to call an international trade group, probably cannot speak authoritatively for all of the people who work with type worldwide, even if they would all be members (which is not the case, I suspect).\n\n"
+    },
+    {
+      "time": "5 Jul 2009 — 9:52am",
+      "content": "@dan\\_reynolds  \nEverything you say is true.  \nAnd I'm not saying that everyone should unquestioningly start marching in lockstep.  \nBut there is a common interest among all font-makers everywhere. And, if it is at all possible, from a \"political\" and \"public relations\" standpoint, a united front would be highly beneficial.  \nFor one reason only: I think it will help bring a speedier resolution of the \"problem\" of web fonts to the satisfaction of most stakeholders.\n\nLike I said, just my opinion, but it is based on a lot of hours looking at this issue unfold on a daily basis.\n\nThere is a symposium at TypeCon2009 on Sunday the 19th about web fonts. Perhaps some light will be shed there.\n\n"
+    },
+    {
+      "time": "5 Jul 2009 — 9:59am",
+      "content": "\"the difference between Store A and Store B\"\n\nB&M analogies aren't always ideal, but yours is pretty good. However, if I may, I think to fully equate the analogy to web fonts, we need a C option:\n\nstore A) commercial tools, but easy to shoplift if one desires. It's also very easy to legitimately purchase quickly and efficiently for those that like to buy their products legitimately.\n\nstore B) commercial tools, but difficult to shoplift if one desires. It's also a bit of a pain to purchase products as there are long lines, crowded parking, and that really annoying person that insists that they look in your card and put a smiley face on the receipt before you can leave since they don't trust any of their customers.\n\nfree bin C) commercial tools that have been left in boxes out behind the abandoned warehouse for anyone to take that wants them.\n\nI think those into getting software for free for the sake of getting it for free are fully aware of location C and use that most of the time (.ru sites, any number of newsgroups or bittorrent trackers, private file sharing groups, sendspace/yousendit/megadownload/etc). Some of these folks, if they can't find the tool they want at option C will go into store A and sneak it out in their coat.\n\nWhich leaves the question: What if Store A didn't exist? What would that group of people do if option C didn't have what they want? I see a few scenarios:\n\n1) They'd decide that it's not worth the effort to steal from store B and do nothing.\n\n2) They'd be determined to get it anyways and do what it takes to lift it from store B.\n\n3) They'd decide to pay money legitimately at store B.\n\nWhat percentage of people that rarely if ever pay for fonts would fit into each of those 3 groups? I don't know. Does getting rid of option A turn off some legitimate purchasers who no longer will bother as they don't want to deal with the hassle of store B? I don't know that either.\n\n\"It’s about the difference between having to defeat security using a font ripper browser plugin or just straight downloading from a URL.\"\n\nIMHO, I don't see a real difference there. In fact, I imagine the 'font ripper' plugin would ultimately be easier to use ('STEAL ANY FONTS ON THIS SITE' one click vs. VIEW SOURCE -\\> Find CSS URL -\\> View CSS -\\> find @font-face path -\\> Download font).\n\nAside from all of that, I do agree that a consensus needs to be formed sooner than later. Something that the type community can present to the W3C as their own proposal as a group.\n\n"
+    },
+    {
+      "time": "5 Jul 2009 — 10:00am",
+      "content": "I'm certainly looking forward to sitting in the audience and listening to the web fonts symposium at TypeCon. Whether or not a consensus is reached, I'm sure that it will be an eye-opening event.\n\n"
+    },
+    {
+      "time": "6 Jul 2009 — 1:59am",
+      "content": "Irrespective of the TTF/OTF vs EOT question:  \nI am delighted that Mozilla 3.5 supports 'liga' and 'kern' features pretty well, even if referencing multiple lookups and even if contextual. Very good. (Safari seems to have problems here.)\n\nKarsten\n\n"
+    },
+    {
+      "time": "6 Jul 2009 — 4:55am",
+      "content": "@k.l. You may be interested in these tests (and results for various browsers):  \n [W3C font linking tests for International typography](http://web.archive.org/web/20131014143948/http:/www.w3.org/International/tests/list-html-css#fonts)\n\nFor some languages, downloadable fonts are currently the only way to make readable web pages.\n\n"
+    },
+    {
+      "time": "6 Jul 2009 — 5:13am",
+      "content": "Thanks, I didn't know this page!\n\n"
+    },
+    {
+      "time": "6 Jul 2009 — 1:46pm",
+      "content": "<cite>I’m certainly looking forward to sitting in the audience and listening to the web fonts symposium at TypeCon. Whether or not a consensus is reached, I’m sure that it will be an eye-opening event.</cite>\n\n9 panelist in one hour. I think one can pretty much guarantee no consensus will be reached.\n\n"
+    },
+    {
+      "time": "6 Jul 2009 — 6:33pm",
+      "content": "If I go, it will be ten panelists in one hour, but I don't think consensus is the goal of the panel session. If some red flags are raised and people understand the issues, that's a good start.\n\n"
+    },
+    {
+      "time": "6 Jul 2009 — 6:59pm",
+      "content": "One person's red flag, is another's blue flag. 10 or 20 panelists in a n hour or five is not going to change the fact that there will be dozens of solutions eventually offered, and the marketplace will pick the winner. Go to the bar and have a drink instead.\n\nNothing was ever resolved in public.\n\n"
+    }
+  ]
+}

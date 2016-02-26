@@ -1,0 +1,86 @@
+{
+  "id": "13157",
+  "title": "Strange word-breaks in InDesign CS",
+  "forum": "Design",
+  "tags": [
+
+  ],
+  "content": "Wondering if anyone has come across this. I'm setting a book of letters that is unusual in that it is heavily peppered with dashes and some odd punctuation. Other than this the copy is relatively standard. The strange part is that InDesign is forcing word-breaks in very unhealthy places, and it's doing so without adding hyphens. The pattern seems to be that when a word is followed by {thinspace}{en-dash}{thinspace}, InDesign seems to want to avoid beginning the next line with that en-dash, therefore it's breaking the previous word no matter what (ie: dissipati|on & otherwi-se in the attachment below).\n\nThe real bug is that simply fixing these manually is sometimes introducing additional breaks further into the flow, so it's been a headache trying to remove these.\n\nDoes anyone have any idea why this is happening? And better yet, how to adjust so that it won't happen at all?\n\nps. I'm running InDesign CS on Windows XP; the font is Adobe Minion Pro.\n\n| Attachment | Size |\n| --- | --- |\n| [broken.gif](http://web.archive.org/web/20101015090010/http:/typophile.com/files/broken.gif) | 15.55 KB |\n\n",
+  "author": "<a href=\"/web/20101015090010/http://typophile.com/user/3771\" title=\"View user profile.\">jason</a>",
+  "time": "<br>",
+  "uid": "3771",
+  "comments": [
+    {
+      "time": "",
+      "content": "I've seen InD do some bad breaking, but never without hyphens. Odd.\n\nHave you tried playing with the justification slider?\n\n"
+    },
+    {
+      "time": "",
+      "content": "I've played a bit with the justificaton settings, but that doesn't seem to have anything to do with it. The anomoly in this particular book seems to be the abundance of spaced dashes; InD doesn't want to start a line with a dash and so is doing absolutely anything to avoid it, including these crazy breaks. I do have the hyphenation setting to shoot for less hyphens, but this just seems strange.\n\nI've posted queries to a few other places and will add to this thread if I discover the reason/solution to this issue.\n\n"
+    },
+    {
+      "time": "",
+      "content": "By the way, QuarkXPress works similary as far as dashes go. A line will break after an em dash if it has to, but not after an en dash. Quark as a work around for this. The discretionary new line command (command-return) placed after an en dash will allow the line to break after an en dash. I found no equivalent discretionary new line command in InDesign. Also, with the thin spaces around the dash, the entire word including dashes and thin spaces will not break.\n\nBut there may be work around. It’s a little cumbersome. First of all, use an em dash manually condensed 50%. This tricks InDesign into thinking there’s an en dash. Em dashes will break and that includes a 50% condensed em dash. Instead of thin spaces, uses plus kerning around the condensed em dash of 125 units (or whatever kind of spacing you want). That allows the line to break around either side of the fake en dash.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks rifffinnel,\n\nYou're right, that is a bit of a cumbersome fix, but what you've described does explain this issue, at least in part. I suppose the main thing is that now I can add this to my list of bugs to watch for. Simply identifying that the en-dashes are troublesome for InD will help.\n\nIs there any way to add or modify a script to override InD's aversion to breaking spaced en-dashes? Like poor metrics in a font, it seems wiser to fix the problem in the primary application, rather than stick a bunch of bandaids all over the document.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Jason,\n\nI think this may be a case for a Style based on an en-dash flanked by thinspaces and all no-break, then doing a \"Find and Change\" to apply this Style in the text. I'm sure I've got notes about a similar situation to this somewhere...\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hmmm. I don't see how no-break styling would help, since the problem is InDesign's unwillingness to break in the first place.\n\nI think the 50% width em-dash is the best short-term solution. I don't know of any way around this. I'll think about it and ask a colleague or two if they can come up with a better way in the current version of InDesign.\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Wouldn't no-break styling specified this way allow InDesign to break around the en-dash?\n\n"
+    },
+    {
+      "time": "",
+      "content": "It is not so much a bug. There are actually typographic considerations here. Hyphens should break at the end of a line; discretionary hyphens, therefore, can break at the end of line. Em dashes--those long separators that I'm using two hyphens for here--can break at the end of a line or the beginning of the next, as either way would make gramitical and typographic sense. The en dash, which is usually used to mean \"to\" or \"through\" in such expressions as \"9-5\" are set up as non-breaking in InDesign (QuarkXpress as well) so that one doesn't get 5- at the end of a line and 9 by itself at the beginning of the next line.\n\nI think InDesign needs to add a couple or three keyboard sequences. One would be to have an equivalent of the Quark discretionary line break command. The command allows a line to break (as does discretionary hyphen) but without the hypen. When placed before an en dash, a line could have an en dash at the end or the beginning of the line. Another command to add specifically for the en dash--a breaking en dash. A third might be the flex space command that Quark has. The space is flexible in that any value may be set up for the space in preferences based on, if I remember this correctly, the width as a percentage of an word space. The flex space acts as a word space in that it represents a distinct breaking word space. If a flex space is added to InDesign, you could set it up to have an equivalent value to a thin space. You could then key \"word-flex space-en dash-flex space-word.\" The program then would have the option to break around either end of the en dash. I still think InDesign is far typographically superior to QuarkXpress. But there are a couple of small items that could have been picked up to make life even better in InDesign.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Good points. The way we have our TeX set up, there is a small penalty for breaking after an em-dash (about like an existing hyphen), and a rather larger one for breaking before an em-dash, but the break is allowed.\n\nFor en-dashes, what I think is needed in InDesign is another dialogue box, like the one for hyphens – break only when so many letters or numbers are left up, and so many taken down. For instance, I’d break pp. 192{endash}94n after 192 just about anywhere, esp. when setting footnotes, endnotes or bibliographical material. En-dashes are also used between words sometimes, or in structures like 10 June{endash}12 July 1962. Again, the break should be allowed.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The bug is InDesign's treating the thin space as non-breaking.\n\nMore details: If you place a discretionary hyphen after most dashes & slashes we will do a discretionary break WITHOUT inserting a hyphen. However, in this case the culprit is actually the thin-spaces -- we treat them as non-breaking and so we get\n\n`word thinspace en-dash thinspace word`\n\nas a non-breaking sequence. And adding discretionary hyphens in between doesn't help. We are considering this a bug for the next version of InDesign.\n\nThe reason we break \"anywhere\" without adding a hyphen is that we are falling into the \"bunch of characters that don't break\" code which was designed to handle cases like people typing \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\" or URLs or the like.\n\nThanks to my colleague Eric Menninga for looking into this.\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks to Thomas for specifically describing InD's process here, and to everyone for their input. The issue for me is that I prefer to use thin-spaced en-dashes -- like this\\* -- for supplementary content, rather than non-spaced em-dashes. Thus, I wasn't speaking to the standard use of en-dashes for number ranges. The book I'm currently setting is absolutely saturated with asides within the narrative, and so InDesign is having a hell of a time figuring out where to break the lines. My concern was simply the way InD was breaking words without hyphenating them, and Thomas' last post describes why this is happening. There are a variety of work-arounds, but it always seems to help me to understand the bug, rather than just swat wildly at it in ignorance.\n\n\\* This example obviously uses HTML em-dashes rather than en's, but you get the idea...\n\n"
+    },
+    {
+      "time": "",
+      "content": "I think what I'd do in this situation, esp. if you don't need the traditional em-dash, is to use FontLab to make up an em-dash using the en-dash with sidebearings equal to the thin space you want to use. You now have one character for the dash, & if I understand Thomas, it will behave.\n\nWe routinely remake the emdash in all our fonts to be a dash 3/4 of an em long (i.e., the dash is 750 units on a 1,000 unit em), with left and right sidebearings of 125 units. It looks fine at either the end or begining of a line; the only wrinkle is that I have to make up two- and three-em dashes as well. We make the two- and three-em dashes with no sidebearings, so any longer dashes can be made up from them.\n\nFWIW\n\nCharles\n\n"
+    },
+    {
+      "time": "",
+      "content": "Charles, here's a useful trick proposed and used by Kent Lew: Have the emdash with lateral spaces, but define a negative kern pair that closes up two emdashes, so you can make looong dashes as needed.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Charles, thanks for the suggestion but (even if we did set the EULA aside) for book work I use primarily Adobe Minion Pro and (at least in my limited experience) FontLab won't/can't re-generate these OpenType fonts. Apparently VOLT can, but I get lost very quickly once I'm in that deep. Looks like I'm stuck with the cumbersome fix mentioned above (using em's and condensing them in InD).\n\n"
+    },
+    {
+      "time": "",
+      "content": "Jason:  \nCheck the Adobe EULA certainly, but I think you'll find that Adobe \\_does\\_ allow modifications of this sort.\n\nAlso, the latest version of FontLab can and will regenerate OpenType fonts, and is particularly adept with type one based OTs such as Adobe's.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Jason – yes, I understand. Minion Pro is one of the few OpenType fonts where FontLab 4.6 will not decompile/recompile the Features properly, due to something in the Kern feature. I think what is going on is that one string (one class definition) is too long & the syntax is violated by this truncation, but I’m not sure. Adam of FontLab has suggested a work-around, but it is buried in the Archives somewhere, and as you say, it isn’t simple.\n\nMy solution was to just give up & start to rebuild the kerning – everything will decompile/recompile if you delete the kerning feature & start it over. It is a lot of work, but a font that we can’t add to & modify has no value in our work, which is setting scholarly monographs. There are just too many characters needed (& a few glyphs to boot) that are not in the font.\n\nAs far as the EULA goes, no one should buy any font that does not permit modification for one’s own use. Type designers are not, by in large, type users – as the best of them not only admit but state. One real risk in using OpenType is that more & more, how type works (Features) is being turned over to type designers. If the users of type can't modify these things -- the featues, including kerning, and the character/glyph compliment, other font formats will be preferable.\n\nThe model should be the old one of metal – Thank you Monotype for these nice fonts. What I put in the matrix case is my business.\n\nCharles\n\n"
+    },
+    {
+      "time": "",
+      "content": "John, thanks for pointing that out. I'll take another look at the Adobe EULA to get up to speed.\n\nCharles, I couldn't agree more with what you've said here. I won't presume to speak as a type designer -- the few custom ligs I've drawn involved a lot of anxiety & frustration -- but it can be equally frustrating to find that even with a beautifully drawn font I can't set the copy I need to set.\n\nI can completely understand the instinct to keep a novice like me (let alone an over-eager beginner) from bungling the good work a type designer has done, but I can't help but think -- perhaps naively -- that once someone has learned enough about this sort of thing to recognize a problem in a font's mentrics or kerning, or to identify a missing glyph, and beyond this to have gained the skills to make these sorts of adjustments, I can't help but think that by this point one would have the respect & restraint to tread carefully.\n\nAs for my current situation, I'm grateful for the suggestions posted here, and those I've gathered from a few other sources, which it appears I'm stuck with at the moment.\n\nAs FontLab 4.6 can't recompile this specific font's kerning feature, and VOLT doesn't like PS outlines, it looks like I'm stuck with fixes and work-arounds. However, if anyone out there knows where to find Adam's post on working around this issue in the archives, please let me know as I'd like to take a look. If I understand correctly, the new FontLab Studio will be able to tackle this task?\n\nThanks again for all the input on this topic...\n\n"
+    },
+    {
+      "time": "",
+      "content": "«&nbsp;I think InDesign needs to add a couple or three keyboard sequences. One would be to have an equivalent of the Quark discretionary line break command. &nbsp;»\n\nSometimes, Googling gives you an opportunity to cross-link information happily…\n\nI'm pleased to inform you that there is a script for InDesign CS (and higher) that performs exactly what you were waiting for&nbsp;:  \n«&nbsp;This script inserts a 'zero width space' at the insertion point and by this adds the painfully missing 'discretionary new line' functionality from Quarkxpress to Indesign.&nbsp;»\n\nCf. [DiscretionaryNewLine.js, by Karsten Poser](http://web.archive.org/web/20101015090010/http:/share.studio.adobe.com/axAssetDetailSubmit.asp?aID=13018).\n\n"
+    }
+  ]
+}

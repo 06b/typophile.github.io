@@ -1,0 +1,34 @@
+{
+  "id": "43708",
+  "title": "Kerning Triplets?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Can Opentype be used to create special kerning for odd series of letters? I’m spacing a font with too much space on the right-hand side of a and noticed that it looks just fine when followed by a series like ro or rn. Could I set up a font so that when a is followed by ro or rn the a spreads a little farther from r to balance things out?\n\n",
+  "author": "blank",
+  "time": "30 Mar 2008 — 7:05pm",
+  "uid": "14722",
+  "comments": [
+    {
+      "time": "30 Mar 2008 — 7:52pm",
+      "content": "Yes, it can. This is achieved through \"contextual kerning\" - I just posted a thread the other day asking how many people were actually doing this.\n\nHowever:\n\n1) You can only do this in GPOS kerning; 'kern' table kerning does not support it. (Apple's AAT extensions to the 'kern' table do, but they're not part of OpenType.)\n\n2) Not all OT savvy tools support this. The AFDKO does, and I'm pretty sure VOLT does. I don't believe FontLab Studio does.\n\n3) Not all apps that handle GPOS kerning will recognize contextual kerning. I know the current version of InDesign does, however.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "2 Apr 2008 — 7:55pm",
+      "content": "James, beware that doing contextual kerning can be quite tricky. For example, consider the combination **L’A** , which happens in French. If you want that sequence spaced well, but at the same time need the quote kerned correctly against **L** and **A** alone, the only way to do it is by using a kerning triplet.\n\nBelow are some GPOS snippets and screenshots of their result. As you can see things can get complex pretty fast. (In case it's not clear, the desired result is the first example below.)\n\n**One**\n\n ![](http://web.archive.org/web/20131015130211im_/http:/typophile.com/files/contkern_1_6334.png)\n`pos L' -100 quoteright' -50 A;\npos L' -150 quoteright;\npos quoteright' -120 A;`\n\n================================================\n\n**Two**\n\n ![](http://web.archive.org/web/20131015130211im_/http:/typophile.com/files/contkern_2_4824.png)\n`pos L quoteright -150;\npos quoteright A -120;`\n\n================================================\n\n**Three**\n\n ![](http://web.archive.org/web/20131015130211im_/http:/typophile.com/files/contkern_3_6388.png)\n`pos L' -100 quoteright' -50 A;\npos L quoteright -150;\npos quoteright A -120;`\n\n================================================\n\n**Four**\n\n ![](http://web.archive.org/web/20131015130211im_/http:/typophile.com/files/contkern_4_5513.png)\n`pos L' -150 quoteright;\npos quoteright' -120 A;\npos L' -100 quoteright' -50 A;`\n\n================================================\n\n**Five**\n\n ![](http://web.archive.org/web/20131015130211im_/http:/typophile.com/files/contkern_5_5588.png)\n`pos L' -150 quoteright;`\n"
+    },
+    {
+      "time": "2 Apr 2008 — 8:02pm",
+      "content": "Thanks for the help guys. I think I’ll worry about kerning triplets after graduation…\n\n"
+    },
+    {
+      "time": "6 Apr 2008 — 10:07pm",
+      "content": "Don't tell me I scared you away... :)\n\nBTW, the desired result can also be achieved using the code below. Yes, that's right, Six is equivalent to One. The reason is because <cite>contextual lookups used in a kern feature will be in a different lookup than the pair positioning rules, and hence the two sets of rules will be additive whenever they match the same glyph pair in the text stream.</cite>  \n [http://www.adobe.com/devnet/opentype/afdko/topic\\_feature\\_file\\_syntax.htm...](http://web.archive.org/web/20131015130211/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#6.h \"http://www.adobe.com/devnet/opentype/afdko/topic\\_feature\\_file\\_syntax.html#6.h\")\n\n**Six**  \n`pos L' 50 quoteright' 70 A;\npos L quoteright -150;\npos quoteright A -120;\n`\n\nIf this is all Greek to you, forget about it.\n\n"
+    },
+    {
+      "time": "7 Apr 2008 — 7:17am",
+      "content": "Hi Miguel,\n\nContextual kerning is nice, but I don't much care for the example. I'll allow it is generally bad form to quarrel with the example, but I've always felt that too many people, including Adobe, kern the quote marks too tight. As evidence, I would say quote marks are not diacriticals, but characters in their own right & deserve their space. That also happens to be the historical usage.\n\nBut If you do use a -150 kern between cap L and quoteright, you're going to need triplets with more than capital A. For example:\n\n ![](http://web.archive.org/web/20131015130211im_/http:/typophile.com/files/Lquote_4778.gif)\n\n"
+    }
+  ]
+}

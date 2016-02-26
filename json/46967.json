@@ -1,0 +1,98 @@
+{
+  "id": "46967",
+  "title": "Blend font interpolated kerning ?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi all,\n\nI've been doing some experiments with the Blend Fonts command to produce interpolated weights.\n\nMy question concerns the interpolation of the kerning values. The interpolated weights produced from the master blended font contains some of the kerning pairs that are present in the orginal fonts but not all of them.\n\nI made sure that the orginal light and bold weights had the same kerning pairs but with different values.\n\nShould the kerning be interpolated ?\n\nIs there a better way of doing this ?\n\nIs there a reason way some kerning pairs are present and not others ?\n\n",
+  "author": "ReginaldV",
+  "time": "1 Jul 2008 — 11:38am",
+  "uid": "29224",
+  "comments": [
+    {
+      "time": "1 Jul 2008 — 12:52pm",
+      "content": "You can interpolate kerning with Superpolator.\n\n—K\n\n"
+    },
+    {
+      "time": "1 Jul 2008 — 12:59pm",
+      "content": "I don't have OS X 10.5\n\n"
+    },
+    {
+      "time": "1 Jul 2008 — 1:09pm",
+      "content": "\\> _The interpolated weights produced from the master blended font contains some of the kerning pairs that are present in the orginal fonts but not all of them. [...] Is there a reason way some kerning pairs are present and not others ?_\n\nMaybe because those pairs had a kerning value of 0 (zero) in the interpolated instance?\n\nI work with MM fonts all the time containing thousands of pairs and I never had a problem. If there's a problem it might be in the Blend Fonts function. I recall it being quite buggy in regards of handling kerning.\n\n"
+    },
+    {
+      "time": "1 Jul 2008 — 1:51pm",
+      "content": "ReginaldV,\n\nI suggest you ditch the Blend feature approach and build your MM fonts with the Mask-to-Master technique.\n\nJames\n\n"
+    },
+    {
+      "time": "1 Jul 2008 — 1:54pm",
+      "content": "Yes I think you could be right about Blend font being buggy.\n\nIs it best then to create a MM font and generate the weights from that.\n\nI'm reading the FL manual now but finding it hard to work out how to create a MM font from the light and bold weights.\n\nI'm I barking up the wrong tree here ?\n\n"
+    },
+    {
+      "time": "1 Jul 2008 — 2:17pm",
+      "content": "James,\n\nWhat is the Mask-to-Master technique ?\n\n"
+    },
+    {
+      "time": "1 Jul 2008 — 3:33pm",
+      "content": "[Ups, didn't read careful enough ...]\n\n"
+    },
+    {
+      "time": "1 Jul 2008 — 4:36pm",
+      "content": "I agree to terminaldesign, forget the blend feature and use Mask to Master. However, Mask to Master does not merge the kerning.\n\nIf you need to transfer the kerning between masters or fonts you can use afm files. The metrics window allows you to export and import them. When you import an afm into an MM font, only the currently active master will be affected. Same for export. This works really reliably and has helped me repair MM fonts quite a few times already.\n\n"
+    },
+    {
+      "time": "1 Jul 2008 — 5:40pm",
+      "content": "Didn't FL used to have a bug where exported AFM files were sometimes incomplete? Was that fixed in a dot release?\n\nT\n\n"
+    },
+    {
+      "time": "1 Jul 2008 — 7:33pm",
+      "content": "MM via Mask-to master\n\n1. Create two fonts that you want to create a MM with. Export their afm files via the metrics window.  \n2. Make sure all the glyphs have the same number and type of points, in the same relative position. Also make sure all path directions are the same for each glyph.  \n3. Assign one of the fonts to the mask layer Tools\\>Mask\\> Assign Font Mask  \n4. Define the appropriate axis: Tools\\> Multiple Master\\> Define New Axis  \n5. At this point if not before, it is a good idea to Save As and assign this soon to be MM vfb a new name. Just in case something goes wrong  \n6. Select the glyphs in the font window and using Mask to Master convert the Mask to the appropriate Master Axis: Tools\\>Multiple Master\\> Mask to Master. When you are asked whether to let FontLab add points where necessary, make sure you select NO\n\nIf you have done your prep correctly you will have no problems, but that hardly ever happens, you will always have a few problems. At this point you will most likely have to import the kerning and sometimes the metrics via the afm files you created to the newly created MM axes.\n\n"
+    },
+    {
+      "time": "1 Jul 2008 — 7:35pm",
+      "content": "I would also recommend not kerning anything in the original fonts, and do all your kerning in the newly created MM vfb. But that is just a personal preference.\n\n"
+    },
+    {
+      "time": "2 Jul 2008 — 12:52am",
+      "content": "terminaldesign,\n\nI'm confused by your description\n\nI have two fonts that I want to make into one MM font, so\n\n<cite>3. Assign one of the fonts to the mask layer Tools&gt;Mask&gt; Assign Font Mask</cite>\n\nI do this to the first font (Font 1)\n\n<cite>4. Define the appropriate axis: Tools&gt; Multiple Master&gt; Define New Axis</cite>\n\nThis applies to Font 1\n\n<cite>5. At this point if not before, it is a good idea to Save As and assign this soon to be MM vfb a new name. Just in case something goes wrong</cite>\n\nSave Font 1 as the MM font\n\n<cite>6. Select the glyphs in the font window and using Mask to Master convert the Mask to the appropriate Master Axis: Tools&gt;Multiple Master&gt; Mask to Master. When you are asked whether to let FontLab add points where necessary, make sure you select NO</cite>\n\nDoes this apply to Font 1 or is this Font 2 ?\n\nI can't work out how I get the two fonts into one file.\n\nSorry if I'm being stupid\n\n"
+    },
+    {
+      "time": "2 Jul 2008 — 2:58am",
+      "content": "The Bold font and the light font are both open.\n\nAssign the light font to the mask layer of the bold font.\n\nDefine the new axis (weight)\n\nUsing Mask to Master, assign the mask (light font) to the Wt0 axis. (As opposed to the Wt1 axis which would be the Bold font)\n\nYou now have the light font at axis Wt0 and the Bold font at axis Wt1.\n\nBoth axes are in the one font. Which started out as just your bold font\n\n"
+    },
+    {
+      "time": "2 Jul 2008 — 4:29am",
+      "content": "Perhaps this small Mac/Win command line Java tool is useful in this case:\n\n[http://www.fonttools.org/downloads/DTL\\_AFMInterpolator.zip](http://web.archive.org/web/20130823092648/http:/www.fonttools.org/downloads/DTL_AFMInterpolator.zip \"http://www.fonttools.org/downloads/DTL\\_AFMInterpolator.zip\")\n\n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\n\nDTL AFM Interpolator version 1.1  \nlast update: 2 July 2008\n\nNew in version 1.1:\n\n- also interpolates POS values next to KPX  \n- negligible values (specified by an optional, extra argument) are left out  \n- instead of using a space as delimiter character, it now delimits using any amount of whitespace\n\nUsage:  \njava AFMInterpolator [file1] [file2] [factor] [flag] [output] ([limit])\n\n- file1: first AFM file  \n- file2: second AFM file  \n- factor: interpolation percentage (0-100)  \n- flag: 0 leaves incomplete pairs out, 1 ignores missing pairs and calculates using 0 instead  \n- output: output file  \n- limit: lower limit for values, leaves pairs with values smaller or equal out (optional)\n\nexample use:  \njava AFMInterpolator fontname\\_regular.afm fontname\\_bold.afm 50 1 fontname\\_medium.afm 10\n\nNote: output file is automatically overwritten\n\n"
+    },
+    {
+      "time": "2 Jul 2008 — 4:39am",
+      "content": "Very cool! Need to try that later. Thanks for sharing.\n\nThe next thing would be to get the kerning data converted to OT feature code elegantly, for use with AFDKO. Could that be done alongside?\n\n"
+    },
+    {
+      "time": "3 Jul 2008 — 12:57am",
+      "content": "Hi Tim, this would need additional information: your class definitions, plus, per class, which is the key glyph and whether the class is used left, right or both side(s).\n\n"
+    },
+    {
+      "time": "3 Jul 2008 — 5:37am",
+      "content": "Alternatively, Robofab offers a kerning interpolation method where the kerning of two seperate fonts can be interpolated in another font directly in FontLab:  \n`\nfrom robofab.world import CurrentFont\nfrom robofab.interface.all.dialogs import SelectFont`\n\ninterpolval = 0.5 # 50% interpolation\n\nf1 = CurrentFont()  \nf2 = SelectFont('please select mininum pole')  \nf3 = SelectFont('please select maximum pole')\n\nk1 = f1.kerning  \nk2 = f2.kerning  \nk3 = f3.kerning\n\nk1.interpolate(k2, k3, interpolval, clearExisting = True)  \nf1.update()  \nprint 'done'\n\n"
+    },
+    {
+      "time": "3 Jul 2008 — 11:29am",
+      "content": "I've gone down the route of creating the MM font with the 'Mask to Master' technique described above. Surprisingly everything seems to be going really well (I was always concerned that making an MM font would be complicated).\n\nAll the glyphs are coloured green, (which means there are no problems right). The spacing and kerning all seems to be interpolating correctly with the same number of pairs in all generated instances. Before I get too excited is there anything else I should be looking for. I did spend a long time preping the light and bold weights, but my experience of developing fonts has always been two steps forward and one step back. This seems like two steps forward and I'm worried I'm missing something.\n\n"
+    },
+    {
+      "time": "3 Jul 2008 — 12:02pm",
+      "content": "\\> _Before I get too excited is there anything else I should be looking for._\n\nSometimes it happens that the masters look good, but in an interpolated instance some glyphs are mangled. This is caused by incompatibilities between the masters, things like,  \n-- different starting point node  \n-- contours in different order\\*  \n-- contours in different directions (I'm not sure of this one)\n\n\\*pay close attention to glyphs like the ellipsis, the colon, the equal sign, the double quotes, etc.\n\n"
+    },
+    {
+      "time": "3 Jul 2008 — 3:34pm",
+      "content": "The last item in Font Info is Multiple Master Settings. I suggest you move the slider to some middle position between your two axes. This will change the display of the font in the Font Window and you'll have a better chance of seeing any mangled glyphs.\n\n"
+    },
+    {
+      "time": "4 Jul 2008 — 3:13am",
+      "content": "Is there any relevant diference on using the \"Assign Master\" command insted of the \"Mask to Master\" operation? Would be the result any diferent, or do they work alike?\n\nRegards\n\n"
+    }
+  ]
+}

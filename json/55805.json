@@ -1,0 +1,58 @@
+{
+  "id": "55805",
+  "title": "Stylistic Alternative Character / Ligature",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Say you have a stylistic alternative character C.alt, but you also have the ligature CT, is there a way to, if you have the stylistic alternate character activated, AND the ligature feature activated that you end up with the CT.alt character…???\n\n",
+  "author": "msmiths",
+  "time": "12 Mar 2009 — 12:57pm",
+  "uid": "17099",
+  "comments": [
+    {
+      "time": "12 Mar 2009 — 3:00pm",
+      "content": "Sure:\n\nfeature liga { # Standard Ligatures  \n # Latin  \n sub C T by C\\_T;  \n} liga;\n\n. . .\n\nfeature ss01 {  \nsub C\\_T by C\\_T.alt;  \n} ss01\n\nBe warned I didn't try it. (This works only if your stylistic set feature(s) are below your \\*liga\\* feature. But as you described things, that is how they should be placed.)\n\n"
+    },
+    {
+      "time": "12 Mar 2009 — 10:56pm",
+      "content": "Presuming you have created the /C\\_T.alt/ ligature glyph, there are two ways you can do this. Which method you use depends on how you order your lookups (or, in FontLab, how you order your features, since FontLab won't allow you to order lookups independently of features).\n\nIf you order your stylistic alternate substitution first, then you need to do this:\n\nfeature ss01 {  \nsub C by C.alt;  \n} ss01\n\nfeature liga { # Standard Ligatures  \n# Latin  \nsub C T by C\\_T;  \nsub C.alt T by C\\_T.alt;  \n} liga;\n\nIf you order your ligature substitutions first, then you need to do this:\n\nfeature liga { # Standard Ligatures  \n# Latin  \nsub C T by C\\_T;  \n} liga;\n\nfeature ss01 {  \nsub C by C.alt  \nsub C\\_T by C\\_T.alt;  \n} ss01\n\n"
+    },
+    {
+      "time": "13 Mar 2009 — 5:42am",
+      "content": "delete, misread the original post.\n\n"
+    },
+    {
+      "time": "13 Mar 2009 — 7:22am",
+      "content": "\\> FontLab won’t allow you to order lookups  \n\\> independently of features.\n\nJohn,\n\nFontLab (the company) doesn't really mind your business and certainly has no business in allowing or disallowing you to do something :)\n\nFontLab Studio (the product, which I assume you were referring to) doesn't actually allow you to order features at all, because the order of features in the font has no relevance. It allows you to reorder lookups, but this indeed is done by changing the order of feature entries with which the lookups are associated with. But it is important to remember that by reordering the feature definitions in FontLab Studio's OpenType panel, you're actually reordering lookups.\n\nI think what John means is that by following the simplistic notion introduced by Adobe FDK for OpenType 1.x that each lookup is defined within a feature definition, the flexibility in which you can order your lookups is limited. Fortunately, by my feature request Adobe implemented the ability to define lookups outside of feature definitions in the Adobe FDK for OpenType 2.x syntax, which will be used in FontLab Studio 6 (no release date yet).\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "13 Mar 2009 — 9:04am",
+      "content": "Aw, Adam, if we stop to consider how product names are changed to meet marketing criteria, we would live in a world of even greater confusion.\n\nI have already had enough of Adobe calling the \"Creative Suite\" programs \"CS\" (a qualifying naming convention which is not based on ANY effective qualification), that you won't see me add a \"Studio\" each time I talk of FontLab (which I like, of course).  \nIt's the company name change (Pyrus \\> FontLab) that's no business at all for us users, I think… :=)\n\n"
+    },
+    {
+      "time": "13 Mar 2009 — 9:45am",
+      "content": "Piccic,\n\nthe problem is not marketing criteria, the problem is potential confusion.\n\nFontLab produces and sells many applications: FontLab Studio, FontLab Fontographer, FontLab TypeTool, FontLab TransType, FontLab ScanFont etc. Some users say \"FontLab\" when they mean \"FontLab TypeTool\", others say \"FontLab\" when they mean \"FontLab Studio\".\n\nIt's basically like saying \"I test this font in Adobe\", when one actually means \"Adobe Acrobat\" or \"Adobe Photoshop\" or something else.\n\nI'm simply concerned with clarity and avoiding ambiguity. Old-timers may understand very well when one uses \"mental shortcuts\" or \"abbreviations\", but since this is a public forum with the idea of serving not only 1-to-1 communication but also allowing others to learn from what is being discussed here.\n\nAnd realizing that Typophile has users from all over the world, for many of whom English may be the third language (like in my case) or perhaps second at best, I prefer to stay on the safe side when communicating, i.e. avoid confusion and misunderstandings.\n\n\\> you won’t see me add a “Studio” each time I talk of FontLab\n\nSure thing, you can call it whatever you want, \"the rusty old thing\", \"the Russian pest\", \"лаборатория шрифтов\" or \"it\". Some people will get it, others won't. One can never guarantee that there will be no misunderstanding but one can minimize its probability :)\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "13 Mar 2009 — 12:56pm",
+      "content": "_FontLab produces and sells many applications..._\n\nYes, but when I started using ‘FontLab’ it was a piece of software produced and sold by a company called Pyrus. Old habits die real hard.\n\n"
+    },
+    {
+      "time": "13 Mar 2009 — 12:58pm",
+      "content": "_I think what John means is that by following the simplistic notion introduced by Adobe FDK for OpenType 1.x that each lookup is defined within a feature definition, the flexibility in which you can order your lookups is limited._\n\nYes, this is what I mean. It is essentially a syntax and UI issue. But it is interesting how is confuses people as to how OT actually works. I recently had an email from someone with a lot of experience making OT fonts in FontLab, ahem, Studio, who was shifting to VOLT for a particular project that needed GPOS mark positioning. He was very confused by the VOLT UI, because he couldn't figure out how to re-order the features. :)\n\n"
+    },
+    {
+      "time": "13 Mar 2009 — 2:23pm",
+      "content": "\\> Yes, but when I started using ‘FontLab’ it was a piece  \n\\> of software produced and sold by a company called Pyrus.\n\nOh, I know what you mean. I realize that every time I talk to somebody from Linotype-Hell or Agfa Monotype, or when I use FutureSplash Animator. ;)\n\n\\> He was very confused by the VOLT UI, because he  \n\\> couldn’t figure out how to re-order the features.\n\nI think originally, the simplistic view of AFDKO did make sense. It's just like the one glyph-one glyph name-one Unicode thinking. Once you introduce the notion that some or all glyphs may not have names at all, and that some glyphs may be associated with none or with many Unicode codepoints, or may represent a sequence of Unicode codepoints, people's minds starts to drift off :)\n\nWe're working on the ideas for a FLS6 UI for OpenType Layout.\n\nA.\n\n"
+    },
+    {
+      "time": "14 Mar 2009 — 8:58am",
+      "content": "Well Adam, it has been _their_ choice to change the company name to the one of their main product, not mine.  \nIf they wished to avoid confusion they proceeded exactly in the wrong direction, but on my part I will make the extra effort to call it \"FontLab Studio\"… :=)\n\nBesides, I have a big admiration for Pyrus/FontLab, so no need of linguistic jokes to prove your point. Right now, I'd rather live in Russia than in the US and if there's a person you need to convince about how difficult it's to communicate in another language (English), it's surely not me.  \nI just appreciate English's flexibility, but I'd rather speak polish with you…  \n<cite><br>\nDorastają przez miłość, i potem tak nagle dorośli<br>\ntrzymając się za ręce wędrują w wielkim tłumie -<br>\n(serca schwytane jak ptaki, profile wzrastają w półmrok).<br>\nWiem, że w ich sercach bije tętno całej ludzkości.</cite>\n\nTrzymając się za ręce usiedli cicho nad brzegiem.  \nPień drzewa i ziemia w księżycu: niedoszeptany tli trójkąt.  \nMgły nie dźwignęły się jeszcze. Serca dzieci wyrastają nad rzekę.  \nCzy zawsze tak będzie - pytam - gdy wstaną stąd i pójdą?\n\nAlbo też jeszcze inaczej: kielich światła nachylony wśród roślin  \nodsłania w każdej z nich jakieś przedtem nie znane dno,  \nTego, co w was się zaczęło, czy potraficie nie popsuć,  \nczy będziecie zawsze oddzielać dobro i zło?\n\n:)  \nClaudio\n\n"
+    },
+    {
+      "time": "19 Mar 2009 — 5:32pm",
+      "content": "I think it ended up being as simple as just adding\n\nsub CT by CT.alt;  \nsub ct by ct.alt;\n\nto the salt feature…\n\nso that if the ligatures are activated\n\nand then the alt feature is activated the OG CT character swaps\n\nright?\n\n"
+    }
+  ]
+}

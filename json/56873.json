@@ -1,0 +1,42 @@
+{
+  "id": "56873",
+  "title": "Negative sidebearings and beginnings of lines",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I've put negative left sidebearings on my 'j' and (descending) 'J', which works well except when those glyphs start a line, in which case the tails stick out past the left margins. Is there a better solution as far as setting up the font goes?\n\n",
+  "author": "<a href=\"/web/20100203174156/http://typophile.com/user/3254\" title=\"View user profile.\">eliason</a>",
+  "time": "<br>",
+  "uid": "3254",
+  "comments": [
+    {
+      "time": "",
+      "content": "Well, there will always be some of that, just like with an \"f\" ending a line. And all in all, I think it preferable to use less negative sidebearing & kern as needed. There are other constructions that might cause problems, such as \"f\\_ space\\_J\", as in \"of Jewish descent\".\n\nIf you try this with, say, Bulmer, which has a large negative sidebearing with the j's on the left and with the f on the right, the wordspace almost disappears.\n\nYou can use an alternate J,j, with less of or no negative sidebearing as a contextual alternate when preceded by a space, but I don't know how that will work at the beginning of a line -- certainly it wouldn't work as the first character in a paragraph.\n\nUsually, all the clever sidebearing ideas we come up with to avoid kerning with a lot of letters come back to haunt us.\n\nFWIW\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for your thoughts, Charles!\n\nI bet there's no easy way to automatically add 80 units of kerning to every possible pair ending in j or J... :-\\\n\n"
+    },
+    {
+      "time": "",
+      "content": "Can OT sub in alternates at the beginning of lines?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Is there such a thing as a null char, so as to make pos null J +x possible? Or after a cr lf, perhaps? Although that'd be problematic for the first line.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Craig,\n\nThe solution just occurred to me. Karsten Lucke use to recommend that in a case such as this, you make the \"standard\" character (the encoded one) the \"exception,\" then using calt, switch to a desired alternate.\n\nSo yes, you could make the standard J/j with about -20 units left sidebearings, then set up a class with all the alpha-numerics with your -80. Check leading punctuation while you are at it, I bet you find that things like an asterisk, colon, etc., work better with the -10 or -20 character. You will still have to kern the j with parenleft, bracketleft, etc.\n\nIt is easy to get the \"j\" too tight. I once set a book on Hemingway & wound up cringing every time \"Kilimanjaro\" appeared in the final, printed book. That has become my test word, BTW.\n\nFWIW\n\n"
+    },
+    {
+      "time": "",
+      "content": "“Kilimanjaro” then became your Everest :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> the tails stick out past the left margins  \n... They should. I mean you put them there to make the letter balance in it's default space and though they may look to you like they are sticking out, to readers, I think it's just fine.\n\nOr, you can make not a few, but dozens of alternates, as the opposite effect occurs as well, with e.g. a non-descending J and many other characters, and then make lots of OT, and then think there is too much space from the margin to the main stem of the J compared to the line below which starts with an \"L\". :-p\n\nCheers!\n\n"
+    }
+  ]
+}

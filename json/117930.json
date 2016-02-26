@@ -1,0 +1,39 @@
+{
+  "id": "117930",
+  "title": "Remove embedding restriction from my font",
+  "forum": "Build",
+  "tags": [
+    "Remove embedding restriction from my font",
+    "Build"
+  ],
+  "content": "I created a font years ago (OTF) before the embedding restriction became an issue. How can i remove any embedding restrictions without re-creating the font in FontLab (too many VOLT hours involved). Just to change the flag!  \nAn old MS tool (Font properties editor) won't help since it doesn't allow to completely remove the restriction to \"Installable\", only to increase the restriction. Any idea?\n\n",
+  "author": "DotlessHyphen",
+  "time": "13 Jul 2014 — 6:58am",
+  "uid": "27488",
+  "comments": [
+    {
+      "time": "13 Jul 2014 — 3:58pm",
+      "content": "Here are three methods\n\n1. Use the fonttools as described in the url [http://www.typophile.com/node/102671](http://web.archive.org/web/20150218044719/http:/www.typophile.com/node/102671 \"http://www.typophile.com/node/102671\")\n2. Use ttx. First execute `ttx -t OS/2 fontname.ttf` (or otf); that produces a small file named `fontname.ttx` containing only the `OS/2` table; you then replace with a text editor the value given at the line `<fsType value=\"00000000 00001000\"/>` (the value you get is probably different) by the value you want; you then finally execute the command `ttx -m fontname.ttf fontname.ttx` to get your new font.\n3. Buy DTL OTMaster to edit the OS/2 table; we are told the font is left otherwise untouched. If it is not, you tell us.\n\n"
+    },
+    {
+      "time": "13 Jul 2014 — 1:46pm",
+      "content": "I try to find a way to avoid using command line. It is strange MS didn't update their tool since 1997...  \nThere are many fonts waiting to change that flag (all are my fonts) .\n\n"
+    },
+    {
+      "time": "13 Jul 2014 — 4:08pm",
+      "content": "It is clearly written in the Microsoft link [http://www.microsoft.com/typography/property/fpedit.htm](http://web.archive.org/web/20150218044719/http:/www.microsoft.com/typography/property/fpedit.htm \"http://www.microsoft.com/typography/property/fpedit.htm\")\n\n> **Embedding** - embedding permissions may be made more restrictive.\n\nAn update would not help you unless they changed their mind about that.\n\nBy the way SIL is also using line commands. They have a command `hackos2` in their impressive list [FontUtils](http://web.archive.org/web/20150218044719/http:/scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=fontutils) of font utilities (that I have never tried).\n\n"
+    },
+    {
+      "time": "14 Jul 2014 — 6:03am",
+      "content": "Thank you so much.\n\n"
+    },
+    {
+      "time": "14 Jul 2014 — 10:50pm",
+      "content": "There's embed, which seems to do exactly what you want:  \n [http://carnage-melon.tom7.org/embed/](http://web.archive.org/web/20150218044719/http:/carnage-melon.tom7.org/embed/ \"http://carnage-melon.tom7.org/embed/\")\n\n"
+    },
+    {
+      "time": "28 Jul 2014 — 8:06am",
+      "content": "With regard to embed.exe I would verify with Font Validator, that the checksum is correctly computed. As far as I remember, there is a tool, that does not compute the checksum correctly. I think, it was embed.exe.\n\n<cite>I try to find a way to avoid using command line. It is strange MS didn't update their tool since 1997...<br>\nThere are many fonts waiting to change that flag (all are my fonts) .</cite>\n\nYou can easily do it with TTX, a batch file and the search and replace function of UltraEdit. TTX correctly computes the checksum.\n\n"
+    }
+  ]
+}

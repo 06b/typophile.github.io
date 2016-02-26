@@ -1,0 +1,18 @@
+{
+  "id": "31373",
+  "title": "One lookup many rules vs. many lookups",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "One lookup many rules vs. many lookups\n\nI am developing an Arabic based font. As a type design I have stored dots separate form base glyph. The dots are joined to base glyph using “mark” feature.\n\nThe base glyph of beh(U+0628) may have about 6 different kind of dots: three (1dot, 2dots, 3dots) below the base glyph and three above the base glyph to make the shapes of beh(628), yeh(6CC), peh(67E) and noon(646), teh(62A) theh(62B) respectively.\n\nBase glyph of seen(633) may have one kind of dot (3dots) above to make a shape of sheen(634)\n\nSimilarly base glyph of sad(635) may have one kind of dot (1dot) above to make a shape of dad(636)\n\nNow I have two solutions for positioning these dots using “mark” feature.\n\nSolution 1: One Lookup\n\nName “AboveDots”  \nPosition First—————Position Second  \nBEH——————————-1dot  \nSEEN——————————2dots  \nSAD ——————————3dots\n\nSolution 2: Three Lookups\n\nName “AboveDots for BEH”  \nPosition First Position Second  \nBEH——————————-1dot  \n————————————2dots  \n————————————3dots\n\nName “AboveDots for SEEN”  \nPosition First—————Position Second  \nSEEN——————————3dots\n\nName “AboveDots for SAD”  \nPosition First—————Position Second  \nSAD——————————-1dot\n\nIn the 1st solution the combinations of SEEN – 1dot, SEEN – 2dots, SAD – 2dots and SAD – 3dots are not required. Will this be effect the efficiency?\n\nIn the 2nd solution the Uniscribe may need to consult 3 lookup; would you please comment on the tradeoff among above two solutions? Would you please suggest which will be more appropriate and efficient? Thanks\n\nBest regards,  \nAtif\n\n [‹ Fonts not available after opening in Font Book](http://web.archive.org/web/20080109182936/http:/www.typophile.com/node/31383 \"Go to previous forum topic\") [Hinting TT opentype fonts ›](http://web.archive.org/web/20080109182936/http:/www.typophile.com/node/31317 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080109182936/http://www.typophile.com/user/16620\" title=\"View user profile.\">Atif</a>",
+  "time": "<br>",
+  "uid": "16620",
+  "comments": [
+    {
+      "time": " 12.Feb.2007 10.42am",
+      "content": "[bump]\n\n"
+    }
+  ]
+}

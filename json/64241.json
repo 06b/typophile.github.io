@@ -1,0 +1,22 @@
+{
+  "id": "64241",
+  "title": "Fontlab: generating TrueType Unique ID record",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Does anyone know of a script which automatically fills in the TrueType Unique ID record in FontLab Studio? Assume all the rest of the names are filled in the Twardoch way.\n\nHow about a script which automatically fills in the Additional Open Type names menu (equivalent of clicking the \"FI\" button)\n\n",
+  "author": "<a href=\"/web/20100203142023/http://typophile.com/user/14133\" title=\"View user profile.\">typodermic</a>",
+  "time": "<br>",
+  "uid": "14133",
+  "comments": [
+    {
+      "time": "",
+      "content": "I wrote this to automate the naming and fill in the TrueType Unique ID - Saves me time when I'm naming families.\n\n`\nfrom robofab.world import CurrentFont\nfrom robofab.interface.all.dialogs import AskString\nf = CurrentFont()\n#\nfontName = AskString('Font Name')\nWeight = AskString('Weight')\n#\ndef naming( short, weight, weight2 ):\n\tf.info.familyName = fontName+\" \"+short\n\tf.info.widthName = \"Normal\"\n\tf.info.styleName = weight\n\tf.info.fontName = fontName.replace(' ', '')+\"-\"+weight2.replace(' ', '')\n\tf.info.fullName = fontName+\" \"+weight2\n\tf.info.menuName = fontName+\" \"+short\n\tf.info.fondName = fontName.replace(' ', '')+\" \"+weight2.replace(' ', '')\n\tf.info.otFamilyName = fontName\n\tf.info.otStyleName = weight2\n\tf.info.trademark = fontName+\" \"+\"is a trademark of RachelR\"\n\tf.info.ttUniqueID = \"RachelR:\"+\" \"+fontName+\" \"+Weight+\":\"+\" \"+\"2009\"\n#\n#\nif Weight == \"Thin\":\n\tnaming(\"Th\", \"Regular\", \"Thin\")\n\tf.info.weightName = \"Thin\"\n\tf.info.weightValue = 250\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Light\":\n\tnaming(\"Lt\", \"Regular\", \"Light\")\n\tf.info.weightName = \"Light\"\n\tf.info.weightValue = 300\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Regular\":\n\tnaming(\"Rg\", \"Regular\", \"Regular\")\n\tf.info.weightName = \"Regular\"\n\tf.info.weightValue = 400\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Medium\":\n\tnaming(\"Lt\", \"Bold\", \"Medium\")\n\tf.info.weightName = \"Medium\"\n\tf.info.weightValue = 500\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Bold\":\n\tnaming(\"Rg\", \"Bold\" ,\"Bold\")\n\tf.info.weightName = \"Bold\"\n\tf.info.weightValue = 700\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Thin Italic\":\n\tnaming(\"Th\", \"Italic\", \"Thin Italic\")\n\tf.info.weightName = \"Thin\"\n\tf.info.weightValue = 250\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Light Italic\":\n\tnaming(\"Lt\", \"Italic\", \"Light Italic\")\n\tf.info.weightName = \"Light\"\n\tf.info.weightValue = 300\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Italic\":\n\tnaming(\"Rg\", \"Italic\", \"Italic\")\n\tf.info.weightName = \"Regular\"\n\tf.info.weightValue = 400\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Medium Italic\":\n\tnaming(\"Lt\", \"Bold Italic\", \"Medium Italic\")\n\tf.info.weightName = \"Medium\"\n\tf.info.weightValue = 500\n\tprint f.info.fullName+\" \"+\"Named\"\nelif Weight == \"Bold Italic\":\n\tnaming(\"Rg\", \"Bold Italic\", \"Bold Italic\")\n\tf.info.weightName = \"Bold\"\n\tf.info.weightValue = 700\n\tprint f.info.fullName+\" \"+\"Named\"\nelse:\n\tprint \"Ooops that's not a weight\"\n\tprint fontName+\" \"+\"is not named\"\n#\nf.update()\n`\n\n"
+    },
+    {
+      "time": "",
+      "content": "Rachel, you are the best. Cheers very much.\n\n"
+    }
+  ]
+}

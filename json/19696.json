@@ -1,0 +1,58 @@
+{
+  "id": "19696",
+  "title": "Non-Continuous Line Segments (Illustrator CS2)",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm working with an AI file I downloaded off the Adobe Exchange Server, it's a map of the United States. Very accurate with every state individually outlined, but as I work I'm noticing a few of the states don't have a continuous outline stroke. Because of the intricate nature of the state's shapes there are easily a thousand points used to create this outline stroke. That's a thousand points a state (give or take a few hundred).\n\nIs there a way that I can automatically highlight the beginning and end of a continuous line segment to make it easy to see where the breaks are in hopes of completing the path?\n\n",
+  "author": "AndrewSipe",
+  "time": "3 May 2006 — 7:22am",
+  "uid": "6496",
+  "comments": [
+    {
+      "time": "3 May 2006 — 12:22pm",
+      "content": "Try adding a fill along with the stroke or using the direct selection tool.\n\n"
+    },
+    {
+      "time": "3 May 2006 — 1:12pm",
+      "content": " ![](http://web.archive.org/web/20131020193803im_/http:/typophile.com/files/Florida_6366.jpg)\n\nThis is Florida, it's selected and all the blue are the individual anchor points. Somewhere along this shape there's a gap, I need to find it to complete the shape.\n\nIs there a way to have the beginning and end points of a continuous path highlighted?\n\n"
+    },
+    {
+      "time": "3 May 2006 — 1:25pm",
+      "content": "You could hide the guides and colorize the stroke instead of the fill. Perhaps that would show you.\n\n"
+    },
+    {
+      "time": "3 May 2006 — 2:05pm",
+      "content": "Do as Miss Tiffany says and put a coloured stroke on the outline, then make sure that the rounded ends option is selected in the stroke panel. If you make the stroke weight thicker it should show up where the gap is (You may need to make it quite thick).\n\nHope this works - haven't tested it in practise.\n\n"
+    },
+    {
+      "time": "3 May 2006 — 2:13pm",
+      "content": "With this selected you could try Object-Path-Join\n\nThen if I were you I would try Object-Path-Simplify\n\nThis is obviously an autotracing that is far more complicated than it needs to be. At a certain point a RIP is not going to want to process this many points.\n\nBest of Luck!\n\npeace\n\n"
+    },
+    {
+      "time": "3 May 2006 — 2:20pm",
+      "content": "Ignore the above, this is easier...\n\njust apply a brush style from the arrows selection. The start and end points will become obvious as they'll be at the head and tail of the arrow . Remember where the gap is and remove the brush style using the appearance palette before joining the gap.\n\n"
+    },
+    {
+      "time": "3 May 2006 — 2:26pm",
+      "content": "I should say I meant ignore MY previous comment not Pauls! Slow typing is the culprit. I had completely forgotten about the join command...\n\n"
+    },
+    {
+      "time": "3 May 2006 — 2:40pm",
+      "content": "Chris G - I was ready to flame on - not :)\n\npeace\n\n"
+    },
+    {
+      "time": "4 May 2006 — 6:35am",
+      "content": "_Then if I were you I would try Object-Path-Simplify_  \nDoes this work equally for two paths?  \nWhat I mean is – if you had two states that shared a border (which, presumably, would be the identical path for each) and you apply Object-Path-Simplify would the border still be the identical path or would the number of other points in each state affect the simplifying?  \nTim\n\n"
+    },
+    {
+      "time": "4 May 2006 — 7:08am",
+      "content": "I didn't think to do a stroked brush application, that's a brilliant idea.\n\nAs far as anchor points go, you're probably right to say it was an autotraced image, but in CS2 there isn't a limit on the ammount of anchor points you can have in a continuous segment. I haven't gone thru a rip for printing (just direct network to the printer.) but I don't think there would be a problem anymore.\n\nI appreciate all the ideas. I knew this collective braintrust would come up with a solution in a little time!\n\noh, and _Then if I were you I would try Object-Path-Simplify_  \n doesn't really work well...\n\n"
+    },
+    {
+      "time": "4 May 2006 — 8:11am",
+      "content": "There wasn't a limit before on points either, causing endless headaches for prepress folks receiving files that wouldn't RIP, for example people turning selections into paths in Photoshop. A laser printer will print just about anything but then you throw it at a postcript RIP and things get serious.\n\nHave not tried simplify on two very complex objects sharing a segment. Of course they can't be truly sharing it unless it's a compound path.\n\nSimplify works really well sometimes, depending on the path…\n\nc'est la vie\n\npeace\n\n"
+    }
+  ]
+}

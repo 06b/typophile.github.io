@@ -1,0 +1,66 @@
+{
+  "id": "61489",
+  "title": "How big is a hint?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I was wondering what the size of one hint is. Looking at the ruler in Fontlab while hinting at 12PPM I think one hint has a point size of 83. Is there a way to calculate the exact hint size at any given PPM?\n\n",
+  "author": "<a href=\"/web/20100203120028/http://typophile.com/user/45572\" title=\"View user profile.\">Dirk Bakker</a>",
+  "time": "<br>",
+  "uid": "45572",
+  "comments": [
+    {
+      "time": "",
+      "content": "A very good question. I think a large font has small hints, and a small font has large hints.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>A very good question.</cite>\n\nThanks :)\n\nI think there must be somekind of connection between the PPM size and the size of one hint. I'm almost certain that one hint at 12PPM is 83pt.  \nThere must be a calculation formula out there which tells me the point size of a hint at 13PPM, 14PPM and so on.\n\nCan someone shed some light on this?\n\n"
+    },
+    {
+      "time": "",
+      "content": "What kind of hints are you talking about? I'm guessing that you're talking about delta hints, which have particular ‘strength’ expressed as a fraction of a pixel. In FontLab, all deltas are expressed in 1/8th of a pixel, with the maximum strength for any individual delta being one pixel.\n\n[You can shift things more than one pixel by combining medial and final deltas. In VTT, you can define the strength of deltas, so it is possible to shift by more than a pixel with a single delta or to use a smaller refinement than 1/8th of a pixel. When using deltas for fonts in black and white rendering, it is typical for many hinters to move things by whole pixels; whereas, witg greyscale rendering one can use smaller delta hints to ‘paint’ shades of grey. ClearType by default ignores x-direction deltas, because otherwise fonts hinted for black and white environments would get messed up. This is not an ideal solution to the problem!]\n\nNow, if what you want to know is the relationship of the strength of a delta hint at a particular ppm size to a measurement in points, then you need to know the resolution of the output device, because you need to know at what nominal point size that ppm size will be used.\n\nI'm pretty sure that whatever calculation you used to conclude that ‘one hint at 12PPM is 83pt’ is really badly wrong. Consider: a delta strength is less than or equal to one pixel at any ppm size; ergo, at 12ppm a delta is up to 1/12th of the nominal point size at which that 12ppm size is used. It would be an incredibly low resolution device at which 83pt = 1/12 of the nominal point size for a 12ppm bitmap.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I think my question is far more simpler. If you look at a monitor at 96DPI and you see a type 1 hint in Fontlab, you can calculate the width of this hint by using the ruler or Meter panel. If a hint at 12PPM is 83 points and at 13PPM 77 points in width what would it be at 14PPM and so on?\n\n ![](http://web.archive.org/web/20100203120028im_/http:/typophile.com/files/How%20big%20is%20a%20hint_4740.png)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Those are pixels.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Those are pixels.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Um. This depends entirely on the scaling factor in your FontLab hinting window, and I suppose if the scaling value is consistent you can work out how large the actual width of a pixel at any given ppm size, in points or any other measurement. But what possible use is this information? You do understand, yes, that this doesn't actually relate to anything outside of the FL hinting window?\n\n"
+    },
+    {
+      "time": "",
+      "content": "The use is, if you want your glyphs to look at their best at a certain PPM value, let's say 12PPM, that you can change the glyphs to the hint size of that PPM value accordingly. Adjust the glyphs to the hints, instead of the other way around.\n\nBy looking at the comments on this question I'm afraid there is no calculation formula for this :(\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>...if you want your glyphs to look at their best at a certain PPM value...\n\nforget the 'hints'. find the Units Per Em of your font,  \ndivide this value by the pixels per em of the target size,  \nuse this 'em units per pixel value' (you may have to round it yourself),  \nto define the x and y grid steps in FL preferences,  \nscale character groups (a-z or A-Z, e.g.) modestly in y to fit the grid, (end of formula)  \nleave more time for x-fitting to the grid (glyph by glyph),  \nmake sure to set each glyph's total width to a whole number of pixels, (don't forget space glyph),\n\nProof and serve.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "How big? Too big. About 50% of the filesize of the original MS core fonts was  \nthe hinting. And then they complained bitmaps take up too much room.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for thinking with me David.  \nBy using this method of working the glyphs look even better in Type 1 hinting at small sizes.  \nIt's more work, but I do recommend it when you have the time.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_It’s more work, but I do recommend it when you have the time_\n\nI am sure [David](http://web.archive.org/web/20100203120028/http:/www.fontbureau.com/people/DavidBerlow) will be grateful for your advice.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>I am sure David will be grateful for your advice.</cite>\n\nI thanked David for thinking with me. The advice that followed was not for David...\n\n"
+    }
+  ]
+}

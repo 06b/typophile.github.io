@@ -1,0 +1,106 @@
+{
+  "id": "106745",
+  "title": "Recommend me a font similar to Raleway",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "I really like Raleway, but the numbers are terrible. I need even numbers, not numbers that bounce up and down. I use a lot of model numbers on my forum such as 6589 or 7500. And it makes the eyes go buggy. Is there any font you can recommend that looks like Raleway but displays numbers evenly?\n\n",
+  "author": "damian5000",
+  "time": "12 Oct 2013 — 11:49pm",
+  "uid": "215212",
+  "comments": [
+    {
+      "time": "13 Oct 2013 — 2:30am",
+      "content": "Raleway has a full set of lining numbers (that is, numbers that line up) as well as the ranging numbers (that is, numbers that are designed to fit with running text and thus \"bounce up and down\", also known as oldstyle numerals). If you're mainly using it on the web, you should be able to specify that you want lining figures using the font-feature-settings attribute in your CSS, specifying that you want \"lnum\" as one of them.\n\n"
+    },
+    {
+      "time": "14 Oct 2013 — 7:13am",
+      "content": "Thank you for the reply. Can you show me exactly what the code would look like. I've googled it, but 'lnum css' turns up almost nothing.\n\n"
+    },
+    {
+      "time": "14 Oct 2013 — 7:34am",
+      "content": "I've tried:\n\nfont-feature-settings: \"zero\";  \n/\\* vendor-prefixes \\*/  \n-moz-font-feature-settings: 'zero=1';  \n-ms-font-feature-settings: \"zero\";  \n-webkit-font-feature-settings: \"zero\";  \n-o-font-feature-settings: \"zero\";\n\nand\n\nfont-feature-settings: 'lnum';  \n/\\* vendor-prefixes \\*/  \n-moz-font-feature-settings: 'lnum=1';  \n-ms-font-feature-settings: 'lnum';  \n-webkit-font-feature-settings: 'lnum';  \n-o-font-feature-settings: 'lnum';\n\nneither worked :(\n\n"
+    },
+    {
+      "time": "14 Oct 2013 — 8:43am",
+      "content": "Strange, the latter looks fine to me. (I'm totally not an expert though.) How are your webfonts served? Some of the services will tend to strip out stuff like several sets of numerals for the sake of economy.\n\n"
+    },
+    {
+      "time": "14 Oct 2013 — 9:30am",
+      "content": "Serving from Google.\n\nlink href='http://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'\n\nMaybe when I call it from the server, I need to specify the lnum as well in some manner...\n\nThere's really virtually nothing about this topic by Googling it.\n\n"
+    },
+    {
+      "time": "14 Oct 2013 — 9:41am",
+      "content": "Okay. Luckily someone else had the exact same problem with the same font. I've found the answer on stackoverflow by Googling 'raleway lnum'.\n\n[http://stackoverflow.com/questions/17218891/getting-different-figure-typ...](http://web.archive.org/web/20150310051046/http:/stackoverflow.com/questions/17218891/getting-different-figure-types-with-google-web-fonts \"http://stackoverflow.com/questions/17218891/getting-different-figure-types-with-google-web-fonts\")\n\nApparently the feature isn't available when calling from Google. Only when using .otf files. I'll look into it implementing this and reply back.\n\n"
+    },
+    {
+      "time": "14 Oct 2013 — 10:33am",
+      "content": "Hmmm... I give up on this for now. The Raleway .otf I downloaded doesn't have lnum in the .otf. Or maybe it's not required to be in the .otf to use lnum?\n\n"
+    },
+    {
+      "time": "14 Oct 2013 — 10:47am",
+      "content": "OT support is still spotty.\n\n"
+    },
+    {
+      "time": "14 Oct 2013 — 2:11pm",
+      "content": "Hi Damian,  \nWebfonts served by Google Fonts and most other webfonts services are usually sub-setted (that means its optimized, and some glyphs are removed to make the file smaller so it loads faster).\n\nTo force Google to send you the entire full file (no subsetting) you have to specify \"subsetting=all\".  \nHere is an example on how to do that for the lobster font: [http://www.impallari.com/lobster#subsetting](http://web.archive.org/web/20150310051046/http:/www.impallari.com/lobster#subsetting \"http://www.impallari.com/lobster#subsetting\")  \nYou can do the same for Raleway or any other font.\n\nOnce you are getting the full font, in your CSS you need to add this code to activate the lnum feature in all browsers:  \nfont-feature-settings: \"lnum\"  \n-moz-font-feature-settings: \"lnum\"  \n-webkit-font-feature-settings: \"lnum\"  \n-ms-font-feature-settings: \"lnum\"  \n-o-font-feature-settings: \"lnum\"\n\nBy the way, the latest Raleway release (v3) a few days ago, also include Italics and Cyrillics. Is available here: [http://www.impallari.com/projects/update/100](http://web.archive.org/web/20150310051046/http:/www.impallari.com/projects/update/100 \"http://www.impallari.com/projects/update/100\") and will also be available in Google Fonts pretty soon.\n\n"
+    },
+    {
+      "time": "15 Oct 2013 — 12:49pm",
+      "content": "It’s strange that you have to specify all glyphs in order to get the few required for one speciﬁc feature.\n\n"
+    },
+    {
+      "time": "16 Oct 2013 — 9:52pm",
+      "content": "Yep, is strange. But web-developers are very strict about optimization. They optimize everything: css, javascript, etc... even small 1kb gifs icons making sprites files to save http requests. They want the fonts to be compressed in the same way, even if that means removing some glyphs and OT features.\n\nCurrently in Google Fonts there are more subsetting options:  \n- Latin,  \n- Latin Extended,  \n- Cyrillic,  \n- Cyrillic Extended,  \n- Greek,  \n- Greek Extended,  \n- Khmer,  \n- Vietnamese,  \n- All (disable subsetting and get the full font).  \n- Your can also roll your own custom subsets, using the \"text=xxxx\" parameter.\n\nBut they are mostly intended for language support, and not yet for OT features.  \nAs you might know, not all OT features are currently supported by all browsers, but hopefully in the near future they will, and I also hope for the subsetting options to improve in all the webfonts services.\n\nTypeKit only offers 2 options:  \n- Default (Latin)  \n- All Characters (subsetting off)\n\nH&JF has done a great job in their service, in particular about the subsetting options. They have an \"easy to use\" and \"easy to understand\" interface for selecting which glyphs gets included and which ones gets removed, allowing the user to fine-tune the subsetting optimizations.  \n [http://www.typography.com/cloud/feature-tour/images/ft\\_characters\\_1x.png](http://web.archive.org/web/20150310051046/http:/www.typography.com/cloud/feature-tour/images/ft_characters_1x.png \"http://www.typography.com/cloud/feature-tour/images/ft\\_characters\\_1x.png\")\n\nI don't know what are the subsetting options that the other services offer to their users. But still, all this webfonts thing is still in an early phase, and there is much to improve when looking at the future.\n\n"
+    },
+    {
+      "time": "17 Oct 2013 — 11:51am",
+      "content": "Be advised that Raleway Thin and Extralight uprights still have their usWeight below the Microsoft Madness limit. Might want to bump it up to 250 as in the italics.\n\n"
+    },
+    {
+      "time": "17 Oct 2013 — 8:20pm",
+      "content": "Thanks Té.  \nI've read about that here [http://www.adobe.com/devnet/opentype/afdko/topic\\_font\\_wt\\_win.html](http://web.archive.org/web/20150310051046/http:/www.adobe.com/devnet/opentype/afdko/topic_font_wt_win.html \"http://www.adobe.com/devnet/opentype/afdko/topic\\_font\\_wt\\_win.html\") but so far we never have had any problems regathering that setting, as we only style-link 400 to 700 and not the other weights.  \nAlso, it seems like a Microsoft's Bug to me, and not a bug in the fonts. They should fix their software, we should not break our fonts to support defective apps.\n\n"
+    },
+    {
+      "time": "18 Oct 2013 — 10:03am",
+      "content": "Good luck getting the PTBita to fix _that_ stupidity... At least I know enough to put in that workaround for myself.\n\n"
+    },
+    {
+      "time": "3 Feb 2014 — 1:55am",
+      "content": "Bringing back this old topic.\n\nThe character set as shown by google fonts doesn't include non-bobbing numbers, so if I force load all subsets, it will have it?\n\n[http://www.google.com/fonts/specimen/Raleway#charset](http://web.archive.org/web/20150310051046/http:/www.google.com/fonts/specimen/Raleway#charset \"http://www.google.com/fonts/specimen/Raleway#charset\")\n\n"
+    },
+    {
+      "time": "3 Feb 2014 — 9:41am",
+      "content": "The term \"lining\" is preferable to \"non-bobbing\".\n\nhhp\n\n"
+    },
+    {
+      "time": "13 Jun 2014 — 6:41am",
+      "content": "Back to initial topic - need substitute for Raleway or Google.fonts. Here's the whole deal - template studio I have subscription with, started using it almost everywhere (most new templates), but I need to have Cyrillic in it - google fonts still doesn't have it in Cyrillic, and I don't know how to set the template up in such a way that it would use any other fonts provider. Could anybody help me please? I am quite new to this thing, but can learn quite fast... Thanks in advance.\n\n"
+    },
+    {
+      "time": "13 Jun 2014 — 5:41pm",
+      "content": "Yesterday I've uploaded Raleway v3 to Github. GoogleFonts version will be updated soon.\n\n"
+    },
+    {
+      "time": "14 Jun 2014 — 7:33pm",
+      "content": "Thank you, PabloImpallari  \nHow much time does it usually takes? Do you know? \"Soon\" might mean a day, a month, an year... )))\n\n"
+    },
+    {
+      "time": "14 Jun 2014 — 10:33pm",
+      "content": "I can't say for sure, for probably the next week or two\n\n"
+    },
+    {
+      "time": "15 Jun 2014 — 12:52am",
+      "content": "Actually, Google didn’t yet offer even Raleway’s italics…\n\n"
+    },
+    {
+      "time": "15 Jun 2014 — 10:24pm",
+      "content": "I guess this one [https://docs.google.com/forms/d/1w2JOnVv\\_Vfcg1H\\_nploj1FRz4LcFsLaFmFkEj50...](http://web.archive.org/web/20150310051046/https:/docs.google.com/forms/d/1w2JOnVv_Vfcg1H_nploj1FRz4LcFsLaFmFkEj50PyW4/viewform \"https://docs.google.com/forms/d/1w2JOnVv\\_Vfcg1H\\_nploj1FRz4LcFsLaFmFkEj50PyW4/viewform\") resubmitted would speed it up, wouldn't it?\n\n"
+    },
+    {
+      "time": "17 Jun 2014 — 1:12pm",
+      "content": "Can't tell if I was able to trigger someth, or it was mere coincedence, but this site rules for sure: [https://groups.google.com/forum/?fromgroups=#!topic/early-access-fonts/e3fM2aLee6I](http://web.archive.org/web/20150310051046/http:/typophile.com/wiki/https%3A/%252Fgroups.google.com/forum/%3Ffromgroups%3D%2523%21topic/early-access-fonts/e3fM2aLee6I)\n\nNext week upgrade is scheduled...\n\n"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "34287",
+  "title": "Question about vertical metrics",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "hello people from typophile\n\nI have a question concerning baseline to baseline distance definition or line spacing,  \nSimply, can that be controled using the typo line gap value?  \nDoes the upm value, also has to be concidered in this task?  \ni´m a little bit confused on this...\n\np.s Working with FL5, at 1000 upm, for outputing a OT-type1 font file\n\nThanks in advance  \nSeeya\n\n",
+  "author": "kiko",
+  "time": "6 Jun 2007 — 6:40pm",
+  "uid": "17987",
+  "comments": [
+    {
+      "time": "7 Jun 2007 — 8:59pm",
+      "content": "_OT-type1_\n\nI presume by this you mean a PostScript OTF font, i.e. an OpenType font with CFF PostScript outline format. [Type 1 is a different species of PostScript font.]\n\nThe answer to your question is a little bit complex, because it depends on what application on what operating system you are looking at.\n\nSome applications by default give explicit control of baseline-to-baseline distance to the user, e.g. InDesign and other professional design applications. So we can ignore these.\n\nOther applications make use of the font vertical metrics settings in the OS/2 and hhea tables to determine baseline-to-baseline distance (and also baseline-to-text-block-top for the first line of text). Windows applications use the OS/2 table metrics. Mac applications use the hhea table metrics. I'm guessing that most Linux apps used the Os/2 table metric, but I have not confirmed this.\n\nLet's get the Mac apps out of the way first, since this is relatively straightforward. If you sum the values of the hhea Ascender, Descender and LineGap metrics (treating the descender as a positive value), that gives you your gross default baseline-to-baseline distance. I say gross, because of course this value gets rounded to device dependent resolutions. The only tricky thing on the Mac side is that different applications calculate baseline-to-text-block-top for the first line of text differently: some use the Ascender value, some use the Ascender+LineGap value.\n\nOn the Windows side, it is a bit more complicated, because the OS/2 table includes two different sets of vertical metrics: Typo metrics and Win metrics. The original idea was that the Typo metrics would control line distance (and hence should be compatable with the corresponding hhea metrics for cross-platform compatibility), and the Win metrics would determine the clipping zone, i.e. the area beyond which parts of glyphs might be clipped by the rendering system. By making the linespacing and clipping zones independent, one could conceivably set them in such a way that e.g. unclipped portions of some letters might intrude into the linespace of adjacent lines. Unfortunately, having elements of text on one line intrude into the vertical space of adjacent lines causes major issues for text refresh, so in practice Windows application developers have ignored the Typo metrics and based both clipping and linespacing on the Win metrics. It is only very recently, in Office 2007, that Microsoft have introduced a mechanism to force the application to base linespacing on the Typo metrics independently of the Typo metrics, but this currently only works ideally in the math equation layout mode in Office 2007; elsewhere, Office assumes the clipping zone to be equal to the sum of the Typo metrics, which simply reverses the old assumption (!)\n\nFor more information about font metrics settings and recommended practices, see here:\n\n[http://typophile.com/wiki/Vertical%20Metrics%20How-To](http://web.archive.org/web/20141028122350/http:/typophile.com/wiki/Vertical%20Metrics%20How-To \"http://typophile.com/wiki/Vertical%20Metrics%20How-To\")\n\nBe sure to read all the way to the end, because there are some update notices on best practices.\n\n"
+    },
+    {
+      "time": "8 Jun 2007 — 8:30am",
+      "content": "yes, a OpenType font with CFF PostScript outline format.  \nI´ll check out that info...\n\nTanks a lot,  \nSeeya\n\n"
+    },
+    {
+      "time": "15 Jun 2007 — 2:52pm",
+      "content": "John,  \nto add to your summary, WPF honors the new selection bit 7 when calculating line spacing, i.e. it will use the typo metrics when the bit is set.\n\nBest regards,  \nMikhail Leonov  \nMicrosoft\n\n"
+    },
+    {
+      "time": "17 Jun 2007 — 8:57pm",
+      "content": "That's good to know, Mikhail. When you say that WPF honours the selection bit 7 setting, what does this imply about clipping for you? Is clipping still associated with the Win values? i.e. is it possible for unclipped text to extend beyond the Typo metrics values in WPF?\n\n"
+    },
+    {
+      "time": "18 Jun 2007 — 10:00am",
+      "content": "John, WPF honors the bit 7 when it calculates line spacing values. Unlike GDI, WPF Text system itself does not clip text, and we discourage our customers from doing this, as it often breaks good typography. Of course, in practice various controls built on top of the WPF text system usually clip all primitives against their own bounds, but in general you should see significantly less, if any, text clipping happening in WPF.\n\n"
+    },
+    {
+      "time": "18 Jun 2007 — 10:25am",
+      "content": "I gather that Office 2007 honors bit 7, however unlike WPF it uses GDI and thus clips to the new line spacing. Ewww.\n\nT\n\n"
+    },
+    {
+      "time": "18 Jun 2007 — 12:01pm",
+      "content": "Bit 7 released windows metrics from playing double role of clipping and line spacing (and preserve compatibility for legacy applications at the same time). This is what's happening in Cambria Math: typo metrics set line height to 2400 units and win metrics to over 11000, so no clipping happens inside GDI even if default line height is much smaller.\n\nUsing GDI is not reason for clippng in Word. Problem is that they are clipping text by iteself to actual line height. If you increase line spacing, area clipped by Word will expand. This is legacy of old Word layout/drawing code, not GDI. Same may happen if they switch to WPF without changing this old code. As you can see in Mikhail's post, WPF standard controls will clip on their own too, so this is not limitation of glyph rendering code. Another (positive) example is math layout code in Word, which is new and does not clip high glyphs.\n\nThanks,  \nSergey\n\n"
+    },
+    {
+      "time": "18 Jun 2007 — 9:00pm",
+      "content": "Thanks for the extra information, Mikhail. Am I correct in assuming that WPF also intelligently handles line refresh, so that artifacts outside the line height are not left onscreen when text is edited? As I understand it, this is one of the concerns about allowing visible glyph shapes to extend beyond the line height.\n\n[PS. I'll be in Redmond next week, Mikhail, and mentioned to Geraldine Wade that I'd like to meet you if you are around.]\n\n"
+    },
+    {
+      "time": "19 Jun 2007 — 10:12am",
+      "content": "John,  \nthe WPF rendering system handles refreshes by keeping track of dirty regions. Dirty region bounding boxes are computed using individual glyph black box metrics, and no font-wide values are used for that purpose.\n\nYes, you are very welcome to stop by. My email is Mikhail.Leonov at (trying to prevent spam by spelling it out) microsoft dot com.\n\nBest regards,  \nMikhail\n\n"
+    },
+    {
+      "time": "25 Jun 2007 — 5:25pm",
+      "content": "By the way, is anyone aware of fonts that have positive sTypoDescender instead of the usual negative value? The dilemma for a font engine or for an application is whether to attempt to \"correct\" the inverted descent by changing its sign (assuming a font defect), or exposing the positive descent value (assuming intentional font vendor decision) and leaving it up to the application to determine what it means in the context of text layout.\n\nI was told some time ago that superscript only fonts may decide to do this, but I'm not sure how this plays with usWinAscent accepting only unsigned values.\n\nThanks in advance,  \nMikhail\n\n"
+    },
+    {
+      "time": "21 Feb 2010 — 6:56pm",
+      "content": "Spam is spam, even in Arabic.\n\n"
+    },
+    {
+      "time": "23 Feb 2010 — 8:33pm",
+      "content": "Mikhail: I believe I remember some of Adobe's engineers encountering inconsistent descender pos/neg issues of the sort you describe. You might want to ping Sairus (sppatel) or somebody on the CoolType team.\n\nRegards,\n\nT\n\n"
+    }
+  ]
+}

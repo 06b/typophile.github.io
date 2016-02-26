@@ -1,0 +1,38 @@
+{
+  "id": "17442",
+  "title": "Diacritic marks: Special Design for uppercase, smallcaps and titling?",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "I was playing around with diacritics in an opentype font of mine, and came to the conclusion that the marks on Uppercase Letters need to be a bit bigger than the ones on lowercase. At the moment, I gave them just a scaling of +9% compared to the original size, but I guess that in some designs, this isn't the best way...\n\nDo you design special versions for uppercase? Where do you place them in Unicode, is there a special place for them?\n\nWhat about smallcaps (here I did use the LC original size) and titling (here I designed new, more detailed ones, but do not exactly know where to place them in unicode).\n\nThanks for your suggestions  \nSebilar\n\n",
+  "author": "Sebastian Nagel",
+  "time": "21 Jan 2006 — 5:53am",
+  "uid": "5444",
+  "comments": [
+    {
+      "time": "21 Jan 2006 — 7:07am",
+      "content": "Sebilar, you are flying in the face of convention. When one makes special versions of accents for majuscule letters, the habitual solution is smaller/more compact marks, so that a line of all-caps - or several lines of all-caps - stay as compact as possible.\n\nAlso, you should just use the Unicode index for each of the accented majuscule letters. If you want to have the large accents AND an additional set of compact accented caps, you can name them things like Aacute.alt or something, then write a SS01 feature to swap out the one with the other. (Since you already have Titling variants.)\n\nAnd in the case of Titling versions of majuscules, you can name them Aacute.titl etc. and assign them Unicode indexes from the PUA (Personal Use Area). Without indices, they can only be accessed through the application of an OT feature; with indices they can be accessed using the Character Palette or InDesign's glyph palette.\n\n"
+    },
+    {
+      "time": "21 Jan 2006 — 9:52am",
+      "content": "_And in the case of Titling versions of majuscules, you can name them Aacute.titl etc. and assign them Unicode indexes from the PUA (Personal Use Area). Without indices, they can only be accessed through the application of an OT feature; with indices they can be accessed using the Character Palette or InDesign’s glyph palette._\n\nWhat do you mean by \"without indices?\" I didn't assign Unicode values to everything in the font I'm working on -- Greek small caps, some ligatures, etc. -- but they still show up in the InDesign glyph palette. And I'm still writing the features for them. And I've been staying out of the PUA because David Lemon told me to.\n\nAs for sizing I also change the angles of acute, grave, etc. so their shallower than those for the lc.\n\nGeorge\n\nI felt bad because I had no shoes, until I met a man who had no Bodoni\n\n"
+    },
+    {
+      "time": "21 Jan 2006 — 12:54pm",
+      "content": "I can see why this might be appropriate on a sans serif face.\n\nBut if you flatten the angle of the accent for the cap (or squash down the circumflex), and drop it a bit closer to the letter, then the difference won't be so obvious.\n\nAnd those things are important to do, because otherwise any setting other than with lots of leading will result in collisions with descenders.\n\nThe convention is to change the angle for cap accents, to improve leading, rather than change the weight to improve color, which makes leading worse.\n\nIn fact, flattening the angle of accents does make them visually bolder, because horizontal lines are perceived as thicker than vertical lines of the same weight!\n\n ![](http://web.archive.org/web/20131012114115im_/http:/typophile.com/files/Es.jpg)\n\n"
+    },
+    {
+      "time": "21 Jan 2006 — 3:56pm",
+      "content": "I will try this, Nick, this should work for me too.\n\nbtw: your avatar is scaring me...\n\nSebilar\n\n"
+    },
+    {
+      "time": "21 Jan 2006 — 9:44pm",
+      "content": "Regarding Unicode: As Chester notes you should use the precomposed diacritic character codes where possible. However, if you are supporting OpenType layout for combining mark characters, either through GSUB in the 'ccm' feature or through GPOS in the 'mark' anchor positioning feature, then you should include glyph variants of the combining marks for uppercase and smallcap letters as appropriate. So, for instance, you might have three glyphs for the combining acute accent. The default form is the lowercase, which is encoded as U+0301; the other glyph variants are unencoded, but are instead accessed using OpenType Layout features. They would be named something like this:\n\nacutecomb  \n acutecomb.cap  \n acutecomb.sc\n\nIf you are using the 'ccmp' feature to map from sequences of base letter plus combining mark(s) to precomposed, unencoded glyphs in the font, e.g.\n\nAdiaresis acutecomb -\\> Adiaresisacute\n\nthen you don't need the variant combining mark glyphs for such sequences. But you obviously need them if doing GPOS mark positioning, and it is useful to have them in the font even if you are supporting precomposed diacritic glyphs, since some user may employ some combining mark sequence for which you have not provided a precomposed glyph. You might have a precomposed glyph for /Adiaresisacute/, for instance, but not have one for the sequence\n\nA dotbelowcomb acutecomb\n\nin which case you want to ensure that the combining acute that follows the capital letter is the correct form and height, even if you have not refined the horizontal positioning using GPOS mark positioning.\n\nTo do this, you need to use a contextual lookup to substitute the cap variant combining mark glyph when it follows an uppercase letter. Since this is a contextual alternate substitution, you may consider using the 'calt' feature, and I think this would be valid. However, since this is probably not something that you want to be turned off by the user along with stylistic contextual substitutions, I recommend putting this lookup in the 'ccmp' feature.\n\n"
+    },
+    {
+      "time": "22 Jan 2006 — 11:10am",
+      "content": "_btw: your avatar is scaring me…_\n\nThanks!\n\n"
+    }
+  ]
+}

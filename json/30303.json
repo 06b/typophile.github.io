@@ -1,0 +1,42 @@
+{
+  "id": "30303",
+  "title": "Order of first glyphs in OT font",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Does the glyph order for the first 256 glyphs in an OT font have any effect on compatibility or performance? I noticed that the new set of ClearType fonts from MS have a quite human readable order starting with all uppercase glyphs, then small caps followed by lower case etc. Nice when you are picking a glyph from a palette with index order shown. Most OT/CFF fonts seems to be using some form of Adobe Standard Encoding for the first glyphs, is that necessary or just based on a tradition?\n\n/mårten\n\n",
+  "author": "<a href=\"/web/20090601195927/http://typophile.com/user/1021\" title=\"View user profile.\">Mårten Thavenius</a>",
+  "time": "<br>",
+  "uid": "1021",
+  "comments": [
+    {
+      "time": " 3.Jan.2007 6.07am",
+      "content": "If the Unicode of the glyphs are right, it doesn’t matter in what order they are in the font.\n\nPieter\n\n"
+    },
+    {
+      "time": " 3.Jan.2007 11.08am",
+      "content": "I have a feeling that some older versions of MacOS don’t like glyphs outside the first 256 Id’s in a TrueType font regardless of cmap - this may be related (in part) to why Apple chose to replace the sputnik curency symbol with the euro - or maybe it isn’t.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": " 3.Jan.2007 12.43pm",
+      "content": "I cannot say anything about TrueType OTFs, but since Microsoft uses arbitrary glyph order, this seems to be fine.\n\nPostScript/CFF OTFs also allow arbitrary glyph order — but there is a little caveat which I found:  \nOn Mac OS9 with ATM, you would not access the Euro via the according key. InDesign 2 is an exception since it does not rely on the OS or ATM. (I decided for a nice glyph order and against supporting OS9.)  \nWith apps that run in OSX or Windows there does not seem to be any problem.\n\nKarsten\n\n"
+    },
+    {
+      "time": " 6.Jan.2007 2.07pm",
+      "content": "There are a bunch of things related to glyph ordering. Here are just the few that I can think of off the top of my head.\n\nOpenType CFF fonts can be marginally smaller if the first couple of hundred glyphs are named and ordered according to a standard scheme.\n\nGlyphs being ordered consistently when they can be substituted from one group to another allows for block shifts, which makes for better glyph substitution performance. So for example if your regular numbers are zero through nine and are consecutively ordered, you should do the same with numerators, inferiors, oldstyle alternates, and so on.\n\nSome older versions of Photoshop expected the first glyph to be the notdef (was this only in OpenType CFF? I forget), and if you stuck a regular glyph in that slot, it would not be usable.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": " 6.Jan.2007 9.13pm",
+      "content": "There are at least two more concerns with glyph ordering in OpenType fonts:\n\n- for TrueType-flavored OpenType, Apple’s TT spec dictates that the first two glyphs must be the notdef and null. It also puts some other requirements on character-to-glyph mapping. [http://developer.apple.com/textfonts/TTRefMan/RM07/appendixB.html](http://web.archive.org/web/20090601195927/http:/developer.apple.com/textfonts/TTRefMan/RM07/appendixB.html \"http://developer.apple.com/textfonts/TTRefMan/RM07/appendixB.html\")\n\n- the glyph ordering controls the order the glyphs are displayed in InDesign’s glyph palette\n\n"
+    },
+    {
+      "time": " 7.Jan.2007 5.48am",
+      "content": "Thomas Phinney wrote:  \n<cite><br>\n&gt; the glyph ordering controls the order the<br>\n&gt; glyphs are displayed in InDesign’s glyph palette<br>\n</cite>\n\nExactly, and that was the reason why I thought of using a glyph order optimized for users instead of an encoding based order.\n\n<cite><br>\n&gt; Glyphs being ordered consistently when they can be<br>\n&gt; substituted from one group to another allows for<br>\n&gt; block shifts, which makes for better glyph<br>\n&gt; substitution performance.<br>\n</cite>\n\nWhen it comes to block shift, are there any difference in the AFDKO feature syntax in using “[a-z]” compared to “a b ... z”? Or is it just a requirement that the glyphs in the block are in a strict order in the font?\n\n/mårten\n\n"
+    },
+    {
+      "time": " 7.Jan.2007 6.08am",
+      "content": "Si,  \nFrom your new avatar, I see you got a kick out of last nights score. :-)\n\nChrisL\n\n"
+    }
+  ]
+}

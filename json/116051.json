@@ -1,0 +1,62 @@
+{
+  "id": "116051",
+  "title": "OpenType and Superscript in InDesign",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "I'm working on a template for an InDesign document that will use a lot of footnotes, and I'm having an issue getting the OpenType superscript feature to actually work. I'm using InDesign CS6, and the typeface is Nimbus Sans Novus (the cut from URW). I see that OpenType superscript works fine in Minion Pro in my document, but I have to manually select numbers from the glyphs palette to get it work with Nimbus or Helvetica Neue, so I assume its a problem in the way the OpenType font is programmed. Is there a decent workaround for this? I've requested fixes to OpenType fonts from other foundries but I'm not sure this is even possible for this project, since I'm dealing with a corporate font choice that is part of their enterprise software solution, and the fonts are served up via the Universal Type Server, making it not just an issue on my end.\n\nThe template will eventually be turned over to the production department, so I'd like a simple fix if possible (the big issue here is that the superscript numbers go to greek onscreen because they are so small when viewed at fit to page, on top of being optically ugly due to scaling).\n\nThanks!\n\n",
+  "author": "seanglenn",
+  "time": "25 Apr 2014 — 7:32am",
+  "uid": "1256",
+  "comments": [
+    {
+      "time": "25 Apr 2014 — 12:06pm",
+      "content": "You could use any sans font, superscripts don’t have to match. (Like in the old days!)  \nCould you make superscripting a Character Style that changes the font to something that does work?\n\n"
+    },
+    {
+      "time": "25 Apr 2014 — 12:37pm",
+      "content": "The superscripted numerals are in the font, InDesign just doesn't pull them up when the OpenType Superscript option is checked. I can access them from the Glyphs palette, just not automatically. I guess I could create a GREP script to find and replace them though.\n\n"
+    },
+    {
+      "time": "25 Apr 2014 — 12:59pm",
+      "content": "Be careful of extolling the olden days – people might start writing in superscripts by hand! ;-)\n\nhhp\n\n"
+    },
+    {
+      "time": "25 Apr 2014 — 1:40pm",
+      "content": "Superscript ﬁgures may be in a font, but unless they are included in the Superscript feature in that font, they will not deploy when the feature is selected in InDesign.\n\nThat may be the issue, and is why I am suggesting a sans font that does have the full, active Superscript figure feature.\n\n"
+    },
+    {
+      "time": "25 Apr 2014 — 1:53pm",
+      "content": "Oddly, according to the specs on the font, they should work:\n\nOT Features: aalt case dnom frac kern liga numr ordn sinf smcp sups\n\nAlas, it does not, which means the specs are incorrect.\n\n"
+    },
+    {
+      "time": "25 Apr 2014 — 2:21pm",
+      "content": "Nick's idea of using character styles to insert a different font might be a good solution. You could also use character styles to make a regular number in the same font look like superscript (small size, baseline shift, etc.)\n\n\\> The template will eventually be turned  \n\\> over to the production department\n\nWorkarounds always make me nervous when different people work on a job. One trick is so temporarily make the character style a different color, like red, so it stands out and you can see if it was applied properly, then change it back to the proper color.\n\n"
+    },
+    {
+      "time": "25 Apr 2014 — 2:52pm",
+      "content": "Of course they work. If you pull them into the file, via the glyph pallet being one way, ink will eventually flow and all will see. What you mean is their placement is not automated via the routine you usually use.\n\nI suspect the superscripts you're using are not a stylistic variation of one, two, three, but true superiors, which have a different Unicode number. When you write 6.2 x 10^4, you don't want that changing to 6.2 x 104.\n\nWhich means you could enter them directly via the keyboard. And also means they <cite>may</cite> disappear (into .notdef characters) should someone get a hold of your file and change the font, say for reading the text.\n\nThere are lots of URW Nimbus Sans Novus fonts out there, some for free, some cost, like from Myfonts. [http://www.myfonts.com/fonts/urw/nimbus-sans-novus/](http://web.archive.org/web/20140803032730/http:/www.myfonts.com/fonts/urw/nimbus-sans-novus/ \"http://www.myfonts.com/fonts/urw/nimbus-sans-novus/\") Without actually having the software (aka \"font\" in this case) to see, there is no way of examining the specific OpenType features someone wrote. That's where any automation takes place. And since it's a customer's font that can't be changed, you'll want to be real careful what solution you eventually pick. I know Murphys' dictum was shorthand for \"mean time before failure,\" but the conventional, sadly humorous meaning can wind up applying, too.\n\n"
+    },
+    {
+      "time": "25 Apr 2014 — 3:05pm",
+      "content": "> .. Which means you could enter them directly via the keyboard.\n\nTrue in general, and the route I prefer to take for math, but unfortunately InDesign's Footnote Options do not allow arbitrary characters (which they are, as far as ID is concerned) to be used as automatic footnote markers.\n\nAnother point down for ID's Footnote Options, which may well bear the tag line \"Proudly Unchanged Since Original Inception\".\n\n"
+    },
+    {
+      "time": "25 Apr 2014 — 5:09pm",
+      "content": "Theunis, yes, you're right. There is more than one way to do footnotes in InDesign, of course...\n\nFor the workflow in our shop, the ID function \"Superiors/Superscripts\" is rigged, in the font (when allowed), to use an **alternate** number/letter sequence, as defined in the features. As alternate glyphs, there are no Unicode assignments made, and names are something like \"one.super\" and \"a.super.\" If the file winds up in a PostSctript environment, the period and everything thereafter drops out, so the base characters are left. On the other hand, when we need a superior or inferior number for mathematical or chemical nomenclature, they will be the superiors/inferiors that have a Unicode assignment, and must be entered from the keyboard.\n\nNot perfect, but at least one more or less viable compromise.\n\nThen you hit the \"what to do\" wall again when preparing ePUB files, allowing for superior presentation when the fonts are embedded, but still working acceptably when the reader makes a font change. And bear in mind that in practice these days, both ePUB and XML are often prepared from a pdf. Labor is cheap in India, and inexpensive handwork is usually more cost effective than creating and implementing a programmatic solution...\n\n"
+    },
+    {
+      "time": "28 Apr 2014 — 7:40am",
+      "content": "Charles — we are using the URW version from MyFonts, and the Glyphs palette in InDesign says that superscript 1 is GID 232, Unicode: 0089, Name: SUPERSCRIPT ONE, but it is not shown as a stylistic variation of numeral 1 like it is in say Minion Pro. I assume that is why it does not work correctly.\n\n"
+    },
+    {
+      "time": "28 Apr 2014 — 10:22am",
+      "content": "Sean, that is the exact cause of your issue. If the font designer added correctly drawn superscript digits, it's only a matter of adding the right _feature_ code to the font to add this feature to OpenType-sensitive software.\n\nProfessional software such as DTL FontMaster even allows \"templates\" of standard font features to be applied to entire fonts, no further action needed (as I understand it from [Frank Blokland's regular updates](http://web.archive.org/web/20140803032730/http:/www.typophile.com/node/107315)).\n\nIt's possible you have an older version of your font so you might want to inquire at URW (or your regular font supplier). And if they tell you, \"no we don't do that\" -- point them towards this discussion!\n\n"
+    },
+    {
+      "time": "28 Apr 2014 — 10:25am",
+      "content": "I've had great experiences with FontShop fixing specific issues for me on fonts I've purchased from them. I don't know however if URW would be willing to the do the same, and the secondary issue is that the font is already available company-wide here via Universal Type Server, so it's not a simple replace it just on my project. I will definitely look into it though.\n\n"
+    }
+  ]
+}

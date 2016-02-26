@@ -1,0 +1,62 @@
+{
+  "id": "39239",
+  "title": "Workflow for Designing Typefaces with Multiple Weights/Styles (Metrics, Kerning, Classes, etc.)",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "I've come to realize that, at least for me, the most time-consuming and maddening part of the typeface design process is turning finished glyphs into an actual, usable font, rather than the process of designing and drawing the glyphs themselves.\n\nFor instance, imagine you want to create a font with a regular and bold weight. Once you've got both faces drawn, glyph by glyph, you need to apply metrics and kerning. The problem is, the metrics and kerning values for the bold weight should really be exactly the same as they are for regular, just pushed out a bit in both directions. Of course I'm oversimplifying things, and this wouldn't apply to all typefaces, but for the \"average\" typeface I think this holds for the purpose of the point I'm trying to make.\n\nThe fact that there is so much redundant work to be done across all weights of a font isn't even the primary problem. The real issue for me is that since kerning can take so long, and be so subjective, I'm not sure I really trust myself to make the exact same decisions for every kerning pair across all weights. What if I kern the A/V pair slightly differently in the bold weight, when compared to how it was done in the regular weight? The only \"solution\" would be to manually compare every kerning pair from every weight with each other, one by one, ensuring they look similar enough to work as a family.\n\nFor me, creating an entire family's worth of glyphs is a reasonable task. But the remaining work for turning a glyph set into a font, when multiplied by the number of weights in a well-developed family, seems unreasonable cumbersome and error-prone.\n\nDoes anyone have any perspective on this, or insight into how this workflow is usually handled among different foundries/designers?\n\nThanks!\n\n",
+  "author": "amv",
+  "time": "19 Nov 2007 — 12:33pm",
+  "uid": "23823",
+  "comments": [
+    {
+      "time": "19 Nov 2007 — 7:19pm",
+      "content": "You could start kerning the bold by copying the kerning from the regular.\n\nOf course, in any ongoing typeface design, even after you start kerning the bold you're likely to change the kerning in the regular as you notice issues. But then you can make parallel changes in both.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "19 Nov 2007 — 7:37pm",
+      "content": "Thanks Thomas, I appreciate input from someone with such an authoritative background.\n\nYour comment brings me to another point, though; in the construction of the truly massive faces produced by Adobe, for example, there are hundreds and sometimes thousands of glyphs multiplied by numerous weights. I'm curious as to how the workflow is managed on a project with so many variables.\n\nIs each weight of each font an \"island\"? In my workflow, which is centered around Illustrator and FontLab, the answer is unfortunately yes. In other words, I usually keep detailed notes as I make changes to a given weight, because all of those changes will have to be made in, or rather \"translated\" to, the other weights. From what I know about FontLab, there's no way for changes to propogate through an entire typeface family based on changes made to a single weight/style.\n\nSo when you say \"parallel\", is it just a figure of speach, or does Adobe's workflow actually somehow allow changes to be made automatically across an entire typeface as a particular font within the family is modified?\n\n"
+    },
+    {
+      "time": "19 Nov 2007 — 8:56pm",
+      "content": "Well, we do everything in MM space when possible. So we've got fewer fonts than it \"looks like\" - for example the six weights of Hypatia Sans are generated from an MM base with two masters (with a few exceptions).\n\nBut to answer the question, even then, the kerning of the different masters is related, and one master may start as a copy of another.\n\nSomebody like Miguel Sousa or Christopher Slye could speak a lot more authoritatively about the whole Adobe kerning workflow with related fonts and big character sets - we've evolved it considerably in the last couple of years, and I managed to duck kerning Hypatia Sans when we ran out of time (Miguel and Robert did it, which I will be eternally grateful for). I'm going to stop commenting now before I say something that's just wrong. :)\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "20 Nov 2007 — 3:14am",
+      "content": "In this article about the creation of Meta Serif the use of Superpolator is mentioned. Apparantly that also interpolates the kerning.\n\n[http://www.fontshop.be/details.php?entry=239](http://web.archive.org/web/20150420150221/http:/www.fontshop.be/details.php?entry=239 \"http://www.fontshop.be/details.php?entry=239\")\n\nMaybe Kris or Christian can provide some more details re this.\n\n. . .  \nBert Vanderveen BNO\n\n"
+    },
+    {
+      "time": "20 Nov 2007 — 8:21am",
+      "content": "More info on the [Superpolator](http://web.archive.org/web/20150420150221/http:/superpolator.com/) website.\n\n"
+    },
+    {
+      "time": "20 Nov 2007 — 10:26am",
+      "content": "There have been many threads here covering the topic of which software to use for making type. My basic message throughout has been: Eliminate Illustrator from your workflow. The only reason people use it rather than the tools in FontLab or Fontographer is because they are used to Illustrator, and unfamiliar with the type program. Be clear on this; Illustrator is absolutely not better at drawing letters; nor more intuitive, nor faster. It is purely a matter of what one is used to. Believe me on this. And there is no way around the additional steps of importing outlines from Illustrator to FL or FOG. It is only when the outlines are in a type design program that you can align the letters and space them. Bite the bullet, spend one week (seriously) using only FL for digitizing, and I assure you the benefits will become clear. You will no longer prefer Illustrator for type drawing. And you will realize a time savings.\n\nThat is a separate issue from kerning efficiency. Having done type design in 4 different appplications (all on Mac platform), I can say that FL has a much improved set of kerning tools, and the drudgery of kerning that I used to dread is considerably reduced when I use the shortcut Thomas mentions: Do careful, thorough kerning on one weight, export an AFM, and then import only the kerning values from the AFM into the other weight. Run thru them in the kerning window and make adjustments with the arrow keys. Done!\n\nThis also presumes that you've done your spacing well. There are various approaches, but it is clear that the spacing of type is intrinsic to the design of the letters; the proportions, texture and color of a typeface are a function of the spacing as much as the letter shapes. So be sure that each style (or each master, if you want to save even more time) is spaced well before you start your kerning process.\n\nThis suggests yet another time savings; if you are making a range of weights, consider digitizing only extremes of weight or width (or other stylistic variable) and blending the intermediate weights. Superpolator can streamline this as well. FL has options that do in fact propagate changes throughout all masters, based on changes to one master. FL allows you to keep masters linked in an MM file. Research these options; I haven't used them much yet.\n\nBest of luck and please report back!\n\n"
+    },
+    {
+      "time": "23 Nov 2007 — 4:22pm",
+      "content": "As my thesis work involves creating a face with four weights (and a very limited character set!) I am very interested in this topic. Would it be possible to generate light, regular, semibold, and bold weights with the following process?  \n1 –&nbsp;Draw light and bold weights  \n2 – Use Fontlab’s blending tool to create a regular weight from light and bold.  \n3 – Refine the regular weight  \n4 –&nbsp;Blend the regular and bold to create the semibold\n\nIf that process is completely loopy, should I just try to pick up the basics of Multiple Master? Or would I be better to just buy Superpolator?\n\nAnd before anyone points it out, yes, I realize how stupid trying to do four weights for a school project is, and yes, I fully expect it to go horribly wrong. But if I shoot for four and only end up with two, it will still impress people.\n\n"
+    },
+    {
+      "time": "24 Nov 2007 — 1:46am",
+      "content": "\\>Once you’ve got both faces drawn, glyph by glyph, you need to apply metrics and kerning.\n\nThis is very wrong. Carl points at why. But you should not draw all your glyphs first, and space them second! Instead you should space each glyph as you draw it. As you draw say, the n, open up the metrics window in FL and type is something like nnnnnnnnn and get the spacing right. Then another letter. It doesn't have to be o, but if it was then you could check oooooooooo then ooonooo then nnnonnn then nonononono onononon or whatever! But typeface design isn't a 1-2-3 thing, i.e., drawn-space-kern. More like draw-space-print-test-print-cry-draw-print-test-look-space-draw-sleep etc.\n\nAfter you've spaced all your glyphs as best you can, then bring in kerning to solve the space problems that might still be there.\n\nAs to your other question, if you want to buy Superpolator, go ahead! In fact, I want to license it, too. But for your brief, you'd probably come along just fine with FL's MM capabilities.\n\n"
+    },
+    {
+      "time": "24 Nov 2007 — 6:12am",
+      "content": "James --\n\nThe process you describe is not unreasonable, in general. It depends, in part, upon how divergent your ideas are for the four different weights and how far apart you plan to have them. Obviously, it's perfectly feasible to create a Light and Bold that interpolate just fine for Regular (without refinement) and Semibold.\n\nAlternately, you might want to try designing the Regular and Bold as your starting points; then interpolate the Semibold; and extrapolate and refine the Light.\n\nYes, extrapolation is often less reliable than interpolation. But this way if you only end up having time for two weights, they will be the more useful ones.\n\nThe usefulness of the extrapolation will depend upon how careful you are in creating your base designs with perfectly harmonious point structures.\n\nSince I tend to think of Regular as the home base in my designs, creating a Light pole that will interpolate a Regular where I want it is too abstract for me. If I'm going to have to spend time tweaking something, I'd rather design the Regular how I want it and tweak the Light. (I'm talking about serif designs. I imagine sans serif would be a little easier to predict.)\n\n-- K.\n\n"
+    },
+    {
+      "time": "24 Nov 2007 — 9:06pm",
+      "content": "Sans have their own set of problems particularly those with low contrast. Things clog up quickly with a sans when you add weight.\n\nChrisL\n\n"
+    },
+    {
+      "time": "24 Dec 2012 — 11:07am",
+      "content": "Commenting on a 2007 thread in 2012. Merry Christmas to all.  \nI only understood/could design a multi weight font from multiple masters when Glyphs app appeared. For me it was the holy grail (more like holy sh\\*t this can be done) kind of Eureka.  \nOnce you understand and start to learn this process, it makes life as a type designer much easier :)  \nAlso I recommend leafing through [adobe's MM guide](http://web.archive.org/web/20150420150221/http:/partners.adobe.com/public/developer/en/font/5091.Design_MM_Fonts.pdf). Really important reading and good info over there.\n\n"
+    },
+    {
+      "time": "26 Dec 2012 — 10:15pm",
+      "content": "MM may save us all.\n\n"
+    }
+  ]
+}

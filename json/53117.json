@@ -1,0 +1,26 @@
+{
+  "id": "53117",
+  "title": "Multiple Master Problem,,, need help",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Hello!, i have a problem...\n\nI usually design in illustrator and import the letter forms in fontlab.  \nI have finished the bold version of a font, and started designing the light version in illustrator so as to create a multiple master between those weights. The problem is that i cannot paste or anyhow alter one of the weights in the defined multiple master inside a glyph, in fontlab, when i do... the other instance is effected and when i paste the light letterform, automatically fontlab receives it as a separate object. Is there a way to create a multiple master by merging the final light and bold fonts, or is there a way to paste the light letterform as part of the bold's multiple master..?\n\nAndreas Kalpakidis\n\n",
+  "author": "inde",
+  "time": "3 Jan 2009 — 1:55pm",
+  "uid": "19239",
+  "comments": [
+    {
+      "time": "4 Jan 2009 — 5:45pm",
+      "content": "thanks for helping out, this really gives a good image of the people in this site.\n\n"
+    },
+    {
+      "time": "4 Jan 2009 — 7:44pm",
+      "content": "With Christmas and New Years and long weekends, it can get slow around here. But to answer your question...\n\nYou can't just paste art into separate masters in a multiple master FontLab vfb file. It doesn't work that way, unfortunately.\n\nWhat you need to do is put your Illustrator art into separate FontLab vfb files, as if you were making two separate fonts. Make sure that the two fonts have exactly the same characters/glyphs present and that each glyph has exactly the same number of paths and nodes as its corresponding glyph in the other font. The corresponding paths in the two fonts should also each have the same starting nodes and path directions.\n\nImportant: Save both fonts before proceeding in case it doesn't work the way you expect. Some of these procedures don't have \"Undo\" and you may need to \"Revert to Saved\" to undo the damage.\n\nWith both fonts open in FontLab, make the lighter weight font's Font window the active window. Choose \"Tools \\> Multiple Master \\> Define New Axis...\", and choose \"Weight\" for type of axis (this is the default if it's the first axis you are defining). Then choose \"Tools \\> Multiple Master \\> Assign Master...\". In the dialog box that comes up, select Wt1 for the master and choose your bold font from the list, ignore the check boxes for now, and hit \"Okay\".\n\nIf all goes well, you will have your multiple master font with the art for your two weights set up as masters. If not, do \"Revert to Saved\" and try different options in the \"Assign Master\" dialog or check your outlines in the source fonts.\n\n(Disclaimer: This is not how I make MM fonts myself--I do all my drawing in FontLab. It should work, but if you run into problems with this method, I may not know the answers. On the other hand, there are probably others here who have worked this way and may be able to help. Assuming they are back from the holidays.)\n\n"
+    },
+    {
+      "time": "6 Jan 2009 — 1:55pm",
+      "content": "Thank you very much this cleared my options, i will probably begin again in fontlab. But it is a pity that i have the fonts caps already designed in illustrator. Thanks again for your help.\n\n"
+    }
+  ]
+}

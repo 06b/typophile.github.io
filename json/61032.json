@@ -1,0 +1,42 @@
+{
+  "id": "61032",
+  "title": "Name table ID 19 and Font Validator",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi,\n\nHas anyone succeeded in defining the fields for sample text (ID 19) in the name table and have it successfully validated by Font Validator?\n\nIt appears that when any arbitrary string is defined in the Macintosh part of that field (19 1 0 0), Font Validator will give the following error: \"E2015 The sample string contains a character that is not mapped in the font name string(1, 0, 0x0000, 19), character at index 0 is not mapped.\"\n\nLooking at this error I get the impression that Font Validator expects the sample string to be identical to the font name? But this contradicts what the name table spec at [http://www.microsoft.com/Typography/otspec/name.htm](http://web.archive.org/web/20131106070513/http:/www.microsoft.com/Typography/otspec/name.htm \"http://www.microsoft.com/Typography/otspec/name.htm\") says: \"ID 19 Sample text; This can be the font name, or any other text that the designer thinks is the best sample to display the font in.\"\n\nI checked the name table of the generated font file with spot to see if something else strange has happened during the generation of the font -- specifically the first character of that field -- but nothing...\n\nThanks in advance,\n\n-Paul van der Laan\n\n[www.type-invaders.com](http://web.archive.org/web/20131106070513/http:/www.type-invaders.com/ \"www.type-invaders.com\")\n\n",
+  "author": "pvanderlaan",
+  "time": "16 Aug 2009 — 3:28am",
+  "uid": "17208",
+  "comments": [
+    {
+      "time": "17 Aug 2009 — 5:58pm",
+      "content": "We don't normally define name ID 19 strings for any platform, but I just tried a test and was able to make a font with a Mac name ID 19 string, which successfully validated.\n\n<cite>Looking at this error I get the impression that Font Validator expects the sample string to be identical to the font name?</cite>  \nI am pretty sure that's _not_ what it means. My understanding is that FontValidator expects all of the characters in sample text string to be mapped in the 'cmap' of the font, as I think the original idea for the sample text string was to render the string using the font where said string resides.\n\n"
+    },
+    {
+      "time": "18 Aug 2009 — 1:38am",
+      "content": "Joshua: '[...] was able to make a font with a Mac name ID 19 string, which successfully validated.'\n\nMy experience is that the nameID 19 string for platformID 1 in TTF flavored OpenType fonts can be successfully validated by Font Validator, while an identical entry in CFF variants will produce an error. I have always considered this to be a bug in FV.\n\nOf course, it makes no sense to put characters in the nameID 19 string that are not mapped in the ‘cmap’, but I don't expect anyone to do this.\n\n"
+    },
+    {
+      "time": "18 Aug 2009 — 8:54am",
+      "content": "<cite>My experience is that the nameID 19 string for platformID 1 in TTF flavored OpenType fonts can be successfully validated by Font Validator, while an identical entry in CFF variants will produce an error. I have always considered this to be a bug in FV.</cite>  \nThanks for the feedback, Frank.\n\nThen perhaps it would be nice when someone from MS could acknowledge this is a bug...\n\n-Paul van der Laan  \n [www.type-invaders.com](http://web.archive.org/web/20131106070513/http:/www.type-invaders.com/ \"www.type-invaders.com\")\n\n"
+    },
+    {
+      "time": "18 Aug 2009 — 9:33am",
+      "content": "<cite>My experience is that the nameID 19 string for platformID 1 in TTF flavored OpenType fonts can be successfully validated by Font Validator, while an identical entry in CFF variants will produce an error.</cite>\n\nAhh...missed that detail (test font was TrueType).\n\n<cite>I have always considered this to be a bug in FV.</cite>\n\nI think I would concur with that if you've verified independently that all characters in the sample text string are indeed mapped in the cmap subtable corresponding to the name table entry.\n\n<cite>Then perhaps it would be nice when someone from MS could acknowledge this is a bug...</cite>\n\nProbably be nicer if a _fix_ were released :-)\n\n"
+    },
+    {
+      "time": "20 Aug 2009 — 2:41am",
+      "content": "<cite>I think I would concur with that if you’ve verified independently that all characters in the sample text string are indeed mapped in the cmap subtable corresponding to the name table entry.</cite>  \nI’ll make some extra dumps from the tables to check this. But it seems strange that this error already occurs with a sample string of “abc” in a fully functional font, right?\n\n<cite>Probably be nicer if a fix were released :-)</cite>  \nI am trying to be realistic. :)\n\n-Paul van der Laan  \n [www.type-invaders.com](http://web.archive.org/web/20131106070513/http:/www.type-invaders.com/ \"www.type-invaders.com\")\n\n"
+    },
+    {
+      "time": "20 Aug 2009 — 10:14am",
+      "content": "<cite>I’ll make some extra dumps from the tables to check this. But it seems strange that this error already occurs with a sample string of “abc” in a fully functional font, right?</cite>\n\nYes, that's what I'm getting at.\n\nBut just to be clear: the rule that Validator purports to be following is to check that the characters in that string are mapped _in the cmap subtable corresponding to the string's platformID and encodingID_. So simply having the glyphs present in the font is not enough; for a Mac (platformID 1, encodingID 0) name string, they need to be mapped in a cmap subtable with platformID 1, encodingID 0. So if such a cmap subtable were not present or did not map those glyphs with the character codes in the 'name' string, that error could occur (and **not** be considered a bug in Validator).\n\nBut assuming you do have an appropriate cmap subtable that corresponds to the 'name' entry, I suspect the nature of the Validator issue might be something like an error in converting text encodings between the name string to the cmap or something like that (e.g. assuming Unicode/UTF-16 but finding MacRoman,single-byte). That is really just a guess though. There are probably lots of ways that could get messed up :-)\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 6:37am",
+      "content": "I'm even more puzzled now. After more digging I discovered that the error only occurs when greek glyphs are included in the font... :/\n\nAnd I had a look at the cmap tables but it will take me at least a week of reading specs and disassembling fonts before I understand its structure. Not worth it.\n\n-Paul van der Laan  \n [www.type-invaders.com](http://web.archive.org/web/20131106070513/http:/www.type-invaders.com/ \"www.type-invaders.com\")\n\n"
+    }
+  ]
+}

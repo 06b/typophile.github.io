@@ -1,0 +1,90 @@
+{
+  "id": "68849",
+  "title": "CFF compression and AFDKO (?)",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I had an issue with Apple FontBook not accepting my freshly designed font.\n\nI sent it to FontLab for a checkup. Pretty soon I got a reply from them, and they could not point to individual character, but I got a replay:\"…the problem is in the CFF compression. This is a AFDKO issue I think. If you turn off the \"Use subroutines to compress outlines...\" option in FLS before you export FontBook will accept the font.\"\n\nThis was all new to me, and since I make commercial typefaces, I need to make sure they work. I got help from this forum about installing the font without FontBook, but the font; the end product, is supposed to work everywhere, so I was somewhat relieved that FontLab advise cleared the issue.\n\nBut what are these CFF compression and AFDKO? And should I know more about them?\n\n",
+  "author": "<a href=\"/web/20111219103224/http://typophile.com/user/12278\" title=\"View user profile.\">Tomi from Suomi</a>",
+  "time": "<br>",
+  "uid": "12278",
+  "comments": [
+    {
+      "time": "",
+      "content": "Fontlab's options menu: generating OpenType & True Type/OpenType PS (.otf). Make sure \"use subroutines to compress outlines in the CFF table is unchecked.\n\nUsing subroutines to compress outlines sounds pretty exciting. But, if you use it, your font won't work. Yay.\n\n[AFDKO](http://web.archive.org/web/20111219103224/http:/www.adobe.com/devnet/opentype/afdko/) is a set of tools for testing fonts. I'm more of a [MS Font Validator](http://web.archive.org/web/20111219103224/http:/www.microsoft.com/typography/FontValidator.mspx) guy, myself but it's good to have for troubleshooting troublesome font families.\n\n"
+    },
+    {
+      "time": "",
+      "content": "For what it's worth, CFF compression always works fine for me. There must have been something about the font that kept the compression routines from working correctly. I wonder if it was because the font was lacking some of the uppercase characters (as you mentioned in the other thread). Someone from Adobe might know the answer.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Really? I turned that off like. . . geez almost a decade ago because nothing I generated with CFF compression worked in Adobe apps.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Adobe Font Development Kit for OpenType. Just realized that. I downloaded the package from Adobe, but have yet not been able to go through it.\n\nAnd Ray; yes,\"using subroutines to compress outlines\" does sound pretty exciting, but I never came across that before. I should have gone through FLS manual more thoroughly. That is easy with that handy pdf.\n\nMark; when I tested the font, it had full character set, so missing glyphs were no issue. Those glyphs were missing even after I put the font in \"fonts\"-folder. InDesign could not find them.\n\nBut with that check mark crossed off, things are honky doorie again.\n\n"
+    },
+    {
+      "time": "",
+      "content": "That's why it's called CFF--Compact Font Format. And they are considerably smaller files than the same font as TTF.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Just for comparison, I generated the same font in TTF and OTF format. The font has 1057 glyphs. The TTF version uses composites, the OTF (CFF) version does not:\n\n ![](http://web.archive.org/web/20111219103224im_/http:/typophile.com/files/ttf_vs_cff_4756.png)\n\nIf I generate the TTF without composites it's even larger:\n\n ![](http://web.archive.org/web/20111219103224im_/http:/typophile.com/files/ttf_no_composites_5741.png)\n\nIf I generate the OTF (CFF) without compression:\n\n ![](http://web.archive.org/web/20111219103224im_/http:/typophile.com/files/cff_no_compression_6098.png)\n\n"
+    },
+    {
+      "time": "",
+      "content": "IIRC there are nasty problems with CFF compression causing bad fonts when the outlines are too complex; thus this is a nasty problem with distressed type.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Compressing outlines is useless. Fonts are small enough. And the hinting of a compressed font is often misinterpreted, if you open it in FontLab. In most cases it is a violation of licenses, but I for my part don’t contact foundries in cases, in which I am able to tune or correct fonts, remapping of characters for example. Well, if I can avoid it, I don’t use FontLab for those corrections, but many people use it. And there may be cases, in which you want to open your own OTF in FontLab. Except from that I think, there was a problem with the AFDKO (the autohint program), if the outlines are compressed.\n\n"
+    },
+    {
+      "time": "",
+      "content": "In the AFDKO 1.6 library that is incorporated into FontLab Studio 5, there is a bug concerning the \"depth\" of recursive subroutines, which results in very modular, repetitive typefaces to compress very well but actually invalidate the spec, so Mac OS X revokes them. The AFDKO 2.5 library that is available as a standalone product and will be incorporated into Fontographer 5 and FontLab Studio 6 no longer has this bug.\n\nAs an interim measure, I do recommend turning the CFF compression off in FontLab Studio.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> Compressing outlines is useless. Fonts are small enough.\n\nUntil you start getting into web fonts which need to get downloaded for every visitor, and whose file size directly relates to the page load time.\n\nOf course, using Gzip on the font files on the server may provide similar or sufficient compression benefits. It would be interesting to compare CFF compression rates. But not everyone has complete control over their server-side compression, so providing a more compact font is probably a Good Thing, if those fonts might be used directly as web fonts.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "@ Thomas\n\nC:\\sfnt2woff\\Compressed (by subroutines)\\20 Minion Styles otf 5.918.988 Bytes  \nC:\\sfnt2woff\\Compressed (by subroutines)\\20 Minion Styles woff 3.632.892 Bytes  \nC:\\sfnt2woff\\Compressed (by subroutines)\\20 Minion Styles gzipped otf 3.679.071 Bytes\n\nC:\\sfnt2woff\\notCompressed (by subroutines)\\20 Minion Styles otf 7.734.752 Bytes  \nC:\\sfnt2woff\\notCompressed (by subroutines)\\20 Minion Styles woff 3.692.012 Bytes  \nC:\\sfnt2woff\\notCompressed (by subroutines)\\20 Minion Styles gzipped otf 3.753.721 Bytes\n\nAs you can see there is a big difference, if you don’t convert the fonts to woff or gzip them (bigger than I thought), but almost none, if you convert or gzip them.\n\nThe only difference between the two versions is the activated subroutine compression. In other words, although the original fonts are probably compressed, I had generated them again for a fair comparison. Woff even slightly has beaten Gzip. (Gzip version 1.3, compression rate \"fast\")\n\nExcept from that the css file (fonts integrated as Base64) or the font files have to be downloaded one time only and then they are in the Browser cache, right? And normally you are not using more than five fonts, which additionally are less complex than Minion. And not to forget the increasing download speeds and storage.\n\n"
+    },
+    {
+      "time": "",
+      "content": ".\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hmm, I wonder if this is what made my system all screwy when I tried double-encoding all the letters of my unicase font. (Discussion [here](http://web.archive.org/web/20111219103224/http:/typophile.com/node/67092). I did have compression on when I tried that before and it caused trouble on my system.\n\nNow that I've unchecked the box and tried the double-encoding again, I'm not (so far) seeing the same issues.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I am not surprised that all the various compression options are at least vaguely similar in effect. However, the point remains that not everyone controls their own web server, and that \"raw\" fonts are going to be a significant proportion of web fonts being viewed for a couple of years, at least.\n\nThe web font advantages of subroutinization are certainly temporary. But as long as it works correctly, there's no reason NOT to do it, and making the native fonts smaller is good.\n\nIt's unfortunate that the current subroutinization code in FontLab has a bug, but that doesn't mean subroutinization is a bad thing.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "@ Thomas\n\nWith regard to the hinting I only saw the FontLab bug, when it decompiles fonts. More to the point, I saw a problem with hint substitution and counter hints (vstem3/hstem3) in the small letter m, as far as I remember. Formerly I first generated fonts with FontLab, then I used the autohint program, that belongs to the AFDKO and in the end I tried to correct a few things in FontLab. And FontLab did damage the hinting on opening the fonts (but not on generating them). (Meanwhile I use the AFDKO autohinting program directly in FontLab.) The hints are likewise in the cff table and the subroutine compression applies also to the hints.\n\nAnd with regard to the server I don’t understand, what you mean. Converting fonts to the woff format is a question of seconds. In the woff format even digitally signatures survive. The subroutine compression changes fonts, woff or gzip don’t. And the server does not make a difference between woff and otf. By the way, I may be wrong, but does the server really unpacks gzipped files? Or does the browser unpack them? If the server unpacks them, where is the advantage of gzipped files, except from sparing storage on the server? Well, I should google for the answer.\n\nThomas, I am burning to see Adobe’s new PS hinting tutorial. Do you know, if it is already finished?\n\n"
+    },
+    {
+      "time": "",
+      "content": "@Arno\n\nMy comments about \"not everyone controls their own server\" refers to Gzip, not WOFF. The server doesn't unpack them, but it has to know about which files are Gzipped.\n\nI wasn't in any way objecting to using WOFF, just pointing out that there is a significant chunk of web font delivery out there that is neither WOFF nor EOT, and a noticeable chunk of users can't easily use Gzipped fonts (or don't know how to change their server configuration), meaning that there is still an advantage to natively compressed fonts.\n\nBut what I'm missing the boat on is, nobody who is sane wants to serve OpenType CFF fonts as web fonts now anyway, as their rendering in Windows browsers sucks. The browsers-of-the-future that render them well will probably all have built-in WOFF support, so my point is doubtless moot.\n\nI still like smaller font files \"just in principle,\" though. :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>I still like smaller font files \"just in principle,\" though.\n\nAs do I. But on the web, it's more than principle, it's page load time. At least the \"first view\", before the font is, hopefully, cached locally.  \nPlus, I'm just an \"optimization\" nut.\n\n@arno\n\ngzipped files are decompressed at the browser level.\n\ngoogle or bing: \"steve souder gzip\" and you'll find more info than you really want to know.\n\nrich\n\n"
+    },
+    {
+      "time": "",
+      "content": "@ Richard\n\nI just found this information: “Every day, more than 99 human years are wasted because of uncompressed content.”\n\nObviously they never have heard about Zen. Be instead of waiting for the content! Funny, especially if you know, that every second the human population grows by 150 pollution units. On the other side, compressed files may spare energy. Mother Earth (and the leopards. Edit: Hunting leopoards) will be grateful for every uncompressed or compressed file.\n\nOh, I just see, that in English a chetah is a hunting leopard. Now I wonder, whether the other leopards release energy with the help of cold fusion.\n\n"
+    },
+    {
+      "time": "",
+      "content": "@Richard\n\nYes, page load time is a big deal. But the subroutinization thing only works for OpenType CFF (not TrueType), and nobody who knows what they're doing is going to use OpenType CFF at all today, because of the rendering issues in current Windows browsers.\n\nNow, that being said, there is also a less-general TrueType concept, the composite glyph, which uses other things as components. Not as strong a general function, but it is handy for accented characters, and makes uncompressed TTFs noticeably smaller than they might otherwise be.\n\nCheers,\n\nT\n\n"
+    }
+  ]
+}

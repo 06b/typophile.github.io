@@ -1,0 +1,30 @@
+{
+  "id": "16513",
+  "title": "Bizarre Fontlab Open Type Bug",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Fontlab is doing odd things when I compile my open type feature ( calt ).\n\n1. While in unicode mode ( Unicode on the left & Latin A on the right, I was adding Latin A characters ) it removed the outlines form hbar glyph when I re-compiled my now altered calt feature. The odd thing was that I had no reference to 'hbar' in the code!\n\nShould I start a new font & paste my content into it? I have heard some folks on Typophile talk about a source file going bad & needing to do this.\n\nNow that I am in Names & Mac Roman mode again compiling my calt feature didn't wipe out the hbar outlines. It did find a missing Quotesingle glyph. Could that have been wiped out when I went into Unicode mode to add the latin A?\n\nAre there safer & less safe modes to compile features in Fontlab?\n\nAnd actually, what is the recommended roundtrip process ( with emphasis on mode changes ) for adding unicode glyphs & then testing them?\n\n",
+  "author": "ebensorkin",
+  "time": "29 Nov 2005 — 9:14am",
+  "uid": "2942",
+  "comments": [
+    {
+      "time": "29 Nov 2005 — 9:31am",
+      "content": "Eben, it could be that there are some Unicode indices assigned to your alternates which actually map to real glyphs. You need for any alternate glyphs to be Unicode indexed to Private Use Area numbers, or to have no indexing at all. (If you only want the glyphs to switch out under calt conditions, you need no indices, but if you want to be able to select them from Glyph palettes, they need to have indices.)\n\nI have noticed that sometimes when I cut and paste glyphs, some of the cut information makes it into the new location. Look out for any glyphs whose Unicode is out of order, then check the name and index, and if need be, regenerate the name and/or Unicdoe using the Glyph Properties panel.\n\n"
+    },
+    {
+      "time": "29 Nov 2005 — 9:31am",
+      "content": "This seems to be a typical problem that you would be best to report to Fontlab Ltd. ( [http://www.fontlab.com/problem/](http://web.archive.org/web/20131108014106/http:/www.fontlab.com/problem/ \"http://www.fontlab.com/problem/\") ), accompanying the submission with files (.vfb, .otf, screenshots before-after) and a detailed step-by-step description (what you click, what should happen, what happens).\n\nAlso, as usual: please tell use about your configuration (system, applications used etc.)\n\nRegards,  \nAdam Twardoch  \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": "29 Nov 2005 — 9:32am",
+      "content": "PS; Adding Unicode PUA indexing can be done using the Glyph / Glyph Names / Generate Unicode... menu item.\n\n"
+    },
+    {
+      "time": "29 Nov 2005 — 9:34am",
+      "content": "Adam, I have had problems like what Eben notes, but have been able to fix them by manually changing the name, and making sure that \"Replace exising\" [sic] is selected.\n\n"
+    }
+  ]
+}

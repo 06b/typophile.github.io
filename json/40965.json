@@ -1,0 +1,30 @@
+{
+  "id": "40965",
+  "title": "OT Alternative Characters",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Having a bit of trouble with alt characters…&nbsp;everything works fine in the Fontlab OpenType features window using\n\nfeature aalt {  \n sub O by Oalt;  \n sub Oacute by Oacutealt;  \n sub Ograve by Ogravealt;  \n sub Ocircumflex by Ocircumflexalt;  \n sub Odieresis by Odieresisalt;  \n sub Otilde by Otildealt;  \n sub Oslash by Oslashalt;  \n sub o by oalt;  \n sub oacute by oacutealt;  \n sub ograve by ogravealt;  \n sub ocircumflex by ocircumflexalt;  \n sub odieresis by odieresisalt;  \n sub otilde by otildealt;  \n sub oslash by oslashalt;  \n} aalt;\n\nBut I noticed there’s no way to access ’aalt’ in Illustrator CS3… so I wanted to add salt, ss01 and maybe titl as well in the OT features for multi-application access.\n\nI found this thread containing a suggestion:\n\nWhenever you define any features in your font that produce 1:1 substitutions by some alternates (salt, ss01-ss20, swsh, hist, smcp, c2sc etc.), you should link these features to aalt in the following way:\n\nfeature aalt {   \nfeature salt;   \nfeature ss01;   \nfeature ss02;   \nfeature hist;  \n feature smcp;   \nfeature c2sc;  \n } aalt;\n\nBut not sure how to implement and ’link’ these…&nbsp;does it go above or below the ’aalt’ feature code?\n\nAnd does aalt on it’s own just not show up in some applications such as Illustrator?\n\nThanks\n\n [‹ FontLab: Closing contour problem + Auto merging shapes](http://web.archive.org/web/20081012181902/http:/www.typophile.com/node/41037 \"Go to previous forum topic\") [Start letters before caps ›](http://web.archive.org/web/20081012181902/http:/www.typophile.com/node/40851 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081012181902/http://www.typophile.com/user/17099\" title=\"View user profile.\">Mike Jarboe</a>",
+  "time": "<br>",
+  "uid": "17099",
+  "comments": [
+    {
+      "time": " 16.Jan.2008 2.42am",
+      "content": "Mike, ’aalt’ is (indirectly) accessed via the Glyph Palette.  \nBut anyway, I think this is what you want:  \n`\nfeature aalt {\nfeature salt;\nfeature ss01;\nfeature titl;\n} aalt;`\n\nfeature salt {  \nlookup OALT {  \nsub O by Oalt;  \nsub Oacute by Oacutealt;  \nsub Ograve by Ogravealt;  \nsub Ocircumflex by Ocircumflexalt;  \nsub Odieresis by Odieresisalt;  \nsub Otilde by Otildealt;  \nsub Oslash by Oslashalt;  \nsub o by oalt;  \nsub oacute by oacutealt;  \nsub ograve by ogravealt;  \nsub ocircumflex by ocircumflexalt;  \nsub odieresis by odieresisalt;  \nsub otilde by otildealt;  \nsub oslash by oslashalt;  \n}OALT;  \n} salt;\n\nfeature ss01 {  \nlookup OALT;  \n} ss01;\n\nfeature titl {  \nlookup OALT;  \n} titl;\n\nAnd while you’re at it, the correct glyph names for your alternates is O.alt , Oacute.alt , etc. (notice the dot before ’alt’)\n\n"
+    },
+    {
+      "time": " 16.Jan.2008 8.31pm",
+      "content": "Okay cool thats working now I thought my output error had to do with the above lookup code but it was within a font that I had removed all of the kerning data but left the kern feature in… as soon as I deleted the kern feature and compiled all was fine… happens to be a font that i’m redoing the kerning on…\n\n"
+    },
+    {
+      "time": " 16.Jan.2008 8.34pm",
+      "content": "Miguel, thanks I’ll try that and correct the alt adding the dot before.\n\nOut of curiosity does not having the dot before alt compromise anything?\n\nAppreciate your response!\n\nMike\n\n"
+    },
+    {
+      "time": " 17.Jan.2008 11.04am",
+      "content": "\\> _Out of curiosity does not having the dot before alt compromise anything?_\n\n[Where and why glyph names are used](http://web.archive.org/web/20081012181902/http:/www.adobe.com/devnet/opentype/archives/glyphnamelimits.html#2)\n\n"
+    }
+  ]
+}

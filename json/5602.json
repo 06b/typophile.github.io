@@ -1,0 +1,74 @@
+{
+  "id": "5602",
+  "title": "Another Windows PostScript font issue - Help!",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm having an issue with a family of windows postscript fonts that I've generated from Fontographer on the PC. When you go into ATM, only the regular and bold weights show up in the window.   \n   \nWhen dragging and dropping the files onto the fonts folder, it says the .PFB is invalid or damaged for each font, but it still installs and I can use the fonts in any application.   \n   \nQuestion: What encoding option should I be choosing when I generate the fonts (Windows 95, Windows 3.1, Adobe Standard?). Would that make a difference?   \n   \nThe fonts are named normally like Bold, BoldItalic, Black, BlackItalic etc. So I don't think it's a naming issue.   \n   \nAny help is appreciated.\n\n",
+  "author": "matt_desmond",
+  "time": "13 Jul 2004 — 10:30am",
+  "uid": "2919",
+  "comments": [
+    {
+      "time": "13 Jul 2004 — 10:46am",
+      "content": "Something similar happened to me.   \nI got the job to develope three fonts a studio   \nwants to sell its client after the logo they designed.   \nI used the \\_ underscore in the font name,   \nI changed and it worked.   \nBest,   \nAS\n\n"
+    },
+    {
+      "time": "13 Jul 2004 — 11:02am",
+      "content": "Here is a screenshot of the font preview window. The postscript name is correct, but the name is showing up wrong. Weird. Alessandro, I'll try to rename them...   \n   \n ![{/image](http://web.archive.org/web/20131022021934im_/http:/www.typophile.com/forums/messages/4101/40555.gif)\n\n"
+    },
+    {
+      "time": "13 Jul 2004 — 11:24am",
+      "content": "It seems like you've built the black weight as a style-linked bold to the regular. Windows can only have four-member font families, with only two weights plus italics in a single family. So for example, you might have the following Windows Family, Style (PostScript FontName) combos:   \n   \nVariable Light, Regular (Variable-Light)   \nVariable, Regular (Variable-Regular)   \nVariable Light, Bold (Variable-Semibold)   \nVariable, Bold (Variable-Bold)   \nVariable Black, Regular (Variable-Black)   \n   \nAlso, although this couldn't cause the problem at hand, you ought to have a hyphen between the family name and the style in the PostScript FontName.   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "13 Jul 2004 — 11:24am",
+      "content": "Regarding the encoding issue: IIRC, PS T1 fonts are supposed to be generated with the Adobe Standard Encoding in Fontographer.\n\n"
+    },
+    {
+      "time": "13 Jul 2004 — 12:14pm",
+      "content": "Thanks for the insight Thomas.   \n   \nI ended up having to rename the fonts. For some reason, though I had to name the Obliques \"Italic\" instead or they wouldn't show up. So here's how I ended up naming them:   \n   \nVariable-Black -Regular   \nVariable-Black -Italic   \nVariable-Bold -Regular   \nVariable-Bold -Italic   \nEtc...\n\n"
+    },
+    {
+      "time": "13 Jul 2004 — 12:17pm",
+      "content": "Matthew,   \n   \nhaving two dashes in a PostScript font name is a very bad idea. Please refer to [http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mview=0&ID\\_Message=2843](http://web.archive.org/web/20131022021934/http:/groups.msn.com/fontlab/tipsandtricks.msnw?action=get_message&mview=0&ID_Message=2843) for font family naming tips.   \n   \nAdam\n\n"
+    },
+    {
+      "time": "13 Jul 2004 — 12:29pm",
+      "content": "Argh, what a pain this is.   \n   \nSo I'm renaming them as follows:   \n   \nVariableBlack -Regular   \nVariableBlack -Italic   \n   \nDoes that look solid?\n\n"
+    },
+    {
+      "time": "13 Jul 2004 — 12:38pm",
+      "content": "No, the family name should precede the dash.   \n   \nRemember, the PostScript FontName is a completely separate issue from the Windows family name stuff.   \n   \nFamily Name, Style (PostScript FontName)   \n   \nVariable Black, Regular (Variable-Black)   \nVariable Black, Italic (Variable-BlackOblique)   \n   \nI should have pointed you at Adam's font naming thingie. It distills most everything he and I know about this stuff.   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "13 Jul 2004 — 1:24pm",
+      "content": "Adam's page is great, but it applies to FontLab and not FOG. There's no place to put the FOND name anywhere that I can see. I don't seem to have any control over the PostScript name. This is what I have in my font info dialog box:   \n   \n ![/image](http://web.archive.org/web/20131022021934im_/http:/www.typophile.com/forums/messages/4101/40586.gif)   \n   \nMaybe I'm just an idiot, but that setting makes the PostScript name end up as VariableBlack-Regular.\n\n"
+    },
+    {
+      "time": "13 Jul 2004 — 1:47pm",
+      "content": "The FOND name is a Mac-specific thing, so don't worry about that.   \n   \nAs for the PostScript name, oh well. I suspect that it's Fontographer and not you. I guess there's nothing to be done about that part, then. It's not critical.   \n   \nAssuming for a moment that there isn't some hidden option, I'll go on to say that Fontographer never did make very good fonts. When you can afford it, you should move to a current-era font editor. FontLab, DTL FontMaster, maybe even TypeTool.   \n   \nT\n\n"
+    },
+    {
+      "time": "13 Jul 2004 — 1:51pm",
+      "content": "I know, I'm saving up for FontLab. For now, this seems to work, so I'm going to call it a day.\n\n"
+    },
+    {
+      "time": "13 Jul 2004 — 3:36pm",
+      "content": "My two cents: I'm using FL4.6 to generate several language versions of a typeface. The base names (AfishaGrotesk) are the same, then I put the language ID, say \"C\" for Cyrillic or \"E\" for CE. If I separate such suffix with a space (AfishaGrotesk C), a weird error occurs: under MacOS X, Fontbook shows font sample with rearranged alphabet. If I eliminate the space in the name, everything is fine: the sample shows alphabet in the correct order. Seems like a definite bug either in FL, or in MacOS 10.3.4/Fontbook\n\n"
+    },
+    {
+      "time": "13 Jul 2004 — 4:35pm",
+      "content": "Oleg,   \n   \ncan you please submit a problem report on [http://www.fontlab.com/html/support.html?](http://web.archive.org/web/20131022021934/http:/www.fontlab.com/html/support.html) Please include some screenshots showing what you mean by \"rearranged alphabet\" and \"correct order\". If possible, please also include the VFB files and the generated fonts for both the incorrect and the correct cases. Please put everything into one ZIP file and attach when submitting the problem. Thank you,   \nAdam Twardoch   \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": "14 Jul 2004 — 11:58am",
+      "content": "_I'm saving up for FontLab_   \n   \ndidja know that if you have a registered copy of Fontographer you can save quite a bit on FontLab? I think it's something to the tune of $150! Very nice of those guys at FL, I'll say.\n\n"
+    },
+    {
+      "time": "14 Jul 2004 — 10:12pm",
+      "content": "Matt, if the upgrade path doesn't work out get in touch with Yuri at FontLab anyhow. I'm sure he'd be willing to provide some other options to help make your move over to FontLab sooner rather than later.   \n   \nSi\n\n"
+    }
+  ]
+}

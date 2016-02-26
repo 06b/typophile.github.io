@@ -1,0 +1,38 @@
+{
+  "id": "64938",
+  "title": "Interface typeface for small sizes: TT or PS hinting?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m working on a typeface that will be used to display pretty small sizes, 8-12 pt mostly, and I’m trying to get the hinting right.  \nAs it stands, the face looks very readable and nice in one of the sizes, in the others the x-height fluctuates, creating a very irregular horizontal texture.\n\nI’ve been trying to figure out Type 1 hinting, allthough as of yet the results have been disappointing. Before I plunge myself deeper down that rabbit hole, I thought I might ask you guys if I should switch to the (seemingly more complex) True type hinting, or if you think i should be able to get proper results with T1?\n\nRegards,  \nS.\n\n",
+  "author": "<a href=\"/web/20100103115303/http://typophile.com/user/1092\" title=\"View user profile.\">svenni</a>",
+  "time": "<br>",
+  "uid": "1092",
+  "comments": [
+    {
+      "time": " 2.Dec.2009 9.57am",
+      "content": "To use T1 or TT Hinting depends on the platform where you use the font. For Windows you probably need to go for TT hinting, MacOSX is happy with T1.\n\nFor the x-height fluctuation, you need to get the alignments zones right and add some ghost hints.\n\nGeorg\n\n"
+    },
+    {
+      "time": " 4.Dec.2009 5.07am",
+      "content": "The font will be rendered with the freetype engine, on all platforms.\n\nThanks for the height fluctuation tip Georg :)\n\n"
+    },
+    {
+      "time": " 4.Dec.2009 8.35am",
+      "content": "I think you need to find out if the implementation includes all font formats and that the implementation does or does not use hints/instructions, ideally before you hint anything.\n\nCheers!\n\n"
+    },
+    {
+      "time": " 7.Dec.2009 3.52am",
+      "content": "Does Freetype include TrueType hinting routines or are these still being suppressed due to Apple’s licensing restrictions?\n\n"
+    },
+    {
+      "time": " 7.Dec.2009 4.44am",
+      "content": "Yes (and no).  \nThe default build setting is to use its own auto-hinting. For those inclined to take a liberal view to copyright issues, you can rebuild the library _with_ that version of TT hinting. See [Freetype and Patents](http://web.archive.org/web/20100103115303/http:/www.freetype.org/patents.html).\n\nAn overview of hinting technologies can be found one the same site: [The FreeType Auto-Hinting pages](http://web.archive.org/web/20100103115303/http:/www.freetype.org/autohinting/data.html).\n\n"
+    },
+    {
+      "time": " 7.Dec.2009 5.50am",
+      "content": "\\>... Apple’s licensing restrictions?\n\nA legal myth with great legs.\n\nCheers!\n\n"
+    }
+  ]
+}

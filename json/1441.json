@@ -1,0 +1,46 @@
+{
+  "id": "1441",
+  "title": "Unique font IDs in Fontographer",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm digitizing a client's hand-lettering. Is there any sure-fire way of giving the font a unique font ID number? Fontographer assigned it the same font ID as Futura Light Italic (I was generating font files using the \"Easy\" mode). When I took the font to another computer and double-clicked the screen font icons inside the font's suitcase, the previews showed up as Futura Light Italic!   \n   \nI know this is a very minor thing, but when I give my client the font files, I would like him to see his own hand-lettering in the preview window... BTW, this is to be a proprietary font, not a commercially released font (the FOG manual recommends getting a unique font ID number from Adobe for the latter).   \n   \nAny help on this would be appreciated.\n\n",
+  "author": "ric",
+  "time": "27 Sep 2003 — 1:25pm",
+  "uid": "2022",
+  "comments": [
+    {
+      "time": "28 Sep 2003 — 6:41am",
+      "content": "Any number you pick will conflict with some existing font somewhere. According to a technote on Apple's developer site:   \n   \n\"As of late 1990, all free font family IDs had been registered, so any new font families created after that time must share their ID with a registered family; Developer Technical Support no longer registers family IDs.\"   \n   \nFor the whole document, which should answer all your questions, see [http://developer.apple.com/technotes/te/te\\_02.html](http://web.archive.org/web/20131011072748/http:/developer.apple.com/technotes/te/te_02.html)\n\n"
+    },
+    {
+      "time": "28 Sep 2003 — 10:15am",
+      "content": "Thanks, Mark.   \n   \nSo it's a case of too many fonts and too few numbers, then. :-(\n\n"
+    },
+    {
+      "time": "28 Sep 2003 — 11:26am",
+      "content": "Well, as it says on that page, applications shouldn't be using font IDs anyway. They should be using font names. Font IDs are only supposed to be used by the system for keeping track of fonts internally. The system is supposed to assign an unused ID when there is a conflict.   \n   \nNevertheless, I have seen conflicts such as you describe occassionally. I think it depends on how the fonts are installed and there may be some ambiguous situations, such as when you preview an uninstalled font in a font managment utility (Font Reserve, Suitcase).   \n   \nMy suggestion would be to choose a different number. Higher numbers, I think, would be less likely to conflict with an installed font, but you will have to experiment to be sure.   \n   \n(Whatever you do, don't use a font ID higher than 16382 for latin fonts. The font may be interpreted as non-roman (Chinese, Arabic, etc.) and will not display correctly.)\n\n"
+    },
+    {
+      "time": "1 Oct 2003 — 6:25pm",
+      "content": "Wow. Thanks for all the info, Mark. The client has a test version of the font now, but I'll be sure to change the ID number if he wants any other changes made to the font.   \n   \nThanks again!\n\n"
+    },
+    {
+      "time": "5 Oct 2003 — 5:48pm",
+      "content": "There are two different numbers that may be in play: Apple's suitcase FOND IDs, and Adobe's Type 1 UniqueIDs.   \n   \nAdobe does not believe UniqueIDs are still important in this day and age; you can leave them out.   \n   \nFOND IDs are required for suitcase-based formats, and the range the number falls into determines what the OS thinks the script of the font is (e.g. MacRoman, Cyrillic, etc.). However, the OS automatically resolves conflicts so the specific number is no longer important.   \n   \nRegards,   \n   \nT\n\n"
+    },
+    {
+      "time": "11 Oct 2003 — 2:22pm",
+      "content": "Thanks, Thomas.   \n   \nRicardo\n\n"
+    },
+    {
+      "time": "13 Oct 2003 — 7:51pm",
+      "content": "Hallelujah. I lost track of my allocation years ago. Now I can re-spin my negligence as foresight!\n\n"
+    },
+    {
+      "time": "14 Oct 2003 — 9:42am",
+      "content": "This is great information. I've had the same understanding as some of you and have stressed about releasing fonts for fear of conflicts, but now I see I've stressed unnecessarily. This resolves a question I've had for some time- thanks Thomas and Mark!   \n   \njared\n\n"
+    }
+  ]
+}

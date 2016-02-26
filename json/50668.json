@@ -1,0 +1,30 @@
+{
+  "id": "50668",
+  "title": "OT 'ignore' lookup",
+  "forum": "Arabic Typography & Type Design",
+  "tags": [
+    "Arabic Typography & Type Design"
+  ],
+  "content": "Hi,  \nLet's say I want a substitution except after a space or at the beginning of the line.  \nI write something like this:\n\nlookupflag IgnoreMarks, RightToLeft;  \n ignore sub space A';  \n sub A' B by C;\n\nHow do I include the beginning of the line in the 'ignores'?\n\n",
+  "author": "behnam",
+  "time": "19 Oct 2008 — 12:34pm",
+  "uid": "5890",
+  "comments": [
+    {
+      "time": "19 Oct 2008 — 3:08pm",
+      "content": "Create 2 classes for your lookups. One could be called @All and include all letters including the space. The other can be called @Letters and include all letters, but no space.\n\nSample:\n\nlookup calte\\_start1 {  \nignore sub @All e';  \nsub e' @Letter by e.start;  \n} calte\\_start1;\n\nStephen\n\n"
+    },
+    {
+      "time": "19 Oct 2008 — 5:21pm",
+      "content": "Thanks Stephen.  \nIsn't it a bit heavy for CPU? I want to apply it to a font with over 900 glyphs.  \n-B\n\n"
+    },
+    {
+      "time": "19 Oct 2008 — 6:06pm",
+      "content": "I used it for fonts with well over 600 glyphs. Shouldn't be a real problem. Look at some of the feature code for Bickham. Its like an encyclopedia. Most people using OT fonts with graphic applications like InDesign are gonna have pretty fast computers.\n\n"
+    },
+    {
+      "time": "20 Oct 2008 — 3:10pm",
+      "content": "Oh the font is big but it's not professional. Actually it is intended mostly for the web. It already gives a heavy workout to the CPU just by being Arabic! I try to trim down everywhere I can.  \nIn my specific case, I think I'll use your solution but backward. I skip the 'ignore' thing and for my substitution, I create a class after which it will be applied. The list of glyphs in that class will be much much shorter than 'everything else' class.  \nBut it's odd that OT doesn't have a specific solution for the beginning and the end of the line.  \n-B\n\n"
+    }
+  ]
+}

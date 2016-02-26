@@ -1,0 +1,90 @@
+{
+  "id": "16461",
+  "title": "ZWJ and ZWNJ signs",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi,  \nSome glyphs such as Unicode points 200C 200D 200E 200F 202C 202D 202E have some signs that shouldn't be visible in the text.  \nHow can I make them invisible in font making?\n\n",
+  "author": "behnam",
+  "time": "26 Nov 2005 — 5:45pm",
+  "uid": "5890",
+  "comments": [
+    {
+      "time": "27 Nov 2005 — 12:10am",
+      "content": "Make them zero width and don't put any outline in the glyph.\n\nThat's assuming you need them at all. Some Unicode codepoints are really only needed by the application for its processing, and there's no real reason to put them in a font.\n\nT\n\n"
+    },
+    {
+      "time": "27 Nov 2005 — 5:05am",
+      "content": "Thanks Thomas,  \nActually I do need at least a couple of them inside the font 200C and 200D. They are placed on the keyboards of many languages of Arabic script and up to now, my solution was to remove the outlines in the glyphs.  \nBut recently I noticed that SIL International has produced a couple of wide range Arabic fonts with those outlines intact. But they don't show inside the text.  \nI was wondering how they do that.\n\n"
+    },
+    {
+      "time": "27 Nov 2005 — 9:52am",
+      "content": "Benham,\n\nit's very simple: properly written Unicode applications don't just go ahead and blindly send all Unicode codepoints of the text into the font renderer. They know that certain Unicode codepoints have a special meaning and they don't request their rendering except in special contexts (when the user requests to visualize control characters).\n\nSo the font maps the Unicode codepoints to glyphs but the application normally does not request those Unicode codepoints (and therefore the glyphs) to be displayed. In some applications the user may turn on the display of control characters (e.g. by clicking on the paragraph symbol icon in Word). Then, the application should request for renderings of those glyphs.\n\nThe Unicode Standard defines which Unicode codepoints are normally non-printing. Unicode applications that are based on Microsoft Uniscribe obey that. The support for proper display of non-printing Unicode characters differs in other Unicode environments (Adobe CS2, Apple Cocoa/ATSUI, ICU/FreeType etc.)\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "27 Nov 2005 — 12:32pm",
+      "content": "Further to what Adam has written.\n\nWell designed applications for complex script text processing will give users the option to display control characters. This can be very important for document editing, and saves the user from having to guess what kind of invisible control characters might be embedded and where. So I disagree with Tom's advice to make the glyphs for control characters blank. If you do this, applications such as the MS Office suite will be unable to display control characters for users who have selected this option. So you should use conventional symbols, on zero-widths of course, to indicate the control characters. There are two sets of conventions: the best established involves thin vertical lines indicating the position of the control character, topped by a mark that identifies the kind of control character. I use a slightly different and visually tidier convention of marks above the text string. I will try to find some references for these conventions or provide some illustrations.\n\nGlyph processing may involve control characters (Microsoft's OT font specs actually require this for some Indic scripts). So a layout engine should make the glyphs available during GSUB processing, and then remove them from the glyph string during final display, unless, of course, the user has elected to display control characters. This is what Microsoft's Uniscribe does.\n\nThere is some disagreement between Microsoft and Adobe about whether control character glyphs should be used in glyph processing. Eric Muller at Adobe makes convincing arguments for why it should never be necessary. Microsoft have just gone ahead and done it. My money is on Microsoft winning this debate, which is why I recommend that makers of layout engines follow the Uniscribe approach.\n\n"
+    },
+    {
+      "time": "27 Nov 2005 — 5:33pm",
+      "content": "Thanks for infomative feedback.  \nYou may remember that I am the one who is making Arabic script cross-platform fonts and I reported a while back a bug in Tiger which was desengaging AAT portion of my AAT/OT fonts. Now with OS 10.4.3 this bug is fixed, thanks mainly to you.  \nFrom what I understand, this is essentially a text engine problem and nothing can be done at font level, particularly for a font dealing with different platforms and different text engines.  \nAlthough your reasonning for keeping those outlines is very valid, but I think I'll go with Tom suggestion, at least for ZWJ and ZWNJ.  \nThese codepoints are extensively used in some Arabic script languages and unlike codes like paragraph sign, they are not intended for any page layout processing. One may argue that the wrong codes are being used for this purpose but the fact is that they are on the keyboards of some languages and in some languages like Kurdish, it is the most used code amongst all. I can not afford to face a visible vertical line once or twice in each and every word!  \nI have no control over the design of applications on different platforms but I do have control over the outlines of my glyphs!  \nI think I'll remove them for ZWJ and ZWNJ but I'll keep them on other 'directioality' codes. As you mentioned they are required by some applications such as Microsoft but they are not on the keyboards.\n\nBut out of curosity,  \nI opened an identical text with those codes both with my font and with SIL fonts on the same application (TextEdit for AAT and Mellel for OT on Mac), with both fonts having those outlines intact. SIL font didn't show them and mine did. There has to be some communication at font level that SIL font provides and mine doesn't.\n\n"
+    },
+    {
+      "time": "27 Nov 2005 — 6:19pm",
+      "content": "If I recall correctly, Mellel does not correctly handle display of control characters according to the Unicode properties, and paints these glyphs. So in this application Persian text and other languages that make frequent use of ZWJ or ZWNJ would indeed be a problem if the glyphs have a visible component. As I suggested earlier, I see this as an application bug, and I don't like trying to second guess such things when making fonts: I would rather follow a spec and established practice by the major technology supporter (in this case Microsoft), rather than trying to fix application and engine problems within the font.\n\nWhich SIL font were you testing?\n\n"
+    },
+    {
+      "time": "27 Nov 2005 — 7:15pm",
+      "content": "You are right. Mellel had this problem for a longtime. But with version 2.0 which was released a week or so ago, ZWJ and ZWNJ don't show anymore.  \nMy main problem is with Apple and its engine. In TextEdit or in Safari, it does show those lines. But AAT version of SIL fonts (they are not cross-platform) don't show them in TextEdit. I had no way of testing it in Safari.  \nIf Apple fixes this bug as well, I don't see any reason to remove the outlines. Unfortunately things move very slowly in rtl and particularly Arabic side and users (and myself) loose patience easily.\n\nThe fonts I was testing are two outstanding fonts released by SIL in mid-Summer. Each in two version of OT and AAT: Lateef and Shahrzad. They are free download and you can get them here:  \n [http://scripts.sil.org/cms/scripts/page.php?site\\_id=nrsi&item\\_id=ArabicF...](http://web.archive.org/web/20130823171333/http:/scripts.sil.org/cms/scripts/page.php?site_id=nrsi&item_id=ArabicFonts \"http://scripts.sil.org/cms/scripts/page.php?site\\_id=nrsi&item\\_id=ArabicFonts\")\n\n"
+    },
+    {
+      "time": "27 Nov 2005 — 7:58pm",
+      "content": "My guess, based on your description, is that SIL have put some lookups in the AAT table to remove the ZWJ and ZWNJ glyph during display, presumably because they observed the same problem you have with the Apple layout engine. Apple continue to amaze me: they have been involved with Unicode since the very earliest years, and much earlier than Microsoft, and yet they lag so far behind in actual support.\n\nI'm glad to hear that Mellel has solved this problem in the new release. I'm very impressed with Mellel, and have been happy to recommend it to my Hebrew and Arabic users on the Mac.\n\n"
+    },
+    {
+      "time": "27 Nov 2005 — 11:27pm",
+      "content": "\\> My guess, based on your description, is that SIL  \n\\> have put some lookups in the AAT table to remove  \n\\> the ZWJ and ZWNJ glyph during display\n\nYou're right, John. ScheherazadeAAT includes lookups in the morx table that replace uni200C (ZERO WIDTH NON-JOINER) and uni200D (ZERO WIDTH JOINER) by uni200B (ZERO WIDTH SPACE).\n\nAdam\n\n"
+    },
+    {
+      "time": "28 Nov 2005 — 2:48pm",
+      "content": "I guess I can do that. It's somewhat more elegant than removing the outlines.\n\nPersian and Kurdish (and other) keyboards should have had 200B instead of ZWNJ to begin with... or 202F which is even better because it doesn't break. I bet this was MS idea to use ZWNJ!\n\nZWJ is different. It plays a very important role in producing a joining presentation form of an Arabic letter without (visually) being joint to anything. This has an important demonstrative role and also for creating acronyms. This is not as easily replaceable as ZWNJ which is essentially used as a special 'spacing' element.\n\nOn the other hand, I'm somewhat uncomfortable with this practice of adaptation to Apple's shortcomings. Apple amazes me too. On one hand, they are more advanced in supporting Unicode than anybody else because they seem to supporting it at the core of their OS. Windows seems to have Unicode support as a layer on top of its OS.  \nIn Mac you can name a file or folder in Arabic or Persian or chinese or whatever. Try to do that in Windows! Never mind Windows, try to open one of Apple Japanese fonts with FontLab. It won't open. You have to change its Japanese name to a token English name to be able to open it.\n\nOn the other hand, they still didn't fix their problem with ZWJ and likes. OS X system font for Arabic script is Geeza Pro. It doesn't have any of these glyphs. Geeza's back-up for these codes is system's Helvetica. You open Helvetica and you see all those outlines are removed!  \nSo it's not like they don't know about it. It's not their priority.\n\n"
+    },
+    {
+      "time": "25 May 2012 — 11:11am",
+      "content": "Resurrecting another ancient thread...\n\nI'm putting the 200B (zero width space) 200C (zero width joiner) and 200D (zero width non joiner) into my typeface to support Brahmi-based scripts, but I've also found that FL wants to assign glyph name 'zerowidthjoiner' to codepoint u+FEFF, not 200C. Should I simply duplicate the glyph under two codepoints?\n\nAlso what is uni2060, 'wordjoiner'?\n\n"
+    },
+    {
+      "time": "25 May 2012 — 11:19am",
+      "content": "The U+FEFF mapping for 'zerowidthjoiner' is a mistake. You should edit the FontLab standard naming file to remove this entry. U+FEFF is a byte order mark, and does not require any glyph in a font.\n\nU+2060 is a non-spacing word joiner, which is supposed to have the effect of preventing a line break from occurring at that point. I've never had a call to include this in any fonts, and I believe it should work as an undisplayed control character.\n\n"
+    },
+    {
+      "time": "25 May 2012 — 12:26pm",
+      "content": "BTW is there no longer a problem with zero-width glyphs? Or are they set to one unit?\n\nhhp\n\n"
+    },
+    {
+      "time": "25 May 2012 — 12:47pm",
+      "content": "What sort of problem? Zero-width glyphs should be zero-width; indeed, if a glyph is classed as a mark in the GDEF table, Uniscribe is going to enforce a zero-width.\n\n"
+    },
+    {
+      "time": "25 May 2012 — 1:01pm",
+      "content": "I remember clearly that in the past it was bad news (which was relevant to me because of Armenian's floating punctuation marks) but I'm assuming today's more advanced rendering engines are required to access the marks you're talking about in the first place = legacy systems confused by zero width would never have an opportunity to choke on those characters anyway.\n\nhhp\n\n"
+    },
+    {
+      "time": "25 May 2012 — 1:51pm",
+      "content": "Thank you, John. Are there any other 'control' marks I should be aware of for Thai and Burmese?\n\n"
+    },
+    {
+      "time": "25 May 2012 — 3:48pm",
+      "content": "For the Paduma Burmese font, Microsoft spec'd\n\nU+200C ; zero-width non-joiner  \nU+200D ; zero-width joiner  \nU+034F ; combining grapheme joiner (zero-width, no visible glyph)  \nU+2060 ; word joiner (so ignore my comment above about not being asked to include it in any fonts; I'd forgotten including it in Paduma)\n\nThat should cover Thai too.\n\nDon't forget that any font with combining mark support should contain the U+25CC dotted circle, which is used as a generic mark base (and hence should have GPOS mark-to-base positioning defined).\n\n"
+    },
+    {
+      "time": "25 May 2012 — 3:48pm",
+      "content": "Hrant, I think that was a Type 1 issue if memory serves.\n\n"
+    },
+    {
+      "time": "25 May 2012 — 7:31pm",
+      "content": "From _The Unicode Standard_, Section 16.2 on Layout Controls:\n\n> In addition to its primary meaning of _byte order mark_ (…), the code point U+FEFF possesses the semantics of ZERO WIDTH NO-BREAK SPACE, which matches that of _word joiner_. Until Unicode 3.2, U+FEFF was the only code point with word joining semantics, but because it is more commonly used as _byte order mark_, the use of U+2060 WORD JOINER to indicate word joining is strongly preferred for any new text.\n\nFew sentences earlier the author stresses not to confuse the _word joiner_ with _zero width joiner_. Any chances that this very type of confusion lays at the root of FontLab’s messed up mapping?\n\n"
+    }
+  ]
+}

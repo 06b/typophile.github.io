@@ -1,0 +1,214 @@
+{
+  "id": "38910",
+  "title": "Caps to small caps",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi All,\n\nI´m currently working on a font that i would like to try adding small caps to it. Is there any particular drawing method to create them using the pre-draw capitals? Something like scaling down the capitals and then exterpolate them maybe? Is there any way to optimize this task or do i have to draw them from zero?\n\nAs a beginer, any expert help or tips on this would be greatly apreciated.\n\nThanks in advance  \nRegards\n\n",
+  "author": "kiko",
+  "time": "7 Nov 2007 — 6:00pm",
+  "uid": "17987",
+  "comments": [
+    {
+      "time": "7 Nov 2007 — 6:13pm",
+      "content": "I would say - but I'm no pro myself - that you can safely use your existing capitals.\n\nThere are probably designers that use Multiple Master technology and such to extrapolate the small weight increase that scaled down caps need to work well, but I think you can also use the Bold Filter in FontLab (or the Expand Stroke option in Illustrator) to achive something similar.  \nHaving said that, extrapolations done with these options do need a lot of editing afterwards, because the Expand Stroke/Bold Filter are usually pretty destructive to the lettershapes.\n\n"
+    },
+    {
+      "time": "7 Nov 2007 — 6:33pm",
+      "content": "Thanks for the reply. I see your point, i´m trying to avoid getting to multiple master tools cause i´m still not confortable using them.  \nBut as you said, although the long editing it takes afterwards using the expand stroke/bold filter, perhaps it will take less time than have to draw them from scratch?\n\n"
+    },
+    {
+      "time": "7 Nov 2007 — 6:35pm",
+      "content": "Take a look at the \"How To\" section of the wiki and, in particular, the entry \"Deriving Small Capitals from Capitals\" [http://typophile.com/node/14255](http://web.archive.org/web/20140810024833/http:/typophile.com/node/14255 \"http://typophile.com/node/14255\")\n\nRegards,  \nErnie\n\n"
+    },
+    {
+      "time": "7 Nov 2007 — 6:36pm",
+      "content": "See the [Typowiki 'How to' on this](http://web.archive.org/web/20140810024833/http:/typophile.com/node/14255), where John Hudson explains a process using the FontLab interpolation tool (not multiple masters) to make small caps from caps.\n\nUnfortunately some of the nice illustrations have gone missing. Paul Hunt, thanks for all your work on the Typowiki. Do you know what's happened there--why some of the illustrations have vanished?\n\n"
+    },
+    {
+      "time": "7 Nov 2007 — 7:02pm",
+      "content": "When I'm making \"serviceable\" small caps from full caps, I don't scale the full caps proportionally, as recommended by John Hudson -- I usually have about a 4 percentage difference -- if the vertical is scaled to 62 percent, then the horizontal is scaled to 66 percent. This will make you do some work with round letters (C, G, O, Q for sure), but will give a better overall balance.\n\nThe weight increase I used in Fontographer was 9 units, but FontLab seems to require less. Don't forget to move them back up to the baseline (half the \"embolding\" value), and rework the left & right sidebearings. And don't forget to \"remove overlap.\"\n\nThat's the start, now clean them up.\n\nP.S. \"serviceable\" meant I could get away with them in about a 10-point setting, in running text. The most common reason I made them up was to get a set of italic small caps. Sizing there is relatively easy; match existing roman small caps. If you're starting with the roman, size the \"new\" small cap \"x\" just a bit taller than the lower-case \"x\". I let the size change when \"embolding,\" so the final size comparison has to wait till you've done that. Now check things with an \"E.\" If both the \"X\" and \"E\" look right, most of the alphabet should feel right, so highlight all & have at it.\n\n"
+    },
+    {
+      "time": "8 Nov 2007 — 3:24am",
+      "content": "There are two helpers for this:\n\nIf your font is MultipleMaster, with a weight axis, try Tim Ahrens' RMX Tuner:  \n [http://justanotherfoundry.com/tools/RMX/](http://web.archive.org/web/20140810024833/http:/justanotherfoundry.com/tools/RMX/)  \nThis gives the best results that an automatic method can provide today, and should be your first choice.\n\nIf the font has a single axis only, you may try the Glyph Tweaker script:  \n [http://www.kltf.de/kltf\\_otproduction.htm](http://web.archive.org/web/20140810024833/http:/www.kltf.de/kltf_otproduction.htm)  \n[Scroll down a bit. Requires RoboFab and Dialog Kit.]  \nFirst measure basic stem widths and height of your caps. Then run the script and fill in these values, plus stem widths and height of the small caps.  \nThe script relies on FLS' Bold function, so the outlines are only as good as this function allows. If you switch on FontAudit, you will see what I mean. Especially diagonals need corrections -- Bold cares for x and y directions only. Still this is a good starting point to get the proportions. I put these into the uppercase's mask layer and adjust uppercase by moving nodes or with John Hudson's method to match the automatically generated proportions.  \nIn essence, what this script does is combining the operations which Charles Ellertson describes: scaling and bolding. I did not want to calculate scaling and bolding factors myself each time, and put the according formulas into a script.\n\nCharles -- <cite>The weight increase I used in Fontographer was 9 units, but FontLab seems to require less.</cite>\n\nYes, it is: 2 units FOG Change Weight = 1 unit FLS Bold.\n\n"
+    },
+    {
+      "time": "8 Nov 2007 — 4:24am",
+      "content": "_Paul Hunt, thanks for all your work on the Typowiki. Do you know what’s happened there—why some of the illustrations have vanished?_\n\nhmmm. i _believe_ that most of these were just available of attachments to the wiki post and i never got around to incorporating them all into the body of the text. i think the attachments must have been lost with the latest update of typophile, but i can't be certain that that is what did it.\n\n"
+    },
+    {
+      "time": "8 Nov 2007 — 7:32am",
+      "content": "I recently started with John Hudson's method--which he suggests only as a starting point for later adjustments--and have continued to use the FontLab Interpolation tool for curves, as well as widening stems by hand. However, I didn't follow Hudson's model exactly, as I made the small caps a bit wider, as Charles suggests and as I believe is traditional. I don't know how much wider as it just did it by eye. Also I adjusted relative weights of vertical arches, corrected diagonals and joints, etc by eye. I don't know how much adjustment is needed if you use the RMX tuner, but next time around, after I have made my weights MM compatible, I will probably use it as a starting point.\n\n"
+    },
+    {
+      "time": "8 Nov 2007 — 8:48am",
+      "content": "A correction:  \n\"If the font has a single axis only, you may try the Glyph Tweaker script\"  \nshould be  \n\"If the font has a single <cite>master</cite> only, ...\"\n\nBill -- <cite>I don’t know how much adjustment is needed if you use the RMX tuner</cite>\n\nBest is to play with it and try different settings until you find some which give a nice result. Whether you make many adjustments or not depends on whether you want the small caps to be more or less like the uppercase (with adjustment of weight and width), or want them to differ in some details. For a Caslon I can imagine that some distinctive features are nice.\n\n"
+    },
+    {
+      "time": "8 Nov 2007 — 9:43am",
+      "content": "Bill,\n\nThe \"4 percent\" is just sort of an average I noticed as I was making up small caps over a number of years -- usually in italic, sometimes in roman. As you say, you have to make even these initial decisions by eye -- or at least, I do, and it seems you as well. The scaling values pretty much depend on the lowercase letters; at least, for the small caps that are to set in running text. As I remember, I've used as little as 59 percent with vertical, and probably as much as 75 percent.\n\nFor another set of \"display\" small caps, you have more freedom. If you have, or the library has, Adrian Wilson's _The Design of Books_, look at the \"special two-letter small caps\" for Caslon Old Face. In my copy, it is page 39. These sorts were available for just a few fonts in the Linecaster days.\n\nCharles\n\n"
+    },
+    {
+      "time": "8 Nov 2007 — 11:44am",
+      "content": "Thanks a lot people for all the tips and links.\n\nAfter some experiments, a question still and always persists… Using the interpolation method described by John Hudson, or even using the bold effect i still can´t understand how do i get the overall width of the smcp generated glyph proportionally to the uppercase letter. How can this be done? Do i have to calculate the glyph overall width manually and than fill that space afterwards?\n\nHope I´m making any sense.  \nHow do I calculate the overall glyph width of the small caps proportionally to the capitals is what´s troubling me most, even knowing that the small caps will be wider. Always have to do some math!\n\nPs. Those missing illustrations probably could help...\n\nThanks in advance  \nRegards\n\n"
+    },
+    {
+      "time": "8 Nov 2007 — 6:16pm",
+      "content": "Charles, I have in an old specimen book of \"The Linotype Caslons\" that has a list of chracters for two of their Caslons \"in Two-Letter Fonts with italic and small caps.\" What does that mean, \"Two-Letter Fonts?\" Is that something about the matrices?\n\n"
+    },
+    {
+      "time": "8 Nov 2007 — 6:37pm",
+      "content": "Bill,\n\nI've never actually held special no. 5 mats in my hand, and Bill Loftin (Heritage Printers) has finally shut down, so I can't ask. But yes, I think that meant they were duplexed mats -- roman and italic on one matrix.\n\nNote the the roman small capitals on these matrices are a bit larger than what you see in the regular font; I imagine they were intended for display. A good supporting argument for Adam's notion that small caps should be a separate font. I'd argue (& for all I know, Adam always felt this way) that this idea works when the small caps are for display, but another set of small capitals should be included in the basic fonts for running text.\n\n"
+    },
+    {
+      "time": "8 Nov 2007 — 6:56pm",
+      "content": "I have thought of doing the display small caps as 3/4 height, like Trajan. This is working on the theory that they will be used in display with caps, whereas in text size it will be used within text. Does that make sense? I've done the text size small caps a bit bigger than x-height. Caslon's are at x-height, but I think they look better a bit bigger.\n\n"
+    },
+    {
+      "time": "8 Nov 2007 — 7:23pm",
+      "content": "Maybe, it probably depends on the (text) designer. When I use small caps in display, it is usually for a subhead -- usually a first-order subhead. Full caps are usually too big at text size; if you set them smaller, the size is right but the weight too thin. Small caps at text size have the right weight, but are too small. A set of small caps just a bit larger than \"regular\" or x-height small caps would be about ideal.\n\nTruth to tell, I try to avoid small caps for subheads, because of my belief that the correct letterspacing of them (and the attendant word spacing) varies with how many words there are. Frequently, the number of words in subheads varies considerably, authors just don't think of all the problems they give us designers ;-).\n\nSmall caps can work quite well in running heads, sometime they too vary considerably in length, but there are far fewer chapters than subheads.\n\nI'm not sure how a designer that favors cap-small cap in display would feel; I confess that design leaves me cold, but maybe that's just saying it doesn't fit my temperment and meager skill -- I rely mainly on space and color when I design.\n\n"
+    },
+    {
+      "time": "8 Nov 2007 — 8:45pm",
+      "content": "Thanks, Charles, that's very interesting. When I get around to it, I'll test out the options you mention to get a feel for what works in the different situations.\n\n"
+    },
+    {
+      "time": "8 Nov 2007 — 9:04pm",
+      "content": "When I was working as an art director, I liked to use small caps, but for most fonts I found them much too short and small.  \nSo I always make the small caps in my fonts quite a bit taller than the x-height, so that they work OK in all-small-caps settings, and as acronyms. I suspect that many type designers make them to look good in a caps-with-small-caps setting, or to match a paragraph of caps-with-small-caps against a paragraph of upper and lower case, in a specimen. But that's not how they are generally used.\n\nI have recently discovered another reason for bigger small caps -- Cyrillic. Because the lower case Cyrillic (especially in Russian) has the look of small caps, with capital letterforms and few extenders, it's necessary to bump up the size of the small caps in a typeface to get adequate differentiation.\n\n"
+    },
+    {
+      "time": "8 Nov 2007 — 10:19pm",
+      "content": "Some of the comments in this thread about proportional scaling and width may be confusing to some people, since the illustrations for the how-to have disappeared. In my method, the width gain is all in the stem weight, which works pretty well perhaps because of the kind of proportions my uppercase letters seem to have. One of the first stages of the process is to make a mask of the caps scaled to the smallcap height that will serve as a guide to the _internal_ width of the smallcaps. As Charles notes, you may be more pleased if this scaling is non-uniform: scaling the width less than the height if you want relatively squarer smallcaps from relatively narrower uppercase letters. My uppercase letters tend to be pretty wide, so I've not found this kind of adjustment necessary in most designs.\n\n"
+    },
+    {
+      "time": "9 Nov 2007 — 8:03am",
+      "content": "Notan strikes again!\n\nJohn passed his method on to me and used Jenson as an example. It was much more illustrative of the advantages of his technique since Jenson is all curves and no straights. It's worked out well for me too Kiko FWIW.\n\nR\n\n"
+    },
+    {
+      "time": "9 Nov 2007 — 11:15am",
+      "content": "\\> _Unfortunately some of the nice illustrations have gone missing._\n\nI think I have the original illustrations saved on my old computer. I'll try to digg them up and place them back on the page.\n\n"
+    },
+    {
+      "time": "9 Nov 2007 — 11:26am",
+      "content": "Speaking of Notan, deriving the proportions of the small caps with one uniform rule throughout the alphabet isn't the only way, and perhaps for some designs not even the best way.\n\n"
+    },
+    {
+      "time": "9 Nov 2007 — 11:40am",
+      "content": "Miguel,\n\nAs a beginer those illustrations could be very helpfull, most because using interpolation it´s something i´m not to familiar with.\n\nThanks in advance  \nRegards\n\n"
+    },
+    {
+      "time": "9 Nov 2007 — 1:38pm",
+      "content": "_but shouldn´t that space be larger in the small caps since they´re steams are bolder?_\n\nAgain, much depends on the design of your original uppercase letters and also, of course, on the height of your smallcaps. My typical smallcaps are noticeably taller than the lowercase x-height, but with the same vertical stem weight at the lowercase letters (usually based on the width of the lowercase i stem). With these sorts of proportions, and the typical width of my uppercase letters, this approach produces the kind of smallcaps I find most useful. Optically, it means that the smallcap text is a touch lighter and more open in appearance than lowercase, which I think is a benefit, especially since naïve users cannot be relied upon to letterspace smallcaps. If any of these variables are different, then the scaling factor used to develop what I think of as the width-guide should be adjusted.\n\nA good test of the width-guide is the smallcap O. If one has a very round, Garamondish uppercase O, then a non-uniform width-guide -- i.e. one in which the uppercase is scaled less horizontally than vertically to determine the interior widths -- could easily result in a smallcap O that is too wide. Here is Constantia, showing the proportional relationship of uppercase, smallcaps and lowercase, with the smallcaps derived from the uppercase using a uniform width guide. I wouldn't want the smallcap O getting any wider than this.\n\n ![](http://web.archive.org/web/20140810024833im_/http:/typophile.com/files/HHhOOo_4674.gif)\n\nBill: _deriving the proportions of the small caps with one uniform rule throughout the alphabet isn’t the only way, and perhaps for some designs not even the best way._\n\nTrue, but if the regularised approach produces an unfortunate result for one of the smallcap letters it may also be an indication that something is wrong with the uppercase.\n\nBy the way, not everyone starts with the uppercase. When designing Cambria, Jelle Bosma started with the smallcaps and then designed the uppercase. I suspect this might be his usual procedure.\n\nPS. Note that the illustration in this post does not show kerning.\n\n"
+    },
+    {
+      "time": "9 Nov 2007 — 2:11pm",
+      "content": "John is quite right about certain full caps going too wide when scaled to small caps, especially when the scaling isn't linear. Having said that, I find it easier to rework CDGOQ (& maybe B, P, R and U) -- take a few units out of each side. This may just be a personal foible, although I make the small caps \"smaller\" than what John indicates, and that may be part of it. The thing to remember is that the first, formulaic step is just a beginning; I don't think you get all the way to a final set of small caps through any formula. With that in mind, whatever \"first steps\" work best for you is the way to go.\n\n"
+    },
+    {
+      "time": "9 Nov 2007 — 2:25pm",
+      "content": "\\>A good test of the width-guide is the smallcap O\n\nFor my design, based on Caslon, the small cap O looked better scaled not as wide as the H was scaled. I just checked and in Merganthaler Linotype's Caslon Old Face (1923) they do the same thing. I can't remember whether I checked what they did while doing mine, but in any case I think it works well. I don't have any 18th century Caslon model for the small caps, so I don't know what Caslon did--except that I can guarantee it won't be consistent!\n\nI also just checked Adobe Garamond and Minion. In both of these the O is proportionally a bit wider--not narrower--than the H, compared to the caps. And in neither of these fonts are the counters as wide as they would be following John's guidelines.\n\nMy conclusion is that there are no hard and fast rules here, and one can do it successfully different ways.\n\nedit: I cross-posted with Charles. I see that he also reduces the rounds a bit compared to the straights.\n\n"
+    },
+    {
+      "time": "9 Nov 2007 — 7:19pm",
+      "content": "Bill: _My conclusion is that there are no hard and fast rules here, and one can do it successfully different ways._\n\nDefinitely. I was suggesting _a_ method for approaching smallcap design (one that that captures the relative proportions of the uppercase letters and translates them into the smallcaps). I certainly didn't intend it to be taken as any kind of rule.\n\n"
+    },
+    {
+      "time": "9 Nov 2007 — 10:13pm",
+      "content": "FYI, the illustrations were restored.  \nHere's the link again: [Deriving Small Cap from Caps](http://web.archive.org/web/20140810024833/http:/typophile.com/wiki/SmallCaps%20How-To)\n\n"
+    },
+    {
+      "time": "10 Nov 2007 — 3:06am",
+      "content": "Jumping in a bit late here...\n\nKarsten,  \n<cite>If your font is MultipleMaster, with a weight axis, try Tim Ahrens’ RMX Tuner</cite>\n\nThe RMX Tuner is not intended for creating 'sets' of reduced glyphs (such as small caps).  \nThe most suitable of the Remix Tools for creating small caps is the RMX Scaler. You can simply select your capitals, run the Scaler and create the small caps with your preferred suffix. Since you can precisely control the weight, width and height, and add spacing it is a 'one-stop-shop' and often does not require any further corrections at all.\n\nIf you then realise you want to change the horizontal propoertions of the small caps (e.g. making the B or S wider) you can easily do so with the Tuner.\n\nWilliam,  \n<cite>I don’t know how much adjustment is needed if you use the RMX tuner</cite>  \nI suggest you open a preview window next to the glyph window so you can instantly see the effect and choose the scaling and weight intuitively and visually. I believe this method is better and quicker than any other digital tool available. Note that if you use the Scaler right after you have used the Tuner the adjustment values are entered automatically.\n\n"
+    },
+    {
+      "time": "10 Nov 2007 — 3:50am",
+      "content": "thanks for restoring the images, miguel! i'm glad you had the foresight to download them all.\n\n"
+    },
+    {
+      "time": "10 Nov 2007 — 5:38am",
+      "content": "<cite>I don’t know how much adjustment is needed if you use the RMX tuner</cite>\n\nOh, I realised you probably mean how much <cite>subsequent manual adjustment</cite> is needed. This is the crucial question, of course.  \nI personally did not make any manual corrections at all to the small caps of my own [Facit](http://web.archive.org/web/20140810024833/http:/justanotherfoundry.com/Facit/index.htm).  \nHowever, I thought that although my tools are suitable for my own designs I should test it with another typeface that has got manually designed small caps already.  \nI built Meta as an MM font and created small caps automatically, and then compared them to the \"real\" ones:\n\n ![](http://web.archive.org/web/20140810024833im_/http:/typophile.com/files/RMX_Meta_SC_4412.gif)\n\ngrey: Meta Small Caps, black line: automatically generated from the regular and bold capitals.\n\nNot surprisingly, the ink traps are more emphasized in the original small caps but in general. However, I think this test demonstrates that my method gives very appropriate results and can save a great deal of time.\n\n"
+    },
+    {
+      "time": "10 Nov 2007 — 5:42am",
+      "content": "Regarding the question whether all of the small caps can or should be reduced in the same way (i.e. retaining the horizontal proportions of the capitals), I have made some investigations. Instead of Latin small caps I chose the cyrillic lowercase letters which are \"small caps\" (please forgive this simplification).  \nI reproduced the lowercase of Alexander Tarbeev's Den Haag (shown below) and Gauge with the RMX tools letter by letter and noted down the required horizontal scale factor (the veritcal one being constant):\n\n ![](http://web.archive.org/web/20140810024833im_/http:/typophile.com/files/RMX_DenHaag_6742.gif)\n\nThis is just a first experiment in this direction but with further research it might be possible to establish a general \"key\" for cyrillic that then helps western designers to choose the right proportions. Or maybe one would find out that every type designer has their own, personal, quantifiable style?\n\n"
+    },
+    {
+      "time": "10 Nov 2007 — 5:46am",
+      "content": "Hi Tim, re RMX Scaler vs RMX Tuner -- sorry, I tend to mix up names!\n\n"
+    },
+    {
+      "time": "10 Nov 2007 — 8:35pm",
+      "content": "Tim, I like what you propose, but I really think the lowercase Cyrillic letters need to be considered independently of smallcaps. Yes, many of them are based on the same shapes as the uppercase forms, but the very fact that they need to proportionally harmonise with some lowercase letters that are differentiated from the uppercase letters requires them to assume a different set of proportions. It is helpful to bear in mind that Cyrillic was a unicameral (uncial) alphabet for a lot longer than either Latin or Greek, and that its conversion into a bicameral alphabet happened relatively suddenly. So what you see in the lowercase alphabet are not 'smallcaps', but uncial letters writ small, while the uppercase represent the same uncial letters writ large. This is a very different evolutionary path than that which produced smallcaps from uppercase letters (brilliantly explored in Margaret Smith's essay 'The Pre-history of \"Small Caps\": from All Caps to Smaller Capitals to Small Caps', in volume 22 of the _Journal of the Printing Historical Society_ (UK)). The term smallcaps presumes the pre-existence of uppercase letters; the division of an uncial script into a bicameral alphabet is a different process. When the bicameral alphabet introduces foreign letterforms not native to the preceding uncial script, as the Petrine reform of Cyrillic did, then the proportions of the two cases of letters adapt to their new partners, and lose the relationship that they might have had to each other. This, of course, makes true Cyrillic smallcaps possible.\n\n"
+    },
+    {
+      "time": "11 Nov 2007 — 3:57am",
+      "content": "Tim: <cite>“small caps” (please forgive this simplification).</cite>  \nJohn: <cite>what you see in the lowercase alphabet are not ’smallcaps’</cite>\n\nJohn, I am not so naive as to think the cyrillic lowercase is the same thing as small caps. I had hoped my little note in parentheses would make that clear.  \nHowever, I believe it is not senseless to study the proportional relations between cyrillic uppercase and lowercase, and even relate that to latin small caps. For example, the reason why the в (lowercase ve) is proportionally wider in the lowercase (see the above illustration) is certainly the same as the reason why a latin small cap B would be made relatively wider than letters with only one counter.\n\n"
+    },
+    {
+      "time": "11 Nov 2007 — 1:33pm",
+      "content": "But in the design of a Cyrillic type, the width of the lowercase в needs to be coordinated with the width of the lowercase а. So this is a very good example of what I am talking about. Yes, the reasons why в proportionally wider in the lowercase than in the uppercase is related to the reason why a smallcap B is proportionally wider than the uppercase, but the precise width of the в is determined relative to other lowercase letters, most importantly а, not relative to the uppercase. This explains why an actual Cyrillic smallcap В might well have a different proportional relationship to the uppercase than the lowercase has. These comments are based on a lot of experience designing Cyrillic types. Smallcaps can be derived systematically from uppercase letters, but lowercase letters need to be designed independently, proportionally relative to each other. So this is why I think it is a mistake to look at the particular proportions of lowercase Cyrillic letters as something that can be related to smallcaps, because I think these proportions involve other influences.\n\nA good experiment would be to apply your approach to typefaces that include Cyrillic smallcaps, so you can show a three-way relationship. This would reveal the difference between the proportions of actual smallcaps and lowercase letters relative to the uppercase.\n\n"
+    },
+    {
+      "time": "11 Nov 2007 — 3:24pm",
+      "content": "Thanks for sharing your experience, John.\n\nI am a bit confused. Do you check each of the Cyrillic lowercase letters that can be regarded reduced versions of their uppercase counterpart individually against the a, or do you also consider the horizontal proportions <cite>within</cite> the letters that can be regarded reduced versions of their uppercase counterpart?\n\nThe latter is exactly what I was interested in. I wanted to know in which way the proportions <cite>within</cite> the uppercase differ from the proportions <cite>within</cite> the lowercase. That's also what my above diagram is about, isn't it? The diagram is supposed to visualise the relation between the intra-uppercase proportions and the intra-lowercase proportions.\n\n"
+    },
+    {
+      "time": "11 Nov 2007 — 9:08pm",
+      "content": "_Do you check each of the Cyrillic lowercase letters that can be regarded reduced versions of their uppercase counterpart individually against the a, or do you also consider the horizontal proportions within the letters that can be regarded reduced versions of their uppercase counterpart?_\n\nThis is the thing: I _don't_ regard them as reduced versions of their uppercase counterparts. I think it is a mistake to regard them as reduced versions of their uppercase counterparts, just as it would be a mistake to regard the uppercase letters as big versions of the lowercase.\n\nI understand your diagram, but what I am saying is that it misses the input from the other lowercase letters. This input is important, especially in the case of an Cyrillic designed to harmonise with an existing Latin design in which several key letters are inherited from the Latin (thanks to Peter the Great!). It also misses the cumulative input derived for iterations of the lowercase design, i.e. not just the influence of lowercase-distinct architecture in some letters, but the influence of the cumulative design decisions about lowercase letters.\n\nI design the Cyrillic lowercase and the uppercase largely independently -- as independently as the Latin lowercase and uppercase --, and unlike smallcaps the proportions of lowercase letters are not derived from uppercase. Within the set of letters that share similar uppercase and lowercase architecture, the same kind of proportional awareness is important _within the individual cases_. For instance, the variation of internal width in the sequence инпџцшщ is similar to that in the sequence ИНПЏЦШЩ, but they are arrived at independently, checking lowercase against lowercase and uppercase against uppercase.\n\n"
+    },
+    {
+      "time": "11 Nov 2007 — 9:13pm",
+      "content": "_Is there any way to optimize this task or do i have to draw them from zero?_\n\nI'd say it depends on the typeface.  \nYou can start by doing global transformations to the upper case glyphs.  \n1. Scale down: Actions\\>Contour\\>Scale  \n2. Add weight: Actions\\>Effects\\>Bold  \nIn either of these, you may add slightly more to the x axis.\n\nFor serif fonts, cutting, pasting, and dragging can also be useful methods.\n\nA good way to see what's working is to compare, in the Metrics window, those letters that are basically the same in all three cases, C, O, S, V, W, X.\n\nIt's also a good idea to test your small caps, in a piece of text in InDesign or Quark, against a typeface of similar style.  \nTry it in a piece of text with \"U.S.\" or similar ambiguous acronyms, and with all-small-cap lead-ins to text paragraphs.\n\nIn page layout applications, you can get a feel for the transformation required by making faux small caps using scaling and stroking.\n\n"
+    },
+    {
+      "time": "14 Feb 2011 — 12:02pm",
+      "content": "Y'know... it's kind of weird when it takes a spammer to unearth interesting stuff. So much for my Mad Google Skillz.\n\n"
+    },
+    {
+      "time": "14 Feb 2011 — 12:48pm",
+      "content": "Now you got me worried, Té ...\n\nIn case the forum deletes that post: it links to no less than six \"interesting\" links: some sort of diet, online poker, and betting sites. I'm hoping it's the diet that attracted you.\n\n"
+    },
+    {
+      "time": "14 Feb 2011 — 1:18pm",
+      "content": "So's to unworry you... it's the thread's subject. I have been wondering off and on about the making of small-caps.\n\n"
+    },
+    {
+      "time": "14 Feb 2011 — 1:56pm",
+      "content": "It's tricky stuff, this is.\n\nFor the characters I need for phonetics, I had to make matching small caps of a handful of characters, which needed to be able to blend in with actual lowercase characters -- the small caps characters depict valid phonemes on their own. Usually, one only needs to worry about caps-and-small caps.  \nI also need some of these reversed, upside-down, or both (rotated!), which may have side effects on the stroke contrasts. Stuff like\n\nvɛʀy dʀoʊl, mˈlɔːːːːd\n\n.. to top it off, there are also a couple of \"required\" superscripts. Same problem there: I'd prefer nice, fat, same-stroke-width ones over regular-made-smallers. I already found out \"just\" vertically shrinking a lowercase 'h' to get 'ʰ' doesn't quite _do_ it for me.\n\n"
+    },
+    {
+      "time": "29 Dec 2012 — 1:33pm",
+      "content": "I need to remind about some of the suggestions here. :-)\n\n"
+    },
+    {
+      "time": "29 Dec 2012 — 5:03pm",
+      "content": "I have yet to read most of this great thread, but very recently I started realizing that the tradition of making the smallcaps wider (relatively) than the fullcaps might be misguided. I could explain why, but instead let me ask:\n\nWhat is the rationale for that?\n\nAnd, what is wrong with this?\n\n ![](http://web.archive.org/web/20140810024833im_/http:/typophile.com/files/TMF_sc_5481.gif)\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Dec 2012 — 6:21pm",
+      "content": "_What is the rationale for that?_\n\nTo properly balance colour between the uppercase, smallcaps and lowercase.\n\n"
+    },
+    {
+      "time": "29 Dec 2012 — 6:45pm",
+      "content": "Why do you need _width_ to do that?  \nIs my setting above imbalanced?\n\nI think wider smallcaps are a metal legacy (where you simply used a smaller size, and _everything_ was wider).\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Dec 2012 — 8:05pm",
+      "content": "Well, you're H, and E are wide, based on your U and N. Something slightly wrong with the C, O and D, too. I could fix it, like I have to do so much type the designers gefuch... but no...\n\nBTW, one reason you make small cps slightly wider is so they can hold their own against the lower case letters. They often appear on the same line. Wouldn't look right if a small cap \"O\", for example, wasn't a bit wider than a lower case \"o\"...\n\nIt is almost like you need three sets of small caps. One for display, one for run-in acronyms, and one for phonetics. That's a bit much to ask, so compromises arise.\n\n"
+    },
+    {
+      "time": "29 Dec 2012 — 8:20pm",
+      "content": "You're talking about my proportions etc. in general (irrespective of what size of caps we're talking about) which -I hope- are like that for a reason (just like I make my tittles \"too big\"). Here I'm interesting in figuring out if smallcaps are in fact better (or at least not worse) when they have the same proportions as the fullcaps. Maybe I should use a different font, something mainstream that would allow people to focus on this question. Let me see...\n\n> so they can hold their own against the lower case letters.\n\nThat's certainly true in the case of old-school smallcaps that are at x-height (or only slightly taller). The way many people (including myself) like to make smallcaps these days is quite a bit higher than that, which makes confusion with the lc moot. Of course this doesn't work when the x-height is too big (not leaving enough room between it and the fullcap height) but to me such fonts aren't really text fonts.\n\n> it is almost like you need three sets of small caps.\n\nAt least. :-)  \nDo you know about FF Atma? And Ernestine has one extra set too.\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Dec 2012 — 8:43pm",
+      "content": "The thing is that to do this test I need a font family with close weights, and since I don't actually _use_ fonts much I came up blank... But it's easy enough to try it yourself: set something like \"THE MICROFOUNDRY\" in the Regular at some size; change the \"HE\", \"ICRO\" and \"OUNDRY\" to the Demi weight, then reduce the size\\* of that text until the color matches the \"T\", \"M\" and \"F\". Adjust the letterspacing as you see fit. Then tell me what you see wrong with it.\n\n\\* Unless the font has an unusually large x-height you'll stay clear of any potential confusion with the lc.\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Dec 2012 — 8:56pm",
+      "content": "Hrant, note that I said balance colour between the uppercase, smallcaps _and lowercase._ There is a threeway relationship to be established. Often, if smallcaps are proportionally similar to the uppercase then they will appear too narrow relative to lowercase letters, just as uppercase letters would appear too wide if their proportions were similar to typical smallcap letters. As you reduce the height of caps, you need to compensate horizontally for the reduction of counter space, especially for a letter like B. Of course, I am talking about text faces in text settings.\n\n"
+    }
+  ]
+}

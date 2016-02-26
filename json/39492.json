@@ -1,0 +1,26 @@
+{
+  "id": "39492",
+  "title": "Robofab Glyph to UFO",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hey guys, I’m in the finishing stages of a font, and am having some trouble with Robofab UFO stuff.\n\nI am able to export and import fonts to UFO format, using the macro panel in Fontlab.\n\nBut I want to be able to just export the glyphs that I have changed, instead of doing the time-consuming complete import/export over and over.\n\nI get this weird message everytime. I have reinstalled Robofab and Python, and the problem persists.\n\nAnyone know the workaround for this?\n\nMany thanks!\n\n ![](http://web.archive.org/web/20080709012826im_/http:/www.typophile.com/files/error_5371.png)\n\n [‹ Looking for thrifty (cheap!) source for FontLab](http://web.archive.org/web/20080709012826/http:/www.typophile.com/node/39489 \"Go to previous forum topic\") [Component Glyph Overlap ›](http://web.archive.org/web/20080709012826/http:/www.typophile.com/node/39380 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080709012826/http://www.typophile.com/user/11130\" title=\"View user profile.\">JLM</a>",
+  "time": "<br>",
+  "uid": "11130",
+  "comments": [
+    {
+      "time": " 27.Nov.2007 9.49am",
+      "content": "Hi,\n\nIt appears that Python is trying to convert a string of text to ascii, and that some of the letters are outside the ascii range (0-127).  \nI would check the font info fields (font naming, copyright etc) of your font and check whether they contain non-ascii letters.\n\nIf you want to get in touch with the Robofab developers quickly I suggest to check the Robofab group at Google: [http://groups.google.com/group/robofab](http://web.archive.org/web/20080709012826/http:/groups.google.com/group/robofab \"http://groups.google.com/group/robofab\")\n\n"
+    },
+    {
+      "time": " 27.Nov.2007 10.02am",
+      "content": "Thanks. I did have some #’s in the name, and I fixed that but I’m still having the same problem.\n\nI joined the Robofab group, so hopefully that will solve the problem.\n\nThanks!\n\nJ\n\n"
+    },
+    {
+      "time": " 27.Nov.2007 12.52pm",
+      "content": "Are you using “DumpOneGlyphToUFO.py”? Line 32 (which is the line traceback says the problem is in) is trying to print the glyph name and the path that the GLIF is being saved to, do either of those use non-ascii glyphs in their names? Check the folder name for any extended characters, FontLab doesn’t like non-ascii glyphs in its output panel.\n\n"
+    }
+  ]
+}

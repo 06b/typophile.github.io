@@ -1,0 +1,18 @@
+{
+  "id": "56528",
+  "title": "Print selected glyphs python/macro?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm looking for a simple way to print into output window the glyphs I have selected.\n\nI wrote this to select pre defined groups - like using classes but simpler  \n`\nfrom robofab.world import CurrentFont\nf = CurrentFont()\n#\n#\nmyGlyphs = ['A','Amacron','Abreve','Aogonek','Agrave','Aacute','Acircumflex','Atilde','Adieresis','Aring']\n#\nfor glyphName in myGlyphs:\n\tf[glyphName].selected = 1\n\tf[glyphName].update()\n#\nf.update()\n`\n\nNow I'm trying to do the other way so groups of glyphs I select will be printed in the output window - I was trying something like this.  \n`\nfrom robofab.world import CurrentFont\nf = CurrentFont()`\n\ntoPrint = f.selected  \nprint toPrint.name\n\nf.update()\n\n",
+  "author": "RachelR",
+  "time": "2 Apr 2009 — 4:31am",
+  "uid": "16986",
+  "comments": [
+    {
+      "time": "2 Apr 2009 — 6:15am",
+      "content": "If it's any help to anyone I worked it out\n\n`\nfrom robofab.world import CurrentGlyph, CurrentFont\nf = CurrentFont()`\n\nfor g in f:  \n if g.selected == 1:  \n print g.name\n\nf.update()\n\n"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "56092",
+  "title": "How to generate diacritic glyphs from glyphs that are already 'componentized'",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I would love to find a way to generate diacritic glyphs in Fontlab. The issue is that most of my base glyphs (eg. a, n, r, A, N &t.) are constructed from components, which means Fontlab's 'Generate Glyphs...' does not work. Other people must surely have been in this situation before, and I would imagine that one could script ones way out of this. Now the thing is that I can't write scripts, so does anyone know a workaround that does not involve decomposing the components in all the baseglyphs? Or does anyone have a script, or know of one, that would be available to do this?\n\nThanks,  \nClaus\n\n",
+  "author": "<a href=\"/web/20100203175431/http://typophile.com/user/16321\" title=\"View user profile.\">clauses</a>",
+  "time": "<br>",
+  "uid": "16321",
+  "comments": [
+    {
+      "time": "",
+      "content": "Why are you base glyphs put together with components? Is this just a temporary situation while you are building? If it is just temporary, then I would just hold off till you feel you have them solidly designed before creating diacritic glyphs.\n\nOr perhaps you have commitment issues! LOL\n\n"
+    },
+    {
+      "time": "",
+      "content": "It's a temporary situation until I have to produce the fonts. I really have to keep it that way when I take it to Multiple Master. And I prefer to test with actual text that use those diacritical characters. Imagine that I would have to redo either the components or the diacritics manually after I could see from the test texts that a change is necessary.\n\nAnd I can't commit, but that is beside the point. :-P\n\n"
+    },
+    {
+      "time": "",
+      "content": "Could you perhaps copy all the components into the mask layer, decompose all the outline layer glyphs, do your auto diacritics glyphs, and switch and repeat until satsfied. Even saving 2 files (1 with the composites and 1 decomposed), and assigning the needed font to the mask layer and switch as needed would be fairly easy.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Could you perhaps copy all the components into the mask layer, decompose all the outline layer glyphs, do your auto diacritics glyphs, and switch and repeat until satsfied. Even saving 2 files (1 with the composites and 1 decomposed), and assigning the needed font to the mask layer and switch as needed would be fairly easy.</cite>\n\nNow that exactly what I wish to avoid. But let's see if a python solution will come forward.\n\n"
+    },
+    {
+      "time": "",
+      "content": "FontForge should do the thing you're asking with _relative_ ease, though not necessarily for other functions. If it can really aid your workflow, it may be worth it to at least try.\n\n"
+    },
+    {
+      "time": "",
+      "content": "How easy? Relative is too relative.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Good luck to you.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I conducted an experiment to see how easy this would be to do in FontForge.\n\nI drew three glyphs at one, two, and three, and by copying references from them assembled A:\n\n ![](http://web.archive.org/web/20100203175431im_/http:/typophile.com/files/construction1_6264.png)\n\nI then drew a series of accents:\n\n ![](http://web.archive.org/web/20100203175431im_/http:/typophile.com/files/construction2_5217.png)\n\nIn the font view I selected all of the accented A glyph slots, then from the Element menu chose Build \\> Build Accented Glyph. The following were generated automatically:\n\n ![](http://web.archive.org/web/20100203175431im_/http:/typophile.com/files/construction3_3966.png)\n\nIs this the sort of procedure you had in mind?\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"I really have to keep it that way when I take it to Multiple Master.\"  \nI think, if I understand you, and I've been there having made an entire serif old style font from components, if you want to keep the base glyphs as components so you can get their design correct all the way through to multiple styles in a variation technology (MM in this case), then you really do not need to see accented versions yet. I mean, I've never made changes to the base glyphs based on what I saw in accented characters, it's always the other way around. So, short of some helpful script that decomposes and recomposes, maybe there's no problem? :)\n\nCheers!\n\n"
+    }
+  ]
+}

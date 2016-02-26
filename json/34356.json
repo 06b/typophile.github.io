@@ -1,0 +1,46 @@
+{
+  "id": "34356",
+  "title": "Metrics classes in Fontlab 5.0.3",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi there  \nI have stayed away from Metrics Classes in Fontlab up until now because of the 'disappearing Metrics Classes' bug. Is that bug gone now with the 5.0.3 release?\n\nThe case is that I would love to use Metrics Classes in my MM font. I have a set of working Kerning Classes that I use for the two endpoints in my MM design. Can I use the same set of Kerning Classes as Metrics Classes somehow? And if I can, then how do I set it up without breaking anything?\n\n| Attachment | Size |\n| --- | --- |\n| [Kerning Classes.png](http://web.archive.org/web/20111206121320/http:/typophile.com/files/Kerning%20Classes.png) | 61.31 KB |\n\n",
+  "author": "<a href=\"/web/20111206121320/http://typophile.com/user/16321\" title=\"View user profile.\">clauses</a>",
+  "time": "<br>",
+  "uid": "16321",
+  "comments": [
+    {
+      "time": "",
+      "content": "Okay I have set up set of metrics classes by hand, but the functionality seems rather flaky. Sometimes the preview in the Metrics Assistance windows is way off, and when I turn on \"Use the measurement line\" on it's way off in another way. A restart of Fontlab seems to fix it for a time before the strange preview appears again – a bug?\n\nAlso, is it correct that I can only choose to use the measurement line globally, and not pr. class? When I press \"Apply and save\" it runs through all the classes that are turned on, as in I can't set and apply the settings pr. class?\n\n"
+    },
+    {
+      "time": "",
+      "content": "A bit late ... [this script](http://web.archive.org/web/20111206121320/http:/www.kltf.de/downloads/KLTF-KerningToMetricsClasses.zip) creates an equivalent metrics class for every kerning class. Also sorts into OT, kerning and metrics classes. (Note: It will remove all existing metrics classes. Also, you need to turn on kerning/metrics classes by hand.)\n\nHm, I don't use metrics classes.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Karsten  \nAny users of Metrics Classes that wan't to chip in? How do you use Metrics Classes? Is it a matter of having very fine grained classes with strictly identical shapes? Then what about i with diacritics?\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'm currently working on FontLab 504 in Mac OS 10.6.8. I'm newby to font metric classes and looking for someone to guide me in this tedious work. I have defined a new metric class by hand, my key glyph has their LSB and RSB set, composites have different values, How do i transfer the key values to the composites by class? I'm avoiding the obvious copy paste special process.\n\nThanks in advance. PD. I'm figuring out how metric class works.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Ok, I figured out. First you have to create the metric class –either by hand or in auto mode (this last one isn't that precise)–; open the Metrics Assistance under Tools menu and check the classes you want to apply. That's it! click Apply and Save button.\n\nFor the I and their accented composites, you will have to use the measurement tool and meke sure to check it, so, the LRS and RSB will be copied from the stem, and not from the very edge of the bounding box.\n\nHope this works. =)\n\n"
+    },
+    {
+      "time": "",
+      "content": "I've yet to really solve the i diacritic issue but what I do is establish a class for the left side of say, the letter /o/ and use it for the c,e, and whatever else has the same left side shape. I then make a class for the left & width of where the original letter is used to define the diacritic characters. For ligatures, I have a class for the right side.\n\nI hope that made sense.\n\n"
+    },
+    {
+      "time": "",
+      "content": "An alternative to using Metric Classes,  \nwill be to write a script to set the metrics for you.\n\nIn the first lines you can define the left and right side bearings for the typical letters.  \nThen you define the groups, and finally you apply the changes.\n\nThis way you can update everything quick and easy.\n\nBut it's just an idea, still have to learn python.  \nMaybe you can write it Claus :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Ha! I wish. I once programmed in Comal 80, but that was probably around the early 80s.\n\n"
+    }
+  ]
+}

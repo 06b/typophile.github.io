@@ -1,0 +1,82 @@
+{
+  "id": "17809",
+  "title": "Does anyone still use merged/harmonized Postscript fonts?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "As I understand it, \"merged\" fonts were specially prepared Postscript fonts that allowed style buttons and keyboard shortcuts to change styles. Usually this is in Quark, but it might work in other applications as well. With current fonts, the style buttons make fake or styled versions of bold or italic. With a \"merged\" font, you could use Command+I and selected text would use the real italic, not just a tilted approximation. Most of what I know is from Robin William's book \"How to Boss Your Fonts Around\" from 1998.  \nDo any Typophiles still use this feature?\n\n",
+  "author": "canderson",
+  "time": "8 Feb 2006 — 9:01pm",
+  "uid": "9913",
+  "comments": [
+    {
+      "time": "9 Feb 2006 — 12:00pm",
+      "content": "You are referring to Style Linking.  \nHere's where support for it stands at the moment, in three applications on Mac OS X\n\n ![](http://web.archive.org/web/20120625051144im_/http:/typophile.com/files/commandi.jpg)\n\n"
+    },
+    {
+      "time": "9 Feb 2006 — 12:49pm",
+      "content": "Thanks for correcting my terminology. It's interesting that InDesign is \"Yes Yes Yes\". This functionality seems to be important to some people. I tried a couple of OpenType fonts in Quark 6.5 and it seemed to apply a true italic for Command-I. Does Passport work differently?\n\n"
+    },
+    {
+      "time": "9 Feb 2006 — 1:59pm",
+      "content": "I can confirm that Quark 6.5 does use true italics with \"Command-I\" and OpenType fonts, if they are style linked. Same thing with Word (v. 10).\n\n"
+    },
+    {
+      "time": "9 Feb 2006 — 2:05pm",
+      "content": "Incidentally, the interesting thing about InDesign is that it's actually choosing the font via its font menu, not \"applying\" a style to a font. If you check the font menu, you can see for yourself that is has changed fonts. It has no generic \"style\" buttons or \"style\" menu choices. So the key commands are simply short cuts for selecting fonts. InDesign apparently looks at the style linkings built into the fonts to choose the appropriate family member. If there is no italic, command-I has no effect. If you choose an italic font from the font menu and do command-I you get the roman.\n\n"
+    },
+    {
+      "time": "9 Feb 2006 — 2:29pm",
+      "content": "Cocoa apps (TextEdit, Pages, etc.) on OS X are less smart about style linking. They do something similar to what InDesign does, choosing fonts rather than applying styles, but seem to ignore the weight part of the style linking information.\n\nCommand-I toggles between roman and italic, but command-b has less desirable results. If there are only two weights, it will toggle between them, which is fine. In larger families, it seems to decide for itself which weight is \"regular\" and which weight is \"bold\", ignoring the intentions of the font designer. \"Regular is usually the \"regular\" or plain weight, while \"bold\" is whichever weight is next in weight after regular, regardless of the style linking.\n\nIf you repeatedly toggle command-b, you will soon be switching between these two fonts, regardless of which weight you started with. In the following examples, command-B should go between Regular and Bold, Light and Semibold, and Thin and Extrabold:\n\n&nbsp;&nbsp;&nbsp;Regular (command-B) --\\> Semibold (command-B) --\\> Regular  \n&nbsp;&nbsp;&nbsp;Light (command-B) --\\> Semibold (command-B) --\\> Regular  \n&nbsp;&nbsp;&nbsp;Thin (command-B) --\\> Semibold (command-B) --\\> Regular  \n&nbsp;&nbsp;&nbsp;Semibold (command-B) --\\> Regular (command-B) --\\> Semibold  \n&nbsp;&nbsp;&nbsp;Bold (command-B) --\\> Regular (command-B) --\\> Semibold  \n&nbsp;&nbsp;&nbsp;Extrabold (command-B) --\\> Regular (command-B) --\\> Semibold\n\nAll this makes command-B rather useless with large families.\n\n"
+    },
+    {
+      "time": "9 Feb 2006 — 2:34pm",
+      "content": "So is it the case that some Type 1 fonts were style-linked and some were not? In particular, I'm referring to fonts that would have showed up in Quarks font menu as a single item, not separate faces.\n\n"
+    },
+    {
+      "time": "9 Feb 2006 — 3:19pm",
+      "content": "That's correct. One of the reasons some foundries skip style linking as a workaround to avoid cross-platform document issues with font names. If all you have is plain styles (regardless of what the fonts look like), it simplifies the problem. On the down side, you get much longer font menus.\n\n"
+    },
+    {
+      "time": "9 Feb 2006 — 3:38pm",
+      "content": "this brings up another issue for me...  \nis it possible to style link fonts (PS & TT) for mac without having them all in the same suitcase?\n\n"
+    },
+    {
+      "time": "9 Feb 2006 — 3:51pm",
+      "content": "I'm not sure how you would do it with OS X and I don't think it's possible on Windows. With OS 9 and earlier, you could just open the font suitcase in the Finder and move bitmap or TT fonts in and out. With linked families, the FOND resource, which has all the link info, would follow the individual fonts around. If you spit up a family into separate suitcases, they would still find each other when they were active.\n\n"
+    },
+    {
+      "time": "9 Feb 2006 — 3:54pm",
+      "content": "<cite>this brings up another issue for me…<br>\nis it possible to style link fonts (PS &amp; TT) for mac without having them all in the same suitcase?</cite>\n\nI think that is a qustion I was meaning to ask. If you \"smash\" your fonts (see link) will that necessarily break the style linking?\n\n[http://www.insidersoftware.com/SM.php](http://web.archive.org/web/20120625051144/http:/www.insidersoftware.com/SM.php \"http://www.insidersoftware.com/SM.php\")\n\n"
+    },
+    {
+      "time": "9 Feb 2006 — 4:33pm",
+      "content": "_I don’t think it’s possible on Windows_\n\nWell, there are no suitcases in Windows, so it's not an issue.\n\n"
+    },
+    {
+      "time": "9 Feb 2006 — 4:48pm",
+      "content": "I meant you can't create Mac suitcase files on Windows.\n\n"
+    },
+    {
+      "time": "9 Feb 2006 — 4:58pm",
+      "content": "_If you “smash” your fonts (see link) will that necessarily break the style linking?_\n\nI would think that would be going too far, so I imagine not. It would probably be best to ask them.\n\nI find this whole \"font smashing\" concept a little distressing when I look at that page.\n\n"
+    },
+    {
+      "time": "9 Feb 2006 — 6:44pm",
+      "content": "In Quark or Word, if Type 1 font is linked, then you can use the keyboard shortcuts, but you only see one menu item, which at this point in history can be confusing to some users. If your font is separated so that there is one face per font suitcase, then the user will see separate menu items not not be able to use keyboard shortcuts. InDesign is smart enough to apply the italic even if the suitcase is separated, but the bold doesn't seem to work reliably.\n\nI think one of the intended uses of the font smasher is to take apart \"frankenfonts\". That is, font suitcases that people have modified (usually in the past) under OS 9. As a lowly prepress person, I used to get fonts with names like \"Sans Serif\", which would be a Mac font suitcase containing Helvetica, Futura, GillSans, etc...\n\n"
+    },
+    {
+      "time": "9 Feb 2006 — 8:05pm",
+      "content": "Style linking does not mean that the italic/bold/bolditalic styles will disappear from font menus. It is possible to modify FOND resources so that this also happens, but it's an optional step and not necessarily a good idea for the reasons you mention. It was a popular trick for a while around 1990, the idea being that you could clean up your font menus, but I don't think fonts are normally shipped this way.\n\n"
+    },
+    {
+      "time": "9 Feb 2006 — 8:34pm",
+      "content": "<cite>It is possible to modify FOND resources so that this also happens, but it’s an optional step and not necessarily a good idea for the reasons you mention.</cite>\n\nThis \"trick\" is what my original question was about! I thought that style linking **had** to be done by harmonizing the font. Thanks for all your help.\n\n"
+    },
+    {
+      "time": "9 Feb 2006 — 11:01pm",
+      "content": "Ah, a topic dear to my heart.\n\n\"Merged fonts\" or \"harmonized fonts\" are possible with Type 1 or TrueType.\n\nOn Windows, in normal Windows applications, only the base font of a style linked set ever shows up in the menus, and other fonts must be accessed through the style links. This is true regardless of font format. One can make the fonts not style linked at all, but this will be mildly surprising for Mac users and quite confusing to Windows users.\n\nRegards,\n\nT\n\n"
+    }
+  ]
+}

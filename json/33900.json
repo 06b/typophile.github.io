@@ -1,0 +1,78 @@
+{
+  "id": "33900",
+  "title": "Accent Height with Create Glyphs FL5",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Is there a way to determine or control the height the accent is placed above Upper case glyphs using Create Glyphs. I have placed all my upper and lower case glyphs into FL and all the accents such as the circumflex, tilde and grave. If I then select an empty lowercase accent glyph such as aacute or agrave the glyph is created using a composite letter and correct accent, the height of the accent above the glyph is determined by the height of that accent in it’s own window.  \nIf I use the same process for the uppercase accent glyphs such as Adiereesis the accent seem to appear very high up above the glyph. Is a there a way to control the height of the accent when used with uppercase glyphs.\n\nRr\n\n [‹ Pixel fonts in Fontographer](http://web.archive.org/web/20071115042148/http:/www.typophile.com/node/34355 \"Go to previous forum topic\") [Printing problems with a PDF ›](http://web.archive.org/web/20071115042148/http:/www.typophile.com/node/34005 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20071115042148/http://www.typophile.com/user/16986\" title=\"View user profile.\">RachelR</a>",
+  "time": "<br>",
+  "uid": "16986",
+  "comments": [
+    {
+      "time": " 19.May.2007 7.01am",
+      "content": "Yes, you can have complete control over the position of automatically placed accents. See the “Anchor Layer” chapter in the FontLab manual.\n\nIf you do not want to go the anchor route, the default position of accents for caps is determined by the difference between the x-height and cap height. The position of the accent is offset vertically by the difference. For instance, if your cap height is 700 and your x-height is 500, the accents will be shifted up by 200 when automatically generating accents for caps. So, by altering the cap height, you can control where the cap accents are automatically positioned. (Note: You don’t have to alter it permanently when doing this. You can change it back after generating the accented glyphs.)\n\n"
+    },
+    {
+      "time": " 19.May.2007 7.18am",
+      "content": "One other point: Changing the cap height will affect only accented caps that are generated after the change. If you have already-generated accented caps that you want to change, you have to delete and re-generate them.\n\n"
+    },
+    {
+      "time": " 19.May.2007 3.24pm",
+      "content": "_So, by altering the cap height, you can control where the cap accents are automatically positioned. (Note: You don’t have to alter it permanently when doing this. You can change it back after generating the accented glyphs.)_\n\nThat’s very devious Mark :-)\n\n"
+    },
+    {
+      "time": " 19.May.2007 5.12pm",
+      "content": "Thank you for noticing. :-)\n\n"
+    },
+    {
+      "time": " 19.May.2007 10.50pm",
+      "content": "I haven’t tried it yet, but the Cap height trick does sound like a great idea, thanks\n\nRr\n\n"
+    },
+    {
+      "time": " 20.May.2007 12.30pm",
+      "content": "I just which I could get FontLab to automatically know what my cap accents are, as opposed to my LC accents. Sure, I can manually specify the composition with Generate Glyphs, but I wish it just “knew.”\n\nT\n\n"
+    },
+    {
+      "time": " 20.May.2007 3.30pm",
+      "content": "Maybe a list, saved alongside .enc and other files, could map user-specific glyph suffixes to FLS-internal tags (to identify glyphs as uppercase, lowercase, smallcap, numeral, etc)? So Generate Glyphs and other functions ’know’ what’s what.\n\n"
+    },
+    {
+      "time": " 20.May.2007 7.53pm",
+      "content": "Thomas, maybe you know this already, but you can save lists of glyph compositions (built with your cap accent names) into a text file, and then load or paste them into the Generate Glyphs dialog.\n\n"
+    },
+    {
+      "time": " 21.May.2007 11.02am",
+      "content": "Thomas,\n\nof course FontLab Studio “knows” which accents are for uppercase.\n\nFor example, if you’re generating the glyph “Aacute”, FontLab Studio takes the glyph “A” as the first composite.\n\nFor the second composite, it tries to use a glyph named “acutecomb.case” (if it is found, it will not be shifted up). If the glyph is not present, FontLab Studio checks for “acute.case” (and if found, it will not be shifted).\n\nIf that is not present, FontLab Studio checks for “acutecomb” and if found, it shift the component up by the difference of caps height and x-heights (as specified in Font Info). In absence of that glyph it does the same for “acute”.\n\nIf you wish to use a different suffix for your uppercase component glyphs, make a copy of “alias.dat” in your user folder and in there, replace all “.case” by “.c” or “.uppercase” or whatever your preferred suffix is.\n\nAdam\n\n"
+    },
+    {
+      "time": " 21.May.2007 11.24am",
+      "content": "Adam, what about the x-axis metrics of “acutecomb.case”?  \nShould this be given a negative left side-bearing and zero width?\n\n"
+    },
+    {
+      "time": " 21.May.2007 1.48pm",
+      "content": "uh, Adam, since many combining diacritics aren’t “named” in the Adobe Glyph List For New Fonts, do we use the unicode number as the name?\n\nFor example, for a macron to ride over a capital letter, make up a glyph named “uni0304.case”? Or, since it won’t have a unicode number & will never make it into a PDF file anyway, use “macron.case” for the name?\n\nTIA\n\n"
+    },
+    {
+      "time": " 21.May.2007 4.15pm",
+      "content": "I wrote a script to automagically place anchor points. In this case, it defaults to 60 units above the characters, but it can be easily tweaked (just look for the number 60 and change it to whatever you like):\n\n[http://betatype.com/node/12](http://web.archive.org/web/20071115042148/http:/betatype.com/node/12 \"http://betatype.com/node/12\")\n\n"
+    },
+    {
+      "time": " 21.May.2007 10.48pm",
+      "content": "Nice!\n\nAnd [here](http://web.archive.org/web/20071115042148/http:/www.kltf.de/downloads/KLTF-GlyphGenerator.zip) is part two, for generating composite glyphs in batch. Uses the ’alias.dat’ file for composition rules. Generates glyphs for <cite>all</cite> composites mentioned in it, if the base glyph is present in the font. Please see the <cite>Read Me</cite> file for some notes and a tip.  \nTry with copies of fonts first. Almost eight a.m. now and I am tired.\n\n"
+    },
+    {
+      "time": " 31.May.2007 6.29pm",
+      "content": "\\> For example, for a macron to ride over a capital letter,  \n\\> make up a glyph named “uni0304.case”? Or, since it won’t  \n\\> have a unicode number & will never make it into a PDF  \n\\> file anyway, use “macron.case” for the name?\n\nIt may make it into a PDF if you map it to the basic (lowercase) variants through the “case” feature (hence the glyphname suffix).\n\nYou’d most likely include OpenType Layout code in your font such as:\n\n`feature case {\n  sub macron by macron.case;\n  sub uni0304 by uni0304.case;\n} case; `\n\nIf your font includes only the spacing macron (named “macron”), I’d call the glyph “macron.case”. If your font also includes the combining macron (“uni0304”), then perhaps it would make sense to include a combining uppercase variant as well (“uni0304.case”).\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": " 9.Jun.2007 6.13am",
+      "content": "Can anybody please delete this ’fornode’ account and all that spam? Sadly this guy doesn’t accept emails himself ...\n\n"
+    },
+    {
+      "time": " 9.Jun.2007 6.29am",
+      "content": "It’s interesting that he created the account over four days ago but  \nonly started spamming (exactly 200 times) about 3.5 hours ago...\n\nAlso:  \n [http://drupal.org/node/149778](http://web.archive.org/web/20071115042148/http:/drupal.org/node/149778 \"http://drupal.org/node/149778\")\n\nhhp\n\n"
+    }
+  ]
+}

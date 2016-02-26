@@ -1,0 +1,33 @@
+{
+  "id": "115057",
+  "title": "Please help: Integrating Arrows",
+  "forum": "Build",
+  "tags": [
+    "arrows",
+    "codepage",
+    "fontlab",
+    "Build"
+  ],
+  "content": "Hello Forum,\n\nI am stuck at one point in FontLab and hope someone can help me.  \nI would like to integrate arrows in a TrueType font using FontLab: arrow right and arrow left.  \nThe font should be used as a webfont later and i don´t want to build in images for arrows anymore.\n\nTo achieve this I proceeded as follows in FontLab:  \n- Create a Glyph in an empty grey box wich is marked yellow in the font-window  \n I understand that glyphs, that are not yellow do not belong to the currently selected encoding, codepage or Unicode range  \n- then i rename the glypgh-name to \"arrowright\" (using the context-Menue) and generate the unicode index for it (2192) using the little diamond  \n- After that action the Glyph is marked as grey (unencoded?) and it goes to the end-section in the font-window.  \n The arrow does not appear in the exported font. I tried TrueType and OpenType.  \n The font consist of 234 glyphs.\n\nDo you have any ideas, what i am doing wrong?  \nDoes the unicode codepage not support arrows?  \nI would be grateful for any hint.\n\nBarbara\n\n",
+  "author": "DontKnow",
+  "time": "18 Mar 2014 — 2:49am",
+  "uid": "218463",
+  "comments": [
+    {
+      "time": "18 Mar 2014 — 7:48pm",
+      "content": "Since none of the more knowledgeable have replied, I'll give a try. What you have done should work, always assuming I've understood you aright.\n\nFirst of all, you are creating (generating) an OpenType font, right? You're using\n\nTrueType/OpenType TT\n\nin the \"save as type\" window.\n\nBeyond that:\n\n<cite>I understand that glyphs, that are not yellow do not belong to the currently selected encoding, codepage or Unicode range</cite> Yes, but this is only internal to FL's display. It is a convenience in using FL, not a requirement; the \"yellow\" has no other meaning.\n\nThe glyph should ultimately have a name of \"arrowright\" and a Unicode number of 2192, though actually, a **name** of \"uni2192\" is also correct. Make sure it shows in the metrics window, just as a check that everything's hooked up.\n\nThen, after you have saved the .vfb file and complied the features (if there are any), go to the preview panel, and type in\n\n\\2192\n\nIt should show. Check the name assignment by typing in\n\n/arrowright (or /uni2192, if you've \\*named\\* it that)\n\nYour character should show both times. It should also show in the metric window BTW, with the same strings.\n\nBTW-2 Unicode is not a \"codepage\" If you're filling in the File \\> Font Info \\> Encoding and Unicode section, I believe the conventional wisdom is to select \"Latin 1,\" and use \"Macintosh MacRoman\" for the Microsoft Character set. Though I know that \"Western (Latin1)\" also works...\n\n\\* \\* \\*\n\nIf this is what you have done, then I'd ask what applications programs have you used to test the font where the character failed to appear?\n\n"
+    },
+    {
+      "time": "20 Mar 2014 — 11:24am",
+      "content": "Dear Charles,  \nthank you for your detailed answer!  \nIt helped me very much, since i have not much to do with fonts.\n\nEspecially your last note has encouraged me to check the font (TrueType / OpenType TT) in the FontExplorer X Pro. There I could see that the name of the Arrow did not work, it was just empty (only the Glyph-ID has a number, but also a different one). Weird, because the Metric preview window displays everything correctly in FontLab. Also \"Latin 1\" + \"MacRoman Macintosh\" are adjusted properly in the Font Info.\n\nThen I generated an OpenType font (OpenType PS) and the FontExplorer shows the names properly. After that i use Font Squirrel to generate the web font, and the arrow does not appear in the glyph overview of the demo HTML - despite the OpenType PS. Argh. I came up with the idea that this could be an issue of Font Squirrel and give another Generator a try (web-font-generator.com). Now it seems to work!\n\nI really admire the patience and the many skills font designers need to have.  \nI was very confused by the yellow marks in FL ... Thanks again for your time and help!\n\nBarbara\n\n"
+    },
+    {
+      "time": "20 Mar 2014 — 3:05pm",
+      "content": "Hmm. When you talk about \"FontSquirrel,\" I suspect your making woff format fonts for the web?\n\nSpecial issues there, and I know almost nothing about those formats. For checking the font itself, try using Microsoft Word (post 2010), or any OT-savvy text editor, and a laser printer -- actually, I'd use InDesign, but that's expecting a bit much, I know.\n\nIf everything works as it should in print, press on to the web formats. I did find one tidbit about FontSquirrel & it's generator:\n\n> When using the FontSquirrel Webfont Generator, you need to check the radio button “EXPERT” and then select the languages to be supported or the code range. The default is that only characters used in “Western languages” are included.\n\nFor all I know, the Font Squirrel generator is not picking up that information from the font itself. Nor do I know what \"code page\" arrowright lived on, back in the dark ages when there were \"code pages\" for hard-wired encodings. But we're well outside the area where I know <cite>anything,</cite> so...\n\n"
+    },
+    {
+      "time": "20 Mar 2014 — 3:29pm",
+      "content": "Yes, i want to extend the web-font with arrows for not using ugly text-images.\n\nThe hint with the Expert-Mode was it. In this section i could put in the arrow-sign in a form for including Single Characters. Putting the Hex-Code in the Unicode Ranges-form doesn't work, but a simple copy of the symbol has done it. It makes of course sense that webfonts do not included all characters for being small.\n\nTomorrow i will print the font through Indesign for being sure that everything ist working correct.  \nI am very grateful, thank you so much again :-)\n\n"
+    }
+  ]
+}

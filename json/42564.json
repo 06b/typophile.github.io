@@ -1,0 +1,30 @@
+{
+  "id": "42564",
+  "title": "MakeOTF and GlyphOrderAndAliasDB problem",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm trying to build a font with makeOTF, but I can't get past this error message:  \n**makeotfexe [FATAL] line too long [../../GlyphOrderAndAliasDB 3]**\n\nAny ideas?\n\n+++++\n\n ![](http://web.archive.org/web/20120616053635im_/http:/typophile.com/files/scrn_4668.png)\n\n<cite> </cite>  \n**The text of \"current.fpr\"**  \nDoAliasAndOrder true  \nInputFontPath MUSEO2\\_100.otf  \nGlyphAliasDBPath ../../GlyphOrderAndAliasDB  \nFeaturePath features  \nFontMenuDBPath ../../FontMenuNameDB  \nkSetfsSelectionBitsOn [7]\n\n**terminal output (on \"makeOTF -fp\")**  \nmakeotf [NOTE] Running makeotfexe with command string:  \n makeotfexe \"-f\" \"MUSEO2\\_100.otf.tmp\" -ga -ff \"features\" -osbOn \"7\" -gf \"../../GlyphOrderAndAliasDB\" -osv \"4\" -mf \"../../FontMenuNameDB\"  \nmakeotfexe [FATAL] line too long [../../GlyphOrderAndAliasDB 3]\n\n+++++\n\n",
+  "author": "Jos Buivenga",
+  "time": "27 Feb 2008 — 1:19am",
+  "uid": "10199",
+  "comments": [
+    {
+      "time": "27 Feb 2008 — 8:27am",
+      "content": "I've tried it with the example file that came with the AFDKO stuff and that one seems to work fine. I'll adapt that file to suit my needs. Still can't figure out what I did wrong with the file I made myself though...\n\n"
+    },
+    {
+      "time": "27 Feb 2008 — 9:45am",
+      "content": "It sounds like a problem with the linebreaks in your file. Make sure you use a a plain text editor (like the free TextWrangler for instance; Apple's TextEdit is not so suitable). Make sure you use Unix linebreaks and finish the last entry in your file with a linebreak too.\n\nHope that helps.\n\n"
+    },
+    {
+      "time": "27 Feb 2008 — 1:05pm",
+      "content": "Paul, that might be it. Ill give it a proper try this weekend. Dankjewel!\n\n"
+    },
+    {
+      "time": "2 Mar 2008 — 8:29am",
+      "content": "It works. Thanks!\n\n"
+    }
+  ]
+}

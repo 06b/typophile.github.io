@@ -1,0 +1,54 @@
+{
+  "id": "47131",
+  "title": "Museo Sans numbers",
+  "forum": "Jos Buivenga's blog",
+  "tags": [
+
+  ],
+  "content": "After reading [Tal Leming's fraction fever](http://web.archive.org/web/20120730152625/http:/talleming.com/2008/04/16/fraction-fever/) I decided to give this a go. I've long wanted to script a decent fraction feature, but couldn't get it right. This is working perfectly (for now ... I've only tested it in Indesign CS2 on Tiger).\n\n ![](http://web.archive.org/web/20120730152625im_/http:/typophile.com/files/frac_4561.gif)\n\n<cite> </cite>  \nStill in progress ... but Museo Sans will end up with nominators, denominators, superiors, inferiors, oldstyle figures (proportional & tabular) and lining figures (proportional & tabular).\n\n ![](http://web.archive.org/web/20120730152625im_/http:/typophile.com/files/sups_3733.gif)\n  \n<cite> </cite>  \n\n ![](http://web.archive.org/web/20120730152625im_/http:/typophile.com/files/sinf_4122.gif)\n  \n<cite> </cite>  \n\n ![](http://web.archive.org/web/20120730152625im_/http:/typophile.com/files/onum_3701.gif)\n  \n<cite> </cite>\n",
+  "author": "Jos Buivenga",
+  "time": "7 Jul 2008 — 6:43am",
+  "uid": "10199",
+  "comments": [
+    {
+      "time": "7 Jul 2008 — 7:03am",
+      "content": "Jos, how does your fraction feature differ from the normal opentype feature code?\n\nChrisL\n\n"
+    },
+    {
+      "time": "7 Jul 2008 — 7:07am",
+      "content": "Chris, I don't know what the normal or standard OT feature code for fractions is. Some time ago I tried to get it working and took a look at a few Adobe Pro fonts, but I really couldn't figure out how they scripted it.\n\n"
+    },
+    {
+      "time": "7 Jul 2008 — 7:12am",
+      "content": "Jos,  \nI just now followed your link to Tal's page. His way is way smart for the enduser but adds a Tad more work for the type desighner :-)  \nIt is really cool that someone doing a cookbook can, in less time than it takes to flip an egg, impose the frac feature with the aid of a stylesheet! Goitta love Tal's work. That is one Leming I would surely follow!\n\nChrisL\n\n"
+    },
+    {
+      "time": "7 Jul 2008 — 7:28am",
+      "content": "It's beautiful and it works like a charm. I'm curious though how other people script the frac feature.\n\n<cite>That is one Leming I would surely follow!</cite>\n\nJust laughed my head off. Tal may be smart in programming solutions but there's no one smarter in commenting ;-)\n\n"
+    },
+    {
+      "time": "7 Jul 2008 — 7:53am",
+      "content": "What I don’t like about the frac feature like this is that the space will be removed. I think it’s the designer who decides how the fractions must look like, not the typeface. I mean with or without the space in front of the fraction.\n\nPieter\n\n"
+    },
+    {
+      "time": "7 Jul 2008 — 8:10am",
+      "content": "True and a good point, but the feature is off by default and can also be applied on a selection if you want (you don't need the space) so the designer stays in control.\n\n"
+    },
+    {
+      "time": "7 Jul 2008 — 12:47pm",
+      "content": "Amazing. And beautiful. Can't wait ...\n\nFriendelijke Groeten, Tom  \n(that was almost all Nederlands I know ;-) )\n\n"
+    },
+    {
+      "time": "7 Jul 2008 — 1:52pm",
+      "content": "Thanks. Glyphs are not final yet. Still got lots to change, but I'm glad to share the joy I had with this frac thing.\n\nYes, Dutch does mingle best with English and will still read as Dutch :-)  \nViele Grüße von Arnheim\n\n"
+    },
+    {
+      "time": "7 Jul 2008 — 3:59pm",
+      "content": "@ **Jos** : \"_I don’t know what the normal or standard OT feature code for fractions is_\"\n\nQuite simplified, this is the way I do fractions (_follows the description, then the code itself_). Derived of Adobe standards, of course. This is a working code I only re-edit to alter the exact figures naming. Depending on the availability of five sixths, four fifths and other [more exotic] fractions you can remove parts of the replacement code below.\n\nSo, **the explanation**.  \nRequirements: 0-9.numerators, 0-9.denominators\n\n- Define what is considered slash (as class);\n- Define already built fractions (like percent, onequarter, onehalf etc.);\n- Replace all standard figures with numerators;\n- Define replacement rules for the already built fractions;\n- Last part: generation of not-ready fractions (like 22/7 etc.)\n\n_feature frac {  \n @slash = [slash fraction];  \n @prebuilt = [perthousand percent onequarter onehalf threequarters oneeighth threeeighths fiveeighths];_\n\nlookup FRAC {  \n sub [zero zero.pnum] by zero.numr;  \n sub [one one.pnum onesuperior] by one.numr;  \n sub [two two.pnum twosuperior] by two.numr;  \n sub [three three.pnum threesuperior] by three.numr;  \n sub [four four.pnum foursuperior] by four.numr;  \n sub [five five.pnum fivesuperior] by five.numr;  \n sub [six six.pnum sixsuperior] by six.numr;  \n sub [seven seven.pnum sevensuperior] by seven.numr;  \n sub [eight eight.pnum eightsuperior] by eight.numr;  \n sub [nine nine.pnum ninesuperior] by nine.numr;  \n } FRAC;\n\nsub zero.numr' @slash' zero.numr' zero.numr' zero.numr' by pertenthousand;  \n sub zero.numr' @slash' zero.numr' zero.numr' by perthousand;  \n sub zero.numr' @slash' zero.numr' by percent;  \n sub one.numr' @slash' four.numr' by onequarter;  \n sub one.numr' @slash' two.numr' by onehalf;  \n sub three.numr' @slash' four.numr' by threequarters;  \n sub one.numr' @slash' eight.numr' by oneeighth;  \n sub three.numr' @slash' eight.numr' by threeeighths;  \n sub five.numr' @slash' eight.numr' by fiveeighths;  \n sub seven.numr' @slash' eight.numr' by seveneighths;  \n sub one.numr' @slash' three.numr' by onethird;  \n sub two.numr' @slash' three.numr' by twothirds;  \n sub one.numr' @slash' five.numr' by onefifth;  \n sub two.numr' @slash' five.numr' by twofifths;  \n sub three.numr' @slash' five.numr' by threefifths;  \n sub four.numr' @slash' five.numr' by fourfifths;  \n sub one.numr' @slash' six.numr' by onesixth;  \n sub five.numr' @slash' six.numr' by fivesixths;  \n sub [@slash @fig\\_dnom @prebuilt] @fig\\_numr' by @fig\\_dnom;  \n} frac;\n\nThe beautiful part is it does not need in fact any editing (you can copy and paste this feature code everywhere, if you have defined the classes **@fig\\_dnom** [denominators] and **@fig\\_numr** [numerators]). Of course Tal's solution is nicer, but this one is easier - and does not have above-mentioned shortcomings (namely, the space problem).\n\n"
+    },
+    {
+      "time": "8 Jul 2008 — 12:41am",
+      "content": "Thank you Asparouh. I'll try it out soon.\n\n"
+    }
+  ]
+}

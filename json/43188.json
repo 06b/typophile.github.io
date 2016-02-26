@@ -1,0 +1,90 @@
+{
+  "id": "43188",
+  "title": "exporting all the glyphs in a font into a text file",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "I feel especially silly asking about this because about a month ago I figured out how to do this. It seems to me that either Fontlab or maybe Font Explorer had a feature that would export all glyphs in a font into a unicode text file. Maybe it's yet a third app. In any event if you recall & can remind me I will be most grateful. Thanks!\n\n",
+  "author": "ebensorkin",
+  "time": "14 Mar 2008 — 7:26pm",
+  "uid": "2942",
+  "comments": [
+    {
+      "time": "14 Mar 2008 — 9:34pm",
+      "content": "[TTX](http://web.archive.org/web/20131222103922/http:/www.letterror.com/code/ttx/index.html)?\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 1:45am",
+      "content": "Nice link by gum! But that does another different cool thing. I want a txt file with the whole:\n\n\"aæbcdefﬀﬁﬂghiĳjklmnoœøpqrsßtuvwxyzðþAÆBCD  \nEFGHIĲJKLMNOŒØPQRSTUVWXYZÐÞ1234567890ªº&\\*  \n$€£¢¤#%•«†»‹‡›@§ƒ¶()[]{}\\|/~:;.!¡?¿'\"‘“”’  \n-—\\_¦™^ÀÁÂÃÄÅÆǺǻÇÈÉÊËÌÍÎÏÑÐÒÓÔÕÖØÙÚÛÜÝàáâã  \näåæçèéêëìíîïðñòóôõöøùúûüýþÿĀāĂăĄąĆćĈĉĊċČč  \nĎďĐđĒēĔĕĖėĘęĚěĜĝĞğĠġĢģĤĦħĥĨĩĪīĬĭĮįİıĲĳĴĵĶ  \nķĸĹĺŁłĽľĿŀļĻŃńŅņŇňŉŊŋŌōŎŏŐőŒœŔŕŖŗŘřŚśŜŝŞş  \nŠšŤťŦŧŨũŪūŬŭŮůŰűŲųŴŵŶŷŸŹźŻżŽžſ√∂∫∞+–÷×=≠≈  \n±¼½¾°©®™µΩ∆∑∏\" + plus the other glyphs.\n\nAs I say there really is a simple easy way to kick one out. And I will find the way again eventually but I hope somebody will be able to remind me instead!\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 3:23am",
+      "content": "Eben, why not select all glyphs, open the preview window, switch to text mode, select and copy everything and paste it into a text doc?\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 10:54am",
+      "content": "I will try that now. Thanks!\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 11:06am",
+      "content": "I have them all in, but I can't seem to find the way to \"switch to text mode\". Maybe that is a FL5 Mac vs PC difference...\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 11:57am",
+      "content": "On the mac it's next to 'metrics mode' and 'kerning mode'\n\n ![](http://web.archive.org/web/20131222103922im_/http:/typophile.com/files/tm2_6300.gif)\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 2:18pm",
+      "content": "Hey, that works. Pretty handy trick!\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 2:46pm",
+      "content": "Thanks. I also use it the other way around. I first discovered this when I wanted to paste a Cyrillic text in FL.\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 8:04pm",
+      "content": "Of course, you can only put _encoded_ glyphs into a text file. I recently wanted to create an InDesign document that contained all the glyphs in a font, including the unencoded glyphs, and Eric Menninga at Adobe very kindly wrote me a script to do this. Eric says he plans to tidy the script up and post it to Typophile at some point.\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 10:10pm",
+      "content": "That is really great! I am pretty sure this is a different method, but this seems like an far better one. Thanks Jos!\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 10:55pm",
+      "content": "You're welcome Eben.\n\nThat's true John, but if you load the font first from which you're pasting, it will work.\n\n\\*edit\\* At least on a Mac. Can't test it on Windows.\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 11:33pm",
+      "content": "<cite>Eric says he plans to tidy the script up and post it to Typophile at some point.</cite>\n\nThat's great news.\n\n"
+    },
+    {
+      "time": "17 Mar 2008 — 2:07am",
+      "content": "I want this script! How can I make sure that I don't miss it's release? :)\n\nThis would save me so much time to keep my glyph lists in my Indesign test documents up to date (up to font). This is really a pain at the moment, it's time consuming and full potential errors ...\n\n"
+    },
+    {
+      "time": "18 Mar 2008 — 6:45am",
+      "content": "It's not too hard to accomplish using InDesign Tagged Text.\n\nYou just have to know the number of glyphs in your font, and then write an InDesign Tagged Text header to a text file, followed by a tag for each glyph ID.\n\nSomthing along these lines in python:\n\n`import sys\nprint 'your tagged text header goes here'\nfor gid in range(425):\n  sys.stdout.write('<cSpecialGlyph:'+gid+'><0xFFFD><cSpecialGlyph:>')`\n\nInsert some unencoded glyphs in InD via the glyph palette, export to tagged text and look at it in a text editor to figure out how it's done exactly.\n\nHm, come to think of it I should have made a program out of it and charged for it ;) Oh well, just send me your fonts that you proof with this script :)\n\nCheers,  \nJens\n\n"
+    },
+    {
+      "time": "18 Mar 2008 — 10:40am",
+      "content": "_Of course, you can only put encoded glyphs into a text file. I recently wanted to create an InDesign document that contained all the glyphs in a font, including the unencoded glyphs, and Eric Menninga at Adobe very kindly wrote me a script to do this. Eric says he plans to tidy the script up and post it to Typophile at some point_\n\nNow that wold be handy.\n\n"
+    },
+    {
+      "time": "18 Mar 2008 — 11:12am",
+      "content": "if you want encoded glyphs, in FLS5 you can do the \"test font feature\" and then there should be an option to show all glyphs in the font (with unicode values). Then from this dialogue box you can copy/paste the output.  \ni'd give more explicit instrux, but am away from my own laptop just now...\n\n"
+    },
+    {
+      "time": "28 Mar 2008 — 1:04am",
+      "content": "`\n    app.findGlyphPreferences = NothingEnum.nothing;\n    app.changeGlyphPreferences = NothingEnum.nothing;\n    app.findGlyphPreferences.appliedFont = app.fonts.item(\"Garamond Premier Pro Italic\");\n    app.changeGlyphPreferences.appliedFont = app.fonts.item(\"Garamond Premier Pro Italic\");`\n\nvar t = app.activeDocument.textFrames.add({geometricBounds:[0,0,210, 148] });  \n var glyphenzahl = 2555;  \n var s = t.parentStory;  \n var c = fillStory( s, glyphenzahl );  \n var startGlyphID = 1;  \n app.findGlyphPreferences.glyphID = startGlyphID;\n\nfor ( i = 1; i \\<= glyphenzahl; i++ )  \n {  \n app.changeGlyphPreferences.glyphID = i;  \n c[i].changeGlyph();  \n }\n\nfunction fillStory( aStory, aCounter )  \n {  \n aStory.contents = '';  \n for ( i = 0; i \\< aCounter; i++ )  \n aStory.insertionPoints[-1].contents = ' ';  \n return aStory.characters;  \n }\n\nSo this is a \"beta\"-version of the script, created with the kind help of [www.hilfdirselbst.ch](http://web.archive.org/web/20131222103922/http:/www.hilfdirselbst.ch/ \"www.hilfdirselbst.ch\") (swiss user-to-user support site). It inserts all glyphs of a Font to a new text frame in Indesign CS3. The glyphs do not need to be encoded with a unicode point.\n\nWhat the script does: create a text frame with as much \" \" inserted as the font has glyphs as \"search dummies\". Start a search and replace script, searching for \" \" and replacing it with i+1 glyph number each time it finds one.  \nIt is done per \"search and replace\" as it does not seem to be possible to directly access Glyphs per GID to insert them into a textframe, but it works per glyph search to replace them.\n\nOne have to adjust:  \n- 2 times Font-Family name und weight (separated per Tabulator: \"Times New Roman[TAB]Regular\")  \n- choose the same font as default setting in your Indesign document to be sure it works. I think as it is not specified in the script, this is necessary.  \n- insert the glyph count of the font in the line \"var glyphenzahl = 1234;\"  \n- \"var startGlyphID=1\": the GID of the \"space\" glyph of your font. Any other unicoded(!) glyph can be used as well, but be sure to read the next line if you do this!  \n- in the line \"aStory.insertionPoints[-1].contents = ' '\" the same glyph has to be inserted as specified in \"startGlyphID\" (i.E. if you have inserted the GID of the space character above, you have to enter a space here. These have to correspond, otherwise it won't work.)\n\nThis can be optimised for sure, but it works quite well for Adobes Garamond Premier Pro and for some of my fonts I was building it for.\n\nI hope this is useful to some of you. Don't hesitate to improve it... I am a scripting noob, so there for sure is space for optimization.\n\n"
+    },
+    {
+      "time": "28 Mar 2008 — 1:24am",
+      "content": "This also works fine:\n\nTools \\> Quick Test As  \nThen choose: All characters  \n:)\n\n"
+    },
+    {
+      "time": "28 Mar 2008 — 3:03am",
+      "content": "\\> This also works fine:\n\nfor encoded characters...\n\n"
+    }
+  ]
+}

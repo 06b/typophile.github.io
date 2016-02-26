@@ -1,0 +1,78 @@
+{
+  "id": "2994",
+  "title": "Open Type small cap differences",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Why in some Adobe fonts are the small caps named A.sc, B.sc ... a.sc, b.sc, and others are listed as Asmall, Bsmall?   \n   \nWhich one is correct or what is the difference?   \n   \nThanks.   \n   \nNigel\n\n",
+  "author": "anonymous",
+  "time": "5 Feb 2004 — 1:07pm",
+  "uid": "1203",
+  "comments": [
+    {
+      "time": "5 Feb 2004 — 5:49pm",
+      "content": "No, Unicode does not (generally) encode glyph variants. Only default -- or what Yannis Haralambous calls 'privileged glyphs' -- are directly mapped to characters. So an OpenType font will contain one encoded \\<a \\> character, and possibly a multitude of unencoded variants: /A.sc/ /A.swash/ /A.alt/ /A.titling/ etc. The glyph variants are mapped indirectly to the character via OpenType Layout features.   \n   \nOpenType Layout allows the user to control the _display_ of text while maintaining the semantically meaningful backing store of character codepoints.\n\n"
+    },
+    {
+      "time": "5 Feb 2004 — 5:51pm",
+      "content": "By the way, you can put anything you like after the dot in an /X.format/ name. Only the part of the name before the dot is parsed. So the smallcaps could be /X.sc/ or /X.small/ or whatever else makes sense to you.\n\n"
+    },
+    {
+      "time": "5 Feb 2004 — 6:08pm",
+      "content": "I'll just add that, by pure matters of convention, I recommed that whenever a glyph is used in an OpenType Layout feature, you use the OpenType Layout feature tag names as glyph name suffix. For example, the variant of the digit \"five\" that is used in the old-style figures feature (abbreviated \"onum\"), should be named \"five.onum\". For small caps variant of \"A\", I personally recommend using \"A.smcp\". I guess in that very case, \"A.sc\" is also acceptable.   \n   \nSuch a systematic approach can help a lot when developing OpenType fonts. If one glyph is used in more than one feature, I'd recommend using the \"primary\" feature tag as suffix (e.g. if the small caps variant of \"A\" is used in the smcp and the c2sc feature, I'd still call it \"A.smcp\").   \n   \nAs mentioned above, this is simply a convention.   \n   \nRegards,   \nAdam Twardoch\n\n"
+    },
+    {
+      "time": "6 Feb 2004 — 12:24am",
+      "content": "I agree with Adam that it is wise to systematically name glyphs according to OTL feature. However, in the case of numeral variants it is important to identify two pieces of information about the glyph: its style and its spacing, which are controlled by two different layout features. For numerals I use the following extensions (although one style is obviously the default form and the extension can be omitted):   \n   \n.LT = lining tabular \\<lnum\\>\\<tnum\\>   \n.LP = lining proportional \\<lnum\\>\\<pnum\\>   \n.OT = oldstyle tabular \\<onum\\>tnum\\>   \n.OP = oldstyle proportional \\<onum\\>\\<pnum\\>   \n   \nRecently, I've started adding smallcap lining figures, but only turn these on with the caps-to-smallcaps feature:   \n   \n.ST = smallcap tabular \\<c2sc\\>\\<tnum\\>   \n.SP = smallcap proportional \\<c2sc\\>\\<pnum\\>\n\n"
+    },
+    {
+      "time": "6 Feb 2004 — 12:20pm",
+      "content": "Those are not _standard_ Unicode values: they are Private Use Area codes, which means that the same codes can be used by another person for completely different characters. This leads to all sorts of problems with font switching and document exchange, as well as producing documents that cannot be searched or spellchecked. I avoid PUA codepoints like the plague. Adobe originally were recommending using PUA codepoints for glyph variants for precisely the purpose you suggest, but they have since reversed that position -- having seen what a mess PUA codepoints make of documents -- and are now advocating against PUA use.\n\n"
+    },
+    {
+      "time": "6 Feb 2004 — 6:06pm",
+      "content": "David Lemon told me at the type conference in Thessaloniki in June 2002 that Adobe were moving away from the PUA encoding, and his colleague Eric Muller was quite vociferous about the problems of PUA in text around the same time. Brioso may have PUA codepoints because it has been in development for some time, or because Adobe had not changed their production standards to remove PUA completely. It is notable that although Brioso has PUA mappings in the cmap table, the glyphs are named as variants of the standard character, e.g. /A.sc/ not /Asmall/, which means name parsers will map these characters back to the standard codepoints for the character, not the PUA codepoints of the variants.\n\n"
+    },
+    {
+      "time": "7 Feb 2004 — 11:20am",
+      "content": "And so the recommendation is to name small cap glyphs as X.sc as opposed to x.sc so the glyph would map to an uppercase instead of a lowercase form?\n\n"
+    },
+    {
+      "time": "7 Feb 2004 — 11:37am",
+      "content": "Ah, now James introduces an interesting point. To which base character do you want your glyph variants to be back-mapped? In the actual OT features, of course, you can map both the upper and lowercase letters to smallcaps, but parsing glyph names back to characters is a one-to-one option. Yes, I think it is better to map smallcaps back to uppercase letters, because the most semantically meaningful use of smallcaps is in acronyms and abbreviations, which should be mapped back to all-caps; most other uses of smallcaps, e.g. running heads, chapter entries, etc., are merely stylistic and it doesn't really matter whether they are mapped back to uppercase or lowercase.   \n   \nAdobe got their knickers in a twist about this question, and have started including duplicate sets of smallcaps in their fonts: one (X.sc) for use with the \\<c2sc\\> feature and one(x.sc) for use with the \\<smcp\\> feature. I don't think this is worthwhile, Microsoft thinks it is silly, and Adobe are not actively recommending that anyone else follow suit. The important thing to remember is that parsing glyph names to reconstruct character strings is something that is only necessary in a minority of cases with one application (Acrobat). Most of the time, when PDFs are exported from applications, the original character string is stored in the PDF, so there is no need for Acrobat to parse the glyph names. Glyph name parsing is only necessary when you have a PDF distilled from something like a Word print stream, in which there is no storage of the original character codes. Of course, the whole mechanism fails spectacularly as soon as you start dealing with complex scripts in which glyph order does not correspond to character order. Also, some TrueType fonts ship with format 3 post tables, which do not include glyph names, and Acrobat will not be able to reconstruct character strings for text set in such fonts.\n\n"
+    },
+    {
+      "time": "7 Feb 2004 — 5:49pm",
+      "content": "John,   \n   \nas far as I know, the necessity to parse glyph names back to characters only occurs in even more specific situations.   \n   \nFirst, it only becomes necessary when the font is embedded in the PDF document as Type 1. Since neither PostScript nor PDF have native support for OpenType PS (.otf) fonts, both Type 1 fonts and OpenType PS fonts are sent as Type 1 (or bare-bones CFF, but it's a negligible detail). OpenType TT/TrueType (.ttf) fonts usually are sent as so-called Type 42 fonts, which are a sort of \"binhexed native TrueType\" fonts.   \n   \nWhat this practically means is that when TrueType fonts are embedded in PDF files, all the tables including the cmap table are embedded. So it the vast majority of cases, for TrueType fonts, Acrobat can access the embedded cmap table and does not need to parse glyph names. Also, when Distiller creates the PDF that uses embedded TrueType fonts, it encodes additional information in the PDF that contains the Unicode version of the text used (which usually makes the PDF larger but more accessible).   \n   \nAs you probably know, in most cases, PDF files are built by first creating a PostScript file, and then converting it into PDF. As I mentioned before, PostScript has no knowledge of OpenType PS, so the .otf fonts are embedded in the PostScript \"print stream\" (i.e. the data gets sent to the printer or is used to build the PDF) as Type 1. This means, obviously, that there is no cmap table that walks along the file.   \n   \nHowever, when a PDF is produced using the Adobe Acrobat package, Acrobat Distiller has an option to use original fonts rather than the ones embedded in the PostScript stream. With this option activated (by default), Distiller looks for the OpenType PS font on the user's hard disk. If found, Distiller parses the cmap table and adds Unicode text information to all text objects in the created PDF file (just like with OpenType TT/TrueType fonts).   \n   \nSo in all the cases above, the PDF is created with Unicode information already embedded, and Acrobat has no need to parse glyph names.   \n   \nThe few situations when Acrobat needs to access glyph names of the font are when:   \n1. The PostScript file was built on one computer, and the PDF file is \"distilled\" on another computer that does not have the OpenType PS font installed.   \n2. The \"use original fonts\" option in Acrobat Distiller was disabled.   \n3. When the TrueType/OpenType TT font was embedded as Type 1 font rather than Type 42 (e.g. when PostScript Level 1 was used or the file was created in Corel DRAW).   \n4. The PDF was created using some non-Adobe software. There are numerous packages for PDF creation on the market, and \\*some\\* of them are much less sophisticated than Distiller.   \n   \nThe information above is my understanding of what I have learned from some Adobe engineers. I hope it is accurate, but I may have mixed something up.   \n   \nSo, all in all, it \\*is\\* useful to use meaningful glyph names, but it's not the end of the world if you don't.   \n   \nRegards,   \nAdam Twardoch\n\n"
+    },
+    {
+      "time": "7 Feb 2004 — 7:55pm",
+      "content": "Adam has it pretty much all correct. But I will note that the presence of the CMAP without a GSUB table doesn't really help in some cases, such as with alternates and ligatures that don't have standard slots in Unicode. Take for example small caps. So there are some of the same situations listed for OpenType PS fonts that also apply to OpenType TrueType fonts.   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "7 Feb 2004 — 8:19pm",
+      "content": "Thomas,   \n   \nindeed, I forgot to mention that aspect. Obviously, for unencoded glyphs such as alternates and small caps, the glyph naming still is very helpful -- at least the \"basic\" character, and therefore its Unicode can be recovered. The same applies to ligatures: when the ligature glyph is named \"f\\_f\\_k\", Acrobat will be able to extract the text \"ffk\". If the ligature glyph were named \"ffk\" or \"ffklig\" or something similar, Acrobat will fail to recover the text and will map that glyph into a non-defined character.   \n   \nTherefore, it really does make sense to follow the recommendations given in the \"Assigning glyph names in new fonts\" section of the document listed at:   \n [http://partners.adobe.com/asn/tech/type/unicodegn.jsp](http://web.archive.org/web/20140802012943/http:/partners.adobe.com/asn/tech/type/unicodegn.jsp)   \n   \nRegards,   \nAdam\n\n"
+    },
+    {
+      "time": "5 Feb 2004 — 1:29pm",
+      "content": "John   \n   \nAre there Unicode designations for the X.sc conventions?   \n   \nNigel\n\n"
+    },
+    {
+      "time": "6 Feb 2004 — 6:43am",
+      "content": "Wouldn't it be better to use Asmall Bsmall etc which have Unicode values and would be accessible to Windows users in applications should as Word which does not support OpenType features?   \n   \nNigel\n\n"
+    },
+    {
+      "time": "6 Feb 2004 — 1:23pm",
+      "content": "Thank you John, I understand now why there should not be any Unicode values assigned to the a.sc A.sc series.   \n   \nEven Adobe's Brioso uses PUA codepoints. Did they change their position since then?   \n   \nNigel\n\n"
+    },
+    {
+      "time": "8 Feb 2004 — 9:10am",
+      "content": "Hi,   \nAdam alerted me to this highly interesting thread, and asked me to provide some more details about Unicode information in PDF which I'm happy to do.   \nHere we go: most modern PDF Producers (not only Distiller) indeed add a special data structure to the actual font data in the PDF which is used to add Unicode semantics for any font. This is not always required; in many cases Unicode mappings can and will be derived from the /Encoding entry in the PDF (which is separate from any encoding information in the font) or by mapping well-known glyph names. However, especially with subsetting or non-AGL glyph names this may not work. Even advanced techniques which interpret parts of the font's data may not work (for example, with TT subsetting it's legal to strip the post table). The additional data structure is called the ToUnicode CMap. It borrows the syntax from using CMaps with CID fonts, but in this case the CMap is used to map the font's code points to Unicode values. More precisely, it can be used to map a sequence of one or more Unicode values to each addressable glyph in the font. This makes it possible to correctly map ligatures (but complex scripts which require glyph reordering cannot be mapped this way). It's important to note that the text will not be stored twice in the font; instead, the font will have the ToUnicode CMap attached to it.   \nWith a ToUnicode CMap reliable text extraction for PDF is possible even if the glyph names are completey screwed up (private names or wrong use of standard names). However (and I guess it's not necessary in this forum to emphasize this point) it is highly recommended to use good glyph names wherever possible. For example, how could the PDF producer create a proper ToUnicode CMap without enough information in the font (of course this point is moot for modern Unicode-based font formats, in particular OpenType)?   \n   \nFinally, it's worth mentioning that there are other means in PDF to attach Unicode information to text. In particular, Tagged PDF offers various means which can be used to mapped arbitrary sequences of text to a Unicode-conforming equivalent, similar to ALT tags in HTML. However, this is completely beyond the font designer's control, but is completely managed by the application producing the PDF.   \n   \nThomas\n\n"
+    },
+    {
+      "time": "5 Feb 2004 — 1:26pm",
+      "content": "The /X.sc/ naming convention is more recent and a better choice for new font development. Some glyph name parsers such as the old ATM and at least some versions of Acrobat, would map /Xsmall/ to a Private Use Area codepoint, i.e. to a non-standard character code. /X.sc/ is interpreted as an unencoded glyph variant of /X/, so is more reliable for capturing standard, interchangeable text from print streams and other circumstances in which the original character codes are lost and only the glyph names remain.\n\n"
+    }
+  ]
+}

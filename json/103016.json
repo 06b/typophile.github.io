@@ -1,0 +1,34 @@
+{
+  "id": "103016",
+  "title": "Specifying Character Size Question",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Previously, I've only ever used FontLab for editing fonts, or adding special characters, but I've recently been asked to build a very simple dingbat font for a client, which consists of two dividers that are going to be used in the layout of a paperback novel. Both need to be page width (which works out to be about 5\" wide), and the designer doing the print production has requested a version where the dingbat font I built would work when set to 20pt or so so that when it appears at the top of a page it does not push the paragraph down to the middle of the page when using InDesign (currently it needs to be 200pt to be the correct width, I'm sure I could solve this if I was laying it out, but alas, I am not). I've looked through the FontLab manual, but I am not finding it to be particularly helpful for this question.\n\nThanks!\n\n",
+  "author": "seanglenn",
+  "time": "14 May 2013 — 10:57am",
+  "uid": "1256",
+  "comments": [
+    {
+      "time": "14 May 2013 — 2:00pm",
+      "content": "200 points is ten times 20 points; therefore, multiply the value of both the left and right sidebearings by five.\n\nOr—I know this is really radical—set the character at 20 pts. and center it.\n\n"
+    },
+    {
+      "time": "14 May 2013 — 7:13pm",
+      "content": "As I read the post, it isn't the left-right sidebeariungs that are the issue, it's the top and bottom. That is, the top-bottom need to be 20 point when the character is set to 200 points.\n\nIf that's right...\n\nSeveral ways to do this in the font I suppose -- break the character up into 10 parts, and put each part in a separate character, the first & last only having side bearings. Code in private use - or, use a,b,c,d,e,f, etc, if he/you're willing to be sloppy...\n\nOr, when setting, it it can be scaled in one direction only, say the horizontal, within InDesign. InDesign lets you do that, even put the instruction in a character style if you prefer. So, if it's a taper rule, set it so that when scaled 999% horizontally, it's vertical (the swell, in this case) is just right at 100%; you could provide for that & anticipate such scaling in the characters you draw in the font.\n\nEtc.\n\nI don't think I've been very clear. Let me know if I need to try again.\n\n"
+    },
+    {
+      "time": "14 May 2013 — 7:26pm",
+      "content": "I'm not sure I see the problem.  \nCan't you simply scale the outline of the glyph to 1000% of it's current size, but not change the vertical metrics or UPM of the font? That should mean that setting it at 20pt gets you the same as you now get at 200pt, but with no extra vertical space.\n\nUnless I'm missing something. It is getting late.\n\n- Jason C\n\n"
+    },
+    {
+      "time": "15 May 2013 — 9:39am",
+      "content": "Jason - I made quick and dirty experiment and it does not work (at least on winXP).  \nI would try (in InD or something) to set zero-width character + this special glyph + zero-width character and set the middle to 200 pt.\n\n"
+    },
+    {
+      "time": "15 May 2013 — 6:54am",
+      "content": "I came up with a solution by scaling the original glyph in Illustrator to 8000pt and then importing the EPS into FontLab (giving the character much larger scale in FontLab as well). It still has a larger top than is needed, but it will work for my purposes.\n\nI guess I will have to open up some fonts like the Adobe Woodtype Ornaments which have these kinds of horizontal rules and see how they worked it out there. I have a feeling by setting the sidebearings out as far as I did that there might be issues if the page width ended up different than it is currently (its for a 6x9 paperback so for now, it works).\n\nHopefully it will only be used this way on this one project, and I won't have to worry about it again. I've already spent more time on it than I billed for.\n\n"
+    }
+  ]
+}

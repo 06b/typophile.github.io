@@ -1,0 +1,62 @@
+{
+  "id": "16573",
+  "title": "OpenType question: dlig feature causes \"offset overflow\"",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "In another thread someone asked about an “overflow” problem when compiling OpenType kern feature in Fontlab. I am having the same problem, except with the dlig feature. The solution that was suggested for the kern feature overflow was using subtables. I tried that with my dlig feature, but it looks like subtables are not allowed with this feature.\n\nMy dlig feature is quite simple. It’s just about 120 lines of things like “sub @lc\\_d @lc\\_a @lc\\_b by dab.alt;” nothing at all more complicated than this. I’m at a loss as to why it would could cause an “offset overflow”. I thought overflow errors were caused by tables that exceeded 64k in size. My dlig feature is nowhere near that size. In fact, my liga feature is about the same size as my dlig feature, but it doesn’t cause an overflow.\n\nIf anyone can shed some light on this, or tell me of a workaround, I would very much appreciate it.\n\nAle\n\n [‹ Pasting from illustartor to fontlab (beginner level..)](http://web.archive.org/web/20080924093338/http:/typophile.com/node/16450 \"Go to previous forum topic\") [Identifying self-intersecting contours ›](http://web.archive.org/web/20080924093338/http:/typophile.com/node/16576 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080924093338/http://typophile.com/user/827\" title=\"View user profile.\">Ale Paul</a>",
+  "time": "<br>",
+  "uid": "827",
+  "comments": [
+    {
+      "time": " 2.Dec.2005 11.18am",
+      "content": "what’s the contents of @lc\\_a etc.?\n\nA.\n\n"
+    },
+    {
+      "time": " 2.Dec.2005 11.30am",
+      "content": "These are classes of variations on each individual letters. For example @lc\\_a is a class that is the equivalent of [a a.alt a.swash a.alt2]. None of these classes contain more than 6 glyphs. I even tried doing it without the classes, i.e. using “sub [a a.alt a.swash a.alt2] [a a.alt a.swash a.alt2] [a a.alt a.swash a.alt2] by aaa.alt;” It still caused the same overflow.\n\n"
+    },
+    {
+      "time": " 2.Dec.2005 12.58pm",
+      "content": "It’s unrelated to the offset overflow, but I’ll just point out that your ligature glyph name is not ideal. Instead of dab.alt it should be d\\_a\\_b.alt.\n\nSorry that I don’t know what’s causing the overflow problem.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": " 2.Dec.2005 1.19pm",
+      "content": "Thanks Thomas. I’ll certainly take your advice into account.\n\nAle\n\n"
+    },
+    {
+      "time": " 2.Dec.2005 3.04pm",
+      "content": "\\> I even tried doing it without the classes, i.e.  \n\\> using “sub [a a.alt a.swash a.alt2] [a a.alt  \n\\> a.swash a.alt2] [a a.alt a.swash a.alt2] by aaa.alt;\n\nSorry, but that is not doing it without the classes. [a a.alt a.swash a.alt2] is a class, @lc\\_a is just a shorthand name for it.\n\nWhy don’t you try it \\*really\\* without classes, i.e. “sub a a a by a\\_a\\_a.alt”?\n\nAdam\n\n"
+    },
+    {
+      "time": " 3.Dec.2005 6.28am",
+      "content": "it seems to me that this kind of encoding can easily result in a large # of replacement lookups. I’m sure I don’t understand OT compilation as well as Adam does, but for your given example if you have 4 letter variations in each of your classes and 120 lines you would end up with 7680 lookups, and easily many more if some of your classes have five or more alernates or your ligature strings are more than 3 characters long. (Adam, please correct me if my thinking on this is wrong!)\n\nAn easy way to get around this problem is to put your dlig feature _before_ your other features (salt, swsh, calt, etc.) But maybe you’re trying to achieve some other effect. Maybe you could explain a bit more in detail what you’re trying to achieve?\n\n"
+    },
+    {
+      "time": " 3.Dec.2005 8.11am",
+      "content": "Not lookups but substitutions — but indeed, that’s the case. And your advice makes much sense, Paul. If you move dlig before calt, you may get away with just putting the basic variants into dlig (sub a a a by a\\_a\\_a.alt) instead of all the variants (sub [a a.alt a.swash a.alt2] [a a.alt a.swash a.alt2] [a a.alt a.swash a.alt2] by a\\_a\\_a.alt), and yet, largely, you’ll achieve the same functional effect (except that dlig will not work for variants that were manually inserted into the text string using the Glyph Palette, but it will still properly interact with calt).\n\nAdam\n\n"
+    },
+    {
+      "time": " 3.Dec.2005 4.08pm",
+      "content": "I had already tried Paul’s suggestion, and the same overflow happened. I’ll try your suggestion, Adam. Thanks for your help.\n\n"
+    },
+    {
+      "time": " 3.Dec.2005 5.05pm",
+      "content": "Adam’s suggestion is a good one for simplifying the code (whether or not it helps the overflow problem). Plus, dlig will still work for variants that are manually inserted using the glyph palette, because what gets stuck in the text is the base character plus the needed formatting.\n\nT\n\n"
+    },
+    {
+      "time": " 4.Dec.2005 5.35pm",
+      "content": "Tom,\n\nyou are right. Adobe Illustrator and InDesign are smart: when I insert a glyph using the Glyph palette, they try to guess the “best” possible way to access that glyph, and store that information. If a glyph has a non-private Unicode codepoint assigned, InDesign (and Illustrator) inserts that codepoint. If a glyph is accessible through a particular OpenType layout feature that InDesign can work with, InDesign inserts the Unicode codepoint of the basic glyph plus a feature code. When I insert a small-cap a, InDesign will store it as “a with smcp applied”. This is nice because if I switch the font, that formatting will retained if the new font also supports small caps.\n\nIf the glyph is available through several different OpenType Layout features, InDesign makes a “best guess”. And only if the glyph is not accessible through an OpenType Layout feature and does not have a Unicode codepoint associated, the glyph id is stored, as a sort of “last resort”.\n\nThe Mac OS X Character Palette works differently. If I switch it to the glyph mode and use it to insert a glyph to, say, TextEdit, the glyph id will be always used.\n\nAdam\n\n"
+    },
+    {
+      "time": " 4.Dec.2005 11.21pm",
+      "content": "Well, what can I say. We’ve had a few years to refine these behaviors, and in the cases cited, we own both ends (the glyph palette and the application) as well as a lot of support infrastructure.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": " 5.Dec.2005 10.03am",
+      "content": "Thomas,\n\non an unrelated note: as we all know, Photoshop CS/CS2 doesn’t have the Glyph palette. I tried to use the Mac OS X Character Palette with it and it only works for “characters”, i.e. glyphs that have a Unicode codepoint assigned (even if that’s just PUA). Even though the Apple Character Palette has a “glyph” mode, unencoded glyphs don’t make it into Photoshop, or InDesign or Illustrator. I realize this has to do with the text infrastructure, and that Adobe apps don’t use the Cocoa text handling (AAT/ATSUI). However, I wonder if this could be looked into for all future CS apps on the Mac. Even though Illustrator and InDesign have their own Glyph palettes, I think a seamless integration with the system Character palette would be desirable. The Mac OS X Character palette is actually a pretty potent tool.\n\nOf course, I have submitted a request on this at [http://www.adobe.com/support/feature.html](http://web.archive.org/web/20080924093338/http:/www.adobe.com/support/feature.html \"http://www.adobe.com/support/feature.html\")\n\nAdam\n\n"
+    }
+  ]
+}

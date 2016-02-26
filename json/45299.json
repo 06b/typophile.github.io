@@ -1,0 +1,66 @@
+{
+  "id": "45299",
+  "title": "Computer generated text art",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "This was a question a couple of weeks ago. It was interesting enough for me to go and try to program it! My first attempts were pixel based, but this one is a full-fledged Windows application which outputs a printed image -- I recommend printing to a PDF, so you can test various settings at your leisure.\n\nIt looks like this (slightly bigger than here):\n\n ![](http://web.archive.org/web/20131101164714im_/http:/typophile.com/files/textimage_prg_5709.jpg)\n\nand can be downloaded for your pleasure at [my own little space of the web](http://web.archive.org/web/20131101164714/http:/www.jongware.com/binaries/textimage1beta.zip) (thass a direct download link). It works allright under XP, don't have a Vista nearby so I can't try that out...\n\nFirst, a tip: don't _stress test_ it! It's a quicky, written in something like 5 or 6 hours, and any weird input will surely crash it... The \"preview\" is more of a gimmick, it doesn't really tries the transform. Perhaps later...\n\nIt only accepts BMP files (but since it only works under Windows anyway, I don't see reasons for complaints -- also, loading any graphic file is _hard_!). On the plus side, you can directly drag your BMPs on it, and type or paste text directly into the RTF box. Any formatting will be lost in the output, though.\n\nIf you need access to a Page Setup box, hold the Shift key while pressing Print (I ran out of screen estate).\n\nA tiny teaser: Che looks like this.\n\n ![](http://web.archive.org/web/20131101164714im_/http:/typophile.com/files/TextImage_4265.jpg)\n\nAs you see, it works best with \"iconic\" images that are still recognizable in this coarse resolution. That's where the icon and sample came from; old Al is pretty iconic by now.\n\nEnjoy.\n\n",
+  "author": "Theunis de Jong",
+  "time": "13 May 2008 — 3:59pm",
+  "uid": "29994",
+  "comments": [
+    {
+      "time": "13 May 2008 — 4:16pm",
+      "content": "I will try. Actually, when I read the first post you did, I thought, Uhhh, I can use that. Thanks You!\n\n"
+    },
+    {
+      "time": "13 May 2008 — 4:57pm",
+      "content": "Well, if you create something original, I'd say, let us see what you come up with!\n\n"
+    },
+    {
+      "time": "14 May 2008 — 4:20pm",
+      "content": "is there anything like that for mac?\n\n"
+    },
+    {
+      "time": "15 May 2008 — 1:58am",
+      "content": "Not by me :-)\n\nAnswers to the original question ( [here](http://web.archive.org/web/20131101164714/http:/typophile.com/node/44982)) focused on ASCII art, which is definitely something else. As no-one seemed to know how to do it, I made it myself.\n\nPerhaps a Mac based typographer _cum_ programmer would like to jump in here.\n\n"
+    },
+    {
+      "time": "15 May 2008 — 12:06pm",
+      "content": "Nice job, Theunis —&nbsp;looks great. I had an idea for some ways to do this when I saw your original thread, but didn't (and still don't) have the time to play around with it.\n\nIf you're amenable to opening up your source code, I might be able to build a Mac version. I'm familiar with FreeType and a few programming languages. Not necessarily fluent but maybe enough to port...\n\n"
+    },
+    {
+      "time": "15 May 2008 — 2:37pm",
+      "content": "Josh,\n\nThanks for the offer! But I'm not quite there yet :-)  \nYesterday, I added a single line (okay, maybe 2) and the justification was spot on (now it isn't) AND it's +/- 20% faster ... So, still tinkering. I'm considering changing the justify routine altogether, as it's now held together by spit and tape.\n\nThis version doesn't use FreeType at all, so a straightforward port to Mac could be a major pain, because the initial measurements are done with pure Windows calls. On the other hand, after that it's number crunching time, so ... perhaps ...\n\nBut, as I said, it's not quite fully developed. I still have some novel ideas -- I wonder how good it can get.\n\n"
+    },
+    {
+      "time": "15 May 2008 — 2:47pm",
+      "content": "Well, if/when you get to a state where you are comfortable sharing, let me know. As I mentioned I don't really have the time to do something from scratch, but if it were possible to work from an existing code base would likely spare some development time. This is something interesting and fun.\n\nIt may or may not be an issue that your measurements, etc. are done purely with Windows calls for the font metrics and such...I could use the corresponding Mac OS system routines, or use FreeType, or if necessary read the font files directly. Which programming language is this written in?\n\nJosh\n\n"
+    },
+    {
+      "time": "15 May 2008 — 3:46pm",
+      "content": "The reason my first tries were with FreeType is because I'm not that comfortable with win coding :-) and I'm still developing _some_ FreeType skills. It was pretty easy to write a proof of concept, though.  \nThen I realized I couldn't create a _vector_ image that way -- only pixel based, and that was a real drag.\n\nSo I switched to pure Windows, using its native print routines. It turned out to have its own weird stuff. D'ya know that if you select a printer, you're stuck with its resolution, in integers only? So using floating point coordinates is off ... Also, it's _impossible_ to scale a font to non-integer sizes! And I'm having a hard time getting relevant font data from this cursed system :-) So much for Myriad Pro Semibold at 8.5 pts; Windows doesn't allow either! At best, it explains some of Word's intricacies.\n\nThat's the Bad & Ugly news. Good news is that the hard work can be done (I think) in your programming language of choice -- given that you have (a) an image to sample, (b) an array of fonts and sizes (with access to their metrics on a character basis), (c) a large chunk of filler text, and (d) the dimensions and a pointer to some 'canvas' to write the results to. My version is in plain C, but the logic in the hard work loop should be portable enough. Originally, I was considering a PostScript version -- now _that_ would be something! (drool) (okay, not now)\n\nYour website doesn't mention contact details, but you can reach me through my domain, using my first name as e-mail address. Intentionally oblique, to fool spambots ... (God, how I hate spam! Don't get me started on that.)\n\n"
+    },
+    {
+      "time": "16 May 2008 — 3:56am",
+      "content": "Theunis this is awesome, you have no idea how many hours you just saved me in a project I am doing at the moment. Big ups\n\n-Rafe\n\n"
+    },
+    {
+      "time": "16 May 2008 — 8:01am",
+      "content": "Theunis, I was wondering whether you take into account the exact font metrics, what I mean whether you calculate the area occupied by the black of the glyph vs. the bounding rectangle? (If you have five weights 1...superlight 5...superbold) it might happen, that in a font weight 3 m is darker in tone than a weight 4 n e.g., especially in monowidth fonts).\n\n"
+    },
+    {
+      "time": "16 May 2008 — 8:40am",
+      "content": "An excellent observation!  \nNo, I don't do that. That means that the \"distance\" in gray between, say, 4 pt Arial and 5 pt Arial and 6 pt Arial is the same for each. As characters are square objects, this should be a logarithmic difference instead (?? -- pretty sure about that...).\n\nYou can influence this by eyeballing it with the Curves option, but I think I know how to make it more \"exact\" (read: \"less inexact\"). It's not the bounding box, because this has the same black-to-white ration for each of the different sizes :-) Instead, I should check against the coverage of each size against the _total line height_ of the line -- that is, the height of the biggest font size. So a 4 pt Arial Black is much lighter than a 12 pt Univers Light, on a line heigth of 12 pts.\n\nThe _actual_ gray values are not that important, though. What's more important is the different _ratio_ from one level to another, those you can now set manually. That should/could be an automatic setting.\n\n"
+    },
+    {
+      "time": "18 May 2008 — 5:53am",
+      "content": "Ouch. I don't know how I could be so unattentive. I believed you used different \\_weights\\_ of the font, not different \\_sizes\\_. I guess, I did not look at the pictures, but only remembered your sentence in the original topic (using the word \"weight\").  \nI thought you were using the same font in ultra-light, light, medium, black, ultrablack or something like that. Sorry for the misunderstanding.\n\nI really should have looked more carefully.\n\n"
+    },
+    {
+      "time": "18 May 2008 — 6:51am",
+      "content": "No need for apologies! It works just as fine with different weights. Or even different _fonts_ (although you're on your own for selecting the gray values).\n\nI just finished adding a few interface niceties: a **Save** and a **Load** button, so you can save (and load) the font list. You can also manage the list itself, moving stuff up and down and editing with a quick double-flick on the font name. You can save the settings as \"defaults.fis\", which will set the defaults (...).\n\nThis version has a different _name_: somewhat more appropriate, **FontImage**. I noticed \"TextImage\" was already used for ASCII art apps, this is definitely something else :-) (Thanks to Tim Satink for that name.)\n\nThe new version, again available [at my site](http://web.archive.org/web/20131101164714/http:/www.jongware.com/binaries/fontimage.1.1.zip) (direct link), features a slightly faster printing and better justification. Some bugs included -- still no guarantees.\n\n"
+    }
+  ]
+}

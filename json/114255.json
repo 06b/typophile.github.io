@@ -1,0 +1,65 @@
+{
+  "id": "114255",
+  "title": "More trouble with FontLab",
+  "forum": "General Discussions",
+  "tags": [
+    "fontlab",
+    "General Discussions",
+    "otf",
+    "OTF lists"
+  ],
+  "content": "`[FATAL] cmap{plat=3,script=1,lang=0}: multiple glyphs uni2126 Omega mapped to code <2126>\nERROR: There was a problem while compiling OpenType font. Final .otf font is not saved. Please, check OpenType features definition for errors`\n\nOnce more I am confronted with an error in FontLab, which I don’t entirely understand. Especially the help suggestion is entirely useless. I understand the issue is caused by “multiple glyphs” with the unicode 2126, but how do I find, identify and eliminate the duplicate entry if it isn’t showing up in the glyphs list? How do I know which is the right associated character, which is the original and which the duplicate?\n\nI love some features of FontLab, but its approach and mysterious ways are really frustrating sometimes. It shows that this software is quite old, compared to modern applications. Glyphs, a relatively new app, shows promise, but I can’t justify to dash out another $329. Designing fonts is a passion of mine and I understand virtually no one can live from it (except maybe H&FJ and a few others)…\n\nIf you know a solution to my second FontLab error I cannot fix alone, please let me know.\n\n",
+  "author": "Core0",
+  "time": "17 Feb 2014 — 6:28am",
+  "uid": "181047",
+  "comments": [
+    {
+      "time": "17 Feb 2014 — 6:45am",
+      "content": "Update: After going back and forth with multiple search attempts, I found the duplicate character and deleted one of them. I have no idea if it was the right one, but as a result, FontLab was able to compile the OTF.\n\n"
+    },
+    {
+      "time": "17 Feb 2014 — 9:47am",
+      "content": "For future reference, glyphs encoded with the same unicode point can be found in the Index View of the Font window.\n\n"
+    },
+    {
+      "time": "18 Feb 2014 — 3:52am",
+      "content": "Thank you, Mark.\n\n"
+    },
+    {
+      "time": "19 Feb 2014 — 3:02pm",
+      "content": "\"I love some features of FontLab, but its approach and mysterious ways are really frustrating sometimes. It shows that this software is quite old, compared to modern applications.\"\n\nI was thinking the exact same thing. I just stumbled upon the thread about the progress on FontLab 6, because frankly FontLab Studio 5 is too confusing. I have a tremendous amount to learn about FontLab still anyway so it's not strange I run into problems, but I'm also thinking perhaps it's not so wise to invest my time in trying to figure this software out if FontLab 6 is on the way. I tried Glyphs but it doesn't quite provide me with what I want. A new FontLab is really what I would prefer, but perhaps that's just due to previous experience and I need to force myself to learn new software.\n\nAnyway, I apologize for coming to a different thread with my own issues, but I was wondering if you guys could help me out with what seems to be a problem which is easy enough to fix for someone with more experience with the software and/or scripting. Here's the thread explaining my problem: [http://typophile.com/node/114295](http://web.archive.org/web/20150414223036/http:/typophile.com/node/114295)\n\nNormally I would just wait for someone to respond, but I need to have 2 basic fonts roughly done by Friday and I'm afraid to start working on the second font until this issue in the first one is solved. I was going to use the metrics and script of the first font to develop the second one. I can't generate an OTF file until the problem in the script is resolved.\n\n"
+    },
+    {
+      "time": "27 Feb 2014 — 9:02am",
+      "content": "In the main font window, you can simply search (Cmd/Ctrl-F) for any glyph by either name or codepoint. So it should have been easy to find those two particular glyphs sharing the one Unicode codepoint. Or am I missing something?\n\nOf course, those of us who routinely work on fonts with 1000+ glyphs use the search functions a lot. Also the custom encoding view.\n\n"
+    },
+    {
+      "time": "9 Mar 2014 — 8:50pm",
+      "content": "I think I'm the one who's missing something. I have a bunch of missing glyphs, which are small-caps. I removed the small-caps class though and the glyphs are gone too, so I have no idea why it's still trying to find these glyphs. Do you have any idea where to look, or could someone have a look at my file and fix the problem?\n\n"
+    },
+    {
+      "time": "11 Mar 2014 — 4:59pm",
+      "content": "What do you mean by \"missing\"? What's the exact error message and what are you doing when you get the error message?\n\nIf you have removed the glyphs, they could still be referenced by:  \n- OpenType feature code  \n- kerning  \n- class definitions\n\n"
+    },
+    {
+      "time": "12 Mar 2014 — 2:24pm",
+      "content": "When I compile it's referencing a lot of .sc glyphs which aren't there. The font I originally started working from had small caps but I don't need any. I made sure there is no mention of .sc in the script of the features or the classes. Where is the kerning? Isn't that just the kern class defined in the OpenType panel?\n\n"
+    },
+    {
+      "time": "12 Mar 2014 — 5:00pm",
+      "content": "In FontLab, go to windows \\> panels \\> classes. Anything there? If there is, even though you don't use it now, Font Lab expects it and will give you an error message. You can't just whisper your intentions in it's ear, you know. (Well you can, but your success rate is going to be <cite>really</cite> low...)\n\nYou'll have to tidy up your classes. Easiest way, as I said in the build forum, is to set things so the classes are a part of the features, write off the features to a simple text file, and check that everything there is still valid. Next, clear both the classes and features in the FontLab file, then read the features back in, and compile.\n\nOr tidy things up in the FontLab (file) itself.\n\n"
+    },
+    {
+      "time": "12 Mar 2014 — 6:03pm",
+      "content": "No, I cleaned that panel. I tried removing everything and compiling and it's still giving me an error as described. I tried all kinds of cleaning methods, from copying everything to Notepad, checking the code and copying everything back manually to exporting features and loading them back in. Even worse, I just noticed that the latest version of my font has the leading all messed up. Things aren't getting better. Does someone have the time and interest to have a look at my font and check what I'm doing wrong?\n\n"
+    },
+    {
+      "time": "13 Mar 2014 — 1:44am",
+      "content": "Have you updated the kerning classes?\n\n"
+    },
+    {
+      "time": "13 Mar 2014 — 2:36am",
+      "content": "I think so. How are the kerning classes updated?\n\n"
+    }
+  ]
+}

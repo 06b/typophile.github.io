@@ -1,0 +1,46 @@
+{
+  "id": "20850",
+  "title": "blending kerning pairs",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "how do all\n\nis it possible to blend kerning pairs between two weights? say a light and a bold. I realise that this will lead to imperfect results, but for an enforced need of expediency, it could be my only option. For the sake of curiosity, it will also be interesting to see the level of quality versus a manually grafted set.\n\ncheers\n\n",
+  "author": "dux",
+  "time": "22 Jun 2006 — 3:28am",
+  "uid": "2193",
+  "comments": [
+    {
+      "time": "22 Jun 2006 — 5:29am",
+      "content": "In FontLab Studio 5, you can create a MultipleMaster font from two existing fonts (e.g. your Light and your Bold) and then generate an intermediate instance. The kerning will be blended.\n\nA.\n\n"
+    },
+    {
+      "time": "22 Jun 2006 — 5:41am",
+      "content": "If you'd like to give it a go with scripting, you might find [Robofab](http://web.archive.org/web/20131108212723/http:/typophile.com/wiki/Robofab)'s Kerning Object quite interesting. It has plenty of Methods for many situations.  \n [http://robofab.com/objects/kerning.html](http://web.archive.org/web/20131108212723/http:/robofab.com/objects/kerning.html \"http://robofab.com/objects/kerning.html\")\n\n"
+    },
+    {
+      "time": "22 Jun 2006 — 8:31am",
+      "content": "Miguel's right, if you're comfortable with Python you can interpolate the kerning between those two fonts with RoboFab\n\n"
+    },
+    {
+      "time": "22 Jun 2006 — 1:16pm",
+      "content": "Adam,\n\nThat operation is not working for me in FLS5.02. The values I get are duplicates of the values from one master. In addition, the number of pairs derived from a MM instance is extremely small compared to the number of pairs in the 2 masters.\n\nA separate issue, but an important one, is this: After compatibilizing my outlines scrupulously, testing successfully with the \"Blend Fonts\" function, instances from a MM have erratically exploding shapes; some points simply migrate randomly, many units away from their correct location. This behavior is different from what results when outlines are not compatible or path order is switched between masters. I include some examples.\n\n ![](http://web.archive.org/web/20131108212723im_/http:/typophile.com/files/sevenwack_3941.gif)\n\n ![](http://web.archive.org/web/20131108212723im_/http:/typophile.com/files/Hwack_4780.gif)\n\n"
+    },
+    {
+      "time": "23 Jun 2006 — 7:41am",
+      "content": "Fontographer did that, and I expect it still does.\n\n"
+    },
+    {
+      "time": "28 Jun 2006 — 3:53am",
+      "content": "I'd love to give this a go in studio 5, but the ruddy folder that houses macro scripts, won't allow me full access unless I key in my password on every single occasion. I've tried every possible way of changing the access privelages, but with no avail. Anyone else encountered this problem? Or is there a way to change the location of the scripts folder? hmfff\n\n"
+    },
+    {
+      "time": "28 Jun 2006 — 11:41am",
+      "content": "\\> _Or is there a way to change the location of the scripts folder?_\n\nI have mine in  \n`[user]/Library/Application Support/FontLab/Studio 5/Macros/`  \nand have no problems. I believe there are other places you can put them.\n\n"
+    },
+    {
+      "time": "28 Jun 2006 — 5:33pm",
+      "content": "There are two locations of the macro folder. On Mac, it's  \n/Library/Application Support/FontLab/Studio 5/Macros/  \nwhere the FontLab's \"factory\" scripts should go and  \n[user]/Library/Application Support/FontLab/Studio 5/Macros/  \nwhere the user's scripts should be placed. The subfolder structure of the both folders is identical. If the user macro folder doesn't have a particular folder that is present in the application macro folder, just create one.\n\nThe locations of the folders for Windows are described in the manual. Note that you can change the location of the user folder in FontLab Studio 5's Options/Preferences dialog. For example, on my Windows machine, it's D:\\FL\\Studio5 rather than the default C:\\Documents and Settings\\Adam Twardoch\\Application Data\\FontLab\\Studio5.\n\nAdam\n\n"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "49391",
+  "title": "Font shape distorted in Microsoft Word - any suggestions?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Hello everybody,\n\nI have recently started to learn about font design and attempted to generate a Helvetica-like sans serif (see also my font post: [http://typophile.com/node/49228](http://web.archive.org/web/20131218002124/http:/typophile.com/node/49228 \"http://typophile.com/node/49228\")). I have some problems, however, in getting the fonts to display smooth at different sizes.\n\nI have noticed that when using the font in Microsoft Word in contrast to Acrobat some of the curves are rendered very badly - see the arrows in the image bellow.\n\nQuestion: What one can do to make sure that fonts are displayed smoothly in Word at various sizes (OS: XP with Cleartype turned on)  \n- are there special design methods needed, is it a matter of metrics, or it is a problem with the outline shape i.e. bad design (the font is in a very early stage)?.\n\nThanks in advance for any advice.\n\nWord:\n\n ![](http://web.archive.org/web/20131218002124im_/http:/typophile.com/files/Test_Word2_6507.PNG)\n\nAdobe Reader:\n\n ![](http://web.archive.org/web/20131218002124im_/http:/typophile.com/files/Test_Acrobat_3634.PNG)\n\n",
+  "author": "pinguin",
+  "time": "12 Sep 2008 — 10:02am",
+  "uid": "35228",
+  "comments": [
+    {
+      "time": "12 Sep 2008 — 10:41am",
+      "content": "You need to hint the font. Try switching to Fontlab or Fontforge, convert the font to Postscript Opentype, and then you can use the Adobe autohinter from [AFDKO](http://web.archive.org/web/20131218002124/http:/www.adobe.com/devnet/opentype/afdko/)?\n\n"
+    },
+    {
+      "time": "12 Sep 2008 — 10:42am",
+      "content": "Did you hint your outlines, or did FontLab (?) autohint while generating the fonts?\n\nWith ClearType turned on it may be better to not hint the font before you are finished designing it. Or try generating it as OTF with PostScript Outlines, then Windows won't use ClearType, just greyscale rendering, but the output will be less distorted and closer to your actual outlines.\n\nGood ClearType hinting can be quite a task ...\n\n"
+    },
+    {
+      "time": "12 Sep 2008 — 11:06am",
+      "content": "The font is not hinted; I don't have Fontlab. I draw the fonts in TypeLight (free software, CR8 Type 2.2 - [http://www.cr8.netfirms.com/typelight.html](http://web.archive.org/web/20131218002124/http:/www.cr8.netfirms.com/typelight.html \"http://www.cr8.netfirms.com/typelight.html\")).\n\nI don't have any experience with Hinting (this is my first font), but I think I can convert the font to OTF using type light. I tried FontForge but I like Typelight more, because of its simplicity. I will try the Adobe autohinter.\n\nI would be very interested to learn ClearType hinting if anybody can point me to a good tutorial or resource.  \nThank you both for the great suggestions.\n\n"
+    },
+    {
+      "time": "13 Sep 2008 — 12:04am",
+      "content": "Assuming the outlines are any good, just basic auto-hinting should resolve your problems. Also if it's TrueType outlines, make sure the bits are set correctly as to what sizes anti-aliasing is allowed at.\n\nT\n\n"
+    },
+    {
+      "time": "15 Sep 2008 — 7:41am",
+      "content": "Yepp. Basic auto-hinting gives nice smoothe rendering in Word and most other type apps. I limit all my retail faces to just the very basic autohinting, as there is less and less need for interpolated cusp points, delta hinting & instructions, or links in this age of reason.\n\nj a m e s\n\n"
+    },
+    {
+      "time": "14 Nov 2008 — 4:22pm",
+      "content": "The latest version of Type 2.2 (2.2.019 full) allows you to add global hinting to OpenType PostScript fonts (eg BlueValues etc). Typelight will now also retain these with edited fonts.\n\nCheers,  \nAllan Murray\n\n"
+    }
+  ]
+}

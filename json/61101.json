@@ -1,0 +1,114 @@
+{
+  "id": "61101",
+  "title": "Font Rendering (no Embedding) in PHP and Licensing",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "hey,\n\ni guess this have been posted and discussed already and i could use the search option, BUT i just wanna be sure the information on this topic is up to date.\n\nis there any special license agreement needed to render fonts and display them on a commercial website using tools that don't embedd the font, but just render an image?\n\nto be clear: the font is not embedded in a flash file, it's stored on the server in ttf or otf, but only accessable by the server itself, not public.\n\ni assume only a regular license is needed here?\n\nthanks: lars\n\n",
+  "author": "lars",
+  "time": "18 Aug 2009 — 5:36am",
+  "uid": "2145",
+  "comments": [
+    {
+      "time": "18 Aug 2009 — 5:44am",
+      "content": "\\> to be clear:\n\nYou missed me on that. How exactly is it being rendered on the local browser? If it comes through as a GIF, JPG or PNG, then you are probably OK. But if you are allowing the browser to render the ttf or otf file, then some of the license rules will be broken.\n\n"
+    },
+    {
+      "time": "18 Aug 2009 — 6:49am",
+      "content": "\\>i assume only a regular license is needed here?\n\nIf the font is to be installed on a server then you may need a specific server license. If the foundry you're licensing from doesn't offer server licenses then a workstation license may be sufficient, but you may get caught out under restrictions around concurrent users - especially if they define web site visitors (people who indirectly use the font) as users. As always the best option is to ask the foundry.\n\n"
+    },
+    {
+      "time": "18 Aug 2009 — 7:04am",
+      "content": "to be a little more specific:\n\n@don: yes, just an image file, like gif, jpeg or png\n\n@sii: good point, maybe not that easy to specify, because it's a one-time-render only. like: pick a font, one specified text is rendered once and this one-time-rendered one is used later on\n\n"
+    },
+    {
+      "time": "18 Aug 2009 — 7:46am",
+      "content": "If you're able to pre-render the images, and avoid installing the font on the server you may save some licensing hassles, although it’s probably just as easy to identify fonts that can be installed on the server without extra fees/hoops.\n\n"
+    },
+    {
+      "time": "18 Aug 2009 — 8:19am",
+      "content": "I don't think lars wants to pre-render the images, as he asked about creating them with PHP. It's basicly the same process as sIFR, but the outcome is an image and not a (decompilable) flash movie.\n\n"
+    },
+    {
+      "time": "18 Aug 2009 — 8:38am",
+      "content": "neverblink: right, that's it (the main difference), no flash movie (embedded font) just an image (font ttf/otf installed on the server but no retrievable by the public).\n\nbasically like \"facelift (flir)\" does it ( [http://facelift.mawhorter.net/](http://web.archive.org/web/20150415234114/http:/facelift.mawhorter.net/ \"http://facelift.mawhorter.net/\")), but only done once. scenario again: user picks font, sets text, image replacement gets rendered, later on it's just displaying the rendered output (image), so one a \"per-user\" basis it's only rendered once.\n\n"
+    },
+    {
+      "time": "18 Aug 2009 — 4:00pm",
+      "content": "_user picks font, sets text, image replacement gets rendered, later on it’s just displaying the rendered output (image), so one a “per-user” basis it’s only rendered once_\n\nThe user does not have a licence to choose/use the font then? I would think that most standard licences would not allow that. It might be seen as you actually hiring the fonts out/allowing their free use.\n\n"
+    },
+    {
+      "time": "19 Aug 2009 — 1:42am",
+      "content": "maybe it's my english, eh, but \"user picks font\" means there are a dropdown box filled with 5 fontnames that can be choosen from - licensed to me. didn't thouht this would turn out to be so \"complex\" :)\n\n"
+    },
+    {
+      "time": "19 Aug 2009 — 2:08am",
+      "content": "Well, the fonts are licensed to you, not to the \"user\", are they? It's not really that complicated. If you buy the licence for the fonts it allows you to use them, not lots of other people?\n\n"
+    },
+    {
+      "time": "19 Aug 2009 — 3:43am",
+      "content": "@paragraph: guess it is my english that causes the misunderstanding here :) i'm not publishing the font itself, just the dynamically generated bitmap image of it (as said, just like facelift/flir does). i'm not embedding single glyphs, the output is a static bitmap image.\n\n"
+    },
+    {
+      "time": "19 Aug 2009 — 6:42am",
+      "content": "Lars, your English is fine, it's the whole concept that's complicated: you are not choosing or using the fonts for a design or a typesetting job **yourself**. It is your licence all right, but it seems that you are just putting the fonts somewhere for other people to use. By this I mean you buy \"fonts\" but you do not use them yourself, you let **others** use them.\n\n"
+    },
+    {
+      "time": "19 Aug 2009 — 7:26am",
+      "content": "hmmm, ok, but ain't the difference the \"no. of workstations\" or rather \"where\" the font is installed?\n\nanother try to describe what i wanna do:\n\nexample: on the typophile's forum you can set your user image by uploading an image. instead of using an uploaded image the user could choose from, let's say, 5 different fonts and instead of an uploaded image being displayed, the user name would be displayed as a \"rendered\" bitmap image using the choosen font.\n\nso, all 5 fonts are installed on the typophile server (not accessable by the public, just by the server), for each user there would be one rendered \"lettering\" of the username outputted as image and displayed in the user profile (and next to each post by that user).\n\ndoes this need some special licensing or is it included in most foundries eula's as long as the font itself is just installed on \"one workstation\" (in this case the server)?\n\n"
+    },
+    {
+      "time": "19 Aug 2009 — 7:41am",
+      "content": "I think people are now understanding the scenario just fine. You just don't like the answer you're getting.\n\nIn short, as several folks have said: most license terms for fonts do not cover this sort of server-based usage, and if that's the case, you'd need a special license of some sort.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "19 Aug 2009 — 8:02am",
+      "content": "you're right, maybe it's the answer i don't like :)\n\nso, if the server side makes the licensing difference, all tools like sifr, cufon or flir can only work with free gpl fonts, unless the user licensed the font under special terms?\n\nwell, of course there's another difference, because sifr embedds glyphs and flir just generates a bitmap image, but generally spoken?\n\nany experiences on those special type of licenses?  \nfor me it's just a goodie to display the user name in a non-regular-web-font, so if those special license is like 10 times the price of the \"regular\" license i would drop that idea :)\n\n"
+    },
+    {
+      "time": "19 Aug 2009 — 9:12am",
+      "content": "I would identify a short list of fonts you want to use, then check each foundry's policy on server based rendering. I'm sure that at least one vendor will be able to provide the right terms at a price you can live with.\n\n"
+    },
+    {
+      "time": "19 Aug 2009 — 10:42am",
+      "content": "Licensing isn't a set of universal standards. The answer to your question can only come from the foundry you purchased the typeface from.\n\nAs for 'web embedding' there's about 139 discussions about that in here over the past few months, so plenty of reading on that subject. ;)\n\n"
+    },
+    {
+      "time": "19 Aug 2009 — 10:56am",
+      "content": "@aluminum: that's a point. sounds like i'm not the first person ever asking these type of question, so... i'm wondering why this isn't a general licensing option already? lot's of people moan about bad typography on the web and the reason seems obvious :)\n\n"
+    },
+    {
+      "time": "19 Aug 2009 — 11:23pm",
+      "content": "You're right that font vendors have been slow to address this. The problem is that they don't know what to charge and with what terms, and until recently it didn't seem like they were missing a huge market. It's been a hard problem for them.\n\nNew web font technologies (like WebOTF) and new services (like TypeKit and Kernest) seem promising in terms of helping the folks who own the fonts make this jump, however. But it may be another six months or more before the situation settles down.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "20 Aug 2009 — 8:18am",
+      "content": "My take. Server side rendering of text to bitmap is at least as old as the (graphical) Web. Remember in the early days of Mosaic and Netscape there were no font tags or CSS, so the only way to do non-Times/Courier text was to pre-render or render-on-the-fly text server-side. The font foundries largely ignored this for say the first six or eight years, until server-side rendering (and for that matter server-side PDF generation) started to threaten their core-businesses (selling fonts to application developers and graphic designers) through things like business card design services, holiday card customization, and more recently web-based design apps. At that point they started to take notice. I think you see the same kind of pattern with Flash and some of the other technologies.\n\nThere are interesting parallels with raw-font linking. When Safari launched with support for raw fonts I talked to Apple folks about it down in Cupertino (this was during a public meeting around OpenType/ ISO OFF standards items). The engineer I spoke to said that raw-font-linking would open the door to brand new business models for type designers. I was kind of skeptical – said that font foundries really didn’t want to change, and certainly didn’t like outsiders telling them they had to. I think it’s interesting that with TypeKit et al, people from outside of the traditional font community were have been able to find a business model.\n\n"
+    },
+    {
+      "time": "21 Aug 2009 — 6:11am",
+      "content": "to be honest i missed the whole typekit/eot discussions... (that's maybe i haven't been following typophile for some time). gonna update myself on those topics...\n\ni fully understand the issues with embedding (which is really a problem/difference), but rendering image outputs of the font to display them on the web, doesn't make a difference to publishing 10.000 printed business cards using that font imho\n\n"
+    },
+    {
+      "time": "21 Aug 2009 — 7:58am",
+      "content": "But if you think about it from the font vendors perspective if someone wants to print a business card they need a font, that's one potential $25 sale per user. If an ISV wants to bundle a font with a business card application, that's also a sale, and much more money based on the level of redistribution. But if someone were to host that business card application online, using server-side rendering, should that also be covered by a $25 end-user license?\n\n"
+    },
+    {
+      "time": "21 Aug 2009 — 10:28am",
+      "content": "see it vice versa: you sell the business card + design which is nearly a complete \"type-based-design\", so you could say \"you earn the money because of the typeface\" (well, kind of), but when using the same font for your business website just to render some header images where no one cares about the typeface it's a non-profit-making usage, isn't it?\n\n"
+    },
+    {
+      "time": "21 Aug 2009 — 11:43am",
+      "content": "Yep, I think that usage seems reasonable, and you're being lumped together with the online-application crowd, from a licensing perspective. Hence my original suggestion of just asking the foundry. They tend to be reasonable too.\n\n"
+    },
+    {
+      "time": "21 Aug 2009 — 1:31pm",
+      "content": "Sorry, wondering if this is just for a personal blog or will the rendering be used by the page viewer?\n\n"
+    },
+    {
+      "time": "22 Aug 2009 — 2:26am",
+      "content": "@miss tiffany: idea was to use it for a \"closed\"/registered only audience. this can be something like a max of 100 unique visitors/viewers that \"see\" the rendered output (which is limited to a headline with something like 24pt and a max of 40 chars).\n\n"
+    }
+  ]
+}

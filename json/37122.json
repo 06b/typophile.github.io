@@ -1,0 +1,214 @@
+{
+  "id": "37122",
+  "title": "Apple and CFF: what's the deal?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "If i remember correctly, someone recently refered to the Mac as being a \"marginally Unicode compliant environment\" or something to that effect. Why is Apple taking so long to adopt the standard and what is the best way to get around this apparent obstacle? I'm assuming (correct me if i'm wrong) that Apple is still adhering to some glyph naming standard to access glyphs, but which standard is that?\n\n",
+  "author": "paul d hunt",
+  "time": "14 Sep 2007 — 12:07pm",
+  "uid": "7006",
+  "comments": [
+    {
+      "time": "14 Sep 2007 — 1:06pm",
+      "content": "Hm, that is a questionably vague assertion.\n\nCould you elaborate? What do you think needs getting around? Font creation? Font usage? Something else?\n\n"
+    },
+    {
+      "time": "15 Sep 2007 — 6:13pm",
+      "content": "_What do you think needs getting around?_\n\nmac not finding characters when they're properly encoded in Unicode.\n\n"
+    },
+    {
+      "time": "16 Sep 2007 — 8:08pm",
+      "content": "'mac' or 'an application that runs under Mac OS'?\n\nAre there specific characters that are problematic?\n\nIn general to the original question: Unicode, as a text encoding at least, is very well-supported under Mac OS (X), at the system level. The OS font-handling mechanism can make use of the same cmaps that Windows does. I do remember some talk of Apple implementing a glyphname-to-Unicode mapping scheme, but not as its first line of defense...that technique is only used if it cannot find a suitable cmap, and it can make use of several.\n\nBut of course, it's always possible for an application to ignore or override what the OS is doing, especially older applications that may have started life pre-OS X; using legacy font manager routines...this could certainly give the appearance of characters not working (probably reading from the Mac Roman cmap). But this is no fault of OS X. Windows suffered similar problems when there was a push to move to the NT line (as opposed to the 9x line)...a lot of apps from the 9x line did not fully support Unicode under NT even though the NT OS was quite capable of doing so.\n\n"
+    },
+    {
+      "time": "16 Sep 2007 — 8:17pm",
+      "content": "well maybe i should use this thread as a case in point:\n\n[http://www.typophile.com/node/37077](http://web.archive.org/web/20131108090338/http:/www.typophile.com/node/37077 \"http://www.typophile.com/node/37077\")\n\nwhy should something like this be such a big headache? why, if the characters are encoded correctly, shouldn't they \"just work\" in all applications on the Mac? maybe i just don't understand the relationship between the OS and the application in handling text...\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 8:38am",
+      "content": "Okay, specifics always help :-)\n\nThere does seem to be something strange going on. I just tried creating a .OTF where the name of the glyph 'A' was changed to some other name (my favorite \"foo\" substitute, \"butthead\"). The glyph is still present in the font, and the included Unicode cmap subtables encode that glyph as U+0041. But the shape does not appear in Font Book nor in other mapping utilities.\n\nHowever, I'm not sure I'd classify this as an 'Apple and Unicode' deal; rather, it would appear to be an 'Apple and OpenType (CFF)' deal. Specifically, it appears that the OS does not to use cmap subtables of a CFF font to obtain character-to-glyph mapping. But I would not call it a Unicode problem at all; the problem (or maybe \"feature\") happens before Unicode enters the picture. [Edit: as an aside, I can do the same thing with a TrueType font and it works just fine].\n\nAs to the relationship between OS and app: there's no requirement for an application to use what the OS provides; I can (and do) have a Mac OS X application that \\*will\\* properly render my example \"butthead\" font properly...but, I'm supplanting the OS's font-handling (even rendering) routines with my own. The point is, just because an OS supports something doesn't mean that all applications running under that OS will; and just because an OS doesn't support something, doesn't mean that you can't write an app that will.\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 8:51am",
+      "content": "How about Greek/math characters? I mean mu pi Delta, etc., the glyphs that are used both as math and as Greek. I am a Mac user and longtime fan but as a type designer, I find the Mac's lack of Unicode compliance frustrating. The Mac uses glyph names to select what comes up instead of the unicode id. This means that a type designer has to do a workaround to get Greek to show up properly. This happens on Mac apps other than Adobe suite apps because Adobe does it the right way and ignores what Apple does. Apples own apps, Text Edit, Pages, et al, and other Mac-compliant aps like MS Office Mac follow Apples lead and cause a royal pain in the Kolo (Greek word for butt).  \nFIX IT, APPLE! This all works perfectly on Windows (I hate to admit but it is true)!\n\nChrisL\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 9:15am",
+      "content": "Another example: If the glyph order in an OTF is not the standard one everything gets totally scrambled on the Mac even though the Unicode values are correct. In CS everything works fine, however. It almost seems that the Mac ignores Unicode values and just refers to the glyph order?\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 9:34am",
+      "content": "Based on what I'm seeing, I would summarize what's going on as, \" **for CFF-based OpenType Fonts** , Mac OS X derives character mapping using something other than the contents of the character-to-glyph mapping table (cmap).\"\n\nI would add the following:  \n- this does not appear to be a problem with TrueType-based OpenType fonts (it's possible to create TrueType based fonts that do not use glyphnames at all and whose glyphs all appear as expected).\n\n- this does not appear to be a problem with the OS's _Unicode_ support; it's a problem with _font-handling_, and very specifically with CFF.\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 10:37am",
+      "content": "So, does Apple have a list of their name-to-Unicode mapping? Are they using the same mapping as Adobe? If the latter is true, then they are effectively saying that the Adobe naming convention is a requirement if you want your CFF fonts to work properly. This could be a problem if your codepoint isn't on the list. What if you use your own, it works, but then Adobe adds it's own later? Am I misunderstanding the situation?\n\n[http://www.adobe.com/devnet/opentype/archives/glyphlist.txt](http://web.archive.org/web/20131108090338/http:/www.adobe.com/devnet/opentype/archives/glyphlist.txt \"http://www.adobe.com/devnet/opentype/archives/glyphlist.txt\")\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 11:18am",
+      "content": "I can't answer as to what Apple is using; I'm only going by my own observations. Glyphnname-to-code mapping might be part of the picture, but it may also depend on other attributes (the CFF 'charset' setting, for example...viz. Tim's issue with glyph ordering). It would be nice to have some official word from Apple as to how code assignments are derived from CFF-based fonts, but I would not hold your breath for that.\n\nI did do a bit more experimenting, naming the 'A' glyph as 'uni0041', and that seemed to work. So that may be a workaround and answer for glyphs that are \"not on the list\" (whatever list that may be...).\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 11:40am",
+      "content": "Joshua,  \nThat was exactly the workaround I was referiing to for Greek/math. Adobe uses the unicode for glyph name in the problematic glyphs and I follow their lead because there is no other option. Apple has to own up and fix it if they are to remain the platform of choice for design and publishing.\n\nChrisL\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 11:52am",
+      "content": "Herte is an example:\n\n ![](http://web.archive.org/web/20131108090338im_/http:/typophile.com/files/uniDeltaOmega_mu-Arno_3578.png)\n\nAlso, look at the screengrab from FontLab to see the use of uni in both slots:\n\n ![](http://web.archive.org/web/20131108090338im_/http:/typophile.com/files/uni03A9_number_Arno_4629.png)\n\nChrisL\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 12:00pm",
+      "content": "OK, so I think it's clear that this is a font-handling issue, not a Unicode issue (it involves Unicode, as the destination mapping, but the problem is further upstream), has anyone been in contact with Apple about it? I'm not sure their font engineers read Typophile; they might miss this.\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 6:01pm",
+      "content": "One may add to the above that while Apple does currently support complex scripts through AAT (their own technology for which very few fonts exist), their OpenType Layout support is currently limited to non-complex scripts. However, OpenType Layout is these days the most popular technology for rendering ortographically correct text in most languages. Mac OS X cannot use the popular OpenType fonts to render Arabic or Devanagari.\n\nI think that supporting Unicode without supporting OpenType Layout is a moot point, so I do very much hope that Mac OS X 10.5 Leopard will have more extensive OTL support for complex scripts.\n\nA.\n\n"
+    },
+    {
+      "time": "18 Sep 2007 — 3:37am",
+      "content": "Adam, this lack of opentype layout support- does this have implications for western fonts too? Like for example an opentype pro package with a many (complex) contextual alternates and I can access only a few features (by keyboard) within TextEdit or Pages or any other app that uses Apple's ATT system?\n\nMikey :-)\n\n"
+    },
+    {
+      "time": "18 Sep 2007 — 6:24pm",
+      "content": "Yes, contextual substitutions don't work in the Mac OS X system text engine, nor does language-specific shaping or complex positioning. Only simple substitutions and positioning work. I hope that this will be improved in 10.5.\n\nA.\n\n"
+    },
+    {
+      "time": "19 Sep 2007 — 12:38am",
+      "content": "Twardoch\\> Yes, contextual substitutions don’t work in the Mac OS X system text engine,\n\nI tested it with Indesign CS3. Contextual substitutions (calt, and clig too) really don’t work in ppc-based Mac OS but WORK(!!!) in intel-based Mac OS 10.4. It seems as very strange situation, isn’t it?\n\nPS  \nFeature locl still not implemented :(\n\n"
+    },
+    {
+      "time": "19 Sep 2007 — 4:47am",
+      "content": "-- j.hadley -- <cite>I did do a bit more experimenting, naming the 'A' glyph as 'uni0041'</cite>\n\nStill didn't do much testing with this, but as regards 'tcedilla' & 'tcommaaccent' named in uniXXXX fashion, it seems that these names work fine in OS 10.4 but not always in 10.3 which is still around. [In apps that use OSX's text engine.]\n\n-- Henyk -- <cite>I tested it with Indesign CS3.</cite>\n\nAdobe uses it's own text engine which does support contextual substitution and positioning. Adam was referring to Apple's own applications like TextEdit and Pages, or other third-party apps that use OSX's text engine.\n\n-- Henyk -- <cite>Feature locl still not implemented :(</cite>\n\nAre you sure? AFAIK it is applied when you select a dictionary for a text string. You can try e.g. with Arno Pro: type a text with 'fi' in the string; apply the Ligatures feature which turns 'f' 'i' into 'fi'-ligature; then apply Turkish language to the string, and the ligature will be decomposed into individual letters. This is 'locl' at work.\n\n"
+    },
+    {
+      "time": "19 Sep 2007 — 8:26am",
+      "content": "Regarding 10.3, I guess that's no surprise. Things seem to be evolving, slowly.\n\nI do agree with Adam that it would be good to see more robust support for OpenType (.otl/CFF format as well as OpenType Layout features) in 10.5. Guess we'll find out soon enough.\n\n"
+    },
+    {
+      "time": "19 Sep 2007 — 11:21am",
+      "content": "i edited the title of this thread to reflect the true nature of the problems i'm currently experiencing with Mac.\n\n"
+    },
+    {
+      "time": "19 Sep 2007 — 8:10pm",
+      "content": "Hello all:\n\nThank you Adam for your comment. So I guess Zapfino Extra Pro (you worked on this correct?) will only work correctly in Adobe apps for now.\n\nI wholeheartedly agree Apple needs to improve their font technology. As it is right now, there are lots of inconsistencies.\n\nAdobe Poetica is a prime example of a font I cannot use to the full. This font comes with small cap alternates that are quite beautiful. However I cannot access them though the typography panel nor through the Character Palette. At least when using the Pages app.\n\nBut I just discovered I can access these characters in TextEdit. But only if you use a \"special trick\". Pull up the Character Palette. Find your glyph. Instead of dragging it into your document- double click on it. Then you can use it in TextEdit. Spell check will not recognize the character you just popped in but it works otherwise (Poetica's funky kerning aside though).\n\n ![](http://web.archive.org/web/20131108090338im_/http:/typophile.com/files/Picture24_6319.png)\n  \n\n ![](http://web.archive.org/web/20131108090338im_/http:/typophile.com/files/Picture22_3892.png)\n  \n\n ![](http://web.archive.org/web/20131108090338im_/http:/typophile.com/files/Picture23_5998.png)\n\nWhy does TextExit have this itty-bitty capability over Pages- I have no idea. Unfortunately, TextEdit is not a full fledged design program. So this is not really of any importance to me until there is a global fix for the OS. And there does seem to be one on the horizon.\n\n[http://www.apple.com/macosx/leopard/technology/unix.html](http://web.archive.org/web/20131108090338/http:/www.apple.com/macosx/leopard/technology/unix.html \"http://www.apple.com/macosx/leopard/technology/unix.html\")\n\nCoreText is the replacement for ATSUI (Apple Type Services for Unicode Imaging). I can't seem to find anything useful on the Apple site. Except for an allusion to improved access with the Terminal app. For the little navigation I did on the Apple Dev Connection, its actually present in Tiger but private.\n\nI wonder if Apple is in communication with type designers/developers? If they polled users- we'd sure give them an ear-full.\n\nMike Diaz :-)\n\n"
+    },
+    {
+      "time": "19 Sep 2007 — 8:12pm",
+      "content": "Chris Lozos\\> perhaps my little trick might help you with your greek characters... :-)\n\n"
+    },
+    {
+      "time": "20 Sep 2007 — 9:38am",
+      "content": "I have taken the CFF/glyph-names/encoding issue up with Apple again, btw. We'll see if it gets \"fixed\" at some point.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "20 Sep 2007 — 10:29am",
+      "content": "Thanks Thom.  \nIn the meantime, what should be the \"best practices\" to try to work around some of these issues? Or is it best just to sit back and wait for Apple to fix these bugs in their system?\n\n"
+    },
+    {
+      "time": "2 Nov 2007 — 11:18am",
+      "content": "Haven't had time to test it all, but the \"feature panel\" in the Apple apps has some major changes in 10.5:  \n [http://www.typografie.info/temp/textedit.jpg](http://web.archive.org/web/20131108090338/http:/www.typografie.info/temp/textedit.jpg \"http://www.typografie.info/temp/textedit.jpg\")\n\n"
+    },
+    {
+      "time": "2 Nov 2007 — 11:34am",
+      "content": "Ralf, this should be it's own thread. There was some interesting discussion recently about how OpenType features should appear in InDesign. I can't find the thread at the moment. However, the way in which the Typography panel functions seems to be basically how Nick Shinn wanted things to work. TextEdit != InDesign, but it's interesting nonetheless.\n\n"
+    },
+    {
+      "time": "2 Nov 2007 — 11:46am",
+      "content": "[http://typophile.com/node/38181](http://web.archive.org/web/20131108090338/http:/typophile.com/node/38181)\n\n"
+    },
+    {
+      "time": "2 Nov 2007 — 11:50am",
+      "content": "Nice.  \nI like the way the sub-menus may be expanded by rotating the triangle -- it's succinct, and keeping things flat is a better way of expanding options than having a new 3-D layered submenu palette appear, or a pop-up menu.\n\n"
+    },
+    {
+      "time": "2 Nov 2007 — 12:17pm",
+      "content": "Re [http://www.typografie.info/temp/textedit.jpg](http://web.archive.org/web/20131108090338/http:/www.typografie.info/temp/textedit.jpg \"http://www.typografie.info/temp/textedit.jpg\") -- The sorting of Arno styles does not look right.&nbsp;&nbsp;;-)\n\nRe Apple and the triangles -- It was already there in earlier versions. Looks clean but has disadvantages too:  \n-- You have to open the sub-menu before getting at, or seeing, the options.  \n-- If you open all of them, the menu gets pretty long.  \nIf at all, then I'd favor something which would fly-out on mouse-over: touch the headline word and a sub-menu pops up right where the mouse is, make your settings or not, and if the mouse leaves the popup's area it will close and accept the changed settings. Yet even this way the settings are hidden by default.\n\nWhat InDesign would badly need is a cleaned-up style/OT menu, and I feel tempted to say that anything would be better than the current one. Either removing the OT/non-OT distinction entirely, or emphasizing it as in your example on the other thread. (Currently I'd prefer removing the distinction. If, for example, the currently selected font features small caps, then the option is preceded by an OpenType icon, if not, then there's no such icon and it would return fake small caps. Maybe another option could forbid faking anything.)  \nOnly today a designer collegue remarked that he'd prefer separate small caps styles over using the OT option ...\n\n"
+    },
+    {
+      "time": "2 Nov 2007 — 12:50pm",
+      "content": "_Only today a designer collegue remarked that he’d prefer separate small caps styles over using the OT option ..._\n\nYes, seeing the name Small Caps in the \"Typeface Style\" field of the Character palette, right under the typeface name, really does give the impression that Small Caps is a complete font, a semantic whole encompassing all characters--which it is, unlike any other OT feature. And on a par with Bold and Italic as a typographic modality.\n\n"
+    },
+    {
+      "time": "2 Nov 2007 — 2:07pm",
+      "content": "\\> _the “feature panel” in the Apple apps has some major changes in 10.5_\n\nThere are some changes alright, but to me they don't see to be that big. Here's the Typography panel on 10.4.10, when selecting the same font:\n\n ![](http://web.archive.org/web/20131108090338im_/http:/typophile.com/files/ArnoPro_OSX10_4_10_6630.png)\n\n"
+    },
+    {
+      "time": "2 Nov 2007 — 2:12pm",
+      "content": "Strange things happen when I switch on liga and smcp the same time:\n\nIn Arno it gets messed up, in Garamond Premier liga work but the dlig mess up the smallcaps.\n\nAre they not processing the lookups in the right order?\n\n"
+    },
+    {
+      "time": "2 Nov 2007 — 2:42pm",
+      "content": "I've played with this a bit and was excited to see \"Contextual Alternate\" at the bottom of the palette. Unfortunately, it doesn't work properly. It substitutes the first alternate glyph available regardless of context. This is almost worse than no support for contextual alternates. I'm very disappointed by this.\n\nI have also noticed that the \"Typography\" palette seems to be broken in Pages '08 under Leopard. It works with some fonts (usually the \"regular\" weight), but not others. The palette goes blank as if no features are present. Keynote '08 seems fine (except for the `calt` problem mentioned above).\n\n"
+    },
+    {
+      "time": "2 Nov 2007 — 3:23pm",
+      "content": "Really? The contextual alternates work fine with me.  \nThis new engine seems to be a bit erratic?\n\n"
+    },
+    {
+      "time": "2 Nov 2007 — 5:26pm",
+      "content": "\\> _Strange things happen when I switch on liga and smcp the same time_\n\nHi Tim, can you provide a couple examples? I'd like to get a better picture of what you're experiencing. Thanks.\n\n"
+    },
+    {
+      "time": "3 Nov 2007 — 11:23am",
+      "content": "\\>_Really? The contextual alternates work fine with me._\n\nI tested it on two different (Intel) Macs running Leopard. The applications I tried were TextEdit, Pages '08, and Keynote '08. The fonts I tried were Kinescope (one of mine), Caflish Script Pro, and Bickham Script Pro.\n\n"
+    },
+    {
+      "time": "3 Nov 2007 — 2:20pm",
+      "content": "Miguel, I am having trouble inserting images at the moment. Will try to sort that out. If I write \"finest\" and activate small caps, common and rare ligatures then the fi and st do not get converted to small caps. In Garamond Premier, the fi correctly becomes small caps but not the st.\n\nMark, I had the same experience as you with Caflisch Script Pro but with my own fonts the contextual alternates work fine. No idea why.\n\n"
+    },
+    {
+      "time": "3 Nov 2007 — 10:02pm",
+      "content": "That's interesting. On my end (using 10.4.10), everything is working as expected for both Arno (top) and Garamond Premier (bottom).\n\n ![](http://web.archive.org/web/20131108090338im_/http:/typophile.com/files/TextEdit_Arno_GP_6332.png)\n\nI don't want to jump into conclusions, but I won't be surprised if it turns out that an OS X's font-related functionality, which used to work, got broken in a later version.\n\n"
+    },
+    {
+      "time": "4 Nov 2007 — 2:39pm",
+      "content": "I have both Tiger and Leopard running and it does appear that the behavior changed. For example, on Leopard if you have \"Common Ligatures\" and \"Rare Ligatures\" enabled in the panel, and then switch to Small Capitals, the fi and ct remain lower case lowercase ligatures.\n\n(Screenshots don't seem to be working at the moment. Didn't someone else mention this?)\n\n"
+    },
+    {
+      "time": "6 Nov 2007 — 5:52pm",
+      "content": "Well, I know the behavior changed since I changed it. Basically, all the lookups and glyph coverage specifics were implemented and/or fixed. What is missing are complex script shaping engines (for ATSUI, CoreText at least has Arabic) - I simply ran out of time but fully intend to knock them off this coming year. Also what's missing is a decent UI for the features. I cleaned this up in the existing framework the best I could but the OT alternates are way more involved than AAT which necessitates a major revision to the Typography Palette (actually, it would be easier to just scrap the current one and rewrite it). Not having the alternates also closes off other features that rely on the presence those glyphs (such as specified in the Estilo font I've come to recently understand). Suffice to say, I have many action items on my plate.\n\nAs far as the Capitals feature interacting with 'liga' for instance, I'll check that out for possibly getting into an update - it might be a simple issue of the order in which these features are carried out. I'll write up bugs from the comments listed here and investigate.  \nDan Fenwick\n\n"
+    },
+    {
+      "time": "7 Nov 2007 — 11:26am",
+      "content": "Thanks for the info, Dan.\n\nOne thing I would suggest is that support for Stylistic Sets be implemented more like what Adobe has done, so that they can be applied cumulatively, not mutually exclusive of each other. In other words: check boxes, not radio buttons, from the user's point of view.\n\nProper support for `calt` in Cocoa apps would be a huge help for those of us making, marketing and supporting sophisticated OT fonts. It's so lame having to tell users that some of my fonts aren't fully functional in Pages or Keynote. They should \"just work.\"\n\n"
+    },
+    {
+      "time": "7 Nov 2007 — 12:43pm",
+      "content": "I second that, Mark.  \nIt's particularly important for script fonts where `calt` is their _raison d'être._\n\n"
+    },
+    {
+      "time": "8 Nov 2007 — 11:33am",
+      "content": "So...we've strayed pretty far from the opener of this thread.\n\nI wonder if Dan or anyone else from Apple could comment on Paul's original concern (which I now share)? I would summarize that as \"OS X 10.4 appears to synthesize Unicode mappings in CFF-based OpenType fonts from glyphnames rather than from 'cmap' subtables, possibly resulting in unexpected behavior for some glyphnames/Unicode values.\"\n\nThe thread that Paul pointed out at [http://www.typophile.com/node/37077](http://web.archive.org/web/20131108090338/http:/www.typophile.com/node/37077 \"http://www.typophile.com/node/37077\") gets to the issue somewhat. My testing suggests that this behavior is limited to CFF-based fonts, not TrueType (where OS X seems to make direct use of 'cmap' subtables, ignoring glyphnames altogether).\n\nWhat I'm specifically interested in, relative to that issue is:  \n- is there a detailed spec discussing the method(s) used in OS X to derive Unicode mappings from CFF-based OpenType fonts?  \n- has anything changed in that mechanism from 10.4 -\\> 10.5?  \n- does Apple have any guideline, standard, \"best practices\", etc. for glyph naming in CFF-based OpenType fonts?\n\n"
+    },
+    {
+      "time": "8 Nov 2007 — 4:05pm",
+      "content": "I asked our scaler expert about this issue and pasted his response below. To proceed, it would be good to get specific cases that we can examine here at Apple.  \nDan Fenwick\n\n\"CFF based OpenType fonts are data fork fonts that has OTTO sfnt tag, thus we call these OTF font as the ones shipped from adobe bare such extension. For these, we only synthesize a unicode cmap if it does not have one (rare the case) or it require morx table synthesis. In the process of that, we do use the existing unicode cmap subtable to generate basis table for the new cmap. Only case for using the glyph names are type 1 fonts (non CFF).\n\nSo I don't what this rumor is from or how we can proceed with the following questions.\"\n\n"
+    },
+    {
+      "time": "9 Nov 2007 — 5:44pm",
+      "content": "Dan,\n\nit's not a rumor, it's true. Or at least, it used to be true.  \nNow it seems like it ain't true anymore. Some things were fixed in 10.5 as opposed to 10.4.10, but some got broken. Please take a look at the screenshots attached.\n\nThey show three fonts: Cambria (OpenType TT by Microsoft, version 5.02), Garamond Premier Pro (OpenType PS by Adobe, version 2.000) and Arno Pro (OpenType PS by Adobe, version 1.011), in TextEdit on Mac OS X 10.4.10 Tiger and 10.5.0 Leopard respectively.\n\n ![](http://web.archive.org/web/20131108090338im_/http:/typophile.com/files/TextEditOT104_5599.png)\n  \n\n ![](http://web.archive.org/web/20131108090338im_/http:/typophile.com/files/TextEditOT105_5020.png)\n\nNote:\n\n1. In Tiger, all OpenType PS fonts have their cmap table synthesized. You can see this with the U+0163 character -- in Garamond Premier Pro, the respective glyph is named \"tcommaaccent\", and is of course mapped to U+0163, but Tiger ignors the cmap mapping, looks at the glyph name, does NOT recognize it, so the glyph is not shown. In Arno Pro, the glyph name is \"uni0163\", which Tiger does recognize and synthesizes an appropriate Unicode. In Leopard, this automatic Unicode synthesis based on glyph name was apparently done away with. I just tested it: I assigned a fully fictitious glyph name to the U+0163 and generated an OpenType PS (.otf) font, and according to my expectation, Tiger failed to show the glyph but Leopard did show it.\n\n2. While the support for different OpenType Layout lookup types in Leopard has been improved, Leopard seems to have introduced some serious problems in the interaction of different OpenType lookups. You can see on my screenshots that I activated both \"Common Ligatures\" and \"Small Capitals\" for the third word in each row. If we disregard the U+0163 problem mentioned above, we see that Tiger correctly interprets the order of the OT lookups that is stored in the font -- the \"smcp\" feature lookups precede the \"liga\" lookups and therefore, with both applied, only \"smcp\" gets processed and \"liga\" is disregarded. In Leopard, we see that this is no longer the case. In Garamond Premier Pro, the \"smcp\" lookups get processed first, and \"liga\" get ignored (correctly), while in Arno, the \"liga\" lookups get processed first, and the \"smcp\" lookups later (which is not correct). Cambria is a particularly good test case because it implements the \"liga\" feature in an innovative way -- by contextually inserting a different variant of the \"f\" glyph before \"i\" or \"l\". And you can clearly see that that \"liga\" lookup also gets processed before the \"smcp\" lookups, which contradicts the lookup order stored in the font.\n\n3. A fully new problem also was introduced in Leopard -- some GPOS kerning in OpenType TT (.ttf) fonts gets disregarded, though it worked in Tiger. Look at the Cambria example -- Cambria only has GPOS kerning, without classes but implemented in several lookups. We can see that both Tiger and Leopard processed the standard TA kerning pair correctly. However, Tiger also processed the small-cap LT, TA, AŢ and ŢA pairs correctly while Leopard failed to process those pairs.\n\nI will send you a fully-documented case per e-mail.\n\nBest,  \nAdam\n\n"
+    },
+    {
+      "time": "9 Nov 2007 — 2:09am",
+      "content": "Another smaller problem I noticed is that the AppleTypeServices RTF code for small caps was changed. While in 10.4, it was F196611, in 10.5 it is F196620 -- which means that documents saved in Tiger that had the small caps feature applied lose this formatting in 10.5 (at least in TextEdit). I guess this may have something to do with the fact that in 10.4, the OT Letter Case selector was a set of radio buttons while in 10.5 it is a set of checkboxes.\n\nOther codes such as F1376256 for oldstyle numerals seem to have stayed the same. Is there a reference list of those constants available somewhere?\n\nA.\n\n"
+    },
+    {
+      "time": "9 Nov 2007 — 7:02am",
+      "content": "That is a great post, Adam! Would you sens a copy of the rest to me as well?\n\nChrisL\n\n"
+    },
+    {
+      "time": "9 Nov 2007 — 8:01am",
+      "content": "Dan: I think Adam has it covered, but I'm happy to supply additional cases if need be. Our experience matches Adam's, i.e. 10.4 does indeed use glyph names to map CFF fonts, even when there is a suitable cmap subtable present – contrary to your scaler expert's reply. But it sounds like this is moot with the release of 10.5. Thanks for looking into it.\n\nAlso, thanks to Adam for investigating the 10.5 behaviors...probably fodder for many more threads :-)\n\n"
+    },
+    {
+      "time": "9 Nov 2007 — 12:15pm",
+      "content": "Nice detective work Adam!\n\n\\> _But it sounds like this is moot with the release of 10.5._\n\nNonetheless, I'd encourage all font developers to test their fonts, just to make sure that the correct use of the 'cmap' table for OT CFF fonts is not restricted to fonts developed by Adobe.\n\n"
+    },
+    {
+      "time": "11 Nov 2007 — 10:00pm",
+      "content": "We're very happy that Apple fixed the OpenType CFF encoding issue by trusting the cmap table rather than relying on glyph names, in Leopard.\n\nThe new problems are most unfortunate, but we can hope they get fixed in a dot release. 10.5.x anyone?\n\nRegards,\n\nT\n\n"
+    }
+  ]
+}

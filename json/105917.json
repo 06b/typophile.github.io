@@ -1,0 +1,42 @@
+{
+  "id": "105917",
+  "title": "Font Conversion and Hinting",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I've got a number of older fonts in Mac type 1 format, and fearing that OS X will eventually drop support for type 1 fonts (or for resource-fork based files), I've started the gradual process of converting these to opentype where the license permits this.\n\nI'm using FontLab Studio for this. The only actual editing I'm doing involves (i) the name table to ensure that families are grouped properly and to add a vendor/foundry suffix in some cases; and (ii) adding a (usually) fairly minimal set of opentype features. I'm not doing anything to the actual glyphs.\n\nI've noticed, however, that in many cases the hinting appears to be degraded after generating .otf files. I assumed that if I did not alter glyphs or mess with the alignment zones the hinting would be preserved, but this does not appear to be the case. (many of these fonts are old (no longer available) Berthold BE faces from Adobe, which I assume were properly hinted to begin with).\n\nHinting is one area which I am not that familiar with. I'm wondering if there are differences between type 1 and CFF hinting which prevents FLS from preserving hints or hinting paramaters, or whether there is perhaps some arcane preference hiding somewhere in FontLab Studio which I need to change (I have FLS set to autohint unhinted glyphs, but that's the only preference I can find which looks relevant).\n\nAny suggestions would be appreciated.\n\nAndré\n\n",
+  "author": "agisaak",
+  "time": "29 Aug 2013 — 8:59pm",
+  "uid": "31798",
+  "comments": [
+    {
+      "time": "29 Aug 2013 — 9:09pm",
+      "content": "Just a quick additional question: Is there a better tool for this than FLS? I've never used TransType Pro, but I always assumed that it was designed primarily to make conversion more convenient, but that it used the same underlying libraries and thus wouldn't do a superior job to FLS. Am I mistaken in this view? Would TTP do a better job of preserving hints? What about FontForge?\n\nAndré\n\n"
+    },
+    {
+      "time": "30 Aug 2013 — 4:43am",
+      "content": "It could be the settings you're using in FL to generate the font. Under \"preferences\", look at the \"Generating Type 1\" setting. Do you have \"remove all existing hints before autohinting?\" checked?\n\n"
+    },
+    {
+      "time": "30 Aug 2013 — 7:07am",
+      "content": "Yes, that is checked, but unchecking it doesn't correct the problem (I didn't think it would since I'd assume that would only have an effect if I asked it to perform autohinting).\n\nAndré\n\n"
+    },
+    {
+      "time": "30 Aug 2013 — 8:46am",
+      "content": "Have you tried Adobe’s FDK? Their own libraries were converted with it and, furthermore, they’ve authored both the formats, so I would expect it does a pretty good job of it.\n\n"
+    },
+    {
+      "time": "30 Aug 2013 — 12:42pm",
+      "content": "I think Glyphs recently added Type 1 support for opening fonts. It may be more useful than FLS, TransType Pro or FontForge but I haven't tried it.\n\n"
+    },
+    {
+      "time": "31 Aug 2013 — 7:34am",
+      "content": "OK, I think I've solved the problem -- in my original post I said I hadn't changed any glyphs, but it turns out that that wasn't entirely true -- I added a glyph (a box to replace the empty .notdef glyph present in the original font), which must have triggered autohinting and caused the alignment zones to be recalculated or something along those lines. It took me awhile to figure this out, though, since I forgot to clear the font caches when doing my subsequent experiments and I think I was getting the same bad hinting because it was using the earlier cached version.\n\nThanks for everyone's suggestions.\n\nAndré\n\n"
+    },
+    {
+      "time": "31 Aug 2013 — 8:28pm",
+      "content": "Regarding FontLab Studio vs TransType, the new TransType 4 is on the next-gen FontLab codebase, so it may indeed get different results.\n\n"
+    }
+  ]
+}

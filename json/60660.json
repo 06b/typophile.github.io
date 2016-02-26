@@ -1,0 +1,66 @@
+{
+  "id": "60660",
+  "title": "How to change the name of a font ?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Ok i have a nifty problem. I'm working in a long technical books with Indesign, and i'm running a script that change italics in the text to Charactere styles. The script only works if the italics are named as italics.\n\nBut Archer is using 'Book italic' as a name and not 'italic' so the script doesn't work… !\n\nIs there anyway i can correct this in the font file, using a text editor, or is too complicated/impossible ?  \nI have no code abilities, btw.\n\n",
+  "author": "nlx",
+  "time": "5 Aug 2009 — 5:14am",
+  "uid": "12069",
+  "comments": [
+    {
+      "time": "5 Aug 2009 — 5:15am",
+      "content": "it's an OTF file…\n\n"
+    },
+    {
+      "time": "5 Aug 2009 — 5:37am",
+      "content": "Search and replace?\n\n"
+    },
+    {
+      "time": "5 Aug 2009 — 7:36am",
+      "content": "searching into footnotes, i think its not possible…\n\n"
+    },
+    {
+      "time": "5 Aug 2009 — 8:21am",
+      "content": "You should not correct this in the font file. It would be like distilling diesel fuel for your car with petrol (gasoline) engine. There must be another way.\n\nRegards,  \nJohnych\n\n"
+    },
+    {
+      "time": "5 Aug 2009 — 10:38am",
+      "content": "To me it makes more sense changing the script to recognize \"Book Italic\" than changing the font. Besides, Archer's EULA might not even allow you to modify the font.\n\n"
+    },
+    {
+      "time": "5 Aug 2009 — 11:59am",
+      "content": "<cite>searching into footnotes, i think its not possible…</cite>  \n???\n\n"
+    },
+    {
+      "time": "5 Aug 2009 — 3:02pm",
+      "content": "Hi NLX,\n\nThanks for choosing Archer for your project. If you'd like to contact me directly, I'd be happy to see what I can do to help.\n\nYours,\n\nKsenya Samarskaya  \nFont Development, Hoefler & Frere-Jones  \nsamarskaya [at] typography [dot] com\n\n"
+    },
+    {
+      "time": "5 Aug 2009 — 3:44pm",
+      "content": "This thread has some similarities to another over at the [InDesign Scripting forum](http://web.archive.org/web/20141010043705/http:/forums.adobe.com/message/1946302#1946302). Miguel Sousa already suggested that it would be wiser -- not to mention much simpler -- to modify a script than to change the names in a font family. The script discussed over on the ID forum is a standard \\*.JSX javascript, not compiled, so it can be modified. And the author, [Jongware], might well happen along here, to explain things better. Still, his contributions over there mention the strategy of **temporarily** changing the fonts in an InDesign document to a family using the the usual variants (regular, italic, bold, and bold italic) in order to run the JSX script that relies on them. After running the script, InDesign's \"Find Font\" command can quickly change all instances of, say, Times NR's \"italic\" to Archer's \"book italic\". As for footnotes, InDesign's can search them, but only if that is included in the search options: check out the options disguised as icons below \"Search:\" on the Find/Change menu.\n\nDavid\n\n"
+    },
+    {
+      "time": "5 Aug 2009 — 3:54pm",
+      "content": "Ah. The request did ring some bells :-)\n\nYes, David is correct on both accounts. Changing the font _temporarily_ doesn't do no harm, and I forgot Find/Change in InDesign can be explicitly set to exclude footnotes ...\n\nTheunis de Jong,  \na.k. (elsewhere) a. [Jongware]\n\n"
+    },
+    {
+      "time": "6 Aug 2009 — 1:39am",
+      "content": "This morning it suddenly occured to me. It is no problem at all.\n\nWhat NLX should do is _first_ replace his \"Book Italic\" with a character style of choice and only _then_ run the script to apply character styles to the rest of italics. The script is smart enough to leave existing character styles unchanged!\n\n"
+    },
+    {
+      "time": "6 Aug 2009 — 3:06am",
+      "content": "Why would one need a script at all?  \nStep one: define character style \"italic\" using font of your choice:\n\n ![](http://web.archive.org/web/20141010043705im_/http:/typophile.com/files/Picture01_4729.png)\n  \nStep two: search for italic format:  \n\n ![](http://web.archive.org/web/20141010043705im_/http:/typophile.com/files/Picture02_4234.png)\n  \n\n ![](http://web.archive.org/web/20141010043705im_/http:/typophile.com/files/Picture03_5515.png)\n  \nStep three: replace in the whole document, including all footnotes:  \n\n ![](http://web.archive.org/web/20141010043705im_/http:/typophile.com/files/Picture04_4690.png)\n  \nBut then, I could be missing something :) \n"
+    },
+    {
+      "time": "6 Aug 2009 — 5:27am",
+      "content": "\"The script\" has been mentioned a few times without any background story, so perhaps I should explain a bit further.\n\n[Preptext.jsx](http://web.archive.org/web/20141010043705/http:/www.jongware.com/binaries/preptext.zip) searches for any combination of bold, italic, superscript, subscript, underline, and small caps (and, by editing a few out-commented lines, strikeout). It creates character styles for each combo found and applies these to the text, so when editing you no longer can remove them by accident.\n\nIn this particular case, _some_ work has to be done by hand (preserving a special version of italics) but, honestly, in most cases it works nigh on perfect ...\n\n"
+    },
+    {
+      "time": "6 Aug 2009 — 8:38am",
+      "content": "Thanks for all, it helps a lot !\n\n"
+    }
+  ]
+}

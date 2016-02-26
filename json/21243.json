@@ -1,0 +1,106 @@
+{
+  "id": "21243",
+  "title": "What is Proper Eng shape?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I am trying to find out which Cap Eng configuration is most commonly accepted and understood by those who need to read it. I have seen the cap Eng with the cap N used as in Garamond Prem. Pro (see below) and as done in Gentium, where the cap Eng looks like an enlarged version of the lower case eng (using lc n). Which will read best to most people?\n\nBelow is a graphic showing both:\n\nThanks,\n\nChrisL\n\n ![](http://web.archive.org/web/20150424041246im_/http:/typophile.com/files/Eng_5392.png)\n\n",
+  "author": "dezcom",
+  "time": "12 Jul 2006 — 8:35am",
+  "uid": "3135",
+  "comments": [
+    {
+      "time": "12 Jul 2006 — 8:39am",
+      "content": "What languages use this Glyph?\n\n"
+    },
+    {
+      "time": "12 Jul 2006 — 9:39am",
+      "content": "See Bringhurst page 277 (appendix - sorts & characters)\n\n"
+    },
+    {
+      "time": "12 Jul 2006 — 9:40am",
+      "content": "It is part of the extended Latin A set. I know it is used in West Africa, Ghana I think, and Swahili. I am not sure but perhaps Azerbaijani? There are perhaps other places as well. Hopefully a more scholarly voice than mine will know more.\n\nChrisL\n\n"
+    },
+    {
+      "time": "12 Jul 2006 — 9:41am",
+      "content": "Thanks David,  \nMy Bringhurst is at home. I will look it up tonight.\n\nChrisL\n\n"
+    },
+    {
+      "time": "12 Jul 2006 — 9:46am",
+      "content": "formerly known as Lapp -- Sami is a Finno-Ugric language (Sweden, Finland ,Norway )\n\n"
+    },
+    {
+      "time": "12 Jul 2006 — 9:53am",
+      "content": "Thanks David.\n\nChrisL\n\n"
+    },
+    {
+      "time": "12 Jul 2006 — 9:59am",
+      "content": "you'll hafta scroll a bit:  \n [http://www.microsoft.com/typography/developers/fdsspec/uppercase.htm](http://web.archive.org/web/20150424041246/http:/www.microsoft.com/typography/developers/fdsspec/uppercase.htm \"http://www.microsoft.com/typography/developers/fdsspec/uppercase.htm\")  \nFor Sami the design is based on the N (Garamond Premeire Pro), for Hausa the design resembles the lowercase eng (Gentium).\n\n"
+    },
+    {
+      "time": "12 Jul 2006 — 10:01am",
+      "content": "So there are two different characters but they have the same unicode marker and name?\n\nChrisL\n\n"
+    },
+    {
+      "time": "12 Jul 2006 — 10:04am",
+      "content": "since you're nice :)\n\nBringhurst --  \neng: A basic letter of the alphabet in Lapp, and in its lowercase form, widley used in lingustic and lexicography. It represents the ng sound in the word wing. (Note the different sounds represented by the same letters in the words wing, Wingate, singlet and singe.) Thought it is ISO character, the eng is missing from most text font.\n\n"
+    },
+    {
+      "time": "12 Jul 2006 — 10:04am",
+      "content": "From the link Paul posted:  \n\" Uppercase Eng  \n Unicode: U+014a\n\nDesign : The preferred design of the uppercase Eng for the Sami language is one based on the uppercase N. The design form that resembles a lowercase n is an equivalent form of the uppercase Eng.  \n The uppercase and lowercase Eng are also used in the western African language of Hausa. In this African language the preferred design for the uppercase Eng is one that has a rounded top similar to a lowercase n.\"  \nChrisL\n\n"
+    },
+    {
+      "time": "12 Jul 2006 — 10:10am",
+      "content": "Thanks David and Paul.\n\nNow I don't know which one to choose or which language gets more use, sigh. :-) I will just do an alt character for it and hope whoever needs it can access it.\n\nChrisL\n\n"
+    },
+    {
+      "time": "12 Jul 2006 — 10:46am",
+      "content": "i'm assuming this is an OT font. If so, it's easy enough to implement both (on the font end)\n\nif you have the Sami Eng as the default  \nin the locl feature put\n\nlanguage HOU exclude\\_dflt;  \n sub [Eng eng.smcp] by [Eng.salt eng.smcp2];\n\nyou could also make a stylistic set that makes the same substitutions. This makes it easy to implement on the application end too (for InDesign CS2 users) until the locl feature is actually acessible by software apps.\n\n"
+    },
+    {
+      "time": "12 Jul 2006 — 11:26am",
+      "content": "Thanks Paul!  \nNo wonder P22 hired you :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "12 Jul 2006 — 12:09pm",
+      "content": "\\> language HOU exclude\\_dflt;  \n\\> sub [Eng eng.smcp] by [Eng.salt eng.smcp2];\n\nIf you add this code, remember to put the lines:\n\nlanguagesystem latn dflt;  \nlanguagesystem latn HOU;\n\nin the bottom-right part of the OpenType panel. Make sure to include a respective \"languagesystem\" clause for all languages that are included in your OpenType Layout features code. If you don't do this, for the Hausa language only the \"locl\" feature will be available, while other features from your font (\"smcp\", \"liga\" etc.) will not at all be available for the language!\n\n"
+    },
+    {
+      "time": "12 Jul 2006 — 12:15pm",
+      "content": "Thanks Adam!  \nYou guys are the best.\n\nChrisL\n\n"
+    },
+    {
+      "time": "12 Jul 2006 — 12:48pm",
+      "content": "i'm afraid i grossly oversimplified what needs to be done, chris. To see how to properly implement the language and script tags, follow Adams advice above and check out Adobe's [feature files](http://web.archive.org/web/20150424041246/http:/typophile.com/wiki/feature%20file) that they have made available to the public to see how to properly write the coding. Thank you Adam, for clearing up my statement above.\n\n"
+    },
+    {
+      "time": "12 Jul 2006 — 2:09pm",
+      "content": "No sweat Paul.\n\nChrisL\n\n"
+    },
+    {
+      "time": "16 Jul 2006 — 6:16am",
+      "content": "Here is my engst ending solution for Froggy:\n\nChrisL\n\n ![](http://web.archive.org/web/20150424041246im_/http:/typophile.com/files/engst_4628.png)\n\n"
+    },
+    {
+      "time": "16 Jul 2006 — 7:52am",
+      "content": "Chris,\n\ndon’t you think that in your \"N\"-derived Eng, the curl is a bit too thick?\n\n"
+    },
+    {
+      "time": "16 Jul 2006 — 8:15am",
+      "content": "Thanks Adam. You are right. I was at odds with matching the J and compromised too much. I will fix it.\n\nChrisL\n\n"
+    },
+    {
+      "time": "16 Jul 2006 — 11:02am",
+      "content": "Here is a new shot at the Eng:\n\nChrisL\n\n ![](http://web.archive.org/web/20150424041246im_/http:/typophile.com/files/engstagain_3785.png)\n\n"
+    },
+    {
+      "time": "1 Oct 2006 — 10:59am",
+      "content": "Adam Twardoch wrote:  \n\\> ... remember to put the lines:  \n\\>  \n\\> languagesystem latn dflt;  \n\\> languagesystem latn HOU;\n\nIn his <cite>OT Layout Feature File</cite> presentation at TypeTech, Christopher Slye pointed this out too -- and his examples had an additional line preceding the more specific ones:\n\nlanguagesystem DFLT dflt;&nbsp;&nbsp;&nbsp; **\\<\\<\\< Don't forget this one!**  \nlanguagesystem latn dflt;  \nlanguagesystem latn DEU;  \nlanguagesystem latn TRK;\n\nIn fact, AFDKO2's compareFamily complains if this line is missing. Don't ask me how I found out ... It is also mentioned explicitly in the Feature File Syntax, at the end of section <cite>4.b. Language system</cite>.\n\nKarsten\n\n<cite>Edit, 2 Oct 2006:<br>\nWith the current FontLab Studio 5.0.2 it is not possible to add the first extra line since it uses an older AFDKO which does not support the 'languagesystem DFLT dflt' statement. See Read Roberts' post (3 October 2006, 9:24pm) on the <a href=\"http://web.archive.org/web/20150424041246/http:/typophile.com/node/28277\" target=\"_blank\" rel=\"nofollow\">AFDKO2 thread</a>. So, let's wait for the update to be able to do things right.</cite>&nbsp;&nbsp;:)\n\n"
+    },
+    {
+      "time": "1 Oct 2006 — 1:17pm",
+      "content": "Thanks Karsten!\n\nChrisL\n\n"
+    }
+  ]
+}

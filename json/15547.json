@@ -1,0 +1,18 @@
+{
+  "id": "15547",
+  "title": "Problems in fontlab 4",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I am trying to create some alternate ampersand glyphs in fontlab but I can’t figure out how to get them to actually work.  \nAlso (and I am sure that it is an obvious question) I can’t get the ’smart quotes’ to work in the typeface either.  \nNobody wants to see inch marks in place of proper quotes do they?\n\nI would appreciate any help that anyone has.\n\n [‹ CorelDraw/FontLab Problem: ttfs won't export, or otf will look different in different programs!](http://web.archive.org/web/20080502224530/http:/www.typophile.com/node/15458 \"Go to previous forum topic\") [Setting type in Greek ›](http://web.archive.org/web/20080502224530/http:/www.typophile.com/node/15498 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080502224530/http://www.typophile.com/user/8424\" title=\"View user profile.\">character</a>",
+  "time": "<br>",
+  "uid": "8424",
+  "comments": [
+    {
+      "time": " 10.Oct.2005 5.55pm",
+      "content": "There was a discussion here a while back about the idea of using OpenType to do smart quotes. The consensus was that it would be a bad idea; that it should be left to the application to do. There was a good reason, but I can’t quite remember what it was.\n\nDoing alternate ampersands is easy. Create your normal ampersand in the normal ampersand slot. Then create your alternate ampersands, naming them ampersand.alt1, ampersand.alt2, etc. (The alternates do not need Unicode values assigned, but you may use PUA codes if you want programs like MS Word for Windows that don’t yet support alternates to be able to access them.)\n\nCreate a “salt” feature defined thusly:\n\nfeature salt {  \n sub ampersand by ampersand.alt1 ;  \n} salt;\n\nThen create stylistic sets like this:\n\nfeature ss01 {  \n sub ampersand by ampersand.alt1 ;  \n} ss01;\n\nfeature ss02 {  \n sub ampersand by ampersand.alt2 ;  \n} ss02;\n\netc., for however many alternate ampersands you have.\n\nThe “salt” feature is the default alternate for programs that don’t support more than one alternate. The “ss0x” features are for programs that support “stylistic sets”. You will see all of them in programs with glyph or character palettes. In Adobe apps, they will also show up together in a pop-up under the ampersand in the Glyph Palette.\n\n"
+    }
+  ]
+}

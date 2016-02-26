@@ -1,0 +1,34 @@
+{
+  "id": "16467",
+  "title": "Looking for guidance cross-platform uni fonts",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi,\n\nMany years ago we developed some 'hacked' fonts for several Native American languages with Fontographer. With more unicode and OpenType support for OSX and WinXP we're looking at re-developing fonts the right way. I've been reading about the issues and processes and am using FontLab and Ukelele on the Mac and the WinXP keyboard tool on PC. I've visited with the folks at languagegeek to see how they're approaching the topic. I've read a number of Adam T's posts and am evaluating the various alternatives.\n\nThe environment...  \n1. The tribal culture committees are looking for word processing, desktop publishing, possible web development and possible database work. It appears that we need to point ourselves to InDesign.  \n2. The documents need to be cross-platform for distribution to schools and various departments.  \n3. The culture committees are fairly specific about the character styles and they may differ somewhat from standard linguistic stylings and namings.  \n4. One language has approximately 60 characters and the other approximately 45.\n\nWhat I've found so far...  \n1. Creating a composite glyph, with a non-defined PUA unicode index, doesn't seem to be supported by some Mac Apps (including Ukelele for associating the character to a key).  \n2. Using combining diacriticals (acute) with space modifiers (small 'w'...which we call 'rounded') doesn't appear to work properly in Mellel spell checking but seems to work OK in NeoOffice. In Mellel it sees the small 'w' as a new word character.  \n3. Positioning in FontLab doesn't appear to be two dimensional, so I tried the OT ccmp feature. However, that doesn't appear to be supported in some Mac Apps.  \n4. Some of the characters we need are at U+2C60 and up, but don't seem to be assigned to a UniCode range. I see them in the OSX charater palette but not the FL4.5 ranges.\n\nPotential direction...  \n1. Use combining diacriticals and space modifiers (and don't use PUA) to better support spell checking and the most number of apps. Live with poorer typographical displays.  \n2. Use pre-composed characters where available to support mutilple diacriticals  \n3. Use NeoOffice/Open Office for word processing and InDesign for DTP.\n\nQuestions...  \n1. Which OpenType features can we use that are supported by the most OSX and PC apps?  \n2. Any suggestions on improving cross-platform typographic quality without using PUA and substitution?  \n3. Is there a way to support apps that don't use OT well and those that do? In other words, how can base support be provided using combining diacriticals and spacing modifiers and also provide advanced positioning and ccmp features for apps that use it and still maintain cross-platform/document support?\n\nAny hints, tips or suggestions are appreciated.\n\n",
+  "author": "fredjonze",
+  "time": "27 Nov 2005 — 10:56am",
+  "uid": "10195",
+  "comments": [
+    {
+      "time": "28 Nov 2005 — 12:04pm",
+      "content": "Fred,\n\nsince we've corresponded off-list, you know my recent writings on the topic. So you are familiar with all the pros and contras of the various approaches. All I can say is that your issue is a tough call.\n\nOne thing you might be looking at is including both OpenType Layout features and AAT features in your font. Mac OS X 10.3 and earlier only support AAT features. Mac OS X 10.4.3 and later support both OpenType Layout features and AAT features. (Mac OS X 10.4.0-10.4.2 had a problem with fonts that contained both types of features.)\n\nYou will find information about adding AAT tables at:  \n [http://developer.apple.com/fonts/](http://web.archive.org/web/20150308211536/http:/developer.apple.com/fonts/ \"http://developer.apple.com/fonts/\")\n\nRegards,  \nAdam Twardoch  \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": "29 Nov 2005 — 7:22pm",
+      "content": "Hi Adam,\n\nCan FontLab handle both OpenType and AAT in the same font? Or, will I need to create the OpenType work first in Fontlab and then use the AAT Font Tool?\n\nThanks,\n\nFred\n\n"
+    },
+    {
+      "time": "29 Nov 2005 — 9:45pm",
+      "content": "What's the breakdown of OS's for the user base? Seems as if you're going to an awful lot of trouble to try to produce a cross-platform solution when a more realistic option would be to make conformant OpenType fonts for Windows XP and Office XP, and stick with hack fonts for the other users - Mac, Linux, and Win 9x? I'd guess you could even use Python Script to generate the good vs evil fonts from the same sources.\n\nSi\n\n"
+    },
+    {
+      "time": "2 Dec 2005 — 1:14pm",
+      "content": "Fred, can you let us know what you ended up doing?\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "2 Dec 2005 — 9:27pm",
+      "content": "Hi,\n\nTo quote the eminent stooge Curley, \"I'm thinkin' and thinkin' as hard as I can and nothin's happening!\"\n\nThe goal is to produce Native American language documents on both OSX and PCs that can be shared both ways. The next goal is to build support for spell checking. The primary applications are desktop publishing and word processing. I also need to create a utility to convert documents with older 'hacked ascii' fonts to unicode.\n\nI'm still working on a single font. I'm tending towards using combining diacriticals with space modifying letters. It appears that the features of AAT do not appear to be usable with the recent OpenType changes to OSX 10.4. I guess we'll just live with lower quality typography until more of the OpenType features are supported.\n\nAt the present time I'm trying to better understand how Ukelele works with combining diacriticals to know if our goals are achievable. I'm also diving into Applescript to see how conversion to unicode will work.\n\nRegards,\n\nFred\n\n"
+    }
+  ]
+}

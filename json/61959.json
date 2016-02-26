@@ -1,0 +1,114 @@
+{
+  "id": "61959",
+  "title": "Half a Class Kern",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "When setting up kerning classes in FontLab Studio, how do I make use of those left/right checkmarks? I read the manual but I don't understand how I can make practical use of them.\n\nLet's say I've defined the capital A as a kerning class for all accented A's. Like this:\n\n\\_kern1: A' Adieresis Aring Agrave Atilde Acircumflex Aacute Amacron Abreve Aogonek\n\nHow can I apply the left A kerning to the AE? I've always just done a copy from A and paste special, left kerning on the AE. It works, but I'd like to do it with classes\n\nI can see that I can define a whole new kerning class and have it apply to only the left or right side. But the A already has a class defined, I can't define another class for A: it already has a class.\n\n",
+  "author": "<a href=\"/web/20100203133041/http://typophile.com/user/14133\" title=\"View user profile.\">typodermic</a>",
+  "time": "<br>",
+  "uid": "14133",
+  "comments": [
+    {
+      "time": "",
+      "content": "If I understand you correctly, this is a simple task:\n\n\\_kern1: A' Adieresis Aring Agrave Atilde Acircumflex Aacute Amacron Abreve Aogonek  \nwith LEFT checkmark marked: [√] | []\n\n\\_kern2: A' Adieresis Aring Agrave Atilde Acircumflex Aacute Amacron Abreve Aogonek AE  \nwith RIGHT checkmark marked: [] | [√]\n\nThe (confusing) logic behind this is to understand if the class is the first or the second letter in the kerning pair. For this reason I always change the name of the kerning class:\n\n\\_Afirst: A' Adieresis Aring Agrave Atilde Acircumflex Aacute Amacron Abreve Aogonek\n\n\\_Asecond: A' Adieresis Aring Agrave Atilde Acircumflex Aacute Amacron Abreve Aogonek AE\n\n———\n\nAnd you might want to include Æ in a E class as well:\n\n\\_Efirst: E' Egrave Eacute Ecircumflex Edieresis AE (and so on)  \nwith LEFT checkmark marked: [√] | []\n\nIs this what you are looking for?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Cristobal, that's what I was looking for. Cheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "oh yes ... me too  \nthanks for the answer\n\n"
+    },
+    {
+      "time": "",
+      "content": "Perfect, you are welcome.\n\n"
+    },
+    {
+      "time": "",
+      "content": "There are two checkmarks that represent the glyph classes in a kerning pair, and the dot in the middle represents the kerning pair.\n\nIf the left checkmark is enabled, all glyphs in the class that is on the left side of the kerning pair get the same kerning value as its key glyph.\n\nIf the right checkmark is enabled, all glyphs in the class that is on the right side of the kerning pair get the same kerning value as its key glyph.\n\nThe \"AE\" glyph is one where you want to share E's kerning value if the glyph appears on the left side of the kerning pair — so you enable the left checkbox.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "I agree with Cristobal that the 'Left/Right' definitions for position is confusing, particularly if you are mixing Left to Right and Right to Left scripts in the same font. It is much better to call these positions 'First' and 'Second'.\n\nMalcolm\n\n"
+    },
+    {
+      "time": "",
+      "content": "Malcolm,\n\nindeed, they \\*are\\* called 1st and 2nd in the FLS UI and the manual.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Oh, it is good to know, but I was not thinking about right-to-left scripts.\n\nI meant it would far more intuitive to mark the side by which you are grouping for, i. e. if you are grouping O, C, G because they are round on the LEFT side you should check the LEFT checkmark, not the other one, as it is today. According to this, FL should be capable to understand that if a group is marked on its left side it is going to be used as the second letter on the pair (or the first one, if it is a right-to-left script).\n\nWhen I try to explain kerning classes to someone (last weekend and yesterday, just to name the last cases), the other person always get it wrong because of this.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Cristobal\n\nhmmm.... I think I understand your point but I don't think I can agree with your logic. Looking at the position of the glyphs in the pair relative to each other in text is much more logical I think.\n\nMalcolm\n\n"
+    },
+    {
+      "time": "",
+      "content": "Ok, it can be just me (and all the other people I have taught this).\n\n"
+    },
+    {
+      "time": "",
+      "content": "Cristobal,\n\nin left-to-right scripts, if glyphs are identical on the LEFT side then it means they will share the same kerning value if they are the 2nd glyphs in the pair. In right-to-left scripts, if glyphs are identical on the RIGHT side then it means they will share the same kerning value if they are the 2nd glyphs in the pair.\n\nIn both cases, the 2nd checkbox needs to be activated. It would be far too complex from the UI standpoint to somehow make sure that the checkboxes relate to the left or right side of the glyphs, because that depends on the direction of the script. But if you think about the logical order of the glyphs in the kerning pair, one is always 1st and the other is always 2nd, and this is what the checkboxes reflect. I'd be happy to hear your suggestions how to improve this, provided that the solution will be workable for both LTR and RTL scripts, of course.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Adam, thanks for answering.\n\nIt’s true, I don’t have a solution workable for LTR and RTL scripts. I am only saying it’s not very clear for me and some other persons. Otherwise, this thread would never existed. But certainly kerning classes in FL is not the most difficult thing to understand.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Adam, one way to deal with this is defining classes by left/right side of glyph logic, regardless of glyphs' writing direction. Setting a left flag means that glyphs' left sides are similar. Always. Upon (kern) feature generation, lookups' LTR/RTL flag determines whether the translation is left=2nd & right=1st, or right=2nd & left=1st. Not a big thing. In addition, source data for LTR/RTL kerning should be defined and kept independently of each other.  \nMalcolm, OT layout table's logic of 1st/2nd is layout engine logic. There is nothing wrong with it. But personally I think that a left/right logic is more in tune with how designers think: left side of a glyph is the left side of a glyph, regardless of writing direction.\n\nKarsten\n\n"
+    },
+    {
+      "time": "",
+      "content": "I also think that left/right would be easier to use. This is a bit off topic, but I really needed the \"high/low\" distinction in classes dealing with accented characters (as in kerning pairs Lo/Lö vs To/Tö. Is there no way to distinguish o from ö above x-height (other than creating an extra class) or did I overlook something?\n\n"
+    },
+    {
+      "time": "",
+      "content": "I’ve dreamed about that high/low distinction as well (very useful for n m ı i í ì î ï, for instance). Sadly, there’s no such thing. So I handle pairs like To/Tö as exceptions to the kerning class.\n\n"
+    },
+    {
+      "time": "",
+      "content": "That bullet in the middle has confused me a few times.\n\nThe way I think of it (when I have it right) is that the bullet represents the glyph that the class is kerning against. So, if you want the class to be considered when its members are on the left side of another glyph, click the left check box. But a few times I've got it inside out and thought the bullet represented the members of the class, and the check boxes represented the other half of a kerning pair, either on the left or on the right, which is backwards.\n\nMost of the time I get it right--er--correct. But I think it would be less confusing if the bullet in the middle were removed. Just have the two check boxes, which would then clearly represent the two possible positions in a kerning pair with no third element to muddy the waters.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I find the left and right dots confusing too. After doing all my classes backwards the first time I tried class kerning, I finally realized what the interface designer had done. I still think it makes more sense the other way and have to make a very conscious effort to do it the FontLab way instead of the intuitive way every time. Obviously, I am not the only person who thinks left kerning means the space to the left of the glyph in question. Even after 5 years of doing it the FontLab way, I still find it very awkward and illogical. There may be an equal number of people in the world who think the FontLab way is logical--who knows. I am just happy to see it isn't just me being crazy.  \nThanks Ray and Cristobal for helping me feel sane :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Chris,\n\nI'm aware of quite a few users who think the \"FontLab way\" is intuitive and the \"intuitive way\" is not intuitive. We actually have given it a fair amount of thought and decided that the way we have implemented it is more robust, especially in context of mixed writing directionality. I believe changing it now would confuse even more people (the ones who think it's intuitive as well many of those who don't think it's intuitive but have learned to deal with it).\n\nHowever, I think we can try to come up with a different graphical indication of \"the thing in the middle\" so it's more clear that it's the kerning pair that is indicated there (currently by the dot) rather than the glyph.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "I quite agree, Adam on both counts.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "It would be nice if the next FontLab had a a different system for dealing with kerning classes. In an ideal system . . .\n\nKerning classes would be set up in the font window, not in a separate dialog. You's switch into class mode. All the class parents would be highlighted. To make a new class parent, right click and create class parent. Select glyphs, drag & drop them on the class parent and they're added to that class. If a glyph already belongs to another class, it cant be selected. However, if you deselected and clicked on that glyph, it would reveal its parent the rest of the class it belongs to. For each glyph, you can turn off left of right kerning. Perhaps there could be a way to make the left belong of one parent and the right belong to another.\n\nThe classes wouldn't be numbered . . . the order is irrelevant. FontLab will automatically generate a proper class table.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Classes don't need to be numbered. That's just what happens by default.\n\nYou can use any naming scheme that makes sense to you, as long as you start it with an underscore. The underscore tells FontLab that it's a kerning class, and not a metrics class (which start with a period) or an OpenType class (which have no special mark).\n\nIncidentally, if you decide to bypass FontLab's class kerning support and create your kern feature some other way (such as writing kern feature code directly in the OT panel or using an external tool such as Metrics Machine) you don't need the underscore or the key glyph (the one with the tick mark) at all. Those are only for FontLab's purposes and are not part of the OT spec.\n\n"
+    },
+    {
+      "time": "",
+      "content": "This is probably real dumb on my part (I don't use class kerning), but I seem to remember reading in this section(Typophile/Build) that a character can be a member of only one class. If that's the case, it rather limits having left versus right kerning classes.\n\n"
+    },
+    {
+      "time": "",
+      "content": "A glyph can be a member of two classes as long the two classes are not for the same side of a kerning pair.\n\nThis also means that a glyph can't be a member of more than two kerning classes.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Mark,\n\nclass names are not at all part of the OpenType spec altogether. They're not included in the final font files at all. They're just being used by the Adobe FDK for OpenType library that converts the text-based feature specification into binary OpenType Layout feature tables. And yes, indeed, the convention of starting names of classes that are used for kerning with an underscore (\"\\_\") is just a convention used within FontLab Studio. This way, FontLab Studio \"known\" which classes are to be used when it generates the feature specification for the \"kern\" feature.\n\nSimilarly, the key glyph is a concept used within FontLab Studio to simplify the internal storage of data (kerning pairs are \"attached\" to glyphs in FontLab Studio). This is pretty much a remainder of old FontLab 3.x where there was no concept of class kerning. It's possible that at some point, we'll develop a fully new way of dealing with kerning which will not require key glyphs.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Right, I shouldn't have said the class had to do with the OT spec. It's easy to forget that when all the tools you use for making OT fonts are based on the AFDKO.\n\n"
+    }
+  ]
+}

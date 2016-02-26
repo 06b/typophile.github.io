@@ -1,0 +1,34 @@
+{
+  "id": "66569",
+  "title": "Assigning U+ prefix in FontLab",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I am looking for some clarity on best practice for the naming and use of UNICODE codes.\n\nWhen reading Typophile's informative posts, \"those who know\" prifix any quotation of a unicode to be assigned to a glyph with the prefix U+ giving a value like 'U+0000' (also as used in Adobe Glyph List) however when looking at font file from Apple and Adobe and accessing their UNICODE via \\>Rename Glyph in FontLab there is no U+ prefix there just the (4 alphanumerics). Also when clicking the magic Jewel in FontLab - no U+ appears.\n\nNote:  \nU+ certainly assists when compiling a spreadsheet so that the program doesn't automatically read as a number and delete preceeding zero in a code.\n\nAlso by prefixing a Unicode by U+ makes the communication of data in a forum clear and easy.\n\nQ. Does coding assignation break if the U+ is assigned in any or all cases in FonLab?\n\nQ. Is there a best practice. Is anyone suggesting to include the U+ when assigning Unicodes within font editing software?\n\nThanks,\n\nMichael Hernan\n\n",
+  "author": "Michael Hernan",
+  "time": "24 Jan 2010 — 4:40am",
+  "uid": "9418",
+  "comments": [
+    {
+      "time": "24 Jan 2010 — 1:18pm",
+      "content": "The U+ convention is used in discussing Unicode characters in order to identify that these are Unicode characters and not e.g. GB 18030 or some other encoding. Since the Unicode encoding field in the FontLab glyph properties dialogue is, by definition, Unicode, there is no need for the U+ prefix in this context, although I agree that it would be nice if a codepoint entered as U+0179 were recognised.\n\nIn spreadsheets, you can use the 0x prefix, which is recognised by FontLab, e.g. 0x0179.\n\n"
+    },
+    {
+      "time": "10 Feb 2010 — 12:36am",
+      "content": "\\> In spreadsheets, you can use the 0x prefix, which is recognised by FontLab, e.g. 0x0179.\n\n...while in the Metrics Window, Preview panel and other text boxes where glyphs are selected, you can use \\uXXXX or \\XXXX to denote a glyph which has a particular Unicode codepoint assigned.\n\nFor glyphnames, you can use uniXXXX for 4-digit Unicode codepoints and uXXXXX for 5-digit Unicode codepoints.\n\n"
+    },
+    {
+      "time": "20 Feb 2010 — 6:13am",
+      "content": "@twardoch How about the transferring of data from a spreadsheet to FontLab?\n\nI am taking a long and convoluted approach at the moment - is there a better way?\n\nMy process now is:  \nI can copy data from multiple columns and in a text editor I inset underscores and = to delimitate Tabs. (This prevents the creation of multiple glyph boxes for the same character).\n\n`LATIN_CAPITAL_LETTER_D_WITH_SMALL_LETTER_Z_WITH_CARON=Dzcaron=01C5`\n\nI create glyphs by 'Generate Glyphs' and inserting my list of strings (as above).\n\nThis gives me a chance to then sort out glyph by glyph in the \\>'Rename Glyph' window/panel, by cutting and pasting the various bits of info from the name field into the other fields.\n\nIt would be great if speadsheet data could automatically `pass` to separate glyphs with the codes and names going to the correct field without user intervention...\n\nAnother question would also be that do prefixes and postfixes allow for this in any way?\n\n"
+    },
+    {
+      "time": "20 Feb 2010 — 6:42am",
+      "content": "I have tried a couple of variations using prefixes.\n\n@Johns suggestion of the 0x prefix didn't seem to do anything?\n\nUsing uni prifix does populate the fields but kills the name of the glyph preceding the unicode. i.e the name of the glyph is replaced by `uni0179`\n\nThis puts me half way to an acceptable method but also defeats the whole point of being able to inset a name to a glyph.\n\nI have just noticed that where I have 3 bits of information: Written\\_Name Lettercode Unicode... the Generate Glyph proceedure noted above cuts off the first part (Written Name).\n\nThis is good as there are only 2 boxes, but surprising nonetheless.\n\nI will wait for wisdom...\n\n"
+    },
+    {
+      "time": "20 Feb 2010 — 9:11pm",
+      "content": "The other thing one can do in spreadsheets it format the cells as \"text\" so as to maintain the leading zeros. However, you need to do that _before_ putting the numbers in, else the zeros will get stripped right when you enter them.\n\nT\n\n"
+    }
+  ]
+}

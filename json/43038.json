@@ -1,0 +1,46 @@
+{
+  "id": "43038",
+  "title": "Question about Unicode",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I'm designing a font and now I have two lowercase g (the normal lowecase g and an alternate g). I've assigned a name to alternate g (g.alt), do I need to assign it an Unicode code?\n\nSecond question, can you recommend me some book about unicode?\n\n",
+  "author": "<a href=\"/web/20100203093704/http://typophile.com/user/24678\" title=\"View user profile.\">MiseEnAbime</a>",
+  "time": "<br>",
+  "uid": "24678",
+  "comments": [
+    {
+      "time": "",
+      "content": "<cite>do I need to assign it an Unicode code?</cite>\n\nNo, you don't. OpenType features are operating on glyphs names. But you will lose access to alternate glyphs in applications, which are not OT-savvy so it's a good practice to put them somewhere in Unicode's Private Use Area.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Start with \"Fonts and Encodings\" by Yannis Haralambous, followed by \"Unicode explained\" by Jukka K. Korpela (both published by O'Reilly).\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"But you will lose access to alternate glyphs in applications, which are not OT-savvy so it’s a good practice to put them somewhere in Unicode’s Private Use Area.\"\n\nThe problem is completely true, but whether that makes creating a bogus encoding a good idea is a question that has long been the subject of heated debate. Adobe, for example, used to do this religiously in all Adobe OpenType fonts, but we finally decided to discontinue the practice in new fonts starting with Arno and Hypatia Sans (IIRC, I personally pushed that move).\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thomas, I wouldn't call it a \\*bogus\\* encoding, but a private one. So, for fonts having a quite restricted audience, private use encodings make sense; for a font to be generally released to the public, probably not.\n\nFor example, the medievalists with \"Junicode\" have essentially proposed a standardized private use encoding for some characters they need that will never have regular Unicode numbers. And our company, in our working fonts, gives all ornaments a Private Use encoding, on the grounds that it alerts an eventual user of the files that there is something in them they need to check, but if they don't and the characters drop out, no real harm is done to the text.\n\nI'd agree that for an alternate glyph, it is best not to use the PUA. The situation with Type 1 fonts was a similar conundrum, where characters outside the MAC or WIN standard name-based encodings were given the wrong name just to be included in the font. Any further use of a file that employed such alternates was a PITA.\n\nWith the multiple uses of a (single) text file today, a layout program that has to treat alternate glyphs as different characters -- different objects -- probably just should not have access to them. Font designers should understand that their product is not an end in itself; to have value it needs to be used. For those of us who use type, a certain consistency across fonts is important. The object-attribute model of OpenType helps with this; letting the features code give whatever typographic niceties the font designer wishes to include, while preserving the text file. Font designers shouldn't then take away what that gains us.\n\n"
+    },
+    {
+      "time": "",
+      "content": "If the alternate glyph represents a character that has not been encoded in Unicode on its own (nor it can be represented as a sequence of Unicode characters), but it has different SEMANTICS that the \"basic\" variant, and if you want this different semantics to be preserved when the text is extracted/searched in an electronic document (PDF), then you should use a PUA value and use glyph names like `uniXXXX` where XXXX is the PUA Unicode codepoint.\n\nIf the alternate glyph represents a visual variant of a basic character but semantically it still is the same character, you should not use PUA and use glyph names like `basicglyphname.suffix`.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for the explanations\n\n"
+    },
+    {
+      "time": "",
+      "content": "What else could be where in Hindsight Unicode at HindUnic.ttf will have glitches?  \n\\* No Alphabetic Presentation Forms unicode block was made from the font. Can you replace quotereversed into u201b? From which character has been added to the Free UCS Outline Fonts?\n\nHere are the relative changes to existing unicode ranges.  \nCyrillic:  \n1162 CYRILLIC CAPITAL LETTER SHORT I WITH TAIL: added tail  \n1163 CYRILLIC SMALL LETTER SHORT I WITH TAIL: added tail  \n1164 CYRILLIC CAPITAL LETTER SEMISOFT SIGN: added line  \n1165 CYRILLIC SMALL LETTER SEMISOFT SIGN: added line  \n1166 CYRILLIC CAPITAL LETTER ER WITH TICK: added tick  \n1167 CYRILLIC SMALL LETTER ER WITH TICK: added tick  \n1170 CYRILLIC CAPITAL LETTER GHE WITH STROKE: added stroke  \n1171 CYRILLIC SMALL LETTER GHE WITH STROKE: added stroke\n\n"
+    }
+  ]
+}

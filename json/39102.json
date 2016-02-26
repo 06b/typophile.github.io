@@ -1,0 +1,210 @@
+{
+  "id": "39102",
+  "title": "Font Release Checklist?",
+  "forum": "Release",
+  "tags": [
+    "Release"
+  ],
+  "content": "I'm nearing completion of the first weight of my font, and for the sake of the exercise, I want to get the font as close as possible to a condition in which it could be sold.\n\nSo far, the work I've done can be broken up into:\n\n1) Creation of glyphs; arrangement in FontLab  \n2) Metrics/kerning  \n3) OpenType features (just ligatures in my case)  \n4) Setting font info/name  \n5) Output to .otf file\n\nThose are of course the basic steps, but I'm sure there are a lot more details that need to be taken into account before a font is really \"ready\" for mass consumption.\n\n",
+  "author": "amv",
+  "time": "14 Nov 2007 — 11:56am",
+  "uid": "23823",
+  "comments": [
+    {
+      "time": "14 Nov 2007 — 4:16pm",
+      "content": "I'm in the same situation right now too, and that checklist is exactly what I'm following. The one thing I can't figure out yet, is accessing the OpenType features. I'm not sure if I'm supposed to create a glyph to represent, say, a small cap character, or if there's a way to actually load this.\n\n"
+    },
+    {
+      "time": "15 Nov 2007 — 10:53am",
+      "content": "If you really want to prepare a font that is ready for 'mass' consumption it would be useful to add these steps to your list:\n\n6) Test the otf file in at least the major apps and OS's.  \n7) If any errors then correct them and output to otf file again.  \n8) Repeat step 6 and 7 until free of errors.\n\n"
+    },
+    {
+      "time": "14 Mar 2008 — 8:30pm",
+      "content": "--if it's a text family, be sure to add oldstyle figures to each font  \n--be sure your text family offers at least two weights, with italics for each  \n--be SURE each font is keystroke-linked to the others, or at least, that each roman is keystroke-linked to its matching italic. If you have more than one bold weight, I would advocate linking the base weight roman to the full bold, skipping the semibold. But it depends on what you're doing.\n\nPLEASE do not emulate the bad habits of so many small boutique foundries: don't release text families with only one weight, add OSFs in OT, and keystroke-link your fonts like the big foundries do. And keep your prices modest ($12.50 per font or four fonts for $50) so freelancers, who are the real taste-makers, can afford to buy your fonts on their own. Do all this, and your customers will be happy and loyal.\n\n"
+    },
+    {
+      "time": "14 Mar 2008 — 11:54pm",
+      "content": "MondoB, I'm with you on the importance of a full complement of weights, etc., for text faces.\n\nBut freelancers as taste-makers? Individual circumstances vary, but in the magazine design world at least, freelancers are generally working in an established style, not blazing a new trail.\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 12:23pm",
+      "content": "<cite>And keep your prices modest ($12.50 per font or four fonts for $50)</cite>\n\nThis is a laugh riot.\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 2:49pm",
+      "content": "I'm all for cheap fonts, but I'm not going to demean those who have invested years of their lives into fighting points and contours by insisting they give away their work at bargain basement prices.\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 4:28pm",
+      "content": "\"...so freelancers, who are the real taste-makers, can afford to buy your fonts on their own.\"\n\nBut what about the type designers who also have to afford their rent? They could make more money per hour working at McDonalds than they could giving their type away for $12.50 per weight! You want us to include everything \"like the big foundries do\" but work for peanuts. I'll tell you what, instead, bill your client at your usual rate but just pay yourself 3 bucks an hour and with the money you saved, buy some type at a fair price? Sounds good, huh?\n\nChrisL\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 6:44pm",
+      "content": "Alex, a few other things to put on your release checklist:\n\n\\* Character set / code page integrity. Are you making the defacto standard Western 1252 character set, or something with more extensive language support? Whichever, make sure your code page complies the Unicode industry standard.\n\n\\* Decompose all composite glyphs before generating font files and remove overlap from glyphs needing it, such as Ccedilla and things with ogoneks. There is no practical reason for shipping fonts containing composite glyphs, as they save only a few kilobytes and add nothing to the value of your font.\n\n\\* Do all glyphs have a Unicode number assigned to them? If not, they may not survive cutting and pasting between applications.\n\n\\* Does your font contain .notdef, .null and CR cells? All three are mandatory, especially the .notdef cell, which needs a blank rectangle in it so that users know what the deal is when an undefined character is called by the material they're setting.\n\n\\* Are we making TrueType and/or Type 1 versions of the font? Presently not many font makers bother with Type 1. I still include TrueType versions of my fonts in the standard ZIP package as a courtesy to Mac users still using OS9.xx, but I'm starting to wonder if it's worth the extra time and logistic hassle.\n\n\\* Promotional material. Whatever your means of distribution, you'll probably need to make type samples to show potential buyers how the font(s) look in use. I only have experience with Myfonts. For a Myfonts release you need a 200 x 200 pixel font flag, ideally something showing the font(s) used in a very attractive way. Depending on the font, a strong font flag can mean the difference between selling a few copies and making no sales.\n\n\\* Promotional written copy. Regardless of your distribution method, it's helpful to write something about your font(s) for customers who want to read something about it (not all customers do). Promotional copy can be (1)&nbsp;a simple description of the font and its characteristics, (2)&nbsp;a detailed description, (3)&nbsp;a description laced with positive and persuasive statements. Be careful with number 3, because it's easy to overdo it and end up with promotional copy that dazzles too much and puts customers off. Also avoid writing very long blurbs unless you are Frantisek Storm and have lots of interesting things to talk about.\n\n_PLEASE do not emulate the bad habits of so many small boutique foundries: don’t release text families with only one weight, add OSFs in OT, and keystroke-link your fonts like the big foundries do._\n\nHow many and which indie font makers release families with only one weight? With only one weight or variant a font cannot be called a family, by definition.\n\n$10 --- $12.50 per font is an impractical price becaws after the costs involved in distribution and promotion are taken into account you'd be left with a paltry $5 --- $8 total revenue from each font, and those figures are based on the lowest margins charged by the most generous distributors in the biz. That amount would be reduced further by discounting. Font discounting is one of the main means of generating interest in a font as it makes your brand visible to the market.\n\nLet's not turn this into an arse kicking thread guys. Give Mondo a break.\n\nj a m e s\n\n"
+    },
+    {
+      "time": "15 Mar 2008 — 7:13pm",
+      "content": "One more thing; come up with a list of key words, or \"technorati tags\" as they're being called now. Some search engines will pick up key words from your blurb (if it contains them), and some search engines only pick up key words from a list labelled \"key words\" or \"technorati tags\". One marketing trick you can use at Myfonts is to submit as many key words as they'll let you use. This helps make your font visible in a crowded marketplace.\n\nj a m e s\n\n"
+    },
+    {
+      "time": "16 Mar 2008 — 6:41am",
+      "content": "I understand type designers going red in the face over price issues, but if you're in it for the long haul, you will emulate the example of Storm Foundry, most of whose type-one text families (always keystroke-linked) still cost $55-$65 (going to OpenType lets them charge more). They have benefited from their price moderation; their historically literate faces were not that easy to market at first. In my personal shopping list, the moderate prices get the action: Quaestor ($50 for 4 fonts), Envoy ($50 for 5 fonts), Atlantica ($5 per font in OT bundle), Dutch Medieval Pro ($13.99 per font in OT bundle), Rebecca Samuels ($15 per font), and Leitura ($20 per font in OT bundle). By contrast, Constantia at $35 per font is not different enough to be worth the higher price. For Zingha I paid $40 per font because there's nothing like it, but I was rewarded by, once again, getting no keystroke links between fonts, so now I'm doubly shy about buying from that foundry. It's a crowded field, and price moderation coupled with user conveniences will pay off in the long term.\n\nAs for completing text-type families, the obvious examples of one weight are FF Clifford and H-FJ Requiem (their only variance is optical weight or text vs display). More often, we are frustrated because the family has bold but no bold italic--tons of examples there! We need to keep emphasizing the importance of industry-wide standards for these failings, because the main perps are the cool small boutique operators who can't be bothered offering the same user conveniences the big boys always offer. These are not small issues.\n\n"
+    },
+    {
+      "time": "16 Mar 2008 — 8:12am",
+      "content": "MondoB, I have read at least 6 posts from you where you keep fixating on the same issues. You have made your point. How many fonts have you made where you know these issues to be undeniable facts? You keep stating that boutique foundries are too cool to accommodate your demands. There are many issues that go into making, releasing and marketing fonts. What do you charge per hour for your design services?\n\n"
+    },
+    {
+      "time": "16 Mar 2008 — 8:52am",
+      "content": "Evangelizing requires repetition, as Josef Goebbels said many times!\n\nGood books also require a lot of effort over a long time span, yet few hardbacks sell for more than $40 and the average paperback on amazon.com goes for about $10.\n\n"
+    },
+    {
+      "time": "16 Mar 2008 — 9:58am",
+      "content": "I believe what Goebbles said (and as adapted by Karl Rove) was “Repeat a lie often enough and the people will believe it!”\n\n_Good books also require a lot of effort over a long time span, yet few hardbacks sell for more than $40 and the average paperback on amazon.com goes for about $10._  \nThis does seem to be true, but not sure how this relates to the topic at hand?\n\n"
+    },
+    {
+      "time": "16 Mar 2008 — 10:23am",
+      "content": "Mondo,  \nYou have to understand market size and market potential as well. Books have a far greater potential market than typefaces. Even books vary all over the place in market potential. The cheap $10 books you speak of have a far greater market than textbooks on Microbiology. I am a big purchaser on Amazon and most of my books are typography related. They average over $50 per book because the market for specialized books is small. Typography freaks are not rich but they love books so we are willing to pay for them. The old axiom of volume of sales increases as price declines has a very big limit. Once you saturate the market, there is nobody else to buy the product no matter how cheap it is. If there were books available on french braiding men's hair for $2, I would never buy it because I am not interested (and am bald). I paid $75 for a book on Cyrillic type design that was only in Russian and I don't speak a word of Russian because I still felt I could get something out of the visuals. The publisher is not planning an English version because he feels the market is too small to cover the cost of production. I would love it if he would produce the book anyway and sell it for ten bucks but it would be very self-centered of me to insist that he do so and loose thousands of dollars just to make me happy.\n\nChrisL\n\nPS: I don't find anything said by the likes of Josef Goebbels as something I would care to follow.\n\n"
+    },
+    {
+      "time": "16 Mar 2008 — 2:01pm",
+      "content": "<cite>What do you charge per hour for your design services?</cite>\n\nI think this needs to be answered for this thread to move forward in any meaningful manner. Otherwise it is just another bit of typophile nonsense.\n\n"
+    },
+    {
+      "time": "16 Mar 2008 — 4:35pm",
+      "content": "Mondo, why do you think it makes sense that boutique foundries should follow the practice of the big box companies in content provision, but not in price?\n\nThere is a strong argument for providing products in a greater range of prices, but it is not to be made by demeaning the \"bad habits of so many small boutique foundries\". In fact, while the big box boys have gone with giving fonts away (aka \"bundling\") and ho-hum pricing, independent foundries have led the way with a great variety of innovative packaging, formatting, encoding, pricing and licensing ideas.\n\nThere is a very good reason why typefaces may be released without a Bold Italic: Bold Italic is the least used of styles, and it's a bitch to draw. So sure, a foundry may lose sales to those who like to have lots of features they rarely, if ever, require, but on the other hand, it's gained a production efficiency. And that's its prerogative.\n\nBTW, the four-style \"nuclear family\" standard created at the birth of DTP by, AFAIK, Microsoft, has been a disaster for the typographic industry.\n\n"
+    },
+    {
+      "time": "16 Mar 2008 — 7:57pm",
+      "content": "The hell with all italics. They get used only 20% of the time and they take twice as long to draw.\n\n"
+    },
+    {
+      "time": "16 Mar 2008 — 8:46pm",
+      "content": "In designing fonts, italics would be much easier to deal with if FontLab (or whatever) allowed slanted sidebearings. I understand that this is not part of any font format, but we have many design aids in font editors that are not part of any font format (guidelines, background images and layers, etc.). Rather, these would be fictional structures that would simplify design and spacing of slanted fonts. As part of this, vertical movements could be constrained to the slant angle.\n\nJust an idea.\n\n"
+    },
+    {
+      "time": "16 Mar 2008 — 8:50pm",
+      "content": "A good idea too, Mark.\n\nChrisL\n\n"
+    },
+    {
+      "time": "16 Mar 2008 — 9:50pm",
+      "content": "Right on, Mark.\n\n"
+    },
+    {
+      "time": "16 Mar 2008 — 11:36pm",
+      "content": "Mondo,\n\nI'm obviously not the only one growing annoyed by your repeated quackings about bold italic, style linking, industry standards, and font prices. I think you should do two things before you raise these complaints again:\n\n1: Retrain yourself to consider the cost of fonts as expenses of your design business. There is no need to argue about how your clients won't pay for them. There are dozens of ways you can account for expenses in your business when tax time rolls around. It's really just a simple accounting matter. Fonts are legitimate tools for design just like layout software, proofing, printing and internet service.\n\n2: Develop a workhorse, 4-style text family of your own original design, with oldstyle figures and small caps in every style, style-linked (the correct term) and available in OpenType format with adequate features to access all the special glyphs. Negotiate a distribution deal that somehow nets you adequate compensation at the prices you name. Then personally answer all tech support calls and messages you get from your customers.\n\nThen maybe we can have a meaningful conversation about the cost of fonts. You clearly have no idea what it is you are asking of type designers by requesting professional-quality fonts at such absurdly low prices.\n\n"
+    },
+    {
+      "time": "17 Mar 2008 — 3:10am",
+      "content": "How is it that a thread titled \"Font Release Checklist\" turns into a tiresome debate (if this argument can be called a debate) about font prices and the standards of indie type makers versus \"the big boys\"?\n\n\\* MondoB ignored the thread topic and started airing his personal agenda instead of starting a new thread on the topic(s) of interest to him\n\n\\* Typophile's moderators apparently did nothing to discourage this, made no attempt to step in and moderate the situation before it escalated.\n\nThankyou to all contributors who showed restraint and kept things civil after I requested it. There is a difference between making a critical response in a civil manner and using snarky language to express the same or similar criticisms, and this thread proves how capable most Typophile members are of civil conduct.\n\nMondoB---please recognize the difference between your personal agenda and the real topic of this thread. They are two quite different things, and the normal routine at Typophile is to discuss two different topics separately on separate threads. Please do not hijack threads as you have done in this instance. This thread was a request for tips on releasing a font. If you wish to debate font prices and industry practices please start a new thread dedicated to that topic. Don't argue with me as I will not be returning to this thread.\n\nModerators---with all due respect, could you folks please be more active in future by stepping in and moderating when the situation requires it? **Trust everyone, but cut the cards.** It's your job to watch what happens on these boards, and when a thread starts to run off the rails, do something about it. A moderator should have cut the cards immediately after MondoB made his first post. The very absence of intervention by any moderator---your inaction---is what made me call for calm to begin with, and the reason for this post.\n\nOnce again, thanks everyone for keeping your cool. Have a better one tomorrow.\n\nj a m e s\n\n"
+    },
+    {
+      "time": "17 Mar 2008 — 3:28am",
+      "content": "Hi James,\n\nI'm one of Typophile's Moderators. I have read this thread with interest, but it never occurred to me that it should be moderated. In fact, even after reading your post, I still wouldn't moderate it.\n\nOur function as moderators is not to steer discussion. We are not emcees or forum leaders. We monitor Typophile threads for inappropriate content, and take action where necessary. We also try to encourage the best content where we can, by putting things on the front page, or on the wiki, etc.\n\nMondoB has a very strong point of view that I personally may or may not agree with. But he is not attacking anyone personally, writing libellous text, linking to stolen fonts or software, or encouraging anything bad. He just wants people to make fonts the way he wishes that they would.\n\nI think that there has been enough counter-reaction from other forum members (i.e., Richard, Nick, Chris, etc.). Why should we go in and cut out parts of his posts, or close the thread? That sounds too much like censorship to me. MondoB has a right to post what he would like, as long as it falls within Typophile's [guidelines](http://web.archive.org/web/20150416013908/http:/typophile.com/readme). This is also a right shared by you, and everyone else here.\n\nNote, of course, that in Typophile's guidelines, we ask vistors not to hijack other peoples' threads. While MondoB has been rather insistent in arguing his point of view, I wouldn't say that he has hijacked the thread. His points do have to do with how fonts are released. For me it is enough on topic. This is my subjective point of view, and I'm sure that all the other moderators have their own subjective points of view as well. I will not presume to know what these are. However, I'm sure that most of the other moderators have read this thread as well, and as you write, they didn't take any action either.\n\nWe discuss when to intervene regularly, and it seems to me that this is clearly a case of when we wouldn't do that. Thank you for raising the topic, though.\n\n"
+    },
+    {
+      "time": "17 Mar 2008 — 7:56am",
+      "content": "Off-Topic:\n\nWhile I disagree with MondoB on many things, I don't think his comments were beyond the scope of this thread in subject matter. I don't think he was hijacking the thread, I just think differently than he does on the subject. I prefer that moderators error on the side of acting less than acting more and only deal with truly abusive behavior. While I may not care for Mondo's agenda or methods, he does not appear to have crossed the boundary and become abusive. Censorship is a dangerous thing and should be avoided. I think the moderators have acted properly and with the right degree of restraint.\n\nChrisL\n\n"
+    },
+    {
+      "time": "17 Mar 2008 — 8:25am",
+      "content": "Ikarus M had the ability to do slanted side bearings as Mark describes. It was a helpful feature.\n\n"
+    },
+    {
+      "time": "17 Mar 2008 — 8:30am",
+      "content": "Mark or James, have you discussed the slanted side bearings idea with Yuri or Adam at FontLab? It sounds good to me!\n\n"
+    },
+    {
+      "time": "17 Mar 2008 — 8:32am",
+      "content": "James, Did the Ikarus constrain angle when mirroring and rotating to maintain the position relative to the axis of the italic slant? In other words, did it treat the chosen italic angle as zero degrees?\n\nChrisL\n\n"
+    },
+    {
+      "time": "17 Mar 2008 — 8:43am",
+      "content": "I may have mentioned the idea in another thread (or maybe I imagined that I did), but I haven't brought it up with Yuri. I know he is out there lurking, though.\n\nA further thought on this would be that the entire coordinate space would be slanted (which is implied by the idea of vertical movements being constrained to the slant angle).\n\n(Sorry for hijacking this thread, if anyone cares.)\n\n"
+    },
+    {
+      "time": "17 Mar 2008 — 10:22am",
+      "content": "ChrisL,\n\nI don't remember it doing any of that. It was just a value that you could enter to slant the side bearings to correspond to the angle of the glyph. It did not treat the italic angle as zero degrees.\n\nIkarus M had two other helpful features, and Italic Balance command that was applied to a glyph before it was slanted. This reapportioned the weigh of curves and was helpful in reducing that slanted look if the italic angle was large. It also had a symmetry tool that allowed you to pick one of four quadrants of a shape and apply the details of that quadrant to the other three. A very helpful tool.\n\n"
+    },
+    {
+      "time": "17 Mar 2008 — 10:27am",
+      "content": "Sweet! Thanks, James!\n\nChrisL\n\n"
+    },
+    {
+      "time": "18 Mar 2008 — 6:14pm",
+      "content": "\\>\\>\\>Returning to the font release checklist\\>\\>\\>\n\n1. For a newbie type designer is it better to release a simple font with a simple character set, or to pull a Thomas Phinney?\n\nWhat should be the bare minimum to allow for release? For instance, I have almost completed my first complete typeface with the full ISO Western whatever character set, plus some added ligs, etc., but it's no where near as ambitious as Arno Pro.\n\n2. An added thing to the checklist that seems to go missing quite frequently is checking and testing vertical metrics. This seems to be a bug-a-boo, since there doesn't seem to be a single standard to work with.\n\nAny thoughts on this?\n\n"
+    },
+    {
+      "time": "19 Mar 2008 — 12:07am",
+      "content": "I would never recommend a novice do what I did and go to such insane lengths in language coverage and typographic features. Glyph creep is insidious. Set out some maximums early on in the project. \"Absolutely no more than 999 glyphs\" would be a good rule. 500 glyphs might be a more sensible limit.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "1 May 2011 — 2:56pm",
+      "content": "What goes into a font to prepare it for release? I feel this is an important question that hasn't been completely answered. I've attempted to extract what has been said so far, since the thread got cluttered with arguments over pricing and the value of bold italics and was since abandoned.\n\namv began with:  \n1) Creation of glyphs; arrangement in FontLab  \n2) Metrics/kerning  \n3) OpenType features (just ligatures in my case)  \n4) Setting font info/name  \n5) Output to .otf file\n\nArtur Schmal added:  \n6) Test the otf file in at least the major apps and OS's.  \n7) If any errors then correct them and output to otf file again.  \n8) Repeat step 6 and 7 until free of errors.\n\nJames Arboghast proposed these considerations:  \n\\* Character set / code page integrity. Are you making the defacto standard Western 1252 character set, or something with more extensive language support? Whichever, make sure your code page complies the Unicode industry standard.\n\n\\* Decompose all composite glyphs before generating font files and remove overlap from glyphs needing it, such as Ccedilla and things with ogoneks. There is no practical reason for shipping fonts containing composite glyphs, as they save only a few kilobytes and add nothing to the value of your font.\n\n\\* Do all glyphs have a Unicode number assigned to them? If not, they may not survive cutting and pasting between applications.\n\n\\* Does your font contain .notdef, .null and CR cells? All three are mandatory, especially the .notdef cell, which needs a blank rectangle in it so that users know what the deal is when an undefined character is called by the material they're setting.\n\n\\* Are we making TrueType and/or Type 1 versions of the font? Presently not many font makers bother with Type 1. I still include TrueType versions of my fonts in the standard ZIP package as a courtesy to Mac users still using OS9.xx, but I'm starting to wonder if it's worth the extra time and logistic hassle.\n\n\\* Promotional material. Whatever your means of distribution, you'll probably need to make type samples to show potential buyers how the font(s) look in use. I only have experience with Myfonts. For a Myfonts release you need a 200 x 200 pixel font flag, ideally something showing the font(s) used in a very attractive way. Depending on the font, a strong font flag can mean the difference between selling a few copies and making no sales.\n\n\\* Promotional written copy. Regardless of your distribution method, it's helpful to write something about your font(s) for customers who want to read something about it (not all customers do). Promotional copy can be (1) a simple description of the font and its characteristics, (2) a detailed description, (3) a description laced with positive and persuasive statements. Be careful with number 3, because it's easy to overdo it and end up with promotional copy that dazzles too much and puts customers off. Also avoid writing very long blurbs unless you are Frantisek Storm and have lots of interesting things to talk about.\n\nFollowed by Dan Gayle's reminder to check vertical metrics and Thomas Phinney's admonition to avoid glyph creep beyond 999 glyphs.\n\nSurely there is more to add, and the sequence can be cleaned up. This could become a valuable tool.  \n--\n\n@Mark Simonson: FontForge has a slanted sidebearing feature, set by the \"italic angle\" setting. I don't want to get into that too much here, but check it out and see if it's similar to what you'd like to see in FontLab.\n\n"
+    },
+    {
+      "time": "2 May 2011 — 8:03am",
+      "content": "Glyph creep isn't \"bad\" so much as time-consuming.\n\nIn general, if generating OpenType PS, one should at least try using subroutines to reduce file size. That can often reduce file size dramatically. However, FontLab can fall over if the font is really huge and complex, in which case you need to try it without. :/\n\nT\n\n"
+    },
+    {
+      "time": "2 May 2011 — 12:28pm",
+      "content": "Re: slanted sidebearings...\n\nOften, I've found that backslanting italics so that they're upright, adjusting sidebearings, then re-slanting glyphs handles the problem pretty effective...not in all cases, but in most.\n\n"
+    },
+    {
+      "time": "2 May 2011 — 2:04pm",
+      "content": "Two other notes for the checklist are to check contour direction and location of start points, though I'm not clear why the latter is important (something to do with hinting perhaps, which should also appear on the checklist — alignment zones and stem widths at least).\n\nAlso, to keep us up-to-date, shouldn't the process also include generating webfont format files?\n\n"
+    },
+    {
+      "time": "2 May 2011 — 3:21pm",
+      "content": "- figure out what kind of use your license should include and/or exclude\n\nIf you're releasing a webfont:  \n- figure out if (and how) you are going to support your OT features  \n- determine intended size  \n- hinting  \n- testing  \n- more hinting\n\n"
+    },
+    {
+      "time": "13 May 2011 — 8:58am",
+      "content": "@ Bendy: \"location of start points\"  \nI would be curious about this too- but also, can you tell me where the start points are ideally located?\n\n"
+    },
+    {
+      "time": "15 May 2011 — 4:11pm",
+      "content": "Hah, no, I'm afraid I can't. But I'm sure I read somewhere that it should be purposeful. Sorry!\n\n"
+    },
+    {
+      "time": "26 Aug 2012 — 8:19pm",
+      "content": "Let's see if bumping this up another year later helps at all.  \nWhat boxes need to be checked; form fields filled, and with what, without which a font might not work correctly?\n\n"
+    },
+    {
+      "time": "28 Aug 2012 — 6:51pm",
+      "content": "Yes, I think bumping this IS a good idea.\n\nA key checkpoint topic I haven't seen addressed here is insuring that fonts can work equally well across multiple operating system platforms and, within reason, multiple applications.\n\nJust about all new fonts today are produced as OpenType and/or Windows Truetype. However, there are internal factors that can thwart transparency.\n\nIn particular, there are numbers of foundries that have produced font families whose internal font and style names and flags make them unworkable in a Windows environment, although they work perfectly on Macs.\n\nBoth Thomas Phinney and Adam Twardoch have produced documents that describe methods to make such families work equally well on both platforms. These documents should be studied and followed by anyone creating a family that consists of more than the four bais Microsoft styles.\n\nAnother compatibility obstruction is fonts whose glyphs are not completely unicoded. In a Windows/Microsoft Office environment ( prior to Office 2010 and prior to Windows 8, but I don't know about these and any later versions), such glyphs cannot be accessed at all. Windows' Character Map function doesn't see non-unicoded glyphs.\n\nI have also just been made aware of certain Open Type fonts that are acceptable to MacOS but give a \"not a valid font\" error message when opened in Windows (any version). This may even be intentional on the part of the font designer(s). I have no further information at this point.\n\n- Herb\n\n"
+    },
+    {
+      "time": "28 Aug 2012 — 9:12pm",
+      "content": "Here's advice I might give fom what I've learned from releasing my two existing commercial typefaces so far.\n\nIf you have a text face  \n- Hold on and wait to complete at least regular italic bold. In certain distributors this can make a huge difference as you may have only one shot at making it known (MyFonts hot new fota features is pretty good for that). Why I say that? Because I released a single weight typeface in 2008 just to know If anyone would buy it. I offered it at 5 bucks. People bought it and I was happy but learned that it'd had been better If I'd waited and maybe charged more.\n\nThat said, releasing that single weight gave me a thrill that thrust me into wanting to do more, so maybe it's just what you need as well.\n\nDon't be scared of charging in the same range as the competitors. Work instead on making so that your type deserves that price point. Make it support more languages, give it OT features. If you use glyphsapp that's too simple not to do.\n\nLook at it as an app: it can improve over time. As a first release, chances are you'll make mistakes. The good news is you can fix them and your users will be able to upgrade it later at no extra cost. And you can add things, like that cool otf feature you just learned on a typophile thread.\n\nYou'll learn so much by simply realeasing whatever best you got now, that my last suggestion might be incongruent with my first: just do it :)  \nBest  \nRodrigo\n\n"
+    },
+    {
+      "time": "29 Aug 2012 — 7:08am",
+      "content": "> Another compatibility obstruction is fonts whose glyphs are not completely unicoded.\n\nAdobe has recommended for a while against encoding glyphs that are variants of standard Unicode characters. These would be characters that don't have standard unicode mappings (such as small caps or swash characters). You _may_ give them codes from the PUA (Private Use Area), but by definition there can be no standards for such encodings, so there is no way to predict what will happen if the font is changed for some reason. Instead, character variants should be accessed via OpenType features.\n\nWhile you don't _have_ to follow this recommendation, it is a valid way to make a font.\n\n"
+    },
+    {
+      "time": "29 Aug 2012 — 8:51am",
+      "content": "Mark - You're right of course. And what that means is that developers have to decide between two incompatible options - either provide for cross-font compatibility or allow all of their font's features to be used, albeit in a sub-optimum typographic environment.\n\nThe ideal solution would be if Microsoft included in its OS an updated equivalent to today's CharMap that would allow access to non-unicoded glyphs. Or if their Office products were fully open-type aware.\n\n- Herb\n\n"
+    },
+    {
+      "time": "6 Sep 2012 — 2:09pm",
+      "content": "Adobe originally did encode all glyphs. Besides ideological impurity and cross-font incompatibilities, the main reason for abandoning that approach was that hardly anybody ever accessed those special glyphs via Unicode, which was the only reason for doing it in the first place. So for newer fonts they stopped doing that. Yours is the first complaint I have seen, as far as I recall.\n\n“ The ideal solution would be if Microsoft included in its OS an updated equivalent to today's CharMap that would allow access to non-unicoded glyphs.”\n\nThey could do it, but the glyphs could not be made to show up in existing non-OpenType-savvy apps, so that would not help much.\n\n"
+    },
+    {
+      "time": "6 Sep 2012 — 2:23pm",
+      "content": "Tom - there have been a number of people in other fora saying that they've bought an OT font based on the available glyphs, and then asking how to access them? It usually turns out that they're using MSWord. Now that number IS small, so from a cost-benefit standpoint, I understand both MS's and Adobe's approach.\n\nI'm not down-in-the-details tech savvy enough anymore to understand why a non-unicoded glyph copied from a charmap-type application couldn't be seen by an Open-Type blind application ... OH - after typing that, I realized that the app needs a way to point to the glyph. Oh well.\n\nThanks for straightening me out!\n\n- Herb\n\n"
+    },
+    {
+      "time": "2 Oct 2012 — 4:52pm",
+      "content": "Note that Word 2010/2011 does support some OpenType typography features, at long last. So at least some of the goodies can be accessed in Word these days.\n\n"
+    },
+    {
+      "time": "16 Oct 2012 — 8:32am",
+      "content": "Don't forget good keywords.\n\n"
+    },
+    {
+      "time": "14 Nov 2012 — 6:16pm",
+      "content": "This post, including all of its variances and meanderings, was EXACTLY what I needed! Thanks SO MUCH.\n\n"
+    }
+  ]
+}

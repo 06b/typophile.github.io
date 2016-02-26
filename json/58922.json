@@ -1,0 +1,214 @@
+{
+  "id": "58922",
+  "title": "New Web Fonts Proposal",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "I just posted an article with our web fonts solution over at our **[FontEmbedding.com](http://web.archive.org/web/20120913064646/http:/blog.fontembedding.com/post/2009/06/10/New-Web-Fonts-Proposal.aspx)** site. We are most interested in knowing how many type designers/foundries would be supportive of a web-specific font format as a way to differentiate from desktop fonts.\n\n",
+  "author": "billdavis",
+  "time": "10 Jun 2009 — 9:46pm",
+  "uid": "3095",
+  "comments": [
+    {
+      "time": "10 Jun 2009 — 10:20pm",
+      "content": "I think the bigger question is how many browser developers would be supportive of the proposal?\n\n"
+    },
+    {
+      "time": "10 Jun 2009 — 10:45pm",
+      "content": "I always rather liked .wtf as the format name (web typeface) as referenced in this article: [http://talleming.com/2009/04/21/web-fonts/](http://web.archive.org/web/20120913064646/http:/talleming.com/2009/04/21/web-fonts/ \"http://talleming.com/2009/04/21/web-fonts/\")\n\nThere's been a number of font proposals for a third format, but none of them have really caught on and I think the browser manufactures have essentially ignored them — Microsoft has EOT already and is happy with it, Firefox & Safari are pushing @font-face without any security. So Darrel's comment is particularly pointed. Foundries are important, but without the browser developer's help, it isn't going anywhere. Even Linotype/Monotype/ITC's updated EULA to allow EOT embedding doesn't seem to have made Firefox or Safari reconsider — at least publicly.\n\n"
+    },
+    {
+      "time": "10 Jun 2009 — 11:21pm",
+      "content": "Bill, after reading the proposal, my concern is about \"obfuscating\" each font by changing the table directory entry. I know very little about type technology, but could someone using FontLab or another type design program just revert the table directory entry to its original setting? If this is possible, then anyone with a type design program (or a demo, or a stolen copy) could download and reformat Web fonts to use on their computers.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 4:50am",
+      "content": "<cite>This new format addresses the needs of web designers, ... </cite>\n\nWeb designer just want webfonts and by the end of this year they will be able to deliver them to the majority of users. The web designers don't want URL-binding, obfuscating, same-origin rescriction et cetera. They just don't care about that.\n\nThis new format would even mean more trouble for the web designers, because since current browser versions don't support it, web designers would have to link EOT, TT or OTF and(!) the new OTW fonts. Phew!\n\n<cite>... the desires of the free font community</cite>\n\nIn which way?\n\n<cite> the concerns of commercial font vendors </cite>\n\nI'm not sure about that. It will probably take some years to be included in all the browsers, but since you would publicly announce how the fonts are obfuscated, removing this \"protection\" will be a piece of cake.\n\n<cite>There are five aspects to the proposed web-specific font format:<br>\n-Same-origin restrictions</cite>\n\nWhat's the connection between a same-origin restriction and the OTW proposal. This can be included for EOT and TT/OT as well (as done in Firefox). No need for a new format here. And it can also be enforced on the server side (e.g. with .htaccess files)\n\n<cite>-Subsetting</cite>\n\nEOT/TT/OTF can be subsetted. What's different with OTW?\n\n<cite>I always rather liked .wtf </cite>  \nWhich most people would probably understand as »What the f\\*\\*\\*«.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 6:36am",
+      "content": "\"This new format addresses ... the desires of the free font community\"? How so?\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 6:51am",
+      "content": "This sounds like EOT without encryption or Microsoft. It creates a format that might be more acceptable to the open-source geeks at the W3C who reject EOT on principle, at least until the paranoids at Slashdot decide Ascender is really Microsoft. But I agree with Ralf, nobody needs another font format. If a foundry really wants what is offered here it would make more sense to just get behind Berlow’s permission scheme should it become a reality (unless one is really hung up on subsets).\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 6:52am",
+      "content": "_Which most people would probably understand as »What the f\\*\\*\\*«._\n\nExactly. I meant it jokingly since .wtf would be interpreted wrongly.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 6:59am",
+      "content": "I'll support this. There's definitely a need for a new format. EOT was almost the one but it didn't catch on for reasons already pointed out in Bill's article.\n\nI don't need a format that prevents the determined and skilled from getting at parts of my fonts. I just want to make sure they can't easily grab perfect copies of my fonts in their entirety directly from a URL. I've always liked EOT and found it to be secure enough. I've seen demonstrations of fonts ripped from EOT and they're okay but there's always something missing: complete kerning, copyright info, family naming, several glyphs. It's not the real font. It's like taping a song off the radio. Subsetting is very important to me.\n\nI played around with EOT about a decade ago and I liked it but the early tools were buggy and there was no Netscape support. I was really disappointed when Safari did the @font-face thing. I want to sell fonts for web use but that was a big step backwards. Every few days I get an email from someone asking me if they can use my fonts for @font-face. I hate saying no, but . . . I don't think people realize that they're really asking, \"can I post your fonts on the web with no EULA so anyone with the URL can download a perfect copy?\"\n\nI really hope the OTW format takes off. From the description it has exactly what I've been looking for in a new web format.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 7:55am",
+      "content": "What about using subsetting? I mean: just like with PDF, embedding a subset font that contains only the glyphs that are actually used. That way, if you try to rip off the font, you hardly ever get a complete font.  \nThe downside would be to know in advance what chars you're going to use, which is no problem for a static page, but might be complicated if your content is pulled from a database.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 7:58am",
+      "content": "\"If this is possible, then anyone with a type design program (or a demo, or a stolen copy) could download and reformat Web fonts to use on their computers.\"\n\n\"I just want to make sure they can’t easily grab perfect copies of my fonts in their entirety directly from a URL.\"\n\nAnyone with an internet connection can Google the font and download it from any number of .ru web sites.\n\nNo matter how easy browsers may make it to grab an @font-face font file, it's still easier to just google/newsgroup/fileshare for the original full font file.\n\nI think that's the one single hurdle that we need to get over. Fonts are shared already. @font-face may increase sharing. But the goal is to increase sales equally as well.\n\nThe problem with 'secure enough' 'protection' is that it's typically a matter of a short amount of time before a simple little app is released that makes it trivial to circumvent with a mouse click, so you are back to square one.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 11:16am",
+      "content": "There's an article on ReadableWeb titled [Apple and Microsoft In Talks On Web Font Protections](http://web.archive.org/web/20120913064646/http:/readableweb.com/apple-and-microsoft-in-talks-on-web-font-protections/) that has some informative information about the whole web fonts issue.  \nFrankly, with all due respect to Bill Davis, I believe that the proposal may not really be a proposal at all, but more like a preview of a fait accompli between Apple and Microsoft.  \n [Check it out](http://web.archive.org/web/20120913064646/http:/readableweb.com/apple-and-microsoft-in-talks-on-web-font-protections/) [.](http://web.archive.org/)\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 1:13pm",
+      "content": "And with no disrespect to Richard Fink, our proposal has nothing to do with the Microsoft web font collection. Sorry to burst your conspiracy theory bubble… :)\n\nAscender distributes these fonts under license and would be glad to license them to Apple if they wanted them – we have licensed them to a variety of software & hardware developers.\n\nThe Ascender proposal is focused on the vast collection of commercial fonts in the market that web designers cannot use with @font-face to design web sites. I am glad Richard noted Chris Wilson’s comments “A solution that only works for freeware fonts is not a solution. Is that too much to ask?” That clearly summarizes what we hope to achieve: a cross platform, cross browser solution that includes both freeware and commercial fonts.\n\nAs Typophile readers may know, Ascender is a supporter of EOT, but this proposal did not achieve the support of the W3C. So here we are today with a plethora of techniques to ‘embed’ fonts into web pages, none of which have achieved the broad support of the web design or font design communities.\n\nAgain, I will ask the question (that so far only Ray Larabie has answered):\n\nWho in the commercial type design/font foundry community supports the idea of a .OTW web font format?\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 12:51pm",
+      "content": "Thanks for the background Richard.  \nThis is a complex issue to keep track of, and your article really helps.  \nI particularly found the minutes of the W3 meeting useful.\n\nIt's unfortunate that there is no official body representing the interests of independent foundries, because I am uneasy that all the \"foundries\" at such meetings represent my interests, as new fonts are not their primary revenue source, although in this instance they probably do.\n\nBill, a web-specific font format sounds like a no-brainer.  \nI'll support that!  \nIt would certainly make my business less complicated and easier to manage, which is important when you have a small business with people doing a lot of multi-tasking. It would also make it easier to explain licensing and product availability and feature support to clients and customers.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 12:55pm",
+      "content": "<cite>What about using subsetting?</cite>\n\nThat might work for a foundry like Vllg or Process that have massive character sets of use to print designers typesetting complex stuff. But many web sites are going to need at least the basic math symbols and the complete alphabet with extended language support things like the names of content authors or users around the world, and for many typefaces that’s everything.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 1:08pm",
+      "content": "The biggest hurdles to introducing this will be getting the foundries and designers to support another new format, and perhaps biggest of all, the browsers too, which could take a while until the format is widely accepted and used. My gut is that time will be the biggest factor, and it isn't on the side of introducing something new. The next year will be very interesting for webfonts. While the new format might be superior and ideal, I think whatever happens with existing technologies will happen much faster, and if those take hold in a large way, I don't know that something new will have a place.\n\nSpeaking as a web designer, I don't care where my fonts come from, either hosted on my site or by a third party. All I want is for the designers and foundries to get paid well for their work and for it to be a sustainable setup. Then we can tackle the problem of most typefaces being bastardized by browser rendering engines at all but display sizes :)\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 3:26pm",
+      "content": "Wait, if I understood correctly, the new format is to obfuscate a couple tables in an otherwise OTF font.  \nThen, the simplest way to implement that would be to have the system libraries de-obfuscate them, so all apps, browser or not, would support the new format.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 3:29pm",
+      "content": "_Wait, if I understood correctly, the new format is to obfuscate a couple tables in an otherwise OTF font.  \nThen, the simplest way to implement that would be to have the system libraries de-obfuscate them, so all apps, browser or not, would support the new format._\n\nThe point is more that a font that is used online cannot be stolen and used for other purposes. If the system library was responsible for de-obfuscating them, it would essentially be like using raw TTF or OTF files and it defeats the purpose of the new format all together.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 3:47pm",
+      "content": "\"and it defeats the purpose of the new format all together.\"\n\nTrue. But it'd also likely be true that in short time there'd be a free app that does the exact same thing.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 4:27pm",
+      "content": "Indeed, and a fact that many seem to be ignoring. Who are these font pirates that an encrypted format will defeat? Are the various foundries and independent vendors unaware of the rampant bootlegging of fonts that already takes place on BitTorrent and elsewhere?\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 4:39pm",
+      "content": "Well, it is essentially defense against the laziest person. Anyone motivated will get at anything without issue, but a lot of people won't bother to go looking for a decryption program or download the files via a torrent, they'll just shrug and drop the encrypted file in the trash.\n\nIt is like those sites that prevent you from directly taking images. If you're motivated enough to take a screenshot and cut it up yourself, you've got your image, but it will stop folk who try to just save image as or drag it from the browser.\n\nIn the internet age, DRM only exists as a challenge for someone to break. Someone will figure out a way to reverse-engineer any file format created and create a perfect copy of the original file, but a modicum of security makes foundries feel better that their fonts cannot be outright stolen and will prevent the lowest level users from just taking.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 5:04pm",
+      "content": "FWIW, here is some reassuring advice to insecure pirates. And have a look at the hundreds of satisfied customers I never knew I had.\n\n ![](http://web.archive.org/web/20120913064646im_/http:/typophile.com/files/torr_4660.png)\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 5:16pm",
+      "content": "@billdavis\n\nI think the proposal is going to take a few days to sink in. I know it will with me. I've read it several times but I still need to sleep on it.  \n(Please clarify: are you are asking for an up-and-down, take-it-or-leave-it vote? Or will serious and constructive questions and suggestions be entertained?)\n\nOne thing that everyone who will be affected by this proposal needs to consider - and it's made pretty clear by the scenario in my post on [Readable Web](http://web.archive.org/web/20120913064646/http:/readableweb.com/apple-and-microsoft-in-talks-on-web-font-protections/) - is whether or not they want to have a little bit of influence on a solution that's likely to be imposed on them by \"the big guys\" no matter what, or have no influence at all by calling for changes that are unrealistic and haven't the chance of a snowball in hell of being adopted.\n\nBill, you didn't address the issue directly, but I do hope this is a sincere call for constructive input and not just an attempt to smooth things out over a decision that's already signed, sealed, and delivered.\n\n\\>\"And with no disrespect to Richard Fink, our proposal has nothing to do with the Microsoft web font collection. Sorry to burst your conspiracy theory bubble… :)\"\n\nYou mean Si Daniels wasn't the second shooter on the grassy knoll? Aw, that's just because he wasn't born yet, probably.  \nI will note your denial. And personally, I believe you. But I can dream. The browsing public would be a lot better off if Apple did license the ClearType fonts for the Mac OS.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 5:18pm",
+      "content": "\"Well, it is essentially defense against the laziest person\"\n\nWhich is pointless, as those aren't the type of 'pirates' that are going to be taking any bite out of revenues.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 5:34pm",
+      "content": "@Paragraph: FWIW, the image you posted is an advertisement. Font piracy on BitTorrent is bad, but not that bad.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 5:46pm",
+      "content": "Peter, think again please. The screen dumps are from a website offering my fonts for download, today. I just obscured my font names and the website address. Let's not make it too easy, please.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 6:37pm",
+      "content": "\\>The browsing public would be a lot better off if Apple did license the ClearType fonts for the Mac OS.\n\nTotally agree! Peter Lofting and co. know my number, as well as Bill's. We're waiting for their call. :-)\n\nAlthough we've not positioned them as web-fonts.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 6:37pm",
+      "content": "\"Anyone with an internet connection can Google the font and download it from any number of .ru web sites.\"\n\nDon't compare @font-face open linking with those Russian pirate sites. That's what Russian pirate sites are all about . . . people go there to get pirated data. It's right there in the name. What I don't want is everyone's site to feature easy-to-grab, full version, directly downloadable fonts. Just pass the URL to your friends and they can get free fonts, straight off of a legal site. Do you need a tool? No, just this URL and you've got a free font. Let's leave the easy to pirate fonts to torrents, alt-binaries and Russian pirate sites. When you go to these places, you know very well what you're getting into. That's why I don't really care about those places.\n\nI don't know about Russian sites and newsgroup binaries but I've seen the kind of trash available through torrents: old versions of some of my fonts, most of which were released on various magazine cover disks. Most of my fonts aren't available because those collections tend to be out of date. The Top 40 MyFonts collection torrent might seem like such a great deal but what's inside is not what's advertised. Old versions. Fonts converted from other formats. Those torrent font collections are mostly trash. It's not like you get to put exactly the fonts you want into a shopping cart and you'll get exactly what you want.\n\nI'm the guy making the fonts so I'm the one who has to be okay with this. If it's the Safari font-face plan then you can't use any of my fonts on your site. I need obfuscation and subsetting or no go.\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 6:40pm",
+      "content": "I want to support this proposal too, Bill. But I think it will really work only in the case of browser developers (Microsoft, Apple, Google, Mozila) are wanting to follow the same standard, giving support to this new webfont format.\n\nMy question is: Is this new webfont format going to be secure enough to prevent a conversion of OTW to OTF/TTF back again?\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 9:10pm",
+      "content": "Whatever the format (EOT or OTW), more embedding bits in the original TTF/ OTF fonts would be nice so that when these web fonts are created - or fonts are embedded in files, _whether or not the user actually read the license_, they could get a clear indication of exactly _what_ forms of embedding /linking are allowed, and just _where_ this embedding / linking is permitted. The current set of embedding bits are too coarse and generic, being used to cover too many different scenarios.\n\nFor a start, separate sets of flags to indicate whether the font can be embedded e.g. in PDF files, in editable (word processor) documents, on web sites, in e-books, (...) - and at what level for each - would be useful.\n\nOf course any browser enabled to download embedded/linked fonts needs to have some easy means of displaying the font the license & copyright fields - and any embedded links to license, designer and vendor in the original TTF / OTF font files -to the client downloading the fonts.\n\n- C\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 9:30pm",
+      "content": "==\n\n_\"There are five aspects to the proposed web-specific font format:_\n\n\\* Subsetting: This is an important feature for Pan-European and non-Latin fonts which often have large character sets.\"\n\nHow does is this subsetting going to work for complex non-Latin scripts where several contextual glyph substitution lookups may need to be gone through to get from characters in the web pages to final glyphs displayed? Is the utility for creating OTW fonts going to go through & re-write the OpenType lookup tables when subsetting a font?\n\n==\n\nThe Ascender OTW proposal doesn't seem to address compression, which EOT has - would it be worthwhile using gzip or some other patent free compression?\n\n- C\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 10:08pm",
+      "content": "\"Is the utility for creating OTW fonts going to go through & re-write the OpenType lookup tables when subsetting a font?\"\n\nI was wondering about that too. Does EOT already do that?\n\n"
+    },
+    {
+      "time": "11 Jun 2009 — 11:53pm",
+      "content": "Typodermic: <cite>What I don’t want is everyone’s site to feature easy-to-grab, full version, directly downloadable fonts. </cite>\n\nAnd that's where those webfont services as Webkit come into play. They will deal with URL-obfuscating, hot-linking prevention and so on. So your fonts will be as \"secure\" as webfonts can be.  \nAnd if you don't like to pass your fonts on to those services, you can also setup your own, like foundries as Typotheque are doing it.\n\noutrasfontes:<cite>Is this new webfont format going to be secure enough to prevent a conversion of OTW to OTF/TTF back again?</cite>\n\nNo.\n\n"
+    },
+    {
+      "time": "12 Jun 2009 — 12:45am",
+      "content": "Well, maybe that might work if it's easy to manage. It would have to be picked up by an existing marketplace or become a big enough marketplace in its own right. Right now, I prefer putting the font in the customer's hands because there's a system in place for doing that and it's really good at pulling in large numbers of customers. If fonts.com and myfonts.com made that service available, I don't see any reason I wouldn't jump on board.\n\n"
+    },
+    {
+      "time": "12 Jun 2009 — 5:57am",
+      "content": "Ralf: <cite>And that’s where those webfont services as Webkit come into play.</cite>\n\nI think you mean [TypeKit](http://web.archive.org/web/20120913064646/http:/typekit.com/), not [WebKit](http://web.archive.org/web/20120913064646/http:/webkit.com/).\n\n"
+    },
+    {
+      "time": "12 Jun 2009 — 6:22am",
+      "content": "Peter: I misunderstood the situation, please ignore my remarks :)\n\n"
+    },
+    {
+      "time": "13 Jun 2009 — 6:47am",
+      "content": "\\>There’s an article on ReadableWeb titled Apple and Microsoft In Talks On Web Font Protections that has some informative information about the whole web fonts issue.\n\nHow does Apple lic. or MS CT fonts help web designers?\n\nCheers!\n\n"
+    },
+    {
+      "time": "13 Jun 2009 — 8:06am",
+      "content": "@dberlow\n\nRight now, when you specify a font-family using CSS in a web page, you play a game of probabilities. The question being, how probable is it that a particular font-family exists on the user's machine?  \nIn fact, on another thread here on Typophile named CSS Font Stacks Article, Frode Hellend (frode frank), has put together an excellent table that deals with these probabilities.  \nToday, web designers can comfortably rely on a handful of \"Web Safe\" fonts that approach 100% penetration on both Windows and Mac. They can specify these font-families with confidence that what they design will be pretty much what the user sees. These fonts also provide kind of a safety net of \"fallback\" choices in lengthier \"font stacks\". (There is much info on the web about this.)  \nApple licenses the \"web safe\" fonts from Microsoft because having a baseline like this from which to work seems to work out as a good thing for all concerned. Apple's customers certainly benefit.  \nLicensing the ClearType fonts is just an extension of the idea. The CT fonts are excellent. Top quality. They are present in the majority of Windows machines and will inevitably approach 100% propagation among Winows installations as older Windows XP installations without Office 2007, are abandoned. (It's a waiting game of attrition. Like waiting for certain browser versions to disappear. Which is, among web designers, the universal professional pastime.)  \nWith Apple on board, it wouldn't be long before the ClearType fonts could be counted on by web designers with the same degree of confidence as fonts like Georgia or Tahoma. Result: A more [readable web](http://web.archive.org/web/20120913064646/http:/www.readableweb.com/).  \nI'm not alone in the opinion. The [article](http://web.archive.org/web/20120913064646/http:/readableweb.com/apple-and-microsoft-in-talks-on-web-font-protections/) also cites Joe Clark's post on the subject from four years ago. Joe had it right on the money from the start. IMHO.  \nIs it that costly for Apple to give us this, I wonder?  \nOr is support for @font-face in Safari an attempted end-run around it? (Stay tuned for part 2 of this saga at readableweb.com)  \nAhh, the tangled web we weave!\n\ncheers back,\n\nrich\n\n"
+    },
+    {
+      "time": "13 Jun 2009 — 8:28am",
+      "content": "Richard, you need to translate the question from Berlowese to English...\n\n\"How does Apple lic. or MS CT fonts help web designers?\"\n\n\"How does Apple lic. or MS CT fonts help me **sell my fonts to** web designers?\n\nThat's what Bill's proposal is all about... as I pull the discussion back on-topic.\n\nPS - a separate thread on the C\\* fonts might help get Apple's attention.\n\n"
+    },
+    {
+      "time": "13 Jun 2009 — 4:14pm",
+      "content": "_A more readable web._\n\nA handful of conservative designs in a narrow range of styles?  \nIf I were a web designer, what I'd want right now would be slab serif faces, geometric sans faces, ultra thin faces, large x-height faces, &c.  \nAnd next year who knows what.  \nOpening things up commercially will make the web a more vibrant, more readable medium, so that foundries, web designers, and end users all benefit a lot, not just a little, which is what we get with the oligarchy nudging things along.\n\n"
+    },
+    {
+      "time": "13 Jun 2009 — 9:06pm",
+      "content": "@nick  \nThis time I agree with you. It _is_ a handful of conservative designs in a narrow range of styles.  \nBut typography on the web is in bad shape, and it will double the existing palette in very short order.  \nThat's its main virtue. And the CT fonts are exceptionally good for body text at smaller sizes - and that seems to be the trickiest and costliest of things to make happen in a screen font.\n\n@sii  \n\\>PS - a separate thread on the C\\* fonts might help get Apple’s attention.  \nGood idea. And you're right, bringing it up here is OT. I've signed up for an online course in Berlowese. I'll do better in the future.\n\nTo bring the debate back: How do font vendors feel about the proposal that is on the table from Ascender?\n\n"
+    },
+    {
+      "time": "14 Jun 2009 — 11:12am",
+      "content": "“How does Apple lic. or MS CT fonts help me sell (FB) fonts to web designers?  \nWe will only be licensing, for the most part. You want to _buy_ some?\n\n\"And next year who knows what.\"  \nExactly. Once Adobe ask'd \"Who needs more than the 200 fonts [then] in the Adobe Library?\" It's the wrong question; clearly few users need more the 200 fonts, but 2 billion users clearly needed more than 200 as the history of dtp showed.\n\n\"...it will double the existing palette in very short order.\"  \nFar out. Are we to 70 then?\n\n\"The CT fonts are excellent. Top quality.\"  \nMaybe you're just talking, and not using, composing, rendering and reading these types?\n\nI don't think the same old solution helps anymore and wonder how it got here, (but not to Linux).\n\nTo really take it back to topic, I don't think there is a lot of call for any more purely generated font formats.  \nBut, we will support every single one that contains a permissions and recommendations table.\n\nCheers!\n\n"
+    },
+    {
+      "time": "14 Jun 2009 — 9:29pm",
+      "content": "Richard: <cite>\"CT fonts are exceptionally good for body text at smaller sizes - and that seems to be the trickiest and costliest of things to make happen in a screen font.\"</cite>\n\nAt small sizes, the number of possibilities for good original body text faces for the web that can be clearly distinguished from each other must be limited by screen resolution. Even with hi-resolution screens and clever things like CT instructions there must be a finite number of ways you can squeeze the letters of the Latin alphabet into pixels available on screen at small sizes and have them remain pleasing, clear, legible and easy to read -yet distinctive and consistent in style.\n\nSure you can always tweak round the edges, but to me there seems little point in trying to produce more and more of these \"screen fonts\" if they are all going to look pretty much the same at the sizes they are used as those we already have.\n\nWhile there still may be some room left for a few more original and useful screen fonts, are we ever going to need (or be able to differentiate between) more than two or three times the number we already have?\n\n"
+    },
+    {
+      "time": "15 Jun 2009 — 12:17am",
+      "content": "I think you're wrong, but even if you were right about small text size, bear in mind that web fonts are scalable, and both web designers and readers may scale up the size of type to the point where a lot more individuality is apparent.\n\n"
+    },
+    {
+      "time": "15 Jun 2009 — 9:19am",
+      "content": "How do font vendors feel about the proposal that is on the table from Ascender?\n\n"
+    },
+    {
+      "time": "15 Jun 2009 — 10:15am",
+      "content": "I suspect that the lack of response is due to either bafflement with the complexities, or the feeling that whatever we say the issue is in the hands of the powers that be, a fait accompli. Anyone who was at TypeCon last year, and saw the arrogance with which Håkom Lie addressed an audience largely composed of the font industry might also have that impression.\n\nIt's all very well to say that the interests of font producers are represented by Microsoft, Apple, and Adobe, but ultimately they are not type foundries, although as you say they bin berry good to us.\n\nOr perhaps not many type designers hanging out at Typophile. But the consensus in this thread seems to support Bill's proposal.\n\nFor font resellers, I wonder what Stephen Coles has to say on the position of FSI (both manufacturer and retailer)?\n\n"
+    },
+    {
+      "time": "15 Jun 2009 — 11:34am",
+      "content": "\\>Anyone who was at TypeCon\n\n'twas at ATypI\n\n"
+    },
+    {
+      "time": "15 Jun 2009 — 1:31pm",
+      "content": "OK, now I remember.  \nThanks for organizing that panel, Si.\n\n"
+    },
+    {
+      "time": "15 Jun 2009 — 3:19pm",
+      "content": "Hi. I'm Thomas Lord who is perhaps known to a few as the author of materials found on [noeot.com](http://web.archive.org/noeot.com) - materials written when some of us feared that W3C was going to rush to standardize EOT with requirements that root strings (a form of DRM) be enforced by compliant clients.\n\nI kinda like Bill Davis' proposal but I would like to see some improvements and generalizations before I can say that I really support it:\n\nThe proposal suggests that consensus might be formed around a standard \"web font\" file format that is (a) distinct from legacy formats used for restricted-license fonts; (b) supports subsets and patent-free compression; (c) conveys copyright, patent, and other licensing information in a way that client applications are encouraged to use to keep users fully informed about the content.\n\nStated abstractly like that: I agree with all of those goals.\n\nThe proposal further suggests that some non-free fonts might be licensed for web use under terms that require licensees to serve those fonts on the web only using existing \"same-origin\" restriction mechanisms. Some, in comments above, have questioned how the customers will feel about this. I think it is a fine idea in principle and a good enough idea if the customers in question are willing to work with that.\n\nHere is where the proposal loses me a bit:\n\nThe proposal is for a new font format specifically. I think that is not quite right.\n\nThe same concerns motivating this proposal for a new font format are shared by makers of non-free image files, video files, audio files, text files, and so forth. That is the first key observation.\n\nThe second key observation is that a single solution for all media types is quite viable: a \"wrapper file format\" that can convey licensing information and, by virtue of changing the byte-stream - differ from legacy formats. That is, we can take existing font formats of all types and wrap them in a format that adds such things as licensing information. The wrapper would be slightly redundant with some features of existing font formats but not by much.\n\nA wrapper format like that can in principle apply to any linked (or \"embedded\", if that is really a concept) resource. There is nothing \"font specific\" about it. Clients such as browsers can be modified to recognize and unpack such a wrapper in a generic way - not in font-specific code. And thus we solve similar problems for all media types, all at once.\n\nI think that going that route is actually the best way to persuade not only restricted-license font vendors but also browser makers to adopt. The way to encourage that adoption is to reach out to people interested in other media types (such as music and video) and get them interested as well. For browser implementors, it is a small change to handle this new wrapper format around any media type and to begin to add features to, for example, give users convenient access to licensing information for \"embedded\" media.\n\nIt is difficult (probably impossible) for W3C to accept in one gulp the idea of a wrapper format across all media types - that's a big step for humankind, not a baby step. Yet it is practical to advertise the intent of getting to that point while initially promoting a generic wrapper as a solution specifically for the immediate problem of fonts.\n\nA third key point is that the benefits of such wrappers are not unique to distributors of \"non-free\" media files. Those of us who produce libre content are also often concerned to see that such things as licensing meta-data is conveyed with the work and that users are informed of that meta-data. A generic wrapper format will help libre causes as much as it will help restricted-licensing interests. Thus, it seems a good centrist position, to me.\n\nRegards,\n\n-t\n\n"
+    },
+    {
+      "time": "15 Jun 2009 — 4:24pm",
+      "content": "Excellent idea, Thomas.\n\n"
+    },
+    {
+      "time": "16 Jun 2009 — 7:40am",
+      "content": "@Thomas Lord (dasht)  \nI find your approach very constructive.  \nGarnering support has a lot to do with how the issues are framed.\n\n"
+    }
+  ]
+}

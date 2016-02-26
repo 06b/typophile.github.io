@@ -1,0 +1,46 @@
+{
+  "id": "59733",
+  "title": "AFDK build font display problem in InDesign CS4",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi there  \nI have a problem with my Adobe FDK build OTF fonts in InDesign CS4. As you can see, the selection of text is only from the x-height down to somewhere below the baseline. And when change the text, it's size or style the space around the black selection does not change/update. Very annoying. What could be wrong?\n\n ![](http://web.archive.org/web/20100203105014im_/http:/typophile.com/files/error_4719.jpg)\n\nThanks,  \nClaus\n\n",
+  "author": "<a href=\"/web/20100203105014/http://typophile.com/user/16321\" title=\"View user profile.\">clauses</a>",
+  "time": "<br>",
+  "uid": "16321",
+  "comments": [
+    {
+      "time": "",
+      "content": "Perhaps the vertical metrics. Is the font's UPM 1000? Have you ran the font through CompareFamily?\n\n"
+    },
+    {
+      "time": "",
+      "content": "That looks like the caret height and refresh problem resulting from a CFF font having a UPM other than 1000. But I thought that had been fixed in CS3?\n\n"
+    },
+    {
+      "time": "",
+      "content": "The UPM is 2048. I haven't run compare family. I will do that tomorrow.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Okay, just had a look. Compare family gives a 76 KB serving of fail. I had a look with fontQA, and this is what is says:\n\nVertical Metrics  \nTest Message Details  \n Y-min Family Statistic min: -497, max: -497, rng: 0, avg: -497, sdv: 0  \nMarkant Y-min -497  \n Y-max Family Statistic min: 2080, max: 2080, rng: 0, avg: 2080, sdv: 0  \nMarkant Y-max 2080  \n UPM Not all UPM values are matching the required value 1000  \nMarkant UPM 2048  \nequal Ascender All Ascender values are equal. 1490  \nMarkant Ascender 1490  \nequal Descender All Descender values are equal. -393  \nMarkant Descender -393  \n OS/2-sTypoAscender All OS/2-sTypoAscender values are matching the calculated value  \nMarkant The OS/2-sTypoAscender value matches the required value OS/2-sTypoAscender: 1490  \n OS/2-sTypoDescender All OS/2-sTypoDescender values are matching the calculated value  \nMarkant The OS/2-sTypoDescender value matches the required value OS/2-sTypoDescender: -393  \nequal OS/2-sTypoLineGap All OS/2-sTypoLineGap values are equal. 574  \nMarkant OS/2-sTypoLineGap 574  \n OS/2-usWinAscent All OS/2-usWinAscent values are matching the calculated value 2080  \nMarkant OS/2-usWinAscent 2080  \n OS/2-usWinDescent All OS/2-usWinDescent values are matching the calculated value 497  \nMarkant OS/2-usWinDescent 497  \n hhea-Ascender Not all hhea-Ascender values are matching the recommended value  \nMarkant The hhea-Ascender value does not match the recommended value hhea-Ascender: 1490, recommended: 2080  \n hhea-Descender Not all hhea-Descender values are matching the recommended value  \nMarkant The hhea-Descender value does not match the recommended value hhea-Descender: -393, recommended: -497  \n suspect BBox height The BBox height of all glyphs is in a normal range.  \nMarkant The BBox height of all glyphs is in a normal range.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I've just tried Adobe Arabic (which is an OT-CFF font with a 2048 UPM) in InDesign CS4 and saw no selection issues.\n\nClaus, run this command:  \n`spot -t head YourFont.otf | grep unitsPerEm`  \nWhat result do you get? unitsPerEm=2048?\n\n"
+    },
+    {
+      "time": "",
+      "content": "`\nBigMac:Markant claus$ spot -t head Markant-Regular.otf | grep unitsPerEm\nunitsPerEm =2048\n`\n\nAnd damn Typophile won't let me insert an image now, otherwise I could show the vertical metrics from fontQA. That is why I had to paste that illegible mess in the post above.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I think I found the problem. I'm assuming that you're generating the PFA file from FontLab Studio (v5.0.4), yes?\n\nWhen the font's UPM value is different from 1000, FontLab Studio generates the PFA file with incorrect FontBBox values. The FontBBox values are correctly displayed in the \"Key dimensions\" pane of the Font Info dialog; but the values in the generated font will be different.\n\n ![](http://web.archive.org/web/20100203105014im_/http:/typophile.com/files/PFA_FBBox_3442.png)\n\nFor quick workaround, just open the PFA file in a text editor and edit the FontBBox values to match what's displayed by the Font Info.\n\nBTW, CompareFamily quickly pointed me to the reason of the problem. **Single Face Test 15** (Warn if Font BBox x/y coordinates are improbable, or differ between head table and CFF) output the following message:  \n**The font bounding box in the hhea table '(-322, -512, 2306, 1798)' differs from that in the CFF table '[-157, -250, 1126, 878]'.**\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Miguel  \nThanks a lot for looking into this. It halfway worked, now the rendering updates as it should. The only thing is that the selection still looks like before – that is only colouring from the x-height and down to somewhere below the baseline. This is a minor issue, so let's not waste time on pursuing that.\n\nClaus\n\n"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "id": "38485",
+  "title": "Full set of characters in a typeface?",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "What is considered a complete typeface? Besides uc/lc/numbers/punctuation (btw what is a full set of punctuation marks?), what other special characters needs to be considered in order for a typeface to be complete?\n\nI want to complete one typeface which I started a while back, and start working on a few more.\n\nThanks guys!\n\n",
+  "author": "npgraphicdesign",
+  "time": "26 Oct 2007 — 11:14am",
+  "uid": "23247",
+  "comments": [
+    {
+      "time": "26 Oct 2007 — 12:12pm",
+      "content": "It depends.\n\nIt used to be you couldn't put more than 256 characters (including space and invisible controls) in a font. Each OS had different character sets it could deal with.  \nThat's not so true anymore but it 's a place to start. It's better to focus on language support; which and how many you want to cover.  \nA Latin-1 encoding will cover most western European languages, with sufficient accents and punctuation for English, German, French, Spanish, Italian, Norwegian, Swedish, and Icelandic. That has about 193 characters, discounting the 63 control characters ordinarily left empty.  \nMacRoman, Windows Latin, and Adobe Standard encodings have similar, though not identical character sets.\n\nIf you want to cover Turkish, Vietnamese, and Livonian, &.al., you will have a lot more work to do. That's just sticking with the Latin alphabet too, it gets really crazy with other scripts\n\n"
+    },
+    {
+      "time": "26 Oct 2007 — 12:19pm",
+      "content": "What Jason says, plus you might want to consider things like ligatures (the more the merrier), oldstyle numbers, small capitals, a euro, special typographic symbols like the dashes, bullet, etc., maybe an ornament or two.\n\nLook through some commercial fonts in FontLab (if you are using that) and see what characters they used.\n\n"
+    },
+    {
+      "time": "26 Oct 2007 — 1:32pm",
+      "content": "Using other people's fonts as a guide to which glyphs should be included may not be such a great idea. So many display fonts include a logical not symbol, generic currency and a broken bar - a complete waste of time.\n\nDecide at the beginning if math symbols are important for your font. In a display font (headliner) you can take it easy on the math symbols but keep the bar and \\<\\> as they're used for non math purposes these days. Skip florin, logicalnot, currency. Including Latin 1 and Latin 2 accents doesn't add a lot more time to font development. Skipping fractions in a display font isn't a crime but include the fraction slash (fraction). A paragraph symbol is unlikely to be used in a display font. Guillemots and base quotes are critical. Emdash and endash: always. I don't include f ligatures unless they're necessary. In a pure display font, numeric ordinals are not likely to be used. I'm not sure which languages require single guillemots but they only take a few extra seconds.\n\n"
+    },
+    {
+      "time": "26 Oct 2007 — 1:35pm",
+      "content": "I would suggest making separate cap accents at the outset, and building your composite accented capitals that way.  \nIt gives you the ability to have flatter-angled cap accents than lower case, and fine-tune the height and angle.  \nAlso, if you later decide to add CE characters, it makes it a lot easier.\n\n"
+    },
+    {
+      "time": "26 Oct 2007 — 1:36pm",
+      "content": "Nick,  \nCan you explain a bit more please? Some of the terminology you are using is foreign to me. I am but a noob at this...\n\n"
+    },
+    {
+      "time": "26 Oct 2007 — 2:29pm",
+      "content": "OK, this is in FontLab.\n\nCreate a new glyph for each cap accent: Command G \\> then name it e.g. \"Cap Acute\". No need for a Unicode Number. Start by pasting your original acute accent in the new window, raising it to the correct height, than angling it flatter.\n\nNext open, for instance, your \"Aacute\" glyph window.  \nDelete the present accent.  \nNow go Glyph \\> Add Component, and Select \"Cap Acute\". Your new accent glyph will be positioned at the right height.\n\nSo, when you have done this for all your cap accent characters, you can compare them with each other, and with the lower case accent characters, in the Metrics window. And if you decide the cap acute accent isn't quite right, you can adjust it in the \"Cap Acute\" window, and the adjustment will be updated automatically in all the characters with a cap acute accent.\n\n"
+    },
+    {
+      "time": "27 Oct 2007 — 4:21pm",
+      "content": "I would suggest you name your uppercase accents using the .case suffix as in acute.case. The alias.dat file has these in its database, and will build the component character using the appropriate accent. OR you can edit the alias.dat file with your own naming.\n\n"
+    },
+    {
+      "time": "27 Oct 2007 — 5:30pm",
+      "content": "If this is to be a text font, you need a lot of glyphs. In Unicode terms, Basic Latin, Latin-1, Latin Extended A, proportional and tabular figures (both oldstyle and lining), small capitals, and much of the Unicode \"General Punctuation -- be sure to include \"minute\" and \"second\" along with quoteleft, quoteright, quotedblleft, and quotedblright.\n\nIf you have any thought that it might be used with scholarly text, I think you need superiors for note calls -- current practice is to name them one.super (or some such) with no Unicode, to be used with the \\*superscript\\* feature you'll also have to write.\n\nI find by the time I'm done with a font, I have about half of Latin Extended B completed, and much of Latin Additional -- And even more glyphs unencoded, to be used in features. Then you can have fun writing the features and kerning.\n\nA text font is a lot of work, this is just a partial list.\n\n"
+    },
+    {
+      "time": "28 Oct 2007 — 11:06am",
+      "content": "Charles, do you think a full alphabet of superior letters is warranted, or just the traditional \"abdehilmnorst?\"\n\n"
+    },
+    {
+      "time": "28 Oct 2007 — 11:10am",
+      "content": "Thanks James.\n\nSo Nikita, amend my suggested naming of \"Cap Acute\" to \"Acute.case\".\n\n(\"case\" being the 4-letter OpenType feature code that refers to \"Upper Case\", which has the friendly name of \"Case Sensitive Features\".)\n\n"
+    },
+    {
+      "time": "28 Oct 2007 — 6:39pm",
+      "content": "Nick,\n\nI know that when the full set of alphabetic characters isn't there, over the year, I wind up having to make a full set; some job will need them. When that happens, I usually have to make up a new set, as I can never seem to match the existing \"abdehilmnorst.\"\n\nCharles\n\n"
+    },
+    {
+      "time": "30 Oct 2007 — 10:50am",
+      "content": "Just for the sake of explanation, here is some info on the [ISO/IEC 8859 standards for 8-bit character encodings](http://web.archive.org/web/20150122202301/http:/en.wikipedia.org/wiki/ISO_8859), including what languages are supported by which subsets. This is all superseded by Unicode, of course, but it is useful for reference and backwards-compatibility purposes.\n\nISO/IEC 8859 does not adequately handle some languages using variants of the Latin alphabet, e.g.: [Vietnamese](http://web.archive.org/web/20150122202301/http:/en.wikipedia.org/wiki/Vietnamese_alphabet).\n\n"
+    },
+    {
+      "time": "30 Oct 2007 — 11:07am",
+      "content": "As the most basic character set, I'd suggest that covering all of WinANSI (codepage 1252) and MacRoman is the starting point.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "30 Oct 2007 — 11:13am",
+      "content": "Charles, do you use the alphabetic superiors to make words, or just as \"reference marks?\"  \nDo you ever use the old reference marks? (daggers, etc.)\n\n"
+    },
+    {
+      "time": "31 Oct 2007 — 5:06pm",
+      "content": "Nick,\n\nWe usually use the alphabetic superiors to make words. Usually in 17th, 18th and 19th century texts, or in collections of letters where the editor wants to preserve some of the scribal nature of those letters. This whole \"preserving the scribal nature\" is one of my pet peeves, by the way.\n\nThey surely don't need to be a part of every font, but if you're making one you think might be used in books that cover this period, and you're doing some of the letters anyway, might as well make a complete set.\n\nYes, we still use the asterisk-dagger-doubledagger etc. sequence. Sometimes we run both, where the original text had footnotes, and the commentator also has footnotes. Occasionally, we use the asterisk-dagger sequence as the only form of notes, but most modern footnoted texts would repeat the sequence too many times on a single page.\n\nBTW, one of my favorite \"scribal texts\" stories involves the Letters of H---- J----, where the editor wanted one, two, three, and four strikethrough lines, and the same for underlines. Also a complete blot out, but that's easy. Also they occasionally wanted to strike through only a comma or period (or parenthesis or whatever), and sometimes a double strikethrough. And of course, a usual strikethrough line won't do. Lots of fun all around. They kept adding requirements all the way through third proof.\n\nBut these are things a type designer just can't worry about; they don't occur all that often, and when they do, are usually require custom work.\n\n"
+    }
+  ]
+}

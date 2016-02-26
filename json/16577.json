@@ -1,0 +1,66 @@
+{
+  "id": "16577",
+  "title": "Fontlab tip ( minor one ) for feature scripting/testing",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "As tips go it’s a minor one, but...\n\nI have come up with a way of working through & testing my Calt feature script & keeping track of where I am. I put a space in the code and move lines code up or down to indicate if I am done with them (depending on the direction I am moving throgh the list). Happily you can change code & recompile with the space there & it doesn’t break anything.\n\n ![](http://web.archive.org/web/20071109095903im_/http:/www.typophile.com/files/screen.jpg)\n\nI don’t have 5.0 yet so I can’t say if this will work in that version.\n\nAnybody else have practical/process tips to share?\n\nOr a somehow better ways of doing this?\n\n [‹ typeface testing](http://web.archive.org/web/20071109095903/http:/www.typophile.com/node/15453 \"Go to previous forum topic\") [Pasting from illustartor to fontlab (beginner level..) ›](http://web.archive.org/web/20071109095903/http:/www.typophile.com/node/16450 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20071109095903/http://www.typophile.com/user/2942\" title=\"View user profile.\">Eben Sorkin</a>",
+  "time": "<br>",
+  "uid": "2942",
+  "comments": [
+    {
+      "time": " 2.Dec.2005 9.26pm",
+      "content": "That’s a handy tip, actually. Sounds good to me. It will work fine in 5.0 as well (the properties of whitespace in the feature code have to do with the Adobe-defined syntax for that code, picked up by Fontlab).\n\nI often put comments at the beginning of a feature to indicate exactly what I still need to do with it. Because I’m only doing about 10-15 hours a week on type design, it’s the only way I can keep track sometimes.\n\nT\n\n"
+    },
+    {
+      "time": " 3.Dec.2005 7.57am",
+      "content": "You can use the “#” character at the beginning of a line to mark the whole line as a comment, or at the end of a code line. For example:\n\n# More swashy glyphs  \nsub @a by @aswsh;\n\nor\n\nsub @a by @aswsh; # More swashy glyphs\n\nAdam\n\n"
+    },
+    {
+      "time": " 3.Dec.2005 8.08am",
+      "content": "Also, I develop the OpenType features in UltraEdit, a text editor for Windows which has many fancy features. I have implemented syntax highlighting and a small feature browser for UltraEdit. Some screenshots are in my Zapfino Extra slides:  \n [http://www.twardoch.com/adam/project.php?pid=0049](http://web.archive.org/web/20071109095903/http:/www.twardoch.com/adam/project.php?pid=0049 \"http://www.twardoch.com/adam/project.php?pid=0049\")\n\nFUT: Build?\n\nAdam\n\n"
+    },
+    {
+      "time": " 3.Dec.2005 8.53am",
+      "content": "Adam, that’s really neat. I wonder if anyone has implemented syntax highlighting for use in feature development in BBEdit or any of the other Mac text editors.\n\n"
+    },
+    {
+      "time": " 4.Dec.2005 5.37pm",
+      "content": "Not that I know. If someone is interested in the syntax highlighting for UltraEdit, I’ll happily make it available for free.\n\nBest,  \nAdam\n\n"
+    },
+    {
+      "time": " 4.Dec.2005 5.56pm",
+      "content": "Adam, Can your syntax highlighting be ported to BBedit Mac?\n\nChrisL\n\n"
+    },
+    {
+      "time": " 5.Dec.2005 9.53am",
+      "content": "BBEdit? What’s that?\\*\n\nA.\n\n\\*) Well, I have heard of it but never used it.\n\n"
+    },
+    {
+      "time": " 5.Dec.2005 10.24am",
+      "content": "There is information in BBEdit’s SDK explaining how to do it. Here is a link:\n\n[http://www.barebones.com/support/develop/plugin\\_sdk.shtml](http://web.archive.org/web/20071109095903/http:/www.barebones.com/support/develop/plugin_sdk.shtml \"http://www.barebones.com/support/develop/plugin\\_sdk.shtml\")\n\nI could probably figure it out, but I don’t know if it would be worth my time. I was hoping that perhaps some other BBEdit user had done it already and was willing to share.\n\n(BTW, I doubt that it’s the sort of thing that could be ported from UltraEdit.)\n\n"
+    },
+    {
+      "time": " 5.Dec.2005 10.40am",
+      "content": "“BBEdit? What’s that?\\*”\n\nIt is an HTML text editor used by Mac coders. It uses color to differentiate kinds of code.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 5.Dec.2005 11.29am",
+      "content": "Okay, it wasn’t too hard to do a quick-and-dirty module for BBEdit after all.\n\n[http://www.marksimonson.com/otfeature\\_module.plist.zip](http://web.archive.org/web/20071109095903/http:/www.marksimonson.com/otfeature_module.plist.zip \"http://www.marksimonson.com/otfeature\\_module.plist.zip\")\n\nUnzip it if it doesn’t happen automatically, quit BBEdit if it’s running, and put the the file into ~/Library/Application Support/BBEdit/Language Modules/ . (If you don’t already have a folder named “Language Modules” in there, make one.)\n\nNow when you open a .fea file in BBEdit, you should see some basic syntax coloring. The colors will depend on your preference settings. Nothing fancy, and some character names (like zero) are also feature tags, so they will be highlighted. There is probably some way to fix this, but, as I say, this is a quick-and-dirty module. If anybody gets ambitious enough to improve it, be my guest. But let me know, too.\n\n"
+    },
+    {
+      "time": " 5.Dec.2005 12.04pm",
+      "content": "Mark!\n\nYOU DA MAN!!!\n\nChrisL\n\n"
+    },
+    {
+      "time": " 5.Dec.2005 12.08pm",
+      "content": "Thanks Mark. And thanks for sharing your code. And thanks to everyone for not turning this into a Mac-versus-Windows pissing contest.\n\n"
+    },
+    {
+      "time": " 5.Dec.2005 4.51pm",
+      "content": "I have followed Mark’s example and published my “Typographic extensions for UltraEdit-32” at [http://www.twardoch.com/adam/about.php?pt=sft](http://web.archive.org/web/20071109095903/http:/www.twardoch.com/adam/about.php?pt=sft \"http://www.twardoch.com/adam/about.php?pt=sft\")\n\nBest,  \nAdam\n\n"
+    }
+  ]
+}

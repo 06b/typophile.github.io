@@ -1,0 +1,26 @@
+{
+  "id": "38428",
+  "title": "Sanah U+0601 adjustment in Volt",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I am attaching an example of sanah U+0601 adjustment from Arab typesetting.\n\n ![](http://web.archive.org/web/20150415083453im_/http:/typophile.com/files/Sanah_5569.jpg)\n\nI tried some hit and trial in Volt for my own font, but invain.\n\nWould you please help me, how to properly cenetr numbers on Sanah U+0601 in MS Volt?\n\nIs it done by single adjustment or pair adjustment? and How\n\nThanks and regards,  \nAtif\n\n",
+  "author": "Atif",
+  "time": "25 Oct 2007 — 3:24am",
+  "uid": "16620",
+  "comments": [
+    {
+      "time": "31 Oct 2007 — 2:02pm",
+      "content": "This is indeed a tricky piece of work. The positioning is done using a series of contextual single adjustments to the positioning of the numerals, all associated with the 'kern' feature. The first lookup shifts an isolated numeral relative to a preceding context sanah glyph. This handles the case of a single numeral. The second lookup shifts the first numeral further (adjustments in separate lookups are cumulative) relative to a preceding context sanah and following context second numeral. The third lookup shifts the second numeral relative to a preceding context sanah and the first numeral. These two lookups handle the case of two numerals on the sign. And so on. One ends up with a series of ten lookups to handle up to four numerals, which will do us for the next few thousand years.\n\nNote that all this relies on monospaced numerals. Obviously the lookup adjustment values are relative to the widths of the glyphs.\n\nIn the Adobe Arabic fonts, we further complicated the issue by including two different sanah widths: one for 1-3 numerals and one for 4 numerals. The latter is contextually substituted using the 'calt' feature prior to positioning.\n\nAdobe have generously made the VOLT source project for the Adobe Arabic Regular font available via Tom Phinney's blog:\n\n[http://blogs.adobe.com/typblography/2007/06/adobe\\_arabic\\_sa.html](http://web.archive.org/web/20150415083453/http:/blogs.adobe.com/typblography/2007/06/adobe_arabic_sa.html \"http://blogs.adobe.com/typblography/2007/06/adobe\\_arabic\\_sa.html\")\n\nIf you were to generate a TTF version of the Adobe Arabic font, you could open it in VOLT and import the project file to see how the lookups work. This is probably simpler than my trying to explain it.\n\n"
+    },
+    {
+      "time": "4 Nov 2007 — 11:08pm",
+      "content": "Bundle of thanks جان ہڈسن for the detailed explanation and for the \"Adobe Arabic - sample VOLT code\" link. May I also request a link to Adobe Arabic font? Thanks\n\nBest Regards,  \nAtif\n\n"
+    },
+    {
+      "time": "5 Nov 2007 — 2:11pm",
+      "content": "The Adobe Arabic font ships with version 7.0.5 and later of Acrobat. If you check the Fonts folder in the Acrobat program directory, you should find the font. Note that this is a CFF OpenType font, which will not rasterise in VOLT. In order to view the imported project file, you will need to make a TTF version of the font in e.g. FontLab.\n\n"
+    }
+  ]
+}

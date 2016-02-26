@@ -1,0 +1,140 @@
+{
+  "id": "67354",
+  "title": "How do I make additional weights and styles?",
+  "forum": "Build",
+  "tags": [
+    "bold",
+    "Font weights",
+    "Build"
+  ],
+  "content": "I recently came across some software with which you can easily make additional weights and styles for your font. I don't know if you have to trace your font again in the program or that it just uses your original vector points. In any case, the software was incredibly expensive, there was no trial version and I couldn't find a place to download it to try it out, so I forgot the name of it.\n\nThat aside, I'm actually wondering how you make your additional weights and styles. Do you draw them manually or do you use software for it? If it's the latter, which? Is it also possible in Fontlab Studio 5? If it's the former, is there a source that describes the process to do it appropriately? Manually making weights and styles seems an awful lot of work, while the process of making a single font is incredibly time consuming already.\n\n",
+  "author": "Martin Silvertant",
+  "time": "12 Feb 2010 — 4:55am",
+  "uid": "52182",
+  "comments": [
+    {
+      "time": "12 Feb 2010 — 7:43am",
+      "content": "There’s no way to avoid manual work. Computers cannot make aesthetic judgments, and combined with rounding errors generated letters get ugly quickly. Using tools like KLTF Glyph Tweaker will allow you to add or remove weight and width while maintaining contrast, but there are limits to what it can do. For example, you can go from a regular weight to a rough start on a bold weight, but if you try to jump to a black weight it’s going to take as much time to clean it up as it would to just draw it. It is also much easier to add weight than to take it away, because once you start pushing strokes in on themselves all the computer can do is overlap them.\n\nExtrapolation/interpolation tools are a great way to flesh out a family after you already have a few fonts drawn. Font Remix Tools, Superpolator, and UFOStretch can really speed stuff up, but if you’re using them to create entire fonts they’re limited to expanding a family into a much bigger family.\n\n"
+    },
+    {
+      "time": "12 Feb 2010 — 7:43am",
+      "content": "I don't think there is only one way to do that task. You could use some tools in the Action submenu In Fontlab but that's not a perfect solution. What I do: I draw the first weight, for instance the light, when I'm satisfy of it I draw a bolder weight, black one for instance. After I interpolate those two the get the regular one. Do the same with the regular and the black one to get the bold weight. Even with the interpolation method, you still have to make some adjustment or retouch on all glyphs.\n\n"
+    },
+    {
+      "time": "12 Feb 2010 — 8:26am",
+      "content": "I didn't expect software to magically make alternate, flawless weights for me; I expected to do some manual work and that's not the problem. However it would be really helpful if software will save me time in the process of that. Superpolator is actually the software I stumbled upon a while ago.\n\nSo, in order to get more weights, I need to have two weights to base the rest on? Is there no way to go from Regular to Light with interpolation software? Because I started by drawing the regular weight, which seems to be a logical start for a font. Also, which software would you recommend?\n\nJames, I actually found the Adobe E-book you posted in this topic: [http://typophile.com/node/56801](http://web.archive.org/web/20140712080832/http:/typophile.com/node/56801)  \nI took a quick glance and I think this will answer some of the questions I have. So thanks a lot for that.\n\nAndré, how do you make an alternate weight? Do you move the vector points of an individual glyph around or do you draw a new glyph on top of the initial glyph to use it as a model? Or do you take the whole set of glyphs, expand the width of the lot and then edit each glyph individually to get the proportions right again?\n\n"
+    },
+    {
+      "time": "12 Feb 2010 — 8:43am",
+      "content": "So far I drew the alternate weight manually on individual glyph. I use the lighter weight as a master and I enlarge horizontally and vertically nodes by nodes to be sure there are always in the same position. To make a better interpolation you have to have the same amount of nodes in each alternate glyph. I've already tried to expand individually, but this method seems doesn't fit to me. An other way I find pretty good an efficiency is to work with the “Interpolate nodes” under the Contour menu. You start from a lighter or bolder weight and move the nodes at the distance you want and it keep on background the original as long you work on.  \nHope this will be helpful.\n\n"
+    },
+    {
+      "time": "12 Feb 2010 — 9:10am",
+      "content": "_So, in order to get more weights, I need to have two weights to base the rest on? Is there no way to go from Regular to Light with interpolation software?_\n\nCorrect - that's what interpolation is: taking two points of data and generating a new one on the line between them.\n\nNote that the aforementioned tools in the Action submenu includes a Bold action, and you should know that negative numbers can be used there to thin rather than thicken strokes.\n\n"
+    },
+    {
+      "time": "12 Feb 2010 — 11:36am",
+      "content": "Making a thing of value always takes hard work. While there are tools to help you find a starting point for between states (interpolation), even these must be visually corrected and adjusted to their new role. Drawing the extremes requires the most work but does not assure a smooth transition during interpolation. Relax and enjoy the drawing part, it is the most rewarding and least time consuming phase anyway.\n\n"
+    },
+    {
+      "time": "12 Feb 2010 — 11:56am",
+      "content": "<cite>I need to have two weights to base the rest on?</cite>\n\nAt least two. Depending on how the type is designed you may need more than two weights to interpolate/extrapolate anything of value.\n\n"
+    },
+    {
+      "time": "12 Feb 2010 — 2:29pm",
+      "content": "So what about italics? Do you use the same process? Do you edit the initial glyphs or draw new ones (besides letters that usually look entirely different in italic like 'a')?\n\n"
+    },
+    {
+      "time": "12 Feb 2010 — 3:16pm",
+      "content": "Italics are another world. They take me longer than the uprights.\n\n"
+    },
+    {
+      "time": "12 Feb 2010 — 3:40pm",
+      "content": "There’s a good explanation of the process for converting romans to obliques to italics in the how-to section of the typowiki. Some characters have to be completely drawn, especially in serif fonts. Some people use interpolation programs (Remix Tools, UFO Stretch) to manipulate the curves rather than just slanting.\n\n"
+    },
+    {
+      "time": "12 Feb 2010 — 3:51pm",
+      "content": "‘Italics are another world’, indeed. Not once, it happened to me to open the roman after several ours of work on the italic, and the damn letters were all leaning to the left!\n\n"
+    },
+    {
+      "time": "12 Feb 2010 — 6:16pm",
+      "content": "There are worse things possible than leaning towards the left :-)\n\n"
+    },
+    {
+      "time": "12 Feb 2010 — 6:18pm",
+      "content": "Most definitely!\n\n"
+    },
+    {
+      "time": "15 Feb 2010 — 4:47pm",
+      "content": "Is there an italic typeface that leans to the left (latin-based alphabet) that you (anybody) would consider using for design work — (and what kind of possible uses/scenarios could such a face have)?\n\nMr. Wikipedia provided some odd examples / uses (German maps?):\n\n\"Left-leaning italics\n\n\"In certain Arabic fonts (eg: Adobe Arabic, Boutros Ads), the italic font has the top of the letter leaning to the left, instead of leaning to the right. Some font families, such as Venus, Roemisch, Topografische Zahlentafel, include left leaning fonts and letters designed for German cartographic map production, even though they do not support Arabic characters.\n\n\"Upright italics\n\nFonts such as Jan van Krimpen’s Romanée, Eric Gill’s Joanna and Martin Majoor’s FF Seria have italic fonts that only have cursive designs, but not the leans typically associated with italic types.\"\n\nVenus as an example? Really? The other example, Roemish, looks startlingly smooshed/underdeveloped in the italic too...(and then I came across the startling phrase: \"upright italics\" —is that a legit term I've overlooked until now?)\n\n"
+    },
+    {
+      "time": "17 Feb 2010 — 3:06pm",
+      "content": "<cite>Is there no way to go from Regular to Light with interpolation software?</cite>\n\nYeah, do a monoline. But even that takes some additional touchup... : )\n\n"
+    },
+    {
+      "time": "23 Feb 2010 — 6:50am",
+      "content": "Martin,\n\nSuperpolator is €250, not 'incredibly expensive'. It literally pays for itself in a week.  \nThat said, Superpolator does not make interpolation possible, just easy.\n\nIf you have the incredibly expensive software FontLab Studio, you have a Python API for that. Install the incredibly free [RoboFab](http://web.archive.org/web/20140712080832/http:/robofab.com/) and start writing your own interpolation code. It's actually rather easy:\n\n``\n\n    from robofab.world import NewFont\n    f1 = your one font\n    f2 = your other font\n    x = interpolation percentage\n    interpolationfactor = float(x) / 100\n    f3 = NewFont()\n    for n in range (0, len(f1)):\n    -- c = f1[n].name\n    -- g = f3.newGlyph(c)\n    -- g.interpolate(interpolFactor, f1[c], f2[c])\n    -- f3[c].mark = f1[c].mark\n    -- g.update()\n    -- bar.tick()\n    f3.update()\n    print \"whee, free new font!\"\n\nReplace \"-- \" with a tab.(What, no indentation? No syntax colouring?)\n\nThe [Robofab website](http://web.archive.org/web/20140712080832/http:/robofab.com/) has a bunch of reference about Python programming, the RoboFab libraries, \"glyph math\" and interpolation.\n\nHope this helps,  \nKai\n\n"
+    },
+    {
+      "time": "23 Feb 2010 — 6:52am",
+      "content": "Is there no way to go from Regular to Light with interpolation software?\n\n(oh this covers extrapolation too, with a interpolation factor \\< 0 or \\> 100\n\nk)\n\n"
+    },
+    {
+      "time": "2 Mar 2010 — 5:14am",
+      "content": "I just realized Superpolator is not for Windows. Could you recommend (almost) equally good software for Windows? Otherwise I will look into the RoboFab manual scripting, but I naturally prefer to do it without codes. Thanks a lot for the help, by the way. I really appreciate it.\n\n"
+    },
+    {
+      "time": "2 Mar 2010 — 5:47am",
+      "content": "Why don't you use just the built-in interpolation funtionality of FontLab? The results are exactly the same no matter which tool you use.\n\n"
+    },
+    {
+      "time": "2 Mar 2010 — 9:33am",
+      "content": "I generally start with Regular.  \nThen I make an Extra Bold by adding as much weight as I can with the \"change weight\" feature, without it looking too weird, and then manually adding more weight by a combination of nudging stems and dragging points and vectors.  \nAt the other end of the spectrum, I make a Hairline weight by drawing a path and adding a stroke value.  \nThen I interpolate between these three \"weight nodes\" to create the other weights.  \nIt's important to develop the metric parameters of all three base weights at the same time, especially the alignment zones, because it's likely that you will want to have the alignment zones the same for all weights.\n\n"
+    },
+    {
+      "time": "5 Mar 2010 — 4:56am",
+      "content": "\\> The results are exactly the same no matter which tool you use.\n\n:-?\n\nCheers!\n\n"
+    },
+    {
+      "time": "5 Mar 2010 — 7:42am",
+      "content": "David, what did you want to express? Approval or disagreement? If the latter, why?\n\n"
+    },
+    {
+      "time": "5 Mar 2010 — 1:15pm",
+      "content": "Sorry, I was startled at breakfast.\n\nI have found certain situations where FL's interpolation software is unable to come to the correct result that other interpolation software can reach.\n\nCheers,\n\ndb\n\n"
+    },
+    {
+      "time": "6 Mar 2010 — 1:59am",
+      "content": "The interpolate function in FontForge works just fine with values \\<0 or \\>100, but errors resulting from unperceived dissimilarities in the base designs then become even more exaggerated. It also has a set of style options including changing weight, x-height, to extend or condense, separate functions for making italics and obliques, and some other toys I still haven't played with.\n\n"
+    },
+    {
+      "time": "6 Mar 2010 — 3:27am",
+      "content": "It's nice if interpolation and extrapolation use hinting to avoid inconsistencies in interpolated/extrapolated stem widths due to rounding.\n\nAdobe's internal tools used to do this, and it was something they lost in the move to FontLab. It probably explains why in a newer version of Myriad Pro the vertical stroke of the lower-case \"d\" is one unit thicker than the vertical stroke of the cap \"D\" (something that came up in passing in another thread).\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "6 Mar 2010 — 5:44am",
+      "content": "\"inconsistencies in interpolated/extrapolated stem widths due to rounding.\"\n\nI am surprised that such things are not corrected after the interpolation is output. I know I spend hours doing it and assume it to be a normal industry practice to make corrections. Also, my choice of which \"number\" to choose as a tweener weight is partly governed by checking stem fluctuations due to rounding. I might pick 647 instead of 650 if the stems were more consistent with that number--I still do a cleanup, though.\n\n"
+    },
+    {
+      "time": "6 Mar 2010 — 6:47am",
+      "content": "<cite>I am surprised that such things are not corrected after the interpolation is output.</cite>\n\nIt’s pretty common—if you start cracking open fonts by some of the best-regarded type designers you’ll find lots of stems and sidebearings off by a unit here or there in the in-between weights. I think that with a lot of these little interpolations errors, if it’s not a high-contrast typeface being used at large sizes, nobody will notice. But for some of us it’s just hard to let go and not tweak every little detail—I just have a compulsion to do it.\n\n"
+    },
+    {
+      "time": "6 Mar 2010 — 8:21am",
+      "content": "It would drive me nuts not to correct it.\n\n"
+    },
+    {
+      "time": "12 Mar 2010 — 4:22am",
+      "content": "<cite>It's important to develop the metric parameters of all three base weights at the same time, especially the alignment zones, because it's likely that you will want to have the alignment zones the same for all weights.</cite>\n\nYou lost me there. Wouldn't the metric parameters be the same because you already set it accordingly while making the regular weight? I guess I don't really know what you're referring to with the metric parameters.\n\n"
+    },
+    {
+      "time": "12 Mar 2010 — 8:56am",
+      "content": "@nickshinn wrote: <cite>because it's likely that you will want to have the alignment zones the same for all weights.</cite>\n\nHuh. I think there is some difference of opinion on this point. Or maybe I misunderstand you? If you mean, the amount of overshoot is likely to be consistent, that may be. But if you mean, the x-height, cap height and descender depth are likely to be the same, at least some designers disagree. For a heavier weight, one might compensate with either a greater x-height (my preferred solution, one I've seen from a number of type designers whose work I appreciate), or a smaller cap height (the approach preferred by Robert Slimbach, another type designer I respect a great deal). Or one could do a smidge of both, I suppose.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "12 Mar 2010 — 12:48pm",
+      "content": "Right, I often make the x-height of the Bold bigger than that of the Regular.  \nHowever, if you're new at this, you would probably want to start out with consistent alignment zones across different weights.\n\nLater, you can experiment, but whatever the case, it's a good idea to figure out what the relationship of the alignment zones is fairly early in the design process.\n\n"
+    }
+  ]
+}

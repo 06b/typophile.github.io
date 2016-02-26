@@ -1,0 +1,58 @@
+{
+  "id": "15812",
+  "title": "When is the better time to hint?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I would like to know when is the better time to start the hinting of a typeface. I almost finish the first weight. I did the spacing and the kearning even if I think I have to work again on that part of my own typeface. I wonder which way to choose? Do other weight. Do the hinting or something else?\n\nI’m stock at this moment.\n\nThanks\n\n [‹ Generate Glyphs in Fontlab Studio](http://web.archive.org/web/20080212055912/http:/www.typophile.com/node/15926 \"Go to previous forum topic\") [Illustrator CS2 Shortcut? ›](http://web.archive.org/web/20080212055912/http:/www.typophile.com/node/15947 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080212055912/http://www.typophile.com/user/5264\" title=\"View user profile.\">sim</a>",
+  "time": "<br>",
+  "uid": "5264",
+  "comments": [
+    {
+      "time": " 24.Oct.2005 8.44am",
+      "content": "I am guessing you are talking about Postscript hinting. True type hinting is another and far more difficult matter.\n\nI believe the postscript hinting should be apart of the typeface from the beginning. It is all about the way you place the anchor points.\n\nI don’t know what software you are using, but if you are working in Fontlab, the software calculates the hinting from the anchor points placed in the extreme points of the characters. The extreme points are the parts of the curve that for a short while are either parallel with the x-axis or with the y-axis. This is often the point on the curve that is highest, lowest or most to the left or to the right side.  \nEvery extreme point should have an anchor point.\n\nFrom these, the software measures the stem-width and the overshoot, and then decides on the most representative dimensions in the hinting.\n\nYou can also do much more, but this is the easiest.\n\nHope it helps\n\nSofie\n\n"
+    },
+    {
+      "time": " 24.Oct.2005 9.07am",
+      "content": "I think TT hinting issues - are best dealt with in the context of the intended use of the font. Is it meant for screen use? Text? Display? If screen use is relevant - What OS ? Maybe you don’t need to do TT hinting at all.\n\n"
+    },
+    {
+      "time": " 24.Oct.2005 9.09am",
+      "content": "If on the other hand screen use is central to the purpose of your font you had better figure it out first! And think about how other weights ( if any ) fit in.\n\n"
+    },
+    {
+      "time": " 24.Oct.2005 10.57am",
+      "content": "PS hinting can be done as you go along. If you convert hints to links in FontLab, you can even leave them intact while you make most kinds of adjustments to outlines, although I usually remove them if I’m doing additional work on a glyph, as it is tidier.\n\nI try to set blue zones (vertical alignment zones) early on, once I have established normal x-height and overshoots etc., but I don’t usually set standard stem values until all the hints are in place.\n\nTT hinting is a different kind of beast, and I wouldn’t start this until after both outline and spacing design are complete. TT hinting is a kind of additional design phase in which you are effectively modifying the design for specific device dependencies.\n\n"
+    },
+    {
+      "time": " 24.Oct.2005 12.43pm",
+      "content": "I agree with John with this proviso - ( if thats the word I want )\n\nIf you are really designing for screen use in particular ( which you are probably not ) but if you are - maybe design some letters & test them with TT hinting at the begining so that the reality of rendering can inform your design process. Nailing down some essentials in the begining can save you alot of work later on. Thats what I wish I had known to do when I started work on my screen-centric font project.\n\n"
+    },
+    {
+      "time": " 24.Oct.2005 6.19pm",
+      "content": "_...maybe design some letters & test them with TT hinting at the begining so that the reality of rendering can inform your design process._\n\nAbsolutely. When making dedicated screen fonts, you want to test in the target rendering environment as early as possible in the design process to review stem weights and other details. When I started work on Constantia for MS, I began by making a Multiple Master font with a weight axis for a few key letterforms — H O i n o, if I recall correctly — and then generated a pile of different instances at different weights. Mike Duggan at MS hinted these, and together we reviewed the rendering of the different weights.\n\n"
+    },
+    {
+      "time": " 28.Oct.2005 5.23am",
+      "content": "“When making dedicated screen fonts, you want to test in the target rendering environment as early as possible”  \nI’m confused: if hinting changes everything, what’s the point of tests for dedicated screenfonts before they are hinted ?\n\n"
+    },
+    {
+      "time": " 28.Oct.2005 9.14am",
+      "content": "_I’m confused: if hinting changes everything, what’s the point of tests for dedicated screenfonts before they are hinted?_\n\nI didn’t suggest testing before hinting. I recommended early testing _including hints._ But also bear in mind that hinting might not change ’everything’ in the target rendering environment. Early testing in ClearType is pretty essential, if that is your primary target environment, because you can’t rely on x-direction deltas to tweak things later: you need to know that your letterforms actually work well in that environment.\n\n"
+    },
+    {
+      "time": " 28.Oct.2005 9.44am",
+      "content": "Of course I write this at the risk of teaching your G-mas to suck eggs.\n\nBut maybe it will be useful to someone...\n\nDavid when you say ’dedicated screen fonts’ do you mean bitmaps? Because that is different. Or do you mean an outline font which is meant for & designed for screen use? I think that John is referring to the latter; and so he is talking about the way your outlines render to screen in the first place. I think he is saying that you want to know that your basic shapes behave well enough before you spend alot of time working on either hinting or even other glyphs. Is that correct John?\n\nMy experience is that hinting can change a surprising amount. But it is not the way you want to start solving problems - just a way - and often not the best way - of smoothing out rendering problems. This is because hinting that is marvelous on Windows in B/W and/or in the old antialiased mode may not give such good results on OSX and it’s rendering engine - or for that matter in ClearType.\n\nThe take I have on this - and I would love to hear if anybody agrees or disagrees - is that you really do want to start with good shapes that behave as well as possible in one target OS/rendering format. And that while you can have good results in a variety of environments, in some ways you have to choose a rendering environment to focus on & then hope to mitigate the damage in the others. I have a font I am developing that is attempting to bridge the gaps and it’s frustrating. I will have to choose an environment to make primary soon. Still, it’s been a great learning experience.\n\nOr in John’s case - maybe they didn’t worry about the other rendering environments much. After all they were making fonts to establish the value of a particular approach to rendering type in the context of LCD screens! Having a contrast in results might even have been appealing to them. John, did you test Constantia in other rendering environments? If so did you let it impact the design? My guess is that the answer is ’No’. Why make the job trickier?\n\nI think that screen rendering environments can be compared to paper or repro technologies, metal vs. CRT vs. Postscript etc. A type design that is optimal in one of these may perform well in others but really **ideal results** can only occur in the niche/context that the face was designed for.\n\nWhen the apple & microsoft environemnts were more similar (OS9 & Win95/8) this was somewhat less true because OS9’s interpretation of hinting was more similar to that of Windows. But now we have the old model TT/PS + Cleartype + OSX’s rendering. And they all differ in pretty big ways. Plus there is screen rez/density which could change over time and is starting to change already.\n\nAndre, what is the purpose of the font? If it’s really for print then you could hint at any time since screen use isn’t central to your purpose. And you can probably get away with auto hint anyway. Anybody agree/disagree?\n\n"
+    },
+    {
+      "time": " 28.Oct.2005 10.22am",
+      "content": "\\>Andre, what is the purpose of the font?\n\nEben\n\nYes, my goal is to produce a typface for print.\n\nAnd, for the one (Sofie) who ask me earlier in this tread, if I talk about PS or TT hinting. I can’t give you any answer, because I’m at the step where I’ve to really understand what are the difference between both. I work with Fontlab for less than one year, obviously, I’ve to read more about hinting before and what all of you wrote will help me to get through.\n\nFinally, thanks to all of you for such a great tips & techniques information you provide. They are really useful to understand.\n\n"
+    },
+    {
+      "time": " 1.Nov.2005 4.06am",
+      "content": "\\>Yes, my goal is to produce a typface for print.\n\nNever mind. If you’re making printer fonts you don’t really need hints.\n\nAs far as making outlines suitable for use as screen fonts,  \n\\>you need to know that your letterforms actually work well in that environment.\n\nYes thanks. Since “that environment” is every size from 9-27 or so, regarless of x-ht. stem, counter or serif decisions you make (within the reason brought on by experince), there are good nodes and bad nodes into which the letterforms are gonna fall (sizes that work well, and sizes that don’t. You can test that, but any changes you make just shifts the problem. Really the testing of letterforms that actually work well in “that environment” should be going on in your mind before a letter’s drawn. I.E. is the contrast dumbed down enough? are the shapes dumbed down enough? Is the spacing dumbed down enough? Dumbing being ness. to compensate for the “smartening” of the CT rasterizer.\n\nAnother thing that’d help hinters, would be if applications developers understood the importance of a finer granularity in the selection of sizes available to screen font users. But that’s such a good topic it’s blog bound.\n\n"
+    }
+  ]
+}

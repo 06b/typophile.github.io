@@ -1,0 +1,38 @@
+{
+  "id": "43848",
+  "title": "AFDKO doesn't work with Python 2.5",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I was trying to use the AFDKO's checkOutlines and AutoHint, but it didn't work because the Python version was 2.5 in MacOSX 10.4. I got an error message that \"This script supports only Python versions 2.3 and 2.4. The current version is 2.5.\"  \nSo I would like to replace ver.2.5 to ver.2.4 or ver.2.3 but I didn't know how should I replace the python program. Or is there any way to solve this problem?\n\n",
+  "author": "Kunihiko_Okano",
+  "time": "3 Apr 2008 — 8:31am",
+  "uid": "1927",
+  "comments": [
+    {
+      "time": "4 Apr 2008 — 12:28pm",
+      "content": "Just curious if you've gotten anywhere with this. Maybe you're using an older AFDKO?\n\nI'm running the latest AFDKO with Python 2.5 (2.5.1, specifically) without a problem — but under OS X 10.5.2, not 10.4.\n\n"
+    },
+    {
+      "time": "4 Apr 2008 — 12:53pm",
+      "content": "On Windows, you can install multiple versions of Python, and I'm guessing the same is true on the Mac. So you may not need to replace v2.5, but might install v2.4 alongside it. You can get the v2.4 package for Mac here: [http://www.pythonmac.org/packages/](http://web.archive.org/web/20131023203411/http:/www.pythonmac.org/packages/ \"http://www.pythonmac.org/packages/\")\n\n"
+    },
+    {
+      "time": "5 Apr 2008 — 8:27am",
+      "content": "Thanks your comment, Joshua.  \n\\>I’m running the latest AFDKO with Python 2.5 (2.5.1, specifically) without a problem — but under OS X 10.5.2, not 10.4.\n\nReally?  \nI've downloaded AFDKO again and reinstalled it, but It didn't work.\n\nThanks, John,  \nI've done it and checkOutlines script worked from FontLab.  \nI got a message that Terminal app. showed.\n\nPython 2.4.4 (#1, Oct 18 2006, 10:34:39)  \n[GCC 4.0.1 (Apple Computer, Inc. build 5341)] on darwin  \nType \"help\", \"copyright\", \"credits\" or \"license\" for more information.  \n\\>\\>\\>\n\nHowever, I've got another problem.  \nWhen I inputed command line \"tx -h\" into Terminal.app, Terminal showed an error message like\n\nshotype:~ okano$ tx -h  \n-bash: tx: command not found\n\nIn order to confirm settings I inputed \"which tx\" into Terminal,  \nThen Terminal shows below message.  \nno tx in /Library/Frameworks/Python.framework/Versions/Current/bin /bin /sbin /usr/bin /usr/sbin\n\nMaybe I have to fix the setting of the path, but I don't know where I should touch to fix the path.\n\n"
+    },
+    {
+      "time": "5 Apr 2008 — 8:41am",
+      "content": "_Maybe I have to fix the setting of the path, but I don’t know where I should touch to fix the path._\n\nFrankly, I don't know squat about Macs (well, except for emacs), but you might find info in this link useful: [http://typophile.com/node/20078?](http://web.archive.org/web/20131023203411/http:/typophile.com/node/20078).\n\nGood luck.\n\n"
+    },
+    {
+      "time": "5 Apr 2008 — 4:10pm",
+      "content": "\\> _shotype:~ okano$ tx -h  \n-bash: tx: command not found_\n\nHi Kunihiko, try this:\n\n1. Open a new Terminal window and type `pico .profile`\n\n2. You should now have the .profile file opened in pico, and see some lines that look like this:  \n`PATH=${PATH}:\"/Users/your_username/bin/\"`\n\n3. Select those lines, copy them, and close the file (Ctrl+X)\n\n4. Type `pico .bash_profile`\n\n5. Paste the lines copied in step 3\n\n6. Close the file (Ctrl+X), answering \"Y\" to save the changes\n\n7. Close the Terminal window\n\n8. Open a new Terminal window. Typing `tx -h` should now work, as well as all the other AFDKO command line tools\n\nHope this helps.\n\n"
+    },
+    {
+      "time": "5 Apr 2008 — 7:52pm",
+      "content": "Thank you very much, Miguel!  \nThat's it! This is very useful tips. I could add the path of AFDKO.  \nI appreciate to use AFDKO comfortably again.\n\n"
+    }
+  ]
+}

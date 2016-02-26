@@ -1,0 +1,118 @@
+{
+  "id": "2454",
+  "title": "Importing Kerning",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I have a hand-made kerning list consisting of pairs of characters, one pair per line (in WordPad). The characters are the actual Windows codes, not descriptives like \"left square bracket\", and the pairs are not separated by anything. I know FontLab can import AFM files, but I want to avoid converting my \"raw\" data to AFM before import. Help?   \n   \nhhp\n\n",
+  "author": "hrant",
+  "time": "Wed, 2003-12-17 15:02",
+  "uid": "1250",
+  "comments": [
+    {
+      "time": " Thu, 2003-12-18 07:43",
+      "content": "\\> I want to avoid converting my \"raw\" data to AFM before import.   \n   \nIs there a reason?\n\n"
+    },
+    {
+      "time": " Thu, 2003-12-18 09:27",
+      "content": "What do you mean by \"raw Windows codes\"? If you open your file in WordPad, can you see the rendered glyphs or some decimal values?   \n   \nAre there only paired glyphs, or are there kerning values as well?   \n   \nAnd then, if you choose File / Save As, which format do you choose? Text Document or Unicode Text Document?   \n   \nLook at the K1.TXT file in the Kerning folder of your FontLab. Is this something you mean? If so, just put some name in the first line of the file and save it in this folder as K4.TXT (Text Document).   \n   \nAdam\n\n"
+    },
+    {
+      "time": " Thu, 2003-12-18 10:55",
+      "content": "Eduardo, there's too many pairs to do it by hand, especially since most of the characters are upper-ASCII, so they need to be \"translated\". I'm thinking of doing it all using Word macros though.   \n   \nAdam:   \n- They're the actual characters, not codes or names.   \n- Since this is for a bitmap font, the kern values are almost all +125 or -125, and the list has been separated into +/- groups. Some very few pairs are double that, but those I can do by hand.   \n- Right now it's in WordPad RTF.   \n- I'll look at the K1.TXT file structure - thanks.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Thu, 2003-12-18 11:21",
+      "content": "\\> most of the characters are upper-ASCII, so they   \n\\> need to be \"translated\". I'm thinking of doing it   \n\\> all using Word macros though.   \n   \nOr you can use the Find/Replace command, it'll take you less than 5 minutes! : )\n\n"
+    },
+    {
+      "time": " Thu, 2003-12-18 13:11",
+      "content": "_I'm thinking of doing it all using Word macros though._    \n   \nThis is what I have done in the past to convert from characters to glyph names. It doesn't take too long, and once you have the macros it is easy to repeat the process for other lists or sample strings.\n\n"
+    },
+    {
+      "time": " Fri, 2003-12-19 00:25",
+      "content": "\\> K1.TXT   \n   \nThis looks like what I have, although I also see some names in K3.TXT (like \"dotlessi\"). The thing is, it looks like a \"sample text\" thing, since it doesn't have actual kerning values in there. But if I can assign the same kerning value (+/- 125) in FontLab to long lists of such value-less pairs en masse, then I'm set. Is there a way to do this?   \n   \n\\> Word macros   \n   \nIn case I have to do this instead after all:   \nWhere's the list of (Adobe?) character names again?   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Fri, 2003-12-19 00:45",
+      "content": "The Adobe Glyph List is [here](http://web.archive.org/web/20050518123500/http:/partners.adobe.com/asn/tech/type/glyphlist.txt). Note that this is version 2.0, which contains additional recognised names from multiple sources. Personally, I found the earlier version more useful for font development, as with few exceptions there was only one 'correct' name per Unicode character. General Adobe glyph naming rules are [here](http://web.archive.org/web/20050518123500/http:/partners.adobe.com/asn/tech/type/unicodegn.jsp).   \n   \nThe easiest way to get your kerning data into FontLab is probably to replace character pairs with spaced glyph name pairs in your list, append 'KPX ' before each one, paste them into a AFM and import them into FontLab. Note that the count of kern pairs at the beginning of that section of the AFM should equal or exceed the actual number, otherwise the list may be truncated during import.\n\n"
+    },
+    {
+      "time": " Fri, 2003-12-19 00:59",
+      "content": "Thanks!   \n   \n\\> append 'KPX ' before each one   \n   \nAs well as append the kerning value after each pair.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Fri, 2003-12-19 15:00",
+      "content": "_As well as append the kerning value after each pair._   \n   \nAs the great man said: Well, duh!\n\n"
+    },
+    {
+      "time": " Fri, 2003-12-19 15:13",
+      "content": "BTW, I've started writing that macro, and will make it available here when finished.   \nAlthough I fear you'll have to set your Security to \"Low\" to run it... :-)   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Sat, 2003-12-20 21:57",
+      "content": "So the Word macro -a quick & dirty brute force affair- is here:   \n [http://www.themicrofoundry.com/other/namesubber.rtf](http://web.archive.org/web/20050518123500/http:/www.themicrofoundry.com/other/namesubber.rtf)   \n   \nAll it does is convert non-alphabetic characters (except the space and non-breaking space) _in the Windows:Western codepage_ to their Adobe names. So in my case I still had to do some manual processing:   \n1) Separate the pairs with a space. Which I actually did by hacking the macro: I put a space before each Adobe name, but then also had to find/replace all 52 alphabetic characters with space+character (which could be put in the macro as well though). This left me with a prefix space per line.   \n2) Put the \"KPX\" prefix per line (no space since I got a prefix space from #1). This I did by typing in a Tab at the head of each line\\* (Shoutcast's Goa channel helped) then doing a find/replace: Tab -\\> \"KPX\".   \n3) Put the kerning amounts (which were 99% either \" +125\" or \" -125\"). Using the same Tab trick. Tab is safe because nobody makes kerns with it... I assume!   \n   \n\\* Note that leading Tabs are messed up by Word (it turns them into \"ruler tabs\"), so I used WordPad.   \n   \nIf I could get the macro to process linefeeds (which I couldn't) then I could get rid of manual processing entirely.   \n   \nAnd after that you cannibalize any old AFM file (that has at least one kern defined) to get FontLab to read it in.   \n   \n--   \n   \nA question:   \nThat Adobe name list has multiple names per codepoint for some characters. Like periodcentered/middot for 00B7 and overscore/macron for 00AF. Do you just choose any of the names?   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Sat, 2003-12-20 23:47",
+      "content": "_That Adobe name list has multiple names per codepoint for some characters. Like periodcentered/middot for 00B7 and overscore/macron for 00AF. Do you just choose any of the names?_    \n   \nThis is a novelty of version 2.0 of the AGL. Previous versions had only Adobe's own glyph names, but version 2.0 includes names that have been used by other major developers, e.g. Apple, which Adobe software using AGL 2.0 will recognise. It is important to remember that the AGL does not primarily exist for the purpose of font developers, but for software developers who need to parse glyph names to obtain character codes.   \n   \nSo yes, you can choose any of the names in the AGL, but for maximum exchangeability with other font developers I recommend using Adobe's original names from the previous AGL versions. Here is one of the Tiro resource files which you and others might find useful: a FontLab .nam file that covers all the Basic Multilingual Place assignments for Unicode 4.0. Unzip and open the .nam in a text editor and read the lengthy comments at the top to understand what the file contains.   \n   \n<!--attachment: tiro_Unicode4_0_BMP_withAFII-22786.zip*mime_zip.gif*application/x-zip-compressed*175.4*Tiro+AGL+name+mapping*tiro_Unicode4%2e0_BMP_withAFII%2ezip -->\n\n<center>\n<br>\n<table border=\"1\"><tr><td>\n<img src=\"http://web.archive.org/web/20050518123500im_/http:/www.typophile.com/forums/icons/mime_zip.gif\" align=\"left\" alt=\"application/x-zip-compressed\">Tiro AGL name mapping<br><a href=\"http://web.archive.org/web/20050518123500/http:/www.typophile.com/forums/messages/4101/tiro_Unicode4_0_BMP_withAFII-22786.zip\" target=\"_blank\"><b>tiro_Unicode4.0_BMP_withAFII.zip</b></a> (175.4 k)</td></tr></table>\n</center><!--/attachment-->   \n   \nIf you drop this .nam file in your FontLab /Mapping folder, you can use it with the Generate Unicode and Generate Names functions in FL. When the new Tiro website goes online, we plan to have a resource download section from which this and other useful FL files will be available, including a .nam that uses a much more extensive list of human-friendly production glyph names.\n"
+    },
+    {
+      "time": " Sun, 2003-12-21 00:15",
+      "content": "Cool - thanks.   \n   \n--   \n   \nBTW, I wrote:   \n\\> you cannibalize any old AFM file   \n   \nIt turns out you need to make sure the source AFM file has a metrics entry for any character you're kerning: kern pairs for characters undefined in the \"StartCharMetrics\" section are ignored. The complication is that the names declared in AFM files output by FontLab don't always match the Adobe stuff, or maybe it's that they only [can] match one of the choices. Like if you declare a pair \"L middot\" (useful in Catalan) it won't show up because the metrics definition (assuming it was output from FontLab) uses \"periodcentered\" instead. And some stuff (like the superior numerals) are represented by Unicode numbers in the metrics section instead of names...   \n   \nSo it looks like my macro needs revision (to match FontLab).   \nOr I guess one could use an AFM file with names that match the ones in the macro.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Sun, 2003-12-21 01:32",
+      "content": "The easiest thing to do is open your own font in FontLab, save out an AFM with one dummy kerning pair, and then use that AFM as your kerning import source.\n\n"
+    },
+    {
+      "time": " Sun, 2003-12-21 14:23",
+      "content": "Right, but the thing to watch out for is that the character names in the kerning pairs have to match the ones in the metrics section of the AFM file. That might seem obvious, but it gets complicated when you consider that the Adobe list shows multiple names per codepoint (like any kern using \"middot\" instead of \"periodcentered\" won't be recognized upon [re]import). So basically you can/should just use the names in the AFM file that FontLab outputs - you don't need the Adobe list (in this case).   \n   \n--   \n   \nI've found 7 wrong names and one typo in my macro - I'll provide an updated version soon.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Sun, 2003-12-21 15:21",
+      "content": "I'm dumb.   \nM�rten Thavenius just pointed out to me that \"^p\" is the Word macro code for linebreak. So no manual anything is needed at all: you can replace \"^p\" with something like \" +125^pKPX \", and there you have it. Although I guess you have to split it up and do the \"+125\" part _after_ the nameswapping, otherwise you'll get \"plusonetwofive\" all over the place.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Sun, 2003-12-21 19:31",
+      "content": "_...it gets complicated when you consider that the Adobe list shows multiple names per codepoint..._   \n   \nThat's why previous versions of the AGL were better suited to new font development. If you refer to the .nam file I uploaded, that contains the Adobe's own names from earlier AGL.\n\n"
+    },
+    {
+      "time": " Sun, 2003-12-21 22:09",
+      "content": "In case anybody's interested, I've updated the macro with a typo fix and 7 cases where FontLab wants character names a certain way. Same link.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Tue, 2003-12-23 09:36",
+      "content": "John,   \n   \nyou're talking all the time about some \"previous versions of the AGL\", completely ignoring the fact that Adobe publish \\*two\\* AGLs. When was the last time you checked:   \n [http://partners.adobe.com/asn/tech/type/unicodegn.jsp](http://web.archive.org/web/20050518123500/http:/partners.adobe.com/asn/tech/type/unicodegn.jsp)   \n?   \n   \nEspecially, the section 6 dedicated to glyph naming in new fonts?   \n   \nAdam\n\n"
+    },
+    {
+      "time": " Tue, 2003-12-23 09:57",
+      "content": "BTW, there's a bug in my macro: it confounds the four curly quotes with their straight versions - Im not sure why. But it might be a Word problem (as opposed to an algorithm problem), so it might be better to fix those by hand.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Tue, 2003-12-23 14:24",
+      "content": "Adam, thanks for pointing that out. I'd assumed that when Adobe published the new AGL it was a replacement, not an addition. I shouldn't be surprised: this is after all the same company that uses the name CoolType for two different technologies!\n\n"
+    },
+    {
+      "time": " Thu, 2003-12-25 07:49",
+      "content": "While checking out the different AGL's, I saw that the AGL \"for new fonts\" seems to be corrupt.   \n   \nAll the entries from \"0077;w;LATIN SMALL LETTER W\" to the end of the list are repeated:   \n   \n [http://partners.adobe.com/asn/tech/type/aglfn13.txt](http://web.archive.org/web/20050518123500/http:/partners.adobe.com/asn/tech/type/aglfn13.txt)   \n   \n/m�rten\n\n"
+    },
+    {
+      "time": " Thu, 2003-12-25 12:29",
+      "content": "Marten,   \n   \nI'm not seeing that at all. Perhaps it was a browser glitch?   \n   \nMaybe somebody else can say if they're having the same problem, or not.   \n   \nT\n\n"
+    },
+    {
+      "time": " Thu, 2003-12-25 14:52",
+      "content": "Hmm, I'm tired, but the last 20 lines at the bottom of the list looks pretty much the same as the 20 lines before those. That is, the range from w-z is repeated twice.   \n   \n/m�rten\n\n"
+    },
+    {
+      "time": " Thu, 2003-12-25 15:22",
+      "content": "I'm seeing it too. And it's just a text file, so I don't think a browser could mess up like that. The good news is that it doesn't matter I guess, since duplicates are superfluous.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Fri, 2003-12-26 17:11",
+      "content": "\\> there's a bug in my macro   \n   \nFortunately the fix was easy: since the code proceeds sequentially, simply moving the two segments that process the straight single and double quotes to _after_ the segments that process the curly stuff does the trick.   \n   \nSo one more update - same link:   \n [http://www.themicrofoundry.com/other/namesubber.rtf](http://web.archive.org/web/20050518123500/http:/www.themicrofoundry.com/other/namesubber.rtf)   \n   \nhhp\n\n"
+    }
+  ]
+}

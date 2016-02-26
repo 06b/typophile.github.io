@@ -1,0 +1,102 @@
+{
+  "id": "637",
+  "title": "OpenType font naming conventions",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm currently breaking my head over naming conventions in OpenType. Having mostly used Fontlab to auto-generate OpenType and other Name fields (FOND, menu, etc) I've been bumping into problems with that wonderful platform known as Windows.   \n   \nI've studied the naming convention that Adobe used in Myriad Pro, which was cunning and complex at the same time... as well as Underware's Unibody font release.   \n   \nBoth use distinctly different schemes... How should I be naming things?   \n   \nTo illustrate I'll give some examples of the kind of issues I'm having with the following kind of situations:   \n   \n- Unconventional names -- Fnord Broken vs Fnord Regular, Fnord Bold, etcetera. as well as 'fantasy' weight names like 'C30' through 'E70'.   \n   \n- Big familes -- ranging from Fnord ExtraLightItalic to ExtraBold. Not all weights show on Windows.   \n   \nThe fonts I create work fine on OS X, but when using them in Adobe applications on a Windows machine I end up with 5 weights at most, 1 weight regular. ATM for Windows Light sees only one weight.   \n   \nHow do people here set up their naming info? When does one use OpenType names, and when not? Is the Adobe Pro way the most common way?\n\n",
+  "author": "unlinear",
+  "time": "16 Jul 2003 — 12:07pm",
+  "uid": "1251",
+  "comments": [
+    {
+      "time": "29 Jul 2003 — 11:01pm",
+      "content": "If fonts are style linked, then they won't show up separately in \"normal\" Windows applications such as Word or QuarkXPress.   \n   \nWhat version of Windows are you on, BTW?\n\n"
+    },
+    {
+      "time": "3 Aug 2003 — 12:58pm",
+      "content": "I did several large OpenType families using FontLab. There is a limitation in Windows OS: type family should contain only four styles: Regular, Bold, Italic, Bold Italic. If you create crossplatform OpenType font, you have to devide the type family in several sub-families:   \nFont OT Regular   \nFont OT Italic   \nFont ExtraBold OT Regular   \nFont ExtraBold OT Italic   \nFont Light Condensed OT   \netc.   \nBut because I want all the styles of one family to be displayed together, I fill in OpenType Specific names in Font Info window. I fill it manualy: the first line is the same for all styles in a family. The second line is the style name, for example \"ExtraBold\". To have all styles sorted by weight, select appropriate weight in the Basic set of font names window. The name of the weight shouldn't match the style name. Imporant is the number of the weight, which appears after selecting the weihght from the list.\n\n"
+    },
+    {
+      "time": "3 Aug 2003 — 2:31pm",
+      "content": "Sounds like Filip has it pretty much down. That's the approach we use at Adobe, except working through our own FDK tools. I do the same thing when working with OpenType fonts in FontLab. I do tend to work in the advanced naming panel to work with all the name strings directly, but that isn't strictly necessary AFAIK.\n\n"
+    },
+    {
+      "time": "3 Aug 2003 — 3:29pm",
+      "content": "How different is OT naming from PS?   \n   \nI've tried converting large families of PS to OT and when I install them, windows only sees 4, whereas with the PS versions installed, I have access to the entire family.   \n   \nAm I missing something in Fontlab or what?\n\n"
+    },
+    {
+      "time": "3 Aug 2003 — 3:44pm",
+      "content": "Thomas, if you realize early enough (I think like half an hour, or is it 5 minutes?), which it seems you did here, you can go into your profile and delete unwanted posts. But note that anybody on email delivery will:   \n1) still see everything.   \n2) never see any edits...   \n   \nhhp\n\n"
+    },
+    {
+      "time": "4 Aug 2003 — 1:12am",
+      "content": "Chris, if you want to make your OpenType font really crossplatform, you have to follow Windows limitations. As I wrote before, in Window OS, type family can only contain 4 styles. You have to divide large family into several subfamilies. Just read my post.\n\n"
+    },
+    {
+      "time": "4 Aug 2003 — 3:18pm",
+      "content": "I did read it, Filip, but I was converting a windows postscript family to opentype. I can see the entire family in windows when the postscript version is installed, but when doing just a straight conversion in Fontlab to Opentype I only see 4. One would assume the names would be carried over, wouldn't they?\n\n"
+    },
+    {
+      "time": "5 Aug 2003 — 10:05am",
+      "content": "And the thread wakes up....   \n   \nI originally posted this because of the incredible lack of documentation on the naming schemes.   \n   \nAlso, the 'magical green diamond' in Fontlab's naming section generates some interesting results that we, right up to the point where I posted this, thought were correct.   \n   \nBut they werent.   \n   \nFor instance: The Open Type Mac name should be The two other opentype names combined, seperated by a space, correct? Then why does Fontlab put the FOND name in there in stead when you hit the 'diamond' (auto-generate names) field?   \n   \nIn the end, thanks to Thomas's great help, we figured it out, but honestly, unless i\"m reading the wrong literature, naming is a field that could use a FAQ (or book) or two.\n\n"
+    },
+    {
+      "time": "5 Aug 2003 — 11:03am",
+      "content": "Although I can now create OpenType family of eight styles or more, the font naming is mistery for me. Especially when I try to open fonts from families, which display all styles correctly. Font naming window in FL displays always very different ways of naming... And the FL manual makes it not very clear.\n\n"
+    },
+    {
+      "time": "5 Aug 2003 — 11:38am",
+      "content": "Filip,   \nRemember that OpenType naming follows TrueType rather than PostScript conventions, so forget about the Menu Name, it doesn't exist in TrueType naming. (You can forget about FOND as well).\n\n"
+    },
+    {
+      "time": "5 Aug 2003 — 12:21pm",
+      "content": "You are right.   \n   \nThe other thing is the naming convention for styles. Sometimes font - usualy named Italic - is named Regular Italic (which looks more lined up in the list of styles). Extra Bold is sometimes ExtraBold. I try to use only names which are in the list of styles in FL.   \n   \n   \nAnother problem is using Character Styles in application like InDesign. For one font the style \"Italic\" works fine, for other font, there must be separated style \"Book Italic\", for other one \"Regular Italic\", \"Rg Italic\". Not to mention fonts with styles named \"ThreeOne\", \"HongKongEighty\" or \"45 Light\". I accept the reason for this kind of style naming, but sometimes it is not so easy to work with it - for example if you have to different fonts in one book and both fonts use different names for italic.   \n   \nOn the other hand, I like Frutiger's idea to use numbers to describe the style. Unfortunately almost nobody followed him. And finaly, the new revised Linotype Next uses 3-digit naming convention...\n\n"
+    },
+    {
+      "time": "5 Aug 2003 — 1:41pm",
+      "content": "\\>   \n   \nThe Book Italic, Regular Italic does create some problems. I've had a lot of success by entering the proper weight name in the weight field and then only using Regular, Regular Italic, Bold, Bold Italic, in the style field (all in the FL naming dialog 1st panel). I wonder... if you entered HongKongEighty in the weight field, and called it Regular in the Style field... would that work?\n\n"
+    },
+    {
+      "time": "5 Aug 2003 — 1:46pm",
+      "content": "\\>   \n   \nI just tried it, it does not!\n\n"
+    },
+    {
+      "time": "5 Aug 2003 — 4:44pm",
+      "content": "The name in the \"weight\" field does not directly correspond to anything that appears in font menus.   \n   \nIt isn't quite right to say that OpenType uses TrueType naming, only. OpenType names are a superset of TrueType names. They add two things:   \n   \n- ability to specify family and style in a way that allows more than four members per family (this is in addition to the usual Windows four-member families)   \n   \n- ability to specify a Classic Mac OS menu name (in a Mac TrueType font this would not be part of the data fork)   \n   \nThese extra bits live in name IDs 16, 17 and 18, and are in their own little panel in the FontLab Font Info dialogs.   \n   \nAdobe has long realized the amount of confusion out there over naming, style-linking and weight issues, which is why we often incorporate tutorials on this in our OpenType production workshops. However, in the past these have focused on how one controls names when using our own FDK tools. Clearly it would be invaluable to write up a clear explanation on how these things work in FontLab. I suppose I will add it to my to-do list....   \n   \nT\n\n"
+    },
+    {
+      "time": "5 Aug 2003 — 4:47pm",
+      "content": "I forgot to say, naming a font \"Regular Italic\" is rather unpleasant. Certainly Adobe does not name fonts in this fashion. Next we'd have \"Regular Bold\"!   \n   \nT\n\n"
+    },
+    {
+      "time": "5 Aug 2003 — 6:27pm",
+      "content": "Filip,   \n   \nafter dealing with the generation of the General family which has a letter 2 number identification system (C30 through G70) i can safely say that Frutigeresque models don't really make naming easier -- I ended up making each font its own family and using opentype to unite it into one listing.   \n   \nThe one thing that bugs me, though, is that either a) Fontlab doesn't generate the files the same way as the Adobe Tools or b) I am an idiot.   \n   \nWhy? Because I followed the naming scheme that Thomas followed on Myriad Pro and although 90% of the applications I tested with made it act the same way as Myriad, I still had a set of seperate fonts in TextEdit whereas Myriad showed up as a single family.   \n   \nI'm going to have to guess that Fontlab messes up -- the way Thomas explained it to me using the Additional Opentype table probably doesn't have that problem, though I'll have to find some time to test that method.\n\n"
+    },
+    {
+      "time": "5 Aug 2003 — 6:45pm",
+      "content": "I'm sure Rob explained this to me correctly either in this thread or offline, but I just had an \"aha!\" experience so I can now solve the problem.   \n   \nHere's the breakdown of what apps use to determine family and menu name info. NOTE the OS X Fonts Panel apps entry at the end....   \n   \n   \nmost Adobe apps, other cross-platform apps:   \n   \nname ID 16 and 17, Windows platform   \n   \n   \nusual Windows apps:   \n   \nname ID 1, Windows platform   \n(+ name ID 2 and style bits for style linking)   \n   \nusual Mac Classic apps, and OS X apps not using Fonts Panel:   \n   \nname ID 18, Mac platform   \n(fall back to name ID 1 if 18 is not present)   \n   \nMac OS X apps using Fonts Panel:   \nname ID 1 and 2, Mac platform   \n   \nSo, the difference in the default behaviors between the FDK and FontLab is that the FDK makes the Mac versions of NameID 1 and 2 equal to the Win versions of NameID 16 and 17. So apps using the Mac OS X Fonts Panel get the same behavior as Adobe's cross-platform apps. However, FontLab assumes that NameID 1 and 2 should be the same for Mac as they are for Windows, so by default it uses those values.   \n   \nAs I had suspected in my earlier discussion with Rob (before I knew the precise problem), this can be worked around by using the \"Additional OpenType Names\" panel to make the Mac and Win entries differ for NameID 1 and 2.   \n   \nI will suggest to Yuri that he change the default behavior for FontLab 4.6, so that it behaves more like the FDK in this particular regard.   \n   \nI hope this helps,   \n   \nT\n\n"
+    },
+    {
+      "time": "5 Aug 2003 — 6:52pm",
+      "content": "Thomas,   \n   \nI'll test is when I have time... but so far, it looks like I owe you many thanks and probably also a drink should I ever make it to one of the type-related conferences.   \n   \n=)\n\n"
+    },
+    {
+      "time": "22 May 2004 — 1:39pm",
+      "content": "You really ought to start a new topic for this, as it really has nothing to do with font naming and is a real non sequitur. Perhaps some handy sysop type person will move your post (and this one?) to a new thread with an appropriate name.   \n   \nI will say that lying about encodings is almost always a bad idea. Use private use area Unicodes if you have to, but don't pretend that Sogdian is Arabic.   \n   \nT\n\n"
+    },
+    {
+      "time": "22 May 2004 — 1:40pm",
+      "content": "Oops, I see you did start another thread. I'll comment there....   \n   \nT\n\n"
+    },
+    {
+      "time": "22 May 2004 — 1:57pm",
+      "content": "Back on the original topic of this thread, Adam Twardoch posted this outstanding summary on the FontLab forum on MSN:   \n   \n\\< [http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mview=0&id\\_message=2843](http://web.archive.org/web/20150414230117/http:/groups.msn.com/fontlab/tipsandtricks.msnw?action=get_message&mview=0&id_message=2843)\\>   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "21 May 2004 — 2:33pm",
+      "content": "Dear all   \n   \nI am an historian who has drawn a font for very specific purposes, ie a sogdian font, reproducing the script used along the Silk Road between the Vth and Xth century. Sogdian is based on aramaic, and the sogdian script gave birth to the medieval uighur one which itself is still alive through the manchu and mongol scripts.   \nThere is no unicode encoding for sogdian and, although it was used from India to China and from Samarkand to the crimea, with extensive textual remains, I am not aware of any plan to have a unicode encoding for it (very strange to see that even in what should be a world project, we are still narrowly westerners. No old or middle iranian script is encoded (thousands of texts) while the Phaestos disk (one text) is !! but it is not the question\n\n"
+    }
+  ]
+}

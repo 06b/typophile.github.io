@@ -1,0 +1,54 @@
+{
+  "id": "59229",
+  "title": "OpenType CASE in Greek not working in InDesign?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi there  \nI have been doing a case feature for Greek diacritical characters, so that the diacritical characters are replaced with the non-diacritical characters when the string is in uppercase. As you can see it works fine in the Fontlab preview panel:\n\n ![](http://web.archive.org/web/20100203095422im_/http:/typophile.com/files/fontlab_5573.png)\n\nBut in InDesign (CS4) it keeps the dieresis and converts the tonos+dieresis into UC dieresis (I marked them in magenta). Is that an InDesign override, that acually makes it the way it should be? Or what?\n\n ![](http://web.archive.org/web/20100203095422im_/http:/typophile.com/files/indesign_5049.png)\n\nThanks  \nClaus\n\n",
+  "author": "<a href=\"/web/20100203095422/http://typophile.com/user/16321\" title=\"View user profile.\">clauses</a>",
+  "time": "<br>",
+  "uid": "16321",
+  "comments": [
+    {
+      "time": "",
+      "content": "Yes, the dieresis should always be maintained in cap (and small cap) setting. And yes, dieresis+tonos becomes just dieresis.\n\nAsk Gerry, he knows all about it ;^)\n\n"
+    },
+    {
+      "time": "",
+      "content": "What Miguel said: the dialytika (dieresis) is retained because it is necessary to differentiate some words in which a sequence of two vowels can either be pronounced as a diphthong or independently. There is a related contextual rule that states that when an accent occurs on the first of two such vowel letters, in all-caps or smallcaps text this must be converted to a dialytika on the second vowel letter when the accent is supressed. In other words, there are two ways to indicate separate pronunciation of two vowel letters in sequence: a dialytika on the second vowel or an accent on the first vowel (an accent on the second vowel indicates an accented diphthong).\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks guys, I had a feeling that was the CASE. I'll go to my favourite witch doctor and summon Gerry.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Following a thread here a while ago with contributions from John, among others, I figured this out for FontLab:\n\nCase feature:\n\nsub Iota by iota;  \n sub @UCtonos iota' by Iotadieresis;  \n sub iota by Iota;  \n sub Upsilon by upsilon;  \n sub @UCtonos upsilon' by Udieresis;  \n sub upsilon by Upsilon;  \n sub @UCtonos by @UCnotonos;\n\n"
+    },
+    {
+      "time": "",
+      "content": ".\n\n"
+    },
+    {
+      "time": "",
+      "content": "Classes:\n\nUCtonos: Alphatonos Epsilontonos Omicrontonos Omegatonos Iotatonos Etatonos Upsilontonos  \nUCnotonos: Alpha Epsilon Omicron Omega Iota Eta Upsilon\n\n...with similar coding for small caps.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hmm, thanks Nick, but now my 'case' feature no longer works – even when I remove your code. It compiles with no errors, but toggling the case feature on and off in the preview panel does nothing. Very strange. Very very strange.\n\nBy the way, how would I implement small caps in this code?\n\n"
+    },
+    {
+      "time": "",
+      "content": "`lookup smcp1 {\n\tsub [Alphatonos Epsilontonos Omicrontonos Omegatonos alphatonos epsilontonos omicrontonos omegatonos] iota' by iota.smcp.alt;\n\tsub [Alphatonos Epsilontonos Omicrontonos Omegatonos alphatonos epsilontonos omicrontonos omegatonos] upsilon' by upsilon.smcp.alt;\n} smcp1;`\n\nsub @GrSmcp1 by @GrSmcp2;\n\nsub @UCtonos' @GrSmcp2 by @UCnotonos;  \nsub iotadieresistonos by iotadieresis.smcp;  \nsub upsilondieresistonos by upsilondieresis.smcp;  \n} smcp;\n\n"
+    },
+    {
+      "time": "",
+      "content": "iota.smcp.alt is small cap iota with dieresis.\n\n"
+    },
+    {
+      "time": "",
+      "content": " ![](http://web.archive.org/web/20100203095422im_/http:/typophile.com/files/Greek_Sc_5334.jpg)\n\n"
+    }
+  ]
+}

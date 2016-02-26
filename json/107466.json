@@ -1,0 +1,30 @@
+{
+  "id": "107466",
+  "title": "GPOS feature 'kern' causes overflow of offset to a subtable",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I know there's a lot of topics about this error but I've looked everywhere and couldn't find a solution for my problem.\n\nHere's what's happening, as soon as I got this error when I tried to compile my font I tried doing some clean up on the classes but nothing worked so I've downloaded AFDKO and installed the macros on Fontlab, ran the AFDKO Kerning macro like a lot of people suggested and got a features.kern file but I don't know what to do now. What do I do with this file in order for Fontlab to let me generate the font without the overflow error?\n\nThanks!\n\n",
+  "author": "Onrepeat",
+  "time": "29 Nov 2013 — 1:54pm",
+  "uid": "202944",
+  "comments": [
+    {
+      "time": "30 Nov 2013 — 7:04am",
+      "content": "You need Karsten Luecke's script, I think it's called\n\nKLTF Make Kern Feature\n\nfrom the Karsten Luecke Type Foundry.\n\nAnyway, I have purchased the script, and can assure you it does work in FontLab Studio. You'll need to get FL set up to take Python scrips, but that's not too bad.\n\n"
+    },
+    {
+      "time": "30 Nov 2013 — 6:39pm",
+      "content": "Thanks for the reply Charles but is there any alternative to that script? From what I've read the AFDKO script works but I'm not sure what to do after I generate the features.kern file.\n\n"
+    },
+    {
+      "time": "14 Dec 2013 — 3:33am",
+      "content": "Duplicate post from when the edit function didn't work..\n\n"
+    },
+    {
+      "time": "30 Nov 2013 — 9:24pm",
+      "content": "Well, maybe. I don't use the Adobe AFDKO routines.\n\nHow I'd make a try if I wanted everything inside FontLab for some reason: using the Fontlab OT Features panel, write off the features file -- in effect, you're writing off a simple text file, which will have .fea as a file extension. Should be in the FL manual if I've been unclear.\n\nWith a text editor, delete all the \\*data\\* in the kern feature in that .fea file, leaving the formal \"feature\" code only. Now, copy & paste the kern data from the AFDKO into the .fea file, where the old kern data use to be. Save, read it (the edited .fea file) back into FontLab, then compile. (BTW -- If you're classes are in the .fea file, make sure you have reset \"classes\" in FontLab.)\n\nBut as I understand Adobe's approach, you should be able to just do everything with the Adobe AFDKO routines to make your OpenType fonts. In effect, you use FontLab for drawing only.\n\nI use FontLab for everything, so have had to avail myself of Karsten's script. Which works fine; I think it is US$80 now. Well worth it to me. Karsten's one of the good guys -- he has other scripts too, almost all of which are free.\n\n"
+    }
+  ]
+}

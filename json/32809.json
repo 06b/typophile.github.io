@@ -1,0 +1,50 @@
+{
+  "id": "32809",
+  "title": "How do I replace end characters in an OpenType script typeface?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm making an OpenType handwriting font for a client, so all characters have long lead-out strokes to flow nicely into the next character. However, the client doesn't want these long strokes at the end of every word. So I'm wondering how I can replace the regular characters (eg. y) by end characters (eg. y\\_end), so in the word 'every' only the y would change. I've looked through the needle-in-a-haystack manual with no luck. How does one specify just the last letter of each word to change to an alternate form?\n\nAny help would be much appreciated.\n\n",
+  "author": "Nick Cooke",
+  "time": "4 Apr 2007 — 9:47am",
+  "uid": "3834",
+  "comments": [
+    {
+      "time": "4 Apr 2007 — 10:06am",
+      "content": "Make a ligature?  \ny + space = y.end  \ny + period = y\n\n"
+    },
+    {
+      "time": "4 Apr 2007 — 10:17am",
+      "content": "Use the contextual alternates. Below is an example with a terminal \"f\". Note you should use the \"period\" construction, as in \"y.terminal\", not a ligature (underline) construction as in \"y\\_end\".\n\nfeature calt { # Connection Forms  \n # Latin  \n sub f' space by f.terminal;  \n} calt;\n\n"
+    },
+    {
+      "time": "4 Apr 2007 — 10:36am",
+      "content": "i prefer using the ignore function to do this type of thing:\n\n[http://typophile.com/node/19839](http://web.archive.org/web/20150418010755/http:/typophile.com/node/19839 \"http://typophile.com/node/19839\")\n\nin particular, look at karsten's post of 17 May 2006.\n\n"
+    },
+    {
+      "time": "4 Apr 2007 — 11:06am",
+      "content": "Paul, as I read it\n\n<cite>so all characters have long lead-out strokes</cite>\n\nThere is nothing to \"ignore.\" He will have to make up terminals. If I've read it wrong, then yes, that would work.\n\n"
+    },
+    {
+      "time": "4 Apr 2007 — 11:15am",
+      "content": "_There is nothing to “ignore.”_\n\nsure there is, what the solution that i've linked to does is replace every letter with the final form _unless_ it is followed by a letter: in these instances, the substitution rule is ignored. i think this is a better solution, because the ending forms are determined by the word boundary and not by the presence or absence of the space character.\n\n"
+    },
+    {
+      "time": "4 Apr 2007 — 12:18pm",
+      "content": "Another option is to use 'fina' and other positional forms - newly supported in InDesign CS3, though not in anything else so far.\n\nT\n\n"
+    },
+    {
+      "time": "4 Apr 2007 — 1:07pm",
+      "content": "thomas, what would be the best way to begin implementing the '`fina`' feature?\n\n"
+    },
+    {
+      "time": "4 Apr 2007 — 1:48pm",
+      "content": "Note that the 'fina' feature is on by default and in some applications may be impossible to turn off, so you only want to use it if the substitutions should always happen. 'fina' feature support presumes character level analysis by the layout engine, so you don't need any context for it. The layout engine identifies the circumstances in which the substitution should occur and applies the feature.\n\nIf using the 'calt' feature, I second Paul's suggestion to use the ignore syntax or, in VOLT, the EXCEPT syntax:\n\nf -\\> f.terminal  \n EXCEPT |\n\n"
+    },
+    {
+      "time": "5 Apr 2007 — 2:53am",
+      "content": "Thanks for the replies, it's a great help - so much better than wasting hours on the manual.\n\nNick Cooke\n\n"
+    }
+  ]
+}

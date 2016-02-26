@@ -1,0 +1,34 @@
+{
+  "id": "13823",
+  "title": "Sub-Pixel Hinting Software - Mac OS X",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "Hello everyone,\n\nI am looking for image editing software for OS X that can render fonts with sub-pixel hinting. I am creating GUI Mockup's and I need the fonts to look as close to the final outcome as I can. Unfortunately none of Photoshop's anti-alias modes create clear type at size 10-12.\n\nThanks in advance.\n\n",
+  "author": "<a href=\"/web/20111229204719/http://typophile.com/user/8296\" title=\"View user profile.\">bal8664</a>",
+  "time": "<br>",
+  "uid": "8296",
+  "comments": [
+    {
+      "time": "",
+      "content": "The \"filtering\" of the anti-aliasing into the three component colors is not public knowledge, so I don't think you'll be able to simulate it. You might be able to reverse-engineer it (to some extent) but I suspect it won't be worth the trouble. What about splicing & dicing screen grabs?\n\n\\> none of Photoshop’s anti-alias modes create clear type at size 10-12.\n\nNothing creates clear type at those sizes, not even... MS's ClearType! Well, nothing except hand-made grayscale pixelfonts, of the sort available at ultrafonts.com...\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hmm. I am not sure how Photoshop does it now, with the integrated type engine that is common to all new Adobe apps (or is at least supposed to be), but from what I understand PS never properly rendered type in true AA mode but actually blended fore and background colour. So, you would not get sub pixel addressing.\n\nWhen sizes 10-12 are referred to, are you speaking of point size or pixel per em (ppm) size? This is important as point size 10-12 on a Win machine running at 96dip would translate to approx 13-16ppm. More pixels!  \nHrant, Clear Type was exactly created for these sizes. A well engineered font will look really nice on the appropriate screen with CT rendering. Of course CT rendering only applies to TrueType outlines, whilst CFF outlines are rendered by Adobe's ATM engine (now built into the OS) or the app inherent type engine. Adobe's equivalent technology to CT is CoolType, or was at least. I am not sure if it is still supported.  \nNow, if you have a well hinted TTF it should behave reasonably within ClearType. However, it may be that the odd Delta causes havoc and depending on how diagonal controls are set, they may stray too. This can be amended with appropriate additional code within VTT, if the font has been hinted using VTT in the first place. As we (at Dalton Maag) do not use FontLab to hint our TTF, I cannot really comment on the controls available for ClearType.\n\nTrue anti-aliasing can only be achieved by an outline and how much of the outline is passing through the pixel. Depending on the rendering engines available, this can vary from app to app, os to os, and depending on the Gamma settings of your hardware, even from screen to screen or model of laptop etc. That's the problem with rendering on the screen today. You cannot control it totally. What you can do is design and engineer your outlines to perfection, then hint to perfection for all modes: black/white, grey, ClearType. Then you have the best chance of getting decent type on the screen.\n\nEverything else is a waste of time.\n\nBruno Maag  \nDalton Maag Ltd\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'm not sure if answer is looking for clear type or ClearType...but when I want something to work best in photoshop, I pick the ppm, make a grid and adjust the font, (everything!) to the grid. Then the user just has to make sure to use that size type, view itat 120% (the closest to \"actual size\"), and either dither yourself, or leave it alone. It's kind of like hints, 1986.\n\n\"Everything else is a waste of time.\" Even listening to you? ;)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Not sure if this will work on the Mac, but the trick I passed on to the Windows designers was to use HTML.\n\nCreate a 'blank' canvas in Photoshop, the UI minus any text, and then place this as a background image on a Web page. Use your favorite HTML editor, or edit by hand, to position the desired text over the background image. When everything looks good take a screengrab of the page from IE.\n\nThis way you're using the native rasterizer, gamma and ClearType settings, which in most cases is what the OS is using in the UI.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> A well engineered font will look really nice  \n\\> on the appropriate screen with CT rendering.\n\nI agree it's very nice - much better than what we've had before - I'm actually a big fan of it.\n\nIt does have two problems though:  \n1) The color fringing. Some people can't stand it (even on hi-res displays).  \n2) A character has variable rendering -variable glyphs- depending on where it falls on the subpixels. This is basically a result of the legacy reliance on an outline \"master\". As long as one file tries to serve both print and screen, the stuff is going to hit the fan, somewhere. (In effect, the root problem here is WYSIWYG-worship.)\n\nSo, handmade grayscale bitmap fonts are even better than CT (except in Italics, where the two techniques come out about even overall).\n\nWhat's interesting about the CT fonts is that they are **lightly** hinted. I've yet to figure out exactly why. It can't be a filesize issue (any more). One could say that with their good subpixel algorithm, they don't need hinting as badly as they used to. On the other hand, it can only help (some more). So this boils it down to two possibilities I think: it's too expensive to do the whole thing; they're leaving room for even more improvement. This latter is pretty routine in contemporary software development, and in fact has happened with CT itself, in the form of: subpixel spacing; and supporting y-direction hinting. (Although there is admittedly a performance dimension to why these weren't implemented earlier).\n\n\\> You cannot control it totally.\n\nVery true. But I've found that the parameters are narrow enough that you can get away with it, in my case via partial-pixel outlines. It's a tightrope act, and ideally you need an alternate cut of a font (for setting light-on-dark text) but that can be -in fact has been- automated. But it's worth it.\n\n\\> Everything else is a waste of time.\n\nCome on, don't be so Swiss, Bruno. ;-)  \nThere's some viable ground between making a really dodgy screen font and a Perfect one. In fact the CT fonts (which are a big improvement on what we've had before) represent such a compromise I think.\n\n\\> I pick the ppm, make a grid and adjust the font, (everything!) to the grid.\n\nWhich I think is what Apple is doing with their iPod Photo adaptation of Myriad.\n\nhhp\n\n"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "id": "118950",
+  "title": "[FATAL] Some glyphs used in feature file were not found in the font",
+  "forum": "Build",
+  "tags": [
+    "error",
+    "fontlab",
+    "Build"
+  ],
+  "content": "I'm working on a typeface I've been working on for a year and I'm nearly done. Today I added a few more kerning classes and kerned hundreds of kerning pairs. I spent hours on it today and I was excited to be done and generate the font and I get an error stating I can't generate the font because some glyphs used in the feature file were not found in the font.\n\nNow, this seems an easy problem to fix. I just don't know how. Can someone tell me what I need to be looking at? Today I replaced a few characters and added some kerning classes in both Bold and Light and I get the same error in both versions so I'm quite sure the problem is in one of the kerning classes.\n\nAs far as I can remember these are the classes I added:  \n\\_a.ss01: a' a.ss01 aacute.ss01 acircumflex.ss01 adieresis.ss01 agrave.ss01 aring.ss01 atilde.ss01  \n\\_i: i' iacute icircumflex idieresis igrave imacron iogonek iring dotlessi  \n\\_y: y' yacute ycircumflex ydieresis ygrave  \n\\_period: period' comma colon semicolon ellipsis  \n\\_question: question' question.ss03  \n\\_copy: copyright' registered\n\nIs there a typo somewhere or am I doing something wrong? How can I check which glyphs are supposedly missing from the font?\n\n",
+  "author": "Martin Silvertant",
+  "time": "23 Aug 2014 — 6:33pm",
+  "uid": "52182",
+  "comments": [
+    {
+      "time": "23 Aug 2014 — 7:53pm",
+      "content": "Check spelling in the feature file, especially of alternate characters you may have added. Also make absolutely sure that everything you may have added to the feature file really does exist in the font. That's what the error message is about, so it is either spelling or one or more glyphs really are missing.\n\n"
+    },
+    {
+      "time": "23 Aug 2014 — 8:13pm",
+      "content": "Is there no way to let \"it\" tell me which glyphs it's missing? It seems ridiculous that I have to check all glyphs while it very well knows where things are going wrong. FontLab and their vague error messages...\n\nI know that when you add glyphs to OT while they're not actually in the font, FontLab will ask if you want to create these extra glyphs. Why can't it do that now?\n\nWhere can I get the feature file? I forgot.\n\n"
+    },
+    {
+      "time": "24 Aug 2014 — 3:58am",
+      "content": "In FontForge when you do \"File -\\> Merge Feature info\" and font is missing some glyphs listed in .fea file these glyphs are automagically created. New created glyphs are - of course - empty and no warning is created.  \n\"Where can I get the feature file? I forgot.\"  \nIn \"OpenType\" window, OpenType menu, Save Features.\n\n ![](http://web.archive.org/web/20150420170214im_/http:/typophile.com/files/OpenType_3594.jpg)\n  \nEdit:  \nAnd ( [http://sourceforge.net/adobe/aglfn/wiki/AGL%20Specification/](http://web.archive.org/web/20150420170214/http:/sourceforge.net/adobe/aglfn/wiki/AGL%20Specification/ \"http://sourceforge.net/adobe/aglfn/wiki/AGL%20Specification/\") ):  \n\"All glyph names a subject to a length-limit of 31 characters in some current software implementations, and require that they be entirely composed of characters from the following set: A–Z, a–z, 0–9, . (period, U+002E; FULL STOP), and \\_ (underscore, U+005F; LOW LINE).\"  \n\n ![](http://web.archive.org/web/20150420170214im_/http:/typophile.com/files/Glyph_4851.jpg)\n\n"
+    },
+    {
+      "time": "25 Aug 2014 — 9:54am",
+      "content": "Thanks a lot. I found the mistake simply by compiling in the OpenType section and FontLab told me the iring (obviously) doesn't exist. I copied other strings of accented characters (in this case probably the u-accented characters) into the class for the i-accented characters and simply replaced the starting letter so I don't have to retype 'circumflex' and all that and forgot to remove the iring.\n\n"
+    },
+    {
+      "time": "10 Dec 2014 — 2:01pm",
+      "content": "Martin,\n\nI'm getting:  \n[FATAL] Some glyphs used in feature file were not found in the font  \nERROR: There was a problem while compiling OpenType font. Final .otf font is not saved.\n\nWhat does \"compiling in the OpenType section\" mean?\n\n"
+    },
+    {
+      "time": "12 Dec 2014 — 5:30am",
+      "content": "If you open the OpenType panel (see JanekZ's post) and click on the fourth icon (the arrow pointing down to the sheets of paper), you will compile the OT functions and FontLab should tell you which characters are missing from your font.\n\n"
+    }
+  ]
+}

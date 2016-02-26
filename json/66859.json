@@ -1,0 +1,73 @@
+{
+  "id": "66859",
+  "title": "I Need a SUPER Character Map",
+  "forum": "General Discussions",
+  "tags": [
+    "character map",
+    "General Discussions",
+    "glyph",
+    "ligature"
+  ],
+  "content": "I run on Windows XP Pro. Over the last few years I've been \"collecting\" some good quality OpenType fonts, many from P22 Type Foundry in their \"PRO\" format. The \"PRO\" .otf files include a lot of the special characters: ligatures, glyphs, swash caps. small caps, etc., etc.\n\n**Problem: The _Windows Character Map accessory program_ will only show me the _standard_ 256 characters usually included in .ttf fonts.**\n\nI use a page layout program (Serif PagePlus X3) that is able to display and implement a font's special characters. But, having to open large, fullblown software just to view a character's map is ponderous.\n\n**So, can anyone recommend a SUPER Character Map** that will show fonts' special characters above and beyond the first 256; hopefully, enabling the user to see the fonts' \"information\" and permitting the copying and pasting of individual characters and symbols a'la the Windows Character Map.\n\nThanks, Jim\n\n",
+  "author": "ShepherdJim",
+  "time": "1 Feb 2010 — 4:55am",
+  "uid": "33429",
+  "comments": [
+    {
+      "time": "1 Feb 2010 — 5:04am",
+      "content": "Try [Popchar](http://web.archive.org/web/20150307044004/http:/www.ergonis.com/products/popcharwin/) from Ergonis. I was using it on Mac and was very confident with it.\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 6:02am",
+      "content": "For Windows, there is Unicode Font Viewer, for example. In XP and beyond, though, the Windows Character Map does handle all the characters in larger fonts.\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 6:56am",
+      "content": "...but not unmapped glyphs - in many fonts the OpenType alternates are not mapped and so don't show up in charmap.\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 7:05am",
+      "content": "I use BabelMap. It's free.  \n [http://www.babelstone.co.uk/Software/BabelMap.html](http://web.archive.org/web/20150307044004/http:/www.babelstone.co.uk/Software/BabelMap.html)\n\nPopChar, mentioned above, has a lot of fans, but not free.\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 7:27am",
+      "content": "I use AMP Font Viewer - [http://www.ampsoft.net/utilities/FontViewer.php](http://web.archive.org/web/20150307044004/http:/www.ampsoft.net/utilities/FontViewer.php \"http://www.ampsoft.net/utilities/FontViewer.php\") but it doesnt have a character map in a grid. But its still nice for managing your fonts on windows easily.\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 8:26am",
+      "content": "Does BabelMap solve the unmapped glyphs issue, and actually show you _every_ character in the font?\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 10:45am",
+      "content": "It's (almost by definition!) not possible to copy & paste unmapped characters across applications.\n\nOh -- I wrote a tiny program _just_ to see all glyphs in a font, under Windows, using the FreeType engine. It doesn't simply display system fonts, but rather \"anything on your hard disk\". It shows which characters are mapped to Unicode and which are not mapped. And I even had a go at displaying OTF features in a 'user friendly' format. I mentioned it somewhere in the Build forum so locate that & find the link to my site.\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 5:17pm",
+      "content": "Thanks everyone to date!\n\nI've downloaded both Popchar and BabelMap and will give them a trial look.\n\nI can't get the Windows Character Map to show me much. I get it into \"Unicode mode\" and I get a separate dropdown off to the side showing the special \"areas\" in the \"map\". But, the \"cells\" above the 255th are all filled with a generic placeholder character (an empty square) or are empty.\n\nI guess I have to learn a bit more about how font files are structured if I'm going to really understand \"the problem.\" For instance, I'm wondering how any software knows how/when/where to \"exchange\" ligatures for certain character sequences if the font's ligatures are not mapped.\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 5:41pm",
+      "content": "I'd also like to learn whether BabelMap is worth installing.\n\nJim, note that of course any font is limited in its Unicode coverage, so when you see squares it doesn't mean Character Map isn't working, it just means the font you're looking at simply doesn't have those characters.\n\nhhp\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 5:30pm",
+      "content": "<cite> .. For instance, I'm wondering how any software knows how/when/where to \"exchange\" ligatures for certain character sequences if the font's ligatures are not mapped.</cite>\n\nThat's actually very simple. For non-OTF fonts, a program cannot know the position of _any_ ligature at all, except \"fi\" and \"fl\". These are defined in the standard character mappings -- even in Unicode, although nowadays that's considered a judgment error.  \nIf a program sees a font has characters on position \"0xde\" and \"0xdf\", it might use these as \"fi\" and \"fl\". Now usually, font designers stick to this position convention, but there are always some that put other characters in that place. So, with lots of \"old\" Type 1 fonts, you have to actually disable ligatures with a modern program such as InDesign.\n\nOpenType fonts solve this possible problem two-way: first, rather than a position, all glyphs (as characters are called in this context) are defined by a unique number -- their Unicode value. It's also possible not to assign a Unicode at all, or one in the Private Use Area; this in case the 'glyph' is a ligature that's not defined in Unicode. The other way is that the font itself contains the information which characters can be combined into which ligatures.\n\nAs for your empty Character Map: well, not every font contains all those characters -- and Windows itself is quite unsure which fonts do and which ones don't ... If you select a font such as Arial, Arial Unicode, or Times New Roman, you should see lots and lots of characters beyond 255.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 8:57am",
+      "content": "Wow! I'm learning a bunch about fonts while researching this topic! FUN!\n\nQuick/Interim thoughts:\n\n**BabelMap** is definitely worth having on your computer. It's small; is not even _installed_ in the normal Windows sense, and you can't beat the price ($0.00)! Its UI is not elegant -- good for analysis in depth -- not so much for using \"open on the side\" while composing a doc in MS Word.\n\n**PopChar** has a more polished and efficient UI. The trial version grays out most of a font's characters so it's a mite tough to be _totally sure_ that PopChar is showing me **all** the available characters.\n\nPopChar's big selling point is its ability to enable you, fairly automatically, to select a \"special character\" in PopChar and have that character be instantly inserted \"back\" in MS Word or whatever program you're working in. It **did** do that, but I quickly determined that if I changed fonts and sizes while in PopChar, what was finally inserted \"back\" in my Word document was maybe not necessarily what I was expecting.\n\n**MainType** While googling around researching my super Char Map need I came across MainType. Besides doing a a spiffy job of showing all the Unicode characters, etc it is also appears to be a competent font manager.\n\nDoes anyone have experience with MainType?\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 10:21am",
+      "content": "Thanks for the mini report!\n\nhhp\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 10:26am",
+      "content": "<cite>I quickly determined that if I changed fonts and sizes while in PopChar, what was finally inserted \"back\" in my Word document was maybe not necessarily what I was expecting.</cite>\n\nWhen inserting a character, you can choose from 3 options:  \n1) plain text  \n2) formatted text  \n3) HTML entity\n\n ![](http://web.archive.org/web/20150307044004im_/http:/typophile.com/files/popchar_4130.png)\n\n"
+    },
+    {
+      "time": "28 Mar 2013 — 12:25pm",
+      "content": "If you're up for a paid font manager and advanced character map viewer you just cannot look past FontExpert by Proxima Software. It's in version 4 now and I think they'll release version 5 anytime soon.\n\n"
+    }
+  ]
+}

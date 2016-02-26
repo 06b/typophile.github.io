@@ -1,0 +1,30 @@
+{
+  "id": "41209",
+  "title": "Adding ordinal caps in TypeTool 3",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'd like to add ordinal capitals to my font, but I can't find where they are put in TypeTool 3's font table. They can either be set glyphs - ST, ND, RD, TH etc. or a full set of superscript letters - A to Z. I only need uppercase as my font is a titling face.\n\nI've tried all the default layouts. For the most of the work I've been using Adobe OT PS standard names (CFF) as I want to output to OpenType.\n\nPerhaps it's not possible to add the ordinal caps in TypeTool which has basic OpenType table support. Can I not add custom glyphs?\n\nAnybody else come up against this, or overcome it in TypeTool?\n\n",
+  "author": "olho",
+  "time": "23 Jan 2008 — 5:35am",
+  "uid": "26242",
+  "comments": [
+    {
+      "time": "23 Jan 2008 — 11:17am",
+      "content": "TypeTool doesn't allow to create new empty glyph slots, but it can be done using a little trick.\n\nCopy and then paste any existing glyph. TT will ask if you want to keep the replaced glyph. Do so, and the glyph will be added to the font, the glyph name being suffixed \".001\". Then rename the new glyphs as needed, in your example you would need d.ordn, h.ordn, n.ordn, r.ordn, s.ordn, t.ordn and/or their uppercase counterparts D.ordn &c.\n\nYou cannot write the OT feature code to switch to ordinals in TypeTool, but you could add the features using Adobe FDK later.\n\nCheers,  \nJens.\n\n"
+    },
+    {
+      "time": "24 Jan 2008 — 7:19am",
+      "content": "Good stuff! Thanks Jens. I've actually noticed that new slots get created this way having deleted a few erroneous ones that appeared at the end of the set. I didn't think they'd be what I needed for this. I'll try this later on today.\n\nI wonder if there's a guide/resource for the correct glyph names anywhere? There are a few I might consider adding if I had a set of names.\n\nMark.\n\n"
+    },
+    {
+      "time": "26 Jan 2008 — 1:50pm",
+      "content": "Of course you can add new glyph slots in TypeTool. Just open your current .enc (Encoding) file in a plain-text editor (or make a new copy of that file first) and add the glyphnames you need. Restart TypeTool and the glyph slots will be available.\n\nYou can use the free Microsoft VOLT or Adobe FDK for OpenType tools to add OpenType Layout features to your font.\n\nThe FontLab Studio 5 user manual (and I think also the TypeTool manual) contains a section on glyph naming and encoding.\n\nRegards,  \nA.\n\n"
+    },
+    {
+      "time": "29 Jan 2008 — 10:34am",
+      "content": "<cite>Of course you can add new glyph slots in TypeTool. Just open your current .enc (Encoding) file in a plain-text editor (or make a new copy of that file first) and add the glyphnames you need. Restart TypeTool and the glyph slots will be available.</cite>\n\nYep, that’s the other way. But no easy cmd-G as in FontLab Studio :)\n\nJens\n\n"
+    }
+  ]
+}

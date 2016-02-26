@@ -1,0 +1,38 @@
+{
+  "id": "100177",
+  "title": "fixing kerning",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hey,\n\nI've got some red values amongst my kerning, which I'm assuming means they don't match what class 'leader's value. Could this be solved by expanding, and then compressing kerning, using fontlab's kerning assistance? Or will this cause new problems?\n\nAnd, what exactly does 'keep existing pairs' in the 'expand kerning' window mean? It seems quite logical to me that I wan't to keep my existing pairs, but apparantly it isn't?\n\nThanks in advance,  \nJasper\n\n",
+  "author": "1996type",
+  "time": "29 Jan 2013 — 1:32pm",
+  "uid": "30114",
+  "comments": [
+    {
+      "time": "29 Jan 2013 — 7:45pm",
+      "content": "Just delete them.  \nThe values for those kern pairs will be replaced by class kerning values.\n\nIf they persist, then you know that there are conﬂicts, with a glyph appearing in more than one class.\n\nFor instance, you may have a class for (V' W), and another for (T' Y), but at some point have the bright idea that Y is quite similar to V and W, and decide to put it in that class, for (V' W Y)\n\nSo if VA is kerned -80, and TA is kerned -100, then Y will be embarrassed, not knowing exactly how intimate it should be with A.\n\n"
+    },
+    {
+      "time": "29 Jan 2013 — 7:46pm",
+      "content": "I wouldn't expand the kerning. The red values are, as you said, exceptions to the class rules, and if you meant them to be exceptions, it's fine to leave them there. If you've made exceptions by accident (by kerning in class kerning with exceptions mode instead of just class kerning mode) just go through and delete the red kern pairs. Exceptions are useful - for example, the /i/ class will probably contain all i diacritic glyphs, and the vast majority of the time they'll kern the same as i, but for certain situations different kerning is needed. It's easier to control these as exceptions rather than have a specific idiacritic kerning class.\n\n"
+    },
+    {
+      "time": "30 Jan 2013 — 12:35pm",
+      "content": "Thanks both. So if I undertand you correctly there is no harm in having class exceptions. Baring filesize in mind though (especially considering webfonts) it seems better to compress kerning. Is there a risk of losing kern pairs there, or does fontlab do the job as it should?\n\n"
+    },
+    {
+      "time": "30 Jan 2013 — 12:44pm",
+      "content": "Ohh, and btw: This might be a stupid question, but what's the use of the apostrophe after the first glyph of a class (as in nick shinn's example)? The classes seem to work fine without it...\n\n"
+    },
+    {
+      "time": "30 Jan 2013 — 1:38pm",
+      "content": "That indicates the key glyph.  \nIt can be in any position the class.\n\n"
+    },
+    {
+      "time": "31 Jan 2013 — 6:02am",
+      "content": "That's what I assumed. Without an apostrophe, though, fontlab just takes the first glyph in the row as the key glyph, which works fine for me.\n\n"
+    }
+  ]
+}

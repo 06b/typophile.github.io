@@ -1,0 +1,86 @@
+{
+  "id": "36421",
+  "title": "A new Opentype script idea",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "I was walking by a hand-lettered sign yesterday, and I noticed that the last 4 words were really compressed because the person ran out of space. This is something that happens a lot when people write things out by hand, sometimes drastic, sometimes subtle.\n\nNow, a lot of typefaces are coming out that \"mimic\" handwriting/lettering. Wouldn't it be cool if they included contextual alternates that compressed the last few words of a sentence if found near the end of a line?\n\nI know that might totally screw with people's H&J settings, but is something like that possible?\n\n",
+  "author": "<a href=\"/web/20111214115506/http://typophile.com/user/12948\" title=\"View user profile.\">Dan Gayle</a>",
+  "time": "<br>",
+  "uid": "12948",
+  "comments": [
+    {
+      "time": "",
+      "content": "OpenType substitution lookups do not, in themselves, have any knowledge about the proximity of the end of a line. But theoretically you could treat the squished letters as justification alternates, and the jstf table could be used to access them. But no apps currently support the jstf table, and there is no easy way to make one.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Now that I think about it, wouldn't the same idea apply to the use of swash characters? Swashes at the end of a line sometimes make much more sense than in the middle of a paragraph.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Dan, a lot of the better drawn scripts do have contextual swashes & flourishes or alternate sets so that you can be discerning as to where to use them. There was a thread about this recently.\n\n[http://www.typophile.com/node/36221](http://web.archive.org/web/20111214115506/http:/www.typophile.com/node/36221 \"http://www.typophile.com/node/36221\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "Reminds me of some crazy typesetting in William Morris’ books, where he would finish the end of lines with tiny superscript.\n\nThis sort of stuff seems more like something that should be handled with plugins in addition to fonts. Seems like another great use for that awe-inspiring Arabic plugin John demonstrated at Typecon. Perhaps we should start a feature request thread over at Adobe.com and start giving them ideas for Indesign CS 5!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Although you can't detect the end of a line (yet) in OpenType, you can set something to happen based on there being no further context. Make a class of all glyphs. Do something based on there being no further glyphs, and use a backtracking context. Not too hard, and pretty similar to other contextual font stuff I've demonstrated and shared FDK/FontLab code for. I'm rather busy right now, but if anyone wants to implement it I'd be happy to write the code for it whenever they are at the point where they need it.\n\nThe limitation would be that depending on the application, other things besides the line ending may break the context. For example, a font change will certainly break the context. Being in a different cell of a table would probably break the context. For \\*some\\* implementations, even word boundaries may break context, to improve performance.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "I suppose if you create the font to target a specific line-length then this could be cool. \"40 column local gothic fixed\" could be a monospaced font that drops to 1/2 or quarter width glyphs when you get to then end of the line.\n\n"
+    },
+    {
+      "time": "",
+      "content": "To be more clear on the coding aspects, the same techniques I used to do rotating weights backtracking from the end of the line would work here, only one wouldn't have to keep on repeating the pattern. This is essentially the same problem, but simpler. :)\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "There's the hard part: it's easy to make a font that makes glyphs narrower at the end of the line, but it's hard to make that sensitive to approaching some specific line length. My technique would result in increasingly narrow glyphs to squeeze more stuff in at the end of the current line, regardless of how close you were to any particular target line length, and would still do this on the current line even after some text wrapped to the next line.\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hello Thomas, this assumes that all applications behave like InDesign, i.e. that any line break would 'end' a sequence. If I remember correctly, this is not the case with Mellel where the sequence would continue despite of a line break (the automatic one, not the 'return'). What would be WPF's behavior here?  \nIt looks like there's no binding standards for layout applications' here, so it is not warranted that contextual features behave as intended.\n\nSquashing glyphs toward the end of a line somehow indicates bad planning by the writer, so it would make script typefaces even more 'human'.  \nAnother approach would use abbreviations as found in blackletter, combining 'bo' 'be' etc, these could be distributed evenly throughout a line; I remember that in a hz-Program brochure there was a sketch by Hermann Zapf for applying this to URW Antiqua.  \nYet another approach would include slightly narrower and wider forms of glyphs that allow it (also found in the hz-Program brochure) and one Stylistic Set feature would replace by narrower, another by wider glyphs, the designer would apply the one which would be needed. Or better, there could be two special features, one maps glyphs to condensed and one to wide alternates; then the layout application could decide a line is too long or too short, and needs condensation or stretching, and apply as many substitutions as are required to get the desired lenght. Would be a nice addition to the multi-line composer. And here, the feature merely provides the material, but the decision whether/what to substitute is on the application.  \nBut this is not the issue of the thread which was handwriting. :)\n\nKarsten\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'd imagine getting the effect that Dan was originally thinking of would be extremely difficult. The problem being that when you substitute narrower characters, you use less space (I know, \"duh!\") So even if you could get around the complication Thomas mentions, so that this \"squeeze\" effect only happens at the end of a prescribed line length - once the effect is applied, the length of that line would get shorter, leaving extra space before the end of the prescribed line length. This would look like someone started trying to squeeze letters in when they still had additional space left.\n\nWhat you'd really need to do is detect widows. Once you find a case where a line wraps, with only a few characters on the following line, you'd then want to replace the last X number of characters with narrower versions, so that the paragraph would end on the previous line, and not leave a widow.\n\nHmm, it gets worse the more I think about it!\n\nJason C\n\n"
+    },
+    {
+      "time": "",
+      "content": "So, this is the idea (more or less)?\n\n ![](http://web.archive.org/web/20111214115506im_/http:/typophile.com/files/linetext_6487.jpg)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Typography is a <cite>subtle</cite> art. But your example shows the <cite>idea</cite> ...&nbsp;&nbsp;:))\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, it'd be nice to justify with alternates. Berlin Sans has been waiting for 12 years for this. Characters sitting in their sfnt garage gathering dust. No, you don't want to wait 'till the last few characters, it should be sread thoughout the line. URW's research and demonstration of this showed quite convincingly that you do not want to apply this to all glyphs, just the unique.\n\n\"But no apps currently support the jstf table, and there is no easy way to make one.\"\n\nThe story of OT's life. Maybe we can get Larson & Hitchcock to think it's a good idea to make OT work in HIP generation. Then...type designers can beat the living crap out of hackers trying to keep up with computer recognition of Our weirdest dreams. And then, engineers will think about, and realize they are pathetically backward by not implementing OT.\n\n\"Typography is a subtle art.\" You must have missed Bill Hill's presentation. Readability, which is typography at its best, is all engineering, no art. Pay attention!\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thomas,\n\nshouldn't the **[JSTF](http://web.archive.org/web/20111214115506/http:/www.microsoft.com/typography/otspec/jstf.htm)** OpenType table be able to achieve something like that? The problem with it is of course that JSTF typically works on entire lines, but in general, I think this is something very cool that OpenType can do.\n\nI really wish InDesign implemented JSTF support one day! (Needless to mention, I have been asking for it for quite some time).\n\nBest,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Readability, which is typography at its best, is all engineering, no art. Pay attention!</cite>\n\nDave, have you dropped by a design school since the spawn of postmodernist typography teachers infiltrated the ranks of faculty? Good typography is about being expressive now.\n\n"
+    },
+    {
+      "time": "",
+      "content": "(somewhat off topic)\n\n\\> Good typography is about being expressive now.\n\nIf you substitute \"trendy\" or something, I might agree. :)\n\nSeriously though, it really depends on the context. If somebody's typesetting a lengthy textbook, they bloody well better not get too \"expressive\" about the selection and usage of the text typeface. Or even a novel. IMO, typography is still usually about serving the text. Sometimes that can be done while being \"expressive,\" but sometimes it can't.\n\nThis isn't intended as a personal attack or anything - indeed, from the way you worded your post, I'm not clear on whether this is a view you espouse yourself, or just what you think is being taught in schools today.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "James: _have you dropped by a design school since the spawn of postmodernist typography teachers infiltrated the ranks of faculty? Good typography is about being expressive now._\n\nDesign schools teach the use of type in the context of graphic design. I'm not even sure that typography is the correct term for this, unless one uses the term in the broadest possible since of making stuff with type. The use of type in graphic design is a specialised use, somewhat alienated -- in intent, if not always in practice -- from what I consider typography, i.e. text manufacture with prefabricated letters. Typography proceeds from text. Graphic design proceeds from different impeti, e.g. branding.\n\n"
+    },
+    {
+      "time": "",
+      "content": "D.B. -- <cite>\"Typography is a subtle art.\" You must have missed Bill Hill’s presentation.</cite>\n\nI did [miss it]! Btw, my use of 'art' is always ironic. I still didn't figure out what art is beyond being something that's crafted obsessively well.\n\nA.T. -- <cite>I really wish InDesign implemented JSTF support one day! (Needless to mention, I have been asking for it for quite some time).</cite>\n\nSo we are two already. Thomas, how many does it need to be recognized by the feature request radar?&nbsp;&nbsp;:)\n\nKarsten\n\n"
+    }
+  ]
+}

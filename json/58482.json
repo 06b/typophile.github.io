@@ -1,0 +1,170 @@
+{
+  "id": "58482",
+  "title": "Typekit - Web font licensing?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Well, given our [recent discussion of using fonts on the web,](http://web.archive.org/web/20131014220225/http:/typophile.com/node/57934 \"Typophile\") I thought this was particularly relevant. It appears that Jason Santa Maria is working with a company called Small Batch, a company that, in conjunction with unnamed foundries, will have a storehouse of fonts one can use online in a protected manner.\n\nApparently it will work via a javascript call indicating what font one wants to use and assumably, it will allow direct usage of some sort for select-ability and without image replacement, but that is yet to be seen. I'm a little cautious due to the usage of javascript to make it happen, given than if one's internet is not as speedy, there may be a flicker of some sort as the fonts are replaced, but that is speculation given that the service hasn't launched yet!\n\n[Check out the entire post about Typekit](http://web.archive.org/web/20131014220225/http:/blog.typekit.com/2009/05/27/introducing-typekit/ \"Typekit Post\")\n\n",
+  "author": "aaronbell",
+  "time": "28 May 2009 — 7:37am",
+  "uid": "43561",
+  "comments": [
+    {
+      "time": "28 May 2009 — 8:53am",
+      "content": "I am extremely dubious about this. They are giving absolutely no technical details, as yet, as to exactly how this font-linking will work.  \nThey say all you have to do is add one line of javascript to your HTML page and Voila! - you can instantly begin specifying - in your pages - a variety of font-families offered by them.\n\nDoes anybody have any further details? Does anyone know of a foundry that has a licensing agreement with them?\n\n"
+    },
+    {
+      "time": "28 May 2009 — 9:22am",
+      "content": "<cite>I am extremely dubious about this. ...Does anybody have any further details? D </cite>\n\nThere is nothing magic about it. It's exactly the kind of service I was planning to set up since last year (but nether got around to do it.)  \nThe CSS @font-face rules are created/loaded on the fly on the client-side and the fonts are then loaded from the external server. The server can check whether or not the request comes from a licensed website. Which fonts you wanna use is defined in your account on the website of the service provider. At least that's how I would have done it and from what I read, they also do it this way. (Though I think I would not use JavaScript)\n\n"
+    },
+    {
+      "time": "28 May 2009 — 9:34am",
+      "content": "The javascript side is my concern too. Wouldn't it be possible to make it all work via something like php? I guess it wouldn't be as easy to implement on the client side, but it wouldn't run the risk of flickering or showing a user a badly set page while the font is downloading.\n\nSpeaking of which, I guess there will have to be some consideration should someone not be using javascript or the like to allow the system to degrade gracefully.\n\n"
+    },
+    {
+      "time": "28 May 2009 — 9:35am",
+      "content": "<cite><br>\nWe’ve built a technology platform that lets us to host both free and commercial fonts in a way that is incredibly fast, smoothes out differences in how browsers handle type, and offers the level of protection that type designers need without resorting to annoying and ineffective DRM.<br>\n</cite>\n\nSo not only they will be hosting the fonts, it sounds like they will be rendering the text for the webpages as well thus creating a single point of failure and a traditional customer lock-in setup. They will also be in a position to track all activity on my website.\n\nThis _is_ a DRM system with some rather nasty side-effects.\n\n"
+    },
+    {
+      "time": "28 May 2009 — 9:43am",
+      "content": "@epsilicon That is a really interesting point. By setting this system up, they would be able to totally track all activity of all users on sites that use their service based on where the calls come from. Potentially powerful data mining tool for them and a little scary for me.\n\n"
+    },
+    {
+      "time": "28 May 2009 — 10:02am",
+      "content": "<cite>The javascript side is my concern too. Wouldn’t it be possible to make it all work via something like php? </cite>\n\nYou don't need any \"coding\" on the client side. A simple unique CSS link would suffice. The rest can be handled on the server side.\n\n<cite>it sounds like they will be rendering the text for the webpages as well</cite>\n\nI don't think so, they specifically talking about a \"font linking license\", so to me this real @font-face linking of TT/OT/EOT fonts.\n\n"
+    },
+    {
+      "time": "28 May 2009 — 10:09am",
+      "content": "If your description is accurate and first-hand, it's pretty much what I surmised. There's at least one other company called TrueFontFamily using a similar system that also uses a Javascript insert. But they generate bitmaps from TTF and OTF. In that case, the TTF is being referenced piecemeal as the bitmaps are created. There is never any access to the entire, installable TTF or OTF. Hence, no licensing problems. (Or, at least, far less licensing problems. After all, what's being done is what gets done in Photoshop every minute of every day - only it's being generated server-side on the fly.)\n\nA system which depends upon JavaScript to generate @font-face rules does nothing to protect the TTF or OTF files. No matter how well obfuscated. Cracking it and requesting the entire font file is trivial.  \nIt will also add overhead to the loading of the page. Especially if it's heavily obfuscated.  \nI cannot imagine in my wildest dreams that Ascender/Microsoft or Adobe or Monotype would acquiesce to such a licensing arrangement.  \nPlus, my understanding is that FireFox enforces a same-domain restriction on font files. I don't know about IE and EOT files.  \nI haven't done any research or testing to see if that's true but I will do so in the next day or two. And if true, I don't see how a system that pulls the font file from a different domain can work.  \nThanks for the info.\n\nRich\n\n"
+    },
+    {
+      "time": "28 May 2009 — 10:20am",
+      "content": "_A system which depends upon JavaScript to generate @font-face rules does nothing to protect the TTF or OTF files._\n\nExactly.\n\nEven it's not a @font-face per se, but something along the [typeface.js](http://web.archive.org/web/20131014220225/http:/typeface.neocracy.org/) it still is going to deliver type definition to the client where it can be re-assembled back into .otf. The only way to prevent this is _not_ to send the type to the client at all, meaning that the type rendering is going to be done on the server side.\n\n"
+    },
+    {
+      "time": "28 May 2009 — 11:19am",
+      "content": "@epsilicon  \nI disagree with you as far as typeface.js and the more popular Cufon text-replacement technique.  \nIn both cases the TTF or OTF is almost always sub-setted, reducing its desirability as something to download and re-use. (In fact, such sub-setting could be requested as a licensing requirement.)  \nBut far more importantly, the JavaScript data is not easily reconstructed into a usable, working font file. And that data, in the case of Cufon at least, is almost always incomplete because the browser engine doesn't need every point to adequately render the glyph. And skipping points creates a smaller file for download.\n\nIMHO - font makers have little to fear from this technique.\n\nJust my 2 cents on the subject.\n\n"
+    },
+    {
+      "time": "28 May 2009 — 11:29am",
+      "content": "@font-face is CSS based, so there's isn't a whole lot of reasons to move it to the back-end vs. the front-end.\n\nAt least with Safari (not sure about Firefox) there is no 'flicker' from what I've seen. The type doesn't render until the font is loaded.\n\n"
+    },
+    {
+      "time": "28 May 2009 — 11:35am",
+      "content": "\"The only way to prevent this is not to send the type to the client at all, meaning that the type rendering is going to be done on the server side.\"\n\nAnd that is simply a solution that few, if any web designers would bother dealing with. We have that now, for the most part...GIFs and JPGs.\n\nI suppose based on the info we have for Typekit at this point, we have no idea what they're doing. My first assumption is that it's just a javascript file that renders out the appropriate CSS with @font-face attributes linking to the source font files on Typekit's servers.\n\n"
+    },
+    {
+      "time": "28 May 2009 — 11:40am",
+      "content": "Ralf Herrmann,  \nI agree that not using javascript is preferable. I'm building out a similar service ( [Kernest.com](http://web.archive.org/web/20131014220225/http:/blog.kernest.com/) ) that works both with and without a javascript tag.\n\nepsilicon,  \nI agree on the risk of a central-point-of-failure and that the TypeKit service (and even my service) is very close to a DRM service. Long term, I don't think that will be the case, and I'm architecting Kernest to provide a useful service even without the DRM aspects.\n\n"
+    },
+    {
+      "time": "28 May 2009 — 11:43am",
+      "content": "<cite>A system which depends upon JavaScript to generate @font-face rules does nothing to protect the TTF or OTF files. </cite>\n\nAnd there will not be any real protection in the near future (or probably never at all). See all the threads on this topic from last year when Safari introduced their @font-face support.\n\n<cite>Plus, my understanding is that FireFox enforces a same-domain restriction on font files. </cite>\n\nWhich can be bypassed when the files are sent with Access Control Headers.\n\n"
+    },
+    {
+      "time": "28 May 2009 — 11:47am",
+      "content": "\"central-point-of-failure\"\n\nKeep in mind that we all probably have different concepts of 'point of failure'\n\nMost web designers have become quite accustomed to progressive enhancements and graceful degradation.\n\nIf, for whatever reason, the font doesn't load, OK, use Arial. As type folks, we may cringe at that, but web designers have become quite accustomed to that method already.\n\nAs a web designer, I'd probably find the ease of using someone elses service to deal with the hosting/bandwidth and CSS a very fair trade for the occasional service outage.\n\n"
+    },
+    {
+      "time": "29 May 2009 — 5:39am",
+      "content": "@Ralf, et al  \nSeems like the pros, cons, ups and downs of a font service like this have been well thought out and we are going around in circles.  \nIMHO - I'm always in favor of experimentation, but I can't see this gaining any traction in the marketplace. It isn't any kind of a long-term solution.  \nFrom the user's perspective, there are too many negatives. And they are BIG negatives.\n\nThe problem of font-linking will be solved satisfactorily when FireFox, Safari, Chrome, Opera, and IE support linking to 1) both TTF/OTF files and EOT (or an EOT equivalent yet to be decided upon) or 2) just EOT or an equivalent uninstallable file format.  \nThen, font-linking can really take off without legal hassles.\n\nHowever, there shouldn't be any illusions. Once those versions of FF, Safari, etc... that do support linking to TTF/OTF reach a kind of \"critical mass\", many web authors will link to font files whether EULAs say they can or not.\n\n"
+    },
+    {
+      "time": "29 May 2009 — 7:37am",
+      "content": "\"The problem of font-linking will be solved satisfactorily\"\n\nThe web tends to abhor proprietary DRM solutions (especially when we're talking about open source projects like Firefox). It might work. But I see EOT having as many adoption issues as any other current option.\n\n"
+    },
+    {
+      "time": "29 May 2009 — 9:25am",
+      "content": "<cite>there are too many negatives.</cite>\n\nWhich are?\n\n<cite> but I can’t see this gaining any traction in the marketplace. It isn’t any kind of a long-term solution.<br>\n</cite>\n\nI don't consider such rental services THE ultimate webfont solution, but an additional font market with huge potential. There are still all those corporate clients which have their corporate typefaces and we should offer them a way to upload those fonts on their server.  \nBut there are millions of website owners who have never licensed a font, because the regular font licenses just don't work for them. But if they have the chance to rent a font for a very small fee per month, they would probably consider it, and this could become a huge market. I know I would use such a service for my own blog ...\n\n"
+    },
+    {
+      "time": "29 May 2009 — 10:16am",
+      "content": "@aluminum  \nEOT is not a DRM format anymore than the JavaScript file which typeface.js or Cufon produces is DRM. Neither one will install as a font file in the operating system. I admit that has a \"DRM effect\" but in this case it really depends on your biases and point of view.  \nEverything has its advantages and disadvantages.  \nFirst, EOT is compressed. That's a plus for me right there.  \nI believe TTF/OTF files can be gzipped but that involves another step and might not be available unless you run your own server.  \nNext, if you're directly subsetting TTF to TTF and the name of the font is kept the same it's pretty easy to get confused and end up with some mighty strange looking web pages. Dealing with six different variations of Minion, all OTF files, is not my idea of a good time.  \nAlso, tying the file, as EOT does, to a domain name (or a drive letter for local use) has advantages when you are subsetting, sometimes glyph-by-glyph, for web pages with very specific requirements. The WEFT tool auomatically adds numbers to the file names, and it makes it that much harder for me to shoot myself in the foot by applying the wrong font file to the wrong site or the wrong page.  \nIt's fine to own guns, but safeties and trigger-locks are necessary accoutrements to them, I think.  \nBut all this nonsense over font-file formats for the web and IP issues have gone on too long.  \nIs the web development community going to wait ten years for the W3C to get off its butt, come up with a format, have the browser makers implement, and then wait out the time it takes for that feature to propogate out to the majority of Internet users?\n\n"
+    },
+    {
+      "time": "29 May 2009 — 11:12am",
+      "content": "\"It’s fine to own guns, but safeties and trigger-locks are necessary accoutrements to them, I think.\"\n\nI agree.\n\nNow, back to talking about fonts...\n\nEOT could work. I'm not saying it won't. But it's MS's invention and rarely does the web browser industry immediately jump on board that kind of proposal.\n\nThe current advantage of @font-face is that it's simple for a web developer to implement and it works. The disadvantage is that foundries think that will cut into sales.\n\n"
+    },
+    {
+      "time": "29 May 2009 — 12:25pm",
+      "content": "<cite>First, EOT is compressed. </cite>\n\nSo are CFF OpenType fonts, which are what most commercial foundries offer.  \n(Can't reply to your point about font names, because I don't understand your problem with them)\n\n"
+    },
+    {
+      "time": "29 May 2009 — 3:06pm",
+      "content": "Richard Fink,\n\nWe've already waited 12 years (NN4 & IE4 in 1997) for the W3C to declare a standard and the browsers to implement it in a consistent manner.\n\nIf we wait another 10 I'm confident typography and type design will no longer exist as professions.\n\n--  \n [http://blog.kernest.com](http://web.archive.org/web/20131014220225/http:/blog.kernest.com/ \"http://blog.kernest.com\")  \n [http://garrickvanburen.com](http://web.archive.org/web/20131014220225/http:/garrickvanburen.com/ \"http://garrickvanburen.com\")\n\n"
+    },
+    {
+      "time": "29 May 2009 — 11:32pm",
+      "content": "<cite>I just wanted to clarify some of the confusion over the mention of JavaScript in the post. Typekit isn’t using any sort of image replacement for rendering fonts on web pages. We’re using the CSS @font-face declaration to link to Truetype and OpenType files. We’re using JavaScript to simplify that process and account for various browser versions (like automatically swapping in EOT for Internet Explorer).</cite>\n\n(from [here](http://web.archive.org/web/20131014220225/http:/blog.typekit.com/2009/05/27/introducing-typekit/#comment-302))\n\n"
+    },
+    {
+      "time": "30 May 2009 — 7:38am",
+      "content": "\\>\\>\\>\\>\\>\\>\n\nChrisL\n\n"
+    },
+    {
+      "time": "30 May 2009 — 10:49am",
+      "content": "@ralf  \nSince you undoubtedly know an order of magnitude more than I do about the nuts and bolts of font technology, I'm at a disadvantage here but teach me, please.  \n(I'm not being snide, I mean it.)  \nI just bought, a few months ago, the Adobe Web Fonts pack.  \nThey were delivered as TTF files. Nearly all the files in my Windows font folder are TTF's but some of them seem to have Opentype features and display an \"O\" in the icon as a result. Or, at least, I assume that's the reason.)  \nWhere are the CFF Opentype files you're describing? What am I missing, here?\n\nI'm a web developer with a keen interest in onscreen reading technology and my main focus is on fonts as they are handled and rendered within browsers. And, therefore, I'm also concerned about what effect on page-load time linked font files will have.\n\nSo another question is, since there are different levels and kinds of compression, what's best? Is CFF really packed down, or will converting it into an EOT shrink it down further? Plus, I have not tested it, but I've heard it mentioned that TTF or OTF files can be gzipped.  \nLotsa questions, I know.  \nYour input greatly appreciated...\n\nrich\n\n"
+    },
+    {
+      "time": "30 May 2009 — 10:06pm",
+      "content": "Typically, CFF OpenType fonts have a \".otf\" extension. All of Adobe's retail/end-user fonts are of this form \\*except\\* the 12 WebType fonts.\n\nOn Windows, for a TTF (TrueType) font, the presence of a digital signature (of all the silly things) causes an \"O\" icon instead of the usual \"TT\" icon.\n\nAny file can be run through a compression program, of course. OpenType CFF is pretty compact as far as the outlines goes, and doesn't easily compact further... unless it has really extensive OpenType layout tables.\n\nThe optional MicroType compression in EOT uses subsetting plus various TT-specific optimizations. It can achieve slightly better results than straight subsetting plus ZIP compression, say 40% instead of 30% or something like that, as I recall. It won't do so much for OpenType CFF, because that format is already quite compact.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "31 May 2009 — 8:51am",
+      "content": "Thanks for stepping up Thomas. I figured you were the guy who could clear this up.\n\nSo, bottom line, CFF does the compression job pretty well.  \nComparable to EOT.\n\nSo I gotta move compression out of the plus column for EOT, as compared to CFF OTF font files.\n\nIf you'd be so kind:\n\nCan an easy conversion be done from TTF or OTF (uncompressed) to CFF? And if so, with what software?\n\nciao,\n\nrich\n\n"
+    },
+    {
+      "time": "31 May 2009 — 1:26pm",
+      "content": "\\> _Any file can be run through a compression program, of course._\n\nOut of pure curiosity I just tried compressing a .ttf and .otf (Effra and Etelka respectively). TTF size was 92K, OTF - 59K. Interestingly enough both compressed down to about the same size:\n\nZIP -\\> 37-39K  \nLZMA -\\> 32-35K  \nPAQ8 -\\> 25-27K\n\nBasically it means that there's still a lot of potential for compression even if the font file is already compressed natively.\n\n"
+    },
+    {
+      "time": "31 May 2009 — 4:38pm",
+      "content": "@epsilicon  \nThanks for that. Pure curiosity drives about half my day, lately.  \nYou don't get more authoritative about stuff like this than Thomas Phinney, but \"compressed\" can mean different things in different contexts.\n\nCurrent browsers support gzip compression which is what I'll be testing. I don't know how gzip matches up to the algorithms you tested or if one of your acronyms actually is the gzip algorithm by another name.  \nHowever, based on your post, my suspicion is there's still some considerable packing that can be done.  \nOf course, there's a time factor for unpacking on the client end in the browser which, frankly, I haven't look into. But I do know it's rather minimal.  \nAnd I'll also compare a CFF file with its EOT counterpart.  \nSee what I come up with.  \nIt won't be within the next couple of weeks. But I will post back the results.  \nIf font-linking is going to happen, and it is, we've got to know these things.\n\nrich\n\n"
+    },
+    {
+      "time": "1 Jun 2009 — 11:45am",
+      "content": "Keep in mind that any OpenType CFF font might or might not be subroutinized. If not, then it won't necessarily be as small as it could.\n\n"
+    },
+    {
+      "time": "2 Jun 2009 — 5:58am",
+      "content": "@christopher slye  \nOy vay, you mean there's something called subroutinization that I have to be aware of?  \nOr are you pulling a newbie's leg?\n\n"
+    },
+    {
+      "time": "2 Jun 2009 — 11:13am",
+      "content": "No, really. :)\n\nIt's part of the Adobe FDK, and also available in FontLab. (The option there is \"Use subroutines to compress outlines in the CFF table\".) I believe there is some inherent compression in OpenType CFF, but subroutinization can shrink a font significantly (or not, depending on the font).\n\n"
+    },
+    {
+      "time": "2 Jun 2009 — 5:54pm",
+      "content": "OK. Gotta buy Fontlab, I see. Can't get away with the cheaper alternatives anymore, I guess.  \nIncidentally, since this thread started out talking about Typekit and licensing - I actually got some hands-on experience with how it works today.  \nHad it cracked and hacked in about three minutes and I'm no great shakes at stuff like that.  \nThe OTF data was trivially easy to obtain.  \nIf delivering an unprotected font file is the major sticking point, I can't imagine any major vendor going along with this.  \nTypekit moves into the nice try column - IMHO.\n\n"
+    },
+    {
+      "time": "3 Jun 2009 — 4:39pm",
+      "content": "Interesting observation. Thanks Richard.\n\n"
+    },
+    {
+      "time": "8 Jun 2009 — 10:52pm",
+      "content": "Sorry, I've been kind of busy in the past week.\n\nAs usual, Christopher knows his stuff (no surprise, he started at Adobe way back around August 1997). OpenType CFF is maximally compressed when you use subroutinization, and not without it. How much additional compression that adds is dependent on the outlines in the font. Sorry that I forgot to mention that... pretty much all Adobe's fonts use subroutinization, and I turn it on in my FontLab prefs and forget about it.\n\nThe main part of the font which is not as compact as it reasonably could be, in OpenType CFF, is the layout tables. The more extensive the OT layout in the font, the more you'd imagine that either going to EOT or doing ZIP compression might make things a bit smaller.\n\nOn the protection side.... No scheme that relies on publicly available specs (including EOT) is going to be all \\*that\\* hard to crack. It's just a question of what proportion of users are deterred by the barriers put in place, and whether the font vendors are satisfied with that. PDF and SWF are not terribly secure, but are \"secure enough\" for most font vendors. Mind you, part of that may be because of the lossy embedding of SWF embedding in general, and PDF embedding as typically practiced.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "9 Jun 2009 — 7:08am",
+      "content": "@thomas  \nThanks. That was succinct and I, newbie, understood every word.  \nMy focus is on screen reading and fonts for that purpose, especially within browsers - the browser having become the universal client. (Like the knife and fork, by now, IE is probably one of the most-used tools in human history.)  \nThe sample of Typekit that I analyzed fed an EOT file to IE and fed a base64 encoded string to FireFox. (Very large. Came to about 133 kb, a substantial bit (no pun) of page load time.)  \nIn order to take the font for re-use, I'd have to reconstruct it from either the EOT or the base64 string.  \nThe same, incidentally, holds true for the JavaScript text-replacement product Cufón, which converts the points into a format readable by the browser's script engine.  \nIMHO - none of these schemes enables easy, drive-by downloading of an instantly installable font-file.  \nPlus, once I've reconstructed the data into a TTF/OTF file - which will require a tool of some kind - I then have to trust that it's quality hasn't been degraded.  \nCufón developer Simo Kunnen explains it well on this thread, [Font Security Issues](http://web.archive.org/web/20131014220225/http:/groups.google.com/group/cufon/browse_thread/thread/0bb96ddb30bc0064#), from Cufón's Google group.  \nI keep having a vision of 60's comedian Jonathan Winters doing his \"Grandma\" character saying, \"Don't touch that. You don't know where that's been!\"  \nAnd, truly, I don't. I don't know if it's missing glyphs, or who knows what else.  \nAnd what holds true for me holds true for other developers as well. As long as the terms are conscionable, I'd rather pay for what I can trust from a company I can hold accountable.  \nBottom line: I think the fear of unlicensed distribution running rampant is overblown. It wouldn't be if Microsoft wasn't holding the line, but they are.\n\n"
+    },
+    {
+      "time": "9 Jun 2009 — 9:57am",
+      "content": "<cite>none of these schemes enables easy, drive-by downloading of an instantly installable font-file.</cite>\n\nNot yet, but as soon as this kind of implementation would become a common way of using webfonts, someone would build a tool that automates the retrieval of the original fonts. This could be as simple as a website (or app), where you enter an URL and get a package of all the fonts used on this website with the base64 encoding removed.\n\n<cite>Very large. Came to about 133 kb, a substantial bit</cite>\n\nWow, that's a lot. TrueType? CFF? Subsetting?\n\nI just tried it with our Graublau Sans Web package. One original OpenType file (CFF) has 44 KB (with the full character set including CE, Greek, Cyrillic ...)  \nAs Base64 it's 56 KB, but with GZIP compression (which all those browsers supporting TT/OT linking should handle) it has only 36 KB! Which could be reduced even further with subsetting.\n\n"
+    },
+    {
+      "time": "9 Jun 2009 — 10:40am",
+      "content": "@ralf  \nTip: Jeffrey Veen is one of the folks behind typekit. View source on Veen's blog.\n\nYou're welcome!\n\n"
+    },
+    {
+      "time": "9 Jun 2009 — 10:52am",
+      "content": "@ralf  \nOops. Mud on my face.  \nVeen pulled the Typekit stuff off his blog. Must've gotten wind people were looking.\n\nI saved files though.  \nIf you want to see, send an email to comments - at - zoomperfect.com. And I'll zip up what I have.\n\nrich\n\n"
+    },
+    {
+      "time": "29 Jul 2009 — 12:17pm",
+      "content": "On a related note, Kernest is now licensing commercial type for use with it’s service. Contact them for details.\n\n"
+    }
+  ]
+}

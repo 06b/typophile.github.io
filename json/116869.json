@@ -1,0 +1,22 @@
+{
+  "id": "116869",
+  "title": "Fontlab, I need a better solution for Ligatures",
+  "forum": "Build",
+  "tags": [
+    "fontlab",
+    "ligatures",
+    "lower r",
+    "script",
+    "Build"
+  ],
+  "content": "Hi,  \nFirst, I’m kind of new to this.  \nI’m about to create a Script font and I have some problems with the lower “r” and the other lower glyphs connected to it.\n\nAm I supposed to do a ligature for every lower letter connected to the lower “r”? That sounds weird.  \nWhen I look at my script fonts installed on my computer there are no big amount of ligatures.\n\nThere must be some other solution to it.  \nWhen I look at fonts on MyFonts, like Ciao Bella, there are no ligatures for the lower r but when I write it in the “Sample text” field there is a more accurate connection between the lower “o” and the lower “r” and the “e” and the “r” and so on.\n\nAny smart and simple solution to this?  \nPlease help me.\n\nThank you.  \nAndreas\n\n",
+  "author": "Theapbo",
+  "time": "28 May 2014 — 12:51am",
+  "uid": "205430",
+  "comments": [
+    {
+      "time": "28 May 2014 — 9:52am",
+      "content": "Right, you definitely don't want to make a font with ligatures for every combination of characters. Not only would the font be huge, there are usually more than two characters in a row that may need the same special treatment.\n\nThe trick is to write a contextual alternates (`\"calt\"`) feature. There's more than one way to do it, so you need to plan it out first and then implement it in feature code. One way to do it goes something like this:\n\nThe default \\r will be designed to accept the usual connecting stroke coming from the glyph that precedes it. In the absence of such a glyph, you need to substitute an alternate \\r that doesn't connect. The code would look something like this:\n\n`feature calt {\nignore sub @glyphsthatconnectontheright r' ;\nsub r' by r.alt ;\n} calt ;`\n\nwhere \\r.alt is the non-connecting version of the \\r. The `ignore` line basically says, \"if the \\r follows a glyph that connects, skip the next part\". If it's some other glyph, then it will substitute the alternate \\r. (The apostrophe marks the glyph that you want to potentially substitute.)\n\nThat's the basic idea. There are other approaches. You could for instance make the default \\r one that doesn't connect and substitute a connecting alternate when it follows glyphs that connect. Or, your connection scheme may be more complex to get a more natural appearance (more than one possible connecting stroke, for instance, low, medium, high, none).\n\n"
+    }
+  ]
+}

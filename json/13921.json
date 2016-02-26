@@ -1,0 +1,22 @@
+{
+  "id": "13921",
+  "title": "Win TT font in Mac OS X",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm in the midst of digitizing, on a PC, an old Art Nouveau typeface. I wish to share this with a Mac user on OS X 10.3.9.\n\nMy understanding is that OS X users can use Win TT fonts just fine. Several online resources confirm this and I've forwarded to her the directions for properly installing the font that these resources advise.\n\nNo luck. She states that her \"computer acknowledges it but displays only a few rectangles.\" (the notdef glyph, I presume). She also finds that the font works perfectly on her boyfriend's PC.\n\nI'm wondering if there are any cross platform font makers here or others who may be able to shed some light on this subject.\n\nI began this font using a template to create a new Unicode, Regular style font. I then pruned many of the characters slots that are outside the Windows 256-character ANSI set. I've now created, so far, only the cap A through M in their appropriate places.\n\nI've specified Unicode Version 1. Mac Roman is included as a Platform. I've checked the Mappings and all 13 characters created thus far are mapped correctly to both the Win Unicode and Mac Roman platforms.\n\nI'll likely end up going the conversion or Opentype route in the end, but would sure like to find out what's up here.\n\n",
+  "author": "Mike F",
+  "time": "18 Jul 2005 — 1:32am",
+  "uid": "3368",
+  "comments": [
+    {
+      "time": "18 Jul 2005 — 9:57am",
+      "content": "Most likely that it is a cmap issue. The Win TTF is probably Symbol encoded which does not get recognised on the Mac. The Mac cmap needs proper index encoding (0-255).\n\nOnly then will a Symbol font work properly on the Mac.\n\nBruno Maag  \nDalton Maag Ltd\n\n"
+    },
+    {
+      "time": "18 Jul 2005 — 4:15pm",
+      "content": "Thank you for responding, Bruno. However, it isn't encoded as a Symbol font. I had it as Mac Roman and \"Microsoft Unicode BMP only\". I just took a look at Arial and it is encoded as above but also adds \"Unicode 2.0 and onwards semantics, BMP only\".\n\nI'll try adding that third encoding and see if it works in Mac OS X.\n\n"
+    }
+  ]
+}

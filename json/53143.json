@@ -1,0 +1,22 @@
+{
+  "id": "53143",
+  "title": "How to set left/right classes in FL with Python?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi,\n\nI know the classes in FontLab can be accessed by using the \"fl.classes\" property in Python, but how do I set the right/left checkboxes in the classes window?\n\n...Any chance that the unofficial Python API reference might be updated some time?\n\nThanks,\n\n-Paul van der Laan\n\n[www.type-invaders.com](http://web.archive.org/web/20131106070949/http:/www.type-invaders.com/ \"www.type-invaders.com\")\n\n",
+  "author": "pvanderlaan",
+  "time": "5 Jan 2009 — 6:13am",
+  "uid": "17208",
+  "comments": [
+    {
+      "time": "5 Jan 2009 — 8:12am",
+      "content": "It's a font-object related function:  \n`SetClassFlags(classIndex,isFirst,isSecond)`  \nYou need to iterate through classes, and depending on whether the class is 1st/left or 2nd/right (e.g. check if a tag is found in class names), set the according flag(s):\n\n`isFIRST_TAG = \"_1ST\"\nisSECOND_TAG = \"_2ND\"\nf = fl.font\nclasses = f.classes\nfor cIdx in range(len(classes)):\n    cName = classes[cIdx].split(\":\",1)[0]\n    if cName.startswith(\"_\"):\n        if isFIRST_TAG in cName:\n            f.SetClassFlags(cIdx, 1, 0)\n        elif isSECOND_TAG in cName:\n            f.SetClassFlags(cIdx, 0, 1)\n        else:\n            f.SetClassFlags(cIdx, 1, 1)\n`\n\nThen update font.\n\n"
+    },
+    {
+      "time": "5 Jan 2009 — 1:23pm",
+      "content": "Helpful as ever - thank you, Karsten!\n\n-Paul\n\n"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "13410",
+  "title": "OT vkrn feature",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I am learning some OT features, and the vkrn feature is very interesting, but I am having some problems.\n\n1. when I check the feature in FontLab 4.6, it raises all the glyphs following the one I want raised.  \nfeature vkrn { pos \\uni053B \\uni055E 120;} vkrn; should raise one \\uni055E when it is after \\uni053B, but everything that comes after it is also raised.\n\n2. I cannot get it to work outside FontLab. The feature should be on by default, but I don’t know how to do it.\n\nAnyone knows how to resolve these problems?\n\n",
+  "author": "levonk",
+  "time": "2 July, 2005 - 3:01pm",
+  "uid": "5971",
+  "comments": [
+    {
+      "time": " 3 July, 2005 - 7:14am",
+      "content": "<cite>feature vkrn { pos \\uni053B \\uni055E 120;} vkrn; should raise one \\uni055E when it is after \\uni053B, but everything that comes after it is also raised.</cite>\n\nI think you have to change your lookup to something like this:  \n`pos \\uni053B \\uni055E <0 120 0 0>;`\n\n[http://partners.adobe.com/public/developer/opentype/afdko/topic\\_feature\\_file\\_syntax.html#2.e.iv](http://web.archive.org/web/20051128092502/http:/partners.adobe.com/public/developer/opentype/afdko/topic_feature_file_syntax.html#2.e.iv)\n\n"
+    },
+    {
+      "time": " 3 July, 2005 - 10:22am",
+      "content": "Eduardo, I tried your suggestion, it gave me an error when I compiled:  \n\\>Pair positioning rule must specify only a single metric  \n\\>aborting because of errors\n\n"
+    },
+    {
+      "time": " 4 July, 2005 - 1:00pm",
+      "content": "The feature is intended for use in vertical setting of East Asian scripts. It is not intended for raising or lowering glyphs in the context of horizontal text. The feature is not applied by any applications outside of vertical setting of East Asian text, e.g. in the Japanese version of InDesign.\n\nIf you want to contextually raise or lower glyphs in horizontal text, you should use the normal feature. I’m not sure if you can do this with FontLab, though, because of the limitation that you encoutered. You can do it with the MS VOLT tool.\n\n"
+    },
+    {
+      "time": " 4 July, 2005 - 2:12pm",
+      "content": "Thanks John.\n\nBut I have a problem. First, I am creating OT-CFF fonts. MS VOLT says it is for TT fonts.  \nSecond, I am using a Mac not a PC, and MS VOLT is a PC app.\n\nIs there a Mac app. that will work with CFF fonts? Maybe from Adobe?\n\n"
+    },
+    {
+      "time": " 4 July, 2005 - 6:22pm",
+      "content": "The Adobe FDK has the same limitations as FontLab, unsurprisingly as FontLab’s current OT generation is built on the Adobe FDK code.\n\nYou can run VOLT under Windows emulation on the Mac.\n\nIt is possible to use VOLT to develop CFF fonts. See my old Typophile post No.510 in this thread: [http://www.typophile.com/forums/messages/4100/15453.html](http://web.archive.org/web/20051128092502/http:/www.typophile.com/forums/messages/4100/15453.html)\n\n"
+    }
+  ]
+}

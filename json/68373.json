@@ -1,0 +1,70 @@
+{
+  "id": "68373",
+  "title": "Adobe Garamond Premier Pro Issue",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Hi there,\n\nI was wondering if anyone could help me? I am using Scrivener on the Mac to output PDF files using dobe Garamond Premier Pro 12pt as my chosen font. However, in instances where the character 'f' is the last character on the line of justified text, it looks clipped. Does anyone know why this would be happening?\n\nKind Regards\n\n",
+  "author": "Fumi",
+  "time": "13 Mar 2010 — 4:32am",
+  "uid": "49645",
+  "comments": [
+    {
+      "time": "13 Mar 2010 — 7:14am",
+      "content": "Apparently, Scrivener is masking the text area when it creates the PDF. The top of the \"f\" extends outside the character bounding box (many do) and consequently gets cut off by the mask when it's at the edge of the text area.\n\nI can't think of a workaround (other than using a different font). I would say this may a problem with Scrivener and you should contact the developer. It's also possible that it's something inherent in the PDF writer in OS X. If it does the same thing in either Text Edit or Pages, that might be the case.\n\n"
+    },
+    {
+      "time": "13 Mar 2010 — 6:58pm",
+      "content": "Ok, thanks for your help. Much appreciated.\n\n"
+    },
+    {
+      "time": "14 Mar 2010 — 1:46pm",
+      "content": "FWIW, I recently opened this font in FontLab to see if I could learn something about its OT features, and noticed that most of the characters do not conform to PostScript specifications; i.e., they lack nodes at many of the extrema...\n\n"
+    },
+    {
+      "time": "14 Mar 2010 — 10:40pm",
+      "content": "<cite>FWIW, I recently opened this font in FontLab to see if I could learn something about its OT features, and noticed that most of the characters do not conform to PostScript specifications; i.e., they lack nodes at many of the extrema...</cite>\n\nThis is not true as far as I know. Can you cite specific glyphs? Which font did you look at?\n\n"
+    },
+    {
+      "time": "15 Mar 2010 — 10:38am",
+      "content": "_This is not true as far as I know. Can you cite specific glyphs? Which font did you look at?_\n\nTry A B C E and F to start with...\n\n"
+    },
+    {
+      "time": "15 Mar 2010 — 11:09am",
+      "content": "Everything looks fine to me, e.g.\n\n ![](http://web.archive.org/web/20140421053243im_/http:/typophile.com/files/GaraC_5536.png)\n\nKeep in mind that in a design like this, there will always be outlines that do not adapt well to picture-perfect PostScript construction, but I would not say Garamond Premier Pro fits the description that \"most\" glyphs lack nodes at extrema.\n\n"
+    },
+    {
+      "time": "15 Mar 2010 — 12:11pm",
+      "content": " ![](http://web.archive.org/web/20140421053243im_/http:/typophile.com/files/premproC_4545.jpg)\n\nThe two FontAudit arrows on the right-hand side of the image indicate incorrect (not \"unnecessary,\" as FontLab describes them) extrema. The handles are simply not orthagonal. The image below shows the original on the left, and a properly-constructed extremum on the right; there is absolutely no perceptible difference between the two.\n\n ![](http://web.archive.org/web/20140421053243im_/http:/typophile.com/files/orhtagonal_5527.jpg)\n\n"
+    },
+    {
+      "time": "15 Mar 2010 — 12:26pm",
+      "content": "Extrema points are needed to properly interact with hinting. Unless there are hints aligned with the points which you indicate (which I doubt), there isn't a problem with this. FontAudit indicates _potential_ problems. Not everything which it flags actually requires correction.\n\nAndré\n\n"
+    },
+    {
+      "time": "15 Mar 2010 — 12:42pm",
+      "content": "Old Nick, as I remember, the Adobe paper on PS fonts specifically says that in cases like those you highlight, in tight curves in terminals, you don't have to have nodes at extrema. Presumably this is not a problem for hinting. This example of the terminals, then, is following the rules.\n\n"
+    },
+    {
+      "time": "15 Mar 2010 — 1:06pm",
+      "content": "Perhaps because I have spent the better part of the last three months updating my entire product line, I have become a little obsessive-compulsive about extrema. Nonetheless, I find it odd that, if you can achieve precisely the same results by following the conventions strictly, one would choose not to.\n\n"
+    },
+    {
+      "time": "15 Mar 2010 — 1:23pm",
+      "content": "My experience is that they are not precisely the same, and that you can see 'lumps' at large sizes in this kind of situation, if you use only nodes at extrema. And, as I said, it's following a myth, not the \"conventions\", if by that you mean the guidelines that Adobe issued.\n\n"
+    },
+    {
+      "time": "15 Mar 2010 — 1:35pm",
+      "content": "<cite>I find it odd that, if you can achieve precisely the same results by following the conventions strictly, one would choose not to.</cite>\n\nIt's not odd when you consider the extent of work required to address it, and the resulting benefit.\n\nAs someone who participated in the production work on Garamond Premier, I can tell you that it was a massive undertaking -- a large glyph complement in eight separate multiple master fonts. It is easy to ask that outlines simply be designed \"right\" in the first place, to avoid time-consuming outline futzing later, but it's simply not compelling when the resulting problems are negligible (or non-existent). Believe me, various people in the Type group here have probably been conscious of it since Day 1 of PostScript. Over the years, we have come to realize that it's just not a significant problem and \"choose our battles\" accordingly.\n\nWhen a designer (Robert Slimbach, in this case) is confronting such a massive undertaking, one finds that it's better to simply allow the outlines to be produced in whatever way comes naturally to the designer, rather than fixate on details that are of little consequence. Of course, Robert understands as well as anyone the importance of points at extrema where it will have an impact on rasterization, and is, IMO, very good at putting points in the right places. If I was receiving outlines that were truly horrible, of course it would be worthwhile to offer the designer some guidance.\n\nI don't mean to sound pompous about it... just conveying a bit of font _realpolitik_ from my perspective.\n\n"
+    },
+    {
+      "time": "15 Mar 2010 — 2:02pm",
+      "content": "Most of what is being talked about is the curve positioning at cups of serifs or other tight turns. These kinds of things don't impact hinting and make the curve easier to draw with fewer points. You can extend the handle as a smooth point out from that curve section and still have enough tension to smooth that curve without having to add another point in such close proximity. Smooth Points in close proximity have limits on handle placement within the UPM grid thereby kinking the curve to force the handle to end at a UPM raster intersection.\n\nBelieve me, it is the best way out of a sticky wicket. Slimbach has his sh\\*t together when it comes to this.\n\nChrisL\n\n"
+    },
+    {
+      "time": "15 Mar 2010 — 2:22pm",
+      "content": "_My experience is that they are not precisely the same, and that you can see 'lumps' at large sizes in this kind of situation, if you use only nodes at extrema_.\n\nPerhaps; it's my experience that curves are immensely easier to edit with proper extrema. And, again FWIW, here's the sum total of the difference (using Photoshop's Difference blending) between the two versions I showed earlier at approximately 1200 points. I only tried to match the upper part of the curve; I am reasonably confident that I could have matched the lower part, had I addressed it.\n\n ![](http://web.archive.org/web/20140421053243im_/http:/typophile.com/files/difference_4938.jpg)\n\n"
+    }
+  ]
+}

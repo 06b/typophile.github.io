@@ -1,0 +1,110 @@
+{
+  "id": "19963",
+  "title": "How to fool the eye?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m in need of some real expert advice here from experienced type designers.\n\nI basically want this shape of the O. I want it to feel like a square O with rounded corners. End of story.\n\nBut…\n\n…the problem is that it makes my eyes see the square to much and I want it to feel more round when I look at it, but with “logically” the same shape.\n\nI can imagine there is some optical trick to pull here, but what?\n\nIs there better ways where to put the nodes?\n\nDoes anybody understand what I mean, I think this could be misunderstood easily due to my bad english =)\n\nThanks in advance, and regards from Sweden.\n\n ![](http://web.archive.org/web/20080906164455im_/http:/www.typophile.com/files/expert_trick_to_do_3713.jpg)\n\n [‹ Migrating to Font Forge](http://web.archive.org/web/20080906164455/http:/www.typophile.com/node/29316 \"Go to previous forum topic\") [Grid Size FL4 ›](http://web.archive.org/web/20080906164455/http:/www.typophile.com/node/29415 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080906164455/http://www.typophile.com/user/11526\" title=\"View user profile.\">Goran Soderstrom</a>",
+  "time": "<br>",
+  "uid": "11526",
+  "comments": [
+    {
+      "time": " 16.May.2006 2.26pm",
+      "content": " ![](http://web.archive.org/web/20080906164455im_/http:/www.typophile.com/files/expert_trick_to_do2_6323.jpg)\n\n…and of course the repeating corners in the whole letterform.\n\n"
+    },
+    {
+      "time": " 16.May.2006 3.00pm",
+      "content": "Underware’s Type Basics has a nice little illustration that could help:  \n [Dynamic Curves](http://web.archive.org/web/20080906164455/http:/www.typeworkshop.com/index.php?id1=type-basics&id2=&id3=&id4=&id5=&idpic=03#pictloader)\n\n"
+    },
+    {
+      "time": " 16.May.2006 3.10pm",
+      "content": "That’s called the “bone” effect, where the ends looks like they’re bulging out. The easiest way to fix it is to give the curves more room into the straights. A more sophisticated way, but one that’s more “brittle” and more work, is to not make the straights totally straight - to give them a very gentle intasis, as Cynthia Batty calls it; or extasis, as... those obsessed by sex and/or drugs call it. ;-)\n\nBTW, my customers are <cite>lucky</cite> I don’t design like I drive!  \n:-P\n\nhhp\n\n"
+    },
+    {
+      "time": " 16.May.2006 10.59pm",
+      "content": "Thank you very much for assistance.\n\nI think I’ll try them both, just to learn.\n\n"
+    },
+    {
+      "time": " 17.May.2006 5.01am",
+      "content": "In font lab:\n\n1. Select the whole glyph.\n\n2. paste to mask, so the original outline is in the background.\n\n3. shift and hold, then click on the bezier knots and slide them away from the corners. The shift-and-hold, then click will move the knots while keeping the handles in the same place.\n\n4. Then adjust the handles so the outline moves back closer to the mask, but with a smoother join of curve-to-straight.\n\nThis process I think is one way of getting you to the ’dynamic curves’ that the Underware folks write about.\n\n"
+    },
+    {
+      "time": " 17.May.2006 7.49am",
+      "content": "I would make one other suggestion: The points where the straights change to curves should usually be aligned between the outer and inner paths. This is particularly true with a (somewhat) geometric design such as yours. As you have it now, the inner curves start sooner than the outer curves, making the curves thicker than the straights.\n\n"
+    },
+    {
+      "time": " 17.May.2006 12.19pm",
+      "content": "I agree with Andy’s “dynamic curves” suggestion. In technical terms, what you want to do is smoothly ramp up the curvature from zero (on the straights) up to a maximum at the 45 degree point, then back down to zero. To do that _right_ takes more than one Bezier segment, as shown by this illustration:\n\n ![](http://web.archive.org/web/20080906164455im_/http:/www.typophile.com/files/rounded-box_4860.png)\n\nNote that the control points of the corner knots are colinear with the straight segments. That’s an indication that the curvature will actually be zero at the straight-curve join.\n\nHope this helps.\n\n"
+    },
+    {
+      "time": " 17.May.2006 12.26pm",
+      "content": "\\> To do that right takes more than one Bezier segment\n\nInteresting.  \nAnd do you think it takes <cite>two</cite> extra points for quadratic beziers (TT)?\n\nhhp\n\n"
+    },
+    {
+      "time": " 17.May.2006 1.14pm",
+      "content": "And do you think it takes _two_ extra points for quadratic beziers (TT)?\n\nDepends on how precise you want it to be. With quadratics, you can’t ever get an exactly zero curvature (except for straight lines), but the more you subdivide the closer you can cut it. You can get away with just one, but two is probably going to be noticeably better.\n\nI wish I could quantify this better for you, but my tools for working with quadratics aren’t anywhere nearly as sophisticated as my cubic tools, which I’ve put a _lot_ of work into over the last couple months.\n\n"
+    },
+    {
+      "time": " 17.May.2006 1.23pm",
+      "content": "I think this did the trick. The letter feels a whole lot better. Many thanks to you guys, it feels like i’ve learned a lot from this excercise.\n\nThe thing is, some things I can see “in my head”, while having problems creating them practically. It’s really great to be able to get this kind of assistance here on Typophile.\n\nBut, I dont quite understand why I (like raph suggested) should put a point in the corners. it doesn’t seem logical to me, could you please explain further?\n\n ![](http://web.archive.org/web/20080906164455im_/http:/www.typophile.com/files/yesitworked_4705.png)\n\n"
+    },
+    {
+      "time": " 17.May.2006 1.24pm",
+      "content": "Move the outer outline points closer to center and then extend the control points. I usually hold the shift key down while using the arrow key to move the points in units of ten.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 17.May.2006 1.30pm",
+      "content": "Chris, Do you mean something like this?\n\n ![](http://web.archive.org/web/20080906164455im_/http:/www.typophile.com/files/yesitworked2_6428.png)\n\nEdit: But then I could have just one point aswell? But I think this will destroy the quadratic feeling of the letter…\n\n"
+    },
+    {
+      "time": " 17.May.2006 1.38pm",
+      "content": "Whatever looks right (at the intended size!), is right. Raph, isn’t your method more geometric, and not the ’dynamic curve’ thing described by Underware? I have a feeling Chris cross-posted with you, Goran, and you already did as he (and I) suggested, by some method.\n\n"
+    },
+    {
+      "time": " 17.May.2006 1.55pm",
+      "content": "William is right, we crossposted.\n\nWhat you have before is just in need of adjustment in small increments until it looks correct. You can choose to either be more geometric or more smoothe curved depending on your intensions.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 17.May.2006 2.00pm",
+      "content": "<cite>Raph, isn’t your method more geometric, and not the ‘dynamic curve’ thing described by Underware?</cite>\n\nMy method is geometric, but I think it leads to basically the same results as the Underware sketch. It’s just described in terms of Beziers rather than doing the sketch first.\n\n<cite>But, I dont quite understand why I (like raph suggested) should put a point in the corners. it doesn’t seem logical to me, could you please explain further?</cite>\n\nI can try. One of my favorite ways of “seeing” curves is to look at what happens to the curvature. That’s a mathematical concept, but there is an intuitive physical metaphor for it. Imagine driving a car along the outline, and imagine what’s happening to the steering wheel.\n\nIn your first example, which is essentially a quarter-circle arc joined to a straight line, you’d be driving along straight, then turn the wheel very sharply to match the curvature of the circle, hold it there until you’d turned 90 degrees, then turn it very sharply back to the center.\n\nIn your last example (which _is_ much smoother), you’d begin the turn much earlier, and the sudden jerk of the wheel would be a lot less, then as you approached the corner, you’d turn it reasonably smoothly to a peak at the 45 degree point, then reasonably smoothly back. The peak (maximum position of the wheel), however, is quite a bit more curvature than it is in the first example, and that’s one important measure of curve smoothness.\n\nIn my example, curvature is continuous and quite smooth - no sudden jerks of the wheel. Further, the peak is broader than in your second example (you spend more time with the wheel near its maximum position) which means it doesn’t need as tight a turn at the very middle.\n\nIt all depends on what you’re trying to achieve. Your second example isn’t bad, but if you want to achieve the effect of a box with smoothly rounded corners, then as I say you’ll need an extra Bezier point. In my experience, Beziers are not very intuitive - when you’re drawing with them, it’s way too easy to get sharp changes in curvature. I predict that before too long, type designers will embrace a more intuitive curve primitive than Beziers, one that guarantees certain properties of curve smoothness, and there will be tools to automatically convert to standard formats such as OpenType.\n\n"
+    },
+    {
+      "time": " 17.May.2006 2.14pm",
+      "content": "Let me post another example that I hope will show the value of my “geometric” method. There are five straight-round transitions here, and all of them have the same gradual ramp-up of curvature from zero to nearly circular. I believe the results are considerably better than if I had simply joined the curved section directly to the straight.\n\n ![](http://web.archive.org/web/20080906164455im_/http:/www.typophile.com/files/inconsolata_a_5279.png)\n\n"
+    },
+    {
+      "time": " 17.May.2006 3.12pm",
+      "content": "Raph, your a is interesting, thanks. Setting the extremes, and then putting in intermediate bezier points is something that experienced type designers—I think it was John Hudson and Mark Simonson—have described here before as a regular method of working.\n\nI do think though, that the circular ’rounds’ are exactly what the Underware diagram is urging you to avoid, and instead to do something like the 1:23 post of Goran. It’s all geometric, of course, but I think what Underware was arguing that simple circles are not as good as more complex shapes. It think it’s all about what will work in the particular design, but Underware’s view was that the circle is generally worse.\n\n\\>I predict that before too long, type designers will embrace a more intuitive curve primitive than Beziers, one that guarantees certain properties of curve smoothness, and there will be tools to automatically convert to standard formats such as OpenType.\n\nAnd I predict that you will do this and it will be terrific!\n\nJust please design it to use it in a work flow with Font Lab (and Illustrator). I.e. no Font Forge on UNIX please! Almost no type designer uses these, as far as I can see.\n\n"
+    },
+    {
+      "time": " 18.May.2006 5.51am",
+      "content": "Interesting point-theories indeed! I could talk about this all night =)\n\nIn this case I feel that my O changed a bit from this “perfect” square to a more human letterform after moving the points and making longer curves - and I liked it very much, so it has influenced B, D, C etc. aswell. I’m however still looking for the true identity of this typeface…\n\nThanks again, everybody!\n\n"
+    },
+    {
+      "time": " 18.May.2006 5.58am",
+      "content": "“I liked it very much, so it has influenced B, D, C etc. as well. I’m however still looking for the true identity of this typeface…”\n\nGöran,  \nI went through a similar process with my “ [Align](http://web.archive.org/web/20080906164455/http:/typophile.com/node/15626)” typeface last year. It started out more geometric and ended up more humanized.  \nHere is a link to the “ [Align](http://web.archive.org/web/20080906164455/http:/typophile.com/node/15626)” critique:\n\n[http://typophile.com/node/15626](http://web.archive.org/web/20080906164455/http:/typophile.com/node/15626 \"http://typophile.com/node/15626\")\n\nChrisL\n\n"
+    },
+    {
+      "time": " 18.May.2006 1.51pm",
+      "content": "Interesting to take part of that one, thanks Chris.\n\nI think the typeface is very cool - which foundry is distributing it?\n\n"
+    },
+    {
+      "time": " 18.May.2006 1.57pm",
+      "content": "yes, chris, which foundry IS distributing it??? \\>^P\n\n"
+    },
+    {
+      "time": " 4.Jun.2006 4.13pm",
+      "content": "Raph,\n\nGiven a cubic Bezier segment with endpoints P0 and P3 and prescribed curvatures K0 and K3 at each end, is it always possible to add a point (ie, subdivide the curve into two Bezier segments) and change the control points such that the new curve has continuous curvature, including at the endpoints? If not, is there any fixed number of points that can be added to guarantee continuous curvature?\n\nIn the example with the square O, it is impossible to guarantee continuous curvature without adding any points. Because of the diagonal symmetry, it’s relatively easy to see which point to add. Do you know how one would do this in general? It seems that there are enough degrees of freedom to guarantee this, but I don’t see an easy way of calculating this. For instance, is the new point always on the original curve? If so, I assume that it’s not always the midpoint, but I’m not sure how to calculate the location.\n\nIf this could be worked out, it could provide a nice way of “smoothing” contours so that they have continous curvature after the rough shape of the contour is described with just a few points. Consider, for instance, describing a D with just 5 points, and then adding the extra points on the curve to “smooth” the contour.\n\nBest wishes,  \nStephen\n\n"
+    },
+    {
+      "time": " 5.Jun.2006 3.23pm",
+      "content": "Stephen,\n\nI’m glad to see you’re interested in the nerdy details of curvature and so on.\n\nIn answer to your question, yes it is definitely possible to automate the process of creating curvature-continuous cubic Bezier segments to solve design problems expressed in terms of some kind of constraint language. If you look into the way Metafont works, it actually does something similar, but unfortunately not with the exact kinds of constraints you’re talking about here.\n\nThat said, ultimately I think I have a better solution to the underlying problem, which is to use a better primitive than Beziers, then do an automated conversion into Beziers (either cubic or quadratic, depending on whether the target is CFF or TT). I’m very actively working on just such a system, and expect to be able to unveil something publicly within the next few weeks.\n\n"
+    },
+    {
+      "time": " 9.Jun.2006 1.44pm",
+      "content": "Raph, I’m very curious - how did you get the idea to apply Cornu spirals to font outlines? I stumbled upon them in a book on optics.\n\n"
+    }
+  ]
+}

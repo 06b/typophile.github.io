@@ -1,0 +1,54 @@
+{
+  "id": "60633",
+  "title": "Legend of Raster: Glyph's Quest for Pixel Solace",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "I'm still trying to wrap my head around what exactly is in between a font's vector outlines and what we see on screen in web browsers. Based on a little reading, as well as the excellent replies in a previous thread ( [Who else wants to understand hinting?](http://web.archive.org/web/20120617055738/http:/www.typophile.com/node/57993)), this is the gauntlet I imagine a glyph must survive on its way to being rendered in a web page...\n\n1. A glyph starts as a **bezier** -based shape.\n2. This shape is made in or brought into a font-creation program like **FontLab**.\n3. **Settings** like UPM (units per em), key dimensions (for vertical measurements like x-height, cap height, ascenders and descenders), and metrics (for horizontal measurements like sidebearings and kerning) determine how the letterform will act as a glyph in a font—e.g., how much room it will occupy at a given size, how close other letters may live.\n4. **Hinting or instructions** are added (automatically and/or manually) which can provide directions for conservation of the fonts design character in environments where less-than ideal output is to be employed.\n5. The glyph is **exported as part of a font** , in either OTF or TTF format (in this context, I am ignoring all other formats—let me know if I shouldn't). TrueType hints are ditched if the font is OTF.\n6. The glyph is confronted by operating-system-level and browser-level **rendering algorithms**. I am still trying to list these combinations for myself. I would want to cross-reference technologies like Quartz and ClearType with headings like OS rendering engine, browser rendering engine, result of combination (overrides, any ignored font data).\n7. **User settings** in various places (browser preferences, OS preferences) can modify how and when the rendering engines interact with font files. Windows users can turn ClearType on or off. Users can turn antialiasing off altogether. Certain preferences can limit the size at which antialiasing is applied. Listing these variables is another item on my to-do list.\n8. Finally, there are the **physical qualities** of a user's hardware, such as the kind of monitor they use, its resolution, whether they run it at native resolution or not, and their settings for color and luminosity.\n\nHave I missed any steps or failed to articulate these well enough? What details might you add? Also, sorry the title of this thread is so juicy compared to the content! What a way to start a conversation about rasterization, eh?\n\n",
+  "author": "Tim Brown",
+  "time": "4 Aug 2009 — 2:08pm",
+  "uid": "7222",
+  "comments": [
+    {
+      "time": "4 Aug 2009 — 2:24pm",
+      "content": "For the physical part -- #6. Rendering -- you could do no better than reading up on FreeType. Much of it is dedicated to pure code, but there is also lots of theoretical stuff.\n\nA side-track could be Maxim Shemanarov's [Antigrain Library](http://web.archive.org/web/20120617055738/http:/typophile.com/wiki/www.antigrain.com) -- he has a nice page on rendering type as well, and even more theoretical stuff on the physics of antialiasing.\n\nOn a more technical note, the divide in font technology is not \"OpenType/TTF\" but rather \"CFF/TTF\". Microsoft's 'TTF' technology uses TrueType curves & hints, Adobe's 'CFF' uses PostScript curves and PostScript hints (not sure about the latter--wasn't Adobe phasing these out for OTF?). Both filetypes can have an OpenType wrapper; TTFs can also have a TTF wrapper.\n\n"
+    },
+    {
+      "time": "4 Aug 2009 — 2:49pm",
+      "content": "Nitpicking:\n\n2. This shape is brought into a font-creation program like FontLab.\n\nI would add:\n\n2. This shape is made in or brought into a font-creation program like FontLab.\n\n"
+    },
+    {
+      "time": "4 Aug 2009 — 3:39pm",
+      "content": "_Both filetypes can have an OpenType wrapper; TTFs can also have a TTF wrapper._\n\nBetter to say that CFF is implemented within OpenType by placing the PS outlines and hints within an sfnt structure; whereas TTF is by definition an sfnt structure.\n\n"
+    },
+    {
+      "time": "4 Aug 2009 — 3:43pm",
+      "content": "If you have not already, be sure to read Beat Stamm's excellent article [_The raster tragedy at low resolution_](http://web.archive.org/web/20120617055738/http:/www.microsoft.com/typography/tools/trtalr.aspx). Some of its starting observations—_e.g._ ‘The screen is a regularly spaced grid of black and white dots’—are now obsolete, but as an introduction to why hinting is necessary this remains a good read.\n\n"
+    },
+    {
+      "time": "4 Aug 2009 — 4:16pm",
+      "content": "Good call, Dyana. I made the change.\n\nThanks for the link to Stamm's piece, John. I have read this ... but _years_ ago, and it will be good to refresh. More recently I've thumbed through Leslie Cabarga's _Learn FontLab Fast_.\n\nTheunis, John, you lost me on the font formats. I need to digest this some more.\n\nTheunis, the [Anti-Grain](http://web.archive.org/web/20120617055738/http:/www.antigrain.com/) link didn't come through right at first. I found the site, though, and I'm looking at it now. Whoa. Lots of stuff here. I'm not sure where to start. Where's the page you're thinking of?\n\n"
+    },
+    {
+      "time": "5 Aug 2009 — 3:48am",
+      "content": "[http://www.antigrain.com/research/font\\_rasterization/index.html](http://web.archive.org/web/20120617055738/http:/www.antigrain.com/research/font_rasterization/index.html)\n\nIts first paragraph mentions a Joel Spolsky article you might already have seen. If not, do read it first :-)\n\nThe font format difference is a nitpick I mentioned because, well, frankly, you started! ;-)  \nMaybe it's not necessary to differ between OTF, CFF, or TTF or otherwise; it's the definition-as-curves that's important in the file format.\n\n"
+    },
+    {
+      "time": "5 Aug 2009 — 5:17am",
+      "content": "Better to say: Hinting or instructions are added (automatically and/or manually) which can provide directions for conservation of the fonts design character in environments where less-than ideal output is to be employed.\n\nHinting instructions are two confused fused terms. \"Suggestions\" about stem width, alignment zones, overlap management, is not a great term, for though TT instructions, and T1 hints do turn off, when turned on, they are simply obeyed, unlike a suggestion, which by definition may be ignored, just like this one. And—for TrueType hinting—actual pixel placement is never defined only actual outline placement is. This is a subtle difference, perhaps, though I would suggest it is crucial to understanding.\n\nAs for reading Beat Stamm’s excellent article \"The raster tragedy at low resolution\", please remember this article is old, out of date in many respects, discussing only TT instructing for black and white fonts which is not terribly important today, and based on a world where TT instructions were interpreted by default in environments where less-than ideal output is to be employed, which is no longer the case.\n\n\\>What details might you add?\n\nThis is pretty good overall.\n\nCheers!\n\n"
+    },
+    {
+      "time": "6 Aug 2009 — 4:46am",
+      "content": "Nice! This piece from Karsten Lücke seems to address the font format differences directly: [http://kltf.de/kltf\\_notes\\_raster.htm](http://web.archive.org/web/20120617055738/http:/kltf.de/kltf_notes_raster.htm \"http://kltf.de/kltf\\_notes\\_raster.htm\")\n\nHat tip: [Typographica](http://web.archive.org/web/20120617055738/http:/twitter.com/typographica/status/3163941251)\n\n"
+    },
+    {
+      "time": "6 Aug 2009 — 5:19am",
+      "content": "I should say also: thanks very much, Theunis and David. I'm in the middle of the reading material you and others in this thread have recommended, so I haven't replied properly yet. Just wanted to post the link to Karsten's piece so everybody knew about it.\n\n"
+    },
+    {
+      "time": "6 Aug 2009 — 6:06am",
+      "content": "The title of the thread is just screaming for a homebrew Nintendo DS game or something. Good resources in the thread!\n\n"
+    }
+  ]
+}

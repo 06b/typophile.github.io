@@ -1,0 +1,38 @@
+{
+  "id": "64073",
+  "title": "OT Feature Substitute",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "i am currently fiddling around with some **Open Type Features** and for some reason cannot make the following script get to work after compiling:\n\nfeature solr { #Solarsys planets  \n sub s u n by a;  \n sub m e r c u r y by b;  \n sub v e n u s by c;  \n sub e a r t h by d;  \n sub m a r s by e;  \n sub j u p i t e r by f;  \n sub s a t u r n by g;  \n sub u r a n u s by h;  \n sub n e p t u n e by i;  \n # luminary  \n sub p l u t o by j;  \n sub m o o n by l;  \n sub c o m e t by m;  \n sub c e r e s by o;  \n} solr;\n\nWhen typing the letters in _FontLab_ everything works fine, when typing the exported font in for instance _Indesign_, the substituted signs won’t show up.  \n [http://tinyurl.com/ylxvpkz](http://web.archive.org/web/20150415032858/http:/tinyurl.com/ylxvpkz \"http://tinyurl.com/ylxvpkz\")  \nAny ideas what could have gone wrong? Thank you and sorry if this subject has already been discussed before.\n\n",
+  "author": "jum",
+  "time": "10 Nov 2009 — 4:18am",
+  "uid": "43906",
+  "comments": [
+    {
+      "time": "10 Nov 2009 — 4:55am",
+      "content": "solr is not a supported OpenType feature. If you put these substitions in another feature, like calt (contextual alternates) or in a stylistic set (e.g., ss01), then you might be able to get at these things through InDesign.\n\n"
+    },
+    {
+      "time": "10 Nov 2009 — 7:55am",
+      "content": "Excellent – just replacing _solr_ with _calt_ (contextual alternates) is working. Thank you very much for the quick help. Btw. is there a list of supported OpenType features and their functions somewhere?\n\n"
+    },
+    {
+      "time": "10 Nov 2009 — 8:42am",
+      "content": "OT layout features supported in [Adobe applications](http://web.archive.org/web/20150415032858/http:/www.adobe.com/type/browser/pdfs/OTGuide.pdf), [Microsoft WPF](http://web.archive.org/web/20150415032858/http:/msdn2.microsoft.com/en-us/library/ms745109.aspx), and [Typotheque's overview](http://web.archive.org/web/20150415032858/http:/www.typotheque.com/fonts/opentype_feature_support/). And the [expected feature behavior](http://web.archive.org/web/20150415032858/http:/www.microsoft.com/typography/otspec/features_ae.htm).\n\n"
+    },
+    {
+      "time": "10 Nov 2009 — 9:06am",
+      "content": "Thank you, this is the reason why i post my questions here.\n\n"
+    },
+    {
+      "time": "10 Nov 2009 — 9:11am",
+      "content": "You may also find this list in the official OT specification of interest:  \n [http://www.microsoft.com/typography/otspec/features\\_ae.htm](http://web.archive.org/web/20150415032858/http:/www.microsoft.com/typography/otspec/features_ae.htm \"http://www.microsoft.com/typography/otspec/features\\_ae.htm\")\n\nThese are the registered features tags, not neessarily supported (yet). A bit techy but when I do OpenType feature programming I sometimes find it interesting to have a look at what the official desciption of the purpose and behaviour of the features is.\n\n"
+    },
+    {
+      "time": "11 Nov 2009 — 2:45am",
+      "content": "Yes, very usefull list. Thanks.\n\n"
+    }
+  ]
+}

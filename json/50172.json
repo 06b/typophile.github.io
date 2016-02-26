@@ -1,0 +1,22 @@
+{
+  "id": "50172",
+  "title": "Mark glyphs - Python script ?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Is it possible to use Python or Robofab to mark a set of glyphs ?\n\nI have a complex set of glyphs that I want to mark in a number of fonts to then alter. I know I could to it with a class but I would have to import the class into each font, but with a macro I could simple call it in each font that is opened.\n\nI was thinking something like :\n\n``\n\nglyphsMark = ['A','C','D','K','1','3','/']\n\nglyphsMark.color = red\n\nRr\n\n [‹ Reassign Keyboard Shortcut for Quick Preview in FLS5 Win?](http://web.archive.org/web/20081121122228/http:/www.typophile.com/node/50073 \"Go to previous forum topic\") [Fontographer is dead, long live Fontlab? ›](http://web.archive.org/web/20081121122228/http:/www.typophile.com/node/49725 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081121122228/http://www.typophile.com/user/16986\" title=\"View user profile.\">RachelR</a>",
+  "time": "<br>",
+  "uid": "16986",
+  "comments": [
+    {
+      "time": " 5.Oct.2008 6.47am",
+      "content": "from robofab.world import CurrentFont\n\nf = CurrentFont()\n\nmyGlyphs = [’A’,’C’,’D’,’K’,’1’,’three’,’slash’]\n\nfor glyphName in myGlyphs:  \n\\>\\>\\>f[glyphName].mark = 20  \n\\>\\>\\>f[glyphName].update()\n\nf.update()\n\n\\* replace “\\>\\>\\>” by a tab  \n\\*\\* replace smart quotes with dumb ones\n\n"
+    },
+    {
+      "time": " 5.Oct.2008 12.12pm",
+      "content": "Thanks gferreira\n\n"
+    }
+  ]
+}

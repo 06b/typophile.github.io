@@ -1,0 +1,30 @@
+{
+  "id": "54780",
+  "title": "Kerning in LaTeX",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Is it possible to change the kerning between a certain letter pair?\n\n(E.g. decreasing the space between ſ and z, latinizing the ß-ligature.)\n\n",
+  "author": "Laurentius",
+  "time": "13 Feb 2009 — 7:42pm",
+  "uid": "42110",
+  "comments": [
+    {
+      "time": "13 Feb 2009 — 8:16pm",
+      "content": "A\\\\kern-.2emB (or whatever value you'd like)\n\n"
+    },
+    {
+      "time": "13 Feb 2009 — 10:03pm",
+      "content": "Thanks, but what I want is for this to happen automatically every time the pair occurs, without having to repeat the \\kern command.\n\n"
+    },
+    {
+      "time": "14 Feb 2009 — 7:22am",
+      "content": "You have to edit the font metrics file in that case.\n\n"
+    },
+    {
+      "time": "25 Feb 2009 — 8:27pm",
+      "content": "I wouldn't recommand changing the font metrics because it would make your tex code less portable. You can define a simple command like:\n\n\\def\\fz{\\symbol{383}\\kern-0.14emz}\n\nI suggest using \\f instead because command names are restricted to basic ASCII. Using \\symbol{383} also makes the command usable in different encodings or language.\n\nHope this help\n\n"
+    }
+  ]
+}

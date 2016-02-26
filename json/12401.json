@@ -1,0 +1,82 @@
+{
+  "id": "12401",
+  "title": "ordering lookups...",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "ok. so since with OT you’re not ordering features, but lookups, how do i:  \nmake a lookup in the clig feature followd by a lookup in the calt feature followed by another lookup in the clig feature? any why can’t you put all this in just one feature? any help is appreciated, thnx!\n\n",
+  "author": "paul d hunt",
+  "time": "13 May, 2005 - 10:12am",
+  "uid": "7006",
+  "comments": [
+    {
+      "time": " 13 May, 2005 - 4:00pm",
+      "content": "Could you be more specific on what kind of effect you are trying to achieve with this?\n\n"
+    },
+    {
+      "time": " 13 May, 2005 - 4:51pm",
+      "content": "i just have some contextual ligatures that need to come after the contextual substitutions, whereas most of my contextual ligatures should be replaced before other contextual lookups. i’m working with a script and trying to make it flow smoothly and it’s getting very complicated. maybe i’m just making it harder than it needs to be though… but i doubt it.\n\nhmmmm… maybe i just need to put some “ignore sub”s in the clig feature…\n\n"
+    },
+    {
+      "time": " 13 May, 2005 - 9:25pm",
+      "content": "Paul,\n\nThat’s a very good question indeed! :)\n\nWhat you’re trying to achieve is legitimate. Unfortunately, this is where the Adobe FEA syntax shows its weakness. In the OpenType binary tables, lookups are completely separated from features and are only mapped to features. Therefore, in the binary tables, you can easily intersperse lookups that map to different features.\n\nThe Adobe FEA syntax attempts to make things simpler for the user, so in this syntax the lookups are defined inside of the feature definitions. But this actually makes interspersing of lookups very difficult to achieve.\n\nOne possible, although not very elegant solution is to define all your named lookups in a separate, “fake” feature (called “xx01” for example) that would be placed at the beginning of the feature definitions. The order of the lookups in this lookup definition should reflect your desired order of the lookups in the final font. Then, in the clig and calt features, simply refer to the features by calling their names — in the correct order.\n\nAlternatively, use VOLT to build your lookups and features, or build your font and do some post-processing of the binary tables in TTX.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": " 14 May, 2005 - 12:53pm",
+      "content": "This is one of the reasons why I favour VOLT over Adobe FDK-based tools for OpenType Layout development. VOLT is much more powerful and much more flexible.\n\n"
+    },
+    {
+      "time": " 14 May, 2005 - 7:13pm",
+      "content": "John,\n\nI don’t see it that way. The Adobe FDK syntax is wonderful for automated, repeatitive, or systematic feature definitions. Combined with Python scripting, it’s possible to achieve a high degree of automation \\*and\\* complexity. For example, many parts of my Zapfino code was half-generated using dictionary-driven Python scripts. In VOLT, I would have drowned in the amount of point-and-clicks. VOLT, on the other hand, is much more suitable for individualized, highly custom projects with little repetition.\n\nIdeally, it would be nice to have a tool that can both :)\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": " 16 May, 2005 - 11:32am",
+      "content": "can i do the majority of my feature programming in FontLab and then tweak it using VOLT? Or would I have to do it all in VOLT???\n\nalso, let me try to restate what you said about the “fake” feature to see if i’m understanding correctly: make a “fake” feature (ie xx01) to house all my contextual lookups in the order that i want them to be called. Make sure this is the first feature called. Then create a “clig” and a “calt” feature which are basically empty, listing them (in my case) with the clig first, since the first set of lookups in xx01 would be clig features, thus making calt follow the clig feature in the lookups.\n\nAnyway, that’s what i got out of what you had written, Adam. I hope I’m understanding you correctly. Please clarify if i am not.\n\nbut regarding one of my earlier questions… why is there a separate clig feature instead of just one calt feature??? that would make all of this easier to do to begin with.\n\n"
+    },
+    {
+      "time": " 16 May, 2005 - 11:55am",
+      "content": "I use VOLT simply because the Adobe FDK can’t do two things that I seem to need to do in almost every project: one-to-many substitutions and GPOS anchor positioning. That said, I tend to do a lot of my OTL work outside of VOLT in spreadsheets and VOLT source text files. The latter are certainly more complicated that the FDK syntax, but I’ve got used to editing them, and can work pretty quickly in this way.\n\nPaul, FontLab has a function that allows you to export OTL features as a VOLT project, but I have not tried this since any early version that didn’t work. It shouldn’t be too difficult to get right, though, and perhaps it has improved. I’ll be meeting Adam in a couple of weeks, and I suspect FL-\\>VOLT workflows is one of the things we’ll discuss.\n\n"
+    },
+    {
+      "time": " 16 May, 2005 - 11:57am",
+      "content": "_why is there a separate clig feature instead of just one calt feature?_\n\nYou don’t have to use the clig feature. I tend to agree that it is unnecessary, and that the same thing can be achieved by applying the calt feature to the result of a ligature feature.\n\n"
+    },
+    {
+      "time": " 16 May, 2005 - 12:17pm",
+      "content": "so then is it “kosher” to just put all my lookups in the calt feature and avoid all the mess above?\n\n"
+    },
+    {
+      "time": " 19 May, 2005 - 6:20am",
+      "content": "no comments? anyone?\n\n"
+    },
+    {
+      "time": " 19 May, 2005 - 11:52am",
+      "content": "The calt feature expects one-to-one glyph mapping, so while you could probably get away with putting ligature (many-to-one) lookups in the calt feature it wouldn’t be 100% kosher — not as bad as cooking meat and dairy together, but not as careful as keeping separate sets of pots :)\n\nCan you perform liga substitutions for the ligatures and then apply calt substitutions to the results?\n\n"
+    },
+    {
+      "time": " 19 May, 2005 - 3:07pm",
+      "content": "well here’s the situation:  \ni have a “t” with a really long cross bar, which often crosses over several letters in either direction, so i have a non-crossing t that is substituted so many slots before and after the t. once these substitutions are made, i want leftover tt’s, tl’s, th’s, &c. to be replaced by ligatures. i’m also trying to “randomize” the appearance of the font so i have stuff like “sub @class1 @class1’ by @class2; sub @class2 @class2’ by @class1;” but before it switches into that, i have double letter ligatures that i want to be applied. so the calt and clig lookups are intermixed to give the effect i want. right now i have all my subs in one feature (calt) but i realize this may be risky, depending on how different apps apply different features. i’d do the “fake” xx01 feature if i thought i knew how to set it up correctly. i’m not opposed to trying to use VOLT, but i’ve done all of my work in FLab and don’t want to start all over again from scratch.\n\n"
+    },
+    {
+      "time": " 19 May, 2005 - 3:30pm",
+      "content": "hmmmm… i tried setting up the xx01 feature the way i understood it, like this:  \n`feature xx01 {\nlookup clig1{\n  sub t t l by t_t_l;\n  sub t a t by t_a_t;\n  sub t e t by t_e_t;\n  sub t i t by t_i_t;\n  sub t o t by t_o_t;\n  sub t u t by t_u_t;\n}clig1;\nlookup calt1 {\n  sub t @ALL t' by t.nobar;\n  sub t @ALL t' by t.nobar;\n} calt1;\nlookup clig2 {\n  sub t l by t_l;\n  sub t t by t_t;\n  sub t b by t_b;\n  sub t d by t_d;\n  sub t h by t_h;\n} clig2;\n} xx01;`\n\nand then i set up clig and calt so they looked like this:  \n`feature clig{\n}clig;`\n\nand then i put the features in this order: xx01, clig, calt and tried compiling the OT features, but i got this error:  \n`[FATAL] Lookup type different from previous rules in this lookup block`\n\nso i’m guessing that that’s not the way adam meant for this to be set up. can you clarify, Adam?\n\n"
+    },
+    {
+      "time": " 19 May, 2005 - 3:34pm",
+      "content": "wait… i think i got it… lemme check…\n\n"
+    },
+    {
+      "time": " 19 May, 2005 - 3:53pm",
+      "content": "nope didn’t get it, i tried setting up the xx01 feature with all my lookups in the correct order and then divying up the lookups in the subsequent clig and calt features. all it did was look up the clig and calt features in order. i don’t understand how apps would reference a xx01 feature anyway. so i’m down to just leaving it all in “calt” or figuring out VOLT or TXX.\n\n"
+    },
+    {
+      "time": " 19 May, 2005 - 8:30pm",
+      "content": "Can you put all your calt lookups before your liga lookups? That way, you do all your contextual substitutions to single letters, and then apply ligatures to results.\n\n"
+    },
+    {
+      "time": " 19 May, 2005 - 9:44pm",
+      "content": "hmmmm…. i probably could…. but that would give a different effect and i kinda like how it’s working now… i’ll hafta take a good look at it all again…\n\n"
+    }
+  ]
+}

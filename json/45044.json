@@ -1,0 +1,26 @@
+{
+  "id": "45044",
+  "title": "order of diacriticals in Unicode?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m having to build a few “ccmp” glyphs for setting Kiowa. I seem to remember that the order of specifying diacriticals in Unicode is “inside out”, starting with the top.\n\nOK, no problem, the name for an “oh” with a macron & and acute above is, for example,\n\nuni006F03040301 (or shorter, uni01010301)\n\nBut when you add the macron below as well, is it preferable to work “inside out” regardless of position, so the glyph name would be\n\nuni010103310301 (omacron, macronbelow combining, acute combining),\n\nor take care of the top first, e.g.\n\nuni010103010331 (omacron, acute combining, macronbelow combining)\n\nI suppose at some level it doesn’t mater, but if there is a convention I’d like to follow it, because for all I know, either the text file or the PDf may be repurposed.\n\nTIA\n\nCharles\n\n [‹ Generating opentype-font...](http://web.archive.org/web/20080709013254/http:/www.typophile.com/node/45057 \"Go to previous forum topic\") [rounding glyph corners -- but how? ›](http://web.archive.org/web/20080709013254/http:/www.typophile.com/node/44966 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080709013254/http://www.typophile.com/user/5094\" title=\"View user profile.\">charles_e</a>",
+  "time": "<br>",
+  "uid": "5094",
+  "comments": [
+    {
+      "time": " 8.May.2008 7.07am",
+      "content": "I’m not sure how relevant it is to what you are doing, but you might want to have a look at p. 111-113 of:\n\n[http://www.unicode.org/versions/Unicode5.0.0/ch03.pdf](http://web.archive.org/web/20080709013254/http:/www.unicode.org/versions/Unicode5.0.0/ch03.pdf \"http://www.unicode.org/versions/Unicode5.0.0/ch03.pdf\")\n\n"
+    },
+    {
+      "time": " 8.May.2008 7.35pm",
+      "content": "The ā̱́ character can be expressed in a two main canonical Unicode forms. The Normalization Form D (NFD), which is achieved by the complete canonical decomposition of the string:  \n`U+0061 U+0331 U+0304 U+0301`  \nand the Normalization Form C (NFC), which is achieved by the complete canonical decomposition and a subsequent canonical composition of the string:  \n`U+0101 U+0331 U+0301`\n\nWhen creating glyphnames for characters such as ā̱́ glyph, I recommend converting the Unicode sequence to the NFC form (on the Mac, you can use Unicode Checker for that), so a sensible glyphname would be `uni010103310301`.\n\nYour `ccmp` code would be then:  \n`sub amacron uni0331 acutecomb by uni010103310301;`\n\nHowever, since many application don’t perform Unicode normalization of the string, your ccmp code could also add code for other situations:  \n`sub amacron acutecomb uni0331 by uni010103310301;\nsub aacute uni0304 uni0331 by uni010103310301;\nsub aacute uni0331 uni0304 by uni010103310301;\nsub a acutecomb uni0304 uni0331 by uni010103310301;\nsub a acutecomb uni0331 uni0304 by uni010103310301;\nsub a uni0331 uni0304 acutecomb by uni010103310301;\nsub a uni0331 acutecomb uni0304 by uni010103310301;\nsub a uni0304 uni0331 acutecomb by uni010103310301;\nsub a uni0304 acutecomb uni0331 by uni010103310301;`\n\nMore on this:  \n [http://groups.msn.com/FontLab/tipsandtricks.msnw?action=get\\_message&mvie...](http://web.archive.org/web/20080709013254/http:/groups.msn.com/FontLab/tipsandtricks.msnw?action=get_message&mview=0&ID_Message=3403 \"http://groups.msn.com/FontLab/tipsandtricks.msnw?action=get\\_message&mview=0&ID\\_Message=3403\")\n\nMore on NFC:  \n [http://unicode.org/reports/tr15/](http://web.archive.org/web/20080709013254/http:/unicode.org/reports/tr15/ \"http://unicode.org/reports/tr15/\")\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": " 9.May.2008 12.24am",
+      "content": "They are not critical at all, so let them be diacritics only. ;-) ((or diacritical marks in the full form)).\n\n"
+    }
+  ]
+}

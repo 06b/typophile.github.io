@@ -1,0 +1,46 @@
+{
+  "id": "64424",
+  "title": "either is not defined or had no rules which could be included in the aalt feature.",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "this is what my terminal shows:\n\nmakeotfexe [WARNING] feature 'dlig', referenced in aalt feature, either is not defined or had no rules which could be included in the aalt feature.  \nmakeotfexe [NOTE] Wrote new font file 'dotsFDK.otf'.\n\nthis how my features.family file looks like\n\n++  \nlanguagesystem DFLT dflt;  \nlanguagesystem latn dflt;  \nlanguagesystem cyrl dflt;  \nlanguagesystem grek dflt;  \nlanguagesystem latn AZE;  \nlanguagesystem latn CRT;  \nlanguagesystem latn DEU;  \nlanguagesystem latn MOL;  \nlanguagesystem latn ROM;  \nlanguagesystem latn TRK;  \nlanguagesystem cyrl SRB;\n\n#--------------------------------------  \nfeature aalt {  \n feature dlig;  \n} aalt;\n\n#--------------------------------------  \nfeature dlig {  \n sub d o by e;  \n} dlig;\n\n++\n\nWhat is going wrong?\n\nalso, when i activate my font and the name is dotsFDK for example then in illustrator in the font list it comes after the L in the list. Someone a idea how that becomes?  \n(i thought some time that my fonts didn't show up at all untill i saw a font that started with 'a' at the bootom of my list.\n\n",
+  "author": "<a href=\"/web/20100203134649/http://typophile.com/user/49864\" title=\"View user profile.\">clankill3r</a>",
+  "time": "<br>",
+  "uid": "49864",
+  "comments": [
+    {
+      "time": "",
+      "content": "Your problem I think is that you are doing a substitute using a standard character rather than a ligature. I don't understand the logic behind having do replaced by e, but that is definitely not a ligature.\n\n"
+    },
+    {
+      "time": "",
+      "content": "that was just for testing if the dlig works and that works.  \nOnly the error shows up in aalt.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Nothing is going wrong. The aalt feature can only include one-to-one substitutions, not ligature substitutions. makeotfexe is simply letting you know that this particular substitution is being stripped from the aalt feature.\n\nI can't comment on the naming issue since you haven't provided enough information. Which name field is 'dotsFDK' taken from? What's in the other fields?\n\nAndré\n\n"
+    },
+    {
+      "time": "",
+      "content": "He is merely including the dlig feature as part of aalt. That's pretty normal to include all your features in the aalt so that you can get glyph submenus to map properly in the glyph palette of AI and other apps. I've never run into an issue with that.\n\nThe warning sounds to me like its finding the dlig feature incorrect (which it is) and is catching the error in its first reference which would be the aalt feature which is typically at the top of your features list.\n\n"
+    },
+    {
+      "time": "",
+      "content": "André is right in this case.. The aalt feature can use only single and multiple substitution rules. That particular message means that the logic which is building the aalt rules can't find any appropriate rules from the dlig feature. Unfortunately, the logic can't tell if the feature was never defined, or was defined, but didn't have any rules that could be used for the aalt feature.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Ok thx for the answers.\n\n\\>\\>  \nWhich name field is ’dotsFDK’ taken from? What’s in the other fields?  \n\\<\\<\n\nI don't get what you mean?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Is it the Font Family Name? The Postscript Name? The Full Name? The Menu Name? The OT Family Name?\n\nHow have you filled out the full set of name fields?\n\nAndré\n\n"
+    },
+    {
+      "time": "",
+      "content": "I namend everything that could be named dotsFDK so my answer is yes, yes, yes, yes, yes i suppose.\n\nIs it a bat habbit? (it's not for release afcorse, it's just for testing).\n\n"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "34776",
+  "title": "Opentype scripts, swash",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi Guys,\n\nI have a question about Fontlab and Opentype-features:  \nI want to make a OpenType-script for [swash](http://web.archive.org/web/20150222133132/http:/typophile.com/wiki/swash) characters. One script for  \nbeginning characters, and one for the last.  \nBut whatever I do, not only the beginning character are changed, but also  \nother Uppercase-letters inside the text-string....  \nWhat's going wrong??\n\nBest regards and thanks for your help,  \nMorten\n\n",
+  "author": "morten",
+  "time": "27 Jun 2007 — 2:18am",
+  "uid": "2642",
+  "comments": [
+    {
+      "time": "27 Jun 2007 — 2:31am",
+      "content": "Show us your feature code.\n\nRalf\n\n"
+    },
+    {
+      "time": "27 Jun 2007 — 2:43am",
+      "content": "Hello Morten,\n\nI use this feature code for it and it works:\n\nfeature swsh {  \nlookup cswsh {  \n ignore sub @call @cswsh1';  \n sub @cswsh1' by @cswsh2;  \n} cswsh;  \n} swsh;\n\n@call = all characters including the space  \n@cswsh1 = all uppercase character names  \n@cswsh2 = all uppercase character with swash names\n\nPieter\n\n"
+    },
+    {
+      "time": "27 Jun 2007 — 5:00am",
+      "content": "Hello Pieter and Ralf,\n\nThanks a lot – unfortunately, it dont works perfect...please look at the attached screenshot.  \nOf course, the must be a reason, but I can't see it. After the 'A', the Uppercase looks right,  \nbut 'PH' should only the P be a swash!\n\nMorten\n\n ![](http://web.archive.org/web/20150222133132im_/http:/typophile.com/files/screenshot_4310.jpg)\n\n"
+    },
+    {
+      "time": "27 Jun 2007 — 6:29am",
+      "content": "[Contextual swashes for beginnings](http://web.archive.org/web/20150222133132/http:/typophile.com/node/19839)\n\n"
+    },
+    {
+      "time": "28 Jun 2007 — 2:36am",
+      "content": "In addition: You should name your @cswsh2-class glyphs the other way round. Not \"scwsh.P\" but \"P.cswsh\". \"P\" is the relevant glypyh name and \".cswsh\" the suffix indicating an alternate form ...\n\n"
+    },
+    {
+      "time": "28 Jun 2007 — 4:24am",
+      "content": "Thanks for your help – well, scripting is a hard work...;-)\n\nRegards and thanks,  \nMorten\n\n"
+    },
+    {
+      "time": "4 Jul 2007 — 9:11pm",
+      "content": "Morten,\n\n1. Your @call class should include all text glyphs, not just the plain uppercase and lowercase letters.\n\n2. You might consider adding simple-substitution \"init\" and \"fina\" features into your font. The \"init\" would substitute regular letters with their initial forms, and \"fina\" would do the same for the final forms. These features are supported now (on user's discretion) in InDesign CS3.\n\nA.\n\n"
+    },
+    {
+      "time": "9 Jul 2007 — 1:23am",
+      "content": "Hi Adam,\n\nYes, thanks, now it all works fine...great!\n\nMorten\n\n"
+    }
+  ]
+}

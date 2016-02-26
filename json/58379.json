@@ -1,0 +1,74 @@
+{
+  "id": "58379",
+  "title": "Dumb question: all glyphs from FLab to InDesign?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Making a specimen. What's the easiest way to paste every glyph in a font to InDesign or the like? The closest I've come is:  \n- Select all glyphs in Fontlab  \n- Open a metrics window  \n- Select all in that main metrics window pane and Copy  \n- Paste into InD\n\nThis gets me most of the way there but some glyphs don't appear (replaced by a colored box) - I think it's the ones that don't have Unicode assignments (alternate characters, small caps, etc.)\n\nWhat am I missing?\n\n",
+  "author": "eliason",
+  "time": "25 May 2009 — 7:45pm",
+  "uid": "3254",
+  "comments": [
+    {
+      "time": "25 May 2009 — 8:23pm",
+      "content": "I haven't used Fontlab before, so I'm not sure what's required in \"saving\" a font, and I'm probably making the most obvious statement which has 100 good reasons why it doesn't work - but - couldn't you just install the font on your system and then type it regularly?\n\nThoughts on Type: [http://www.sthursby.com/blog](http://web.archive.org/web/20131018212433/http:/www.sthursby.com/blog \"http://www.sthursby.com/blog\")\n\n"
+    },
+    {
+      "time": "25 May 2009 — 8:55pm",
+      "content": "I set the entire thing up manually once and I now just keep adding and tweaking it as character sets grow. If you have Metrics Machine you could always generate a text file with it and import that into Indesign.\n\n"
+    },
+    {
+      "time": "25 May 2009 — 9:40pm",
+      "content": "I'll assume you always generate and install the font before trying this. To easily grab the full set. Do an OT or TT test. Tools/Quick Test As. In the test window, display all characters, select all copy/paste in to Photoshop or whatever. That's how I make the samples on Typodermic.com give or take a few redundant glyphs.\n\n"
+    },
+    {
+      "time": "25 May 2009 — 9:46pm",
+      "content": "I did something similar to what James did... I set up a document in InDesign and opened the Glyphs palette... That will show you every character in your typeface, allowing you to double-click on the ones that haven't been showing up and pasting them into a textbox. You can also choose different Unicode sets, like Basic Latin and Latin 1, Extended Latin A, etc. It's time-consuming the first time, then you just add to it or tweak it, as James says.\n\n ![](http://web.archive.org/web/20131018212433im_/http:/typophile.com/files/glyphs_6436.png)\n\n"
+    },
+    {
+      "time": "26 May 2009 — 4:11am",
+      "content": "Eric Menninga wrote an InDesign script for me that grabs all the glyphs from a font and puts them into a story. This approach captures all the glyphs, not just the directly encoded ones, so is useful for getting a quick grab of everything in the font. Eric mentioned that he might make this script publicly available, so I will direct his attention to this discussion.\n\n"
+    },
+    {
+      "time": "26 May 2009 — 7:59am",
+      "content": "I've just made an InDesign document once, I got the whole characterset I generally use both by using the glyph palette and copy-pasting, and just saved that document and use it every time I need the charset. Only have to do that once, and just expand it if the typeface you are displaying has more characters.\n\n"
+    },
+    {
+      "time": "27 May 2009 — 10:34am",
+      "content": "The trick is that you can describe an arbitrary glyph (one without an unicode mapping) using tagged text, so my script would create a tagged text file with all glyphs from 1-1000. AFAIK, scripting doesn't have direct access to arbitrary glyphs directly.\n\n"
+    },
+    {
+      "time": "27 May 2009 — 12:50pm",
+      "content": "I've never had success getting Quick Test to work. I'll try making a master file with the Glyph palette.  \nThanks to all for your suggestions.\n\n"
+    },
+    {
+      "time": "27 May 2009 — 5:34pm",
+      "content": "Craig, my Quick Test does not work (correctly) either, but it will list all characters in the font \\> copy & paste into InDesign:\n\n ![](http://web.archive.org/web/20131018212433im_/http:/typophile.com/files/qt_4835.png)\n\n"
+    },
+    {
+      "time": "27 May 2009 — 8:35pm",
+      "content": "Jan, no luck for me with that - it still doesn't pick up my small caps, unconventional ligatures, etc.\n\n"
+    },
+    {
+      "time": "27 May 2009 — 11:03pm",
+      "content": "Oh bugger, you are right. It missed fj ffj and the alternate caps. Take it back, useless.\n\n"
+    },
+    {
+      "time": "28 May 2009 — 5:44am",
+      "content": "I've posted the script to make a contact sheet or specimen sheet in InDesign here:  \n [http://indesignsecrets.com/make-a-font-contact-sheet-in-indesign.php](http://web.archive.org/web/20131018212433/http:/indesignsecrets.com/make-a-font-contact-sheet-in-indesign.php)\n\nThis is Eric's script, with a UI added by Chuck Weger. Enjoy!\n\n"
+    },
+    {
+      "time": "28 May 2009 — 6:10am",
+      "content": "That's terrific, thanks!\n\n"
+    },
+    {
+      "time": "28 May 2009 — 11:59pm",
+      "content": "Quick test works but no Unicode = no show.\n\n"
+    },
+    {
+      "time": "2 Apr 2012 — 4:18pm",
+      "content": "If it were possible to convert from a list of glyphs formatted like so:\n\nU+0020-U+007E U+00A0-U+00FF U+02C6 U+02D9-U+02DA\n\nGetting them out of Fontforge is easy. But unfortunately I think it would work only about as well as \"Quick Test\" in Fontlab—only display glyphs with a unicode value. Unfortunately I don't have InDesign, only Illustrator, so the Macro wont work for me. Even OSX's \"Special Characters\" dialogue will not let you select multipe glyphs to insert. If I remember properly, the \"Character Map\" in Windows lets you do this. Microsoft pulled one on you this time, Apple.\n\nI'm going to have to see about Libré tools on this one.\n\n"
+    }
+  ]
+}

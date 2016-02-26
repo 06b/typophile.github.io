@@ -1,0 +1,78 @@
+{
+  "id": "16257",
+  "title": "typed characters wont appear in metrics window.",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Has anyone else experienced this? In the Metrics window I'm typing characters directly and they won't appear. i can get them to show up if i type a slash before the character name, ie /ampersand for &, but it shouldn't be that hard. any ideas?\n\n",
+  "author": "paul d hunt",
+  "time": "15 Nov 2005 — 7:39am",
+  "uid": "7006",
+  "comments": [
+    {
+      "time": "15 Nov 2005 — 8:03am",
+      "content": "even odder... i just exported the fonts as TT fonts and tried printing from InDesign. They showed up in the app, but they would not print. What am i doing wrong?\n\n"
+    },
+    {
+      "time": "15 Nov 2005 — 8:11am",
+      "content": "Are you perhaps accidentally putting them in the mask layer? or are you missing a closepath?\n\nChrisL\n\n"
+    },
+    {
+      "time": "15 Nov 2005 — 8:40am",
+      "content": "well i was able to work around it by opening a new font and doing the Merge Fonts feature. I thought it may have been something to do with names or unicode not being generated properly, but i kept trying to regenrate both names and unicode without any avail. I'm baffled by this...\n\n"
+    },
+    {
+      "time": "15 Nov 2005 — 9:11am",
+      "content": "Was it a Multiple Master instance which retained the MM?  \nI had a problem with this once.  \nI ended up regenerating the font.\n\nChrisL\n\n"
+    },
+    {
+      "time": "15 Nov 2005 — 10:57am",
+      "content": "i don't know if this is the same thing, but i had a similar problem recently in Fontographer when i imported the glyphs via an illustrator eps.\n\ni was importing them just fine, but when i typed them out in the metrics window, they didn't show up. then when i exported the font, the glyphs showed up.\n\ni found that it had to do with the fill in illustrator. i went back to illustrator, turned the fill off (also went into outline mode so i could see the glyphs), and re-imported them into Fontographer. this cleared up the problem. i have no idea why, or if that's the problem you are having but i hope it helps.\n\n(side note)\n\nhowever, importing the glyphs from illustrator lead to another issue having to do with the scale. it seemed like the glyphs would change size depending on the amount and placement of the glyphs that made up the import groups.\n\nis this a common problem that is easy to fix? should i start a new thread?  \n---------  \nnc\n\n"
+    },
+    {
+      "time": "15 Nov 2005 — 11:40am",
+      "content": "FontLab doesn't let you do anything but 100% black. The Fontographer capability is for the virtually obsolete Type 3 font format which allowed such things. Imported art from Illustrator sometimes causes values other than 100% black to be used, causing problems with export of other font formats which don't allow such things.\n\nRe: Your scaling problem. Are you working in FontLab or Fontographer?\n\n"
+    },
+    {
+      "time": "15 Nov 2005 — 11:41am",
+      "content": "(BTW Paul, I have no answer for your problem. Sounds very odd.)\n\n"
+    },
+    {
+      "time": "15 Nov 2005 — 11:51am",
+      "content": "\\>Scaling Problem\n\nImporting (from illustrator- saved down to 3.0) groups of multiple glyphs into Fontographer.\n\n------------  \nnc\n\n"
+    },
+    {
+      "time": "15 Nov 2005 — 12:23pm",
+      "content": "Paul, sounds to me like you're in \"Names mode\".  \nClick the \"Codepages\" button at the top of the Font window.  \nNow request a new Metrics window.  \nType.\n\nWas I right?\n\n"
+    },
+    {
+      "time": "15 Nov 2005 — 12:28pm",
+      "content": "_Click the “Codepages” button at the top of the Font window..._\n\nI tried this. I think my fonts must have somehow become corrupt. I guess it's time to send them to Yuri. Just wanted to make sure i didn't overlook something simple before troubling him.\n\n"
+    },
+    {
+      "time": "15 Nov 2005 — 12:41pm",
+      "content": "Paul, are you in FLS5 Beta or FL45M?  \nI've seen some things in FLS5 where glyphs lose their identities, and the \"regular\" spaces of the Font window are blank. I just select all and choose \"Glyph / Glyph Names / Reencode Glyphs...\" Which assigns everything the right name and Unicode index.\n\n"
+    },
+    {
+      "time": "15 Nov 2005 — 1:08pm",
+      "content": "_Scaling Problem  \nImporting (from illustrator- saved down to 3.0) groups of multiple glyphs into Fontographer._\n\nFontographer normally will scale artwork to the height of the em square. The trick is to include, as part of your artwork, a box or line that corresponds to the ascent and descent of your font. As long as your artwork is not taller than this box (or line), it will always import at the same scale. (This is a very old FOG trick that many wish FontLab could do.)\n\n"
+    },
+    {
+      "time": "15 Nov 2005 — 2:12pm",
+      "content": "thank you Mark.\n\n--------  \nnc\n\n"
+    },
+    {
+      "time": "16 Nov 2005 — 5:40am",
+      "content": "Paul, is it in FL or FOG that the preview problem appears? Win or Mac?\n\nI've experienced that same problem in FL/Win when I opened a font that had the \"MS Character Set\" set to Symbol, and it wasn't a symbol font, in the Encoding and Unicode page in Font Info. Try to check that one.\n\n/mårten\n\n"
+    },
+    {
+      "time": "16 Nov 2005 — 6:28am",
+      "content": "aha! that was the problem exactly. thank you so much, Mårten!\n\n"
+    },
+    {
+      "time": "11 May 2013 — 11:58pm",
+      "content": "Thank you Istitch—removing fill in illustrator allowed me to see my font in the metrics window, also.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "id": "104262",
+  "title": "Barcode Font Help",
+  "forum": "General Discussions",
+  "tags": [
+    "203dpi",
+    "barcode",
+    "General Discussions",
+    "labels",
+    "printing"
+  ],
+  "content": "I'm trying to set up some bar codes, these need to be printable as fonts with limited pre processing, I've selected a barcode called Code 93 which is quite condensed compared to say, Code39 (its predecessor)\n\nI'm now trying to get/create a font for it as it seems to be hard to track down (and I have no budget to fork our $100 dollars) I have had some success fixing a broken free font but I'm a bit lost at the \"Hinting/Instruction\" aspect.\n\nI'm trying to print this barcode on a 203dpi Thermal transfer label printer, what kind of auto hinting etc do i need to do get this to work (From MS word initially and a FoxPro form generator down the line)\n\n[or does anyone have a working free version, the first results on google lack start and end characters required]\n\nThanks,\n\n",
+  "author": "chrisl",
+  "time": "1 Jul 2013 — 4:46am",
+  "uid": "212701",
+  "comments": [
+    {
+      "time": "1 Jul 2013 — 8:51am",
+      "content": "Why do you have no budget?\n\nhhp\n\n"
+    },
+    {
+      "time": "1 Jul 2013 — 9:14am",
+      "content": "Well its just the TTF I'm after, not a software package\n\n"
+    },
+    {
+      "time": "1 Jul 2013 — 10:05am",
+      "content": "Oh, I thought there was a $100 barcode font you couldn't afford.  \nThere must be a font-only solution that's less expensive.\n\nhhp\n\n"
+    },
+    {
+      "time": "1 Jul 2013 — 10:50am",
+      "content": "Well thats what I was thinking, its just a font!!\n\n"
+    },
+    {
+      "time": "1 Jul 2013 — 12:09pm",
+      "content": "For single or a few barcodes there are online resources that will generate them — mostly as png or pdf. Wide selection of code-types available.\n\n(There is a reason why barcode-generators consist of more that just the font — verification is guaranteed when you use an app. I am talking about the checksum digit.)\n\n"
+    },
+    {
+      "time": "2 Jul 2013 — 12:16am",
+      "content": "I know about the double checksums on the Code93, I really need this as a font as it'll be used more than a few times,\n\nThanks,\n\n"
+    },
+    {
+      "time": "2 Jul 2013 — 1:30am",
+      "content": "So you want the checksums _pre-calculated_ inside the font?\n\n"
+    },
+    {
+      "time": "2 Jul 2013 — 10:31am",
+      "content": "No I can do that from within VBA/Foxpro before the string of text is made a barcode\n\n"
+    },
+    {
+      "time": "3 Jul 2013 — 12:35am",
+      "content": "Has no one at all got a source/copy of a decent code93? :-(\n\n"
+    },
+    {
+      "time": "3 Jul 2013 — 1:33am",
+      "content": "Have you tried Morovia's version?\n\n[http://www.morovia.com/fonts/code93/](http://web.archive.org/web/20130821040316/http:/www.morovia.com/fonts/code93/ \"http://www.morovia.com/fonts/code93/\")\n\n"
+    },
+    {
+      "time": "3 Jul 2013 — 6:15am",
+      "content": "What do you mean by \"copy\"?\n\nhhp\n\n"
+    },
+    {
+      "time": "3 Jul 2013 — 6:35am",
+      "content": "A working version they could upload somewhere\n\n"
+    },
+    {
+      "time": "3 Jul 2013 — 7:05am",
+      "content": "What if it's a commercial product?\n\nhhp\n\n"
+    },
+    {
+      "time": "3 Jul 2013 — 9:19am",
+      "content": "Chris. A font won't do it, since there are several ways to encode the font en for placing the extra functions for code 93.  \nAnd if you can afford a labelprinter like this, then why not pay for good functioning software...\n\n"
+    },
+    {
+      "time": "5 Jul 2013 — 6:35am",
+      "content": "Not sure what your programing skill is, but here is coding to produce it in PostScript:  \n [http://code.google.com/p/postscriptbarcode/wiki/Code93Ext](http://web.archive.org/web/20130821040316/http:/code.google.com/p/postscriptbarcode/wiki/Code93Ext \"http://code.google.com/p/postscriptbarcode/wiki/Code93Ext\")\n\n"
+    },
+    {
+      "time": "7 Jul 2013 — 9:00am",
+      "content": "For someone that can program, there is [GNU Barcode](http://web.archive.org/web/20130821040316/http:/www.gnu.org/software/barcode/); to compile the sources on my mac, I had to comment out the line `int streaming;` in the file `barcode.h` and then add the line `int streaming;` (say just after `#include barcode.h`) in the files `main.c` and `sample.c` as well as the line `extern int streaming;` in the file `pcl.c`; then executing `./configure` and `make` gives the binaries.\n\nHere is the output of `barcode -h`\n\n    GNU barcode 0.99 is a tool to convert text strings to printed bars.\n    \n    barcode: Options:\n       -i input file (strings to encode), default is stdin\n       -o output file, default is stdout\n       -b string to encode (use input file if missing)\n       -e encoding type (default is best fit for first string)\n       -u unit (\"mm\", \"in\", ...) used to decode -g, -t, -p\n       -g geometry on the page: [x][++]\n       -t table geometry: x[++]\n       -m internal margin for each item in a table: [,]\n       -n \"numeric\": avoid printing text along with the bars\n       -c no Checksum character, if the chosen encoding allows it\n       -E print one code as eps file (default: multi-page ps)\n       -S print one code as svg file (default: multi-page ps)\n       -P create PCL output instead of postscript\n       -p page size (refer to the man page)\n       -s streaming mode (refer to the man page)\n    \n    Known encodings are (synonyms appear on the same line):\n    \t\"ean\", \"ean13\", \"ean-13\", \"ean8\", \"ean-8\"\n    \t\"upc\", \"upc-a\", \"upc-e\"\n    \t\"isbn\"\n    \t\"39\", \"code39\"\n    \t\"39ext\", \"code39ext\"\n    \t\"128c\", \"code128c\"\n    \t\"128b\", \"code128b\"\n    \t\"128\", \"code128\"\n    \t\"128raw\"\n    \t\"i25\", \"interleaved 2 of 5\"\n    \t\"cbr\", \"codabar\"\n    \t\"msi\"\n    \t\"pls\", \"plessey\"\n    \t\"code93\", \"93\"\n    \t\"code11\", \"11\"\n    Mail bug reports and suggestions to <bug-barcode@gnu.org>.\n\n"
+    },
+    {
+      "time": "8 Jul 2013 — 8:38am",
+      "content": "I'm afraid it would probably need to be a true type font to work with our kit,\n\nThe label printers are second hand from other companies and we already have those so they don't really cost anything,\n\nDo you mean will this be used in a commercial product? No, we don't plan to sell it on! If you mean does someone have it as part of a commercial product that's what I'm trying to locate online! :-)\n\n"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "67092",
+  "title": "double-encoding for unicase?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I have a unicase font that has a bunch of OpenType scripting (swsh, dlig, etc.).\n\nI have designed the letters in the A-Z slots, and had presumed that I would just put one-component copies of them into the a-z slots.\n\nWould it be a mistake to simply double-encode, say, the /A/ glyph with the Unicodes for /A/ and /a/ instead of making lowercase copies? That way I wouldn't have to work all the lowercase permutations into all the scripting, kerning classes, etc.\n\n",
+  "author": "eliason",
+  "time": "6 Feb 2010 — 10:58am",
+  "uid": "3254",
+  "comments": [
+    {
+      "time": "6 Feb 2010 — 11:37am",
+      "content": "It's generally not recommended (in the FontForge manual at least) to double-encode glyphs, but it certainly can be done and may indeed be the practical solution for a unicase or caps-only display font.\n\n"
+    },
+    {
+      "time": "7 Feb 2010 — 7:00pm",
+      "content": "Has anyone tried this before? What are the consequences?\n\n"
+    },
+    {
+      "time": "8 Feb 2010 — 2:57am",
+      "content": "I was told this would be a bad thing, but I can't quite remember why. Something to do with glyph names remaining relevant when the font is used in some applications.\n\nI can imagine a scenario wherein you select some text, apply your double-encoded font, and suddenly \"a\" is now \"A\" and you've lost case information in that text that doesn't come back if you then decide to change it to another font. But this is pure supposition.\n\n"
+    },
+    {
+      "time": "8 Feb 2010 — 9:01am",
+      "content": "Great idea Craig.  \nI'd be interested to know if it's practical.\n\n"
+    },
+    {
+      "time": "8 Feb 2010 — 11:47am",
+      "content": "On more or less the same subject, is there an advantage to handling unicase kerning one or the other of these two ways?\n\n1. Simply expand uppercase classes to include lowercase instances; e.g., A' Aacute Acircumflex Adieresis Agrave Aring Atilde Abreve Aogonek (plus) a aacute acircumflex adieresis agrave aring atilde abreve aogonek.\n\n2. In the past, I have...  \n(a) exported uppercase only kerning, opened the .afm file and cut and pasted the kerning data into a simple text file;  \n(b) opened the text file in Excel, specifying \"delimited\" with \"space\" as the delimiter;  \n(c) made two copies of the kerning info;  \n(d) run a macro to change the second column of uppercase letters into lowercase letters in the first copy, then done the same for both columns in the second copy;  \n(e) pasted the altered info beneath the original, then saved the results as a .prn file;  \n(f) pasted the .prn info into the original .afm file; then, finally  \n(g) imported the metrics back into FontLab.\n\n"
+    },
+    {
+      "time": "8 Feb 2010 — 2:55pm",
+      "content": "_I was told this would be a bad thing, but I can't quite remember why. Something to do with glyph names remaining relevant when the font is used in some applications._\n\nThe rationale against double-encoding seems to involve embedded fonts potentially losing their Unicode information, in which case the glyph names could be used for proper glyph-to-character translation ... there's a more extended discussion in the FontLab manual under \"Advanced Naming and Encoding\" (p145).\n\nWorking with the copied glyphs isn't as big of an inconvenience if you're using classes for scripting as well as kerning (pretty much like Nick's suggestion #1 above), and using components for the copies. Rather than double-encoding the \"A\", make a named \"a\" glyph that's a component of \"A\" and create appropriate classes for every pair or series of similar glyphs. Then in your code, just refer to the classes.\n\n"
+    },
+    {
+      "time": "8 Feb 2010 — 6:05pm",
+      "content": "Thanks to all. It's working in experiments on my computer, but after reading that manual section (thanks for pointing it to me), I'm leaning towards not being the guinea pig on this one.\n\n"
+    },
+    {
+      "time": "8 Feb 2010 — 6:50pm",
+      "content": "There is nothing wrong with assigning multiple Unicode codepoints to single glyphs. There are lots of situations in which this is sensible and efficient. The TT/OT Unicode cmap subtables are designed to be able to handle this sort of thing.\n\nThe only caveats to be observed are:\n\n1. If a PDF is distilled from a print stream, it will not be possible for Acrobat to reconstruct the character string (for searching, copying/pasting text) unless there is a one-to-one relationship between correctly named glyphs and individual Unicode characters.\n\n2. It is not generally adviseable to encode the same glyph as characters from different writing systems, e.g. unifying the encoding of Latin a and Cyrillic а, but only because it is easier to manage things like kerning and OpenType Layout if glyph sets for different scripts are kept separate.\n\n"
+    },
+    {
+      "time": "11 Feb 2010 — 4:05am",
+      "content": "@John Hudson,\n\nWith regards to your first caveat, this brings up a related issue which I find myself going back and forth on:\n\nThe fact that the unicode stream might be lost in PDFs seems to be the major argument against having OT features map from one character onto another (rather than onto a glyph variant). If one adheres rigorously to this, it can often result in a large amount of glyph duplication (e.g. many fonts will include separate sets of small caps for the 'smcp' and 'c2sc' features so that case is preserved in PDFs). While such duplication might not drastically increase the size of the font file, it can lead to an extremely cluttered font, and ins some cases greatly increases the complexity of coding (and thus the possibility of uncaught bugs) - for example, in cases where there are several, cumulative variants of the small capitals which must all be duplicated.\n\nAre there other reasons besides PDF-related issues which argue against having two different characters map to the same glyph (e.g. mapping both A and a to a single a.smcp glyph)? If not, how high is the percentage of PDFs created which fail to preserve the original character stream?\n\nHow rigorous are people out there when it comes to assuring that no two characters map onto a single glyph? For those who are not, how often do you run into problems as a result of this?\n\nWhile I use small capitals as my example above, I'm more interested in cases where more than case-sensitivity would be sacrificed. For example, mapping zero to U2070 (superscript zero) or s to U017F (long s) rather than creating a separate s.hist glyph.\n\nApart from the potential for bugs, lots of glyph duplication also results in an overly long glyph-palette which can frustrate the user looking for a particular glyph.\n\nAndré\n\n"
+    },
+    {
+      "time": "11 Feb 2010 — 9:50am",
+      "content": "My practice depends on what my clients want. I always explain the PDF issue to them, and then they decide whether this is important to them.\n\n_If not, how high is the percentage of PDFs created which fail to preserve the original character stream?_\n\nAs I understand it, it's any situation in which Acrobat is used to distil from a print stream, as opposed to an application using some kind of write-to-PDF function that makes use of PDF character string storage. ‘Printing to PDF’ sends only the glyph IDs for the embedded font(s) which then need to be mapped to glyph names in the font(s) in order for Acrobat to try to parse these and reconstruct the original text.\n\n"
+    },
+    {
+      "time": "12 Feb 2010 — 7:53am",
+      "content": "I can report that the double-encoded version of the font, when installed with Font Explorer X on my Mac, produced all sorts of problems (other apps hanging, lots of beach ball cursors, screwy renderings of system fonts (like Dock contextual menus), etc.). Guess I'll start building those classes.\n\n"
+    },
+    {
+      "time": "22 Sep 2011 — 9:24am",
+      "content": "Just for the record, the errors I was finding I think were due to caching problems. In the end I did use this double-encoding solution for my Ambicase fonts and it seems to have worked well.\n\n"
+    }
+  ]
+}

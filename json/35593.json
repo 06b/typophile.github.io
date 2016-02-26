@@ -1,0 +1,38 @@
+{
+  "id": "35593",
+  "title": "problem with robofab + imac intel",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "hi everybody\n\nI need some help and i hope someone can help me.\n\ni have a new imac intel and i am trying to install robofab but for some some reason i can not make python work. I probably did a mess:  \nfirst I installed python 2.5.1. Then I realized that robofab needs the python 2.3.3, I installed it but it didn´t work. So then I trashed everything and then re-installed python 2.3.3 but during the installation I got an error message about preferences that I should delete first in order to use robofab, but I can't find this preference archive.  \nIs there any way of going back to the beginning?\n\nhope someone has any idea about it. thanks!\n\n",
+  "author": "Dario Muhafara",
+  "time": "31 Jul 2007 — 1:47pm",
+  "uid": "8223",
+  "comments": [
+    {
+      "time": "3 Aug 2007 — 4:16am",
+      "content": "I cant either use Robofab on a brand new Intel. Have tried everything, but it wont work.\n\nHope someone can shed some light on this :)\n\n"
+    },
+    {
+      "time": "3 Aug 2007 — 7:53am",
+      "content": "Check and see where RoboFab's \"robofab.pth\" file was installed, it may have been installed in the Universal install of Python in HardDrive/Library/Frameworks/ but since FontLab isn't a Universal Binary it is going to be using the older install of Python in HardDrive/Library/Python/\n\nGo ahead and copy the robofab.pth file to a location that looks more like this one:  \nHardDrive/Library/Python/2.3/site-packages/robofab.pth\n\nAndy\n\n"
+    },
+    {
+      "time": "6 Aug 2007 — 1:36am",
+      "content": "I've been running [Robofab](http://web.archive.org/web/20140331162837/http:/typophile.com/wiki/Robofab) on a Mac Intel since April last year without a problem. It runs with the version of Python that comes with the system (v2.3.5).  \nI recall to have followed these instructions to make it work with FL5: [http://just.letterror.com/ltrwiki/RoboFab\\_2fFontLabStudio5](http://web.archive.org/web/20140331162837/http:/just.letterror.com/ltrwiki/RoboFab_2fFontLabStudio5 \"http://just.letterror.com/ltrwiki/RoboFab\\_2fFontLabStudio5\")\n\n"
+    },
+    {
+      "time": "6 Aug 2007 — 11:05am",
+      "content": "I got it working now. What I did was just to type \"python2.3\" in the terminal when installing except for only \"python\". I guess it didnt want to work under my 2.4, and by writing python 2.3 it activates the right python when installning... eh... or something.\n\nI read it at the Robofab installation instruction.\n\n"
+    },
+    {
+      "time": "7 Aug 2007 — 2:05pm",
+      "content": "Hi Andy, Goran and Miguel for your answers.\n\ni tried to do my best and it seems that I have some problem installing python2.3  \ni am copying the answer in termina when i try to install robofab as says in the letterror website:\n\nLast login: Tue Aug 7 17:53:48 on ttyp1  \nWelcome to Darwin!  \ncpe-190-55-122-76:~ Daro$ python /Applications/tipografia/RoboFab\\_1.1.1\\_PlusFontTools/install.py  \nInstalling RoboFab: about to write a path to '/Applications/tipografia/RoboFab\\_1.1.1\\_PlusFontTools/Lib' in '/System/Library/Frameworks/Python.framework/Versions/2.3/lib/python2.3/site-packages/robofab.pth'...  \nTraceback (most recent call last):  \n File \"/Applications/tipografia/RoboFab\\_1.1.1\\_PlusFontTools/install.py\", line 25, in ?  \n p = install(dir, \"robofab\")  \n File \"/Applications/tipografia/RoboFab\\_1.1.1\\_PlusFontTools/install.py\", line 18, in install  \n f = open(fileName, 'w')  \nIOError: [Errno 2] No such file or directory: '/System/Library/Frameworks/Python.framework/Versions/2.3/lib/python2.3/site-packages/robofab.pth'  \ncpe-190-55-122-76:~ Daro$\n\nI tried to manually generate the robofab.pth directory but i get this error anyway.\n\nany idea? thanks!\n\n"
+    },
+    {
+      "time": "29 Oct 2007 — 9:17am",
+      "content": "Dario,\n\nI have an update, a colleague of mine was having this same problem and found that it was a permissions problem. Check the directory that it's trying to install the robofab.pth file to and see if your user has permissions to write there:\n\n`/System/Library/Frameworks/Python.framework/Versions/2.3/lib/python2.3/site-packages`\n\nLocate that folder and Get Info on it and in the details at the bottom of the Info window, if it says that you only have read access, click the lock icon and give your user Read & Write access.\n\nThat'll at least get the robofab.pth file installed, but you may still need to copy it into the site-packages folder for an older installation of Python.\n\nAndy\n\n"
+    }
+  ]
+}

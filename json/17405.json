@@ -1,0 +1,54 @@
+{
+  "id": "17405",
+  "title": "Faux bold/italic substitution",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m working with a number of editors who are using Microsoft Word to write their articles. Because they’re not particularly savvy, these editors use the “ [faux](http://web.archive.org/web/20081119142952/http:/typophile.com/wiki/faux%252Bformating)” bold and italic buttons regularly, instead of changing the typeface to the correct italic or bold variant. Regardless of your opinion on this poor practice, it hasn’t proved a problem because InDesign had the smarts to convert faux italics into real italics when the Word docs are imported, making the necessary substitutions automatically. Or so I thought.\n\nWe’ve just changed our primary text typeface and InDesign now ignores the “faux” formatting on import. The text appears a straight roman with no bold or italic. I can only imagine that this is an issue with the new font we are using because this is the only variable that has changed — that perhaps the designer missed a step when generating the font files or that there’s a requisite box defining a particular weight as the default bold? I’m talking about in Fontographer or FontLab. Both the old font and the new font are Type 1, so it’s not an OpenType thing.\n\nI’d like to go back to the type designer armed with some suggestion for a fix. (Because I’m making the assumption that the fix needs to be made to the font.) The client has already signed off on the typeface, so simply changing the font isn’t an option, and there are enough italics and bolds set that I’d rather not go back and change them all by hand. Can you help?\n\n [‹ CT Design Guide](http://web.archive.org/web/20081119142952/http:/typophile.com/node/18685 \"Go to previous forum topic\") [Optical Kerning / Alignment / Optical Bounds - Samples? ›](http://web.archive.org/web/20081119142952/http:/typophile.com/node/19793 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081119142952/http://typophile.com/user/8807\" title=\"View user profile.\">basicframework</a>",
+  "time": "<br>",
+  "uid": "8807",
+  "comments": [
+    {
+      "time": " 19.Jan.2006 10.25am",
+      "content": "You shouldn’t feel as if you have to have explanations for the type designer. I wouldn’t. I would guess it is a naming issue. But, really, the type designer should be able to explain it to you. No?\n\n"
+    },
+    {
+      "time": " 19.Jan.2006 10.42am",
+      "content": "It sounds like the font is not set up with reg/bold/italic/bold italic linkings. I believe this is the only way that InDesign would know which font to use for bold or italic when it imports the Word doc. It has been common practice for some foundries to set up each font in a family as its own separate one-font family in order to overcome Windows/Mac name compatibility issues. Perhaps this is the case with the new fonts?\n\n"
+    },
+    {
+      "time": " 19.Jan.2006 11.09am",
+      "content": "Thanks for the suggestions. I’ve spoken with the designer and indeed, the font was not set up with the linkings. It’s a new still-in-development face, so that simply hadn’t been done yet.\n\n(Thanks also for moving this topic — I wasn’t sure whether it belonged in Build as it was more an end-user question — I figured someone would move it if necessary.)\n\n"
+    },
+    {
+      "time": " 19.Jan.2006 11.45am",
+      "content": "They should be applying styles instead manual formatting, but the buttons are so much more convenient there probably isn’t much hope for that.  \nOne thing you could do while waiting for the fix is to define two character styles (MyItalicStyle and MyBoldStyle ), each using the correct font, and then run this macro (ConvertToStyles) once on each Word document.\n\nPrivate Sub doConvertToStyle(isItalic As Boolean)  \n With Selection.Find  \n .ClearFormatting  \n .Replacement.ClearFormatting  \n If isItalic Then  \n .Font.Italic = True  \n .Replacement.Style = ActiveDocument.Styles(“MyItalicStyle”)  \n Else  \n .Font.Bold = True  \n .Replacement.Style = ActiveDocument.Styles(“MyBoldStyle”)  \n End If  \n .Text = “”  \n .Replacement.Text = “”  \n .Forward = True  \n .Wrap = wdFindContinue  \n .Format = True  \n .MatchCase = False  \n .MatchWholeWord = False  \n .MatchByte = False  \n .MatchAllWordForms = False  \n .MatchSoundsLike = False  \n .MatchWildcards = False  \n .MatchFuzzy = False  \n .Execute Replace:=wdReplaceAll  \n End With  \nEnd Sub\n\nSub ConvertToStyles()  \n doConvertToStyle True  \n doConvertToStyle False  \nEnd Sub\n\n"
+    },
+    {
+      "time": " 19.Jan.2006 11.48am",
+      "content": "I forgot to say...  \nThose are Word macros. To use them, add them to your Normal.dot.\n\n"
+    },
+    {
+      "time": " 19.Jan.2006 12.31pm",
+      "content": "\\> Because they’re not particularly savvy, these editors use the “faux” bold and italic buttons regularly, instead of changing the typeface to the correct italic or bold variant.\n\nOn Windows this should not be a problem - the [B] and [I] buttons will link to the true bold or italic fonts if they exist and and if they are correctly named. On the Mac is this still a problem? I would have thought this would have been fixed a long time ago.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": " 19.Jan.2006 7.10pm",
+      "content": "It’s not a problem on the Mac either, if the fonts are set up correctly. I don’t think it ever has been a problem, except with fonts that don’t have style links or have incomplete links (italics, but no bold, for example). The style linking information is stored in the FOND resource (in the font “suitcase”) in both Type 1 and TrueType fonts.\n\n"
+    },
+    {
+      "time": " 19.Jan.2006 7.16pm",
+      "content": "Actually, this isn’t a problem on Mac either, as long as the fonts are built to support style links, and the bold and italic fonts are present. Calling the initial use of this faux bold and italic is incorrect - faux bold and italic is what happens when the fonts are either not present or not linked. Simply using the buttons is just fine as long as the fonts are linked and present (and even necessary if the person is using Word on Windows, or if the files might be taken to the Windows version of Word).\n\n"
+    },
+    {
+      "time": " 19.Jan.2006 7.24pm",
+      "content": "Jinx! :-)\n\nBy the way, I think it is really neat the way InDesign toggles between the appropriate fonts when you do command-shift-B or command-shift-I as if you selected the fonts from the font menu.\n\n"
+    },
+    {
+      "time": " 8.May.2006 7.37pm",
+      "content": "Hello to all,\n\nThanks for the illuminating discussion...I was just having this exact problem and found this thread.\n\nI have designed identities for some small companies and created templates for them in Word that have this exact problem: the fonts in use don’t have correct FOND resource style linking information to allow autosubstitution in Word (thanks for the tip Mark...)\n\nFor example, I used Scala and Scala Sans in an identity just a few months ago and had to resort to creating paragraph styles in the Normal.dot templates (along with simple keyboard shortcuts and a training session with the employees on how to use them!):\n\n ![](http://web.archive.org/web/20081119142952im_/http:/typophile.com/files/Scala_fauxformatting_6077.jpg)\n\nSo, the question is: when using commercial typefaces in projects, how can designers correct this? Can font programmers be hired to “correct” the lack of style linking information in these fonts and save new versions of the font files? Or, would that be breaking the legal terms of use?.....\n\nWhy would reputable foundries not include this information in their faces’ FOND resource areas?!?\n\nIt really is a problem when the end user is the average corporate worker. They simply won’t bother with complex formatting rules, no matter how simple you try to make it for them....if the bold and italic buttons don’t work in Word, forget it. I said the words “Paragraph Style” to them in the above-mentioned training session, and they looked at me like I had a 10-pound goiter.\n\nAny suggestions for dealing with this in the future?  \n(and thanks Tom for the macro code.....very handy, but again, I leave little hope that end users of office templates will actually ever run it!....)\n\n"
+    }
+  ]
+}

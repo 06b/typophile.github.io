@@ -1,0 +1,30 @@
+{
+  "id": "108110",
+  "title": "How to add palt and vpal features?",
+  "forum": "Build",
+  "tags": [
+    "alternate",
+    "halfwidths",
+    "metrics",
+    "number",
+    "proportional",
+    "Syntax",
+    "use",
+    "vertical",
+    "Build"
+  ],
+  "content": "Does anybody know the syntaxes of these features (Proportional Alternate Halfwidths and Proportional Alternate Vertical Metrics)?\n\n",
+  "author": "aki3k",
+  "time": "9 Jan 2014 — 3:06am",
+  "uid": "216456",
+  "comments": [
+    {
+      "time": "9 Jan 2014 — 5:18am",
+      "content": "It looks like they are \"Single adjustment positioning\"  \n [http://www.adobe.com/devnet/opentype/afdko/topic\\_feature\\_file\\_syntax.htm...](http://web.archive.org/web/20150419225314/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#6.a \"http://www.adobe.com/devnet/opentype/afdko/topic\\_feature\\_file\\_syntax.html#6.a\")  \nSo in .fea file:  \n`\nlookup vpalProportionalAlternateVertic {\n  lookupflag 0;\n    pos \\A <100 100 200 -300>;\n} vpalProportionalAlternateVertic;`\n\n`lookup paltProportionalAlternateMetric {\n  lookupflag 0;\n    pos \\B <-200 -300 0 0>;\n} paltProportionalAlternateMetric;\n`  \nBTW palt is Proportional Alternate Widths not Halfwidths\n\n"
+    },
+    {
+      "time": "9 Jan 2014 — 12:03pm",
+      "content": "This should help. Below are excerpts from the 'palt' and 'vpal' GPOS features in our KozGoPr6N-Medium OpenType font:\n\nfeature palt {  \n position \\634 \\<-20 0 -500 0\\>;  \n position \\638 \\<-250 0 -500 0\\>;  \n position \\674 \\<-480 0 -500 0\\>;  \n} palt;\n\nfeature vpal {  \n position \\638 \\<0 250 0 -500\\>;  \n position \\7887 \\<0 20 0 -500\\>;  \n position \\7899 \\<0 480 0 -500\\>;  \n} vpal;\n\nThe font is CID-keyed, so the glyph references are CIDs. CIDs 634, 638, and 674 correspond to U+3001, U+30FB, and U+FF08, respectively. These are good examples, because they represent a left-justified (U+3001), right-justified (U+FF08), and centered (U+30FB) glyph. The vertical form of CID+634 is CID+7887, and that of CID+674 is CID+7899. CID+638 is used for both horizontal and vertical writing, because it is centered in the em-box.\n\nAlthough the new advance widths are 500 units, meaning half-width, there is no requirement that this be the case. We simply decided to implement them that way for this particular font.\n\n"
+    }
+  ]
+}

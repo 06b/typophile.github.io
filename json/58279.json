@@ -1,0 +1,22 @@
+{
+  "id": "58279",
+  "title": "Fontlab’s metrics.txt syntax—numbers and documentation?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "What syntax must I use to create a metrics.txt entry for numbers? And is the syntax for metrics.txt documented somewhere?\n\n",
+  "author": "blank",
+  "time": "22 May 2009 — 7:38am",
+  "uid": "14722",
+  "comments": [
+    {
+      "time": "25 May 2009 — 1:22pm",
+      "content": "James,\n\nI agree that the syntax is a bit cryptical.\n\nMetrics.txt has an internal definition for a few special predefined pseudoclasses for use only in Metrics.txt: `uppercase, UPPERCASE, LATIN_UC, lowercase, LOWERCASE, LATIN_LC, smallcaps, SMALLCAPS, LATIN_SC`.\n\nThese pseudoclasses are prepopulated in FontLab Studio with some content. Whenever a glyph that belongs to one of those pseudoclasses is clicked on the metrics table in the metric mode of Metrics window, the glyph will be displayed in the Metrics window, surrounded by a set of other glyphs defined in Metrics.txt in the %%TEMPLATE section.\n\nYou can modify contents of the prepopulated pseudoclasses by defining an identically-named class in FontLab Studio's Classes panel.\n\nFor example, the glyph uni2206 is normally surrounded by uppercase glyphs in the Metrics window. If you define a UPPERCASE class in the Classes panel that looks as follows:  \n`UPPERCASE: uni2206`  \nthen the uni2206 glyph in Metrics window will join the prepopulated UPPERCASE pseudoclass. So from now on, in the metric mode of Metrics window the uni2206 glyph will behave exactly like uppercase letters, i.e. it will be surrounded by \"HOH\" on both sides, rather than \"HOH\" on the left side and \"non\" on the right side.\n\nYou can also define Metrics.txt templates for any classes that you defined in your Classes panel. Have a look at the following example:\n\n`%%CLASS_BEGIN\n#figures\nonum1\nonum2\nlnum1\nlnum2\npnum1\npnum2\ntnum1\ntnum2\n%%TEMPLATE\n/zero/one/two@/three/four\\n/five/six/seven@/eight/nine\\n/dollar/sterling/Euro@/cent/currency\\n/H/O/H@/n/o/n\\n\n%%CLASS_END`\n\nThe lines starting with %% tell FontLab Studio that a new section of the file starts or ends somewhere. Then, the line starting with # is a comment, an internal description for a given section. And immediately after it, a series of lines can follow, each having a **class name** as defined in FontLab Studio's Classes panel. These can be OpenType class names, kerning class names or metric class names. In my case, they are OpenType class names that are normally used for onum, lnum, pnum and tnum OpenType Layout features.\n\nThe %%TEMPLATE section describes the default surrounding for a glyph in the metric mode of the Metrics window. In the @TEMPLATE section, the `@` symbol stands for \"current glyph\", i.e. the glyph selected in the metrics table of the Metrics window, while `\\n` represents a \"new line\", i.e. the jump to the next line.\n\nAnother example: if you create a metric class in the Classes panel as follows:  \n`.uniFBE9: uniFBE9' uni067D.medi uni06B9.medi uni06BD.medi uni06CE.medi uni06D1.medi uni0751.medi uni0752.medi uni0753.medi uni0754.medi uni0755.medi uni0756.medi uni0767.medi uni0768.medi uni0769.medi uniFB55 uniFB59 uniFB5D uniFB61 uniFB65 uniFB69 uniFBA3 uniFBE7 uniFBFF uniFE8C uniFE92 uniFE98 uniFE9C uniFEE8 uniFEF4`  \nthen in Metrics.txt, you can add a following section:\n\n`%%CLASS_BEGIN\n#.uniFBE9\n.uniFBE9\n%%TEMPLATE\n/uniFBE0@/uniFE90\n%%CLASS_END`\n\nthen any of the Arabic glyphs defined in the `.uniFBE9` will be surrounded by the glyphs uniFBE0 and uniFE90 when clicked on in the metric table in the Metrics window. (The right order of display, i.e. right-to-left, can be controlled by the RTL button in the Metrics window). Please scroll the image to the right to see the class definition:\n\n ![](http://web.archive.org/web/20140330221443im_/http:/typophile.com/files/metricstxt_3848.png)\n\nPs. I just noticed that I already answered this on an [older thread on Typophile](http://web.archive.org/web/20140330221443/http:/typophile.com/node/52204).\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "25 May 2009 — 1:42pm",
+      "content": "Sorry for making you answer it twice, Adam. I can’t believe I didn’t find that one when I was searching.\n\n"
+    }
+  ]
+}

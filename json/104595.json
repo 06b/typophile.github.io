@@ -1,0 +1,26 @@
+{
+  "id": "104595",
+  "title": "Help with standard stem calculation (and other hinting nonsense)!!!",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "So, after spending the last couple years on my first font family, I am extremely close to releasing it, except for the fact that PS hinting is making my brain explode.\n\nI've figured out how to use the Adobe Font Development Kit for autohinting, but from my understanding, if you don't have good standard stems set up, the autohinting doesn't really help too much.\n\nSo my question is, what is the proper way to calculate the standard stem, and is there any sort of way to automate this? Even if there is a script that will do it to a decent level seems like something that would work better than my current understanding.\n\nI've attached a screenshot showing how poorly my font is rendering on screen... (as you can see, the characters are hopping all around as if they were on a trampoline).\n\nAt this point, any help whatsoever will be greatly appreciated.\n\n ![](http://web.archive.org/web/20150419164354im_/http:/typophile.com/files/Screen%20Shot%202013-07-13%20at%2012_6023.03.52%20PM.jpg)\n\n",
+  "author": "wolfattack",
+  "time": "13 Jul 2013 — 12:15pm",
+  "uid": "15289",
+  "comments": [
+    {
+      "time": "13 Jul 2013 — 12:27pm",
+      "content": "You should probably mention what font editor you're using.\n\n"
+    },
+    {
+      "time": "13 Jul 2013 — 12:32pm",
+      "content": "Sorry about that, Fontlab.\n\nIronically, after spending countless hours dealing with this over the last week or two, I realized my descender alignment zone (like for my /g/) was under the primary zone column, and by moving it to the secondary zone column in Fontlab it now looks 10x better!\n\n"
+    },
+    {
+      "time": "13 Jul 2013 — 1:44pm",
+      "content": "FontLab can fill in the stem weights automatically if you click the 'auto stems' button in the hinting settings page of font info. However, you ideally need as few as possible, so I'd recommend measuring the lowercase stem widths (horizontal and vertical) with the ruler and putting these in. If uppercase has significantly different weights you can add those secondarily.\n\nIt looks like you need to adjust your alignment zones a bit too; make sure they include all overshoots, and need to be entered in ascending numerical order (as you note, primary zones pull overshoots down, except the baseline and secondary zones pull overshoots up, like with the descenders).\n\n"
+    }
+  ]
+}

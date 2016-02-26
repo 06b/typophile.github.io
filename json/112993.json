@@ -1,0 +1,30 @@
+{
+  "id": "112993",
+  "title": "Weights - How to deal with it!?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "It's driving me absolutely crazy. I want to use Open Sans 400 for most everything and Open Sans 800 for forum subjects/topics/forum names. But the only browser to render it properly is Chrome. Every other browser gets completely mixed up and seems to default to Open Sans 800 even when Open Sans 400 is called.\n\nI've tried making Open Sans 400 weight 800 through CSS, but it's a totally different deal than true Open Sans 800 font type.\n\nAny ideas? Chrome is fine. All other browsers have no idea how to handle it. That includes Firefox, Opera, Explorer. I wish I had some samples to show what I mean, but this is an issue from a while back, and I just decided to settle on 'sans caption' for what I really want to be open sans 800.\n\n",
+  "author": "damian5000",
+  "time": "2 Feb 2014 — 8:55am",
+  "uid": "215212",
+  "comments": [
+    {
+      "time": "2 Feb 2014 — 11:08am",
+      "content": "Since the Apache license appears to allow modifications, the simplest solution would be to give the fonts different names...\n\n"
+    },
+    {
+      "time": "3 Feb 2014 — 1:59am",
+      "content": "Can you give me an example of how that would be done? Changing the name of the font...\n\n"
+    },
+    {
+      "time": "3 Feb 2014 — 4:58am",
+      "content": "The following is largely an excerpt from what I have on my bedroom LAN server. Perhaps it'll help...\n\n    @font-face {\n    \tfont-family: 'Open Sans';\n    \tfont-weight: normal;\n    \tfont-style: normal;\n    \tsrc: local('Open Sans'), local('OpenSans'),\n    \t     url('OpenSans-Regular.woff') format('woff'),\n    \t     url('OpenSans-Regular.ttf') format('truetype');\n    }\n    @font-face {\n    \tfont-family: 'Open Sans';\n    \tfont-weight: normal;\n    \tfont-style: italic;\n    \tsrc: local('Open Sans Italic'), local('OpenSans-Italic'),\n    \t     url('OpenSans-Italic.woff') format('woff'),\n    \t     url('OpenSans-Italic.ttf') format('truetype');\n    }\n    @font-face {\n    \tfont-family: 'Open Sans';\n    \tfont-weight: bold;\n    \tfont-style: normal;\n    \tsrc: local('Open Sans Semibold'), local('OpenSans-Semibold'),\n    \t     url('OpenSans-Semibold.woff') format('woff'),\n    \t     url('OpenSans-Semibold.ttf') format('truetype');\n    }\n    @font-face {\n    \tfont-family: 'Open Sans';\n    \tfont-weight: bold;\n    \tfont-style: italic;\n    \tsrc: local('Open Sans Semibold Italic'), local('OpenSans-SemiboldItalic'),\n    \t     url('OpenSans-SemiboldItalic.woff') format('woff'),\n    \t     url('OpenSans-SemiboldItalic.ttf') format('truetype');\n    }\n    @font-face {\n    \tfont-family: 'Open Sans XBold';\n    \tfont-style: normal;\n    \tsrc: local('Open Sans Extrabold'), local('OpenSans-Extrabold'),\n    \t     url('OpenSans-ExtraBold.woff') format('woff'),\n    \t     url('OpenSans-ExtraBold.ttf') format('truetype');\n    }\n    @font-face {\n    \tfont-family: 'Open Sans XBold';\n    \tfont-style: italic;\n    \tsrc: local('Open Sans Extrabold Italic'), local('OpenSans-ExtraboldItalic'),\n    \t     url('OpenSans-ExtraBoldItalic.woff') format('woff'),\n    \t     url('OpenSans-ExtraBoldItalic.ttf') format('truetype');\n    }\n\n"
+    },
+    {
+      "time": "3 Feb 2014 — 5:14am",
+      "content": "okay. thanks. i figured out, i just needed to change font-family in css. I can call it whatever i want, then associate that with the uploaded ttf file.\n\nexample:  \n`@font-face\n{\nfont-family: myFirstFont;\nsrc: url(http://www.mysite.com/forum/fonts/OpenSans-Bold.ttf);\n}`\n\nI thought I had to manually change the font name within the file, which I found out how to do with typograf, but turns out i didn't need to do that.\n\nThanks again for the reply.\n\n"
+    }
+  ]
+}

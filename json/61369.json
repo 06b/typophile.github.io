@@ -1,0 +1,214 @@
+{
+  "id": "61369",
+  "title": "What is Typekit?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Can someone describe [Typekit](http://web.archive.org/web/20131016012009/http:/typophile.com/wiki/Typekit) to a luddite?\n\n",
+  "author": "Chris Dean",
+  "time": "25 Aug 2009 — 12:24pm",
+  "uid": "/web/20131016012009/http://typophile.com/readthetype",
+  "comments": [
+    {
+      "time": "25 Aug 2009 — 12:35pm",
+      "content": "I would describe it as a web font obfuscation service. A layer between browser and font that provides just enough hacking, hiding, along with rights-management, to make (some) type designers comfortable with allowing their fonts to be used with the @font-face linking mechanisms supported by Web browsers.\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 12:48pm",
+      "content": "So it lets a web designer use a font that s/he owns, and a user can see it even if that don't have it installed?\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 1:11pm",
+      "content": "Sounds like it's embedding the font in that particular web site - is that correct?\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 1:13pm",
+      "content": "It's a service. From what I can tell you can't use any font you own, just those that Typekit offers. You could use any font you own with @font-face if the fonts EULA allows it (most won't).\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 1:18pm",
+      "content": "I don't know what \"@ font face\" or \"EULA\" means. I'm not being devil's advocate. I'm actually a luddite.\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 1:43pm",
+      "content": "\"@fontface\" is a declaration in CSS\\* that allows a specific font which may not be on a viewer's machine to be loaded along with the web page and thus allow a web page to display text rendered in something other than \"web-safe\" default fonts -- as a font, not as an image.\n\nDifferent browsers have different implementations of this @fontface declaration, supporting different font formats, etc.\n\nWeb designers find it cumbersome and a nuisance to keep track of all the different variations in code and formats to address the idiosyncrasies of different browsers that their viewers may be using. It is also confusing and frustrating for well-intentioned designers to understand which, if any, of the fonts they have or want will allow such a use as part of a font vendor's End User License Agreement (EULA).\n\nOn the other side of the equation, most vendors do not have licensing models for allowing use of their fonts for this kind of web \"embedding.\" Most are reluctant to allow this use because some of the current browsers only support @fontface with \"naked\" fonts (i.e., the same OpenType or TrueType font format that can be installed directly on a desktop machine and used for any other purpose) and the security against these fonts being rather inadvertently or innocently acquired and used elsewhere is minimal.\n\nEnter TypeKit (among others) as a service. They arrange with foundries to offer typefaces for use as web fonts (taking advantage of @fontface to serve up fonts to the web page). They host the font files on their own server and take pains to obfuscate the location and the contents of those files in various ways, to add a layer of security against misappropriation that their partner foundries accept.\n\nWeb designers who subscribe to the service select from the fonts on offer and are provided with copy-and-paste code that allows them to utilize these fonts in their web pages via CSS stylesheets, without having to worry about the details of the evolving technology and with confidence that they are correctly licensed. Typekit takes care of making sure that various browsers are served the appropriate formats in such a way that maximum compatibility and consistency is provided for the design.\n\nEssentially TypeKit is building a bridge between web designers and font vendors by taking care of the messy muddle in the middle in terms of both technology and licensing ins and outs.\n\nI hope I've stated this clearly for you and that my understanding does an adequate job of representing the essence of the situation.\n\nOthers can correct any oversimplifications or add any essential elements that I've skipped.\n\n-- Kent.\n\n[Edit]: \\* Sorry, I forgot to explain: CSS stands for Cascading Style Sheets and is used hand-in-hand with HTML for formatting and styling web pages.\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 1:53pm",
+      "content": "And for anyone else on the fringes:\n\n[http://typekit.com](http://web.archive.org/web/20131016012009/http:/typekit.com/ \"http://typekit.com\")\n\n[http://blog.typekit.com/2009/05/27/introducing-typekit/](http://web.archive.org/web/20131016012009/http:/blog.typekit.com/2009/05/27/introducing-typekit/ \"http://blog.typekit.com/2009/05/27/introducing-typekit/\")\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 3:27pm",
+      "content": "This is some good basic reading too ...\n\n[http://opentype.info/blog/2009/07/29/why-webfont-services-are-the-future...](http://web.archive.org/web/20131016012009/http:/opentype.info/blog/2009/07/29/why-webfont-services-are-the-future-of-fonts-on-the-web/ \"http://opentype.info/blog/2009/07/29/why-webfont-services-are-the-future-of-fonts-on-the-web/\")\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 4:47pm",
+      "content": "You can see the rendering (hopefully) of two of my babies (Galette & Mentone) [here](http://web.archive.org/web/20131016012009/http:/www.paragraph.com.au/typekit.html). Do not know whether they both work on IE/Win, though (Sii, could you please let me know?).\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 5:15pm",
+      "content": "Galette seems to work, Mentone does not. IE7 on Vista.\n\n"
+    },
+    {
+      "time": "27 Aug 2009 — 5:54am",
+      "content": "\\> You can see the rendering (hopefully) of two of my babies (Galette & Mentone) here.\n\nCool. First time I had seen type kit in use. And it does work on IE7.0.5 on Windows. A second of display in the default serif, and then it pops into the correct faces. (I wonder if the delay is server related, and if it will grow longer if the service becomes popular.)\n\n"
+    },
+    {
+      "time": "27 Aug 2009 — 7:05am",
+      "content": "@Paragraph: There is a lag of three or four seconds before the ‘real’ fonts kick in. I am on a Mac w OS X 10.5 and Safari 4 (latest release). And in the Netherlands, if that is of consequence.\n\nThe lag makes it kind of unusable. Except if it just happens in the first webpage, I guess, IF it caches in some way.\n\n. . .  \nBert Vanderveen BNO\n\n"
+    },
+    {
+      "time": "27 Aug 2009 — 7:06am",
+      "content": "@Paragraph: have you tweaked something? When sii posted, my system (IE6 on Win XP Pro) agreed with his verdict. Mentone seems to show OK for me as well now though. Although the ™ symbol isn't working in the Galette sample.  \n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_  \nEver since I chose to block pop-ups, my toaster's stopped working.\n\n"
+    },
+    {
+      "time": "27 Aug 2009 — 7:22am",
+      "content": "TypeKit is one of many web-sites-as-a-service that allows you to put some javascript on your page that, in turn, will automatically load the appropriate javascript and/or css files necessary for you to load typefaces onto your page for use in standard HTML.\n\nThey have arisen for a few reasons (IMHO, of course):\n\n- convenience for the web designer...we just add one line to our HTML to set it all up  \n - perceived protection for the type designer (there's a certain level of obfuscation that many foundries find acceptable over directly uploading fonts to your own server)  \n - pricing options. It appears that, at least with typekit, there will be a buffet-type pricing scheme.\n\n"
+    },
+    {
+      "time": "27 Aug 2009 — 7:56am",
+      "content": "\\>Mentone seems to show OK for me as well now though.\n\nSame here. :-)\n\n\\>The lag makes it kind of unusable.\n\nVery little lag - a second at most on my set up. But any lag makes me think people might start putting Web fonts on the metrics of the core fonts to reduce the reflow-flicker when the fonts load in.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "27 Aug 2009 — 9:24am",
+      "content": "By the way, as it says in the thread title, it's \"Typekit,\" not \"TypeKit.\"\n\nI wouldn't bother mentioning it except I'm just so glad to see a name that's not in \"camel case\" for a change. (Maybe it's an indication of a trend away from that.)\n\n"
+    },
+    {
+      "time": "27 Aug 2009 — 9:30am",
+      "content": "Given the target audience is web designers/developers, perhaps camel case would have been more appropriate. ;)\n\n"
+    },
+    {
+      "time": "27 Aug 2009 — 9:45am",
+      "content": "And the logo is all lowercase - so I say anything goes :-)\n\nHow about... TyPeKıT!\n\n"
+    },
+    {
+      "time": "27 Aug 2009 — 4:56pm",
+      "content": "Thank you all for this, AFAIK the Typekit folk are making the submitted OT fonts compatible with IE right now, perhaps Mentone was just tweaked. How about the rendering? Below is Safari 4.0.3/Mac OSX 10.5.8:\n\n ![](http://web.archive.org/web/20131016012009im_/http:/typophile.com/files/saf_6742.png)\n\n"
+    },
+    {
+      "time": "27 Aug 2009 — 9:41pm",
+      "content": "@christopher dean\n\n\"_So it lets a web designer use a font that s/he owns, and a user can see it even if that don’t have it installed?_\"\n\nAlmost. It lets a web designer use a font that s/he licenses for use from the font service, like Typekit, even though the user doesn't have it installed in their operating system.\n\nOn a technical level, it works similarly to the way block ads - like the ones for Font Bureau here at Typophile - are included in the page. Similar principal except instead of including a link to block ad images, the link is to font data. Both are handled by Javascript that creates the HTML and CSS necessary to link to the correct resource on the fly as the page loads in the browser.\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 3:58am",
+      "content": "\\>AFAIK the Typekit folk are making the submitted OT fonts\n\nProve it.\n\nAnd the rendering looks great, but do you have something slightly lighter?\n\nAnd why do the uppercase italic letters look more slanted than the l.c., are they all the same angle or is it something worse?\n\n\\>http://typekit.com\n\nAre they using their own service anywhere on thir own site?\n\nCheers!\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 5:51am",
+      "content": "David: if there is anything wrong with the rendering of the fonts, it is my fault, not Typekit's. They serve the stuff, they do not make it.\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 6:31am",
+      "content": "\\>...if there is anything wrong with the rendering of the fonts, it is my fault...\n\nI know that. All rendering quality depenze on the digital outline font input and the scaling quality.\n\nDo you have something slightly lighter or not!?\n\n\\>...not Typekit’s.\n\nI never said it was Typekit’s fault.\n\nI asked you to prove that they were serving OT, meaning OpenType, (.otf) fonts converted to EOT to IE users.\n\nCheers!\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 6:38am",
+      "content": "Well, that one should be simple: I sent them .otf  \nIs that proof enough?\n\nLighter? I thought that Mentone Light was already on the too light side at small sizes.\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 6:45am",
+      "content": "\\>Well, that one should be simple: I send them .otf  \n\\>Is that proof enough?\n\nKind of depends if you gave them conversion rights as part of the license you signed with them.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 6:57am",
+      "content": "Maybe I should just shut up. Disclaimer: all rendering mishaps in said Mentone and Galette samples are entirely my fault. The good bits are courtesy AFDKO autohint.\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 7:12am",
+      "content": "\\>Is that proof enough?\n\nNo, but thanks. Why don't you ask them. You have a licensing agreement don't you?\n\n\\>Kind of depends...\n\nSimon, it depends on whether they are trying to serve some fonts to all IE, or some IE with some fonts, and some IE with other fonts. Is that clear?\n\nThat's 'interoperability'. If they or anyone told their foundry clients the whole situation before they made licensing agreements, I'd be pleasantly shocked.\n\nWhile you're awake 'over there', Simon, can you point me to a web site that serves an Embeddable OpenType font (that is the same as an Embedded Opentype font, except that since it's never embedded, I remain tense correct), with more than 256 glyphs in the EOT?\n\nAnd I apologize to anyone, 'in-the-know' who knows that EOT does not generally contain any OT if it's going to work in all IE.  \nBut they/we still cannot change the name of EOT fast enough for these discussions. ;)\n\nCheers!\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 7:18am",
+      "content": "FWIW Jan, this is what I get in IE/Win:  \n(Note that it doesn't seem to find your real italics, as well as the poor rendering at some sizes, and the missing ™ in one font but not the other...)\n\n ![](http://web.archive.org/web/20131016012009im_/http:/typophile.com/files/samples_3713.gif)\n  \n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_  \nEver since I chose to block pop-ups, my toaster's stopped working. \n"
+    },
+    {
+      "time": "28 Aug 2009 — 7:20am",
+      "content": "...oh and the sample page prints OK (crisply, but still without the real italics) to a physical printer or to a third-party PDF utility, but not to Acrobat, which complains:\n\n`%%[ProductName: Distiller]%%\nMentone-Light not found, using Courier.\n%%[Error: invalidfont; OffendingCommand: show]%%`\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 7:37am",
+      "content": "David, just one last remark, if I may: I do not have enough understanding of these matters to be a worthwhile sparring partner to you. I am attracted to Typekit by their practical approach to the problems you and the others have been discussing at length in the other threads and elsewhere. I like \"practical\", as I am too daft and old for \"theoretical\".\n\nCheers to you too.\n\nDave, that's pretty bad, back to drawing board ... no smoothing/antialiasing at all? Just a raw bitmap? Simon to the rescue!\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 7:39am",
+      "content": "By the way, the italics and the trademark render fine in my Firefox, so whatever it is, it's as issue of incompatibility with IE (No surprise there then.) rather than with Windoze.  \n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_  \nEver since I chose to block pop-ups, my toaster's stopped working.\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 8:36am",
+      "content": "DB\\> Simon, it depends on whether they are trying to serve some fonts to all IE, or some IE with some fonts, and some IE with other fonts. Is that clear?\n\nI wasn't thinking of IE or EOT, I was speculating that they might convert to TrueType to give broader support across different platforms - eg. Linux, or versions of Windows that don't support CFF.\n\nDB\\> While you’re awake ’over there’, Simon, can you point me to a web site that serves an Embeddable OpenType font (that is the same as an Embedded Opentype font, except that since it’s never embedded, I remain tense correct), with more than 256 glyphs in the EOT?\n\nSorry David, I'm awake but I don't have a clue as to what you're asking.\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 8:45am",
+      "content": "\\>Dave, that’s pretty bad, back to drawing board ... no smoothing/antialiasing at all? Just a raw bitmap? Simon to the rescue!\n\nFor sure, funnily enough they contacted me for the first time last night. The email had the subject line \"EOT, Microsoft, and What the Hell\" :-)\n\nI'm certain we can help them adjust their CFF -\\> TTF -\\> EOT conversion process to improve the rendering in IE.\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 11:07am",
+      "content": "@sii\n\n\"_I’m certain we can help them adjust their CFF -\\> TTF -\\> EOT conversion process to improve the rendering in IE._\"\n\nThis is a big problem that I'm still trying to find answers to. I have spent good money on OTF CFF fonts that look like hell in Windows no matter what I do. And I am not automatically assigning blame to Windows, either. Safari's rendering of body text drives me nuts, so I'm not a big fan of their approach to rasterizing within Windows, either.  \nJohn Hudson quite graciously took the time to explain to me the fundamental differences between TT and CFF but how do we bridge the gap with regard to web fonts?  \nI might email you on this one, Simon, and soon.  \nWhat \"help\" might be on the way?\n\n[Richard Fink](http://web.archive.org/web/20131016012009/http:/readableweb.com/)\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 11:25am",
+      "content": "\\> This is a big problem\n\nActually I think it's the \\*biggest\\* problem - once you get the whole licensing thing out of the way.\n\nIn Windows CFF fonts are generally rendered using a separate \"black-box\" PostScript rasterizer licensed from Adobe.\n\nFor the Web, what's cool about services like Webkit is that they can serve different fonts to different browsers running on different platforms depending on the rendering style of the browser, type of display etc., Something that's incredibly hard to do on a case-by-case basis for the average web site owner, unless they are working side by side with a font vendor who can provide a set of custom fonts - people like Font Bureau or Ascender.\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 12:01pm",
+      "content": "Firefox in Windows XP just shows me Verdana...\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 1:11pm",
+      "content": "Go to options / internet / fonts / and unclick \"IKEA\"\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 1:14pm",
+      "content": "[http://www.cssquirrel.com/comic/?comic=32](http://web.archive.org/web/20131016012009/http:/www.cssquirrel.com/comic/?comic=32 \"http://www.cssquirrel.com/comic/?comic=32\")\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 1:35pm",
+      "content": "@ Fink (in joke. you had to be there): Do you have an online bio?\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 1:36pm",
+      "content": "They explain the joke in the related blog post.\n\n[http://www.cssquirrel.com/2009/08/17/comic-update-typekit-comes-to-font-...](http://web.archive.org/web/20131016012009/http:/www.cssquirrel.com/2009/08/17/comic-update-typekit-comes-to-font-faces-rescue/ \"http://www.cssquirrel.com/2009/08/17/comic-update-typekit-comes-to-font-faces-rescue/\")\n\nBut if you _have_ to explain the joke...\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 1:44pm",
+      "content": "DB\\> While you’re awake ’over there’, Simon, can you point me to a web site that serves an Embeddable OpenType font (that is the same as an Embedded Opentype font, except that since it’s never embedded, I remain tense correct), with more than 256 glyphs in the EOT?\n\nMe\\> Sorry David, I’m awake but I don’t have a clue as to what you’re asking.\n\nI asked around, and we think you're asking if its possible to include more than 256 glyphs in an EOT. The answer is yes, although you probably want to subset a font, that's not required. As a test I took a font with over 600 glyphs and made an EOT, seems to work fine...\n\n ![](http://web.archive.org/web/20131016012009im_/http:/typophile.com/files/Capture_3902.GIF)\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 2:11pm",
+      "content": "_CFF -\\> TTF -\\> EOT conversion process_\n\nSi, is this conversion something that should not be tried at home?\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 2:24pm",
+      "content": "Actually nothing to stop you giving this a try. Output TTF from FontLab and try various hinting settings, as well as different weights and styles. Then on a Windows installation you can proof different settings using HTML and IE. Once you've found the optimal settings you can create an EOT using WEFT or the Ascender EOT lite tool. Post the results to your site for peanut-gallery-review.\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 3:56pm",
+      "content": "Rich: _John Hudson quite graciously took the time to explain to me the fundamental differences between TT and CFF but how do we bridge the gap with regard to web fonts?_\n\nUse the same rendering technology for both outline types?\n\nTop: Windows GDI CFF font rasterisation using Adobe blackbox.  \nBottom: Windows WPF CFF rasterisation using ClearType.\n\n ![](http://web.archive.org/web/20131016012009im_/http:/typophile.com/files/CFFwCT_4873.gif)\n\nI suspect David will say this is bridging the gap by making CFF fonts look bad in the same way as TTF fonts, but there's something to be said for things looking bad in the same way rather than in divergent ways.\n\nUndocumented: how CT rasterisation of CFF interprets CFF hint data.\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 5:29pm",
+      "content": "Keeping the Typekit in mind, BTW, there is a forum with the most common questions and problems involved in the current beta version of their service.\n\n[http://getsatisfaction.com/typekit](http://web.archive.org/web/20131016012009/http:/getsatisfaction.com/typekit \"http://getsatisfaction.com/typekit\")\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 6:43pm",
+      "content": "I'm a little tired, and it's been a few days since I followed this thread but I read through it. Given there's a few acronyms I don't understand, can someone explain the relationships between Typekit and ClearType, TrueType, Black box, Hinting, Fontlab &c or are we talking about different things now (not that that's a problem).\n\nI thought Typekit was a \"middle man\" between vendors, designers and viewers. Is this correct or am I back to being confused?\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 7:05pm",
+      "content": "•Typekit = Web service that schleps fonts in a way similar to Doubleclick schlepping ads. Yes, it is a middle man.  \n•Hinting = Instructions in a font that tell software how to render it so that it fits into a pixel grid without looking like a postmodern experimental design.  \n•TrueType = A font format created by Microsoft and Apple because everyone got pissy about John Warnock enforcing the Postscript patents. TrueType provides an awesome hinting system for rendering type at small sizes, but only ten people know how to use it and nobody else wants to figure it out because TrueType hinting is like watching paint dry. In New Orleans.  \n•ClearType = Microsoft’s hype, I mean type, rendering engine. It is not especially relevant because it does a poor job of rendering the Postscript fonts that people actually want to use. Because Microsoft doesn’t want anyone to steal their secret, they don’t tell us how it really works so almost nobody knows how to make type look good with ClearType.  \n•Blackbox = I think John was referring to the Adobe type rendering engine. It sucks, but it sucks consistently across platforms.  \n•Fontlab = What we’re all stuck using to create fonts until Glyphs is released.\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 7:45pm",
+      "content": "<cite>I thought Typekit was a “middle man” between vendors, designers and viewers. Is this correct or am I back to being confused?</cite>\n\nThat's the basic idea behind sevices like Typekit, Christopher. A middle-way where web designers can use fonts through a subscription. Designers can copy ad paste simple code to their pages and choose wich fonts to use in the service's interface, without having to deal with more complex issues like the highly technical ones exposed here.\n\nI'm giving a try, supplying some few selected display fonts to see how the response of web designers will be for this kind of type design approach.\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 8:29pm",
+      "content": "Thanks for the definitions James. I know what the words mean, I just don't understand how they relate to what Typekit Does. Instinct tells me the that the conversation is becoming somewhat tangential. I'm quite curious to see how Typekit unfolds.\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 9:18pm",
+      "content": "The definitions relate to Typekit because Adobe, Microsoft, and Apple have made it excessively irritating to create type that looks good onscreen and across software and OS platforms. So instead of just being able to license the existing Postscript fonts, everybody has to make and test TrueType hinted fonts to use with services like Kernest, (and if it leaves beta before the PR person spends all the money, Typekit). This is a problem for type vendors who have a lot of high-end text faces, because hinting the fonts for use at text size is going to take a long time and cost a lot of money, especially if it turns out that web designers would really just rather stick with Georgia and Verdana because most people won’t spot much difference at ten pixels anyway.\n\n"
+    }
+  ]
+}

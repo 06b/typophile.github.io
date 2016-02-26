@@ -1,0 +1,50 @@
+{
+  "id": "55717",
+  "title": "opentype features",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hello,\n\nNew to the forum here (and to OT)(and have a decent working knowledge of fontlab), forgive if this has been covered.\n\nI am looking to add an opentype substitute feature into a font i have begun building. My intent is to have three versions of each character that will cycle as to appear randomly. That being said, my question is threefold.\n\n1- In fontlab's glyph window, where do i create the alternate characters, and what would be a typical naming convention?\n\n2- Would it be easier, code-wise, to randomize each character? or to create alt\\_set1, alt\\_set2, and alt\\_set3?\n\n3- what would be the best way to set up the glyph classes to achieve this result?\n\nI hope this makes sense..  \nThank you for any and all input!  \nJohio\n\n",
+  "author": "<a href=\"/web/20100203164416/http://typophile.com/user/42894\" title=\"View user profile.\">johio</a>",
+  "time": "<br>",
+  "uid": "42894",
+  "comments": [
+    {
+      "time": "",
+      "content": "1. a.alt1, a.alt2, &c.  \n2. by character  \n3. there have been several Typophile threads on this, but they're hard to find these days with Google.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thank you Nick, for your time.\n\nWould this be achieved through calt, aalt, or other means? I have been attempting to find script examples with little luck. Any additional information on the subject would be amazing. Links, tutorials or the like.\n\nThanks again.  \nJoe\n\n"
+    },
+    {
+      "time": "",
+      "content": "Here is example cycling code based on CALT, originally cooked up by Tom Phinney:\n\nfeature calt {  \nlookup rotate {  \n sub @default @default' by @alt1;  \n sub @alt1 @default' by @alt2;  \n} rotate;  \nlookup rotate;  \n} calt;\n\n[Silas Dilworth](http://web.archive.org/web/20100203164416/http:/silasdilworth.com/) and I recently released [Black Monday, a font that cycles through three glyph sets.](http://web.archive.org/web/20100203164416/http:/www.typetrust.com/font/blackmonday) It turned out that while CALT is nice, it is not widely implemented. Making matters worse, it’s not always on by default. And it’s flaky—for example, in Indesign long strings of nonstop CALTs occasionally result in CALT turning off (although for display faces this won’t usually be an issue). Silas dealt with this by writing a program that generates a massive list of LIGA ligatures to handle the cycling; it works very well.\n\nWould the mods please make a sticky out of one of the older, in-depth posts?\n\n"
+    },
+    {
+      "time": "",
+      "content": "great info James, thanks for the time!\n\nBlack Monday is a great example of the functionality i am looking for. Nice looking as well!\n\nOne of several remaining questions is a total novice one. When I define the glyph classes, i.e. @alt1. what form does this take in the code?\n\nwould it be something like:\n\n@alt1 = [a.alt1 - z.alt2]\n\nwhich would be followed by something simple like the above calt feature??\n\nThanks for all the help.  \nJoe\n\n"
+    },
+    {
+      "time": "",
+      "content": "Classes are covered in the Fontlab manual, page 597.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>for example, in Indesign long strings of nonstop CALTs occasionally result in CALT turning off (although for display faces this won’t usually be an issue)</cite>\n\nWhat do you mean? That after each (automatic) line break, the rotation circle will start anew?\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>What do you mean?</cite>\n\nWhen I was testing Black Monday with CALT, the contextual alternates feature would occasionally shut off and need to enabled by the user. I should probably put some examples together and submit a bug report.\n\nAnd the mods have stickied the old post that explains the CALT rotation stuff, it is at the top of the build forum.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>submit a bug report</cite>\n\nWith exact application name and version etc, yes. Sounds weird. (I haven't experienced this with my own alternate-rotation fonts yet so I am curious.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "[http://typophile.com/node/19625](http://web.archive.org/web/20100203164416/http:/typophile.com/node/19625 \"http://typophile.com/node/19625\")\n\n"
+    }
+  ]
+}

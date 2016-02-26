@@ -1,0 +1,38 @@
+{
+  "id": "46838",
+  "title": "InDesign problem/question",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I know this isn’t the right place, but perhaps somebody can point me to a place that can help.\n\nIn CS3, if you are using a document dictionary and add a word, the new hyphenation points are honored—unless that word is preceded by a closed-up emdash, in which case, hyphenation reverts to the hyphenation in the proximity dictionary. This behavior holds true for hyphens, en-dashes, and emdashes, whenever the the character preceding the dash/hyphen is not a space—or perhaps not one ID takes as a word boundary.\n\nFor example, if you add\n\npart~ic~ular\n\nand\n\nhyph~enat~ion\n\nto the user dictionary, the single words are hyphenated according to the new break points, but\n\nbut both\n\nparicular-hyphenation,\n\nand\n\nparticular—hyphenation\n\nrevert to the proximity dictionary break points.\n\nFor the compound words, you can add them to the dictionary treating the hyphen ac a character, and it works. e.g.\n\npar ~~ic~~ ular-~hyph ~~enat~~ ion\n\nbut that is a lot of work, and em-dashes can occur with just about any words, and in any proof stage.\n\nAny suggestions appreciated,\n\nCharles\n\n [‹ creating NON LATIN Unicode font for Apple Macintosh](http://web.archive.org/web/20080907055314/http:/www.typophile.com/node/45501 \"Go to previous forum topic\") [ascenders cut off in MS Word ›](http://web.archive.org/web/20080907055314/http:/www.typophile.com/node/45635 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080907055314/http://www.typophile.com/user/5094\" title=\"View user profile.\">charles_e</a>",
+  "time": "<br>",
+  "uid": "5094",
+  "comments": [
+    {
+      "time": " 26.Jun.2008 3.53pm",
+      "content": "Insert a miniscule space, perhaps? The hair space, for example. You can also try the non-joiner character (if I remember correctly). But chances are you can’t do that on either side of the hyphen, because it might lead to the hyphen ending up on the wrong side if it’s used in a line break. And, logically (following Adobe’s logic), “particular-” is not the same word as “particular”, so that would only halve the problem.\n\nOne would expect a hyphenated compound to honour the hyphenation of its compounds; I can’t think of a reason why _not_.\n\nBy the by, are these two words just random examples? It seems to me they should get hyphenated OK. (Which doesn’t circumvent the actual problem, tho’.)\n\n"
+    },
+    {
+      "time": " 27.Jun.2008 9.49am",
+      "content": "I think I can explain what’s happening and why and what we hope to do about it...  \n1) First of all, this behavior has been reproduced and a bug report has been written against the next version of InDesign.  \n2) This bug was introduced either in CS2 or CS3 to fix an bug with some languages (Czech, Polish, maybe others). The original behavior was always to send the words on either side of a dash to the hyphenation system separately (which addresses your issue). However, when Czech words that already contain a hyphen are hyphenated the hyphen character appears at the end of one line and the beginning of the next. So, it was necessary to send words containing hyphens to the dictionary intact. The bug is that we didn’t differentiate between the hyphen and dashes.  \n3) We do strip punctuation off before looking up words in the dictionary, so _particular_ and _particular-_ should be treated the same way.  \n4) The non-joiner isn’t a breaking character, but the discretionary line break (or zero-width space, u+200B) is.\n\n"
+    },
+    {
+      "time": " 27.Jun.2008 1.18pm",
+      "content": "Thanks for the reply, Eric.\n\n<cite>3) We do strip punctuation off before looking up words in the dictionary, so particular and particular- should be treated the same way.</cite>\n\nisn’t quite what happens, though. Below a test snippit w/ CS3. As you can see, both the word before and after reverts with either an em-dash or a standard hyphen. (The lines at the top just show what I added to the dictionary, we all know that isn’t the place you enter them!)\n\n ![](http://web.archive.org/web/20080907055314im_/http:/www.typophile.com/files/hyp2_5326.gif)\n\nWhat we really want to do is completely replace the hyphenation dictionary that comes with InDesign, but that doesn’t seem possible. You can put in all the words from a book, hyphenated as you want, but under certain situations, InDesign seems to revert to the Proximity dictionary no matter what.\n\nThe reason for all this is we set books, and by in large need to follow the Chicago Manual of Style. Two cases from the Chicago Manual should make the point, single vowels should stay up & never be taken down (section 6.45, 15th edition); and compounds words need to be treated gingerly—see section 6.50.\n\nThe other reason for making a dictionary for each title is that various languages are almost never tagged in author-supplied files. What we have done for years is to make up a dictionary for each book, and if Russian & English, Spanish & English—or whatever—occur in the text, all the words can live in a single dictionary specific for that book.\n\nSo, is there a way to completely replace the dictionary?\n\n"
+    },
+    {
+      "time": " 27.Jun.2008 1.43pm",
+      "content": "Charles, your screenshot shows that one of the words added was **hype~enat~ion**. Is that a typo, or the word added was really that one?\n\n"
+    },
+    {
+      "time": " 27.Jun.2008 2.00pm",
+      "content": "Miguel,\n\nYes, it’s a typo. Should be hyph~enat~ion. Should have made two screen shots.\n\n"
+    },
+    {
+      "time": " 27.Jun.2008 4.02pm",
+      "content": "InDesign shares plug-able hyphenation dictionaries with Photoshop & Illustrator and they can be created by external parties. See [http://www.adobe.com/devnet/linguisticlibrary/](http://web.archive.org/web/20080907055314/http:/www.adobe.com/devnet/linguisticlibrary/) to start. You might have to contract with a developer, but the possibility exists...\n\n"
+    }
+  ]
+}

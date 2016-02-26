@@ -1,0 +1,33 @@
+{
+  "id": "122104",
+  "title": "How to substitute two letters for alternates rather than a ligature",
+  "forum": "Build",
+  "tags": [
+    "alternate letters",
+    "contextual alternates",
+    "OpenType",
+    "Build"
+  ],
+  "content": "I continued working on this handwritten typeface and while I made alternates to replace double vowels before, I would prefer to replace both vowels individually.\n\nSo, right now I have the following feature:  \nsub a a by a\\_a;\n\n/a\\_a features two variants on /a that are both different from the default /a. Essentially what I want to do is replace /a /a by /a.alt1 and /a.alt2 instead of /a\\_a, because I want to maintain the ability to apply tracking to all the letters.\n\nNow, I actually have this feature working with the following code:  \nsub a' a by a.alt1;  \nsub a.alt1 a' by a.alt2;\n\nHowever, this doesn't seem to be the most beautiful solution and I'm not sure if there are instances where this feature won't work appropriately. Is there a better solution than this? Can it be done with only one line?\n\n",
+  "author": "Martin Silvertant",
+  "time": "19 Dec 2014 — 7:38am",
+  "uid": "52182",
+  "comments": [
+    {
+      "time": "19 Dec 2014 — 2:55pm",
+      "content": "<cite>Can it be done with only one line?</cite>\n\nNo. Feature code has some real limitations. I did a connecting script this year and discovered just how much feature code won't do in certain situations. To me that's a real shortcoming since connecting scripts with alternates have been around for well over a hundred years.\n\n"
+    },
+    {
+      "time": "19 Dec 2014 — 4:20pm",
+      "content": "I suppose this has no bearing on what you're talking about, but just to clarify, the typeface I'm currently working on is not a connected script. It's more akin to Comic Sans.\n\nSo is the feature code I'm working with now (the second example) proper?\n\n"
+    },
+    {
+      "time": "19 Dec 2014 — 5:57pm",
+      "content": "Yeah, that's how it's done. You should probably add \"sub a.alt2 a' by a.alt1;\" so that if there are, say, seven a's in a row, the last is not noticeably the odd one out.\n\n"
+    },
+    {
+      "time": "19 Dec 2014 — 9:45pm",
+      "content": "Good idea. Thanks!\n\n"
+    }
+  ]
+}

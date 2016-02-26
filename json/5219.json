@@ -1,0 +1,34 @@
+{
+  "id": "5219",
+  "title": "String length in pixels from font size",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "Is there a way to figure out how many pixels a string of characters takes up from it's font size?   \n   \nIe. what is the pixel width of \"this string\" in Arial 8pt?\n\n",
+  "author": "anonymous",
+  "time": "14 Jun 2004 — 5:22pm",
+  "uid": "1203",
+  "comments": [
+    {
+      "time": "14 Jun 2004 — 6:00pm",
+      "content": "if you map all the bitmaps of the characters at the given size, but that's LOT of work!   \n   \ng\n\n"
+    },
+    {
+      "time": "14 Jun 2004 — 7:22pm",
+      "content": "You might consider using a monowidth font - that'll save you a lot of coding.   \n   \nOtherwise you might use canned approximations of bitmap widths for \"prototypical\" glyphs (which does depend on point size though) - like take \"i\" to be three or four pixels. Arial would be a good source for these.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "15 Jun 2004 — 11:02am",
+      "content": "\"I'm exploring some ways to get text to fit within a certain pixel width of an html table cell.\"   \n   \nThat's not how the web works. The best you can do is suggest a typeface at a certain size, but you need to accomodate the fact that anyone can change the typeface and size as they personally see fit.   \n   \nIf you're OK having text just 'disapear' then wrap the text in a fixed-sized div with overflow set to hidden.\n\n"
+    },
+    {
+      "time": "14 Jun 2004 — 6:35pm",
+      "content": "Thanks for the replies.   \n   \nI'm exploring some ways to get text to fit within a certain pixel width of an html table cell. Ideally I'd like truncate the text with an ellipses after a certain number of characters, so it wouldn't have to be 100% accurate... but I'd be okay with an html/css solution (which I'm also not having much luck with) that just makes the text go bye bye after x pixels.   \n   \nAnyway, thanks again.\n\n"
+    },
+    {
+      "time": "14 Jun 2004 — 5:55pm",
+      "content": "To get the width of a string set in a given font, you need:   \n   \n- font size   \n   \n- the font itself (advance widths at least)   \n   \n- to know if kerning is on, and if so, account for it as well   \n   \n- if it's TrueType (as Arial is), and you're looking at the hinted widths, you need to actually run the glyphs as programs to see whether the widths change   \n   \nThis assumes the text isn't justified and has nothing else to mess up its spacing....   \n   \nRegards,   \n   \nT\n\n"
+    }
+  ]
+}

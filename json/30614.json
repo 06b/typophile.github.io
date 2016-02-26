@@ -1,0 +1,70 @@
+{
+  "id": "30614",
+  "title": "Using fonts without installing",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Are there any layout or design applications which do not require a font to be installed in order to use it? That is, I have a decent library of Bitstream fonts (came with WordPerfect X3) and would like to use one or two for a specific project but not have them installed in my font registry...\n\n(I have a feeling I'm going to get a rep around here as the user asking the stupidest questions, but so be it. Asking questions is how I learn.)\n\n",
+  "author": "metalfoot",
+  "time": "15 Jan 2007 — 10:43am",
+  "uid": "16041",
+  "comments": [
+    {
+      "time": "15 Jan 2007 — 10:52am",
+      "content": "I'm not sure how you plan on using the fonts without installing them. What programs are you going to use them in?\n\n"
+    },
+    {
+      "time": "15 Jan 2007 — 10:58am",
+      "content": "\\>\\> Are there any layout or design applications which do not require a font to be installed\n\nAdobe InDesign, Illustrator & Photoshop CS/CS2  \nJust place your fonts in \"Program Files\\Common Files\\Adobe\\Fonts\"(PC) or \"Library\\Application Data\\Adobe\\Fonts\"(Mac) folder.\n\n"
+    },
+    {
+      "time": "15 Jan 2007 — 10:59am",
+      "content": "What I mean is that a TTF can reside quite nicely anywhere else on the computer, be previewed, etc, without being installed. I'm just wondering if any programs exist that can use the font information without needing to actually install and uninstall the fonts to my Windoze fonts directory.\n\nSuntory: that's handy to know. Thanks. (Darn, I wish I was a student and could buy such programs inexpensively...)\n\n"
+    },
+    {
+      "time": "15 Jan 2007 — 11:12am",
+      "content": "A font can be 'enumerated' for the current session using Windows API's (AddFontResource) without the font being physically copied to the Windows fonts folder - this is how private fonts are enumerated (eg. the teletext fonts in Windows Vista) and how font management apps work. But as identified elsewhere, most people would consider the font installed, if only temporarily.\n\n"
+    },
+    {
+      "time": "16 Jan 2007 — 10:32am",
+      "content": "Your idea plus what another user had said on another thread--I think it was the one about Letterhead fonts--gave me an idea, which I tried. Very cool. I now can do what I was hoping to do; use fonts without installing them to the font registry. (Very useful with, for instance, Manfred Klein's picture fonts)\n\nThanks!\n\n"
+    },
+    {
+      "time": "13 May 2008 — 8:47pm",
+      "content": "\\>\\>Are there any layout or design applications which do not require a font to be installed in order to use it?\n\nI think this blog post will help you a lot:  \n [http://www.dailygyan.com/2008/05/how-to-install-fonts-in-windows-without.html](http://web.archive.org/web/20150218044120/http:/www.dailygyan.com/2008/05/how-to-install-fonts-in-windows-without.html)\n\nIt explains how to install and remove fonts at runtime without having an admin account. Moreover the fonts added are reflected in all windows applications.\n\n"
+    },
+    {
+      "time": "13 May 2008 — 11:45pm",
+      "content": "On Windows, doesn't the font get enumerated (becoming available to the running apps) just by double-clicking on it and leaving the Preview window opened? I recall doing something like this on XP, I think.\n\n"
+    },
+    {
+      "time": "14 May 2008 — 5:01am",
+      "content": "Miguel: just tried that, and yes, it does seem to. Didn't know that before: that'll be handy. The things one learns here!  \n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_  \nEver since I chose to block pop-ups, my toaster's stopped working.\n\n"
+    },
+    {
+      "time": "14 May 2008 — 1:23pm",
+      "content": "I believe High-Logic's font manager for Windows, MainType, can \"load\" fonts without installing them. If you do not \"unload\" them again, they disappear when you next re-boot.\n\n"
+    },
+    {
+      "time": "14 May 2008 — 3:53pm",
+      "content": "\\> What I mean is that a TTF can reside quite nicely anywhere else on the computer, be previewed, etc, without being installed.\n\nNot sure this is what you want, but in Windows, if you uncheck \"Copy fonts to Fonts folder\" in the Add Fonts dialog box, a shortcut to the font is placed in the C:\\Windows\\Fonts folder instead of the font file itself. But it's still 'installed' in the sense that all Windows applications can see it.\n\n"
+    },
+    {
+      "time": "17 May 2008 — 8:47pm",
+      "content": "oh boy, you're using windows and having problems - go figure.\n\nI'll write this thing from two perspectives, for everybody who reads this post.\n\nfor Mac/Linux/Unix users:\n\nFonts that are 'installed' in the system simply mean the fonts are located in a folder that the operating system or applications scan on startup to build a font-cache. They're buried in the system, and when you 'install' a font, all it does it simply create a duplicate file within this folder. For linux/unix users, the user's fonts are stored in a hidden .font folder in the user's home directory (~/.fonts/). On the macintosh, these fonts are stored in home/library/fonts/.\n\nIf you have specific groups of fonts sorted by project or style or however you sort them, place those fonts in a folder and when you want those fonts 'installed', simply move that folder into the user fonts folder and restart the application you are working in.\n\nFor windows users:\n\nWindows isn't as intuitively designed as the \\*nix family of operating systems and wasn't built with production in mind. It has been upgraded and hacked into being sufficient, but certain things like font-management are much more difficult on windows.\n\nI believe the font directory in windows is located somewhere around C:\\system\\fonts\\ or something like that, it shouldn't take too much time to find it. I'm not sure off-hand where user-fonts are installed, but same deal goes, if you place your groups of fonts in folders, you can move these folders or 'font modules' in and out, and after a restart, they're be recognized and in place.\n\nFor users of both:\n\nThere are programs like suitcase that allow font management and sorting, meaning you can have thousands of fonts installed, but only have certain fonts 'activated' at any given time (like an automated system to move the folders) and these can cost a lot of money, or some are free (as on linux with certain desktop environments). One tool I love/hate is Linotype's free tool FontExplorer X. It's free for mac, and the free PC version is coming soon.\n\nThink of it as an iTunes, but for fonts. You're strong, you'll adapt. But best of all, it allows you not only to browse your collection, but also type in a custom preview (which is handy for font identification) and will allow you to see it in all weights of any selected font simultaneously!\n\nBest of luck, and I hope this post was helpful to somebody out there!\n\n"
+    },
+    {
+      "time": "18 May 2008 — 4:11am",
+      "content": "Miguel! That's very good to know! Never heard it before.\n\n"
+    },
+    {
+      "time": "18 May 2008 — 5:05am",
+      "content": "... but before cashing out money for a font manager, read the Adobe forums on problems with some of the 'smart' options.  \nIt seems InDesign, in particular, doesn't play nice with font managers -- especially on the Mac.\n\nThe free ones you're using at your own risk :-)\n\n"
+    },
+    {
+      "time": "18 May 2008 — 9:08am",
+      "content": "@Theunis:\n\nthanks for the warning to mac users, I had not heard that.\n\nI can report that my setup (Tiger, CS3, FontexplorerX) hasn't given me any issues in Illustrator or inDesign (yet)\n\n"
+    }
+  ]
+}

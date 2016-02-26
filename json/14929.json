@@ -1,0 +1,50 @@
+{
+  "id": "14929",
+  "title": "Font size and em square",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "A [discussion](http://web.archive.org/web/20131010235708/http:/typophile.com/node/14822) about pixel fonts has made me realize I don't know how font sizes are actually being decided. Suppose I'm working with MS Word and the font size is set to 12 points, does it mean that the em square is being mapped to a 12x12 points square? Furthermore, what kind of points -- pica or PS -- are these? I know the difference is almost neglectable, but I'm curious.\n\n",
+  "author": "oribendor",
+  "time": "31 Aug 2005 — 6:28am",
+  "uid": "8409",
+  "comments": [
+    {
+      "time": "31 Aug 2005 — 8:08am",
+      "content": "There's a nominal-ppi difference between \"native\" Windows and virtually all apps. More on that other thread soon. But don't ask me to define \"soon\"...\n\nhhp\n\n"
+    },
+    {
+      "time": "31 Aug 2005 — 9:15am",
+      "content": "Here is the note in InDesign:  \n\"Like other graphic-arts software from Adobe and other companies, InDesign uses PostScript points, which don't correspond exactly to traditional printer points. There are 72.27 traditional printer points in an inch, as opposed to 72 PostScript points.\"\n\nSo an em square as defined in the font would print at 12 PostScript points, when you tell the software to print at 12 points. I think this is the same for true type and open type fonts.\n\nInDesign allows you to measure also in 'Ciceros'. If I understand it rightly--which I may not--this is made up of 12 Didot points, which are slightly larger than either traditional or PostScript points. The Didot points were used on the continent, as opposed to the US and England, which is the \"traditional printers point\" referred to in the quote from Adobe.\n\n"
+    },
+    {
+      "time": "31 Aug 2005 — 11:20am",
+      "content": "Screen font sizes are measured in ppem, pixels per em. One ppem is equal 1 pt at the screen density of 72 dpi. In other words, with a screen density of 72 dpi, the ppem size and the point size are equal. In Mac OS, the screen density usually equals 72 dpi in typical applications, so a 12 points size will produce a 12 ppem screen font rendering, that is, the em square (usually 1000 font units) will be rendered upon 12 pixels. If your caps are 700 units high then the caps will be rendered onto 8.4 pixels, probably rounded down to 8 pixels. If you make a pixelfont, pick the size that does not need to be rounded.\n\nBut this is only true for the screen density of 72 dpi. On Windows as well as in the most web browsers on a Mac, the screen density typically defaults to 96 dpi. The ppem size of 12 will correspond to a point size of 12\\*72/96 = 9 pt. Conversely, the point size of 12 pt will render 12\\*96/72 = 16 ppem.\n\nSo in short, under the default settings, if you select 12 point type in Word for Mac, you will get a rendition of the 12 ppem screen size but in Word for Windows you will get a rendition of the 16 ppem screen size.\n\nIn addition to that, on modern Windows computers, usually notebooks, the default screen density may have been modified to 120 dpi (the \"large fonts\" setting). On such a computer, 12 pt will render a 20 ppem screen size. And of course, the user can modify the setting even further.\n\nA.\n\n"
+    },
+    {
+      "time": "31 Aug 2005 — 2:37pm",
+      "content": "Adam, could you elaborate on 120dpi being set as a factory default?\n\nhhp\n\n"
+    },
+    {
+      "time": "1 Sep 2005 — 1:50am",
+      "content": "Wow, thank you all guys!\n\nNow, Adam, what happens when I **print** my document? Is the em square mapped to a 12x12 points square (or whatever size it's set at) then?\n\noribendor\n\n"
+    },
+    {
+      "time": "1 Sep 2005 — 2:35am",
+      "content": "Oribendor,\n\nwhen you print, the em square is mapped to whatever the dpi resolution (\"density\") is. If you print 12 point type at 600 dpi, then your em square will be mapped to 12\\*600/72 = 100 pixels (or toner dots). Of course, since printer manufacturers often use differently sized toner or ink dots (a la RET technlogy by HP), that mapping is not so exact. Some printers also have different dpi resolutions in the vertical and horizontal directions.\n\nHrant,\n\nmy new Dell notebook (Dell Inspiron XPS Gen 2) arrived Windows with factory settings of 120 dpi. I've also heard of a recent HP model with such setting. I don't have any elaborate data though.\n\nA.\n\n"
+    },
+    {
+      "time": "1 Sep 2005 — 3:50am",
+      "content": "I have often wondered about this Mac 72 dpi assumption. This seems awfully coarse by modern monitor standards.\n\nMy 19\" CRT monitor is set at 1600 x 1200 resolution, giving me 114 dpi. This is using X11 on Linux, by the way. One reason for my using high screen resolution is to make moderate-sized type look cleaner, especially with Postscript rather than TrueType fonts. As far as I can tell, most applications on Linux attempt to render fonts on screen at the true mechanical size, rather than assuming something like 72 or 96 dpi. This means that, when I up the screen resolution, type remains at the same mechanical size, while being rendered at higher pixel size, so giving me a more readable display. For example, 12 point renders as 12 ppem at 72 dpi, and 19 ppem at 114 dpi.\n\nHow does the Mac go about this business? If I increase the resolution as above, does the text stay at the same pixel size, and shrink in mechanical size? I would not have thought so, but, not being a Mac user, I do not know.\n\nOn the point size, print size, and screen size question, I have found that word processors may not be trustworthy in this respect. This came about from making test prints in Kword of a font I was developing. It appears that, in order to get the print to match the display, Kword was letterspacing the text, so the spacing changes I was making in the font were being swamped out by onscreen rounding effects. This was using ragged right formatting, by the way. I do not know if the actual glyph sizes were also being modified. By contrast, Scribus (a desktop publishing app for Linux) did not compromise the print as far as I could tell.\n\n"
+    },
+    {
+      "time": "5 Sep 2005 — 6:18am",
+      "content": "the 72dpi resolution on the macintosh is the dpi that the operating system uses when rasterizing fonts.\n\nThis has nothing to do with your computer monitor's resolution. So a 12 point character on a Macintosh will be the same pixel pattern no matter what you set your screen resolution to. The higher your screen resolution the smaller the character will look.\n\nThis is the same on Windows the 96 or 120 dpi settings (or the custom ones that are now available) is the resoluiton that the Windows rasterizer calculates the glyphs shape.\n\n"
+    },
+    {
+      "time": "6 Sep 2005 — 1:48pm",
+      "content": "\"if you select 12 point type in Word for Mac, you will get a rendition of the 12 ppem screen size but in Word for Windows you will get a rendition of the 16 ppem screen size.\"\n\nHow about 11 pt?\n\n"
+    }
+  ]
+}

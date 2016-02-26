@@ -1,0 +1,54 @@
+{
+  "id": "35989",
+  "title": "How to properly convert RGB image to CMYK for print (help)",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I know the basic way, but just to be on the safe side  \nhow do you guys do it that has worked best for you?\n\nLooking forward to your answers (yeah... this is why we post these idiot)  \nThanks!\n\n",
+  "author": "battlefield",
+  "time": "10 Aug 2007 — 5:23am",
+  "uid": "15052",
+  "comments": [
+    {
+      "time": "10 Aug 2007 — 5:43am",
+      "content": "Image – Mode – Convert to Profile… use the profile you got from the printer.\n\n"
+    },
+    {
+      "time": "10 Aug 2007 — 6:22am",
+      "content": "Don’t convert. And don’t use any profiles either.\n\nYour printer has to put your pdfs through the RIP anyway. The settings of his RIP software are set—or at least should be—to match the profile of his press, while each single press and every print job needs a different profile: rubbers, inks and paper type used, pressure, density, print speed, temperature and relative humidity of the press room, &c. Al these different parameters affect dot gain and so they can‘t be predicted by your PhotoShop or other software, but ought to be adjusted, ideally, minutes before press run.\n\nIf you convert your imagery from RGB to CMYK colour space yourself, valuable colour information will be lost, so that the final conversion in the RIP won’t have all the data to get the most optimal colour match.\n\nThis procedure is being advised by engineers at Heidelberg Druckmaschinen AG. If your printer complaints you gave him a pdf in RGB colour space, either he is not knowing his craft, or he needs an update of his RIP preflyghting software. So, why are these profile conversion filters built into Adobe applications? Ask their marketeers.\n\n"
+    },
+    {
+      "time": "10 Aug 2007 — 6:41am",
+      "content": "That's very interesting — I'd always been told it was best to minimize the amount of material the printer would have to RIP because their methods somehow produced lower-quality results than using Photoshop, et al. But that never made any sense to me, since it would seem that a printer would have everything to gain by possessing the best technology/know-how where the reproduction of digital images in print was concerned.\n\nThis is the sort of information that makes me wish I could spend a year or so working at a printer.\n\n"
+    },
+    {
+      "time": "10 Aug 2007 — 7:03am",
+      "content": "_This is the sort of information that makes me wish I could spend a year or so working at a printer._\n\nAll printing companies are not created equal. Better yet, call the prepress department at the printer you intend to use and ask them what they want. If they give you the same answer that Ludwig did, follow the advice; if they don't concur with Ludwig, find out **exactly** what they prefer. If what the prepress person says makes sense, do it; if it all sounds like a bunch of mumbo-jumbo, they probably don't know what they're talking about, and you should give some serious consideration to finding another printer.\n\n"
+    },
+    {
+      "time": "10 Aug 2007 — 7:05am",
+      "content": "There is no best way. You really just need to convert as you wish and then adjust as needed via proofs and press checks.\n\n"
+    },
+    {
+      "time": "10 Aug 2007 — 7:43am",
+      "content": "Seconded, there is no BEST way.  \nBut just converting by whatever default model and then adjusting is probably the worst advice one could give to you. Keep in mind that ANY process in the manipulation of an image will reduce the amount of information in it.\n\nThe basic problem in RGB-\\>CMYK conversion is that the first model uses Three (additive) colours, while the latter (subtractive) uses four. The first three colors, C, M, Y theoretically could be easily derived from the respective RGB-values. Now the problem is that the fourth color, black, has to be determined somewhat artificially, and that the way black is calculated will have massive consequences on C,M,Y. There's several basic models to determine the amount of black, like UCR (Under Color Removal), GCR (Grey Component Removal), good old Skeleton-Key, etc. All these work pretty differently, the set of plates will look very different, depending on the conversion method, and will give completely different results in print.\n\n"
+    },
+    {
+      "time": "10 Aug 2007 — 7:56am",
+      "content": "Your options would be:\n\n1. Just fiddle around, proof, adjust, proof, adjust, evetually print. NOT recommended. You won't be happy nor confident in the long run, if the results are good, it's just good luck. You could have bad luck, too.\n\n2. Theoretically, you could try to integrate into a color workflow via profiles. That would make sense if you had control over your input devices and the RGB images to start with. Keep in mind that profiles aren't arcane magic, they just help how to reproduce a given color in a given color space in another color space. If your input image is bad, profiles won't make it any better, they can just help you to reproduce it most exactly as bad as was before.\n\n3. Educate yourself, calibrate your screen, talk to respectable and experienced printers, etc. Probably the best way, but time consuming.\n\n4. Find a printer and/or prepress company who will do it for you. Color conversion and prepress things in general are most of all a question of experience.\n\n"
+    },
+    {
+      "time": "10 Aug 2007 — 9:34am",
+      "content": "Wow. Thanks guys.  \nthis is probably the forth times reading your entries.  \ni will take all your advice in to consideration, thanks for pointers **franzheidl**.\n\nVery informative **Ludwig M. Solzen**!.\n\n"
+    },
+    {
+      "time": "10 Aug 2007 — 7:53pm",
+      "content": "I'm a bit late to the topic, but I remember seeing a paper on Adobe's site that deals with this fairly comprehensively (7MB PDF):  \n [http://www.adobe.com/digitalimag/pdfs/phscs2ip\\_reproprep.pdf](http://web.archive.org/web/20150221212128/http:/www.adobe.com/digitalimag/pdfs/phscs2ip_reproprep.pdf \"http://www.adobe.com/digitalimag/pdfs/phscs2ip\\_reproprep.pdf\")\n\nI haven't had the need to read up on this issue myself so have only skimmed through that article, though.\n\n"
+    },
+    {
+      "time": "12 Aug 2007 — 2:38am",
+      "content": "thanks, i will check it out.\n\n"
+    }
+  ]
+}

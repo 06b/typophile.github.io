@@ -1,0 +1,30 @@
+{
+  "id": "44899",
+  "title": "Experimental alphabet in OpenType",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m interested in creating a typeface for the [Vine alphabet](http://web.archive.org/web/20081024203549/http:/www.omniglot.com/writing/vine.htm), if only because it creates such an appealing look. (Also, since I’m not enlightened in traditional type, I suppose critiques on experiments will be less deriding. ;) However, it’s a very peculiar script, and I’m not familiar with all of the capabilities of OpenType, so I’d like to know if the following things, among others, are possible, and in what circumstances:\n\n- Vertical text in left-to-right columns\n- Vowels as diacritics (or maybe just fancy kerning)\n- Arbitrary ligatures, e.g. ’zz’, ’sc’, ’pph’\n- Marking the start of a line/sentence (or maybe just captials)\n- Forcing line break at end of sentence\n- Continuing hypenation on a new line\n\nIf too many of these capabilities end up to be dependent on the typesetting tool rather than OpenType, I may just turn this into an SVG/EMCA script. Thanks for any tips in advance.\n\nEDIT: attached the graphical description of the alphabet.\n\n ![](http://web.archive.org/web/20081024203549im_/http:/typophile.com/files/vine_3871.gif)\n\n [‹ [Help] Microsoft Word & faux italic/bold/bold italic](http://web.archive.org/web/20081024203549/http:/typophile.com/node/44144 \"Go to previous forum topic\") [Generating opentype-font... ›](http://web.archive.org/web/20081024203549/http:/typophile.com/node/45057 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081024203549/http://typophile.com/user/30402\" title=\"View user profile.\">MathHat</a>",
+  "time": "<br>",
+  "uid": "30402",
+  "comments": [
+    {
+      "time": " 1.May.2008 2.03pm",
+      "content": "1) nothing to do with OpenType per se, although OpenType certainly has functionality helpful in supporting vertical text.\n\n2) If you want Latin vowels to turn into diacritics, that would take some thought. Probably.\n\n3) Yes, and it’s quite easy.\n\n4) Not exactly. You could simulate these half-decently with contextual functionality, though.\n\n5) That would definitely be a function of the typesetting tool.\n\n6) Not quite sure what that means, but probably not, if I’m guessing right.\n\nSo, your second and fourth items would be tricky.\n\n"
+    },
+    {
+      "time": " 1.May.2008 4.18pm",
+      "content": "Hmm, right down the middle, nice. I suppose I could try both.\n\nBy continuing the hyphen, I mean having a contextual marker at the start of the continued line. I’ve attached the Vine alphabet reference image to the root post to show what I mean. I can guess that it could be simulated as well, though, due to the nature of the script (no word breaks).\n\n"
+    },
+    {
+      "time": " 4.May.2008 7.11am",
+      "content": "You might want to have a look at the existing fonts for classical Mongolian script, MonBaiti.ttf in MS Vista plus possibly a couple of these:\n\n[http://www.wazu.jp/gallery/Fonts\\_Mongolian.html](http://web.archive.org/web/20081024203549/http:/www.wazu.jp/gallery/Fonts_Mongolian.html \"http://www.wazu.jp/gallery/Fonts\\_Mongolian.html\")\n\n"
+    },
+    {
+      "time": " 11.May.2008 2.19pm",
+      "content": "One thing to keep in mind is that classical Mongolian descends from the Arabic abjad, but written from top to bottom instead of left to right. You’re going to have to deal with many things that cause problems in Arabic design, so if you find no explanations for classical Mongolian (not surprising, there’s not much computer support yet), look to what’s been done for Arabic.\n\nYour requirement for split hyphenation, where a hyphen appears on both the end of one line and the beginning of another, will be a typesetting problem and not easily solvable through OpenType. I think the old German orthography problem of duplicating a letter on the following line (e.g. »Schiff-/fahrt« for »Schiffahrt«) is basically similar. Marking the start of a line or sentence is also better done in typesetting, since it will often need to be adjusted by hand. Fighting with a font’s automatic behavior is a losing battle.\n\nDon’t let any of this dissuade you from trying to make the font work rather than going with SVG or something. You can do most of what you want in OpenType, and having done so you’ll end up with many more intellectual rewards. The result will also have a much broader potential audience.\n\n"
+    }
+  ]
+}

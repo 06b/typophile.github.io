@@ -1,0 +1,94 @@
+{
+  "id": "68371",
+  "title": "Trouble getting Contextual Alternates to alternate",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I am working on a script font where several letters have 2 versions: one swashed (main) and one plain (alternate). When the same letter comes twice in a row I want to switch one of them around - to avoid colliding swashes.\n\nI mainly use the calt feature like this: sub l l' by l.calt;  \nThis works as expected, and if I keep repeating the letter the two versions alternate all the way.\n\nBut sometimes I want to switch the first letter: sub g' g by g.calt;  \nWhen I now keep repeating the letter I just get a long row of the switched glyph with the original glyph at the end - no continous alternation. How do I write the code to avoid this?\n\nFor simple letter pairs this is just a minor niggle (I really don't expect text to be set with many identical letters in a row), but as I want to group/class similar letters to also avoid collisions between different letters, I need to get this sorted.\n\nI would really appreciate some input from someone with a better grasp on OpenType feature programming than myself ;)\n\n",
+  "author": "<a href=\"/web/20100323041155/http://www.typophile.com/user/27336\" title=\"View user profile.\">Roger S. Nelsson</a>",
+  "time": "<br>",
+  "uid": "27336",
+  "comments": [
+    {
+      "time": "",
+      "content": "Continues alternation, second one of each pair replaced:\n\nsub g g' g by g.calt;  \nsub g.calt g g' by g.calt;\n\nContinues alternation, first one of each pair replaced:\n\nsub g by g.calt;  \nsub g.calt g.calt' g.calt by g;  \nsub g g.calt g.calt' by g;\n\nBoth successfully tested in FontLab. Is this that, what you were searching for?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for your input! :)\n\nYour first block: well, this was never a problem - it worked with a simple \"sub l l' by l.calt;\". They way you suggest it it looks like only three-letter repeats will be changed, and not double-letters...? I haven't tried it out, though - as I already had a working solution.\n\nYour second block: will not the first sub change every single-letter occurrence of the letter to the alternate form, too? Wouldn't want that...\n\nAfter some experimentation I have almost sussed it - using lookups! :)  \nThis is very close to working:\n\nlookup calt1 {  \n sub g' g by g.calt;  \n} calt1 ;  \nlookup calt2 {  \n sub g.calt g.calt' by g;  \n} calt2 ;\n\nOnly caveat is that with odd repeats of letters the last two in the sequence will be the colliding main forms. Hmm... My head hurts from trying to find a perfect solution to this... ;)\n\n"
+    },
+    {
+      "time": "",
+      "content": "let’s stay with the g.\n\nsub g g' by g.calt;\n\nresults in:\n\ng g.calt g.calt g.calt g.calt …\n\nif followed by\n\nsub g.calt g.calt' by g;\n\nthe result is probably:\n\ng g.calt g g g g …\n\nM Y P R O P O S A L\n\nsub g g' g by g.calt;  \nsub g.calt g g' by g.calt;\n\nresults in\n\ng g.calt g g.calt g g.calt g g.calt …\n\nand\n\nsub g by g.calt;  \nsub g.calt g.calt' g.calt by g;  \nsub g g.calt g.calt' by g;\n\nresults in\n\ng.calt g g.calt g g.calt g g.calt g …\n\nI think, I would understand your wish better, if you post the output, that you want to have.\n\nWould you like to have one of the following outputs?:\n\ng g g g g g g g.calt\n\nor\n\ng g g g g g g.calt g\n\nThe first one probably works in this way:\n\nignore sub g' g;  \nsub g' by g.calt;\n\nThe second one should work in this way:\n\nignore sub g' g g;  \nsub g' by g.calt;  \nsub g.calt g.calt' by g;\n\nor\n\nignore sub g' g g;  \nsub g' g by g.calt;\n\nThis time untested.\n\n"
+    },
+    {
+      "time": "",
+      "content": "sub g g' by g.calt;  \nactually results in g g.calt g g.calt g g.calt ... just as I want it to when the second letter in a pair should be switched. Easy. ;)\n\nThe problem is when I want to sub the first letter in a pair (because the combination alt/main looks better that way).  \nFor repeated letters the perfect solution would be code that generates the result:  \ng.calt g g.calt g .... when there are even repetitions, and  \ng g.calt g g.calt g ... when there are odd repetitions  \nBut that would probably take some sort of backwards changing in the text string that I'm not even sure is possible...\n\n"
+    },
+    {
+      "time": "",
+      "content": "Looks like a loop would be required after\n\nignore sub g' g g;  \nsub g' g by g.calt;\n\nBut actually I don’t have an idea. But I am tired. Maybe I find an elegant solution later.\n\n<cite>sub g g' by g.calt;<br>\nactually results in g g.calt g g.calt g g.calt</cite>\n\nSure? I thought, that I had unsuccessfully tested it in FontLab. Normally all letters g, that are successors of letters g should be substituted. But again I am tired. Maybe I am actually messing it up.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yeah, it is straining my brain, too... ;)  \nBut I suddenly noticed that you have used \"ignore\" on some subs. I'll study up on what that syntax can do...  \n(and it is a bit confusing when you edit your posts after I have read them ;)  \nThanks again for the input. :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Actually I only see a step by step solution, but no way to program a kind of backwards loop – a substitution beginning with the end of a string. The contradiction of elegance.\n\nMaybe the problem would not appear, if the alternates would be your standard letters and the actual standard letters the alternates.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The basic letters have looped ascenders/descenders. When there are two consecutive loops (overlapping) I want to switch one letter to a straight form \"piercing\" the (other) loop. So for the ascenders the loop goes to the right, and the right letter has to switch. Easy. But the descenders are looped to the left, so the left letter has to switch. Which looks to be difficult to program for alternate substitution for multiple loops. Bummer.  \nI think I have to compromise a bit... Perhaps it is possible to program it (for odd numbers of loops) so that I get the sequence \"g.calt g g.calt g ... g.calt g g.calt g.calt g\"? So ending the sequence with two consecutive straighs and one final loop? Can that be done?\n\n"
+    },
+    {
+      "time": "",
+      "content": "I don't know if this is relevant, but apparently there isn't a single word in the English language containing three gs in a row...\n\n"
+    },
+    {
+      "time": "",
+      "content": "It is just an example - to keep it simple while discussing... ;)  \nThe plan is to expand the feature so that ANY sequence of overlapping looped letters will have the switching!  \nThere are MANY words that contain more than two of the letters \"b d h k l\" or \"g j p y\" in a row, and I want the calt feature to fix all these...\n\n"
+    },
+    {
+      "time": "",
+      "content": "Okay, here is the dirty solution. (Personally I hate those solutions.) You can extend it. Actually it is enough to cover a string with a maximum of 32 letters, that have an alternate. If the string is broken by a letter, that does not have an alternate, the feature applies to both parts of the string and both parts can consist of a maximum of 32 letters. (For those ones, that have not read the whole thread: g and g.calt need to be replaced by classes.)\n\nfeature calt {  \nignore sub g' g;  \nsub g' by g.calt;  \nlookup CALT\\_1 {  \nsub g' g g.calt by g.calt;  \nsub g' g g g g.calt by g.calt;  \nsub g' g g g g g g.calt by g.calt;  \nsub g' g g g g g g g g.calt by g.calt;  \nsub g' g g g g g g g g g g.calt by g.calt;  \n} CALT\\_1;  \nlookup CALT\\_2 {  \nsub g' g g.calt by g.calt;  \nsub g' g g g g.calt by g.calt;  \nsub g' g g g g g g.calt by g.calt;  \nsub g' g g g g g g g g.calt by g.calt;  \nsub g' g g g g g g g g g g.calt by g.calt;  \n} CALT\\_2;  \nlookup CALT\\_3 {  \nsub g' g g.calt by g.calt;  \nsub g' g g g g.calt by g.calt;  \nsub g' g g g g g g.calt by g.calt;  \nsub g' g g g g g g g g.calt by g.calt;  \nsub g' g g g g g g g g g g.calt by g.calt;  \n} CALT\\_3;  \n} calt;\n\n"
+    },
+    {
+      "time": "",
+      "content": "wow, that was some routine! Impressive! :)  \nHow do I shorten it a bit? I don't foresee the use of 32 consecutive looped letters, maybe 6-8 tops? ;)  \nThis routine elegantly solves the odd/even \"switched\" sequences.  \nThe only problem that remains is that this routine switches any standalone g to its alternate form, whereas I want the single occurrences to remain in their basic looped form. Do you know how to fix that as well?\n\n"
+    },
+    {
+      "time": "",
+      "content": "On closer inspection ALL sequences are completely switched!  \nIt gives alternate glyphs wherever I want plain, and plain wherever I want alternate ;)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Here it is the other way around:\n\nfeature calt {  \nsub g by g.calt;  \nignore sub g.calt' g.calt;  \nsub g.calt' by g;  \nlookup CALT {  \nsub g.calt' g.calt g.calt g.calt g.calt g.calt g by g;  \nsub g.calt' g.calt g.calt g.calt g by g;  \nsub g.calt' g.calt g by g;  \n} CALT;  \n} calt;\n\nResults in\n\ng  \ng.calt g  \ng g.calt g  \ng.calt g g.calt g  \ng g.calt g g.calt g  \ng.calt g g.calt g g.calt g  \ng g.calt g g.calt g g.calt g  \ng.calt g g.calt g g.calt g g.calt g\n\ng.calt g.calt g g.calt g g.calt g g.calt g  \ng.calt g.calt g.calt g g.calt g g.calt g g.calt g\n\nBut now I am not sure, if you want to have a single letter replaced.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I think I got it! :D\n\nThis routine will make up to 8 letters in sequence alternate - and always ending with the base letter:\n\nfeature calt {  \nsub g' g by g.calt;  \nlookup CALT\\_1 {  \nsub g.calt' g.calt g by g;  \nsub g.calt' g.calt g.calt g.calt g by g;  \nsub g.calt' g.calt g.calt g.calt g.calt g.calt g by g;  \n} CALT\\_1;  \n} calt;\n\nThanks for the valuable input, Arno! I would never had sussed this in a million years on my own...\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yours seems to result in the same, but it is shorter and therefore better.\n\n"
+    },
+    {
+      "time": "",
+      "content": "By the way, there is also the command \"reversesub\", but I think FontLab cannot compile it. The actual AFDKO can and with the help of batch files it easy to handle. And you can use both, the AFDKO and FontLab. The GPOS and the GSUB table of a font can be extracted with TTX and merged into the OTF, that was generated with FontLab. You even can avoid, that TTX changes anything, if you temporarily remove the following files from the FontTools directory (in your Python directory):\n\nC:\\Python26\\Lib\\site-packages\\FontTools\\fontTools\\ttLib\\tables\\G\\_P\\_O\\_S\\_.py  \nC:\\Python26\\Lib\\site-packages\\FontTools\\fontTools\\ttLib\\tables\\G\\_S\\_U\\_B\\_.py\n\nand\n\nC:\\Python26\\Lib\\site-packages\\FontTools\\fontTools\\ttLib\\tables\\G\\_P\\_O\\_S\\_.pyc  \nC:\\Python26\\Lib\\site-packages\\FontTools\\fontTools\\ttLib\\tables\\G\\_S\\_U\\_B\\_.pyc\n\nThen TTX extracts the tables as hexdata! (TTX is unable to dump the FeatureParams-Tags correctly [TTX empties them], if they are present in the GSUB table.)\n\nThe AFDKO and TTX are really cool! And for free.\n\n"
+    },
+    {
+      "time": "",
+      "content": "If you are looking for a way to have any single letter to alternate every other instance of it appearing; that is way more complex.  \nI think Paul Hunt knows how to do this by setting up classes and alternating back and forth. I'm not sure, but this may only work if all letters have alternates so you substitute one class by another repeatedly. I may be fuzzy on that, but maybe he can tell you more.\n\n"
+    },
+    {
+      "time": "",
+      "content": "That's right.  \nYou need to have alternates of every character, including punctuation and space, for the pseudo-random effect.  \nI've done it in a couple of typefaces.  \nIn Duffy Script, I made three alternates of every character, but for Fontesque Pro, only one alternate, because it's very rare that you get three of the same character in a row, in any language. (That's the subject of another thread!)\n\n"
+    },
+    {
+      "time": "",
+      "content": "…\n\n"
+    }
+  ]
+}

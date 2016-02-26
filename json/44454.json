@@ -1,0 +1,154 @@
+{
+  "id": "44454",
+  "title": "FontLab Interface Peeves (2)",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Pursuant to the old thread on FontLab Interface Peeves, [http://typophile.com/node/32709](http://web.archive.org/web/20140809205930/http:/typophile.com/node/32709 \"http://typophile.com/node/32709\"), I'd like to take up this issue again. In response to that thread, we got some MW improvements in 5.03 which I am trying to get my head around, having been away from font design for the past year.\n\nI would like to focus on one of the old suggestions, which is for a mode that would cause whatever you are doing to be done on all masters (when you press a key to activate this mode). So, for example, you're in a 4-master font. You move a point and some handles - - everything that you're doing happens in the other three masters. Or you're in the metrics window. You've noticed that you stupidly have sidebearing values of 5 and 5 for the = glyph. You need at least 40, you now realize. Why should you have to enter those values 4 times? Or do that cursor-key movement four times?\n\nObviously, it's dangerous to work like this if you don't know what you're doing, but then everything about working with multiple masters requires a lot of concentration. So what? So you concentrate.\n\n",
+  "author": "billtroop",
+  "time": "20 Apr 2008 — 9:46am",
+  "uid": "4019",
+  "comments": [
+    {
+      "time": "20 Apr 2008 — 10:20am",
+      "content": "I think these would really be nice additions. Funny thing is that this actually implies two options per each behavior:\n\nAs regards the Glyph Window behavior, when you move a node, handle, anchor, component in one master will move it in other masters too. There,  \n(1) move to exactly the coordinates it receives in the current master (absolute)  \n(2) move at the same dx/dy at which it was moved in the current master (relative)\\*\n\nSimilar in the Metrics/Kerning Window behavior, when adjusting sidebearings or kerning in one master, adjust them in the other masters too. There,  \n(1) change to exactly the same value(s) defined for the current master (absolute)  \n(2) change at the same difference as for the current master (relative)\\*\n\n\\* If a node has been moved 10 down and 20 left in one master, it will be moved 10 down and 20 left in all other masters.\n\nSo, this were _two_ additional options. Maybe three radio buttons (mutually exclusive) right in the top part of the Masters panel.  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apply adjustments to:  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;() current master only  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;() all masters absolute  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;() all masters relative  \nSo it shows which master you are currently in, which masters are affected by your operations, and how.  \nI could even think of one more thing, to do the change only in a specific other master, so we end up with this:  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Apply adjustments to:  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;() current master only  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;() [Wt1 Wd0] absolute  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;() [Wt1 Wd0] relative  \nwhere [Wt1 Wd0] represents a popup list from which one can select either \"all\" or the name of a specific master.&nbsp;&nbsp;;-)\n\n"
+    },
+    {
+      "time": "20 Apr 2008 — 11:33am",
+      "content": "Karsten, I was only thinking of relative values, which I imagine would work for 99% of cases, but it would be nice to have the options. There is no guarantee that making these adjustments, even on a relative basis, would produce the results you want, but the mechanism would certainly get you there a lot quicker. How often I repeat these tasks -- just the sort of thing the computer is supposed to do for us. You are right -- if the feature is being added at all, it should be added with the options you specify -- which would only make for a little more programming work.\n\n"
+    },
+    {
+      "time": "21 Apr 2008 — 10:56am",
+      "content": "I was thinking the same thing recently while working on a six weight font. If I could have the option to 'sync' all weights so that if I made a metrics, kerning, classes, or opentype feature change/edit it would automatically apply to all. But then again, there are usually differences in each weight that might require individual edits in where this wouldn't work, it all depends on what your working on.\n\n"
+    },
+    {
+      "time": "21 Apr 2008 — 11:23am",
+      "content": "With classes, you can at least import them from one of your other weighjts but I think this would even be better.\n\nChrisL\n\n"
+    },
+    {
+      "time": "21 Apr 2008 — 11:55am",
+      "content": "Two things I would change:\n\n1. Tools \\> Action - The fact that \"Action\" is singular instead of plural hides the fact that it can do multiple things. When I was just beginning with the interface, this really frustrated me. I knew there was a whole list of things I could do, but I kept forgetting where the list was located.\n\n2. Window \\> Panels - I wish Panels had it's own place on the main menu, or that the panel options could be listed in the Window menu, without a Panels flyout menu. Even better, make keyboard shortcuts so the menu could be avoided entirely.\n\n"
+    },
+    {
+      "time": "22 Apr 2008 — 10:32am",
+      "content": "This is a great idea. It would be nice to have in a panel rather than just as a preference, so that one could easily and quickly toggle between the different options while working on the font.\n\n"
+    },
+    {
+      "time": "22 Apr 2008 — 11:54am",
+      "content": "A very early and not much tested [script](http://web.archive.org/web/20140809205930/http:/www.kltf.de/downloads/KLTF-MasterToMaster.zip) which I did last week, for copying node coordinates from one master to another one (or all). Please read the QuickIntro.txt file for details. As said, the script has not been tested much yet, so do not blame me if it trashes your fonts. Make font backups before running the script. _Absolutely no warranties._&nbsp;&nbsp;;-)\n\n"
+    },
+    {
+      "time": "22 Apr 2008 — 12:58pm",
+      "content": "Thanks, Karsten. It works. It's not what Bill was asking for, but something like this have been handy when I was working on Proxima Nova.\n\n"
+    },
+    {
+      "time": "22 Apr 2008 — 2:15pm",
+      "content": "<cite>It's not what Bill was asking for,</cite>\n\nOf course not, I did it before Bill posted his request.&nbsp;&nbsp;:)&nbsp;&nbsp;Unfortunately I don't see a way to do \"live\" scripts that react to mouse or keyboard actions. But then, adding such functionality is really up to FontLab. (Please.)\n\n"
+    },
+    {
+      "time": "22 Apr 2008 — 3:34pm",
+      "content": "I'm pretty sure it's possible to write interactive tools, such as the Curve, Drop, and Line tools in the Macro toolbar. The scripts for them are located here (on a Mac):\n\n/Library/Application Support/FontLab/Studio 5/Macros/System/Tool/\n\n"
+    },
+    {
+      "time": "23 Apr 2008 — 4:30am",
+      "content": "I am not sure whether you are aware of the Make Master function. Although it is not nearly as convenient as the proposed feature would be it can be used as some sort of workaround. If I make changes to the regular and want to transfer them to the bold, this is what I do:\n\n1  \nBefore I make the changes, I define a new axis. You could call it \"old-new\" or \"design\" but typically I can't be bothered to rename it and leave the default name \"width\" even though it is not appropriate.\n\n2  \nI then make the changes to the regular, at wt0 wd0 (the new regular).\n\n3  \nI use the Make Master function in Tools \\> Action on the master wt1 wd0 (the new bold), which transfers the change to the bold.\n\n4  \nThen I can remove the wd axis. This would typically be be at wd0 but if you want the changes to the bold either stronger or weaker than in the regular you can choose any other position. But then you need to replace wt0 wd1 (the old regular) with wt0 wd0 (the new regular) first.\n\nThis brings me to another refinement of the feature described above: you could let the user specify that the changes should be transferred to the other master(s) 1:1, or weakened, or emphasized.\n\nI was thinking about writing a macro that transfers the difference between the mask and the normal outline to the other masters, which would save adding the axis and, as I believe, reflect the way most designers work with the mask as the \"old\" version and the normal outline as the \"current\".\n\n"
+    },
+    {
+      "time": "27 Apr 2008 — 12:36pm",
+      "content": "<cite>such as the Curve, Drop, and Line tools in the Macro toolbar</cite>\n\nA bit belated ... Hello Mr Simonson, thank you, I'll look into them again. I did that much earlier but don't remember how interactive they were.\n\nTim, interesting. I was expecting that you use a script for this.  \nUsing the mask as another \"master\" sounds good. My only worry is that the mask does not warrant identical node/point structure with the foreground. It really depends on how people use the mask. E.g. I use it as a dustbin for many older versions placed side by side.\n\n"
+    },
+    {
+      "time": "29 Apr 2008 — 12:07pm",
+      "content": "Tim, I like that use of the make master feature - - very clever!\n\nBut still - - we need that button. I decide to lengthen the right serif of f by ten units. That needs to happen in the other 7 masters . . . immediately. One keystroke -- not more -- needs to enable the feature.\n\nSpeaking of peeves - - what is the so-called 'workspace' feature?\n\nEvery time I ask Fontlab for a session saver feature someone points out to me that FL already has the great save workspace feature. Can anyone tell me what this does and why it's great? I have exported a hundred workspaces without ever once succeeding in saving my 'session'. Everyone must know what a session saving feature is -- as in most browsers today - - Your session is the open files, windows, toolbars - - everything you're working on before you press the session-save button. Session save restores that with one button -- or less if program startup invokes session-save.\n\nThis is PARTICULARLY desirable for the complex file/window setups we are likely to have in font work.\n\nSo what is save workspace and how does that answer this problem?\n\n"
+    },
+    {
+      "time": "29 Apr 2008 — 1:58pm",
+      "content": "I think save workspace only saves the positions and visibility of the panels and toolbars, but not document windows or whether certain documents are open. A save session feature would be very nice to have.\n\n"
+    },
+    {
+      "time": "29 Apr 2008 — 5:11pm",
+      "content": "OK, so we know this extremely basic, extremely time-saving, extremely easy-to-program session save is something we want.\n\nNow back to something more basic. Like the simple matter of opening a metrics window. Why is that I can use the shortcut shift-alt-m to open a metrics window if the font window is active but not if the a glyph window is active (that glyph window being, usually, the place from which I will want to open a metrics window in the first place?\n\nFunnily enough, if I use customize and assign 'open metrics window' to control-K, as in Fog, the function behaves differently, more sensibly, and does work from the glyph window.\n\nOK, enough fooling around. I now have several open windows I wish to close quickly.\n\nOn the Mac I can do this quickly with command-W. On many, many sensible Windows programs, including most browsers, I can do this with control-W. I can do this with my hands on the home keys quickly and efficiently (because I have remapped useless caps-lock to either useful command or control depending on platform).\n\nI know I can do it with control-f4 in Windows but this is just too annoying. Does Fontlab allow us to assign a key for the 'close window' command? Not that I can see. Is there any other way around this?\n\n"
+    },
+    {
+      "time": "29 Apr 2008 — 5:50pm",
+      "content": "Command-W usually works. You can also use command-option-W to close all open windows (same as most Mac programs). Although, sometimes in FontLab, command-w doesn't work--it closes a panel instead (which shouldn't happen) or does nothing at all. This seems to be a bug. I don't know the exact circumstances that trigger it, but it seems to happen when I'm working a lot in panels (OpenType, Preview, Class, etc.).\n\n"
+    },
+    {
+      "time": "30 Apr 2008 — 9:34am",
+      "content": "\\>Command-W usually works.\n\nMark, to be honest, that's how I recalled it - - OK, so we have a bug when it isn't working. At least we know that.\n\nHere's an interesting bit of behaviour - - don't know whether it's good or not -- what do others think?\n\nUSING COMPOSITES: I make an fi lig out of f and dotlessi. I now make an ffi lig out of fi and what I'll call 'short f'. If it were Fontographer, I'm reasonably sure that the fi constituent of ffi would be seen as a single unit. Not so in Fontlab. The individual constituents -- f and i -- can be moved separately, in spite of their having been called as composites from fi.\n\nNeedless to say, it's intended, as a just-before-final-production step, to decompose all the composites, and then, fog-style, remove overlap -- assuming that fontlab does that properly.\n\nI think on balance, I dislike this behaviour. If I decided to tighten the spacing between f and i in the fi lig, I think I would want that to be reflected in ffi, and it doesn't look like it would happen. I think it would happen that way in Fog but I haven't yet checked.\n\nBy the way, my old Fog 5 beta from 1996 seems to work in Vista - - with Win98 compatibility selected or something like that. STILL the only way to get 3200% zoom in a font editor! Studio did 800% and Flab still only does 400 ? ? ? I know there's a kludge around it, but I have heard horror stories in connexion with that particular kludge.\n\nLet's just pause for a moment to drool over Fog's ability not just to scale but to rotate and slant composites - - which can sometimes be a very graceful and rapid way to turn a comma into persuasive left & right quotation marks.\n\nCould we see some of that, soon, . . . . . . ?\n\n"
+    },
+    {
+      "time": "30 Apr 2008 — 10:14am",
+      "content": "While we're at it:  \nOn the Mac you cannot assign a shortcut for 1:1 zoom and neither button nor shortcut for Expand Master, both of which is possible in the Windows version. It would be very cool if these were enabled in the next Mac version.\n\n"
+    },
+    {
+      "time": "30 Apr 2008 — 11:06am",
+      "content": "The way composites work in FL, a composite glyph cannot be a component. In other words, a component can only be one step removed from the original. So, when you use Generate Glyphs to make your ffi by telling FL to combine f and fi, FL sees that fi contains two components, it copies them separately to the new glyph rather than treating them together as a single component in the new glyph. In fact, if you try to do an end-run around this behavior by, say, deleting the dotlessi component and replacing the f with fi (using the Component Properties inspector), you will see that neither fi or any other composite glyphs are available.\n\nSlant and rotate are not supported, but it is possible to flip horizontal, flip vertical, and rotate 180° by editing the scale values in the Component Properties inspector panel:\n\nTo flip horizontal, enter -100% for the x scale value.  \nTo flip vertical, enter -100% for the y scale value.  \nTo rotate 180°, enter -100% for both x and y scale values.\n\nI stumbled onto this recently when I imported a FOG file using Foglamp. The FOG file contained some components that were rotated 180°. Note that you need to correct the path direction after decomposing if you flip horizontal or vertical.\n\n"
+    },
+    {
+      "time": "30 Apr 2008 — 12:34pm",
+      "content": "If you highlight two characters in a glyph window, and click the 'mirror' button in the transformation panel it will flip everything horizontally or vertically, as you chose. The 'slant' in the same panel--you can open it from the panels tool bar--will slant. Or are you talking about something different?\n\n"
+    },
+    {
+      "time": "30 Apr 2008 — 12:51pm",
+      "content": "Yes, something different: Components. Components are sort of second-class citizens in FontLab. A lot of tools and commands don't work on them at all. When you select them, you are in a sort of component mode in which fewer things are possible.\n\n"
+    },
+    {
+      "time": "30 Apr 2008 — 1:40pm",
+      "content": "\\>Or are you talking about something different?\n\nLike it says: composites.\n\nMark, I never knew about those values in scale . . . but something else must work because I have succeeded in flipping composites in the past.\n\nOne thing to make clear: Fog will generate some composites as composites, but not ones to which special things like slant, rotate, etc. have been applied; they will appear decomposited in the generated font. I presume this is because such composites are not valid type 1 instructions. Are they a part of CFF?\n\nWhat other things are there in CFF that are possible but that font editors are not letting us do ? ? ? ?\n\nAlso, isn't time to raise the question again: under what circumstances can floating point points be used in PostScript? What rasterizers, if any, will rasterize such fonts? And where is Fontlab in all of this?\n\n"
+    },
+    {
+      "time": "30 Apr 2008 — 2:12pm",
+      "content": "My understanding is that composites are not allowed in CFF fonts, and are not need anyway since CFF fonts are compressed by definition.\n\n"
+    },
+    {
+      "time": "30 Apr 2008 — 2:15pm",
+      "content": "@Bill: something else must work because I have succeeded in flipping composites in the past.\n\nProbably you dragged one of the corners past its opposite. This works, too, but it's not as precise.\n\n"
+    },
+    {
+      "time": "30 Apr 2008 — 2:49pm",
+      "content": "So Mark, is my understanding of this correct?\n\nIn Fontlab I\n\n1. make an fi composite out of f and dotlessi\n\n2. then make an ffi composite out of 'short f' and fi\n\nIs the result that I now have a composite of three independent referrants, short f, f, and i ? (rather than a composite referring to short f and fi?)\n\n"
+    },
+    {
+      "time": "30 Apr 2008 — 3:39pm",
+      "content": "As far as I can tell, yes.\n\nThe only way to get fi to be inserted as a single component is to decompose the fi glyph before generating the ffi composite glyph.\n\n"
+    },
+    {
+      "time": "9 May 2008 — 5:12am",
+      "content": "\"Components are sort of second-class citizens in FontLab. \"\n\nComponents are second-class citizens in TT and T1, they will stay that way forever at the current change rate (which is 0 change in 22 years, and FL will never have a reason to improve their lot. Get used to 'em as dumb as stones and as flexible as well.\n\nCheers!\n\n"
+    },
+    {
+      "time": "10 May 2008 — 4:40am",
+      "content": "But, however dumb they are in the final font format is only slightly related to how smart or dumb they are in the font editor. FontLab Studio can do what it likes on its end to a very large degree.\n\n"
+    },
+    {
+      "time": "13 May 2008 — 3:12am",
+      "content": "I would really like a (large) metrics window that can house 3 or 4 metrics windows in a grid you can determin yourself, where fontsize and textinput is the same for all the \"child\" metric windows.\n\n"
+    },
+    {
+      "time": "13 May 2008 — 2:03pm",
+      "content": "Thomas, I agree that the editor can do what it likes with composites -- just like Fog always did. But just what \\_is\\_ the latest scoop on composites in PS fonts? I just remember the conventional wisdom that composites, though at one time used in Adobe fonts, are not recommended anymore.\n\nBack to David. Most people with a product go about improving it somehow over the years. It is really kind of spooky the way T1/CFF is changing so very little. Maybe it's time for a new look at what type could be doing? Why is Adobe letting the technology remain so static? Aesthetically, we're on total overload - - so maybe it's time to look at some hard technology issues?\n\nSpeaking of slow progress, it is a year since we looked at Fontlab 5.01; now we're at 5.04. When is this company going to address simple focus issues?\n\nFOR EXAMPLE:\n\nI am in the glyph window. I am sequentially evaluating each glyph in a simple one-axis, two-master font.\n\nI start with !. I use the slider to go from -500 to +1500, looking for anomalies and problems.\n\nOK. I looked at that glyph, Now I want to go the next glyph.\n\nCan I use the control-right bracket key to advance to the next glyph? ? ?\n\nNO !\n\nThat's because focus is on the MM slider.\n\nI have to click on to the glyph window, then press control-right bracket, and then move the mouse back over to the wretched MM slider again.\n\nWHAT ? ? ? ?\n\nWhy doesn't control-right bracket (advance to next character) work, no matter where mny focus is ?\n\nWhy hasn't this bug YET been fixed?\n\nThomas, earlier I had somewhat clumsily asked the question,\n\n\"I presume this is because such composites [slanted, rotated] are not valid type 1 instructions. Are they a part of CFF?\n\nWhat other things are there in CFF that are possible but that font editors are not letting us do ? ? ? ?\"\n\nAre you indirectly answering the question and saying that there are no new composite features we don't know about in CFF?\n\nAlso, not to open a can of worms, and at the risk of exposing my ignorance even further, but I remember, when I was starting out, that there was quite a bit of talk about subroutines; you never seem to hear about them now. Anything worth investigating there?\n\nBack to Fontlab bugs. Using control-right-bracket, above ascii 128, the glyph window and the metrics window seem to use different encoding - - - still.\n\nAm I the only one to find this an embarrassing bug?\n\n"
+    },
+    {
+      "time": "13 May 2008 — 2:06pm",
+      "content": "One more point while we're on the example above, evaluating, glyph by glyph, a two-master font. I have a complication: two different versions. I have each font open in a window side by side.\n\nWhy can't the MM slider work on both glyph windows simultaneously?\n\nAnd when are we going to have DIFF for GLIFFS ?\n\n"
+    },
+    {
+      "time": "29 Jun 2008 — 11:15am",
+      "content": "Is anyone else having exceptional problems with Fontlab 5.04 and Vista? I find that for example the OPEN command generates an instant crash, though there are other ways of opening fonts that don't do this.\n\n"
+    },
+    {
+      "time": "29 Jun 2008 — 1:26pm",
+      "content": "I'd have to say that my greatest peeve with FL is the totally inconsistent, unreliable preview in the 'metrics window'. Changing sidebearings makes things jump all over the place, and common combinations will display with different spaces in between. How frustrating.\n\n—K\n\n"
+    },
+    {
+      "time": "29 Jun 2008 — 11:26pm",
+      "content": "Bill, I'm not having any major problems with FLS 5.0.4 in Vista. The Open command works fine for me.\n\n"
+    },
+    {
+      "time": "1 Jul 2008 — 8:34am",
+      "content": "John, my problems are so fundamental that I must think there is something exceptional going on. Perhaps I'll try a reinstall? I hate to delete preferences, after having spent so much time getting them. I wish people would do what XyWrite does for all preferences and customization files. They're pure ascii and cannot be corrupted, and can be edited as plain text. What is the matter with that? Binary preference/customization files should be banned. By the way, I assume you are using Aero?\n\n"
+    }
+  ]
+}

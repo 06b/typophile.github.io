@@ -1,0 +1,42 @@
+{
+  "id": "51130",
+  "title": "Getting the first glyph of a word/sentence in openType?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I've been playing around with fontlab/openType for a school assignment but I'm not really getting it.\n\nI'm really interested in scripting a font. A teacher told me you don't have a lot of options nowadays since postscript type 3 isn't supported anymore? But you should still be able to do some nice things with openType I think.\n\nWhat I am after is the following;  \nI'm making a font that lets all the characters respond to each other. Basically I want to check what the first character of a word is, and let the other characters choose the appropriate glyph based on that.\n\nSo, when I write 'nosebleed' (wow, random) I want the o,s,e,b,l,d to choose their glyphs belonging to the n, some something like o.n, s.n, e.n etc.\n\nFor the combination CA you could do something like this:\n\nfeature replace{  \n sub C A by C.A; (where C.A is a glyph containing both a C and an special version of the A)  \n} replace;\n\nBut of course, this won't let you change the whole word.\n\nThis;  \nignore substitute @LETTER f' i';  \nsubstitute f' i' by f\\_i.init;\n\nLets you change glyphs to make a ligature at the beginning of a word. But can you reverse this? Like; only replace the glyph if it's NOT at the beginning of the word, and replace it by it's version belonging to the FIRST character of the word.\n\nIn other scripting languages I would do something like this:\n\nSee if the typed character is the first character of the word being typed.  \nIf it is, use the standard glyph. If not, see what the first character was and make the typed character the glyph 'typedCharacter.firstCharacter';\n\nDoes anyone know if there is a way to do this? Or something like this? Or something to get me started?\n\n",
+  "author": "Heedless",
+  "time": "31 Oct 2008 — 3:57am",
+  "uid": "39145",
+  "comments": [
+    {
+      "time": "31 Oct 2008 — 6:26am",
+      "content": "Check out the OpenType features for positional forms: init, medi, fina, isol. They are made for stuff like this. I think InDesign CS3 supports them.\n\n"
+    },
+    {
+      "time": "2 Nov 2008 — 5:14am",
+      "content": "A more conventional approach would be a calt feature, something along these lines:\n\nsub [A A.A B.A C.A D.A E.A] [A B C D E]' by [A.A B.A C.A D.A E.A];  \nsub [B A.B B.B C.B D.B E.B] [A B C D E]' by [A.B B.B C.B D.B E.B];\n\n[A B C D E]' will be replaced, the class before is is what serves as context. This means, in the first line, any glyph following an A will be replaced by an .A alternate, and any subsequent glyph (i.e. following an .A alternate) will be replace by an .A alternate too. The first glyph of a word will not be replaced -- the above context definition requires that at least one glyph precedes the glyph to be replaced.  \nJust wondering, how many alternates do you want to draw?&nbsp;&nbsp;;-)\n\n"
+    },
+    {
+      "time": "3 Nov 2008 — 7:46am",
+      "content": "Well, I have to make a typeface with the full 256 characters, so that means something like 265 \\* 265 = 70.255 glyphs\n\nBut I'm not even sure if that amount is supported.  \nI won't make them all myself. I'm pretty handy with scripting, so I'll just write some script which will generate the glyphs in PDF / illustrator format (and then I'll have to find a way of easily importing them in fontlab, instead of copy pasting them).  \nBut I think I will start with about 5 \\* 5 = 25 glyps so see if it works :p\n\nThanks for the reply btw\n\n"
+    },
+    {
+      "time": "3 Nov 2008 — 8:01am",
+      "content": "Karsten,  \nAre your replacements ligatures or single glyph alternates in your example?\n\nChrisL\n\n"
+    },
+    {
+      "time": "3 Nov 2008 — 10:57am",
+      "content": "You may need the Asia-Font Studio because FLS refuses to save fonts with more than, I don't remember, 6000-7000 glyphs.&nbsp;&nbsp;:D\n\nHello Mr Lozos, it's just glyph alternates. I used as suffix the first-glyph-of-word to which the alternate relates, so \"B.A\" is an alternate B which is used in words starting with A.\n\n"
+    },
+    {
+      "time": "3 Nov 2008 — 11:20am",
+      "content": "\\> You may need the Asia-Font Studio because FLS refuses  \n\\> to save fonts with more than, I don’t remember, 6000-7000  \n\\> glyphs. :D\n\n6,399 is the maximum number of glyphs in a font that can be created with FontLab Studio 5. You should be glad to hear that this limit will be lifted in FontLab Studio 6 (which we are working on) so the maximum number of 65,535 glyphs per font will be possible.\n\nAdam\n\n"
+    },
+    {
+      "time": "3 Nov 2008 — 11:21am",
+      "content": "Ah, now I get it, forgive a blind old geezer :-)\n\nChrisL\n\n"
+    }
+  ]
+}

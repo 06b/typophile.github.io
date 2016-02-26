@@ -1,0 +1,39 @@
+{
+  "id": "117107",
+  "title": "Renaming font shipped from Volt .ttf to .otf?",
+  "forum": "Build",
+  "tags": [
+    "Arabic complex opentype featrures ttf otf filename",
+    "Build"
+  ],
+  "content": "Hi. My fonts where designed in Fontlab, generated as ttf fonts. Those were imported to Volt where open-type features were added.  \nAfter shipping from Volt the file ended up with a ttf file-format name. Can I manually change the shipped font's name from AlQuds.ttf to AlQuds.otf? Any advantages or disadvantages? Thanks\n\n",
+  "author": "Vladimir Tamari",
+  "time": "6 Jun 2014 — 11:00pm",
+  "uid": "23584",
+  "comments": [
+    {
+      "time": "9 Jun 2014 — 12:56pm",
+      "content": "Occasionally, I have made CFF fonts which simply don't work, usually ones with complex outlines. In such cases, I copied the font an changed the extension to .otf, and the font worked fine. I would imagine that it would worked the opposite way, too.\n\n"
+    },
+    {
+      "time": "10 Jun 2014 — 3:57am",
+      "content": "According to [the OpenType Specification](http://web.archive.org/web/20150317155818/http:/www.microsoft.com/typography/otspec/otff.htm):\n\n> **Filenames**\n> \n> OpenType fonts may have the extension .OTF or .TTF, depending on the kind of outlines in the font and the creator's desire for compatibility on systems without native OpenType support.\n> \n> - In all cases, fonts with only CFF data (no TrueType outlines) always have an .OTF extension.\n> - Fonts containing TrueType outlines may have either .OTF or .TTF, depending on the desire for backward compatibility on older systems or with previous versions of the font. TrueType Collection fonts should have a .TTC extension whether or not the fonts have OpenType layout tables present.\n"
+    },
+    {
+      "time": "14 Jun 2014 — 1:17am",
+      "content": "Thank you very much oldnick and Karl Stange  \nMy workflow was to design the font in Fontlab using PS outlines, generate a TT font, use that in Volt to ship a font with TT outlines and filename TTF. It works fine in all modern applications, but as an Arabic font it has many OpenType features, and an OTF filename seems more true to type (excuse the pun) - so I will change it to OTF.  \nRight?\n\n"
+    },
+    {
+      "time": "14 Jun 2014 — 2:15am",
+      "content": "ttf as well as otf both types of fonts may contain OpenType features. It is not necessary to change ttf to otf due to Open Type features. If you want to use otf then you should generate the otf files from fontlab not from volt. Then apply the OpenType features to this otf in the volt. When you open a otf file in volt, volt will not show the outlines and instead you will see all glyph cells empty as volt render only ttf outlines not ps outlines. But it will not effect the final shipped font and the final otf shipped from volt will work correctly in all applications. If your original outlines are ps then changing it to ttf will cause a very very little change or you may say distortion in the outlines and in most cases the glyph shaping will not be much affected but you should manually check all the glyph outlines to avoid any glyph shape distortion.\n\n"
+    },
+    {
+      "time": "15 Jun 2014 — 6:28pm",
+      "content": "Thank you Ustaz Zuhair. Indeed I am trying to avoid change to TT outlines because of the changes you mentioned. However when I generate the font from FL to OTF Volt cannot open it. Indeed if I try to open the OTF file in FL even FL says there are errors and does not open it. I wonder why.\n\n"
+    },
+    {
+      "time": "4 Oct 2014 — 7:07pm",
+      "content": "The method worked when generating the otf from Fontlab as a BINARY (not compiled). Volt compiles it as described by Mr. Zuhair. Thank you.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "32035",
+  "title": "List of Class based kerning",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I have done class based kerning for my OT font which seems to work, but is it possible to save a list of all the pairs I have\n\nRegards\n\nR :)\n\n [‹ sIFR and Ligatures -- Does it work?](http://web.archive.org/web/20081207135455/http:/typophile.com/node/32044 \"Go to previous forum topic\") [Some apps' font menus won't show my font ›](http://web.archive.org/web/20081207135455/http:/typophile.com/node/32051 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081207135455/http://typophile.com/user/16986\" title=\"View user profile.\">RachelR</a>",
+  "time": "<br>",
+  "uid": "16986",
+  "comments": [
+    {
+      "time": " 7.Mar.2007 5.45am",
+      "content": "yes. you can export a(n) .afm file from within your metrics panel.\n\n"
+    },
+    {
+      "time": " 7.Mar.2007 6.02am",
+      "content": "Rachel,  \nUsing the list from Paul’s suggestion above is quite valuable when completing other weights in your family.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 7.Mar.2007 7.45am",
+      "content": "ChrisL, thats sort of why I wanted it, thanks to you and Paul\n\nR.\n\n"
+    },
+    {
+      "time": " 7.Mar.2007 9.51am",
+      "content": "If it is an OT font and you are working in FontLab, go to the features panel and “build kerns.” Compile, and then write off the feature file, which you can open with a text editor. In that file, the “kern” feature will show both your plain pairs kerning and your class kerning. The classes as defined will be at the top of the file.\n\n"
+    },
+    {
+      "time": " 7.Mar.2007 11.57am",
+      "content": "The Classes panel allows you to save its contents, so you can apply it to another font. (Menu list at top left of the panel.)\n\nIf you make a class for “O\\_right” and include O’, C, G and Q, as well as the accented versions of those letters, you only need to manually kern O (providing the other characters are similar enough in shape). And so on for all the other character kinds that require kerning.\n\nUsing this principle, you only need to manually set a couple of hundred kern pairs for each weight of a font, and the rest of the kerns are handled by the class-based system.\n\nThe rest of the information — the lists of glyph classes and their contents — is transferred in FontLab’s “flc” files, by using the menu at the top left of the classes panel.\n\n"
+    },
+    {
+      "time": " 7.Mar.2007 12.25pm",
+      "content": "<cite>If you make a class for “O_right” and include O’, C, G and Q, as well as the accented versions of those letters, you only need to manually kern O (providing the other characters are similar enough in shape). And so on for all the other character kinds that require kerning.</cite>\n\nYeeaaahh, maybe. It always seems to scew up, or maybe I don’t understand the program well enough. If so, I’m not alone: take a look a Monotype Bulmer OpenType, purchased through Adobe (though I doubt it is Adobe’s fault). There is a class \\_f which has as its members all the f\\_ligatures. It is specified to kern only on the LEFT. But somehow, when the pair “f” and “quote” (also a class) got kerned, that value was applied to all the members of \\_f, even though that is a kern on the RIGHT. So, “Jeffi” (a nickname in a novel I’ve read) would have what amounts to a word space between the “ffi” and the apostrophe with the possessive “Jeffi’s”.\n\nI prefer to take control & only work with the features files.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "105914",
+  "title": "Color palettes in the scalable color technologies –&nbsp;feedback please",
+  "forum": "General Discussions",
+  "tags": [
+    "color fonts",
+    "color palettes",
+    "COLR",
+    "CPAL",
+    "General Discussions",
+    "SVG"
+  ],
+  "content": "As part of what seems to be a growing consensus around the co-existence of both scalable color font proposals (SVG and COLR) within the OFF/OT specs and possibly in some fonts as well, we’re looking into having both technologies share the same color palettes (i.e. literally use the same color palette table – CPAL – in the font).\n\nThis way, CSS markup (for example) can simply refer to the palette-index to be used for the text, instead of separate COLR-palette-index and SVG-palette-index values.\n\nThis kind of abstraction of course is what OT is very good at, with the cmap and GSUB for example being shared across glyph technologies and the text engine dispatching the positioned glyph IDs at the very last moment, as it were, to either a CFF or TT (or SVG) renderer.\n\nAnd the CPAL could be extended to include name IDs that function as user-facing labels for color palette entries (e.g. “floral fill”, “leaf fill”, “outline”), as in the SVG table’s current spec for color palettes.\n\nHowever, would font designers indeed want the same set of color palettes if they had both SVG and CPAL in their fonts? (Why both in the same font? For instance, a website could use a font with SVG descriptions including gradients and animation, but also include COLR versions of the glyphs (rendered static in flat colors in well-defined edges) in order to render in browsers that don't yet support SVG OT.)\n\n1. For example, a static SVG description of a floriated initial cap may include gradients for the flowers (e.g going from maroon to red to pink, with each of those colors with a color palette entry), whereas the \"fallback\" COLR description might simply have one or two of those colors as color palette entries.\n\n2. Or an animated SVG glyph may have more colors not in its COLR version, e.g. the dot on top of the \"i\" would change colors with time, each color being a palette entry, whereas the COLR version of the glyph would only choose one (or none) of those colors.\n\n3. Also, at the color meeting at TypeCon, John Hudson mentioned he could imagine a client wanting both COLR and SVG in a font, each for \\*different\\* ranges of characters. This might mean that entirely different sets of palettes are needed for different ranges/subsets of glyphs in the font, much like the hints in CID CFF's multiple dictionaries (e.g. Cyrillic vs kanji hinting). However, this complexity may not be worth it at this point in time.\n\nMy feeling is that both technologies should simply share the color palettes if possible, and that fonts having both SVG and \"fallback\" COLR glyphs is at most a transitional necessity.\n\nThoughts?\n\nSairus\n\n",
+  "author": "Sairus Patel",
+  "time": "29 Aug 2013 — 7:10pm",
+  "uid": "214052",
+  "comments": [
+    {
+      "time": "29 Aug 2013 — 7:17pm",
+      "content": "PS: if we go the sharing route we'll simply rename the SVG table's offsetToColorPalettes ULONG to be 'reserved ­ set to 0' in order not to break current tools/impls.\n\n"
+    },
+    {
+      "time": "30 Aug 2013 — 6:09am",
+      "content": "I think the more relevant question might be Why Not? Is there any good reason (technical or otherwise) that the two should have separate palette tables if they coexist in the same font/spec?\n\nI can only think of advantages to a single shared table, many of which you already touched on, including simplicity, file size, and end-user interaction. From the development side, I imagine a single shared table would be _much_ easier to manage in source data.\n\nAre there really any potential disadvantages to a single CPAL table? Are there any real advantages to separate color palette tables?\n\n"
+    },
+    {
+      "time": "5 Sep 2013 — 8:53pm",
+      "content": "In talking to other stakeholders here at Microsoft they generally agree that extending CPAL to make it more useful for general purpose color palette specification is a very good idea.\n\n"
+    }
+  ]
+}

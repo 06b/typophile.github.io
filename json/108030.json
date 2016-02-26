@@ -1,0 +1,34 @@
+{
+  "id": "108030",
+  "title": "How to get OpenType Japanese fonts to work properly in Word 2010?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I generate my Japanese font in Fontlab Studio 5.2, with VOLT data, then open the font in VOLT, recompile it to get it to work in Word 2010. But then, I can't type any Japanese characters (kana and kanji) with my font, although all ligatures work well. I just added some minor changes into my font to ease my typing, not created in the first place, but it seems that I have to manually re-add the features in VOLT. That's an awful lot of work and a bloody pain. Is there anything else I can do to add OpenType features into a font and to get it to work in Word?\n\n",
+  "author": "aki3k",
+  "time": "6 Jan 2014 — 12:58am",
+  "uid": "216456",
+  "comments": [
+    {
+      "time": "6 Jan 2014 — 11:58am",
+      "content": "I might be able to help, but I will need more details about the font (such as how the glyphs are named, what OpenType features you are trying to add, and anything else that may be pertinent), along with more details about what precisely doesn't work in MS Word. Also, I should point out that MS Word is a good example of poor heuristics, meaning that there are much better applications to use for determining whether you have a well-structured font. Adobe InDesign comes to mind, and I don't say that because I work at Adobe.\n\n"
+    },
+    {
+      "time": "7 Jan 2014 — 9:37am",
+      "content": "The font is originally an OpenType font that has the OTF extension and with TrueType outlines (and its name is Iwata Antic Std / イワタアンチックStd, if this'd help). Many special characters are mapped at the Private Use Area, so I wanted to add some \"code-like\" ligature features, something like shortcuts, to ease my typing. I'm not quite sure about how the glyphs are named: I opened it with FontCreator and they got no names, while Fontlab Studio names them somehow \"cid1, cid2, cid3,...\", maybe by their codepoints. As I told you, the font must never work if I just generate them from Studio (due to the lack of DSIG table), so I have to recompile it with VOLT. The ligatures work, but then, I can't type ANY Japanese characters like Kanji and Kana in Word. The damn program just use the default font (MSMincho) for these classes of letters. I can add a dummy DSIG table instead, but again there's another problem: the ligature feature works, but the vert feature doesn't, and I can't rotate the prolonged sound mark (ー). And I know Adobe programs support OpenType features very well, very very well indeed, and that's why I could never be sure if my fonts really work just using them. Adobe doesn't provide every software I need, so testing fonts on Word is the only way I can know if my fonts would work well with other softwares, non-Adobe softwares, I guess. I can send you the original font, the Studio file if you need, but would that violate any terms of use, or even worse, resource licensing?\n\n"
+    },
+    {
+      "time": "7 Jan 2014 — 1:28pm",
+      "content": "First and foremost, you should confirm that the font's license allows the end user (you) to modify the font for private use. I am familiar with Iwata's fonts, but I do not know the terms of their license.\n\nAnyway, assuming that modifying the font is allowed by the license, it seems that you're simply trying to add new substitutions, either to an existing GSUB feature or as a new one, to the 'GSUB' table. For this task, there is no need to completely open the font in a font editor. The font is CID-keyed, as evidenced by the glyph names that you see (\"cid\" followed by one or more digits), and very few commercial font editing apps are able to export such fonts correctly.\n\nThe better approach, in my opinion and experience, would be to decompile the 'GSUB' table into an editable form, such as by using [ttx](http://web.archive.org/web/20150419225651/http:/sourceforge.net/projects/fonttools/). The process would be to decompile the table, which is in the form of an XML file, make the necessary additions, then recompile the XML into the original OpenType font. This invalidates the 'DSIG' table, so including a \"stub\" table, as you suggest, would be good.\n\n"
+    },
+    {
+      "time": "7 Jan 2014 — 11:34pm",
+      "content": "So if I wanna modify the glyph outlines, I'll be desperate? Oh my goodness, I am desperate, and giving up. Thanks for your help.\n\n"
+    },
+    {
+      "time": "8 Jan 2014 — 7:15am",
+      "content": "If you want to modify or add glyphs, the mergeFonts command-line tool in our [AFDKO](http://web.archive.org/web/20150419225651/http:/www.adobe.com/devnet/opentype/afdko.html) would be the best way to replace or add glyphs in a CID-keyed font. Adobe Tech Note #5900, which is included in AFDKO, is a tutorial that includes coverage of the mergeFonts tool. There is a learning curve, but what you want to do is possible. I can do some hand-holding, if necessary, in terms of outlining specific steps you need to follow. The first order of business would be for you to install AFDKO.\n\n"
+    }
+  ]
+}

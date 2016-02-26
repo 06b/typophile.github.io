@@ -1,0 +1,74 @@
+{
+  "id": "117227",
+  "title": "How to draw smooth outlines in fontlab",
+  "forum": "Design",
+  "tags": [
+    "design",
+    "Draw",
+    "fontlab",
+    "smooth",
+    "Design"
+  ],
+  "content": "Hello,\n\nI have a problem in drawing in fontlab, always my letters are not smooth when I display it on screen. So, what is right way or best way to draw in fontlab? any help please?\n\nthanks\n\n",
+  "author": "ott",
+  "time": "12 Jun 2014 — 2:13pm",
+  "uid": "186362",
+  "comments": [
+    {
+      "time": "12 Jun 2014 — 2:32pm",
+      "content": "Can you post an image? The main method of achieving smoothness is nodes at extremes, and as few as possible while preserving character integrity.\n\n"
+    },
+    {
+      "time": "12 Jun 2014 — 10:10pm",
+      "content": "I'm guessing this is actually referring to screen rendering =\\> hinting.\n\nhhp\n\n"
+    },
+    {
+      "time": "13 Jun 2014 — 5:25am",
+      "content": "here is a screenshot\n\n ![](http://web.archive.org/web/20150424040334im_/http:/typophile.com/files/smooth_4931.png)\n\n"
+    },
+    {
+      "time": "13 Jun 2014 — 7:18am",
+      "content": "Oh, I was wrong.  \nSo: mostly what Nick said.\n\nhhp\n\n"
+    },
+    {
+      "time": "13 Jun 2014 — 11:16am",
+      "content": "If you could do a screen shot showing the unfilled outline, including the on- and off-curve nodes, we could give some more helpful advice.\n\nIt looks as if perhaps you have an on-curve point whose corresponding BCP is collapsed right onto the point, causing what you want to be a smooth curve to exhibit a bit of a \"kink.\" But without seeing the point structure it is hard to be sure. There are many ways to mess up a curve, unfortunately! :)\n\n"
+    },
+    {
+      "time": "13 Jun 2014 — 12:53pm",
+      "content": "Thomas, this is screenshot showing the unfilled outline\n\n ![](http://web.archive.org/web/20150424040334im_/http:/typophile.com/files/33322_3793.png)\n\n"
+    },
+    {
+      "time": "13 Jun 2014 — 3:43pm",
+      "content": "1) That's the good one; let's see the \"tooth\" on the right.  \n2) Also showing the control points is critical.\n\nhhp\n\n"
+    },
+    {
+      "time": "13 Jun 2014 — 4:50pm",
+      "content": "hrant: hope this is helpful\n\n ![](http://web.archive.org/web/20150424040334im_/http:/typophile.com/files/5754656_6094.png)\n\n"
+    },
+    {
+      "time": "14 Jun 2014 — 1:17pm",
+      "content": "I have converted the outlines from PostScript to TrueType but the problem is still!! any help??\n\n"
+    },
+    {
+      "time": "14 Jun 2014 — 1:46pm",
+      "content": "Converting poor outlines to TT can only make it worse. :-/\n\nLet's try this again...  \nIn your first image  \n [http://typophile.com/files/smooth\\_4931.png](http://web.archive.org/web/20150424040334/http:/typophile.com/files/smooth_4931.png \"http://typophile.com/files/smooth\\_4931.png\")  \nthe worst offender is the inside curve of the bottom-right element.  \nCould you show a screengrab from FontLab with all the control points?\n\nBTW in FontLab, Alt-Shift-Click balances the control points in a curve.\n\nhhp\n\n"
+    },
+    {
+      "time": "14 Jun 2014 — 2:29pm",
+      "content": "I really dont know, but I dont think changing one point will solve the issue  \nhere the screenshot that you asked about:\n\n ![](http://web.archive.org/web/20150424040334im_/http:/typophile.com/files/545656546_5061.png)\n\n"
+    },
+    {
+      "time": "14 Jun 2014 — 5:00pm",
+      "content": "Actually that's not the big offender. I meant this part:\n\n ![](http://web.archive.org/web/20150424040334im_/http:/typophile.com/files/bumpy_4728.gif)\n\nBut actually in the part you do show, the vertex at the top of the inside curve (right above the 402 guide) has control points that are not aligned. If you do that more deliberately that can actually work (assuming it's made to carry through the entire font) but here it's close-but-not-exact, which makes it look simply wrong.\n\nhhp\n\n"
+    },
+    {
+      "time": "15 Jun 2014 — 9:06am",
+      "content": "Is it necessary to aligned all control points? If so, how I can draw this curve without it? can you recommended or explain something about that?\n\nThanks\n\n"
+    },
+    {
+      "time": "15 Jun 2014 — 9:37pm",
+      "content": "Try extending the horizontal control point and shortening the vertical one.\n\nAnd have a look here: [http://learn.scannerlicker.net/2014/04/16/bezier-curves-and-type-design-...](http://web.archive.org/web/20150424040334/http:/learn.scannerlicker.net/2014/04/16/bezier-curves-and-type-design-a-tutorial/ \"http://learn.scannerlicker.net/2014/04/16/bezier-curves-and-type-design-a-tutorial/\")\n\n"
+    }
+  ]
+}

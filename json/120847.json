@@ -1,0 +1,34 @@
+{
+  "id": "120847",
+  "title": "Copying Figure Kerning Information",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I am editing an existing font family that had proportional old style figures as the default and a feature for tabular lining. My client wants those switched so that tabular lining is the default and proportional old style the feature.\n\nSeems simple… I set up a new encoding file with figure.oldstyle replacing the old figure.lnum glyphs and, copied the glyphs into the new locations and set up the features to work properly.\n\nThat just leaves the kerning… right now I am laboriously copying the kerning info onto paper, deleting it all then carefully inputting it all back into the new old style glyphs. It seems like this approach will take forever with 16 individual fonts and is prone to accidental mistakes.\n\nI couldn't get \"Paste Special\" to work as all the figures have new names. Can you guys think of an easier way to handle this kerning problem?\n\n",
+  "author": "Robby Woodard",
+  "time": "26 Oct 2014 — 9:56am",
+  "uid": "703",
+  "comments": [
+    {
+      "time": "26 Oct 2014 — 6:23pm",
+      "content": "If you are using FontLab:\n\nExport the AFM Metrics file.  \nOpen it in a text editor.  \nIn the 'Kerns' section rename the glyphs in turn (e.g. one to one.oldstyle) with Find & Replace and save as a new file with the AFM extension.  \nBack in FontLab, delete all the kerning, move the figures into the correct encoding slots .  \nOpen a Metrics window and open the new AFM file.  \nSelect 'Import kerning data into current font.\n\n"
+    },
+    {
+      "time": "27 Oct 2014 — 4:55am",
+      "content": "That is brilliant, Malcolm! I have worked with Fontlab for a few years and never thought to try editing amf files with a text editor. This bit of information will come in very handy down the road.\n\nThanks!\n\n"
+    },
+    {
+      "time": "4 Dec 2014 — 7:49am",
+      "content": "As brilliant as it sounded, I can not get this process to work.\n\nI have edited the old afm file in Word and TextEdit (mac). I just changed all the figure names from zero to zero.oldstyle throughout. The new font has all the figures in position and renamed in the encoding file.\n\nWhen I import the new afm back into the new font with the new figure names, it only applies changes to glyphs that were in the original font. Any glyph with a new name get no new kerning.\n\nAny ideas on what might be happening?\n\n"
+    },
+    {
+      "time": "16 Dec 2014 — 5:42am",
+      "content": "It was great to learn I can edit .afm in a text editor. Disappointing that search and replace would not work as described…\n\nI think it had something to do with the new figures being in the wrong order after their names were changed. The Update [kern] feature would not reorder them properly to work either.\n\nThe most streamlined workflow I could figure out was to export the old .afm, open it in a text editor and do searches for the figures. As I found them, I cut them from the old .afm and pasted them into a new blank doc.\n\nI imported the .afm, now with no figure info, into my new .vfb with the new the figures with new names and positions.\n\nUsing the new text file with all figure info, I copied and pasted the data into the new figures by hand.\n\nA little tedious but it worked. I am still thinking there is probably a better way...\n\n"
+    },
+    {
+      "time": "17 Dec 2014 — 10:18am",
+      "content": "I do quite a bit of website coding that often involves conditional search and replace patterns that extend over hundreds of documents. For these kinds of complex changes to text, learning Regular Expressions can literally save thousands of hours of manual deletes, copying, pasting, reordering and adding things. Combine it with a scripting language, like Perl or, even, Applescript and magical sorts of mass changes can be done. The big drawback, of course, is the learning curve, which probably wouldn't be cost-effective for a one-off juggling of text in a few .afm files.\n\n"
+    }
+  ]
+}

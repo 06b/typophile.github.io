@@ -1,0 +1,66 @@
+{
+  "id": "17482",
+  "title": "TTF Hinting - 'little' issue",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "The raster tragedy at low resolution - Beat Stamm: But why are there two links, rather than four? IUP[X] will take care of the others if there is no gap between them.\n\nwhat kind of gap? what is the ‘gap’?\n\n ![](http://web.archive.org/files/hint.png)\n\n",
+  "author": "david hamuel",
+  "time": "23 January, 2006 - 4:41pm",
+  "uid": "8867",
+  "comments": [
+    {
+      "time": " 23 January, 2006 - 6:32pm",
+      "content": " ![](http://web.archive.org/files/gap.png)\n\nThe gap is the disconnection between the upper right side of the stem and the lower right side of the stem caused by the presence of the part of the outline forming the arch. Because of this gap, the top part of the stem will grid fit independently of the bottom part, which might cause misalignment at some sizes. There are two ways to address this in hinting. One is to apply the same hint structure from the left side of the stem to both point A and point B, as shown in this example. The other way to do it, an what I usually do in a case like this, is to apply a non-rounding horizontal hint from point A to point B, indicating that these two points should always be aligned.\n\n"
+    },
+    {
+      "time": " 23 January, 2006 - 6:41pm",
+      "content": "posting on behalf of Beat Stamm\n\nWhen the two other control points somehow are not rather directly “connected” to the linked ones, then one might call this a gap.\n\nTake e.g. a Verdana UC ‘E’, control points 0, 11, 8, 7, 4, and 3. They’re all designed to be at the same x-coordinate, but there is some kind of a gap between points 11 and 8, and between 7 and 4. (Likewise with the gap on the TNR lc ‘n’ where the arch joins the left stem, between points 28 and 0)\n\nNow, back to the Verdana ‘E’, if only points 0 and 3 are controlled in x (linked, interpolated, etc.), then it’s up to the rasterizer what happens with point 8. But once all three (0, 8, and 3) are controlled, then IUP[X] will take care of the remaining points (11, 7, and 4).\n\nBeat\n\n"
+    },
+    {
+      "time": " 23 January, 2006 - 7:00pm",
+      "content": "Thank you John & Mike & Beat.\n\nCan I do “the other way” with the next case: B to C and not A to C?\n\nThe yellow circle - can I call it a gap?\n\n ![](files/b%20hint.png)\n\n"
+    },
+    {
+      "time": " 23 January, 2006 - 10:59pm",
+      "content": "You could. In this case (Times UC ‘B’), points B and C are designed to vertically align (afaik), hence one way is as good as the other. That said, linking from B to C, as opposed to linking from A to C, may have a slight code size advantage (i.e. the resulting font file will be about 1 or 2 bytes shorter. This may add up eventually, which may or may not be important to you). The advantage comes from when you start using CVTs to control the weight of the stem: only the link from A to B needs a cvt number, the one from B to C won’t, and hence the savings. If, instead, you were to link from A to C, you’d need that same cvt number again, to make sure the upper portion of the vertical stem is controlled in much the same way as the lower portion.\n\nThe situation is somewhat different at the bottom or at the top of the ‘B’. Again, you may wish to control the weight of the serif and the weight of the horizontal stroke using a cvt number. But now we’re controlling two different features (a serif and a stroke), as opposed to two different portions of the same feature. It would make sense therefore to link from the bottom of the glyph to the top of the serif and separately to the top of the stroke, using separate cvt numbers. In the illustration it looks like the two features have the same width, but this is merely a result of displaying what the glyph looks like at a small size and at low resolution, at which point the two features have the same minimal width of 1 pixel.\n\nThe real problem is that when we look at a glyph like that, we can readily _see_ the stems and strokes. However, these stems and strokes are sometimes made up of several “pieces of outline” with gaps inbetween. These pieces are not tied to one another until we link and interpolate them for that purpose.\n\n"
+    },
+    {
+      "time": " 24 January, 2006 - 6:31am",
+      "content": "“Hmmm.”  \nThe “Gap” in the n should be a rounded “mdrp” with 0 minimum.  \nThe Stem Gap in the B between “B” and “C” should be “alignrp”, the fastest correct inst. assuming you mirp A-B, moving the reference point to B in the process.  \nHas anyone written a book on this yet?\n\n"
+    },
+    {
+      "time": " 24 January, 2006 - 1:00pm",
+      "content": "Thank you Beat & David\n\n"
+    },
+    {
+      "time": " 24 January, 2006 - 3:05pm",
+      "content": "Another thing:  \nExample-Based Hinting of True Type fonts - Geraldine Wade, Douglas E. Zongker, David H. Salesin\n\n“Insted of using hand- created templates for each charcter to be hinted, we use an existing, hinted font as the template, allowing the hints of one font to be transferred to another”\n\nWhat is idea behind that? how come (allowing…..another)?\n\n"
+    },
+    {
+      "time": " 24 January, 2006 - 4:50pm",
+      "content": "The idea of ‘Example-Based Hinting of True Type fonts’ is that rather than having to manually hint every new font you can algorithmically apply hints from one font to another. Generally this has not been possible to copy hints from one glyph to another, let alone across fonts, unless the glyphs have identical point structures. What Geraldine and her collaborators were doing, if I remember correctly, is analysing what Peter Enneson would call role architecture to determine the corresponding sets of points in non-equivalent structures. In other words, the hint copying tool would identify e.g. the top of the bowl in two lowercase b letters, even if the point numbering in that region of the glyphs was totally different. This enabled them to copy the hints from one font to another. Obviously that isn’t the end of the job, but it is a big time saver. Some of the same analysis would presumably be useful in building an autohinter.\n\n"
+    },
+    {
+      "time": " 24 January, 2006 - 5:20pm",
+      "content": "\\> apply hints from one font to another.\n\nNo ethic issue? (not of course if we are talking about members of the same family)\n\n"
+    },
+    {
+      "time": " 24 January, 2006 - 7:07pm",
+      "content": "To decide the ethical question, I’d like to point out that Doug’s tool works on the _source code_ of a font. Therefore I’m tempted to relate the question to that of the source code of any other computer program. If I were in the business of hinting (a.k.a. programming) fonts, and if I had already solved the problem how to hint the O slash for font A, then I would certainly apply this solution to font B. Doug’s tool automates this process. If, on the other hand, someone thinks I shouldn’t be in the possession of the source code of font A in the first place, then they may send the lawyers.\n\n"
+    },
+    {
+      "time": " 24 January, 2006 - 7:36pm",
+      "content": "Thank you John & Beat\n\n"
+    },
+    {
+      "time": " 24 January, 2006 - 8:38pm",
+      "content": "The ethical question is in the use of the technology, not in the nature of the technology. The use of the data in one font in whatever way is subject to the terms of the license agreement. As Beat notes, the tool in question presumes that you already have hinting source code for one font, which generally implies that you have been involved with the development of that font or, in fact, own that code. It is conceivable that hint source code might also form part of the total package of an open source font, and so might be copied to another font within the terms of the open source license.\n\n"
+    },
+    {
+      "time": " 25 January, 2006 - 6:27am",
+      "content": "“What is idea behind that? how come (allowing…..another)?”  \nHint transference is done by first having good general Font Program and Pre-Programs that’ll work for most fonts. Secondly, a “universal” CVT is used, whereby all cvt tables have the same table position, for e.g. H stem, (not to be confused with B Stamm) even though the value itself varies from font to font. These CVT values are then filled in specifically for each font, based on a measuring expedition by man or machine. With this in place, the hint monger can use preexisting character stacks, and only needs tools or brains to change the point numbers that are being referenced, in a short time achieving hinted character groups that can then be quickly debugged.\n\n“the problem how to hint the O slash”  \nA sadly never removed artifact of metal, discrete non-overlapping shapes like this……unless there is some change at the intersections of bar and O, this Is best solved by compositing an O and a slash :-) Hint it after the overlap is removed and join the wasting as it reaches a thousand skilled hours since 1990 to achieve what is usually an inferior result.\n\n"
+    }
+  ]
+}

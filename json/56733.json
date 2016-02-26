@@ -1,0 +1,30 @@
+{
+  "id": "56733",
+  "title": "Auto change values",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I have a simple fontlab question - While finishing my kern font I realize that the values I used are a bit tight for my taste, so I want to add (+) all my kerning values +30 for example so they still well kerned but more space in equal proportions. Is there any easy way to do this? :S Hopefully yes!\n\nThanks!\n\n",
+  "author": "mikej",
+  "time": "7 Apr 2009 — 8:37am",
+  "uid": "37792",
+  "comments": [
+    {
+      "time": "7 Apr 2009 — 10:20am",
+      "content": "so for instance, if oTo is 30, want to automatically change to 60... I find a way to do it but isn't good.  \nSearch and Replace in my OpenType Kern window... It isn't good cos I have lots of different values :-(\n\n"
+    },
+    {
+      "time": "7 Apr 2009 — 12:11pm",
+      "content": "I'm not sure how you would do it in FL - I'm sure there must be a way.\n\nThis little script will add a value to all kerning pairs - be careful it will alter all your pairs.\n\n`\nfrom robofab.world import CurrentGlyph, CurrentFont\nfrom robofab.interface.all.dialogs import AskString`\n\nf = CurrentFont()\n\nkerning = f.kerning\n\nkern = int(AskString('Increase/Decrease Kerning'))\n\nkerning.add(kern)\n\nif kern \\> 0:  \n print \"kerning Decreased by\"  \n print kern  \nelif kern \\< 0:  \n print \"kerning Increased by\"  \n print kern\n\nf.update()\n\n"
+    },
+    {
+      "time": "7 Apr 2009 — 2:00pm",
+      "content": "Would it work to do this?  \nTools \\> Action... \\> Metrics \\> Adjust metrics and kerning: Check kerning and enter the amount in the box.\n\n"
+    },
+    {
+      "time": "7 Apr 2009 — 7:26pm",
+      "content": "@RachelR - Seems a bit tricky but thanks!  \n@eliason - Will try! this will add or just change the value?\n\nThanks guys!\n\n"
+    }
+  ]
+}

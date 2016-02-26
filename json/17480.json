@@ -1,0 +1,30 @@
+{
+  "id": "17480",
+  "title": "VOLT & Ship Font & Strip",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "How to make sure that I’m not going to strip the working tables - when I want to use “File/Ship Font” ?\n\n...and why “VOLT strips existing OpenType tables from fonts loaded into it”?\n\n [‹ merging contours](http://web.archive.org/web/20080106094950/http:/www.typophile.com/node/17495 \"Go to previous forum topic\") [Question: Why does the last letter not appear in Illustrator... ›](http://web.archive.org/web/20080106094950/http:/www.typophile.com/node/17469 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080106094950/http://www.typophile.com/user/8867\" title=\"View user profile.\">david hamuel</a>",
+  "time": "<br>",
+  "uid": "8867",
+  "comments": [
+    {
+      "time": " 23.Jan.2006 2.49pm",
+      "content": "Not sure what you mean by the first question.\n\nFor the second one VOLT can’t currently convert OpenType Layout tables (GSUB, GPOS etc.,) into its own source format so it removes them when you open a font.\n\nYou could use a tool like FLAB to export a font + VOLT source tables - although in our experience this gives mixed results.\n\n"
+    },
+    {
+      "time": " 23.Jan.2006 2.51pm",
+      "content": "David,\n\nThe \\*whole point\\* of “Ship Font” in VOLT is to strip the private VOLT tables from the font. If you don’t want to do that, just use Save.\n\nVOLT strips existing OTL tables from a font when opening it because the purpose of VOLT is to create new OTL tables from the private VOLT data that the user edits.\n\nPerhaps I’ll ask:\n\n1. Why do you want to use “Ship Font” while retaining the private VOLT tables?\n\n2. Why do you want to keep existing OTL tables when opening a font in VOLT?\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": " 23.Jan.2006 3.04pm",
+      "content": "Let me go back to ’VOLT release notes/File options’.....\n\nThank you!\n\n"
+    },
+    {
+      "time": " 23.Jan.2006 3.05pm",
+      "content": "I suppose we don’t do a good job of explaining that one of the cool things about SFNT is that the font file is made up of tables, and you can define and add your own “private table” to contain useful information such as high-level hinting source code, or OpenType Layout source code, or comments, that can be used by a font development tool. That way you don’t need to keep multiple files hanging around, all of your ’source’ can be contained in a font file.\n\nIn most cases, you’ll want to remove (strip) these sources prior to distributing a font to a customer, mainly because they add additional file size to the font. In other cases, say you’re making an open-source font, you might decide to keep them in.\n\n"
+    }
+  ]
+}

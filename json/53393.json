@@ -1,0 +1,38 @@
+{
+  "id": "53393",
+  "title": "Opentype CFF with UPM size 1100 instead of 1000?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Dear Typophiles,\n\nI am cleaning up some sins done in the past, when still doing trial and error type design (wondering if I have advanced from this level until now :)\n\nI have a font that has ascenders as high as 800em, and descenders to -300, which results in an UPM-size larger than 1000, exactly 1100 EM. It is intended to be and drawn as a Opentype font with Postscript outlines, mainly for use in DTP environment (but i'd like it to be compatible with office applications if possible). Fontlab 5 tells me that a UPM-size other than 1000 may cause problems.\n\nI've done a recherche on the web and found out that there are cosmetic problems in CS1-applications (cursor size, ...), but could not find anything \"serious\" endangering the use of such a font. These postings were relatively old, the newer ones from 2007.\n\nAre there, in 2009, known problems for fonts with this settings? Scaling down to 1000 is quite difficult (ugly or much work), if it is possible without problems, i'd like to stick with the 1100...\n\nIf there are problems to be expected: What happens if I set the UPM size to 1000, force the descender to -200, and still have glyphs that reach down to -300? Clipping? Even more dangerous things?\n\nThanks for your help  \nSebastian Nagel\n\n",
+  "author": "Sebastian Nagel",
+  "time": "12 Jan 2009 — 2:48pm",
+  "uid": "5444",
+  "comments": [
+    {
+      "time": "12 Jan 2009 — 5:45pm",
+      "content": "It can cause incorrect spacing in Quark (don't know if this was fixed in 8.0).\n\nI ran into this problem just as I was almost finished with Lakeside (a connecting script), which had a UPM of 1300 something (don't ask). Scaling it down to 1000 caused big problems for me because the x-height was quite small, and also messed up all the careful alignment I had done on the connecting strokes. My solution was to scale it up to a UPM of 2000. This still left the cursor anomaly in certain older Adobe apps, but it fixed the spacing problem in Quark.\n\n"
+    },
+    {
+      "time": "12 Jan 2009 — 6:45pm",
+      "content": "I remember that at Adobe we ran into another issue with other-than-1000 upm fonts, that occurred when making PDFs with a \"third party\" (non Adobe) application, and then viewing them in \\*newer\\* versions of Acrobat/Reader (8 and 9, I think). It involved an area where the PDF spec might even be ambiguous, IIRC. Anyway, the PDFs came out with the glyphs scaled incorrectly... it was pretty bad.\n\nI think it's safe to say that it's nearly certain there will be further problems with \"some applications\" or workflows; it's just that we don't know for sure what those applications/workflows are, and there can even be complicated \"emergent problems\" from combining particular applications.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "12 Jan 2009 — 6:58pm",
+      "content": "My recommendation is that everyone should make a point of using a UPM other than 1000 for their CFF fonts, because the more fonts are made that way the more careful app developers will be about not assuming that any PS font has a UPM of 1000!\n\n"
+    },
+    {
+      "time": "13 Jan 2009 — 4:19am",
+      "content": "thanks for the feedback. i'll test in xpress extensively then...\n\nit's a pity, scaling it to 1000 is that ugly that it would mean a lot of re-adjusting.  \nMaybe i should try scaling to 2000. But let's see what xpress 7 and 8 say about this.\n\nMy other question was: What happens if I set the UPM size to 1000, force the descender to -200, and still have glyphs that reach down to -300, meaning being larger than the specified UPM? Clipping? Even more dangerous things?\n\n"
+    },
+    {
+      "time": "13 Jan 2009 — 8:40am",
+      "content": "Sebastian, if you need to scale from 800 to 1000, try scaling first up to 8000 and then down to 1000; that will avoid rounding errors.\n\nIt is okay to have some elements of glyphs exceed the UPM height and these will not be clipped so long as the OS/2 table winAscent and winDescent values equal or exceed the actual height of the tallest glyphs. However, you generally don't want the main parts of letters to exceed the UPM height, only things like cap accents.\n\n"
+    },
+    {
+      "time": "13 Jan 2009 — 1:34pm",
+      "content": "I like the idea that all PS glyph data tables should be on 1,000, and all TT glyph data tables are on powers of 2, but...\n\n\"... if you need to scale from 800 to 1000, try scaling first up to 8000 and then down to 1000; that will avoid rounding errors[...]\"  \n...on some even values, and few odd values. Good luck!\n\n\"What [] if I set the UPM size to 1000, force the descender to -200, and still have glyphs that reach down to -300, meaning being larger than the specified UPM?\"  \nIt depends. Sounds like your safest and speediest method, is to convert it to an 1100 upm TT font, and leave it. TT doesn't really care about the upm value and DTP/office environments use enough TT to get along. This keeps the issue out of Adobe's emfumbling mitts, look ma no editing, and boom done.\n\nThe current bottom of node/53308 states your most likely options, and it's quite simple if you start one of two ways... which you have not.\n\nCheers!\n\n"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "id": "31317",
+  "title": "Hinting TT opentype fonts",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi all,\n\nI have generated [OTF](http://web.archive.org/web/20131013030740/http:/typophile.com/wiki/OpenType) fonts from my vfb file which work fine, but when I try to generate the [TTF](http://web.archive.org/web/20131013030740/http:/typophile.com/wiki/TrueType) fonts they don't come as well, the [hinting](http://web.archive.org/web/20131013030740/http:/typophile.com/wiki/hinting) seems to be off on them. How should I go about generating the TTF fonts using my vfb to get better results.\n\nc.\n\n[Moderator's Note: Changed title from \"Generating\" to \"Hinting\" --PDH]\n\n",
+  "author": "coop",
+  "time": "9 Feb 2007 — 12:01pm",
+  "uid": "5642",
+  "comments": [
+    {
+      "time": "9 Feb 2007 — 4:11pm",
+      "content": "Doesn't Fontlab generate CFF (T1) flavored rather that TT flavored OT fonts? Did that change in 5.0?\n\n"
+    },
+    {
+      "time": "10 Feb 2007 — 9:14am",
+      "content": "I'm sure you can create both - but CFF is the default?\n\n"
+    },
+    {
+      "time": "10 Feb 2007 — 9:52am",
+      "content": "In 4.6 ( which is what I have ) it is. Definitely. Aha!\n\nExports fonts with up to 6,400 glyphs\\* as OpenType PS (.otf), Win TrueType / OpenType TT (.ttf), Win Type 1 (.pfb + .pfm/.afm), ASCII/Unix Type 1 (.pfa + .afm), Win Multiple Master (.pfb + .mmm), FontLab 3.0-4.6/TypeTool/AsiaFont Studio/ScanFont/TransType/FontLab Studio (.vfb). Also exports glyphs as Adobe Illustrator 8 EPS (.ai + .eps), TIFF, BMP. Mac version also exports Mac Type 1 (LWFN), Mac TrueType (.dfont or FFIL), Mac Multiple Master.\n\nThe new one (5.0.2) does OT TT.\n\n"
+    },
+    {
+      "time": "10 Feb 2007 — 6:44pm",
+      "content": "FontLab has supported both flavors of OpenType equally long, as far as I recall. On Windows (at least) TrueType is the default.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "10 Feb 2007 — 11:02pm",
+      "content": "\\> _the TTF fonts they don’t come as well, the hinting seems to be off on them_\n\nHow are you doing the TT hinting? TrueType hinting is not as easy to do as Type 1 hinting. Don't expect your fonts to perform on screen as well as Times New Roman or Arial. These were heavily and carefully hinted.\n\n"
+    },
+    {
+      "time": "11 Feb 2007 — 12:32am",
+      "content": "Miguel,\n\nI understand that TT hinting is alot more complex, but waht would give me the best results from using a vfb that has Type 1 hinting. I've been saving the vfb's seperate to use to produce the TT fonts and then:\n\n1. Contours direction to TT  \n2. Curves to TT  \n3. Convert to instructions\n\nIs there anything else I should be doing to get better results ?\n\nc.\n\n"
+    },
+    {
+      "time": "11 Feb 2007 — 4:41am",
+      "content": "Eben,\n\nWindows TrueType was extended by Microsoft and named TrueType Open around 1994-95, and later (1997-98) renamed to TrueType-flavored OpenType, or OpenType TT. FontLab has supported TrueType and therefore TrueType-flavored OpenType since version 3.0, and allowed including OpenType Layout features since version 4.0 that came out in 2001. However, in FontLab versions prior to Studio 5, the OpenType TT was simply labeled \"TrueType (.ttf)\" or \"Windows TrueType (.ttf)\".\n\nA.\n\n"
+    },
+    {
+      "time": "11 Feb 2007 — 4:50am",
+      "content": "Regarding TrueType hinting -- FontLab Studio has very sophisticated autohinting which converts PostScript hints into TrueType instructions. However, it takes some experimentation to achieve the best results. One option would be to use Adobe's PostScript autohinter that is built into AFDKO 2, open the autohinted font in FLS and then convert the hints to instructions. Alternatively, you can use FLS's built-in autohinter. Two essential settings that should be carefully set, and perhaps re-turned several times \\*after\\* PostScript autohinting but \\*before\\* converting hints to instructions, are Font Info / Hinting settings / Alignment zones and also Standard stems. You can use the \"Auto\" buttons there (\\*after\\* PostScript autohinting) but it's sometimes useful to manually edit the stems to reduce their number (you'd usually take some average values).\n\nAfter converting hints to instructions, the stems are imported into the TT Hinting Options dialog (that can be opened by clicking on the \"...\" button in the TrueType Options panel when using the TrueType Hinting tool). In there, you can experiment with the \"Optimize PPM\" button and the \"Reset PPM\" button as well as with changing the values (you should open a multiline preview from the TrueType Tools panel, and then click on the \"Apply\" button in the TT Hinting Options dialog and observe how the results change).\n\nAdam\n\n"
+    },
+    {
+      "time": "11 Feb 2007 — 11:33pm",
+      "content": "<cite><br>\nTwo essential settings that should be carefully set, and perhaps re-turned several times *after* PostScript autohinting but *before* converting hints to instructions, are Font Info / Hinting settings / Alignment zones and also Standard stems. You can use the “Auto” buttons there (*after* PostScript autohinting) but it’s sometimes useful to manually edit the stems to reduce their number (you’d usually take some average values).<br>\n</cite>\n\nI not sure too sure what you mean by re-tuning several times. The Alignment zones I've set up for each font and shouldn't change between PS and TT fonts should they?  \nAgain with the Standard stems, should they be the same across different font formats.\n\nc.\n\n"
+    },
+    {
+      "time": "12 Feb 2007 — 12:44am",
+      "content": "Adam: Thanks for the clarification!\n\nSimon: Unless I have misunderstood something I think what Adam is getting at is the fact that the hinting systems in t1 & tt are quite quite different. AND if you want utterly optimal results on screen you will have to treat & tweak them differenetly. If screen is not a significant focus of your fontmaking the hinting strategy you describe using may be just fine. Adam isn't saying what you have to do; just what you might do if you were so inclined.\n\nAdam, feel free to correct me if I am in error here.\n\n"
+    },
+    {
+      "time": "12 Feb 2007 — 6:25am",
+      "content": "Coop,\n\nindeed, the alignment zones and standard stems should in principle be the same between formats. But sometimes, it turns out to be necessary that you replace two alignment zones or stems with one that has a larger value, so that more things are aligned. Good setting of alignment zones and stem values has more impact in the TT hinting model than in the PS hinting model, because the PS hinting model is simpler while the rasterizer makes more decisions as for what to unify and align. In the TT hinting model, this information is taken more directly from the stems and zones, and of course, is driven by the instructions. But worrying in detail about the instructions is a yet another level of complexity, which I wouldn't worry at this point.\n\nNote that if you're using ClearType, the dependance on the perfectly optimized stems is slightly less relevant, but alignment zones are still important.\n\nAlso, for the stems, what's important to fine-tune in the TT hinting is the ppem sizes at which stems \"jump\" from one pixel to two pixels (and then from 2 to 3 etc.). Especially when designing semibold or bold styles, there may be some screen sizes where, using the standard Windows antialiasing (not ClearType), some styles may look the same although they nominally have different weights. In such case, for the bolder styles, you'd set the ppem sizes in which stems jump from 1 to 2 pixels lower (so they become thick \"earlier\", e.g. at 13 ppem), and for the regular styles higher (so they stay thin \"longer\", e.g. 17 ppem). I personally prefer typefaces for the screen where the regular style jumps from one pixel to two pixels as early as 15 ppem, but in a large family with many weights, this might not be practical (on the other hand, in such a family, it could be the Medium style that jumps at 15 or even 14).\n\nPerhaps what I'm saying is that when choosing the optimal alignment zones and stems, you may want to test both PS and TT outlines and how they appear on screen, and then only after testing both outline flavors, you'd decide on using the same set of stems and zones for both PS and TT.\n\nAdam\n\n"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "6302",
+  "title": "Drawing PostScript TrueType",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Is there a problem:   \n   \n1. to design a type in PostScript and to generate the type as TrueType? (the TrueType is going to be with same size of the em-square 1000; and not the power of two 1024 etc etc)   \n   \n   \nor...   \n   \n2. to design a type in PostScript; convert to TT with TransType?\n\n",
+  "author": "thelring",
+  "time": "21 Aug 2004 — 4:55pm",
+  "uid": "4363",
+  "comments": [
+    {
+      "time": "22 Aug 2004 — 9:43am",
+      "content": "In TrueType / OpenType TT fonts, you can use ANY em-square (up to 16384). For example 200, 202, 500, 523, 998, 1000, 1024, 2000, 2048, 2049 etc. Pleae forget the neccesity of using an UPM that is a power of two!   \nIf you use FontLab or TypeTool, just design your font as PostScript and generate it as TrueType. If you wish to fine-tune the screen appearance, you can refer to Leslie Cabarga's book \"Learn FontLab Fast\" ( [http://www.logofontandlettering.com/](http://web.archive.org/web/20131010185358/http:/www.logofontandlettering.com/) ) for tips on the process of converting PostScript fonts to TrueType fonts.   \n   \nRegards,   \nAdam\n\n"
+    },
+    {
+      "time": "22 Aug 2004 — 11:19am",
+      "content": "Also true for PostScript Type 1 and PostScript flavored OpenType fonts, with the caveat that regardless of the em square, all coordinates used in the font must be no greater than +- 4096 (or is it 4095, given the use of zero as a coordinate? I forget).   \n   \nIIRC, earlier versions of FontLab had a problem generating T1/OT-CFF fonts with em squares other than 1000, but I believe that restriction has been lifted.   \n   \nRegards,   \n   \nT\n\n"
+    },
+    {
+      "time": "22 Aug 2004 — 11:46am",
+      "content": "First and foremost, thank you both!   \n   \nYou don't mind that I'm going to ask more? I have the book \"Learn...\". Not long ago..   \n.\n\n"
+    },
+    {
+      "time": "23 Aug 2004 — 10:32am",
+      "content": "Re 1.:   \n   \n\\> Why to have TT/Open Type TT when OP TT   \n\\> \"does not work on Mac OS 8/9..\"? while   \n\\> OpenType PS \"works on Windows, Linux,   \n\\> Mac OS 8.6, 9. and OS X\".   \n   \nThere are issues and problems with OT TT and with OT PS.   \n   \nThe downside of OT PS is that in Office 2000/XP for Windows and in any non-Adobe application running on Windows 95/98/ME, you will only get Western characters from OT PS fonts (or the multilingual characters will be problematic to access) while you will get multilingual/Unicode characters from OT TT fonts. Only Office 2003 and Windows 2000/XP/2003 are free from the mentioned limitations of OT PS fonts.   \n   \nThe downside of OT TT is that it does not work on Mac OS 8.6 or 9, and that the outlines are not stored in PostScript curves which seems important to some designers.   \n   \nOther advantages and disadvantages of the formats are listed in the book, most notably regarding hinting.   \n   \nRe 2.:   \n   \nYes, principally OpenType PS/TT helps you solve the compatibility problem, and yet, it is extremely difficult to decide between the PS and the TT flavor because of problems mentioned above.   \n   \nRegards,   \nAdam\n\n"
+    },
+    {
+      "time": "23 Aug 2004 — 12:00pm",
+      "content": "_Pleae forget the neccesity of using an UPM that is a power of two!_   \n   \nUnless you are planning to license your fonts to Microsoft, who still have this as a procurement requirement.\n\n"
+    },
+    {
+      "time": "23 Aug 2004 — 5:37pm",
+      "content": "interesting, John, why do you think they still have this requirement? i'm curious\n\n"
+    },
+    {
+      "time": "24 Aug 2004 — 10:03am",
+      "content": "Paul,   \n   \nall fonts that Microsoft ships with Windows, Office etc. have one unified UPM size (of 2048). For Microsoft, this surely simplifies quality assurance.   \n   \nMicrosoft explains that on their web page: [http://www.microsoft.com/typography/ProductionGuidelines.mspx](http://web.archive.org/web/20131010185358/http:/www.microsoft.com/typography/ProductionGuidelines.mspx)  \n   \nOther vendors such as Apple or Linotype have been shipping TrueType / OpenType TT fonts with other UPM sizes for years. The value of 1000 is most common, especially if you ship PostScript and TrueType fonts from the same source. But Apple also shipped fonts with completely different UPM sizes, e.g. 400 for the Zapfino (AAT) font in Mac OS X 10.3.   \n   \nRegards,   \nAdam\n\n"
+    },
+    {
+      "time": "24 Aug 2004 — 6:43pm",
+      "content": "Some time ago, I did a survey on a very large set of TrueType fonts (over 22000) from a large selection of font foundries. The following is the list of UPM values found in these fonts and their percentage count.   \n   \nRegards,   \nAdam\n\n    UPM Count 1000 70.71% 2048 26.83% 1200 0.64% 4096 0.43% 2000 0.31% 1600 0.23% 900 0.11% 1100 0.08% 1400 0.07% 1024 0.06% 920 0.06% 256 0.04% 1800 0.04% 2594 0.04% 600 0.03% 1050 0.03% 1500 0.03% 400 0.02% 875 0.02% 1190 0.02% 3400 0.02% 1020 0.01% 2200 0.01% 4000 0.01% Others 0.18%\n\n"
+    },
+    {
+      "time": "24 Aug 2004 — 7:55pm",
+      "content": "\\> 1000 70.71%   \n\\> 2048 26.83%   \n   \nAlthough I agree that using a power of two is no big deal (unless it's for MS), I do suspect that there are a lot more \"quality\" fonts among that 26.83% than there are among the other. So it would be nice to have a filter on those stats - but how do you measure quality? Well, I don't think you can, numerically, but here's an idea: break down each of those percentages according to the level of hinting included.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "24 Aug 2004 — 8:25pm",
+      "content": "Adam - thank you very much for your posts. and your time!   \n   \nIs there a problem with Quark and OpenType?   \n   \n   \np.s.   \nhow do I post a sample, glyph window etc - If i want to illustrate my point?\n\n"
+    }
+  ]
+}

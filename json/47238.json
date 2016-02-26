@@ -1,0 +1,94 @@
+{
+  "id": "47238",
+  "title": "tahoma kerning issue",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "My Tahoma font on CS3 (mac) messes up big time on odd font sizes (9,11,13 ect).\n\nCheck out example attached.\n\nNEED HELP BADLY!!\n\n ![](http://web.archive.org/web/20100514182042im_/http:/typophile.com/files/tahomamessingup_6257.jpg)\n\n-Steve\n\n",
+  "author": "<a href=\"/web/20100514182042/http://www.typophile.com/user/33646\" title=\"View user profile.\">skater_king</a>",
+  "time": "<br>",
+  "uid": "33646",
+  "comments": [
+    {
+      "time": "",
+      "content": "bump?\n\n"
+    },
+    {
+      "time": "",
+      "content": "It's not kerning, it's rounding. Although Tahoma is designed with a pixel grid in mind, there is no way all spacing can be taken into account for all pixel sizes.\n\nAlthough I must add that your screen shot is especially bad looking ... On my machine, even a size of 7 points displays nicer text. Mind, that's an 1280x1024 TTF screen with ClearType on. It sure helps with the small sizes.\n\nSee these fountains -- 7, 8, 9, 10, 11 pts. Note the difference in _length_ between 9 and 10 points -- also due to rounding, but this time it appears to preserve character form instead of character width (courtesy of Microsoft, I guess).\n\n ![](http://web.archive.org/web/20100514182042im_/http:/typophile.com/files/tahoma_3912.PNG)\n\nAny special reason your measurements are in pixels, rather than points? What program did you use?\n\n[Edit:] Oh, CS3. Well, it's still a lousy display. Do you have the highest possible setting for text in your preferences? (I.e., anything better than \"lowest\"?)\n\n"
+    },
+    {
+      "time": "",
+      "content": "\" Although Tahoma is designed with a pixel grid in mind, there is no way all spacing can be taken into account for all pixel sizes.\"\n\nActually, it was, at least for these sizes. But that was done for the Win rasterizer. IN CS3, unless I'm mistaken you're using the Adobe rasterizer, and I'm not sure what it's doing to get quality, whether it's doing some sort of oversampling as the Mac rasterizer, or something else all together.\n\nAs Theunis noted, it's not a kerning issue. This would be a really small size to show large kerning values. However it's also not a simple rounding issue either. In the 11pix sample it looks like that, but note that in the 13 pix sample, you're not only seeing strokes crash, but overlap. see the word \"in\", where the \"i\" and left stroke of the \"n\" actually overlap. Normal rounding issues wouldn't explain that. This is some miscalculation of the advance widths, is my guess.\n\nHmm, although aside form describing the issue, I can't help more, as I don't have a Mac with CS right now. Perhaps the other Adobe experts will fill in the gaps?\n\nJason c\n\n"
+    },
+    {
+      "time": "",
+      "content": "CS3 Photoshop set to bi-level rendering? That might be your problem?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Sorry it is set to pt's.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite><br>\nSorry it is set to pt’s.<br>\n</cite>\n\nyou mean set to points? That's not what Sii's asking about.  \nYour sample is in Black and White, not greyscale, which seems really odd to me.  \nThat could be causing the problem.\n\n"
+    },
+    {
+      "time": "",
+      "content": "On a slightly different note, \"CS3\" is not a program. Is this Illustrator, Photoshop (as Si and Jason assume), InDesign (as I was thinking)?\n\nI _do_ get this ugly small text in InDesign (CS1), **if and only if** I set the text real small -- 7 pts, on a medium sized page -- A5, zoomed out to show the entire page, and _then only_ if I force InDesign's display performance to really really low: \"Optimized\", which turns off anti-aliasing on the screen.\n\nThat \"screen anti-aliasing\" is another important point. If this is text from Illustrator or InDesign, you don't have to worry about the screen quality. If you print it, it will look great. (Oh, okay, only if your printer has a reasonable quality as well!) If you zoom in onto it, it will not look great (because you will still see aliasing), but at least the characters will separate. And if you set the view quality to better than the worst possible, it'll look much better, even in small sizes.\n\nIf this is text in Photoshop, you have a totally different set of problems. If this is meant to be printed at, say, a reasonably 200 dpi (and \"print quality\" images should at least be 300 dpi), your tiny 9 pixel text will be about 0.045 inch tall, or in the metric system, about 1 millimeter.  \nIf it's intended for the screen (as in: a web page), try selecting one of the other rendering modes for text. Photoshop allows a number of quality settings, and again you seem to have chosen the worst one possible.\n\n(What Jason is suggesting is also possible: Photoshop needs a few more colours to be able to draw the text antialiased.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Photoshop. web. Of course points. the sample @ the top is RBG.\n\nIt was happening before then i did a fresh install of everything on a new HD and it was fixed for a while, but now its doing it again. Only with Tahoma tho....\n\nI also tryed a re-install of the font as well.\n\n-Steve\n\n"
+    },
+    {
+      "time": "",
+      "content": "Nothing wrong on my end. The configuration I'm using is,  \n- Photoshop CS3 (v10.0.1)  \n- Tahoma Regular (v5.01.2x)  \n- Mac OS X (v10.5.4)  \n- Anti-aliasing: None\n\n ![](http://web.archive.org/web/20100514182042im_/http:/typophile.com/files/Tahoma_PSCS3_4759.png)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Could it be some of your Justification/Hyphenation settings? Or it might be an effect of the \"Every-line Composer\". Try reseting the paragraph settings.\n\n ![](http://web.archive.org/web/20100514182042im_/http:/typophile.com/files/reset_paragraph_3603.png)\n\n"
+    },
+    {
+      "time": "",
+      "content": "No, that couldn't be an effect of the composer choice. Certainly not when it's in a ragged-right setting. If the text were justified, it could be due to other justification settings, maybe?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Question Thomas . . .\n\nI thought that if you specified ragged, with hyphenation, ID would allow varying word spacing, and it was only when hyphenation was turned off that the \\*ideal\\* space value was always used. I've always set indexes ragged, hyphenation on (but minimal), with wordspacings of 97%-100%-103%. Am I just wasting time?\n\n"
+    },
+    {
+      "time": "",
+      "content": "It does make a difference, Thomas, at least when using no anti-aliasing. That's why I mentioned it. Below are the exact same paragraphs; the ones on the left are using the Every-line Composer, and the ones on the right are using the Single-line Composer. All paragraphs are set flush-left ragged-right.\n\n ![](http://web.archive.org/web/20100514182042im_/http:/typophile.com/files/every_vs_single_5492.png)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Miguel,\n\nI just did the paragraph reset to no avail. Didn't help.....\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"Every-line Composer\" & \"Single-line Composer.\"\n\nThat looks like it's trying to mean non-integer or integer spacing.\n\nIs that so!?\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "What is the versionnumber of the fontfile?  \nDo a Command-I and check the info.\n\n. . .  \nBert Vanderveen BNO\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>“Every-line Composer” &amp; “Single-line Composer.”</cite>\n\nThat looks like it’s trying to mean non-integer or integer spacing.\n\nIs that so!?\n\nFortunately, not even remotely close.  \nSee [this older thread](http://web.archive.org/web/20100514182042/http:/www.typophile.com/node/15215) for a quick overview.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"Fortunately, not even remotely close.\"  \nThen, \"looks like\", means something different to you. If it is not, in fact, the difference between the two specimens, it is the difference in one. MS's example on the right, is most certainly integer spacing according to the bitmap or hints, how do you think things 'down there' become readable? The left is... taking another route to another destination and the older thread is an under-view.  \nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Well, the OP mentions \"it was fixed for a while, but now its doing it again\", which suggests _something else_ than mere local software settings.\n\nThe difference between Single Line and Multi-Line Composer is that the former fills a line of text, adjusts for space settings, looks for possible hyphenation to the previous line(s) (to count the number of successive hyphens), then moves on to the next.  \nThe Multi-Line Composer does the same, but also takes into account the _average space width_ in each separate line. It then averages the space widths over the entire paragraph, rather than taking them for granted. To appreciate the difference, compare InDesign's formatting to that of WordPerfect, PageMaker, Quark, and Word. ID's text spacing is by far more consistent.\n\n\"Non-integer or integer\" could apply to the internal calculations of character and space widths, but I'd expect (and certainly hope!) calculations are done with as high as possible precision. Referring back to Word: it appears to me it bases its spacing and character positioning on the resolution of the printer, which means documents will re-flow if you change to another (and hey, so it does). InDesign does not have that flaw.\n\nBe it kerning, rounding, or integer-based maths, the OP has had this problem on and off for presumably the same InDesign/Photoshop settings, the same OS, and the same font file.\n\n"
+    },
+    {
+      "time": "",
+      "content": "“Non-integer or integer” could apply to the internal calculations [...], _but [...] I certainly hope!) calculations are done with as high as possible precision\"_\n\nI don't think this person's posts are related to printing, so I don't think you are remotely relating to the precision of the post.\n\nIf the Single Line Composer is other than simply planting each bitmap glyph end to end on integer metrics, until it runs out of full words and starts a new line — I'd be surprised (from what I see), wouldn't you?\n\nCheers!\n\n"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "id": "30727",
+  "title": "Em Square settings?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm creating a very detailed font and I'm not able to get enough detail in with an em square of 1000 in fontlab. The points get mangled in some spots where they can't sit in the location they should be in.\n\nIf I move up to a em of 2048, will I still be able to output the files as postscript or will that cause technical problems?\n\nI would like to release this font as a CFF flavored OpenType font.\n\nThanks,  \nMatt\n\n",
+  "author": "matthew_desmond",
+  "time": "19 Jan 2007 — 8:34am",
+  "uid": "553",
+  "comments": [
+    {
+      "time": "19 Jan 2007 — 10:28am",
+      "content": "I think that earlier versions of FL had this problem; and I think that the coordinates used in the font (OTF) must be no greater than 4096.\n\n(and with TTF -- up to 16384 em-square)\n\nAdam, am I right (or wrong)?\n\n"
+    },
+    {
+      "time": "19 Jan 2007 — 9:40pm",
+      "content": "Here's a trick invented by Luc de Groot, which he was kind enough to share at the Graphika conference recently, and I've already put it to good use -- this is from the centre of a 20 unit monoline ampersand, on a 1000 em square.\n\n ![](http://web.archive.org/web/20141030071923im_/http:/typophile.com/files/technique_5527.jpg)\n\n"
+    },
+    {
+      "time": "20 Jan 2007 — 10:11am",
+      "content": "Matthew,\n\nfor both OpenType PS (.otf) and OpenType TT (.ttf), you can use a UPM size anywhere up to 16,384, though the PostScript specification recommends that no glyph coordinates should extend the range -4000 to +4000. Adobe’s recent complex-script fonts (Adobe Arabic, Adobe Hebrew, Adobe Thai) are OpenType PS and use a 2048 UPM.\n\nBut you’re in no way limited to 1000 and 2048. You can use 1024, 1500, 2000, 2048, 2382, 3000, 3420, 4000 or whatever you like as UPM size. Doesn’t matter.\n\nThe only limitation I was able to find so far is that for OpenType PS fonts with the UPM size other than 1000, the text cursor in InDesign CS (and older versions) would appear of wrong size (i.e. for a 2000 UPM font, if you select some text, on screen only the bottom half of the text will be selected and for a 3000 UPM font only the bottom third). But that’s only a cosmetic screen display problem and it has been fixed in InDesign CS2.\n\nAdam\n\n"
+    },
+    {
+      "time": "21 Jan 2007 — 11:14am",
+      "content": "Nick, that's a great trick. I will have to try it next time.\n\nAdam, thanks for the info. I went with an em of 2000.\n\n"
+    },
+    {
+      "time": "21 Jan 2007 — 11:35am",
+      "content": "Nick, Adam, if you do that trick Font Lab's 'font audit' will flag those short connections as 'too short'. Does 'too short' harm anything in the font? Why does 'font audit' flag them?\n\n"
+    },
+    {
+      "time": "21 Jan 2007 — 12:23pm",
+      "content": "William,\n\nFont Audit checks for situations that \\*may\\* indicate a mistake. Sometimes, people put two nodes next to each other by mistake but then don't notice it. The font gets produced with this unintentional quirk in the outline. The quirk is never harmful, but if unintentional, it's certainly ugly. And can get noticed if the letter is printed in a huge size, or cut in vinyl for example.\n\nHowever, it some cases, like that suggested by Lucas by the way of Nick, such outline quirks may be intentional. Font Audit has no way of knowing the designer's intention, so it flags various situations that may indicate a problem.\n\nI remember when I installed FontLab Studio on Matthew Carter's computer and was showing it to him, we opened one of this typefaces (I think Mantinia). I was walking through the glyphs and in one of them, there was the red Font Audit arrow. Matthew got very curious: \"Oh, what it that?\" So I explained him what Font Audit is, and then I clicked on the arrow to show the description of that particular problem. Matthew read the description, thought for a few seconds and said:\n\n\"I don't think so.\"\n\nThat basically sums up on what you should do with Font Audit warnings: read it, think about it, and make up your own mind.\n\nBest,  \nAdam\n\n"
+    },
+    {
+      "time": "21 Jan 2007 — 1:29pm",
+      "content": "It would be helpful in your next go around on the manual if you included in the FontAudit section some guidelines on considerations of when and when not to change a flagged curve. I realize that there are not hard and fast rules, but perhaps from feedback from designers you could include some guidelines, and reasons for them.\n\nI find the flagging of extrema without points to be quite useful, just as an aid to the drawing process. When you click on 'correct' it will hit exactly the extremum, which is useful.\n\n"
+    },
+    {
+      "time": "22 Jan 2007 — 6:29am",
+      "content": "\"Here’s a trick invented by Luc de Groot, \"  \nI forgot people did that stuff: how positively 80's. You know, if ya work in TT, ya don't have invent that kind of hacking to your &, nor o-bar, Ç or #, that's the trick I invented. :)\n\n"
+    },
+    {
+      "time": "22 Jan 2007 — 7:27am",
+      "content": "_if ya work in TT, ya don’t have invent that kind of hacking_\n\nIt was for the hairyest weight of Taz, which Luc described as 2/1000.  \nPerhaps he was using a larger em square.  \nA lot of his clients are newspapers that use Type 1 fonts.  \nMe, I'm just a Type 1 guy.\n\n"
+    },
+    {
+      "time": "23 Jan 2007 — 8:44pm",
+      "content": "I have a need for high precision as well so I had an email exchange with FontLab about this issue a couple of weeks ago after noticing the FogLamp manual had specific information about the UPM that was missing from the FontLab Studio manual. The reply:\n\n\"FogLamp manual does say that OpenType TT fonts can have a UPM of up to 16,000 although FontLab Studio only supports 10,000. That's true for OT PS as well. FontLab theoretically supports 10,000 but according to Yuri Yarmola (our chief programmer) it is not recommended to set UPM to more than 4,000. This may cause value overflow problems with certain math operations in FontLab.\"\n\nIn a followup email he also said that FontLab would consider enabling support for 10,000 UPM if I could prove I really needed it. I don't have a need for it and I feel certain that applies to 99% of us.\n\nFor text fonts, a maximum 4,000 UPM will work just fine -- attaining high precision is easy to do. So I am happy with the 4,000 number.\n\nIt also helps to know that when generating a font, FontLab Studio retains the precision in the finished font of whatever UPM you digitized to, unlike Fontographer which rounds down to 1,000 UPM at generation time even in the most current version from FontLab.\n\n"
+    },
+    {
+      "time": "2 Feb 2007 — 5:56am",
+      "content": "As discussed currently in the forum topic, \"UPM value of 1000 set in stone?\" what Yuri says about the tool, is that we don't have the TT maximum to plot the EM on (16,384 is, I believe, the actual number), and that 4000, though hopefully he means 4096 is safe.\n\nNick, as seen in Lucas's 1000-x problem, to me, 1000 is nearly 1/2 way to correct for print, mostly because of the details required for some faces for that medium. There is nothing stopping one from defining the black-compressed at 2048 when the rest of a family is at 1000.\n\nThe best news of the day, is that you can open fonts in foglamp, amp-em-up to 16k, output a new font and make them FL proof, true?\n\n"
+    },
+    {
+      "time": "3 Feb 2007 — 4:52am",
+      "content": "David,\n\neven 16,384 is possible in FLS5. It's just that you may run into problems when your glyph coordinates exceed 65,535 during the design process, as your glyphs will be destroyed.\n\n4,000 and 4,096 are perfectly safe for OpenType TT, but for OpenType PS you need to make sure that none of your point coordinates exceed ±4,095.\n\nA.\n\n"
+    },
+    {
+      "time": "3 Feb 2007 — 6:47am",
+      "content": "\"make sure that none of your point coordinates exceed ±4,095\"  \nSo, they count zero as one?\n\n\" FontLab Studio only supports 10,000\"  \n\"even 16,384 is possible in FLS5\"  \n??? which is true, just for the sake of completeness. (I don't care, I'll never need that much).\n\n"
+    },
+    {
+      "time": "3 Feb 2007 — 8:31am",
+      "content": "For the sake of completeness:\n\nI have just tested FontLab Studio and found out that internally (in .vfb) it's possible to have an UPM size up to 32,767. The glyph coordinate limit is from –32,768 to +32,767. It's easy to find out yourself: if you put a point at x=32,767 and move it one unit to the right, it will pop up at –32,768.\n\nA.\n\n"
+    },
+    {
+      "time": "3 Feb 2007 — 4:43pm",
+      "content": "Thanks Adam.\n\n"
+    },
+    {
+      "time": "19 Feb 2007 — 7:35am",
+      "content": "\"if you put a point at x=32,767 and move it one unit to the right, it will pop up at –32,768.\"\n\nI assume that means the FL em is a cylinder.\n\n"
+    },
+    {
+      "time": "19 Feb 2007 — 3:35pm",
+      "content": "Ah, but presumably it wraps in both x and y! Which makes it some sort of hypershape....\n\nT\n\n"
+    },
+    {
+      "time": "20 Feb 2007 — 5:43am",
+      "content": "Thomas Magellen Phinney, your right! Now the only question left is whether or not a contour is allowed to cross the international date line.\n\n"
+    },
+    {
+      "time": "20 Feb 2007 — 5:33pm",
+      "content": "If it did that, then the stroke would end before it started. I tried that once, and it disappeared in a puff of logic. :)\n\nT\n\n"
+    },
+    {
+      "time": "21 Feb 2007 — 12:14am",
+      "content": "Maybe it could be an extra task for the Typophile font ID board: show screenshots of fonts enlarged 30x in FontLab Studio (and hence wrapped in the FontLab hyperspace) and let the font IDers guess which typefaces these were. :)\n\nA.\n\n"
+    },
+    {
+      "time": "10 Mar 2007 — 12:48pm",
+      "content": "Tracking\n\nChrisL\n\n"
+    },
+    {
+      "time": "10 Mar 2007 — 6:05pm",
+      "content": "I needed increased precision on something I'm working on at the moment, and theres some handy info in this thread.  \nTracking it as well. :)\n\n"
+    },
+    {
+      "time": "12 Mar 2007 — 3:21pm",
+      "content": "I hope once you finish hunting down and killing this thread, you cook and eat it, and try to come up with uses for the pelt, etc. Hunting threads for pure sport is so wasteful.\n\nT\n\n"
+    },
+    {
+      "time": "12 Mar 2007 — 9:02pm",
+      "content": "Adam wrote: _Adobe’s recent complex-script fonts (Adobe Arabic, Adobe Hebrew, Adobe Thai) are OpenType PS and use a 2048 UPM._\n\nActually, only the Adobe Arabic fonts have a UPM of 2048, the Hebrew and Thai have UPMs of 1000. My approach is to tailor the UPM to the design. If I can accurately represent a design using a UPM of 1000, I will do so because there will be fewer point coordinates with four digit values and hence the size of the font file will be smaller. In the case of the Adobe Arabic, the designer Tim Holloway felt that he needed that larger UPM size to achieve the refinement he wanted, and since he is used to thinking in a 2048 em, having now worked on a number of fonts with that UPM, we settled on that.\n\nIn another project I am working on, I'm using a UPM of 4096, because that's what I feel is necessary to accurately represent the complexity of the design.\n\nThe great thing about TT/OT with regard to the em square is that it does allow this flexibility, and means that the design does not need to be forced into a standard grid. Unfortunately, some font companies have settled on a standard em square, usually 1000, and although this makes sense in terms of converting existing PS Type 1 font data, it seems to me an unnecessary and unwelcome restriction to apply to new designs.\n\n"
+    }
+  ]
+}

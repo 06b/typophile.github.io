@@ -1,0 +1,25 @@
+{
+  "id": "66674",
+  "title": "CSS improvements",
+  "forum": "Bug Reports and Feature Requests",
+  "tags": [
+    "bugs",
+    "CSS",
+    "metaphile",
+    "Bug Reports and Feature Requests"
+  ],
+  "content": "- Main CSS [has two validation errors](http://web.archive.org/web/20150419072221/http:/jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Ftypophile.com&profile=css21&usermedium=all&warning=1&lang=en \"Validator report\").\n- I think the off-grey text colour (`#333`) is too light, especially on the grey background. I would just make the text flat black in that case.\n- Hyperlinks are too difficult to distinguish from body copy. This isn’t just bad usability; it also [violates WCAG 2](http://web.archive.org/web/20150419072221/http:/www.w3.org/WAI/WCAG20/quickref/#qr-visual-audio-contrast-without-color \"Use of Colo[u]r\"), but a lot of things here do. The colour is too pale. You additionally need some kind of underline (`border-bottom` solves the problem of amputating descenders found with `text-decoration: underline`).\n- You need to be much more specific in styling links. Styling plain `a` catches every anchor, including invisible, non-link anchors. You want `a:link` then `a:visited` then the pair of `a:hover,a:active` (defined together to get around IE6 bugs). Other combinations are possible, of course. (Eric Meyer’s [standard advice](http://web.archive.org/web/20150419072221/http:/meyerweb.com/eric/thoughts/2007/06/11/who-ordered-the-link-states/ \"Who ordered the link states?\") is to specify them in order of “`L`o`V`e’s `H`urts `F`ade `A`way,” but some experts disagree.)\n- Unless you have a serious design intent in a well-planned layout, I don’t think it’s a good idea to mess with visitors’ default font size. Hence `font-size: 1em` (or `100%`) is advisable for body copy. You’ve got variously .9em and .85em, which explains why the type is too damned small. (And those numbers can multiply together, as you know.) I see a computed 11px type size in Safari 4. This is pretty small.\n- We don’t have a print CSS, which is rather shocking. It’s quite easy to put together, and can be included in the main CSS without recourse to a separate file (put it all inside `@media print { }`).\n- We don’t have a mobile CSS, or, as it has devolved at present, a CSS for iPhones/iTouches and other Mobile WebKit browsers. These are more troublesome to set up (ask [PB at MetaFilter](http://web.archive.org/web/20150419072221/http:/metatalk.metafilter.com/18420/ \"iPhone CSS for MetaFilter\") for help); if you’re too specific in your selectors, you’ll leave out mobile devices that could actually use the stylesheet; and, significantly, the whole enterprise makes a mockery of the `handheld` media type, which was supposed to solve all our problems but obviously won’t.\n\n",
+  "author": "joeclark",
+  "time": "26 Jan 2010 — 11:49am",
+  "uid": "7076",
+  "comments": [
+    {
+      "time": "27 Jan 2010 — 2:19am",
+      "content": "I agree with most points and would give top priority to a [more distinct link style](http://web.archive.org/web/20150419072221/http:/typophile.com/node/43305) and a print style sheet.\n\nIn addition, I think it’s odd that unordered lists within posts are rendered at a smaller font-size than the rest.\n\n"
+    },
+    {
+      "time": "27 Jan 2010 — 9:37pm",
+      "content": "Multiplication of `font-size` declarations.\n\n"
+    }
+  ]
+}

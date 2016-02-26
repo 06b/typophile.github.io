@@ -1,0 +1,86 @@
+{
+  "id": "62332",
+  "title": "Many Fontlab Questions",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I've been improving with the Fontlab learning curve, and have encountered some issues/questions along the way. These questions might expose my inefficient amateur workflow, so I welcome any suggestions. Especially now, before I get too stuck in my wrong ways. Since I won't bother to bombard the board with multiple posts, I'll just list them out here:\n\n1. If I move the anchor of, let's say e, how can I get it to automatically update the positioning of é without deleting the glyph (slot still there, but cleared) and double-clicking it again? Also, when I try this with a character that doesn't exist in the current codepage, it deletes the entire glyph and I have to generate it. Any shortcut to that?\n\n2. Is there any way I can sort my glyphs so that scaron, scommaaccent, sacute, etc are next to each other?\n\n3. If I kern Nu, can I apply the kerning value automatically to Nú, Nù, Nû etc? If the answer's kerning classes, will I end up making a class for each base composite?\n\n4. With a few hundred glyphs, is there anyway to quickly check if all my contours are in the right direction?\n\n5. How come I must decompose each glyph and merge the contours before I generate a font? Why would anyone want to NOT merge/decompose? I'm curious.\n\n6. Is there an automatic centering feature? e.g. Placing an anchor exactly in the horizontal center of an O without checking with rulers each time.\n\n7. What does it mean when a glyph slot is bright red?\n\nHope that's not too overwhelming. Feel free to answer one or just some, I need all the help I can get. Thanks in advance!\n\n",
+  "author": "kosal",
+  "time": "23 Sep 2009 — 10:40pm",
+  "uid": "4186",
+  "comments": [
+    {
+      "time": "24 Sep 2009 — 6:17am",
+      "content": "1. I don’t believe so, but would love to be told otherwise.  \n2. Either use index mode in the glyph window or create an encoding file that orders things as you want them ordered. You can always use one encoding file to develop a font and another to generate the final fonts.  \n3. Kerning classes are the answer. Yes you have to make a class for each key glyph.  \n4. Select everything in the font window (cmd+a) and run Contour \\>\\> Paths \\>\\> Set PS Direction. This might break a few glyphs if you have stuff running in too many directions, but usually it works fine.  \n5. If you don’t remove overlaps glyphs some programs will render the overlaps incorrectly. Likewise, not all software handles composites properly. [Get Ben Kiel’s font generator script to do this automatically.](http://web.archive.org/web/20150123042000/http:/benkiel.com/typeDesign/)  \n6. No.  \n7. Usually it means that you ran some kind of batch function on a bunch of glyphs and it failed on that one, marking it as red. If you got a VFB file from someone else, that designer may have marked it red as a reminder.\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 6:52am",
+      "content": "<cite>1. If I move the anchor of, let’s say e, how can I get it to automatically update the positioning of é without deleting the glyph (slot still there, but cleared) and double-clicking it again?</cite>\n\nI think the whole point of using anchors is to be able to preview the position of accents before you build the composites. At least that is the way I use them (when I use them). Isn't that the reason the Anchors Preview is there in the Preview Window?\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 7:15am",
+      "content": "Thanks for the responses, they're very helpful. James, you might've misinterpreted the my question #5. Let me rephrase. Since it's obviously better/safer to decompose+merge glyphs when generating the final font, why doesn't Fontlab do it automatically upon generation? Is there any circumstance where one would NOT want to decompose and merge?\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 8:13am",
+      "content": "_Is there any circumstance where one would NOT want to decompose and merge?_\n\nFor fonts with TrueType outlines, it's not necessary to decompose composites in the final fonts. It may actually be desireable to keep accented glyphs as components because that way you only have to hint the accent and base glyph once and can use additional hinting in the composite glyph e.g. to keep the base glyph and accent from touching. If you decompose, these stacked hints would break.\n\nTo be on the safe side, don't use scaled or flipped components if you plan to keep composites in your fonts.\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 1:28pm",
+      "content": "_or create an encoding file that orders things as you want them ordered_\n\nHow can this be done?\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 3:29pm",
+      "content": "[Old thread on sorting glyphs](http://web.archive.org/web/20150123042000/http:/typophile.com/node/46077).\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 3:35pm",
+      "content": "<cite>\"Since it’s obviously better/safer to decompose+merge glyphs when generating the final font, why doesn’t Fontlab do it automatically upon generation?\"</cite>\n\nBut FontLab doesn't know if it's the final font you're making. I generate a \\*lot\\* of test fonts in the design/developing phase; and say an f\\_f\\_itilde ligature is a pain to tweak again once it's decomposed and merged. Or an oslash… :-\\  \nSo I for one wouldn't find it funny if FontLab decomposed and merged my stuff every time I generate a font. But maybe everyone else does it differently :-?\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 3:40pm",
+      "content": "But I think the idea is that the .vfb would retain the unmerged outlines but the font file produced would have the merges done.\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 3:46pm",
+      "content": "Aaah! OK, sorry. I halfway thought I must be missing something.\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 4:04pm",
+      "content": "hmm.. I work from the vfb file. is that normal? it sounds like some of you generate the font in the format needed, then edit the generated file if needed.\n\nNormally I work from a vfb and do it this way:  \nDesign in and Save the vfb file.  \nDecompose and Merge.  \nGenerate test font file (otf, for example).  \nClose the vfb without saving.  \nWhen I need to make changes to the font, I open up the vfb and repeat the process. I never really edit the generated fonts.\n\nIs this normal?\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 4:35pm",
+      "content": "That's (approximately) what I meant too. Sorry for garble-speak. No, I don't edit the generated fonts.  \nWe're having a multi-dimensional misunderstanding! I'll shut up now. :)\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 4:44pm",
+      "content": "<cite>How can this be done?</cite>\n\nRead the manual.\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 5:50pm",
+      "content": "Ad 7. If you're asking about the caption of a glyph cell being bright red, it means that you have a mismatch between the glyphname and the Unicode codepoint.\n\nRegarding decomposing and merging: FontLab Studio doesn't automatically remove overlaps because it is not always a perfectly precise operation. Sometimes, when you have complex shapes that overlap, there may be some manual clean up work required. However, there is a setting in Preferences to automatically decompose all glyphs when the font is generated as OpenType PS (.otf). It's a good idea to always decompose all glyphs (even the non-overlapping ones) in OTF, since composites in OTF are considered an \"obsolete feature\" and some rasterizers (e.g. Bitstream FontFusion) don't render them correctly. On the other hand, for OpenType TT / TrueType fonts, it's a good idea to keep the non-overlapping composites because the hinting is simpler and more consistent in the final font. With composite glyphs, FontLab Studio only needs to generate TT hinting code for the base glyphs and there are far less situations when the accented letter would render differently from the base letter. If you decompose glyphs in a TT font, some letters may render differently, and your font will be considerably larger.\n\nOverlapping contours, however, should be always decomposed and merged. If they're not, Mac OS X will render them so that the overlaps become visible. This is for example visible in Arial or Times New Roman on Mac OS X, for glyphs such as aogonek — you can actually see a thin white outline around the ogonek that protrudes into the \"a\". And yes, Ben Kiel's Python script for generating fonts is doing all the steps you're asking for at once.\n\nRegarding the encoding files — there is a section in the manual that discusses this, and you just need to follow it. An encoding file is a plain text file in which the first line has a special format that includes an encoding number (random) plus a name, while the subsequent lines are just glyphnames, one per each line, in the order that you desire. Once you put the .enc file in the right location, start FLS and switch your font to that encoding, you'll be able to use Glyph / Sort Glyphs / By Encoding to get the desired glyph order in your font.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 6:02pm",
+      "content": "I have [**posted a small Python script**](http://web.archive.org/web/20150123042000/http:/forum.fontlab.com/python-scripting/python-script-center-anchors-t7226.0.html) that will center anchors in the currently active glyph in the Glyph Window or all selected glyphs in the Font Window.\n\n"
+    },
+    {
+      "time": "27 Sep 2009 — 1:50pm",
+      "content": "I can't seem to find the Python script's Zip file/URL. Am I missing something Mr. Twardoch?\n\n"
+    },
+    {
+      "time": "28 Sep 2009 — 9:54am",
+      "content": "I don't know. It works fine for me. The link says \"Center\\_anchors.py.zip (0.81 KB - downloaded 6 times.)\"\n\nA.\n\n"
+    },
+    {
+      "time": "28 Sep 2009 — 10:04am",
+      "content": "Do you have to register/login at that forum to have access to downloads?\n\n"
+    },
+    {
+      "time": "8 Oct 2009 — 10:21am",
+      "content": "\\> Do you have to register/login at that forum to have access to downloads?\n\nI believe so.\n\nCheers,  \nAdam\n\n"
+    }
+  ]
+}

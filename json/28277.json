@@ -1,0 +1,374 @@
+{
+  "id": "28277",
+  "title": "AFDKO 2.0 : Post your feedback here",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "If you're using the new [AFDKO](http://web.archive.org/web/20110525072414/http:/typophile.com/wiki/AFDKO) (v2.0), we would like to hear your feedback. Please use this thread for your comments, wishes, concerns, bugs found, and/or anything related with the tools contained in the new AFDKO. Thanks!\n\nAndreas [has already started](http://web.archive.org/web/20110525072414/http:/typophile.com/node/20033?from=50#comment-158270).\n\n",
+  "author": "<a href=\"/web/20110525072414/http://typophile.com/user/1844\" title=\"View user profile.\">Miguel Sousa</a>",
+  "time": "<br>",
+  "uid": "1844",
+  "comments": [
+    {
+      "time": "",
+      "content": "Overall, it runs and I'm able to compile the projects from 1.6.\n\nI like to know how to set up usWinAscent and usWinDescent.\n\ntable OS/2 {  \nTypoAscender 765;  \nTypoDescender -235;  \nTypoLineGap 250;  \nusWinAscent 900;  \nusWinDescent -350;  \n} OS/2;\n\nThis is not working, why?\n\n1. the mystery of -nr\n\nIf I use a project file I got lots of the time: [FATAL] unrecognized option (-nr).  \nNow I found out it its related to the option:  \nReleaseMode true  \nBut if you set it to false, the -nr fatal error comes up. So better use  \n#ReleaseMode true (vs) ReleaseMode false\n\n2. relative paths under windows only by using -fp option with \\*.fpr file.\n\n3. This message seems to be a general one since it comes everytime. Can we turn it off since its not specific to the font?\n\nmakeotfexe.exe [NOTE] There are -12851 instances of the deprecated “except” syntax in the feature file. Though such statements are processed correctly by this parser for backward compatibility, please update them to the newer “i gnore substitute” syntax. For example, change “except a @LET sub a by a.end;” to “ignore sub a @LET; sub a’ by a.end;”. (Note that the second rule is now required to be marked to identify it as a Chain Contextual and not a Single Substituti  \non rule.)\n\nSo far I tested the makeotf programm only.\n\nThe FontLab scripts installer seems not to work under python 2.2 win xp.\n\nline 134 and 105  \nNameError: global name '\\_\\_file\\_\\_' is not defined\n\nSo I tryed to move the files manually. No script is running. Maybe this is related no path was added to the python site packages by the installer. So what path should we set manually?\n\nExample, the Auto-Hint script\n\nTraceback (most recent call last):  \n File \"\", line 70, in ?  \nImportError: No module named string\n\nwin xp sp2, FL5, Python 2.2\n\n-- [astype.de](http://web.archive.org/web/20110525072414/http:/www.astype.de/)--\n\n"
+    },
+    {
+      "time": "",
+      "content": "Bravo Miguel. I look forward to giving it a spin.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> [...]  \n\\> usWinAscent 900;  \n\\> usWinDescent -350;  \n\\> ) OS/2;\n\nThe Feature File Syntax says:  \nwinAscent  \nwinDescent\n\n"
+    },
+    {
+      "time": "",
+      "content": "and makeotf says:  \nsyntax error at \"WinAscent\" missing \"}\"\n\nok fixed, since \"WinAscent\" is not the same like \"winAscent\" :-)\n\nI miss to give the makeotf the path and name of the fontinfo file. Is it no longer needed?\n\nBTW. Its not commen this file is called \"fontinfo\" everytime and placed in the path of yourfont.pfa. For example I call it \\_fontinfo.txt. Other developers place it under other paths call it with an other name. So if the new FDK is looking \"hard coded\" for \"fontinfo\" it can't find it.\n\nMy first impression is, in points of usability, this fdk has some serious back steps compared to 1.6. Its bound the developers special workflow. :-(\n\n-- [astype.de](http://web.archive.org/web/20110525072414/http:/www.astype.de/)--\n\n"
+    },
+    {
+      "time": "",
+      "content": "i experienced the same problems with the scripts as andreas described; any solutions yet?  \nt.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Karsten is right. The correct parameter names are **winAscent** and **winDescent** , which are case-sensitive. For a complete list of the parameters that can be specified by the FDK, in regards to the OS/2 table, please refer to the file 'OT Feature File Syntax.html', section 9.f. OS/2 table.\n\nAs for the file **fontinfo** , please refer to the documentation file 'MakeOTFUserGuide.pdf', page 9.\n\n"
+    },
+    {
+      "time": "",
+      "content": "i updated my python installation and now the install macros scripts works; nevertheless, most of the scripts don't.  \nfor example 'autohint' gives me:\n\nTraceback (most recent call last):  \n File \"\", line 798, in ?  \nImportError: No module named win32api\n\nthe 'adobe-update scripts' script, however, seems to work.\n\ni checked other non-FDK scripts and they also work fine.\n\nwinxp, FL 5.0.2, python 2.4.3\n\n"
+    },
+    {
+      "time": "",
+      "content": "Not using a PC for this, but my guess is win32api is an 'external' Python library which you have to grab somewhere and install in addition to python and fdk.\n\n"
+    },
+    {
+      "time": "",
+      "content": "thanks karsten,\n\ni downloaded the win32api.dll and placed it into various places that seemed appropriate: the windows system folder, the python dll folder, the fontlab modules folder.\n\neventually the error changed, but was not solved:\n\nTraceback (most recent call last):  \n File \"\", line 798, in ?  \nImportError: DLL load failed: Das angegebene Modul wurde nicht gefunden.\n\nin line 798 AutoHint.py tries to import the win32api.dll and the win32con.py; i also downloaded the latter and placed it into the fl modules folder - with no changes in behaviour.\n\nif \\_\\_name\\_\\_ == '\\_\\_main\\_\\_':  \n dontShowDialog = 1  \n if haveAC:  \n result = 2  \n if os.name == \"nt\":  \n import win32api  \n import win32con\n\nany ideas?\n\n"
+    },
+    {
+      "time": "",
+      "content": "AFDKO Version 2.0 includes several new tools, and I recently authored a new Adobe Tech Note, #5900, to act as a tutorial for three of them, specifically for mergeFonts, rotateFont, and autohint. This Adobe Tech Note will be available at the following URL: [http://partners.adobe.com/public/developer/font/index.html](http://web.archive.org/web/20110525072414/http:/partners.adobe.com/public/developer/font/index.html \"http://partners.adobe.com/public/developer/font/index.html\")\n\nAnd, it will be included in the next release of AFDKO. Until then, if anyone would like to receive this Adobe Tech Note, contact me by email.\n\nKen Lunde  \nSenior Computer Scientist, CJKV Type Development  \nAdobe Systems Incorporated  \n [lunde@adobe.com](mailto:lunde@adobe.com)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Ken! I'll take you up on that.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Andreas,\n\nAs Miguel has noted, the correct feature file keywords are described in the file \"FDK/Technical Documentation/OT Feature File Syntax.html\"\n\nThe \"fontinfo\" file is no longer required, and when used, makeotf pays attention to only a few parameters. The way things work now is that makeotf will llook , in order, in three sources for parameters settings:  \n - the fontinfo file, if there is one  \n - the project file  \n - the command line  \nIf the different sources specify different settings, the last one seen wins.\n\nIf you use a project file, you have no need to use a fontinfo file at all, and would do better to not have one, in order to avoid possible conflicting options. I agree that if you \\*do\\* use a fontinfo file, it would be better to be abel to specify a path - I will add this to makeotf with the next bug fix release.\n\nI am pleased to hear that you do use the project files. I thought it would be useful to have this option, but no one at Adobe uses them, and your e-mail is the first evidence that I have seen that anyone else does, either. I wil llook into the '-nr' problem under Windows.\n\nThe easiest way to supress the complain about use of the 'except' clause in in the feature file is to change from using \"except' to 'ignore\".\n\n- Read Roberts\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi,\n\nMy apologies - I see that the dependency on the win32api and win32com.py modules in the Windows version is not documented. I will fix this in the next release. Note that they have to be installed in one of the directories which is in the sys.path list of your Python. The only directory under FontLab's Macros directory which is in this list is in Macros/System/Modules. Did you put both these modules in one of the directories in sys.path?\n\nAnother limitation is that the AutoHint and CheckOutlines modules use C extension modules that are linked for use with Python 2.3 ( aka FontLab 5) and won't work with Python 2.2 ( aka FontLab 2.2).\n\n- Read Roberts\n\n"
+    },
+    {
+      "time": "",
+      "content": "read,\n\n<cite>Note that they have to be installed in one of the directories which is in the sys.path list of your Python. The only directory under FontLab’s Macros directory which is in this list is in Macros/System/Modules. Did you put both these modules in one of the directories in sys.path?</cite>\n\nthis is actually what i've done, yet, it doesn't work. i also added a path file to the site-packages folder (just like the one created by the FDK) - but it makes no difference. fontlab (or python) still reports that the library can't be found.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Windows users should install the win32all package:  \n [http://www.python.net/crew/mhammond/win32/Downloads.html](http://web.archive.org/web/20110525072414/http:/www.python.net/crew/mhammond/win32/Downloads.html \"http://www.python.net/crew/mhammond/win32/Downloads.html\")\n\nIt includes the win32api etc. modules.\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "One current problem with Python extension modules is that they work only with the version of Python for which they were built. It is possible that your win32api module doesn't match your Python. Another possibility is that the win32api module may have dependencies on other modules. I will echo Adam Twardoch's good advice and recommend that you download the entire win32 package. However, I will add that you need to pick the right one that works with the version of Python that you have. I actually used \"pywin32-205.win32-py2.3.exe\" to install the win32 package for my co-workers at Adobe. This translates as \"build 205 of the win32 package, built for Python 2.3\". The newer builds of win32 ought to work, as long as they are built for the Python you are using. These can be found at:  \n [http://sourceforge.net/project/showfiles.php?group\\_id=78018](http://web.archive.org/web/20110525072414/http:/sourceforge.net/project/showfiles.php?group_id=78018 \"http://sourceforge.net/project/showfiles.php?group\\_id=78018\")\n\nNote that the AFDK0 FontLab scripts are built to work with Python 2.3. Autohint and CheckOutlines in particular use extension modules that are tied to specifically to Python 2.3; the others assume in some places support for operations that exist only in 2.3 and later.\n\n- Read\n\n"
+    },
+    {
+      "time": "",
+      "content": "i was aware of the version interdependence and installed the extensions accordingly. which didn't solve it. right now i am trying to get it to work with python 2.3.5 - not successful yet. i'll check back for new developments.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Read,\n\nany chance that Adobe could also release AFDKO 2.0 compiled for Python 2.4?\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, I can build the Python 2.4 libs as well, for the next update in a few weeks. Note that this affects only the FDK Check Outlines and Auto Hint scripts - the command -line tools are entirely independent of any installed Python, and none of the other scripts for FontLab use a Python extension module.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Good soul mind to post screenshot(s) how to install AFDKO (v2.0)?\n\n- C.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The file \"FDK/Read\\_Me\\_First.html\" explains how to install the AFDKO v2.0\n\n"
+    },
+    {
+      "time": "",
+      "content": "I have tried the Autohinter for a couple of project, and it feels very nice. Sometimes when autohinting with FontLabs own hinter, I got a couple of red \"H\" that I didnt know how to fix.\n\nAdobes autohinter creates all green H’s ;-) I also kind of like that the log shows exactly what the autohinter did do to the font.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Maybe a bug or a bug in the documentation, since the example doc shows the winDescent value with a minus.\n\nThe winDescent value have to be written without minus. Otherwise the font will be currupted and crashes instandly my xp system.\n\nexample for correct compilation:\n\n`\n  table hhea {\n     Ascender 900;\n     Descender -350; # not 350\n     LineGap 0;\n  } hhea\n`  \n`\n  table OS/2 {\n       TypoAscender 765;\n       TypoDescender -235;\n       TypoLineGap 250;\n       winAscent 900;\n       winDescent 350; # not -350\n       Panose 2 2 5 2 6 5 6 2 4 3;\n       XHeight 455;\n       CapHeight 720;\n       FSType 4;\n       WeightClass 400;\n       WidthClass 5;\n  } OS/2;\n`  \n-- [astype.de](http://web.archive.org/web/20110525072414/http:/www.astype.de/)--\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> _Adobes autohinter creates all green H’s ;-)_\n\nThis reminds me of something.  \nWhat I'm going to say might be obvious to many of you, but just wanted to make clear that in order to get good/proper hinting results, Alignment Zones and Standard Stems need to be set beforehand.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Miguel, in your opinion; do you thinks it’s OK to do this with FontLab’s auto-stems and auto alignment zones? When it comes to these matters, I really like the word Auto :)\n\nGoran, Autodidakt\n\n"
+    },
+    {
+      "time": "",
+      "content": "Goran, I here you there ;^)\n\nI'd follow [Adam's tip](http://web.archive.org/web/20110525072414/http:/www.typophile.com/node/15436#comment-113296), with a couple additional steps:  \n...  \n1.1. Check that the auto Alignment Zones are good, i.e. they should cover all the \"overshoot nodes\". Eventually, you might want to shift some of these points a few units up or down.  \n...  \n5. Run Adobe's Autohint\n\nThat's all :^)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Great advices! Thanks for that.\n\n"
+    },
+    {
+      "time": "",
+      "content": "If I compile my old Postscript-data in FDK2 its all ok.  \nIf the font-data newer (in Studio 5 generated), I have this errormessage on screen.  \nAny suggestions?\n\n ![](http://web.archive.org/web/20110525072414im_/http:/typophile.com/files/FDK2_5540.gif)\n\n"
+    },
+    {
+      "time": "",
+      "content": "No value or key in FDK 2 for **renumber**?  \nrenumber yes|no # Increment the head table FontRevision field\n\n"
+    },
+    {
+      "time": "",
+      "content": "Andreas, as regards your latest example:\n\nSomeone please correct me if I'm wrong, but I think that (as for OS/2 TypoDescender) hhea Descender must be a negative value:\n\ntable hhea (  \n&nbsp;&nbsp;&nbsp;&nbsp;Ascender 900;  \n&nbsp;&nbsp;&nbsp;&nbsp;Descender -350;&nbsp;&nbsp;# not 350  \n&nbsp;&nbsp;&nbsp;&nbsp;LineGap 0;  \n) hhea;\n\nOS/2 winDescent is the only below-the-baseline value which must be stated with a positive value! (The FLS5 FontInfo interface asks for a negative winDescent value for reasons of consistency and user-friendliness.)  \nAs to the feature file syntax document, sections 9.d and 9.f -- it seems it's just minor copy/paste errors.\n\nKarsten\n\n[Third editing now. Hope there are no mistakes left ...]\n\n"
+    },
+    {
+      "time": "",
+      "content": "If in font.ps  \n/Notice (Copyright © 2006 something. All Rights Reserved.) readonly def  \n... Error\n\nIf in font.ps  \n/Notice (Copyright **(c)** 2006 something. All Rights Reserved.) readonly def  \n... no problem\n\nThat’s all. Sorry.\n\n[preusss]\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thank you Karsten, yes the hhea Descender needs a negative value. I corrected my example above.\n\n-- [astype.de](http://web.archive.org/web/20110525072414/http:/www.astype.de/)--\n\n"
+    },
+    {
+      "time": "",
+      "content": "What means this errormessages (comparefamily):  \n`\nSingle Face Test 6:\n...\nError: Environment variable CF_DEFAULT_URL is not set, so I can't compare it to Mac Foundry URL name id 11.\nError: Environment variable CF_DEFAULT_FOUNDRY_CODE is not set, so I can't compare it to the OS/2 table foundry code.`\n\n[preusss]\n\n"
+    },
+    {
+      "time": "",
+      "content": "Update: Sorry, I should have installed a fresher version of Stuffit Expander before posting. Everything works fine now! :-D Playtime!\n\nAm I the only one who can't UnStuff the Mac file?  \nI get an error everytime. I want to play.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Both the Windows XP and Mac OSX operating systems have things called \"environment variables\", which have a name and a text value. compareFamily looks for two environment variables with the names shown in the error messages that you saw. If present, it uses the values to compare with values in the font, and complains if font values and the environment variable values are not the same.\n\nTo read how to set environment variables in Windows, see::  \n [http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs...](http://web.archive.org/web/20110525072414/http:/www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/environment_variables.mspx?mfr=true \"http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/environment\\_variables.mspx?mfr=true\")\n\nFor Mac OSX, open a command-line window (aka the Terminal program) and first try the command:  \nCF\\_DEFAULT\\_FOUNDRY\\_CODE=\"ADBE\"  \nIf this works , you then enter the command  \n\"export CF\\_DEFAULT\\_FOUNDRY\\_CODE\"  \nand it is set for any programs that you run by entering commands in this window. To make the setting permanent, create/edit the file in your home directory named \".profile\", and add in the file the same two commands that you tried.\n\nIf the first command produced the response \"Command not found\", then the Terminal window is using the tcsh shell program to process the command lines, and the commands to set the variable are:  \nsetenv CF\\_DEFAULT\\_FOUNDRY\\_CODE \"ADBE\"  \nexport CF\\_DEFAULT\\_FOUNDRY\\_CODE\n\nand to make the settings pemanent, you shoud certate or edit the file in your home directory named \".cshrc\", and add these commands.\n\nOf course, you should use your values for the 4 letter foundry code and for the name ID 11 fondry URL, rather than the values for Adobe.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Other people have complained about how the FDK 2.0 makeotf doesn't have a \"renumber\" option. The bug fix version , due in a few weeks, will have one.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi preusss,\n\nThis happens because makeotf is compiled with debug libraries, and will show a dialog like this whenver a low-level assetion that checks data integrity fails. The problem here is most llikely one of encoding, that one of the input files has characer codes above low ASCII, like an umlaut. I suggest checking:  \nthe feature file \"\\_features.txt\"  \nthe menu name file \"\"FMNDB\\_Prillwitz.txt\"  \nthe GOADB file \"GOA\\_GTF.txt\"  \nby cutting them down to just a stub with only some safe text, and then adding the original text back in a section at a time, to find the problem. It is not legal to use high-ASCII characters in glyph names. It is legal in some of the name table names, but you must represent these character codes as hex codes in the feature file. For example, the char code for the \"copyright\" glyph is \"\\00a9\" for Windows menu names, and \"\\a9\" for Mac menu names; you can see this in the \"features.name\" exampel file in the \"Example Font Sources\". The character codes for the Windows platofrm names are Unicode values, for the Mac they are Mac Roman ecnodign values.\n\n- Read Roberts\n\n"
+    },
+    {
+      "time": "",
+      "content": "Anyone using FDK 1.6 feature files needs to read the following\n\nDavid Agg asked why his FDK 1.6 feature file was failing at the lines:  \n\\> feature kern {  \n\\> language ROM;\n\nAnswer:\n\nThis works in the FDK 1.6, because the default script is ‘latn’; you get the same effect is if you had written  \n script latn;  \n language ROM;\n\nHowever, in the FDK 2.0, the default script is “DFLT”, so the effect is saying:  \n script DFLT;  \n language ROM;\n\nand the only legal language tag for the DFLT script is the ‘dflt’ language.\n\nTo get what you want, you should put the lines:  \n languagesystem DFLT dflt;  \n languagesystem latn dflt;  \n languagesystem latn ROM;\n\nat the beginning of the feature file; all features not registered under a specific language will then be registered under these three script/language pairs.\n\nIn features where you specify any language or script, you need to spell out all the script language combinations, and explicitly include the appropriate features under each, e.g  \n script DFLT;  \nlanguage dflt;  \nlookup LOOKUP\\_1 {  \n ... lots of rules  \n} LOOKUP\\_1;\n\nscript latn;  \n language ROM;  \nlookup LOOKUP\\_1; # reference to the previously defined LOOKUP\\_1,  \n # so that it will be included under latn-ROM as well as DFLT-dflt.\n\nThe compareFamily tool now dumps a table of script/languages vs sets of lookups, so you can see what’s actually in the font.  \n You should look at this when you are working out new script/language settings in the feature file.\n\n- Read Roberts\n\n"
+    },
+    {
+      "time": "",
+      "content": "Problems with the FDK 2.0 and FontLab on Windows.\n\nSome people have seen that when they add the FDK executable directory \"FDK/Tools/win\" to their PATH variable, that FontLab starts behaving badly - macros disappear, and other odd things. If this happens to you, remove the FDK directory from the PATH variable, and don't install the FDK. The next release in a few weeks will fix this.\n\nThe problem is that the PATH variable is used by Windows as the list of directories to search for not only programs, but also libraries. 'FDK/Tools/win\" contains Python and system libraries that may conflict with what FontLab uses. Thanks to John Hudson, who put up with a lot of e-mails and tests to help figure out what was wrong.\n\n- Read Roberts\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Read,\n\nmany tnx.\n\n[preusss]\n\n"
+    },
+    {
+      "time": "",
+      "content": "i'm trying to get the AutoHinter to work on PC running the macro from within FLS5, but i get the following error:\n\n`Traceback (most recent call last):\n  File \"\", line 75, in ?\nImportError: No module named plistlib`\n\nwhat do i do when i have missing modules?\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"Good soul mind to post screenshot(s) how to install AFDKO (v2.0)?\"\n\n\"The file “FDK/Read\\_Me\\_First.html” explains how to install the AFDKO v2.0\"\n\nI am lost with tech. Did not understand.\n\nThanks!!!\n\n- C.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Anon Bug\n\nAnonymous data blocks will be ignored by the FDK. I have tried different positions in the feature file. The FDK compiles it without any error message but the resulting font file have always the same byte length like the font without the anon block, so my gues no anonymous block was added.\n\nNo luck too with the example form the tech doc \"10. Specifying anonymous data blocks\".\n\n-- [astype.de](http://web.archive.org/web/20110525072414/http:/www.astype.de/)--\n\n"
+    },
+    {
+      "time": "",
+      "content": "To spare yourself from having some problems while trying to use the AFDKO, install the tools in paths that contain NO space characters. Also, do the same with the folders and files you're working with.\n\nFor example, CompareFamily won't work if the font files are inside a folder named \"My Folder\".\n\n"
+    },
+    {
+      "time": "",
+      "content": "Sorry if this is a stupid question but it seems that the old .fpr files from my old projects are not recognised anymore. Has the format changed?\n\nThe example font provided does not include a .fpr file - is there an example .fpr file available anywhere?\n\nThanks,  \nTim\n\n"
+    },
+    {
+      "time": "",
+      "content": "hi Tim, no FDK2 training on the TypeTech week?\n\nYes, the format have changed.\n\nmakeotf -fp bla.fpr  \n`\nFeaturePath Std\\_Reg\\features.txt\nFontMenuDBPath FontMenuNameDB.txt\nGlyphAliasDBPath GOA.txt\nInputFontPath Std\\_Reg\\yourfont.pfa\nOutputFontPath ready\\yourfont.otf\nDoAliasAndOrder true\nDoSubroutinization true\nReleaseMode true\n`  \nDon't try to set something above to \"false\", just let the line out.\n\nOr you should try a batch file  \n`\nmakeotf -f yourfont.pfa -o yourfont.otf -ff features.txt -mf FontMenuName.txt -gf GOA.txt -S -ga\n`\n\n-- [astype.de](http://web.archive.org/web/20110525072414/http:/www.astype.de/)--\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, Andreas.  \nIt worked. Slowly getting there.\n\nBatch files are a good idea - they are so much more comfortable than the real command line. I already used them with the old FDK. Plus, batch files allow you to compile a whole family at once.\n\nAlternatively, you can set up a shortcut to your python.exe, go to the properties and manually add \"(path)\\MakeOTF.py -fp\" and then drag any .fpr file on it. You could have several shortcuts with different additional options added.\n\nOr, you could set up the .fpr file type in your system so that double-clicking .fpr files \"opens\" them with Python and MakeOTF.py. Maybe this is the most elegant solution.\n\nHowever, I have no idea if any of this is possible on a Mac.\n\nTim\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi! paul ,\n\ndid you figure out what to do when modules are missing ?\n\nI have the same problem.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I experienced a strange problem:\n\nThe OT features in the fonts generated with the new FDK do not work in InDesign and they do not show up in the menu. Kerning does not work either.  \nHowever, when I open the font in FL the features are there and working. Even in Word the kerning works.\n\nAny ideas?\n\nThanks,  \nTim\n\n[edit] Read's suggestion to insert the languagesystem tags fixed the problem.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_did you figure out what to do when modules are missing ?_\n\nsorry, no. i guess i need to bone up on python to figger it all out.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Paul, did u install Mark Hammond's win32all and python 2.3.5 or phyton 2.4? I was having the same problem but I was told that the auto-hinter only work in phyton 2.3.5, now it works fine.\n\nEmiliano Amadei\n\n"
+    },
+    {
+      "time": "",
+      "content": "Im gonna try to write a dummy's guide to install 'with success' AFDKO 2.0 in Fontlab Studio5.0.2.\n\nFirst, as mentioned before, your Fontlab Folder must not have any spaces or number in them. I had to uninstall my copy and install it in the folder \"C:\\FLStudio\\\". Just that, not two folders as default Fontlab installation does. Then I unzipped the \"FDK2.0-WIN.zip\" in \"C:\\\" creating the path \"C:\\FDK\".  \nNow install the phyton program, version 2.3.5 \"Python-2.3.5.exe\" and the win32all \"pywin32-210.win32-py2.3.exe\". If anyone is unable to locate any of this files, drop me a PM.  \nWith that done, run the command prompt. Get to the drive root where you installed fontlab.(In my case \"C:\\\") Then type \"cd fdk/tools/fontlab\". Now type \"installfontlabmacros.py /../../../flstudio/macros\" (Change \"flstudio\" for the name of your FontLab Folder). You're gonna see it copying the files to the Fontlab Macro folder. This python script also creates a file named \"FDK.pth\" in the python folder. As default is in \"C:\\Phyton23\\Lib\\site-packages\\\". This file, if open in the Notepad has the line \"C:\\FDK\\Tools\\SharedData\\FDKScripts\". This is the folder where FDK scripts are located. If you want to change the location of your \"SharedData\" folder, just rewrite the location in the \"FDK.pth\" file.  \nIf done as above, your FontLab macros are ready to use. The only one that still generates error is \"Auto-Hint\". It gives the following:  \n'Failed to import either version of auto-hinting library  \nCurrent list of search paths for modules:  \n['C:\\\\',  \n 'C:\\\\WINDOWS\\\\system32\\\\python23.zip',  \n 'C:\\\\PHYTON~1.5\\\\Lib',  \n 'C:\\\\PHYTON~1.5\\\\DLLs',  \n 'C:\\\\PHYTON~1.5\\\\Lib\\\\lib-tk',  \n 'C:\\\\',  \n 'C:\\\\FLStudio',  \n.....................  \nTraceback (most recent call last):  \n File \"\", line 105, in ?  \nImportError: No module named PyACDebug'.  \nAny suggestions?\n\nEmiliano Amadei\n\n"
+    },
+    {
+      "time": "",
+      "content": "Before this thread is going to sleep I will point to some uncommented bugs.\n\n1. The anonymous data block bug I have posted before.  \nNo anon data block will be added. No error message, nothing.\n\n2. The -adds bug.  \nThe switch \"-adds\" will not work! Everytime I use it makeotf will read/convert it to \"-nadds\" with the resulting error output \"makeotfexe.exe [FATAL] unrecognized option (-nadds)\"\n\n3. Not a bug, but a great loss. The new makeotf shows no info about not defined glyphs (AliasDB) or unhinted glyphs.\n\nThomas, Read, Miguel please comment or verify it.\n\nSystem: WinXP SP2\n\n-- [astype.de](http://web.archive.org/web/20110525072414/http:/www.astype.de/)--\n\n"
+    },
+    {
+      "time": "",
+      "content": "The FDK for Windows is missing the module plist.py. This is part of the standard Mac Python installation. It is used by the AutoHint script. See fi you can get someone with a Mac to send it to you, else wait two to four weeks for the next update for the FDK to fix the various installation issues.\n\nIf you then have the problem \"importError: No module named PyACDebug\", there is a deeper problem on Windows where the FDK can conflict with the the Ptyhon associated witth FontLab. The solution for this is to wait for the next FDK build : it will fix this, and support both Python 2.3 and 2.4 with FontLab.\n\n"
+    },
+    {
+      "time": "",
+      "content": "About Andreas' post.\n\n1) 'adds bug. Yes, I can duplicate this bug. You can work around it for the moment by supplying a target weight value after the 'adds' option, e.i. '-adds 500\". The next build wil fix this bug, so you will not have to specify a value. Without a value, MakeOTF makes a guess as to the target weight.\n\n2) Anon block.  \nThis is indeed not supported in MakeOTF, and never has been. It is meant for someone who is developing their own version of MakeOTF, and who wants to support feature file syntax not supported by the undelrlying MakeOTF library. What it does is to just pass the \"anon\" block text from the feature file from the library to the top-level program. MakeOTF does receive this data, but does nothing with it.\n\n3) Missing complaints about unhinted glyphs.  \nThe missing hints reports came from the 'tx' tool, which MakeOTF uses to convert fonts from \\*otf to \\*pfa (Type 1) for input into the makeOTF library. I supressed its output, as several users didn't like seeing its output in this context. However, you can still see the same unhinted glyphs report by running compareFamily, whcih will complain about unhinted glyphs, or more quickly, by using the command-line 'tx -cff inputFontPath temp.cff'. This will incidentally make a CFF version of the input font file, but will also report all the unhinted glyph. On the Mac you can avoid the temp file by saying \"tx fontPath \\> /dev/null\". Piping output to /dev/null is the standard Unix way of saying 'throw out all the output\", but I don;'t know how to do this in Windows.\n\n4) Missing complaints about not defined glyphs.  \nI don't understand this. MakeOTF will still fail if your feature file references glyph names not in the font. Do you want reports when 1) glyph aliasing is turned on and 2) the source font contains glyphs not named in the glyph alias file as source or final names? I could add this, although probaby not for the next build. I would assume that glyphs whose base name ( the part before the suffix, if any) look like \"uniXXX\" or \"uXXXX\" should not be reported,.\n\n- Read\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thank you Read for your clear words.\n\nto 1.  \nI have no luke in adding a value \"-adds 500\".\n\nThis is the order of my batch file (plus an extra fontinfo file setting the font to bold):  \n`\nmakeotf\n-f C:\\1\\2\\3\\4\\Pro\\Regular\\font.pfa\n-o C:\\1\\2\\3\\4\\ready\\myfont.otf\n-ff C:\\1\\2\\3\\4\\Pro\\Regular\\_features.txt\n-mf C:\\1\\2\\3\\4\\_FontMenuNameDB.txt\n-gf C:\\1\\2\\3\\4\\GOA_GTF.txt -S -ga -adds 500\n`\n\n(all in one line)\n\nto 4.2\n\nYes, I thought on the second option. Sometimes some temp glyphs are left in the font or some special xxx.alt versions will be added but are not in the GOA file (GlyphOrderAndAliasDB). In this situation I will update the GOA to control the glyph placement.\n\nIn general this \"extra\" info helped me a lot and I miss it. Maybe it could be activated by a switch in future versions.\n\n-- [astype.de](http://web.archive.org/web/20110525072414/http:/www.astype.de/)--\n\n"
+    },
+    {
+      "time": "",
+      "content": "Read Roberts writes:  \n\\> Piping output to /dev/null is the standard Unix way of  \n\\> saying ‘throw out all the output”, but I don’t know  \n\\> how to do this in Windows.\n\nThe Windows equivalent is  \ntx fontPath \\>NUL\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Paul,\n\nI have a new Windows build that I'd like to e-mail to you to see if it solves your installation problems on Windows. If you are interested, please e-mail me at rroberts(at)adobe.com.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_Windows users should install the win32all package:  \nhttp://www.python.net/crew/mhammond/win32/Downloads.html_\n\nAdam, this link is broken, is this the right link?  \n [http://sourceforge.net/project/showfiles.php?group\\_id=78018](http://web.archive.org/web/20110525072414/http:/sourceforge.net/project/showfiles.php?group_id=78018 \"http://sourceforge.net/project/showfiles.php?group\\_id=78018\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "_The FDK for Windows is missing the module plist.py. This is part of the standard Mac Python installation. It is used by the AutoHint script. See fi you can get someone with a Mac to send it to you_\n\nIs this the same as plistlib.py? Where am I supposed to place this file once i have it?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks to a new build for Windows, and some tech support from Read Roberts, I got this up and running. Thanks Read!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Is there a new build for Mac as well?\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "No, not yet. But there will be one soon.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Miguel!\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "is the latest windows build the one which is downloadable from the adobe website?  \nthanks,  \ntitus\n\n"
+    },
+    {
+      "time": "",
+      "content": "The OpenType Layout feature definition statements such as 'languagesystem DFLT dflt;' or 'script DFLT;' errorneously produce a script tag ' ' instead of the intended 'DFLT' inside of the font file -- if the font is produced using Adobe FDK for OpenType (AFDKO) version 1.6, FontLab 4.x, or FontLab Studio 5, including the recent version 5.0.2.\n\nThis situation is resolved in AFDKO 2.0. I have written a small free Python script that will fix the errorneous entries in your existing fonts, without the need to rebuild the font in AFDKO 2. This way, you can continue building your fonts in FLS5 until a version of FontLab Studio is released that incorporates AFDKO 2.\n\nThe information about the little tool can be found in this thread: [http://typophile.com/node/29469](http://web.archive.org/web/20110525072414/http:/typophile.com/node/29469 \"http://typophile.com/node/29469\")\n\nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "is there a new build for Mac?\n\n\\> a version of FontLab Studio is released that incorporates AFDKO 2.\n\nsoon?\n\n"
+    },
+    {
+      "time": "",
+      "content": "David,\n\nIncorporating AFDKO 2 into FontLab Studio is a substantial task so it will make it into the next major release, not a minor bugfix release. We currently don't have anything to announce on this.\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi all,\n\nWhen using the auto hint macro is it normal to get along list of corrections in the output window.\n\n ![](http://web.archive.org/web/20110525072414im_/http:/typophile.com/files/Picture_4488.jpg)\n\nAre these corrections the macro has made, or are these corrections I need to make. I ask cos I run the macro again on the same font I still get the list of corrections so I'm sort of thinking the corrections haven't been made.\n\nc.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The autohint macro will not make corrections unless you tell it to explicitly. However, it only makes a limited set of corrections such as adding points at extremes. It never changes the path of a curve, and so won't fix these issues. What it is telling you is that there are points on a path which are so close to the boundaries of a stem-hint or alignment zone that it seems likely that the intent was that the point should be captured by the hint - but you need to move the point a few design-scaped units to make this happen. This is not necessarily a problem that needs fixing. It is bad if these points are on a feature that really needs to be aligned with other glyphs, like the top or bottom of a lower case or upper case letter. However, these points may also be on curves that do not need to be controlled. Bottom line: look at a waterfall of these glyphs, and see if you have hinting problems. If so, you need to do something, else not.\n\n"
+    },
+    {
+      "time": "",
+      "content": "i checked whether the windows build mentioned by paul on 10 November, 2006 - 7:53pm actually made it to the download page. unfortunately it didn't, so i wondered if it's ever going to make it or if i there is another way to get it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>i wondered if it’s ever going to make it or if i there is another way to get it</cite>\n\nGood question. It's been overdue for a long time already. Maybe it's time to roll out the Phinn-Signal? Who's got their hand on the switch this week? Dezcom, maybe?\n\nRegards,  \nErnie\n\n"
+    },
+    {
+      "time": "",
+      "content": "Solfeggio must a musician or at least have the doe to Ray mi sol :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Mechanical-monkey musician maybe. (Howzat for alliterative overkill?!)\n\nBut more to the point, the newest file in the current version of AFDKO 2 for Windows is time stamped September 1, 2006. The promised update has yet to be seen. Perhaps someone from Adobe will address this? Soon, one hopes.\n\nRegards,  \nErnie\n\nUtterly Off-Topic: Chris, thought you (at least) might remember the Nairobi Trio and Robert \"Red Hot Harp\" Maxwell's composition as sung by the Ray Charles Singers. Here's your dose of nostalgia:\n\n_mi sol la, re fa mi sol, do mi do fa re sol sol  \nmi sol la, re fa mi sol, do mi do fa re sol sol do  \ndo mi fa, si re si mi, la do la fa re sol sol  \ndo mi do fa, si re si mi, la do la fa re sol sol do_\n\n"
+    },
+    {
+      "time": "",
+      "content": "A Ray from the Rayettes :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Sorry, Chris, not the pianist and soul singer, but the \"Ray Charles\" (born as Charles Raymond Offenberg) who was composer and conductor of The Ray Charles Singers. Nice try all the same.\n\nRegards,  \nErnie\n\n"
+    },
+    {
+      "time": "",
+      "content": "I know who you mean. They were the oh-so clean cut chorus who sang very \"nice\" music. I was pushing Ray for re and sol to be Soul for my little joke and the Ray Charles Singers you mentioned didn't have much of that :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Re: [OpenType migration] OpenType Feature Files\n\nHi George;\n\nAbout your May 10th posting on opentype-migration-list@indx.co.uk:\n\nThe syntax you suggest could be implemented, but I don't immediately see the advantage. I do see that you can represent in one statement what would otherwise require many statements, but to do so you need to refer to a lookup that has to be defined elsewhere, and this lookup will require just as many statements.\n\nFor your questions from your posting on Monday May 7th:\n\n- there is no std extension, but lots of people use '.fea\"\n\n- the next FDK update, due out soon, has only bug fixes and minor extensions. The next major release, which will add GDEF table and anchor support but probably not device tables, is due out summer 2008.\n\n- In a single contextual chain positioning statement, you can specify only one value per input position, just as you can only specify a single value for a class pair. To apply different values for different glyphs at the same position, you must use different statements.\n\n- Contextual ligature statements are in fact more limited than Tom Phinney's reply shows. In the case of the contextual ligature rule, the substitution cannot be a class. Contextual positioning statements provide context for a particular lookup type. To figure out what you can do, strip off the context, and then consider whether it would work as a non-contextual positioning statement. The underlying GSUB and GPOS table structure does allow much more flexibility than this, but we chose to limit flexibility in favor of simplicity of expression.\n\n- Read\n\n"
+    },
+    {
+      "time": "",
+      "content": "AFDKO Build 26 is now available.  \n [http://www.adobe.com/devnet/opentype/afdko/](http://web.archive.org/web/20110525072414/http:/www.adobe.com/devnet/opentype/afdko/ \"http://www.adobe.com/devnet/opentype/afdko/\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "Miguel, you didn't mention that it includes your script for generating the kern feature!\n\n(I recommend reading the documentation inside the module 'WriteFeaturesKern.py' which is located in 'Macros / System / Modules' after installation. It expects that names of leftside-only and rightside-only kern classes either include a tag '\\_LEFT' and '\\_RIGHT'. Alternatively, these default tags can be changed in the first few lines of the module. Additional tags -- '\\_LAT', '\\_GRK', '\\_CYR' -- help the script to set subtable breaks correctly. It even allows for class-based exception kerning.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "very nice, Miguel! Thanks for including this.\n\n"
+    },
+    {
+      "time": "",
+      "content": "great, thanks adobe, thanks miguel and read!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Is it possible to use the AFDKO scripts through FontForge (through X11 on Mac OSX 10.4.9), rather than just FontLab?\n\nIf so, how, or which chapters of the manuals do I need to look at?\n\nOr am I totally misunderstanding how this whole thing works?\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Or am I totally misunderstanding how this whole thing works?</cite>\n\nNot totally, only partly. You can use most of the FDK without FontLab.\n\nThe \"main\" FDK, the tools that build and analyse OTFs are command line tools that are independent of FL. However, there are some additional tools that run as macros in FL. I doubt you will get them to work in any other application.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Relative to this build, I'm not sure how new they are, but Check Outlines and AutoHint are lovely.\n\n"
+    },
+    {
+      "time": "",
+      "content": "[edit]\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'm getting some outputs I never seen before when running the outline check\n\nglyph U.  \n looking for coincidentpaths ...  \n removing any intersections...  \n inspecting/repairing paths...  \n checking path directions...  \n glyph V.  \n looking for coincidentpaths ...  \n removing any intersections...  \n inspecting/repairing paths...  \n checking path directions...  \n glyph W.  \n looking for coincidentpaths ...  \n removing any intersections...  \n inspecting/repairing paths...  \n checking path directions...\n\nI'm getting the same results on most glyphs. Can anyone explain this and is it something I should be worried about\n\nRr\n\n"
+    },
+    {
+      "time": "",
+      "content": " **Some remarks on the Autohint function of Adobe's FDK 2.0**\n\nHere are a few tech notes, which may (or may not) be useful for typophiles:\n\n1) The first version, i.e. FDK v2.0 Aug 31 2006 **build 21** (FDK2.0-WIN.zip, file size ca. 14.4 MB), was faulty. It did not work on my Windowx XP machine.\n\n2) Yesterday, I installed the current version, i.e. FDK v2.0 May 5 2007 **build 26** (FDK2.0-WIN.zip, file size only 9.8 MB).\n\n3) The current versions runs in the DOS box of Windows XP (but not in the DOS box of Windows 98, which I also tested).\n\n4) After unpacking the zip file FDK2.0-WIN.zip into the folder **c:\\fdk** , I switch to the DOS box (i.e. cmd.exe) and select the FDK folder via **cd c:\\fdk** and then set the FDK program folder via **path=c:\\fdk\\tools\\win**.\n\n5) After copying the font to be autohinted into the FDK folder under the name **c:\\fdk\\font.pfa** , I start autohint by **autohint -a font.pfa** , which results in the hinted font saved under the same name font.pfa.\n\nNow a few remarks on the Autohint function:\n\nAdobe's FDK autohint function is of very high quality, but it seems to be geared to Latin fonts only, for the autohinting quality heavily depends on the x-height, ascender etc. alignment zones (which do not exist in most non-Latin fonts, e.g. in Indic fonts, so that it is unclear, how such non-Latin fonts could be hinted with FDK).\n\nI compared the autohint function of Fontlab 4.6 with the autohint function of Adobe's FDK. It is astonishing that exactly the same font with exactly the same alignment zones and exactly the same vertical and horizontal stem widths has entirely different autohinting results in Fontlab, as compared with Adobe's FDK. Especially, Fontlab 4.6 does not seem to handle vertical stem widths properly:\n\na) The screenshot [http://www.sanskritweb.net/temporary/fdk.jpg](http://web.archive.org/web/20110525072414/http:/www.sanskritweb.net/temporary/fdk.jpg \"http://www.sanskritweb.net/temporary/fdk.jpg\") shows that Fontlab makes some vertical stems too thick, wheareas Adobe's FDK autohint function streamlines all vertical stems. This screenshot was made without font smoothing.\n\nb) The PDF [http://www.sanskritweb.net/temporary/fdk.pdf](http://web.archive.org/web/20110525072414/http:/www.sanskritweb.net/temporary/fdk.pdf \"http://www.sanskritweb.net/temporary/fdk.pdf\") can be used for testing font smoothing, which, if switched on e.g. in Adobe Acrobat Reader, alleviates the Type 1 autohint deficiencies of Fontlab 4.6, which may (or may not) have been remedied by a later release of Fontlab.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Uli, what do the actual hints for the h and n look like in FontLab? Can you provide a screenshot of the glyph windows? This is a strange effect, and not what I would expect from the FL autohinter, unless it is trying to hint the serif widths as well as the stem widths and miscalculating the hint replacement point.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Mr. Hudson:\n\nI already deleted the test font faultily hinted by Fontlab 4.6.\n\nBut you can most easily repeat my experiment as follows:\n\n1) Open Adobe's **OpenType** font SerifaStd-Roman.otf with Fontlab 4.6.\n\n2) Remove all hints (e.g. by key shortcut shift F7) via Fontlab 4.6\n\n3) Autohint all glyphs (e.g. by key shortcut F7) via Fontlab 4.6\n\n4) Generate **PostScript Type 1** font SerifaStd-Roman.pfb with Fontlab 4.6\n\n5) Also generate the PFA version SerifaStd-Roman.pfa with Fontlab 4.6\n\nThis PS Type 1 font SerifaStd-Roman.pfb will contain the faulty vertical stem hints faultily hinted by Fontlab 4.6. I do not know, whether later versions of Fontlab have the same problem. Using Adobe's FDK autohint function on the PFA version SerifaStd-Roman.pfa will remedy the faulty stem hints.\n\n"
+    }
+  ]
+}

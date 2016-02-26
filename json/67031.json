@@ -1,0 +1,30 @@
+{
+  "id": "67031",
+  "title": "Delete OT Classes with Python",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi\n\nCan anyone tell if it's possible to delete OT Classes using Python. I have tried something like:\n\nfor k in range(len(f.classes)):  \n s = f.classes[k][0]  \n if s==\"\\_\":  \n del f.classes[k]\n\nto delete every class that starts with an underscore, but this approach doesn't work. Is there another way to delete classes or am I doing something stupid?\n\ntia  \nM\n\n",
+  "author": "malcolm",
+  "time": "4 Feb 2010 — 5:54pm",
+  "uid": "3320",
+  "comments": [
+    {
+      "time": "5 Feb 2010 — 6:51am",
+      "content": "Try this:\n\nf=fl.font  \nfIdx=fl.ifont  \nclasses = f.classes  \nfor k in range(len(classes)-1,-1,-1):  \n&nbsp;&nbsp;&nbsp;if len(classes[k].strip()) and classes[k][0] == \"\\_\":  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;del classes[k]  \nf.classes = classes  \nfl.UpdateFont(fIdx)\n\n"
+    },
+    {
+      "time": "5 Feb 2010 — 12:29pm",
+      "content": "Yeah, very strange behaviour of the API. The elements of the list are read-only but the enclosing structure can be overwritten. I ended up with the same workaround.\n\n"
+    },
+    {
+      "time": "6 Feb 2010 — 6:14pm",
+      "content": "Thank you Karsten. I must admit I don't understand 100% why that works but thanks you for your solution.\n\nM\n\n"
+    },
+    {
+      "time": "10 Feb 2010 — 12:33am",
+      "content": "Two things:\n\n1. When you delete an element from a list, the number of items in the list obviously is reduced by one. But the initial range(len()) loop is just a static list so if you remove any elements, you'll get an \"Index out of range\". This is why Karsten is iterating through the loop in the descending order of elements. This is not FontLab-specific, it would happen with every Python list for which you'd remove elements that way.\n\n2. Many of FontLab's pseudolist objects only implement partial behavior of list objects. But you can assign such pseudolist object to a real Python list, then perform some list modifications, and then reassign the list back to the FontLab pseudolist. I don't consider this \"normal behavior\" but, well, the FontLab Python API was developed quite a few years ago and some of the objects behave a bit strangely.\n\n"
+    }
+  ]
+}

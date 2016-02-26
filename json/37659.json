@@ -1,0 +1,138 @@
+{
+  "id": "37659",
+  "title": "pfb2otf",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "The question of how to convert pfb font files to a format that can be used on the Mac was raised in two recent threads, one [with FortForge](http://web.archive.org/web/20150414171715/http:/typophile.com/node/37469), another one [with FontLab](http://web.archive.org/web/20150414171715/http:/typophile.com/node/37555).\n\nWith FontLab, that looks quite easy. With FontForge, for those that are not Unix Shell or Python literate, that may be tricky. I thus wrote a small Mac application **pfb2otf** that you can download by clicking [**here**](http://web.archive.org/web/20150414171715/http:/www.iro.umontreal.ca/~boyer/typophile/pfb2otf.zip) and that makes it easy too: you double click the icon of **pfb2otf** , select the folder containing the afm and pfb files of the fonts to convert, and that is it. If the afm file is not there, you lose kerning.\n\nNow for Mac programmers: if you have a look at the script `pfb2otf.app/Contents/MacOS/pfbtootf` that does everything (in 70 lines or so), could you tell me what would have been the proper way to pass information from Applescript to the Unix shell? I fudged something using temporary files. Is there a good reference on this? Moreover, to show what is being done during processing, I display in a Finder window the otf files that are being generated; sometimes the displayed size is Zero KB, whilst the file is definitely not empty as we see when we check with File Info. Where is the bug?\n\nMichel\n\nMay 13 2009: link to pfb2otf modified following [this post](http://web.archive.org/web/20150414171715/http:/typophile.com/node/37659#comment-346516).  \nMay 13 2009: pfb2otf now returns an error if X11 is not installed.  \nMay 14 2009: And here is [**pfb2otfpy**](http://web.archive.org/web/20150414171715/http:/www.iro.umontreal.ca/~boyer/typophile/pfb2otfpy), that does not require X11, and can also read data from pfm files.  \nFeb 02 2010 [**pfb2otf**](http://web.archive.org/web/20150414171715/http:/www.iro.umontreal.ca/~boyer/typophile/pfb2otf.zip), that does not use the Python library but requires X11, also reads data from .pfm files when they are in the same folder as the .pfb files.  \nDec 27 2011. The message for [**pfb2otf**](http://web.archive.org/web/20150414171715/http:/www.iro.umontreal.ca/~boyer/typophile/pfb2otf.zip) was changed to _\"Enter the folder with the font files to convert (listed in grey)\"_; you must indeed enter the folder containing the fonts to convert before clicking on **Choose** (tested on OS X 10.5, 10.6 and 10.7 with the [MacPorts FontForge](http://web.archive.org/web/20150414171715/http:/www.macports.org/ports.php?by=name&substr=fontforge)).\n\n",
+  "author": "Michel Boyer",
+  "time": "30 Sep 2007 — 1:14pm",
+  "uid": "18942",
+  "comments": [
+    {
+      "time": "30 Sep 2007 — 1:40pm",
+      "content": "looks nice. I will check the resulting otfs later but this seems to be a nice solution.\n\nThe zero KB display in Finder is a known \"misbehavior\" of the Finder it is a bit lazy updating the info. Easiest way to get correct values is to change view mode of the finder window to icon view and back to details.\n\nI’m not familiar with Fontforge. How you script it? With Python? Then you could better build a small PyObj app with xCode.\n\nGeorg\n\n"
+    },
+    {
+      "time": "30 Sep 2007 — 2:12pm",
+      "content": "\\> How you script it? With Python?\n\nNo I used the fontForge script language, old fashioned Bourne shell and called osascript when needed, trying to depend on as few resources as possible. That means a 70 line script file, plus the file Info.plist (40 lines of text), plus an icon which is the big part, 40312 bytes.\n\n"
+    },
+    {
+      "time": "1 Oct 2007 — 1:55pm",
+      "content": "\\> <cite>Easiest way to get correct values is to change view mode of the finder window to icon view and back to details.</cite>\n\nI changed the script to do that. The window flickers but at least the sizes are fixed when the files are first generated. Thanks.\n\n"
+    },
+    {
+      "time": "28 Jul 2008 — 7:16am",
+      "content": "Worked perfectly for me. Thanks for posting this, it's a life saver.\n\n"
+    },
+    {
+      "time": "19 Nov 2008 — 8:47pm",
+      "content": "I'm having trouble with this. I've got X11 installed, downloaded Font Forge, and your PFB-OTF converter. However, when I select the folder nothing happens. Does the OTF font go somewhere else? I get a \"Done\" window but I don't see the OTF font anywhere.\n\nAt first I thought it was because I had .pfm & .pfb files instead of .afm & .pfb files. But when I tried it on another font which had the \"correct\" .afm files nothing happened either.\n\nAm I doing something wrong?\n\n"
+    },
+    {
+      "time": "21 Nov 2008 — 5:01pm",
+      "content": "You do not need X11.\n\nYou put the afm and pfb files in a folder where you are allowed to write. For instance, I put some computer modern fonts in some folder called cmr on my mac. After clicking the application pfb2otf, I select that folder and I see this:\n\n ![](http://web.archive.org/web/20150414171715im_/http:/typophile.com/files/input_3754.jpg)\n\nI then click \"Choose\" and get the following:\n\n ![](http://web.archive.org/web/20150414171715im_/http:/typophile.com/files/output_6623.jpg)\n\nThe otf files that are created can be seen appearing in the window behind as they are written. They are in the same folder as the .afm and .pfb files. I never added the feature to read kerning from .pfm files. This works on my ppc mac wich OS X 10.4 but I see no reason for it not to work on 10.5 or an intel mac.\n\nMichel\n\n"
+    },
+    {
+      "time": "12 May 2009 — 5:13pm",
+      "content": "Hi Michel!\n\nI just tried DLing pfb2otf 3 times. Each time I got a [gibberish].zip(2).part that stopped DLing at ~22kb. (Not the same gibberish every time.) I've only ever seen something like that happen a half dozen times in a bunch of years, and it generally means something's corrupted somewhere.\n\nI could go ahead and do the conversions via Unix, but any time there's an easier way, my basically lazy self will definitely go for that.\n\nI'm using a Mac G4-400, OSX 10.4.11. If you can help me out, I'll greatly appreciate it. Thanks!\n\n"
+    },
+    {
+      "time": "13 May 2009 — 3:38am",
+      "content": "Hi,\n\nThe zip file is 22433 bytes that's all. pfb2otf.app is just a unix script wrapped in a clickable application. I guess the server configuration was changed because the file no longer unzips automatically. You need only unzip it. I added a .zip extension to the filename and adjusted the link in the post; the application now unzips automatically on my mac G4 with OSX 10.4.11 when I click on the link.\n\nMichel\n\n"
+    },
+    {
+      "time": "13 May 2009 — 8:13am",
+      "content": "Hi again, Michel: Sorry to be a pin in the drain, but....\n\nThe file unzips just fine and the app gets as far as choosing the folder, but then......\n\nNothing happens. The app closes without converting anything. All I get is the source folder with its original contents.\n\nNow what?\n\nThanks for your help!\n\n"
+    },
+    {
+      "time": "13 May 2009 — 10:06am",
+      "content": "Hmmmmmmmmm........ tried to run FontForge & got this message:\n\nLink (dyld) error:\n\nLibrary not loaded: /usr/X11R6/lib/libSM.6.dylib  \n Referenced from: /Applications/FontForge.app/Contents/MacOS/FontForge  \n Reason: image not found\n\nOff to pester the FontForge folks.......... cul8r......\n\n"
+    },
+    {
+      "time": "13 May 2009 — 11:39am",
+      "content": "That means you'll need to find your OS X installation disks and install X-Windows.\n\n"
+    },
+    {
+      "time": "13 May 2009 — 12:19pm",
+      "content": "FontForge is a tricky beast to get running on a Mac, and even more so on Windows that I've heard. Follow the installation instructions at [http://fontforge.sourceforge.net/mac-install.html](http://web.archive.org/web/20150414171715/http:/fontforge.sourceforge.net/mac-install.html) very carefully and you should be all right.\n\n"
+    },
+    {
+      "time": "13 May 2009 — 2:02pm",
+      "content": "Easiest way is to install is via [MacPorts](http://web.archive.org/web/20150414171715/http:/www.macports.org/).  \n`sudo port install fontforge`\n\nMacports requires the XCode Dev Kit 2.5 installation for OS X 10.4.\\*\n\nWith a good Macports install, you get all sorts of easy to install Unix goodness.\n\n"
+    },
+    {
+      "time": "13 May 2009 — 5:24pm",
+      "content": "AHA! My X11 is borked! I tried launching GIMP just to make sure, and it won't run either. I didn't even realize it was messed up - it's been a while since I used GIMP.\n\nWow, I asked for help with one problem and you've helped me track down an even bigger problem! I can fix that one pretty easily. Thanks! :-)\n\n"
+    },
+    {
+      "time": "14 May 2009 — 6:08am",
+      "content": "I appended to the original post a link to a version of pfb2otf that uses the fontforge python module and does not require X11. You might also try that.\n\nMichel\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 12:20pm",
+      "content": "Hi. I have been looking for something like this. Thanks. BUT, I cannot get it to work properly. I am not very technical, so forgive me if my questions seems silly. I have downloaded your app and fontforge, but when I try to run the app it says that I should download fontforge executables for mac. Then it sends me back to the page where I downloaded fontforge in the first place.\n\nAm I doing somehing wrong?\n\nThank again\n\nGustav\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 2:00pm",
+      "content": "@ Stavros: Did you read the instructions for installation I linked above?\n\nFirst you need to have X11 installed on your Mac. It comes on the MacOS X install discs, but is not installed by default.\n\nThe Fontforge executables are at [this link.](http://web.archive.org/web/20150414171715/http:/sourceforge.net/projects/fontforge/files/fontforge-executables/)  \nThere are currently three variants for Mac depending on OS version and processor type, along with Linux and Cygwin versions. Choose the one that suits your machine.\n\nThere are additional libraries needed to give Fontforge full functionality. They are packaged for installing convenience for Mac, and [can be downloaded via this link.](http://web.archive.org/web/20150414171715/http:/sourceforge.net/projects/fontforge/files/fontforge-dependencies/20081207/)\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 7:04pm",
+      "content": "Hi\n\nI tried pfb2otfpy on a powerbook pro with 10.5 and on a mac mini with 10.6 and got your symptom on both. Something in Fontforge seems to have changed since the last time I used it (on a ppc with 10.4). I removed a test and the program works fine on my Powerbook Pro. I'll check tomorrow on the mini. You can download again and see if things go better. That is not a clean solution. I'll try to do better when I have time.\n\nOn the other hand, [pfb2otf](http://web.archive.org/web/20150414171715/http:/www.iro.umontreal.ca/~boyer/typophile/pfb2otf.zip) works for me on both machines (but requires X11, which is no big trouble to install).\n\nMichel\n\n"
+    },
+    {
+      "time": "1 Feb 2010 — 7:31pm",
+      "content": "correction: it is a MacBook Pro not a Powerbook pro with 10.5 on which I checked.\n\n"
+    },
+    {
+      "time": "2 Feb 2010 — 4:36am",
+      "content": "Hi Michel\n\nI am on a MacBook Pro with 10.5. The last link to pfb2otf you sent seems to work.\n\nThanks for your time and the great app!!\n\n"
+    },
+    {
+      "time": "2 Feb 2010 — 4:41am",
+      "content": "So there is a spin off. If I open a font it automatically launches in Font Explorer. Can I change this back to launch on font book?\n\n"
+    },
+    {
+      "time": "2 Feb 2010 — 6:03am",
+      "content": "To change back, right click on an otf file, select \"Get Info\". then go to \"Open with\", select \"Font Book\" and Change All. You'll have to do the same with a .ttf and a .dfont file.\n\nMichel\n\n"
+    },
+    {
+      "time": "2 Feb 2010 — 2:47pm",
+      "content": "Instead of installing Fontforge via an installer, IMO an easier/better solution would be to install it via [Macports](http://web.archive.org/web/20150414171715/http:/www.macports.org/). Then you know for certain that all of your dependencies, requirements, etc., are taken care of.\n\n"
+    },
+    {
+      "time": "2 Feb 2010 — 5:54pm",
+      "content": "Installing via macport requires compiling and thus the developer installation. And it takes time before getting a running version; I have a macport installation on my MacBook Pro and I know. If the aim is only to use pfb2otf, the installer is fast and the version of pfb2otf that uses a fontforge script is quite stable. It runs in less than a minute or so if X11 is already installed (I just tested again on my MacBook pro and fontforge requires /usr/X11/lib/libXi.6.dylib to run in batch mode; can you tell me why?). The fontforge python libraries also come with the installer. The problem is that the version of python that is to be used changes with time and with the OS. With OS X 10.5 and OS X 10.6, fontforge now expects python2.5 (and on my mini with 10.6, /usr/bin/python is /usr/bin/python2.6). With OS X 10.4, it uses python2.3; pfb2otfpy thus requires some maintenance (and I do it only when someone asks), pfb2otf is quite happy with old or new versions of fontforge; it requires no change and is quite happy with the installer.\n\nMichel\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 8:27am",
+      "content": "What I do is install the latest X11 from the [XQuartz project](http://web.archive.org/web/20150414171715/http:/xquartz.macosforge.org/trac/wiki) instead of what came on the system DVD. Everything else I try to get from Macports.\n\nBut you're right, it requires the developer SDK installed, which isn't as straightforward (or fast) as just using the installer.\n\n"
+    },
+    {
+      "time": "3 Feb 2010 — 9:03am",
+      "content": "I also installed the XQuartz version of X11 on my MacBook Pro else [**Inkscape**](http://web.archive.org/web/20150414171715/http:/en.wikipedia.org/wiki/Inkscape) (download from [http://www.inkscape.org/](http://web.archive.org/web/20150414171715/http:/www.inkscape.org/ \"http://www.inkscape.org/\")) would not run.\n\n"
+    },
+    {
+      "time": "24 Dec 2011 — 3:24am",
+      "content": "Hi Michel, and congratulations for your work.\n\nUnfortunately I can't get pfb2otf to work. When I point at the folder containing the fonts to be converted, I get an error message saying \"Error: the folder you chose is not writable\" even though I have chmoded the folder's permissions to 777.  \nThis is all running on OS X 10.7. fontforge installed through MacPorts. XCode 4 installed through the Appstore.  \n:/\n\nAny idea?\n\nMerry Christmas ;)\n\n"
+    },
+    {
+      "time": "24 Dec 2011 — 4:40am",
+      "content": "I just tried on 10.6, also with a MacPorts installed FontForge, and everything worked fine (on some type1 font file in /usr/local/texlive/2011).\n\nI won't be able to check on 10.7 before next week. Since then, and since you seem to know unix, you could try this: inside `pfb2otf.app/Contents/MacOS` there is a text file, `pfbtootf.txt` which is just an executable script. Copy it in some of your working folders; then just execute in a shell window `sudo pfbtootf.txt`. It will execute as the super user.\n\nBy the way, when you click \"Choose\", you must be inside the directory containing the font files. It should look like this, with the font files in grey:\n\n ![](http://web.archive.org/web/20150414171715im_/http:/typophile.com/files/choose_5739.png)\n\n"
+    },
+    {
+      "time": "27 Dec 2011 — 6:57am",
+      "content": "<cite>When I point at the folder containing the fonts to be converted, I get an error message saying \"Error: [...] '</cite>\n\nI changed the message to \"Enter the folder with the font files to convert (listed in grey)\".\n\n"
+    },
+    {
+      "time": "27 Dec 2011 — 7:27am",
+      "content": "Message in the header updated.\n\n"
+    },
+    {
+      "time": "16 Jan 2012 — 12:25am",
+      "content": "My, how time flies. When I was first messing around with all of this, I was still a beginner when it came to Unix and the command line. Now I do web development for a living, and feel naked when I don't have a proper \\*nix available, along with all the available power and flexibility.\n\nThanks for keeping this updated Michel!\n\n"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "38218",
+  "title": "When you make an Ohorn ( U+01A1, U+01A0 )",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "I want to check an assumption - when you make an Ohorn ( U+01A1, U+01A0 ) it is necessary that the ’horn’ be joined with the O shape so that the O shape in the Ohorn cannot be a component.\n\n(Although the Ohorn shape can be a component of other Unicode glyphs.)\n\nIs this correct?\n\nPut another way though - I might ask. Will a composed overlapping shape create an unwanted white space the way that a temporary ( unconnected but overlapping) leg on an upper case R does?\n\nThanks!\n\n [‹ Dumb question](http://web.archive.org/web/20080204005508/http:/www.typophile.com/node/38187 \"Go to previous forum topic\") [{ What does this error mean? } ›](http://web.archive.org/web/20080204005508/http:/www.typophile.com/node/38182 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080204005508/http://www.typophile.com/user/2942\" title=\"View user profile.\">Eben Sorkin</a>",
+  "time": "<br>",
+  "uid": "2942",
+  "comments": [
+    {
+      "time": " 18.Oct.2007 6.20pm",
+      "content": "What happens can be rasterizer-dependent and in some cases size-dependent. But also consider what will happen if somebody ever does an outline or stroke effect on the text. You really don’t want overlapping paths in that case.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": " 18.Oct.2007 9.08pm",
+      "content": "Great Point. Thanks Thomas!\n\n"
+    },
+    {
+      "time": " 18.Oct.2007 9.49pm",
+      "content": "_...if somebody ever does an outline or stroke effect on the text. You really don’t want overlapping paths in that case._\n\nThat’s why I weld (remove overlap) cedillas and ogoneks onto accented characters. Shipping a font with diacritics in component form only saves a few kilobytes in font file size and adds nothing to the quality of the product.\n\nMost fonts I’ve produced so far are display types, or semi-display-demi-text, and designers will inevitably render them in outline form. As long as your horn glyph, cedilla glyph and ogonek glyph exist stand-alone in their own cells with legit unidoce index numbers assigned, they can be components of diacritic characters combined on-the-fly by applications—-but you knew that already.\n\n_Will a composed overlapping shape create an unwanted white space the way that a temporary ( unconnected but overlapping) leg on an upper case R does?_\n\nThe whitespace is generated in OT fonts with Type 1 outlines, but for some reason not in TT fonts with TT outlines.\n\nj a m e s\n\n"
+    }
+  ]
+}

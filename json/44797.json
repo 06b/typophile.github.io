@@ -1,0 +1,18 @@
+{
+  "id": "44797",
+  "title": "InDesign: black turns to rich black on export to PDF?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "There was a [similar thread](http://web.archive.org/web/20100703130158/http:/typophile.com/node/31345) to this previously, but it referenced appearance of black in PDF (on monitor) and did not address my particular problem:\n\nIn InDesign, my type is set to [Black]. When I print directly from ID, only black ink is used. When I export to PDF and then print, type is printed in CMYK rich black. I don't want this. (Oddly, 50% tint of [Black] prints with color, but 50% opacity of [Black] uses only black ink. A gradient from 100% [Black] to [Paper] uses only black ink.)\n\nI have already adjusted my \"appearance of black\" options to not view or output as rich black, instead to output blacks accurately. I have tried various combinations of PDF export options, using No Color Conversion and different settings with the profiles. I've tried changing my color settings as well, using various Color Management options... this makes no difference.\n\nClearly something in the process of exporting to PDF is overriding what I want. What am I missing?? I'm going CRAZY.\n\nThanks!\n\n",
+  "author": "<a href=\"/web/20100703130158/http://typophile.com/user/30309\" title=\"View user profile.\">blustery</a>",
+  "time": "<br>",
+  "uid": "30309",
+  "comments": [
+    {
+      "time": "",
+      "content": "I asked the color guy here and got this response:  \n-------------------------  \nProbably the first question is whether the PDF itself contains the rich black or the rich black only appears when printing the PDF. Based on the description I think I lean toward the latter. If that’s correct then it may be an Acrobat color management issue. One way to find out is to place the resulting PDF into a new ID doc and print and see if you get rich black output. If you do, the PDF is bad, and if you don’t, it’s an Acrobat thing. (This assumes your color settings are configured with a CMYK profile policy of “Off” or “Preserve Numbers”.)\n\nThe default PDF export presets in ID should not include any profiles for the text, although for PDF/X variants the output intent will imply one. If Acrobat is configured to use that profile and its print dialog is configured in such a way that you are requesting a conversion, you’ll get one, and your text will go 4c. The gradients are specified as DeviceN which would escape the conversion. The tint vs opacity example is strange; if anything I would expect it the other way around, but that’s only based on a guess as to what may be happening.  \n-------------------------  \nHope this helps. Not my area.\n\n"
+    }
+  ]
+}

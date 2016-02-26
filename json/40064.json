@@ -1,0 +1,30 @@
+{
+  "id": "40064",
+  "title": "Word randomly using OOT ligatures in OS X 10.5",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "No, seriously. Microsoft Word version 11.3.5 under OS X (Leopard) 10.5.1, is displaying and printing common ligatures (fi, fl, ffl, etc) for OpenType — not AAT — fonts. Not entirely consistently, but like 90% of the time. But it’s not spacing for them. So you get the ligature and then a large gap before the next letter.\n\nI can post screenshots if you don’t believe me, but try it for yourself.\n\nDoes anyone (a) have any idea what’s going on; or (b) know who I should be filing a bug report with?\n\n [‹ how to write login script](http://web.archive.org/web/20081119051058/http:/www.typophile.com/node/40137 \"Go to previous forum topic\") [Fonts for Visual Basic ›](http://web.archive.org/web/20081119051058/http:/www.typophile.com/node/40016 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081119051058/http://www.typophile.com/user/24459\" title=\"View user profile.\">kikujiro</a>",
+  "time": "<br>",
+  "uid": "24459",
+  "comments": [
+    {
+      "time": " 14.Dec.2007 2.57am",
+      "content": "I have some similar problem with Textmate (texteditor), I use my own monospace font (OT font with ligature feature: fi, fl, ff) and the systems text engine substitutes the glyphs but the Program is not aware of the change in glyph count and places the cursor at the wrong position. This behavior started with 10.5\n\n"
+    },
+    {
+      "time": " 14.Dec.2007 7.16am",
+      "content": "I’ve seen the same thing in PDFs of Pages documents that I’ve received from others. I don’t have Pages, so I can’t double check or document it. There too, it started with 10.5.  \nChristian A. Harder\n\n"
+    },
+    {
+      "time": " 14.Dec.2007 10.17am",
+      "content": "I’ve asked our internal tester to verify, and alerted Apple and Microsoft. (Although they both have folks who read Typophile anyway.)\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": " 14.Dec.2007 11.29am",
+      "content": "Yes, MS Word uses ATSUI but they cache metrics and alter the glyph advances via the ATSUI low level callbacks. I believe there’s a MS bug already but I’ll search the DB. Looks like TextMate has the same issues. Bottom line is, I don’t think this is a problem with the OT layout engine in Leopard but I’ll double check nevertheless.\n\nDan\n\n"
+    }
+  ]
+}

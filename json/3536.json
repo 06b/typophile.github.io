@@ -1,0 +1,70 @@
+{
+  "id": "3536",
+  "title": "Opentype: standard names for alternates?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'd like to know if we (already?) have a sort of standard, when designing an Opentype script (or not) typeface, for alternate characters, and for opening and closing version of glyphs.   \n   \nI've opened my copy of Akira Kobayashi's Calcite from Adobe and I've seen normal alternates are named along the line of a.alt, b.alt2, etc. and ligatures are (as explained in FontLab's manual) indicated with f\\_f\\_l, s\\_t, etc. but I've not found out if a naming standard exists for opening versions, swashes, closing versions, different alternates, etc.   \n   \nBesides, I've seen Calcite's alternates and ligatures seem to have an Unicode value. Which criteria has been used to assign, it since these letters are not basic letters of a certain language/script?   \n   \nMany thanks in advance to anyone.\n\n",
+  "author": "piccic",
+  "time": "10 Mar 2004 — 1:36pm",
+  "uid": "1316",
+  "comments": [
+    {
+      "time": "10 Mar 2004 — 2:30pm",
+      "content": "Claudio,   \n   \nCalcite's alternates have Unicode mappings from the Private Use Area. As the name suggests, there are no criteria since the mappings are private. You are free to assign the Unicodes E000-F8FF according to your own preferences, or not at all.   \n   \nAs for the glyph name suffixes, I recommend using the \"most appropriate\" OpenType Layout feature name. For example, a smallcap \"a\" could be named \"a.smcp\", a initial form \"a.init\", a final form \"a.fina\" and a swash form \"a.swsh\". If there are more swash forms, they could be called \"a.swsh1\", \"a.swsh2\" etc.   \n   \nOf course, if the swash forms are at the same time parts of some styllistic sets, you could call them \"a.ss01\", \"a.ss02\" etc.   \n   \nIf the same glyph is used in more than one feature, I'd subjectively pick the \"most appropriate\" or \"most logical\" one.   \n   \nRegards,   \n Adam Twardoch   \n Fontlab Ltd. / MyFonts.com\n\n"
+    },
+    {
+      "time": "10 Mar 2004 — 3:47pm",
+      "content": "\\> You are free to assign the Unicodes E000-F8FF according to your own preferences, or not at all.   \n   \nIf not included, are there any programs that will not   \nrecognize the characters without assigned #'s?   \nI've been including them out of fear.\n\n"
+    },
+    {
+      "time": "10 Mar 2004 — 4:53pm",
+      "content": "Applications that support OpenType Layout features that are used to access these glyphs will naturally be able to access these glyphs via these features.   \n   \nPrivate Use Area mappings are devised for applications that support Unicode but do not support any OpenType Layout features or the particular features that you used in your font. In such case (e.g. Microsoft Word), the user can use an \"Insert Symbol\" feature that will bring up a Character Map-alike window, and there, insert the character. Of course, the text stored behind the character inserted that way will be \"garbled\". Meaning: if the user inserts an \"a.init\" or \"a.smcp\" using the PUA mapping, the spellchecker, the hyphenation algorithm or the search/replace feature will not recognize it as a proper \"a\" (while this would be the case if the character is inserted via the OpenType Layout features). So this really is the last resort option. OpenType Layout features are better than PUA mappings, but since there are still applications that don't support OTL, PUA may be the only option to allow the users inserting these characters.   \n   \nI know that John Hudson advises against PUA, I personally do the same, I also think that Microsoft has the same position. Adobe officially advises against the practice, but have been assigning PUA in their own fonts. My guess is, however, that they will stop doing so at some point.   \n   \nRegards,   \nAdam Twardoch\n\n"
+    },
+    {
+      "time": "11 Mar 2004 — 6:09am",
+      "content": "Adobe's current position seems to be 'we know all the problems with PUA characters, but we don't want to deal with the complaints from users who can't access ligatures and smallcaps in their non-OT applications'. So they continue to include the PUA encodings in their fonts. Personally, I don't think this is doing the users any favours in the long term.\n\n"
+    },
+    {
+      "time": "12 Mar 2004 — 7:10am",
+      "content": "First let me thank you. I'm flattered to be helped in my Opentype and Unicode infancy by such professionals as John and Adam Twardoch, and I appreciate enormously the effort Eric is doing as well with Process to promote the Opentype format.   \n   \nYou have answered many doubts I had in a few words, but a doubt still remains. Adam, when you talk of \"most appropriate\" OT names, you mean \"preparing the ground\" for something which is not yet standard, or are you suggesting a naming convention already adopted by someone? I mean, while I was waiting for your answers I used temporarily the names \"a.ini\" and \"a.fin\", instead of the four-lettered \"extension\" you mentioned.   \nIf it's not a rule I'd prefer to stick to three-lettered \"extensions\": more short and more handy if I have more than a single alternate (i.e. \"a.ini\", \"a.ini2\", etc.)   \n   \nThis answers a good part of my question. However, what would you suggest if, instead of regular alternates, swashes and alt.gylphs of a script, I will use the Opentype features in a conceptual or historical way?   \nIn a typeface I have in its early stages I will include latin forms from various centuries (I, II, III, IV, etc.), how would you name the alternates? It would be interesting to tentatively define a standard.   \n   \nI understand your suggestion for style sheets is good anyway, expecially when I will use Opentype features in a conceptual way.   \n   \nA last question. If Unicode values are included for PUA usage, will they constitute some kind of problem (besides being a delay in the support of Opentype) in Opentype-savy applications or will they be just additional/unused information (I think so)?\n\n"
+    },
+    {
+      "time": "12 Mar 2004 — 7:22am",
+      "content": "P.S. I can't wait to read the article on the Cherokee alphabet on your website, John.   \nIt's pretty interesting, considered I thought for a longtime to create both an Hebrew and a Cherokee version of my old Ottomat/Tomazooma (since I reworked it in a all-unicase fashion as it was thought prior to the Emigre release), because its source of inspiration was a 1960s story of the Fantastic Four set in the American Indian environment, created by comic-book legends Jack Kirby and Stan Lee (both of Jewish heritage, as many artists which shaped the form of the American comic book as a medium).   \nI talked a few times with Oded Ezer about the Hebrew version, but I had no serious information on the alphabet of Chief Sequoyah and its history.\n\n"
+    },
+    {
+      "time": "12 Mar 2004 — 9:04am",
+      "content": "Claudio,   \n   \nthere is no single convention adapted by \"everyone\". However, those who adopt the convention that I recommend, will perhaps benefit from the fact that I'm planning to release an add-in for FontLab that will automatically build OpenType Layout features based on these names. So if you have a set of glyphs named \"a.swsh\", \"b.swsh\" etc., my tool will build the \"swsh\" feature for you.   \n   \nNote that I have yet no precise plans as for the functionality of that tool and its terms of availability.   \n   \nOther than that, you can use whatever you want -- there is no and most highly will not be any user software that depends on these glyphname suffixes to do some functionality.   \n   \nAdam\n\n"
+    },
+    {
+      "time": "13 Mar 2004 — 10:57am",
+      "content": "Ok, I'll stick with \"a.init\" and \"a.fina\" and so on. But, apart from the benefits from scripts or add-ons like the one you've planned, I seem to get I can freely use any single name for alternates, and it's not so important to create a standard because they are like, let's say, \"labels\", right?\n\n"
+    },
+    {
+      "time": "30 Apr 2004 — 8:47am",
+      "content": "_Personally, I don't think this is doing the users any favours in the long term._   \n   \nwhy do you say that John?\n\n"
+    },
+    {
+      "time": "30 Apr 2004 — 9:16am",
+      "content": "Electronic documents tend to have a fairly long life, especially today when a single document might be published to multiple media. PUA codepoints have a number of problems. Firstly, they are inherently unreliable: if you switch fonts in a document that includes PUA codepoints, there is no guarantee that your PUA-encoded smallcaps or ligatures won't suddenly become rare Chinese\\* characters or simply the wrong smallcaps or ligatures. The whole point of the PUA is that it is not standardised, so anyone can use the codepoints for any purpose. Secondly, as soon as you introduce PUA codepoints into a document, you lose the ability to reliably spellcheck, search or sort.   \n   \n\\*The PUA area of Unicode was originally specified mainly as a place for personal Chinese characters, i.e. for idiosyncratic characters representing proper nouns.\n\n"
+    },
+    {
+      "time": "30 Apr 2004 — 9:21am",
+      "content": "\\> Electronic documents tend to have a fairly long life   \n   \nYou really think so? Compared to what, speech?! :-\\>   \n   \nhhp\n\n"
+    },
+    {
+      "time": "30 Apr 2004 — 9:43am",
+      "content": "I think John and Adam have done a pretty good job of describing the situation.   \n   \nI'll note that the PUA has two subsections, of variable and potentially overlapping size. The End User Sub-area is from E000 up, and is completely arbitrary. The Corporate Use Sub-area is filling in the PUA from the top down, and allows people and companies to define specific characters to mean whatever they like. Commonly people publish their usage of this part of the PUA, which allows for the possibility of shared stuff.   \n   \nAdobe's use of the PUA has been to use a section of the CUS (F6xx-F77xx) for certain glyphs that are fairly common across different font families, and to use the EUS for unusual or unique glyphs.   \n   \nThe only reason I mention this is that \\*if\\* one is going to use the PUA, I think it is a fine idea to be aware of and make use of Adobe's CUS assignments. To do so, start at: [http://partners.adobe.com/asn/tech/type/unicodegn.jsp](http://web.archive.org/web/20150416060011/http:/partners.adobe.com/asn/tech/type/unicodegn.jsp)   \n   \nHowever, I won't argue with Adam and John's reasons for not wanting to put EUS codepoints in fonts in the first place. If we were starting from scratch, I expect we'd not take the same path ourselves. Of course, these days, there are a lot more and more popular OpenType aware applications than there were when we had to make the decision.   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "30 Apr 2004 — 4:56pm",
+      "content": "I think those three are the only ones that currently support features for advanced typography for Western languages.   \n   \nA bunch of Microsoft's applications support quite a few OpenType layout features, but only when those features are required for language support.   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "30 Apr 2004 — 11:35am",
+      "content": "Thomas   \n   \nOther than Illustrator, InDesign and Photoshop what are the other popular OpenType aware applications?   \n   \nNigel\n\n"
+    }
+  ]
+}

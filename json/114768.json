@@ -1,0 +1,131 @@
+{
+  "id": "114768",
+  "title": "VOLT Questions for an Arabic font.",
+  "forum": "Arabic Typography & Type Design",
+  "tags": [
+    "Arabic Typography & Type Design",
+    "VOLT Arabic diacritical marks mark on mark mkmk"
+  ],
+  "content": "Salaams - 5 years and 39 weeks have passed since a group of us started this typophile special interest group!\n\nI am trying to finalize the OT version of my AlQuds font (started in the 1960s!). Some final problems in VOLT:\n\n1- How to create a lookup for a case when two marks are elevated on top of one glyph at a given height. The first mark shifts up OK but the second one overlaps it. There is a separate lookup for Marks on Marks which works fine when the marks are at their \"normal\" height above the anchor is there a conflict with that?\n\n2- When typing a mark then another - for example a shaddeh then a fatha I get shaddeh and fatha on top. But when typing the fatha first then the shaddeh, the shaddeh comes out ontop making it shaddeh kasra!\n\n3- Why do mark substitutions not work on the Mac, including ios ipad applications? I have separate glyphs for pairs of marks, and they appear fine in PC applications, but Mac relies on the positioning lookouts.\n\n4- Do anchors created in Fontlab make their way into VOLT?\n\nMany thanks  \nVladimir\n\n",
+  "author": "Vladimir Tamari",
+  "time": "6 Mar 2014 — 5:32am",
+  "uid": "23584",
+  "comments": [
+    {
+      "time": "6 Mar 2014 — 10:47am",
+      "content": "Without looking at the Volt project it is difficult to visualise exactly what you are trying to achieve but I will have a go:\n\n1 + 2 Do you have a range of glyphs for mark on mark? These common mark combinations should be implemented with a ccmp feature that will give you the right combination irrespective of the input sequence. These should then get positioned by anchors in the mark feature. The mkmk feature is also used for multiple mark combinations.\n\n3 Perhaps someone with more knowledge of Apple IOs can answer this but it may be the font requires some AAT tables to work in IOs.\n\n4 No. You need to convert your anchor positions in FontLab to Volt lookups and groups by writing some Python to generate the Volt data, otherwise it's a very long and laborious effort putting it in by hand.\n\n"
+    },
+    {
+      "time": "6 Mar 2014 — 12:49pm",
+      "content": "If you give some more detail of the problem 1 or add some images it would become easy for others to suggest any solution.\n\nThe problem 2 can be solved by adding a new glyph to the font (if it is not present in your font) containing the shadda and fatha in a combined shape as in the image\n\n ![](http://web.archive.org/web/20150317122852im_/http:/typophile.com/files/shadda_fatha_6681.jpg)\n  \nName this glyph as **shaddafatha** or something alse and then add a lookup to the ccmp feature containing the following substitutions  \n`\nshadda fatha -> shaddafatha\nfatha shadda -> shaddafatha\n`\n\nIt will produce the required results.\n\n"
+    },
+    {
+      "time": "6 Mar 2014 — 5:23pm",
+      "content": "Dear malcolm and Zuhair\n\nMany thanks for your helpful comments...I am learning!  \nYes I have glyphs with all the mark combinations, and in this test verison I put a small \"a\" in the glyph to distinguish it from the case when the marks are created separately on compiling.  \nThe ccmp does have the dual combinations as suggested by Zuhair.  \nThe trouble with the order of the marks only occurs on the Mac because it does not implement the ccmp substitutions.\n\nThe attached image shows the lookup I made for marks atop the alef-hamza glyph. However as you see the Mark-on-Alef lookup is not working - first the ccmp does not kick in in this second lookup, and secondly the marks do not lift as required. The Mark to Mark feature itself works well since the damma is placed higher than the shadda. Is it a question of defining and placing anchors on the alef-hamza, , and how do you do that?\n\nRegards  \nVladimir\n\n ![](http://web.archive.org/web/20150317122852im_/http:/typophile.com/files/Marks%20on%20Hamza_4557.JPG)\n\n"
+    },
+    {
+      "time": "7 Mar 2014 — 4:59am",
+      "content": "When you look at combinations in a lookup in Volt you will see only the function that the lookup is implementing.\n\nTo see what the combinations of lookups are achieving for a given feature (or sets of features) you need to inspect the sequence in the Volt Proofing tool making sure you turn on the correct script, language, feature set.\n\n"
+    },
+    {
+      "time": "8 Mar 2014 — 7:09pm",
+      "content": "Thanks malcolm - the figure above needs to be scrolled to the right to show the proofing tool. One thing I discovered is that the order of the lookups is important - positioning before marks on marks or vice versa?  \nAnother question: The proofing tool shows no positioning adjustment. But the shipped font does. What am I doing right (or wrong?)\n\n"
+    },
+    {
+      "time": "9 Mar 2014 — 11:33am",
+      "content": "The recommended order for the positioning lookups is  \n1-Kerning  \n2-Cursive  \n3-Mark  \n4-MkMk\n\nI do not use proofing tool at all. It takes a lot of time.  \nI use MS Word 2013 to test the font and to quickly view the results of changes made in lookups. Here is how it works. Open MS Word, type the text in your font, type the words that needs some correction in the Volt project.  \nNow keep the MS Word open with the written text and start MS Volt, open your font it it, make the required change in the lookups, click on Compile and then click on Save. Now open the folder containing the saved font, right click on the font file and select install from the menu. It will install the font and the MS Word will apply the changes to the text in real time i.e. you do not have to restart the MS Word for the new installed font.  \nAlso it is not required to ship the font each time for testing in the application, just compile it, save it, and install it.  \nIt saves me a lot of time.\n\n"
+    },
+    {
+      "time": "9 Mar 2014 — 10:33pm",
+      "content": "Thank you very much Ustaz Zuhair you have given excellent advice that indeed saves time. It seems to work with the installed Notepad (click Format to select the font) also WordPad software in Programs/Utilities. I say 'seems' because I do not have Word 2013, and in any case the changes I make in the lookups are not always reflected in the WordPad. Curiously if I select the word and click of the B for bold then the changes do occur! I need to study the lookups systematically.  \nHow are the anchors named? Does each glyph group have its own anchor name? Or rather does each lookup need a new anchor name?\n\n"
+    },
+    {
+      "time": "10 Mar 2014 — 12:15pm",
+      "content": "Vladimir  \nMy apologies for not seeing all the image.  \nAll those questions are really dependent on your work-flow, how you create your anchor points in FontLab and how you translate that information into Volt data. This is an image of one of my projects for the mark positioning lookup.\n\n![](http://web.archive.org/web/20150317122852im_/http:/goo.gl/DWnFOU)\n\nAlthough the Volt proofer can be difficult with some features, the mark feature is pretty basic and should work for Arabic marks.  \nYou could try and export the lookup from Volt and look at the text it creates. You could experiment by changing values and seeing what effect that has when imported back into Volt.  \nAlso, we have a font activator for Windows that is a simple drag and drop process. Very useful when you need to activate and deactivate fonts many times. You can find it here:  \n [http://goo.gl/HSjnLs](http://web.archive.org/web/20150317122852/http:/goo.gl/HSjnLs)\n\n"
+    },
+    {
+      "time": "10 Mar 2014 — 3:09pm",
+      "content": "You can download and use the trial version of MS Word 2013 for this purpose. Also you can test the bold style in the same way, just keep the text in bold style in MS Word.  \nWhile working on a font I keep open three windows for a quicker testing (1) MS Word with the (bold or regular) text that need correction (2) Volt with the font project (3) the folder containing the working font files.\n\nIn Volt, make changes in the lookups, Compile it and Save it. then click on the folder tab and install the saved font and then quickly click on the MS Word tab to check the changes taking place. After clicking install, if you were quick in clicking the MS Word tab, you will also observe the changes taking place in the same moment.\n\n ![](http://web.archive.org/web/20150317122852im_/http:/typophile.com/files/image_001_5045.jpg)\n\nThe anchors are position specific on any specific letter. As you can observe the anchor AbvMrks (green arrow) over the letter laminitial in this image. The red arrow show the marks group that needed to be appear at this anchor position. Here (at red arrow) you can place a group of marks or a single mark or two as you need.\n\n ![](http://web.archive.org/web/20150317122852im_/http:/typophile.com/files/image_002_5742.jpg)\n\nIf you need 2 different mark positions on the same letter then you will need a new anchor for the 2nd position as shown in the 2nd image. The new anchor is named as AbvMrks2. This 2nd anchor was needed for the placement of two marks only (superscriptalef and maddasuperscriptalef.alt.b) over the same letter laminitial.\n\nIt is better to keep the number of anchors lower in a font. In most cases only one anchor for above marks and one anchor for below marks is enough for all letters. Even for MkMk, the same anchor should be used that is used for Marks. Yes, in certain cases it becomes necessary to create more anchors as observed in the 2 images.\n\nNow, suppose, if you need two mark positions on Raa, then you should try to use the same 2nd anchor AbvMrks2 for the second position over Raa in the same lookup or in a new lookup as needed.  \nSuppose, you needed the 2nd anchor position over Raa for the placement of mark ShaddaFatha only. To do so, add a new lookup, in the first column place Raa, in the second column place only ShaddaFatha and in the third column write down the same 2nd anchor name i.e. AbvMrks2, and it is done.\n\n"
+    },
+    {
+      "time": "10 Mar 2014 — 6:04pm",
+      "content": "Thank you so much Malcolm and Zuhair for your kindness. I will study your expert demonstrations - at last I am already getting results, but need to learn the various effects more by using them. I have also downloaded the font deactivator and will check it out thanks.\n\n"
+    },
+    {
+      "time": "12 Mar 2014 — 4:36pm",
+      "content": "Things are working out and the marks stay where they are intended thanks again! As Zuhair has mentioned the marks jump to their re-set locations in Word as soon as the re-volted font is installed.  \nVery nice. I am still confused however in the Marks lookup about the relationship between the first glyph and the second glyph. Moving the anchor seems to affect both numerically but in use only the Mark moves. In practice that does not matter if I set the second glyph to zero and lock it, but I am curious why the two sides are adjustable if one suffices?\n\n"
+    },
+    {
+      "time": "12 Mar 2014 — 11:54am",
+      "content": "Have you looked into the volt project of Arabic Typesetting font that is provided with MS Volt? Have you placed the marks lookup in the **mark** feature and marks to marks lookup in **mkmk** feature? Does the problem occur on Mac only?\n\n"
+    },
+    {
+      "time": "12 Mar 2014 — 6:10pm",
+      "content": "No, yes, yes, yes !  \nFor testing your fonts in Apple environment on iOS 7 devices see [http://typophile.com/node/114930](http://web.archive.org/web/20150317122852/http:/typophile.com/node/114930 \"http://typophile.com/node/114930\")\n\n"
+    },
+    {
+      "time": "13 Mar 2014 — 5:42am",
+      "content": "You should look over the volt project of Arabic TypeSetting font, and compare its mark and mkmk lookups with your lookups. It might be helpful. This font is provided with MS Volt. Look into the Volt installation directory, there will be a file named as Volt Supplemental files, execute it and it will produce the arabtype.volt.ttf file. It is a ttf file with volt project. Open it in Volt to check its lookups.\n\n"
+    },
+    {
+      "time": "13 Mar 2014 — 9:53am",
+      "content": "Also if you could add an image of your mark lookup and an image of your mkmk lookup so that it would be helpful in giving some suggestions.\n\n"
+    },
+    {
+      "time": "13 Mar 2014 — 5:38pm",
+      "content": "Thank you for your suggestions I will check them - currently lots of work on the outlines and it seems the marks and mkmk schemes are working nicely - I will be sure to ask you for advice soon!\n\n"
+    },
+    {
+      "time": "28 Mar 2014 — 7:18am",
+      "content": "Hello again - as promised, here I am asking for more advice. In the Marks panel in Volt some of the Marks appear twice, once in gray and once in black - what does that signify? Thanks for your help.\n\n ![](http://web.archive.org/web/20150317122852im_/http:/typophile.com/files/Capture_3456.JPG)\n\n"
+    },
+    {
+      "time": "19 Apr 2014 — 3:12pm",
+      "content": "Hi Tamari,\n\nThe grey mark or marks are usually additional marks in a ligature glyph where you can place one mark above or below each letter by alternating the Component number in the above right side of the lookup. If the ligature has two letters, you will have two marks, if it has 3 letters, there will be 3 marks, and so on.\n\nIn your figure, it doesn't appear that any of these glyphs in Position First should be a ligature, so check your glyphs information in the Glyph Editor in VOLT and assign the glyph Type to Simple and Components to 1.\n\n"
+    },
+    {
+      "time": "25 Apr 2014 — 11:38pm",
+      "content": "I just saw this. Thank you so much Mamoun for your advice. I will check the glyph info.  \nA more serious problem is the following: I made a lookup to lower the kasra to prevent a clash when a reh or zein etc. goes under an initial yeh etc. then a kasra clashes with the reh . It is not working in practice -as you can see in the screen shot - same in Word text. What am I doing wrong? Please scroll to the bottom right of the image to see the clash however I lower the BelowMarks group.  \nWith best regards from Vladimir\n\n ![](http://web.archive.org/web/20150317122852im_/http:/typophile.com/files/rehbehkasra_3454.jpg)\n\n"
+    },
+    {
+      "time": "26 Apr 2014 — 5:21am",
+      "content": "It means you need two kinds of mark anchors placement below certain initial letters, one type of mark anchor that remain close to the dots under normal conditions i.e. when not preceded by reh and the other type of mark anchor that place marks far below when the letter is preceded by reh.\n\nSo I hope you should have made one lookup for the normal close marks and the image you posted is for the second lookup for the distant marks when preceded by reh.\n\nIn this look up make two changes  \n(1) In the header of this lookup in the PROCESS MARKS box replace _ALL_ with _ **BelowMarks** _. As you do not need the processing of above marks here in this lookup.\n\n(2) In the lower part of the lookup, you have given the Context Before as \\<reh\\> group only while it should also contain the letter to which you are applying the new marks placement. So the context before should look like this containing the following two lines  \n`\n<reh> <Yeh-init> |\n<reh> <BelowMarks> <Yeh-init> |\n`\n\nThe string in the second line will work when reh also contain below marks. So it should also be added.\n\nThanks,  \nM.Z\n\n"
+    },
+    {
+      "time": "26 Apr 2014 — 9:29am",
+      "content": "Thank you so much- it worked, as you see from my photo (it shows the mark placement working and thanks Zuhair, Maamoun and Malcom)!  \nI have one last VOLT question - I have a lookup for marks on a group of 2-component lam-alef ligature group - It works if I say it only has one component in the lookup panel. The problem is that when I adjust the height of the marks for one member of the group, the marks for all the group are raised by an equal amount. I could not manage to raise one of the marks while the other remain in place. Thank you again for your invaluable help.\n\n ![](http://web.archive.org/web/20150317122852im_/http:/typophile.com/files/IMG_9426_6280.JPG)\n\n"
+    },
+    {
+      "time": "27 Apr 2014 — 1:36pm",
+      "content": "Have you put the check mark sign in the **Lock 2nd Anchor** box in the lower right side of the lookup. If not then check mark it.  \nPlease post an image if the problem persists.  \nThanks,\n\n"
+    },
+    {
+      "time": "28 Apr 2014 — 6:05am",
+      "content": "Thank you kindly. When do I lock the 2nd anchor - after adjustment or before? And do I lock the anchor independantly for each glyph in the group? I am not clear about this as sometimes when I lower the mark the marks in all the other glyphs are lowered too whether locked or not...I think! I am a little confused by the process. Here is a figure of the lookup.\n\n ![](http://web.archive.org/web/20150317122852im_/http:/typophile.com/files/lamalef-kasra_5883.JPG)\n\n"
+    },
+    {
+      "time": "28 Apr 2014 — 12:22pm",
+      "content": "The 2nd Anchor should be locked before adjustment for all marks but it is necessary that you have drawn all the marks outlines at the same position in marks glyphs as shown in the image\n\n ![](http://web.archive.org/web/20150317122852im_/http:/typophile.com/files/Marks_6169.jpg)\n  \nSo when you lock the second anchor, all the marks will stick to the first anchor i.e. the cross sign at the locked position and when you adjust the cross sign, to some position, all the marks will also move along with it and appear at that position on the base glyph.  \nNow you will also observe in the mark lookup in the lower right side that the second glyph has zero X and Y values as shown in the image below and only the First Glyph values are changing as you make adjustments.  \n\n ![](http://web.archive.org/web/20150317122852im_/http:/typophile.com/files/Marks_1_3745.jpg)\n\nThanks,  \nM.Z\n\n"
+    },
+    {
+      "time": "28 Apr 2014 — 2:08pm",
+      "content": "Thank you M.Z. yes I already had all the marks on the same level. The method you explained above and in your earlier comments is the one I have been using to adjust single marks. My problem now is with two marks on a ligature. When I adjust a certain combination, for example the black kasra higher than the gray one (as in my lam-alef example image), the same effect is transmitted to the other glyphs. I want to avoid that adjust each pair individually.  \nBest wishes.\n\n"
+    },
+    {
+      "time": "29 Apr 2014 — 4:48am",
+      "content": "I have no idea how to solve this problem.\n\nThanks,\n\n"
+    },
+    {
+      "time": "3 May 2014 — 9:36pm",
+      "content": "It is I who thank you sir!  \nUPDATE:  \nThe solution to the mark placement problem on the lamalef has been provided by Ustaz Mamoun Sakkal (one of the top experts in Arabic typography) in his note above 19 April, but I did not understand it fully at the time:\n\nThe lamalef ligature has two components. In the lamalef-mark lookup click Component 1 in the upper right corner. This allows you to adjust the first mark on the lam, and the mark is in black, while there remains an immovable gray mark. Then click to change the component number to 2, and the second mark becomes black (i.e. it is now the active one) while the first becomes gray. Adjust the second mark on the alef or the hamza on alef etc. That is all. The same process can be used for the الله or لله ligatures where the number of components are 4 and 3 respectively.\n\nThank you Mamoun it works fine now.\n\n"
+    },
+    {
+      "time": "4 May 2014 — 6:05am",
+      "content": "But it was not the problem you were facing. The problem you mentioned in your post was something else as narrated by you\n\n> The problem is that when I adjust the height of the marks for one member of the group, the marks for all the group are raised by an equal amount.\n"
+    },
+    {
+      "time": "4 May 2014 — 8:45pm",
+      "content": "Apologies if the way I expressed my problem was unclear. In practice it now works when Component 1 then component 2 are set.  \nThank you Zuhair.\n\n"
+    }
+  ]
+}

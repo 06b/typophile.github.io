@@ -1,0 +1,77 @@
+{
+  "id": "69184",
+  "title": "Custom glyph names in the Private Use Area",
+  "forum": "Build",
+  "tags": [
+    "glyph names",
+    "PUA",
+    "Unicode",
+    "Build"
+  ],
+  "content": "Hi all,\n\nI tried asking this question over at the FontLab forum, but there doesn’t seem to be very much activity there, so I’m trying here as well. Apologies in advance if this question has been asked before – at any rate I have not been able to find an answer in the archives.\n\nI am developing a font which includes a large number of glyphs in the Private Use Area. For these I would like to use my own names, primarily because many of them have alternate forms accessible through aalt, stylistic sets etc. Coding would get much easier if I could use semantic names rather than “uniExxx”, especially in case I want to change the Unicode index of a glyph (each time I do that, I have to track down every reference to that glyph in the code and change the name).\n\nProblem is, when I use my custom names the OpenType features stop working, and InDesign gives the glyph names as \\<null\\>.\n\nIs there any way to get custom names to work? If this has been answered before, kindly point me in the right direction. I read somewhere a comment to the effect that “sometimes it works, sometimes it doesn’t, but I don’t know why”.\n\nOh, and I know custom characters should not always be in the PUA. Suffice to say, I want them there in this particular font.\n\nYours,\n\nMåns\n\n",
+  "author": "Mans",
+  "time": "7 Apr 2010 — 5:08am",
+  "uid": "30877",
+  "comments": [
+    {
+      "time": "7 Apr 2010 — 5:33am",
+      "content": "<cite> Coding would get much easier if I could use semantic names rather than “uniExxx”, especially in case I want to change the Unicode index of a glyph (each time I do that, I have to track down every reference to that glyph in the code and change the name). </cite>\n\nWhen you change the name of any glyph in fontlab you're given the option of changing the name in all code and classes as well (there's two checkboxes in the glyph names dialogue that you'll need to check).\n\nYour choice of names should have no bearing on how your opentype features work (compiled features refer to GIDs alone, not unicode values or glyph names) so I suspect whatever is causing your features to not work properly is a separate matter.\n\nI'd use whatever names you want while developing the font and then change them to follow the proper naming format once the font is completed.\n\nAndré\n\n"
+    },
+    {
+      "time": "7 Apr 2010 — 6:08am",
+      "content": "Also, the glyph names are normal. The InDesign glyph palette doesn't get its names from your font. It looks them up based on unicode value, and there are no standard unicode names for PUA code points.\n\n"
+    },
+    {
+      "time": "7 Apr 2010 — 10:13am",
+      "content": "<cite><br>\nWhen you change the name of any glyph in fontlab you're given the option of changing the name in all code and classes as well (there's two checkboxes in the glyph names dialogue that you'll need to check).<br>\n</cite>\n\nThanks! Yes, I noticed that little handy feature. That's one problem less. Unfortunately it's not the main problem.\n\n<cite><br>\nYour choice of names should have no bearing on how your opentype features work (compiled features refer to GIDs alone, not unicode values or glyph names) so I suspect whatever is causing your features to not work properly is a separate matter.<br>\n</cite>\n\nAnd yet when I change the name, aalt substitution stops working. When I change it back it starts working again. (And it is not because the name is not changed in the code; the font compiles with no errors.)\n\n<cite><br>\nI'd use whatever names you want while developing the font and then change them to follow the proper naming format once the font is completed.<br>\n</cite>\n\nYes, that was my plan. Good to hear that I'm not the only one doing it that way.\n\n<cite><br>\nAlso, the glyph names are normal. The InDesign glyph palette doesn't get its names from your font. It looks them up based on unicode value, and there are no standard unicode names for PUA code points.<br>\n</cite>\n\nNot true. The InDesign palette (in CS3) gives the PUA glyphs name along the line of \"\\<private use area-Exxx\\>\", except my renamed glyphs which are named \"NULL\".\n\n"
+    },
+    {
+      "time": "7 Apr 2010 — 11:13am",
+      "content": "Sorry, my mistake. I know I frequently get for glyph alternates which are the \\*results\\* of GSUB rules, but it sounds like you are talking about base glyphs.\n\nAndré\n\n"
+    },
+    {
+      "time": "7 Apr 2010 — 3:17pm",
+      "content": "Glyphnames for alternates are better to be \"meaningful\" even if you encode them in the PUA. So \"A.ss01\" is better than \"uniE012\".\n\n"
+    },
+    {
+      "time": "8 Apr 2010 — 8:22am",
+      "content": "<cite><br>\nGlyphnames for alternates are better to be \"meaningful\" even if you encode them in the PUA. So \"A.ss01\" is better than \"uniE012\".<br>\n</cite>\n\nMy thoughts exactly. So, any insights on how to make OpenType features work with meaningful names in the PUA? Or am I the only one who has this problem?\n\n/Måns\n\n"
+    },
+    {
+      "time": "9 Apr 2010 — 12:06am",
+      "content": "Adam, I was reading sloppily the first time I saw your post. Reading it again I understand what you mean. What I have done is generally to _not_ give Unicode numbers to alternates, just the original glyph. My current scheme is to have glyphs with names like \"uniE000\" (and Unicode index E000), and alternates with names like \"uniE000.alt1\" (no Unicode index).\n\nFor obvious reasons I would rather like to use names like \"meaningful\" and \"meaningful.alt1\" (but with preserved index for the \"meaningful\" glyph). Unfortunately, this is where the problems start. Any idea why?\n\n/Måns\n\n"
+    },
+    {
+      "time": "9 Apr 2010 — 6:31am",
+      "content": "Mans,\n\n\"uniE000\" or \"uniE000.ANYTHING\" will map back to U+E000.  \n\"anything\" or \"anything.ANYTHING\" will map back to an unknown glyph.\n\nSo if you employ your own encoding scheme (say, for a private language), you typeset some text in a text editor, produce a PDF, copy the text from PDF and paste it again into the text editor, you will get the same text (without alternates or formatting, but at least the text) if you use the glyphnames \"uniE000\" or \"uniE000.ANYTHING\", but you MAY get a string of undefined characters if you use the glyphnames \"anything\" or \"anything.ANYTHING\".\n\nThe reason why I wrote \"MAY\" rather than \"will\" is explained in detail in this thread:  \n [http://typophile.com/node/29469#comment-404691](http://web.archive.org/web/20131015220259/http:/typophile.com/node/29469#comment-404691 \"http://typophile.com/node/29469#comment-404691\")  \n(PDF-compatible glyphnames is the magic term).\n\nAdam\n\n"
+    },
+    {
+      "time": "9 Apr 2010 — 6:58am",
+      "content": ".\n\n"
+    },
+    {
+      "time": "9 Apr 2010 — 7:10am",
+      "content": "<cite> My thoughts exactly. So, any insights on how to make OpenType features work with meaningful names in the PUA? Or am I the only one who has this problem? </cite>\n\nAs I said earlier, I don't think that the problem you are having with your code not working is related to the naming issue here -- or at least I've never run into a problem where particular glyph names prevent features from working. I think this is probably a separate issue. If your (non-working) code is relatively small, you might want to post it here.\n\nAndré\n\n"
+    },
+    {
+      "time": "11 Apr 2010 — 11:09pm",
+      "content": "Adam, thanks for the link to that thread, it explained a lot!\n\nAndré, after a lot of experimenting I can conclude that you were right. For some reason, FontLab decided to discard the Unicode index from my renamed glyph each time I exported an OpenType font, and instead insert the \"space\" glyph (of all things) in that position. (Probably some other problems arose behind the curtain, since the OpenType features stopped working at the same time.) I solved the problem by right-clicking on the glyph and selecting \"More\\>Remove Unicode\", then reapplying the Unicode index to the glyph that was meant to have it.\n\nThanks to you both for all support and suggestions.\n\nMåns\n\n"
+    },
+    {
+      "time": "8 Jul 2011 — 4:27am",
+      "content": "Greeting to you all.\n\nRelated my question in this thread [http://typophile.com/node/29469#comment-470244](http://web.archive.org/web/20131015220259/http:/typophile.com/node/29469#comment-470244) .... I wrote again here because there are similarly topic:\n\nI understand haphazardly regarding [adobe glyphs](http://web.archive.org/web/20131015220259/http:/www.adobe.com/devnet/opentype/archives/glyph.html) as follows:\n\n1. That all the glyphs should be mapped back into the map table and encoding based AGL AGLFN last ver for OT fonts today.\n2. PDF is a sort of \"catalyst\" to determine the quality of an OT font, so the naming and coding of glyphs absolutely must meet the standards on above (number 1).\n3. Glyphs which included into the range as wide as any, remain to be defined into unicode which will only lead to - at least - 31 characters. **Related to the Adam's explanation**. Is it true to be defined—example—the \"B\" name glyphs into cmap table like this:\n\n0x0042 !B.alt1  \n0x0042 !B.alt2  \n0x0042 !B.alt3  \n0x0042 !B.medi1  \n0x0042 !B.medi2  \n0x0042 !B.ss01  \n0x0042 !B.ss02  \n0x0042 B\n\nWill they be defined precisely? Whether this is meant by Adobe? ... Note that in this way will not display alternate glyphs on the Quick Test FL (and I suspect also in generating fonts). Glyphs to be shown is that explicitly have a unicode, including characters that have PUA code. Please enlightenment.\n\nBest Regards.\n\n"
+    },
+    {
+      "time": "8 Jul 2011 — 6:51pm",
+      "content": "Andi,\n\nno, this portion of .nam will cause that A.ss01 will get the Unicode U+0041 if you do \"Generate Unicode\", and A will also get that Unicode, and you'll get conflicts. In a font, only one glyph should exist out of those which have the same Unicode in a .nam file. Basically, what you're showing is that if your font has A.ss01 and no A, and you'll do \"Generate Unicode\" and then \"Generate Names\", then your A.ss01 will be renamed to A. Which I don't think is what you want.\n\nDo not put any glyphs that should be accessed through OpenType Layout features into the .nam file. The .nam file specifies glyphnames that should have Unicodes, and glyphs that have Unicodes are accessible directly through the \"cmap\" table, without OpenType Layout.\n\nAll glyphs that are accessible though OpenType Layout features should only be specified in the OpenType Layout feature definitions (OpenType panel and perhaps Classes panel).\n\nBest,  \nAdam\n\n"
+    },
+    {
+      "time": "8 Jul 2011 — 6:54pm",
+      "content": "Ps. You MAY add PUA codepoints into your non-Unicode glyphs, i.e. you could do:\n\n0xE005 !B.alt1  \n0xE006 !B.alt2  \n0xE007 !B.alt3  \n0xE008 !B.medi1  \n0xE009 !B.medi2  \n0xE00A !B.ss01  \n0xE00B !B.ss02  \n0x0042 B\n\nOr something like that (the PUA codes you assign are arbitrary, I've just chosen some -- but you're really free to occupy the space between 0xE000—0xF8FF). If that's what you really want. Of course, you'll still need to write OpenType Layout features, but you'll get an additional access method to those glyphs, through \"cmap\", using PUA codepoints. This access method is not recommended, but if you want those glyphs to be accessible in application that do not support user-controlled OpenType Layout features, this may be a sensible scenario for you.\n\nBest,  \nAdam\n\n"
+    },
+    {
+      "time": "26 Jul 2011 — 5:12pm",
+      "content": "Thanks Adam, I can learn quickly to this. You also have to explain things in a separate thread. :-)\n\nBest\n\n"
+    }
+  ]
+}

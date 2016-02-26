@@ -1,0 +1,52 @@
+{
+  "id": "105365",
+  "title": "Batch process fonts \\> ufo?",
+  "forum": "Build",
+  "tags": [
+    "processing",
+    "ufo",
+    "Build"
+  ],
+  "content": "Does anyone know a good way to batch process fonts into UFO format? I don't have RoboFont so unfortunately that's not an option.\n\nThanks\n\n",
+  "author": "hashiama",
+  "time": "9 Aug 2013 — 10:56am",
+  "uid": "16341",
+  "comments": [
+    {
+      "time": "9 Aug 2013 — 12:12pm",
+      "content": "from a VFB or from otf?\n\n"
+    },
+    {
+      "time": "9 Aug 2013 — 1:05pm",
+      "content": "What do you mean by batch \"process\"?  \nbatch generate? batch edit font info? batch rename?\n\nIf batch Generate, you can use Area51  \nif batch Edit Font Info, you can write some python scripts  \nIt depends on what you want to do...\n\n"
+    },
+    {
+      "time": "9 Aug 2013 — 1:20pm",
+      "content": "Did you find a problem with FontForge? For me the script\n\n    ---- fnt2ufo ----\n    #!/usr/bin/env fontforge -lang=ff\n    \n    Open($1);\n    Generate($1:r + \".ufo\");\n    Quit(0);\n    ---- cut here ---\n\nappears to work. With linux or OS X, a simple\n\n    find . -name \"*.otf\" -exec fnt2ufo {} \\;\n\nshould do the job for all otf font files in the current directory and subdirectories. If that is not fast enough (due to one call to fontforge for each file) you can reduce the number of calls to one reusing some code of [http://fontforge.org/scripting-tutorial.html](http://web.archive.org/web/20150415054428/http:/fontforge.org/scripting-tutorial.html \"http://fontforge.org/scripting-tutorial.html\")\n\n"
+    },
+    {
+      "time": "9 Aug 2013 — 4:25pm",
+      "content": "Now I remember that you have been using the [github version of FontForge](http://web.archive.org/web/20150415054428/http:/fontforge.github.io/en-US/downloads/mac/). If so, and if FontForge.app is in /Applications then save the following lines in a file, say sfnt2ufo\n\n    #!/Applications/FontForge.app/Contents/Resources/opt/local/bin/fontforge -lang=ff\n    Open($1);\n    Generate($1:r + \".ufo\");\n\nThen execute the command\n\n    chmod 755 sfnt2ufo\n\nand put the file `sfnt2ufo` somewhere in your path (one of the folders listed when you type `echo $PATH`). Then, and only then, you can execute (in any folder)\n\n    find . -iname \"*.[ot]tf\" -exec sfnt2ufo {} \\;\n\nto process all ttf and otf files or simply use\n\n    sfnt2ufo <fontfile>\n\nto get the corresponding ufo of one particular font file.\n\n"
+    },
+    {
+      "time": "10 Aug 2013 — 2:21pm",
+      "content": "I just tried on a MacBook Air with no programmer tool installed (no X code), just XQuartz and github FontForge and applications from the mac store. The input was 486 western fonts from Adobe Type Classics (something of about 10 years ago). It took about 2 minutes to generate the ufo, but FontForge would not process back some of the UFO files, telling it could not process the features in the ufo and scrapping them.\n\n"
+    },
+    {
+      "time": "27 Oct 2013 — 12:13pm",
+      "content": "Please post the exact error message so I can get this fixed :)\n\n"
+    },
+    {
+      "time": "27 Oct 2013 — 12:56pm",
+      "content": "More that two months afterwards! You are lucky I did not scrap those files. Here is the answer I had prepared for your post.\n\n----  \nHere is a trace searching for a particular problem in the .fea files that were generated\n\n    find . -name \"*.fea\" -exec grep 'by[]*;' {} \\; | sort | uniq -c\n     102 sub [\\uniF661]' [\\slash \\fraction \\uni2215]' [\\uniF661]' by ;\n      12 sub [\\uniF661]' [\\slash \\fraction]' [\\uniF661]' by ;\n     128 sub [\\zero]' [\\slash \\fraction]' [\\zero]' by ;\n\nThis found all feature files and searched in them for lines where 'by ;' is written. There is a total of 102 + 12 +128 =242 lines. Those are the 242 lines that cause the problem with the 242 ufo files.\n\nAfter executing\n\n    find . -name \"*.fea\" -exec sed -i .orig '/by[]*;/d' {} \\;\n\nto remove those lines, FontForge accepted the ufo files as input without scrapping the features.\n\n"
+    },
+    {
+      "time": "27 Oct 2013 — 2:36pm",
+      "content": "<cite>Please post the exact error message so I can get this fixed :)</cite>\n\nHere is the stderr file that was generated when reading in the .ufo file for Utopia Standard Regular\n\n> Copyright (c) 2000-2012 by George Williams. See AUTHORS for contributors.  \n> License GPLv3+: GNU GPL version 3 or later  \n> with many parts BSD . Please read LICENSE.  \n> Executable based on sources from 12:29 EST 18-Jul-2013-ML-NoPython-D.  \n> Library based on sources from 12:29 EST 18-Jul-2013.  \n> Based on source from git with hash:f8dc0063ea93c64e70e5ab1402a840e8c9801cc8  \n> No substitution specified on line 583 of /Users/boyer/Desktop/Western Fonts/Utopia Std Opticals/UtopiaStd-Regular.ufo/feature.fea  \n> There were errors when parsing the feature file and the features have not been applied\n\nLine 583 is\n\n    sub [\\uniF661]' [\\slash \\fraction \\uni2215]' [\\uniF661]' by ;\n\n"
+    },
+    {
+      "time": "25 Nov 2014 — 2:32am",
+      "content": "There are many ways my friend. However, if you know the coding well you can do this. Batch processing a font to UFO format requires certain steps that should be coded carefully. You can contact through me this and all your doubts will be over. [http://www.windows10versions.com](http://web.archive.org/web/20150415054428/http:/www.windows10versions.com/ \"http://www.windows10versions.com\")\n\n"
+    }
+  ]
+}

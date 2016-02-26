@@ -1,0 +1,26 @@
+{
+  "id": "18749",
+  "title": "Quick questions about Type-1 Unique IDs",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Is there a set number or maximum number of digits that the Type-1 Unique ID Number can be? Also, are there applications, OS versions, or printers that sometimes have trouble reading fonts that have no ID numbers, or longer ID numbers? What might happen if two fonts loaded on one system shared the same ID number? Thanks in advance.\n\n",
+  "author": "theterrible",
+  "time": "22 Mar 2006 — 4:35pm",
+  "uid": "10962",
+  "comments": [
+    {
+      "time": "22 Mar 2006 — 8:30pm",
+      "content": "Here's a slightly updated/expanded version of some information that I wrote for Adobe developer support on this question. (Edited again on 3/23 to improve clarity/accuracy.)\n\nYes, Type 1 UniqueIDs are a set number. No, neither Type 1 nor OpenType CFF fonts require UniqueIDs. Nothing will break if you omit them.\n\nBack in the mid-80s, when printing might be done on a 57K serial connection and printers might have 8 MHz processors, the caching of font bitmaps in PostScript devices enabled by UniqueIDs made a noticeable speed difference. With today's connection bandwidths and printers, the printing speed difference was insignificant for western-language fonts in our tests, and not enough to outweigh the risks of collisions between UniqueIDs for different fonts and the trouble of tracking the ID numbers. (Note that there did seem to still be some advantage for our Asian fonts with 10,000-25,000 glyphs.)\n\nA collision between UniqueIDs can cause glyphs from the first font printed to substitute for those of the second font with the same UniqueID. Although it is rare, it is a serious problem - and hard to diagnose when it happens, because it is rare enough that most people have never seen it themselves before.\n\nIf you must use UniqueIDs for some reason, you should get them assigned by Adobe to minimize the risk of collisions.\n\nXUIDs can be guaranteed to be unique, thanks to the extensible mechanisms and vendor ID registration involved. However, the same comments about minimal speed improvement apply here.\n\nFor these reasons, Adobe has stopped using UniqueIDs (and XUIDs) in our western OpenType CFF fonts. If we still made Type 1 fonts, we wouldn't use UniqueIDs for them, either. We \\*do\\* in fact still use XUIDs and UniqueIDs in Asian CID-keyed fonts, because the same analysis showed that there was some printing performance benefit in this case.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "23 Mar 2006 — 12:25pm",
+      "content": "Thanks Thomas. Regarding the ID being a fixed number--sure once it's set it is fixed, but is there a set number of digits that it needs to be? Most I've seen are 7 digits long, but if you have an 8-digit ID, are there issues that can come up?\n\n"
+    },
+    {
+      "time": "9 Sep 2009 — 8:12pm",
+      "content": "Rather belatedly!\n\nUniqueIDs and XUIDs are set formats, you can't just add digits, no.\n\nT\n\n"
+    }
+  ]
+}

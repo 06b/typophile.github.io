@@ -1,0 +1,74 @@
+{
+  "id": "38448",
+  "title": "Fractions",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Currently when OT fraction feature is applied to text in InD numbers imput render as numerators, then when the slash/fraction character is input the subsequent numbers render as denominators.\n\nWhat would really ideal is if the numbers in the string would remain as full-size numbers UNTIL the slash/fraction character is input, then those numbers before the slash would change to numerators and the numbers after the slash/fraction would render as denominators.\n\nAnyway to do this?\n\n",
+  "author": "<a href=\"/web/20100224212223/http://typophile.com/user/1947\" title=\"View user profile.\">terminaldesign</a>",
+  "time": "<br>",
+  "uid": "1947",
+  "comments": [
+    {
+      "time": "",
+      "content": "Yes, but it requires an awful amount of contextual substitutions. And, of course, it may generate undesirable results in some situations. In any case, here's one way to do it:\n\n**Warning:** The code below was tested in FontLab \\*only\\*.  \n**Disclamer:** Use the following code at your own risk.  \n`\nfeature frac {\n\t@NUMERALS = [zero one two three four five six seven eight nine];\n\t@NUMERATORS = [zero.numerator one.numerator two.numerator three.numerator four.numerator five.numerator six.numerator seven.numerator eight.numerator nine.numerator];\n\t@DENOMINATORS = [zero.denominator one.denominator two.denominator three.denominator four.denominator five.denominator six.denominator seven.denominator eight.denominator nine.denominator];`\n\n# Replaces numerals before the slash (only 4 digits \"deep\")  \n sub @NUMERALS' @NUMERALS @NUMERALS @NUMERALS fraction by @NUMERATORS;  \n sub @NUMERATORS @NUMERALS' by @NUMERATORS;\n\n# Replaces numerals after the slash  \n sub fraction @NUMERALS' by @DENOMINATORS;  \n sub @DENOMINATORS @NUMERALS' by @DENOMINATORS;  \n} frac;\n\n"
+    },
+    {
+      "time": "",
+      "content": "Here's what I \"figured\" out.\n\nsub @FIGURES' slash @FIGURES by @numr;  \n sub @FIGURES' @FIGURES slash by @numr;  \n sub @FIGURES' @FIGURES @FIGURES slash by @numr;  \n sub @numr slash @FIGURES' by @dnom;  \n sub @dnom @FIGURES' by @dnom;  \n sub slash by fraction;\n\nGives up to three numerators (all you need in a non-math font) and infinite denominators.\n\nWorks fine in InDesign, Illustrator, and Photoshop.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"What would really ideal is if the numbers in the string would remain as full-size numbers UNTIL the slash/fraction character is input, \"\n\nOut of curiosity, why would this be ideal?\n\n—K\n\n"
+    },
+    {
+      "time": "",
+      "content": "I am curious too. Better 'user experience'?\n\nMind that currently 'frac' is supposed to be applied to the relevant fraction string, not to entire paragraphs. In so far, there's no real advantage of a slash-backward approach. Only the already mentioned disadvantage that the number of possible numerator digits is limited.\n\n(Miguel, it looks like this will switch to numerators only if there are <cite>at least</cite> four digits before the slash; and if there are more, <cite>only</cite> the four digits directly before the slash will become numerators.)\n\nKarsten\n\n"
+    },
+    {
+      "time": "",
+      "content": "_’frac’ is supposed to be applied to the relevant fraction string,_\n\nHowever, with James' slash-backward stipulation, it can be built in to a style sheet and applied to whole stories.\n\nThus, numbers composed of whole integers, such as dates, money, page number references, etc., will remain \"non-numeratored\", and only \" integer+(figure-slash-figure fraction)\" will require individual attention, which is the way it is supposed to be now anyway.\n\nIn North American newspapers and magazines, for instance, this would work for baseball reports, which are full of statistics, and the only text requiring manual adjustment would be \"pitched 5 1/3 innings\", where the fraction feature would have to be de-selected for the \"5\". Even there, inserting a hair space between integer and fraction (as certain Typophilers are wont) does away with the need to edit the feature setting.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I have a client (cooking mag) who wants to have the fraction feature applied to whole paragraphs and only have the fractions render where they need to render, instead of having to apply the feature on a spot by spot basis.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> _Miguel, it looks like this will switch to numerators only if there are at least four digits before the slash_\n\nYou're right, thanks for pointing it out. That's what happens when I try to be fast and concise with the code and don't give it enough testing.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I understand. For a particular client who knows about possible limitations this may be ok. Couldn't you check some text samples with them: for recipes maybe you can limit fractions to one numeral before the fraction-slash; I think what's needed is simple things like 1/8, 1/16 etc. Then they need not care for 1 1/2 -- though typographically Nick's hair/thin space solution is even better.\n\nExtending Nick's example, you could add a bit more contextuality and move it into a separate lookup:\n\nfeature frac {\n\n&nbsp;&nbsp;&nbsp;&nbsp;# first step, substitute slash with fraction,  \n&nbsp;&nbsp;&nbsp;&nbsp;# but only if it's inbetween two numerals,  \n&nbsp;&nbsp;&nbsp;&nbsp;# and if it's not a date:  \n&nbsp;&nbsp;&nbsp;&nbsp;lookup step1 {  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignore sub slash' @NUMERALS @NUMERALS slash; # exclude 2/12/07  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignore sub slash @NUMERALS @NUMERALS slash'; # exclude 2/12/07  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignore sub slash' @NUMERALS slash; # exclude 9/1/2007  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ignore sub slash @NUMERALS slash'; # exclude 9/1/2007  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub @NUMERALS slash' @NUMERALS by fraction;  \n&nbsp;&nbsp;&nbsp;&nbsp;} step1;\n\n&nbsp;&nbsp;&nbsp;&nbsp;# only then substitute numerators/denominators:  \n&nbsp;&nbsp;&nbsp;&nbsp;lookup step2 {  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# below I omit the additional contextuality given in Nick's example  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# since we cared for these contexts in lookup \"step1\" already:  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# (A)  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# only one numerator digit:  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub @NUMERALS' fraction by @NUMERATORS;  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# (B)  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub [fraction @DENOMINATORS] @NUMERALS' by @DENOMINATORS;  \n&nbsp;&nbsp;&nbsp;&nbsp;} step2;\n\n} frac;\n\n(A) If you want to allow for two numerators (but then the typographer definitely has to use hair/fine spaces in some cases), you add one line:  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub @NUMERALS' @NUMERALS fraction by @NUMERATORS;\n\n(B) If you want to restrict the number of denominators to two, the last line should look like this:  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub [@NUMERATORS fraction] [fraction @DENOMINATORS] @NUMERALS' by @DENOMINATORS;\n\nSame caveat as for Miguel's example [I like the idea: frame numerator-fraction, then substitute the other numerators inbetween!].  \nThe more specific a feature gets, the harder it is to anticipate cases in which it shall NOT be applied. A feature only sees a glyph sequences but not their meaning.\n\nSorry for another long post.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Good point about dates Karsten, I hadn't considered that.  \nNice work!\n\nBTW, for the Hair Space in InDesign, it's: Type \\> Insert White Space \\> Hair Space, or Option-Shift-Command-I (Mac).\n\n"
+    },
+    {
+      "time": "",
+      "content": "I had a brief e-mail conversation with Tal Leming a couple months ago about just this sort of thing. Even though the OT spec recommends that {frac} be applied only on an as-needed basis to a limited string, I felt that there were plenty of occasions where it would be more desirable to be able to apply it globally and then manually turn off only the few exceptions. James's cookbook scenario is just the sort of thing I had in mind. Tal's trial solution was similar to the one Nick put forward.\n\nIn addition, the thing I brought up to Tal (and something which is implied by Nick's 5 1/3 example) is that editors will naturally input a space to separate integers and their related fractions, whereas in typesetting, you generally don't want an intervening space. Deleting those spaces manually is a tedious layout task. To eliminate the need for manual adjustment, Tal devised a substitution that replaced a space that follows a figure and precedes a numerator with a special \"fraction space\".\n\nI'd have to go back and find the e-mails to recall the exact code. This was just a theoretical exercise, since I didn't have a specific font or client in mind -- only a common situation that I'd run into many times that I thought might be solvable. I haven't had occasion to fully test Tal's sample code or implement it.\n\nBut the \"fraction space\" issue is actually separate from the \"global fractions\" issue and I think worth considering as an inclusion in a more conventional {frac} implementation, so that a designer could include the leading space when applying the {frac} feature in the standard manner, thereby eliminating the space in typeset presentation, but leaving it in the underlying text encoding, so that if the material gets repurposed into another format (one without proper fractions) the intervening space remains to indicate the difference between eg. 1 5/16 and 15/16.\n\n-- K.\n\n"
+    },
+    {
+      "time": "",
+      "content": "As you say, typing the space-between makes sense editorially, as it distinguishes between 1 1/16 and 11/16 etc.\n\nEven if that is not a universal practice, it doesn't hurt to make the transition from manuscript fractions to typographic fractions an automatic, in-font OT feature, except that...\n\n...if the OpenType solution mentioned here is not universally applied to fonts, there will be problems changing fonts. Suppose you have a document set in a font which automatically removes the space-between, and switch to one that doesn't -- the typographer/editor/proofreader will have to be really on the ball to catch the few instances in text, in say a cookbook, where the space jumps back in.\n\nTherefore I would say this technique should only be used in proprietary fonts, not retail fonts.\n\n\\*\\*\n\nAnother treatment of the space-between has been mentioned by CharlesE in this forum -- I recall he reworks fonts to add kerning between integers and numerators, and that's something I'm starting to put in fonts.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, you could either substitute the space between numeral and numerator, maybe even taking into account a fraction following the numerator(s) -- which however blows up the feature code for just a little effect.  \nOr, you could solve this by positioning and reduce the space's advance width. The contextual rule would have to be the same as the one used for substitution.\n\nRegardless of the implementation, this may be considered a border case. Is this still kerning, i.e. a spacing correction, to be applied by default? Or does it belong to what I call \"typographic spacing\" which also includes adding space before colon, semicolon, exclamation and question mark, etc? This then would be optional and be covered in a different feature than \"kern\".\n\n"
+    },
+    {
+      "time": "",
+      "content": "In my experience, manuscripts from different clients come in with various formatting. The usual way we get fractions in a MS is closed up to the number, frequently coded. I imagine we do a lot of things differently from some users; we strip most all coding out of the typescript (MS), and we recode or put in a lot of InDesign tags with EditPad Pro -- including the code for fractions. The reason is that most manuscripts coming in via Word are a jumble of general styles and direct formatting; best to get rid of it & start over.\n\nWe also don't concern ourselves about anyone trying to recover text from a PDF; instead, the assumption is that any \"repurposing\" will be done via exported & reworked XML files.\n\nMore to the point, it is hard for the type designer to know just how the font will be used; to cover all bases, a lot of features would have to be written. One of my pet grumbles -- how can a type designer know just how the font will be used? Traditionally, it is the users of type who make these decisions.\n\n"
+    },
+    {
+      "time": "",
+      "content": "In InDesign we ran into this issue fairly early because the first OpenType fonts at Adobe with 'frac' just had a simple ligature-like substitution for the basic fractions which could be applied globally. Later, after it was decided to switch to a more generic implementation in the fonts there was a fear that some documents would be set with 'frac' applied this way (like a cookbook). We talked about trying to be more intelligent about applying 'frac' selectively under the hood, but decided we didn't want to start second-guessing when & where to apply OpenType features. Fortunately, back then we had a much smaller user base. Similar issues existed with the 'ordn' feature, at least in earlier font implementations.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I highly recommend reading Tal Leming's [take on automatic fractions](http://web.archive.org/web/20100224212223/http:/talleming.com/2008/04/16/fraction-fever/).\n\n"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "52033",
+  "title": "Puzzling problem with CALT feature in VOLT",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi,  \nI am currently building an arabic font with a number of contextual alternates lookups.  \nIn some of the lookups, I use groups as substitution targets and/or context.\n\nAll my lookups and groups seem to follow the appropriate syntax; the font compiles just fine.  \nHowever the “substitution behaviour” of those lookups which use groups (instead of a list of individual substitutions) is completely erratic. Per ex, in a lookup where I have:\n\n\\< Group1a \\> -\\> \\< Group1b \\> in the context of being followed by \\< Group99 \\>\n\nin which the elements of Group1a are: A and B (in that order)  \nthe elements of Group1b are: A.alt and B.alt (in that order)\n\nWe would normally expect A to be replaced with A.alt and B with B.alt\n\nHowever it is not what is happening. Instead, A is replaced with B.alt and B is replaced with A.alt.  \nIt is not simply an inversion [which itself would also be puzzling]; with larger groups, elements A, B, C, D are replaced randomly (ex: A by C.alt, B by A.alt, C by D.alt, D by B.alt)\n\nThe randomness does not come from the glyph order in the classes. The glyphs in each respective class are enumerated to match the position of the substitute glyph in the other class. In the vtl and vtg files:\n\nDEF\\_GROUP “Group1a”  \n ENUM GLYPH “A” GLYPH “B” END\\_ENUM  \nEND\\_GROUP  \nEND\n\n—\n\nDEF\\_GROUP “Group1b”  \n ENUM GLYPH “A.alt” GLYPH “B.alt” END\\_ENUM  \nEND\\_GROUP  \nEND\n\n—\n\nDEF\\_LOOKUP “Calt01” PROCESS\\_BASE SKIP\\_MARKS DIRECTION RTL [#this is an arabic script font]  \nIN\\_CONTEXT  \n RIGHT GROUP “Group99”  \nEND\\_CONTEXT  \nAS\\_SUBSTITUTION  \nSUB GROUP “Group1a”  \nWITH GROUP “Group1b”  \nEND\\_SUB  \nEND\\_SUBSTITUTION  \nEND\n\n——-\n\nThe random substitution happens for a given lookup even when I delete all the other substitution lookups to make sure there is no unforeseen “interference” or problem of substitution order/sequence.\n\nClearly if this is not working I must be doing something wrong, but I’ve checked again and again, notably by comparing with “Arabtype.volt.ttf”, and I can’t find where I’m erring.\n\nAn inelegant way around this would be of course to explicitely enumerate each ’glyph to glyph’ substitution individually (and it does work that way for the few lookups I’ve converted) but using groups \\*should\\* work and there are lookups which contain 30+ glyphs to substitute in the context of 6+ glyphs so I would not want to have to enumerate each combination individually.\n\nAny help would be much appreciated! Thanks,  \nPatrick\n\n [‹ Does Indesign CS4 support Indic scripts?](http://web.archive.org/web/20081208063856/http:/typophile.com/node/49832 \"Go to previous forum topic\") [Kerning/Metrics settings not saving to font file (Fontographer 4.7 Issue) ›](http://web.archive.org/web/20081208063856/http:/typophile.com/node/52025 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081208063856/http://typophile.com/user/4579\" title=\"View user profile.\">giasson</a>",
+  "time": "<br>",
+  "uid": "4579",
+  "comments": [
+    {
+      "time": " 24.Nov.2008 4.10pm",
+      "content": "The [VOLT Release Notes](http://web.archive.org/web/20081208063856/http:/www.microsoft.com/typography/VOLT%20Release%20Notes/gsub.mspx) (bottom of the page) say:\n\n<cite>NOTE: Glyphs in groups are always ordered by their glyph IDs and not by the order implied from the way a group is described.</cite>\n\nSo what matters is not the order of glyph names in group definitions, but the order of glyphs in the font. The glyph order should be <cite>A B C ...</cite> and <cite>A.alt B.alt C.alt ...</cite>\n\nKarsten\n\n"
+    },
+    {
+      "time": " 24.Nov.2008 9.38pm",
+      "content": "Yes, Karsten has it right: the GID orders of the two groups need to be cardinal. This limits the use of groups in substitution lookups. Generally, I recommend against the use of groups in this way anyway, since it doesn’t provide any visual feedback on the substitutions in the lookup.\n\n"
+    },
+    {
+      "time": " 25.Nov.2008 2.27am",
+      "content": "D’oh!\n\nThank you very much Karsten and John for your help\n\nPatrick\n\n"
+    }
+  ]
+}

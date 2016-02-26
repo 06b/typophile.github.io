@@ -1,0 +1,54 @@
+{
+  "id": "20052",
+  "title": "FL 5 Kerning classes not applying when exported",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi,\n\nI have reached the final stage in a type design project  \nfor my degree and I seem to have encountered a problem with my kerning pairs.\n\nFL 5 seems to be ignoring my kerning classes and the values in  \nmy (metrics) kerning mode window and using the basic metric set for kerning etc.  \nWhen I quicktest the typeface within FL it uses the kerning settings, but not when exported!?\n\nHas anyone encountered this problem before? I thought it might be an exporting preference that I have not selected but I think I have tried nearly everything.\n\nAny Ideas,\n\nMD\n\n",
+  "author": "mdsey",
+  "time": "19 May 2006 — 8:18am",
+  "uid": "12974",
+  "comments": [
+    {
+      "time": "19 May 2006 — 1:32pm",
+      "content": "I am not sure what you mean -- does the FLS5 Metrics Panel (if in Kerning mode) not show any kerning values, or does the font which you generated not use kerning which you defined? Which font format are you generating, PST1 or TTF or OTF? If kerning is not recognized in an application using the font generated, which application is it?\n\nIf it is the generated font only that ignores your kerning, then you might check the FLS5 Preferences(Mac)/Options(Win), last point \"kerning\" in the section for OpenType export (left column), therein the bottom option (something like: \"generate/rebuild kern feature?\") -- this should be checked.  \nAlternatively, you can use the Kerning Assistance and \"update kern feature\" manually.\n\nSorry that this is more questions rather than answers ...\n\n"
+    },
+    {
+      "time": "19 May 2006 — 2:07pm",
+      "content": "Thanks for your interest. My problem is that my generated font, which I have tried exporting in TTF, OTF and PS T1 is not recognising my kerning values when exported and tested in Indesign & Illustrator CS2.\n\nThanks for your suggestions, I will try them now and get back.\n\nMD\n\n"
+    },
+    {
+      "time": "19 May 2006 — 2:32pm",
+      "content": "Went through preferences and ticked and unticked 'generate kern feature'. 'Generating All' both times, but no luck either when exported as ttf or otf.\n\nCould I possibly have too many kerning pairs? I have noticed that in my Metrics window/ Kerning mode I have a fourth line called 'K', which has a value of -31. I presume 'K' is Kerning but the number is highlighted in blue? Is this number inncorrect or conflicting with metrics?\n\nMD\n\n"
+    },
+    {
+      "time": "19 May 2006 — 4:11pm",
+      "content": "Blue means negative kerning, which should occur in pairs like AV, for example.\n\nThat value of -31 is for which pair? If the font is correctly generated, you should be able to see that value in InDesign's Character panel, when you place the caret between the letters that constitute the pair.\n\n"
+    },
+    {
+      "time": "19 May 2006 — 4:45pm",
+      "content": "I see. Hm, have you looked into the OpenType Panel -- is there a feature \"kern\" listed? If you compile features and type in a pair of which you know it is kerned -- is kerning applied here?\n\n"
+    },
+    {
+      "time": "20 May 2006 — 2:56am",
+      "content": "There seems to be alot of negative kerning in my pairs, a FL novice's error! ...I have now ammended. When I exported the typeface in .ttf format, the pairs which now have posititve values were kerned just as I had set in FL. hurray!! -31 was for lwr case 'av' kerning pair.\n\nDoes this mean that negatively kerned pairs will not export within the typeface? or Is it a matter of balancing the 'set' width of characters within the 'metrics mode', with kerning data in 'kerning mode' to achieve negative kerning? How would you negative kern?\n\nIn my 'Opentype panel' the kerning feature is there and all my pairs are also. Negative and positive, alot of negatives as I have said. I presume this was my problem?\n\nWhat would be your advise for setting width in metric mode? For example would you just set metrics to character width, left and right and leave all spacing between characters to kerning mode?\n\nA million questions, I know!  \nThanks for your help.\n\nMD\n\n"
+    },
+    {
+      "time": "20 May 2006 — 5:19am",
+      "content": "It should not matter if kerning values are positive or negative. If they are in the kern feature, they should go into the font and be recognized by Adobe apps.  \n(If you make PS-flavored OTFs, in \"Options/Preferences\"--\"Generating OpenType & TrueType\"--\"Kerning\", you should only mark \"Generate OpenType kern feature &c\". In the first section \"Generating OpenType & TrueType\", bottom part, \"Export OpenType Layout tables\", \"Compare feature definitions\" and \"Generate GDEF table\" should be on.)\n\nUsing classes may help you keep the number of kerning pairs smaller. In the middle of [this thread](http://web.archive.org/web/20140714105222/http:/typophile.com/node/18452), there was a bit more about kerning and classes.\n\nHow do you space/kern your font? Normally, letterspacing should be done in metric mode entirely, by adjusting the spaces to the left and right side of each glyph. (This is still the old metal type model.) And only if this resulted in good letterspacing, then you switch to kerning mode and refine individual critical pairs, say, VA AV &c. But this should be the very last step, and not affect too many pairs (at least in theory), if you don't want to get crazy!&nbsp;&nbsp;;-)\n\nKarsten\n\n"
+    },
+    {
+      "time": "20 May 2006 — 5:43am",
+      "content": "My error was that I understood the Kerning mode to be the main tool from which to set letter spacing whereas I had only set character width in metric mode. I have been able to export a ttf with my kerning intact, however it entailed correcting the negative kerning?\n\nI have made some changes to the glyphs since so this forced me into changing the metrics to a closer finished spacing, so a fresh start with some pairs seemed to be the only remedy.\n\nCareful refining in kerning mode will resume in a while.\n\nThanks for your help.  \n(ps I might be back)\n\nMD\n\n"
+    },
+    {
+      "time": "30 May 2006 — 8:42am",
+      "content": "I am customizing Garamond Premier Pro for a customer by adding several new glyphs (mostly underdot characters) using FL 502. There have been several issues with the kerning and small caps feature in the custom font.\n\nMy export settings are good according to earlier items in this thread.  \nThe program will generate an OTF-ps font with the additional glyphs, but it retains only it's original OpenType tables and features.\n\nMy 1st concern is working through the kerning issues.  \nI have several problems with it working as it should.\n\nI have assigned the new glyphs to FL's kerning classes (e.g. the cap underdot T is in the same kerning class as cap T with cap T being the parent or key glyph of the kerning class).  \nWhen I enter the metrics window the kerning pair values are visible in the kerning fields for the original glyphs (cap T and lower case a for instance) but not for the new glyphs until I actually click into or activate the kerning field.  \nHave others seen this behavior?\n\nFontLab support has been reasonably responsive and advised me to subtable the kerning feature (a very tedious process in a font with 10,000 plus kerning pairs?). My most recent query to them said:  \n\"I am having issues with subtabling the kerning feature\"  \nTheir response was:  \nThis is a known problem with no easy fix. It's a problem (flaw in design) of the OpenType font format.  \nDo others concur with this statement?\n\nIf I try to recompile the OT Tables after updating the kerning feature I get an error like: [FATAL] GPOS feature 'kern' causes overflow of offset to a subtable (0x2c226).  \nEach time I manually add a new subtable to the kern feature (by keying in \"subtable;\" between 2 lines in the FL's OpenType panel) the subtable number in the error changes.  \n(And again, the new glyphs are not part of the updated kerning tables unless I have manually activated them in the Metrics window.)\n\nCan someone offer me some guidelines to subtabling? other than Adobe's and Microsoft's suggestions to \"divide the class in half with a subtable command\" until it compiles succesfully.\n\n"
+    },
+    {
+      "time": "1 Jun 2006 — 6:50pm",
+      "content": "\\> _Do others concur with this statement?_\n\nYes. Each GPOS table has to be below 64K, otherwise you get that overflow error.\n\nEvery time you use “subtable;” you're creating a new GPOS table. The downside effect of creating a new table is that classes that are only present in one of the tables, can't be kerned with classes in other tables.\n\nWhat you could try to do is to _save table space_. This can be achieved by decomposing any class-class entries into single pairs `pos`, when both classes are constituted by only one character/glyph. Example: Lets say you have the following classes\n\n`_x_left: x'\n_q_right: q'`\n\nand that you kerned 'x' with 'q' by '-10'. When you hit \"Update [kern] feature\", FontLab will generate the following entry\n\n`pos @_x_left @_q_right -10;`\n\nSince this is expressed as class-class, it is starting to eat up some of the \"precious\" 64K without being really necessary, since you can express that pair simply as\n\n`pos x q -10;`\n\nand place it at the top of the `kern` feature, before class-class entries.  \nUnfortunately, FontLab won't do this for you, so you either have to do it by-hand, or write a smart Python macro.\n\nBTW, the original Garamond Premier Pro `kern` feature only makes use of `subtable;` twice. This avoids table overflow, and puts classes from different scripts in separated tables.\n\n[Edit: Some developer resources below]  \n [The Glyph Positioning Table](http://web.archive.org/web/20140714105222/http:/partners.adobe.com/public/developer/opentype/index_table_formats2.html#PP), aka [GPOS](http://web.archive.org/web/20140714105222/http:/typophile.com/wiki/GPOS)  \n [The 'kern' feature](http://web.archive.org/web/20140714105222/http:/partners.adobe.com/public/developer/opentype/index_tag7.html#kern) (not to be confused with [The Kerning Table](http://web.archive.org/web/20140714105222/http:/partners.adobe.com/public/developer/opentype/index_kern.html))  \n [GPOS rules/syntax](http://web.archive.org/web/20140714105222/http:/partners.adobe.com/public/developer/opentype/afdko/topic_feature_file_syntax.html#6)\n\n"
+    }
+  ]
+}

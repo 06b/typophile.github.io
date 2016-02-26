@@ -1,0 +1,22 @@
+{
+  "id": "56170",
+  "title": "In Point BCPs",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi,  \nI'm reviewing a font with a lot of styles and I have to remove In Point BCPs. I don't want to apply the Remove Overlap action to the entire font because I don't know what FontLab could do (I really want to be sure of every single action working with FL). Anybody know a script that recognizes glyphs with such problems so that I could work on them directly? Or something that solves the problem only where it is necessary?\n\nBest,\n\nMichele\n\n",
+  "author": "<a href=\"/web/20100203162707/http://typophile.com/user/23212\" title=\"View user profile.\">Michele Patanè</a>",
+  "time": "<br>",
+  "uid": "23212",
+  "comments": [
+    {
+      "time": "",
+      "content": "Hi Michele,  \nthis uses RoboFab and calls a \"Merge Contour\" command to _clean_ the glyph.  \nOptionally the script can color the glyph instead of calling the Merge Contour so you can edit the contour by yourself.  \n`\n#FLM: Sanitize BCP\n# scriptype - Paolo Mazzetti - 2009\nfrom robofab.world import CurrentGlyph\nfrom FL import *`\n\ng = CurrentGlyph()  \nfor contour in g:  \n try:  \n for p in contour.bPoints:  \n if p.bcpIn == p.bcpOut and p.bcpIn == (0,0):  \n fl.CallCommand(fl\\_cmd.ActionRemoveOverlap)  \n #g.mark = 1  \n except:  \n pass  \ng.update()\n\n(Indentation won't probably make it)  \nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "The AFDKO tool \"spot\" can do this, I think. Maybe Miguel will comment.\n\n"
+    }
+  ]
+}

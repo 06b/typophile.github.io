@@ -1,0 +1,18 @@
+{
+  "id": "114168",
+  "title": "Mapping of AZERTY keyboard",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I recently received a request for customization of an existing font by adding a logotype to the font. The end user is French and uses the AZERTY keyboard layout.\n\nI checked with the user about placing the logo in the mu slot, and he said that would work for him. My question is, will placing the logo in the mu position in a 1252 codepage set-up achieve the results I am after, or does the mu character need to be placed elsewhere?\n\n",
+  "author": "oldnick",
+  "time": "13 Feb 2014 — 8:30am",
+  "uid": "6470",
+  "comments": [
+    {
+      "time": "13 Feb 2014 — 7:32pm",
+      "content": "Except for the fact that the French keyboard layout has a mu character, the fact that it's an AZERTY layout is not an issue: i.e. characters in fonts aren't accessed by keyboard scan code. (If they were, you'd have to put A in the Q position, and Z in the W position.)\n\nNow, what happens when a user types a \"mu\" on such a keyboard?\n\nU+00B5 is the position in official Unicode; it is _not_ one of the unofficial Windows characters which were in the positions of the control characters from U+0080 to U+009F. You definitely do not use U+03BC, the position of the regular Greek letter mu, because that key will generate the \"micro\" symbol, not that letter.\n\n"
+    }
+  ]
+}

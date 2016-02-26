@@ -1,0 +1,46 @@
+{
+  "id": "57013",
+  "title": "Urdu features",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Sorry for cross-posting, I posted this on the Fontlab forum yesterday but didn't get any response so I thought I'd try here.\n\nI'm fairly new to the details of OpenType, and I wonder if anyone here can help me. Just a quick intro to get some context for the question: Urdu traditionally uses a very complex variant of Arabic script called ' [Nastaleeq](http://web.archive.org/web/20120424143322/http:/typophile.com/wiki/Nastaliq)' (or any number of alternative spellings!) where words are written sloping downwards from right-to-left, so initial characters are small and high-up, with final characters big and swirly at the bottom. This makes it hard to specify technically, and there is no Unicode standard for the process AFAIK.\n\nWe've got a couple of Urdu fonts here, one of which uses an enormous number of ligatures (about 10,000 of them), another of which uses more standard Arabic joining rules, but with far more variants of each character. What I'm trying to do is find where in the font the information is stored for these two processes. Bringing the fonts into FontLab Studio, the features tables aren't terribly helpful - here's a sample from rlig:\n\nlookup rlig54 {  \n} rlig54;\n\nAm I looking in the right place? The fonts work great in Word, so the features must be working correctly.\n\nIn case it helps, the two fonts are Jamil Noori Nastaleeq and Nafees Nastaleeq\n\nThanks for any advice\n\n",
+  "author": "Hobnob",
+  "time": "15 Apr 2009 — 2:08am",
+  "uid": "43760",
+  "comments": [
+    {
+      "time": "15 Apr 2009 — 4:36am",
+      "content": "FontLab is not a good choice for examining Arabic fonts, as it lacks all support for contextual alternates.\n\nTry DTL's OTMaster -- even the free Light version [(download)](http://web.archive.org/web/20120424143322/http:/www.fonttools.org/) is able to display the tables. It's not as readable as Adobe's OpenType script notation, but then again, that does not support context alternates either.\n\nWhich makes some sense, as FontLab is built around Adobe's font tools. Arabic fonts get their smarts from Microsoft's VOLT tool (reportedly, even Adobe's fonts).\n\nOTMaster displays the OT information in a rough-and-ready format, which means you will have to know everything about OpenType substitutions. I will not even mention which of the many, many tables you must inspect, because if you don't know, you won't know what you are looking it.\n\n"
+    },
+    {
+      "time": "15 Apr 2009 — 6:44am",
+      "content": "Danny if you are doing this for research purposes, I should mention the Tasmeem system [http://www.winsoft-international.com/en/products/tasmeem.html](http://web.archive.org/web/20120424143322/http:/www.winsoft-international.com/en/products/tasmeem.html). I believe Thomas Milo et al are working on a Nastaliq for this system. Here is Titus Nemeth's primer on the system [http://sehstoerung.sonance.net/pdfs/T\\_Nemeth%20-%20A%20primer%20for%20Arabic%20Typeface%20Design\\_web.pdf](http://web.archive.org/web/20120424143322/http:/sehstoerung.sonance.net/pdfs/T_Nemeth%20-%20A%20primer%20for%20Arabic%20Typeface%20Design_web.pdf)\n\n"
+    },
+    {
+      "time": "26 Apr 2009 — 1:18pm",
+      "content": "The Adobe FDK for OpenType syntax that is used in FontLab Studio is good for developing new features but it is not ideal for representing a \"dump\" of the features taken from the final font. Indeed, [DTL OTMaster](http://web.archive.org/web/20120424143322/http:/www.fontmaster.nl/english/OTMaster_rdrct.html) or the free FontTools/TTX (which is bundled with [Adobe FDK for OpenType](http://web.archive.org/web/20120424143322/http:/www.adobe.com/devnet/opentype/afdko/) and [available separately](http://web.archive.org/web/20120424143322/http:/fonttools.sourceforge.net/)) are much better tools to look at how the features are defined. OTMaster provides a graphical representation while FontTools/TTX creates XML text dumps which can be viewed in any text editor.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "9 Aug 2009 — 1:31am",
+      "content": "Hi Danny,\n\nWe just completed a new nastaliq typeface. It's based on Persian, but supports the whole Arabic block in Unicode. It was designed for Urdu and to get the Pakistani \"flavour\" rather than the Persian one, we provide a series of typographic parameters in the Tasmeem interface.\n\nBTW, allow me to put you straight when you write: \"Urdu traditionally uses a very complex variant of Arabic script called ’Nastaleeq’\".\n\nNastaliq is outrageously complicated if you are forced to reproduce with 15th century typesetting concepts, without an analysis of the internal logic of historical Arabic scripts, an aspect that I call \"script grammar\". That would be analogous to cloning the hand-held calculator without even suspecting that there is math involved - something that would require a massive data base with at least the outcome of all common supermarket additions and still miss the point of what calculating entails.\n\nThink again: how could nastaliq be \"very complex\" and at the same time be the script of choice for the majority (population wise) of the Arabic-scripted world, and why would there be a massive demand to adapt it for computer use?\n\nThe truth is, that nastaliq or naskh-i taʿlīq (slanted naskh - naskh _italic_) is an extreme simplification of traditional, pre-typographic naskh. Efficient and elegant at the same time. It took us 300 glyphs to cover nastaliq.\n\nAs a boon, for the same text well-constructed nastaliq needs only a fraction of the length required by ordinary computer typefaces of comparable size, allowing for generous line spacing to lend it elegance and legibility.\n\nWe were not the first to discover the straightforward simplicity of nastaliq. The first realistic Arabic typesetting - as opposed to the uninformed caricatures produced in the West and the competent, but failing experiments in the East - was based on _ta'lîk_ (taʿlīq), the Ottoman variant of nastaliq (see image, 1840's, attributed to Ohanis Mühendisoğlu). It dates from the second quarter of the 19th century and it appeared about a quarter of a century before a comparable quality of naskh typography was attained.\n\nThomas Milo  \nDecoType  \nwww.decotype.com\n\n ![](http://web.archive.org/web/20120424143322im_/http:/typophile.com/files/Ottoman_Taliq_Typography_close-up_5876.jpg)\n\n ![](http://web.archive.org/web/20120424143322im_/http:/typophile.com/files/Pre_muhendisyan_detail_6124.gif)\n\n"
+    },
+    {
+      "time": "9 Aug 2009 — 1:46am",
+      "content": "As a comparison I am adding a piece of competent naskh typesetting from the same period. It struggles to implement all script rules, but fails technically.\n\nThomas Milo  \nDecoType  \n [www.decotype.com](http://web.archive.org/web/20120424143322/http:/www.decotype.com/ \"www.decotype.com\")\n\n ![](http://web.archive.org/web/20120424143322im_/http:/typophile.com/files/Pre-Muhendisyan_compressed_4536.jpg)\n\n"
+    },
+    {
+      "time": "9 Aug 2009 — 2:57am",
+      "content": "More material for comparison: the first mature naskh typography - in shape, script grammar and technical realization, again by Ohanis Mühendisoğlu: 1865 (a quarter of a century after his nastaliq/ta`liq typeface). As fully-blown naskh typography this quality set the standard and has never been surpassed.\n\nThomas Milo  \nDecoType  \nwww.decotype.com\n\n ![](http://web.archive.org/web/20120424143322im_/http:/typophile.com/files/Muhendisyan_detail_5268.gif)\n\n"
+    },
+    {
+      "time": "9 Aug 2009 — 4:55am",
+      "content": "One final illustration showing how much more efficient nastaliq is in terms of surface use. Please note that the so-called complex forms in fact enhance legibility: they are much more distinct than the monotonous repetitive shapes of the western simplified approach. It is also interesting to observe that the nastaliq tradition has proven to resistant to alien simplification attempts.\n\nIn the illustration the nastaliq line is green. It is remarkably shorter than any of the other typefaces, all set in the same size.\n\nThomas Milo  \nDecoType  \n [www.decotype.com](http://web.archive.org/web/20120424143322/http:/www.decotype.com/ \"www.decotype.com\")\n\n[www.decotype.com/Tasmeem/UDHR\\_Samples\\_3.pdf](http://web.archive.org/web/20120424143322/http:/www.decotype.com/Tasmeem/UDHR_Samples_3.pdf \"www.decotype.com/Tasmeem/UDHR\\_Samples\\_3.pdf\")\n\n ![](http://web.archive.org/web/20120424143322im_/http:/typophile.com/files/UDHR_Samples_3-9_4388.gif)\n\n"
+    },
+    {
+      "time": "10 Aug 2009 — 10:56pm",
+      "content": "One final observation:\n\nThe idea that Urdu script is \"very complex\" is analogous to the idea that Nastaleeq has \"any number of alternative spellings\".\n\nThe preferred Arabic script variety by Pakistani's (whether they write Urdu, Pashtu, Panjabi or Kasmiri) has only ONE spelling:\n\nنستعلیق\n\n:-)\n\nThomas Milo  \nDecoType  \n [www.decotype.com](http://web.archive.org/web/20120424143322/http:/www.decotype.com/ \"www.decotype.com\")\n\n"
+    }
+  ]
+}

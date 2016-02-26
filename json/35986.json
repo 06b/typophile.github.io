@@ -1,0 +1,18 @@
+{
+  "id": "35986",
+  "title": "Problem with substituting glyph groups in VOLT",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hello there,  \nIn VOLT, I try to add a substitution lookup which is supposed to substitute the glyphs of one group by those of another. However, it doesn’t replace, let’s say, the nth glyph of one with the nth glyph of the other, although the order of the glyph groups is right. Everything gets scrambled when it gets through this particular lookup. Any ideas?\n\n [‹ problem: Word 2007 + Hebrew](http://web.archive.org/web/20080705153201/http:/www.typophile.com/node/35625 \"Go to previous forum topic\") [Letter drawings with lines along the curves ›](http://web.archive.org/web/20080705153201/http:/www.typophile.com/node/35982 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080705153201/http://www.typophile.com/user/19313\" title=\"View user profile.\">typotype</a>",
+  "time": "<br>",
+  "uid": "19313",
+  "comments": [
+    {
+      "time": " 10.Aug.2007 7.27am",
+      "content": "When you’re substituting one group for another, the glyphs of both groups must be in the same relative order within the font’s _glyph palette_, **not** just the group definition\\*.\n\nFor example, let’s say you want to substitute superiors for lining digits. Your lining digits ’zero’ through ’nine’ occupy glyphs 24 through 33. Your superiors must be at glyph _n_ through _n + 9_. So if the ’zerosuperior’ is at glyph 140, ’ninesuperior’ should be at glyph 149 and the other superiors in sequence between the two. If there are gaps or inconsistent ordering in either the “to” or “from” groups, you will get strange results as you describe (for example if you have ’onesuperior’ at glyph 141, ’twosuperior’ at glyph 150, etc.).\n\n[\\* (VOLT Release Notes)](http://web.archive.org/web/20080705153201/http:/www.microsoft.com/typography/VOLT%20Release%20Notes/gsub.mspx#groups)\n\n"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "id": "61991",
+  "title": "Type designers, do your font licenses allow iTunes LP embedding?",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "Who saw this coming? ;-)\n\n[http://jayrobinson.org/2009/09/11/some-notes-on-itunes-lp/](http://web.archive.org/web/20100131021335/http:/jayrobinson.org/2009/09/11/some-notes-on-itunes-lp/ \"http://jayrobinson.org/2009/09/11/some-notes-on-itunes-lp/\")\n\nScroll down to \"WebKit and iTunes LP Internal Structure\"\n\n<cite>The iTunes LP experience is accomplished with HTML 4.01, CSS and JS. The interface feels very Flash-like, but there is no trace of it. The CSS animations are elaborate and smooth. Font files are referenced with an @font-face declaration in the CSS but there seems to be little to no use. Most text, even long passages of lyrics, is represented visually with a PNG file. I wonder if they originally intended to use font replacement for all text, but changed their mind.</cite>\n\nFont licensing fun aside I wonder what the image-centric nature of the text does for accessibility?\n\n",
+  "author": "<a href=\"/web/20100131021335/http://typophile.com/user/1049\" title=\"View user profile.\">sii</a>",
+  "time": "<br>",
+  "uid": "1049",
+  "comments": [
+    {
+      "time": "",
+      "content": "This is fantastic! I will add it to the epar spec., thanks.\n\nDoes anyone know if and video formats allow font embedding or linking?\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "If the text isn't in the HTML at all, then the image-centric nature of it cripples accessibility.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>Does anyone know if and video formats allow font embedding or linking?\n\nYes, that the need for font embedding, streaming and compression in video is the primary reason the OpenType spec ended up being standardized by the ISO MPEG group.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I remember that now! So, are we going to have a OpenType for a web standard then?\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "For anyone who cares. Seems as if the format is being opened up - [http://www.engadget.com/2009/10/13/apple-says-itunes-lps-dont-cost-label...](http://web.archive.org/web/20100131021335/http:/www.engadget.com/2009/10/13/apple-says-itunes-lps-dont-cost-labels-10-000-will-be-availab/ \"http://www.engadget.com/2009/10/13/apple-says-itunes-lps-dont-cost-labels-10-000-will-be-availab/\") - looks like everyone's EULAs will need to rev'd to allow or deny iTunes iLP iEmbedding ;-)\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>Seems as if the format is being opened up\n\nAnd here it is...\n\n[http://www.apple.com/itunes/lp-and-extras/](http://web.archive.org/web/20100131021335/http:/www.apple.com/itunes/lp-and-extras/ \"http://www.apple.com/itunes/lp-and-extras/\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "right now the whole LP thing is lame.\n\n"
+    },
+    {
+      "time": "",
+      "content": "From Apple's \"Design Best Practices\" document:\n\n&nbsp; &nbsp; &nbsp; **Fonts and Scrollbars**\n\n&nbsp; &nbsp; &nbsp; • &nbsp; **_Don’t use Open Type._** When using fonts, use SVG fonts, which  \n&nbsp; &nbsp; &nbsp; are small, render quickly, and scale better. The fonts to be turned  \n&nbsp; &nbsp; &nbsp; into SVG fonts need to be legally cleared for use within the iTunes  \n&nbsp; &nbsp; &nbsp; LP or iTunes Extras, and should be distributed in the package as an  \n&nbsp; &nbsp; &nbsp; SVG font to restrict consumer usage of the font.\n\n&nbsp; &nbsp; &nbsp; However, it is often better to use images rather than SVG fonts.  \n&nbsp; &nbsp; &nbsp; See the next two suggestions.\n\n&nbsp; &nbsp; &nbsp; • &nbsp; **_Use buttons instead of live text for menus._** Use images for menu  \n&nbsp; &nbsp; &nbsp; buttons, instead of an SVG font. This has a couple of advantages:\n\n&nbsp; &nbsp; &nbsp; » Rendering is the same on all platforms (Mac, Windows, Apple TV).  \n&nbsp; &nbsp; &nbsp; » You have more control over spacing of text since you can use kerning  \n&nbsp; &nbsp; &nbsp; and other ways to make the text smaller or bigger, depending on how  \n&nbsp; &nbsp; &nbsp; much space the design allows.  \n&nbsp; &nbsp; &nbsp; » No potential fonts rights issue.\n\n&nbsp; &nbsp; &nbsp; • &nbsp; **_Use a JPEG for large blocks of text._** Instead of using live text from a  \n&nbsp; &nbsp; &nbsp; font for a song list or lyrics, make the list or lyrics an image.\n\n&nbsp; &nbsp; &nbsp; You have more control over sizing and spacing, which can be useful on  \n&nbsp; &nbsp; &nbsp; lyrics pages where space is limited or for long, one-line lyrics that  \n&nbsp; &nbsp; &nbsp; might not fit.\n\n&nbsp; &nbsp; &nbsp; JPEGs are smaller than fonts and compressed, so one small image gets  \n&nbsp; &nbsp; &nbsp; loaded into memory instead of larger-sized font elements.\n\n&nbsp; &nbsp; &nbsp; By putting lyrics in an image, the text can’t be copied and pasted (legal  \n&nbsp; &nbsp; &nbsp; considerations).\n\n&nbsp; &nbsp; &nbsp; Rendering is the same on all platforms.\n\n&nbsp; &nbsp; &nbsp; No fonts rights issue (if there ever would be one).\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"Use a JPEG for large blocks of text\"\n\nSeems like a big step backwards.\n\n"
+    },
+    {
+      "time": "",
+      "content": "So far I’ve only seen one iTunes LP, and the booklet was a PDF. Seemed like a much more sensible solution than all this HTML and rasterization stuff.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Kent, thanks for digging through the documents. Interesting that they suggest avoid using real fonts due to rendering issues, including cross-platform issues. Parallels to the Web, and other open systems where font rendering is left to the viewing app.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite> &gt; they suggest avoid using real fonts due to rendering issues, including cross-platform issues</cite>\n\nYes, and that if fonts are to be used, they suggest SVG. (Is there an actual SVG \\*font\\* format?) Why is it SVG can be made to render consistently, but CFF/TTF fonts can't?\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> Why is it SVG can be made to render consistently, but CFF/TTF fonts can’t?\n\nCFF/TTF fonts do render consistently (and well enough), if they are used large enough.  \nAnd my guess is that SVG fonts, (an actual web font format), will not render consistently, (or well enough) if scaled small enough.  \nThough this is pretty simple, it ain't been edyoukaded yet.\n\nCheers!\n\n"
+    }
+  ]
+}

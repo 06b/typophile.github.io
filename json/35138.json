@@ -1,0 +1,50 @@
+{
+  "id": "35138",
+  "title": "U+0192",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Over [here](http://web.archive.org/web/20150104012122/http:/typophile.com/node/9913) Paul Hunt was asking about how to deal with the Unicode unification of the hooked f and florin as a single character. This strikes me as a build issue, so I'm posting comments here.\n\nIn the general case of two possible forms for a single Unicode character you usually need to decide two things:\n\n1. Which form will be the default, i.e. which glyph will be mapped to the Unicode character directly in the cmap table.\n\n2. What method will be used access the second form, i.e. in what layout feature is it appropriate to map the non-default glyph to the default glyph?\n\nThe fhook / florin case is a troubling one, though, because there isn't an obvious answer to the second question. Personally, I think it was a really bad unification in Unicode: the florin should have been encoded separately in the currency symbol block. But it is much too late to do anything about that.\n\nI usually make a font-level distinction about this character. If a font has limited language support, e.g. it only supports the Latin 1 character set or one of its derivatives (Mac Roman, MS codepage 1252, etc.) I'll encode a florin symbol glyph a U+0192. If a font supports a wider range of languages, including languages that use the hooked f as a letter, then I'll encode a normal lowercase hooked f glyph at U+0192. The choice can be simplified like this: Does the font contain an uppercase hooked F (U+0191)? If so, then the U+0192 should be the letter not the currency symbol.\n\nIt would be possible, in the latter case, to include a special florin currency symbol glyph simply as a stylistic variant, but my inclination would be not to. The straight, lowercase hooked f is recognisable as a florin sign, and there is a risk of ending up with the wrong glyph in text where the hooked f letter is desired, which would be very bad.\n\nA more troubling aspect of the hooked f is that a regular italic f very often has a hooked descender, and is confuseable with the hooked f: _f ƒ._ So in font families that support languages that use the hooked f as a letter, you need to make a decision about how to design the normal italic f? Do you draw it without a descender? Do you draw it with a straight descender? Do you draw it with a reduced lower terminal? Or do you draw it with the hooked terminal but provide one of the other forms as a stylistic variant for use by people who need to make a distinction with the hooked f?\n\n",
+  "author": "John Hudson",
+  "time": "14 Jul 2007 — 1:40pm",
+  "uid": "1262",
+  "comments": [
+    {
+      "time": "14 Jul 2007 — 1:53pm",
+      "content": "sorry to throw you off with retracting my original post and then bumping a separate thread, &c, but thank you for giving your take, John.\n\n_Personally, I think it was a really bad unification in Unicode: the florin should have been encoded separately in the currency symbol block. But it is much too late to do anything about that._\n\nI agree and this is an unfortunate situation. Your solution is very straightforward, I had decided to make the hooked-f the default in a project i'm working on and was mostly wondering how to handle the florin, but i think the florin consideration is not that important.\n\n"
+    },
+    {
+      "time": "18 Jul 2007 — 1:41pm",
+      "content": "What about using the 'locl' (locale) OT feature to help the distinction between the two forms?\n\nT\n\n"
+    },
+    {
+      "time": "21 Jul 2007 — 9:29pm",
+      "content": "_A more troubling aspect..._\n\ni'm finding that this is a general problem with many of the hooked letters for African languages, especially in italic fonts where the hook could be confused as just a chancery swash.\n\n"
+    },
+    {
+      "time": "21 Jul 2007 — 10:04pm",
+      "content": "_What about using the ’locl’ (locale) OT feature to help the distinction between the two forms?_\n\nYou mean for distinction to distinguish a variant italic f from the italic hooked f? Yes, this would be possible, although I'm not sure exactly for what languages it would be appropriate. I'll see if I can draw up at least a partial list and post it here.\n\nOne of the fonts for which I've been asked to include support for U+0192 as a letter uses it in a romanisation scheme for ancient semitic scripts. So one might end up with a 'latn' script tag and e.g. a 'HEB' language system tag, i.e. Hebrew written in the Latin script. This is certainly possible in the context of OpenType Layout architecture, but I wonder into what application support issues this might run?\n\n"
+    },
+    {
+      "time": "21 Jul 2007 — 10:43pm",
+      "content": "_Yes, this would be possible, although I’m not sure exactly for what languages it would be appropriate._\n\nisn't that the main problem? Many of the languages that use/will be using the hooked f are still developing standard orthographies, or they have not been recorded yet. Is that correctly stated, John? I guess you could always use a stylistic set, but that's a bit inelegant isn't it?\n\n"
+    },
+    {
+      "time": "22 Jul 2007 — 12:24pm",
+      "content": "The relative instability and/or lack of record for developing orthographies may be an issue, but it isn't necessarily a major problem. It can become a problem if application developers assume a relationship between the misnamed OpenType 'language system' tags and natural language tags for e.g. spellchecking, hyphenation, etc. But if it is possible to access the OT Layout tags independently, then users have a mechanism to select the typographic conventions that they want, and the association to particular languages is simply a convenience.\n\n_I guess you could always use a stylistic set, but that’s a bit inelegant isn’t it?_\n\nEven if I were using the language system tags for this sort of thing, I would still also provide access via a stylistic set. I don't think this is 'inelegant': there is a variant form of the f in an italic font, and some users may wish to deploy it. There is an orthographic reason for the variant to exist, and some users may require it to make an orthographic distinction, but others may simply like that form.\n\n"
+    },
+    {
+      "time": "15 Aug 2007 — 8:14am",
+      "content": "Apart from all possibillities in programs etc. You do know that this florin-sign is no longer of (real) value in Holland. I don't know of any other currency that use florin, but in Holland we ended up using €.\n\n"
+    },
+    {
+      "time": "15 Aug 2007 — 12:46pm",
+      "content": "But presumably there are a lot of existing documents from the pre-Euro period that still need to display the florin symbol, even if its use is now historical. History is real too. :)\n\n"
+    },
+    {
+      "time": "16 Aug 2007 — 5:02am",
+      "content": "I realised that later too...  \nBecause I had to use ƒ.  \nSilly!\n\n"
+    }
+  ]
+}

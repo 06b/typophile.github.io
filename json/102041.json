@@ -1,0 +1,52 @@
+{
+  "id": "102041",
+  "title": "Different line gap between styles of the same font",
+  "forum": "Build",
+  "tags": [
+    "line gap",
+    "problem",
+    "Build"
+  ],
+  "content": "Hi,\n\nI have a problem with the line gap of my font when using it on windows 7 with Wordpad (no problem on open office and on my mac).\n\nI made a font family with 4 styles (regular, italic, bold and bold italic) and when I use it with Wordpad, I ended up with unconsistent linegap. Italic, bold & bold italic have the same line gap but regular has a larger one.\n\nI use Fontlab to made the font and my settings in \"Truetype Specific metrics\" are the same for all 4 styles (see below).\n\nOS/2 TypoAscender = 1600  \nOS/2 TypoDescender = -500  \nOS/2 TypoLineGap = 400  \nOS/2 WinAscent = 1900  \nOS/2 WinDescent = -600  \nhhea Ascender = 1900  \nhhea Descender = -600  \nhhea LineGap = 0\n\nA screenshot of the regular and bold version at the same size :\n\n![](http://web.archive.org/web/20140809085059im_/http:/f.cl.ly/items/1i3E2C0Y1F0T2c3d3V31/linegap-problem.png)\n\nI tried various settings in \"Truetype Specific metrics\" but none of them solve the issue. I don't know why the line gap calculated by wordpad is different for regular and bold despite that they have the same settings… Maybe you know…\n\nSorry for my english… I hope someone could help me !\n\n",
+  "author": "thomaspaillot",
+  "time": "5 Apr 2013 — 8:15am",
+  "uid": "210418",
+  "comments": [
+    {
+      "time": "5 Apr 2013 — 10:10am",
+      "content": "Just some thoughts for you to consider:  \n1. Are you absolutely certain that the largest numbers in your Regular are 1900 and -600? Did you do a Recalculation to check that weight?  \n2. Does your Wordpad file have a Carriage Return at the end of the last line? A long shot but it may affect it.  \n3. Have you tried it with both LineGap settings at zero? I know this is contrary to all recommendations but it may force Wordpad to work with it. If you changed this number you would also have to set your Typo numbers to match Win & hhea. It will affect your output in all apps.\n\nAssuming this is a font you are making for sale, if it were my font I wouldn't worry about using it in Wordpad. How many people use Wordpad in an office or professional setting?\n\n"
+    },
+    {
+      "time": "5 Apr 2013 — 9:48pm",
+      "content": "OK, now this one's a longshot, but did you cache the VDMX table? If your autohinting is off, that could cause weird settings in the VDMX. This would only happen at some sizes, though, so if you see the issue at a large range of sizes, that's not the cause.\n\n"
+    },
+    {
+      "time": "5 Apr 2013 — 9:57pm",
+      "content": "It may be a problem with the bounding box.  \nIn FontLab:  \n\\> Metrics and Dimensions \\> Key dimensions\n\nFont BBox: (-xxx, - **xxx** ) - (xxxx, **xxx** )\n\nMake sure that the y-axis/vertical values (which I have indicated in bold) are the same for every font.\n\nGo through all the glyphs and check the position of the highest (usually the ring accent over cap A) and lowest details—these are used to determine the bounding box.\n\n"
+    },
+    {
+      "time": "8 Apr 2013 — 12:47am",
+      "content": "Thank you for your replies !\n\n@George Thomas:  \n1. I check my vertical dimension and effectively 1900 is not my largest number, it's 1929.  \n2. Not a problem with a carriage return.  \n3. I havn't tried to set the 2 linegap to 0, will try it to see if it change something.\n\nI tried my font on wordPad because I didn't have word on PC (I work on a mac) and I assume that if there is an issue in wordPad, this issue may appear on other software as well.\n\n@jasonc :  \nI have the issue at all sizes…\n\n@Nick Shinn:  \nMy Font BBox are different, see the values below:  \nRegular: (-99, -710) - (3132, 1920)  \nItalic: (-139, -711) - (3070, 1920)  \nBold: (-130, -710) - (3141, 1928)  \nBold Italic: (-198, -711) - (3235, 1929)\n\nDo I need to change my font design to fit in the same bounding box ?\n\nI will do more test today, and I'll let you know if I make any progress !\n\nAgain, thank you !\n\n"
+    },
+    {
+      "time": "8 Apr 2013 — 3:31am",
+      "content": "I think styles of the same family and size master should share the same em proportions. This does not mean, e.g. the heights or depths of all the glyphs need to be the exactly the same, but they should be fairly close.\n\n"
+    },
+    {
+      "time": "9 Apr 2013 — 8:32am",
+      "content": "I tried various \"Truetype specific settings\" but none of them fix the issue. I change the tallest glyphs in the bold version so that regular and bold fit in the same bounding box (xxx, -710) - (xxx, 1920) but it didn't change anything. I tried to set the 2 linegap to 0… same result.\n\nIf someone has another idea I'll take it!\n\n"
+    },
+    {
+      "time": "9 Apr 2013 — 9:51am",
+      "content": "I finally fix the issue… it was components in some fractions (1/4, 3/4…) that wasn't decompose !\n\nThanks for your help !\n\n"
+    },
+    {
+      "time": "9 Apr 2013 — 10:11am",
+      "content": "How did that create the problem?\n\n"
+    },
+    {
+      "time": "10 Apr 2013 — 12:24am",
+      "content": "I use the component \"1\" and \"4\" and scale them down to make the glyph \"1/4\", so my guess is that the original hinting of the glyph \"1\" and \"4\" cause the issue… Does it make sense to you ?\n\n"
+    }
+  ]
+}

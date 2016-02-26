@@ -1,0 +1,54 @@
+{
+  "id": "46451",
+  "title": "XeLaTeX and OT fonts",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hello!\n\nI have been spending all day trying to get support for OT fonts on my Linux machine, and the best I have done so far is with XeLaTeX. I have, however, been having a few problems getting Igino Marini´s Fell Types to work properly. I have control over all of the special OTF features, it´s just that the spacing is really messed up and they come out much smaller than I specify. I have gotten a few other OTF faces to work fine, so I´m not sure where the problem is. Can anybody point me to some assistance???\n\nThe example below is as follows:\n\nDelicious at 10pt;  \nLinux Libertine at 10pt;  \nIM Fell Double Pica Pro at 80pt.\n\nThanks!!!  \nGlen\n\n ![](http://web.archive.org/web/20150414025848im_/http:/typophile.com/files/Bildschirmfoto_6485.png)\n\n",
+  "author": "Glen",
+  "time": "15 Jun 2008 — 3:58pm",
+  "uid": "24145",
+  "comments": [
+    {
+      "time": "16 Jun 2008 — 3:48pm",
+      "content": "On my mac, I can't have the Fell fonts work as is with XeLaTeX either (and, according to the license <cite>You can't change the font and its contents (including outlines, kerning and other data as well</cite>).\n\n"
+    },
+    {
+      "time": "16 Jun 2008 — 4:53pm",
+      "content": "Does anybody have any idea why this problem may be happening?\n\n@Michel: Do you know of any decent documentation for XeLaTeX? I haven't had any real luck yet...\n\n"
+    },
+    {
+      "time": "16 Jun 2008 — 6:15pm",
+      "content": "I don't know the reason. All I know is that if I change the em size of the otf font from 2048 to 1000 using Fontforge, the problem seems to disappear. Is the em size the very reason? I have no idea. Does the license allow changing it? I would say no. Is there a way to do the equivalent using low level variables in XeLaTeX without touching the font? I dont' know either and I don't think that's the way to go. The font seems to work well with InDesign but it would indeed be more fun with XeLaTeX because it is then easier to adjust the opticals to get them automatically.\n\n[added] In the texlive installation, the files XeTeX-notes.pdf and XeTeX-reference.pdf (that on my mac are in /usr/local/texlive/2007/texmf-dist/doc/xetex) and the file fontspec.pdf (in /usr/local/texlive/2007/texmf-dist/doc/xelatex/fontspec) contain useful information.\n\n"
+    },
+    {
+      "time": "17 Jun 2008 — 11:10am",
+      "content": "Thanks very much for your help Michel!\n\n"
+    },
+    {
+      "time": "20 Aug 2008 — 1:38am",
+      "content": "Hello. I've been noticed about this issue and this thread. Some progress? I really would like to know where the problem is, if it's just a UPM problem or not. Anyway I'm going to ask some expert and evenctually let you know.\n\n"
+    },
+    {
+      "time": "23 Aug 2008 — 8:09pm",
+      "content": "I compiled on my mac (ppc with OS X 10.4.11) the latest pre-release version (revision 811) of XeTeX using the tarball at the bottom of [this link](http://web.archive.org/web/20150414025848/http:/scripts.sil.org/svn-view/xetex/TRUNK/). I tried your fonts without touching them with the following input copied from page 164 of Lawson's book, _Anatomy of a Typeface_:\n\n`\n\\documentclass{article}\n\\usepackage{fontspec}`\n\n\\font\\flower=\"IM FELL FLOWERS 2\" at 17.5pt  \n\\font\\capital=\"IM FELL French Canon PRO Roman\" at 39pt  \n\\setromanfont{IM FELL Great Primer PRO}  \n\\setlength{\\textwidth}{4.5in}  \n\\setlength{\\parindent}{0pt}  \n\\begin{document}  \n\\fontsize{17.5}{20}\\selectfont  \n{\\flower 1} \\textsc{the application}: This is levelled at that numerous part of mankind, who, out of their ample fortunes take care to accomplish themselves with everything but common sense.\n\n\\bigskip  \n\\begin{center}  \n73. \\textit{The Old Hound.}  \n\\end{center}\n\n{\\capital A\\kern0.05em}n old Hound, who had been an excellent good one in his time, and given his master great sport and satisfaction  \n\\end{document}\n\nUsing the commands `xelatex -no-pdf p164.tex` and then `xdv2pdf p164.xdv` here is what I get:\n\n ![](http://web.archive.org/web/20150414025848im_/http:/typophile.com/files/hound_4933.jpg)\n\nYour fonts seem to work just fine. However, if I use `xdvipdfmx` instead of `xdv2pdf` I still get a bad pdf output with fonts having an em-size of 2048 (and `xelatex` without the `-no-pdf` option uses `xdvipdfmx` to produce the pdf output).\n\nMichel\n\n"
+    },
+    {
+      "time": "24 Aug 2008 — 1:50am",
+      "content": "Thank you, Michel. In the meantime I asked an italian TeX user that I knew for having used the Fell Types to investigate a little. He sent me a test pdf output telling me everything was working right. But when I looked at it, it was bad exactly the same way as another pdf I received. I asked him about this and sent him a screen save and he answered that it used Acrobat Reader 5 and the output was good and sent me, as a proof, a jpg. We both are on Windows XP. I use Acrobat reader 8 and the output is bad. I tried another pdf reader, Sumatra, an open source, and the output is good. So it seems the problem is in the chain pdf creator-pdf reader: somewhere the \"Postscript=1000 em size\" identity should have remained.\n\nIgino\n\n"
+    },
+    {
+      "time": "24 Aug 2008 — 4:18am",
+      "content": "Interesting. I just checked with various readers on my macintosh and the pdf output given by xdvipdfmx looks wrong with Preview 3.0.9 (the standard viewer for the macintosh), the TeXShop viewer, Adobe Acrobat Professional 8.1.2, and Acrobat Reader 8.1.2. It however looks ok with Acrobat Reader 7.0.9.\n\nMichel\n\n"
+    },
+    {
+      "time": "25 Aug 2008 — 8:24am",
+      "content": "It might be worth raising your question to the [**XeTeX mailing list**](http://web.archive.org/web/20150414025848/http:/tug.org/mailman/listinfo/xetex).\n\nMichel\n\n"
+    },
+    {
+      "time": "26 Aug 2008 — 10:50am",
+      "content": "The Acrobat/PDF issues are a problem we've recently learned about with unusual (non-1000) upm sizes for Type 1 and OpenType CFF fonts and PDFs created with xdvipdfmx.\n\nIf the PDF is created using Acrobat, it works fine. If the PDF is created with xdvipdfmx, it will look incorrect on screen in Acrobat 8 and 9, and print incorrectly. Although it will look correct on screen in some older versions of Acrobat, it will still print incorrectly (at least to Adobe PostScript devices).\n\nI expect that the on-screen problem in XeLaTeX is related to the same issue of upm scale. That one is clearly a XeLaTeX bug.\n\nRegards,\n\nT\n\n"
+    }
+  ]
+}

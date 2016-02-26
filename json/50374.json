@@ -1,0 +1,30 @@
+{
+  "id": "50374",
+  "title": "Transient, a user interface font",
+  "forum": "Bitmap Text",
+  "tags": [
+    "Bitmap Text"
+  ],
+  "content": "I've always been a fan of carefully-pixelled UI fonts, but a little while ago I discovered [Warp Sans](http://web.archive.org/web/20150414142925/http:/toastytech.com/guis/os24_connections.gif), the system font from OS/2 Warp. It's not as polished Tahoma or Espy Sans, nor as stylish as Chicago or Charcoal, but it inspired me to try making my own pixelly font.\n\nMy initial goal was pure readability, so I decided to use a proportionally large x-height. However, my attempts at 'pure readability' wound up looking exactly like 10pt Arial, so I switched to a more stylish, art-deco approach (E, R, 8 and S are good examples).\n\n[The current set of glyphs](http://web.archive.org/web/20150414142925/http:/zork.net/~st/Transient-filled-6.png) covers all of Latin1 and a good selection of the Latin Extended A and Latin Extended B sections of the Unicode standard. I didn't draw all those myself; I drew the accents and used a program I wrote to automatically combine them with base characters to produce all the accented characters (if some of the accented characters look wonky, that's why). That's also where the glyphs for Roman numerals and bracketed letters and numbers come from.\n\nSince I designed it to be a user-interface font, I'm naturally [using it as my system font](http://web.archive.org/web/20150414142925/http:/zork.net/~st/Transient-in-situ.png). That picture also happens to include small samples of the bold variant I'm working on - mostly just a double-struck version of the Regular, except for the few characters like 'e' and 'y' that need special treatment.\n\nSo... what do you think?\n\n",
+  "author": "Screwtape",
+  "time": "10 Oct 2008 — 2:55am",
+  "uid": "37882",
+  "comments": [
+    {
+      "time": "10 Oct 2008 — 10:46am",
+      "content": "Looks pretty cool.\n\nSomething about the height: 13 is a funny number, especially on Windows (where the nominal dpi is 96, not 72). I would make the descenders one pixel shorter, or the ascenders one pixel taller. Your \"j\" BTW is going all the way down. The \"t\" looks nice unusually tall though.\n\nOne other thing: the \"x\" is way too geometric.  \nOne thing you might try is staggering the arms.\n\nhhp\n\n"
+    },
+    {
+      "time": "11 Oct 2008 — 1:21am",
+      "content": "<cite>Looks pretty cool.</cite>\n\nThanks!\n\n<cite>13 is a funny number...</cite>\n\nWell, it was rather an accident.. 7px x-height + 3px ascenders + 3px descenders + 3px accents-on-capitals works out at a nice round 16px, but since most English text doesn't have accented capitals, most glyphs are 13px tall. I've wanted to make the space reserved for accents 4px tall rather than 3px to make it easier to distinguish carons and breves; would that help?\n\n<cite>Your “j” BTW is going all the way down.<cite></cite></cite>\n\nOh, good catch! The Dutch \"ij\" looks a lot better when the \"j\" extends all the way to the bottom.\n\n<cite>One other thing: the “x” is way too geometric. One thing you might try is staggering the arms.</cite>\n\nI'm not sure what you mean by 'staggering the arms'. I agree that 'x' is very geometric, but so is 'o' and 'c' and 'z'. I've made it [a little more script-y, like the x we used for algebra in highschool](http://web.archive.org/web/20150414142925/http:/zork.net/~st/Transient-filled-7.png)... I'll try it out for a while and see if it feels right.\n\nAgain, thanks for commenting!\n\n"
+    },
+    {
+      "time": "11 Oct 2008 — 2:05am",
+      "content": "UPDATE: After a little more experimentation I think I've found [a better looking x](http://web.archive.org/web/20150414142925/http:/zork.net/~st/a-study-in-x.png).\n\n"
+    },
+    {
+      "time": "11 Oct 2008 — 12:24pm",
+      "content": "\\> ... + 3px accents-on-capitals works out at a nice round 16px\n\nYou can float secondary parts above (or below) the Em, but the conventional way to measure a bitmap font is from the top of the lc ascenders\\* to the bottom of the lc descenders. So this is a 13. I've made a 13 myself, but only because it fits well in a system of three sizes, plus it's a pixelfont where you always set the point size to 8 anyway. If this will be a pixelfont too it's not such a big deal. The thing is, your descenders should ideally be shorter than the ascenders (since they're much less frequent in text) so you do have room to trim the height by 1 in the descenders (or alternatively go to 14 with the ascenders, which however would start making the font a bit small-on-the-body).\n\n\\* Or Cap height, if that happens to be higher (not generally recommended).\n\nThat last \"x\" seems great.\n\nhhp\n\n"
+    }
+  ]
+}

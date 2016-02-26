@@ -1,0 +1,70 @@
+{
+  "id": "3207",
+  "title": "Television, Screen and other pixel tales needed",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hooray for my first post. As I am reading through the forums I am truly honored by the amount of talented people there are on this site.   \n   \nI am a student currently working on a theoretical type project based on the idea of truth. The basis is derived from the idea of vocal pattern truth recognition that is being used in fields like airport security. My goal is to create a typeface for screen applications(TV/Closed captioning is my first goal)that analyzes the vocal patterns of a speaker and determines the truth of their words and will alter the type if lies are told. Think a lie detector that a television viewer can turn on to determine whether any of the words spoken by Bush are true.   \n   \nI will be building a full character set with UC and lc which is kind of a new thing for captioning. They use lc but sparingly. I want to do this because I think that the lc has the possibilities for more variations.   \n   \nI am pretty solid about my idea's focus and it's potential benefits, but I am very nervous since my knowledge of building typefaces for screen is more limited than my knowledge for print(which is beginner also). So when I pose questions don't assume that anything is obvious please. I would really like to understand the ideas behind legible screen fonts and make my project a success.   \n   \nSince I am building an original typeface that is bound for the screen should I design it as an outline first, then translate it to screen/pixel whatever?   \n   \nIf I am designing the type and its structural variations with HDTV(1920 x 1080 res.)in mind, is the process different for building a typeface from that resolution vs. a standard TV we used today? How and why are good here also.   \n   \nMy money, time and resources are limited since it is a school project. What should I be looking at to create this?   \n   \nAny others words would be greatly appreciated if you can help me with this? Sometimes it easier for me to answer and understand than pose and wait.   \n   \njp\n\n",
+  "author": "blackbirdsings",
+  "time": "19 Feb 2004 — 6:17pm",
+  "uid": "3063",
+  "comments": [
+    {
+      "time": "20 Feb 2004 — 9:40am",
+      "content": "Interesting.   \nHow will the type change based on \"truthfulness\"?   \n   \nAs for screen design:   \n1) Ignore print - it will reduce the quality of your screen work. Don't make an outline font unless you have to.   \n2) Figure out what vertical span (in pixels) you'll have.   \n3) Figure out how horizontally economical the font has to be.   \n4) Try to get a handle on the types of fidelity loss you'll encounter, and design with that in mind, like by incorporating trapping\\* (which is not just for outline fonts - video \"bleeds\" too).   \n5) Define the types of emphasis you need (noting that the traditional method -italics- is lousy onscreen).   \n6) Use grayscale pixels if you can.   \n   \nThere's a lot of precedent for video fonts\\*\\*, but to me none of them are really good enough - you have a chance to break promising new ground.   \n   \n\\* [http://www.themicrofoundry.com/ss\\_trapping1.html](http://web.archive.org/web/20131105104711/http:/www.themicrofoundry.com/ss_trapping1.html)   \n   \n\\*\\* Like this: [http://www.myfonts.com/fonts/bitstream/tiresias/](http://web.archive.org/web/20131105104711/http:/www.myfonts.com/fonts/bitstream/tiresias/)   \n   \nhhp\n\n"
+    },
+    {
+      "time": "20 Feb 2004 — 11:57pm",
+      "content": "Yes I am familiar with Letterror's Twin typeface. I do not have the capabilities of a group like that, but i guess i hope to bring something similar to that to fruition.   \n   \nHrant, was hoping you would respond. You comments were what I was hoping for. Some of your thoughts I have also conjured, but with my limited knowledge I had not the way to state them as eloquently as you had.   \n   \nI am going to survey them more tomorrow since it is very late and i need to go to bed.   \n   \nThank you both.   \n   \njp\n\n"
+    },
+    {
+      "time": "22 Feb 2004 — 4:10pm",
+      "content": "I was looking in depth at the basic construction of a bitmap font and wanted to know more about the correaltion between the size of the squares used for example by Silkscreen (which is only used optimally at 8 pt) and its .014 in. square that builds the form.   \n   \nLooking at my options and the time I have my approach will probably take this course. Using a set grid, design a screen-based font that will have a set base alphabet and at least one parallel-varied set that shows the effects of untruthful statements with a varying line width, extended stems, enlarge counters, etc... It probably will not be optimal to read at the size needed for a closed captioning system, but I hope my main idea will still come across.   \n   \nMaybe in the future I can extend the family and incorporate more of the research into it.   \n   \nAny other encouraging information is welcome though if you feel I can accomplish the fuller idea or verison of it in a smaller time frame.   \n   \njosh\n\n"
+    },
+    {
+      "time": "22 Feb 2004 — 4:47pm",
+      "content": "There are two main kinds of bitmap fonts:   \n1) \"True\" bitmap fonts where the actual pixel data is defined in bits. These are either stand-alone (like in the FON format) or embedded (in a TT font). These fonts only show up when their pre-defined pixel height is chosen. True bitmap fonts have unfortunately become second-class citizens in terms of support, especially on MacOS.   \n2) Pixelfonts (like Silkscreen), which are basically outline fonts that can be used at any point size, but which map out the correct bitmap data only when a certain point size is chosen. Pixelfonts have robust support, because the OS doesn't know the difference.   \n   \nIn a pixelfont the point size you need to use to make the bitmap come out right depends on the ratio of the outline pixel squares to the em size of the font. For example if you fix the target point size to 8 and make the \"pixels\" 125 em units square, you can build a bitmap font of any vertical span you want and it'll come out right when the font is set to 8 point. This might seem counter-intuitive, but it avoids the user having to fish around for the right point size that will make the font snap into place.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "22 Feb 2004 — 5:59pm",
+      "content": "Is there a sliding scale I can use to say make a 20 pt type?   \n   \nI feel I really need to experiment before I can completely understand this. My mathematical wisdom went out the window a long time ago.   \n   \nI'm going to get to work with the best of the knowledge gained and will definitely post while working.   \n   \njp\n\n"
+    },
+    {
+      "time": "22 Feb 2004 — 10:28pm",
+      "content": "For 20 pixels high defining em & pixel sizes that map to 8 point is probably a bad idea, because your outlines would go more than twice over the vertical limit. What you might do instead (especially since this font seems to be for \"controlled\" use only) is define a normal em of 1000, and use pixels of 50 units square: that way you'd just chose \"20 point\" (at 72 dpi) and it would map out perfectly.   \n   \nCall it \"Icosa\". :-)   \n   \nhhp\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 1:07am",
+      "content": "Hrant,   \nyou wrote:   \n\"In a pixelfont the point size you need to use to make the bitmap come out right depends on the ratio of the outline pixel squares to the em size of the font. For example if you fix the target point size to 8 and make the \"pixels\" 125 em units square, you can build a bitmap font of any vertical span you want and it'll come out right when the font is set to 8 point. This might seem counter-intuitive, but it avoids the user having to fish around for the right point size that will make the font snap into place. \"   \n   \nWhile this is not inaccurate, it leaves out an important issue: the UPM size. Your calculations assume a UPM size of 1000.   \n   \nThe whole trick of the size of the grid (i.e. \"vector pixels\") is:   \n   \nOne side: At 72 dpi, the point size that you require is equal the ppem size of the font, i.e. the number of pixels that the emsquare will consist of, e.g. 8.   \n   \nOther side: Your font's emsquare is built of a certain amount of of units, typically 1000. So we speak of 1000 UPM (units per em).   \n   \nSince 8 pixels correspond to 1000 units, 1 pixel corresponds to 1000/8 = 125 units. This is really simple math.   \n   \nHowever, note that if you use FontLab to create a font in TrueType format, you will be able to choose any number as your UPM size. Therefore, you can as easily set your UPM size to 800 and target for a 8 pixels type size, so that one pixel corresponds to 800/8 = 100 units.   \n   \nSimilarly, if you target a 20 pixels type size, you can use a UPM 1000 and then one pixel will correspond to 1000/20 = 50 units, but you can also use a UPM 200 and then one pixel will correspond to 200/20 = 10, or a UPM 2000 and then 2000/20 = 100.   \n   \nKeeping this in mind, you will be able to easily target \"untypical\" font sizes such as 13 pixels.   \n   \nAdam Twardoch   \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 8:12am",
+      "content": "You're right about my assumption.   \nBut there's a reason to stick with 1000: unlike TT, that's the only size PS can handle.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 10:49am",
+      "content": "(Wow, I am going to break my \"never reply to Hrant\" rule for the first time in months.)   \n   \nThat's not true. Type 1 (and OpenType CFF) fonts can be built at any em scale, as long as all points and metrics are within +/- 4096 units.   \n   \nAdditionally, specifying size in points for a font intended to be used on screen is meaningless, unless the output device is also defined. There's a good reason folks developing screen fonts talk about size in ppem (pixels per em). This does correspond to points in classical Mac-speak, but the conversion from ppem to points involves multiplying by 3/4 for classical Windows-speak. That is to say, 12 ppem equals 12 point on Mac, but 9 point on Windows. If you want to optimize something for \"12 point display\" on both Mac and Windows, you need to optimize both the 12 and 16 ppem sizes.   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 10:53am",
+      "content": "(Congratulations.)   \n   \nI guess the limitation then is only when Fontographer exports PS?   \nCan FontLab export PS fonts with different ems?   \n   \nhhp\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 11:19am",
+      "content": "Latest versions of FontLab, or at least versions in development, can. (It seems like I'm always on a pre-release version to get the latest bug fixes, so it's hard for me to keep this straight.) I recall that earlier versions could not, but we pointed out that it really was okay to use other ems, and it got changed.   \n   \nI didn't remember that Fontographer had a limitation in this area, but then it's been a lot of years since I've used it, and this is a rarely-trod path.   \n   \nT\n\n"
+    },
+    {
+      "time": "23 Feb 2004 — 11:29am",
+      "content": "So another -more important- question:   \nWould any notable apps (especially legacy ones) have a problem with non-Em=1000 PS fonts?   \n(Thanks.)   \n   \nhhp\n\n"
+    },
+    {
+      "time": "24 Feb 2004 — 3:43pm",
+      "content": "Not that I am aware of, no.   \n   \nT\n\n"
+    },
+    {
+      "time": "20 Feb 2004 — 8:54am",
+      "content": "You might be interested in the book/project [Metro Letters: A Typeface for the Twin Cities](http://web.archive.org/web/20131105104711/http:/www.amazon.com/exec/obidos/tg/detail/-/0972969616/qid=1077295816/sr=1-1/ref=sr_1_1/002-2716609-9435242?v=glance&s=books). The project's winner was [Letterror](http://web.archive.org/web/20131105104711/http:/letterror.com/). They are programmer's extraordinaire. The presentation was beyond amazing. Their typeface is programmed to show among other things [Weather](http://web.archive.org/web/20131105104711/http:/design.umn.edu:8080/cgi-bin/ltrstr/tcdc/alternator?fresh=1&page=interface_004&nocache=1077295949.1529911) and [Wind](http://web.archive.org/web/20131105104711/http:/design.umn.edu:8080/cgi-bin/ltrstr/tcdc/alternator?fresh=1&page=interface_005&nocache=1077295991.0616601). More applicable to your research is how they demonstrated noise.\n\n"
+    }
+  ]
+}

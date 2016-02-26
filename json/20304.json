@@ -1,0 +1,54 @@
+{
+  "id": "20304",
+  "title": "Unicode / Non-latin letters",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I am considering doing an Indian Font with non-latin letters as a supplement to a \"indianized\" latin font. My first idea was to place the letters in the regular boxes, and then providing a keyboard-layout as seen in this website:  \n [http://www.geocities.com/SiliconValley/Lab/9988/keyboards.htm](http://web.archive.org/web/20111221235102/http:/www.geocities.com/SiliconValley/Lab/9988/keyboards.htm \"http://www.geocities.com/SiliconValley/Lab/9988/keyboards.htm\")\n\nBut then I also studied OSX own Punjabi-font Gurmukhi MT which comes with the OSX, and saw that this is done in another way, with Unicode. In this font, the glyphs is not where the latin letters are, but in other places marked \\*\\*\\* below the standard squares. As an example, one font had 402 number of characters allowes instead of standard 256 and these new boxes is placed below with a specific Unicode-number.\n\nIs there anyone who has any experience of producing non latin fonts with their given unicode numberings? How do this work basically? How do people use it later on? Latin Keyboards do not have any possibility to use these \"unicode fonts\", or do they?\n\nThe reason for this Indian alternate version of my Latin alphabet, was not intentionally to make a full working Indian font, but more as an \"extra bonus\" for the standard font, but then I though that why not make it \"for real\" - and maybe do a font where the Indian letters are placed BOTH in the regular latin keyboard AND with Unicode.\n\nIf the questions seems strange, it's because I don't know what I am talking about and my english is not native language. =)\n\nAny knowledge on this?\n\nThanks in advance.\n\n",
+  "author": "<a href=\"/web/20111221235102/http://typophile.com/user/11526\" title=\"View user profile.\">Goran Soderstrom</a>",
+  "time": "<br>",
+  "uid": "11526",
+  "comments": [
+    {
+      "time": "",
+      "content": "Goran,  \nIf you are using FontLab, you can select the codepage you are interested in from the Unicode mode pop-up list. This will give you a ghosted bitmap in the background of the glyphs needed with the proper names and unicode numbers in place. Opentype/unicode is the way to go and will live much longer than remapping methods. Hopefully Adam will give you more details but there are numerous code pages to choose from. I have done Greek and Cyrillic but there are many more available.\n\nChrisL\n\n ![](http://web.archive.org/web/20111221235102im_/http:/typophile.com/files/devangari_5957.png)\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> a “indianized” latin font.\n\nWow, I can't wait to see it!  \nReverse-Latinization rules.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yeah, it's going to be like a typographic meeting between east and west ;-)\n\nThanks Chris for giving useful tips, unfortunately I use Fontographer…\n\n"
+    },
+    {
+      "time": "",
+      "content": "_unfortunately I use Fontographer…_\n\ni believe they'll let you upgrade. \\>^p\n\n"
+    },
+    {
+      "time": "",
+      "content": "But I like the easiness of Fontographer, I have not given FontLab that much time I must confess, but it feels like Fontographer is more strictly design-oriented, while FontLab seems so much more technical and have a lot of \"extras\" that makes the design process a little bit more difficult. But maybe I'm just lazy to learn it…\n\nHowever, I'm hoping that Fontographer will get better preview resolution on screen and in printing - that part is terrible.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Goran, the Indic scripts are complex writing systems that require not only correct (Unicode) text encoding for the basic letters and marks, but also many glyph variants (e.g. half forms, conjunct ligatures) and smart layout for mark positioning. The Devanagari fonts I am working on at the moment each contain more than 650 glyphs, not including Latin characters. I use OpenType Layout for the glyph substitution and positioning. One could also make Mac-only AAT format fonts, but in any case this isn't something that can be undertaken as an 'extra bonus' in a Latin display type. Unlike some elements of Latin typography, the complex glyph handling of Indic scripts is not optional: you have to provide complete and correct shaping in order for the text to be normally readable.\n\nAs an example, here is some Devanagari text shown (top) with the raw Unicode characters before subject to shaping and (below) the correct shaping as applied using OpenType Layout. Note that in addition the letter _ra_ becoming a subscript mark attached to the preceding letter (in other instances, it would become a superscript mark attached to the following letter), and the combination of consonant sequences into conjunct ligatures, some glyphs actually change order. All of this needs to be handled by the font and an Indic shaping engine.\n\n ![](http://web.archive.org/web/20111221235102im_/http:/typophile.com/files/DevShaSam_6589.gif)\n\nRegarding keyboarding, one would use an appropriate Indian keyboard driver, e.g. Hindi or Marathi for the Devanagari script. I used the Windows Hindi keyboard for these samples.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Very interesting John. Thanks for sharing that. It seems there is a lot of work getting this function properly. I am more design-oriented person, I believe.\n\nHmm, are you perhaps interested in some kind of collaboration in the future?\n\nI have an informal agreement with a Foundry regarding the release of the typeface and a strong picture in my head how to design the Indian glyphs to match my indianized latin-font.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_Hmm, are you perhaps interested in some kind of collaboration in the future?_\n\nI doubt if I would have time, and you would need to persuade the foundry to pay for the development because I wouldn't do such work on spec. Unless the foundry in question has experience in non-Latin fonts and the Indian market in particular, I'm doubtful that they would go for it. But if you are serious, why not make some of the Indic glyphs (I'm guessing you are talking about the Devanagari script; there are thirteen official scripts used in India!) and if they're promising I might be able to put you in touch with some useful people.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'll keep that in mind, thanks John, and I may contact you later on – We'll see how it goes with my plans, if it's possible etc.\n\nThanks!\n\n/ Göran\n\nBtw – I was actually thinking of doing Gurmukhi (from the mouth of guru), sine I really like the shapes and the concept of this old Punjabi writing letters. It also goes along with the whole \"soul\" concept with the latin font in a nice way.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Okay. Most of the same kind of shaping rules apply for Gurmukhi as for Devanagari. The big divide in terms of shaping behaviour is between northern and southern Indian scripts.\n\n"
+    }
+  ]
+}

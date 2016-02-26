@@ -1,0 +1,74 @@
+{
+  "id": "1247",
+  "title": "FlashMX 2004 and \"Pixel\" Fonts",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "FlashMX 2004 was released yesterday. It has several new features that will be of interest to makers or users of \"pixel\" fonts, fonts designed to overcome Flash's text anti-aliasing.   \n   \nThe most obvious thing is that there is now a button to turn antialiasing _off_ for selected text.   \n   \nAfter playing around with the Mac version last night and this morning, I have discovered the following:   \n   \n- Pixel fonts, such as those from Atomic Media, work just as well as before, if not better.   \n   \n- It is no longer necessary to set horizontal and verticle text box coordinates to whole numbers to prevent \"blurring.\" The same goes for centered or flush right text and tracking, which used to be no-no's.   \n   \n- Pixel fonts may be embeded for use in \"dynamic\" or \"input\" text boxes with no ill effect. Earlier versions of Flash had a bug which caused such fonts to blur somewhat. The work-around was to set the quality level for the movie to \"low,\" but this caused _everything_ in the movie to be aliased--not usually the desired effect.   \n   \n- In certain cases (I'm still testing this), Flash will use bitmap fonts when they exist. For example, my Anonymous font is a TrueType font with bitmaps embedded for 8, 9, 10, and 11 ppm. When these sizes are used, and antialiasing is turned off, the embedded bitmaps are used.   \n   \n- Even more amazing, Flash now appears to support bitmap fonts which _don't_ have corresponding outline fonts. Again, I'm still testing this. So far the results are encouraging, but inconsistent.   \n   \n- Although not bearing directly on pixel fonts, Macromedia seems to have fixed the bug which caused high-ascii character encoding to become scrambled when using PostScript fonts with Flash.   \n   \nAll in all, it seems like the situation has improved drastically for people who want to use aliased text in Flash. It also appears that the situation has improved for font makers as well, giving us more flexibility in the way of format, and perhaps making some of the tricks that were necessary before obsolete.   \n   \nI will continue to try things out and report anything else I find. If anyone else has been doing the same, post your findings here.\n\n",
+  "author": "Mark Simonson",
+  "time": "Thu, 2003-09-11 08:37",
+  "uid": "1043",
+  "comments": [
+    {
+      "time": " Thu, 2003-09-11 10:26",
+      "content": "\\> In certain cases (I'm still testing this), Flash will use bitmap fonts   \n   \nThis is great news! But I do wonder what those \"certain cases\" are...   \nWhatever further you find out, definitely let me/us know!   \n   \nAlso: What version of Flash Player supports embedded and/or lone bitmaps?   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Thu, 2003-09-11 11:28",
+      "content": "You need the Flash 7 player. I've set up a demo here:   \n   \n [http://www.ms-studio.com/demo.html](http://web.archive.org/web/20050516140858/http:/www.ms-studio.com/demo.html)   \n   \nIf you don't want to install the new player yet (or at all), here are standalone versions:   \n   \n [http://www.ms-studio.com/demo.zip](http://web.archive.org/web/20050516140858/http:/www.ms-studio.com/demo.zip) (for Windows)   \n   \n [http://www.ms-studio.com/demoProjector.hqx](http://web.archive.org/web/20050516140858/http:/www.ms-studio.com/demoProjector.hqx) (for Mac)\n\n"
+    },
+    {
+      "time": " Fri, 2003-09-12 12:23",
+      "content": "Some more discussion about this here:   \n   \n [http://newsfeed.fatorcaos.com.br/000021.html](http://web.archive.org/web/20050516140858/http:/newsfeed.fatorcaos.com.br/000021.html)   \n   \n(via [WhatDoIKnow.org](http://web.archive.org/web/20050516140858/http:/www.whatdoiknow.org/).)\n\n"
+    },
+    {
+      "time": " Fri, 2003-09-12 12:50",
+      "content": "Hey, thanks for the demo!   \n   \nRemaining questions:   \n1) When does aliasing _not_ work?   \n2) What about embedded _grayscale_ bitmaps?   \n3) What about fonts with _only_ embedded bitmaps?   \n   \nBTW, does all this really mean the death of pixelfont development?   \nIncluding that fancy FFF stuff? Is that why Bardram has disappeared? :-)   \n   \n--   \n   \nBTW, why can't I get the Windows Alt-zero method (of accessing upper-ASCII characters) to work any more? I guess I might have forgotten - how does it work again?   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Fri, 2003-09-12 13:59",
+      "content": "Just hold Alt while hitting the numeric code on your numeric keypad.   \nYou'll have to activate NumLock, I think.   \nWhere/when is it not working?\n\n"
+    },
+    {
+      "time": " Fri, 2003-09-12 14:10",
+      "content": "I just figured it out: I have to press _Function_ along with Numlock to turn numlocking on. Darned laptop keyboard. This Compaq Presario one is particulary lousy, like it only has a Ctrl key on the left (which makes me use two hands where I could otherwise sometimes get away with one), and the space bar is tiny. Instead it has all these idiotic \"special\" keys, including _two_ backslant/pipe keys! \"But dude, look at all that cool fake chrome!\" Puke.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Fri, 2003-09-12 16:59",
+      "content": "The upper ascii characters won't work in my demo because only the basic stuff is embedded. Just as before, you have a choice of which characters to include. For the demo I only included the basic A-Z, a-z, numbers and puncuation--about 95 characters. If I get a chance, I'll do another one with more characters included.   \n   \nAbout the remaining questions:   \n1. Aliasing always works. Apparently, Flash creates an internal bitmap font at the size requested, even if the source font has none.   \n2. It does not appear to support grayscale fonts :-( although they can be used as before with the antialiased setting.   \n3. As I said, I had some luck with fonts that only have bitmaps, but so far the results are inconsistent.   \n   \nI don't think it means the death of pixel fonts, but it does offer a larger range of solutions. See Craig Kroger's message near the end of the page I linked to above.\n\n"
+    },
+    {
+      "time": " Fri, 2003-09-12 18:54",
+      "content": "\\> Aliasing always works.   \n   \nEven for dynamic text? I guess like \"normal\" Flash font embedding, characters you _haven't_ elected to embed simply don't show up if typed?   \n   \n\\> It does not appear to support grayscale fonts   \n   \nHow did you test this? Did you make some with BitFonter? Assuming you did: So these fonts worked directly in the OS, but not Flash?   \n   \n\\> grayscale fonts ... can be used as before with the antialiased setting.   \n   \nBut that's just stuff rendered from [de-hinted] outlines, right?   \n   \nSorry for the grilling! :-)   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Fri, 2003-09-12 21:43",
+      "content": "_\\> Aliasing always works.   \n  \nEven for dynamic text? I guess like \"normal\" Flash font embedding, characters you haven't elected to embed simply don't show up if typed?_   \n     \n   \nYes and yes.   \n  \n_\\> It does not appear to support grayscale fonts   \n  \nHow did you test this? Did you make some with BitFonter? Assuming you did: So these fonts worked directly in the OS, but not Flash?_   \n     \n   \nI deduced this from the fact that the \"grayscale\" fonts being produced for use with Flash depend on its normal antialiasing in order to work. When you turn aliasing on, you are defeating this feature, therefore the trick won't work. I haven't actually tested this hypothesis or anything, which is why I included the words \"appear to\" in my statement. Still, I would be surprised if I am wrong about this.   \n   \nI have not tried using grayscale bitmap fonts made in BitFonter. I don't know if those work with Flash, but I'm doubtful. In my demo, for example, the bitmap fonts only show up when aliasing is switched on. If you turn aliasing off, the bitmap fonts disappear. If there is an outline font, that's used. If not, the field goes blank. Flash simply ignores bitmap fonts unless aliasing is on, but that also forces the pixels to be only on or off. Also, from what I've read (see the link above again), it appears that Flash actually embeds bitmap objects rather than using the host OS's bitmap font facilities. Embedded outline fonts are handled similarly. They are not fonts so much as collections of outline objects like any other in the symbol library.   \n   \nIt might be worth a try, though. Just to be sure.   \n   \n_\\> grayscale fonts ... can be used as before with the antialiased setting.   \n  \nBut that's just stuff rendered from [de-hinted] outlines, right?_   \n     \n   \nExactly. So you would still have the same problems if you try to use them for dynamic text as before.\n\n"
+    },
+    {
+      "time": " Fri, 2003-09-12 22:20",
+      "content": "\\> that also forces the pixels to be only on or off.   \n   \nHow do you know, without testing it with embedded grayscale bitmaps? It's possible Flash simply uses whatever image-of-character the OS gives it, which could be a grayscale rendering.   \n   \n\\> Flash actually embeds bitmap objects rather than using the host OS's bitmap font facilities.   \n   \nYes, but it sounds like it's initially getting the bitmap renderings from the OS (the way Pyrus FONMaker works).   \nThis, in order to avoid:   \n1) Reinventing all the -patented, mind you- rendering code;   \n2) Maintaining all the hinting/embedding in the font within the movie for eventual real-time rendering, which would make filesizes much bigger.   \n   \nI'm hopeful.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Sat, 2003-09-13 09:32",
+      "content": "Okay, I tested it in FlashMX 2004 on OS X. Not surprisingly, since OS X doesn't support grayscale bitmap fonts, it didn't work. By that I mean the font does not display correctly at all, much less take advantage of the new aliasing feature.   \n   \n(OS 9 _does_ support grayscale bitmap fonts, but FlashMX 2004 doesn't run on OS 9. The grayscale bitmap font I tried _does_ show up in FlashMX, but disappears when you close out the text box or the movie is published. No surprise there.)   \n   \nIf anyone out there is using the Windows version of FlashMX 2004, here's a Windows TTF grayscale font you can use to try it out:   \n   \n [http://www.ms-studio.com/FeltTipGray18.zip](http://web.archive.org/web/20050516140858/http:/www.ms-studio.com/FeltTipGray18.zip)\n\n"
+    },
+    {
+      "time": " Sat, 2003-09-13 09:52",
+      "content": ":-(   \n   \nBut thanks for testing it, and for the font!   \n   \nHey, what about this: if somebody made a Flash movie on Windows using an embedded grayscale font, might the movie display OK on MacOS, since the OS only takes part during creation?   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Sat, 2003-09-13 10:14",
+      "content": "Mark, can you do me a big favor?   \n   \nThat FeltTip font works great in Word and CharacterMap, but not PhotoShop for example: you just get those boxes.   \n   \nI noticed the font has small boxes in each character slot on the outline side. Maybe that's causing Photoshop to ignore the embedded bitmaps, and having the outline characters empty (or more like undefined) would fix it? So if you get a chance could you possibly make a version of FeltTip with _only_ the bitmaps? No pressure though.   \n   \nhhp\n\n"
+    },
+    {
+      "time": " Sat, 2003-09-13 10:25",
+      "content": "Well, yeah, that's why I posted the font. It's an empirical question. (Referring to your second most recent post.)\n\n"
+    },
+    {
+      "time": " Sat, 2003-09-13 10:42",
+      "content": "As for Photoshop, I don't know what's going on there. The Mac grayscale bitmap I made only sort of works in Photoshop 7 in OS 9 (it comes out somewhat distorted) and not at all in OS X. As far as I know, Photoshop uses its own rendering engine for type, not the host OS's. Hey, if you really want the grayscale font in Photoshop, just set it in Word, do a screen capture, and paste it in. ;-)   \n   \nGrayscale bitmap fonts do offer some advantages, but support is a real mixed bag. I'm not planning to spend a lot of time on them myself.\n\n"
+    }
+  ]
+}

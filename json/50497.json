@@ -1,0 +1,82 @@
+{
+  "id": "50497",
+  "title": "Orphans and Widows in HTML",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi All!\n\nI am not sure if this is the right category to post, but here goes:\n\nHow do you deal with coding [orphans and widows](http://web.archive.org/web/20150409035615/http:/en.wikipedia.org/wiki/Widows_and_orphans) in HTML? I never used to think about this until I started working in my current job and the proofreader would mark up the widows. My quick fix is a tag before the last word of the sentence before the widowed line. My dilemma with this solution, however, is when text gets resized by the user (using their browser settings), the tag can move to the next line, thus prematurely breaking the line midway and making the paragraph appear disjointed.\n\nAny designers/front-end developers have an alternative solution to this?\n\nThanks muchly! :)\n\n",
+  "author": "Webmystressk",
+  "time": "14 Oct 2008 — 12:51pm",
+  "uid": "38135",
+  "comments": [
+    {
+      "time": "14 Oct 2008 — 1:17pm",
+      "content": "HTML is meant to describe the information presented, not set its layout. That job is left to CSS, or at least it is supposed to be if you're using idealized coding style standards.\n\nThe best I can think of to prevent widows and orphans is to substitute spaces between the last couple/few words of a paragraph with a nonbreaking space (& nbsp; without the space) to keep them glued together on the same line, though this might result in the preceding line having very few words there too.\n\n"
+    },
+    {
+      "time": "14 Oct 2008 — 1:39pm",
+      "content": "Thanks for the feedback, cuttlefish!\n\nI've tried this before and there's still an extra space that makes the document look much worse. That's all right though... I'll just have to find another way :)\n\n"
+    },
+    {
+      "time": "14 Oct 2008 — 1:59pm",
+      "content": "As Cuttlefish said this is not the purpose of html.\n\nFor example, look through these forums and you will see widows and orphans everywhere - on a typography site. Just explain this to the proofer, there is no work-around that will have cross-browser and cross-platform coherency. Anything you do in this regard is only to make it look right on your own particular screen, and in all likelihood in one particular browser. Among other issues you will cause are problems for visually impaired users who need to scale text up or to have it read out by the computer.\n\nIf you must have your text conform to the rules of the (superior) world of print then place it as a static image or dynamic flash image. I wouldn't recommend this as you should work within the medium in its simplest form in order to alienate as few users as possible.\n\n"
+    },
+    {
+      "time": "14 Oct 2008 — 2:24pm",
+      "content": "Handling this would be the domain of CSS. CSS3 has some properties for this:\n\n[http://www.w3.org/TR/css3-page/#breaks-inside](http://web.archive.org/web/20150409035615/http:/www.w3.org/TR/css3-page/#breaks-inside \"http://www.w3.org/TR/css3-page/#breaks-inside\")\n\nBut I don't think any web browser supports them at this time.\n\nAnd you NEVER let copyeditors edit what they see on screen. That's ridiculous. No two people will see the web page the same way with any real consistency.\n\nEDIT: Though I don't think those CSS properties would handle the 'one word line at the bottom of a paragraph' type of widow.\n\n"
+    },
+    {
+      "time": "14 Oct 2008 — 3:25pm",
+      "content": "There are blog plugins like [Widon't](http://web.archive.org/web/20150409035615/http:/www.shauninman.com/archive/2006/12/05/widont_2_wordpress_plugin) to work around the issue.\n\n"
+    },
+    {
+      "time": "14 Oct 2008 — 3:46pm",
+      "content": "You could always make a large donation to the Mozilla foundation with a request that the rendering engine fix widows. But given how obsessed browser programmers are with the utterly irrelevant issue of page rendering speed it’s not likely to happen if you aren’t kicking in at least six figures. I’m not really sure how one gets orphans in HTML, unless there’s a tricky multi-column text layout in use, but those are very rare.\n\n"
+    },
+    {
+      "time": "15 Oct 2008 — 12:04pm",
+      "content": "Cuttlefish\n\n???\n\nFrom\n\n[http://www.w3schools.com/xml/xml\\_whatis.asp](http://web.archive.org/web/20150409035615/http:/www.w3schools.com/xml/xml_whatis.asp \"http://www.w3schools.com/xml/xml\\_whatis.asp\")\n\n(I quote)\n\nThe Difference Between XML and HTML\n\nXML is not a replacement for HTML.  \nXML and HTML were designed with different goals:\n\nXML was designed to transport and store data, with focus on what data is.  \nHTML was designed to display data, with focus on how data looks.\n\nHTML is about displaying information, while XML is about carrying information.\n\n"
+    },
+    {
+      "time": "15 Oct 2008 — 12:16pm",
+      "content": "That's a slightly inaccurate/out-of-date definition.\n\nboth xml and html are markup languages that describe the data they contain. xml is used mostly for exchanging data while html is mainly to provide data to a web browser.\n\nCSS is then used to style and format said html.\n\n"
+    },
+    {
+      "time": "16 Oct 2008 — 6:08am",
+      "content": "This reminds me of a conversation with my wife, when I tried to suggest that a screwdriver was not also a pry bar, hammer, chisel, gouge, trowel, etc.\n\n"
+    },
+    {
+      "time": "16 Oct 2008 — 6:50am",
+      "content": "Exactly. It'll work in a pinch, but your Shift Manager and OSHA will give you crap for it.\n\n"
+    },
+    {
+      "time": "16 Oct 2008 — 7:28am",
+      "content": "If the proofreader marks up widows and orphans, just tell him.her to resize their browser window a little bit, that will fix it.  \nAfter the initial \"yeah, but...\", they might get it.\n\n"
+    },
+    {
+      "time": "16 Oct 2008 — 8:39am",
+      "content": "@charles\\_e: That definition is certainly outdated, as Aluminum mentioned. Current web design best practice puts a lot of emphasis of using (X)HTML to define the _semantics_ of content, rather than the display. While it was once common (and is still too common) to use markup in a presentational role, these days this is definitely frowned on by any decent web designer/developer.\n\nHopefully CSS will at some point bring decent typographic control to the web. But with the glacial pace of the CSS Working group, I wouldn't bet on it any time soon.\n\n[[semibad](http://web.archive.org/web/20150409035615/http:/www.semibad.com/)]\n\n"
+    },
+    {
+      "time": "16 Oct 2008 — 9:24am",
+      "content": "As to the out-dated definition:\n\nIs it \\*definition\\*, or current practice? I know a bunch of web designers are using HTML in ways for which it it wasn't designed. Most of the people in the print world I know are moving toward XML for files that are to have multiple uses. For web display, those would be converted (using XSLT). In this model, HTML is still for \\*display\\*.\n\nI've always taken XML to be an extension of SGML -- that is, generic, unlike HTML.\n\n"
+    },
+    {
+      "time": "16 Oct 2008 — 9:59am",
+      "content": "It depends on what you mean by \\*display\\*. But yea, you're on the right track.\n\nxml = the content marked up via generic xml --\\> xslt = lets you transform the generic xml to a specific structur (in this case HTML) --\\> html = the markup language that tells the browser what the content 'chunks' are --\\> Web Browser = the \\*display\\* that will render the html using whatever default styles it wants to use --\\> CSS = the styles that are to override the browser's default styles to layout the page, style the type, add design elements (color, decorative images, etc.)\n\nTechnically, XML is a SUBSET of SGML, while valid HTML is an APPLICATOIN of SGML. But don't ask me to tell you what that actually means. ;o)\n\nOn top of that, many folks are using xhtml or, at least, xhtml syntax, which takes it back to being an SUBSET of SGML (as xhtml = xml).\n\nIn fact, newer browsers will allow you to use xml and css all by themselves to present and format in a web page. Not really the original intent, but viable.\n\nGoing all the way back to the original question...the reason you don't deal with widows online is that to have widows to begin with, you need a fixed canvas and fixed variables such a specific typeface and specific type size. You have control over this in print, buy you have no real control over it online. The end users can over-ride any design suggestions you may make. I can change the font, the size, the size of my browser, etc. So it becomes a rather futile thing to dwell upon.\n\nThe copyeditor might just be old-schooling it and marking up everything via habit so you can just ignore the elements that aren't applicable online. On the other hand, if they are insisting on things like this, then they need to get some basic training on how online typesetting works.\n\n"
+    },
+    {
+      "time": "16 Oct 2008 — 1:12pm",
+      "content": "Orphans/widows are defined in paged media section of CSS3 standard. So it was supposed to work on printed pages. However, they have exactly the same meaning in multicolumn layout, which is also defined in CSS3.\n\nAccording to [http://en.wikipedia.org/wiki/Comparison\\_of\\_web\\_browser\\_CSS\\_support#Prope...](http://web.archive.org/web/20150409035615/http:/en.wikipedia.org/wiki/Comparison_of_web_browser_CSS_support#Properties \"http://en.wikipedia.org/wiki/Comparison\\_of\\_web\\_browser\\_CSS\\_support#Properties\") Opera, Safari and Chrome support orphans/widows. This page does not mention IE8, but it supports them too. FireFox is still behind in paged media support.\n\nThanks,  \nSergey\n\n"
+    },
+    {
+      "time": "16 Oct 2008 — 2:27pm",
+      "content": "<cite>This reminds me of a conversation with my wife, when I tried to suggest that a screwdriver was not also a pry bar, hammer, chisel, gouge, trowel, etc.</cite>\n\nCharles, that is so wonderful about a screwdriver: it IS also a pry bar, hammer, chisel, gouge, trowel, etc. And it even can be used to (un)screw those thingamajingies, wat are the called again — oh yeah: screws.\n\nOn a sidenote: even in the formalised environment of newspapers and magazines w&o’s appear all the time. There seems to be a break point where the cost in time and money of copyediting and repositioning apparantly outweighs the principles of good typography.\n\nBut then — good typography is pretty scarce. And has been for ages. The best typography was done in the first half or threequarter century after Gutenberg invented the ‘art’.\n\n. . .  \nBert Vanderveen BNO\n\n"
+    },
+    {
+      "time": "16 Oct 2008 — 5:49pm",
+      "content": "In the world I live in (which includes a private toolchest), widows are to be banished but orphans allowed. That's if you're referring to lines. If you're referring to words, the last word in a paragraph is only that.\n\nPeople keep talking about \"good typography\" as if the compositor allows the last word of a paragraph to fall on a line by itself out of laziness or ignorance. Usually, it is a matter of compromise. If you take down the last word -- or an even greater sin, hyphenate it, you also preserve close, even word spacing we all aspire to. Of course if you're allowed to edit the copy, you can make things fit, but in this case, what pleases a typographer will give an editor apoplexy.\n\nThe funniest couple of PEs I ever saw was \"PE--loose line, with a mark right beside it \"PE--hypenated last word.\" Well, even if you threw out all the wordspaces, that word wasn't going to go up. And the line sure wasn't going to get any tighter if you took the entire word down. Did I mention that it was a three-line paragraph?\n\nI know editors who apply the principle even to bibliographic entries, which are usually only two lines long. Where do they think that extra space is going to come from?\n\nMy rule of thumb is that however many words it takes, the last line of a paragraph should be longer than the paragraph indent of the following paragraph. Sometimes two words, such as \"of it.\" aren't enough.\n\n"
+    }
+  ]
+}

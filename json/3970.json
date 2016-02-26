@@ -1,0 +1,26 @@
+{
+  "id": "3970",
+  "title": "Romanian T comma Vs. T cedilla",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "What is the status of the [T and t comma](http://web.archive.org/web/20141023224049/http:/www.typophile.com/wiki/tcommaaccent) (021A & 021B)  \nversus the T and t cedilla (0162 and 0163) for Romanian?\n\nIn the Latin Extended A Unicode Doc it mentions the comma  \nbeing \"preferred\" over the cedilla. Adobe seems to be going  \nwith the comma. Has the cedilla version fallen out of use and  \nor been replaced?\n\nAny help is greatly appreciated.\n\n",
+  "author": "eolson",
+  "time": "26 Mar 2004 — 2:45pm",
+  "uid": "1087",
+  "comments": [
+    {
+      "time": "26 Mar 2004 — 3:31pm",
+      "content": "The form \"t with comma\" is strongly recommended in all cases.   \n   \nYou can include one lowercase glyph \"tcommaaccent\" with the Unicode codepoints U+0163 and U+021B, and one uppercase glyph \"Tcommaaccent\" with the Unicode codepoints U+016A and U+021A.   \n   \nAlternatively, you might include one lowercase glyph \"tcommaaccent\" (U+0163), one identical glyph \"uni021B\" (U+021B), one uppercase glyph \"Tcommaaccent\" (U+0162) and one identical uppercase glyph \"uni021A\" (U+021A). The latter is practical if you don't principally want to include double-mappings of Unicode characters. Otherwise, the first described approach is the way to go.   \n   \nFor get about the variant \"t with cedilla\".   \n   \nRegards,   \nAdam\n\n"
+    },
+    {
+      "time": "26 Mar 2004 — 4:47pm",
+      "content": "I'll second what Adam has written: to date I have not found a single language that uses T/t with cedilla. The only likely candidate was Gagauzi, which is a Turkic language spoken in Romania, and which uses the S/s with cedilla following Turkish orthography, but the T/t with 'comma accent' following the Romanian orthography.   \n   \nNote, however, this important issue: the S/s and T/t with cedilla and comma accent were only disunified in Unicode and ISO 10646 after the need to distinguish in plain text for bilingual documents became clear. The older Windows codepage for Romanian (CP 1250) uses the Unicode codepoints for the cedilla diacritics, not the newer comma diacritics. This means that the vast majority of Romanian documents are encoded using the cedilla diacritics, not the preferred comma forms. This needs to be addressed at the glyph level in OpenType fonts, using the Romanian language system tag ROM and the Localised Forms \\<locl\\> feature to map the S/s cedilla diacritic character codes to the comma diacritic glyphs.   \n   \nI'm afraid I don't know how Gagauzi is typically encoded, so can't advise on what manner of OpenType gymnastics might be required.\n\n"
+    },
+    {
+      "time": "27 Mar 2004 — 7:12am",
+      "content": "Thanks guys.   \nMy hunch has been confirmed. I'll stick with the t + comma but   \ntake your advice and double up with codepoints for safe keeping.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "45222",
+  "title": "how to select a unicode range using python",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "hey guys am a newbie in fontlab could you help me how to select a unicode range using macro?  \nlike the “select alphanumeric”, I can’t figure out how it selects by unicode range.  \nhere is the select alphanumeric codes:\n\nfl.Unselect()\n\nfor i in range(0x41, 0x5b):  \n fl.Select(Uni(i))\n\nfor i in range(0x61, 0x7b):  \n fl.Select(Uni(i))\n\nfor i in range(0x30, 0x3A):  \n fl.Select(Uni(i))\n\nfl.iglyph = 20\n\nnow how do I change this to select unicode range from Amacron to Gdotaccent?\n\n [‹ Drop caps with \"snug\" first line](http://web.archive.org/web/20080704195912/http:/www.typophile.com/node/45281 \"Go to previous forum topic\") [So how do I learn this whole encoding thing? ›](http://web.archive.org/web/20080704195912/http:/www.typophile.com/node/45286 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080704195912/http://www.typophile.com/user/30838\" title=\"View user profile.\">markzman</a>",
+  "time": "<br>",
+  "uid": "30838",
+  "comments": [
+    {
+      "time": " 13.May.2008 4.55pm",
+      "content": "Here are a few lines from [Unicode’s name list](http://web.archive.org/web/20080704195912/http:/www.unicode.org/Public/UNIDATA/NamesList.txt)  \n`\nCode Name\n0030\tDIGIT ZERO ...\n0039\tDIGIT NINE`\n\n0041 LATIN CAPITAL LETTER A ...  \n005A LATIN CAPITAL LETTER Z\n\n0061 LATIN SMALL LETTER A ...  \n007A LATIN SMALL LETTER Z\n\nThat means that ’LATIN SMALL LETTER A’ is `Uni(0x0061)` or equivalently `Uni(0x61)` etc. since we may always remove zeros between `0x` and the first non zero digit. Thus\n\n`range(0x0030,0x0039+1)` gives 0123456789  \n`range(0x0041,0x005A+1)` gives ABCDEFGHIJKLMNOPQRSTUVWXYZ  \n`range(0x0061,0x007A+1)` gives abcdefghijklmnopqrstuvwxyz\n\nYour code above does not select all alphanumerical characters; it selects digits, capitals letters and small letters of only the English alphabet. It could have been written  \n`\nfl.Unselect()\nfor i in range(0x0030,0x0039+1) + range(0x0041,0x005A+1) + range(0x0061,0x007A+1):\n   fl.Select(Uni(i))\n`\n\nFrom Adobe’s file [http://www.adobe.com/devnet/opentype/archives/glyphlist.txt](http://web.archive.org/web/20080704195912/http:/www.adobe.com/devnet/opentype/archives/glyphlist.txt \"http://www.adobe.com/devnet/opentype/archives/glyphlist.txt\") `Amacron` is `0100` and `Gdotaccent` is `0120`; `range(0x0100,0x0120+1)` is used to select that range.\n\nMichel\n\n"
+    }
+  ]
+}

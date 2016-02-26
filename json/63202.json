@@ -1,0 +1,46 @@
+{
+  "id": "63202",
+  "title": "using a different value in the name table",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hey there. I received a question about one of my fonts that I do not understand and hope someone here can help. This is the email I got:\n\nHello Michael,  \nFirst, I'd like to thank you very much for the great typefaces you  \ncontinue to share. It really is appreciated. Second, I'd like to let  \nyou know about a problem I have encountered using 3Dumb, I believe it  \nrelates to a Windows bug, that is having trouble reading the data in  \nyour font file. I am trying to embed 3Dumb onto a site using CSS, the  \ntechnique works fine in the Safari browser, and Firefox on Mac, but in  \nFirefox on Windows, and IE the font isn't rendered.\n\nHere is my test case:  \n [http://christophermeyers.name/fonttest/](http://web.archive.org/web/20100203124847/http:/christophermeyers.name/fonttest/ \"http://christophermeyers.name/fonttest/\")\n\nAfter reading this:\n\n[https://bugzilla.mozilla.org/show\\_bug.cgi?query\\_format=specific&order=re...](http://web.archive.org/web/20100203124847/https:/bugzilla.mozilla.org/show_bug.cgi?query_format=specific&order=relevance+desc&bug_status= __open__ &id=517770 \"https://bugzilla.mozilla.org/show\\_bug.cgi?query\\_format=specific&order=relevance+desc&bug\\_status=\\_\\_open\\_\\_&id=517770\")  \nmy best guess is it has to do with the use of a numerical value in the  \nname table.\n\nIf you have any thoughts on this or would be able to re-release that  \nfont using a different value in the name table, I would greatly  \nappreciate it.\n\nAny idea what he is talking about or how to fix this? I use FontLab Studio.\n\nThanks.\n\n",
+  "author": "<a href=\"/web/20100203124847/http://typophile.com/user/45099\" title=\"View user profile.\">mtension</a>",
+  "time": "<br>",
+  "uid": "45099",
+  "comments": [
+    {
+      "time": "",
+      "content": "Tired late night thoughts:\n\nOpen FLS5's _FontInfo_, go through all pages, and whenever the name \"3Dumb\" appears, exchange it by \"ThreeDumb\". (Especially in the font name fields on the first _FontInfo \\> Names and Copyright_ page.)\n\nPerhaps you also need to change _FontInfo \\> Names and Copyright \\> Embedding_ to \"Embedding/Everything is allowed\". Don't remember, but perhaps the font's current setting does not allow use with @font-face in Windows.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Maybe I'm missing something here. But as far as I understand, the font should not work with @font-face in IE. IE only uses EOT fonts with the @font-face call, and from the email I assume the user only has the OTF (or ttf) version of the font?\n\nJason C\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hello Jason, the test site links to both .ttf and .eot, and according to the description the problem occurs in FF/Windows too which relies on .ttfs, so there is more to it than a missing or buggy .eot. Karsten\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thank you very much for responding I will try your suggestions and see if it works.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The problem is in the family/full names of your font, the family name is '3Dumb' with a capitalized 'D' and the fullname is '3dumb' with a lowercase 'd'. Believe it or not, this is enough to cause the t2embed library used to load fonts on Windows to burp. Firefox 3.5, Safari and IE all use this library but Safari falls back to rewriting the name table and using a low-level font loading API when the load using the t2embed library fails. Similar logic has been added for Firefox 3.6.\n\nTo avoid problems with the t2embed library on Windows:\n\n1. Make sure the fullname includes a precise match of the family name (e.g. family = \"Bountiful Bongo\", fullname = \"Bountiful Bongo Bold\" and not fullname = \"bountiful bongo bold\" or fullname = \"BountifulBongo Bold\").\n\n2. Make sure no name table record (including the license record) is longer than 2500 characters. Yes, this officially sucks...\n\nFor your font, the simple solution is rename '3dumb' to '3Dumb' in your name table records and everything should be groovy.\n\nJohn Daggett  \nMozilla Japan\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks jdaggett, that is a very clear explanation. This was the first font I made, and obviously I was sloppy. I really appreciate your time.\n\n"
+    },
+    {
+      "time": "",
+      "content": "jdaggett, your suggestion worked. Thanks for all of you for taking the time to help me out, I really appreciate it. All the best.\n\n"
+    }
+  ]
+}

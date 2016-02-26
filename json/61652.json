@@ -1,0 +1,34 @@
+{
+  "id": "61652",
+  "title": "Help with spacing glitch",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I'm not a typographer, so bear with me. I posted in general discussion about a variation that I made on a the characters zero, one, and tilde in a typeface. I tried to leave everything else alone. The characters themselves appear fine, but there seems to be a glitch (stray point? reversed curve?) in one of the fonts because the line spacing gets expanded, even during a FontBook preview.\n\nI am using FontForge, and it doesn't seem to indicate any particular problem.\n\nCould someone take a look at these and see if the error jumps out at them? Even narrowing it down to which variant is the troublemaker would be helpful.\n\n_[Link removed by me]_\n\nThanks!\n\n",
+  "author": "<a href=\"/web/20100203110057/http://typophile.com/user/47650\" title=\"View user profile.\">beroe</a>",
+  "time": "<br>",
+  "uid": "47650",
+  "comments": [
+    {
+      "time": "",
+      "content": "FontLab Studio doesn't seem to like your files, it hangs when trying to import them :(\n\nWhy did you choose .dfont as file format? .dfont is only supported on Mac OS, do all biologists use a Mac? ;) I'd generate the fonts as TTF, these are more widely supported.\n\nRe. your line spacing problem, have you set the vertical metrics to identical values in all four fonts?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Jens --\n\nI chose .dfont out of ignorance -- was the only option I saw in FontForge that would bundle them together like that.\n\nI uploaded a TTF set here:  \n [http://www.computingforbiologists.org/files/CourierPCfB.ttf.zip](http://web.archive.org/web/20100203110057/http:/www.computingforbiologists.org/files/CourierPCfB.ttf.zip \"http://www.computingforbiologists.org/files/CourierPCfB.ttf.zip\")\n\nI didn't set the vertical metrics myself because I started with the full set and just made a few edits. (I only see horizontal in the menu?) That could have been automatically set somehow? At one point I tried connecting an open path with an arc during edits, and it created a big loop out into the netherworld. I think I successfully undid that change, but maybe it altered that vertical setting in the process.\n\nI also did save them once with a stray point, and maybe that altered things?\n\nReally appreciate it!\n\n-Steve\n\n"
+    },
+    {
+      "time": "",
+      "content": "I ran your fonts through a test tool, FontQA, and these are the errors that were found:\n\n_Some contours have less than three nodes._\n\nCourierPCfB: zero: (x=388, y=392)  \nCourierPCfB Bold Oblique: mhook: (x=1163, y=16), rhookturnedsuperior: (x=688, y=529)  \nCourierPCfB Bold: mhook: (x=1149, y=16), rhookturnedsuperior: (x=565, y=529)\n\nSome composite glyphs have empty components.  \nCourierPCfB: zerowidthspace-\\>(uni0000), zerowidthnonjoiner-\\>(uni0000), zerowidthjoiner-\\>(uni0000)\n\nI believe the last error, the empty components, are responsible for the wrong linespacing calculation. When you delete the empty components from these three glyphs, it should probably work okay.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Oh, and if you want all four fonts in one file, you could generate a TTC (TrueType Collection) format. But I'm not sure if FontForge supports it yet.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I truly appreciate your time on this. I will check those elements. It is a little weird that of those, I only knowingly edited the zero, but may have inadvertently put a dot after selecting a space... Glad to see it is not an issue of a reversed path or something else over my head.\n\nI ordered typeTool (= fontLab junior) and maybe it will export TTC.\n\nI'm really impressed by the quality of discourse on this board. When we have a more final cover design for the book, I'll definitely post it here for critique.\n\n"
+    }
+  ]
+}

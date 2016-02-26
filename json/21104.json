@@ -1,0 +1,66 @@
+{
+  "id": "21104",
+  "title": "Accessing a font's glyphs in Microsoft Word utilizing Windows XP",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Utilizing Microsoft Word and Windows XP, how could one easily access a font's glyphs (ligatures, old style numerals, etc.) without having to go through the cumbersome process of copying and pasting from the font's character set?\n\nMany thanks!\n\n",
+  "author": "drmns",
+  "time": "3 Jul 2006 — 9:14am",
+  "uid": "4179",
+  "comments": [
+    {
+      "time": "3 Jul 2006 — 11:55am",
+      "content": "easily? I don't think that exists in XP land. Seriously though, I would be interested in an answer as well. Whenever I try to use the character map on an Opentype face that I also have on my Mac, a lot of the glyphs don't show up.\n\n"
+    },
+    {
+      "time": "3 Jul 2006 — 12:23pm",
+      "content": "I think this will answer your question:  \n [http://typophile.com/node/20920](http://web.archive.org/web/20150307230611/http:/typophile.com/node/20920 \"http://typophile.com/node/20920\")\n\n\\> _how could one easily access a font’s glyphs (ligatures, old style numerals, etc.) without having to go through the cumbersome process of copying and pasting from the font’s character set?_\n\nCan you name the font you're using?\n\n"
+    },
+    {
+      "time": "4 Jul 2006 — 5:12pm",
+      "content": "Adobe Jenson Pro, LTC Californian Pro Text - for starters.\n\n"
+    },
+    {
+      "time": "6 Jul 2006 — 8:19am",
+      "content": "How about this:\n\n[http://www.nbcs.rutgers.edu/~hedrick/typography/](http://web.archive.org/web/20150307230611/http:/www.nbcs.rutgers.edu/~hedrick/typography/ \"http://www.nbcs.rutgers.edu/~hedrick/typography/\")\n\nScroll down here:  \nUtility for producing SC and expert OpenType fonts\n\nNever tried it myself.\n\n"
+    },
+    {
+      "time": "7 Jul 2006 — 3:11am",
+      "content": "FWIW: Have just downloaded and tried that utility; seems to work as described on Adobe fonts. Mixed results on others, but that's acknowledged by the creator. Gives you access to small caps, OS figures, ligatures and related features if they were included in the font. Doesn't get at alternate glyphs. Because of the structured way it creates the name for the font containing the accessed characters, Word users could presumably then code a macro to swap out characters from one font to the other according to their own preferences. (Like, swap numerals to OSF except within a table, swap to small caps where a particular style's used - or where faux small cap formatting is applied! etc.)\n\n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_  \nEver since I chose to block pop-ups, my toaster's stopped working.\n\n"
+    },
+    {
+      "time": "7 Jul 2006 — 7:48am",
+      "content": "Good to know, in case I ever need to use Openoffice with OpenType. (I use Lyx/Latex and until it gets native support I will continue to use postscript.)\n\n"
+    },
+    {
+      "time": "7 Jul 2006 — 12:28pm",
+      "content": "Typequake,\n\nA fully OpenType-savvy TeX version has been available for quite a while now: [http://scripts.sil.org/xetex](http://web.archive.org/web/20150307230611/http:/scripts.sil.org/xetex \"http://scripts.sil.org/xetex\")\n\nA.\n\n"
+    },
+    {
+      "time": "7 Jul 2006 — 11:04pm",
+      "content": "Yes, and an excellent system it is. However, I run Lyx on Windows, so I don't think Xetex would work.\n\n"
+    },
+    {
+      "time": "8 Jul 2006 — 3:04am",
+      "content": "Why not? On my machine XeTeX works fine, although I have not tried Lyx.\n\n"
+    },
+    {
+      "time": "8 Jul 2006 — 8:28am",
+      "content": "I am quite a fan of Lyx, which I used to prepare my doctoral thesis (that's the way I became interested in typography). Check this out:  \n [http://wiki.lyx.org/Mac/XeTeX](http://web.archive.org/web/20150307230611/http:/wiki.lyx.org/Mac/XeTeX \"http://wiki.lyx.org/Mac/XeTeX\")\n\n"
+    },
+    {
+      "time": "9 Jul 2006 — 1:18pm",
+      "content": "Adobe's existing OpenType fonts ALL encode every single glyph in the font, with the small caps, oldstyle figures, etcetera at standardized Unicode positions (around U+F6xx-F7xx).\n\nSo there's no need to hack apart the font with special tools. You can access all those glyphs now.\n\nMind you, Adobe is also abandoning this approach in new fonts moving forwards: glyphs without legitimate Unicodes, that are alternates or ligatures of standard characters, will be left unencoded (accessible by OpenType layout features).\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "10 Jul 2006 — 5:44am",
+      "content": "Thomas,\n\nYes, but HOW do you access them? Suppose you have a sentence and you want to change two words to small caps -- what do you do in Word?\n\n"
+    },
+    {
+      "time": "14 Jul 2006 — 6:53am",
+      "content": "Preferred answer:  \nUse only applications that support OpenType Layout features.\n\nAlternative answer:  \nWord uses the Unicode codepoints. Any character with a Unicode codepoint can be entered into Word -- through standard system mechanisms such as an appropriate keyboard layout, the Character Map application (through the clipboard), and also by methods specific to Word, e.g. typing the four-letter hexadecimal code and pressing Alt+X, or through a VB macro.  \n [Adam Twardoch](http://web.archive.org/web/20150307230611/http:/typophile.com/wiki/Adam%20Twardoch), in [FontLab forum](http://web.archive.org/web/20150307230611/http:/groups.msn.com/FontLab/general.msnw?action=get_message&mview=0&ID_Message=5986)\n\nN.B.: As Thomas said, Adobe will soon abandon the practice of using PUA codepoints, so the use of the method above is highly discouraged (even with fonts that contain PUAs nowadays).\n\n"
+    }
+  ]
+}

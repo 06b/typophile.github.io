@@ -1,0 +1,72 @@
+{
+  "id": "119826",
+  "title": "Universal Media Control Characters - Existing or New Free Font",
+  "forum": "Build",
+  "tags": [
+    "characters",
+    "font",
+    "Build"
+  ],
+  "content": "Greetings,\n\nI'm working on updating my site's code from XHTML 1.1 to XHTML 5, part of that includes the music player. For years I've used an image for the media control characters though now since I'm doing the design update I want to make it easy for people who create themes to change the colors of the controls hence fonts and hence why I eventually wandered to these forums.\n\nEither one of two goals would work fine for me. First I've spent time browsing and searching through Unicode character sheets for existing characters with some success. Then after having little-to-no luck decided to mess around with the idea creating a font specific to media control characters, at least for now. I've downloaded and installed FontForge, created a new font and am having some difficulty determining how to create characters beyond #255 (in red at the top-left). If I go this route I don't want to use an existing font as I want to ensure what I create is purely free to use by others. Alternatively I'd be happy to use an existing purely free font.\n\nHere is an image of the media control characters I'm trying to find or at least create...\n\n![Example Media Control Characters](http://web.archive.org/web/20150111051508im_/http:/i.stack.imgur.com/m90qr.png)\n\nHere are some of the characters I've found though don't seem to be well supported by any of the fonts I've tried...\n\n[Previous Track](http://web.archive.org/web/20150111051508/http:/fileformat.info/info/unicode/char/23ee)\n\n[Play Track](http://web.archive.org/web/20150111051508/http:/fileformat.info/info/unicode/char/23f5)\n\n[Pause Track](http://web.archive.org/web/20150111051508/http:/fileformat.info/info/unicode/char/23f8)\n\n[Stop Track](http://web.archive.org/web/20150111051508/http:/fileformat.info/info/unicode/char/23f9)\n\n[Next Track](http://web.archive.org/web/20150111051508/http:/fileformat.info/info/unicode/char/23ef)\n\nFor those having a look there are some inconsistencies between the characters (specifically previous and next track symbols).\n\nSo what are my options? Are there any truly free TTF/WOFF fonts with support for these universal media control characters? If not how do I create these characters in a new font using FontForge or other open source or freeware software?\n\n",
+  "author": "JAB Creations",
+  "time": "23 Sep 2014 — 1:50pm",
+  "uid": "223164",
+  "comments": [
+    {
+      "time": "23 Sep 2014 — 2:12pm",
+      "content": "[http://fortawesome.github.io/Font-Awesome/](http://web.archive.org/web/20150111051508/http:/fortawesome.github.io/Font-Awesome/ \"http://fortawesome.github.io/Font-Awesome/\")  \nPerhaps?\n\nAlso: [http://icomoon.io](http://web.archive.org/web/20150111051508/http:/icomoon.io/ \"http://icomoon.io\")\n\nOf interest: http://listgeeks.com/#!/view/icons-as-webfonts/by/stewf\n\n"
+    },
+    {
+      "time": "23 Sep 2014 — 3:15pm",
+      "content": "Thanks Riccard! The Font-Awesome works great! The second link I wasn't sure of and I'm completely unsure of what is going on at the third site.\n\nWhat I've done is isolated the code and used [HTML Escape](http://web.archive.org/web/20150111051508/http:/www.htmlescape.net/htmlescape_tool.html) tool that lets you copy/paste characters and it gives you the numeric entity (my preference versus say the named entities).\n\nCSS\n\n`@font-face {\n  font-family: 'FontAwesome';\n  src: url('fonts/fontawesome-webfont.eot?v=4.2.0');\n  src: url('fonts/fontawesome-webfont.eot?#iefix&v=4.2.0') format('embedded-opentype'), url('fonts/fontawesome-webfont.woff?v=4.2.0') format('woff'), url('fonts/fontawesome-webfont.ttf?v=4.2.0') format('truetype'), url('fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular') format('svg');\n  font-weight: normal;\n  font-style: normal;\n}\np {\n  display: inline-block;\n  font: normal normal normal 14px/1 FontAwesome;\n  font-size: inherit;\n  text-rendering: auto;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}`\n\nHTML\n\n`< p >\n& #xf049;\n& #xf048;\n& #xf04a;\n& #xf04b;\n& #xf04c;\n& #xf04e;\n& #xf051;\n& #xf050;\n< /p >`\n\nThere may be additional fonts with the same characters without the fill however I don't want to commit an excessive amount of time to the subject right now; creating the foundation is the most important thing. Thanks for your help, I greatly appreciate it!\n\n"
+    },
+    {
+      "time": "24 Sep 2014 — 2:20am",
+      "content": "#xf049; etc. are Private Use characters. They are best being avoided, because their meaning is not defined, so when the specific web font doesn’t load, they can’t be displayed in a fallback font.\n\nYou had the correct codes in your first post, you should definitely continue to use these (#x23ee; ...)\n\nThe FontFont UI Icons collection contains all these symbols, designed to work together, but the fonts are not free: [https://www.fontfont.com/news/new-release-ff67](http://web.archive.org/web/20150111051508/https:/www.fontfont.com/news/new-release-ff67 \"https://www.fontfont.com/news/new-release-ff67\") (scroll down to ‘New Release: FF UI Icons’).\n\n"
+    },
+    {
+      "time": "24 Sep 2014 — 6:57am",
+      "content": "Agree with Jens. For a large number of the characters Font Awesome provides (e.g. euro, dollar, bank, chart, credit card, checkboxes, refresh, wheelchair...), there's no reason valid codepoints couldn't have been used!\n\nFurthermore, the approach that is being advocated by the FA site is that these icons are mere adornments meant to enhance the display. If the concept of \"play\", \"pause\", etc _is_ your message, these should be conveyed in the content of your page, not in the stylesheet. Or as it has [already been said...](http://web.archive.org/web/20150111051508/http:/technotes.iangreenleaf.com/posts/font-awesome-not-awesome.html)\n\n"
+    },
+    {
+      "time": "24 Sep 2014 — 10:24pm",
+      "content": "I will admit it is not a perfect solution however I need a basis for the long term and it works best for the moment. I'm not sure how to do any of this in SVG and on other sites more relevant to that I received no response. Private characters, I agree, they can change. The article wasn't written by someone coming off as mature, much more opinion based. Seeing as I'm building my own platform and making certain completely-free fonts available one of my goals is (as with all things I work on) to improve performance and standards; _fontawesome.woff_ is 64KB which is simply too much just for _just_ media control characters. I'll try to learn to create a standalone woff file and assign the characters to the appropriate numeric ids; there aren't enough (at least that I see offhand) though it would improve upon the works-already resolution I've come to. Eventually I'd love to create my own fonts though such a goal beyond my immediate goal is quaternary at best.\n\nThe most relevant thing I can ask at this point is how do I create a minimal font with these characters in FontForge? By default it doesn't allow more than 255 characters and excessive poking around hasn't helped me to figure out how to define any characters beyond the numeric id of 255 in FontForge.\n\nThere will always be people who take it upon themselves to say, \"No, don't do that.\" as if they have some sort of official standing that entitles them to dictate beyond having the freedom to share an opinion. If such people have a better idea that they are also willing to teach how to implement then great, otherwise they've just another naysayer and naysayers are just people that people such as myself ignore; there is always an answer even if it's not what you think it is.\n\n"
+    },
+    {
+      "time": "25 Sep 2014 — 3:11am",
+      "content": "[http://css-tricks.com/icon-fonts-vs-svg/](http://web.archive.org/web/20150111051508/http:/css-tricks.com/icon-fonts-vs-svg/ \"http://css-tricks.com/icon-fonts-vs-svg/\")\n\nAlso: [http://iconmelon.com/](http://web.archive.org/web/20150111051508/http:/iconmelon.com/ \"http://iconmelon.com/\")\n\n"
+    },
+    {
+      "time": "25 Sep 2014 — 9:16am",
+      "content": "I've created fonts with thousands of characters in FontForge. I don't know why you're seeing it limited to only 255. Maybe it has to do with the encoding you are using. Try Encoding \\> Reencode \\> Unicode.\n\nGranted, the page I linked to was rantish. There are plenty of other pages that state the case in a better way, but the message is the same. If you are creating a nice \"\\>\\>\" glyph, why not put it in the common codepoint (u+23e9)? Using PUA just recreates the old early-1990s problem of using Symbol to type Greek characters - give the document to someone that doesn't have that font, and it looks like gibberish.\n\n"
+    },
+    {
+      "time": "25 Sep 2014 — 9:21pm",
+      "content": "In FontForge there is full and BMP, which Unicode do I want?\n\nAlso when using File--\\>Generate Fonts... it doesn't allow me to select Web Open Font under the No Outline Font drop-down menu...what do I need to do to export this to a usable woff file I can use on the web?\n\n"
+    },
+    {
+      "time": "26 Sep 2014 — 7:47am",
+      "content": "BMP is going to give you access to the 65536 characters in \"Plane 0\", the Basic Multilingual Plane. Full will give you access to codepoints in all 16 planes, though I believe the total number of characters you can have in your font is still only 65536. The basic UI controls are all in the BMP, but if you ever want to expand upon that, there are some in Plane 1 too. I don't know of any reason not to go Full right away, except maybe that it's a bit easier to navigate the editor window when it has fewer character slots to scroll through.\n\nI only generate TTF and OTF, so I can't answer the question about WOFF.\n\nI do have an OFL font I'm working on that includes the UI characters you've mentioned, but it's not ready for release yet.\n\n"
+    },
+    {
+      "time": "26 Sep 2014 — 9:10am",
+      "content": "JAB, if it would be helpful, I could cut a demo including the symbols you need.\n\n"
+    },
+    {
+      "time": "26 Sep 2014 — 11:16am",
+      "content": "FontForge is crashing at every _ **EVERY** _ opportunity, touching the scrollbars, dragging windows from the second screen to the first because it's too dumb to remember the window preference, it Macintosh \"maximizes\" on my laptop (which means it just resizes the window arbitrarily and about ten thousand other different retarded combinations of retardedness) and that was after all the fuss on my desktop. All I was trying to do was a very simply cut/paste (and I don't copy because when I did it kept pasting the first character even though I _explicitly_ copied the second). FontForge is absolutely infuriating to work with, I think even Moby -Dick would get bored and go home and check his email at this point.\n\nIn FontAwesome I need the following characters to appear on my website from left to right in the following numeric order...\n\n61,513  \n61,512  \n61,514  \n61,515  \n61,516  \n61,518  \n61,521  \n61,520\n\nSince there are eight characters but only seven spaces I attempted to start at character 9192 since overshooting to 9,200 is an alarm clock and apparently the only reference to character 9192 was something about ... drunk Japanese people? You know Unicode would make a lot more sense if there were _numerical_ indexes that used hex as a secondary index reference...\n\nChristTrekker, I would greatly appreciate it seeing as I can't even save more than a single character before the program makes the Hindenburg look like an overwhelming success. I'm not sure what the characters look like and I'm not sure if all the characters I want are there so would it be possible if someone could also please copy/paste from FontAwesome like I as attempting _just_ those characters to those numeric positions and export to a WOFF format?\n\n"
+    },
+    {
+      "time": "26 Sep 2014 — 12:16pm",
+      "content": "This script subsets fontawesome for me and saves the subset as WOFF:\n\n    #!/usr/local/bin/fontforge -lang=ff\n    \n    m = [61512, 61513, 61514, 61515, 61516, 61518, 61520, 61521]\n    \n    Open(\"fontawesome-webfont.ttf\",1)\n    SelectNone()\n    i = 0\n    j = SizeOf(m)\n    while (i < j)\n      d = SelectMoreSingletonsIf(m[i])\n      ++i\n    endloop\n    SelectInvert()\n    Clear()\n    Generate(\"fontawesome_subset.woff\",\"woff\",0)\n    Close()\n\n"
+    },
+    {
+      "time": "26 Sep 2014 — 1:41pm",
+      "content": "Té Rowan, thanks though I have no idea what to do with that (I guess Python) code? I'm guessing most people here are running Linux as their primary OS, I'm running a cleaned up version of Windows 7.\n\n"
+    },
+    {
+      "time": "27 Sep 2014 — 5:31am",
+      "content": "I'm not good enough at Python to script FontForge in that. It's just plain old FFscript. In any case, it gives an idea of what operations are needed to subset fontawesome: Load the font, make sure only the Unicode values in the array are selected, invert the selection (so they are the ones NOT selected), remove everything selected, save whatever remains as a WOFF file.\n\nOS? Nah, most folk here work on Macs or Windows boxes. Linux is a small minority; Fontlab _et al_ are not Unix-native.\n\n"
+    }
+  ]
+}

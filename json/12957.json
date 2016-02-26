@@ -1,0 +1,54 @@
+{
+  "id": "12957",
+  "title": "OS X Font Weirdness",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "OK, second try...first one seems to have vaporized into the ether. My apologies if this ends up a double post.\n\nStrange things are happening with the fonts on my iMac running MacOS 10.3.9 (and were happening previously). I cannot use Hoefler Text Ornaments in certain applications, particularly Word 2004. Any characters I type show up as empty squares.\n\nIf I try to use the HTO in TextEdit, it switches to Times. Bizarrely, it works fine in earlier versions of Word. The font looks completely normal in both Apple’s Font Book and Lemke’s FontBook application.\n\nSimilarly, I recently downloaded a trial of Broadsheet (from [www.texashero.com](http://web.archive.org/web/20081007190208/http:/www.texashero.com/ \"www.texashero.com\")). In TextEdit, if I start out typing something in Broadsheet, it switches to Lucida Grande after about the 6th character entered. Or, if I type a bunch of text in another font, then try to switch it to Broadsheet, it all converts...except the e’s.\n\nAny ideas what is going on? I have tried flushing the Office font caches, but it has has no effect. I was hoping that my recent upgrade to Panther would (somehow) fix things, but that hasn’t worked either.\n\nthanks for any suggestions you may have,  \nvv  \nJ.O.\n\n [‹ New 'Legend of Zorro' type treatment](http://web.archive.org/web/20081007190208/http:/www.typophile.com/node/12871 \"Go to previous forum topic\") [please name this font ›](http://web.archive.org/web/20081007190208/http:/www.typophile.com/node/13004 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081007190208/http://www.typophile.com/user/7728\" title=\"View user profile.\">jondru</a>",
+  "time": "<br>",
+  "uid": "7728",
+  "comments": [
+    {
+      "time": " 9.Jun.2005 9.58pm",
+      "content": "So...48 hours and 61 reads and no one has any constructive advice? Did I do something wrong?\n\nvv  \nJ.O.\n\n"
+    },
+    {
+      "time": " 10.Jun.2005 6.31am",
+      "content": "Jondru,\n\nIs there any application where HTO does work for you?  \nThis font has just several glyphs encoded as for Private Use. These glyphs are available through the Character Palette.  \nThe font works well in MS Word X for Mac (2001) under MacOS X 10.3.5.\n\nRegards,  \nJohnych\n\n"
+    },
+    {
+      "time": " 10.Jun.2005 8.12am",
+      "content": "i suspect that the issue with Broadsheet is that the e’s are actually missing from the font. This is most likely what is causing it to revert to another font. If you want the e’s you’ll have to purchase the full version of the font.\n\n"
+    },
+    {
+      "time": " 10.Jun.2005 8.46am",
+      "content": "Thanks for the feedback...I was wondering if I was just crazy.\n\nHoefler Text Ornaments does work completely normally in Word versions older than Word 2004. If I open an older Word file that contains Hoefler ornaments with Word 2004, the ornaments revert to blank squares. It was that strange behavior in TextEdit’s font palette that really seemed weird.\n\nSo if the glyphs are encoded for “private use,” you’re not supposed to use them? The behavior doesn’t just occur with one or two glyphs, it’s any of the ornaments, which look like they’re supposed to be accessible by ordinary means.\n\nWhat I’m really trying to determine is if this one font is corrupted (and if so, how to fix it) or if something more systemic is at work.\n\nAs for Broadsheet...d’oh! I hadn’t even considered that the demo version might be crippled in that way. The behavior was so similar to the Hoefler strangeness that I assumed they were related phenomena. I’ll try mailing the designer at texashero.com to verify.\n\nthanks again for the insight,  \nvv  \nJ.O.\n\n"
+    },
+    {
+      "time": " 10.Jun.2005 9.34am",
+      "content": "Your font cache could be corrupt. Try [Font Finagler](http://web.archive.org/web/20081007190208/http:/www.versiontracker.com/dyn/moreinfo/macosx/22795) as well as searching and trashing all of the evil little Adobefnt files.\n\n"
+    },
+    {
+      "time": " 10.Jun.2005 12.29pm",
+      "content": "Thanks very much. I tried clearing the caches, but I may have missed some. Hunting the Adobefnt files is a new tip that I’ll try. I tried Font Finagler once, without apparent success, but I’ll give a more concerted effort this time.\n\nthanks again,  \nvv  \nJ.O.\n\n"
+    },
+    {
+      "time": " 10.Jun.2005 2.08pm",
+      "content": "I just found this article at Adobe that seems to discuss what you’re referring to here (having to use the Character Palette): [http://www.adobe.com/products/indesign/pdfs/fonts\\_osx.pdf](http://web.archive.org/web/20081007190208/http:/www.adobe.com/products/indesign/pdfs/fonts_osx.pdf \"http://www.adobe.com/products/indesign/pdfs/fonts\\_osx.pdf\").\n\nBased on their description, I bet you’re exactly right and that’s what my problem is.\n\nThe only catch is that it says it was supposed to have been fixed in 10.3.6 (I’m running 10.3.9). Still, I’ll give your advice a try.\n\nthanks,  \nvv  \nJ.O.\n\n"
+    },
+    {
+      "time": " 10.Jun.2005 2.31pm",
+      "content": "I’ve not read that before, can you tell me what was supposed to be fixed? I currently run Suitcase XI and 10.3.9 with continued adobefnt files (read: constant) and occasional (read: hardly ever) problems with font cache.\n\n"
+    },
+    {
+      "time": " 10.Jun.2005 2.50pm",
+      "content": "Quoting from the document (p. 13):\n\n“In Mac OS X version 10.3.5, occasionally certain symbol/dingbats fonts do not display in certain applications. This problem was fixed with Mac OS X 10.3.6. A similar situation occurs when you are using a Unicode symbol/dingbat font within a Unicode-savvy application. An example of this is the Mac OS X font ZapfDingbats.dfont - which is a Unicode font - when used with TextEdit - which is a Unicode-savvy application - will result in the fond Lucida Grande being substituted for ZapfDingbats.dfont when you enter text with the keyboard.\n\nUnicode does not map symbol/dingbat characters to keyboard alphabet keys. Therefore, text entry...will result in ’invisible’ text, blank boxes, or font substitution.\n\nTo display and use dingbat characters...use the Character Palette....”\n\nThis sounds exactly like what I’ve seen. Since you’re using Suitcase, you may be interested to know that the doc refers readers to the Extensis KB Article #1302204 ( [http://www.extensis.com/en/support/kb\\_article.jsp?articleNumber=1302204](http://web.archive.org/web/20081007190208/http:/www.extensis.com/en/support/kb_article.jsp?articleNumber=1302204 \"http://www.extensis.com/en/support/kb\\_article.jsp?articleNumber=1302204\")).\n\nBTW, I also have a PC where I do a lot of work...would you recommend buying Suitcase for managing fonts on it?\n\nthanks,  \nvv  \nJ.O.\n\n"
+    },
+    {
+      "time": " 10.Jun.2005 3.01pm",
+      "content": "Thanks for quoting. I didn’t mean to say I am having problems though. I only meant that those adobefnt files do appear and I will occasionally trash them all.\n\nYes. I can recommend Suitcase, but, I haven’t used it on a PC in about a zillion years.\n\n"
+    }
+  ]
+}

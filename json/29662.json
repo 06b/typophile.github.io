@@ -1,0 +1,70 @@
+{
+  "id": "29662",
+  "title": "Font dimensions - generate problem",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "When I generate this typeface as an OpenType PS there are no problems, and it works properly.\n\nThe thing that seems peculiar to me is when I scroll across the type to select in InDesign or Illustrator (or whatever), it goes from baseline to baseline from one line to the next.\n\nAs it’s a script the characters are all different sizes, so the Ascender, Descender, Cap height and x height values are all pretty arbitrary, but the ascender and descender values do add up to 1000. The fonts’ UPM size is 1000.\n\nDoes anybody have any idea why the type is selected like this?\n\nHave I entered some incorrect values? please see the pics.\n\nThanks.\n\n ![](http://web.archive.org/web/20100105212435im_/http:/typophile.com/files/scroll_4717.jpg)\n\n ![](http://web.archive.org/web/20100105212435im_/http:/typophile.com/files/met1_4011.jpg)\n\n ![](http://web.archive.org/web/20100105212435im_/http:/typophile.com/files/met2_4820.jpg)\n\n",
+  "author": "<a href=\"/web/20100105212435/http://typophile.com/user/3834\" title=\"View user profile.\">Nick Cooke</a>",
+  "time": "<br>",
+  "uid": "3834",
+  "comments": [
+    {
+      "time": " 21.Nov.2006 5.15am",
+      "content": "Nick,\n\nSorry I can’t help you w/your problem, just wanted to say that it is beautiful!\n\n"
+    },
+    {
+      "time": " 21.Nov.2006 5.32am",
+      "content": "Thanks anyway Eric.\n\nNick Cooke\n\n"
+    },
+    {
+      "time": " 21.Nov.2006 5.41am",
+      "content": "Why is WinDecent different than TypoDecender and WinAcent different than TypoAcender?\n\nChrisL\n\n"
+    },
+    {
+      "time": " 21.Nov.2006 6.53am",
+      "content": "_Why is WinDecent different than TypoDecender and WinAcent different than TypoAcender?_\n\n[vertical metrics how-to](http://web.archive.org/web/20100105212435/http:/typophile.com/wiki/vertical%252Bmetrics%252Bhow-to)\n\n"
+    },
+    {
+      "time": " 21.Nov.2006 8.01am",
+      "content": "Paul, after reading that linked “clarification” I am now more confused than ever.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 21.Nov.2006 8.28am",
+      "content": "So am I Chris.\n\nPaul, I’ll read that article again to see if I can extract some meaning.\n\nNick Cooke\n\n"
+    },
+    {
+      "time": " 21.Nov.2006 8.31am",
+      "content": "well the problem with this article is that the solution is still out to the jury, but it describes the problem very well.\n\n"
+    },
+    {
+      "time": " 21.Nov.2006 8.48am",
+      "content": "Nick’s winAcent/WinDecent equalls 1,100 instead of 1,000. Is that right as a solution for him right now while we wait for the jury?\n\nChrisL\n\n"
+    },
+    {
+      "time": " 21.Nov.2006 9.19am",
+      "content": "from what i understand (someone correct me if i’m wrong)\n\nunder the latest thinking, the equation should be this:  \nTypoAscender + TypoDescender + TypoLineGap = WinAscent + WinDescent = hhea ascender (=WinAscent) + hhea descender (=WinDescent) + hhea line gap (=0(zero))\n\nnow hopefully that’s clear and correct\n\nunder this scheme, nick would want to bump his TypoLineGap to 100 to make all these things equal out. even then i’m not sure this would fix the problem as nick has described it.\n\n"
+    },
+    {
+      "time": " 21.Nov.2006 9.35am",
+      "content": "Thanks Paul. That tidies it up a lot. I hope it gives Nick something to try as well.\n\nMaybe his problem has to do more with his applications than his type? Do any other fonts act like this Nick?\n\nChrisL\n\n"
+    },
+    {
+      "time": " 23.Nov.2006 2.40am",
+      "content": "Nick,\n\nyour values look all-right to me.\n\nA.\n\n"
+    },
+    {
+      "time": " 23.Nov.2006 3.07am",
+      "content": "At last! I was just about to post a reply when Typophile went on vacation.\n\nThanks Paul and Chris for taking time to try to help, it’s good to get advice from a couple of fellow ’bezier wranglers’ Ha! Paul, I know you’re a Script Meister yourself - love Allyson and Zaner Pro.\n\nI altered the metrics according to Paul’s equation, minus the Typo Line gap and line gap, (is it necessary to have a value here?).\n\nCould the problem have something to do with ’Splats’ extending above and below the bounding box? Or too many points in these characters?\n\nSee [Olicana](http://web.archive.org/web/20100105212435/http:/typophile.com/node/16296)\n\nThe type selects differently in different programs – see below:\n\n ![](http://web.archive.org/web/20100105212435im_/http:/typophile.com/files/metsgrab_5889.jpg)\n\nIllustrator:(the word character is selected)\n\n ![](http://web.archive.org/web/20100105212435im_/http:/typophile.com/files/Illgrab_5965.jpg)\n\nInDesign:\n\n ![](http://web.archive.org/web/20100105212435im_/http:/typophile.com/files/InDesgrab_6551.jpg)\n\nText Edit:\n\n ![](http://web.archive.org/web/20100105212435im_/http:/typophile.com/files/TextEdgrab_4341.jpg)\n\nWord: (does this program not recognise OT features?)\n\n ![](http://web.archive.org/web/20100105212435im_/http:/typophile.com/files/Wordgrab_5953.jpg)\n\nNick Cooke\n\n"
+    },
+    {
+      "time": " 27.Nov.2006 5.36am",
+      "content": "The current version of Word recognizes a limited set of opentype features but not contextual alternates. Si can chime in but my understanding is that MS is working on it for a future revision.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 27.Nov.2006 9.09am",
+      "content": "On Mac, Word 2004 does not support any OpenType Layout features at all. On Windows, Word 2003 it supports “ccmp”, “mark” and “mkmk”. I believe that Word 2007 also supports “kern”.\n\nRegards,  \nAdam\n\n"
+    }
+  ]
+}

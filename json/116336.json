@@ -1,0 +1,42 @@
+{
+  "id": "116336",
+  "title": "Swash/Small caps problem",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I have created c2sc, smcp and swsh features which all work as they should. However, when applying the smcp together with the swsh, the two ligatures for n\\_g.swsh and h\\_y.swsh appear instead of N, G, H and Y small caps. How can I have the two features together and somehow override the ligatures?\n\nHere's the code:  \nfeature swsh {  \n sub @swsh1 by @swsh2;  \n sub N i by N\\_i.swsh;  \n sub h y by h\\_y.swsh;  \n sub n g by n\\_g.swsh;  \n sub n y by n\\_y.swsh;  \n sub r h by r\\_h.swsh;  \n sub r i by r\\_i.swsh;  \n sub r j by r\\_j.swsh;  \n sub r k by r\\_k.swsh;  \n sub r t by r\\_t.swsh;  \n sub r.swsh' @fligs by r;  \n sub @swsh3 by @swsh4;  \n} swsh;\n\nI've been messing about with it for so long I can't think straight.\n\nAny help gratefully received.\n\n ![](http://web.archive.org/web/20150416045216im_/http:/typophile.com/files/featuresgrab_4746.png)\n\n",
+  "author": "Nick Cooke",
+  "time": "7 May 2014 — 5:00am",
+  "uid": "3834",
+  "comments": [
+    {
+      "time": "7 May 2014 — 5:03am",
+      "content": "What happened to edit?\n\n1. (top) C/l/c  \n2. Small Caps  \n3. c2sc, swsh  \n4. c2sc, swsh, smcp\n\n"
+    },
+    {
+      "time": "7 May 2014 — 11:04am",
+      "content": "Maybe change the order of features help? 'smcp' before 'swsh'...\n\n"
+    },
+    {
+      "time": "7 May 2014 — 11:35pm",
+      "content": "I've tried that, but the swash ligs always remain.\n\n"
+    },
+    {
+      "time": "8 May 2014 — 5:14am",
+      "content": "Interesting, I try to test code below, and it work corect.  \nWhen I change the order, it work like in Your example.\n\n`\nlookup smcp {\n lookupflag 0;\n  sub \\n by \\n.smcp;\n} smcp;`\n\nlookup swshLiga {  \n lookupflag 0;  \n sub \\n \\g by \\n\\_g.swsh;  \n} swshLiga;\n\nlookup swshSub {  \n lookupflag 0;  \n sub \\n by \\n.swsh;  \n} swshSub;\n\nfeature smcp {  \n script DFLT;  \n language dflt;  \n lookup smcp;  \n script latn;  \n language dflt;  \n lookup smcp;  \n} smcp;\n\nfeature swsh {  \n script DFLT;  \n language dflt;  \n lookup swshLiga;  \n lookup swshSub;  \n script latn;  \n language dflt;  \n lookup swshLiga;  \n lookup swshSub;  \n} swsh;\n\n"
+    },
+    {
+      "time": "9 May 2014 — 4:36am",
+      "content": "Thanks Gluk, but I've no idea what this means. I copied and pasted it into smcp and that didn't work, so I tried it in swsh and that didn't either. I'm more of a designer than a programmer, so my coding is at a very rudimentary level and I don't know what goes where.\n\n"
+    },
+    {
+      "time": "9 May 2014 — 10:28am",
+      "content": "Hi Nick\n\nHaving a guess at what is happen here, it could be that the 'swsh' feature may be happening before 'smcp' and/or 'c2sc'. You probably want all the standard replacements to happen first - then have the swash ligatures lookups act on what's there after.  \nAlso if changing text with swash ligs into small caps, you may need to decompose the swash ligs back to standard glyphs in a separate lookup before applying smcp lookups.\n\n"
+    },
+    {
+      "time": "9 May 2014 — 7:24pm",
+      "content": "Maybe post the full code rather than just the code for 'swsh'?\n\nAndré\n\n"
+    }
+  ]
+}

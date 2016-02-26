@@ -1,0 +1,58 @@
+{
+  "id": "47198",
+  "title": "Delete note in FontLab?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "For me on a mac, it is impossible to take away the notes.\n\nIn the manual it is written that I should delete the text in the note, and then close it.\n\nI do this, but the note is still there.\n\nCan anyone delete notes at all?\n\nCheers\n\n ![](http://web.archive.org/web/20080907065953im_/http:/typophile.com/files/notes_4031.png)\n\n [‹ Custom Numeric Fonts](http://web.archive.org/web/20080907065953/http:/typophile.com/node/47286 \"Go to previous forum topic\") [AFDKO 2.0 : Post your feedback here ›](http://web.archive.org/web/20080907065953/http:/typophile.com/afdko2 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080907065953/http://typophile.com/user/11526\" title=\"View user profile.\">Goran Soderstrom</a>",
+  "time": "<br>",
+  "uid": "11526",
+  "comments": [
+    {
+      "time": " 8.Jul.2008 1.56pm",
+      "content": "That works for me and I’m on a mac. Are you doing it from the font window or from the individual glyph window? Maybe that makes a difference.\n\n"
+    },
+    {
+      "time": " 8.Jul.2008 2.12pm",
+      "content": "I just tried both, nothing happens. The note stays there.\n\nI open the note – delete the text inside the note – and then just close it.\n\nIs that how you do also?  \nThanks for helping.\n\n"
+    },
+    {
+      "time": " 8.Jul.2008 2.59pm",
+      "content": "I just tried it on a font. I opened it from the glyph cell in the main font window, deleted the text and closed. The note was still there as you said. Then I opened the glyph widow for that cell and opened the note from there. The text was still in it even. I deleted the text from there, closed it and it did go away.\n\nThat seems like a small bug in the program, but it did work for me from the glyph window.\n\n"
+    },
+    {
+      "time": " 9.Jul.2008 3.36am",
+      "content": "Hi Goran,\n\nWhy don’t you try the following script:\n\n———————————————\n\nfrom robofab.world import CurrentFont\n\nf = CurrentFont()  \nfor g in f:  \n g.note = “”  \n g.update()\n\n———————————————\n\nIt should blank all notes.  \n(note that you will have to have Robofab installed).\n\nCheers.\n\n"
+    },
+    {
+      "time": " 9.Jul.2008 6.55am",
+      "content": "Ramiro,\n\nThanks for helping out.\n\nDo you mean I should just copy/paste that in to a new program in the macro editor and hit play? If so, then this result is produced in the Output-panel:\n\n——————————————————————\n\nFile “”, line 7  \n g.note = “”  \n ^  \nIndentationError: expected an indented block\n\nDid I do something wrong?\n\nIt is amazing that a simple task as removing a note should be so hard ;-) Why dont they just add a command “delete note”?\n\n"
+    },
+    {
+      "time": " 9.Jul.2008 7.29am",
+      "content": "Hi Goran,\n\nSorry, my mistake. Indentations are important in loops:\n\nfrom robofab.world import CurrentFont\n\nf = CurrentFont()  \nfor g in f:  \n—g.note = “”  \n—g.update()\n\n(copy & paste but \\*\\*replace the mdashes before g.note and g.update() for single indentations\\*\\*)\n\nThis should work fine if you have Robofab installed.\n\nGreetings.\n\n"
+    },
+    {
+      "time": " 9.Jul.2008 8.30am",
+      "content": "Ramiro,\n\nMy english is not that good –&nbsp;I dont understand the word “indentations”.\n\nI should replace the emdash – with what?\n\nThanks for having patience :)\n\n"
+    },
+    {
+      "time": " 9.Jul.2008 9.45am",
+      "content": "[http://en.wikipedia.org/wiki/Indentation](http://web.archive.org/web/20080907065953/http:/en.wikipedia.org/wiki/Indentation \"http://en.wikipedia.org/wiki/Indentation\")\n\nMmmmhhh... It is the ’TAB’ key.\n\nIn mac keyboard, on the left, the arrow key that is above ’Caps Lock’.\n\nGreetings.\n\n"
+    },
+    {
+      "time": " 9.Jul.2008 10.58pm",
+      "content": "The same script without robofab:  \n`\nfor g in fl.font.glyphs:\n    g.note = ''\nfl.UpdateFont(fl.ifont)\n`\n\nRemove all notes in the current font.\n\nEigi\n\n"
+    },
+    {
+      "time": " 10.Jul.2008 2.05am",
+      "content": "Thanks!\n\nGot it working! :)\n\n"
+    },
+    {
+      "time": " 10.Jul.2008 4.09am",
+      "content": ":)\n\n"
+    }
+  ]
+}

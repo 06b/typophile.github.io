@@ -1,0 +1,38 @@
+{
+  "id": "2832",
+  "title": "FontLab, OpenType, Mac and AAT?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Using my brand new copy of FontLab, I've put together my first OpenType font. Unfortunately, I don't think I understand everything yet and I have a few questions for the experts. (Please forgive me if these questions sound a little stupid.)   \n   \nMy font is a basic CFF .otf font with upper case characters and alternate figures. I use the aalt and salt OpenType features and it works in the FontLab preview on Panther.   \n   \n1) I was surprised to see that 1/3rd of my applications have no idea what OpenType might be at all (Word, etc.). 1/3rd work just fine and I can access the alternate characters (these are Adobe applications which seem to use their own font engine) and the last third of my applications (such as TextEdit, or Freeway) claim that there are \"no typographic features\" in the font (but I can use the character palette's glyph input to see the alternates) . It seems that Apple wants me to put AAT tables in the font, but how can I add these tables? The Apple tools apparently only like TrueType flavored OpenType fonts? Help!   \nMy salt feature is really simple (and accesses two FontLab classes):   \nfeature salt { # Stylistic Alternates   \n sub @figures by @altfigures;   \n} salt;   \n   \n2) To make the font more usable, I want to \"copy\" the upper case glyphs to lower case. I tried adding additional Unicode indexes as per page 95 of the FontLab manual. FontLab proudly shows the little \"D\" icon at both locations and the preview seems to indicate everything is fine. Unfortunately, applications only seem to display the first index and either nothing (Adobe) or the default Font (Apple) for the lower case!? I can of course cheat and just duplicate the glyph (or use a \"composite\" with only one component).   \n   \n3) When I add the OpenType \"size\" feature, FontLab crashes when compiling the features. Does anyone know whether that's a known problem (or something FontLab just doesn't support), or should I report this?   \nThe following is the example from the Adobe web site. I removed the sizemenunames.   \nfeature size {   \nparameters 100 # design size (decipoints)   \n3 # subfamily identifier   \n80 # range start (exclusive, decipoints)   \n139; # range end (inclusive, decipoints)   \n} size;   \n   \n   \nThanks for your time!   \nRobert\n\n",
+  "author": "<a href=\"/web/20090530022622/http://typophile.com/user/2920\" title=\"View user profile.\">robertm</a>",
+  "time": "<br>",
+  "uid": "2920",
+  "comments": [
+    {
+      "time": " 24.Jan.2004 7.44pm",
+      "content": "I've since found a very inconvenient answer to #1. But it works and it could be automated (anyone?).   \n   \n1) Use TTX 2.0b1 [http://sourceforge.net/projects/fonttools/](http://web.archive.org/web/20090530022622/http:/sourceforge.net/projects/fonttools/) to dump the original OpenType font. The resulting .ttx file will have \\<glyphorder\\> at the top which maps GlyphIDs to names. Get the IDs for the glyphs that will be substituted.   \n   \n2) Create a \"mif\" file with the following contents (the list is the substitution list)\n\n    Type Noncontextual Name Character Alternates Namecode 17 Setting No Alternates Settingcode 0 Default yes Orientation HV Forward yes Exclusive yes Type Noncontextual Name Character Alternates Namecode 17 Setting Alternates Settingcode 1 Default no Orientation HV Forward yes Exclusive yes 10 58 11 63 12 57 13 66 14 61 15 60 16 65 17 64 18 59 19 62\n\nUnfortunately, I haven't fgured out a way to use my fancy names (\"zero.2\") instead of the GlyphIDs which might change when messing around with the font too much in FontLab.   \n   \n3) Run ftxenhancer -m miffile myfont.otf   \n(Apple font tools, [http://developer.apple.com/fonts/](http://web.archive.org/web/20090530022622/http:/developer.apple.com/fonts/))   \n   \nThe resulting CFF OpenType file will work in AAT aware applications as well as in OpenType applications.\n\n"
+    },
+    {
+      "time": " 25.Jan.2004 6.06am",
+      "content": "Apple's font tool DumpPOST creates a text file with the Postscript names for all the characters in the font. The PS names can be changed in a text editor and appended to the font with the AAT Font Tool. These are 'classic', pre-OSX applications. In OSX, ftxdumperfuser may do the same job (I've not used it).\n\n"
+    },
+    {
+      "time": " 25.Jan.2004 5.31pm",
+      "content": "The post resource version 3 doesn't have glyph names; I think I'll stick with ttx (I'm using the latest from CVS).   \n   \nThere was one additional hurdle: Panther ignores the OpenType kerning information when AAT information is present.   \n   \nTo fix this, I simply add a 'kern' table to the font which FontLab conveniently generates when it saves a PC TrueType font.   \n   \n1) In FontLab, save font as PC ttf AND CFF-otf   \n   \n2) Run magic script:\n\n    #!/bin/sh NAME=MyFont ttx -t kern $NAME.ttf sed -e 's/ttFont sfntVersion=\\\"\\x00\\x01\\x00\\x00\\\"/ttFont sfntVersion=\\\"OTTO\\\"/' <$name.ttx> $NAME.kern rm $NAME.ttx mv $NAME.otf $NAME.otf.fl ttx -m $NAME.otf.fl $NAME.kern rm $NAME.kern echo \"Adding 'morx' table...\" ftxenhancer -m $NAME.mif $NAME.otf echo \" ***BUILD COMPLETE***\"\n\n3) Trash the PC ttf.   \n   \nRobert\n\n"
+    },
+    {
+      "time": " 25.Jan.2004 5.35pm",
+      "content": "Robert, how are you making fonts with version 3 post tables? Just interested to know what your procedure is.\n\n"
+    },
+    {
+      "time": " 25.Jan.2004 6.48pm",
+      "content": "FontLab (4.6, Mac) just did it, it didn't ask (I've only used the program for a couple of hours and I'm still somewhat mystified by its functionality).   \n   \nI use File-\\>Generate Font-\\>OpenType-CFF. The display next to the Options box says: \"Type 1 options: make PFM, make AFM; Unicode encoding; TT/OTF options: hinted (keep, autohint, visual); export Unicode;   \nI think that these options aren't relevant when writing OT/CFF.   \n   \nSee picture for the FontLab OpenType preferences dialog.   \n   \nRobert   \n   \n ![OT preferences](http://web.archive.org/web/20090530022622im_/http:/www.typophile.com/forums/messages/4101/24893.gif)\n\n"
+    },
+    {
+      "time": " 25.Jan.2004 10.53pm",
+      "content": "_FontLab (4.6, Mac) just did it, it didn't ask..._   \n   \nIt may be that, if making a PS OTF, FontLab writes the glyph names to the CFF table (I believe there is a place to store them there) and so writes a version 3 post table. That actually makes sense. I mainly work with TrueType fonts, for which FontLab writes a version 2 post table. I recently had to make a TT font with a version 3 table, and ended up needing another tool to do this.\n\n"
+    }
+  ]
+}

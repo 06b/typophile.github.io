@@ -1,0 +1,66 @@
+{
+  "id": "29653",
+  "title": "Fontlab, Open Type and generating fonts - expert advice or tutorial",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "As a small foundry we have developed numerous typefaces and are in the process of converting all our fonts to open type. The problem we are having is that our kerning pairs (although displaying fine in the metrics/kern window) are not making it into our otf file, or it appears that way when loaded into indesign and illustrator. What we are looking for is an online tutorial or some expert advice into generating reliable, complete, and of course cross-platform font files.\n\nAny thoughts or suggestions would be most appreciated.  \n(we are running Fontlab 4.5)\n\nNiels Oeltjen  \nLetterbox\n\n",
+  "author": "Niels",
+  "time": "20 Nov 2006 — 7:19pm",
+  "uid": "15488",
+  "comments": [
+    {
+      "time": "20 Nov 2006 — 9:02pm",
+      "content": "Niels, this has been covered here somewhere before, but...\n\nYou need to add a second OT feature to your files. For some buggy reason, fonts which only have a kern feature do not access that feature. The most common solution is to add the \"basic\" ligature feature for fi and fl substitution.\n\nLet us know if this works for you.\n\n"
+    },
+    {
+      "time": "20 Nov 2006 — 10:38pm",
+      "content": "It's important that the second feature is of substitution type. With just the \"kern\" feature, only the GPOS table is included in the font file, and no GSUB. However, falsely, InDesign CS2 only checks for the presence of the GSUB table, and if there is none, does not process any OpenType features. Something like:\n\nfeature liga {  \n sub f i by fi;  \n sub f l by fl;  \n} liga;\n\nwould help out as this will ensure that a GSUB substitution table is included in the font file. I have requested that in the next version of AFDKO, an empty GSUB table is always included even if there are not substitution features are defined by the user.\n\nAdam Twardoch  \nFontlab Ltd.\n\n"
+    },
+    {
+      "time": "22 Nov 2006 — 2:15pm",
+      "content": "A small quibble: There are a number of fonts where either there are no f-ligatures, or shouldn't be (cap/small-cap fonts come to mind). If you use f-ligaturing, then any letterspacing you use runs into a bump with the ligatures. The most innocuous candidate I've found is \"zero\" \"slash\" \"zero\" to percent.\n\n"
+    },
+    {
+      "time": "23 Nov 2006 — 2:34am",
+      "content": "Charles,\n\nI don't think a replacement of \"0/0\" with \"%\" makes any sense at all. But if you think it's a good idea, what feature would you associate this with?\n\nA.\n\n"
+    },
+    {
+      "time": "24 Nov 2006 — 9:38am",
+      "content": "Adam, you're right, I should have listed the feature -- it is the fraction feature, which FontLab (5.0) will generate automatically. If there are no fractions, you can use\n\n@SLASH = [slash fraction];  \nfeature frac {  \n sub zero' @SLASH' zero' zero' by perthousand;  \n sub zero' @SLASH' zero' by percent;  \n} frac;\n\nIt doesn't have to be a ligature feature -- Anything that generates a GSUB table will work, and fractions, which aren't on by default, are a safer substitution. If there is no \"perthousand\" in the font, just kill that one (actually, FontLab just won't generate the routine if it isn't in the font).\n\nCharles\n\n"
+    },
+    {
+      "time": "24 Nov 2006 — 9:21pm",
+      "content": "I believe it's also perfectly fine (spec-wise) to substitute a glyph for itself, so you could have something like:\n\n`feature lnum {\n   sub zero by zero;\n   sub one by one;\n   # and so on...\n} lnum;`\n\nI'm sorta working off the top of my head here, so maybe there's a good reason to not do exactly that, with lnum; it's just an example of an approach worth mentioning.\n\n(In fact, I think the feature file \"ignore sub\" statement ends up in an OTF the same way, i.e. `ignore sub a b'` ends up being `sub a b' by b`, so perhaps a single `ignore sub` statement is also an option... not that I've actually tried this yet!)\n\n"
+    },
+    {
+      "time": "26 Nov 2006 — 5:21pm",
+      "content": "Thanks Adam and Village, your suggestions worked a treat!\n\nAll fonts working and now available at  \n [www.letterbox.net.au/store/](http://web.archive.org/web/20120416000844/http:/www.letterbox.net.au/store/ \"www.letterbox.net.au/store/\")\n\nNiels\n\n"
+    },
+    {
+      "time": "26 Nov 2006 — 8:27pm",
+      "content": "Please help.  \nI've added the ligature feature but I still cant see my kerning... My first serious font is frustrating me to death\n\n"
+    },
+    {
+      "time": "27 Nov 2006 — 3:50am",
+      "content": "Its solved, I have been looking for more info in others threads and you were right and I finally made my kerning into Indesign CS2... tnx\n\n"
+    },
+    {
+      "time": "6 Dec 2006 — 7:28pm",
+      "content": "BTW, using the 'frac' feature to access pre-composed fractions is a bad practice.  \nIt's true that it's handy for the user, but by doing so the input character stream (one;slash;two) might end up being inadvertently altered (onehalf).\n\n"
+    },
+    {
+      "time": "6 Dec 2006 — 7:39pm",
+      "content": "_BTW, using the ‘frac’ feature to access pre-composed fractions is a bad practice.  \nIt’s true that it’s handy for the user, but by doing so the input character stream (one;slash;two) might end up being inadvertently altered (onehalf)._\n\nbut if the user specifies that one slash two be replaced by onehalf via the frac feature, don't we want to preserve the end result as opposed to the initial character stream?\n\n"
+    },
+    {
+      "time": "8 Dec 2006 — 3:50pm",
+      "content": "That's an interesting question. I guess it depends on whether you view the original text stream as merely an input method, or as something to be preserved.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "12 Dec 2006 — 5:51pm",
+      "content": "BTW, FontLab 4.5 is really old. I recommend using FontLab Studio 5.0.2 to build OpenType fonts.\n\n"
+    }
+  ]
+}

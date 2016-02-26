@@ -1,0 +1,30 @@
+{
+  "id": "30416",
+  "title": "Adding space to all Caps via OpenType?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I thought someone had once mentioned that it was possible to increase letterspacing in all Caps above what the normal sidebearings make by using some opentype feature. Is this possible and how would I code it?\n\nThanks for all geekly advice!\n\nChrisL\n\n",
+  "author": "dezcom",
+  "time": "7 Jan 2007 — 5:20pm",
+  "uid": "3135",
+  "comments": [
+    {
+      "time": "7 Jan 2007 — 7:08pm",
+      "content": "Hey ChrisL,\n\nI'm sure other people know much more than I do, but I was trying teaching myself how to do this the other day so I'll at least get you started. If all of your caps are in a class (we'll call the class \"caps\" in this example), then you can just use the OpenType cpsp feature do add units (xx) to the sidebearings as such:\n\nfeature cpsp {  \n pos @caps \\<xx 0 xx 0\\>;  \n} cpsp;\n\nI bet I'm missing something important, so I encourage others to respond and fill in the gaps.\n\nGood luck,  \nDavid\n\n"
+    },
+    {
+      "time": "8 Jan 2007 — 5:58am",
+      "content": "David,  \nThanks for the info! I am not clear on the x's and o's though. I asume your \"xx\" equals the value of increase in units. Is the \"o\" the glyph? or could it be the class name?\n\nChrisL\n\n"
+    },
+    {
+      "time": "8 Jan 2007 — 7:32am",
+      "content": "At best with two examples:\n\npos Adieresis \\<5 0 10 0\\>;  \npos @caps \\<5 0 10 0\\>;\n\nThe 'pos' command is followed either by a glyph name or a class name.\n\nEnclosed are, left to right: x placement adjustment, y placement adjustment, x advance adjustment, y advance adjustment.  \nSo, the example says: The outlines of glyph 'Adieresis' are moved to the right at 5 units, and then the advance width is increased by ten.  \nThis looks a bit complicated at first, but has to do with the fact that a font does not know about a rightside bearing; rather, the rightside bearing is advance width -- the glyph's total width including leftside and rightside bearings -- minus leftside bearing.  \nWhat the example does is: it increases both leftside and rightside bearing at 5 units each.\n\nThe second and forth number remain zero because you do not want to move the glyph up or down.  \n(Instead of adding extra glyphs and substitute them in the 'case' feature, you could as well add a lookup with commands like  \npos parenleft \\<0 20 0 0\\>;  \npos parenright \\<0 20 0 0\\>;  \nwhich will raise glyphs a bit if you select 'All Caps'.)\n\nThe Feature File Syntax (html) document which accompanies the AFDKO is a very good reference for this.\n\n"
+    },
+    {
+      "time": "8 Jan 2007 — 8:02am",
+      "content": "Karsten,\n\nThanks! That certainly helps sort it out for me nicely!\n\nChrisL\n\n"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "60743",
+  "title": "Problems testing fonts with Font Explorer X",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I'm having issues when I'm trying to test out fonts I've generated from Fontlab. Here's my usual process:\n\n• I generate the font\n\n• I create a new set in Font Explorer X and import my new font into that set\n\n•&nbsp;I activate the set and try it out in Illustrator or Indesign\n\nAt this point, everything is fine. But then if I make changes to the font in Fontlab and generate a new font, I run into problems:\n\n• I generate the font\n\n• I deactivate the old font in Font Explorer X and delete it (Font Explorer isn't moving my fonts to its own library, so the font I'm generating from Fontlab is replacing the version the Font Explorer is accessing).\n\n• I import the new version of the font\n\nAt this point, two things happen. Either the applications still use the old version of the font (even after restarting them), or when I go to use the font in InDesign (or whatever), no characters show up.\n\nAm I doing something wrong, or is there a better way to test out in-progress fonts?\n\nthanks!\n\nJonathan\n\n",
+  "author": "<a href=\"/web/20100216090654/http://typophile.com/user/25245\" title=\"View user profile.\">jonathanhughes</a>",
+  "time": "<br>",
+  "uid": "25245",
+  "comments": [
+    {
+      "time": "",
+      "content": "Clear the system– and user-fontcaches, I would suggest. (Use FontFinagler, or Onyx. On Mac OS X of course — don’t know about the dark side).\n\n. . .  \nBert Vanderveen BNO\n\n"
+    },
+    {
+      "time": "",
+      "content": "I use FontXplorer too and have no problems exchanging old fonts for newer ones. My flow isn't that different btw.\n\n\\> Generate the first font  \n\\> Drag in (new) set  \n\\> Activate font(!)\n\n++++\n\n\\> Generate new font  \n\\> Cmd+Shift Delete \\> click \"Move to Trash\"  \n\\> Drag new file\\* in set  \n\\> activate font\n\n\\* I number my files in progress so a new font file has a different name.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The notorious font caching under Mac OS X makes the testing of fonts quite tricky. I don't like testing on production machines and we had some problems on Macs after using for instance FontFinagler for cleaning the caches (which could have been caused by other factors). So, I was very pleased when both VMware Fusion and Parallels Desktop started to support the server version of Leopard. From that moment on we could test our fonts (and software) at least for Mac OS 10.5.x on clean images (sometimes in combination with cache cleaners), like we did for many years with the different Windows editions already. It seems that Snow Leopard will be supported by VMWare and Parallels too, which is nice.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I number my test fonts in the family name.  \nThat way I don't have to worry about conflicts.\n\n"
+    },
+    {
+      "time": "",
+      "content": "A few things:  \n• If you can avoid it, don’t use FontExplorer for testing fonts unless it really is the final version. Just drop the fonts into the Adobe fonts directory. That way if something goes wrong you don’t have to consider FEX as a variable.  \n• Clear the application and system caches and reboot  \n• Make sure that your regular weight is named correctly. If the regular weight of a font has misconfigured name information, the Adobe apps can freak out and not load fonts from the family properly until a correctly named regular weight has been installed.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "51971",
+  "title": "duplicate upper/lowercase kerning in fontlab",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "is there a way to automatically make fontlab apply the exact same kerning values i have set for uppercase to lowercase?\n\ni've searched around and found a great post by mark simonson that explained how to do it fontographer but i can't seem to find anything similar for fontlab.\n\nthe kerning assistance panel in fontlab confuses me to no end.\n\nany help would be amazing!\n\n",
+  "author": "gerald",
+  "time": "21 Nov 2008 — 5:37pm",
+  "uid": "12369",
+  "comments": [
+    {
+      "time": "21 Nov 2008 — 6:30pm",
+      "content": "What you need to do is set up kerning classes. Open the Classes panel, click on the \"+\" pop-up menu in the lower left-hand corner, and choose \"New Kerning Class\". This will create a new kerning class with a dummy name such as \"\\_kern1\".\n\nIn field at the the lower right, change the name to something more meaningful to you such as \"\\_A\", but make sure it starts with an underscore or it won't be processed properly. (The underscore indicates that it's a kerning class, not some other kind of class.)\n\nYou set up the class by indicating a key glyph (\"A\" for example) by adding a tick mark (apostrophe) after, and then list the names of the glyphs with which you intend to have the same kerning (\"a\" for your case). In your case, it should look like this:\n\n`_A: A' a`\n\nA more complete one would look more like this:\n\n`_A: A' Aacute Agrave Acircumflex Adieresis Aring Atilde a aacute agrave acircumflex adieresis aring atilde`\n\nWhen it looks the way you want, click on the \"Accept\" button (very important--if you don't, whatever you typed in will be lost). The glyphs you chose will populate the field at the upper right of the panel. If you've mistyped a glyph name, it will simply not show up, so it's a good idea to compare the two fields.\n\nFinally, you need to tell FontLab whether this class applies to when these glyphs are on the right or left or both sides of other glyphs. You do this by checking the little boxes to the right of the class name in the list at the top left. The dot in the center indicates the glyph that this class is sitting next to in a string of text. If this class should only apply when it's glyphs are the _left_ side of a kerning pair, then click the left check box, or right box for the right side of a pair.\n\nAfter you set up your kerning classes, FontLab will automatically apply kerning to all members of class based on the kerning you apply to the key member in the Metrics window. If you choose \"Class Kerning\" from the \"Options\" pop-up menu at the bottom of the Metrics window, any kerning you apply to any member of a class will be applied to the key glyph, instead of to the member glyph.\n\nI hardly ever use the Kerning Assistance dialog, except to update the kern OpenType feature based on the current kern table. The Kerning Assistance dialog allows you to do some of the same things you can do in the Classes panel, but I find it to be less handy.\n\nThe manual goes into all this stuff in more detail.\n\n"
+    },
+    {
+      "time": "21 Nov 2008 — 6:34pm",
+      "content": "Tip: It's usually easier to add glyphs to a class by selecting the glyphs you want to add in the Font window, and then dragging them to the upper right field of the Classes panel.\n\n"
+    },
+    {
+      "time": "21 Nov 2008 — 7:07pm",
+      "content": "thanks a ton mark!  \ni will give this a try\n\n"
+    },
+    {
+      "time": "22 Nov 2008 — 1:56am",
+      "content": "The only reason why I can see anyone wanting to duplicate uppercase/lowercase kerning is if you were creating an all-caps face with the glyphs duplicated in the lowercase position.\n\nIn such a case, I'd think it would be easiest to simply create the uppercase characters and assign each of them two code points (e.g. assign A to both 0x0041 and 0x0061). I've read a number of times that doing things this way is actually a bad idea, but I've never really seen a satisfactory explanation as to why its a bad idea. I was wondering if anyone could enlighten me on this.\n\nAndré\n\n"
+    },
+    {
+      "time": "22 Nov 2008 — 4:16am",
+      "content": "André,\n\nIn Type 1 fonts, you have to duplicate the glyphs as Unicode codepoints are not used at all.\n\nIn OpenType PS (.otf), there are quite a few situations where applications rely on glyph names rather than on Unicode codepoints. In some PDF creation scenarios where OpenType PS (.otf) fonts get converted to Type 1 fonts. In such scenarios, the original Unicode character strings of the text are lost, and also the glyph-to-Unicode information (the \"cmap\" table) is lost. The only carrier of text information are the glyphnames associated with the glyph stream. Tools such as Acrobat use that information to reconstruct the original character string, which is necessary for operations such as Find or Copy-Paste. Note that more \"intelligent\" PDF creation engines may include additional resources in the PDF file that store the original Unicode text.\n\nIn OpenType TT (.ttf) fonts, the approach with not duplicating the glyphs but assigning multiple Unicode codepoints is fine.\n\nA.\n\n"
+    },
+    {
+      "time": "22 Nov 2008 — 6:25am",
+      "content": "To answer the specific question: If I didn't want to use class-based kerning, here is what I'd do. (I use Vedit, but I'd bet Edit Pad Pro can do the same thing.)\n\nKern the caps. Be sure the lower-case letters are in the .vfb, but don't bother to kern them.\n\nWrite off an .AFM\n\nGrab all the KPX lines & put them in another buffer.\n\nSelect all and change the case.\n\nSearch the string \"kpx\" and replace it with \"KPX\".\n\nPaste these \"new\" kerning pairs back into the .AFM.\n\nGo back to FontLab, import the .AFM & select \"replace all kerning.\"\n\nYou can do this faster than I can write this post.\n\nFWIW\n\n"
+    },
+    {
+      "time": "22 Nov 2008 — 8:05am",
+      "content": "\\> Grab all the KPX lines & put them in another buffer.  \n\\> Select all and change the case.\n\nNo doubt this will work fantastically for the glyphs \"uni0137\" or \"uni1EA1\".\n\nA.\n\n"
+    },
+    {
+      "time": "22 Nov 2008 — 9:33am",
+      "content": "That's a clever solution, Charles, but assumes that the kerning is finalized. Class kerning has more set up, but once it's done, it gives you a lot of flexibility in the kerning process.\n\nBy the way, Adam: I just thought of a feature you should add to FontLab that would make setting up classes even easier. How about a command for making a new class based on glyphs selected in the Font window? You select a bunch of glyphs, choose \"New Class...\" from, say, the Glyph menu. A dialog appears with the glyphs displayed, a text field for the class name, a pop-up to choose the kind of class. For kerning classes, it would have some way to select the left/right of pair option and which one is the key glyph. Maybe you just drag it to the beginning of the glyph list.\n\nOr, maybe you could enhance the current Kerning Assistance dialog by having it use whichever glyphs are selected in the Font window as the basis when you click on the little \"New\" button to create a new kerning class?\n\n"
+    },
+    {
+      "time": "22 Nov 2008 — 10:25am",
+      "content": "<cite>No doubt this will work fantastically for the glyphs “uni0137” or “uni1EA1”. </cite>\n\nWell, of course uni0137 already is lower case (the lower case of uni0136) . . .\n\nBut I take your point, this only works where glyph names are the old \"AGL-type names\" -- as with the old Type 1 fonts.\n\n\\* \\* \\*\n\nMark, I don't use FontLab class-based kerning much because I have yet to figure out how to make all the needed exceptions work -- for example, all the \"f + any-vowel-with-an-accent (other than acute)\" has to be an exception, as do F, K, P, T, V, W, and Y followed by an accented vowel. Then there are the acute-accented vowels followed by a quoteright (single or double) or parenright or bracketright, and on & on.\n\nWhen I do use class kerning with exceptions, I assemble everything in a text editor & import it back in. I can't make things work right in FL. No doubt just my ignorance.\n\n"
+    },
+    {
+      "time": "23 Nov 2008 — 5:26am",
+      "content": "Thanks, Adam, for your answer to my question. I found it useful.\n\nAndré\n\n"
+    }
+  ]
+}

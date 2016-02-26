@@ -1,0 +1,214 @@
+{
+  "id": "29469",
+  "title": "Opentype features take a vacation with one font using FL5 Mac",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I have been working on a typeface called Tovarich which has several opentype features which used to work fine until a few days ago. I can't figure out what I did to screw it up but I must have done something bone-headed.  \nFrom within FontLab 5, my features compile properly without complaint. They show up and work as expected in the preview screen. When I output the font as PostScripot flavored OTF, my features vanish in both InDesign and Illustrator CS. There are brackets around the feature names in the menu indicating \"nobody home\" and the features don't work. For the past few days, I have been trashing my features and redoing them all to no avail. I trashed them and then imported features from one of my other fonts which is working fine but it still does not work! I have trashed my cashe several times, rebooted, resaved the font under a new name and redone the features again all with the same unpleasant result, terminal frustration! What the heck have I done wrong? Why will the exact same feature code work on one font and not another?  \nI would be tearing my hair out but that ship has long sailed,\n\nAny help would be appreciated,\n\nChrisL\n\n",
+  "author": "dezcom",
+  "time": "13 Nov 2006 — 12:22pm",
+  "uid": "3135",
+  "comments": [
+    {
+      "time": "13 Nov 2006 — 2:16pm",
+      "content": "how about trashing your adobefnt files?\n\n"
+    },
+    {
+      "time": "13 Nov 2006 — 2:29pm",
+      "content": "Josh,\n\nHow do I do that?\n\nChrisL\n\n"
+    },
+    {
+      "time": "13 Nov 2006 — 2:54pm",
+      "content": "do a search for “adobefnt” it should bring up a bunch of files ending in .lst  \nsometimes trashing all these files fixes some problems.  \nI’m on a Mac… don't know if it’s the same on PC.\n\n"
+    },
+    {
+      "time": "13 Nov 2006 — 3:16pm",
+      "content": "Thanks Josh. I am on a Mac as well.\n\nChrisL\n\n"
+    },
+    {
+      "time": "13 Nov 2006 — 3:36pm",
+      "content": "are there cyrillic characters in your font?  \n [This thread](http://web.archive.org/web/20141128021439/http:/typophile.com/node/18044) may address the same problem?\n\n"
+    },
+    {
+      "time": "13 Nov 2006 — 5:53pm",
+      "content": "Yes, there is a whole Cyrillic set in it. But no Greek this time.\n\nChrisL\n\n"
+    },
+    {
+      "time": "13 Nov 2006 — 6:02pm",
+      "content": "I remembered that thread and set only basic Roman with no help. I then added greek but still no help!  \nMy font has CE Latin extended A, Cyrillic with the extended Cyrilic for Baltic. What I don't get is that all my other fonts that I have designed work just fine. It is only this one that baffles me :-/\n\nChrisL\n\n"
+    },
+    {
+      "time": "13 Nov 2006 — 6:27pm",
+      "content": "Do you have the language system(s) declared properly? If you only declare\n\n` languagesystem DFLT dflt;`\n\nyou will see no layout features in InDesign CS2 (and earlier, I presume). The DFLT/dflt language system is relatively new, and should work all by itself someday, but for now, some apps don't know about it. For now, you should always include some other language system declaration (and that usually means latn/dflt).\n\nOf course, if you really did import _all_ features from some other font that works, including the language system declarations, then I guess I am stumped.\n\n"
+    },
+    {
+      "time": "13 Nov 2006 — 7:54pm",
+      "content": "Do I declare the language system in InD or in FontLab? I assume it must be in the Opentype feature in FontLab because I don't know where to find it in InD.\n\nChrisL\n\n"
+    },
+    {
+      "time": "13 Nov 2006 — 8:07pm",
+      "content": "Here is my feature code:\n\nfeature tnum { #tabular numbers  \n sub @num by @TNUM;  \n} tnum;\n\nfeature numr { # Numerators  \n # Latin  \n sub @num by @numr2;  \n language AZE ; # Azeri  \n language CRT ; # Crimean Tatar  \n language DEU ; # German  \n language FRA ; # French  \n language ITA ; # Italian  \n language MOL ; # Moldavian  \n language ROM ; # Romanian  \n language SRB ; # Serbian  \n language TRK ; # Turkish  \n script cyrl; # Cyrillic  \n sub @num by @numr2;  \n script grek; # Greek  \n sub @num by @numr2;  \n} numr;\n\nfeature sups {# superior figures  \n sub @num by @supnum;  \n sub @infnum by @supnum;  \n sub @numr2 by @supnum;  \n sub @dnom1 by @supnum;  \n} sups;\n\nfeature locl { # Localized Forms  \n # Latin  \n language MOL exclude\\_dflt; # Moldavian  \n sub [Scedilla scedilla] by [Scommaaccent scommaaccent];  \n language ROM exclude\\_dflt; # Romanian  \n sub [Scedilla scedilla] by [Scommaaccent scommaaccent]; } locl;\n\nfeature frac { # Fractions  \nlookup frac1 {  \n sub one' [slash fraction]' four' by onequarter;  \n sub one' [slash fraction]' two' by onehalf;  \n sub three' [slash fraction]' four' by threequarters;  \n sub one' [slash fraction]' three' by onethird;  \n sub two' [slash fraction]' three' by twothirds;  \n sub one' [slash fraction]' eight' by oneeighth;  \n sub three' [slash fraction]' eight' by threeeighths;  \n sub five' [slash fraction]' eight' by fiveeighths;  \n sub seven' [slash fraction]' eight' by seveneighths; } frac1;  \n} frac;\n\nfeature liga { # Standard Ligatures  \n # Latin  \nlookup liga1 {  \n sub f f i by f\\_f\\_i;  \n sub f i by fi;  \n} liga1;  \nlookup liga2 {  \n sub f f l by f\\_f\\_l;  \n sub t t i by t\\_t\\_i;  \n sub f l by fl;  \n sub f f by f\\_f;  \n sub t t by t\\_t;  \n sub t i by t\\_i;  \n sub T T by T\\_T;  \n} liga2;  \n language TUR exclude\\_dflt;  \nlookup liga2;  \n} liga;\n\n"
+    },
+    {
+      "time": "13 Nov 2006 — 8:13pm",
+      "content": "I just checked Apples \"Pages\" and \"Keynote\" applications. Liga works fine with them but I don't think they support frac anyway. Liga does not work with Adobe aps though :-/\n\nChrisL\n\n"
+    },
+    {
+      "time": "13 Nov 2006 — 8:16pm",
+      "content": "Josh,  \nI tried trashing “adobefnt” but it didn't help.\n\nChrisL\n\n"
+    },
+    {
+      "time": "13 Nov 2006 — 8:27pm",
+      "content": "Ah, here we go:\n\n[http://typophile.com/node/28277](http://web.archive.org/web/20141128021439/http:/typophile.com/node/28277 \"http://typophile.com/node/28277\")\n\nThere's some discussion about languagesystem in there. I forgot that DFLT/dflt is so new that FontLab doesn't yet recognize it (right?), but perhaps the language system tags in general are your problem.\n\n"
+    },
+    {
+      "time": "13 Nov 2006 — 10:11pm",
+      "content": "By the way, only delete AdobeFnt\\*.lst files, not the AdobeFnt.db file (if you have it).\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "13 Nov 2006 — 11:32pm",
+      "content": "Some opentype features for cyrillic script which works in AdobeCS for Windows don't works in AdobeCS for MacOSX 10.4.x, f.ex. liga, howewer calt is working...\n\n"
+    },
+    {
+      "time": "14 Nov 2006 — 5:19am",
+      "content": "Thanks Christopher, I assume you meant:  \n\"However, in the FDK 2.0, the default script is “DFLT”, so the effect is saying:  \nscript DFLT;  \nlanguage ROM;\n\nand the only legal language tag for the DFLT script is the ‘dflt’ language.\n\nTo get what you want, you should put the lines:  \nlanguagesystem DFLT dflt;  \nlanguagesystem latn dflt;  \nlanguagesystem latn ROM;\n\nat the beginning of the feature file; all features not registered under a specific language will then be registered under these three script/language pairs.\n\nIn features where you specify any language or script, you need to spell out all the script language combinations, and explicitly include the appropriate features under each, e.g  \nscript DFLT;  \nlanguage dflt;  \nlookup LOOKUP\\_1 {  \n… lots of rules  \n} LOOKUP\\_1;\n\nscript latn;  \nlanguage ROM;  \nlookup LOOKUP\\_1; # reference to the previously defined LOOKUP\\_1,  \n# so that it will be included under latn-ROM as well as DFLT-dflt.\"\n\nI thought that only applied to the Adobe FDK2 tool? Unless you can tell me I need to put something similar in my FontLab5 features?\n\nWhat is weird is that it only does wrong on this font, not any of the others I've done the same way.\n\nChrisL\n\n"
+    },
+    {
+      "time": "14 Nov 2006 — 5:20am",
+      "content": "Thanks Thomas, I only deleted the .lst files but to no avail.\n\nChrisL\n\n"
+    },
+    {
+      "time": "14 Nov 2006 — 5:34am",
+      "content": "To further fuel the debate, I just loaded my problematic Tovarich font here at the office. I do all my font development at home on a different computer. At home, I have my personal copy od InDesign CS suite. Here at the office, I have the newer CS2. Both home and office computers are Macs running the same system software Mac OS 10.4.8. Both are pre-Intel G5s.  \nAlthough the \"OSF\" icon does not show up on the Tovarich I loaded here at the office, ALL OF MY OTF FEATURES WORK HERE! Again, the for certain difference is that here I am using CS2 instead of CS at home. There may be more to it than that but that is a start. This would all make sense if all my OTF fonts behaved the same way, but they don't. Every other opentype font on my system at home works on the older Adobe CS just fine EXCEPT Tovarich--go figure.  \nHas Adobe heard any other CS vs. CS2 font issues with opentype?\n\nChrisL\n\n"
+    },
+    {
+      "time": "14 Nov 2006 — 6:06am",
+      "content": "Here is a PNG file showing working OTF features in CS2.\n\n ![](http://web.archive.org/web/20141128021439im_/http:/typophile.com/files/Tovarich-Test-_3473.png)\n\nChrisL\n\n"
+    },
+    {
+      "time": "14 Nov 2006 — 10:31am",
+      "content": "I was hoping a FontLab expert would chime in with some guidance about the languagesystem declarations. I am not sure if FontLab allows you to just put those statements in the OpenType panel, or if FontLab is generating its own language system tags using something in the font info.\n\nTry putting the line  \n`languagesystem latn dflt;`  \nin the \"global\" part of the OpenType panel.\n\n"
+    },
+    {
+      "time": "14 Nov 2006 — 10:34am",
+      "content": "Thanks Christopher, I will give it a try.\n\nChrisL\n\n"
+    },
+    {
+      "time": "14 Nov 2006 — 10:50am",
+      "content": "\"I was hoping a FontLab expert would chime in with some guidance about the languagesystem declarations.\"\n\nMe too. Maybe Adam Twardoch will see this thread and set me straight :-)\n\nChrisL\n\nPS: Have there been any complaints to Adobe about this kind of thing with CS before?\n\n"
+    },
+    {
+      "time": "14 Nov 2006 — 2:40pm",
+      "content": "Another issue: Now the font has moved down the list to the foreign script area at the bottom, Even though I don't have anything other than basic Latin checked? Is there a fix for this too?\n\nChrisL\n\n"
+    },
+    {
+      "time": "14 Nov 2006 — 3:04pm",
+      "content": "Hereis a PNG of the font menu in CS:\n\n ![](http://web.archive.org/web/20141128021439im_/http:/typophile.com/files/fontlist_3526.png)\n\nChrisL\n\n"
+    },
+    {
+      "time": "14 Nov 2006 — 5:19pm",
+      "content": "Chris,\n\nyour OpenType code looks like a result of some wild grab-and-paste action, randomly collected from other people’s fonts. In short, your OpenType code doesn’t make any sense at all.\n\n1. In the lower-right part of the OpenType panel, declare \\*all\\* the languagesystems that your OT code uses.\n\nYou should at any case declare these two:\n\nlanguagesystem DFLT dflt;  \nlanguagesystem latn dflt;\n\nThen, you should declare all the languages that use the Latin script for which you have some special handling. For the Scedilla-\\>Scommaaccent \"locl\" behavior, declare Moldavian (MOL) and Romanian (ROM). For the special \"i\" casing and ligature treatment, declare Azeri (AZE), Crimean Tatar (CRT) and Turkish (TRK, \\*not\\* TUR!):\n\nlanguagesystem latn AZE;  \nlanguagesystem latn CRT;  \nlanguagesystem latn MOL;  \nlanguagesystem latn ROM;  \nlanguagesystem latn TRK;\n\nIf your font includes any Cyrillic glyphs, you should also declare the Cyrillic script:\n\nlanguagesystem cyrl dflt;\n\nIf you want to include special Serbian glyphs in locl, declare Serbian as well:\n\nlanguagesystem cyrl SRB;\n\nIf your font includes any Greek language glyphs (i.e. not mathematical Greek), you should also declare the Greek script:\n\nlanguagesystem grek dflt;\n\nSo your lower-right part of the OpenType panel may look like this:\n\nlanguagesystem DFLT dflt;  \nlanguagesystem latn dflt;  \nlanguagesystem latn AZE;  \nlanguagesystem latn CRT;  \nlanguagesystem latn MOL;  \nlanguagesystem latn ROM;  \nlanguagesystem latn TRK;  \nlanguagesystem cyrl dflt;  \nlanguagesystem cyrl SRB;  \nlanguagesystem grek dflt;\n\nThis provides a map for all the languagesystems that will be included in your font. If a feature definition does not use any exceptions, it will be automatically assigned to all the languagesystems defined there.\n\nIf a feature definition defines any exceptional handling for any of the languagesystems, you must enumerate all of these languagesystems once again, inside of the feature definition, and you must specify for each of them the appropriate action (i.e. \"exclude\\_dflt\" or \"include\\_dflt\" plus some lookups if necessary).\n\nAs for \"smcp\", \"c2sc\" and \"liga\" handling of Turkish \"i\", I recommend using the new Adobe approach. That is,\n\nfeature locl { # Localized Forms  \n script latn;  \n # Handling of Turkish i  \n language TRK exclude\\_dflt;  \n lookup locl\\_TRK {  \n sub [i I.smcp] by [i.TRK Idotaccent.smcp];  \n # The \"i.TRK\" glyph should be an identical copy of \"i\"  \n } locl\\_TRK;  \n language AZE exclude\\_dflt;  \n lookup locl\\_TRK;  \n language CRT exclude\\_dflt;  \n lookup locl\\_TRK;  \n # Handling of Romanian Scommaaccent  \n language ROM exclude\\_dflt;  \n lookup locl\\_ROM {  \n sub [Scedilla scedilla] by [Scommaaccent scommaaccent];  \n sub Scedilla.smcp by Scommaaccent.smcp;  \n } locl\\_ROM;  \n language MOL exclude\\_dflt;  \n lookup locl\\_ROM;  \n} locl;\n\n(You may also want to include the Serbian glyph handling there).\n\nThis way, you will avoid the need to deal with \"script\" and \"language\" in ANY other OpenType feature definition.\n\nSimply make sure that in the feature definition of \"smcp\" (or in the appropriate classes), \"i\" gets replaced by \"I.smcp\" and \"i.TRK\" by \"Idotaccent.smcp\". Of course \"dotlessi\" should be replaced by \"I.smcp\" as well.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "14 Nov 2006 — 5:35pm",
+      "content": "Thanks Adam! I will try and digest all of that in my feeble way :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "14 Nov 2006 — 6:00pm",
+      "content": "Adam,  \nI did what you suggested and IT WORKED! I knew I had done something boneheaded!  \nTHANKS for figuring it out!\n\nNow I wonder why it works in CS2 messed up as it was originally? Maybe CS2 has a bonehead debugger built right in :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "15 Nov 2006 — 1:54am",
+      "content": "Adam, are you sure that the 'exclude\\_dflt' statements need to be used inside 'locl', as in your example?\n\nAFAIK they don't, because:  \n1. In 'locl' we want to define language specific behavior, so neither 'script DFLT;' or 'language dflt;' commands should ever be used there, and  \n2. Since 'language dflt;' is not used, there's no default behavior specified, so there's no reason for using 'exclude\\_dflt;'.\n\nAm I missing something?\n\n"
+    },
+    {
+      "time": "15 Nov 2006 — 6:15am",
+      "content": "_You should at any case declare these two:_\n\nlanguagesystem DFLT dflt;  \nlanguagesystem latn dflt;\n\nAdam, will the DFLT tag cause any problems with the current version of FLS5?\n\n"
+    },
+    {
+      "time": "15 Nov 2006 — 6:50am",
+      "content": "\"# The “i.TRK” glyph should be an identical copy of “i”\"\n\nNot the dotless i Adam? If it is exactly the same, why not just point to the Latin \"i\"? I am really missing something here. Itmay be that I just don't understand the contexts in Turkish which need a substitution( or lack there of).\n\nChrisL\n\n"
+    },
+    {
+      "time": "15 Nov 2006 — 7:17am",
+      "content": "I think I see it now Adam. If, in Turkish, I substitute \"i.trk\" for \"i\" before I apply the liga feature, then the liga feature will only be applied to the Latin i in non-Turkish usage. This would eliminate the repetition of locl exclusions for multiple ligatures.\n\nChrisL\n\n"
+    },
+    {
+      "time": "15 Nov 2006 — 10:00am",
+      "content": "\\> If, in Turkish, I substitute “i.trk” for “i”  \n\\> before I apply the liga feature, then the liga  \n\\> feature will only be applied to the Latin i in  \n\\> non-Turkish usage. This would eliminate the  \n\\> repetition of locl exclusions for multiple  \n\\> ligatures.\n\nExactly. This is the technique Adobe adopted in Garamond Premier Pro and later releases. In \"locl\", you chage the \"identity\" of the letter i without changing its appearance, and then the rest of your code is clean and easy, without the necessity of dealing with various exceptions, and without the need to think about it in all the OpenType features you may think of.\n\n\\> will the DFLT tag cause any problems with the  \n\\> current version of FLS5?\n\nUnfortunately, yes. Inside the font file, a script tag \" \" (four spaces) rather than \"DFLT\" will be produced. This is an unregistered tag, so I don’t think it will break anything, but it’s not optimal. As soon as we upgrade FontLab Studio to make use of AFDKO 2, the feature syntax will automatically produce the correct result.\n\nA.\n\n"
+    },
+    {
+      "time": "15 Nov 2006 — 10:02am",
+      "content": "_Unfortunately, yes. Inside the font file, a script tag ” ” (four spaces) rather than “DFLT” will be produced._\n\nis this something can be fixed simply with TTX?\n\ncan i just replace the line  \n`<ScriptTag value=\" \"/>`  \nwith  \n`<ScriptTag value=\"DFLT\"/>`  \n?\n\n"
+    },
+    {
+      "time": "15 Nov 2006 — 11:58am",
+      "content": "Yes. I’ve just compared the output of AFDKO 2 and FontLab Studio 5, and the GSUB table was the same except for that very difference. You can do the replacement manually. But I have just written a Python script that will perform the fix on an arbitrary number of fonts automatically:\n\n[http://www.silesian.com/software/FixDFLTScriptTagSL.zip](http://web.archive.org/web/20141128021439/http:/www.silesian.com/software/FixDFLTScriptTagSL.zip \"http://www.silesian.com/software/FixDFLTScriptTagSL.zip\")\n\nFrom the README.TXT:\n\nFixDFLTScriptTagSL 1.0 (061115)\n\nChanges invalid default OT Layout script tag ' ' to 'DFLT'  \n in all OpenType fonts found in a folder (current or specified).  \n Keeps a backup copy of the original font file (.bak extension).\n\nCopyright (c) 2006 by Silesian Letters, [http://www.silesian.com/](http://web.archive.org/web/20141128021439/http:/www.silesian.com/ \"http://www.silesian.com/\")  \n Written in Python 2.4 by Adam Twardoch. FREEWARE.\n\nusage: python FixDFLTScriptTagSL.py [folder]\n\nRequires the Python source version of FontTools/TTX:  \n [http://www.font.org/software/ttx/](http://web.archive.org/web/20141128021439/http:/www.font.org/software/ttx/ \"http://www.font.org/software/ttx/\")\n\nThe OpenType Layout feature definition statements such as  \n 'languagesystem DFLT dflt;' or 'script DFLT;' errorneously  \n produce a script tag ' ' instead of the intended 'DFLT'  \n inside of the font file when the font is produced using  \n Adobe FDK for OpenType (AFDKO) version 1.6, FontLab 4.x,  \n or FontLab Studio version up to 5.0.2. Using AFDKO 2.0  \n produces correct results. This Python script corrects  \n the errorneous entries in existing OpenType fonts.\n\nEnjoy,  \nAdam\n\n"
+    },
+    {
+      "time": "15 Nov 2006 — 12:01pm",
+      "content": "I am assuming your script is for P{C only, correct Adam?\n\nChrisL\n\n"
+    },
+    {
+      "time": "15 Nov 2006 — 12:56pm",
+      "content": "The script runs on both Mac OS X and Windows. I have just uploaded a revised version 1.1 of the script to\n\n[http://www.silesian.com/software/FixDFLTScriptTagSL.zip](http://web.archive.org/web/20141128021439/http:/www.silesian.com/software/FixDFLTScriptTagSL.zip \"http://www.silesian.com/software/FixDFLTScriptTagSL.zip\")\n\nthat can run conveniently inside of FontLab Studio 5 as well as from the commandline.\n\nINSTALLATION\n\n1. Make sure you have Python installed.\n\nOn Mac OS X 10.4, Python 2.3 is installed by default. It will work fine, but installing Python 2.4 is recommended. On Windows, install Python 2.4 from [http://www.python.org/](http://web.archive.org/web/20141128021439/http:/www.python.org/ \"http://www.python.org/\")\n\n2. Install the source Python version of FontTools/TTX.\n\nDownload and unzip the file  \n [http://fonttools.sourceforge.net/cvs-snapshots/zip/fonttools-current-sna...](http://web.archive.org/web/20141128021439/http:/fonttools.sourceforge.net/cvs-snapshots/zip/fonttools-current-snapshot.zip \"http://fonttools.sourceforge.net/cvs-snapshots/zip/fonttools-current-snapshot.zip\")\n\nOpen the Terminal (Mac OS X) or the command-line window (Windows)\n\nGo to the folder where you unzipped FontTools (using the '`cd`' command). If you unzipped the file on your Mac OS X Desktop, you will probably need to type in `cd Desktop/fontTools`. Then, type in, on Mac OS X:\n\n`sudo python setup.py install`\n\nor on Windows:\n\n`python setup.py install`\n\n3. To test if the installation was correct, open FontLab Studio 5, open the Edit Macro panel, type in:\n\n`import fontTools.ttLib`\n\nand click on \"Run macro\". If an error message appears, your installation of FontTools/TTX failed. If nothing appears, you have a correct installation of the source Python version of FontTools/TTX.\n\n4. Locate your FontLab Studio 5 data folder using Windows Explorer/Finder.\n\nGo to Options/Preferences / General Options / Folders and paths,  \n and check the \"FontLab Studio 5 files\" textfield.  \n If the textfield is empty, and you're on Mac OS X, go to  \n`%yourusername%/Library/Application Support/FontLab/Studio 5/`  \n Otherwise, go to the folder specified in that textfield. This is your FontLab Studio 5 data folder.\n\n5. Inside of your FontLab Studio 5 data folder, there should be a folder named \"`Macros`\". If it is not there, create one.\n\n6. Inside of the Macros folder, create a folder named \"`Silesian`\".\n\n7. Unzip FixDFLTScriptTagSL.zip and put the file `FixDFLTScriptTagSL.py` into the Silesian folder.\n\n8. Restart FontLab Studio and in the Macro toolbar, choose `Silesian` from the Macro folders list, and then choose `Fix DFLT OT Script Tags [SL]` from the Macro programs list. Click on the Run button.\n\n(It is also possible to run this macro from the commandline outside of FontLab Studio).\n\n"
+    },
+    {
+      "time": "15 Nov 2006 — 1:01pm",
+      "content": "Adam, do you have any idea when the version of FontLab with AFDKO 2 incorporated will be released?\n\n"
+    },
+    {
+      "time": "15 Nov 2006 — 1:03pm",
+      "content": "\\> do you have any idea when the version of FontLab  \n\\> with AFDKO 2 incorporated will be released\n\nWe don’t currently have anything to announce about this.\n\nA.\n\n"
+    },
+    {
+      "time": "15 Nov 2006 — 2:25pm",
+      "content": "Thanks for the update Adam!\n\nChrisL\n\n"
+    },
+    {
+      "time": "15 Nov 2006 — 8:02pm",
+      "content": "Adam, what about [my question](http://web.archive.org/node/29469#comment-168582) ?\n\n"
+    },
+    {
+      "time": "15 Nov 2006 — 9:04pm",
+      "content": "Miguel,\n\nyou are right, it’s not necessary but it doesn’t harm -- the output is identical. I like to include it just to make sure just for the sake of good coding practice and consistency. Whenever I write code, I like to make sure that my snippets are always \"cut-and-pastable\" without paying attention to modality/context too much. I prefer explicit vs. implied, so I always specify either the \"exclude\\_dflt\" or the \"include\\_dlft\" statement whenever I do language-specific processing.\n\nIndeed, in \"locl\", there usually is no \"language dflt\" statement so the exclude\\_dflt statement is not required. However, had this kind of processing been done in a different feature, one would need to use exclude\\_dflt, so I simply include it as a means to make sure that I know where I am.\n\nA.\n\n"
+    },
+    {
+      "time": "15 Nov 2006 — 9:45pm",
+      "content": "Also, for whatever it may be worth, in the PDF of slides used for Christopher Slye's talk on OpenType feature files (at the ATypI 2006 Lisbon conference) one finds this snippet:\n\n**Saving the i-dot**  \n`\nfeature liga {\n  script DFLT;\n  language dflt;\n  sub f i by f_i;\n  script latn;\n  language dflt include_dflt;\n  language TRK exclude_dflt;\n} liga;\n`  \nSaid PDF is available at:  \n [http://blogs.adobe.com/typblography/atypi2006/slye\\_lisbon-05.pdf](http://web.archive.org/web/20141128021439/http:/blogs.adobe.com/typblography/atypi2006/slye_lisbon-05.pdf \"http://blogs.adobe.com/typblography/atypi2006/slye\\_lisbon-05.pdf\")\n\nSeems to me it can't hurt.\n\n"
+    },
+    {
+      "time": "16 Nov 2006 — 5:03am",
+      "content": "@RC--Thanks for posting that! The pdf of Christopher's presentation is something I wish I had seen before.\n\n@Christopher Slye--Your pdf goes a long way in showing the \"why\" and \"how: of feature code. Prior to this, I was just trying to decipher what I had seen and make some sense of it. As you can see from my code above, I was fishing in the dark and trying to teach myself how to do it (a blind-man fishing in the dark). I also didn't realize until now that you worked for Adobe, the collective pronouns you used now make sense to me :-) a very big THANK YOU for your help! The fog is starting to lift and I can now at least see the water :-)\n\n@Punchcut gang--What a wonderful place Typophile is to get real help and expert Advice from people like Christopher, Adam, Miguel, and Paul. KEEP UP THE GOOD WORK!\n\nChrisL\n\n"
+    },
+    {
+      "time": "16 Nov 2006 — 5:47am",
+      "content": "rcc,\n\nyou don’t need to do this kind of treatment if your \"locl\" feature replaced i with i.TRK for Turkish.\n\nA.\n\n"
+    },
+    {
+      "time": "16 Nov 2006 — 5:58am",
+      "content": "One of the other slides in Christopher's presentation shows the \"i.dot\" solution Adam mentioned.\n\nChrisL\n\n ![](http://web.archive.org/web/20141128021439im_/http:/typophile.com/files/trkdot_4081.png)\n\n"
+    },
+    {
+      "time": "16 Nov 2006 — 8:38am",
+      "content": "_you don't need to do this kind of treatment if your \"locl\" feature replaced i with i.TRK for Turkish._\n\nAdam,\n\nRight... I suspected someone might call me on this bit. (Mere newcomer's angst, that?)\n\nHowever, being mindful of the current scarcity of 'locl' support and suchlike, I raised the issue for its 'belt-and-braces' potential, reckoning thus: if one as-yet-unimplemented feature doesn't execute the intended substitution, the other one ought to do so, yes? And later, if one projects a few months/years down the chronological road, such coding redundancies ought to be smoothly ignored when applications do in fact support the anticipated feature(s). (Though by that time, one would likely wish to amend and update one's feature code and issue revised versions anyway.)\n\nOr is that dreadfully wrongheaded? What, if one can state them, are 'best practices' on such issues? Wiser counsel won't be disregarded.\n\nThank you.\n\n"
+    },
+    {
+      "time": "16 Nov 2006 — 9:05am",
+      "content": "rcc,\n\nin theory, you’re right. It is possible that an OpenType Layout engine would do language-sensitive OpenType processing (i.e. process OpenType features assigned to languages other than \"dflt\"), but it would not automatically apply the \"locl\" feature. But this is \\*very\\* unlikely. Currently, major applications do not use the language-sensitive processing. Adobe applications currenly only apply features assigned to \"latn dflt\" while Microsoft applications apply features for complex scripts assigned to the dflt language in the respective scripts (arab, hebr etc.).\n\nEspecially for the non-complex scripts, I think it is safe to assume that if an application processes language-sensitive lookups, it will also apply \"locl\".\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "16 Nov 2006 — 9:48am",
+      "content": "Thanks for the additional insight, Adam. It's truly appreciated.\n\nBest,  \nrcc\n\n"
+    },
+    {
+      "time": "3 Apr 2010 — 3:06am",
+      "content": "@ Adam\n\n<cite>lookup locl_TRK {<br>\nsub [i I.smcp] by [i.TRK Idotaccent.smcp];</cite>\n\nEven in Turkish it should be allowed to set an dotless I.smcp. Your code requires an additional character \"dotlessi.smcp\".\n\nIn [http://typophile.com/node/69063](http://web.archive.org/web/20141128021439/http:/typophile.com/node/69063 \"http://typophile.com/node/69063\") I propose to either keep the font absolutely symmetrically with regard to dotlessi and i or to break the symmetry of the dotlessi.\n\nE I T H E R  \nDotlessi, Dotlessi.smcp, dotlessi, Idotaccent, Idotaccent.smcp, idotaccent, I, I.smcp and i. (Please, symmetrie also with regard to the names – not i.trk and Idotaccent or idotaccent and I.trk!)\n\nO R  \nsame as above, but without Dotlessi and without Dotlessi.smcp\n\n-------------------\n\nEveryone is cooking his own soup there. In Athelas (TypeTogether) only i.smcp is substituted by idotaccent.smcp in the locl feature, but not i by idotaccent.\n\n"
+    },
+    {
+      "time": "3 Apr 2010 — 4:26am",
+      "content": "Arno,\n\n`“Dotlessi”` and `“idotaccent”` are not PDF-compatible glyphnames. They resolve to an unknown character. Instead of `“idotaccent”`, Adobe recommends using `“i”` with any suffix (after a dot), and FontLab recommends `“i.TRK”`, specifically.\n\nI’m not sure what you mean by “symmetry in glyphnames”. Adobe and FontLab publish extensive guidelines on glyphname naming, and there is nothing in there about symmetry. The fact that the name `“Aacute”` is used for the glyph which represents the Unicode character U+00C1 (Á, LATIN CAPITAL LETTER A WITH ACUTE), and `“aacute”` is used for U+00E1 (á, LATIN SMALL LETTER A WITH ACUTE).\n\nAs it happens, `“Aacute”` is the uppercase variant of `“aacute”` does not mean that all uppercase variants have the same glyphname as the lowercase letters except that the first letter of the glyphname is uppercase. The fact that it works for some glyphnames is just incidental.\n\nThe glyphname for the character U+01F5 (ǵ, LATIN SMALL LETTER G WITH ACUTE) is `“uni01F5”`, but the glyphname for its uppercase counterpart, U+01F4 (Ǵ, LATIN CAPITAL LETTER G WITH ACUTE) is \\*not\\* `“Uni01F5”` but is `“uni01F6”`.\n\nThe glyphname `“Idotaccent”` is used for the character U+0130 (İ, LATIN CAPITAL LETTER I WITH DOT ABOVE), and the glyphname `“I”` is used for the character U+0049 (I, LATIN CAPITAL LETTER I). The lowercase variant for both of them is U+0069 (i, LATIN SMALL LETTER I). There is no LATIN SMALL LETTER I WITH DOT ABOVE in Unicode, and the name `“idotaccent”` doesn’t mean anything. It may look “pretty” according to your symmetry rules, but it doesn’t work.\n\nSame thing for `“dotlessi”`. It’s a glyphname for U+0131 (ı, LATIN SMALL LETTER DOTLESS I) but its uppercase counterpart is U+0049 (I, LATIN CAPITAL LETTER I). There is no LATIN CAPITAL LETTER DOTLESS I in Unicode, so there is no such thing as `“Dotlessi”`.\n\nOf course everyone is cooking his own soup. But some people’s soup may contribute to a stomach pain. Font developers are free to use invented, non-PDF-compatible glyphnames — but this will result in less usable fonts. PDFs produced with such glyphnames may not be searchable, and copy-paste may not work properly.\n\nWe at Fontlab Ltd. agree with Adobe that it’s a good idea to duplicate the small cap glyphs, though we recommend naming the glyphs `“A.c2sc”` and `“a.smcp”`, which makes clear what their purpose is. Since PDF applications often need to parsing glyphnames to recreate the original text string (when searching or copy-pasting), keeping separate glyphname prefixes for glyphs that semantically represent uppercase or lowercase letters allows better text accessibility.\n\nPDF readers will know that `“A.c2sc”` stands for a smallcap version of the _“A”_ character, while `“a.smcp”` stands for a smallcap version of the _“a”_ character. This way, copy-paste and searching will still work properly even if the text is set in smallcaps.\n\nThis is the code that I recommend using:\n\n`# This goes into the lower-right section of the FLS OpenType panel.`\n\n`languagesystem DFLT dflt;\nlanguagesystem latn dflt;\nlanguagesystem latn AZE;\nlanguagesystem latn TRK;`\n\n`# This goes into the features list in the FLS OpenType panel.`\n\n`feature locl {\nlanguage TRK;\nsub i by i.TRK;\nlanguage AZE;\n} locl;`\n\n`feature c2sc {\nsub I by I.c2sc;\nsub Idotaccent by Idotaccent.smcp;\n} c2sc;`\n\n`feature smcp {\nsub i by i.smcp;\nsub i.TRK by i.TRK.smcp;\nsub dotlessi by dotlessi.smcp;\n} smcp;`\n\nThis requires the following glyphs to be present in the font: `“I”`, `“Idotaccent”`, `“i”`, `“i.TRK”`, `“dotlessi”`, `“I.c2sc”`, `“Idotaccent.c2sc”`, `“i.smcp”`, `“i.TRK.smcp”`, `“dotlessi.smcp”`.\n\nThe feature code above presumes that the `“locl”` lookups are written before the `“smcp”` lookups. If you put `“locl”` after `“smcp”`, then the `“locl”` would need to exchange the smallcap glyphs. But this makes less sense: the `“locl”` lookup for Turkish should be defined early in the font because it should influence other features such as `“liga”`.\n\nSure thing however, every font vendor is free to make fonts that don’t work. ;)\n\nA.\n\nPs. I’m including a link to the related discussion:  \n [http://typophile.com/node/69063#comment-404694](http://web.archive.org/web/20141128021439/http:/typophile.com/node/69063#comment-404694 \"http://typophile.com/node/69063#comment-404694\")\n\n"
+    }
+  ]
+}

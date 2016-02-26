@@ -1,0 +1,42 @@
+{
+  "id": "30361",
+  "title": "Yet another programmer's monospace",
+  "forum": "Sans Serif",
+  "tags": [
+    "Sans Serif"
+  ],
+  "content": "Only in the last month or so have I run across Typophile. No sooner do I get here, of course, than I discover that this particular windmill already has plenty of broken lances stuck in it, and I’m late to the party. But...\n\nFor the last four years or so, I have been working on this. I program for a living, and very quickly got fed up with looking at Courier and friends. Because hubris is one of the cardinal virtues of programming, I banged out my own first draft in Fontographer, got a copy of MS VTT (for mac os 9!), and have been polishing and tweaking the font ever since. I use it as my main programming, email, and web page mono font, at first as motivation to keep improving it, but these days, because I don’t think it looks half bad.\n\nI’ve now read through the various threads on monospaced type design now, particularly Eben Sorkin's Software Developer. It’s great to recognize problems I’ve fought with myself addressed here (and, sometimes, affirming to see similar solutions to my own!)\n\nI now recognize this is a path well travelled, but it isn't often travelled well. I may yet have something worthwhile to contribute.\n\nI give you: BakaMono.\n\n ![](http://web.archive.org/web/20150123214921im_/http:/typophile.com/files/bakashell_5765.gif)\n\nMy design goals:  \nUsable both bitmapped and antialiased (I use both), down to as small a pixel size as possible. I.e., good hinting.  \nNot look like a \"slave to the bitmap\" like good old [ProFont](http://web.archive.org/web/20150123214921/http:/www.tobiasjung.net/profont/index.html).  \nMake programming typographic idioms as blatant and unambiguous as possible. Heavy, obvious punctuation.  \nAvoid trouble spots that lots of otherwise excellent fonts get wrong: the O 0 o test; the l i 1 | ! test; ambiguous punctuation: , . : ; ’ ` ” [] {} () \\< \\>; and letters too similar: e @ a o D O g j y rn m z 2 S 5\n\nA much more comprehensive sample is attached.\n\n| Attachment | Size |\n| --- | --- |\n| [bakasample.pdf](http://web.archive.org/web/20150123214921/http:/typophile.com/files/bakasample.pdf) | 52.78 KB |\n\n",
+  "author": "rgeorge",
+  "time": "4 Jan 2007 — 1:34pm",
+  "uid": "16039",
+  "comments": [
+    {
+      "time": "4 Jan 2007 — 2:02pm",
+      "content": "It looks pretty good. I really like how you've managed to keep the shape of the 'g' in the bitmap version without it becoming a big blob.\n\nMy only concern is with the height of the numerals. '2' and 'z', '1' and 'i' and '0' and 'o' are all the same height, which can lead to confusion as you've noted. Making the numbers just slightly taller could help.\n\n- Lex\n\n"
+    },
+    {
+      "time": "4 Jan 2007 — 3:59pm",
+      "content": "Are you interested in the way this prints? Or, put another way: how would you say you have balanced the print forms vs. the screen forms? Given that this is a programmers font I imagine them emphasis is on screen - correct? Do you tend to use it in bitmap or anti-aliased mode? The font feels more elegant than a typical programmers font. Partly that is the numbers, but it is also the treatment of the el & eye as well as detail like the small upper bowl on the cap B. Were you loking for something with a refined feeling? Did that just result from looking for ditictive forms? What, if anything, would you like to improve?\n\nMy comments: Maybe your x height numbers should gain a pixel in height. Then the crossbar on the zero could be more linear and your 2 less z like.\n\nHow do feel about Luc(as) de Groot's fonts?\n\n"
+    },
+    {
+      "time": "4 Jan 2007 — 7:46pm",
+      "content": "Heh, elegant. I guess that's as good a way of putting it as any. I had been thinking \"personality\". I've tried to get some coworkers to try it out, and even the idea that the usual default terminal fonts might be improved on is something of a hard sell. I had to have something that'll grab them quick, so wherever I could I'd in some detail or trick I'd seen done in a better font, instead of conservatively following the bitmap. I was just shooting for 'different', so if I hit \"elegant\", well, wonderful.\n\nI must confess... I have not actually tried it in print. Since graduation, paper is used in only a vanishingly tiny portion of my workflow. So I guess, yes, screen would be the main emphasis.\n\nI use both bitmap and antialiased modes, depending on the physical size of the pixels of the display I happen to be using: on a CRT cranked up to where the pixels are smaller than the phosphor dots, antialiasing is a huge win. On my monster LCD at work, I can use huge type for similar effect. On my little laptop, anything smaller than 13px really needs to be bitmapped or the blur overwhelms it.\n\nI may try raising the numbers' \"x-height\" a bit. I notice that's the solution de Groot uses in theSans to distinguish o0O.\n\nAnd speaking of de Groot... I haven't yet had occasion to use theSans and friends. Looking at the web site, I'm impressed; his approach is much more formal than mine, and his families are much more complete. EIGHT weights, three widths and true italic, plus lots of \"extras\" like many digit variants, alternates and unusual ligatures... does he ever sleep? I look forward to eventually seeing some of those extras cooked down into a few full featured OpenType fonts.\n\nhmm, OpenType. I wonder if there are any opentype features this could use.\n\n-- R.\n\n"
+    },
+    {
+      "time": "5 Jan 2007 — 4:07pm",
+      "content": "Probably there is no call for multiple weights while programming. A Normal or 'book' weight would probably be enough. Don't you think? Or no? What have your fellow programmers said about the font? What do they like & not? How many of them keep using it? What kinds of Open type feature were you thinking of? The idea you had mentioned about giving extra room to the 'm' stikes me as a bit scary.\n\n"
+    },
+    {
+      "time": "10 Jan 2007 — 7:38pm",
+      "content": "I have one convert so far. He's reporting a strange hinting issue: apparently at 11px the 'A' \"balloons\". I can't reproduce it yet but I believe him.\n\nas for extra weights: OS X actually synthesizes a bold (and oblique) when it needs a missing one, and does a somewhat OK job, so that may be enough. It's good to have though: when using a terminal, there's an escape sequence to switch to bold (and reverse, and underlined, and maybe oblique and blinking) characters. IntelliJ IDEA puts various text styles to good use with its syntax formatter. The more variations available, the more things you can tell apart.\n\nThe hypothetical opentype trick: I think of it as long-distance kerning. The rule would have to work like this: If a glyph sequence \"space, char run, 'm', char run, space\" appears, substitute a narrower space glyph for both spaces, and a matchingly wider 'm' glyph. Similar rules for M, W, w; and i, l, etc. could \"absorb\" excess m-width like spaces. I don't know if opentype's rules are powerful enough to express a multi-glyph substitution like that, though.\n\nProbably a more useful OT feature would be punctuation case shifting. In any case, it'd probably only help Mac users, since I understand on Windows, OT interpretation isn't a built-in os service (?) and isn't likely to be added to programming editors.\n\n-- R.\n\n"
+    },
+    {
+      "time": "10 Jan 2007 — 8:18pm",
+      "content": "<cite> I don’t know if opentype’s rules are powerful enough to express a multi-glyph substitution like that, though. </cite>\n\nThey are. But as you note, opentype scripting/feature support support must be available.\n\nWhen you hinted this, did you use mostly delta hints?\n\n"
+    },
+    {
+      "time": "16 Aug 2007 — 2:07pm",
+      "content": "Any new news with this font?\n\n"
+    }
+  ]
+}

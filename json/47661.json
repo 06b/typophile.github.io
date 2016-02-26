@@ -1,0 +1,34 @@
+{
+  "id": "47661",
+  "title": "Replacement feature problem",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": " ![](http://web.archive.org/web/20080907162823im_/http:/typophile.com/files/Rep3_3684.jpg)\n\nThe problem is that when I replace lower case with small caps the brackets also reduce in size (shown in pink). There is a similar problem when replacing caps with small caps. As you can see with the illustration the feature code is pretty simple - just replacing one class with another. Could this be something that needs specifying as an exception to the context rule? The FontLab manual has no illustrations which demonstrate the meaning of the text, so consequently means nothing to me. That’s the trouble with the manual; sometimes it has illustrations for obvious things, but none for not-so obvious things.\n\nAny ideas? Thanks.\n\n [‹ the never ending subtable overflow story](http://web.archive.org/web/20080907162823/http:/typophile.com/node/47526 \"Go to previous forum topic\") [InDesign CS3 hyphenation again . . . ›](http://web.archive.org/web/20080907162823/http:/typophile.com/node/47637 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080907162823/http://typophile.com/user/3834\" title=\"View user profile.\">Nick Cooke</a>",
+  "time": "<br>",
+  "uid": "3834",
+  "comments": [
+    {
+      "time": " 23.Jul.2008 2.56am",
+      "content": "Nick,  \nI think it is a question of feature appliance: Should they blindly be applied throughout the whole text string?  \nBut if you like it to work even in these cases, I guess you’ll have to add some contextual stuff.\n\n"
+    },
+    {
+      "time": " 23.Jul.2008 4.25am",
+      "content": "Hi Nick,  \nI haven’t worked with c2sc and such before, but I think it would work if you take your punctuation out of the classes altogether for caps and small caps. That way your resized marks can replace the standard contextually as Christoph says.\n\nStephen\n\n"
+    },
+    {
+      "time": " 23.Jul.2008 4.31am",
+      "content": "I think that you can define a different class for small brackets and everything is not a letter, in that way in smcp you can replace only the letters and in c2sc you replace letters and other glyphs\n\n"
+    },
+    {
+      "time": " 23.Jul.2008 5.39am",
+      "content": "You seem to deal with smallcap punctuation in smcp. It’d be better to cover alternate smallcap punctuation only in c2sc (caps to small caps), but not in smcp (lowercase to small caps).\n\nThen, smallcap punctuation are applied only if a user selects “All Small Caps” in the application which activates both c2sc and smcp (so to test this behavior in FLS, you need to apply both too).  \nIf a user selects “Small Caps”, only smcp would be activated (without smallcap punctuation).\n\nIn so far I don’t think that it makes sense to take smallcap punctuation out of smallcap features entirely. No contextuality needed either, that may mess things up even more.\n\nKarsten\n\n"
+    },
+    {
+      "time": " 23.Jul.2008 1.40pm",
+      "content": "Right Karsten.  \n“smcp” should be only for letters, so that it works as “(Caps with) Small Caps” in mixed case settings with upper and lower case, such as acronyms and names in text.  \n“c2sc” should have all the bells and whistles, for when applications combine it with “smcp” to produce “All Small Caps”—for use in settings such as running heads, folios and title pages, where the idea is to produce an effect akin to optical scaling.\n\n"
+    }
+  ]
+}

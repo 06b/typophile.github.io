@@ -1,0 +1,62 @@
+{
+  "id": "16858",
+  "title": "Standards for Unicode Private Use Area?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Dear typophiles,\n\nWhat are the standards for using the Unicode Private Use Area's? For example, comparing Adobe Garamond Pro and Adobe Minion Pro:\n\n1. old-style numeral zero is represented in both by F730;\n\n2. For E04E, Garamond has Sacute.titling, while Minion Pro has orn.001 (an ornament).\n\nAre there any guidelines for this or is it just the wild west? (Context: working on an Arabic expert font, need a sane encoding scheme for alternates, swashes, etc.)\n\nBest  \nIdris\n\n",
+  "author": "ishamid",
+  "time": "17 Dec 2005 — 9:01pm",
+  "uid": "10590",
+  "comments": [
+    {
+      "time": "17 Dec 2005 — 9:38pm",
+      "content": "It is the wild west, in more ways than one. You don't need to encode glyph variants in your fonts, and I strongly recommend against using PUA codepoints for any text. In you case, though, it is a moot point, because all PUA codepoints have a presumed left-to-right directionality, so they are useless for Arabic.\n\nAdobe and some other developers have used PUA codepoints for glyph variants so that there was a way to access them in applications that do not support OpenType Layout. I think this is a terrible idea, because PUA codepoints are a kind of textual infection: once you introduce them to text, you lose the ability to search, sort, spellcheck, etc., and if you try to display the text in a different font there is no way to know what glyphs you will get, if any, for the PUA codepoints.\n\n"
+    },
+    {
+      "time": "18 Dec 2005 — 11:13am",
+      "content": "Is there anything wrong with me using Minion Pro's PUA codepoints in my fonts?  \n(Other than promulgating a bad idea, John.)\n\n"
+    },
+    {
+      "time": "18 Dec 2005 — 11:56am",
+      "content": "Thank you very much for your insights-)\n\nSo what do I do for alternate glyphs in an Arabic font? I am not talking about the usual contextual variants (ini, med, end, and iso) or ligatures, but rather alternates (like swashes). So, e.g., [nun]-iso (0646) may have a usual glyph and a swash variant [nun.swash] (generally used to improve paragraph and line spacing). How do I encode [nun.swash]?\n\nRelated question: If Adobe Accrobat 7.05 (which claims better Arabic support) opens the opentype font, will it be able to tell that [nun.swash] is to be treated like [nun]?\n\nDon't know too much about OTF; in the TeX world we can use them, but don't make direct use of the tables; we mostly use our own encoding files instead.\n\nThnx again and  \nBest  \nIdris\n\n"
+    },
+    {
+      "time": "18 Dec 2005 — 12:10pm",
+      "content": "Just an aside: I think that encoding Arabic ligatures (As in Arabic Presentation Forms A) was a really bad idea. The list is not exhaustive and many of these are virtually never used.\n\nIndeed, the whole concept of ligatures with respect to Arabic is generally very poorly thought out. When one works on highly vowelized classical text (as I do-\\>) the limitations of this approach becomes very apparent. I am working on an alternate approach, which maintains the beauty of Classical Arabic-script while disposing of ligatures (except for a couple or so).\n\nBest\n\n"
+    },
+    {
+      "time": "18 Dec 2005 — 8:22pm",
+      "content": "In an Open Type Arabic font, you don't need to encode the variants at all. The variants will be accessed through OpenType Layout features, which use glyph IDs in their lookups. So the underlying codepoint in text for the _nun_ will always be U+0646, regardless of the variant shape used and the layout features applied. Most of the Arabic presentation form codepoints in Unicode were a political inclusion that provided a temporary method of doing basic Arabic shaping while waiting for smart font technology like OpenType, AAT and Graphite to come along. If applied in a pure way, the Unicode character/glyph model would have prohibited inclusion of any presentation form codepoints: all you should need are the characters for the Arabic letters. Everything else can be handled at the glyph processing level.\n\nI tend to agree with you about Arabic 'ligatures'. Have you read Tom Milo's essay in the book _Language Culture Type_? It is an excellent analysis of the Arabic writing system and mounts a compelling argument against the whole notion of ligatures in Arabic. You might find my essay in the same book helpful in terms of understanding OpenType language processing (although I'm still embarassed about the Arabic-related typo in one of my examples: I really do know the difference between _kaf_ and _lam!_)\n\n"
+    },
+    {
+      "time": "18 Dec 2005 — 8:42pm",
+      "content": "I will look up _Language Culture Type_ . I am quite pleasantly surprised that I apparently came to the same conclusion as Milo, without having read any of his work-)\\*\\*\\*\n\nActually, there is arguably one true \"ligature\" in Arabic: the lam-alif combination. It is interesting that some of the earliest Islamic sources refer to the lam-alif combo (pronounced \"laa\") as a single character of the Arabic alphabet!\n\nThnx for all of the explanations.\n\n\\*\\*\\*Milo's naskh, of course, is one of the very best, perhaps superseded only by Mishafi ( [www.diwan.com](http://web.archive.org/web/20131019055253/http:/www.diwan.com/ \"www.diwan.com\"))\n\n"
+    },
+    {
+      "time": "19 Dec 2005 — 12:36pm",
+      "content": "_Actually, there is arguably one true “ligature” in Arabic: the lam-alif combination. It is interesting that some of the earliest Islamic sources refer to the lam-alif combo (pronounced “laa”) as a single character of the Arabic alphabet!_\n\nWhen talking about type, especially in regard to smart digital fonts, I tend to use the term ligature to refer to a specific display solution, i.e. the rendering of more than one character as a single glyph. This is the level at which analysis of the Arabic script and implementation meet, and hence where it gets interesting. If one's analysis of the script is that the form of each letter varies according to adjacent context, i.e. is determined by the particular shape of the preceding and/or following letter, then one can describe the lam\\_alif 'ligature' in the same terms: this is the form that the lam takes when followed by alif, and this is the form that alif takes when preceded by lam. What confuses the analysis is trying to determine where the lam ends and the alif begins, which is probably why this combination has been taken as a singular textual element. But the analysis is valid enough for some fonts to implement the writing of lam+alif using two glyphs, rather than one ligature.\n\n"
+    },
+    {
+      "time": "21 Dec 2005 — 12:13pm",
+      "content": "_What confuses the analysis is trying to determine where the lam ends and the alif begins, which is probably why this combination has been taken as a singular textual element._\n\nActually, the primordial reason is more cosmological/numerological. The word [laa] (symbolized by [laam]-[alif]) means \"no\", as in, \"No god but Allah\". The symbol for the negation is counted as a single \"letter\" of the alphabet. It is also significant that the Arabic for \"No god but Allah\" is composed only of alif's and laam's (with a haa at the end). Phenomenologically \"laa\" symbolizes the stage of mystical or unitary consciousness where all discrimination ceases. At the same time the name for this character/letter is just [laam-alif]. The point is that no other letter combination is reified as such in Classical Arabic other than this one: It is often and traditionally counted as the second-to-last letter of the alphabet. Thus one could make a strong argument for maintaining it as a ligature in the Unicode main Arabic block. [laam-alif] is in the interesting (and perhaps unique) situation of being both a ligature and a single character at the same time\n\nOf course, for type design and typography purposes this is all _practically_ irrelevant-) But on philosophical grounds I would place U-FEFB in the U-0600 block...\n\nBest\n\n"
+    },
+    {
+      "time": "21 Dec 2005 — 11:17pm",
+      "content": "Great stuff, Idris.\n\nAre you familiar with the background of the Hebrew alef\\_lamed ligature? It isn't as interesting cosmologically as the Arabic lam\\_alif, but is fascinating nonetheless. See this thread: [http://www.typophile.com/node/3306](http://web.archive.org/web/20131019055253/http:/www.typophile.com/node/3306 \"http://www.typophile.com/node/3306\")\n\nOne of the most interesting images I've seen in the last few years is a photograph of an early mediaeval manuscript of Hebrew language text writtin in the Arabic alphabet but with Hebrew vowel marking. How's that for a cultural statement!\n\n"
+    },
+    {
+      "time": "22 Dec 2005 — 6:58pm",
+      "content": "Thank you very much for pointing out that thread, John.\n\nMy medium term project includes a font for Arabic written in Hebrew characters (common in the middle ages: some Islamic philosophy (like Averroes) was transmitted to the Latin world that way), so this is of great interest to me.\n\n"
+    },
+    {
+      "time": "8 May 2007 — 2:08pm",
+      "content": "So, I guess the answre to the first question in the thread would be: \"there aren't any\"?\n\nIs it perfectly all right to stuff the private use area with whatever random glyphs that are not encoded elsewhere, with no regard to order or popular consensus?\n\n"
+    },
+    {
+      "time": "8 May 2007 — 2:59pm",
+      "content": "It depends on what you intend your font to be used for. For example, if your font is going to include a large number of mediaeval variants forms, ligatures, and symbols, it might be a good idea to follow the standards laid out by a group so that your font can be used on all documents that previously used theirs, and vice versa. Basically, PUA is a sort of neutral-zone, where anyone can define their standard using standard code point references (as opposed to adding encoding slots which most likely won't be reproducible in all applications). A number of groups have collaborated to define these spaces but they are hardly required. For an example of how these work try reading more about the Medieval Unicode Font Initiative at [http://gandalf.aksis.uib.no/mufi/](http://web.archive.org/web/20131019055253/http:/gandalf.aksis.uib.no/mufi/ \"http://gandalf.aksis.uib.no/mufi/\") .\n\nOn the other hand, if you're including dingbats, ornaments, or other features that can't or have no need to be transcoded (transliterated? transgraphemed? transcoded?) to another font, then feel free to fill it up as haphazardly as you'd like.\n\n_«El futuro es una línea tan fina que apenas nos damos cuenta de pintarla nosotros mismos». (La Luz Oscura, por Javier Guerrero)_\n\n"
+    }
+  ]
+}

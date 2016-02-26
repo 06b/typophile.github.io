@@ -1,0 +1,54 @@
+{
+  "id": "42676",
+  "title": "Digital signature needs",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Where can I buy, in a reasonable price, digital signature certificate to sign OpenType fonts. Is there any free tool to sign fonts?\n\n",
+  "author": "DotlessHyphen",
+  "time": "29 Feb 2008 — 3:14pm",
+  "uid": "27488",
+  "comments": [
+    {
+      "time": "29 Feb 2008 — 6:18pm",
+      "content": "The _tool_ for signing fonts is free (provided by Microsoft; see [http://www.microsoft.com/typography/developers/dsig/default.aspx](http://web.archive.org/web/20130311172533/http:/www.microsoft.com/typography/developers/dsig/default.aspx \"http://www.microsoft.com/typography/developers/dsig/default.aspx\") for more information). But I don't know of any free Certificates, and that is the critical bit required for applying a digital signature to fonts.\n\nDo a search for Authenticode Class III Code Signing Certificate; that is the specific variety required for signing fonts (this type of Certificate is not limited to use on fonts, but other types will not work). There are several vendors (known as Certificate Authorities), including Thawte and Verisign.\n\nI'm not sure what you consider \"reasonable\"; my experience with this tells me to be prepared to spend around $100/year or so, maybe more, maybe less depending upon the specific vendor. Generally Certificate Authorities will offer discounts for multi-year purchases so if you're in it for the long haul it may be worth doing that. Again, be sure you are getting a Class III Code Signing Certificate and not an SSL Cert or some other type.\n\nIt is possible to create a self-signed Certificate for free; the tool set provided by Microsoft allows you to do this and there are instructions in the DSIG toolkit for doing this. A self-signed certificate behaves more or less the same as a regular Certificate, but since it is not issued by a Certificate Authority, it will not be considered \"trusted\", even if it is valid. But it is a good way to learn about the process of signing fonts, do dry runs, etc.\n\nJosh\n\n"
+    },
+    {
+      "time": "29 Feb 2008 — 9:49pm",
+      "content": "Thanks, I will do the search.\n\nRegards,\n\nDH\n\n"
+    },
+    {
+      "time": "2 Mar 2008 — 1:18am",
+      "content": "Hey Josh,\n\nAs I understand, the certificate must be purchased for a year or more.  \nI got an offer from Thawte as follows:\n\nWe do offer a Microsoft Authenticode Code Signing Certificate.\n\nThe Microsoft Authenticode Code Signing Certificate has a 1 and 2 year validity period.\n\nPlease find the pricing below:  \n1 year: US$299  \n2 year: US$549\n\nPlease use the link below to enroll for the Microsoft Authenticode Code Signing Certificate:  \n [http://www.thawte.com/ssl-digital-certificates/code-signing/index.html](http://web.archive.org/web/20130311172533/http:/www.thawte.com/ssl-digital-certificates/code-signing/index.html \"http://www.thawte.com/ssl-digital-certificates/code-signing/index.html\")\n\nCan you think of a cheaper Certificate provider?\n\nRegards,\n\nDH\n\n"
+    },
+    {
+      "time": "2 Mar 2008 — 2:26am",
+      "content": "searching for \"Code Signing Certificate\" brings up some intresting stuff.\n\n[code singing - It’s Cheaper and Easier than You Thought](http://web.archive.org/web/20130311172533/http:/www.wintellect.com/cs/blogs/jrobbins/archive/2007/12/21/code-signing-it-s-cheaper-and-easier-than-you-thought.aspx)\n\n-- [astype.de](http://web.archive.org/web/20130311172533/http:/www.astype.de/)--\n\n"
+    },
+    {
+      "time": "2 Mar 2008 — 10:02am",
+      "content": "[Beginner's Guide to Digitally Signing OpenType Fonts](http://web.archive.org/web/20130311172533/http:/www.adobe.com/devnet/opentype/afdko/topic_digital_sig_guide.html)\n\n"
+    },
+    {
+      "time": "3 Mar 2008 — 4:48am",
+      "content": "Is this Required yet?\n\nCheers!\n\n"
+    },
+    {
+      "time": "3 Mar 2008 — 10:33am",
+      "content": "I am pretty sure it is not required yet, but I remember long ago that the idea was tossed around of eventually requiring a DSIG. As far as I know, the only difference today (even under Vista) between signed fonts versus unsigned is the font file icon (and extra information in Properties). But it's not hard to imagine it becoming more restrictive and invasive, much in the way applications have become.\n\nAndreas, thanks for the link...looks like TUCOWS (reselling Comodo) is pretty much the cheapest way to go.\n\n"
+    },
+    {
+      "time": "4 Mar 2008 — 4:53am",
+      "content": "\"...the idea was tossed around of eventually requiring a DSIG.\"  \nThat there would qualify as an understatement.\n\nCheers\n\n"
+    },
+    {
+      "time": "4 Mar 2008 — 1:10pm",
+      "content": "Thanks - TUCOWS is the address indeed.\n\nRegards,\n\nDH\n\n"
+    },
+    {
+      "time": "7 Mar 2008 — 3:16pm",
+      "content": "CAcert will offer code signing certificates soon. It's a free service and worth the suppot. [www.cacert.org](http://web.archive.org/web/20130311172533/http:/www.cacert.org/).\n\n-- [astype.de](http://web.archive.org/web/20130311172533/http:/www.astype.de/)--\n\n"
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "id": "6638",
+  "title": "Help with OpenType handwriting font programming?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm working on a handwriting font that I would like to make semi-random. I alrady have glyphs for primary and alternate forms set up in fontlab. I tried to read through the Microsoft OpenType spec but it was like eating a box of rocks, a little hard to swallow. All I want to do is code the font so that \"ss\" and other dual characters that I set up will automatically be replaced with \"s s.Alt\" etc.   \n   \nCan someone point me to an easy guide to the programming side of OTFs, or let me know which code sequence I should be using?\n\n",
+  "author": "matt_desmond",
+  "time": "13 Sep 2004 — 11:38am",
+  "uid": "2919",
+  "comments": [
+    {
+      "time": "13 Sep 2004 — 11:54am",
+      "content": "Are you making the OpenType features with FontLab or VOLT or ? If we know what tools you are using, we can provide more precise advice.   \n   \nBasically, though, you want to create a set of substitution lookups for the Contextual Alternates \\<calt\\> layout feature. I use VOLT for OpenType, so in VOLT syntax I would express your example in this way:   \n   \n s -\\> s.alt   \n s |   \n   \nThe bar in the second line indicates the context, so this substitution would occur whenever preceded by s.   \n   \nSomeone else can probably explain the FontLab / Adobe FDK syntax better than I can. I always have to go and read the manual again whenever I do any OT work directly in FontLab.\n\n"
+    },
+    {
+      "time": "13 Sep 2004 — 11:54am",
+      "content": "please try   \n   \nfeature calt {   \n sub s s' by s.alt;   \n} calt;   \n   \n' indicates the glyph to be changed.\n\n"
+    },
+    {
+      "time": "13 Sep 2004 — 12:09pm",
+      "content": "Thanks for your help. I'm using FontLab, but I think I'll download volt to check it out.\n\n"
+    },
+    {
+      "time": "13 Sep 2004 — 12:20pm",
+      "content": "There are three types of substitutions that may be useful to you:   \n   \n- ligatures   \n- contextual alternates   \n- contextual ligatures   \n   \nLigatures are easy as pie. For example, if you have an ss ligature with a glyph name of \"s\\_s\" (not to be confused with the German eszett), you could do:   \n   \nfeature liga {   \nsub s s by s\\_s;   \n} liga;   \n   \nOr for a contextual substitution where you get a different ss ligature when ss comes after the letter \"e\"   \n   \nfeature clig {   \nsub e s' s' by s\\_s.alt;   \n} clig;   \n   \nNote that you would want to put the clig feature ahead of the liga feature to make that work. Otherwise you'd already have the s\\_s ligature and that substitution wouldn't fire. To make clig work \\*after\\* liga, you'd do:   \n   \nfeature clig {   \nsub e s\\_s by s\\_s.alt;   \n} clig;   \n   \nHope this quick tutorial helps.   \n   \nT\n\n"
+    },
+    {
+      "time": "13 Sep 2004 — 12:30pm",
+      "content": "Awesome, thanks for all of your help. :-)   \n   \nNow, my next goal is to make a completely random opentype font where there are 3 or 4 different glyphs for each character. ;-) I know there's a random feature that I need to figure out...\n\n"
+    },
+    {
+      "time": "13 Sep 2004 — 4:09pm",
+      "content": "Matthew,   \n   \nthere is a \"rand\" OpenType feature registered in the spec, but it isn't supported by any application (to my knowledge). Therefore, you're best to try clig/calt as suggested above.   \n   \nAdam\n\n"
+    },
+    {
+      "time": "14 Sep 2004 — 9:25am",
+      "content": "I use VOLT for OpenType   \n   \n   \nwhat is VOLT?\n\n"
+    },
+    {
+      "time": "14 Sep 2004 — 12:38pm",
+      "content": "[VOLT](http://web.archive.org/web/20141112041540/http:/www.microsoft.com/typography/VOLT.mspx) = Visual OpenType Layout Tool   \n   \nThis is a free, Windows-only tool provided by Microsoft for adding OpenType Layout functionality to TrueType fonts\\*. It has a number of advantages over current FontLab and the Adobe FDK, most importantly in supporting some lookup types that are not supported in the FDK code, particularly one-to-many substitutions and anchor attachment positioning. It also allows you to order lookups independently of features, which means you can stagger lookups from different features which can help efficiency. VOLT is pretty much essential for doing any work with complex scripts, so it has a large user base of Indian and Arabic font developers. I've been using it since 2000, and still prefer it to FontLab for this kind of work.   \n   \n\\*It can also be used to add such functionality to CFF OT fonts, but VOLT does not have a CFF rasteriser, so you need to do your work in a dummy TT font and then import it to a CFF font.\n\n"
+    },
+    {
+      "time": "14 Sep 2004 — 1:35pm",
+      "content": "I've wondered about the \"rand\" feature. Would it be set up like:   \nsub x from [x x.salt1 x.salt2 x.salt3 (etc.)]   \nand then the application would randomly pick from within that set? or is there a more ideal way that this would be set up?   \nunfortunately, i doubt any apps will support this feature anytime soon, but it'd be nice to know how this feature would be written in theory.\n\n"
+    },
+    {
+      "time": "16 Sep 2004 — 10:22am",
+      "content": "VOLT = Visual OpenType Layout Tool   \n   \nThis is a free, Windows-only tool provided by Microsoft for adding OpenType Layout functionality to TrueType fonts\\*. It has a number of advantages over current FontLab and the Adobe FDK, most importantly in supporting some lookup types that are not supported in the FDK code, particularly one-to-many substitutions and anchor attachment positioning. It also allows you to order lookups independently of features, which means you can stagger lookups from different features which can help efficiency. VOLT is pretty much essential for doing any work with complex scripts, so it has a large user base of Indian and Arabic font developers. I've been using it since 2000, and still prefer it to FontLab for this kind of work.   \n   \n   \n   \nNot too fast. Not too fast. I work with computers, but I'm not a computer whiz.   \n   \n   \nVOLT is pretty much essential for doing any work with complex scripts   \n   \n   \nScripts - typefaces? or programming issue?   \n   \n   \n so it has a large user base of Indian and Arabic font developers.   \n   \n you design Indian and Arabic fonts?\n\n"
+    },
+    {
+      "time": "16 Sep 2004 — 7:01pm",
+      "content": "_Scripts - typefaces? or programming issue?_   \n   \nHeh, sorry, neither. The term 'complex script' is used to refer to a writing system in which there is not a simple sequential rendering of glyphs relative to character codes. So Latin is typically considered a simple or non-complex script, because there is a one-to-one relationship between the characters that you type and the glyphs that appear on your screen, which are simply laid out in a line. Of course, once you start including ligatures, variant letters, dynamic accent positioning, etc. Latin ceases to be so simple, but it remains differentiated from complex scripts in the sense of writing systems that require complex processing simply in order to be readable. So, for example, Arabic is a complex script because individual letters may take different forms depending on where they occur in a word or what the adjacent letters are, and this is normative behaviour for the writing system.   \n   \n   \n_you design Indian and Arabic fonts?_   \n   \nI have not designed any Indian typefaces yet, but I'm looking forward to it. I've done Thai (with Fiona Ross and Tim Holloway), which is related to the Indic writing systems. I've collaborated (again, with Fiona and Tim) on Arabic font development, although Tim does most of the actual design and I have the fun job of making the complex script stuff work with OpenType lookups. The most complex thing I've had to both design and build was the SBL Hebrew font for Biblical Hebrew.\n\n"
+    },
+    {
+      "time": "17 Sep 2004 — 9:52am",
+      "content": "_I've done Thai.... I've collaborated on Arabic font development...   \nThe most complex thing I've had to both design and build was the SBL Hebrew font for Biblical Hebrew._      \n   \n   \nInteresting. Do you speak the language(s)? Did you know that you want to design non-latin typefaces?   \n   \nI'm reading the book \"Designing Typefaces\" -now the story by Akira Kobayashi. That is why I'm asking.   \n   \nDo you think it is wise to study/learn another language?   \nI'm asking that since of the thread \"Breaking into the Industry\"   \n   \nBack to VOLT - In order to design non-latin typefaces you need VOLT? and PC?   \nWhy you can't design non-latin typefaces with MAC?   \n   \n   \nOh....what is \"SBL\"?\n\n"
+    },
+    {
+      "time": "17 Sep 2004 — 11:54am",
+      "content": "I don't speak most of the languages for which I design type. Even if I spoke one language for each of the scripts for which I design, that would still be only a tiny percentage of the actual languages written in those scripts. Speaking or reading knowledge of a language is not necessary to design for 'foreign' scripts. It is important to have a good understanding of the history and development of the script, or to work closely with people who do. I try to understand scripts as systems, in terms of construction, relationship to language and grammar, etc. Most often, I arrange to have my work reviewed by an experienced typographer who is a native user of the script, unless I'm particularly confident in my knowledge of a script or can't find someone with the appropriate skills and experience.   \n   \nI started designing for non-Latin scripts in 1997, when I tried my first Cyrillic design. At the time, I was mainly looking for a way to expand the number of shapes I got to draw: I was getting bored of Latin letters. Later I realised that I'd accidentally stumbled into one of the few growth areas in this business, and also one in which few of my colleagues were working.   \n   \n   \nYou can make plenty of non-Latin typefaces without VOLT. You only need VOLT if the script requires OpenType Layout features that are not supported in FontLab yet, e.g. anchor attachment positioning. Since VOLT is a Windows tool, you need to either be running a Windows machine or VirtualPC to make complex script OT fonts. You can, of course, make AAT format complex script fonts using free tools from Apple, but the tools are ludicrously difficult and the format has only minimal application support and is not cross-platform compatible.   \n   \nA lot of people who start out in Latin script type design come to it from a North American or European graphic design background, in which the Mac is still the most common tool. But for non-Latin font development and _use_ Windows is a much more common platform. Personally, when I look at the range of font development applications and tools that are available on Windows, many of them free, I really can't see any point in using a Mac. Windows is simply a better font development environment. This is not to say that typical Latin font makers are missing out on anything by using a Mac: if everything you need to do can be done in FontLab, then it doesn't matter what platform you are on. But I have upwards of 20 font development and testing applications on my system, which perform a variety of functions including things that cannot be done in FontLab and which have no parallel on the Mac. Now, I should also point out that most of my clients are major software developers, who have very strict technical quality assurance requirements, so the kind of non-critical bug that might pass unnoticed in the average Latin retail font is not acceptable in my work. And if, for example, my client says they want a TT font to have a version 3 OS/2 table and a format 3 post table, I need to be able to deliver that, even if FontLab doesn't have these options yet.   \n   \n   \nSBL is the Society of Biblical Literature, a scholarly organisation that is one of my clients.\n\n"
+    },
+    {
+      "time": "17 Sep 2004 — 1:31pm",
+      "content": "More interesting!   \n   \n   \n _Later I realised that I'd accidentally stumbled into one of the few growth areas in this business, and also one in which few of my colleagues were working._   \n   \nNow I have a challenge!   \n   \n   \nIn your opinion - to buy a PC? Is there a good PC? Windows or XP? ( I don't know if I'm going to do that this year...)   \n   \n_if everything you need to do can be done in FontLab, then it doesn't matter what platform you are on_   \n   \nI don't know what I want to do, or can do, or \"can be done with FontLab\"\n\n"
+    },
+    {
+      "time": "18 Sep 2004 — 11:06am",
+      "content": "If you want to buy a Windows PC, I suggest a Dell machine running Windows XP Pro. Some of the Toshiba Satellite laptops are quite good too. I should also note that I don't know much about current PC desktop hardware, as I've only used laptops for the past five years.\n\n"
+    },
+    {
+      "time": "18 Sep 2004 — 11:13am",
+      "content": "Thank you John.   \n   \n(By the way, I have Toshiba Satellite laptop , but with Windows 98)\n\n"
+    },
+    {
+      "time": "21 Sep 2004 — 12:23pm",
+      "content": "\\> Speaking or reading knowledge of a language is   \n\\> not necessary to design for 'foreign' scripts.   \n   \nAs I expressed in my recent Spatium magazine article, with proper help from natives (like in proofing legibility), linguistic analysis and a general sensitivity to cultural authenticity and functionality, a non-native can produce very good type in scripts he doesn't even know the elemental sounds for! But one thing you can't do without nativity is push the cultural boundaries, to express things beyond what historical precedent will encourage.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "21 Sep 2004 — 1:25pm",
+      "content": "_But one thing you can't do without nativity is push the cultural boundaries, to express things beyond what historical precedent will encourage._   \n   \n cultural boundaries - such as....?\n\n"
+    },
+    {
+      "time": "21 Sep 2004 — 1:40pm",
+      "content": "For example let's say you need to make a dual-script system with Latin and a non-Latin font. To know how much and in what directions you can \"push\" the non-Latin component to match the Latin requires a sensitivity that goes way beyond what a non-native can usually muster.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "21 Sep 2004 — 3:11pm",
+      "content": "\\<font class=\"dontLookLikeCrap\"\\>_let's say you need to make a dual-script system with Latin and a non-Latin font_   \n   \nany good sample? your work? I see that you are dealing with non-latin, no ( and came from Russia. Do you speak Russian?)   \n   \n   \nBy the way - do you any good source to learn/study: Russian, Arabic, Hebrew, Latin, Greek -   \n   \n like Alexander Lawson, Alexander & Nicholas Humez (Alpha to Omega - Greek history as seen through the development of its language & alphabet)\\</font\\>\n\n"
+    },
+    {
+      "time": "21 Sep 2004 — 3:30pm",
+      "content": "Got $15? Buy the current issue of Spatium magazine - all is explained. :-\\>   \n   \nRussian: I just learned to pronounce all the letters, but that's about it. I've heard it's a hard language.   \n   \nResources: I saw that other thread of yours - give me a day or two.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "21 Sep 2004 — 3:41pm",
+      "content": "You're fast. Thanks.   \n   \n_Got $15? Buy the current issue of Spatium magazine_   \n   \nFrom ?\n\n"
+    },
+    {
+      "time": "21 Sep 2004 — 3:47pm",
+      "content": "[http://www.typophile.com/forums/messages/30/47261.html](http://web.archive.org/web/20141112041540/http:/www.typophile.com/forums/messages/30/47261.html)   \n   \nhhp\n\n"
+    },
+    {
+      "time": "21 Sep 2004 — 5:13pm",
+      "content": "Hrant,   \nMy copy of Spatium just came in the mail today. Hmmmm, ah, let me see here. . .ah, YES, page 10 \"Latinization: Prevention and Cure, by Hrant H. Papazian. :-)   \n   \nBravo Hrant!   \n   \nChrisL\n\n"
+    },
+    {
+      "time": "1 Oct 2004 — 10:31pm",
+      "content": "I love cross-polination. I also love cultural variety. The degree to which these two things can coexist positively depends on the \"security\" of the scripts/cultures in question. What I mean is that for example Latinization of Armenian is much worse than that of Cyrillic or Arabic. And things like the Arabization of Latin is downright great - and I'm not saying this due to some cultural prejudice, but simply because Latin is too strong to be hurt by it - it can only get richer thanks to cross-polination.   \n   \nAlso, a big on-the-ground problem with cross-polination is that it's almost never done with the subtlety necessary in the realm of text design. Virtually all Latinized non-Latin fonts reduce readability through blind fealty to formalism (eg matching x-heights), and pretty much every single Latin face that's made to look like some non-Latin script or other can only ever be a cute, naive display face. We need to clearly understand the qualitative difference between text and display before we can apply typographic cross-polination well. But even then sometimes it's a bad idea.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "2 Oct 2004 — 1:06pm",
+      "content": "\\> I recently came across [[http://www.p22.com/pavilion/index.html](http://web.archive.org/web/20141112041540/http:/www.p22.com/pavilion/index.html)] at p22   \n   \nWow, now I know the _real_ meaning of Unicase: the PTAF font (in the first set).   \nDude, you could like base an entire 20th century design ideology on that, dude.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "2 Oct 2004 — 1:25pm",
+      "content": "I recently came across these   \nif you like that kinda thing, check out:   \n [http://www2.wind.ne.jp/maniackers/designfont.html](http://web.archive.org/web/20141112041540/http:/www2.wind.ne.jp/maniackers/designfont.html)   \n [http://www.flop.jp.org/](http://web.archive.org/web/20141112041540/http:/www.flop.jp.org/)   \n [http://www.lovedesign.tv/](http://web.archive.org/web/20141112041540/http:/www.lovedesign.tv/)   \n [http://www.orange.ne.jp/~den7/](http://web.archive.org/web/20141112041540/http:/www.orange.ne.jp/~den7/)   \n [http://www.kinemamoon.com/](http://web.archive.org/web/20141112041540/http:/www.kinemamoon.com/)   \n... just a few of my favorites\n\n"
+    },
+    {
+      "time": "1 Oct 2004 — 10:11pm",
+      "content": "In response to Hrant's comment on cultural boundaries:   \n   \nI've found that a little cultural cross polination is the perfect way to push cultural boundaries. For example, Latin alphabets done in Japan are very interesting. (I recently came across [these](http://web.archive.org/web/20141112041540/http:/www.p22.com/pavilion/index.html) at p22). Even from a linguistic standpoint, non-native speakers often use expressive transliterations that, because they are different from common idioms, communicate beautifully.   \n   \nNow, Hrant may argue that becuase so many Roman-native type designers do non-roman fonts, the cross-polination has gone out of control--an invasive species out-competing the native fauna, as obrusive as non-native sucker fish, sqeezing out the native trout in my state. This may very well be the case.\n\n"
+    }
+  ]
+}

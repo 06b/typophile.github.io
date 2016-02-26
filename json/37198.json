@@ -1,0 +1,74 @@
+{
+  "id": "37198",
+  "title": "Substitute the first letter of a word using opentype?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm trying to figure out if there's a way to substitute the first letter of a word for an alternate version. I don't want the rest of the s's in the word to swap also like how standard swashes would work. I'd like it to be automatic so you don't have to hit the alternates every time.\n\nThe only way I can think to do it is to substitute the s using the space before the word as a ligature. But that doesn't help when there is other punctuation going on.\n\nAny ideas?\n\n",
+  "author": "matthew_desmond",
+  "time": "17 Sep 2007 — 10:57am",
+  "uid": "553",
+  "comments": [
+    {
+      "time": "17 Sep 2007 — 11:25am",
+      "content": "This isn't a great option because it only works with InDesign CS3, but we started supporting the OpenType features `'init', 'fina', 'isol',` and `'medi'` which can be dynamically applied to characters. These correspond with \"initial letter\", \"final letter\", \"isolated letter\" and \"medial letter\". It is only semi-smart, but can handle punctuation around words for example.  \nA more universal approach involves some complex contextual processing which is why Thomas Phinney suggested adding support for the positional forms feature.\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 11:34am",
+      "content": "Are not positional forms required for proper Arabic anyway?\n\nChrisL\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 12:04pm",
+      "content": "Yeah, would prefer something that works in CS2 apps (AI, InDesign).\n\nI may just have to resort to the manual swashes and the client will just have to use them at their leisure.\n\nMatt\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 12:14pm",
+      "content": "Create a class that contains all glyphs that are letters (or anything else you consider to be part of a word). Then, set up a contextual substitution in which if a glyph is not preceded by a member of that class, use the alternate.\n\nHere's one way to do it. In the following code, the classes are defined thus:\n\n`@letter` = any glyphs you consider part of a word;  \n`@normal_letter` = any glyphs that have a different form for the beginning of a word  \n`@alternate_letter` = the alternate versions of the glyphs in `@normal_letter`\n\nThe contextual substitution (to be placed in the `calt` feature):\n\n`\n   lookup beginnings {\n      ignore sub @letter @normal_letter' ;\n      sub @normal_letter' by @alternate_letter;\n   } beginnings;\n`\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 12:48pm",
+      "content": "Ahh, must be smarter than fontlab.\n\nThis looks like it should work, but I'm getting a weird \"invalid token (text was \"@\")\" error when I try to compile.\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 1:43pm",
+      "content": "If you copied the text from here and pasted it in, you might get some trouble with the non-breaking spaces I used for the indents at the beginning of the lines. If not, then make sure you've got all your ticks and semicolons accounted for...\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 1:59pm",
+      "content": "To belatedly reply to Chris: yes, positional forms are required for some scripts (including Arabic) and are applied automatically by InDesign ME (all versions, not just CS3) but the new thing added in CS3 was adding positional forms as an option for non-ME InDesign.\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 2:02pm",
+      "content": "Oh, I see. Prior to that, an ME version was required. Thanks!\n\nChrisL\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 2:51pm",
+      "content": "OK, got rid of the error. Now I got this script to work with one letter substitution... What If I have dupes for all 26 letters? Do I need to make classes for each letter?\n\n"
+    },
+    {
+      "time": "17 Sep 2007 — 2:55pm",
+      "content": "Never mind. I'm dim sometimes. It was replacing the letters with the blank spots I had for all of the glyphs. D'oh, it's beer time.\n\nThanks a ton Mark!!!\n\n"
+    },
+    {
+      "time": "18 Sep 2007 — 7:49am",
+      "content": "I was just looking for that kind of thing, thanks for a quick way of describing it.\n\n"
+    },
+    {
+      "time": "19 Sep 2007 — 1:09pm",
+      "content": "Paging Mark Simonson!\n\nI understand how this method works now.  \nIs there a way to use this same technique for replacing the end letter of a word?\n\nI am just no good at making the code do what I want it to do...\n\n"
+    },
+    {
+      "time": "19 Sep 2007 — 1:17pm",
+      "content": "check this thread:\n\n[Contextual Swashes for Beginnings](http://web.archive.org/web/20131019042353/http:/www.typophile.com/node/19839)\n\n"
+    },
+    {
+      "time": "19 Sep 2007 — 1:35pm",
+      "content": "After reading that other thread, I got it. Thanks Paul.\n\n"
+    },
+    {
+      "time": "19 Sep 2007 — 1:38pm",
+      "content": "sorry i didn't link to it earlier. :^p\n\n"
+    }
+  ]
+}

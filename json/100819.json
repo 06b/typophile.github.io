@@ -1,0 +1,78 @@
+{
+  "id": "100819",
+  "title": "Danish OpenType Numerals",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I wonder, could OpenType automatically convert regular numerals to _spelled-out_ Danish numerals without a crazy number of ligatures? Can OT do one-to-many and many-to-many?\n\nMore on the Danish counting system: [http://www.olestig.dk/dansk/numbers.html](http://web.archive.org/web/20140810045514/http:/www.olestig.dk/dansk/numbers.html \"http://www.olestig.dk/dansk/numbers.html\")\n\n",
+  "author": "Frode Bo Helland",
+  "time": "24 Feb 2013 — 1:32pm",
+  "uid": "17101",
+  "comments": [
+    {
+      "time": "24 Feb 2013 — 1:40pm",
+      "content": "OT does one-to-many (type 2 GSUB lookup) easily enough. In theory, it can be made to do many-to-many, but in fact this is nowhere supported in either tools or apps. So you'd probably have to do some clever contextual one-to-many substitutions. In other words, you would have to analyse the decimal positions in the number, and substitute the appropriate word for the letters in each position. So, for an English example you might have a number '625', and you would need context to isolate the initial numeral and capture that it is in the hundreds position (followed by two integers), then substitute\n\n`six -> s i x space h u n d r e d space a n d`\n\nthen you would capture the 2 in the tens position:\n\n`two -> t w e n t y hyphen`\n\nand finally the five in the ones position:\n\n`five -> f i v e`\n\nThe biggest risk in this kind of approach is failure of context, which means you need to carefully think through all the permutations of situations in which a number might occur. I think the feature would need to be like the 'frac' feature, i.e. explicitly applied by a user to a selected string of characters, and not the sort of feature one could safely turn on for an entire document.\n\n"
+    },
+    {
+      "time": "24 Feb 2013 — 1:43pm",
+      "content": "Correct me if I’m wrong, but here’s an example: The number “78” in Danish is “otteoghalvfjers”. The ordinal version (the 78th) is “otteoghalvfjerssindstyvende”. It’s a bit complicated.\n\n(Edit: John, I wrote this before I saw your post.)\n\n"
+    },
+    {
+      "time": "24 Feb 2013 — 1:56pm",
+      "content": "He he he.\n\n"
+    },
+    {
+      "time": "24 Feb 2013 — 2:10pm",
+      "content": "Nothing of substance, but the usual editorial style with English numbers spelled out does not use \"and,\" so the replacement string would be\n\nsix -\\> s i x space h u n d r e d space\n\nE.g., 625 written out is, \"six hundred twenty five\" ...\n\n"
+    },
+    {
+      "time": "24 Feb 2013 — 2:21pm",
+      "content": "Hmm, there’s the flip: In Danish it’s not “seventy-eight”, it’s “eight and seventy”.\n\n"
+    },
+    {
+      "time": "24 Feb 2013 — 2:32pm",
+      "content": "There is a problem with the zero in any language -- in English, 70 is not \"seventy-zero,\" and I'd bet in Danish, it's not \"zero and seventy.\"\n\nThat aside, with some work, you could probably get the font to do the job, even in Danish. But if you're working on a document, it might be better to do search & replaces. If you do the work in the font, what's in the underlying document (say, the XML exported from an InDesign file...)?\n\n"
+    },
+    {
+      "time": "24 Feb 2013 — 10:23pm",
+      "content": "BTW, I think this is a really bad idea. 'Six hundred twenty five' is not a glyph variant of the character string '625', it is a different character string, a different convention for recording a number in writing.\n\n"
+    },
+    {
+      "time": "25 Feb 2013 — 3:06am",
+      "content": "We all know it’s a bad idea, John. These are the very same people who decided to name the biggest ice flake in the world _Green_land.\n\n"
+    },
+    {
+      "time": "25 Feb 2013 — 5:14am",
+      "content": "Even back then they knew a thing or two about marketing. Tip of the helmet gentlemen.\n\n"
+    },
+    {
+      "time": "26 Feb 2013 — 5:02am",
+      "content": "No way, it was called Greenland (or rather Grœnland) by its first settler, the Norwegian-born Icelander Eirikr hinn rauði (Erik the Red). But it was a marketing ploy, yes.\n\n"
+    },
+    {
+      "time": "26 Feb 2013 — 6:08am",
+      "content": "Thanks for clearing that up, Sindre.\n\n"
+    },
+    {
+      "time": "26 Feb 2013 — 6:25am",
+      "content": "He was there.\n\nhhp\n\n"
+    },
+    {
+      "time": "27 Feb 2013 — 12:01pm",
+      "content": "Is there a way to change the order of glyphs?\n\ndnum {  \n sub @lnum' by @dnum;  \n sub @dnum' @dnum by @dnum\\_tens;  \n ??? swap @dnum for @dnum\\_tens and vice versa ???  \n}\n\n"
+    },
+    {
+      "time": "28 Feb 2013 — 2:13pm",
+      "content": "Reordering glyphs using GSUB is a bit tricky. I do it sometimes in order to be able to ligate reordered characters in Indic fonts, but I'm never entirely comfortable doing so. You have to do it in two steps: contextually insert the new glyph where you want it, and then contextually delete the old glyph from the unwanted location. Since there are no insert/delete GSUB lookup types per se, what you need to do is first use a one-to-many lookup, and then a many-to-one lookups. So, for example, let's say I want to reorder the glyphs in the sequence ABC so that they are BAC, I would first have a lookup (VOLT syntax; sorry the Adobe stuff makes no sense to me).\n\n`A -> B A\n|C`\n\nwhich would result in BABC; then a second lookup something like\n\n`A B -> A\nB|`\n\nresulting in BAC.\n\n"
+    },
+    {
+      "time": "1 Mar 2013 — 1:03am",
+      "content": "I can’t seem to get one-to-many working with classes.\n\n"
+    },
+    {
+      "time": "1 Mar 2013 — 4:18pm",
+      "content": "Wait, didn’t I post a comment here about how Danish cheques are formatted in the Swedish style of cardinal numbers? Or was that on twitter? I can find it neither place, so let me put it up here again for posterity’s sake: On Danish cheques, when writing out the cardinal, eg. kr. 768,32 you would write _syvhundredesekstiottekronerogtretitoøre_ (like in Swedish common use), and not _syvhundredeottetredskronerogtoogtrediveøre_ (like in Danish common use).\n\n"
+    }
+  ]
+}

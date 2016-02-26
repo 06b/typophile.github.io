@@ -1,0 +1,50 @@
+{
+  "id": "4465",
+  "title": "Currency Slot",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm not sure when this originated but...  \nwhat is the status of including the [Euro](http://web.archive.org/web/20130811122546/http:/typophile.com/wiki/Euro) in the [currency](http://web.archive.org/web/20130811122546/http:/typophile.com/wiki/currency) slot?  \nI've been including the Euro in both the currency and Euro slot.  \nFrom what I can tell, this is residue from my Fontographer days  \nwhen the Euro was new.\n\n",
+  "author": "eolson",
+  "time": "26 Apr 2004 — 8:51am",
+  "uid": "1087",
+  "comments": [
+    {
+      "time": "26 Apr 2004 — 10:17am",
+      "content": "What OS are you on, and what format of fonts are you building?   \n   \nIn MacRoman encoding, there's only one slot, and if you want to have both glyphs one has to be unencoded. In Unicode or Windows based encodings, put each in its proper place.   \n   \nIf you need to worry about non Adobe Classic Mac apps, there are some extra wrinkles, which I've long since lost track of. I'm sure somebody else will chime in....   \n   \nT\n\n"
+    },
+    {
+      "time": "26 Apr 2004 — 11:24am",
+      "content": "I forgot the mention.   \nI'm developing OpenType CFF flavored fonts.\n\n"
+    },
+    {
+      "time": "26 Apr 2004 — 12:02pm",
+      "content": "Oh, well that's easy, then. No reason whatsoever to put the euro in the currency slot. Each gets its own slot, and the euro will show up in the right place for MacRoman, including on Classic and OS 8/9.   \n   \nBut you need to have both for Windows and full Unicode environments. WinANSI has separate slots for the two, and Windows users and folks in full Unicode environments will think there's something wrong if a euro shows up in place of the generic currency symbol.   \n   \nT\n\n"
+    },
+    {
+      "time": "26 Apr 2004 — 12:09pm",
+      "content": "\\>Eric, don't worry, OT fonts (as other fonts based on TrueType table structure) have room for 65536 glyphs. It's enough for all currencies, which Unicode knows. I'm not sure, whether anybody needs the original currency sign for some purpose. Most Non-Unicode-savvy OS'ies and applications can't handle both currency (00A4) and Euro (20AC) sign in the same time, because they excist in (practically) no single 8-bit character set. A good rule of thumb: when dealing with OT fonts forget old apps and OS'ies. In practice you may put Euro sign in both slots, nobody will hardly complain.\n\n"
+    },
+    {
+      "time": "26 Apr 2004 — 12:53pm",
+      "content": "Cool, thanks guys.\n\n"
+    },
+    {
+      "time": "26 Apr 2004 — 1:02pm",
+      "content": "What Juhani says about non-Unicode-savvy OSes and applications is not true. **All** the Windows codepages for European languages have both euro and currency characters in separate slots (Western/WinANSI, Eastern European, Cyrillic, Baltic, Turkish, Greek). Microsoft extended their codepages to add the euro many years ago. These codepages are what single-byte fonts and applications work with.   \n   \nAlthough the currency symbol has few practical uses as a currency symbol, a lot of folks have ended up using it as a bullet or other kind of dingbat. Switching fonts and having it turn into a euro symbol would be a Bad Thing, and I have heard Windows users complain about it in fonts made by people who didn't know better.   \n   \nThere is no reason whatsoever to put a euro (U+20AC) symbol in the currency (U+00A4) slot in an OpenType CFF font. For Classic and OS 8/9, the ATM driver maps the euro to the right slot in MacRoman for both viewing and printing.   \n   \nBut there are good reasons NOT to double-map the euro symbol, as described above. So, for anybody asking for advice, I strongly discourage it, just as I would strongly discourage putting a euro in the slot intended for the letter E.   \n   \nRegards,   \n   \nT\n\n"
+    },
+    {
+      "time": "27 Apr 2004 — 5:25pm",
+      "content": "if i remember my reading of _Elements_ correctly, the currency sign is used as a place holder for where a (unspecified) currency symbol should go. So though my opinion doesn't pull as much weight as Mr. Phinney's, i'd have to say that putting the Euro symbol in the currency slot would be a bad thing.\n\n"
+    },
+    {
+      "time": "27 Apr 2004 — 8:21pm",
+      "content": "Paul, you're right about the specified purpose of the currency sign. Mind you, I think it gets used more as a bullet or dingbat than in this intended manner.   \n   \nBut what's with this Mr. Phinney business? As long as you don't mind me calling you Paul, you can call me Thomas or Tom or T.   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "28 Apr 2004 — 3:44pm",
+      "content": "sorry thom, i musta slipped into my pseudo-respectful mode. good to know i'm allowed to be on familiar terms with ya. ;^D\n\n"
+    }
+  ]
+}

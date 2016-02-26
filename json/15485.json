@@ -1,0 +1,98 @@
+{
+  "id": "15485",
+  "title": "mac+word+OT=?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "has anyone else noticed any buggy font behavior using this combo? or is it just me?\n\n",
+  "author": "paul d hunt",
+  "time": "4 Oct 2005 — 5:22pm",
+  "uid": "7006",
+  "comments": [
+    {
+      "time": "4 Oct 2005 — 5:50pm",
+      "content": "Could you be more specific? What kind of buggy behavior?\n\n"
+    },
+    {
+      "time": "4 Oct 2005 — 6:09pm",
+      "content": "sure.... i have a \"normal\" four font family (Regular, Italic, Bold, Bold Italic) and they group normally on WinXP in Word (styles are accessed through the B & I buttons), and in Adobe apps (fonts group together and styles are accessed through drop down menu), and in Adobe apps on Mac, but in Word on Mac three fonts show up separately in the font list: Regular, Italic, & Bold. The Bold Italic can be accessed by selecting the Bold font and selecting the Italic (I) button. I don't get it...\n\n"
+    },
+    {
+      "time": "4 Oct 2005 — 6:19pm",
+      "content": "Word always baffles me. I don't know what they do differently than every other app but the only problems I ever have since OS-X is with Word and PowerPoint. I end up using only Microsoft bundled fonts with them. Sorry Paul, I am venting and not helping you one bit.\n\nChrisL\n\n"
+    },
+    {
+      "time": "4 Oct 2005 — 7:21pm",
+      "content": "The Bold Italic font: Is the font name more than 29 characters (including spaces)?\n\n"
+    },
+    {
+      "time": "4 Oct 2005 — 7:30pm",
+      "content": "which one? LOL  \nthe FOND name, the PS Font Name and the Full Name are. I hit the auto-check button in FLab and it said the naming's fine, but those could be too long, eh?\n\n"
+    },
+    {
+      "time": "4 Oct 2005 — 8:06pm",
+      "content": "If it's an OpenType font, it would be the \"Mac Name\" on the OT Specific Names panel. I discovered this while working on Proxima Nova. Fonts with names longer than 29 characters in that field don't show up in the font menu in Word (Quark, too, I seem to recall).\n\n(So, Proxima Nova Extra Condensed Extrabold Italic was a definite no go. I shortened it to Proxima Nova ExCn Extrabld It. I developed a consistent abbreviation scheme for all 42 fonts.)\n\n"
+    },
+    {
+      "time": "4 Oct 2005 — 9:13pm",
+      "content": "there are waaaaaaaaaaay too many naming fields to keep track of. thanx mark!\n\n"
+    },
+    {
+      "time": "4 Oct 2005 — 9:19pm",
+      "content": "I would have been lost without Adam's naming guide on the FontLab forum:\n\n[http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mvie...](http://web.archive.org/web/20131018023336/http:/groups.msn.com/fontlab/tipsandtricks.msnw?action=get_message&mview=0&ID_Message=2843 \"http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mview=0&ID\\_Message=2843\")\n\nAlthough he doesn't really talk about the Mac Name field.\n\n"
+    },
+    {
+      "time": "5 Oct 2005 — 9:07am",
+      "content": "Some Adobe fonts, for example, don't have linked styles. Is it possible that the Windows version of word finds the style you want by name instead?  \nI'm used to all my styles showing up in the font menu. It's never really been a problem for me, except when they're not linked and I have to chose them from the menu.\n\n"
+    },
+    {
+      "time": "5 Oct 2005 — 9:09am",
+      "content": "why can't there be just one naming field? or maybe two... LOL that would solve a host of problems (for me anyway)\n\n"
+    },
+    {
+      "time": "5 Oct 2005 — 9:13am",
+      "content": "_\"why can’t there be just one naming field?\"_\n\nCompatibility? I agree, though, that it would be much easier if all my fonts used one naming system.\n\n"
+    },
+    {
+      "time": "27 Mar 2007 — 5:33pm",
+      "content": "Paul, if you use MakeOTF (from the [AFDKO](http://web.archive.org/web/20131018023336/http:/typophile.com/wiki/AFDKO)) you only have to specify 5 names for each font, and 3 of those are simply straightforward. MakeOTF will take care of the rest.\n\nThe structure of the each entry in the `FontMenuNameDB` file is:  \n`[PostScriptName]\nf=FamilyName\ns=StyleName (a.k.a. Subfamily name)\nc=WindowsCompatibleMenuName\nc=1,MacintoshCompatibleMenuName`\n\nHere are some of the entries for Minion Pro, for example:  \n`[MinionPro-Regular]\n\tf=Minion Pro\n\ts=Regular\n\tc=Minion Pro\n\tc=1,Minion Pro`\n\n[MinionPro-It]  \n f=Minion Pro  \n s=Italic  \n c=Minion Pro  \n c=1,Minion Pro Ital\n\n[MinionPro-Bold]  \n f=Minion Pro  \n s=Bold  \n c=Minion Pro  \n c=1,Minion Pro Bold\n\n[MinionPro-BoldIt]  \n f=Minion Pro  \n s=Bold Italic  \n c=Minion Pro  \n c=1,Minion Pro Bold Ital\n\n[MinionPro-Medium]  \n f=Minion Pro  \n s=Medium  \n c=Minion Pro Med  \n c=1,Minion Pro Med\n\n[MinionPro-MediumIt]  \n f=Minion Pro  \n s=Medium Italic  \n c=Minion Pro Med  \n c=1,Minion Pro Med Ital\n\nAs you see, the PostScriptName takes the general form of FamilyName-StyleName (it can't be longer than 31 characters, so the StyleName portion sometimes needs to be abbreviated. Another important thing is the hyphen; some applications rely on its presence to sort the fonts in the menu).  \nThe FamilyName and StyleName are straightforward. Each of these has to be limited to 31 characters.  \nThe WindowsCompatibleMenuName is used for style linking and family subgrouping on Windows. There can only be a maximum of 4 fonts with the same WindowsCompatibleMenuName within the same typeface family.  \nThe MacintoshCompatibleMenuName is usually based on the WindowsCompatibleMenuName, and it needs to be different for each font in the family. These Windows and Mac names are limited to 31 characters as well.\n\nThat's as easy as it can get, I think. All Adobe fonts are built this way and they seem to work just fine across applications and operating systems.\n\n"
+    },
+    {
+      "time": "27 Mar 2007 — 6:18pm",
+      "content": "The Cabbots spoke only to the Lowells, and the Lowells only to God.\n\nProgrammers, on the other hand, only speak to other programmers.\n\n"
+    },
+    {
+      "time": "27 Mar 2007 — 6:33pm",
+      "content": "I guess I'm lucky to be a designer \\*and\\* a programmer, so in that sense I'm bilingual. Nonetheless, I'm clueless about what you're trying to say. BTW, this is the Build forum.\n\n"
+    },
+    {
+      "time": "27 Mar 2007 — 6:36pm",
+      "content": "i think i need to hire a professional to walk me through from setting up python to the basics of the AFDKO & python. :^/\n\n"
+    },
+    {
+      "time": "27 Mar 2007 — 7:05pm",
+      "content": "<cite>Nonetheless, I’m clueless about what you’re trying to say. BTW, this is the Build forum.</cite>\n\nI've always thought sarcasm without humor was an ineffective blade. Perhaps I'm wrong again.\n\n"
+    },
+    {
+      "time": "28 Mar 2007 — 10:07am",
+      "content": "Karsten's document on naming is also very good.\n\n"
+    },
+    {
+      "time": "28 Mar 2007 — 10:58am",
+      "content": "Karsten's document is freakin' awesome actually. I wish he would write a manual for FontLab.\n\nChrisL\n\n"
+    },
+    {
+      "time": "28 Mar 2007 — 1:12pm",
+      "content": "_Karsten’s document_\n\nWhere's that?\n\n"
+    },
+    {
+      "time": "28 Mar 2007 — 1:16pm",
+      "content": "[http://www.kltf.de/downloads/FontNaming-kltf.pdf](http://web.archive.org/web/20131018023336/http:/www.kltf.de/downloads/FontNaming-kltf.pdf \"http://www.kltf.de/downloads/FontNaming-kltf.pdf\")\n\n"
+    },
+    {
+      "time": "28 Mar 2007 — 2:38pm",
+      "content": "Thanks, William. Now that I look at it, I think I remember seeing an earlier version of it a while back.\n\n"
+    }
+  ]
+}

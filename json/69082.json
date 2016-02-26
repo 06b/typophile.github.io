@@ -1,0 +1,34 @@
+{
+  "id": "69082",
+  "title": "Command \"Append Glyphs\" -- FontLab Studio 5.0.4 bug? Yes! And more.",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Two fonts opened in FontLab, Alpha and Beta. The only difference between the two fonts is, that one glyph is missing in Alpha. And that glyph is the left and the right partner of kerning pairs in Beta. Select the glyph from Beta, copy it and append (context menu) it to Alpha. And now check the kerning. Only the kerning of those pairs is appended, in which the copied and appended glyph is the left partner. The other pairs are ignored.\n\nIf you also want to have the kerning of the pairs, in which the copied glyph is the right partner, you have to select the appended glyph in Alpha and command \"Paste special\" (Strg+Alt+V) and in the dialog the check boxes for pasting the kerning must be activated.\n\nThis is a bug, isn’t it? Is it already documented? I have learned to be careful talking about bugs. This time I checked it three times. Can anyone verify, that I am right?\n\n",
+  "author": "<a href=\"/web/20101008174445/http://typophile.com/user/45774\" title=\"View user profile.\">Arno Enslin</a>",
+  "time": "<br>",
+  "uid": "45774",
+  "comments": [
+    {
+      "time": "",
+      "content": "I always use \"paste special\" to include kerning, etc.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Arno,\n\nthere are three ways to append some glyphs from one font to another:  \n1. Tools / Merge Fonts  \n2. Fonts panel / Append Glyphs  \n3. Font Window / Index mode / Paste\n\nUnfortunately, the three ways produce different results. \"Append Glyphs\" is an older feature, so I believe it may produce less satisfying results. \"Merge Fonts\" is a better way (also has more options that control what should happen).\n\n"
+    },
+    {
+      "time": "",
+      "content": "@ Adam\n\nHey, you have a new avatar. It’s the same twardoch as in the midday.\n\nWhen I command \"Merge Fonts\", the fonts will be completely merged, but I want to append a few glyphs only. And I don’t want to loose control there. If I command \"Merge Fonts\" I had more things to check.\n\nMy problem with the command \"Append Glyphs\" is not, that it produces a different result than the other commands, but it copies the \"left half\" of the kerning and I think, I have too much trusted in it in the past, that it copies both. Do you know, what I mean? You see that the kerning has grown after appending, that the pairs were correctly copied, but you don’t ask the question, whether all pairs were copied.\n\n@ Chris and Adam\n\nYes, the command \"Paste Special\" is an alternative, if all checkboxes in the white field are activated and additionally the checkbox \"Ignore Destination selection, map glyphs by names\" (Otherwise you have to rename the glyphs after the command \"Paste Special\").\n\nAnd in this context I found another bug:\n\nIf I copy the glyph from Beta and paste it via \"Paste Special\" into Alpha, the pasted glyphs are not visible! The character counter has grown, but I first have to switch to the index mode and back, before they are visible. But at least both parts of the kerning will be copied, the right and the left one. So, thank you, Chris.\n\nAdam, after each step I do in FontLab I check, if everything is correct. My problem is, I don’t know exactly, what everything is. Because it has happened so often, that anything does not work as expected, I don’t trust in the application. It even begins, when I drag and drop a vfb file to FontLab. Do you know, how I do that?: I position the cursor almost at the top of the Window, because I am afraid, that I accidentally select and move characters, when the cursor is on top of the glyph window after dropping the vfb file. I handle the app like porcelain, because I am always afraid to damage anything, that I recognize five steps later. And then it can be hard to undo it.\n\nI mean, I was a very good Photoshopper five or six years ago. Now I am out of practice. But I remember, that I could work in it in a way, that my subconsciousness said my hands, what is to do, and I did not have to activate my consciousness so often. This breaks inspiration. Well, the two applications are not comparable, but I wish, I had not always this fear to damage anything.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yeah, cool. \"Paste Special\" is cool. It kills the hinting of the copied glyphs.\n\nThe command \"Paste Special\" cannot replace the command \"Paste\". Genius!\n\nWorkaround:  \n1. Copy  \n2. Append Glyphs  \n3. Select appended glyphs and command \"Paste Special\" for right and left kerning\n\nAnd don’t forget to activate the two check boxes for left and right kerning in the white field after each start of FontLab.\n\nOne more time I lost time. Now I have to hint my glyphs again.\n\nOh, and if you assume, that the option \"Font Window / Kerning information is copied with the glyph\" does not work as it should, you are damn right, because it is the same as with the appending command: Only those pairs are copied, in which the copied glyph is the left partner.\n\n------\n\nFLS 5.0.4 under Windows XP\n\n"
+    },
+    {
+      "time": "",
+      "content": "Arno,\n\nthis is unfortunate, but kerning is stored in FontLab Studio that way: kerning is stored with that glyph which is the 1st glyph in a kerning pair. I agree however that the copying should behave differently and not rely on FontLab's internal object representation -- which should not be the user's concern.\n\nAdam\n\n"
+    }
+  ]
+}

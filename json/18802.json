@@ -1,0 +1,34 @@
+{
+  "id": "18802",
+  "title": "Painting and/or Superhinting and/or ClearType - Relative Effort",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "Spawned from here:  \n [http://typophile.com/node/18685](http://web.archive.org/web/20090814014720/http:/typophile.com/node/18685 \"http://typophile.com/node/18685\")\n\nSo along the journey on the eternal quest of making a font  \nlook good (but to me at least never “the same”) both in print  \nand on screen, I have a question:\n\nWhat’s the relative effort involved in getting this  \noutline “g” (slightly modified from Patria) to render  \nout this bitmap “g”, preferably robustly on as many  \nplatforms and applications as possible.\n\n ![](http://web.archive.org/web/20090814014720im_/http:/typophile.com/files/render_g.gif)\n\nOne way is to make two separate fonts, one outline, one pixelfont\\*.  \nAnother is to superhint, like the previous generation of MS core fonts,  \nbut with the difference that grayscaling is enabled. A third is to -come  \nclose, and in some ways exceed- using CT, using some level of hinting  \n(which I’m not clear on). For the purposes of this discussion I will add  \nthat -if it makes a big difference- you can assume the top of the lower  \nbowl of that outline “g” to be flat -and even uniform in weight- instead.\n\n\\* Or a raw bitmap font, in special situations.\n\nSo I’m wondering what are the relative efforts, as well as  \nthe relative technical impediments in terms of delivery,  \nof the various methods. Thank you.\n\nhhp\n\n",
+  "author": "<a href=\"/web/20090814014720/http://typophile.com/user/1250\" title=\"View user profile.\">hrant</a>",
+  "time": "<br>",
+  "uid": "1250",
+  "comments": [
+    {
+      "time": " 25.Mar.2006 10.19am",
+      "content": "BTW, another relevant comparison here is to grasp the relative effort required in grayscale superhinting versus 1-bit superhinting (something that many people have regularly done). Basically to answer the question: Is it worth it?\n\nhhp\n\n"
+    },
+    {
+      "time": " 26.Mar.2006 10.36am",
+      "content": "“So I’m wondering what are the relative efforts, as well as  \nthe relative technical impediments in terms of delivery,  \nof the various methods.”\n\nwatz the spec.?\n\n"
+    },
+    {
+      "time": " 26.Mar.2006 2.13pm",
+      "content": "Spec? Wazzat?\n\nMaybe this: a TT font populated with “normal” outlines (leftmost “g”), but that renders out specific grayscale bitmaps (righthand “g”s) at certain PPEMs. My sample bitmap “g” is from an existing (but still in development) 14\\* PPEM serif pixelfont, which however has quite “abnormal” outlines (because without hinting that’s the only way to get specific grayscale bitmaps).\n\n\\* Or 15 if you want to include a blank topmost row (although that’s a  \ngracious sacrifice of apparent size that’s been unfashionable for years).\n\nSo how painful would it be to superhint a normal outline font to render out bitmaps like that? One reason I ask is because I wonder why it’s never been done (AFAIK). Although maybe the Next Big Thing became ClearType so superhinting\\* was exiled from the Republic. And speaking of CT, would that be any better in terms of reducing effort? I’m assuming CT can render out “normal” (full-pixel), non-colorized bitmaps.\n\n\\* Which interestingly however is not mutually exclusive with CT, so...\n\nAs for the cross-platform, cross-app wish, that might actually be pretty hopeless, seeing as how OSX mostly ignores hints. On the other hand, CT-style fonts might actually work when OSX’s subpixel rendering is enabled? What’s funny BTW is that the existing format of my pixelfont actually ensures consistent rendering across platforms! The only other way to do that these days seems to be to settle for Fabulous Full Fuzz on both platforms! :-/\n\nhhp\n\n"
+    },
+    {
+      "time": " 26.Mar.2006 3.22pm",
+      "content": "I don’t understand - why don’t you fire up FontLab or VTT and find out for yourself?\n\nGrayscale hinting was done on Palatino, to some extent. I think Mike told me that, but ... I’m not sure. Perhaps I have diagonal hinting in mind. I believe Bistream Vera family was also hinted for grayscale rendering (by FreeType).\n\n"
+    },
+    {
+      "time": " 28.Mar.2006 11.43am",
+      "content": "\\> why don’t you fire up FontLab or VTT and find out for yourself?\n\nBecause I’d have to spend a long time trying various things out  \nto find out what certain others could tell me in a few minutes.  \nBut if I have to, I will.\n\nWhen somebody puts up a font for critique, I don’t  \ntell them to go spend some years figuring it all out.\n\n\\> Grayscale hinting was done on Palatino\n\nOh, wait, I think Simon told me that too, not long ago.  \nI’m so hare-brained these days I can’t even remember  \nanswers to my own questions. I was supposed to check  \nthat out...\n\n\\> I believe Bistream Vera family was also hinted for grayscale\n\nCan anybody confirm/deny this?\n\n—\n\nBTW, I wrote:  \n\\> I’m assuming CT can render out “normal”  \n\\> (full-pixel), non-colorized bitmaps.\n\nBut I’m realizing that in order to get that a font would  \nactually have to be... superhinted, and quite extensively!\n\nhhp\n\n"
+    }
+  ]
+}

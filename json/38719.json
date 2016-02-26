@@ -1,0 +1,70 @@
+{
+  "id": "38719",
+  "title": "Kerning Multiple Master fonts",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I am doing a multiple master based interpolation project. I have the light and the extra bold as masters and will interpolate the rest of the weights.\n\nHowever, when I kern I would prefer that the kerning automatically will apply to both masters and the generatad weights in between. Right now the pairs I add only applies to the weight I have chosen to kern.\n\nOr... could I decide wheather to use the same kerning for all weights or kern the both weights differntly and then interpolate the kerning also?\n\nAnyone with this experience?\n\nThanks in advance!\n\nGöran\n\n",
+  "author": "<a href=\"/web/20120211003304/http://typophile.com/user/11526\" title=\"View user profile.\">Goran Soderstrom</a>",
+  "time": "<br>",
+  "uid": "11526",
+  "comments": [
+    {
+      "time": "",
+      "content": "Hi Göran,  \nThe kerning will surely not be the same for the Light and the Extra bold anyway.  \nWhen you´re happy with the kerning on these, interpolate the kerning in the intermediate weights.  \nThis works best if you have the the same kern pairs in both masters.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Toby – eller kan man säga Hej kanske ;-)\n\nYes, they will be the same. At least as a start. I have a system for that already, that correspondence to the sidebearings difference in the weights. Then I will only make certain excpetions where needed, that has more to do with the different shapes in letter forms between light and bold.\n\nI guess I could just save the Metrics file and then import it into FontLab for the other weight, but the best would be to be able to actually \"see\" the kerning isntantly on both weights.\n\n<cite> This works best if you have the the same kern pairs in both masters. </cite>\n\nThis will also be easier achieved if the kerning was active on both masters right from the start.\n\nIsnt it possible to activate the kerning to apply for both masters? There must be...\n\n"
+    },
+    {
+      "time": "",
+      "content": "There´s no way of doing that I know of, sorry!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Ok, then I will forward it to the FontLab \"wish-list\".\n\n"
+    },
+    {
+      "time": "",
+      "content": "goran,\n\ngo to the metrics window in your regular font and export the metrics as .afm file. then activate your bold weight and import the metrics file. it will ask you what to use - select only the kerning.\n\ntitus\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, but that was exactly what I wrote above. I would however rather see the kerning \"interact\" while kerning, that was the whole purpose.\n\n"
+    },
+    {
+      "time": "",
+      "content": "i am sorry, i didn't read the second post. yet, i don't see the difference between having the same kerning active on both masters from the start, or adding the same values - which gives you the same result.  \n'interact'? i thought they should have the same values? and if they differ, they are interpolated when you generate an instance.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, I know. With interact I mean that I want to lets say kern the A + V on the extra light, and then switch to the Extra bold and se how the kerning pair will work on both masters. If I change the light, I also want the Bold o be changed automatically. I want to see it happen \"live\" is what I mean.\n\nWhat I'm trying to do is to develop a system on a font where the sidebearing-difference is related to the kerning so they could share the same kerning value. I convinced it will work on this particular font, but I would love to be able to compare them both instantly.\n\nFor example, if the Light O has a sidedearing that is 60 on both sides and the Bold has 40 and a kerning pair is needed on O A. Lets say the preferred kerning is -20. That could be the same as -30 if the sidebearing was bigger on the light etc. So what I am doing is making a system from the start that relates to the sidebearings difference. Well, at least a try to do this :)\n\nI'm having problems describing this idea in english, but maybe you get the point?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Your wish is understood, I think.&nbsp;&nbsp;;-)&nbsp;&nbsp;If the weights/styles are compatible (in terms of both spacing and kerning) then it'd be better to space/kern one, and only in a second step copy values to the other master as described above, to check and correct values where necessary.\n\nIf you manage to keep them 1:1 compatible, then only one style actually needs kerning values: generate the kern feature (with FLS' \"Update kern feature\" or the AFDKO2 script) and copy/paste it to the other fonts. If you use AFDKO2 to generate fonts, you wouldn't even need to do this but just refer to a common kerning file. So kerning values need not be present in all masters. But it is most unlikely that this would work.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Well, on some fonts, if seeing the kerning on both masters – the kerning could also be used as a tool to find small errors in sidebearings (or developing a system where the kerning and sidebearings work together). That is pretty much why I want this function to be available.\n\nI am not talking about a traditional serif font here, but if you take a look at Flieger Pro, it is easy to see the positive sides of being able to see the kerning right away on both masters.\n\n[http://www.autodidakt.se/index.php?page=flieger](http://web.archive.org/web/20120211003304/http:/www.autodidakt.se/index.php?page=flieger \"http://www.autodidakt.se/index.php?page=flieger\")\n\nI could here decide that I want to use only one kerning (to save time) and then adjust the sidebearings according to that on each master to make the joining strokes \"connect\" to the next glyph where kerning is needed for that.\n\nI think it makes sense in a way. Especially when the sidebearings in **not** the same on both masters.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I mixed up two threads and posted a script (and brief how-to-use) here:  \n [http://www.typophile.com/node/39498#comment-247801](http://web.archive.org/web/20120211003304/http:/www.typophile.com/node/39498#comment-247801 \"http://www.typophile.com/node/39498#comment-247801\")\n\nKarsten\n\n"
+    },
+    {
+      "time": "",
+      "content": "Ah, that is cool. I will give it a try. Thanks Karsten-wizard.\n\n"
+    },
+    {
+      "time": "",
+      "content": "If I was making a connecting square italic OT MM version of this design I would aim to end up with as close to zero kerning pairs as possible. :-)\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, of course – regular lowercase pairs on a font like [Flieger](http://web.archive.org/web/20120211003304/http:/www.autodidakt.se/index.php?page=flieger) does not need much kerning at all, except for a few letters. It is the caps, swashcaps and all other punctuation and \"stuff\" that needs most attention.\n\n"
+    }
+  ]
+}

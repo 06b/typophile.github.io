@@ -1,0 +1,70 @@
+{
+  "id": "32134",
+  "title": "OpenType-PS with more than 1000 UPM?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I am working on a dingbat font with a lot of details. With the recommended value of 1000 UPM I get really poor results. With a value of 2000 UPM the quality is at least acceptable. Both FontLab and FontQA give me errors because of the differing values.\n\nSo I wonder: What problems could I run into if I use an UPM value of 2000 in an CFF OpenType font?\n\nRalf\n\n",
+  "author": "<a href=\"/web/20100324053753/http://typophile.com/user/1794\" title=\"View user profile.\">Ralf Herrmann</a>",
+  "time": "<br>",
+  "uid": "1794",
+  "comments": [
+    {
+      "time": "",
+      "content": "[http://typophile.com/node/30727](http://web.archive.org/web/20100324053753/http:/typophile.com/node/30727 \"http://typophile.com/node/30727\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "Use 2048 but be sure your UPM value is consistant with the actual outline size.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "No particular reason to choose 2048 over 2000, for OpenType CFF.\n\nI'm not sure what Chris means by \"the UPM value is consistent with the actual outline size.\" Perhaps he just means that the outlines should not be massively larger/smaller than the UPM, which is good advice.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, that is what I mean Thomas. Regarding 2048, I was told that 2048 is a factor of the square root of 2 and therefore can be expressed more quickly by a computer. I think it was Vincent Connair who said it while he was at Microsoft. There is a thread here someplace which goes into it more.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thats good news. Thanks for all the answers.\n\nRalf\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> Use 2048\n\nThis myth must die.\n\n\\> a factor of the square root of 2 and therefore can be expressed more quickly by a computer\n\nThe whole thing with power of two is related to rasterizing & performance.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, so why must it die? is there a problem with maximizing performance in rasterizing?\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "ChrisL: powers of two used to be important for early TrueType rasterizers, back when integer math was considerably faster than floating point. They have never been relevant for Type1 rasterizers. It might still be worth worrying about if you're designing TT outlines for handheld devices, but modern CPU's process floats just as fast, or faster, than integers.\n\nIncidentally, it's possible to do fractions in Type1 (and OT CFF), so the units per em is not really a hard limit the way it is in TT. FontForge can do fractions (it's turned off by default), and I wouldn't be surprised if other tools could too. A font with 1000 and fractions will have fewer potential compatibility problems than one with a nonstandard em size. Fonts with nonstandard units are valid, but the problems come when you do glyph substitution and replacement across multiple fonts, and when buggy applications get confused by the metrics. But for this application, it doesn't sound like any of these problems are particularly worth worrying about. You need lots of units to represent your detail, so go for it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Raph. Hopefully the Microsoft folks will chime in and give their 2 cents worth too.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> Yes, so why must it die?\n\nsince day one there was no problem to design TT with 16384 em-square or less. Why they still stick to 2048? Mabye the old habit. But there's no reason to do that anymore. Maybe Simon will shed some light.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Incidentally, it’s possible to do fractions in Type1 (and OT CFF), so the units per em is not really a hard limit the way it is in TT. FontForge can do fractions (it’s turned off by default), and I wouldn’t be surprised if other tools could too.</cite>\n\nI've been using floating point in Type 1 in FontForge (which seems to be on by default), but when I convert to OT CFF, FontForge rounds to integer. How do I keep the coordinates floating point? Thanks!\n\n"
+    },
+    {
+      "time": "",
+      "content": "[TypoWiki](http://web.archive.org/web/20100324053753/http:/typophile.com/wiki/UPM%20How-To)&nbsp;&nbsp;;-)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes Karsten, that is the thread I meant Thanks!\n\n[http://typophile.com/node/30913](http://web.archive.org/web/20100324053753/http:/typophile.com/node/30913 \"http://typophile.com/node/30913\")\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "As far as we were ever able to determine at Adobe, the \"power of 2\" thing stems from optimizing scaling operations for Motorola 68000-series CPUs, which could use binary bit-shifting for multiplication.\n\nWe attempted to test this, and were unable to discover any measurable performance differences in rasterization for slight differences in em-square values on Intel or PowerPC hardware, across a variety of sizes.\n\nBut it's still a Microsoft requirement today. It's possible that some tools or environments have dependencies on a 2048 em for TT outlines. It's also possible that some tools or environments have dependencies on a 1000-unit em for Type 1 or CFF outlines.\n\nFor example, InDesign CS1 and earlier assume a 1000-unit em (for Type 1 and CFF) when determining cursor and selection size, which can cause a cosmetic problem. One can imagine more serious problems, but I haven't seen any (yet).\n\nRegards,\n\nT\n\n"
+    }
+  ]
+}

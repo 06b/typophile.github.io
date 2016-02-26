@@ -1,0 +1,54 @@
+{
+  "id": "18215",
+  "title": "sidebearings in FOG",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "hello,\n\nhow do you set your sidebearings and character widths so that they are nice round numbers. i can set my character width to a certain width and my left side bearing, but not my right. it seems like only two out of the three numbers can be whole.\n\nalso, is 450 too big for a character width?\n\n ![](http://web.archive.org/web/20081006113313im_/http:/typophile.com/files/sidebearing.png)\n\nsorry if this is obvious. thanks in advance,\n\n—————————  \nnick cottrell\n\n [‹ Over my head: subpixel font rendering in Mac OS](http://web.archive.org/web/20081006113313/http:/typophile.com/node/18233 \"Go to previous forum topic\") [Font Libraries and Collections ›](http://web.archive.org/web/20081006113313/http:/typophile.com/node/17928 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081006113313/http://typophile.com/user/9718\" title=\"View user profile.\">istitch</a>",
+  "time": "<br>",
+  "uid": "9718",
+  "comments": [
+    {
+      "time": " 26.Feb.2006 1.08pm",
+      "content": "Seems that the right-most node of your D is on a decimal, which is not going to work out for you in PostScriptLand. Fontographer allows you to put nodes and BCPs on decimals, but the generated fonts will be “flattened”: nodes and BCPs moved to the closest whole unit.\n\nAnd, no 450 is not too great a character width, but it seems that you’re not really using your em-square of 1000 units to the best advantage, jufging by this cap D. (It IS a cap D, right?)\n\n"
+    },
+    {
+      "time": " 26.Feb.2006 1.22pm",
+      "content": "thank you for the reply Chester,\n\ni am importing the glyphs from illustrator and i suppose this is why they are not the right size. what should i do to fix this? is there something i can do in illustrator, or can i import the glyphs and fix the width(so that both left and right node rest on whole numbers) from there? (…even if my glyphs become slightly warped, which i suppose i can fix afterwards…)\n\nnot really sure how to address the M square issue either… does it have to be 1000 units?\n\n———————————————-  \nnc\n\n"
+    },
+    {
+      "time": " 26.Feb.2006 2.39pm",
+      "content": "Nick — The whole idea of the em square is that the widths of the characters are measured relative to the line size (distance from baseline to baseline of two consecutive lines). When saved as a font your characters are saved with a line height of 1. Character set widths are then determined by multiplying the set size (what the user chooses in the font dialog, menu, et al) by the unit set width you established in Fontographer.\n\nNo, your line size does not have to be 1,000. However, that is standard for Adobe Type 1 fonts (TrueType is 2,048) and too much variation will lead to unusual character sizes. Sizes over 1000 will collide between lines.\n\nWhen importing paths from Illustrator, it is helpful to determine the actual size of the character. I use overlapping rectangles—one for descender, another for x-height, another for cap height, and another for max line top. By copying/importing them into Fontographer and then carefully scaling them to best fit in the Fontographer glyph window, you can then take the scaling factor back to Illustrator, enlarge or reduce the measuring rectangles by that amount, and thereafter use the rectangles as guides for characters that can be imported into Fontographer without scaling modification.  \nIt works in FontLab and TypeTool as well.\n\nBon chance.\n\n"
+    },
+    {
+      "time": " 26.Feb.2006 2.43pm",
+      "content": "NC, it should be 1000 units for a couple of reasons: 1) consistency with other fonts; 2) maximum resolution.\n\nOne thing you can do to make sure that you’re working to the right Fontographer dimensions is to draw an em square in Fontographer and export it. Then open that up in Illustrator, and there’s the em square you should be working in in that application.\n\n(I haven’t used Fontographer (much) in the recent past, but believe that imported/pasted outlines now come in “true”. In old Fontographer, imported/pasted outlines scaled to fit the em square. There were many tricks one could use to insure that all outlines would come in at the same scale.)\n\n"
+    },
+    {
+      "time": " 26.Feb.2006 2.44pm",
+      "content": "thank you Charles, i’m gonna try that right now…\n\n——————  \nnc\n\n"
+    },
+    {
+      "time": " 26.Feb.2006 3.00pm",
+      "content": "Chester,\n\nthanks! i was posting my last comment when you posted yours…\n\nyeah, it still automatically scales the glyphs. i’ve been told that the trick is to import a shape that is the size of the em square along with the rest of the glyphs so it snaps to the (consistent) shape and not the individual glyphs.\n\ni’m going try this technique you just described. do you think i should also use a couple of shapes inside the em square shape to indicate the decent, acent, and x-height.\n\nthanks so much for your expertise…\n\ni also found out how to “align points to grid” which helped me solve the initial problem i was having with nodes resting on decimals. so if my points are aligned with the grid and are not resting on decimals, will the exported fonts be Postscript friendly?\n\n"
+    },
+    {
+      "time": " 26.Feb.2006 3.38pm",
+      "content": "NC, adding marks/boxes at the baseline and x-height are also very useful. Instead of boxes, I used to use horizontal lines at - from bottom to top - descender, baseline, xheight, capheight, ascender. Watch out for curves which overshoot; just nudge the the glyphs into the em-square before exporting them.\n\nAnd, yes, your aligned-to-grid fonts will behave nicely once exported. Thing is, they would behave nicely even if they weren’t aligned to grid, but your nodes and BCPs might move in ways you hadn’t expected. (I had this experience with my last Fontographer-designed font, which has semi-ciruclar terminals. In some weights, these semi-circles were drawn at odd-number widths: 25 units, for example. Which would mean that the apogee node would fall at 12.5 units. So, when generated, the semi-circle would still be 25 units, but the apogee node would be either 12 or 13.\n\nThe lighter the type, the harder it is to get the nodes and BCPs in the right place to describe attractive letterforms. This same difficulty applies to scripts which rely upon exact positioning and overlay of nodes.\n\n"
+    },
+    {
+      "time": " 26.Feb.2006 4.06pm",
+      "content": "thanks Chester,\n\nthat’s interesting about the nodes and BCPs. i just recently listened to an [interview](http://web.archive.org/web/20081006113313/http:/www.typeradio.org/loudblog/index.php?cat=Groot,Luc(as)de) of Luc(as) de Groot and he was describing how he designed the thinnest font (ever created) and that it was extremely difficult because all of the points needed to be aligned to the grid and so on…\n\ni was pretty much confused as i was listening to the interview (imagine Keanu Reaves “whoooa!”), but perhaps i’m beginning to understand…\n\nonce again, i really appreciate the advice. i hope it leads me closer to a successful design…\n\n———————————  \nnc\n\n"
+    },
+    {
+      "time": " 26.Feb.2006 5.11pm",
+      "content": "NC, harder than hairline is hairline italic. That’s the typographic equivalent of a moon shot. Luc[as] is an extraordinarily talented and technologically knowledgeable guy.\n\n"
+    },
+    {
+      "time": " 26.Feb.2006 5.30pm",
+      "content": "word.\n\n———-  \nnc\n\n"
+    }
+  ]
+}

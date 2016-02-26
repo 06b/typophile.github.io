@@ -1,0 +1,47 @@
+{
+  "id": "105276",
+  "title": "Fetamont - a T1-completion of the metafont logo",
+  "forum": "Sans Serif",
+  "tags": [
+    "donald knuth",
+    "fixed pen",
+    "font family",
+    "Metafont",
+    "Sans Serif",
+    "single stroke"
+  ],
+  "content": "When you are familiar with the TeX/METAFONT-world you have probably already seen the logos of METAFONT, METAPOST or METATYPE1. They are made of the following glyphs:\n\n ![](http://web.archive.org/web/20150414045554im_/http:/typophile.com/files/aefmnopsty1_4274.png)\n  \n\"AEFMNOPST\" have been constructed in the METAFONT language by Donald. E. Knuth and \"Y1\" have been added by the METATYPE1-Team. \n\nI have completed the font in two ways:\n\n- I have added many glyphs, such that the T1-encoding table is complete now (T1 is also known as the EC- or Cork-encoding)\n- I have added some variants like \"light ultracondensed\" or \"script\"\n\n ![](http://web.archive.org/web/20150414045554im_/http:/typophile.com/files/smallspecimen_5329.png)\n  \nThe main purpose of this font is to make future logos related to METAFONT easier (like mf2pt1, MFLua, ....). Also the old \"S\" will be replaced by Knuths newest version of the \"S\", such that the METAPOST logo will be set correctly in type1 fonts.\n\nPlease have a look at the examples attached and tell me about inconcistencies and also spacing/kerning issues.\n\nMany thanks,\n\nfujito\n\n| Attachment | Size |\n| --- | --- |\n| [fetamontspecimen.pdf](http://web.archive.org/web/20150414045554/http:/typophile.com/files/fetamontspecimen.pdf) | 238.23 KB |\n\n",
+  "author": "fujito",
+  "time": "6 Aug 2013 — 11:41am",
+  "uid": "72748",
+  "comments": [
+    {
+      "time": "7 Aug 2013 — 7:29am",
+      "content": "Nice work! Will the source be available?\n\n"
+    },
+    {
+      "time": "15 Aug 2013 — 9:50am",
+      "content": "Thank you.\n\nYes, sources will be available and be put under some reasonable license (probably lppl). I have put the most important parts in the following file (showing also the construction):\n\n[detailed construction of Fetamont](http://web.archive.org/web/20150414045554/http:/dhost.info/unimath/stuff/ffm-proof-a4.pdf)\n\nOr try it as a [scribd-document](http://web.archive.org/web/20150414045554/http:/de.scribd.com/doc/159764039/Ffm-Proof-a4)\n\nLater I will make a tex-package and try to post it on ctan.\n\n"
+    },
+    {
+      "time": "12 Aug 2013 — 2:26am",
+      "content": "(I'm getting an error on the link)\n\n"
+    },
+    {
+      "time": "12 Aug 2013 — 10:26am",
+      "content": "Thank you: The links seems to work sometimes and sometimes not ???\n\nSo just try again or try it as a [scribd-document](http://web.archive.org/web/20150414045554/http:/de.scribd.com/doc/159764039/Ffm-Proof-a4).\n\n"
+    },
+    {
+      "time": "15 Aug 2013 — 9:48am",
+      "content": "Looks really great. Would it be too much to suggest some kind of tension parameter, to move from squarer – rounder versions of the font?\n\nEdit: Actually is that what this \"half' command is: superhalfs. Or your nilus arc,\n\nWhich by the way what was the correction you made with that exactly? I'm also trying to do italics in Metafont and finding it difficult to compensate correctly)\n\nAlso what is -randup?\n\n2nd Edit: you may be interested in Dexter Sinister's metafont, ['Meta-the-difference-between-the-two-Font'](http://web.archive.org/web/20150414045554/http:/www.servinglibrary.org/read.html?id=8) – which looks like it's Metafont logo derived.\n\n"
+    },
+    {
+      "time": "15 Aug 2013 — 10:14am",
+      "content": "There is already a global parameter (\"superness\") that makes the font squarer or rounder. E. g. the script styles have superness=0.75 instead of superness=0.8. After having published the sources, everyone may produce easily new font styles by just redefining the global parameters.\n\n\"half\" is nothing really special, it is just the concatenation of two arcs and arcs are not really special (nilus arcs are a bit more complex) as the font is penbased. Have a look at the following picture and then you may have a look at the definitions of \"arc\", \"half\" and \"circle\":\n\n ![](http://web.archive.org/web/20150414045554im_/http:/typophile.com/files/arc_3463.png)\n\n`\n%this is for arc, it is just the algebraic solution of\n%zi+whatever*diri=zj+whatever*dirj\n%but I did not want to save any variables here\ndef corner(expr zi,diri,zj,dirj) =\n (\n xpart(zi)\n -xpart(diri/length(diri))/(ypart(diri/length(diri))\n *xpart(dirj/length(dirj))-xpart(diri/length(diri))\n *ypart(dirj/length(dirj)))*(xpart(dirj/length(dirj))\n *(ypart(zi)-ypart(zj))+ypart(dirj/length(dirj))\n *(xpart(zj)-xpart(zi)))\n ,\n ypart(zi)\n -ypart(diri/length(diri))/(ypart(diri/length(diri))\n *xpart(dirj/length(dirj))-xpart(diri/length(diri))\n *ypart(dirj/length(dirj)))*(xpart(dirj/length(dirj))\n *(ypart(zi)-ypart(zj))+ypart(dirj/length(dirj))\n *(xpart(zj)-xpart(zi)))\n )\nenddef;\n\n%a quarter of a superellipse\ndef arc(expr zi,diri,zj,dirj) =\n zi{diri}\n ...zi\n +superness*(corner(zi,diri,zj,dirj)-zi)\n -(1-superness)*(corner(zi,diri,zj,dirj)-zj)\n ...zj{dirj}\nenddef;\n\n%half a superellipse\ndef half(expr zi,diri,zj,dirj,zk,dirk) =\n arc(zi,diri,zj,dirj)\n & arc(zj,dirj,zk,dirk)\nenddef;\n\n%full superellipse\ndef full(expr zi,diri,zj,dirj,zk,dirk,zl,dirl) =\n arc(zi,diri,zj,dirj)\n & arc(zj,dirj,zk,dirk)\n & arc(zk,dirk,zl,dirl)\n & arc(zl,dirl,zi,diri)\nenddef;\n`\n\nThe \"-randup\" is just like the direction \"(0,-1)\" but with some noise (which is only applied for the script styles). I was too lazy to define a \"random down\" so it is kind of \"- random up\".\n\nTo the nilus arc: I have worked out a clearer solution of it a long time ago but never wrote it down in METAFONT. But the principle stays the same, so here is the old code snippet (and I am aware that it is ugly, sorry):\n\n`\nvardef computearcpoints(suffix $,$$)(expr lsupcorr,rsupcorr) = % private definition for computations of arcpoints\n pair originall,originalr,centerl,centerr,cornerl,cornerr,betweenl,betweenr,extremuml,extremumr;\n if (xpart(z$$r-z$r)>0) and (ypart(z$$r-z$r)<0) %lower left\n or (xpart(z$$r-z$r)<0) and (ypart(z$$r-z$r)>0): %upper right\n  originall=(1/(length(up slanted slant)))[.5[z$l,z$r],z$l]; %later there will be some slanting calculations and we redo them now\n  originalr=(1/(length(up slanted slant)))[.5[z$l,z$r],z$r];\n  %originall=z$l;\n  %originalr=z$r;\n  centerl=(x$$l,ypart(originall));\n  centerr=(x$$r,ypart(originalr));\n  cornerl=(xpart(originall),y$$l);\n  cornerr=(xpart(originalr),y$$r);\n else: %lower right and upper left\n  originall=(1/(length(up slanted slant)))[.5[z$$l,z$$r],z$$l];\n  originalr=(1/(length(up slanted slant)))[.5[z$$l,z$$r],z$$r];\n  centerl=(x$l,ypart(originall));\n  centerr=(x$r,ypart(originalr));\n  cornerl=(xpart(originall),y$l);\n  cornerr=(xpart(originalr),y$r);\n fi\n betweenr=(length(((z$$r-z$r)/length((z$$r-z$r)))slanted slant)*0.5+0.5)\n  [((1+rsupcorr)*superness)[centerl,cornerl],\n  ((1+rsupcorr)*superness)[centerr,cornerr]];\n betweenl=(length(((z$$l-z$l)/length((z$$l-z$l)))slanted slant)*0.5+0.5)\n  [((1+lsupcorr)*superness)[centerr,cornerr],\n  ((1+lsupcorr)*superness)[centerl,cornerl]];\n %--calculate extrema for slanted bows:---\n if slant>0:\n  if (xpart(z$$r-z$r)>0) and (ypart(z$$r-z$r)<0): %lower left\n   extremuml=directionpoint (slant,-1) of (z$l{cornerl-z$l}...betweenl{z$$l-z$l});\n   extremumr=directionpoint (slant,-1) of (z$r{cornerr-z$r}...betweenr{z$$r-z$r});\n  elseif (xpart(z$$r-z$r)<0) and (ypart(z$$r-z$r)>0): %upper right\n   extremuml=directionpoint (-slant,1) of (z$l{cornerl-z$l}...betweenl{z$$l-z$l});\n   extremumr=directionpoint (-slant,1) of (z$r{cornerr-z$r}...betweenr{z$$r-z$r});\n fi\n else:\n  if (xpart(z$$r-z$r)>0) and (ypart(z$$r-z$r)<0) %lower left\n  or (xpart(z$$r-z$r)<0) and (ypart(z$$r-z$r)>0): %upper right\n   extremuml=z$l;\n   extremumr=z$r;\n  fi\n fi\nenddef;\n\nvardef pulled_arc.l(suffix $,$$)(expr lsupcorr,rsupcorr) = % inside of arc\n computearcpoints($,$$,lsupcorr,rsupcorr);\n z$l{cornerl-z$l}...betweenl{z$$l-z$l}\n  ...{z$$l-cornerl}z$$l\nenddef;\n\nvardef pulled_arc.r(suffix $,$$)(expr lsupcorr,rsupcorr) = % outside of arc\n computearcpoints($,$$,lsupcorr,rsupcorr);\n z$r{cornerr-z$r}...betweenr{z$$r-z$r}\n  ...{z$$r-cornerr}z$$r\nenddef;\n\nvardef arc.l(suffix $,$$) = % inside of arc\n pulled_arc.l($,$$,0,0)\nenddef;\n\nvardef arc.r(suffix $,$$) = % outside of arc\n pulled_arc.r($,$$,0,0)\nenddef;\n`\n\n"
+    },
+    {
+      "time": "4 Jan 2014 — 1:31pm",
+      "content": "Meanwhile, I have published the font on [CTAN](http://web.archive.org/web/20150414045554/http:/www.ctan.org/pkg/fetamont).\n\n"
+    }
+  ]
+}

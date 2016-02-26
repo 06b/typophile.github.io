@@ -1,0 +1,58 @@
+{
+  "id": "20346",
+  "title": "auto ligatures with PST1 fonts in InDesign",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "It seems that ligatures named following the \"x\\_x\" convention will substitute automatically with PostScript Type 1 fonts in InDesign. Can anyone else confirm this?  \nIf this is truly the case, is this a bug or a feature?\n\n",
+  "author": "paul d hunt",
+  "time": "31 May 2006 — 7:04am",
+  "uid": "7006",
+  "comments": [
+    {
+      "time": "31 May 2006 — 7:18am",
+      "content": "I don't know if this is exactly what you mean, since I dont know about the \"x\\_x\" convention, but InDesign has preferences where you can choose if all ligatures in the font should come automatically, or not.\n\nSo if I type \"flow\" - then there would automatically be a ligature instead of f and l.\n\nEDIT: Probably you were talking about something else more technical, I guess… =)\n\n"
+    },
+    {
+      "time": "31 May 2006 — 9:20am",
+      "content": "Paul,\n\nI'm not quite sure what you mean. I've never heard that arbitrary ligatures would work in Type 1 fonts.\n\nFor Type 1 fonts with Adobe Standard Encoding, the two standard ligatures \"fi\" and \"fl\" will work as ligatures if they are named with the names used by the Adobe Standard Encoding itself (i.e. \"fi\" and \"fl\" rather than \"f\\_i\" and \"f\\_l\"), simply because they always have been part of the Adobe Standard Encoding.\n\nA.\n\n"
+    },
+    {
+      "time": "31 May 2006 — 9:24am",
+      "content": "BTW, this is the reason why FontLab Studio 5's STANDARD.NAM file has the old-style names \"fi\" and \"fl\" for exactly those two ligatures. Names for all other ligatures should be formed using the underscore convention (\"f\\_f\", \"f\\_f\\_i\" etc.) but for these two, the \"fi\" and \"fl\" names without the underscore are probably better if you generate your fonts as both OpenType and Type 1.\n\nAs usual, I simply recommend following the FontLab Studio 5 STANDARD.NAM practices of glyph naming and encoding unless there is really a good reason not to. Note that in FontLab Studio 5.0.2, the naming was updated (see [http://fontlab.com/The-News/Announcements/FontLab-Studio-5.0.2/](http://web.archive.org/web/20131108134936/http:/fontlab.com/The-News/Announcements/FontLab-Studio-5.0.2/ \"http://fontlab.com/The-News/Announcements/FontLab-Studio-5.0.2/\") for details) and I recommend all FontLab Studio 5 users to get the update.\n\nA.\n\n"
+    },
+    {
+      "time": "31 May 2006 — 9:37am",
+      "content": "Paul,  \nDo you mean they load without the liga feature being written for them? or do you mean they only load automatically with that syntax in the feature code? As Adam says, fl and fi are standard and should load in any case.\n\nChrisL\n\n"
+    },
+    {
+      "time": "31 May 2006 — 9:38am",
+      "content": "adam, last night i was testing this hypothesis just a bit with a font that had an ll ligature. i named the glyph l\\_l, generated a PST1 font (for Windows), installed the font, opened InDesign, selected preset text, selected the font i had just installed, and presto! the l\\_l ligatures were inserted without any OpenType programming. The ligatures persited even when i unchecked the ligatures option.  \nI believe this is the source of the problem with some postscript fonts automatically substituting discretionary ligatures when they are not wanted (as has been documented elsewhere on these forums): they just exist in the font and InDesign calls them when they are named c\\_t & s\\_t.\n\n"
+    },
+    {
+      "time": "31 May 2006 — 2:29pm",
+      "content": "Yes, you're right. It's a feature or a bug, depending on your perspective and which fonts you're using. :/\n\nT\n\n"
+    },
+    {
+      "time": "31 May 2006 — 7:06pm",
+      "content": "_It’s a feature or a bug, depending on your perspective and which fonts you’re using._\n\nThat's how i looked at it. So is Adobe planning on fixing/changing this? Can you say? I'd just like to know what to expect in the future...\n\n"
+    },
+    {
+      "time": "31 May 2006 — 8:43pm",
+      "content": "I can't say what we're going to do. My preference would probably be to restrict the behavior to the five f-ligatures and leave it at that. Plus maybe Th. :)\n\nT\n\n"
+    },
+    {
+      "time": "2 Jun 2006 — 2:43am",
+      "content": "_adam, last night i was testing this hypothesis just a bit with a font that had an ll ligature. i named the glyph l\\_l, generated a PST1 font (for Windows), installed the font, opened InDesign, selected preset text, selected the font i had just installed, and presto! the l\\_l ligatures were inserted without any OpenType programming._\n\nThat's weird, I did exactly the same thing and it did not work here.\n\nA.\n\n"
+    },
+    {
+      "time": "2 Jun 2006 — 1:09pm",
+      "content": "I'm using InD CS1... Maybe they changed it for other versions?\n\n"
+    },
+    {
+      "time": "2 Jun 2006 — 3:39pm",
+      "content": "I noticed this when I was working on Grad (OT-CFF). I hadn't added any features, but the ligatures all worked (whether or not I wanted them to). I used the x\\_x naming convention. After I added the features to specify liga, dlig, etc., they worked correctly, of course.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "43417",
+  "title": "Printing Type Test/Samples via InDesign?",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "Hello, I just joined this forum. :) I hope this is the proper place for my post.\n\nI'm wondering if there is a good, efficient and pretty way to print (or export to PDF) font test/sample pages. I basically need two lines of information per font: 1) name of font; 2) a specific line of copy in a given size. My Suitcase Fusion does this, in a dirtier way, using the \"Print Sample Pages\" feature. I've typed out the line of copy in the \"preview\" box, but it's just so much clutter, and I'm unable to get rid of things like file location. Plus, it takes up an entire page per font.\n\nI've made my own manually in InDesign in the past, but it's incredibly tedious and there must be a better way.\n\nI appreciate any input! Please let me know if my post needs clarifications, and apologies if this belongs elsewhere.\n\nThank you!  \nN\n\n",
+  "author": "nana",
+  "time": "20 Mar 2008 — 12:46pm",
+  "uid": "28574",
+  "comments": [
+    {
+      "time": "20 Mar 2008 — 2:20pm",
+      "content": "Hi Nana, and welcome to Typophile.\n\nIf you know InDesign Scripting, it should be fairly easy to do what you want. Below is a snippet that fills-in a text frame with info about the first 5 fonts available to InDesign. The result for me looks like this:\n\n ![](http://web.archive.org/web/20130227052416im_/http:/typophile.com/files/IDScript_fontsample_6646.png)\n\n`\nvar myTextFrame = app.documents[0].textFrames[0];\nvar myInsertPoint = myTextFrame.insertionPoints[-1];`\n\nfor (x=0; x\\<5; x++) {  \n myInsertPoint.appliedFont = 'Myriad Pro';  \n myInsertPoint.fontStyle = 'Regular';  \n myInsertPoint.pointSize = 8;  \n myInsertPoint.contents = app.fonts.item(x).fullName + '\\n';  \n myInsertPoint.appliedFont = app.fonts.item(x);  \n myInsertPoint.pointSize = 16;  \n myInsertPoint.contents = 'The quick brown fox\\n\\n';  \n}\n\n"
+    },
+    {
+      "time": "20 Mar 2008 — 2:50pm",
+      "content": "Oh wow, thank you so much, Miguel! I've never used InDesign Scripting, but I did manage to put in your snippet. I'm not sure if I can make the appropriate modifications to make it do what I want (i.e., the fonts I want to display are not in sequence, etc.), but I can see that it \\*would\\* be possible.\n\nI really appreciate your response and welcome. Thank you!\n\n"
+    },
+    {
+      "time": "21 Mar 2008 — 1:09am",
+      "content": "Getting to specific fonts or font families requires a little more effort. Perhaps the two scripts below are more helpful to you.\n\nThe first one makes samples of all the fonts that belong to the family or families provided in a hard-coded array — Minion Pro and Myriad Pro, in this case.\n\nThe second one composes samples of all the fonts belonging to the family that is currently selected in the Character palette.\n\nEnjoy!  \n`\nvar myFamilies = new Array('Minion Pro','Myriad Pro');\nvar myStory = app.documents[0].stories[0];\nvar myInsertPoint = myStory.insertionPoints[-1];\nvar fontFamilies = app.fonts.everyItem().fontFamily;\nvar fontIndexes = new Array();`\n\nfor (var x in fontFamilies) {  \n for (var y in myFamilies) {  \n if (fontFamilies[x] == myFamilies[y]) {  \n x = parseInt(x);  \n fontIndexes.push(x);  \n}}}\n\nfor (var z in fontIndexes) {  \nvar x = fontIndexes[z];  \nmyInsertPoint.appliedFont = 'Myriad Pro';  \nmyInsertPoint.fontStyle = 'Regular';  \nmyInsertPoint.pointSize = 8;  \nmyInsertPoint.contents = app.fonts.item(x).fullName + '\\n';  \nmyInsertPoint.appliedFont = app.fonts.item(x);  \nmyInsertPoint.pointSize = 16;  \nmyInsertPoint.contents = 'The quick brown fox\\n\\n';  \n}\n\n######################\n\nvar myStory = app.documents[0].stories[0];  \nvar myInsertPoint = myStory.insertionPoints[-1];  \nvar myFontFamily = myInsertPoint.appliedFont.fontFamily;  \nvar fontFamilies = app.fonts.everyItem().fontFamily;  \nvar fontIndexes = new Array();\n\nfor (var x in fontFamilies) {  \n if (fontFamilies[x] == myFontFamily) {  \n x = parseInt(x);  \n fontIndexes.push(x);  \n}}\n\nfor (var z in fontIndexes) {  \nvar x = fontIndexes[z];  \nmyInsertPoint.appliedFont = 'Myriad Pro';  \nmyInsertPoint.fontStyle = 'Regular';  \nmyInsertPoint.pointSize = 8;  \nmyInsertPoint.contents = app.fonts.item(x).fullName + '\\n';  \nmyInsertPoint.appliedFont = app.fonts.item(x);  \nmyInsertPoint.pointSize = 16;  \nmyInsertPoint.contents = 'The quick brown fox\\n\\n';  \n}\n\n"
+    },
+    {
+      "time": "21 Mar 2008 — 9:46am",
+      "content": "Wow!! Thank you so much, Miguel! Both of them will come in so very handy. I can't believe I haven't taken advantage of the scripting feature in InDesign; you've opened me up to a whole new workflow!\n\nI really appreciate your time. Thank you!!\n\n"
+    }
+  ]
+}

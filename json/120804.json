@@ -1,0 +1,154 @@
+{
+  "id": "120804",
+  "title": "OS X Yosemite: Font Problem",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "I upgraded my MacBook Pro to OS X Yosemite last Friday and almost immediately found an it was incompatabile with many of my fonts, no matter which word processing program I used: Pages 5, Pages '09, TextEdit, Nisus, or Mellel.\n\nSome fonts just would not work properly in it.\n\nSo on Monday I went back to using OS X Mavericks.\n\nI fought pretty hard to have the fonts issues solved in Pages 5, and Tim Cook even took note of the issues I raised, but it seems the engineers just don't care about fonts or typography. I give up. I'll stick with Mavericks until the font issues have been solved, which may be never.\n\nIf you have observed any problems with Yosemite, please let me know. I will keep tabs on the issue.\n\n",
+  "author": "wwgreaves",
+  "time": "23 Oct 2014 — 9:27pm",
+  "uid": "216169",
+  "comments": [
+    {
+      "time": "24 Oct 2014 — 7:20am",
+      "content": "Interesting, After years of putting off moving up from OS X 10.6 I put Yosemite on my Mac Pro on Tuesday - no problems except the ones I knew about - lost a couple of useful programs - but all fonts seem to be fine in InDesign, Word, PhotoShop etc. Since I do not use the programs you mention I would look for updated versions that might correct Yosemite problems. As I said, so far so good with fonts - even ScanFont works OK with the compatability pack.\n\n"
+    },
+    {
+      "time": "24 Oct 2014 — 9:13am",
+      "content": "An Apple discussion group says some homemade fonts are having problems. A suggestion is: \"OpenType fonts should have a UTM setting of 1000. These were at 2048. So I changed those and had FontLab Studio rebuild the names\"\n\n[https://discussions.apple.com/thread/6605691](http://web.archive.org/web/20150303084740/https:/discussions.apple.com/thread/6605691 \"https://discussions.apple.com/thread/6605691\")\n\nAnd as bojev mentioned, check for application updates.\n\n"
+    },
+    {
+      "time": "27 Oct 2014 — 11:43am",
+      "content": "After upgrading to Yosemite. I was surprised to discover that Charcoal (formerly the Mac menu font) was no longer installed on my system. I eventually found CharcoalCY.dfont in a folder called /Library/Application Support/Apple/Fonts/Deprecated along with the following:\n\n Apple LiGothic Medium.ttf  \nApple LiSung Light.ttf  \nBiauKai.ttf  \nGenevaCY.dfont  \nHei.ttf  \nHelveticaCY.dfont  \nKai.ttf\n\nToday my email included an RTF document using Charcoal. TextEdit was able to find and use the font. Word made a substitution.\n\n"
+    },
+    {
+      "time": "29 Oct 2014 — 2:48am",
+      "content": "> An Apple discussion group says some homemade fonts are having problems. A suggestion is: \"OpenType fonts should have a UTM setting of 1000. These were at 2048. So I changed those and had FontLab Studio rebuild the names\"\n> \n> [https://discussions.apple.com/thread/6605691](http://web.archive.org/web/20150303084740/https:/discussions.apple.com/thread/6605691 \"https://discussions.apple.com/thread/6605691\")\n> \n> And as bojev mentioned, check for application updates.\n\nSorry, this isn’t entirely accurate. It has nothing to do with whether fonts are ‘homemade’ or not. An units per em (upm) other than 1000 is perfectly valid for OpenType fonts. In fact, it can have any value between 16 and 16384. There are a number of fonts from FontFont and Adobe which use 2000 upm.\n\nChanging the upm in FontLab will scale the glyphs and lead to distortions in the outlines. (There was probably a good reason why the type designer needed a higher resolution in the first place.)\n\nI can’t imagine what effect ‘rebuilding the names’ should have on this issue.\n\nApplication updates can’t change this (unless applications switch to their own font rendering engine). It’s clearly a bug in Mac OS X and will probably be fixed in the next system update.\n\n"
+    },
+    {
+      "time": "30 Oct 2014 — 8:58am",
+      "content": "Yes, the upm issue is known, and from what I understand folks at FontFont are communicating with Apple’s type team about this. Luckily, only a very few FFs actually have 2000 upm, but still, it is something that we hope Apple addresses immediately.\n\nI upgraded about a week ago on my desktop machine and my macbook. So far no issues; FAP, at work, works as usual (with the upgrade they pushed out the same day as Yosemite rolled out); Font Explorer, at home, is running like a charm. Indesign and other CS/CC seem to be functioning perfectly, and I'm not having any issues (other than a number of embed problems with collisions between licensed & bundled versions of Helvetica, which is something that's been plaguing me for several years) in terms of type in our PDF workflow.\n\nIn fact, I'd say that Yosemite sped up the launch, save, print and various operations speeds in the Adobe apps pretty significantly. The only thing that has slowed down is Outlook.\n\nJLT\n\n"
+    },
+    {
+      "time": "31 Oct 2014 — 7:17am",
+      "content": "I continue to have no problems with Yosemite and I too think it has improved some operations.\n\n"
+    },
+    {
+      "time": "31 Oct 2014 — 9:11am",
+      "content": "JLT, are you saying that UPM fonts at 2000 or 2048 print properly on Adobe Suite apps on your Mac with Yosemite?\n\n"
+    },
+    {
+      "time": "3 Nov 2014 — 5:34am",
+      "content": "Yes, Adobe applications are not affected by the problem.\n\nThough my InDesign CS 3 doesn’t print in Yosemite. It crashes as soon as you press ctrl-p or select the menu print command.\n\n"
+    },
+    {
+      "time": "3 Nov 2014 — 7:06am",
+      "content": "Jens, Adobe hasn't issued an update patch for InDesign CS3 since 2008 (the current version is 10), so I wouldn't count on them issuing a fix.\n\nA workaround might be to make a PDF and then print the PDF.\n\n"
+    },
+    {
+      "time": "3 Nov 2014 — 11:55am",
+      "content": "> Though my InDesign CS 3 doesn’t print in Yosemite. It crashes as soon as you press ctrl-p or select the menu print command.> A workaround might be to make a PDF and then print the PDF.\n\nThat’s how I handle it when I use InDesign CS3 (version 5.0) in Yosemite. It is indeed very awkward. The CS5.5 (version 7.5.3) prints fine, though.\n\n"
+    },
+    {
+      "time": "3 Nov 2014 — 12:32pm",
+      "content": "I also use CS5.5 with no problems.\n\n"
+    },
+    {
+      "time": "5 Nov 2014 — 8:48am",
+      "content": "I know CS3 is pretty old, but I still have hope ;) InDesign CS3 crashed in 10.9.0 too when printing, but Apple fixed it in a minor update.\n\n"
+    },
+    {
+      "time": "5 Nov 2014 — 9:19am",
+      "content": "I'm still using Freehand 10 and really don't want to lose it, as I'd hate to have to use Illustrator. Is it usable with Yosemite?\n\n"
+    },
+    {
+      "time": "5 Nov 2014 — 2:14pm",
+      "content": "@ Nick Cooke,  \nFreeHand on the Mac OS stopped working beyond 10.6 (Snow Leopard) as that is when Apple dropped support for Power PC based code via 'Rosetta'. However, you can still use FreeHand on newer systems if you are prepared to purchase Snow Leopard server (Apple are selling it - unadvertised - at US$19.99 if you call (800) MYAPPLE.) and set up a virtual machine using Virtual Box (free) or Parallels, Fusion, etc.\n\nMore here:  \n [http://freehandforum.org/forum/viewtopic.php?f=5&t=2067](http://web.archive.org/web/20150303084740/http:/freehandforum.org/forum/viewtopic.php?f=5&t=2067 \"http://freehandforum.org/forum/viewtopic.php?f=5&t=2067\")\n\n"
+    },
+    {
+      "time": "5 Nov 2014 — 4:03pm",
+      "content": "What is so great about Freehand to make you want to go through all that hassle?\n\n"
+    },
+    {
+      "time": "5 Nov 2014 — 11:08pm",
+      "content": "It's just something you need to have experienced Dezcom, I am not proselytizing, merely offering solutions to those who might benefit from them\n\n"
+    },
+    {
+      "time": "5 Nov 2014 — 11:56pm",
+      "content": "Thanks Les. That sounds like a real pain, so I think I'll stick with Snow Leopard until I absolutely have to update.  \nChris, I just find Fh much better for drawing than Illustrator, I never liked the way you couldn't constrain angles when pulling handles and it just felt really clunky. Mind you I never really tried to get into it. Thankfully FontLab is pretty similar to Freehand when drawing.\n\n"
+    },
+    {
+      "time": "6 Nov 2014 — 8:06am",
+      "content": "Nick & Les,  \nIllustrator was once upon a time a great program--today, not so much. I do all my drawing in FontLab because the drawing tools are much better. I paste them into Illy only for color and export.\n\n"
+    },
+    {
+      "time": "8 Nov 2014 — 3:55am",
+      "content": "My point exactly Chris. Freehand (was) is just like FL for drawing ease of use. That's what I'm also going to do when I have to finally relinquish Freehand. I don't know why Adobe didn't incorporate the superior drawing capabilities of Freehand into Illustrator when they bought out Macromedia.\n\n"
+    },
+    {
+      "time": "8 Nov 2014 — 10:15am",
+      "content": "Nick, because of money and egos.\n\n"
+    },
+    {
+      "time": "9 Nov 2014 — 10:46am",
+      "content": "Macromedia also had Fontographer - that Adobe did not want or could not figure out how to use in another program.\n\n"
+    },
+    {
+      "time": "9 Nov 2014 — 11:10am",
+      "content": "I never used Freehand so I'm just guessing, but backwards compatibility may have been a factor. People expect new versions of a program to still allow old files to be opened and updated, and changes to drawing methods may cause problems.\n\n"
+    },
+    {
+      "time": "9 Nov 2014 — 3:43pm",
+      "content": "Adobe did not want to go to the expense of porting Freehand with upcoming OS changes coming. Also, since they owned AI, they virtually killed their competition in the acquisition. No sense in splitting staff time on 2 similar products What they got was the Freehand userbase, not the product.\n\n"
+    },
+    {
+      "time": "9 Nov 2014 — 4:16pm",
+      "content": "And we all know Beta was a better video format than VHS but who knows what will win.\n\n"
+    },
+    {
+      "time": "19 Nov 2014 — 6:09pm",
+      "content": "“Macromedia also had Fontographer - that Adobe did not want or could not figure out how to use in another program.”\n\nMacromedia licensed Fontographer to FontLab, with an option for FontLab to buy it, before Adobe bought Macromedia.\n\nHowever, it is also true that Adobe would not have been excited about inheriting Fontographer. It is too small a niche for Adobe’s tastes.\n\nThe second portion of your comment just doesn’t make any sense. It is not like Adobe could just repurpose the ancient code from Fontographer in a different program, and whether or not Adobe owned it, they could make use of concepts from it if they wanted to.\n\n"
+    },
+    {
+      "time": "20 Nov 2014 — 2:01pm",
+      "content": "Thanks for the clarification Thomas - I was not aware that Macromedia had licensed it to FontLab. The last part of my comment was following up on my lack of knowledge in thinking that Adobe did nothing with Fontographer.\n\n"
+    },
+    {
+      "time": "20 Nov 2014 — 2:14pm",
+      "content": "bojev, You can still buy it if you like?  \n [http://www.fontlab.com/font-editor/fontographer/](http://web.archive.org/web/20150303084740/http:/www.fontlab.com/font-editor/fontographer/ \"http://www.fontlab.com/font-editor/fontographer/\")\n\n"
+    },
+    {
+      "time": "20 Nov 2014 — 4:41pm",
+      "content": "Chris, I have been an owner and user of Fontographer since 1988 - through all its versions. The comment was about what Macromedia did years ago when selling off the programs - I assumed FontLab got it from Adobe, but Thomas said it happened before Adobe got FreeHand, etc.\n\n"
+    },
+    {
+      "time": "20 Jan 2015 — 6:32am",
+      "content": "Although I have switched almost completely now, fairly frequently I run into things that are difficult and time consuming to create in Illustrator that I know I could do in seconds in Freehand. Up until now I have been able to open Freehand MX (using OS 10.6.8) and export the files to Illustrator to complete.  \nI am on the verge of updating to Yosemite but I'm not sure if I want to totally give up Freehand.  \nI was hoping someone would have a solution to make Freehand MX run in Yosemite.\n\n"
+    },
+    {
+      "time": "21 Jan 2015 — 3:50am",
+      "content": "There is no support of Rosetta apps on Yosemite but you can use an emulator to run this kind of old apps. Parallels desktop for example.\n\n"
+    },
+    {
+      "time": "21 Jan 2015 — 12:15pm",
+      "content": "You should be able to run it in Sheepshaver ( [http://sheepshaver.cebix.net](http://web.archive.org/web/20150303084740/http:/sheepshaver.cebix.net/ \"http://sheepshaver.cebix.net\")), which is an open source emulator that lets you run older Mac OS's. It's a little hacky, but I've used it to run old apps in Mac OS 8.x on recent Apple hardware. Runs very fast compared to vintage Mac hardware and it's pretty easy to get files in and out of it. It lets you choose a folder on your modern Mac that shows up as a volume in the emulator. I used it recently to make PDFs from 20-year-old PageMaker files (don't ask).\n\n"
+    },
+    {
+      "time": "21 Jan 2015 — 1:12pm",
+      "content": "Sorry, Mark, I can't help myself: What on earth would require the resurrection of PageMaker files from two decades ago? And have you saved every digital file you've ever created? ;)\n\n"
+    },
+    {
+      "time": "21 Jan 2015 — 2:02pm",
+      "content": "Don't know Mark's reason, but I save all final work files on CDs, because a client will occasionally for revisions to an old file. Even if I no longer use that program I can still usually extract the text and graphics.\n\nAnd I have some REALLY old church newsletters in QuarkXPress (which I no longer use) and the printed copies are lost, so one of these days I'll make the Quark files into PDFs.\n\n"
+    },
+    {
+      "time": "21 Jan 2015 — 2:54pm",
+      "content": "I have pretty much saved every digital file I've created. I'm not totally sure why, but it doesn't take up much space. Less and less space as the years go by, in fact. It's fairly well organized, so I can always find things.\n\nThe PageMaker files were two documents I made for my 20-year class reunion in 1994. I had my 40-year reunion this last summer and thought it would be fun to show them to my classmates on an iPad. The files were PageMaker 3 format, so it went like this: Open in PM 3 and make sure all fonts are installed; open in PM 4.6 and save in that format; open in PM 6.5 and save as PostScript (.ps); transfer to modern Mac, open in Preview and export as PDF. There may have been fewer PM steps, but it worked great.\n\n"
+    },
+    {
+      "time": "22 Jan 2015 — 9:09am",
+      "content": "I do Prepress for Publishers and Typography, so applications have to be always on the latest versions.  \nOSX 10.10 also moved us to Cloud Apps, which crapps out whenever TWC goes out as we are in TWC Wasteland and Service is Terrible. On 10.10 working in Indesign, any Font to be used first get's culled from Typekit (purchase), as we have a decent collection of Fonts (Licenced!) including designed ones  \nit become obvious that before opening a cloud app, load the Fonts to be used into a Font application (Fontbook, Suitcase, Fontexplorer Etc.) before opening the App. otherwise you end up purchasing Fonts already owned.  \nWe have software (Apps etc.) you can't take up to 10.10, so they have their own system and stay that way.  \n(Proprietary Color separation software on OSX 10.5, RIP\"S on XP and older TEXWARE on OS9.2 and 10.5). OpenFiles, save and juggle between the systems.\n\nLudwig\n\n"
+    }
+  ]
+}

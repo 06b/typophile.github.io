@@ -1,0 +1,170 @@
+{
+  "id": "15436",
+  "title": "To autohint, or NOT to autohint...",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "What are the benefits of hinting a font if you're not going to do it manually? I have found that even my more rigid, geometric typefaces end up rendering clunky or wobbly when autohinting comes into play. Decorative and detailed fonts... fugetaboudit!\n\nI am of the opinion that an unhinted font generally looks better than an autohinted font on screen, leaving antialiasing to a quality engine (ie: Adobe or MacOS... especially Photoshop with the selection of antialiasing styles).\n\nHow do you all approach this conundrum? Does it bother you? What do you prefer... autohinting or no hints at all?\n\n(PC/Windows centric opinions are most appreciated here.)\n\n",
+  "author": "<a href=\"/web/20110617024927/http://www.typophile.com/user/7929\" title=\"View user profile.\">silas</a>",
+  "time": "<br>",
+  "uid": "7929",
+  "comments": [
+    {
+      "time": "",
+      "content": "I too am curious, as I've noticed the auto-hints tend to only hint horizontally and not vertically (in FontLab). Is there some special method of hinting a font that delivers great results, or is it more of a trial-and-error effort?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Type 1 hinting is not that hard and you usually get better results than with autohinting. TrueType hinting is much more complex, and therefore more difficult to do. I also think that autohinting TrueType fonts does not work as well as autohinting Type 1 fonts. You can get the best results manually hinting TrueType fonts, but it's a lot of work.\n\n"
+    },
+    {
+      "time": "",
+      "content": "My recommendations are: hint t1 manually, put in (manually) some standard stems and zones, convert t1 hints to tt (automatically, but adjust conversion rules according to font design), apply delta-hinting to stems and zones (first - auto to stems, then adjust as needed). For most designs it will do 80% of the work.\n\n"
+    },
+    {
+      "time": "",
+      "content": "A combination of manual and auto hinting seems to do the trick for me on T1 fonts.  \nIn FL go, Prefs \\> Type 1 \\> Type 1 Auothinting Options.  \nAdjusting these numbers based on the stem widths of your design can have a drastic  \nimpact on the quality of the autohints you end up with. Really thin and really bold designs  \nusually need the most adjustment.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Where does autohint on type 1 typically not work well, and need correction? How?\n\n"
+    },
+    {
+      "time": "",
+      "content": "William, T1 autohinting will typically add more hints than you really need, and some of these can conflict and result in messy rendering. Hint replacement can sometimes deal with these, but if you were hinting manually you probably wouldn't put so many hints in. Also note that FontLab's auto hint replacement function works most of the time, but we found some problems with it when working on a project for Adobe last year. FontLab was reporting correct hint replacement (green dot) but Adobe's test tools were finding faults where one hint sits directly on top of another hint. I went in to the manual hinting window and confirmed that the hints were overlapping, and had to manually create separate hint groups. I have not had an opportunity to test this with FL5.\n\nUnless I am making a quick-and-dirty test font during development, I manually hint. It doesn't take long, and I like knowing what is going on in every glyph.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>if you were hinting manually you probably wouldn’t put so many hints in\n\nThanks!\n\n"
+    },
+    {
+      "time": "",
+      "content": "John,  \nThanks very much for the info! If manual hinting is as easy as you say in FontLab, It makes me wonder why auto hinting seems to fail at it so often. I have yet to do an auto hinting which is better than no hinting. Sometimes it works better than others but most of the time, it is less than stellar. I hope Adam Twardoch can enlighten us on this function as well as let us in on FL5 for Mac OS-X release plans. He could give us a \"hint\" on hinting as well:-)  \nIt has been a while, but I seem to remember Fontogrpher doing a better job at hinting.\n\nChrisL\n\nPS: Thanks William for posing the question so concisely as well!\n\n"
+    },
+    {
+      "time": "",
+      "content": "What John said.\n\nGenerally, I would start with FontLab autohinting, and add manual hinting on top of that.\n\nAdobe's own Type 1 and OpenType CFF fonts are all autohinted, but with our own autohinter. We're looking at putting that into our OpenType SDK code so that folks like FontLab will be able to use it, and the need for manual hinting of PS outlines will be greatly reduced.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"We’re looking at putting that into our OpenType SDK code so that folks like FontLab will be able to use it, and the need for manual hinting of PS outlines will be greatly reduced.\"\n\nBRAVO! Kudos to Thomas and Adobe for sharing with the type design community.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "_If manual hinting is as easy as you say in FontLab, It makes me wonder why auto hinting seems to fail at it so often._\n\nThe difference is that **you** know what the font is supposed to look like, FontLab doesn't. It's easy for you as a designer to look at a glyph and say, \"This is an important part of this glyph; this isn't.\" There is a certain amount of judgement that no algorithm can completely replace.\n\nIf the hinting process was so easy to automate, there would be no need for hints; it could be built into the rasterizer.\n\n"
+    },
+    {
+      "time": "",
+      "content": "One could indeed put the hinter into the rasterizer. I suspect there are two reasons that wasn't done long ago:\n\n1) Performance. Even back in the early 90s, let alone the mid-80s, autohinting every font would have had a noticeable impact on output speed.\n\n2) Until the last few years, Adobe considered the quality of its autohinter a proprietary advantage over other type foundries. This attitude has shifted as we have come to the realization that it is more valuable Adobe as a company to help others make better fonts so that our applications work better.\n\nActually, it's a particularly fun aspect to working in the Adobe type group in recent years: we can legitimately say that altruism towards other type foundries is good business, too. :)\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thomas, if that's the case, I really hope it happens soon. As you can tell from my argument, I was making the assumption that if quality autohinting was possible, we would have it by now, and I speculated as to the reason why we don't have it. Here I thought Adobe had a team of expert hinters on staff to do the grunt work. So it turns out it does exist, but you guys were just keeping it to yourselves. Thanks in advance.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> We’re looking at putting that into our OpenType SDK code\n\nYes, that would indeed be very nice of you.\n\n\\> autohinting every font would have had a noticeable impact on output speed.\n\nEven if you consider that it only has to be done once per character? Just like you cache a rasterization of a glyph at a given size for better performance.\n\nAlso: When it comes to really small PPEMs (like onscreen) no T1 autohinter can match TTs manual hints. It's like Mark said about \"true\" intelligence.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"The difference is that you know what the font is supposed to look like, FontLab doesn’t. It’s easy for you as a designer to look at a glyph and say, 'This is an important part of this glyph; this isn’t.' \"\n\nThe difference is that I don't know jack about hinting. I know how my font is supposed to look but I don't know what to do with the hinting to make it work. I look at the hints auto-hinting creates in my fonts and I look at hints from other fonts to try to figure out how they work but I am too naive to make it work. Is there some source for hinting (Hinting for Dummies) that you might recommend? When people on this forum say it is so simple to do manually, I keep looking for the \"Easy\" button but I am too much of a dufus to find it. I have managed to teach myself pretty much the rest of what I need to know about using the software but hinting...well I need a hint.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "[autohinting is for girls!](http://web.archive.org/web/20110617024927/http:/www.taquitos.net/snacks.php?snack_code=2535)\n\n"
+    },
+    {
+      "time": "",
+      "content": "The way I think about Type 1 hinting is this:\n\nAny important horizontal stroke (like the crossbar of a T) gets a hint. When you do this, you are defining a horizontal stem. Any important vertical stroke (like the middle of the T) gets a hint. This is called a vertical stem. Some things, like the top of an A and the bottom of a V, also get a sort of one-sided-horizontal-stem hint, even though there's not a horizontal stroke. Forget about diagonal strokes (including italics). They have to fend for themselves. Don't worry too much about serifs.\n\nAlignment zones are like horizontal ruts. The edges of horizontal stems that fall into them will magically line up with each other at lower resolutions. You normally put alignment zones at the baseline, cap height, x-height, and so on. You make them thick enough to catch any edges that are nearby (including the tops and bottoms of rounded glyphs). This is what keeps things lined up horizontally at low resolutions.\n\nStandard stems are a bit like alignment zones, but define recurring dimensions in the font, such as thin strokes and thick strokes. The rasterizer decides how many pixels each of these standard stems should be at a given resolution. Then, when it encounters one of your stem hints, it picks the closest match from the standard stems and uses that to decide how many pixels wide it should be.\n\nAdding hints also imposes some symmetry to the shapes in the glyphs. For instance, a round bullet with no hinting will not necessarily come out symmetrical when it's rasterized. By adding a horizontal and a vertical hint, the rasterizer will magically make it symmetrical in both directions at low resolutions.\n\nThere's obviously more to it than this, but it should be enough to get you started.\n\nI found David Lemon's introduction helpful when I started doing my own hinting:\n\n[www.pyrus.com/downloads/hinting.pdf](http://web.archive.org/web/20110617024927/http:/www.pyrus.com/downloads/hinting.pdf \"www.pyrus.com/downloads/hinting.pdf\")\n\nBetween that and the Hinting chapter in the FontLab manual, it's not too difficult to figure out the important stuff.\n\nAnother thing that helps is to turn on the Type 1 Hinting Preview in FontLab. This allows you to see interactively how hinting works. (Note: If you're on a Mac, this won't work in OS X or Classic running under OS X. You have to run FontLab in OS 9 with ATM for it to work. Reportedly, this will be fixed in FontLab Studio 5.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>I am of the opinion that an unhinted font generally looks better than an autohinted font on screen, leaving antialiasing to a quality engine (ie: Adobe or MacOS… especially Photoshop with the selection of antialiasing styles).</cite>\n\nGot two questions which may have obvious answers, but would be grateful if someone could clarify:\n\n- for an unhinted font, does any screen renderer (either OS or application) do any of its own autohinting? Don't have an unhinted font to test with, but would Photoshop's crisp/strong/smooth text rendering modes give exactly the same results without any hints?\n\n- does hinting, or indeed anti-aliasing have any relevance to printing at all? (I'm thinking desktop printers rather than press here)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Mark,  \nThank you very much for taking the time to get me started on hinting. I am sure others who are hinting-challenged will appreciate your efforts as well. You are one of the people on this board who make it valuable.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"autohinting is for girls!\"\n\nBut Vincent, I like girls AND chocolate--what do I do? :-)  \n(What would this forum be like sans a Comic :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "I think I've heard that the FreeType rasterizer on Unix may do auto-hinting. But other than that, I've not heard of a rasterizer doing autohinting.\n\nHinting has some relevance to 600 dpi, but not a ton at normal text sizes. Very small type at 600 dpi benefits quite a bit from good hinting (think 5-8 pt). At 300 dpi hinting matters a lot. At imagesetter resolutions, it matters very little.\n\n\\>\\> autohinting every font would have had a noticeable impact on output speed.\n\n\\> Even if you consider that it only has to be done once per character? Just like you cache a rasterization of a glyph at a given size for better performance.\n\nEven so. I don't think most people realize how slow RIPs were back when. I remember waiting up to an hour for a single page of text for me newsletter to output....\n\n\\> Also: When it comes to really small PPEMs (like onscreen) no T1 autohinter can match TTs manual hints. It’s like Mark said about “true” intelligence.\n\nThis is only sort of true. I agree that manual hinting can always be better than auto-hinting. I am dubious about whether manual hinting is always or even usually worthwhile. Manual hinting of TrueType is a particularly troublesome cost/benefit equation because hinting of TT always assumes some particular rendering system: one does it differently for ClearType than without, for example.\n\nI think it will be very interesting for people to do in-depth comparisons of ClearType on OpenType CFF versus TrueType outlines. It will be especially fun with cases where we have essentially the same typeface design fully realized in multiple formats.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "There is (limited) information on Freetypes autohinting [here](http://web.archive.org/web/20110617024927/http:/www.freetype.org/freetype2/docs/ft2faq.html#autohint).\n\nI bumped into it the other day when I was making a greyscale pixel font to use on my website that would be dynamically rastered by freetype. Freetype kept autohinting the middle 'crossbar' on my B to align with the pixel grid which was not what I wanted. I've put an example [here](http://web.archive.org/web/20110617024927/http:/www.edeverett.co.uk/files/BB.gif) The top left B is how freetype rendered it and the top right B is how I wanted—and finally got— it. Their outlines are in red bellow.\n\nEd.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Vincent,  \nNow that I have follwed everyone's links and done some more research, I find that you are a Zen Master Hinter with a Black Belt in Delta:-) So when you say, \"Autohinting is for Girls,\" you speak with master authority.  \nHere I am, not even yet worthy of a \"Yes Grasshopper\" yet :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "One tip: if you experiment with hinting in FontLab/FontLab Studio, try the following:  \n1. In Font Info / Hinting Settings, do \"Auto zones\".  \n2. Autohint your font.  \n3. In Font Info / Hinting Settings / Standard Stems, do \"Auto stems\".  \n4. Remove the hinting.\n\nThe bottom line is that sometimes, having an OpenType PS font without hinting is OK if you have defined standard stems and alignment zones.\n\nAlignment zones are most important. Standard stems are the second-most important. Individual glyph hints follow in priority.\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Adam!\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Also: There are several [Hinting links](http://web.archive.org/web/20110617024927/http:/www.myfonts.com/activity/hinting/) at this MyFonts site.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "I don't think anyone mentioned the fact that TrueType hints are not used natively on Mac OS X.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "",
+      "content": "I didn't know that Si, thanks. Does this mean the OS rasteriser does all the work or does the app chime in? I guess I am just saying, how does it work? Truetype fonts look great on my Mac.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "The Mac OS X rasterizer uses a very advanced antialiasing mechanism so the fonts look good on screen without using hinting. Apple put a lot of research into scaling: the doc icons and other graphical items are also scaled using a very smart algorithm.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> the fonts look good on screen without using hinting.\n\nBut not good enough, or at least not as good as they could.  \nTheir algorithm might be the best of its kind (although I think  \nthe MS stuff is better) but sadly that's not saying much at all.\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Fast forward to late 2008. What should one do, using FLS for a font family of six weights: to auto-hint or not to autohint that is the question. Is there now specialized hinting software that is easy to use and does a better job? Many thanks for helpful suggestions from the experts.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Any update with releasing Adobe's own autohinter to the public?\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Any update with releasing Adobe's own autohinter to the public?</cite>\n\nIt’s been part of the free Adobe FDK for a couple years now.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Fontographer 5 is the first FontLab product that includes the Adobe autohinter. FontLab Studio 6 will also include it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "When is FL6 coming out?\n\nhhp\n\n"
+    },
+    {
+      "time": "",
+      "content": "Nice… I thought it was something separate than the FL5 autohinter.\n\nWhen is FL6 coming out? Is it going to be incredible or what? : )\n\n"
+    },
+    {
+      "time": "",
+      "content": "It is (sort of) separate in FL(S)5. You need to install the AFDKO, which will add a bunch of Python scripts to FLS5, including the autohinter, which you can run as a macro (Python script). You can also run it from the command line (e.g., via Terminal in OS X). What Adam is saying (I think) is that when you use the \"autohint\" facility in FLS6, it will be the Adobe autohinter, as it is in Fontographer 5.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Mark,\n\nindeed, the Adobe autohinter will be natively included in FontLab Studio 6. We're currently working on it (with double energy since Fontographer 5 is out), but we don't have a release date yet.\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Nice, I'll look into that… thanks for the clarification.\n\n"
+    }
+  ]
+}

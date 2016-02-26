@@ -1,0 +1,66 @@
+{
+  "id": "46263",
+  "title": "{calt} code for one to many substitution workaround",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I have been putzing with some feature code to try to do what seems like a simple thing, replace 3 glyphs with 3 other glyphs contextually. Some day maybe Adobe et al will allow for one to many substitutions.  \nIn the mean time, here is a screen grab of my code. The only way I got it to work was to make a succession of 3 lines of code to do what it seems one line should work. I am sure Karsten or someone else has done it far more elegantly so I am hoping they will show us the better way to do it.  \nIn the following, I am substituting the combinations TT, TTY, and TY with alternates for better spacing. I am repeating similar code for smallcap version in succeeding lines. The last few lines are just part of another substitution.\n\nHere is hoping you Obbeewon code warriors have a better way than my hack.\n\nThanks,\n\n ![](http://web.archive.org/web/20081203163636im_/http:/www.typophile.com/files/caltboulder_5292.png)\n\nChrisL\n\n [‹ RoboFab Kerning - Add Pair ?](http://web.archive.org/web/20081203163636/http:/www.typophile.com/node/46310 \"Go to previous forum topic\") [Advice on EULA? ›](http://web.archive.org/web/20081203163636/http:/www.typophile.com/node/46198 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081203163636/http://www.typophile.com/user/3135\" title=\"View user profile.\">dezcom</a>",
+  "time": "<br>",
+  "uid": "3135",
+  "comments": [
+    {
+      "time": " 9.Jun.2008 9.56pm",
+      "content": "The first line: sub T’ T by T.alt2;  \nLooks like you’re substituting instances of two T’s with a single “TT” glyph (T.alt2), and this alt is a ligature?\n\nThen in the second line you’re substituting instances of T.alt2 plus T.alt plus T plus Y with T.alt3.\n\nThe third line substitutes instances of T.alt2 plus T with T.alt.\n\nHave I interpreted this correctly? Correct me if I’m wrong.\n\nIt’s a bit confusing not knowing exactly what these alternate glyphs look like, but a few things jump out at me here: What are the apostrophes (quotesingle) for? I’m accustomed to using the quotesingle after the key glyph in a class definition for kerning, eg:  \n\\_kern01: a’ a.1 a.2 agrave aacute acircumflex adieresis [etc etc]\n\nIn that example a.1 and a.2 are stylistic alternates, and the other a’s are the familiar western diactritics.\n\nBut in the code box for defining OT features I’ve never found quotesingle to be of any use. This is how I code similar sequences to your calt examples:\n\nsub T T by T\\_T;  \nsub T T Y by T\\_T\\_Y;  \nsub T\\_T Y by T\\_T\\_Y;\n\nThat coding works, compiles without a hiccup. It’s good practice by the way to use an underscore in the names of ligature glyphs to avoid coincidences with standard unicode glyph names.\n\nj a m e s\n\n"
+    },
+    {
+      "time": " 9.Jun.2008 10.08pm",
+      "content": "Also, also three sample lines I’ve written above belong in the LIGA feature rather than CALT. CALT you only use for one-to-one substitutions, eg: sub a by a.2;\n\nj a m e s\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 12.14am",
+      "content": "I think Chris (“the Salmon”) is not substituting a single glyph with two T’s for two, but rather an alternate form of T for one of them, much like it’s becoming popular to replace the regular f by narrower ones in certain letter cominations instead of using dedicated f\\_i, f\\_l, &c., &c. ligatures.\n\nBut then again, feature coding has always been my weak side, so I might be wrong.\n\nSzabolcs\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 2.18am",
+      "content": "AFAIK there is no way around writing three lines of code for three substitutions.\n\nLigatures are an easy solution, but as Szabolcs mentions, ligatures’ inside spaces of course will not adjust if the typographer applies letterspacing to the text.  \n(In Pyke, the ligature approach is appropriate because most of the ligatures are “one shape” glyphs — rather than two separate shapes combined on the same body — so there are no inside spaces that would need adjustment.)\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 3.49am",
+      "content": "Okay I tried coding with the apostrophe and now understand how the coding works. The glyph before the apostrophe is replaced by the alternate after “by” if the glyphs preceding “by” appear in the specified sequence, a contextual substitution.\n\nNo, sorry Chris, I don’t know a more elegant way of coding than that.\n\n_Ligatures are an easy solution, but as Szabolcs mentions, ligatures’ inside spaces of course will not adjust if the typographer applies letterspacing to the text._\n\nTrue, but in the case of a narrow substitute f, if letterspacing is applied the need for the narrow f may eliminated and the typographer may want to turn off CALT and use the stock f instead, or face the very real possibility of people laffing at their work.\n\nI understand your point—-ligatures can’t be adjusted for interior space once they’re drawn and programmed in the font. Contextual alternates have the advantage of complicity with whatever letterspacing the user applies. But the more letterspacing used, the less need there is for ligatures. By a similar token, the more letterspacing used, the less need there is for contextual alternates designed to compensate for interior space and avoid lateral collisions that look awkward when the font is used with stock spacing out of the box.\n\nI’ve designed sans serif text fonts for private clients which are equipped with ligatures for common combinations, eg: ff, ffy, ft, fft. When making them I tested using stock spacing and with differing amounts of letterspacing applied, and wound up designing the ligatures with an amount of interior space that works in most situations. That’s how you design ligatures. They have to work with letterspacing in mind, and with no letterspacing at all.\n\nFor a lower case it’s not a big issue because letterspacing is used in tiny amounts, rarely in copious fashion. Capitals however, can take vast amounts of tracking out and still look good. In that case, some typographers will decide not to use ligatures at all because they “look funny”, while others have a broader view of things and will use ligature capitals even with generous spacing. Do it in InDesign with Optical Kerning switched on, and InD positions the ligatures relative to single glyphs so that you get nice even density. I don’t think it looks funny at all. With optical kerning turned off it looks silly. With optical kerning on it looks fine and natural, even tho the ligatures were designed to work at close quarters. The reason it still works is this: most ligatures have the same or very comparable optical density to single glyphs, so there is no reason why they shouldn’t look alright with letterspacing applied. It’s just that we’re not used to seeing ligatures very often full stop. Get use to looking at them in concert with other glyphs and suddenly your prejudice evaporates.\n\nj a m e s\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 8.20am",
+      "content": "Szabolcs and Karsten are correct, I am avoiding the liga feature on purpose. I am using calt not just to avoid the TT ligature, but to help minimize difficult kerning issues such as TY and TT. The T.alt glyphs are just shortened crossbar left or right options to tighten the big spaces. The 3 alts are a short left bar, a short right bar and both bars shortened. This eliminates the need for many ligatures to do the same job. To use liga, I would need TY, YT, TV, VT, TW, WT, TT, and TTY in both caps and smallcaps and 7 lines of code to do what I did in calt with 3 glyphs and 3 lines of code.\n\nChrisL\n\nHere is a screendump. The blue text has calt turned off, notice the line length increase. The second set is smallcaps.\n\n ![](http://web.archive.org/web/20081203163636im_/http:/www.typophile.com/files/Tcalt_3601.png)\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 10.41am",
+      "content": "_This eliminates the need for many ligatures to do the same job. To use liga, I would need TY, YT, TV, VT, TW, WT, TT, and TTY in both caps and smallcaps and 7 lines of code to do what I did in calt with 3 glyphs and 3 lines of code._\n\nYes. I wasn’t suggesting you use LIGA to do the same job, but discussing the relationship between spacing and the related need for either contextual alternates or ligatures to solve awkward combinations in a lower case; and the rather different relationship that exists between spacing and capitals. When discussing LIGA I should have termed it DLIG anyway, as LIGA is for “standard” ligatures.\n\nAny particular reason why you’re solving TT with short bar alternate T’s? I’m not saying it’s bad or undesirable in any way, just curious as to your rationale on this combo. A lot of fonts substitute TT with a joined pair TT ligature because (I guess) it’s neater, and few people complain about it.\n\nj a m e s\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 12.10pm",
+      "content": "“A lot of fonts substitute TT with a joined pair TT ligature”\n\nI just think it calls too much horizontal attention to itself—particularly in a very bold sans. Also, perhaps do to my Greek herritage, that always looked like a huge Greek Pi (as in 3.414) to me.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 12.21pm",
+      "content": "Those are good reasons :^) But I still think context has a say in these things. When designing a font I constantly try to see it from a layperson’s viewpoint, perceiving it in a naive way.\n\nj a m e s\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 12.32pm",
+      "content": "”...perceiving it in a naive way.”\n\nExactly! I try to do the same. As a reader, when I see 2 joined T’s, It calls attention to itself for me. I am not a truly naive reader so I show it to others and see if it is noticed. If it is not, I think I am on the right track. If my son says, “What is that thing in the middle of the word that looks like a goal post?”, I know it ain’t workin’. :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 12.43pm",
+      "content": "It’s the only way. We have different experiences of reader reactions in this instance. I’ve tested joined TT ligs on naive readers and they didn’t even notice them. Maybe they’re not soccer fans, or something like that ;^)\n\nj a m e s\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 1.04pm",
+      "content": "or maybe the font wasn’t bold enough?\n\nChrisL\n\n"
+    },
+    {
+      "time": " 10.Jun.2008 1.10pm",
+      "content": "“bold enough”? A font can never be bold enough ;^) You may be onto something there tho. So much depends on the type of font in question.\n\nj a m e s\n\n"
+    }
+  ]
+}

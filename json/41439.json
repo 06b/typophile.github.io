@@ -1,0 +1,98 @@
+{
+  "id": "41439",
+  "title": "Howto determine the width of dashes (em/en)",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "My font's UPM size is 1000.  \nWhat width do use for em- and en-dashes?\n\nArjen\n\n",
+  "author": "typovar",
+  "time": "28 Jan 2008 — 4:43am",
+  "uid": "14112",
+  "comments": [
+    {
+      "time": "28 Jan 2008 — 6:04am",
+      "content": "[microsoft says this](http://web.archive.org/web/20150414044000/http:/www.microsoft.com/typography/developers/fdsspec/punc.aspx#en)  \n  \n _\\* En dash  \n Unicode: U+2013  \n Height alignment : Visually centers on the lowercase x-height.  \n Advance width Rule : Placed on the en space of the typeface._\n\n\\* Em dash  \n Unicode: U+2014  \n Height alignment : Visually centers on the lowercase x-height.  \n Advance width rule : Placed on the em space of the typeface.\n\n"
+    },
+    {
+      "time": "28 Jan 2008 — 7:13am",
+      "content": "[http://en.wikipedia.org/wiki/Dash](http://web.archive.org/web/20150414044000/http:/en.wikipedia.org/wiki/Dash \"http://en.wikipedia.org/wiki/Dash\")\n\n"
+    },
+    {
+      "time": "28 Jan 2008 — 7:30am",
+      "content": "I'm not familiar with UPM. However, I do know that an em space is the same size as the font's point size height (if a font is 10 pts an em space is 10 points.) And an en space is half an em space (so in the same example, a font is 10 pts, and en space is 5 points.)\n\nApplying this reasoning, an em dash would be 10 pts wide and an en dash would be 5 pts wide.\n\n[em space](http://web.archive.org/web/20150414044000/http:/typophile.com/wiki/em%20space)  \n [en space](http://web.archive.org/web/20150414044000/http:/typophile.com/wiki/en%20space)  \n [em dash](http://web.archive.org/web/20150414044000/http:/typophile.com/wiki/em%20dash)  \n [en dash](http://web.archive.org/web/20150414044000/http:/typophile.com/wiki/en%20dash)\n\n"
+    },
+    {
+      "time": "28 Jan 2008 — 8:10am",
+      "content": "Right - That is what the Wikipedia reference above states.\n\n"
+    },
+    {
+      "time": "28 Jan 2008 — 8:41am",
+      "content": "While all the technical data above is correct, there is a movement for making the em dash slightly wider than its escapement, giving a small sidebearing on either side, so that it does not crash into o and other letters that have small or no sidebearings.\n\nThat said, doing this prevents you from putting several dashes in a row, and having them join (without kerning). Three ems is used in bibliographies to indicate the same author as the item above, for instance.\n\n"
+    },
+    {
+      "time": "28 Jan 2008 — 11:59pm",
+      "content": "I read all about the size of em. But there was hardly any info about the sizes when designing in Fontlab (TypeTool). True that nowadays dashes are drawn with sidebaring. Still, I'm not sure if my em-dash should be 1000 UPM wide.\n\n"
+    },
+    {
+      "time": "29 Jan 2008 — 5:44am",
+      "content": "\"Still, I’m not sure if my em-dash should be 1000 UPM wide.\"\n\nMost fonts I know of are produced with a \"3/4 em dash\", not an Em dash, and, this may be confusing. There was no type designer present at the formation of the glyph sets to tell the techies that most users and uses were not going to want a 'real' Em dash, so we who need to solve problems, not argue about technicalities, said dash'em, and made the right character, which is a full em space, with 1/8 em sidebearing on either side of a 3/4 em wide dash.\n\nIf you are working on a face that is considerably less wide than 'regular', then you may also need to consider the widths of \"M\" and \"N\" as guides for your dashes, and then make the EM vs. 3/4 EM descision. The same is true in the wider direction, if you are working on a face considerably wider than 'regular'.\n\nCheers!\n\n"
+    },
+    {
+      "time": "29 Jan 2008 — 6:00am",
+      "content": "Let's talk about the visual appearance of dashes for a moment, not numbers. You don't have to go back too far in typographic history to find the time before the em-system.\n\nVisually, the \"em-dash\" was about as wide as the widest capital letter -- sometimes an \"M\", more often a \"W\".\n\nThe \"en-dash\" was about as wide as a figure.\n\nThe hyphen was about as wide as a lower-case \"i\" (which was about as wide as a word space, in the days when you always added space to justify a line).\n\nIf you talk to an old Linotype operator (some are still living, and the linecaster didn't use the \"em\" system), he's apt to tell you that an em-space is about the size of a capital M.\n\nMoving to the current em-system, the technial \"width\" (setwidth) of the dashes is more or less fixed, 1000 units for an em-dash (on the 1,000 unit UPM), 500 units for an en. How much of that inside space (ink + sidebearings) is filled with ink is your business.\n\nAs Dan said, you will need two- and three-em dashes. Unless you write a kerning or ligaturing routine, that prohibits sidebearings. But, there are not many fonts I can think of where the capital M (or W) is 1,000 units. So my solution is to make a dash with ink about the size of M or W, set the width to 1,000, and make two ligatures for a two- and three-em dash, with no sidebearings, so if you need a 4- or 5- or whatever em dash, you can set it.\n\nI usually make the ink of an en-dash look right with a figure, and set the sidebearings the same as a hyphen, as an en-dash is also used between alpha charactes on occasion. It's width will usually be around 500 units, but if that works out to 550 or 450, I don't sweat it.\n\nFWIW\n\n"
+    },
+    {
+      "time": "29 Jan 2008 — 6:17am",
+      "content": "Further reading: [The Em](http://web.archive.org/web/20150414044000/http:/typophile.com/node/27742).\n\n"
+    },
+    {
+      "time": "30 Jan 2008 — 12:53am",
+      "content": "I have long been of the understanding historically, if you go back to foundry metal type (before hot metal), the em dash wasn't part of the typeface, but was a separate \"sort\" and was the same width as the point size. In fact, that's why its width was independent of the typeface.\n\nI certainly agree that typeface-dependent sizes probably look better in many cases. At Adobe we still largely adhere to the standard that an em dash should have an advance width equal to the UPM, however.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "30 Jan 2008 — 4:20am",
+      "content": "The dashes in my typefaces are all different lengths.  \nI eyeball 'em to look good.  \nSome of them have plenty of sidebearing, others don't.\n\n"
+    },
+    {
+      "time": "30 Jan 2008 — 4:35am",
+      "content": "\" if you go back to foundry metal type (before hot metal), the em dash wasn’t part of the typeface, but was a separate “sort” and was the same width as the point size.\"\n\nGood point. This is also true into the age of mechanical metal type. Most fonts of that era, and up until the 1980's were made of 80-90 characters and all the rest were sorted in from a limited variety of options, usually 8, (sets of accents, reference, secondary punctuation and etc., though not &). The upside of this was a consistent user experience with the downside that design suffered ever so slightly.\n\nCheers!\n\n"
+    },
+    {
+      "time": "9 Mar 2008 — 12:20pm",
+      "content": "Thanks everyone for the comments.  \nThis has just been one of those silly things I came across when working on a typeface.  \nI should have known that the answer to this questions was obvious: Use your eyes!\n\nThanks Nick.\n\n"
+    },
+    {
+      "time": "9 Mar 2008 — 10:36pm",
+      "content": "_you will need two- and three-em dashes._\n\nIn that case, is it a good idea for foundries to kern dash-to-dash combinations to remove the gap, if the dashes have sidebearings?\n\n\\*\\*\\*\n\nBTW Arjen, if you use the \"looks good?\" approach, rather than a common standard, be sure to test your work in a text print-out, rather than the metrics window (although that's the place to start, obviously).\n\n"
+    },
+    {
+      "time": "10 Mar 2008 — 9:35am",
+      "content": "Is it ok to raise the en-dash for UC numbers? Its normal level looks terrible to me, but I have never seen it raised like this in print.\n\n ![](http://web.archive.org/web/20150414044000im_/http:/typophile.com/files/mydash_5815.gif)\n\n"
+    },
+    {
+      "time": "10 Mar 2008 — 10:22am",
+      "content": "I included an alternate, raised en dash in the Whitman LF designs (called \"figure dash\" in my [PDF specimen](http://web.archive.org/web/20150414044000/http:/www.kentlew.com/Type/WhitmanSpecimen.pdf)). It was hacked in the option-l [logicalnot] character position.\n\nI'm hoping to implement it somehow via the {case} and {lnum} feature in the OpenType versions, although we haven't quite thought through the contextualization yet.\n\n-- K.\n\n"
+    },
+    {
+      "time": "10 Mar 2008 — 1:28pm",
+      "content": "I've always made my hyphens and dashes ride a bit high, about 3/4 x-height rather than visual center. Makes them look a little less like ankle-biters next to ascenders and in all-caps settings.\n\n"
+    },
+    {
+      "time": "10 Mar 2008 — 2:03pm",
+      "content": "Kent, I'm retrofitting several typefaces for OT, that have \"three-quarter\" height default lining figures.  \nI've added a class of \\*cap figures\\* as an alternate that kicks in with the \\*case\\* feature, and am including a figure dash as part of the plan, complete with kerning.\n\n"
+    },
+    {
+      "time": "10 Mar 2008 — 3:05pm",
+      "content": "Kent,\n\nI usually make a \\*endash.lp\\* & switch it on with lining numbers. Also, when doing a good job, plus, minus, equal, divide, and copyright. And sometimes less & greater & a few other operators. Sometimes too the dollar sign, pounds-sterling, etc. etc. (I usually use the oldstyle numbers as default, so the lining sets are .lp and .lt).\n\nThe only real problem is where an endash is used in the text, as with (Chicago's example) \"quasi-public--quasi-judicial body.\" (I think an em dash shows here, but s/b an endash.) If you are using lining numbers & a higher en-dash, it would stick out. If you also switched on a raised-up hyphen, it would be too high for lower case letters.\n\n\\*case\\* is usually no problem, just have a higher hyphen & all dashes along with whatever else you want -- quotes, parens, brackets, etc.\n\nFWIW\n\n"
+    },
+    {
+      "time": "10 Mar 2008 — 7:27pm",
+      "content": "Thanks!\n\n"
+    },
+    {
+      "time": "11 Mar 2008 — 5:00am",
+      "content": "Charles, Nick -- Thanks for the advice.\n\nThere are \"case\" versions of monetaries and arithmetic signs for Whitman; they've been there from the beginning. And they'll be switched out with appropriate onum/lnum features.\n\nSubstituting raised dashes with {case} is pretty much a no-brainer. The trick with the endash.uc, as Charles mentions, is that if you use a straight substitution for it with the {lnum} feature, then it will also appear in running text. Although the occurrence of an endash outside the context of a number range is not common, it still occurs.\n\nSo, the solution currently in mind is to contextualize the substitution with a statement something along the lines of \"sub @lnum endash' @lnum by endash.uc\".\n\n-- K.\n\n"
+    }
+  ]
+}

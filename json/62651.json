@@ -1,0 +1,54 @@
+{
+  "id": "62651",
+  "title": "Copying paths between masters",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "This is something that has bugged me in the past. When I'm working with multiple masters in FontLab, and I'm creating a new glyph, or a new path in a glyph, there doesn't seem to be an easy way to transfer what I've done in one master to another. For example, let's say I've drawn this path in the Wt0 master:\n\n ![](http://web.archive.org/web/20150415081238im_/http:/typophile.com/files/wt0e_6694.png)\n\nThis looks good, but if I now switch to the Wt1 master, I get this:\n\n ![](http://web.archive.org/web/20150415081238im_/http:/typophile.com/files/wt1e_5081.png)\n\nThis path that is the result of the initial points I dropped when creating the path in the other master. Any changes I made in the other master are not reflected in this master, which makes sense. The whole idea of having multiple masters is for them to be different. However, I must now perform most of the same clean up I did in the other master to get this to where I want it. In the past, I would switch on the option to view the other master at the same time, like this:\n\n ![](http://web.archive.org/web/20150415081238im_/http:/typophile.com/files/wt0wt1e_3470.png)\n\nI could then use the other path as a guide when creating the version for Wt1. It works, but I could save a lot of time and effort if there was a way to make an exact copy of the path from the other master as a starting point. Unfortunately, FontLab doesn't seem to have any way to do this. However, last night I discovered a simple method:\n\n1. Copy the glyph or path you want to duplicate in the other master.  \n2. Create a new (single master) document and create a new glyph.  \n3. Paste the glyph or path into the new glyph slot and then copy it.  \n4. Go back to the original (multiple master) document and paste the glyph or path into its original location.\n\nThe path on both masters will now be identical. Note that this will affect _all_ masters. I don't know if there is a way to do this with some but not all masters.\n\nThere may very well be some other way to do this, or maybe others have discovered this trick, but I thought it was a pretty good solution and might be useful to other people.\n\n",
+  "author": "Mark Simonson",
+  "time": "2 Oct 2009 — 8:00am",
+  "uid": "1043",
+  "comments": [
+    {
+      "time": "2 Oct 2009 — 8:28am",
+      "content": "I have never tried this. I have not had much luck working directly on the master so I always make a font file for changes, then regenerate the master.\n\nChrisL\n\n"
+    },
+    {
+      "time": "2 Oct 2009 — 8:43am",
+      "content": "I don't work directly on the master either. Changes on WT0 always seems to bugger-up WT1, or atleast I can never predict how the tweaks will cascade through. I tend to make font file changes and regenerate the master as well.\n\n"
+    },
+    {
+      "time": "2 Oct 2009 — 9:05am",
+      "content": "I'm not sure I follow either of you. Are you saying that you work in a single-master file for each of the two weights and then combine them into a multiple master version when you want to see how they interpolate?\n\n"
+    },
+    {
+      "time": "2 Oct 2009 — 9:17am",
+      "content": "Yea Mark I think that is what they are saying. I usually work that way too. I find drawing directly in a MM file a bit cumbersome. Your example bears this out.\n\nWhen making MM vfbs I always use Mask-to-Master, never had much luck with that blend thing.\n\n"
+    },
+    {
+      "time": "2 Oct 2009 — 9:37am",
+      "content": "Not sure if this is what you are looking for: On my [production page](http://web.archive.org/web/20150415081238/http:/www.kltf.de/kltf_otproduction.htm), at about the middle of the page, click the \"KLTF Master To Master\". The download contains a script and a brief description in a text file. (The \"NEW!\" is not valid any more ...)\n\nP.S. Please try with a copy of the font first, just in case.  \nP.P.S. Behavior of popups is a bit odd on the Mac. You need to click on an entry twice to make a selection.\n\nKarsten\n\n"
+    },
+    {
+      "time": "2 Oct 2009 — 9:43am",
+      "content": "_Yea Mark I think that is what they are saying. I usually work that way too. I find drawing directly in a MM file a bit cumbersome. Your example bears this out._\n\nHuh. I guess I've gotten used to the quirks of working directly in the masters with multiple master FontLab files. It's really not that hard, except for occasional puzzlers like the one above. I find it to be incredibly useful to see how the interpolation is working (using the Axis panel along with the Preview panel and the quick preview in the Glyph window). I worked with four masters the entire time when I did Proxima Nova.\n\n"
+    },
+    {
+      "time": "2 Oct 2009 — 9:48am",
+      "content": "Kartsten, that looks excellent and much more flexible than the workaround I came up with. I should have known there would be a Python script somewhere that did this. Or more likely I did know and forgot about it. I'll try it out. Thank you!\n\n"
+    },
+    {
+      "time": "2 Oct 2009 — 11:06am",
+      "content": "Actually, I forgot about it and was reminded by this thread.&nbsp;&nbsp;:)\n\n"
+    },
+    {
+      "time": "2 Oct 2009 — 12:23pm",
+      "content": "I usually work with Multiple Master and when I design a glyph in Wt0 the other master is all messed up, so I use Tools\\>Multiple Master\\>Expand Master in order to have the same exact glyph in both masters. Then I just work on the master Wt1 to design the boldest version. And I do the same both for width or weight axis. This works for me because I'm sure that the points are in the same relative position and the paths have the same direction.\n\nIf you have any problems, you can email me and I'll be glad to help.\n\nDino\n\n"
+    },
+    {
+      "time": "2 Oct 2009 — 12:46pm",
+      "content": "Now I feel dumb. I never knew what that command was for (and obviously never tried to find out). It certainly isn't evident from the name. But there it is, right in the manual. So, never mind about my clever workaround. It turns out FontLab can do that. On a positive note, I now know about Karsten's brilliant script, which provides a lot more control, so it wasn't a complete waste of time.\n\nI wonder how many other \"clever\" workarounds I do to replicate features I don't know about? :-)\n\n"
+    }
+  ]
+}

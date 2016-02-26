@@ -1,0 +1,94 @@
+{
+  "id": "16143",
+  "title": "going bald! HELP!!!",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I have pulled out 80% of my hair trying to tackle these problems…I haven’t posted here before so hello to all…\n\n(I am working on a Mac OSX tiger on Fontlab 4.5)\n\n**1.** Should I test them in fontbook or suitcase I have different results in each.\n\n**2.** Exporting as .otf. Is there any benefit to .ttf\n\n**3.** Would like them to be a true cross platform font (reason for using opentype). Is this too lofty of a goal. I have heard of many problems with this. Solutions?\n\n**4.** My kerning pairs don’t show up when using them in an application. They are as if I didn’t make any. what am i doing wrong?\n\n**5.** I have fonts with light, medium, bold, etc. When turning them on it doesn’t seem to recognize the whole set some are missing. I have read through many posts and the manual can only get it right with luck it seems. help?\n\n**6.** When typing with the fonts and the weights do show up there is for example a line of text in bold and a line in regular. When they print, they come out the same, either both bold or both regular… WTF?\n\nThanks for your help in advance\n\n{Moderator: neutura. it was suggested that numbers be added to your questions to assist in answering your questions. hopefully you don’t mind. miss tiffany}\n\n",
+  "author": "<a href=\"user/5892\" title=\"View user profile.\">neutura</a>",
+  "time": "<br>",
+  "uid": "5892",
+  "comments": [
+    {
+      "time": " 9 November, 2005 - 4:58pm",
+      "content": "Going bald isn’t all that bad :-)\n\nWhat apps are you printing with? Many are not OTF savvy.\n\nChrisL\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 5:02pm",
+      "content": "I have tried printing through all adobe apps\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 5:03pm",
+      "content": "Sometimes one of the letters will be bold and the rest regular too!\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 5:06pm",
+      "content": "This particular thing sounds like a cache-ing issue, with the different style having the same font ID. Try flushing the RIP’s cache, and making new versions with different IDs (or just the IDs set to zero should work these days).\n\nhhp\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 5:13pm",
+      "content": "That sounds logical. Pardon my lack of knowledge here but when you get to the settings for font ID’s I have been clicking the import button and it makes these numbers pop up. (It felt important when it did that). Are you saying that I should just leave it alone?\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 5:17pm",
+      "content": "Reply to **4.**  \n_AFAIK, on both Mac and Windows, GPOS (including class) kerning of TrueType flavored OpenType fonts is ignored by all non Adobe applications._ [Thomas Phinney](http://web.archive.org/web/20060501195452/http:/typophile.com/node/16023#comment-93880)\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 5:21pm",
+      "content": "Reply to **5.** & **6.**  \nThis is probably related to incorrect font naming.  \nRead and follow [[Tips / Families] Font Family Naming in FontLab](http://web.archive.org/web/20060501195452/http:/groups.msn.com/FontLab/tipsandtricks.msnw?action=get_message&mview=0&ID_Message=2843)\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 5:33pm",
+      "content": "Just a tip:  \nIf you’re using InDesign to test your fonts, you can generate the files directly into InDesign’s fonts folder (somewhere around _Computer/Applications/Adobe InDesign/Fonts_). InDesign will refresh the fonts instantaneously.\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 5:37pm",
+      "content": "You guys are wicked.\n\nI tried to apply the stuff in tips/families. It did clear up some issues. It looks like I need to get more familiar with the coding part when naming my font. I would give you all the hair I’ve pulled out as a gift but that’s gross…\n\nLast thing. Is there a way to view my fonts IDs and coding to see if I have done it right? For instance, compare it to another font done right?\n\nThanks for the responses.\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 5:43pm",
+      "content": "(I wrote these answers while Mike was posting, so there may be some redundant info.)\n\n_1. Should I test them in fontbook or suitcase I have different results in each._\n\nReinstalling a different version of the same font serially will result in problems because of the various font caches used by OS X. There are several strategies that I know of.\n\nOne is to avoid font managers and install fonts directly into the Adobe’s private Font directory ([startupvolume]/Library/Application Support/Adobe/Fonts/). This means your fonts are only available to Adobe apps, but the apps don’t seem to have cache problems when you use this approach.\n\nAnother strategy is to change the name of your font every time you generate a new version. You can install such fonts any way you like, but it’s an extra step to keep changing the name.\n\n_2. Exporting as .otf. Is there any benefit to .ttf_\n\nIt depends. If you are working with Type 1 curves (beziers) there will be a conversion process when you save as TTF which you don’t have direct control over. Also, hints will be automatically converted to TT instructions, again without your direct control. Neither seems like a good way to test. If you are working in TT curves and building hints with TT instructions, that would be different.\n\n_3. Would like them to be a true cross platform font (reason for using opentype). Is this too lofty of a goal. I have heard of many problems with this. Solutions?_\n\nIt is possible. There are some good tips on the FontLab forum, written by Adam Twardoch. Look in the “Tips” section. Particularly look at the article about naming. (Mike linked to this above.)\n\n_4. My kerning pairs don’t show up when using them in an application. They are as if I didn’t make any. what am i doing wrong?_\n\nIt could be that you have not built a “kern” feature for your font. There is an option to do this automatically when you save an OpenType font. It’s better to do it manually by using Class Kerning. It’s not exactly obvious how to do this. Here is the procedure:\n\nCreate your left and right glyph classes (see the manual on how to do this). Kern the primary glyphs using the Metrics window. IMPORTANT: Make sure you don’t do kerning pairs for any other glyphs. Do “Kerning Assistance…” from the Tools menu. Click on the “Apply and Save” button. Now you will have your “kern” feature. You need to do this whenever you change the kerning.\n\nAn additional step if you have more than 100 class kerning pairs: Insert “subtable;” about every 100 lines in the kern feature definition. If you don’t, you will get erratic kerning in non-Adobe applications. I don’t know why this is, but it works.\n\nOne more thing: The old-style kerning table is ignored in CFF OTF fonts.\n\n_5. I have fonts with light, medium, bold, etc. When turning them on it doesn’t seem to recognize the whole set some are missing. I have read through many posts and the manual can only get it right with luck it seems. help?_\n\nSee Adam’s article on naming mentioned above.\n\n_6. When typing with the fonts and the weights do show up there is for example a line of text in bold and a line in regular. When they print, they come out the same, either both bold or both regular… WTF?_\n\nI’m not sure, but it is probably a caching issue. The methods I explained in my answer to question #1 should help with this.\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 5:45pm",
+      "content": "_Last thing. Is there a way to view my fonts IDs and coding to see if I have done it right? For instance, compare it to another font done right?_\n\nFont ID’s are not used anymore, except in some cases by older Mac OS’s. Only the names are used.\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 6:01pm",
+      "content": "What a font of information! Or is that fount?\n\nThanks eveybody. I am sure I will benefit from this advice too!\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 6:01pm",
+      "content": "VERY helpful  \nMark,\n\nI have been doing it as prescribed minus the apply and save function. (probably why they do not show up) I am using CFF OTF. You mentioned old-style kerning tables. Thats not something I could inadvertently create is it?\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 6:30pm",
+      "content": "About FOND IDs:  \n_As of this writing [01-March-1991], nearly all major applications identify families by name, and since Font/DA Mover and System 7.0 renumber conflicting families when copying fonts, there should never be confusion except when using newer fonts on old software which references by number._ [Apple Technical Note](http://web.archive.org/web/20060501195452/http:/developer.apple.com/technotes/te/te_02.html)\n\nSo, as long as the number you put in the field next to the script selected is within the range (see image), you’re safe.\n\n ![](http://web.archive.org/files/fond_id.png)\n  \nTip: Fontlab will automatically generate a random number within the script’s range, when you switch between scripts.\n"
+    },
+    {
+      "time": " 9 November, 2005 - 6:33pm",
+      "content": "The kerning table/kern feature thing gave me problems for a while when I first was using FontLab a year or two ago and generating OT fonts.\n\nMy understanding is that kerning tables are not saved with CFF OTF fonts, although I think it is possible. Even so, you don’t want to do it.\n\nAlso, look at your kern feature after it is generated. If you see any pairs which directly reference glyphs. For example:\n\n&nbsp;&nbsp;pos A T -30;\n\ninstead of\n\n&nbsp;&nbsp;pos @\\_kernlA @\\_kernrT -69;\n\n\\_kernlA and \\_kernrT are classes; A and T are just glyph names. For reasons I don’t understand, if any entries in your kern feature are NOT classes, there will be problems in some applications. The way to remove the non-class pairs is to go through your kerning pairs (open a Metrics window; click on the little K to activate kerning; click on the “Kerning Dialog” button to the right of the button with the red X) and delete any pairs in which either side is not the primary glyph of a class (that’s the one which comes first in the class and has a tick mark [‘] next to it).\n\nAfter doing this, redo the Apply and Save thing. Keep doing this until you only have class-based kerning pairs in the kern feature.\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 6:36pm",
+      "content": "Font cache cleaner: [Font Finagler](http://web.archive.org/web/20060501195452/http:/homepage.mac.com/mdouma46/fontfinagler/)\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 6:39pm",
+      "content": "There is one other strategy with regard to font caches in OS X: Using a utility to clear the caches. Font Finagler will do this as will Font Explorer X. It works, but it has a big drawback in that you have to restart every time you do it. If you are doing a lot of change/test cycling, this can be very annoying and time-consuming. I don’t recommend it, especially because there are easier methods, like the ones I mentioned earlier.\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 6:40pm",
+      "content": "Brilliant!\n\nIt looks like I am on the right track to solving my issues. When comes to making fonts it feels like the days when 10 people in the world knew what html was.  \nThanks Mike for the final clarification.\n\n"
+    },
+    {
+      "time": " 9 November, 2005 - 9:18pm",
+      "content": "It is very much like those days, unfortunately. We’re on the new font frontier, cowpokes. Saddle up and watch for raiders!\n\nT\n\n"
+    },
+    {
+      "time": " 10 November, 2005 - 8:30am",
+      "content": "Let’s just hope that somebody like David Siegel doesn’t come along and write “How to Create Killer OpenType Fonts.” It would take years to recover.\n\n"
+    }
+  ]
+}

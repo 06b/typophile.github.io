@@ -1,0 +1,54 @@
+{
+  "id": "40005",
+  "title": "Font problem on Leopard - please help me............! somebody, anybody?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Does anyone know what the hell to do with this message?\n\n'FOND' font association usability\n\nThe font Arial MT LT worked fine before..... my client is insisting on using it, I am stuck!  \nany help appreciated!  \nthanks\n\n",
+  "author": "ninabasil",
+  "time": "12 Dec 2007 — 2:44am",
+  "uid": "24971",
+  "comments": [
+    {
+      "time": "12 Dec 2007 — 3:20am",
+      "content": "Hi Nina,  \nfellow sufferers, though no solution/explanation so far:  \n [Font not loading in Leopord](http://web.archive.org/web/20150317234122/http:/discussions.apple.com/message.jspa?messageID=5803357)  \n [Font installation issue with Leopard](http://web.archive.org/web/20150317234122/http:/discussions.apple.com/thread.jspa?messageID=5835682)  \n [After installing Leopard, Futura Extra Bold is not working.](http://web.archive.org/web/20150317234122/http:/forums.creativecow.net/thread/71/858573)\n\nWhich format is your font?\n\n"
+    },
+    {
+      "time": "12 Dec 2007 — 10:08am",
+      "content": "Please file bugs if you are able (or AppleCare) against Leopard whenever you encounter problems such as these. Try to include the offending font. I notified the responsible engineers and they are now investigating.\n\n"
+    },
+    {
+      "time": "12 Dec 2007 — 3:11pm",
+      "content": "Failing the \"'FOND' font association usability\" test probably means that the font has no outlines but only bitmaps. There are some known problems with such fonts on Leopard which we hope to address in a future release. In general, however, bitmap-only fonts don't work in all situations in Mac OS X and it would be best to switch to a TrueType, PostScript, or OpenType version of the font.\n\nAs Dan says, if you suspect there is a problem with the font validation engine used by Font Book or with font activation, please file a bug or send Apple feedback and include the font. Even if we know which validation test is involved, it's hard for us to track down any problems without having a copy of the font itself which triggers it. The following URLs are the places to start:\n\n[http://developer.apple.com/bugreporter/bugrptform.html](http://web.archive.org/web/20150317234122/http:/developer.apple.com/bugreporter/bugrptform.html \"http://developer.apple.com/bugreporter/bugrptform.html\")  \n [http://developer.apple.com/faq/bugreporting.html](http://web.archive.org/web/20150317234122/http:/developer.apple.com/faq/bugreporting.html \"http://developer.apple.com/faq/bugreporting.html\")  \n [http://developer.apple.com/bugreporter](http://web.archive.org/web/20150317234122/http:/developer.apple.com/bugreporter \"http://developer.apple.com/bugreporter\")  \n [http://www.apple.com/feedback/macosx.html](http://web.archive.org/web/20150317234122/http:/www.apple.com/feedback/macosx.html \"http://www.apple.com/feedback/macosx.html\")\n\n"
+    },
+    {
+      "time": "12 Dec 2007 — 4:30pm",
+      "content": "Thanks for those links!\n\nChrisL\n\n"
+    },
+    {
+      "time": "12 Dec 2007 — 4:31pm",
+      "content": "Any further word on when opentype support will be improved in the language support arena by Apple?\n\nChrisL\n\n"
+    },
+    {
+      "time": "13 Dec 2007 — 3:06am",
+      "content": "tseng,\n\nI have 2 quick questions related to your response to this issue, as you posted it on one of the boards in Florian's links above. To whit--\n\nI fetched Rezilla as you recommended, was able to open an offensive Type 1 bitmap suitcase, and delete superfluous bitmaps. No problem. Now, my two quick questions:\n\n1. How do I save these changes to a new file that Mac OS recognizes as a bitmap suitcase? The Rezilla documentation is weak, so I couldn't figure it out. I did a \"Save As\" and it wants to save the edited suitcase as a .rsrc file. I did, changed the extension to .bmap, but no dice--the OS still does not see it as a suitcase.\n\n2. In the suitcase, when it is opened, there are also a number of NFNT resources. Only ID numbers are provided (no names). I don't know what these numbers represent, I only recall from the old days that NFNT has something to do with fonts (blushes...) Do I need to do anything with these as well, and if so, how?\n\nThanks for your help..........(and yes, we need the system to let us open bitmap suitcases again a-la earlier versions of the OS. Or have Apple write a little utility app that does the same thing, a-la the old Font DA Mover.)\n\n"
+    },
+    {
+      "time": "13 Dec 2007 — 9:00am",
+      "content": "Hey Chris-\n\nAs far as improving OpenType support, we will be improving Arabic shaping in CoreText and general feature handling but, there are no immediate plans to add specific shaping engines (we realize of course they will certainly need to be eventually written). Which scripts & languages were you most interested in seeing added?\n\nDan\n\n"
+    },
+    {
+      "time": "13 Dec 2007 — 10:10am",
+      "content": "Ryan:\n\n1. The file won't be recognized as a suitcase unless it has the right file type. Check Rezilla to see if it will let you set the file type to FFIL. Otherwise, you'll need to install the developer tools and use:\n\nSetFile -t FFIL\n\nYou may want to give it the extension \".suit\", but that shouldn't be necessary.\n\n2. Don't worry about the extra NFNTs. They're harmless, and it's too much trouble to track down the ones you don't need. They're the places where the bitmaps actually live.\n\n"
+    },
+    {
+      "time": "14 Dec 2007 — 5:55am",
+      "content": "Got it tseng, it works now. I just grabbed a fileinfo freeware tool from versiontracker, used it to change rezilla's modded suitcase file type to FFIL and creater to DMOV, and bingo, success.\n\nThanks.\n\n"
+    },
+    {
+      "time": "26 Sep 2012 — 8:55am",
+      "content": "JUST discovered this amazing site thanks to experiencing the same problem with a font called 'Function'.\n\nThe problem I'm having however is when I try to install Rexzilla on OSX 10.8.2 I get the following error: \"You can’t open the application “Rezilla” because PowerPC applications are no longer supported.\"\n\nIs there an alternative tool available that has the same effect described by tseng?\n\nThanks!\n\n"
+    }
+  ]
+}

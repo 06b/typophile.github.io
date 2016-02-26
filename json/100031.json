@@ -1,0 +1,48 @@
+{
+  "id": "100031",
+  "title": "can you \"force\" optical kerning in a font? (fontographer)",
+  "forum": "General Discussions",
+  "tags": [
+    "fontographer",
+    "General Discussions",
+    "optical kerning"
+  ],
+  "content": "Hi,\n\nI am trying to \"fix\" a font in fontographer, the problem is that the characters are set too wide apart and unless I turn on optical kerning in PS/InD it looks like a disaster. Since I have to pass the font to the client to use for titles in presentations etc. I want to try to fix these issues so they don't have to manally set these properties, and most of the software they use (PPT etc) don't even have those options.\n\nI managed to fix the tracking issue, but not the kerning - is it possible to somehow \"force\" optical kerning when I export the modified font?  \nI'm not that good at Fontographer so I'd try to avoid manually setting the kerning for all characters + I think it would take me 2 weeks to finish it and it would still look bad.. :)\n\nThanks in advance!\n\n",
+  "author": "nchi",
+  "time": "25 Jan 2013 — 2:37am",
+  "uid": "177581",
+  "comments": [
+    {
+      "time": "25 Jan 2013 — 2:53am",
+      "content": "P.S. I tried the Auto Kern option but I see absolutely no difference in the output font.\n\n"
+    },
+    {
+      "time": "25 Jan 2013 — 8:31am",
+      "content": "Unless there's an unusual technical issue, it sounds like you just need to sit down and space the font properly... Not everybody's cup of tea, and it takes more time/expertise than many people think.\n\nhhp\n\n"
+    },
+    {
+      "time": "25 Jan 2013 — 3:26pm",
+      "content": "As far as I know, no.\n\nHere's a trick I don't use, but does work resonably well. Find a font that looks similar, but is spaced and kerned much better.\n\nCopy the left and right sidebearing values into your font. Not the widths, the sidebearings. With Fontographer, I believe you'll have to do this by hand, but it won't take as long as you think.\n\nNow import the kerning from that parent font.\n\nIf you don't have much experience, you'll be a lot closer than if you just start from scratch.\n\nAs for manually refining the kerning, use a long string of characters. I put something like\n\nthe pae **aa** eiling evehnory\n\nin the metrics window. Get the fit of the characters other than the pair show in bold at least reasonable. The pair I've shown in bold are the pair I'm kerning. (You don't use bold, of course.) So, to work on \"a\", keep advancing the second (shown in bold) character from \"a\" to \"z\", changing the kerning as needed. Now change the first shown-in-bold to \"b\" and repeat the process.\n\nAs you go, you may see an opportunity to cut down of the number of kern pairs by changing a sidebearing value. If you do, you'll have to rekern that character...\n\nYou'll also want to include punctuation with each alpha character, and punctuation with itself (period+quotedblright, for example).\n\nSpend time on the numbers -- pretend you're setting three digit page numbers, or four digit dates. Have a couple short words with the wordspace in the metrics window along with the numerals.\n\nIt sounds daunting, but I can kern all the alphas, upper & lower case, the punctuation, and the numbers in about 6-8 hours. Not a short period of time, but not two weeks, either.\n\nGenerate your font, set a page or two of text at a size that will be typical of the size used, and print that out. Fix anything obviously wrong.\n\nThat should be a pretty good start.\n\n"
+    },
+    {
+      "time": "25 Jan 2013 — 9:12pm",
+      "content": "So as noted above, \"no\", there's no way to force optical kerning as the default.  \nAt first I thought you wanted to modify the kerning in the font, which would be easy enough to do with a python script in Robofont or Glyphs or Fontlab.\n\nBut if the kerning is bad or non existent, you need to fix it manually.\n\nI would suggest that you sub it out to someone to do the kerning for you. There are many folks here who could do it quite quickly, and it'd be worth your while, i think. Although truth be told, I'm not one of them. ;)\n\nJason C\n\n"
+    },
+    {
+      "time": "26 Jan 2013 — 4:23am",
+      "content": "<cite>There are many folks here who could do it quite quickly, and it'd be worth your while</cite>\n\nTrue, I suppose. But like other tradesmen, we charge a fair bit. What does it costs to get your furnace fixed when it's Sunday morning and 20-below outside?\n\nThis may not be the time, but some of these tradesmen skills are worth having, and not only because the work costs if you sub it out.\n\n"
+    },
+    {
+      "time": "26 Jan 2013 — 6:30am",
+      "content": "> we charge a fair bit.\n\nLike how much would you charge to have a plain font with let's say 200 chars fully spaced and kerned?\n\nA skill is worth having yourself if:  \n- You need it often enough.  \n- You have no natural impediment against it; I've encountered people who simply don't have what it takes to do spacing properly and/or really hate thinking in the ways a spacer needs to. Everybody needs help with something sometimes.  \n- It makes you happier!\n\nhhp\n\n"
+    },
+    {
+      "time": "26 Jan 2013 — 7:55pm",
+      "content": "Yeah, I didn't imply that it'd be cheap, but worth doing. Although if the font needs to be respaced as well as kerned, even the \"pros\" might not be able to hit your deadline\n\n"
+    },
+    {
+      "time": "26 Jan 2013 — 8:20pm",
+      "content": "Thanks to experience, faster = cheaper than one might think...\n\nhhp\n\n"
+    }
+  ]
+}

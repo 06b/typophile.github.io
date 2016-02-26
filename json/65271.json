@@ -1,0 +1,54 @@
+{
+  "id": "65271",
+  "title": "Designing a font for @font-face",
+  "forum": "Design",
+  "tags": [
+
+  ],
+  "content": "Hey Typophiles,\n\nThis is my first post on here but I’ve been reading the forums a bit for the past year or so.\n\nAnywho, I plan on creating a typeface for use on the web and I haven’t ever done that...sooo I was wondering if anyone had some advice from experience and examples if possible.\n\nI’ve been examining Verdana’s development and other current web standard typeface features, but I’m just looking for some things to keep in mind when designing this typeface.\n\nThis typeface will be used as body copy and that will be its primary use. I might extend it later but right now the plan is just to develop a nice typeface for use on a website I’m creating.\n\n",
+  "author": "<a href=\"/web/20100103043243/http://typophile.com/user/49782\" title=\"View user profile.\">mark.johnson</a>",
+  "time": "<br>",
+  "uid": "49782",
+  "comments": [
+    {
+      "time": " 11.Dec.2009 6.38am",
+      "content": "Be forewarned that you’re going to get discouraged and wonder why you’re putting so much effort into what seems like so little reward.\n\nI suggest ignoring this voice and keep plugging away.\n\n"
+    },
+    {
+      "time": " 11.Dec.2009 11.20am",
+      "content": "haha awesome thanks.\n\n"
+    },
+    {
+      "time": " 31.Dec.2009 9.24am",
+      "content": "I was looking at Verdana and Georgia the other day as I am tentativly looking to go in this direction - though TT hinting is a world of pain I have managed to avoid so far...\n\nanyway... I noticed how **round** they both are.\n\nand this has just reminded me of David Crossland’s Cantarell which is a @font-face compatible font on  \n [Font Squirrel](http://web.archive.org/web/20100103043243/http:/www.fontsquirrel.com/fonts/Cantarell)\n\nDoes anyone have any pointers as to how to match a known pixel height to a UPM for very accurate alignment of line to pixles?\n\n/m\n\n"
+    },
+    {
+      "time": " 31.Dec.2009 10.10am",
+      "content": "If you’re making a pixelfont, set the UPM to 1000 and use a grid of 125 for everything (including kerning, vertical metrics, etc.) so when you set the point size to 8 at 72 dpi (a pseudo-standard of sorts) it all clicks.\n\nhhp\n\n"
+    },
+    {
+      "time": " 31.Dec.2009 10.57am",
+      "content": "I will try this! Cheers hhp!\n\n"
+    },
+    {
+      "time": " 31.Dec.2009 4.56pm",
+      "content": "_point size to 8 at 72 dpi (a pseudo-standard of sorts)_\n\nWhat sort of pseudo-standard?\n\n"
+    },
+    {
+      "time": " 31.Dec.2009 5.11pm",
+      "content": "There isn’t a lot of pixelfont action these days, but when they were “in” the accepted way to make them render out predictably was to shoot for 8 point (at 72 dpi) no matter how many pixels high the font actually was. For example my three sizes of Mana\\* all need to be set at 8 to come out right (you just need to determine the leading accordingly). Yes, it’s a hack, but it makes -or at least made- things as controllable as possible.\n\n\\* [http://www.themicrofoundry.com/manademo/](http://web.archive.org/web/20100103043243/http:/www.themicrofoundry.com/manademo/ \"http://www.themicrofoundry.com/manademo/\")\n\nhhp\n\n"
+    },
+    {
+      "time": " 1.Jan.2010 6.13am",
+      "content": "Wait, so that means each little square that makes a pixel needs to be 125×125 units, no matter what number of pixels you need?\n\n"
+    },
+    {
+      "time": " 1.Jan.2010 8.56am",
+      "content": "Yes.\n\nOf course if your font is very large (which rarely makes sense though) you get in trouble, so you might use 20. Nothing in between works well\\* because Windows uses a nominal dpi of 96, so you want 75% (72/96) of the number to result in an integer. The problem with anything besides 8 is that the user needs to be aware of what size to use for it to click.\n\n\\* Remember, it has to divide 1000 evenly.\n\nhhp\n\n"
+    },
+    {
+      "time": " 1.Jan.2010 8.58am",
+      "content": "Whoa, brain-tangling stuff! Thanks.\n\n"
+    }
+  ]
+}

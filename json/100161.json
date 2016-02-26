@@ -1,0 +1,80 @@
+{
+  "id": "100161",
+  "title": "Bitmap Rasterization",
+  "forum": "Build",
+  "tags": [
+    "anti-alias",
+    "autohint",
+    "bitmap",
+    "Display",
+    "font",
+    "hinting",
+    "raster",
+    "screen",
+    "truetype",
+    "ttf",
+    "Build"
+  ],
+  "content": "Hi there,\n\nI’ve experience a quite fuzzy thing: Exporting a font two times from _FontLab_, no known changes in the output settings.  \nThe 1. font is the red text below, the 2. is the white text.  \nThe only thing that was changed in between the 2. font-exports was the numbers ( **0 – 9** ) and the punctuation ( **,.;!?“”** …) not displayed here.\n\nIt appears to be that now the Bitmaps are not the same anymore (especially the horizontal stems in **a, e, s** and **h** in the attached 300% example).  \n_Anti-aliasing method_ is set to _sharp_ in _Photoshop_, but this it seems has nothing to do with the different jittering in the result.\n\nAny help or hint is highly appreciated!\n\n| Attachment | Size |\n| --- | --- |\n| [Raster\\_Bildschirmfoto 2013-01-29.png](http://web.archive.org/web/20150415051753/http:/typophile.com/files/Raster_Bildschirmfoto%202013-01-29.png) | 12.54 KB |\n\n",
+  "author": "jum",
+  "time": "29 Jan 2013 — 2:41am",
+  "uid": "43906",
+  "comments": [
+    {
+      "time": "29 Jan 2013 — 8:07am",
+      "content": "If you are making a font and testing its quality in Photoshop, you're doing the wrong thing. Photoshop was never intended to be used for typesetting. Use a page layout program such as InDesign or an illustration program such as Illustrator to test your fonts; they don't rasterize the type.\n\n"
+    },
+    {
+      "time": "29 Jan 2013 — 9:03am",
+      "content": "Thanks for your reply, George.  \nIn fact i do need to display the font properly in _Photoshop_ as it is for a digital screen. The **outlines** still are perfectly matching – only the **bitmaps** are rendered differently.  \nI think there is something wrong with the fonts **weight** and therefore its final interpretation as **bitmaps** , still searching …\n\n"
+    },
+    {
+      "time": "29 Jan 2013 — 9:46am",
+      "content": "OK, I understand what you're doing now. I come from the print world so don't deal much with screen issues, so I don't have a solution for this.\n\n"
+    },
+    {
+      "time": "29 Jan 2013 — 9:52am",
+      "content": "The characters you added might be affecting either the vertical bounds or the hinting. If it's the former, try making the leading in Photoshop constant (although there are more robust -but trickier- fixes that can be done within FontLab); if it's the latter make sure you're not doing some auto-hinting before export (or just turn the hinting off).\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Jan 2013 — 10:23am",
+      "content": "@George No worries, prints not dead ;)  \n@hrant Alright, it seems its the interpretation of the vertical bounds and connected to that the hinting.  \nI messed a test-file up with _autohinting_, which worsened the effect – I will try to turn off the hinting all over.  \nThe source of this error is not PS. The displayed font is generated digitally on a screen, so no work around possible.\n\n"
+    },
+    {
+      "time": "4 Feb 2013 — 9:37am",
+      "content": "Generally one could say, the bitmaps look terrible. When _previewing_ the Font on a **PC** the numbers _(PC\\_Preview\\_2013-02-04\\_4375.png)_, you get an impression of how badly the glyphs are rasterized – yet the outlines look OK. Generating Bitmap sizes for: 8, 10, 12, 23, 24, 27, 28, 32, 48, 96.\n\n ![](http://web.archive.org/web/20150415051753im_/http:/typophile.com/files/PC_Preview_2013-02-04_4375.png)\n\n"
+    },
+    {
+      "time": "4 Feb 2013 — 2:34pm",
+      "content": "Just glad you landed safely without your heat shield burning up.\n\n"
+    },
+    {
+      "time": "4 Feb 2013 — 6:38pm",
+      "content": "Did you say that you'd turned off hinting when generating the image embedded in your post of Fe 4 9:37am?\n\nBecause that's clearly still a hinting issue. I suppose I should ask if this is otf or ttf? I assumed otf.\n\n"
+    },
+    {
+      "time": "4 Feb 2013 — 8:31pm",
+      "content": "I'm no expert, but I think Photoshop does its own thing when it comes to rasterizing it for the screen. Are you sure both words with set in the exact same spot in the PhotoShop file?\n\n"
+    },
+    {
+      "time": "5 Feb 2013 — 7:09am",
+      "content": "@bbg lol! (had to read this twice comparing the image)  \n@jasonc yes, **hinting** was turned off … i will try and error a couple of settings with _autohinting_ and while exporting _Preferences / TrueType/OpenType TT (.ttf) / Autohint font_ switched on and off. It’s .ttf with lotsa opentype features.\n\n ![](http://web.archive.org/web/20150415051753im_/http:/typophile.com/files/Autohint_font_5960.gif)\n  \n@aluminum Photoshop just displays the malfunction the font’s got when it comes to pixels. Could have been a possible error, but all type is set on full pixels. \n"
+    },
+    {
+      "time": "5 Feb 2013 — 6:32pm",
+      "content": "@jum: note that the window you are showing us is your preferences for opening ttf fonts, not generating them. In order to turn off autohinting when generating a font, go down a few options to \"Generating OpenType & TrueType\",  \nto the subcategory \"TrueType/OpenType TT\", and uncheck the export hinted TrueType fonts\" box.\n\nSorry if this is restating something you've already figured out.\n\nJason C\n\n"
+    },
+    {
+      "time": "6 Feb 2013 — 3:03am",
+      "content": "@jasonc ouch, you are right! anyway the font still looks crap in a windows preview.\n\n"
+    },
+    {
+      "time": "25 Feb 2013 — 1:52am",
+      "content": "Now this looks helpfull: [http://alistapart.com/column/font-hinting-and-the-future-of-responsive-t...](http://web.archive.org/web/20150415051753/http:/alistapart.com/column/font-hinting-and-the-future-of-responsive-typography \"http://alistapart.com/column/font-hinting-and-the-future-of-responsive-typography\")\n\n"
+    },
+    {
+      "time": "21 Mar 2013 — 10:36am",
+      "content": "And this is how you do it: [http://www.fontsurgery.com/fonts/font-dev/hinting/autohinting-with-fontl...](http://web.archive.org/web/20150415051753/http:/www.fontsurgery.com/fonts/font-dev/hinting/autohinting-with-fontlab-studio-5/3/ \"http://www.fontsurgery.com/fonts/font-dev/hinting/autohinting-with-fontlab-studio-5/3/\")\n\n"
+    }
+  ]
+}

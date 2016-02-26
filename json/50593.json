@@ -1,0 +1,114 @@
+{
+  "id": "50593",
+  "title": "While we wait for @font-face, there's typeface.js",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "Hi, I’m working on a project called typeface.js, which aims to do font rendering in the browser using javascript, \\<canvas\\>, and VML. With that functionality, we can avoid having to use images or flash to display graphic text on the web.\n\nThe idea is that you should be able to take an open-source font that’s free to redistribute, then convert that to a typeface.js font (basically the outline information and metadata in JSON format), and then use that font on your site just like normal, with plain HTML and CSS.\n\nIt even works. Here’s the site for the project, and it uses its own library to draw its own graphic text:\n\n[http://typeface.neocracy.org](http://web.archive.org/web/20081023030830/http:/typeface.neocracy.org/ \"http://typeface.neocracy.org\")\n\nThere are a few cool things about it, it seems to me. One is that you get consistent rendering across platforms, whether you’re talking about Windows or Mac or Linux, or whatever else, as long as there’s or VML.\n\nAnother nice thing is that if you’re willing to forego that consistency, once we have cross-browser support for @font-face (if that ever happens), all you’ll need to do is substitute some @font-face rules for the call to load typeface.js and its fonts, and that should be all the change that’s needed.\n\nAnyway, think this’ll work?\n\n [‹ Akzidenz Grotesk roots](http://web.archive.org/web/20081023030830/http:/www.typophile.com/node/4567 \"Go to previous forum topic\") [Laser Printer - dpi question ›](http://web.archive.org/web/20081023030830/http:/www.typophile.com/node/33734 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081023030830/http://www.typophile.com/user/38348\" title=\"View user profile.\">davidchester</a>",
+  "time": "<br>",
+  "uid": "38348",
+  "comments": [
+    {
+      "time": " 16.Oct.2008 8.20pm",
+      "content": "I don’t think you’re going to get many type industry people to support this when you use a look-alike of a well-known commercial typeface (Optima), which was designed by Hermann Zapf, a type designer who almost stopped designing typefaces because of people copying his type designs.\n\n"
+    },
+    {
+      "time": " 16.Oct.2008 8.34pm",
+      "content": "what Mark said.\n\n"
+    },
+    {
+      "time": " 16.Oct.2008 8.40pm",
+      "content": "Despite raising hackles with two of the three types showcased as Mark points out... it looks like a lot of excellent work went into this. A couple of thoughts that will really encourage support:\n\n•&nbsp;Can you protect the .js file so it is server specific and cannot be linked-to?  \n• Can you alter your conversion tool to respect the embedding preferences already included in fonts? ie if no embedding, then no conversion.  \n• Can you make the drawn text selectable/copyable?\n\nWhat is a typical bandwidth hit to implement this?\n\nThanks for your efforts.\n\n"
+    },
+    {
+      "time": " 16.Oct.2008 8.49pm",
+      "content": "That’s impressive! Not sure if it’s any better/worse that good ol’ sIFR, but that’s some impressive work.\n\n"
+    },
+    {
+      "time": " 16.Oct.2008 10.22pm",
+      "content": "I don’t really know enough to comment from a technical standpoint, and I’m not sure that you’ll be able to gain traction in the face of Flash and @Font-Face. But it’s a pretty brilliant idea, and reads well even without hinting. Does it kern?\n\n"
+    },
+    {
+      "time": " 17.Oct.2008 2.36am",
+      "content": "is the resulting text still ’live’? if not, i don’t see the improvement over static images.\n\n"
+    },
+    {
+      "time": " 17.Oct.2008 4.57am",
+      "content": "That seems like a fair point about the look-alike fonts — I’ll probably swap them out for something more appropriate.\n\n<cite>Can you protect the .js file so it is server specific and cannot be linked-to?</cite>\n\nI can put up some hurdles at least, but I haven’t look too far into that yet.\n\n<cite>Can you alter your conversion tool to respect the embedding preferences already included in fonts? ie if no embedding, then no conversion.</cite>\n\nThe conversion tool does respect embedding preferences.\n\n<cite>Can you make the drawn text selectable/copyable?</cite>\n\nAt least in Firefox (and maybe in Safari too), you can actually select and copy the text, but you just don’t see the text being highlighted as you select. It might be possible to add support for highlighting.\n\n<cite>What is a typical bandwidth hit to implement this?</cite>\n\nA typeface.js font ends up being usually a few tens of kilobytes, so not too bad at all. It will be cached by the browser, and so visitors should only need to grab it on their first page load.\n\n<cite>Does it kern?</cite>\n\nThere’s no support yet for custom hinting or kerning, but it’s certainly possible to add those features in with some work.\n\n"
+    },
+    {
+      "time": " 17.Oct.2008 6.51am",
+      "content": "I think kerning would be a key feature to have. That and giving the maker of the font at least the option to not to give it away for free.\n\n"
+    },
+    {
+      "time": " 17.Oct.2008 7.22am",
+      "content": "Some people asked the advantage it has over flash. And that’s simply for people on devices that don’t use flash. While Opera Mobile supports it, Opera Mini doesn’t, but does support javascript.\n\nBTW; I tried it with Ælbrocan, and got some interesting results. Does it have a complexity limit or what might have caused the difference between [http://coruna.elahorcado.net/js\\_test.html](http://web.archive.org/web/20081023030830/http:/coruna.elahorcado.net/js_test.html \"http://coruna.elahorcado.net/js\\_test.html\") and [http://coruna.elahorcado.net/frakturTest.html](http://web.archive.org/web/20081023030830/http:/coruna.elahorcado.net/frakturTest.html \"http://coruna.elahorcado.net/frakturTest.html\") (the latter uses font-face designation and so needs Safari or similar)\n\n_«El futuro es una línea tan fina que apenas nos damos cuenta de pintarla nosotros mismos». (La Luz Oscura, por Javier Guerrero)_\n\n"
+    },
+    {
+      "time": " 17.Oct.2008 9.04am",
+      "content": "<cite>is the resulting text still ’live’? if not, i don’t see the improvement over static images.</cite>\n\nTremendous bandwidth and labor savings are big advantages. For example, a newspaper site could have all headlines in its own custom headline face as soon as a story goes live with no need for a person to generate and/or check an image, and not incur the cost of readers downloading every single headline image. For a site like NYTimes.com or ESPN.com this could be a great way to reinforce a brand at little cost.\n\n"
+    },
+    {
+      "time": " 17.Oct.2008 11.06am",
+      "content": "It works beautifully on the iPhone (no Flash).\n\n"
+    },
+    {
+      "time": " 18.Oct.2008 9.19am",
+      "content": "I’m on firefix/windows and the text is not selectable.\n\n"
+    },
+    {
+      "time": " 20.Oct.2008 6.44am",
+      "content": "“• Can you alter your conversion tool to respect the embedding preferences already included in fonts? ie if no embedding, then no conversion.”\n\nI don’t think this is the worst idea I’ve ever heard, but close. “Embedding preferences”? Embedding permissions! are labels on fonts for THAT PURPOSE, and no other(s). Since this is not embedding, and has little to do with PDFs, I don’t understand, yet, why folks think embedding permissions can be used for web font linking. But I’m finding out.\n\nCheers!\n\n"
+    },
+    {
+      "time": " 20.Oct.2008 11.02am",
+      "content": "What the hell is Optimer... is it the same as Musicer? You are right Mark, Zapfer will not be happy!\n\nMichael\n\n"
+    },
+    {
+      "time": " 20.Oct.2008 3.12pm",
+      "content": "David Berlow, thank you for the compliment!\n\nAs a maker of type, I think font linking is a bad idea. The winning “solution” to font choice on the web is coming, and I hope font-linking aint it. By my suggestions, I’m trying to move this solution to a more “embedded-like” (EOT) option, which I prefer. That is why I am advocating for it to be domain/server specific. That is also why I wanted embedding permissions (!thankyou) to be respected. It would be nice to have a time machine, go back and create a permission for font linking, then journey back and ask David Chester to respect that. Or you could hope his users read your EULA.\n\n"
+    },
+    {
+      "time": " 20.Oct.2008 4.07pm",
+      "content": "Well, as David says, if I allow my fonts to be embedded in PDF documents, that doesn’t mean I allow them to be converted into .js fonts/\n\nSpecific “.js” permissions would be needed.\n\nIs there some way to include information in a font which permits it to work only at a specified URL?\n\n"
+    },
+    {
+      "time": " 20.Oct.2008 4.42pm",
+      "content": "Do we really need to complicate EULAs to that extent?\n\nI’m still trying to figure out why PDF embedding is a big deal. I don’t even want to bother with flash and js and css and...\n\n"
+    },
+    {
+      "time": " 20.Oct.2008 5.12pm",
+      "content": "David Chester was kind enough to ask for input from the type community. Rather than respond with a squabble about embedding vs pdf vs blah blah , I think the feelings could be summarized thusly:\n\nType Designers:  \n• Please don’t make your solution a vehicle for freely distributing our fonts.  \n• If you can prevent (or strongly inhibit) theft of our fonts, your solution becomes much more attractive to most foundries.\n\nType Users:  \n• Thank you. It is nice to have alternative NOW in situations when Flash (SIFR) wont do.  \n• Please add kerning  \n• Please make all browsers selectable  \n• Please keep working on the features you’re planing!\n\nAluminum: I’m with you. If readers have to buy fonts to view PDFs: what is the point of a Portable Document Format that isn’t portable?\n\nNick: Specific .js permissions would be needed — Hence the need for the time machine in my comment. Such permission doesnt’ and probably never will exist.\n\n"
+    },
+    {
+      "time": " 20.Oct.2008 5.13pm",
+      "content": "This is imo pretty revolutionary, but I do agree on the permission debate. I think rendering happens on the machine of the user so they would really need the font file to make this work, right? I highly doubt this could actually work with ’real’ fonts, because of the permissions etc. Who’s going to give away his fonts for free? This might be the biggest thing to work on atm.\n\nI really love what you’ve done so far!\n\n"
+    },
+    {
+      "time": " 20.Oct.2008 7.06pm",
+      "content": "Very interesting! How widely supported is VML?\n\nT\n\n"
+    },
+    {
+      "time": " 21.Oct.2008 7.36am",
+      "content": "”...font-linking aint it.”  \nBut it’s here already and i t i s n o t going away. You are aware of this are you not?\n\n“By my suggestions, I’m trying to move this solution to a more “embedded-like” (EOT) option”  \nOh. Then you should lobby for doing so without making a format that can ONLY contain fonts.  \nBy my suggestions, I’m trying to move this solution to work with what’s already in place, that’s actually meant as a solution for the problem at hand.\n\n“Or you could hope his users read your EULA.” and...  \nOr, one could want linking permissions, and a EULA to match and then not care unless it was legally appropriate.\n\n“Type Designers:” then “Type Users:”  \nWhat are you talking about in this whole section?\n\n” If you can prevent (or strongly inhibit) theft of our fonts, your solution becomes much more attractive to most foundries.”  \nThis is nowhere, I can’t believe I’m still hearing it — a lot of people are getting lost in thought on preventative solutions.  \nI’m primarily interested in enforcement abilities where it counts, and I think more will join that view.\n\n“If readers have to buy fonts to view PDFs:...”  \nWhat are you talking about? Has anyone ever had this experience?\n\n“Do we really need to complicate EULAs to that extent?”  \nLook, if it is your business to grant licenses to font software in exchange for money, then you have to do the work, write the agreements, and as much as technology allows — to place notices of permissions in the fonts themselves. If it is not your business to grant licenses to font software in exchange for money, or you don’t feel like it, then don’t.\n\nI do not yet believe the founders who have businesses licensing PDF permissions, are truly supportive of “dual purposing” the embedding bit.\n\nCheers!\n\n"
+    },
+    {
+      "time": " 21.Oct.2008 7.58am",
+      "content": "_Do we really need to complicate EULAs to that extent?_\n\nWe should do whatever is most appropriate.  \nThere are severe requirements on licensing major graphics software applications, requiring serial numbers that restrict their use to specific computers, and that is a part of doing business if you’re a graphic designer.  \nWe’re not talking about $4.95 scrapbook script fonts here, but professional font software products that, when a family is licensed for multi-user use, can cost much more than Quark XPress.\n\n"
+    },
+    {
+      "time": " 21.Oct.2008 9.04am",
+      "content": "But nick, if you’re going with that analogy, it’s flawed, as I only need to worry about purchasing the software for myself, not my audience.\n\nIn the end, obviously vendors are free to put whatever license they want on their product and consumers are free to decide to accept it or not.\n\nIt seems that most of the EULA restrictions on fonts have less to do with making more money based on the client, and mainly fears of somehow people copying the fonts. If it’s the latter, than I think that’s a silly thing to dwell upon.\n\nOn the other hand, if there’s money to be made in tiered embedding licenses, then I could at least concede a business argument for it.\n\n"
+    },
+    {
+      "time": " 21.Oct.2008 10.34am",
+      "content": "_I only need to worry about purchasing the software for myself, not my audience._\n\nSoftware is not purchased, it’s too slippery. It’s licensed, hence EULAs.  \nYou need to worry about the terms of the EULA, and the fact that the web sites you design may be breaking it by distributing the software to your audience, or by making it easily available to piracy.\n\n”...a silly thing to dwell upon.”\n\nSo much for fair play and the rights of content creators.\n\n”...money to be made...”\n\nCan’t we frame this discussion in less mercenary and adversarial terms?  \nLet’s move beyond permissions vs. restrictions, profits vs. theft.\n\n"
+    },
+    {
+      "time": " 21.Oct.2008 10.57am",
+      "content": "“Software is not purchased, it’s too slippery. It’s licensed”\n\nLegally, yes. But that’s now how consumers see nor want it. ;o)\n\n“So much for fair play and the rights of content creators.”\n\nTheir rights are granted already via the law.\n\n“Can’t we frame this discussion in less mercenary and adversarial terms?”\n\nThat would be the ultimate goal. Not sure where to start, though.\n\nGoing back to this particular technology, the customer would see it as a nicety as they can now have another option to use a custom font choice.\n\nThe reaction in this thread, though, from the font vendors seems to be that they may not like the idea of people using this technology with their fonts.\n\nIs that an issue? If so, is that an issue for the technology creator (davidchester), the consumer (obeying EULAs) or the font vendor (pricing? enforcement?) to resolve? Can it be resolved? Does it differ than current uses with sIFR and the like?\n\n"
+    }
+  ]
+}

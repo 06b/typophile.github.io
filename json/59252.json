@@ -1,0 +1,62 @@
+{
+  "id": "59252",
+  "title": "how to make several glyphs for the same character?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "hello,\n\ni'm verry new to font making and am stuck on the feature i want to make. there are all glyphs made and in some typing occasions i want them to be different: when i type \"gj\", or \"jj\" or \"yj\" i want them to join in a specific way (j is shorter). should i make a separate glyph of those pairs or should i make different glyphs of the same letters and put some script that says how they should join when follow each other?\n\n",
+  "author": "<a href=\"/web/20100203100313/http://typophile.com/user/45114\" title=\"View user profile.\">gamawaves</a>",
+  "time": "<br>",
+  "uid": "45114",
+  "comments": [
+    {
+      "time": "",
+      "content": "You could make them ligatures, that is two joined letters. Check the internet for them. To make this work in a font, you need to \"program\" this. I have put this between quotes because it is not that hard to do, it is required to make your font in a software package like fontlab, if you need help a lot of people can help (you could already check the manual on their website). But why a jj ligature? Are there words that use jj combinations? In what language?\n\nGood luck\n\n"
+    },
+    {
+      "time": "",
+      "content": "Sidney, thanks for the answer. i use Fontlab and understand that it goes to \"programming\", but i don't know how. if you know those manuals, please show the links.  \nmaybe there are no words with jjjj, but if someone would want to write so, i want text to look the right way. anyway, most important is yj combination. there are some lithuanian words like: lyja, ryja, gyja...\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'm not such an expert on this, but I think you do this:\n\nYou make a new character by going to Glyph -\\> Generate Glyphs. In the top field in the window that appears you can name the new glyph, use something like y\\_j. Open the glyph, and design your yj ligature.\n\nThen go to Window -\\> Panels -\\> OpenType. Click the little + sign on the lower left of the OpenType panel. This creates a new (but empty) opentype feature.\n\nSelect the new feature in the left field of the window, and replace the default:\n\n`feature xxxx {\n  sub by ;\n} xxxx;`\n\nwith:\n\n`feature liga {\nsub y j by y_j;\n} liga;`\n\nIf you have more ligatures, just place them underneath the last one, above the bottom \"} liga;\".\n\n"
+    },
+    {
+      "time": "",
+      "content": "Alec Julien's ligature tutorials on Vimeo:  \n [http://vimeo.com/745129](http://web.archive.org/web/20100203100313/http:/vimeo.com/745129 \"http://vimeo.com/745129\")  \n [http://vimeo.com/679844](http://web.archive.org/web/20100203100313/http:/vimeo.com/679844 \"http://vimeo.com/679844\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "thank you guys, that was exactly what i needed.\n\n"
+    },
+    {
+      "time": "",
+      "content": "In case you are only changing the design of the 'j' and not the letters that precede it, it would make more sense to use contextual alternate (calt) feature.\n\n<cite>Are there words that use jj combinations?</cite>  \nThe Thai Prime Minister Vejjajiva comes to mind. [\"Languages at a Glance\"](http://web.archive.org/web/20100203100313/http:/www.as8.it/linguistics/languages_at_a_glance.html) compiled by Eben Sorkin further provides the Danish hajjæger, the Dutch pijjekker, the English avijja and hajji, the Hungarian ujjak, the Norwegian hasjjag, the Polish trójjęzyczność, and the Swedish nojja.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Ah. Using fonts. My favorite horse. Or perhaps Sancho's donkey? Isn't that a windmill over yonder?\n\nWhether you use ligatures or contextual alternates depends. First of all, only a little current software supports OpenType features. Of those that do, most support ligatures, fewer support contextual alternates.\n\nLigatures may revert to the base characters when a certain tracking value is reached. You may or may not want them to. If not, contextual alternates would be best. If you want the end user to think about whether or not to use them, they are discretionary ligatures (\\*dlig\\*). If you want him/her to take effort to not use them, put them in \\*liga\\*.\n\nCurrently, contextual alternates -- or ligatures -- are a group that is either on or off. That is, you get all or none. If you want several stylistic variations which are independent of each other, put them in stylistic sets -- which even less software supports.\n\nFinally, almost all letter pairs in the Latin alphabet occur. I learned that with King Arthur's mom, suddenly needing to kern Yg (Ygraine).\n\n"
+    },
+    {
+      "time": "",
+      "content": "Jongseong:\n\nThanks for replying to my question, maybe something for a new post: what ligatures and kerning might be needed world wide for the support in different languages?\n\n"
+    },
+    {
+      "time": "",
+      "content": "With the Latin alphabet, it may be more fruitful to wonder which potential troublesome letter pairs we _don't_ have to worry about. As Charles says, almost all letter pairs occur. But yes, this is a topic for another thread.\n\n"
+    },
+    {
+      "time": "",
+      "content": "There are also many Czech words where jj occurs. Typically in words containing prefix nej- (the most): nejjasnější, nejjedovatější, nejjižnější...\n\n"
+    },
+    {
+      "time": "",
+      "content": "_Are there words that use jj combinations?_\n\n[Ujjal Dosanjh](http://web.archive.org/web/20100203100313/http:/en.wikipedia.org/wiki/Ujjal_Dosanjh), Canadian politician of Sikh origin.\n\n"
+    },
+    {
+      "time": "",
+      "content": "thank you all. really, in this case the calt feature is better, because only one glyph should change when it goes after another. when using liga feature i write jjjjjjjj (of course there's no such word, but in such crazy moments i want it to look correct). only first pair goes to right combination and then the third j goes without ligature. with calt feature i made that every j goes in good way no matter how many of them will go.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "64155",
+  "title": "NULL & .null in the same font.",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "NULL & .null in the same font.: if this happens, will something bad occur?\n\nFirst of all, I know NULL is the proper null, not .null or any other kind of null.\n\nOf course, some people will want to chime in and tell me that they think bad things may occur and how it's not to spec but what I want to know is if anyone knows something specifically bad which may occur. Even better, reports of problems which have occurred in fonts with multiple nulls.\n\nAlso: what about the NUL which appear as the first glyph in the MacOS Roman table? What's its function? Can it exist alongside NULL? What's the point of NUL.\n\n",
+  "author": "<a href=\"/web/20100203135428/http://typophile.com/user/14133\" title=\"View user profile.\">typodermic</a>",
+  "time": "<br>",
+  "uid": "14133",
+  "comments": [
+    {
+      "time": "",
+      "content": "NUL is part of the old ASCII character set, (code point 00 in 8 bit hex). It's used in empty strings in programming languages. It basically means \"no data\". NULL is the name for the the equivalent code point in Unicode (0000 in hex).\n\nNot sure where .null comes from. Seems like an aberration. I was just reading something recently (in the OpenType spec, I think) that the only glyph name that is allowed to start with a period is .notdef. I would avoid .null.\n\n"
+    },
+    {
+      "time": "",
+      "content": "So that's a good question, Mark. What is .null? Where did it come from? Why is there an option in Fontlab to add .null? Does anyone know what that's doing there? I don't use it but seeing that option back around 2000 made me think that there must be something good about having .null and some of my earlier fonts still have them.\n\nSo yeah, .null is bad, just do NULL, got it. But still, has anyone heard of a specific problem related to a .null glyph? This typical pattern in a thread like this is\n\nQ: X is bad but does anyone know of anything specific that will occur if I do X.  \nA: The spec says X is bad. You shouldn't do X  \nQ: Yeah, but do you know anything specific that will occur if I do X.  \nA: X is bad.  \nend of thread\n\n"
+    },
+    {
+      "time": "",
+      "content": "I believe \".null\" is the glyph name of the required second glyph in the Apple TrueType spec (after .notdef, before CR and space).\n\nFontLab has an option to automatically add \".null\" \"CR\" and \"space\" glyphs when generating TrueType fonts.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "[Slaps forehead.] I actually looked at the FontLab manual where it talks about that option before I wrote the above. Somehow I only saw \"NULL\" and looked right past \".null\". Thomas is correct. Also, it looks like \".null\" and \"NULL\" are the same thing.\n\nThis raises an interesting question, though. The FontLab manual states that only \".notdef\" and \"space\" are required in Windows TrueType fonts, but that \"CR\" and \"NULL\" are also required in Mac TrueType fonts. Presumably, this means Mac TrueType resource-based fonts that are generated in suitcase files, a format that is effectively becoming extinct with the advent of Mac OS X, which can use Windows TrueType fonts (and OpenType fonts by extension).\n\nSo, unless you are generating TrueType fonts as a Mac suitcase file, you probably don't need \".null\" (or \"CR\" for that matter), since they are not required by Windows TrueType fonts, which work perfectly well on Mac OS X. And, according to Adobe's [OT Feature File Syntax spec](http://web.archive.org/web/20100203135428/http:/partners.adobe.com/public/developer/opentype/afdko/topic_feature_file_syntax.html#4.e), which is the thing I mentioned above, \".notdef\" is the only glyph name allowed to start with a period. So definitely don't put \".null\" in an OT font.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Okay, so I've inspected a few .ttf fonts that Apple ship on modern Macs, Mac TrueType suitcase fonts that Microsoft includes with Office, and .otf fonts that Adobe bundles with CS apps. All except Adobe's .otf fonts include either \"NULL\" or \".null\", but not both. Adobe .otf fonts I looked at did not contain \".null\", \"NULL\", or \"CR\". I also check my own .otf fonts and none of them included those either.\n\nI would conclude from this that you probably should include \"NULL\" or \".null\" in your TrueType fonts, but probably not both since they appear to be the same thing. Definitely not \"NUL\", though. I would just leave the option checked in FontLab and assume it does the right thing for the kind of font you are generating. Presumably, if the font already has a glyph named \"NULL\", it will not add \".null\".\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks that clears up a few things. About half my fonts have NULL and the other half have .null so I can just sit tight. Cheers.\n\n"
+    }
+  ]
+}

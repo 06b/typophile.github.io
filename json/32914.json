@@ -1,0 +1,50 @@
+{
+  "id": "32914",
+  "title": "H&J issues with InDesign CS2",
+  "forum": "Design",
+  "tags": [
+
+  ],
+  "content": "Hey there, I’m having a lot of problems getting ID CS2 to deliver acceptable word spacing when I justify text. I’ve tried different settings; manually breaking words; no hypenation; playing with the “Better Spacing/Fewer Hyphens” slider; changing fonts; individually adjusting ALL the controls under Justification; removing nearby object which force wraparound. To no effect, it still lays out type with unacceptably large or small word spaces. Ref attached JPEG screen-shot for a reference sample. Font is Franklin Gothic Book (but seems to have no relevance to problem). Working on a PC.\n\nI’m relatively new to InDesign CS2 but had a lot of exposure to Quark a few years back so I know there must be an answer to this problem. All input appreciated.\n\n| Attachment | Size |\n| --- | --- |\n| [justification\\_problem1.jpg](http://web.archive.org/web/20080628175035/http:/typophile.com/files/justification_problem1_0.jpg) | 58.06 KB |\n\n [‹ Who is the best designer of the 90s?](http://web.archive.org/web/20080628175035/http:/www.typophile.com/node/33143 \"Go to previous forum topic\") [Typographic CV ›](http://web.archive.org/web/20080628175035/http:/www.typophile.com/node/33225 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080628175035/http://www.typophile.com/user/17921\" title=\"View user profile.\">redux032</a>",
+  "time": "<br>",
+  "uid": "17921",
+  "comments": [
+    {
+      "time": " 9.Apr.2007 6.24pm",
+      "content": "What you could try as a test would be to use InDesign’s single-line composing mode, pick the same values you use in Quark (70-100-150?), using the the same old Type 1 font, and see what happens. Most single-line composing programs work about the same, so if the two are making the same line ending decisions, you have a starting point.\n\nI came to ID from TeX, which uses a paragraph optimization routine which is to my mind superior to ID’s paragraph composition mode. Could just be sour grapes on my part, I suppose. Anyway, I found that I had to go into the fonts & make the “ideal” wordspace smaller, usually right around 200/1000, then use 80% 100% 120% as justification settings. You could get the same effect by varying the ideal & min percentages, I suppose, but we’re trying to set up fonts so our comps can just use 80-100-120 for text settings.\n\nTo give you some idea of the difference with TeX, we use to use the equivalent of 65% 100% 140% to get roughly the same results — of course, TeX would not exceed certain limits (you get an overfull box to resolve by hand); Neither Quark nor ID do that.\n\nI did look at your PDF. As you say, it is a mess & I can’t imagine what values gave you so tight a setting. As to loose, hum.\n\nAnyway, try the single line composition mode.\n\n"
+    },
+    {
+      "time": " 9.Apr.2007 6.42pm",
+      "content": "Probably you’ve already ruled out this possibility, but I’ve experienced similar-looking justification problems in ID2 on occasion when I’ve missed stripping out a few unwanted hard returns from the text before placing it into a text box. Scanned text seems to be the worst for causing this problem (the OCR software usually puts a hard return at the end of every line). You can usually spot them in the story editor.\n\n"
+    },
+    {
+      "time": " 9.Apr.2007 6.46pm",
+      "content": "Funny, I’ve had more problems with InDesign and ragged text, it seems sometimes to have a mind of its own. I end up having to manually rag nearly everything. Didn’t have this problem in Quark.\n\n"
+    },
+    {
+      "time": " 9.Apr.2007 7.05pm",
+      "content": "AFAIK, InDesign also takes into account the language assigned to the text, when performing hyphenation. You might want to experiment with that setting.\n\n"
+    },
+    {
+      "time": " 9.Apr.2007 8.12pm",
+      "content": "I have to learn more about paragraph composer too. I’ve just been winging it so far.\n\n"
+    },
+    {
+      "time": " 10.Apr.2007 3.50am",
+      "content": "Did you define basic parameters for Justification? To do this, close all documents in InDesign. Then go the Paragraph-pallette and choose Justification (via the triangle-button) or use the keyboard-combination Command-Option-Shift-J.  \nHere you define values for Word & Letter Spacing and Glyph Scaling. Eg my standard values are:  \nWord Spacing - Minimum 75% - Desired 87% - Maximum 100%  \nLetter Spacing - Minimum 0% - Desired 0% - Maximum 0%  \nGlyph Scaling - Minimum 99% - Desired 100% - Maximum 101%  \nAuto Leading: 100%  \nThese values will be used for all documents you CREATE afterwards.\n\nThe values above give the Composer some latitude when Justifying text. For unjustified text reasonably tight wordspacing is achieved.  \nFor some typefaces it is necessary to change these values, eg Gill Sans, which is way too loose.  \nHope this helps.\n\n"
+    },
+    {
+      "time": " 10.Apr.2007 6.28am",
+      "content": "In the loose setting, is that a non-breaking hyphen? If so, why? If that stub could move up, then the look would be much better. And what of the next line (that is not shown). There must be some monster word there that wouldn’t fit in the remaining space.\n\n"
+    },
+    {
+      "time": " 10.Apr.2007 12.55pm",
+      "content": "Well, I’m not sure what made the difference EXACTLY but things are looking much better today - thanks for all the hints and tips. Here are some of the things I did/changed:\n\n1. Turn on “Show Invisibles” Ctrl+Alt+i  \nThis allowed me to find at least one soft return that was adding to the problem.  \n2. Change the Justification settings  \n - Word spacing 90/95/100 which may be tight but it certainly helped with the words that were too far apart  \n - I left letter spacing at 0  \n - Glyph spacing 99/100/101; no significant visual impact on this document but it probably helped somewhere.  \n3. I turned hyphenation on and then off again and I SWEAR it helped. OK maybe it didn’t really but I know it didn’t hurt. It made me feel more powerful, at least\n\nAttached is a “Before and After” image. There are no soft returns in this copy - it’s all just from changing justification settings and getting rid of that soft return on one line.  \nThanks for all your help!\n\n ![](http://web.archive.org/web/20080628175035im_/http:/www.typophile.com/files/justification_problem2_5038.jpg)\n\n"
+    },
+    {
+      "time": " 24.Apr.2007 9.29pm",
+      "content": "_1. Turn on “Show Invisibles” Ctrl+Alt+i  \nThis allowed me to find at least one soft return that was adding to the problem._\n\nFWIW, it’s always a good practice to rip out soft returns (and multiple hard returns) when doing DTP, either in whatever program one is using to manipulate the text or in InD. Cures a range of problems (as you’ve discovered), for starters....\n\n"
+    }
+  ]
+}

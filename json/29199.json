@@ -1,0 +1,46 @@
+{
+  "id": "29199",
+  "title": "Vertical paragraph rules?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I posted a query to the InDesign [forum](http://web.archive.org/web/20131108074341/http:/www.adobeforums.com/cgi-bin/webx/.3bc20e3d) but to no concrete avail. Anyone know an easy way to add vertical (left/right) rules to a paragraph? Stuffing the copy into a table with a left/right stroke doesn't work if the text is more than a page long (InD can't \"flow\" a table cell across 2 frames), and I'd like to avoid simply adding rules manually as text-flow isn't finalized and thus things are going to move around a bit. Seems that it shouldn't be much more complicated than horizontal rules, but...\n\n",
+  "author": "jason",
+  "time": "31 Oct 2006 — 1:40pm",
+  "uid": "3771",
+  "comments": [
+    {
+      "time": "31 Oct 2006 — 2:32pm",
+      "content": "It actually is _a lot_ more complicated than horizontal rules.\n\nI'm an avid user of paragraph rules, and though I've managed to come up with some pretty unorthodox stuff before (see my _Paragraph Rules_ tutorials soon on [Unzipped](http://web.archive.org/web/20131108074341/http:/www.fontshop.be/) and [The FontFeed](http://web.archive.org/web/20131108074341/http:/www.fontshop.com/fontfeed/)) there is to my knowledge _no way_ to achieve vertical rules that match the height of paragraphs.\n\nThe easiest way to make a vertical rule is to define a very short, very heavy rule: a 1pt wide 24pt thick horizontal rule is -- indeed -- a vertical 1pt rule that is 24pt long. To make the rule only 1pt wide, specify an indent from right that is 1pt less than the column width. Elementary my dear Watson.\n\nNow the main problem is that _Paragraph Rules_ are attached to the _paragraphs_ -- you can position one in relation to the first line of the paragraph and one in relation to the last line. How many lines the paragraph counts has no effect at all. So even so it's possible to specify vertical rules next to both the first and the last line in the paragraph, it's impossible to specify a vertical rule next to all the other lines. The only way to do so would be to convert every line of text to a single paragraph by using hard returns, but this completely negates what you want to achieve, as you explained text flow isn't finalised.\n\nSo I'm really sorry, but to my knowledge what you want to do is impossible. :^/\n\n"
+    },
+    {
+      "time": "1 Nov 2006 — 1:48am",
+      "content": "Hi Jason\n\nYour question puzzled me so I had a look. I think it might help to reverse the relationship of the para attributes and do this in two parts;\n\n1. Make your 'side' rules on the master page as continuous vertical lines top to bottom at either side of your text column area. This would mean they are behind your text and para attributes.\n\n2. Use paragraph rules in the text flow – but heavy white ones to _mask_ the background vertical rules. The white para rules can occupy as much vertical space as your inter-para spacing, and be made to extend beyond the column width by being set with negative integers on the indent.\n\nOf course this method assumes a white paper colour and/or absence of background tint/colour/imagery. Here's a screen grab to explain better.\n\n ![](http://web.archive.org/web/20131108074341im_/http:/typophile.com/files/white-rules-mask_5235.jpg)\n\n"
+    },
+    {
+      "time": "1 Nov 2006 — 12:07pm",
+      "content": "Hey Ben (& Yves),\n\nYour solution makes sense and won't be too hard to implement. Of course, I have a bunch of headings, subheads, etc., to deal with, all of which I'll want to mask the rules you suggested, but that's a small matter. I suppose, as Yves mentioned, the trick will be to make sure that my \"mask\" rules are exactly the height of the styles they're added to, so that I don't have tiny bits of vertical rule showing through. I'll also likely move the vertical rules slightly inside the text frame, as I've had vector objects shift ever so slightly during RIP at the printer.\n\nThanks for the suggestion, and hopefully a simpler method will be introduced in future InDesign releases...\n\n"
+    },
+    {
+      "time": "2 Nov 2006 — 2:37am",
+      "content": "Whoa Ben, now _that_ is what I call thinking out of the box. Great solution! :^)\n\n"
+    },
+    {
+      "time": "2 Nov 2006 — 11:43am",
+      "content": "Thankyou Yves!\n\nAh yes I didn't allow for headings and subheads.\n\nIt occurs to me that these could be dealt with on a separate layer, perhaps with white text box backgrounds for the masking or as a massively baseline-shifted part of the first line of the paragraph style if you want to keep everything on one layer.. ie. if your leading is 15pt and the white para rule is masking 45pts of inter-para spacing (three lines), then a subhead can be baseline shifted another lines' worth, 15pt upwards from the first line of para to appear in front of that masked 45pts of space.\n\nYou'll need to experiment with this...\n\n"
+    },
+    {
+      "time": "2 Nov 2006 — 1:26pm",
+      "content": "I have another thought. I haven't played with it extensively, so it might not be practical over long texts, but it will certainly stick with the paragraph.\n\nTry using the anchored object. Create a line with the line tool (draw it vertically obviously) and then create an anchored object box and attach it to the first letter of your paragraph. Paste the line into the anchored box. If you align the top of the abchored frame to the Cap height, the line should start at the right spot, and then you can adjust the length of it.\n\nI'll try and post my screen shot.\n\n ![](http://web.archive.org/web/20131108074341im_/http:/typophile.com/files/anchorobject%20copy_5491.jpg)\n\nI believe it's possible to simply copy and paste that basic anchored object at the beginning of every paragraph where you want a vertical side rule so that the box width and the settings remain the same each time. You will most likely have to adjust the length of the rule, though.\n\nK.\n\n"
+    },
+    {
+      "time": "29 Jan 2010 — 12:02pm",
+      "content": "Re: ben\\_archer's tip about putting the vertical rule(s) on the Master page and masking it out with Paragraph Rules\n\nExcellent workaround, but I found that using the Underscore Option in Paragraph Styles worked even better because - once the weight and offset were set effectively - it applied to paragraphs of any number of lines.\n\n"
+    },
+    {
+      "time": "29 Jan 2010 — 12:28pm",
+      "content": "This is amazing stuff, I haven't tried any of this but I will I promise!  \nGreat question that lead to very smart answers.  \nMy only input is that ironically MS Word does that really easily - it's called borders.\n\n"
+    }
+  ]
+}

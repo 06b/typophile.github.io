@@ -1,0 +1,50 @@
+{
+  "id": "36529",
+  "title": "CS2 font substitution",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I made some fonts for a newspaper last year.  \nRecently they switched from CS to CS2, and one of the fonts is acting up.  \nIt’s a Bold Roman, and instead of setting correctly, it produces garbled glyphs, in Bold Italic.  \nThe paper’s production process goes from InDesign via PDF and EPS back to PDF for RIP, or something like that.\n\nI wonder if anyone has come across a similar problem, and knows how to fix it?\n\n [‹ Overlapping components in fontlab](http://web.archive.org/web/20081007003155/http:/www.typophile.com/node/37868 \"Go to previous forum topic\") [indesign \"BLENDING HELP\" ›](http://web.archive.org/web/20081007003155/http:/www.typophile.com/node/37870 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081007003155/http://www.typophile.com/user/2021\" title=\"View user profile.\">Nick Shinn</a>",
+  "time": "<br>",
+  "uid": "2021",
+  "comments": [
+    {
+      "time": " 27.Aug.2007 12.38pm",
+      "content": "Are the garbled glyphs from the same font?  \nDo the fonts have Type 1 Unique ID numbers? (They shouldn’t)  \nHave they tried restarting the RIP?  \nDoes the text still come out garbled after a RIP restart?\n\nHave you tried running the font family through the AFDKO’s CompareFamily?\n\n"
+    },
+    {
+      "time": " 27.Aug.2007 1.05pm",
+      "content": "Thanks Miguel.\n\n1. The garbled glyphs are from the Bold Italic font, not the Bold Roman in which the correct glyphs were set.\n\n2. The fonts are OpenType, but as I derived them from older Type 1 fonts, I left the unique Type 1 ID numbers in the OT font. I hope deleting the ID numbers solves the problem!  \nNB. The fonts do have unique FOND numbers.\n\n3. I’m pretty sure they have tried restarting the RIP.\n\n5. I’ve tried to install AFDKO, without success, so I don’t use it.\n\n"
+    },
+    {
+      "time": " 27.Aug.2007 2.16pm",
+      "content": "\\> _I hope deleting the ID numbers solves the problem!_\n\nIt will sure help.\n\n\\> _NB. The fonts do have unique FOND numbers._\n\nThose numbers — that are displayed by FontLab — won’t end up in the OTFs. OpenType fonts do not have FOND IDs.\n\n\\> _I’ve tried to install AFDKO, without success, so I don’t use it._\n\nWe’ll need to take care of that next time.\n\n"
+    },
+    {
+      "time": " 27.Aug.2007 2.29pm",
+      "content": "_We’ll need to take care of that next time._\n\nThanks — I was kicking myself for not bringing my laptop to TypeCon, when I saw you helping Eben with AFDKO on his!\n\n"
+    },
+    {
+      "time": " 27.Aug.2007 2.41pm",
+      "content": "Getting help was instrumental in getting it going. Thanks again Miguel!\n\n"
+    },
+    {
+      "time": " 29.Aug.2007 12.12pm",
+      "content": "I’m happy to report that the issue has been resolved.\n\nThe problem was that my client had made a duplicate of one of the fonts I supplied, with an added chevron character.  \n(That’s quite alright within the terms of the contract, and made sense to handle in-house initially, and worked well until the software update.)  \nHowever, as the OpenType fonts I provided were customizations of my earlier Type 1 retail fonts, I had left the Type 1 ID number in the font info, as I didn’t know it was unnecessary. At least, it didn’t seem to do any harm, a redundancy. However when they copied the font, they ended up with two versions with the same ID installed, which screwed up somewhere in the production process after the CS2 update.\n\nI made them new versions of the two fonts, with the Type 1 ID fields left blank. Now things are working OK, and I ended up looking like a star. But I was obliged to tell them that their real saviour was Typophile’s Build forum, and a certain Adobe representative :-)\n\n"
+    },
+    {
+      "time": " 29.Aug.2007 1.12pm",
+      "content": "Glad to hear about the outcome. Thanks for the acknowledgment.\n\n"
+    },
+    {
+      "time": " 10.Oct.2007 12.59am",
+      "content": "Currently i’m having almost the same problem as stated above.  \nI was using a font (Normetica) at a buro where i work freelance,  \nand it stopped working around the time we started using a network and CS2.\n\nIt didn’t just stop working completely, it was only the weight Normetica A.  \nNormetica B & C are still working. Yesterday i did a test with a collegue, and on a computer that is not connected to the network & has CS3 the font is operational.  \nBut we don’t have CS3 for all computers yet.\n\nIf you can tell me where i can find the font Type 1 ID, this problem might be solved quicker then i thought.\n\nthanks in advance,  \nB-A\n\n"
+    },
+    {
+      "time": " 10.Oct.2007 2.12am",
+      "content": "In FontLab Studio, you can find it at Font Info -\\> Version and Identification -\\> Identification settings\n\n"
+    }
+  ]
+}

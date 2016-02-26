@@ -1,0 +1,22 @@
+{
+  "id": "64994",
+  "title": "Correct way to scale a whole font?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "HI,\n\nI read a few threads on scaling a whole font but there were no definite conclusions or majority view.\n\nI have a hand drawn and scanned typeface that I have traced in Illustrator. The alphabet was drawn out many times with the artist circling the characters he favoured for the font with some alternates.\n\nSo I traced them and then measured and scaled using this method:\n\nIn Illustrator:\n\nAscender= 14.565mm  \nCap Height= 12.22mm  \nX-Height= 3.9mm  \nBase= 0  \nDescender= 7.864mm  \nWhich makes my em square 22.429mm or 63.578pts\n\nSo I convert to 1000 UPM by:  \nAscender= 14.565 / 22.429 x 1000 = 649.38  \nCap Height= 12.22 / 22.429 x 1000 = 554.83  \nX-Height= 3.9 / 22.429 x 1000 = 178.34  \nBase= 0  \nDescender= 7.864 / 22.429 x 1000 = 350.62\n\nSo to scale my illustrator drawings to pop into FontLab (presuming I have UPM set to 1000) I need to scale each glyph up by (1000 / 63.578 x 100) = 1572.871118%\n\nWhen I scale this way, set my FontLab file up with the values for Ascender etc, the glyphs come in bang on where they are supposed to.......\n\nBut when outputting the font, it is tiny. I mean, really, really small. So I read up on scaling it up. There are two viewpoints, it seems, on doing this. Either altering the UPM or Tools-Actions-Contour-Scale (with apply to whole font with both hints and metrics ticked. Altering the UPM means I only alter one number. Scaling requires me to recalculate and reposition the guides, which admittedly, doesn’t take long.\n\nBoth methods seem to work but when I go to Exort the .otf FontLab warns me that the UPM is not 1000 and this could lead to problems. What is the safest way to do this and why is it safer or better?\n\nMany thanks.\n\nPaul\n\n",
+  "author": "<a href=\"/web/20100103112310/http://typophile.com/user/7682\" title=\"View user profile.\">octopi</a>",
+  "time": "<br>",
+  "uid": "7682",
+  "comments": [
+    {
+      "time": " 3.Dec.2009 1.56pm",
+      "content": "If you’ve really put this much work into it and don’t want to distort the letters scale them up in Illustrator. It will probably be faster than fixing the problems caused by Fontlab rounding errors and then you don’t have to worry about software not liking a font with an oddball UPM.\n\n"
+    },
+    {
+      "time": " 3.Dec.2009 2.13pm",
+      "content": "I would recommend using ScanFont to import Illustrator outlines into FontLab.\n\nShort of that, follow Mr Puckett’s advice and scale them up in Illustrator first.\n\nIn Illustrator, one point equals one FontLab unit, so scale your illustator outlines to something approaching 700 points on the Cap height and you will be on your way.\n\n"
+    }
+  ]
+}

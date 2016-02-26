@@ -1,0 +1,58 @@
+{
+  "id": "4852",
+  "title": "Appropriate OT feature for Roman Numerals",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "What would be the most approprate feature to include replacement of things such as XXVII and iX or simply V with connecting strands of Roman Numerals? just wondering....\n\n [‹ Setting type in Greek](http://web.archive.org/web/20081201111835/http:/www.typophile.com/node/15498 \"Go to previous forum topic\") [FontLab 5 PC/Mac ›](http://web.archive.org/web/20081201111835/http:/www.typophile.com/node/15058 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081201111835/http://www.typophile.com/user/2910\" title=\"View user profile.\">pablohoney77</a>",
+  "time": "<br>",
+  "uid": "2910",
+  "comments": [
+    {
+      "time": " 19.May.2004 8.51pm",
+      "content": "Roman numerals actually have their own codepoints in Unicode (goofy though that might seem). So, you can just use those codepoints.   \n   \nIn addition, or instead, if you want a substitution feature to exchange default forms for ones that have connecting serifs, I'd suggest simply using stylistic sets. I can't see roman numerals being common enough to justify their own unique feature.   \n   \nRegards,   \n   \nT\n\n"
+    },
+    {
+      "time": " 20.May.2004 12.34am",
+      "content": "i knew i had seen those unicode character slots somewhere. i realize this would be totally useless to anybody but me, but i was curious. and since i have no shame... what are stylistic sets?\n\n"
+    },
+    {
+      "time": " 20.May.2004 9.15am",
+      "content": "I don't think Roman numerals are goofy. I think they're about as important as unicase fonts (especially in Spanish for example), and look how many designers make those!   \n   \n [http://www.typophile.com/forums/messages/4100/32161.html](http://web.archive.org/web/20081201111835/http:/www.typophile.com/forums/messages/4100/32161.html)   \n   \nhhp\n\n"
+    },
+    {
+      "time": " 20.May.2004 9.46am",
+      "content": "I didn't say Roman numerals were goofy. I said it was goofy that they had their own slots in Unicode.   \n   \nAlthough, on further consideration, it is true that they have semantically different meaning than the same glyphs used as letters, so the argument that they should have separate Unicodes is not without merit. Still, I suspect that their existence in Unicode is due to compatibility with some other encoding.   \n   \nT\n\n"
+    },
+    {
+      "time": " 20.May.2004 11.07am",
+      "content": "Thomas,   \n   \nI think Roman numerals should have their own Unicode values. The difference between European numerals and Roman numerals are somewhat like between uppercase and lowercase -- they share some characteristics, but are also different in some regard. For example, in scientific or legal texts, Roman numerals may designate a different level of structure than the European numerals, so keeping them separate makes sense.   \n   \nEncoding Roman numerals as a mere styllistic variants of European digits isn't obvious at all -- you would need to do very elaborate contextual substitutions.   \n   \nFirst, because depending on the position within the number, the European numeral converts to a different Roman numeral, and secondly, obviously, because for certain numbers, the Roman numeral must be repeated. So for example, 4444 translates to MMMMCDXLIV. Making an OpenType layout feature that does the conversion is possible but not trivial. Also, in some older sources, alternate renditions of various Roman numbers were used, e.g. XXC = LXXX, IC = XCIX, IIXX = XVIII. Therefore, I think it's better when Roman numerals have their own Unicodes.   \n   \nBest,   \nAdam\n\n"
+    },
+    {
+      "time": " 20.May.2004 11.11am",
+      "content": "I was actually thinking of treating them as variants of European \\*letters\\*. But since they have their own legitimate Unicodes, and the semantic meaning of the letters is quite different, that would be against the philosophies of Unicode and OpenType.   \n   \nThat being said, the practical implication is that you stick the characters in the font, but have no easy way to input them, unless you use a custom keyboard setup. Otherwise, you'll have to hunt and peck them from a utility palette (glyph palette / character palette / character map).   \n   \nT\n\n"
+    },
+    {
+      "time": " 20.May.2004 11.14am",
+      "content": "WoW! OT converting Arabic numerals to Roman? I hadn't even thought of that! And i'm afraid i'm not that ambitious to try to figure it out. I just meant a feature that would Roman caps symbolizing numerals into forms that actually link with each other. That's all, nuffin more.\n\n"
+    },
+    {
+      "time": " 20.May.2004 11.24am",
+      "content": "Although I don't know that I recommend \\*any\\* OpenType feature for this purpose (for reasons mentioned above), the \"stylistic sets\" features I mentioned earlier are substitution features with names 'ss01' to 'ss20'.   \n   \nFor full documentation on all registered OpenType layout feature tags, see:   \n\\< [http://partners.adobe.com/asn/tech/type/opentype/appendices/feattags.jsp](http://web.archive.org/web/20081201111835/http:/partners.adobe.com/asn/tech/type/opentype/appendices/feattags.jsp)\\>   \n   \nRegards,   \n   \nT\n\n"
+    },
+    {
+      "time": " 20.May.2004 11.27am",
+      "content": "Here's info on Stylistic Sets from the spec:   \n   \nFunction: In addition to, or instead of, stylistic alternatives of individual glyphs (see 'salt' feature), some fonts may contain sets of stylistic variant glyphs corresponding to portions of the character set, e.g. multiple variants for lowercase letters in a Latin font. Glyphs in stylistic sets may be designed to harmonise visually, interract in particular ways, or otherwise work together. Examples of fonts including stylistic sets are Zapfino Linotype and Adobe's Poetica. Individual features numbered sequentially with the tag name convention 'ss01' 'ss02' 'ss03 ... 'ss20' provide a mechanism for glyphs in these sets to be associated via GSUB lookup indexes to default forms and to each other, and for users to select from available stylistic sets.   \n   \nRecommended implementation: An ssXX table maps GIDs for default forms to one GIDs for corresponding stylistic alternatives in each set. Each ssXX feature uses one-to-one (GSUB lookup type 1) substitutions. Font developers may choose to map only from default forms to variants for each stylistic set, or may choose to map between all stylistic sets in each feature, depending on intended user experience. For example, feature 'ss03' might contain lookups mapping variant glyphs from 'ss01' and 'ss02' to corresponding variants in 'ss03', in addition to mapping from default forms.   \n   \nApplication interface: Note that the application is responsible for counting and enumerating the number of features in the font with tag names of the format 'ss01' to 'ss20', and for presenting the user with an appropriate selection mechanism. For GIDs found in the ssXX coverage table, the application passes the GIDs to the ssXX table and gets back one or more new GIDs.   \n   \nUI suggestion: This feature should be off by default.   \n   \n...\n\n"
+    },
+    {
+      "time": " 20.May.2004 12.08pm",
+      "content": "thanks a lot tom for satisfying my curiosity   \n;^)\n\n"
+    },
+    {
+      "time": " 5.Oct.2005 11.14am",
+      "content": "and my curiosity returns...\n\n_Making an OpenType layout feature that does the conversion is possible but not trivial._  \nAdam, do you know anyone who has done this? If not I may be taking a stab at it. Anyone who want’s to contribute their genius on how to work this out, feel free to comment.\n\n"
+    }
+  ]
+}

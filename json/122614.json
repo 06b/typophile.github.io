@@ -1,0 +1,93 @@
+{
+  "id": "122614",
+  "title": "mysterious inflation in OTF file size",
+  "forum": "Build",
+  "tags": [
+    "complexity",
+    "memory",
+    "size",
+    "Build"
+  ],
+  "content": "I have an old font that I created a decade or so ago. It's an insane font created with paths that were created by an auto-trace. The glyphs have relatively insane numbers of the paths.\n\nOver the years I have cleaned it up a little here & there resulting in a slowly shrinking file size and smoother performance. I've finally taken the tie to do a more thorough clean up of the font on on exporting the otf & ttf files from FontLab 5.1.4 for mac I noticed that the resulting files are significantly bigger that the last revision.\n\nThe newer version has 20% or so less paths & no other intentional changes, no new glyphs etc…. so this should not be the case.  \nI've gone through the font glyph by glyph to verify that it truly does have far fewer paths.\n\nDoes anyone have any ideas how I might further investigate this issue? It is a free font & people like it. The clean up barely changes it's appearance at all & is definitely a good thing but my goal is to make the font less computationally demanding, not more.\n\nThanks\n\n",
+  "author": "raseone",
+  "time": "16 Jan 2015 — 3:03pm",
+  "uid": "171284",
+  "comments": [
+    {
+      "time": "17 Jan 2015 — 6:18am",
+      "content": "- I downloaded your font  \n- made .pfa Type1 font  \n- in command line mode:  \nmakeOTF -f c:\\...\\font.pfa -S  \n( [http://www.adobe.com/devnet/opentype/afdko.html](http://web.archive.org/web/20150317231005/http:/www.adobe.com/devnet/opentype/afdko.html \"http://www.adobe.com/devnet/opentype/afdko.html\") )\n\nI get otf font 88 kB, your original font is 110 kB. The key is option -S.  \nBTW open/generate font in FontForge and FontLab makes much bigger files.\n\n"
+    },
+    {
+      "time": "17 Jan 2015 — 10:29am",
+      "content": "Thank you so much JanekZ!\n\nI am updating my copy of the Adobe FDK right now. I am fairly lame in command line & only a novice user of the adobe fdk. Your instructions seem simple enough & I think I can pull it off. Can you fill me in on the nature of option -S ? is that just a request to display the file size?\n\nI've been cut off from font forge for a while due to operating system upgrades and the lack of an installable binary for the newer versions. Are you aware of any fontforge binary out there on the net anywhere that will run under mac os 10.8 or higher?\n\nI suppose I've got nothing to hide here so here are some links to the exact font files in question.\n\n[http://www.graffitifonts.com/downloads/paintcans\\_old.otf](http://web.archive.org/web/20150317231005/http:/www.graffitifonts.com/downloads/paintcans_old.otf \"http://www.graffitifonts.com/downloads/paintcans\\_old.otf\")  \n [http://www.graffitifonts.com/downloads/paintcans\\_new.otf](http://web.archive.org/web/20150317231005/http:/www.graffitifonts.com/downloads/paintcans_new.otf \"http://www.graffitifonts.com/downloads/paintcans\\_new.otf\")\n\n"
+    },
+    {
+      "time": "17 Jan 2015 — 12:57pm",
+      "content": "\"the nature of option -S ?\"\n\n ![](http://web.archive.org/web/20150317231005im_/http:/typophile.com/files/1_6279.jpg)\n  \nIt looks option -r is good, but I don't have GlyphOrderAndAliasDB file at hand.  \n\"Are you aware of any fontforge binary\"  \nI know nothing, but you may find this useful [http://fontforge.github.io/en-US/downloads/mac/](http://web.archive.org/web/20150317231005/http:/fontforge.github.io/en-US/downloads/mac/ \"http://fontforge.github.io/en-US/downloads/mac/\")\n"
+    },
+    {
+      "time": "17 Jan 2015 — 11:25am",
+      "content": "oops, sorry about that. The directory is password protected.\n\nuser: guest  \npass:welcome\n\nThank you for the info on options -s & -r\n\nNot entirely sure if font forge is of any particular use to me anymore but I am partial to open source software so I'll take a fresh look. I enjoyed having it in my arsenal. It has nice error reporting.\n\nThanks!\n\n"
+    },
+    {
+      "time": "17 Jan 2015 — 12:58pm",
+      "content": "1) Open font and generate Type1 font - .pfa file  \n2) (in FontLab) generate GlyphOrderAndAliasDB  \nuse this script [http://typophile.com/node/75834](http://web.archive.org/web/20150317231005/http:/typophile.com/node/75834 \"http://typophile.com/node/75834\")  \nremove font name in generated file name  \n3) Save this as FontMenuNameDB file:  \n`[PaintCans]\n\tf=PaintCans\n\ts=Regular\n\tc=PaintCans\n\tc=1,PaintCans`\n\nAll your files are in one folder with font.pfa\n\n4) Finally:  \n`makeOTF -f c:\\...\\font.pfa -r`\n\n5) Your new font:\n\n ![](http://web.archive.org/web/20150317231005im_/http:/typophile.com/files/PaintCans_4217.jpg)\n\nJob done!\n\n"
+    },
+    {
+      "time": "17 Jan 2015 — 1:08pm",
+      "content": "holy smokes! Thanks for the run through. I'll give it a try right now & report back on the results for the benefit of any future readers.\n\nIt's funny I can see the massive number of glitched out paths right in your screen shot. The new version has a lot less of that. In my own defense I have newer fonts made by the same method that don't have these problems but this horrifying old font gets around a lot. It will be great to make it less embarrassing.\n\n"
+    },
+    {
+      "time": "17 Jan 2015 — 2:49pm",
+      "content": "Ok that seems to have worked well. I think I messed up the first step but I bumbled through it easy enough.\n\nHere's the process in more detailed terms that might be easier to digest.\n\n1.) I used FontLab to create a Postscript version of the font (ASCII/UNIX Type1 ). This creates 4 files: .pfa, .pfm, .inf, .afm\n\n2.) I downloaded the scripts created by Arno Enslin here: [http://typophile.com/node/75834](http://web.archive.org/web/20150317231005/http:/typophile.com/node/75834 \"http://typophile.com/node/75834\")\n\n3.) I removed the .txt extention from the end of the downloaded file so my mac would recognize it as a zip file then uncompressed the file & moved into FontLabs standard location for macros & scripts located at ` Library/Application Support/FontLab/Studio 5/Macros `\n\n4.) In FontLab I went to WINDOW\\>PANELS\\>EDIT MACROS to open the EDIT MACROS window. I dragged the \"Generate\\_GlyphOrderAndAliasDB\\_file.py\" file into the EDIT MACROS window. The contents of the file appeared in the window.\n\n5.) I hit the RUN MACRO button at the top of the window that looks like a \"play\" button. This generated the ` GlyphOrderAndAliasDB ` file in the folder along with the rest of the type1 font files.\n\n6.) The font in this example was called \"PaintCans\" so I created a plain-text file named ` FontMenuNameDB ` (no file extension) with the following contents and saved it to the folder with the other font files.  \n`[PaintCans]\nf=PaintCans\ns=Regular\nc=PaintCans\nc=1,PaintCans`\n\n7.) Having the latest Adobe Font Dev Kit for OpenType installed ( [Adobe FDKO](http://web.archive.org/web/20150317231005/http:/www.adobe.com/devnet/opentype/afdko.html) ) I ran the \"makeOTF\" script by opening a terminal window and entering:  \n` makeOTF -f c:\\...\\font.pfa -r `\n\nThis all worked like a charm and the Adobe makeOTF script spit out an OTF file into the directory with the other files.\n\nThis shaved about 7kb off of the file size which is great. I'm not sure why but it's still good.\n\nI had an original font at 166kb. I removed thousands of paths and somehow wound up with a font that was 253kb (bigger when I expected smaller). This method did produce a smaller file but only by a little bit. I was hoping to understand where all this extra file size had come from & to wind up with a new file under 166kb.\n\nDid I screw it up by using FontLab to create the initial Type1 file?\n\nAny thought on where I might go next?\n\n"
+    },
+    {
+      "time": "18 Jan 2015 — 4:20am",
+      "content": "I don't know, it could be FontForge writes down something differently (hinting?). I generated .pfa file as \"Type1 (Ascii)\" in FontForge, ca 1,5 MB. The rest of this process looks the same. New font file PaintCans\\_GW.otf is 198 040 bytes (your original paintcans\\_new.otf is 252 948 bytes).\n\n ![](http://web.archive.org/web/20150317231005im_/http:/typophile.com/files/GW_6491.jpg)\n  \nI created another file - with all hints removed. New file is 167 540 bytes.  \nThat's all for today. Good night!\n\nEdit: your old font has no hints at all - it justify this big difference in size.\n\n"
+    },
+    {
+      "time": "18 Jan 2015 — 10:53am",
+      "content": "That's it!\n\nI had some indication that it was hinting data early in the process but I mistakenly thought the old one had hinting as well. In fact I accidentally auto hinted my FontLab file for the old version some time in the past… so I was totally unable to to reproduce the smaller version from the original source file. The hinting carried over into the new revision & confusion ensued.\n\nI see now that the OTF files for the old version have no hinting but the FontLab file does. I was looking right past this as I thought I had eliminated this possibility. I'm very glad to see it's a simple solution.\n\nI will add that you are still able to get a significantly smaller file through the process above than I am. I will investigate that on my own but in any case you are arriving at right about the expected file size by removing the hinting & this makes me very happy.\n\nI really appreciate you taking the time to help out with this. You have just spared the entire future of the digital world untold millions of useless bits. I will do my best to pass the favor on to some other unfortunate soul… or back to you if there is anything you need.\n\n"
+    },
+    {
+      "time": "19 Jan 2015 — 1:36am",
+      "content": "\"you are still able to get a significantly smaller file\"  \nThat's strange.  \n[edited]\n\n"
+    },
+    {
+      "time": "18 Jan 2015 — 6:09pm",
+      "content": "If you remove contours that fit in a 4x4 (resp. 5x5) rectangle, you can reduce the size to 115K (resp. 86K). For a limited time only [no 4x4 and no 5x5 speckle in PaintCans](http://web.archive.org/web/20150317231005/http:/www.iro.umontreal.ca/~boyer/typophile/nodots/).\n\nMichel\n\n"
+    },
+    {
+      "time": "18 Jan 2015 — 6:50pm",
+      "content": "Wow, cool. Thanks both of you!\n\nI've downloaded the files from both of you & I'm working on compiling a new copy of font forge tonight. I should be able to reproduce everything you have done in these examples soon. My working copy of paintcans\\_new.otf is now on course to be somewhere between 150k & 168k. Now I see I may be able to get it even smaller. Good stuff.\n\nThis font has escaped my control & gets around the internet under it's own power. I've spent far more time messing with it over the last several days than I spent making it all those years ago. It is an inadvisable way to make a font to say the least but it has lead to this great learning experience.\n\nI made a number of path adjustments, kerning adjustments & transformations that make the font a lot better from a design perspective so I'm glad I got into this. I'll come back and post a final version after I run it through fontforge from step 1 to shave off those extra bits.\n\nI figure you would have to be nuts to use this font at any size that would benefit from hinting\n\n"
+    },
+    {
+      "time": "18 Jan 2015 — 7:09pm",
+      "content": "I can see what you did there & the speed with which you can accomplish that with your method is great. I'm working manually to treat & reduce those little speckles but this process you've showed me could certainly come in very handy. The reduction is size is significant but the visual effect is a bit random. A great trick to learn in any case. Thank you!\n\nIf you look at the newer version you will see there are a lot less of those & many of them have been enlarged to a more reasonable size & moved so they do not overlap.\n\nThis font also has a pretty bad problem with nodes that have fallen in exactly the same place so there are many nodes directly on top of each other. I have fixed tons of them manually but a script based solution could go a long way here with little or no visual impact. Do you have any magic for that?\n\n"
+    },
+    {
+      "time": "19 Jan 2015 — 9:31am",
+      "content": "The file size depends on the number of points. Identifying contours that fit in a 5x5 square is a basic exercise with Python and removing them (or rather drawing a new glyph without them) is only a few lines. Here `nf` is the new font where I draw the glyphs for some selection I made in FontForge\n\n    for g in font.selection.byGlyphs:\n         if g.foreground and len(list(g.foreground)) != 0:\n           pen=nf[g.glyphname].glyphPen()\n           for c in g.foreground:\n             if largeside(c)>5:\n               c.draw(pen)\n           pen = None\n\nwhere `largeside` is length of the large side of the rectangle that circumscribes the contour.\n\nSomething else that could be tried\\* is removing only tiny contours that create holes because, once printed, they should disappear due to flowing ink, unless the character is printed very large.\n\n\\*Something still easier to do: when `largeside(c)` is not larger than 5, decide with some probabilty &nbsp;_p_&nbsp; to draw the contour `c` too. That might help keeping the appearance and, starting with 86K, there is room to add contours. Those contours could also be enlarged (with matrix transformations instead of doing it by hand).\n\n"
+    },
+    {
+      "time": "19 Jan 2015 — 12:44pm",
+      "content": "That is fantastic tool, but unluckily doesn't work on my computer (winXP SP3, FF 31 DEC 2014, python 2.7 2012)  \n\"Execution of script c:\\...\\1.py failed\"  \nor new message:  \n\"NameError: name 'font' is not defined\"\n\n"
+    },
+    {
+      "time": "19 Jan 2015 — 5:15pm",
+      "content": "Sorry, that is just a stub. It is not the full script. The tool is something that can be clicked in the tools menu and requires a file in a special format (on unix, in the `~/.fontforge/Python` directory).\n\nHere is a full script usable as a script. The advantage in copying in a new font and copying back is that the operation can be undone and redone (copy can be undone). I could not get that behaviour otherwise.\n\n    import fontforge;\n    ff=fontforge\n    \n    cwidth = {} # **\n    def largeside(c):\n      (xmin,ymin,xmax,ymax) = c.boundingBox()\n      width = xmax-xmin\n      height = ymax - ymin\n      if width > height: return width\n      else: return height\n    \n    f = ff.activeFont()\n    # f.copy() # **\n    nf= ff.font()\n    fsel = f.selection.byGlyphs;\n    for g in fsel:\n      nf.createChar(g.unicode,g.glyphname)\n      nf.selection.select((\"more\",None), g)\n    # nf.paste() # **\n    for g in fsel:\n      cwidth[g.glyphname] = g.width # **\n      if g.foreground and len(list(g.foreground)) != 0:\n        pen=nf[g.glyphname].glyphPen()\n        for c in g.foreground:\n          if largeside(c)>5:\n            c.draw(pen)\n        pen = None\n    nf.copy()\n    f.paste()\n    for g in fsel: # **\n      g.width = cwidth[g.glyphname] # **\n    nf.close()\n\n# \\*\\* Modifications according to post below\n\n"
+    },
+    {
+      "time": "19 Jan 2015 — 2:48pm",
+      "content": "Works like a charm!  \nI suppose it can be ignored:  \n`line 12, in\nf.copy()\nAttributeError: 'NoneType' object has no attribute 'copy' `\n\nMany thanks for such a great tool.  \nedit: I generated again the PaintCans\\_GW.otf, this time 98 304 B, and from .pfb - 93 415 B.\n\n"
+    },
+    {
+      "time": "19 Jan 2015 — 5:59pm",
+      "content": "I see that for some reason the character widths were not preserved by my code. The lines\n\n    f.copy()\n    nf.paste()\n\ncan indeed be removed and are now commented out. I also modified the code so as to keep a dictionary of the glyph widths before the clean up so as to restore those widths in the end.\n\n"
+    },
+    {
+      "time": "20 Feb 2015 — 12:13pm",
+      "content": "Hello again Michel & JanekZ & anyone else.\n\nI wound up adding a bunch of characters to that paintcans font so final processing & reduction have been delayed a bit. All of your info was quite helpful though.\n\nI still think I am failing to strip away all the hinting data from not just this font but a few others as well. I have mysterious file inflation of 20-60k on a few fonts & hinting data is my best guess. I have a fairly good handle on the basics of hinting controls in fontlab & fontforge but there must be something I'm missing. I've been through the manual & all over the net looking for ideas.\n\nCan anyone suggest one sure method to know for sure if any hinting data is present and/or one sure method to remove all hinting data if any is present?\n\nI may be on a wild goose chase but I'd like to know once & for all.\n\n"
+    }
+  ]
+}

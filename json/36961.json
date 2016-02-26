@@ -1,0 +1,54 @@
+{
+  "id": "36961",
+  "title": "TypeTool and OpenType",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Okay, as an amateur, a dabbler, a dilettante if you like: I have been drawing my first(ish) font in TypeTool. It’s only a pixel font (yeah, yeah, I know, does the world need any more? but it’s only for my own edification really), and I’ve got a bit carried away drawing small caps and ligatures and different types of numerals etc.  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My question is: short of upgrading to FontLab\\*, is there a cheap/simple way of adding OpenType layout tables to turn these characters into usable features?  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I’ve spent a while trying to read the VOLT pages on MS’s website but it’s left my head spinning as I’m no techie.\n\n\\*which I may end up doing at some future point _anyway_ I suppose...\n\n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_  \nEver since I chose to block pop-ups, my toaster’s stopped working.\n\n [‹ Curve compensation methods](http://web.archive.org/web/20081202184601/http:/www.typophile.com/node/37778 \"Go to previous forum topic\") [Recent list of FontLab Options() class? ›](http://web.archive.org/web/20081202184601/http:/www.typophile.com/node/37685 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081202184601/http://www.typophile.com/user/8181\" title=\"View user profile.\">dtw</a>",
+  "time": "<br>",
+  "uid": "8181",
+  "comments": [
+    {
+      "time": " 10.Sep.2007 8.15am",
+      "content": "[http://www.microsoft.com/typography/VOLT.mspx](http://web.archive.org/web/20081202184601/http:/www.microsoft.com/typography/VOLT.mspx \"http://www.microsoft.com/typography/VOLT.mspx\")\n\nDid you try this page? “VOLT and InDesign” tutorial should be the best to start with.\n\nThanks,  \nSergey\n\n"
+    },
+    {
+      "time": " 10.Sep.2007 8.29am",
+      "content": "Hi Sergey,\n\nI’d seen the main VOLT pages but hadn’t spotted that tutorial: I’ll print that off and have a good read through offline. Cheers.\n\n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_  \nEver since I chose to block pop-ups, my toaster’s stopped working.\n\n"
+    },
+    {
+      "time": " 12.Sep.2007 5.23am",
+      "content": "Okay, that made things seem less intimidating, so I installed and had a go. My ligatures are now working a treat.\n\nBut: what determines the glyph IDs and therefore the order they appear in in the ‘Glyph Editor’ window? My lower-case Latin alphabet (and the Greek one, come to that) appear in a nice uninterrupted sequence when I work on the font in TypeTool, but they’re quite jumbled up when I open it in VOLT. (For example, I get f-u in sequence, then w-z, and the other letters are scattered about the font later in the list.) This is obviously causing the substitution to go awry when I try to use glyph groups for the small caps feature.\n\n(As it happens, the numerals have stayed in a row so the group substituions for \\<onum\\> work fine)\n\nI know I could create the small caps substitutions one by one instead of using groups, but I want to understand what’s wrong!\n\nThanks in advance,\n\n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_  \nEver since I chose to block pop-ups, my toaster’s stopped working.\n\n"
+    },
+    {
+      "time": " 12.Sep.2007 10.03am",
+      "content": "In glyph window, VOLT display glyphs ordered by glyph id. May be you display glyphs in FontLab ordered by Unicode?\n\nVOLT always order glyphs in group by glyph id, so if your glyphs are not ordered consistently you will get in trouble. For example, if you a has glyph id 3, b is 4, but a.sups is 11 and b.sups is 10, then `{a,b} -> {a.sups, b.sups}` will map `{3,4}` to `{10,11}`, so a will become b.sups, and b will become a.sups. Only way is to avoid this is to reorder glyphs or list them in lookup separately.\n\nThanks,  \nSergey\n\n"
+    },
+    {
+      "time": " 21.Sep.2007 11.19am",
+      "content": "TypeTool does not offer the ability to display glyph IDs or reorder those.\n\nAdam\n\n"
+    },
+    {
+      "time": " 21.Sep.2007 11.20am",
+      "content": "TypeTool does not offer the ability to display glyph IDs or reorder those.\n\nAdam\n\n"
+    },
+    {
+      "time": " 21.Sep.2007 11.30am",
+      "content": "But presumably you could create a new source file in TypeTool into which you could copy glyphs in the order in which you wish them to appear?\n\n"
+    },
+    {
+      "time": " 25.Sep.2007 5.23am",
+      "content": "But presumably you could create a new source file in TypeTool into which you could copy glyphs in the order in which you wish them to appear?\n\n"
+    },
+    {
+      "time": " 25.Sep.2007 11.19am",
+      "content": "Yes, if you copy-paste glyphs in TypeTool into a new font, their glyph IDs will be ordered in the sequence in that you do the copy-pasting.\n\nA.\n\n"
+    },
+    {
+      "time": " 2.Oct.2007 3.30am",
+      "content": "Sorry for not replying sooner: yeah, that’s what I ended up doing. Thanks guys.\n\n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_  \nEver since I chose to block pop-ups, my toaster’s stopped working.\n\n"
+    }
+  ]
+}

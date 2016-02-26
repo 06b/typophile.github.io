@@ -1,0 +1,70 @@
+{
+  "id": "62838",
+  "title": "How to create subpixel renderings?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Maybe this should just be a question for miha, but I'll put it out to everyone:\n\n**How does one create a subpixel rendering?**\n\nI understand the concept of it but I don't really know where to start with it.\n\nWhat tools should you use? Is Photoshop the way to go?  \nWhat file types support it?  \nHow do you render type or graphics accurately using subpixels?\n\nThanks in advance.\n\n",
+  "author": "mattmc",
+  "time": "7 Oct 2009 — 5:38pm",
+  "uid": "27718",
+  "comments": [
+    {
+      "time": "7 Oct 2009 — 7:29pm",
+      "content": "Hey Matt, would you hone your questions a bit with specifics about your intent? Unless you want another potentially huge deluge of information around the subject of subpixels, antialiasing, graphics libraries, and gameboy advance homebrewing etc. (which is already abundantly available courtesy of [John Haugeland](http://web.archive.org/web/20150416032532/http:/www.typophile.com/user/48230) over at [miha’s flea’s knees thread](http://web.archive.org/web/20150416032532/http:/www.typophile.com/node/61920)) I would suggest narrowing your focus. This sounds like a general request on the subject – which is totally valid – but please tell us more about the contexts in which you are interested.\n\n<cite>What file types support it?</cite>\n\nFor bitmap images, I can answer this unequivocally: any file type that supports color allows you to address subpixels. Also, the sharpest and most effective subpixel antialiasing/rendering is achieved at the border between pure white and pure black.\n\nSincerely,  \nWilliam Leverette\n\n"
+    },
+    {
+      "time": "8 Oct 2009 — 4:47am",
+      "content": "Matt, you said you understand the concept so I'll write how I started: When I made my first subpixel design last year (only one word), I took some screenshots of OS rendering of black text. I chose and saved five colors of red and five of blue, each ranging from the lightest to the darkest. I think I first made some diagonals for exercise :-) Designing with subpixels is similar to pixel art, consequently you use its strategies: for example, working with 32× magnification and looking on 1× scale opened in the other window at the same time.\n\n\"<cite>What file types support it?</cite>\"  \nI just add a maybe obvious information that the format has to be lossless (PGN or GIF) and \"saved for web\".\n\n\"<cite>How do you render type or graphics accurately using subpixels?</cite>\"  \nYou (or the viewer) has to have a LCD monitor, set in native resolution, with image displayed with 1× magnification. Monitor must not be used rotated and must have a RGB ordering of subpixels. According to Microsoft, a \"very small number\" of LCD screens use BRG ordering.\n\nSubpixel art is appropriate in the smallest sizes, because there you can be better than rasterisers!\n\nWilliam, a \"potentially huge deluge of information\" is certainly a possible danger in this thread. :-)\n\n"
+    },
+    {
+      "time": "8 Oct 2009 — 5:04am",
+      "content": "\\>You (or the viewer) has to have a LCD monitor, set in native resolution, with image displayed with 1× magnification.\n\nAnd, you don't need to make bitmaps to do this, you can use outlines. Just set the grid in your font design program to the number of pixels in the target font size, set the sample window of text to that size, and you are drawing outlines to a particular grid size, seeing the results live. And, you can reuse the outline for other sizes, other grids. [http://fontbureau.com/test/franky/](http://web.archive.org/web/20150416032532/http:/fontbureau.com/test/franky/ \"http://fontbureau.com/test/franky/\") is an example on a design far less tiny and interesting than Miha's. . . but you have to follow Miha's above instructions to see it correctly.\n\nCheers!\n\n"
+    },
+    {
+      "time": "8 Oct 2009 — 5:38am",
+      "content": "the only browser I see Frankly in is Safari. Why is that?\n\n"
+    },
+    {
+      "time": "8 Oct 2009 — 10:03am",
+      "content": "Mike, if you \"view source\" you'll see the links to the fonts. It would be nice if FB could zip them all up to make it easier for proofing in other browsers, alternately you'll need to download each font individually (there seem to be over 40) and install them in the normal way.\n\n"
+    },
+    {
+      "time": "9 Oct 2009 — 3:57am",
+      "content": "\\>the only browser I see Frankly in is Safari. Why is that?\n\nIt's just a demo, it's basic principle is independent of OS and I refuse to make anything but products for other browsers.  \n(And, as you can read MS steals everything it can get its hands on anyway. ;)\n\nCheers\n\n"
+    },
+    {
+      "time": "9 Oct 2009 — 9:09am",
+      "content": "I saw Franky some time ago. I viewed it in Safari on Windows and I could change the rendering from Mac to Windows … and I was confused: when you change the rendering type the font is also changed, strange.\n\nDoing a handmade subpixel typeface for text at sizes such as 5 pixel x-height and maybe 4 is certainly not worth it. I am not sure for 3 pixel x-height, I didn't make any tests.\n\n"
+    },
+    {
+      "time": "9 Oct 2009 — 11:28am",
+      "content": "@mike\\_duggan  \n_\"the only browser I see Frankly in is Safari. Why is that?\"_  \nThe Franky demo uses the @font-face CSS rule to call TTF fonts into the page.  \nSafari is probably the only browser you currently have installed that supports it.  \nYou can also use: Firefox \\> 3.5.x, Opera 10, or Chrome with web fonts [enabled](http://web.archive.org/web/20150416032532/http:/paulirish.com/2009/chrome-and-font-face-a-summary/). (Note: haven't tested the Franky page in any of these yet.)\n\nCheers, Rich\n\n"
+    },
+    {
+      "time": "9 Oct 2009 — 4:16pm",
+      "content": "The Franky page is not displaying the desired fonts in Firefox 3.5.3 on Mac OSX 10.5.4, for whatever reason.\n\n"
+    },
+    {
+      "time": "11 Oct 2009 — 7:21am",
+      "content": "i agree with ken, same problem for me.\n\nedit: i'm on 10.6.1\n\n"
+    },
+    {
+      "time": "11 Oct 2009 — 8:46am",
+      "content": "William Leverette:  \n<cite><br>\nAlso, the sharpest and most effective subpixel antialiasing/rendering is achieved at the border between pure white and pure black.<br>\n</cite>\n\nFrom my understanding of your comment, you're saying that the division between the blue and red pixels (on an RGB LCD screen) is stronger than at other subpixel boundaries. This also seems to be the case to me, but why is that?\n\nClearType and other similar subpixel rendering schemes seem to use the same low-pass filter that is applied to each color (and this is corroborated by everything I've read, including Platt's paper). Here they seem to be ignoring any differences between divisions. Could sharper rendering be achieved by somehow taking into account this division?\n\nBest wishes,  \nStephen\n\n"
+    },
+    {
+      "time": "11 Oct 2009 — 9:43pm",
+      "content": "@kentlew, simon, et al,\n\nYeah, I checked the Franky page against those browsers that support web fonts and both the font display and the JavaScript that does the switching is whacked.  \nIE is a complete bomb because the fonts are TTF. In the others, either the Franky font doesn't display or the JavaScript switcher doesn't work.  \nI'm sure it can be made to work cross-browser but the @font-face syntax needs re-doing, so does the JavaScript, and EOT files need to be created for IE.  \nI think the Franky page is a really interesting exercise.  \nIt's an interesting and clever solution to a very real problem. And there may be some way to consolidate the fonts into one file to create a more practical solution, who knows.  \nI even volunteer to try and fix it.  \nBut if the fonts involved are not free to download outside of browser display and manipulate as needed of course no can do.\n\n@mattmc  \nI'm a little confused by this sub-pixel image thing. Is this a way to use a screen shot to make a sharper bitmap image of a font? In other words, to use the LCD screen's x-axis sub-pixel rendering to create better anti-aliasing?\n\n"
+    },
+    {
+      "time": "12 Oct 2009 — 5:07am",
+      "content": "\\>And there may be some way to consolidate the fonts into one file to create a more practical solution, who knows.\n\nDone. It's called TrueType for FreeType.\n\nCheers!\n\n"
+    },
+    {
+      "time": "16 Oct 2009 — 3:18pm",
+      "content": "@mattmc\n\nThomas Fuchs, the creator of the script.aculo.us Javascript library has created something called Textorize which uses the Mac OS X rasterizing engine to create bitmap text he claims is sharper and better anti-aliased than what you can get out of Photoshop or ImageMagick. (They do look good, Windows rendering included.)  \nIntro with slideshow here:  \n [http://mir.aculo.us/2009/09/29/textorize-pristine-font-rendering-for-the...](http://web.archive.org/web/20150416032532/http:/mir.aculo.us/2009/09/29/textorize-pristine-font-rendering-for-the-web/ \"http://mir.aculo.us/2009/09/29/textorize-pristine-font-rendering-for-the-web/\")\n\nAnd now, it seems, there's a new website devoted to it:  \n [http://textorize.org](http://web.archive.org/web/20150416032532/http:/textorize.org/ \"http://textorize.org\")\n\n"
+    }
+  ]
+}

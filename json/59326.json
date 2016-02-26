@@ -1,0 +1,50 @@
+{
+  "id": "59326",
+  "title": "Strange happenings in liga feature when opening generated OTF in FL5",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Something weird's going on with my fonts: if I open a font that has been generated, and passed trough autohint, the contents of the liga feature changes, and FL5 refuses to compile (Fatal Error). This seems to be sticky, so fonts opened afterwards acquire the same problem (or I might just be going nuts). The only real change other than numberin simplified seems to be that \"script dflt;\" becomes \"script ;\"\n\nIs it another of the FL5 little surprises or does autohint simplify/edit liga? Please see transcript below:\n\nBefore:\n\nfeature liga { # Standard Ligatures  \n # Latin  \nlookup liga16 {  \n sub f f i by ffi;  \n sub f i by fi;  \n} liga16;  \nlookup liga17 {  \n sub f f j by f\\_f\\_j;  \n sub f f l by ffl;  \n sub f f by ff;  \n sub f j by f\\_j;  \n sub f l by fl;  \n} liga17;  \n language AZE exclude\\_dflt; # Azeri  \nlookup liga17;  \n language CRT exclude\\_dflt; # Crimean Tatar  \nlookup liga17;  \n language MOL ; # Moldavian  \n language ROM ; # Romanian  \n language TRK exclude\\_dflt; # Turkish  \nlookup liga17;  \n script dflt;  \nlookup liga16;  \nlookup liga17;  \n} liga;\n\nAfter generating OTF and passing through FDK autohint:\n\nfeature liga { # Standard Ligatures  \n # Latin  \nlookup liga1 {  \n sub f f i by ffi;  \n sub f i by fi;  \n} liga1;  \nlookup liga2 {  \n sub f f j by f\\_f\\_j;  \n sub f f l by ffl;  \n sub f f by ff;  \n sub f j by f\\_j;  \n sub f l by fl;  \n} liga2;  \n language AZE exclude\\_dflt; # Azeri  \nlookup liga2;  \n language CRT exclude\\_dflt; # Crimean Tatar  \nlookup liga2;  \n language MOL ; # Moldavian  \n language ROM ; # Romanian  \n language TRK exclude\\_dflt; # Turkish  \nlookup liga2;  \n script ;  \nlookup liga1;  \nlookup liga2;  \n} liga;\n\n",
+  "author": "<a href=\"/web/20100203094914/http://typophile.com/user/40601\" title=\"View user profile.\">paragraph</a>",
+  "time": "<br>",
+  "uid": "40601",
+  "comments": [
+    {
+      "time": "",
+      "content": "Mind that the AFDKO feature file syntax as used in FLS5 and FM is a higher level language and does not match binary layout tables one-to-one. There is some \"translation\" involved which shows when you re-import layout tables. With some lookup types, differences are more drastic than in your example.\n\nThe \"dflt\" (lowercase) keyword is only used in combination with \"language\". The default \"script\" is designated by \"DFLT\" (uppercase).  \nIf you want to address \"script DFLT\", you need to run FLS5-generated .otfs or .ttfs through Adam Twardoch's script [Fix DFLT Script Tag](http://web.archive.org/web/20100203094914/http:/www.silesian.com/software/FixDFLTScriptTagSL.zip). (He also made helpful remarks about script DFLT in a more recent Typophile discussion, you need to google for it.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, Karsten. I'll thank you properly when I shall have understood this and had fixed it. Strewth, I'm out of me depth!\n\n"
+    },
+    {
+      "time": "",
+      "content": "I still have some mischief in there somewhere. I tried to install the Fix DFLT ... script but no luck so far:\n\nLocating OpenType fonts in /Users/Jan/process...  \nTraceback (most recent call last):  \n File \"\", line 108, in ?  \n File \"/System/Library/Frameworks/Python.framework/Versions/2.3/lib/python2.3/codecs.py\", line 205, in \\_\\_getattr\\_\\_  \nAttributeError: stdout\\_hook instance has no attribute 'flush'\n\nI installed Python 2.6.2 as well. What is NumPy, btw?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Numpy is a set of Python libraries. If you install the big Robofab package it includes Numpy.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Oh bugger. Now my Python is too new for Robofab. It says I need 2.3. My brand new Numpy is the wrong version too (MAC OS 1.5, I am still running Leopard (10.4) on iMac 1.8 PowerPC G5). Help, squeek?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Sorry about this mess: now I have installed Python 2.5.4, installed numpy 1.3.0, all's well, the script still does not run.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks to Karsten, the script now works. The best way to install the Python and NumPy to make this work:  \n [http://www.robofab.org/install.html](http://web.archive.org/web/20100203094914/http:/www.robofab.org/install.html \"http://www.robofab.org/install.html\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "paragraph\n\nYou can decompile the GSUB-table of your Font, generated with FontLab. Autohint the font with the AFDKO and then merge the decompiled GSUB-table back into the autohinted font. But somehow I doubt, that the autohint program messes up the GSUB-table. However, it is worth to try. I often correct fonts in this way, when I want to keep changes at the minimum.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, Arno. It is clearly a FLS5 bug, nothing to do with ADFKO.\n\n"
+    }
+  ]
+}

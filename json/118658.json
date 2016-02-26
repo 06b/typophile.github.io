@@ -1,0 +1,39 @@
+{
+  "id": "118658",
+  "title": "How can I improve my new font made with Fontforge?",
+  "forum": "Build",
+  "tags": [
+    "FontForge",
+    "Build"
+  ],
+  "content": "Hi, I am new to making fonts and would like some help to a few questions I have. Helping me clearing these up would be much appreciated. :)\n\nThe image below show what is supposed to be a sci-fi all caps font.  \n ![](http://web.archive.org/web/20150420211220im_/http:/i57.tinypic.com/2zny90m.png)\n\n1) How do I set the EM/point size for the entire font?\n\nI worry that by making one glyph taller or lower than the others, that it will override any default or even preset value. I am concerned that if I can't keep the point size consistent, that the edges then will become fuzzy on accident as the plines are shifted.\n\n2) How can I make sure that the glyphs end up looking the best at they possibly can, without them looking inconsistent?\n\nFor example, with left side looking fuzzy on an all caps \"i\" character, but with right side looking sharp?\n\n3) What are the basic requirement for finishing a font with FontForge, if only having completed drawing up all the glyphs?\n\nI worry that by omitting something in the settings I accidentally have the font look bad, or even cause issues with usability.  \nFor example, if typing text with my font in an image editor, when typing non-caps, the image editor switches fonts. Therefore I put some x glyph into those lower case letters in FontForge, to avoid having my image editing software switch fonts as I accidentally type stuff in non caps.\n\n",
+  "author": "SpaceHobo",
+  "time": "12 Aug 2014 — 3:48am",
+  "uid": "222129",
+  "comments": [
+    {
+      "time": "12 Aug 2014 — 3:51am",
+      "content": "4) Would the font end up looking more crisp if I made the EM/pointsize large?\n\nI am still not sure just how to set the point size (size of font), but I think I read that you could have 4096 x 4096 points. Sounded large, but if that improves the fidelity and the visual appearance, then I am all for it.\n\n"
+    },
+    {
+      "time": "12 Aug 2014 — 7:52am",
+      "content": "Btw, the purpose of making this font,was for creating text on top of an image file used for texturing 3d objects.\n\n"
+    },
+    {
+      "time": "12 Aug 2014 — 4:05pm",
+      "content": "You don’t have to make the font with a 4096 UPM size. It’s really a bas idea as some software could have problem. Most of fonts are at 1000 pt in UPM size. It doesn’t affect how crisp is your typeface, all is in vector anyway.  \nFor your question 2, the crispiness of the font depends on how you drew glyphs. It will be needed that you don’t have more points than needed and that you have point at extrema. The way the font look on screen at a size could be tweak adding hints to the font (it’s called hinting) to make sure the vector drawing translate well at a specific size on a pixel grid (the screen). But it’s a really time consuming task as it is needed for each size and it’s only used on Windows as Mac and Linux just don’t bother with hints and use other methods to render type. You won’t have to do that for your font.  \nYou should look at the book [designwithfontforge.com](http://web.archive.org/web/20150420211220/http:/designwithfontforge.com/) and for question 3 look at the [Making\\_Sure\\_Your\\_Font\\_Works page](http://web.archive.org/web/20150420211220/http:/designwithfontforge.com/en-US/Making_Sure_Your_Font_Works_Validation.html).\n\n"
+    },
+    {
+      "time": "12 Aug 2014 — 10:48pm",
+      "content": "Thank you very much for your feedback. :)\n\n"
+    },
+    {
+      "time": "13 Aug 2014 — 7:45am",
+      "content": "Well, hm, I am stumped and I need some help.\n\nApparently, my font does not have any issues with there lacking a point at 'extrema', however I can't get hinting to work.\n\nThe basic concept of 'hinting' is fairly clear to me, and after looking at wikipedia's webpage for hinting, it is clear to me that I want the same effect as seen in the image on the upper right side in that article:  \n [https://en.wikipedia.org/wiki/Font\\_hinting](http://web.archive.org/web/20150420211220/https:/en.wikipedia.org/wiki/Font_hinting \"https://en.wikipedia.org/wiki/Font\\_hinting\")\n\nIn FontForge however, I am unable to intuitively get an idea of how the hinting tools are suppsosed to work and I have not seen anything on the internet that explain it.\n\nDespite fiddling with the hinting options and viewing the font anew in an image editing software, I see no change at all. Apparently I must be doing something wrong, but I have no idea what.\n\nI really would want this to work, otherwise I would be left to correcting a font to look crisp, for every font size I want to use later on, using 'grid fit'. I could deal with maybe two files, but if I wanted a 100 px or 110 px sized font, then I would have to go back and create a new set of the font, which I'd rather avoid.\n\nEdit: Btw, this is the documentation for hinting, in case anyone wanted to have a look: [http://fontforge.org/hinting.html](http://web.archive.org/web/20150420211220/http:/fontforge.org/hinting.html \"http://fontforge.org/hinting.html\")\n\n\\* Goes to check to see if the image editing software has an issue with font hinting.\n\n"
+    },
+    {
+      "time": "20 Aug 2014 — 6:14am",
+      "content": "> 1) How do I set the EM/point size for the entire font?\n\nYou don't set the point size, nor the em size while developing a font: the DTP software that uses the font. You set the UPM grid and that's all. Have a look here: [http://learn.scannerlicker.net/2014/07/31/so-how-much-is-an-em/](http://web.archive.org/web/20150420211220/http:/learn.scannerlicker.net/2014/07/31/so-how-much-is-an-em/ \"http://learn.scannerlicker.net/2014/07/31/so-how-much-is-an-em/\")\n\n> 2) How can I make sure that the glyphs end up looking the best at they possibly can, without them looking inconsistent?\n\nThe problem you just posed is a rasterization/hinting problem. For rasterization problems, read this: [http://learn.scannerlicker.net/2014/04/16/bezier-curves-and-type-design-...](http://web.archive.org/web/20150420211220/http:/learn.scannerlicker.net/2014/04/16/bezier-curves-and-type-design-a-tutorial/ \"http://learn.scannerlicker.net/2014/04/16/bezier-curves-and-type-design-a-tutorial/\")\n\nFor hinting problems, you have things like the ADFKO autohint tool ( [http://www.adobe.com/devnet/opentype/afdko.html](http://web.archive.org/web/20150420211220/http:/www.adobe.com/devnet/opentype/afdko.html \"http://www.adobe.com/devnet/opentype/afdko.html\")), or you can learn manual hinting.\n\n> 3) What are the basic requirement for finishing a font with FontForge, if only having completed drawing up all the glyphs?\n\nDinobib got it right with the validation. I'd suggesting staring a lot, proofing a lot.\n\n> 4) Would the font end up looking more crisp if I made the EM/pointsize large?\n\nNo.\n\nYou seem to have some design problems with the font, also, like horizontal and vertical lines being the same width, weird curve joints (like B and 8) that can make these to indistinguishable.\n\nHope I helped!\n\n"
+    }
+  ]
+}

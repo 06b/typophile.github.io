@@ -1,0 +1,22 @@
+{
+  "id": "29144",
+  "title": "OT feature with paragraph break?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Is there a way to denote a paragraph break in the OpenType Feature Definition Language?\n\nThe paragraph break as such (not the pilcrow \\_glyph\\_, that is, but the \\_character\\_, so to speak), has no code point in the font, but is implemented through and handled by the text processor or text setting engine. So, unfortunately, I don't see a way to incorporate it in an OpenType feature.\n\nIt might be very useful to have this, though; one may want to have for example end swashes only at the end of a paragraph.\n\n",
+  "author": "Rhythmus.be",
+  "time": "28 Oct 2006 — 4:57pm",
+  "uid": "14571",
+  "comments": [
+    {
+      "time": "28 Oct 2006 — 5:27pm",
+      "content": "You're correct that there's no way to do this in OpenType today. line and paragraph beginnings/endings are not really handled in OpenType.\n\n"
+    },
+    {
+      "time": "28 Oct 2006 — 5:49pm",
+      "content": "That's quite unfortunate. Could it be done by the text setting engine? I mean, at every instance where a line or paragraph breaks, the text engine could call the font and insert the appropriate glyph. One could go even so far as to implement this into the line breaking algorithm, so that the advance width of the alternate glyph could be reckoned with, while calculating the optimal spacing. I guess this is similar to how 'jalt' (Justifcation Alternates) works?\n\n"
+    }
+  ]
+}

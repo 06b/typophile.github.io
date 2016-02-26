@@ -1,0 +1,50 @@
+{
+  "id": "104335",
+  "title": "Non-breaking paragraphs",
+  "forum": "Design",
+  "tags": [
+    "breaking",
+    "Layout",
+    "paragraph",
+    "Type setting",
+    "Design"
+  ],
+  "content": "Dear Typophile users,  \nI am wondering if there is a way to set the text without the paragraph breaks (or returns) using pargraph marks instead (like a pilcrow or such - ¶) in an automatic way (without having to search and replace it with find and change in InDesign).  \nIn that way making a solid block of text.  \nHere is an example (_Symbol without indent or line break_):  \n [http://www.thinkingwithtype.com/contents/text/#Marking\\_Paragraphs](http://web.archive.org/web/20130806033744/http:/www.thinkingwithtype.com/contents/text/#Marking_Paragraphs \"http://www.thinkingwithtype.com/contents/text/#Marking\\_Paragraphs\")\n\nI look for a similar thread but could not find it...  \nSo any help to make it easier to achieve will be welcome.  \nThanks in Advance\n\n",
+  "author": "renno",
+  "time": "3 Jul 2013 — 12:55pm",
+  "uid": "186034",
+  "comments": [
+    {
+      "time": "3 Jul 2013 — 5:36pm",
+      "content": "answer deleted; I misunderstood your question\n\n"
+    },
+    {
+      "time": "3 Jul 2013 — 4:48pm",
+      "content": "Remember that for \"paragraphs\" over a certain number of characters -- pretty low, as I remember -- InDesign reverts to the single line composer mode.\n\nOtherwise, just search for end of paragraph & replace it with a space of some sort, a pilcrow, and another space.\n\nNot what you asked, but I don't see the issue of doing this globally. Then go back & put in whatever paragraphing you do want.\n\nIf you want it global & semiautomatic, just set up a grep search/style. However, at some point, you'll probably want an end of paragraph, so I'd advise against this.\n\n"
+    },
+    {
+      "time": "3 Jul 2013 — 10:36pm",
+      "content": "I wonder if there are any layout applications that offer this as an option?\n\n"
+    },
+    {
+      "time": "5 Jul 2013 — 9:03am",
+      "content": "The answer is there is no way to do this automatically — in real time — in InDesign. I.e., you can't do an on-the-fly search-and-replace to change hard returns to something else. A GREP style won't do it, and there's annoyingly no \"real time\" search-and-replace feature.\n\nFor one brief moment of hope, I thought AutoCorrect might help you out, but you can't enter a return as a character in AutoCorrect. Returns sort of have their own special rules.\n\n"
+    },
+    {
+      "time": "6 Jul 2013 — 10:53am",
+      "content": "> I.e., you can't do an on-the-fly search-and-replace to change hard returns to something else\n\n???  \nWe get in manuscripts all the time that use the following coding\n\n> ... sdfkjg azsdfkl aslkdf awelt asdfj asdrfkgj aslkj asdflkj aweotu awet aslkdfj asldfkj  \n> {A}  \n> This is an A-subhead  \n> {txt} aweroptu aqtrwiu sdfkjg azsdfkl aslkdf awelt asdfj asdrfkgj aslkj asdflkj aweotu awet aslkdfj asldfkj\n\nOK. I want to apply paragraph styles globally. I first search for\n\n{A}  \nand throw out the return, so it is on the same line a the text proper, e.g.,\n\n{A}This is an A-subhead\n\nDone by searching for {A} & the special end of paragraph wildcard token, and replacing it with only {A}\n\nTo finish the story... I then search for the character {A} with a paragraph style of \"text\" and replace the paragraph style with \"Ahead\".\n\nOne more search to dump the code {A}.\n\nAll done with \"find and replace,\" it takes very little time for a chapter (\"story\" in InDesign) or even an entire book (\"all\")\n\nBut the first step was knocking out that unwanted hard return, so the {A} code was in the same paragraph as the text of the subhead.\n\nWhile I'm home & haven't tested it exactly, I'm 99.44 &% sure you can do that & replace the hard return with a pilcrow & spaces, using either \"selection\", \"story\", or \"all\" (\"all\" probably not a smart choice...)\n\n"
+    },
+    {
+      "time": "8 Jul 2013 — 6:40am",
+      "content": "Yes, of course you can do a search-and-replace.\n\nI said you can't do it \"on the fly\" — i.e., you can't set it up so every instance of a hard return _automatically_ becomes a sequence of pilcrow surrounded by spaces every time it's typed, without actively executing a search and replace.\n\nIn other words, a GREP _search_ will work, but a GREP _style_ won't.\n\nThe original poster specifically asked if you can do this \"without having to search and replace it.\"\n\nThe answer is no, unfortunately you can't.\n\n"
+    },
+    {
+      "time": "8 Jul 2013 — 8:28am",
+      "content": "Maybe if you write a plug-in?\n\nhhp\n\n"
+    },
+    {
+      "time": "12 Jul 2013 — 12:44pm",
+      "content": "Thanks for all the feedback, i guess i should stick with the find and replace then, but it would be a good thing for the next version of InDesign or some plug-in, unfortunately i don't have the coding skills for that...\n\n"
+    }
+  ]
+}

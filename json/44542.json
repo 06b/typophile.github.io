@@ -1,0 +1,58 @@
+{
+  "id": "44542",
+  "title": "Browser substitution of old style figs and modern figs with Corbel",
+  "forum": "Design",
+  "tags": [
+
+  ],
+  "content": "Greetings all,\n\nI'm working on a web site design for which I would like to use Corbel as the suggested font of first choice for text. This is a redesign of a site that now uses Verdana for text and Trebuchet Bold for display. Verdana works fine as basal text, but looks less handsome in bold, especially when set in all caps. Hence the current choice of Trebuchet Bold for display. The beauty of Corbel is that it seems to work well everywhere in the overall look and feel that we desire -- u/lc, a/c, bold, bold a/c, etc.\n\nHowever, there are _many_ places in this site where the abbreviation MM2 appears. Since Corbel's default usage for numerals is old style figs, this makes for an awkward combination of characters. (If Typophile is displaying my post on your machine the way it does on mine, you'll see this right here, since I am seeing an old-style 2.)\n\nNumerals appear rarely on this site, apart from this one constant MM2 combination, so I am hesitant about using Corbel, lest site readers think it is an error.\n\nThe site is being built in CSS, about which I know just enough to be dangerous. And what might be possible in CSS3 certainly ain't possible right now . . .\n\nIf I understand this properly, I could ask that this be hard-coded to call for the particular desired glyph -- a \"2\" in _modern figs_ -- so that this MM2 combination appears consistently throughout the site _if the browser's system has Corbel._ But any browser that does _not_ have Corbel is going to display something unintended, and other than a modern-fig \"2.\" Is this correct?\n\nThe client may be fine seeing the MM2 combo with the very short old-style fig 2, or it may be that they'll reject the idea out of hand. I'm just trying to understand what are the possibilities before I pitch the idea of Corbel.\n\nThanks for any input.\n\nBruce\n\n",
+  "author": "<a href=\"/web/20110517141429/http://www.typophile.com/user/15637\" title=\"View user profile.\">Bruce</a>",
+  "time": "<br>",
+  "uid": "15637",
+  "comments": [
+    {
+      "time": "",
+      "content": "Hey, Bruce -- Good to see you're still around, alive and kicking.\n\nI'll let the web wonks give you more expert opinions and possible solutions. All I can say is that I suspect you'll be setting yourself up for a world of headache and frustration on your current course. Myself, I would surrender the Corbel and look elsewhere.\n\n-- Kent.\n\n"
+    },
+    {
+      "time": "",
+      "content": " Actually, Corbel doesn't seem to have given the lining figures any PUA code points, so I'm not sure how you could display a lining `2' even on systems that had the font installed.\n\n—Joel\n\n"
+    },
+    {
+      "time": "",
+      "content": "What you really need is for the browsers and CSS to support lining vs oldstyle as formatting. Not there yet.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Bruce!\n\nWhat Thomas said.\n\nA bit more detailed here:  \n<cite>The css3 fonts module is still a working draft […] so there remains the possibility to address the omission of figure case selection. […] the numerals cannot be ‘transformed’ to upper- or lower-case, in the style of text-transform. This implies that a ‘variant’ property should be used, much like font-variant is used to specify small caps. As such, it is proposed that a numeral-variant property be added to the css3 fonts module.</cite> — [webtypography.net](http://web.archive.org/web/20110517141429/http:/webtypography.net/Harmony_and_Counterpoint/Numerals__Capitals_and_Small_Caps/3.2.1/)\n\nHowever, you can use a workaround similar to the one described here: [Using The Best Ampersand Available](http://web.archive.org/web/20110517141429/http:/css-tricks.com/using-the-best-ampersand-available/).\n\nJust tag all instances of ‘MM2’ in your HTML with something like `<span class=\"lf\">MM2</span>` (lf for lining figures here, you can pick any name). Then, in the CSS, specify a sequence of sans fonts that are similar to Corbel – but have lining figures, as default:  \n`.lf {font-family: \"Myriad Pro\", \"Myriad\", Calibri, sans-serif;}`\n\nThere certainly are more (possibly better) options. Still, Myriad is quite widespread, and users that have Corbel will most likely also have Calibri. Both do a great job.  \nFor some other faces, you’d have to adjust the size (see Lucida Sans), otherwise they’d stand out. Unfortunately, and afaik, you can’t do that dependent on the font, yet.\n\nThis example is rendered by Safari on Mac OSX; font-size: 18px. I assume your text will actually be even smaller, so the differences would really be insignificant.\n\n ![](http://web.archive.org/web/20110517141429im_/http:/typophile.com/files/corbel_4776.png)\n\nF\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for that suggestion, Florian. This could be an effective workaround.\n\nAm I correct in thinking that since Acrobat Reader uses Myriad as its default sans font, then almost every computer is going to have it installed?\n\nBruce\n\n"
+    },
+    {
+      "time": "",
+      "content": "I’m afraid it’s not as easy as that. Fonts that come with Acrobat – and reside somewhere on the computer – still might be unavailable to the browser. If one can believe this study, Myriad is actually very rare: [The most common fonts, codestyle.org](http://web.archive.org/web/20110517141429/http:/www.codestyle.org/css/font-family/sampler-CombinedResultsFull.shtml)  \nMaybe Joe Clark can elaborate on this topic? I reckon he knows quite a lot about the spread of fonts.\n\nI’d go with Calibri and rely on the fact that those come bundled, if any.  \nKeep in mind most users won’t see neither Corbel nor Calibri.  \nIn any case, make sure to add Corbel to the end of your font stack, as a fallback, so that your users don’t end up with some random default sans like Arial. That might look worse than having the old-style figures in the first place.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Well, this is exactly what is so disheartening for me when I approach web issues. I am a book designer, so I want to control _everything,_ and of course I can't!\n\nMy hope was that Corbel could pop up first, on the newer Windows machines that happened to have it, but would rely on Verdana and Trebuchet as next choices for everyone else, and certainly ahead of Helvetica and Arial. Yet I see now that not everyone has even these fonts.\n\nThank you for the link to the codestyle study. Useful and interesting. When I went to their site, I noted that Gill is not displayed correctly (in Gill) in the list of font names, and when I asked for samples of Calibri and Corbel they both displayed in Times. Oh well, I'm sure the hard data in percentages is correct.\n\nI look with envy at Sumner's site ( [http://www.stonetypefoundry.com/](http://web.archive.org/web/20110517141429/http:/www.stonetypefoundry.com/ \"http://www.stonetypefoundry.com/\")) and how gorgeously he sets up everything, _controls_ everything! Every line break! Every subtlety of linespacing! Every alignment with illustrations! And of course he's doing that through PDFs, over which he _does_ have complete control. But my collaborator and friend, who'll be writing code for this new site, keeps telling me to have as few \"pictures of words\" as possible, since it runs directly counter to the idea of searches, appearances in rankings, and so forth.\n\nWhat a strange tug of war this is, between the modern practices of searchability and any-browser-displayable type on the one hand, and my hot-metal, lock-it-all-up-in-the-chase and control every hairspace desires on the other . . . Am I a curmudgeon who can't change? Or am I a person who justifiably wishes to see information displayed in a particular and refined way, on every computer?\n\nI'm sure many of you have these conversations with yourselves on a regular basis. And in the end, I guess I should put up, shut up, and just keep on using Verdana.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Bruce: Actually, Sumner is using GIFs, not PDF.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Florian beat to me the CSS answer. :)\n\nAll the PCs I've encountered (beside my own) lack Myriad.... It's probably best to throw in one more generic option (helvetica?) before the \"sans-serif\" option, since the default sans is often asstastic.\n\n---  \neeblet.com\n\n"
+    },
+    {
+      "time": "",
+      "content": "I realize this is an old thread, but I have to say that the lack of control designers have over display on the web is a feature, not a bug.\n\n\"displayed in a particular and refined way, on every computer?\"\n\nConsidering that screens and eyesight (if your user even has eyesight) vary a lot, this is impossible and not a good thing.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Why would it be ‘not a good thing’ if the author could suggest a figure style that goes best with the content?\n\nThree years later, there is hope for more typographic control: W3C’s CSS Fonts Module Level 3 Working Draft includes a section about [numerical formatting: the font-variant-numeric property](http://web.archive.org/web/20110517141429/http:/www.w3.org/TR/css3-fonts/#font-variant-numeric-prop).\n\nJohn Daggett (Mozilla) explains the [OpenType font feature support](http://web.archive.org/web/20110517141429/http:/hacks.mozilla.org/2010/11/firefox-4-font-feature-support/) in Firefox 4. In this browser, you can select lining figures via the vendor-specific CSS declaration `-moz-font-feature-settings: \"lnum=1\";`.\n\nSee also Christopher Slye’s article on Typblography, [OpenType Features Come to the Web](http://web.archive.org/web/20110517141429/http:/blogs.adobe.com/typblography/2010/09/opentype-features-come-to-the-web.html).\n\n"
+    }
+  ]
+}

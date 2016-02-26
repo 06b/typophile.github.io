@@ -1,0 +1,70 @@
+{
+  "id": "123445",
+  "title": "Iowan Old Style",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Hello, all  \nI’ve always been a big fan of John Downer’s work, so I was overjoyed when  \nI discovered that his wonderful Iowan Old Style was included in Yosemite  \n— in a “.ttc” format, which I don’t quite understand, but with small caps and  \nold style figures, which were lacking from my old Bitstream PS version.  \nUnfortunately, these features don’t seem to work in InDesign: the glyphs are  \nvisible in the ‘Glyphs’ window, but can’t be used unless you double-click on  \nthe ones you need to typeset… Does anyone know what all this is about?  \nThank you very much.\n\n",
+  "author": "Celeste",
+  "time": "23 Feb 2015 — 1:23pm",
+  "uid": "11083",
+  "comments": [
+    {
+      "time": "24 Feb 2015 — 5:36am",
+      "content": "They work on my computer in Yosemite (Intel Mac Pro, early 2009) from ID glyph palette.\n\n"
+    },
+    {
+      "time": "24 Feb 2015 — 7:28am",
+      "content": "Yes, me too — but you can’t directly use the OpenType features to access small caps, old style figures, etc. These features work with Seravek, though, which is also bundled with Yosemite…  \nI’m lost.\n\n"
+    },
+    {
+      "time": "24 Feb 2015 — 8:09am",
+      "content": "I can open the ttc file in Fontographer will do some research to see what is different between Seravek and Iowan Old Style. (Iowan is a great font and a longtime favorite of mine too\n\n"
+    },
+    {
+      "time": "24 Feb 2015 — 8:07am",
+      "content": "Thank you very much — I tried to open it in FontLab myself, but couldn’t succeed.\n\n"
+    },
+    {
+      "time": "24 Feb 2015 — 11:11am",
+      "content": "I looked at opentype features for Iowan after opening and the regular Roman appears to only have kerning features. Seravek on the other hand is full of opentype features. Iowan thus appears to not have had opentype features added to do what you seek.\n\n"
+    },
+    {
+      "time": "24 Feb 2015 — 12:06pm",
+      "content": "OK, so we’re screwed, right? Thank you very much for trying, anyway.\n\n"
+    },
+    {
+      "time": "28 Feb 2015 — 9:19pm",
+      "content": "I'm sure that the Yosemite version has AAT features, not OpenType features. So the glyphs are there, but InDesign doesn't recognize the features.\n\nApple shows no real signs of abandoning AAT; it serves their needs, has some performance advantages, and the compatibility advantages of OpenType don't seem to matter to them.\n\n"
+    },
+    {
+      "time": "1 Mar 2015 — 5:29am",
+      "content": "And obviously there’s no way to change the AAT into an OpenType format? And that doesn’t explain why Seravek.ttc (also bundled with Yosemite) works perfectly fine…\n\n"
+    },
+    {
+      "time": "1 Mar 2015 — 9:11am",
+      "content": "I am still on OS X 10.9 where Seravek is an opentype font. As for Iowan Old Style, it has no lookup except kern. Bangla MN is AAT. I have no tool to check all .ttc files in batch and get statistics.\n\nCorrection: Iowan Old Style Black has the following opentype tables: aalt, salt, ornm, smcp, c2sc, onum, pnum, tnum, liga, ordn, frac, sups, sinf, numr, dnom, subs, kern\n\nIowan Old Style Black Italic and Iowan Old Style Titling also have useful GSUB opentype tables. It is only the four standard fonts that are left with only a kern table.\n\nMore precisely, here is the script I executed:\n\n    #!/usr/bin/env python\n    # -*- coding: utf-8 -*-\n    \n    import fontforge,sys\n    \n    filename=sys.argv[1].decode('utf-8')\n    \n    def disptable(fnt):\n      for t in ['gsub', 'gpos']:\n         lkp = eval(\"fnt.%s_lookups\" % (t))\n         print(\"&nbsp;&nbsp;%s: %s\" % \\\n           (t, ', '.join([\"%s\" % (p[0:6]) for p in lkp])))\n    \n    lstfonts = fontforge.fontsInFile(filename)\n    for f in lstfonts:\n      print \"<strong>%s</strong>\" %(f)\n      fnt=fontforge.open(\"%s(%s)\" % (filename,f))\n      disptable(fnt)\n\nand here is a copy paste of the trace of execution  \n`\n% lsttables 'Iowan Old Style.ttc' 2>/dev/null\nIowan Old Style Black\n  gsub: 'aalt', 'salt', 'ornm', 'smcp', 'c2sc', 'onum', 'pnum', 'tnum', 'liga', 'liga', Single, 'ordn', Single, Single, Single, 'frac', 'sups', 'sinf', 'numr', 'dnom'\n  gpos: 'subs', 'kern'\nIowan Old Style Black Italic\n  gsub: 'aalt', 'salt', 'ornm', 'smcp', 'c2sc', 'onum', 'pnum', 'tnum', 'liga', 'liga', Single, 'ordn', Single, Single, Single, 'frac', Single, 'sups', 'sinf', 'numr', 'dnom'\n  gpos: 'subs', 'kern'\nIowan Old Style Bold\n  gsub:\n  gpos: 'kern'\nIowan Old Style Bold Italic\n  gsub:\n  gpos: 'kern'\nIowan Old Style Italic\n  gsub:\n  gpos: 'kern'\nIowan Old Style Roman\n  gsub:\n  gpos: 'kern'\nIowan Old Style Titling\n  gsub: 'aalt', 'salt', 'ornm', 'tnum', 'pnum', 'frac', Single, 'sups'\n  gpos: 'kern'\n`  \nwhere `Single` corresponds to a some bare single substitution table.\n\n"
+    },
+    {
+      "time": "3 Mar 2015 — 7:52am",
+      "content": "Here is a more useful script that lists not only the tags but their associated scripts and languages and that can be used to check for consistency.\n\n    #!/usr/bin/env python\n    \n    import fontforge,sys\n    filename=sys.argv[1].decode('utf-8')\n    lstfonts = fontforge.fontsInFile(filename)\n    \n    def languages(ll):\n      return '; '.join(\"%s{%s}\" % (s[0], \\\n                  ', '.join(l for l in s[1])) \\\n              for s in ll)\n    \n    def disptable(fnt):\n      for t in ['gsub', 'gpos']:\n        print \" %s:\" % (t)\n        lkp = eval(\"fnt.%s_lookups\" % (t))\n        for p in lkp:\n          v = fnt.getLookupInfo(p)[2]\n          if v:\n            print \" %s: %s\" % \\\n                 ((v[0][0]), languages(v[0][1]))\n    \n    for f in lstfonts:\n      print \"-----\\n%s\\n-----\" %(f)\n      fnt=fontforge.open(\"%s(%s)\" % (filename,f))\n      disptable(fnt)\n\nLet us now come back to what can be done and what may be done.\n\nImporting into the Regular the GSUB features of the black should take a few seconds. Since the black does not contain the Greek alphabet or cyrillic characters, the features (smallcaps, proportional figures etc) would work only for the latin script; getting more than that requires more than a few minutes.\n\nIowan Old Style is however a Bitstream font and [Bitstream's EULA](http://web.archive.org/web/20150305002126/https:/www.fontshop.com/foundries/bitstream/eulas/bitstream-typefaces) says\n\n> No Modifications.  \n> You may not modify, adapt, translate, reverse engineer, decompile, disassemble, or create derivative works based on the Bitstream Product without Bitstream's prior written consent.\n"
+    },
+    {
+      "time": "3 Mar 2015 — 12:27pm",
+      "content": "The pertinant EULA in this case is Apple's, not Bitstream's, since the font is provided by Apple to the end user, but the effect is the same:\n\n> L. No Reverse Engineering. You may not, and you agree not to or enable others to, copy (except as expressly permitted by this License or by the Usage Rules if they are applicable to you), decompile, reverse engineer, disassemble, attempt to derive the source code of, decrypt, modify, or create derivative works of the Apple Software or any services provided by the Apple Software or any part thereof...\n"
+    },
+    {
+      "time": "3 Mar 2015 — 12:40pm",
+      "content": "Yeah, I thought so. But I’m sure that I’d have been absolutely unable to implement Michel’s script solution anyway… Thanks for the try nonetheless.\n\n"
+    },
+    {
+      "time": "3 Mar 2015 — 1:51pm",
+      "content": "I wrote a script that takes as input a font (ttf, otf, ttc and even dfont) and that lists features. I provided no script to modify a font in any way.\n\nIn order to \"fix\" the fonts, you need no script at all.\n\nTo copy the GSUB tables, when the EULA allows it, you open the two fonts with FontForge, the one with the missing GSUB tables and the one from which to copy. In the font with the missing GSUB tables you select \"Element \\> Font Info \\> Lookups\" and then \"GSUB\" and you click \"Import\". You will then see the lookups from the other font. You select them and then click OK. That is it.\n\nThat assumes that the glyph names are the same in the two fonts, which I guess is good practice for a font designer if one font is the regular and the other is the bold or the black.\n\nWith a ttc font, you probably need to split before; Apple's `ftxsplitter` does that.\n\n"
+    },
+    {
+      "time": "4 Mar 2015 — 12:31pm",
+      "content": "Sorry, Michel, but I’m a mere <cite>user</cite> of typefaces — I’m afraid the solutions you’re so kindly suggesting are way beyond my reach…\n\n"
+    }
+  ]
+}

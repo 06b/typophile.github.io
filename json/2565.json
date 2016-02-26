@@ -1,0 +1,50 @@
+{
+  "id": "2565",
+  "title": "Text engine in Flash?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Maybe there's some Flash guru out there who can sort this out for me. I'm trying to finish putting together a Thai display face, and I'm running into massive problems with Flash. Here's the deal:   \n   \nAs I'm typing along, all is happy & good. Vowels sit where they should, and all is peaceful in the world.   \n   \n ![](http://web.archive.org/web/20150416194843im_/http:/www.typophile.com/forums/messages/4101/23271.gif)   \n   \nAs soon as I'm done typing & select the text frame, everything turns to chaos & damnation. I _think_ what's happening is this: the vowels which showed up as I was typing are in the Unicode PUA, and they're being substituted for the vowels in the Thai range. E.g., U+706 _should_ be there, but instead U+0E49 is.   \n   \n ![](http://web.archive.org/web/20150416194843im_/http:/www.typophile.com/forums/messages/4101/23272.gif)   \n   \nAlso, when I turn on aliasing, all the diacritics completely disappear. Huh?   \n   \n ![](http://web.archive.org/web/20150416194843im_/http:/www.typophile.com/forums/messages/4101/23273.gif)   \n   \nAnyone ever encountered this sort of thing? Is there anyway around it? Does Flash just not work with the 874 codepage? Everything works smashingly in Microsoft Word, etc. Sorry for the huge attachments.\n\n",
+  "author": "matteson",
+  "time": "2 Jan 2004 — 2:02pm",
+  "uid": "1026",
+  "comments": [
+    {
+      "time": "3 Jan 2004 — 11:06am",
+      "content": "OK, so I think I figured out what the problem isnow it's just a matter of developing some sort of cheap work around. Hopefully one that's not too clumsy. If anyone's listening to me talk to myself, feel free to chime in with your opinion.   \n   \n**The problem:**   \n   \n(1) Flash only enjoys working with the native codepage of the OS that it's working with. So Flash on my US version of Windows XP spits out the text formatting from the the 874 Thai codepage. So that: as I'm typing, Windows handles the text processing & all is good, but when I'm done Flash takes over and fu©ks it all up.   \n   \n(2) It's possible to call up Unicode points using variables in dynamic text fieldswhich seems like it would sort everything out. But it's [seemingly] impossible to embed the necessary characters from the PUAso this too is useless. Well, since the end user would have to have the font installed to see things correctly.   \n   \n(3) It's also possible to use external UTF8 encoded files (a la Notepad) to generate Unicode characters in Flash, but the same embedding problems apply. I don't know the Actionscripting for that anyway :-/   \n   \n**The solution:**   \n   \n(1) Theoretically, users running Windows Thai edition won't have any problem using the font as it conforms to the 874 codepage. So in this case no fix is necessary.   \n   \n[_downfall:_ I still need to test this on Windows Thai]   \n   \n(2) It seems, for 2000 and XP users, that a font could be built using GPOS and GSUB to do the vowel positioning and/or substitution. I.e., the vowels could be removed from the PUA,placed in points in the 1252 codepage, and that way they could be embedded in Flash.   \n   \n[_downfall:_ apps & OSs that don't like GPOS & GSUB will be screwed]   \n   \n(3) Or I could build a propietary keyboard driver, and map the variously positioned vowels (once again, placed in the 1252 page) to different key combinations.   \n   \n[_downfall:_ non-standard and clumsy text imput method]   \n   \nArgh.\n\n"
+    },
+    {
+      "time": "5 Jan 2004 — 5:43pm",
+      "content": "\\> I still need to test this on Windows Thai   \n   \nSome things:   \n-MyFonts shows no type connections in Thailand.   \n-There seem to be no ATypI members from Thailand.   \n-My brother knows some people there, I'll see if he can ask any of them if they'd like to do some font testing.   \n-Linotype has Thai fonts - ask them for help.   \n-I remember one of the FontFont designers did a Thai-inspired font, try tracking him down.   \n-Last resort: use your yellow pages, go out for some Thai food some night, and ask the owner if he can hook you up. :-)   \n   \n--   \n   \nI think going non-standard (for which you can at least adopt some widely used Thai 8-bit hack page, I think) might be your best bet. (I hope John doesn't haunt me tonight... :-)   \n   \nhhp\n\n"
+    },
+    {
+      "time": "6 Jan 2004 — 9:09am",
+      "content": "As I understand it type design in Thailand is undergoing a bit of a slump.   \n   \nK. Punlop seems to be the main commercial font vendor, and Pongsathorn Sraouthai leads certain Open Source efforts. As I understand it neither vendor is actively making OpenType Thai fonts. I think one of the official Thai Linux implementations uses fonts designed outside of Thailand, by Yannis Haralambous (I could be wrong).   \n   \nMost of the Thai fonts Microsoft ships were acquired from a company called Unity Progress which has gone out of business.   \n   \nCheers, Si\n\n"
+    },
+    {
+      "time": "6 Jan 2004 — 2:07pm",
+      "content": "\\>type design in Thailand is undergoing a bit of a slump   \n   \nThat's probably an understatement :-/ I know a handful of people from Thailand, but none of them are type designers. Artists & farmers mostly. One of them lives upstairs and has a localized Thai OS, but he's in Chiang Mai until the end of the month. So testing isn't a huge problem - just a waiting issue.   \n   \nIn the meantime, I've figured out how to make the diacritics and vowels sit in the right places by using ActionScript to import UTF-8 encoded .txt files. But I still can't alias and/or embed the fonts without problems.   \n   \nI've thrown together [a file comparing several fonts](http://web.archive.org/web/20150416194843/http:/www.eightyproof.com/image/bitthai/none.gif) - and I'm led to believe it's an issue with Flash and not with the fonts. I've got Unity Progress' Dillenia, PSL's Chamnarn, Norasi (which is one of Yannis Haralambous' fonts), Tahoma, and my Daasaang.   \n   \n(1) [aliasing seems to work fine now](http://web.archive.org/web/20150416194843/http:/www.eightyproofpress.com/image/bitthai/alias.gif); (2) [embedding causes the diacritics to shift](http://web.archive.org/web/20150416194843/http:/www.eightyproofpress.com/image/bitthai/embed.gif); (3) [aliasing _and_ embedding causes the diacritics to disappear](http://web.archive.org/web/20150416194843/http:/www.eightyproofpress.com/image/bitthai/alias_embed.gif). Problem 2 might be caused by Flash only embedding the Unicode points within the Thai range - because the 874 codepage calls up the correctly placed diacritics from the PUA.   \n   \nI suppose I just need to find a Flash guru to sort me out. In the meantime though I will try to contact some of the folks you've suggested Hrant. Thanks again.\n\n"
+    },
+    {
+      "time": "8 Jan 2004 — 7:33am",
+      "content": "Jesus and Mary. So I figured out how to add my own custom embedding range for the Thai characters in the PUA. Thought I was on the home stretch. Had already opened the champagne even. But when I embed (choosing Basic Latin, Thai, & my custom PUA) I still get my jacked up glyphs.   \n   \nSo...until I embed, I assume Windows is handle glyph processing. I.e., Windows is controlling which glyphs appear for which character code. At that point, in the right contexts, 0xE9 is being represented by any of u+0E49, u+F706, u+F70B, or u+F714. [based on certain APIs, correct?]   \n   \n ![](http://web.archive.org/web/20150416194843im_/http:/www.typophile.com/forums/messages/4101/23683.gif)   \n   \nOnce I embed however, it seems that Windows glyph processing is beaten down by Flash's big clumsy stick. Even though my PUA glyphs are [supposedly] embedded, they're no longer being called. Notice below that (1) the first cluster's tone mark is too high, (2) is perfect, (3)vowel collides with the ascender, & (4) well, the consonant should be subbstituted so you can see the vowel below.   \n   \n ![](http://web.archive.org/web/20150416194843im_/http:/www.typophile.com/forums/messages/4101/23684.gif)   \n   \nI'm working under the impression - correct me if I'm way off base - that even though Flash is somewhat Unicode savvy, it works with the codepage of your OS. So, theoretically, if I localize my machine (XP Pro) for Thai, Flash shouldn't have problems with the Thai codepage. But that's not what I'm seeing. I'm getting the same output whether I'm localized for English, Thai, or a good ol' southern drawl.   \n   \nIs there a way around this? I'm beginning to feel even dumber than usual. I'm starting to dream about this for Chrissakes.\n\n"
+    },
+    {
+      "time": "8 Jan 2004 — 7:55am",
+      "content": "I guess you might also try asking on a dedicated Flash discussion list - hopefully there's one with a strong technical bent.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "8 Jan 2004 — 8:05am",
+      "content": "Yeah, this last post was actually a copy of one I posted to flashsupport.com ;-) I'm just blanketing all of the people I know who are more knowlegable than I.\n\n"
+    },
+    {
+      "time": "27 Apr 2004 — 12:12pm",
+      "content": "I never found a good resolution, Hayden. I ended up writing a macro for Word that turns the characters into Unicode values, and then a bunch of other macros that do the glyph substitutions. It's a pretty heavy-handed and ungraceful hack, but it works. Wish I had better news for you.\n\n"
+    },
+    {
+      "time": "27 Apr 2004 — 12:08pm",
+      "content": "just curious if there was any resolve to this as i am having similar problems with importing tildes into flash dynamic fields. works fine locally and turns to custard when i upload swf and text file.\n\n"
+    }
+  ]
+}

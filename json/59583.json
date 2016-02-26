@@ -1,0 +1,34 @@
+{
+  "id": "59583",
+  "title": "Microsoft Word font menu",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi Typophiles,\n\nI'm having trouble with a custom font I created in FLS5: It's appearing at the bottom of Word's font menu, below the last alphabetical listing. The font contains special glyphs placed in FL's Supplementary Private Use Area-A, which I suspect is why the font appears down there (with all the CJK fonts). Does anyone know how I can get the font to appear in it's correct alphabetical position, without removing glyphs?\n\nAlso, a related problem is that the font does not appear under Word's Insert \\> Symbol menu. I have Googled, searched the Forums both here and on FontLab without any luck. Any help from anyone is appreciated!\n\n",
+  "author": "<a href=\"/web/20100203090254/http://typophile.com/user/14870\" title=\"View user profile.\">ATF</a>",
+  "time": "<br>",
+  "uid": "14870",
+  "comments": [
+    {
+      "time": "",
+      "content": "The answer is on here somewhere. You need to pretend your font supports Greek encoding.\n\n"
+    },
+    {
+      "time": "",
+      "content": "ATF\n\nCould you (destroy the outlines by running an effect filter over them and) post a link to the vfb file?\n\njackson is probably talking about **[this thread](http://web.archive.org/web/20100203090254/http:/www.typophile.com/node/54395)**.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Jackson and Arno, that does seem to have worked. The Thomas Phinney link was particularly useful.\n\nCheers, Wayne Thompson, ATF\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Jackson and Arno, that does seem to have worked. The Thomas Phinney link was particularly useful.\n\nOn a related note, you guys know how I can get the extended glyph set (set in Flab's Private Use Area) to show up in Word's Insert Symbol dialog box? In Adobe apps it's easy, you just use the glyphs palette, but Word it seems to be harder.\n\nAgain, apologies if this was previously covered elsewhere in Typophile\n\nCheers, Wayne Thompson, ATF\n\n"
+    },
+    {
+      "time": "",
+      "content": "ATF\n\nIt’s just an assumption: Check the box \"Encoding and Unicode, Unicode Ranges, **Private Use**\". (I think you can trust in the auto settings of this FontLab dialog. You know, normally you cannot blindly trust in the auto functions of FontLab.) But there is a problem, if you have an italic style (linked to regular) with more glyphs in the PUA than the regular style, at least in OpenOffice. Then you cannot access the part of the PUA of the italic style, that is missing in the regular style. So you probably should provide dummy characters in the regular style. Furthermore I assume, that the Unicode points of the PUA characters should be the same in both styles, at least I doubt, that Word can find the italic partner of the dummy character, if its Unicode point is different.\n\nIn this context a general tip: Don’t style link to bold, at least not in those cases, in which your font family contains more than two weights!\n\n"
+    }
+  ]
+}

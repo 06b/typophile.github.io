@@ -1,0 +1,38 @@
+{
+  "id": "63385",
+  "title": "questions related to creating/converting fonts for @font-face embedding on web pages",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hello,\n\nI am a web developer who is new to the technical world of fonts. I have been playing around with font-embedding on web pages and how they render on the variety of browsers and operating systems available. Two questions have been left unanswered in my research, and it was recommended to me by a member of your community to pose them here. Forgive their newbie-ish slant, but I have tried to find answers, and can't seem to find them.\n\n1) I have noticed that some fonts (like Microsoft's Consolas) look \\*horrible\\* on a computer screen without any anti-aliasing technologies turned on. Is there some way to use FontForge to improve the hinting on these fonts so they look good when not anti-aliased? Consolas is a bad example since it is not a font that has a license to allow editing or remixing, but there are other fonts (like Graublau Web) where this happens as well. How easy is it to do this?\n\n2) When converting fonts to one format to another using FontForge (e.g. .otf to .eot) the converted fonts have subtle (and sometime not so subtle) errors in them. I understand that this has to do with the spline algorithms the different formats use. Are there any tips you can give to somehow minimize the errors in conversion?\n\nI would like to point out I am only looking at doing conversions for fonts in which the license allows font-embedding.\n\nThanks in advance,  \nZoltan.\n\n",
+  "author": "zoltan",
+  "time": "22 Oct 2009 — 11:15am",
+  "uid": "49431",
+  "comments": [
+    {
+      "time": "22 Oct 2009 — 1:00pm",
+      "content": "You need to distinguish a couple of things:  \n1) Allowing font-embedding does NOT necessarily imply @font-face linking.  \n2) Allowing @font-face linking does NOT at all imply that conversion is allowed.  \n3) And the fact that a font is for free also does NOT necessarily mean that conversion is allowed.\n\nThe current situation, roughly, is this:  \nMany foundries do allow font-embedding of their TTF/OTF fonts if this involves some level of protection. Usually this kind of allowed font-embedding refers to old technology and includes PDF or Flash -- but NOT @font-face linking of TTF/OTF fonts. The latter effectively means uploading a font and exposing it so it can be easily downloaded and used locally, which is the opposite of the required protection.  \nMost foundries do NOT allow conversion of fonts, e.g. into web font formats like EOT or wOFF. (I know that online-converter are out there already and that this of course invites to use them. Yet the fact that these exist does NOT mean that you are allowed to convert each and every font you like.)  \nMany foundries will, it seems, produce EOT and wOFF versions of their fonts themselves. This way they can make sure that the quality is right. (It implies removing of unnecessary glyphs to make files smaller, hinting to make type look better, etc.)  \nOthers, like Typotheque, provide a web font service, hosting fonts themselves.\n\nYou mention Graublau Web in connection with editing or remixing (reverse engineering, conversion, etc). If you follow the link \"End User License Agreement (EULA)\" on [this page](http://web.archive.org/web/20120617120638/http:/www.fonts.info/info/press/free-fonts-for-font-face-embedding.htm) which refers to [this PDF](http://web.archive.org/web/20120617120638/http:/www.fonts.info/shop/pub/W-EULA.pdf), you will see that although Graublau can be downloaded for free, you are NOT allowed to convert it.\n\nIf in doubt, check a font's EULA (usually a link is exposed next to the download button or during the purchase process) or ask the foundry of a typeface you like to use. Perhaps they can tell you if and when they will offer web font versions of their typefaces.\n\nBest wishes, Karsten\n\n"
+    },
+    {
+      "time": "22 Oct 2009 — 3:16pm",
+      "content": "Zoltan,\n\nthere are certainly some fonts that are available under liberal licenses that do allow conversion and unlimited use as @font-face web fonts. For example, there is a number of fonts that are available under the GNU Public License, the SIL Open Font License, the RedHat GPL+exception license, the DejaVu license or the GUST Font License:  \n [http://delicious.com/adamtwar/gratis+liberal+web+font](http://web.archive.org/web/20120617120638/http:/delicious.com/adamtwar/gratis+liberal+web+font \"http://delicious.com/adamtwar/gratis+liberal+web+font\")\n\nFor those fonts, you need to pay some attention regarding the trademarks (if you modify the fonts, you need to change the font names) and the availability of the source code (though it is not necessarily clear what can be considered source code for fonts — some claim that the OpenType format \\*is\\* the source because there is no single \"source code language\" for OpenType fonts).\n\nAs far as the screen quality is concerned, careful treatment of hinting is the essential element. I don't know much about FontForge's abilities to deal with hinting in a flexible way, though.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "23 Oct 2009 — 5:53am",
+      "content": "\\>I would like to point out I am only looking at doing conversions for fonts in which the license allows font-embedding.\n\nSee! EOT screws the type world, confuses the design world, and delights the legal world.\n\nIf the W3C accepts a format that requires we mark out fonts as \"embeddable\" in order to be linkable, we will be on them like a virus that loves stupidity.\n\nCheers!\n\n"
+    },
+    {
+      "time": "23 Oct 2009 — 11:12am",
+      "content": "EOT has already been rejected.\n\nA spec for CWT (EOT-Lite) is apparently being drafted for consideration, and there is the opportunity to clarify that embedding bits do not imply permission for web use or format conversion. Embedding bit fields will likely remain in the CWT header, because otherwise the format won't be recognisable as an EOT-compatible format in older IE browsers, but these will be considered padding by CWT implementations and simply ignored, just as embedding bits in TTFs and OTFs are ignored by Firefox and Opera.\n\n"
+    },
+    {
+      "time": "24 Oct 2009 — 5:20am",
+      "content": "I should be surprised that everyone ignores the original poster's technical question and prattles on about font licensing minutiae that users have little interest in, but I'm not.\n\n/dons flame-retardant suit\n\n"
+    },
+    {
+      "time": "25 Oct 2009 — 10:00am",
+      "content": "\\>I should be surprised that everyone ignores the original poster’s technical question...\n\nOur deepest apologies, as a community. Also, I think this is not a technical question.  \nJH\\>EOT has already been rejected.\n\nNot nearly soon enough. Now how do you like it? We get both EOT and whatever you want to call it next!?\n\n\\>Is there some way to use FontForge to improve the hinting on these fonts so they look good when not anti-aliased?\n\nNot really. anti-aliasing is the future.\n\nzoltan\\>How easy is it to do this?\n\nProbably impossible without a large investment in time, or money, to get aliased windows font output in the green. Mac's okay.\n\nzoltan \\>I understand that this has to do with the spline algorithms the different formats use. Are there any tips you can give to somehow minimize the errors in conversion?\n\nNot that I know of. T1 to TT conversion is dirty and lossy. TT to T1 though cleaner, lacks native TT drawing tools, so it'll stay this way.\n\nCheers!\n\n"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "id": "19839",
+  "title": "Contextual swashes for beginnings.",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm programming [contextual swashes](http://web.archive.org/web/20150223073526/http:/typophile.com/wiki/swsh) for the beginning and endings of my script face I'm working on and I'm using the info in the fontlab manual. I tried the ending swashes script and it worked fine. The beginning script that I copied directly from the manual doesn't work. Is there a way to make this happen? As you can see from the screen capture the beginnings are being replaced for every letter even though I have an ignore substitute scripted in.\n\n| Attachment | Size |\n| --- | --- |\n| [cswh.jpg](http://web.archive.org/web/20150223073526/http:/typophile.com/files/cswh.jpg) | 167.4 KB |\n\n",
+  "author": "bvfonts",
+  "time": "9 May 2006 — 2:34pm",
+  "uid": "2951",
+  "comments": [
+    {
+      "time": "11 May 2006 — 8:37am",
+      "content": "Hi,  \nI think you should include the swash glyphs in your ignore string:\n\nignore sub [@letter @start\\_swash] @start';\n\nto make it work.\n\n"
+    },
+    {
+      "time": "11 May 2006 — 9:04am",
+      "content": "Ah, most important, you have to define the context! It's not enough to put the apostroph ;)\n\nignore [@letter @start\\_swash] @letter';  \nsub @letter' @letter by @start\\_swash;\n\nfor example...\n\n"
+    },
+    {
+      "time": "11 May 2006 — 9:18am",
+      "content": "That didn't work, it gave me error messages, but thanks for trying! : ) Waaaaa.\n\n"
+    },
+    {
+      "time": "11 May 2006 — 9:41am",
+      "content": "try this\n\nswsh {  \nignore sub @ALL @swsh1';  \nsub @swsh1' by @swsh2;  \n} swsh;\n\nwhere\n\n@ALL = All letters and punctuation  \n@swsh1 = The letters you want to be replaced by swashes  \n@swsh2 = swash variants\n\n"
+    },
+    {
+      "time": "11 May 2006 — 11:31am",
+      "content": "I just got a reply from fontlab and this is what they said:\n\n\"I'm puzzled. It should work but doesn't. I'll do some more tests.\"  \nAdam Twardoch  \nFontlab Ltd.\n\nSo I guess the code isn't the problem.\n\n"
+    },
+    {
+      "time": "11 May 2006 — 4:52pm",
+      "content": "Have you tried renaming your classes?  \nI know this suggestion might sound silly, but you never know...\n\nOne other thing, have you tried generating a font and test it in InDesign, for example? Does it work?\n\n"
+    },
+    {
+      "time": "11 May 2006 — 7:27pm",
+      "content": "I tried renaming the classes and that didn't do anything. I also tested the font in Illustrator CS2 and it did exactly what it does in the fontlab ot preview panel.\n\n"
+    },
+    {
+      "time": "15 May 2006 — 10:19pm",
+      "content": "as you have things set up now, you need to include all your x.start letters in your @letter class. sorry i didn't make this note earlier (i missed the jpg image somehow)\n\n"
+    },
+    {
+      "time": "16 May 2006 — 8:37pm",
+      "content": "Thanks Paul! The beggining are working. The only problem is that now the endings aren't working. It's like if one works it cancels out the other one or maybe I should change the code. Here's a capture of what's happening now: [http://www.bvfonts.com/livejournal/begins.gif](http://web.archive.org/web/20150223073526/http:/www.bvfonts.com/livejournal/begins.gif \"http://www.bvfonts.com/livejournal/begins.gif\")\n\n"
+    },
+    {
+      "time": "17 May 2006 — 3:46am",
+      "content": "Maybe the first ignore also prevents the end-swash substitution. By defining separate lookups, you also define the boundaries for each \"ignore\" (only valid within the lookup in which it was defined).\n\nfeature calt (\n\nlookup caltstart (  \n&nbsp;&nbsp;&nbsp;ignore sub @letter\\_start @start';  \n&nbsp;&nbsp;&nbsp;sub @start' by @start\\_swash;  \n) caltstart;\n\nlookup caltend (  \n&nbsp;&nbsp;&nbsp;ignore sub @end' @letter\\_end;  \n&nbsp;&nbsp;&nbsp;sub @end' by @end\\_swash;  \n) caltend;\n\n) calt;\n\nMr Hunt's suggestion to include X.start glyphs in the @letter class may also applies for X.end glyph substitution.  \nEither you include X.end glyphs in @letter too. Or you create separate context-classes for caltstart lookup (including a-z and a.start-z.start) and for caltend lookup (including a-z and a.end-z.end); I indicated this by adding \"\\_start\" and \"\\_end\" to \"@letter\" in the sample above. Both may result different substitution behavior with one/two-letter-words, so you should try both ways and see which looks better.\n\n"
+    },
+    {
+      "time": "17 May 2006 — 7:53am",
+      "content": "i believe karsten is correct. you need a separate lookup for your starts and for your finishes.\n\n"
+    },
+    {
+      "time": "17 May 2006 — 10:54am",
+      "content": "That was it! Thanks Paul and Karsten! There was one small thing that needed changing. Instead of ( ) it needed to be changed to { } on your code.\n\n"
+    },
+    {
+      "time": "14 Jun 2006 — 4:46pm",
+      "content": "it seems you got everything figured out. Congratulations on [Eye Catching](http://web.archive.org/web/20150223073526/http:/www.myfonts.com/fonts/bluevinyl/eye-catching/), it looks great!\n\n"
+    },
+    {
+      "time": "5 Mar 2007 — 1:42pm",
+      "content": "/track/\n\n"
+    },
+    {
+      "time": "30 Oct 2010 — 6:20pm",
+      "content": "Hello everyone! I need some help with this too. I think I'm on the right track but something's missing in my beginnings & endings. I have the exact feature set up that Karsten posted above, so the problem must be in how I have my classes set up, as shown below:\n\n@letter\\_start: t t.start  \n@start: t  \n@start\\_swash: t.start  \n@letter\\_end: t t.end  \n@end: t  \n@end\\_swash: t.end\n\nThanks! :)\n\n~ Laura\n\n"
+    }
+  ]
+}

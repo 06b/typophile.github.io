@@ -1,0 +1,94 @@
+{
+  "id": "39172",
+  "title": "WinAscent... LineGap... Font BBox?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": " ![](http://web.archive.org/web/20131106163920im_/http:/typophile.com/files/Os1_5847.jpg)\n\n ![](http://web.archive.org/web/20131106163920im_/http:/typophile.com/files/OS2_3858.jpg)\n  \nWhat is it that causes the positioning of fonts relative to the top of a text box? \n",
+  "author": "Nick Shinn",
+  "time": "16 Nov 2007 — 7:33pm",
+  "uid": "2021",
+  "comments": [
+    {
+      "time": "16 Nov 2007 — 7:53pm",
+      "content": "Isn't it because of the ascenders positioning within the typeface\\_?\n\n"
+    },
+    {
+      "time": "16 Nov 2007 — 8:18pm",
+      "content": "It seems that different applications on different platforms use different ones of these, and do vertical alignment differently. The Typowiki on [vertical metrics](http://web.archive.org/web/20131106163920/http:/typophile.com/node/13081), written by John Hudson, has quite a bit about it.\n\n"
+    },
+    {
+      "time": "16 Nov 2007 — 8:39pm",
+      "content": "That's mainly about cross-platform compatibility.  \nIn it, he says, \"...different methods are used [by different applications] to calculate the distance from the top of the text frame to the first baseline,\" but doesn't go into it any further.\n\nI was wondering which font metric governs the text-frame-to-baseline measurement in various programs, such as Quark in my example.\n\nI try to keep the final Font BBox measurement (top right y-axis value) consistent within font families, that seems to work, but I wondered if there was more to it than that.\n\n"
+    },
+    {
+      "time": "17 Nov 2007 — 4:50am",
+      "content": "\"What is it that causes the positioning of fonts relative to the top of a text box?\"  \nWe've been asked several times to \"fix\" this and we've made the top of the em square and top of the H the same.  \nThe response has been positive.\n\nCheers!\n\n"
+    },
+    {
+      "time": "17 Nov 2007 — 9:36am",
+      "content": "Thanks David!\n\n"
+    },
+    {
+      "time": "17 Nov 2007 — 10:54pm",
+      "content": "How do you adjust the em square?\n\n"
+    },
+    {
+      "time": "18 Nov 2007 — 5:44am",
+      "content": "\"How do you adjust the em square?  \nI'm not sure what adjustment you want to make;  \nThere is resolution of em, like 1000 or 2048, er something else.  \nThere is the position of the baseline within the em.  \nThere is the font's relationship to the vertical boundaries...\n\nCheers!\n\n"
+    },
+    {
+      "time": "20 Nov 2007 — 7:59pm",
+      "content": "What Read Roberts found on the Mac was that some applications calculate the distance from the top of the text box to the baseline of the first line of text as hhea Ascender, and some calculate it as hhea Ascender + Linegap. On Windows, OS/2 WinAscent is almost always used to calculate this distance. So the only way to ensure consistency everywhere is to match the hhea Ascender value to the OS/2 WinAscent value, while setting the hhea Linegap value to zero, \\*presuming\"\n\nI'm not sure what a WPF app will do to calculate the distance if fsSelection bit 7 has been set to instruct the app to use the OS/2 Typo values to calculate linespacing: it may use TypoAscender, or it may use TypoAscender + TypoLineGap, or it may use WinAscent. Of course, if you have made the decision to use fsSelection bit 7, that is most likely because your Typo values do not sum to your Win values, i.e. you want to decouple linespacing from clipping. So then you are back at cross-platform compatibility issues.\n\n"
+    },
+    {
+      "time": "30 Nov 2007 — 1:53am",
+      "content": " ![](http://web.archive.org/web/20131106163920im_/http:/typophile.com/files/Hs_4497.jpg)\n  \nWhat causes this behaviour in TextEdit?  \nThe font format is Mac Type 1, generated as a suitcase, with Fontlab.\n\nMetric values are identical for roman and italic -- including \"BBox\" y-axis values, alignment zones, etc., and yet italic characters position lower than roman.\n\nIt doesn't happen in other applications such as CS and Word.\n\n"
+    },
+    {
+      "time": "30 Nov 2007 — 5:18am",
+      "content": "\"Metric values are identical for roman and italic — \"\n\nTriple checked?\n\n"
+    },
+    {
+      "time": "30 Nov 2007 — 6:08am",
+      "content": "Have you previously installed a different version with the same name? If so, it may be a font cache issue, where the OS is not displaying your most recent version of one of the two fonts.\n\n"
+    },
+    {
+      "time": "1 Dec 2007 — 11:05pm",
+      "content": "Nick,\n\nsend me the font, I'll take a look.\n\nGeneral: keep in mind that this stuff is VERY different for OTPS, OTTT and Type 1. Each format has its own peculiarities depending on the system and the app used.\n\nFor example, I have found out is that for one font format, I have now forgotten which, one version of InDesign used UPM minus Descender to position the first line of text rather than using Ascender (I think it was OpenType PS and TypoDescender, but am not sure). So if you made Ascender+Descender \\<\\> UPM size, the first line was off by a different offset than the rest.\n\nAdam\n\n"
+    },
+    {
+      "time": "4 Dec 2007 — 9:08am",
+      "content": "Nick,\n\nI had the same Problem with two fonts (normal and small-caps) of the same family, the small-caps produced a wider linespacing than the normal weight. All vertical metric values were equal. I think TextEdit does not look at any metric values. It measures the font boundingbox by itself.  \nThe source of the problem was a missing extreme point at the bottom of a cedilla. A BCP-handel was placed far below the descender. After setting the extreme point everything was fine.  \nI think checking your accents is a good idea.\n\nEigi\n\n"
+    },
+    {
+      "time": "4 Dec 2007 — 11:58am",
+      "content": "Thanks Andreas, I'll check those again!\n\n"
+    },
+    {
+      "time": "13 Dec 2007 — 3:25am",
+      "content": "While working on a photofont plugin for AID, QXP and web we have this problem with vertical (and also horizontal) layout of text in a text block. Since from the block that has to be served by plugin we have absolutely no access to any pixel outside it, we have to fit everything inside to avoid any kind of glyph cutting.\n\nUnfortunately it makes impossible typographically correct layout of the text (lsb on the left, ascender or ascender+linegap on the top): what should we do with script-like fonts which extend outside the left margin line? The same problem happens with top layout: in fonts similar to Zapfino Ink many glyphs extend vertically beyound ascender and even UPM line.\n\nSo far we found no other solution for the \"top-left\" problem then using font bounding box - this is the only way to make sure that no part of a glyph will disappear. Unfortunately it makes difficult to align text blocks on the page, requiring some manual control.\n\nAnother problem would be to define \"typographically correct\" font bounding box: some glyphs will never appear as leftmost on a text line (take accents made \"old\" way with negative left sidebearing) but may have big impact on calculating font bbox. We have no good solution for this right now, but we continue research.\n\nIn photofonts detecting glyph (and font) bounding box has additional level of complexity: since glyph image has \"smooth\" transparency, it is not easy to draw a line of where it actually ends.\n\n"
+    },
+    {
+      "time": "13 Dec 2007 — 6:28am",
+      "content": "Track.\n\nChrisL\n\n"
+    },
+    {
+      "time": "13 Dec 2007 — 7:30am",
+      "content": "\"Track\"  \nTrack to the widest bounds of each character proportionally and Lead to the widest the bound of all characters, you mean?\n\nA glyph shape not needing to be a subset of the glyphs 'compose-me-here-without-leading-or-tracking' box, is in the top 10 highlights of digital type composition, somewhere ;-) So, when one wants to export typography without a good definition of the em, or a format to hold the 'true' extremes, that is tough.\n\nNick's issue, since he's got one style working, should be solvable by one combination or another of type number monkeying.\n\nBut now that this bounding issue is just a stable of variables, I'll be cool to have a type design app so if the type designer knows the answers, the app knows the questions and can display, (as guidelines), 'the bounds', when that's important in a design(er). I don't think anything does that now, does it?\n\nCheers!\n\n"
+    },
+    {
+      "time": "13 Dec 2007 — 11:15am",
+      "content": "Thanks, David! That was an insightful explanation which I am glad you posted.\n\nMy posting of the word \"track\" was just my quick way of getting this thread to show up in my list of threads to follow :-/\n\nChrisL\n\n"
+    },
+    {
+      "time": "17 Dec 2007 — 2:01am",
+      "content": "/track/\n\n"
+    },
+    {
+      "time": "17 Dec 2007 — 9:42am",
+      "content": "_without a good definition of the em_\n\nIt seems to me that Fontlab wimped out on that.  \nLeft and right sidebearings are shown--but \"show vertical metrics\" doesn't, other than x-height, cap-height, and ascender-height (unless there is some feature somewhere I've missed, that turns on a visual representation of \"WinAscent\", \"TypoLineGap\", etc).\n\nWith Fontographer's glyph window, as I recall, there was a visual display of the em square--as if it really existed!\n\n"
+    }
+  ]
+}

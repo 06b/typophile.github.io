@@ -1,0 +1,22 @@
+{
+  "id": "57328",
+  "title": "Lookups not exporting from Fontforge",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I have begun kerning my font and the test runs at generating .otf and .ttf are not including the kerning tables when I open them in InDesign. I know these formats support the tables. I have fiddled with the 'Generate Font' options, but to no avail. Are there any tricks to this? Maybe some other setting that I could have overlooked.\n\n",
+  "author": "EricFromPTown",
+  "time": "24 Apr 2009 — 4:26pm",
+  "uid": "21313",
+  "comments": [
+    {
+      "time": "25 Apr 2009 — 8:18am",
+      "content": "1. The topic title is misleading: I am almost sure your lookups are exported, but for some reasons aren't working in ID.\n\n2. You haven't provided enough information on settings you used for TTF/OTF output. In particular, important options are \"OpenType\", \"Apple\" and \"Old style 'kern'\".\n\n3. Have you registered your kerning lookup for proper language systems (i. e. at least latn{dflt})?\n\n4. I am not an InDesign expert, but as I recall from some older Internet discussions there are several bugs/features related with kerning support in ID. These problems may vary from version to version. In particular you should check the following:\n\n-- does you font support the Windows 1250 (Central European) codepage (i. e. not just Windows 1252)?\n\n-- does your font include any GSUB features except your GPOS kerning lookup?\n\n"
+    },
+    {
+      "time": "27 Apr 2009 — 10:57am",
+      "content": "Thanks anagnost, and sorry for the misleading title. It turned out to be #3; I did not have the GPOS lookup registered to {dflt}. Thanks for the help!\n\n"
+    }
+  ]
+}

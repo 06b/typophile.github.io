@@ -1,0 +1,54 @@
+{
+  "id": "39130",
+  "title": "Where's the kerning in Arno Pro?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "A colleague of mine owns Arno Pro. He's doing work which contains transliterations, and needs an h with a dot above. He wanted to modify his copy of Arno Pro and add it in. When he opened the font in fontlab, he discovered that none of the kerning pairs show up, and when it gets saved again, all the kerning (and who knows what else) gets stripped from the font.\n\nI didn't quite believe him, so I took a look myself, and sure enough, FontLab shows no kerning. Not in the metrics window, and not in the OpenType window. (The feature shows up, but there's no lookups!)\n\nIs Adobe using some new kind of system?\n\nThanks,  \nHarbs\n\n",
+  "author": "Harbs",
+  "time": "15 Nov 2007 — 3:35am",
+  "uid": "17567",
+  "comments": [
+    {
+      "time": "15 Nov 2007 — 8:50am",
+      "content": "I would talk to Thomas Phinney about this.\n\n[http://www.typophile.com/user/909](http://web.archive.org/web/20140831065138/http:/www.typophile.com/user/909 \"http://www.typophile.com/user/909\")\n\n"
+    },
+    {
+      "time": "15 Nov 2007 — 9:00am",
+      "content": "Harbs, please do a search next time: [http://typophile.com/node/34059](http://web.archive.org/web/20140831065138/http:/typophile.com/node/34059 \"http://typophile.com/node/34059\")\n\n"
+    },
+    {
+      "time": "15 Nov 2007 — 9:55am",
+      "content": "In a similar situation with a need to set transliterated text, I did the special character as a separate font. This means a little more work in setting the text, but you avoid messing up the base font.\n\n"
+    },
+    {
+      "time": "15 Nov 2007 — 12:16pm",
+      "content": "Thanks Miguel.\n\nI did look, but didn't find it... :(\n\nWilliam, he knows about that option, but he's very paticular about kerning...\n\nHarbs\n\n"
+    },
+    {
+      "time": "15 Nov 2007 — 12:25pm",
+      "content": "I checked that and found that final version of Arno Pro uses relatively new type 9 lookup which FLS cannot read. We will fix that in the next update.\n\n"
+    },
+    {
+      "time": "15 Nov 2007 — 3:05pm",
+      "content": "_We will fix that in the next update._\n\nMaybe by that time Adobe will fix the bug in the kerning so that \"quoteright\" and \"quotedblright\" (& \"quotedblleft\" and \"quoteleft) have a kern. And the reverse, for users in the UK.\n\n"
+    },
+    {
+      "time": "15 Nov 2007 — 4:01pm",
+      "content": "Charles, would you care to provide a visual representation of what you're asking? Would be nice to have 'before' and 'after' samples. Thanks.\n\n"
+    },
+    {
+      "time": "15 Nov 2007 — 7:08pm",
+      "content": "Miguel,\n\nTake pity on an old print guy. The only way I know to do this is to set something in InDesign, export a PDF file, open that up in Photoshop, then save the file as a GIF so I can post it. That is a lot of work.\n\nI don't even know how to control the quotes in this forum. Consider:\n\n\"'Oh' he said 'don't do that.'\"\n\nNow typographically, that is rendered\n\n/quotedblleft{}/quoteleft{}Oh/quoteright{}/space{}/quoteleft{}don't do that/period{}/quoteright{}/quotedblright\n\nBut that's not what gets displayed.\n\nIn any case, in all the Adobe fonts I know, there is no kern between /quotedblleft{}/quoteleft{}, and there should be -- anything from about 75/1000 to 150/1000, depending on the font & word space value. The same between /quoteright{}/quotedblright{}. And in the UK, those sequences are reversed, but the kerning should still exist between the two quotemarks.\n\n/quotedblleft{}/quoteright should also have a kern, as in\n\n\"'Tis of the I sing.\"\n\nFor a different example, using Warnock Pro Light, set the string A/quoteright{}/comma{}. The kerning is so tight the comma winds up looking like some strange diacritic on the \"A\".\n\nIf I have to (i.e., if it will get things fixed), I'll spend half a weekend setting examples to post.\n\n"
+    },
+    {
+      "time": "16 Nov 2007 — 12:18am",
+      "content": "Hello Charles, it's funny to find this in an Arno thread since kerning in Arno is much better than in some older fonts: Quotation marks are spaced generously which I like. Two consecutive quotation marks align nicely. And there's kerning between quotation marks and comma/period -- and the other way round too.&nbsp;&nbsp;;-)  \nSome combinations like&nbsp;&nbsp;A'.&nbsp;&nbsp;or&nbsp;&nbsp;V.'&nbsp;&nbsp;may require contextual refinement, but this can be said for most typefaces. Yet another dimension of kerning horrors ...\n\n"
+    },
+    {
+      "time": "16 Nov 2007 — 12:48am",
+      "content": "\\> _That is a lot of work._\n\nIndeed. What I do is set things in InDesign and then just take a snapshot by pressing Command+Shift+4 on OS X.\n\n\\> _I don’t even know how to control the quotes in this forum._\n\nThe best way I know is by using HTML entities. You can specify them by Unicode (hex), decimal or abbreviated form. Here's a short list:  \nquoteleft – &#x2018; / &#8216; / &lsquo;  \nquoteright – &#x2019; / &#8217; / &rsquo;  \nquotedblleft – &#x201C; / &#8220; / &ldquo;  \nquotedblright – &#x201D; / &#8221; / &rdquo;\n\n\\> _In any case, in all the Adobe fonts I know, there is no kern between /quotedblleft{}/quoteleft{}, and there should be [...]_\n\nOK, so something like this? All the lines are set in Arno Pro Regular. The top lines show the font as it is currently, with no kerning between quotes. The bottom lines have 75/1000 units of kerning.\n\n ![](http://web.archive.org/web/20140831065138im_/http:/typophile.com/files/Arno_quotes_3816.png)\n\n\\> _For a different example, using Warnock Pro Light, set the string A/quoteright{}/comma{}._\n\nYeah, it looks bad. This combination requires a kern triplet, or more conservative kerning at least.\n\n ![](http://web.archive.org/web/20140831065138im_/http:/typophile.com/files/Warnock_A_quote_6051.png)\n\n\\> _If I have to (i.e., if it will get things fixed), I’ll spend half a weekend setting examples to post._\n\nPlease do. I'll make sure these bugs get logged, and will certainly be fixed next time the fonts get revised. No need to post them here. You can send the material directly to me at msousa adobe.com\n\nWhat would be nice is if you could post a list of unusual kerning combinations, like the quote/quote examples you've just provided. This type of thing should actually be posted on the Wiki. If you don't know how to do that, just start a new thread.\n\n"
+    }
+  ]
+}

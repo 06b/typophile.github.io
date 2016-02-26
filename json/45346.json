@@ -1,0 +1,26 @@
+{
+  "id": "45346",
+  "title": "Using special characters in text files that plug into flash",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Hi all,\n\nI'm trying to do some edits to my company's website. The website was designed in flash (ActionScript2), but has external .txt files that plug into it. I've noticed that certain characters like single and double left/right quotes and apostrophes are causing havoc in these .txt files.\n\nI noticed that some of the files use codes for characters such as:  \n‚Äô=apostrophe/single right quote  \n‚Äù=Smart Quotes (or maybe just right quotes)\n\nI can't seem to find what kind of scripting language this is, and couldn't seem to find it in the wiki. What is this language? where can I find a chart of character codes?\n\nTIA\n\nAndy\n\n",
+  "author": "Chipman223",
+  "time": "14 May 2008 — 10:48am",
+  "uid": "26908",
+  "comments": [
+    {
+      "time": "14 May 2008 — 12:05pm",
+      "content": "Andy,  \nYou should check out the link below:\n\n[http://www.allwebco-templates.com/support/S\\_hex.htm](http://web.archive.org/web/20131013044932/http:/www.allwebco-templates.com/support/S_hex.htm \"http://www.allwebco-templates.com/support/S\\_hex.htm\")\n\nFlash understands these codes when it loads in external text and should automatically convert them.\n\nJosh\n\n"
+    },
+    {
+      "time": "14 May 2008 — 1:16pm",
+      "content": "This is pretty simple. The quoteright (U+2019) and the quotedblright (U+201D) are outside of the Mac OS Roman range. In order to display those characters correctly, a text file containing them has to be saved in Unicode (UTF-8). If you then reopen such file using the Mac OS Roman encoding, the quotes get replaced by the multiple characters you're seeing (in UTF-8, 2019 = E2 + 80 + 99 and 201D = E2 + 80 + 9D)\n\n"
+    },
+    {
+      "time": "14 May 2008 — 3:08pm",
+      "content": "Woah, awesome. Thanks Miguel, A simple save-as saves the day.\n\n"
+    }
+  ]
+}

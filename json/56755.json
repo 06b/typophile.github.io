@@ -1,0 +1,50 @@
+{
+  "id": "56755",
+  "title": "Changing a glyph - your workflow?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "When building a font in FontLab, let's say you want to tweak a glyph. What's the best way to create a new glyph or three to try out alternatives? Obviously you will want to hit \"Generate Glyphs,\" but I confess that the options on that dialog really confuse me and my poking around has resulted in some messy font windows and some weird results like rejected glyphs being encoded in the kerning, etc. Along those same lines, I'm unsure sometimes whether I want to be copying and pasting glyphs, or outlines.\n\nI take this to be pretty bread-and-butter in the work of designing fonts, so I'm sure some of you with more experience have worked out best practices for generating glyphs such that  \n- their names make sense  \n- their positions in the font window make sense  \n- they are easy to set up as simultaneous comparisons in preview  \n- the \"winner\" of the comparison can be slotted into the appropriate spot  \n- the \"losers\" are \"archived\" somehow\n\nThanks for any hand-holding you're willing to provide!\n\n",
+  "author": "eliason",
+  "time": "7 Apr 2009 — 2:19pm",
+  "uid": "3254",
+  "comments": [
+    {
+      "time": "7 Apr 2009 — 3:18pm",
+      "content": "I usually just copy the current version of the glyph and then append it to the font. FontLab will put it after all the encoded glyphs and tack a \".00x\" to the name, where \"x\" is a number starting with 1. It will also leave the unicode value blank. You can make as many of these as you need and you can preview them in the Metrics or Preview windows by typing the names like this: e/e.001/e.002/e.003 etc.\n\nTip: If you also put them next to each other in the Index mode of the Font window, you can use command-[and command-] in the Metrics window to quickly flip between the different versions without having to type out the names.\n\nIf you have settled on your favorite, and it's not the version without the extension and unicode number (e.g. not \"e\" in the example above), add an extension such as \".000\" to the current (encoded) glyph and delete its unicode number. Then remove the extension from your favorite and auto-generate the proper unicode value. It will pop into place with the other encoded glyphs. You may also want to rearrange its position in the Index view.\n\n"
+    },
+    {
+      "time": "7 Apr 2009 — 5:19pm",
+      "content": "I do what Mark described, and on occasion I have actually configured them as alternates for easy testing in Indesign.\n\n"
+    },
+    {
+      "time": "8 Apr 2009 — 4:35am",
+      "content": "A good question, and another way of doing things: If I can make the selection on screen in FL, I rarely do the work with temporary alternates, usually using the mask, (and swap function to switch as rapidly as possible for comparison. I often end up with a line of glyph designs in the mask layer, but this way, I always know where they are. If I am making the decision in print, I usually make a second font I can switch to. This might be influenced by the fact that I don't like alternates, and I don't like fiddling with proofs.\n\nCheers!\n\n"
+    },
+    {
+      "time": "8 Apr 2009 — 1:34pm",
+      "content": "My method is the same as David's: I keep different versions of the same glyph in the mask layer, usually spaced out to the sides of the current edit, and using the swap-outline-with-mask function when I want to compare the different forms side-by-side.\n\nEach time I generate a test font for press tests or other proofing, I archive the FontLab source and move to a new one for the next round of edits.\n\n"
+    },
+    {
+      "time": "8 Apr 2009 — 1:59pm",
+      "content": "_\"swap-outline-with-mask function\"_  \n! This exists?! I'm constantly manually copy-pasting stuff between the mask and outline layers.\n\nGreat thread! Thank you for sharing your methods.\n\n"
+    },
+    {
+      "time": "8 Apr 2009 — 4:56pm",
+      "content": "\"! This exists?!\"  \nAll but the hyphens, 'Tools/Mask/goldmine ;)\n\nCheers!\n\n"
+    },
+    {
+      "time": "8 Apr 2009 — 5:02pm",
+      "content": "Wow. Thanks. :-)\n\n"
+    },
+    {
+      "time": "10 Apr 2009 — 9:36am",
+      "content": "Thanks for the helpful tips, everyone!\n\n"
+    },
+    {
+      "time": "11 Apr 2009 — 1:48am",
+      "content": "_\"All but the hyphens, ’Tools/Mask/goldmine ;)\"_  \nA life-saver! Thank you. :)\n\n"
+    }
+  ]
+}

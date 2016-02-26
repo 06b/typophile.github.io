@@ -1,0 +1,114 @@
+{
+  "id": "5097",
+  "title": "Linguistic Kerning",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "So after a long delay, I've finally compiled something that I feel could really help type designers: a list of the most frequent letter-pairs according to actual language, so that designers can better figure out what pairs need kerning. The following list is for English, and it's derived from the venerable Brown corpus (by Kucera & Francis). It's not a huge corpus by today's standards (\"only\" about a million words), but it's nicely generic (not limited to Shakespear, newspapers, or the Bible like some other corpora) and there's been a lot of derivative research based on it - which is in fact what actually allowed me to do this, since I don't yet have the Brown corpus as a digital file; I compiled the files from a linguistic analysis book by Dominic Massaro, where all pairs in all 3-7 letter words from the Brown corpus were quantified (in fact in all word positions). For the 2-letter words I went through the Brown corpus myself: there were about 25 of them - although they account for ~20% of English text!   \n   \nThe list is broken up into three frequency groups. The cutoffs are pretty arbitrary, but what I tried to do is group them such that there's a triple difference: group 2 is three times the size of group 1, and group 3 is triple group 2. In this way a designer can decide how \"deep\" he wants to go.   \n   \n [http://www.themicrofoundry.com/other/kf\\_pairs.rtf](http://web.archive.org/web/20131018213916/http:/www.themicrofoundry.com/other/kf_pairs.rtf)   \n   \nhhp\n\n",
+  "author": "hrant",
+  "time": "5 Jun 2004 — 9:31am",
+  "uid": "1250",
+  "comments": [
+    {
+      "time": "5 Jun 2004 — 11:50am",
+      "content": "Thanks Hrant! That was a true scholar's effort.   \n   \nChrisL\n\n"
+    },
+    {
+      "time": "5 Jun 2004 — 5:15pm",
+      "content": "Interesting and laudable work, but I think you are mischaracterising its usefulness when you say 'designers can better figure out what pairs need kerning'.   \n   \nI used to take this approach to kerning, but I now favour full-on, exhaustive, class-based kerning. Few fonts are used exclusively for one language, and it difficult to make predictions beyond one orthography to anticipate what kerning pairs might be important for other languages. So 'linguistic kerning' is of limited value unless you have a pressing technical need to significantly limit the number of kerning pairs in a font. Letter pair frequency analysis should be seen as a good mechanism for filtering and reducing kerning information, not for building it.\n\n"
+    },
+    {
+      "time": "5 Jun 2004 — 9:07pm",
+      "content": "It's so flattering to have your constant \"special attention\", John... :-/   \n   \nThere are two reasons to make a kern for a letter pair: if it's very awkward (like \"AV\"); or if it's slightly awkward but very common (like \"st\"). Linguistic frequency data helps a lot for the latter\\*. Since any form of design is concerned with efficiency, kerning absolutely everything is basically wasteful (in at least two ways), and smart pair lists can only help\\*\\*. Mana-16 has 1500+ pairs, but it still consiously avoids many hundreds more.   \n   \n\\* Similarly, minding the spacing of the most frequent 100 words in English -which cover 45% of typical text- makes your fonts better faster. So you can work on another font.   \n   \n\\*\\* Part of the reason is that you simply can't kern \"Ta\" and \"T\n\n"
+    },
+    {
+      "time": "5 Jun 2004 — 9:32pm",
+      "content": "Great, this is cooperative spirit.\n\n"
+    },
+    {
+      "time": "6 Jun 2004 — 9:29am",
+      "content": "Hrant, you misunderstood me -- perhaps because you assume that I'm picking on you --: I was not saying that what you have done is not useful, I was pointing out that its usefulness might be different from how you characterised it. This sort of linguistic information is useful, but I think it is most useful for filtering kerning data. And this is _not_ the same as building kerning data.   \n   \nLuc(as) de Groot has the most extensive set of linguistic kern data that I'm aware of, and he points out that this is the key to generating a manageable set of pairs that a) are really useful and improve text for the languages covered in a predictable way, and b) is small enough to work in all applications. The latter is the primary reason for wanting to filter kerning to the most frequent pairs. Many applications cannot support fonts with very large numbers of kern pairs (Tom Phinney recommends no more than 3,000 standard kern pairs in a font). So the usefulness of linguistic kerning data is linked to technical limitations in specific font formats and applications, and in addressing these limitations the kind of data that you have compiled _is useful_.   \n   \nThrough making fonts for companies like MS, though, I've grown impatient with the process of making fonts to address software limitations or bugs. Many font developers are in an endless game of catch-up with software: always trailing in the wake of the latest versions, always trying to figure out what bugs exist or what parts of a given font format have been implemented and which have not. I try to avoid being in this situation, and design to the font specification and for software that is doing what it should, not what the app developers have bothered to do. This isn't always possible, of course: if a client specifically says 'I need this font to work in X application on Y operating system', then I need to do everything I can to make this possible, including linguistic filtering of kerning _if there is a significant limit on kern pair support in that application._ Again, this is why I see linguistic kerning as primarily a tool for filtering kerning data, not for developing it.   \n   \nThere are a lot of languages in the world (probably somewhere between 4,500 and 6,200, depending on how you count dialects). Of these, a very large number are written in the Latin script, with more or fewer diacritics. Many of these languages use 'common' letters to represent different classes of phoneme, e.g. _w_ is a vowel in Welsh, which significantly affects the kind of pair combinations in which it frequently occurs. The more of these languages one tries to support, the less useful letter-pair frequency information becomes, because the number of frequent pairs expands rapidly.   \n   \nWhen I started trying to build linguistic kerning data, my interest was less in frequency pairs per se but in determining which diacritic letters would be likely or unlikely to occur in sequence, based on a) what groups diacritics were used by a given language and b) how they were used for a language). But I soon came to the conclusion that a person could spend _a very long time_ compiling such data, and still only scratch the surface, because every new language you research changes filters based on previous languages. At some stage, this process ceases to be efficient unless you decide that your fonts are only going to offer intentional kerning support for a fixed subset of languages (which is where Luc is, I believe), i.e. other languages may be supported, but only by accident.   \n   \nOpenType GPOS, class-based kerning is the only current mechanism that offers an efficient way of providing kerning for multiple scripts and languages in a single font. Such kerning inevitably includes support for pairs that do not actually occur in any language, but by removing the need to filter kern data in order to address application limitations, it saves a huge amount of time building linguistic kerning filters and amassing the huge amount of data necessary for such filters. Ask yourself, how should type designers be spending their time: making new fonts and spacing them, or researching letter frequency or diacritic use in hundreds of languages in order to try to accomodate yesterday's software?   \n   \nSo, again, I'm not criticising what you've done, only tried to put its usefulness in context. I think it is important that, before font makers go out and start trying to define kern pairs based on frequency in specific languages, they consider the broader picture. This is especially important because of changes in font and layout technology.\n\n"
+    },
+    {
+      "time": "6 Jun 2004 — 9:44am",
+      "content": "\\> So the usefulness of linguistic kerning data   \n\\> is linked to technical limitations   \n   \nBut also cost-effectiveness of human effort.   \n   \n\\> unless you decide that your fonts are only   \n\\> going to offer intentional kerning support   \n\\> for a fixed subset of languages   \n   \nWhich is a highly realistic decision.   \nBrute-forcing too many pairs is worse.   \n   \n\\> how should type designers be spending their time   \n   \nI guess by striking a balance between quality and efficiency - and linguistic data helps.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "6 Jun 2004 — 9:55am",
+      "content": "This reminds me, ironically, of your comments re. modernism and control on the ATypI list. My approach to kerning these days is based on recognising an effectively unconquerable ignorance: we cannot know for what languages a font might be used, and we do not have time or resources to document every language on the planet to determine what kerning data might be important for each language; ergo, we should develop technologies and strategies for kerning that acknowledge this ignorance.\n\n"
+    },
+    {
+      "time": "6 Jun 2004 — 10:03am",
+      "content": "_Brute-forcing too many pairs is worse._   \n   \nBut what is 'too many pairs'? The only limitation on number of kerning pairs that I recognise are technical limitations, i.e. bugs in software. As soon as you start supporting diacritics in kern data, the number of kerning pairs starts mushrooming. I've flattened class-based kerning in a number of OT fonts with similar character sets (pan-European Latin, Greek and Slavic Cyrillic), and they tend to have between 26,000 and 35,000 pairs. But that's only 'too many pairs' in terms of legacy applications that cannot support more than 3,000 pairs without crashing. As class-based kerning, this represents reasonable and effective kerning for _hundreds_ of languages, achieved without needing to compile individual data sets on those languages. That is both quality _and_ efficiency.\n\n"
+    },
+    {
+      "time": "6 Jun 2004 — 10:12am",
+      "content": "_But also cost-effectiveness of human effort._   \n   \nYes, this is my point: I have come to the conclusion that compiling linguistic data as a basis for kerning is not a cost-effective use of human effort because the payback is intentional support for at best a subset of languages. A much greater number of languages can be supported by accepting ignorance and providing exhaustive kerning by way of classes. It is important to realise just how efficient class-based kerning is relative to defining individual kern pairs.\n\n"
+    },
+    {
+      "time": "6 Jun 2004 — 10:18am",
+      "content": "Regarding Modernism/control: I've never advocated design hooliganism (like in the 90s). Control is important, but one example of where control can go too far is implementing kerns that \"do not actually occur in any language\". I've been guilty of that myself, but the more linguistic data I have the less justified such purism will become.   \n   \n\\> we should develop technologies and strategies   \n\\> for kerning that acknowledge this ignorance.   \n   \nAgreed - which is what I meant by \"determinism\". But determinism doesn't necessarily lead to brute-forcing, it can just as well lead to _necessary_ lapses in quality.   \n   \n\\> The only limitation on number of kerning pairs that I recognise are technical limitations   \n   \nNo, because the human effort required still remains.   \n   \nIf class-based kerning makes the kerns for \"Ta\" and \"T\n\n"
+    },
+    {
+      "time": "6 Jun 2004 — 6:01pm",
+      "content": "Cap to lowercase combinations need quite a few exceptions to what one might get from class kerning alone. But cap to cap combinations need no exceptions AFAIK, and lowercase to lowercase rarely need exceptions.   \n   \nSo, at least half the time, using class kerning promoted both efficiency and quality. The remainder of the time, one has to do more work--but never any more than one would have to do when dealing with plain old pairs.   \n   \nT\n\n"
+    },
+    {
+      "time": "6 Jun 2004 — 6:02pm",
+      "content": "Hrant, have you done any work with class-based kerning? Your paradigm seems to be very pair-based, and I think this really is yesterday's technology.   \n   \nWhen you say 'control can do too far ... implementing kerns that do not occur in any language', I think you are missing my point re. class-based kerning, which is that you gain exhaustive kerning coverage automatically and at very little cost in terms of human effort, font size or processing time.   \n   \nAlso, it is worth noting that pairs that do not occur in any language are typically pairs involving two diacritic letters that are not common to any orthography or which cannot occur side-by-side in any orthography (a good example, and something I tend to filter just because I do _know_ that they are unneeded, are pairs involving the\n\n"
+    },
+    {
+      "time": "6 Jun 2004 — 8:15pm",
+      "content": "Another thing to keep in mind is that within a font:   \n   \n- classes are the most efficient way of dealing with kerning, especially for large character sets   \n   \n- suppressing or modifying pairs within classes takes more space than leaving the class kern as is. This is not an argument for leaving in an inaccurate value where there should be an \"exception\" to override it, but there is absolutely no reason to suppress \"unnecessary pairs\" within the font, in a class kerning environment.   \n   \nI'm glad that Adam and I are repeating our talk on class kerning for the Type Tech Forum at ATypI Prague. It's a powerful, but often misunderstood, tool.   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "6 Jun 2004 — 9:58pm",
+      "content": "\\> But cap to cap combinations need no exceptions   \n   \nUnless you make your accented caps shorter - which I've done in Mana-16 - and I've seen done elsewhere. But I agree it's rare.   \n   \n--   \n   \n\\> have you done any work with class-based kerning?   \n   \nNot yet, I admit. And I'll probably like it when I get around to it. But the point is that -like anything else, including linguistic data- its usefuless is not absolute, it depends on individual designers, and what they feel they need to do. No solution or method is equally valid for all of us - note for example how even highly accomplished designers vary in their use of hand drawing & scanning, versus direct bezier design. And in my case for example I frankly don't make enough fonts with enough characters to really need class-based kerning, at least as far as I can tell (but maybe I'm wrong).   \n   \n\\> one should never assume that there is no ....   \n   \nWhile I think \"never\" is not what design is about - if you get my meaning.   \nIt's the anti-control thing again.   \n   \n--   \n   \nAnd there's something else: the (potential) usefulness of linguistic pair data isn't limited to kerning. As Eric Olson has demonstrated, such data can be useful in deciding what ligatures to include for example. And it can even help determine not only spacing, but actually letterform details too! Since it's all related, and a glyph doesn't exist in a vacuum.   \n   \nI have a nice list of _trigraphs_ brewing, and kerning doesn't even go there!   \n   \nhhp\n\n"
+    },
+    {
+      "time": "7 Jun 2004 — 12:22am",
+      "content": "Actually, kerning goes there just fine. Just not your old-fashioned pair kerning. But in OpenType you can kern trigraphs or longer combinations if you like.   \n   \nT\n\n"
+    },
+    {
+      "time": "7 Jun 2004 — 8:10am",
+      "content": "I'd forgotten about that! Great news. What apps support it?   \nBTW, does class kerning handle greater-than-digraphs?   \n   \nhhp\n\n"
+    },
+    {
+      "time": "7 Jun 2004 — 8:31am",
+      "content": "\\> What apps support it?   \n   \nHeck if I know. AFAIK, nobody has built a test font for more-than-pair kerning. Without seeing it tested, I wouldn't want to assume that it works. Painful experience and wise advice has lef me to be from the \"if it hasn't been tested, it doesn't work\" school.   \n   \n\\> Does class kerning handle greater than digraphs?   \n   \nYes and no. Class kerning meaning the table of classes against classes is inherently oriented towards kerning one glyph against another. But one would use contextual kerning statements to do kerning of more than two glyphs in a string, and there's no reason you can't use classes in contextual kerning statements (just as one can in contextual substitution statements).   \n   \nT\n\n"
+    },
+    {
+      "time": "7 Jun 2004 — 8:40am",
+      "content": "MS Office on Windows supports contextual kerning for any scripts for which OT kerning is automatically handled as part of basic shaping, e.g. Thai, Arabic, Hebrew, etc.   \n   \nI've made Thai and Arabic fonts that use contextual kerning. It works.\n\n"
+    },
+    {
+      "time": "7 Jun 2004 — 9:14am",
+      "content": "Does that mean kerning can be \"cascaded\" depending on context (if you know what I mean)?   \n   \nhhp\n\n"
+    },
+    {
+      "time": "7 Jun 2004 — 9:57am",
+      "content": "Fontographer's \"Kerning Assistance\" has been doing class-based kerning since 1993/4.   \n   \nFor a basic Latin font without excessive kerning of non-accented lower case characters, you can kern all your cap-cap, cap-lc and lc-lc, all your accented characters, non-alphetics, and still come in under 2,000 pairs.   \n   \n\\*\\*\\*   \n   \nHowever, if you want to kern for \"DotCom\" words (which is where I draw the line), it could go a bit higher...   \n   \n\\*\\*\\*   \n   \nIt should be pointed out that class based kerning is only as discerning as the user makes it. For instance, it is tempting to lump V and W into the same kern class, but only if the angles of the stems are identical, which is frequently not the case.   \n   \n\\*\\*\\*   \n   \nThe perfect use for multi-character kerns: in abbreviated titles. If you kern your periods tightly to the caps (on both sides!), something like \"Y.Y\" has the letters colliding, so a 3-glyph exception would solve that problem (which also fools InD's Optical Kerning). But man, it would be so much work it would only be justified if you could amortize it over a large set of accented characters.\n\n"
+    },
+    {
+      "time": "7 Jun 2004 — 10:02am",
+      "content": "\\> Fontographer's \"Kerning Assistance\" has been   \n\\> doing class-based kerning since 1993/4.   \n   \nAnd Font Studio way before that!   \n   \n\\> it would only be justified if you could amortize it   \n   \nOr automate it...   \n   \nhhp\n\n"
+    },
+    {
+      "time": "7 Jun 2004 — 11:17am",
+      "content": "Yes, class-based kerning is not new, nor is it unique to OpenType.   \n   \nOf course, one shouldn't forget that there is a difference between classes as a way of generating kern pairs, and building the classes into the fonts to make for a more compact representation of kerning.   \n   \nOne could easily automate construction of classes. It would need some tweaking, but could work pretty well. The automated class construction could be based on a static list, by looking for glyphs with identical sidebearings, or by some combination. My approach involve a static list, plus analysis of glyph names, and using that to do both class-based kerning and class-based spacing.   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "7 Jun 2004 — 11:22am",
+      "content": "\\> analysis of glyph names   \n   \nAh, so for example if you saw \"grave\" in the name of a lc character, you would automatically not kern it (or kern it less) when it came after a UC, like the \"T\"? Clever.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "7 Jun 2004 — 1:26pm",
+      "content": "I'm not sure what you mean by 'cascaded', Hrant. Here are some examples of things I've done with contextual kerning:   \n   \nWhen vowel or other marks are applied to Arabic text, they may collide with adjacent letters if the base is narrow or if the letters are kerned. There are two ways to solve this: by contextually repositioning the marks or by contextually rekerning the letters. Neither solution is appropriate to all situations, so the Arabic fonts I've worked on sometimes move the mark and sometimes move the letter, depending on the specific context.   \n   \nIn Thai, the tall vowel signs need to be kern off the marks above preceding letters. Since the marks may be stacked two deep, kerning need to be contextual and to account for single marks or sequences of marks.\n\n"
+    },
+    {
+      "time": "7 Jun 2004 — 2:48pm",
+      "content": "Interesting elaboration - thanks.   \n   \nWhat I was trying to ask (clumsily) is whether a kern can depend on the existence/size of a _previous_ kern. Contextual kerning, if you would. This would allow an entire word to be set looser based on what some pairs in the word are doing - although I guess -if you build a table big enough- what you're describing could do the same thing?   \n   \nhhp\n\n"
+    }
+  ]
+}

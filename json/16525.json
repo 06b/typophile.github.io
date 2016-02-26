@@ -1,0 +1,70 @@
+{
+  "id": "16525",
+  "title": "Justified Text in Bringhurst's Elements of Typographic Style",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Hi. I'm new here and to typography in general. I've started reading Bringhurst's EOTS, based on numerous recommendations, and had a few questions on some of his guidelines and the justification used in the book itself.\n\nI'm only on page 42, but thus far, the following guidelines have been suggested:\n\n<cite><br>\n2.1.7 Don't letterspace the lowercase without a reason.<br>\n2.1.9 Don't alter the widths or shapes of letters without cause.<br>\n2.4 Etiquette of Hyphenation and Pagination<br>\n    ... and no typesetting software should be permitted to compress,<br>\n    expand or letterspace the text automatically and arbitrarily<br>\n    as a means of fitting the copy.<br>\n</cite>\n\nAll of the above seem to make perfect sense to me, especially tweaking a designers type by changing widths, even to a mere mortal, I wouldn't even consider such blasphemy. However, he then points the reader to p.190 (section 9.4) where he talks about the various software justification engines that are able to do letterspacing and glyph shaping. He then proceeds to describe the min/max letterspacing and min/max glyph shaping settings he used in the book?!?\n\nIs it me, or is he violating his own rules by using letterspacing and altering the widths of glyphs? Perhaps, as a newcomer, I simply do not understand some of the terminology, but it seemed clear to me that the first two guidelines frown upon both letterspacing and glyph shaping.\n\nWith that said, I am also curious as to the general concensus of his use of justification in the book. Before I started getting into the details of interword spacing, I thought the book was very readable. However, after reading only 42 pages, I am now continually distracted by the horrible interword spacing seen is some paragraphs. On p.31 the following paragraph looks terrible:\n\n<cite><br>\nA man who would letterspace lower case would steal sheep, Frederic Goudy liked to say. If this wisdom needs updating, it is chiefly to add that a woman who would letterspace lower case would steal sheep as well.<br>\n</cite>\n\nMy untrained eye still can't notice any glyph shaping occuring, but in the above paragraph, I can see the extra letterspacing and wordspacing with no problem whatsoever. In some ways, I think I enjoyed the \"look\" of the book better when I was ignorant of these details. Now, all I do as I read is concentrate on how the wordspacing is so inconsistent across lines.\n\nAm I just being overly critical because I've just recently been enlightened to some of the details of typography?\n\nThanks,  \nPete\n\nps On a side note, does anyone know if InDesign's paragraph composer has the same feature the TeX does concerning the amount of extra wordspace used on consecutive lines? If I recall, TeX will not put one line of text with an abnormal amount of extra wordspace next to another where the wordspace must be shrunk in the other extreme, thus limiting the contrasting amount of nearby wordspacing.\n\n",
+  "author": "pkazmier",
+  "time": "29 Nov 2005 — 3:54pm",
+  "uid": "10074",
+  "comments": [
+    {
+      "time": "29 Nov 2005 — 4:18pm",
+      "content": "It seems to me this isn't quite the contradiction you're implying.\n\nIn 9.4 Bringhurst discusses and shows examples of various h+j settings, and outlines those used in _EOTS_. What he's outlining here are very specific rules set up in the h+j engine.\n\nIn 2.4, as you've quoted, he cautions that \"no typesetting software should be permitted to compress, expand or letterspace the text _automatically and arbitrarily_ as a means of fitting the copy.\"\n\nCarefully testing and setting specific engine rules is not the same as permitting the software to \"automatically and arbitrarily\" fit the copy; on the contrary, fine-tuning the engine is the opposite of leaving the software to do whatever it thinks is best.\n\n"
+    },
+    {
+      "time": "29 Nov 2005 — 4:27pm",
+      "content": "Pete, typographers have always cheated to squeeze copy to fit.  \nThe trick is to do it cleverly enough to be unnoticeable to the reader, and also the professional eye.\n\nH&J software allows the typographer to cheat in several ways:  \n- reduce letterspace (tracking)  \n- reduce wordspace  \n- reduce horizontal scale by a percentage\n\nThere is nothing wrong with inconsistent wordspacing from line to line -- it allows an even fit between letters (tracking), which is most desirable.\n\n"
+    },
+    {
+      "time": "29 Nov 2005 — 6:36pm",
+      "content": "<cite>On a side note, does anyone know if InDesign’s paragraph composer has the same feature the TeX does concerning the amount of extra wordspace used on consecutive lines?</cite>\n\nAFAIK, InDesign's paragraph composer uses TeX algorithms (which are public domain).\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 2:05am",
+      "content": "InDesign's paragraph composer uses primarily a combination of (1) a patented idea, the patent for which was bought from URW, (2) its own tweaks and modifications to that idea. There could be some influence from TeX either directly or indirectly, but I know it was not the primary source.\n\nI think what Bringhurst was opposed to was applications like Microsoft Word that don't let you specify much in terms of what they should do to achieve their justification.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 5:00am",
+      "content": "Thomas,\n\nThe URW hz program (a suite of algorithms that URW developed; I assume hz is the program that Bringhurst is referring to in Elements pg 190, 192) was indeed heavily influenced by the Knuth-Plass algorithm. In fact, according to the Seybold Report, Volume 22, Number 11, it directly used TeX for its paragraph-based line-breaking decisions [I assume that they mean it used the Knuth-Plass algorithm?].\n\nAs you correctly point out though, this is only part of what makes the hz program [and by extension InDesign] so powerful. The other microtypographic extensions incorporated into hz are important too. The full text of the relevant Seybold report is available online [slightly mangled by my browser?] at: [http://www.seyboldreports.com/SRPS/free/0ps22/ps22-11a.htm](http://web.archive.org/web/20140911190703/http:/www.seyboldreports.com/SRPS/free/0ps22/ps22-11a.htm \"http://www.seyboldreports.com/SRPS/free/0ps22/ps22-11a.htm\")\n\nSome of the features of the hz algorithm are now available to the TeX world through pdfTeX. There is a nice discussion of these microtypographic extensions to TeX in Han The Thanh's Ph.D dissertation:  \n [http://www.pragma-ade.com/pdftex/thesis.pdf](http://web.archive.org/web/20140911190703/http:/www.pragma-ade.com/pdftex/thesis.pdf \"http://www.pragma-ade.com/pdftex/thesis.pdf\")\n\nIs there any freely available discussion of Adobe's extensions to the URW algorithms? Or is it all a secret now? :)\n\nOne thing: the font expansion aspects of the hz algorithm really do beg for Multiple Master fonts. I do wish that you guys hadn't killed them off....\n\nGrant\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 7:46am",
+      "content": "Thanks for the responses. One followup question, in what order would you rate these evils used to justify text: wordspacing, hyphenation, letterspacing, and glyph scaling. Lets assume that moderate amounts of each are used: max M/2 and min M/5 wordspacing, +/-3% letterspacing, +/-2% scaling. I'm not sure how to quantify moderate amounts of hyphenation.\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 8:01am",
+      "content": "\\>how to quantify moderate amounts of hyphenation\n\nIn paragraph settings in InDesign the flyout arrow gives you the option of choosing the \"hyphenation settings\" dialogue box, which includes the powerful slider that makes a trade-off between better spacing and fewer hyphens. Where to put the slider and the other settings gives a way to quantify the setting.\n\nI would also be interested in people's views on best practices and settings in InDesign on these issues.\n\n"
+    },
+    {
+      "time": "1 Dec 2005 — 10:36pm",
+      "content": "Personally, I don't mind a fair bit of hyphenation, and prefer more even spacing. So I slide the slider all the way over to that extreme.\n\nIn pkazmier's example, I would not consider that rang of spacing options \"moderate.\" If the standard space in the font is M/4 (which is about average), then that corresponds to spacing settings of 80%/??%/200% in InDesign (I'd assume you'd put 100% in the middle, but maybe that's just me. Whereas I and most typographers tend to suggest settings like 80/100/133. Of course, a lot depends on context: maybe pkazmier is mostly setting newspaper text in narrow columns or something, requiring more extreme justification settings.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "2 Dec 2005 — 2:20am",
+      "content": "Thomas,\n\nI was using the reasonable max and min suggestions in Bringhurst's book with regards to word spacing. After your post, I went back to confirm that I correctly posted the right numbers, but it seems that Bringhurst does suggest tighter numbers for text set at smaller sizes. It says that a max of M/3 and min of M/4 would be better numbers to strive for. Would these numbers be a considered moderate? And, would you consider the numbers I posted for letterspacing and glyph scaling as moderate, or are those also too generous?\n\nThanks,  \nPete\n\n"
+    },
+    {
+      "time": "2 Dec 2005 — 6:47am",
+      "content": "\\>On p.31 the following paragraph looks terrible:\n\nI would imagine that he took the decision to not hyphenate Frederic based on his own advice. (cf. page 43 _Hyphenate proper names only as a last resort unless they occur with the frequency of common nouns._)\n\nTim\n\n"
+    },
+    {
+      "time": "3 Dec 2005 — 12:19pm",
+      "content": "Just dropping by on a [very] rare spare moment.\n\nRegarding pkazmier's numbers above:\n\nI agree with Thomas, wordspacing = 80 / 100 / 133 (assuming a native word space of 250). The figures for letterspacing are too extreme in my book. I prefer -1 / 0 / +1. These are starting points -- works fine maybe 85% of the time; altered if necessary based on font, size, leading, margins, nature of text being set, etc., in order to satisfy my eye.\n\nI don't generally allow glyph scaling at all, by default. I will exercise it as the last resort on an ad hoc basis for particularly ornery paragraphs.\n\nIn terms of prioritization of the various parameters:  \nHyphenation first, followed closely by Wordspacing -- actually the two in conjunction, the relative proportion depending upon the material being set; thankfully Indy allows movement between the two.  \nLetterspacing only in small amounts, as noted above.  \nGlyph scaling almost never, only as a last resort.\n\n"
+    },
+    {
+      "time": "3 Dec 2005 — 3:27pm",
+      "content": "Great to have your rare contribution Kent. I and I'm sure others miss your insights. All the best.\n\n"
+    },
+    {
+      "time": "7 Dec 2005 — 5:33pm",
+      "content": "Sometimes tighter spacing can look good, I really like the examples in Dowding's book The Finer Points in the Spacing and Arrangement of Type.\n\nHe suggests that M/5 can produce a strong readable line, which equates to about 67/80/100 if I recall correctly.\n\nIt is tight, but can look very nice.\n\n"
+    },
+    {
+      "time": "7 Dec 2005 — 7:14pm",
+      "content": "Kent!! Great of you to drop by again.\n\n\\> There is nothing wrong with inconsistent wordspacing from line to line\n\nSure there is. See: [http://typophile.com/node/16395](http://web.archive.org/web/20140911190703/http:/typophile.com/node/16395 \"http://typophile.com/node/16395\")\n\n\\> it allows an even fit between letters (tracking)\n\nOnly if you're obsessive-compulsive about justification...  \nOtherwise, you fall for neither variable word spacing nor  \nvariable letterspacing.\n\nhhp\n\n"
+    }
+  ]
+}

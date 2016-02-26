@@ -1,0 +1,38 @@
+{
+  "id": "41070",
+  "title": "unicode for alternates",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hello,\n\nI’m making a font and I’m trying too add alternate characters using for example the following code.\n\nfeature zero {  \n sub zero by zeroalt;  \n} zero;\n\nSo I’ making extra characters by adding an -alt suffix. For example “zero” becomes zeroalt.  \nSo far so good. But my question is the following: What do I do with the Unicode of these new characters?  \nThe Unicode for “zero” is “0030” but I can’t put my alternate “zero” at “0031” because that’s taken by “one”.  \nWhat are some possible unicode solutions for “zeroalt”? And is a uncode necessary for these alternates?\n\nthx\n\n [‹ iKern](http://web.archive.org/web/20080905213205/http:/www.typophile.com/node/41124 \"Go to previous forum topic\") [Creating/Modifying Existing Font ›](http://web.archive.org/web/20080905213205/http:/www.typophile.com/node/41074 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080905213205/http://www.typophile.com/user/9633\" title=\"View user profile.\">D. Wiewauters</a>",
+  "time": "<br>",
+  "uid": "9633",
+  "comments": [
+    {
+      "time": " 18.Jan.2008 9.11am",
+      "content": "_And is a unicode necessary for these alternates?_\n\nyes and no. adobe recommends you not encode alternate glyphs, but then typical users (using MS Office) will not be able to access alternate glyphs at all (unless they have more sophisticated applications such as Adobe CS apps.) This is the route I would probably go. if you want to give these glyphs unicode encoding, use the Private Use Area slots. In FontLab you can assign all your unencoded glyphs at once by choosing Glyph \\> Glyph Names \\> Generate Unicode \\> Assign PUA indexes to unencoded glyphs.\n\n"
+    },
+    {
+      "time": " 18.Jan.2008 10.45am",
+      "content": "thx Paul for the quick answer.\n\nIt’s a font for a kind of digital private press. So office isn’t that big of an issue. But I’ll guess I’ll encode them anyway if there’s a private use area in unicode.\n\n"
+    },
+    {
+      "time": " 18.Jan.2008 10.46am",
+      "content": "srry double post\n\n"
+    },
+    {
+      "time": " 18.Jan.2008 12.14pm",
+      "content": "If any of the documents you set will have a use beyond that original printing, (e.g., pulling text from a PDF file, etc.), I suggest you also name those characters zero.alt, one.alt, etc. Any program based on \\*names\\* (like a PDF) isn’t going to understand “zeroalt”. But the Adobe convention is that everything after the period drops out, so “zero.alt” would extract as “zero” and the text would be useful.\n\nPrivate use also comes with some penalties — any character so encoded has a meaning only in a particular font.\n\nIf you can access characters without a Unicode index, as with InDesign, the best practice would be to name the alternative characters “zero.alt” , give them no Unicode index, and use OT features to access them. That way, the text in the original document is preserved.\n\nFWIW\n\n"
+    },
+    {
+      "time": " 18.Jan.2008 8.47pm",
+      "content": "Also, in the event there is more than one alternate for a character, and you have no more descriptive suffixes than .alt (such as you might for language-specific variants or oldstyle figures) use zero padded number extensions, such as: zero.alt01, zero.alt02, &c. Two digits will allow the option of up to one hundred variants, though the only reason I can think you would need that many is if you inserted a random number generator into your substitution script, which could be a fun experiment but not terribly useful generally.\n\n"
+    },
+    {
+      "time": " 20.Jan.2008 3.35am",
+      "content": "Charles and Jason, thanks as well for the great tips.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "id": "14641",
+  "title": "GD Fonts (\\*.gdf fles)",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I am new at font creation, as will be apparent by this post, and was wondering how to go about making bitmap fonts. Allow me to give you a bit of context... I am working with php dynamic imaging, specifically the GD Library. I want to create custom bitmap fonts in order to load with the imageloadfont() function. It may help you answer my question if you take a look at the following page:\n\n[http://www.widgnet.com/gdf\\_fonts/](http://web.archive.org/web/20141103232206/http:/www.widgnet.com/gdf_fonts/ \"http://www.widgnet.com/gdf\\_fonts/\")\n\nFor a small library of these fonts to play with or at least take a look at in order to help answer my questiong, please take a look at the following page:\n\n[http://www.widgnet.com/gdf\\_fonts/fonts.html](http://web.archive.org/web/20141103232206/http:/www.widgnet.com/gdf_fonts/fonts.html \"http://www.widgnet.com/gdf\\_fonts/fonts.html\")\n\nApparently the creator of this site was able to convert TTF fonts into GDF fonts fairly simply, but he does not explain how, or perhaps I am overlooking a key part of the site.\n\nEssentially, I want to be able to create a small bitmap (maybe 8 by 13 px or something similar, that's not the important part...) for each letter/symbol and compile these bitmaps into a font file. This font file then has the following information:\n\nbyte 0-3 (int) number of characters in the font  \nbyte 4-7 (int) value of first character in the font (often 32 for space)  \nbyte 8-11 (int) pixel width of each character  \nbyte 12-15 (int) pixel height of each character  \nbyte 16-EOF (char) array with character data, one byte per pixel in each character, for a total of (nchars\\*width\\*height) bytes.\n\nAnd while I may understand what this information is saying, I'm not sure how to go about using it. Any and all help is appreciated. Thank you =)\n\n-Trevor\n\n",
+  "author": "antiaverage",
+  "time": "16 Aug 2005 — 3:34pm",
+  "uid": "8815",
+  "comments": [
+    {
+      "time": "16 Aug 2005 — 4:12pm",
+      "content": "Hmm... I found a [PHP font converter](http://web.archive.org/web/20141103232206/http:/puremango.co.uk/cm_fontmaker_114.php) which converts a \\*.png file into a \\*.gdf file, but is this the only way to go about creating a \\*.gdf file?\n\n"
+    },
+    {
+      "time": "16 Aug 2005 — 8:21pm",
+      "content": "Wow, that's interesting. One of the bitmap fonts that guy did is based on my Anonymous™ TrueType font. I can't decide whether to be annoyed or honored. Hmm.\n\n"
+    },
+    {
+      "time": "18 Aug 2005 — 4:26am",
+      "content": "yo, I'm the puremango dude; if you're talking about the example font on the png2gdf app, I can change the font or link to you if you want? sorry if you're annoyed; I know how it feels when your work gets passed off as someone else's and I promise that wasn't the intention here.\n\n"
+    },
+    {
+      "time": "18 Aug 2005 — 4:30am",
+      "content": "and to antiaverage, if you know PHP, the font convertor tool goes through the process step by step, alternatively if you're looking for other ways of creating GD fonts, check out [philiplb.de's TTF2GDF tool](http://web.archive.org/web/20141103232206/http:/www.philiplb.de/index.php?showdownload=63&p=Downloads)\n\n"
+    },
+    {
+      "time": "18 Aug 2005 — 3:19pm",
+      "content": "user24--It's okay, but it would be nice if you could credit the source somehow. Anonymous™ is a free font, but not free-as-in-free-beer.\n\n"
+    },
+    {
+      "time": "19 Aug 2005 — 1:55am",
+      "content": "mark; actually on further inspection, the font I used was Arial - I couldn't remember because it's been a while since I wrote the app.\n\nWhen you said <cite>One of the bitmap fonts that guy did is based on my Anonymous™ TrueType font</cite>, I thought you meant me, but I think you were actually refering to the widgnet URL, not the [example PNG](http://web.archive.org/web/20141103232206/http:/puremango.co.uk/font.png) on my site.\n\nAh well, if I had used your font, you can be assured there would now be a link to you. ;-)\n\n"
+    },
+    {
+      "time": "19 Aug 2005 — 1:18pm",
+      "content": "I was referring to this:\n\n[http://www.widgnet.com/gdf\\_fonts/preview/anonymous.png](http://web.archive.org/web/20141103232206/http:/www.widgnet.com/gdf_fonts/preview/anonymous.png \"http://www.widgnet.com/gdf\\_fonts/preview/anonymous.png\")\n\nSorry for the confusion.\n\n"
+    },
+    {
+      "time": "22 Aug 2005 — 10:22am",
+      "content": "I've been struggling with GDF fonts lately, too. Apparently, the fonts are architecture-dependent. I need to use them on a Sun Sparc machine, so the tools mentioned earlier in this thread don't really work for me. Is there anywhere I can get step-by-step info on how to create these fonts? Or, is there a tool out there that works for Sparc machines?\n\n"
+    },
+    {
+      "time": "24 Nov 2005 — 7:40am",
+      "content": "This thread is old, but anyway.  \nInstead of using GDFs, one can also use TrueType fonts with the [imagettftext](http://web.archive.org/web/20141103232206/http:/www.php.net/imagettftext) function in PHP+GD.\n\n-- [omine.net](http://web.archive.org/web/20141103232206/http:/www.omine.net/)\n\n"
+    }
+  ]
+}

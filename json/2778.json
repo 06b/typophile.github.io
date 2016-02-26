@@ -1,0 +1,58 @@
+{
+  "id": "2778",
+  "title": "Editing \"Family Name\" of a Font",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "I'm sure this has been discussed, but my searches have turned up empty.   \n   \nIs there a way to change the properties of a font in Mac OS X? The reason I ask is that I've just purchased a font that came with several different weight variations. When the font is opened in FontBook, though, each variation is displayed as it's own unique font family.   \n   \nIs there a way for me to change this?   \n   \nThanks in advance.\n\n",
+  "author": "sperte",
+  "time": "20 Jan 2004 — 12:33pm",
+  "uid": "2903",
+  "comments": [
+    {
+      "time": "20 Jan 2004 — 1:36pm",
+      "content": "You can use FontLab to change the info in the font header - Family name, Style name, etc. In lieu of that, I believe you can open the AFM file in a text editor and change the info there.   \n   \nI'm assuming that the Family name is something like 'Fontname-Regular'. If you want them to not be their own unique entries, then the Family name should be just 'Fontname' for each font, the Style name should be 'Regular', & the Font name should be 'Fontname Regular'. Same for the other members of the family (e.g., italic, bold, bold italic).   \n   \nIf you want a huge family (i.e., more than 4 members) to be contained in one family, you'll need to add OpenType names in FontLab. The family name for every font will be the same, and the Style names will all be different.   \n   \nMaybe this makes sense? I don't think I'm at my most lucid today ;-)\n\n"
+    },
+    {
+      "time": "20 Jan 2004 — 2:26pm",
+      "content": "Yeah that makes sense. That's exactly what I want to do.   \n   \nI've got four font styles in the family Paralucent. Each style has a family name that matches its unique style. For instance, Paralucent-Bold belongs to the family Paralucent-Bold. My goal is that it would belong to Paralucent.   \n   \nIs there another utility that can do this? Perhaps something without the $549 price tag? ;)\n\n"
+    },
+    {
+      "time": "20 Jan 2004 — 2:36pm",
+      "content": "Yeah, it seems implausible to pay $549 to rename 3 fonts. I'm not a Mac user, but I'd try this. Open your AFM files in Simpletext. You'll see something like this at the top:\n\n> StartFontMetrics 2.0   \n> FontName Paralucent-Italic   \n> FullName Paralucent Italic   \n> FamilyName Paralucent-Italic   \n> Weight Regular\n\nChange that info to this:\n\n> StartFontMetrics 2.0   \n> FontName Paralucent-Italic   \n> FullName Paralucent Italic   \n> FamilyName Paralucent   \n> Weight Regular\n\nNotice the change in FamilyName. Maybe that'll sort you out.   \n   \nBe sure you're not violating your EULA by modifying the information though.\n\n"
+    },
+    {
+      "time": "20 Jan 2004 — 2:39pm",
+      "content": "Incidentally, if you have access to a PC, you can use CrossFont for this sort of thing. E.g., generate an AFM from the Type 1 font. Modify the info in the AFM. Then generate a new PFM file. That doesn't help you much though :-/\n\n"
+    },
+    {
+      "time": "20 Jan 2004 — 7:09pm",
+      "content": "As far as I know, changing the AFM file won't do diddly to help you. Mac OS doesn't care about or use the AFM.   \n   \nIs it a Type 1 font?   \n   \nIn any case, you would need to consult the license agreement to see if you are allowed to modify it.   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "20 Jan 2004 — 10:02pm",
+      "content": "I've got an email into T.26 about it. I'll post their response when I get it.   \n   \nI did try that work-around with the AFM file, just to check it out... Just as you said, Thomas. OS X didn't care one bit.   \n   \nBy the way, I can still \\*use\\* the fonts, I just don't like the way they're displayed or organized.\n\n"
+    },
+    {
+      "time": "21 Jan 2004 — 8:11am",
+      "content": "\\>Mac OS doesn't care about or use the AFM.   \n   \nAaahhh. Bummer. I always use the CrossFont workaround on a PC, and generate new files with new names.   \n   \nIf T26 says it's kosher, I wouldn't mind changing the headers for you, Sean.\n\n"
+    },
+    {
+      "time": "21 Jan 2004 — 9:46pm",
+      "content": "They hooked me up with the Mac version (PostScript).   \n   \n... which bring me to another question:   \n   \nI use a PC at work, in an all-windows network (except for my Mac laptop). I'd like access to some of my fonts from my laptop on the PC.   \n   \nI know that Windows XP supports installation of PostScript Type 1 fonts, but for some reason whenever I try and copy a font over to our Windows server, the file size reflects 0kb in XP, but it appears fine in OS X in the same (network) location.   \n   \nAny ideas? Did I make sense?\n\n"
+    },
+    {
+      "time": "22 Jan 2004 — 5:49am",
+      "content": "Mac files have two 'forks'. A resource and a data fork IIRC. All of the font info resides in the resource fork, which a PC doesn't read (PC files have only one 'fork').   \n   \nI have to jump back & forth between platforms sometimes, and on my PC I use a piece of software called TransMac. It'll take a Mac file & write a file that a PC understands. Pretty cheap to license, too.\n\n"
+    },
+    {
+      "time": "22 Jan 2004 — 6:08am",
+      "content": "Sean, you can download a trial version of TransMac [here](http://web.archive.org/web/20131017014851/http:/www.asy.com/sharetm.htm). The trial version is pretty functional, and the license for a full version is $64. The same company also sells CrossFont which converts Mac fonts into PC fonts and vice versa. I've licensed that too, as it's very useful for non-OpenType fonts.\n\n"
+    },
+    {
+      "time": "22 Aug 2005 — 4:51pm",
+      "content": "Hiyas-\n\nI'm brand spankin new to typography and am working with Fontographer 4.1 on a PC. I'm pretty much Gumping my way through the learning process and have managed to create new fonts. However, they're all always titled \"UNTITLED\".\n\nI'd already gone in and edited the .AFM and .ini files, just like what's been mentioned above, however the .fog file that Fontographer uses to edit my fonts, doesn't seem to be communicating with the .AFM and .ini files. Essentially, when I attempt to Generate my font files, I've never given the option to actually \\_name\\_ my font or even create a new font family (goal #2).\n\nI realise i'm probably in the minority here with working on a pc and all, and i further realise there are newer versions of the software out there, but any pointing in the right direction would be most helpful.\n\nthanks muchly  \n/aae\n\n"
+    }
+  ]
+}

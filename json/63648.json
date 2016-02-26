@@ -1,0 +1,58 @@
+{
+  "id": "63648",
+  "title": "Illustrator file format (.ai) not recognized by windows. (?)",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi,\n\nI'm just stuck with this issue. I have Adobe Suite CS3 for some time now, and I don't know why, the .ai files are not associated with Illustrator. I already reinstalled the whole Suite and nothing.  \nApparently if I drag a file into Illustrator it opens, but it's just boring. I want this to work properly.  \nI'm just loosing patience here.  \nSome help would be appreciated :).\n\nThanks  \nJoão\n\nP.S.: I know this is no typophile like issue, but I have no patience to google.\n\n",
+  "author": "<a href=\"/web/20100203132818/http://typophile.com/user/46497\" title=\"View user profile.\">esphera</a>",
+  "time": "<br>",
+  "uid": "46497",
+  "comments": [
+    {
+      "time": "",
+      "content": "Right click \\> Open with \\> check Always open with this app\n\n"
+    },
+    {
+      "time": "",
+      "content": "well, I already tried that, but apparently the only program that doesn't appear on the software list it's precisely Illustrator.\n\nHere's a SS.\n\nEven if I go to the Illustrator folder, and select the app file (.exe) it doesn't work.\n\n ![](http://web.archive.org/web/20100203132818im_/http:/typophile.com/files/screenshot_6512.gif)\n\nThanks  \nJoão\n\nP.S.: \"Abrir com...\" \\> \"Open with...\"\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Even if I go to the Illustrator folder, and select the app file (.exe) it doesn’t work</cite>\n\nThe one shown isn't properly an app file, but a shortcut. Try to locate the proper .exe  \n(it should be in Adobe\\Adobe Illustrator CS3\\Support Files\\Contents\\Windows\\Illustrator.exe)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Even with that. Tried Also.\n\nThanks for you patience :)  \nJoão\n\n"
+    },
+    {
+      "time": "",
+      "content": "Are you confident enough in your computer skills to use RegEdit? (But it might not work anymore -- Windows 7?)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Are you suggesting to reinstall the Suite and use regedit to delete the registry? Yes I'll probably try that, but later :) I'll post the result, and thanks for the tip :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Ah, no. It ought to work (probably), but you can first try manually changing the association.\n\nIn HKEY\\_CLASSES\\_ROOT, \".ai\" points to a default handler for \"Adobe.Illustrator.13\". This key, in turn, contains all necessary Explorer information -- eg., the icon to use, but also the Shell stuff (as in \"Open\",\"Print\").  \nThe Shell subkey there contains a subkey \"open\", which _then_ has a subkey \"command\", and this is finally the one to edit. Its value \"(Default)\" should read -- _including the quotes_\n\n\"C:\\Program Files\\Adobe\\Adobe Illustrator CS3\\Support Files\\Contents\\Windows\\Illustrator.exe\" \"%1\"\n\n-- but note that this is the path on my system, and yours is highly likely different.\n\n"
+    },
+    {
+      "time": "",
+      "content": "So, you mean this?\n\n ![](http://web.archive.org/web/20100203132818im_/http:/typophile.com/files/SS_5285.jpg)\n\nIt's not working. :\\\n\nI'll try to reinstall the Suite tomorrow again, and delete the registry, and then.. pray.\n\nThank you for your elucidative answer :)\n\nJoão\n\nP.S.: (Predefinição) = (Default).\n\n"
+    },
+    {
+      "time": "",
+      "content": "There is a slight difference with my setup (Win XP). In mine, the primary key \".ai\" (which is picked up by the system as the file extension -- oui, mon fier Mac amices, that's how Windows' file system works!). That contains another definition as default: \"Adobe.Illustrator.13” -- and _that_ is the name of another key further down the list, with all details. I think you should leave the key you just changed to \"Adobe.Illustrator.13\".\n\n.. Oh well, there is also the possiblity it's all changed with Win 7.\n\n"
+    },
+    {
+      "time": "",
+      "content": "My OS is Vista 64\n\n"
+    },
+    {
+      "time": "",
+      "content": "Ok. Just solved the problem by checkin' my girlfriends reg editor.\n\nThank you for your availability. :D\n\nJoão\n\n"
+    }
+  ]
+}

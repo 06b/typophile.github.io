@@ -1,0 +1,26 @@
+{
+  "id": "39159",
+  "title": "Opentype font converted to type 1??",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi all,\n\nCould anybody explain the following situation:\n\nI’m using an Opentype font (Type1 flavour) in AICS2 and export it to a pdf.  \nWhen i check the fonts in acrobat they are presented (or converted) to a Type1.  \nSo the font is using the type1 icon and not the opentype icon. I saw pdf’s before with opentype fonts / using the opentype icon. Why is that?\n\nthx,  \nSteven\n\n [‹ Classes Issue](http://web.archive.org/web/20080907002927/http:/www.typophile.com/node/39149 \"Go to previous forum topic\") [Poll: What OS and apps do you use for designing type? ›](http://web.archive.org/web/20080907002927/http:/www.typophile.com/node/38314 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080907002927/http://www.typophile.com/user/24018\" title=\"View user profile.\">stevend</a>",
+  "time": "<br>",
+  "uid": "24018",
+  "comments": [
+    {
+      "time": " 16.Nov.2007 1.25pm",
+      "content": "<cite>I’m using an Opentype font (Type1 flavour) in AICS2 and export it to a pdf.<br>\nSo the font is using the type1 icon and not the opentype icon.</cite>\n\nThat’s perfectly normal. Nothing to worry about.\n\n<cite><br>\n I saw pdf’s before with opentype fonts / using the opentype icon.<br>\n<cite></cite></cite>\n\n[http://typophile.com/node/18413](http://web.archive.org/web/20080907002927/http:/typophile.com/node/18413 \"http://typophile.com/node/18413\")?\n\nRalf\n\n"
+    },
+    {
+      "time": " 16.Nov.2007 2.59pm",
+      "content": "You asked the same question in the Adobe user forums, and I answered it there. :)\n\nIn some senses, it’s the other way around: Type 1 is stored more like OpenType in PDF.\n\nPDF uses CFF (Compact Font Format) with Type 2 charstrings as a lossless compression for Type 1 fonts. When OpenType was created, Adobe adopted the then-new CFF approach for handling Type 1 outlines (entire fonts really) within OpenType. The other OpenType tables are in addition to the CFF portion of the font.\n\nSo in PDF, when Acrobat reports fonts as being “Type 1,” they are actually CFF - just like that portion of OpenType CFF fonts.\n\nMore recently, PDF has added the capability to store additional OpenType layout tables as well. However, this facility has been little-used to date, AFAIK.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": " 16.Nov.2007 3.31pm",
+      "content": "Thomas, would I be correct in assuming your last point indicates that it’s a good idea to use Adobe’s naming system for features, eg “Asmall” rather than “A.smcp” or “A.sc”, and “threeinferior” rather than “three.inf”?\n\nI note that these are the default names in FontLab 5’s “Adobe OT PS standard names (CFF)” code page (Names mode).\n\n"
+    }
+  ]
+}

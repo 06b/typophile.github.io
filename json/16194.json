@@ -1,0 +1,150 @@
+{
+  "id": "16194",
+  "title": "FlashType renderer",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "I've been doing some background reading on the new FlashType renderer in Macromedia Flash 8. See this [basic overview](http://web.archive.org/web/20150124145107/http:/livedocs.macromedia.com/flash/8/main/wwhelp/wwhimpl/common/html/wwhelp.htm?context=LiveDocs_Parts&file=00001434.html) and this explanation of [rendering options](http://web.archive.org/web/20150124145107/http:/livedocs.macromedia.com/flash/8/main/00001435.html#223833).\n\nIronically, the example of Flash rendering shown [here](http://web.archive.org/web/20150124145107/http:/www.kaourantin.net/2005/08/some-text-features-in-flash-player-8.html) uses my Constantia, one of the MS ClearType fonts, looking rather the worse-for-wear in FlashType: very grey with lots of colour fringing. Unfortunately, there doesn't seem to be any way to determine which of the rendering options was used in this example.\n\nI'm wondering if any of our resident rendering fanatics (Raph?) might have access to Flash 8 and could prepare some comparison samples showing the same text and font specs with different FlashType options enabled?\n\n",
+  "author": "John Hudson",
+  "time": "11 Nov 2005 — 2:51pm",
+  "uid": "1262",
+  "comments": [
+    {
+      "time": "11 Nov 2005 — 5:01pm",
+      "content": "(simple post to keep this request on the front page)\n\n"
+    },
+    {
+      "time": "11 Nov 2005 — 6:41pm",
+      "content": "Also wonder if it has a BGR option too, and will it pick up the registry settings if the ClearType is set to BGR on a Windows machine.\n\nThe other obvious question the demo raises is how would Flash handle a font with embedding set to \"print and preview\" - would the document be locked for editing in accordance with the OpenType spec?\n\n"
+    },
+    {
+      "time": "11 Nov 2005 — 8:19pm",
+      "content": "I've just been playing around with some of the anti-aliasing settings in Flash 8. On the Properties Palette for text, there is a pop-up that lets you control anti-aliasing of text with the following choices:\n\n&nbsp;&nbsp;Use device fonts  \n&nbsp;&nbsp;Bitmap text (no anti-alias)  \n&nbsp;&nbsp;Anti-alias for animation  \n&nbsp;&nbsp;Anti-alias for readability  \n&nbsp;&nbsp;Custom anti-alias...\n\n\"Use device fonts\" means that the system anti-aliasing (with settings controlled at the system level) will be used, but also means that the font needs to be installed on the system running the animation.\n\n\"Bitmap text\" is just what it sounds like. It works just as it did in the previous version of Flash.\n\n\"Anti-alias for animation\" looks like ordinary grayscale anti-aliasing.\n\n\"Anti-alias for readability\" uses sub-pixel antialiasing (like ClearType). I'm seeing some color fringing on my LCD Apple Cinema Display with this setting which I don't see in other programs.\n\n\"Custom anti-aliasing\" lets you tweak the anti-aliasing settings by controlling \"Thickness\" and \"Sharpness\". It also shows two values which can only be accessed via ActionScript--\"Inside Cutoff\" and \"Outside Cutoff\". I don't know what those mean (yet).\n\nHere is a simple sample I created:\n\n ![](http://web.archive.org/web/20150124145107im_/http:/typophile.com/files/flash-aa1.gif)\n\nThe first custom setting I did lowers the amount of color fringing, but looks fuzzier. The second custom setting shows what the maximum sharpness value does. Lots of color fringing. I don't know yet how the other two settings affect any of this.\n\n"
+    },
+    {
+      "time": "11 Nov 2005 — 8:22pm",
+      "content": "_The other obvious question the demo raises is how would Flash handle a font with embedding set to “print and preview” - would the document be locked for editing in accordance with the OpenType spec?_\n\nAs far as I know, Flash does not embed fonts themselves. Instead it creates a set of symbols based on the outlines. In other words, it converts fonts to an internal graphic format.\n\n"
+    },
+    {
+      "time": "12 Nov 2005 — 12:42am",
+      "content": "Hmmm. I'm seeing a awful lot of color fringing in the second and fourth samples there, myself.\n\nIt will be interesting to delve deeper into this once the Adobe/Macromedia merger is complete.\n\nI will say that their rendering engine is very tiny indeed, impressively so.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "12 Nov 2005 — 1:03am",
+      "content": "Let's see what's going on here.\n\n ![](http://web.archive.org/web/20150124145107im_/http:/typophile.com/files/FT1.gif)\n  \nA close-up of the 'Anti-aliasing for readability':  \n\n ![](http://web.archive.org/web/20150124145107im_/http:/typophile.com/files/FT2.gif)\n  \nAnd with subpixels:  \n\n ![](http://web.archive.org/web/20150124145107im_/http:/typophile.com/files/FT3.gif)\n\n"
+    },
+    {
+      "time": "12 Nov 2005 — 7:15am",
+      "content": "For Hrant:\n\n13ppem:\n\n ![](http://web.archive.org/web/20150124145107im_/http:/typophile.com/files/flash-aa13ppm.gif)\n\n13ppem bold:\n\n ![](http://web.archive.org/web/20150124145107im_/http:/typophile.com/files/flash-aa13ppemb.gif)\n\n16ppem:\n\n ![](http://web.archive.org/web/20150124145107im_/http:/typophile.com/files/flash-aa16ppm.gif)\n\n16ppem bold:\n\n ![](http://web.archive.org/web/20150124145107im_/http:/typophile.com/files/flash-aa16ppemb.gif)\n\n(Note: The font used here is my Proxima Nova Condensed, Light and Semibold weights. The earlier example was Extra Condensed Light.)\n\nBy the way, I can see a bit of color fringing on the new \"Insert image\" text below the Comment window. A little bit of Flash going on there (in case you were wondering why Flash 8 Player is required to upload images).\n\n"
+    },
+    {
+      "time": "12 Nov 2005 — 7:58am",
+      "content": "I also wonder if, in an actual Flash animation (these are just screen grabs above), the sub-pixel anti-aliasing is magically turned off for CRTs?\n\nOne way to find out...\n\n[http://www.marksimonson.com/flashaa/F8AASettings.html](http://web.archive.org/web/20150124145107/http:/www.marksimonson.com/flashaa/F8AASettings.html \"http://www.marksimonson.com/flashaa/F8AASettings.html\")\n\nIf anybody is using a CRT, let us know what you see.\n\n"
+    },
+    {
+      "time": "12 Nov 2005 — 9:58am",
+      "content": " ![](http://web.archive.org/web/20150124145107im_/http:/typophile.com/files/flash-crt.png)\n\nNo noticable difference in a CRT...\n\n"
+    },
+    {
+      "time": "12 Nov 2005 — 10:08am",
+      "content": "_As far as I know, Flash does not embed fonts themselves. Instead it creates a set of symbols based on the outlines. In other words, it converts fonts to an internal graphic format._\n\nI don't think that should matter. Converting a font to another format, proprietary or otherwise, doesn't absolve you of your responsibilities around the font creator's wishes.\n\nThis demo ( [http://www.kaourantin.net/2005/08/some-text-features-in-flash-player-8.html](http://web.archive.org/web/20150124145107/http:/www.kaourantin.net/2005/08/some-text-features-in-flash-player-8.html \"http://www.kaourantin.net/2005/08/some-text-features-in-flash-player-8.html\")) seems to prove that they are storing enough outline and metric information for this to be considered a converted fully functional font. This is not a simple convert to outlines static image.\n\nConverting a font prior to embedding in a document is fine, and if that's what Macromedia/Adobe are doing and they're following the OpenType spec with respect to font embedding permissions then I don't see a problem.\n\nIf however the claim is that this is not \"font embedding\" as defined in the OpenType spec then that changes everything. Then the font creators wishes around conversion and redistribution have to be respected, and as practically no-one allows this currently, someone wanting to use a font in Flash in this way would have to get permission from a font creator to convert and redistribute in this way.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "12 Nov 2005 — 10:15am",
+      "content": "\\> No noticable difference in a CRT…\n\nI set my system to Blue-Green-Red subpixel orientation using the ClearType Tuner, reloaded your page and it's exactly the same. Also adjusted the gamma using the tuner's slider bar and although the Windows GDI text changes contrast the Flash text does not change, even on page reload.\n\nThis tells me that it ignores user display preferences and what the system knows about the display (at least on Windows).\n\n"
+    },
+    {
+      "time": "12 Nov 2005 — 10:49am",
+      "content": "Mark, is your Proxima font TT or PS?\n\nSi, I'm not surprised that the FlashType renderer is ignoring system display settings, particularly those related specifically to ClearType: it seems to be pretty stripped-down to make it as small as possible. A big part of the success of the Flash Player is the quick download and install time.\n\nAlso, the rendering options provided to Flash creators indicate that Macromedia see rendering very much as a part of swf creation rather than swf display. The maker of a swf has control over what kind of rendering he wants to use and how he wants to tune it. The viewer of the swf has no control. Effectively, this is the opposite of most display technology.\n\n"
+    },
+    {
+      "time": "12 Nov 2005 — 10:57am",
+      "content": "_Mark, is your Proxima font TT or PS?_\n\nOpenType CFF.\n\n"
+    },
+    {
+      "time": "12 Nov 2005 — 11:18am",
+      "content": "_Converting a font prior to embedding in a document is fine, and if that’s what Macromedia/Adobe are doing and they’re following the OpenType spec with respect to font embedding then I don’t see a problem._\n\nAs a font developer, I don't really have a problem with whatever they are doing because the font, however it or some representation of it is embedded in the .swf, cannot be extracted as a font, cannot be used outside the .swf, in short, is not being distributed \"as a font.\" However, I can imagine a situation that would bug me.\n\nSay someone created an online application that sets type and generates a GIF or JPEG image for the user and delivers this as a file. And, let's say, this application includes a selection of fonts embedded within it, including one of mine. Such an application would seem to cross the line between application of a font (generally what users are expected to do with fonts) and redistribution of a font (a right font developers normally reserve for themselves and their agents). I would expect the developer of such a Flash application to acquire special rights from the owners of the fonts just as anyone who wants to bundle fonts with a desktop application.\n\nOnline font preview test drives made in Flash (or other methods) come very close to crossing this line, but usually include some method (e.g., background patterns) to make it difficult or complicated to swipe.\n\n"
+    },
+    {
+      "time": "12 Nov 2005 — 11:31am",
+      "content": "_As a font developer, I don’t really have a problem with whatever they are doing because the font, however it or some representation of it is embedded in the .swf, cannot be extracted as a font, cannot be used outside the .swf, in short, is not being distributed “as a font.”_\n\nI think it's a slippery slope as to where you draw the line. You may not mind this case, probably because it's so close to document embedding which almost every designer feels as acceptable. That's why my hope is that they're following the spec and observing the embedding permissions set by the designer.\n\nThe other case you mention seems less like document embedding, and more like regular font redistribution which indeed requires additional rights from the font creator.\n\n"
+    },
+    {
+      "time": "12 Nov 2005 — 7:10pm",
+      "content": "Here's a question, Mark: what if the online type-setting application used the actual font, licensed directly from you? Wouldn't that be just as troublesome?\n\nT\n\n"
+    },
+    {
+      "time": "12 Nov 2005 — 7:56pm",
+      "content": "If it was just the basic license, hell yeah. If if was the \"1000 or more\" user license, maybe not. In such a situation I would expect to be contacted about doing a custom license since it is not unlike redistribution, which is definitely prohibited (pretty much the only thing that is prohibited) by my license. (I am, however, in the process of rewriting it to clarify some things that are perhaps a bit ambiguous.)\n\n"
+    },
+    {
+      "time": "28 Nov 2005 — 3:49pm",
+      "content": "Sorry for weighing into this thread late. I was in Japan when it was first posted, and not getting my regular Typophile fix.\n\nIn any case, it looks like the samples John asked for are posted now. Originally, Flash 8 was to include [Saffron](http://web.archive.org/web/20150124145107/http:/www.merl.com/projects/ADF-Saffron/) from Mitsubishi Electric Research Labs. I have no idea whether that's still true or not.\n\nTo my eyes, the \"optimized for readability\" looks like pretty much yet another ClearType clone. It's obvious that there's some hinting going on (the x-height takes a big jump in some sizes, a clear sign of hinting), but I'm not sure whether the hints are somehow extracted from the font or are autogenerated. Regarding the subpixelling, in default settings, there's more color fringing than its direct competitors, but at least that's tunable.\n\nTo be honest, I'm a little burned out on font rendering stuff. The market has pretty much decided that MS ClearType is the way to go, and everybody that needs to ship a font renderer had better either clone or license it. There doesn't seem to be that much room for alternatives.\n\n"
+    },
+    {
+      "time": "28 Nov 2005 — 7:06pm",
+      "content": "But does it support kerning?\n\n"
+    },
+    {
+      "time": "28 Nov 2005 — 7:21pm",
+      "content": "With Static text, you can choose \"Auto kern\" which uses built-in metrics. Dynamic and Input text support tracking only, no kerning, auto or otherwise.\n\n"
+    },
+    {
+      "time": "28 Nov 2005 — 8:17pm",
+      "content": "Thanks Mark. No reason for me to stop ignoring the existence of Flash. Fantastic!\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 6:52am",
+      "content": "Emigre has always excluded Flash from their EULA, which is both unwarranted and short-sighted and even silly (paranoid?). Flash isn't going anywhere. In fact, you can expect to see Flash take the place of Windows Media, Real and Quicktime, since Flash is both ubiquitous across platforms and because Flash video (FLV) requires no additional plug-ins on the users' end.\n\nJohn wrote:  \n_Also, the rendering options provided to Flash creators indicate that Macromedia see rendering very much as a part of swf creation rather than swf display. The maker of a swf has control over what kind of rendering he wants to use and how he wants to tune it. The viewer of the swf has no control. Effectively, this is the opposite of most display technology._\n\nJohn, Photoshop has allowed creators to tweak anti-aliasing for graphical text (where neither the browser or the OS can render it). To my understanding, the same applies to Flash, where Flash has to control the rendering, independent of the browser or the OS. The value of Photoshop's approach is that it gives very fine controls, something Flash has lacked until now, and something that Flash still must aspire to.\n\nI would love the Adobe Photoshop gang to educate the Flash crew on proper anti-aliasing, provided they don't try to turn SWF into PDF and bloat the usefulness out of the format.\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 7:01am",
+      "content": "Joe, our EULA allows for embedding in Flash - or any other application - so long as the greatest care is taken to make the embedded fonts unembeddable.\n\nI meant to imply that until Flash can render the kerning in a font, I have no need to use it. The mudTyper on vllg.com is a live typing tool which utilises kerning, unlike many other foundries' live testing tools which are Flash-based and kerning-free. The rest of our site is similarly Flash-free.\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 7:06am",
+      "content": "Chester, that's a very real gripe about Flash. The lack of kerning is a big weakness of Flash at the moment. I'm going to have to take another look at vllg.com. =)\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 8:21am",
+      "content": "\\>Joe, our EULA allows for embedding in Flash - or any other application - so long as the greatest care is taken to make the embedded fonts unembeddable.\n\nChester, do you really mean **any application**? Our XBox SDK includes a tool that embeds TrueType fonts in Xbox games - the fonts are completely secure and un-embeddable from the game. I've always advised our developers that standard font licenses do not allow for anything other than \"document embedding\" and that additional rights should be acquired when they want to include a font to use in a game's UI. If the Vllg EULA provides these rights automatically that would be great news, and I'd love to point developers to your fonts and EULA as an exception to the rule.\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 9:12am",
+      "content": "Simon, in the Village and Thirstype EULA, the relevant clause states:\n\n\"You can make archival copies of the fonts for your own purposes. You will not distribute the fonts to people outside of your organization. A copy of the fonts may be sent as part of a file release to a prepress bureau, if absolutely necessary. The fonts can be embedded in other software files, such as Portable Document Format (PDF) or Flash files, but you will take all reasonable care to embed the fonts in such a way that they cannot be extracted from the files you create.\"\n\nWhich would allow embedding in a game UI. If the font can't be de-embedded from the game UI, then I personally see no difference between a typeface appearing in a game UI or a print ad or movie titles or a billboard or a TV commercial.\n\nPlease note that this applies to the Village and Thirstype EULAs, which I administer, and does not necessarily reflect the EULAs of the other members of vllg. As always, and in all cases, please read the EULA for each font, and address any questions or requests for clarification to the relevant party.\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 2:53pm",
+      "content": "Thanks,\n\nI think the difference is really that the font itself is being redistributed and is being used dynamically by the product - which is technologically different from being used statically in a bitmap image or in print.\n\nMost type designers and vendors make an exception to allow the redistribution of their fonts in \"document files\" (although some restrict commercial document files) but you've gone a step further in extending this exception to any reasonably secure \"software file\" which in my opinion adds a lot of value to your offerings.\n\nAlthough my question was somewhat provocative, it was serious too. If the Xbox team give me the opportunity I would like to include a reference to your license and site in the documentation. I'm talking to them about this issue on Friday.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 4:08pm",
+      "content": "Si, you're welcome, and thank you.\n\nI argue that font software embedded in other software - say a dynamic, interactive Flash module or a video game - isn't much different from other uses of type resulting in \"hard\" products.\n\nA timely example: The original Xbox logo was built from Rick Valicenti's Bronzo typeface, published by Thirstype. This does not mean that he gets a penny for every Xbox logo moulded in plastic or embroidered on a baseball cap.\n\nAnother Thirstype font, Traitor by Barry Deck, is used for the logo and identity of Comedy Central, as well as for on-air credits for programs. We do not receive residuals cheques monthly for this screen time.\n\nIt seems to me that having one's fonts used in high-profile or wide-profile applications can contribute to further sales by people who have seen those applications.\n\nWith best, c\n\n"
+    },
+    {
+      "time": "30 Nov 2005 — 4:34pm",
+      "content": "My feelings exactly.\n\n"
+    },
+    {
+      "time": "1 Dec 2005 — 9:32am",
+      "content": "Okay, I won't try to talk you out of it - it’s your EULA, and if what you allow makes software and games cheaper to develop that’s more money software and games companies can spend on items like foosball tables, free soda and nice sofas for their employees. ;-)\n\n"
+    },
+    {
+      "time": "1 Dec 2005 — 10:25pm",
+      "content": "To answer a much earlier question, yes, Flash 8 is using the Saffron rendering engine.\n\nT\n\n"
+    },
+    {
+      "time": "18 Jan 2006 — 11:10am",
+      "content": "Press release on MTI's license with MERL - [http://www.monotypeimaging.com/aboutus/pr\\_display.aspx?year=2006&pr=269](http://web.archive.org/web/20150124145107/http:/www.monotypeimaging.com/aboutus/pr_display.aspx?year=2006&pr=269 \"http://www.monotypeimaging.com/aboutus/pr\\_display.aspx?year=2006&pr=269\")\n\n"
+    },
+    {
+      "time": "31 May 2006 — 9:55am",
+      "content": "Hello everyone,\n\nThis comment is directed more at Mark Simonson, and I apologize if this is off topic of the thread.\n\nI am trying to use the Proxima Nova font for an application that I am developing for the PC, my fellow designer is on a mac, he purchased the opentype version of the font, but when italics are used the \"a\" character changes from a \"curved back\" to a \"straight back\" version. We ran a couple tests and the macintosh version of the font does the EXACT OPPOSITE which makes me think that the italic font maps are switched for the PC and Mac versions, is there any way to switch them or correct this problem so we can have a consistent \"a\" for the font?\n\nIn addition, is there any way to access the \"open-type -\\> sytlistic alternates\" option that is available in Photoshop and In-Design in Flash 8 using Actionscript or options?\n\nSorry for the long post, but just wanted to let Mark know about his font file.\n\n"
+    },
+    {
+      "time": "1 Jun 2006 — 8:37am",
+      "content": "Note to everyone: Hijacking an old thread on a discussion board is not the best way to get a customer service issue resolved. I didn't see this until a day after it was posted (and might not ever have seen it at all). My email address ( [mark@ms-studio.com](mailto:mark@ms-studio.com)) is on every page of [my website](http://web.archive.org/web/20150124145107/http:/www.ms-studio.com/), and I respond promptly to any customer service questions.\n\n(For the record, Joel emailed me shortly after posting this and I am helping to resolve the problem he is having. Also, for the record, I have thoroughly tested the fonts and have never seen or heard of this particular problem before. I have not received a report of this from any other users, and the fonts have been on the market and in use for almost a year. It appears that Joel's colleague has somehow enabled \"Stylistic Alternates\" without realizing it, but we are still trying to get to the bottom of it.)\n\nAs for Flash, at this time, unfortunately, it is not possible to access anything but the basic roman/latin character set since Flash is not \"OpenType savvy\" yet. Now that Adobe owns Flash, this may (I hope) change in the next version.\n\n"
+    }
+  ]
+}

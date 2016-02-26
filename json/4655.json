@@ -1,0 +1,26 @@
+{
+  "id": "4655",
+  "title": "What's WGL4?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I have a customer that wants the font in what they call WGL4 format.   \n   \nIsn't that some some of encoding for OpenType? Or isn't it OpenType specific?   \n   \nIf so\n\n",
+  "author": "peterbruhn",
+  "time": "7 May 2004 — 10:08am",
+  "uid": "799",
+  "comments": [
+    {
+      "time": "7 May 2004 — 10:23am",
+      "content": "WGL4 is a Microsoft character set specification. It's not an encoding, and it's not specific to OpenType. It is however specific to Unicode (a Type 1 font with WGL4 character set would be possible, but pretty useless).   \n   \nEssentially, WGL4 includes the following Windows codepages:   \n- Western (WinANSI)   \n- Eastern Europe   \n- Turkish   \n- Baltic   \n- Greek   \n- Cyrillic   \n   \nIt also includes some additional extended Latin characters not present in the Latin codepages above, and a whole section of IBM linedraw characters.   \n   \nSo to build a WGL4 font, you can use the MS spec you cite, build it in either TTF or OTF (OpenType CFF) format, and mark the font as supporting those 4 codepages (plus whatever additional DOS or Mac codepages are appropriate).   \n   \nT\n\n"
+    },
+    {
+      "time": "7 May 2004 — 11:59am",
+      "content": "WGL4 should be seen as a kind of transitional character subset, somewhere between the fixed sets of 8-bit codepages and free ranging in Unicode. It represents Microsofts attempt, at a particular time, to define an internal character set that would reliably support a specific set of languages (official, major and other well-documented European languages in the Latin, Greek and Cyrillic scripts), which could be specified as a procurement set by different groups within MS and which would be reliably covered in MS core fonts.   \n   \nWGL4 is now a bit out of date, and I'm cautious about recommending it as a base for new font development. It is missing four Cyrillic characters that were added to Unicode at the request of the Macedonian government after WGL4 was defined; it contains at least a couple of obsolete characters that are no longer in use (e.g. the Greenlandic _kra_ which has not been part of the Greenlandic alphabet since the 1970s). The obsolete characters are not a big problem, since it does not harm to include them and historical documents containing them might need to be encoded, but the missing characters are a problem.   \n   \nAlso note that there is a core set of WGL4 which consists of specific codepage support, as noted by Thomas above, and it may be possible to talk your customer into supporting this without needing to add all the IBM linedraw characters which fill out the larger WGL4 set.\n\n"
+    },
+    {
+      "time": "10 May 2004 — 2:13am",
+      "content": "\\<font class=\"dontLookLikeCrap\"\\>Thank you Thomas and John.   \nI figured as much as it was an extended set. Strangely enough the customer specified that the just wanted the standrad set AND WGL4   \n   \nI'll have to get back to them on that ;)   \n   \n/peter   \n\\</font\\>\n\n"
+    }
+  ]
+}

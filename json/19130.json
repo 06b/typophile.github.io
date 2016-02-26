@@ -1,0 +1,34 @@
+{
+  "id": "19130",
+  "title": "How is body size determined for fonts?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "One of the unnoticed aspects of type is that regardless of size and internal proportions—Cap height, x-height, and descender depth—when characters of different fonts are set they share the same baseline. I know a bit of the history baseline standards. What I am curious about is what governs that standard in path defined digital type.  \nI have noticed that when set solid most fonts behave as you would expect. However, some fonts seem to have had a “size” standard imposed upon them that is incompatible with the actual size of the characters. Futura is a case in point. The image below was prepared in Adobe Illustrator CS. They fonts are Myriad, Futura, ITC Franklin Gothic, Kabel, and Gill Sans. All are Adobe Type 1 format fonts and all were set 72/72. The horizontal lines indicate the baselines and the red circle the problem. What gives?\n\n ![](http://web.archive.org/web/20131102034511im_/http:/typophile.com/files/BaselineQuestion.jpg)\n\n",
+  "author": "Charles Leonard",
+  "time": "8 Apr 2006 — 2:42pm",
+  "uid": "11700",
+  "comments": [
+    {
+      "time": "8 Apr 2006 — 11:44pm",
+      "content": "In short your issue hear appears to be with the leadding of your type. Leading is the distance between baselines. This term is orignated from the traditional form of typesetting where led stripps would be used to create distance between each block of type (Figure A). When each character is crafted it is placed inside a box that is refered to as the type block. When the designer places the type in the box he uses a standard base line to determine where the text visually sits this is uniform through each type block, this line is known as the baseline. This box that they use to \"house\" the letter is refered to as having \"set-width\" and \"point size,\" being the width and height, respectively (Figure A). The baseline in most typesetting programs will use the baseline to determine where to place the type respectively to the other characters. A 10 point font with a 15 point ledding is going to be very loose and open when a 10 point font with a 10 point ledding will feel very tight. But all in all all type is different and it just needs to look right.\n\n[http://www.gcomollo.com/type/figure\\_a.jpg](http://web.archive.org/web/20131102034511/http:/www.gcomollo.com/type/figure_a.jpg \"http://www.gcomollo.com/type/figure\\_a.jpg\") \\<-figure a\n\n"
+    },
+    {
+      "time": "9 Apr 2006 — 1:12am",
+      "content": "Note that the linespacing is independent of the body size, i.e. the size of the actual glyphs. The type size in points always relates to the font UPM size, i.e. the standard design space in units. Most fonts have the design space (UPM size) of 1000 units. This means that when the type is set at 10 points, the 1000 units of the font's design are 10 points large. In other words, at 10 points, each font unit is 0.01 points large. This means that if your uppercase H is 700 units high, at 10 point, your uppercase H will be exactly 7 points high. This means that if you change the font UPM size from 1000 to 2000 without rescaling the glyphs, the letters at 10 point (or any other size) will shrink by half.\n\nThe linespacing is controlled by a number of different parameters in the font. They're discussed at [http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mvie...](http://web.archive.org/web/20131102034511/http:/groups.msn.com/fontlab/tipsandtricks.msnw?action=get_message&mview=0&ID_Message=4356 \"http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mview=0&ID\\_Message=4356\")\n\nA.\n\n"
+    },
+    {
+      "time": "9 Apr 2006 — 6:25am",
+      "content": "Thanks. I read the article. I know that line space is distinct from body size—I'm old enough to have been taught cold- and hot-metal composition where I manually adjusted linespace. I am also aware of UPM size and its calculation. What I cannot figure out here is why in unleaded setting, which is the way the font was originally created by the type designer(s), a font's descender would collide with an ascender on the next line, e.g. have a upm of more than 1,000 in a 1,000 unit system.  \nCan I assume that Futura has been incorrectly sized by Abobe or Lino (the sources in this case) or that changing operating systems have produced this anomoly?\n\n"
+    },
+    {
+      "time": "9 Apr 2006 — 6:33am",
+      "content": "Is it possible they took a Futura with a big  \nx-height and simply made the extenders longer?\n\nBTW, another font which is inadvisably large on the Em is Caecilia.\n\nhhp\n\n"
+    },
+    {
+      "time": "9 Apr 2006 — 8:53am",
+      "content": "Thanks. I'll check out Caecilia.  \nI suspect that you are right about the big x-height. The settings I have seen of the font that were made from cold metal rather than Lino, Mono, photo, and digital all are visually smaller, but you can never determine if that was from the face on the body or through the addition of cast-on or laid in line space.  \nTo some extent my question is rhetorical. The various images of the Futura plate proofs shown in Burke's _Paul Renner: The Art of Typography_ indicate that all characters with descenders were designed with two lengths that I assume made the font conform with the German baseline standard (shorter descenders) and the Anglo-American baseline standard (longer descenders). If you rescale the longer descender \"American\" Futura based on the ascenders and descenders (rather than cap height and ascender), you end up with much smaller characters on the body and a x-height identical to Kabel. In other words, a font in proportion and size that is much more like old-style romans than sans serif grotesques.  \nSo, I guess I am trying to figure out the source of the size change that produces the error shown in the initial image.\n\nI followed up on the measurements and came up with the following image showing Futura's dimensions. The second image is how the anomoly shows up in InDesign, The third image is a composite of all the patterns for lower-case p shown in Burke on page 93.\n\n ![](http://web.archive.org/web/20131102034511im_/http:/typophile.com/files/Futura%20body%20measurements.jpg)\n\n ![](http://web.archive.org/web/20131102034511im_/http:/typophile.com/files/FuturaSolidInDesign.jpg)\n\n ![](http://web.archive.org/web/20131102034511im_/http:/typophile.com/files/DescenderLengths.jpg)\n\n"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "106181",
+  "title": "Fontforge - File Open Warnings",
+  "forum": "Build",
+  "tags": [
+    "FontForge",
+    "fontname",
+    "Perl",
+    "PHP",
+    "Build"
+  ],
+  "content": "I am using Perl (readpipe) to grab the fontname value from a font via Fontforge. For example:\n\n`my $psfontname = readpipe(\"/usr/local/bin/fontforge -script /webfont/getfontname.pe font.ttf\");`\n\nThe problem is, Fontforge always outputs all the warnings when it loads a font, so I end up with a multiline output of values I do not want. Anyone know how to disable Fontforge doing that on file open? I am using is via command line only.\n\nExample warnings:  \n`Warning: Mac and Windows entries in the 'name' table differ for the\nFamily string in the language English (US)`\n\n",
+  "author": "TOM-MLL",
+  "time": "8 Sep 2013 — 9:58am",
+  "uid": "65510",
+  "comments": [
+    {
+      "time": "8 Sep 2013 — 3:17pm",
+      "content": "duplicate - delete\n\n"
+    },
+    {
+      "time": "8 Sep 2013 — 7:50pm",
+      "content": "I don't know perl but here are some relevant remarks. According to perldoc, `readpipe` collects the standard output (which is `stdout`) whereas FontForge warning messages are written to `stderr`. If you call `psname.pl` the following script\n\n    my $font = $ARGV[0] ;\n    my $psfontname = \n       readpipe(\"/opt/local/bin/fontforge -script psname.pe \" \n                   . $font) ;\n    print $psfontname ;\n\nthen the call\n\n    perl psname.pl ArnoPro-Regular.otf > savename\n\nsends only the postscript name into the file `savename`. If you want to see only the standard output and no warning message, you can type\n\n    perl psname.pl ArnoPro-Regular.otf 2>/dev/null\n\nYou could also redirect `stderr` inside the perl script\n\n    my $font = $ARGV[0] ;\n    my $psfontname = \n       readpipe(\"/opt/local/bin/fontforge -script psname.pe \" \n                   . $font . \n                   \" 2>/dev/null\") ;\n    print $psfontname ;\n\nwhere `2>/dev/null` redirects `stderr` to `/dev/null`.\n\nInstead of sending the messages to the garbage can, you could append them to a log file with `2>>file.log`.\n\n"
+    },
+    {
+      "time": "27 Oct 2013 — 12:20pm",
+      "content": "I just added a -quiet mode to not print non-essential information to stderr so now you can do this:\n\nmy $psfontname = readpipe(\"/usr/local/bin/fontforge -quiet -script /webfont/getfontname.pe font.ttf\");\n\n"
+    },
+    {
+      "time": "27 Oct 2013 — 12:21pm",
+      "content": "I just added a -quiet mode to not print non-essential information to stderr so now you can do this:\n\nmy $psfontname = readpipe(\"/usr/local/bin/fontforge -quiet -script /webfont/getfontname.pe font.ttf\");\n\n"
+    }
+  ]
+}

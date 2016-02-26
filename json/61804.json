@@ -1,0 +1,214 @@
+{
+  "id": "61804",
+  "title": "Cufon and (c)",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "Hi,\n\nFor fun I used this tool - [http://cufon.shoqolate.com/generate/](http://web.archive.org/web/20111209195915/http:/cufon.shoqolate.com/generate/ \"http://cufon.shoqolate.com/generate/\") to create a [Cufon](http://web.archive.org/web/20111209195915/http:/typophile.com/wiki/Cufon) format font. Upon opening the resulting .js file in a text editor I noticed that the font's (c) and trademark strings didn't come across. Anyone know if that's a limitation on the font format or if it's possible to paste in these strings?\n\nCheers, Si\n\n",
+  "author": "<a href=\"/web/20111209195915/http://typophile.com/user/1049\" title=\"View user profile.\">Sii Daniels</a>",
+  "time": "<br>",
+  "uid": "1049",
+  "comments": [
+    {
+      "time": "",
+      "content": "sii,\n\nI've worked quite a bit with Cufón. Where in the js file are you expecting it to appear or where would you like it to appear? And what are you looking to acheive by it?\n\nJust the line of code you're referring to will suffice. The reason I'm asking is because I had a similar thing happen in reverse - the generator picked up something in the font name and substituted some unicode values that caused the file to malfunction. I had to remove it manually.\n\nrich\n\n"
+    },
+    {
+      "time": "",
+      "content": "Typically when you authorize someone to make a derivative font based on your IP, you require that your (c) string and perhaps more importantly your trademark notice appear in the derivative font. I’m somewhat surprised that font makers would license their fonts for conversion into the Cufon format if this information is stripped out.\n\n"
+    },
+    {
+      "time": "",
+      "content": "What happens when a font is used via Flash?\n\nAnyway, if required, a copyright notice can be added as a javascript comment easy enough.  \nMultiline:  \n/\\*  \nWonderFont by Sii 2009 All Rights Reserved  \n [http://wonderfont.org](http://web.archive.org/web/20111209195915/http:/wonderfont.org/ \"http://wonderfont.org\")  \n\\*/  \nSingle line:  \n// WonderFont by Sii 2009 All Rights Reserved\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks!\n\n\\>What happens when a font is used via Flash?\n\nMy understanding is that today the entire font gets sucked in (c), TM and all. I don't know about the past. But that's more of an embedding scenario, not a file conversion / derivative font creation process.\n\n"
+    },
+    {
+      "time": "",
+      "content": "There is a legal requirement that copyright statements be preserved. After I brought this up with Cufón developer Simo Kinnunen, he very kindly (and quickly!) released a new version of his generator to correct this problem.\n\n(I haven't had time to confirm this, though.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Great. Glad I rasied the subject. Will give it a try.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "",
+      "content": "There's a google group for Cufón that Simo started.  \n [Cufon Google Group](http://web.archive.org/web/20111209195915/http:/groups.google.com/group/cufon)  \nNo doubt you can get answers there. There is also the source code on Github which has a changelog.  \n [sorccu/cufon](http://web.archive.org/web/20111209195915/http:/wiki.github.com/sorccu/cufon)  \nFinally, my memory jogged on this. The problem I had was with a trademark symbol which was actually in the name of the font. That's what I had to remove. Screwed whatever it was I trying to do up royally. But unrelated to your question, Sii.  \nI'm just wondering if the copyright statement has been preserved in human (as in my javascript comment example) or in javascript form.\n\nrich\n\n"
+    },
+    {
+      "time": "",
+      "content": "I just checked - they preserve the (c) string now - here's a cut and paste from the .js\n\n/\\*!  \n\\* Â© 2009 Microsoft Corporation. All Rights Reserved.  \n\\*/\n\nBut no trademark!? :-( Christopher can you get back on to them? TM is more important than (c).\n\n"
+    },
+    {
+      "time": "",
+      "content": "What I have been told is that copyright is more legally important; the DMCA requires that it be preserved. Not so for trademark. (Apparently. IANAL.)\n\nSimo and I discussed the choice of putting the copyright statement in JS comments versus the binary data. The former is more accessible, but could (in theory, I guess) get stripped by \"some Javascript optimizers\". So, while I speculated that it might be more bulletproof to embed the copyright in the binary, Simo chose to put it in text comments, and observed that any other software that chose to strip it would probably be violating the DMCA or some other law. Seems okay to me.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Oh, BTW, I did suggest to Simo that he query other foundries to see what kinds of legal/informational text would be desirable to preserve in Cufón.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Sii\\>TM is more important than (c).\n\nWe brought this up months ago, here.\n\nSince no fonts I've ever heard of have permission to convert to EOT with Cufon, any more than we license people to use font forge to make whatever modifications they want to our fonts, (and regardless of whether the font contains a correct (c) in the end), the (tm) is violated by either a rename, or a same-named file with different contents. Some combination of both is violating (c) and (tm), I think, but the great apes are going to have to handle this now.\n\nSo far the logs indicate people are mostly stealing Adobe and Microsoft fonts.\n\nCS\\> ....Seems okay to me.\n\nThat whole paragraph of interaction was pretty twisted from a font IP owning perspective.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>That whole paragraph of interaction was pretty twisted from a font IP owning perspective.</cite>\n\nHow so?\n\n"
+    },
+    {
+      "time": "",
+      "content": "@dberlow\n\n\\>Since no fonts I’ve ever heard of have permission to convert [to EOT with] Cufon...\n\n_\"You may embed the licensed fonts into HTML web pages only for the purpose of typesetting the page using any of the following methods and technologies: @font-face Cascading Style Sheet (\"CSS\") rules, Adobe Flash files, Microsoft Silverlight files, sIFR, fLIR, **Cufón** and Typeface.js. Other technologies not listed here that would allow a designer to typeset web pages using the licensed fonts are allowed. The licensed fonts must not be obviously downloadable and must be reasonably hidden from average users with whatever web page embedding method you employ.\"_\n\n[http://www.fonthead.com/license](http://web.archive.org/web/20111209195915/http:/www.fonthead.com/license \"http://www.fonthead.com/license\")\n\nNow you have.\n\nrich\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> and must be reasonably hidden from average users with whatever web page embedding method you employ.\n\nNo way!? I can license these fonts, but I can't use them unless I embed them in a web page.  \nDoes anyone know how to embed a font in a web page? We are not permitting the impossible this year.\n\n\\> Other technologies not listed here that would allow a designer to typeset web pages\n\nWho does this, ever?\n\n\\>Now you have.\n\nNow I have what? Fonthead sounds like an extraordinarily optimistic name. I hope they have fonts.\n\n\\>How so?\n\nSomeone is violating (c) and (tm) on fonts, and tells you \"but if _someone else_ strips the (c), boy will they be in trouble!\"?\n\nWhat is the question?\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"What I have been told is that copyright is more legally important; the DMCA requires that it be preserved. Not so for trademark.\"\n\nDavid’s tangent aside, I’ve always been told by folks in the know (Paul Stack, Frank Martinez, Microsoft attorneys and other people that deal in fonts and font IP) that the trademark is the best way to legally protect a design. Hence my surprise that the Adobe lawyers were okay with Cufon not carrying across © and TM, and then when I raised the issue they only felt © was important.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The Adobe lawyers were never okay with Cufón stripping the copyright notice. It was only just brought to their attention. And I'm told that Adobe requires the copyright to be preserved because it's otherwise a DMCA violation -- so it's not so much a legal judgement call as an established legal requirement.\n\nMy point in contacting Simo was to (helpfully!) tell him that Cufón was likely violating the DMCA. Of course this also a problem for Adobe, so I asked that he remove the notice on his site that Adobe fonts are okay to convert until he fixed the generator (which he did immediately).\n\nSimo told me he's very interested in more feedback, so I suspect he just needs to be asked to also preserve trademark. (I'll ask him.) Of course, Adobe's happy to have more of that info preserved and visible to end users -- it just didn't have the legal urgency of the copyright notice (in the opinion of Adobe legal).\n\nSi, don't know what to tell you about the copyright/trademark disagreement. Maybe my lawyer can call your lawyer. :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "@dberlow\n\n\\>Who does this, ever?\n\nScoff if you want to. But you said you had never heard of it.  \nNow you have.  \nIt's very clear, too. That the word \"embedding\" is being used as a catch-all term means little. The allowed techniques are specifically named:  \n**@font-face Cascading Style Sheet (“CSS”) rules, Adobe Flash files, Microsoft Silverlight files, sIFR, fLIR, Cufón and Typeface.js**\n\nObviously, these folks want to do business with web authors. And are willing to do so in light of the current state of browser support for @font-face.\n\nAt Font Bureau's site there is no link to the license or licensing policies on the home page. As a potential customer, I like the fact that Fonthead is up front about it.  \nIt feels like the more digging I have to do to find the EULA, the more restrictive it turns out to be. ;)\n\nRegards,\n\nrich\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>David’s tangent aside,\n\nYou mean that the organizations in question are developing and in support of a violating service?\n\n\\>...the word “embedding” is being used as a catch-all term means little.\n\nWhat's the purpose of language again? I didn't mean to imply scoff. You showed me an example, and I indicated that it is not what most font developers intend as an agreement.\n\nDid you license anything yet? How are the fonts being serving? Are you testing cross-browser before you license?\n\n\\>At Font Bureau’s site there is no link to the license or licensing policie...\n\nI presume you mean for web fonts. When you go to the Font Bureau web site, you should consider that it is for news and information in general, but for the vast most part it is designed and operated for licensing fonts to users at work stations for much wider spectrum of applications found for our Font Bureau fonts in that model.\n\nWhen the web side is up, I'll tell you. It's a different model from start to finish since users want to know exactly what the fonts look like in use, we never have to give you or even tell you what the actual styles are, and you may never stop paying.\n\nSii! there's no tangents here, all points are equal; I said, we think the (tm) is violated by either a rename (of the (c) material), or a same-named file with different contents. I would let other people handle it from here.\n\n\\>Simo told me he’s very interested in more feedback\n\nIf that's like cheese, I'm all for it!\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>Si, don’t know what to tell you about the copyright/trademark disagreement. Maybe my lawyer can call your lawyer. :)\n\nI suppose our legal folks would only care if we were to permit this form of conversion and distribution. But I think it's something that anyone allowing their fonts to be used in this way should consider. Didn't mean to pick on Adobe - just that other font makers would probably support the technology purely on Adobe green-lighting the use your fonts. We do have some hand-outs from last year's \"Business of Type\" event, attended by various foundry people on the business and legal side. I'd be happy to forward these if you're interested.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_the trademark is the best way to legally protect a design_\n\nSimon, they might mean the _registered trademark_ ®, rather than the plain ™, which (in my very limited understanding) anyone is free to attach to anything but which in reality offers no protection at all.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Correct.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite> &gt; At Font Bureau’s site there is no link to the license or licensing policies on the home page.</cite>\n\nRichard, I don't know if you seriously never found the FB EULA or if you're just trying to make a point.\n\nIn case it's the former situation -- or for anyone else who cares -- the EULA is two clicks away. First: \"Help\" in the lower right corner; Second: \"Single User Font Software License Agreement\" under the heading \"Pricing & Licensing\" in the right-hand column. (Similarly accessible from every page on the site.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Kent,\n\nNo, I didn't find it, I said to myself what a lot of people will say, \"Screw this\" and then clicked to the next site listed in Bing or Google.  \nAnd no, I'm not (just) trying to make a point and get Berlow's goat. ;)\n\nTo paraphrase Tina Turner, \"What's **Help** Got To Do With It?\"  \nWhy not a link that says, err, \"Licensing\"?\n\nAnyway, right after reading your post I went and bought a weight of Whitman. (You're welcome.) I now have the licensing pdfs that come with it. You will hear much more from me on this.  \n(Hey, BTW, what's the refund policy? What if somebody comes by to shop, picks out a nice looking font, and it ships in only OTF CFF and looks like sh-t in a web page? I bring this up only because these are problems font designers are going to run into. I don't think your licenses exclude you from consumer protection laws. Just food for thought.)\n\nWe are days away from a formal announcement by Mozilla that the WOFF web opentype font file format is going to be supported in an upcoming release of Firefox. It might even be included in a Firefox update which means even quicker distribution.  \nThis means that very soon, 80%-90% of browsers will support some kind of font-linking other than linking to \"raw\" TTF/OTF files that those looking for payment for their fonts have found so objectionable.\n\nTherefore, the time has come for font designers to decide whether they want to play in the web font casino or not.  \nIf you don't, that's OK. Maybe even smart, if the print work is sufficient.\n\nBut now's the time to start thinking things through. It's not just talk anymore, it's an imminent reality.\n\nrich\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>to play in the web font casino or not.\n\nThe house always wins - but does House doesn't allow embedding?\n\n"
+    },
+    {
+      "time": "",
+      "content": "It seems like Berlow & Co., they no want to play.  \nThe license is this huge amount of verbiage that, out of respect, really, they could have boiled down to a one sentence summary at the start of all the legal gobbledygook:\n\n_All you can do for the money you just spent is embed this font within a pdf and give to it to a commercial service bureau._\n\nAnd so, by gum, that's what I'm going to do! I have an idea for a T-Shirt. Or maybe that's not legit. It's hard to tell. I'm a web guy, what's a service bureau? Do they work for the Font Bureau? I'm confused.\n\nRegards,\n\nrich™\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite> &gt; To paraphrase Tina Turner, “What’s Help Got To Do With It?”<br>\nWhy not a link that says, err, “Licensing”?</cite>\n\nI'm not going to argue with you there. Not my bailiwick.\n\n<cite> &gt; Hey, BTW, what’s the refund policy? </cite>\n\nAlso on the Help page, under Ordering: Return Policy.\n\n<cite> &gt; What if somebody comes by to shop, picks out a nice looking font, and it ships in only OTF CFF and looks like sh-t in a web page?</cite>\n\nPresumably that's what going to be addressed with the \"web side\" that David was referencing above: _\"It’s a different model from start to finish since users want to know exactly what the fonts look like in use.\"_ Again, not my bailiwick. Don't know anything about it.\n\nBut I'll tell you right now that Whitman will probably look like sh-t on a web page. Wasn't made for it. Isn't meant for it. Wasn't even considered back then. Maybe FB will be doing something about that in the future.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Sorry, forgot to say it: Thank you. Seriously. If you are unhappy, let me know and I'll do what I can.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Kent,\n\nI had seen and liked Whitman before you and I ever met.  \nActually it looks fairly good in the Windows pangrammer.  \nI've seen much worse, and FB does give you a choice of formats which helps.\n\nMaybe FB will change it's policies. Who knows.\n\nI think I'll close the blinds now, and see what it looks like inside a browser...\n\nrich™\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi everyone,\n\nThanks, Christopher, for directing me here. I sure hope the discussion isn't already over!\n\nI guess part of the problem is that some (mainly freeware) fonts abuse the Copyright and possibly the Trademark field as well. I've seen fonts that embed their whole EULA to the Copyright field, but they're obviously exceptions :)\n\nAnyway, I'd be happy to add trademark information to the font files as well. It's a bit trickier than adding the copyright but you can expect it to be added by the end of this week. If there are any other issues that need attention please let me know. Feedback and suggestions are also welcome.\n\nSimo\n\n"
+    },
+    {
+      "time": "",
+      "content": "Simo,\n\nI hope you are getting your own trademarks and copyrights to the work you are deriving and disseminating from other's works.\n\nAre you?\n\nRF\\> What if somebody comes by to shop, picks out a nice looking font, and it ships in only OTF CFF and looks like sh-t in a web page?\n\nWhat if someone comes in purchases a bathtub, launches it, and it sinks and drowns a whole family in a swift running river?\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi Simo, thanks for joining the fray.\n\nI hadn't considered the case of badly formed (c) and TM strings and I can see why those might be a problem. Perhaps in the case of strings exceeding a certain length an error message could be generated.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi David,\n\nI have to say I'm not quite sure if I understood your question correctly, but I'm not adding any copyright / trademark notices of my own to the font files as I feel it would be inappropriate. The JavaScript renderer on the other hand does have my copyright and [MIT free software] license information. I've attributed people I've taken ideas from in the source code, however as I had to (and like to) research and develop solutions on my own there's only one small piece of code like this in the renderer, and a couple more in the generator's source code. Does that answer your question?\n\nSimo\n\n"
+    },
+    {
+      "time": "",
+      "content": "_I guess part of the problem is that some (mainly freeware) fonts abuse the Copyright and possibly the Trademark field as well. I’ve seen fonts that embed their whole EULA to the Copyright field, but they’re obviously exceptions_\n\nWeird stuff abounds. This is similar to the situation I ran into and alluded to earlier in this thread.\n\n@dberlow\n\n_What if someone comes in purchases a bathtub, launches it, and it sinks and drowns a whole family in a swift running river?_\n\nMove to strike as non-responsive.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>Does that answer your question?\n\nNo, I guess what you are saying is that you want to take our data, modify it, and put our copyright and trademark back on it.\n\nIs that right?\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "David, I'm not sure I want to wade into this one, but if you don't want your fonts converted to the Cufón data format, I think your complaint is with your customers. There are plenty of warnings on the Cufón site about it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Is that your 'legal' advice?\n\ncheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, \"legal\" in quotes.\n\n"
+    },
+    {
+      "time": "",
+      "content": "@dberlow\n\n\"_No, I guess what you are saying is that you want to take our data, modify it, and put our copyright and trademark back on it._\"\n\nYeah, that's what I and a lot of developers **would** want. We want and need the freedom to take the font data we purchase from you and massage it, fix it, and add to it, so that it does what we need it to do in a web page exactly as we want it to. (Quite serious, here. No bull.)  \nI mean, what do you think goes on when someone opens up one of FB's fonts in Photoshop and a minute later there's a gif based on it posted on a web site somewhere?\n\nBTW - There's an actual side-by-side comparison of Cufón and Flash that's worth taking a look at for those interested:\n\n[cufón and sIFR (A Visual Comparison](http://web.archive.org/web/20111209195915/http:/tylersticka.com/2009/09/cufon-and-sifr/) is a little blog post about it that contains a link to the [comparison page](http://web.archive.org/web/20111209195915/http:/sandbox.tylersticka.com/web-type-test/).  \nThe author, Tyler Sticka, thinks Cufón looks better than Flash.  \nMe, too. Especially in IE, where Vector Markup Language is being used, rather than canvas tag bitmaps in the other browsers.  \nAt worst, it's six of one half dozen...\n\nRegards,  \nRich\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite> &gt; I mean, what do you think goes on when someone opens up one of FB’s fonts in Photoshop and a minute later there’s a gif based on it posted on a web site somewhere?</cite>\n\nWith all due respect, Rich, that's a different case.\n\nIn your Photoshop example, the font data has been utilized (not \"opened up\" btw), as provided, to perform as it was licensed to do: to render letterforms. The user is then free to do as he wishes with the fixed, rendered form; just like printing.\n\nIn the \"Cufón\" example (I'm using this as representative, not to pick on Cufón specifically), the font data itself is being materially modified to perform differently. Such a modification of the software data itself is a derivation under copyright and one needs permission from the intellectual property owner to do so.\n\nCurrently, the general license of most foundries does not grant this permission off-the-shelf. So, developers need to ask first. Some foundries may grant that permission, some may not. That's their right. Some may want additional fees, some may not. That's also their right.\n\nIf you can't come to terms, then you'll take your business elsewhere. I realize you hate having to jump through that hoop. The technologies and markets are still emerging. It will take a while to sort out.\n\nThere may come a day when the permission to make these modifications becomes incorporated as a de facto part of a standard license. I get that that's what you'd like to see happen. But we aren't there yet.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi again everyone,\n\nAll font files now include the following information (in this order): Copyright, Trademark, Full font name, Description, Manufacturer, Designer, Vendor URL and License information URL. Missing fields are not shown. Here's how it looks like with an Adobe font:\n\n/\\*!  \n \\* The following copyright notice may not be removed under any circumstances.  \n \\*  \n \\* Copyright:  \n \\* © 2000, 2001 Adobe Systems Incorporated. All Rights Reserved.  \n \\*  \n \\* Trademark:  \n \\* Adobe Caslon is either a registered trademark or a trademark of Adobe Systems  \n \\* Incorporated in the United States and/or other countries.  \n \\*  \n \\* Full name:  \n \\* ACaslonPro-Regular  \n \\*  \n \\* Designer:  \n \\* Carol Twombly  \n \\*  \n \\* Vendor URL:  \n \\* [http://www.adobe.com/type](http://web.archive.org/web/20111209195915/http:/www.adobe.com/type \"http://www.adobe.com/type\")  \n \\*  \n \\* License information:  \n \\* [http://www.adobe.com/type/legal.html](http://web.archive.org/web/20111209195915/http:/www.adobe.com/type/legal.html \"http://www.adobe.com/type/legal.html\")  \n \\*/\n\n@dberlow\n\nOK, so your license does not allow your fonts to be used with Cufón, right? That's perfectly fine. But there's always going to be someone who does it anyway, and the \"EULA allows this\" checkbox is pretty much all we can do about it. In cases like this, would you rather not have your copyright embedded to the font files at all?\n\nWhat do you count as modification anyway? Even Abode Flash slightly modifies the curves of embedded fonts by converting them to quadratic ones (see \"Converting TrueType fonts to SWF glyphs\", page 172 of [http://www.adobe.com/devnet/swf/pdf/swf\\_file\\_format\\_spec\\_v10.pdf](http://web.archive.org/web/20111209195915/http:/www.adobe.com/devnet/swf/pdf/swf_file_format_spec_v10.pdf \"http://www.adobe.com/devnet/swf/pdf/swf\\_file\\_format\\_spec\\_v10.pdf\")). Now, Cufón obviously takes things a bit further by allowing the user to scale the font down and optimize the path after that for the purpose of decreasing file size, but this functionality can be turned off. After that it's not much different from what Flash does. The curves are just converted to cubic beziers and stored in VML format.\n\nFrom the SWF spec:\n\n\"The complete procedure for converting TrueType glyphs to SWF glyphs is as follows:\n\n1. Negate the y-coordinate. (In TrueType glyphs, the y-axis points up; in SWF glyphs, the y- axis points down.)\n2. Scale the x and y co-ordinates from the EM square of the TrueType font, to the EM square of the SWF glyph (always 1024).\n3. Insert an on-curve (anchor) point at the midpoint of each pair of off-curve points.\"\n\nSo actually Flash scales things too. Both Cufón and Flash do 1. They both also do 2, although this can be turned off in Cufón. The 3rd point is different but the purpose is the same. So, they're not that much different after all.\n\nIt would be interesting to find out whether PDFs also do something like this.\n\nSimo\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Simo, IMHO the inclusion of that data is very welcome.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "",
+      "content": "Simo \\>... the “EULA allows this” checkbox is pretty much all we can do about it.\n\nI think there is much more you can do.\n\n\\>... would you rather not have your copyright embedded to the font files at all?\n\nIs that your only option? IP owners either let their copyrights or trademarks be violated, but not both?\n\n\\>After that it’s not much different from what Flash does.\n\nThe difference between embedding from a desktop-installed font to a document file and serving a font file from a computer to the public, is quite different. Thus, comparing what a swf does and what you seem to want to do, is not valid, legally, technically, or in terms of \"helping the public\".\n\nI hope you have a business plan are are willing to share it. ;)\n\nRichard\\> We want and need the freedom to take the font data we purchase from you and massage it, fix it, and add to it, so that it does what we need it to do in a web page exactly as we want it to.\n\nWith all due respect, you have no idea what you are talking about.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "@sii et al:\n\nI, too, am glad Simo came back to elaborate and announce the changes he's made in response to the concerns raised here.  \nI would like to add that on Cufón's Google group there's a thread dealing with the issue of what, exactly, font designers might or might not have to fear about unlicensed use of the JavaScript font data that Cufón uses.  \nAnd the discussion is, in some ways, a precursor to the issues that will arise with SVG fonts, should that technology come to be widely deployed.\n\n@kent\n\n_\"In your Photoshop example, the font data has been utilized (not “opened up” btw), as provided, to perform as it was licensed to do: to render letterforms. The user is then free to do as he wishes with the fixed, rendered form; just like printing.\"_\n\nOooh, let's not travel too far down \"Copyright Road\" but what the heck, let's fence a little.  \nPlease answer me these questions:\n\n1) What fair use rights do I have with regards to font files? By law I have to have **some** regardless of what any EULA might say and I was just wondering what you thought those might be.\n\n2) Do you consider a contractual obligation - with regards to a work protected by copyright - to not create derivative works to include sub-setting that work into parts?\n\n3) Lastly - and this is a real world scenario I recently ran into:\n\nA font is obtained under a totally free and open license. (No doubt about this. Unequivocal EULA included and the source verified.) But in order to use it as a web font, you need to convert it into an EOT. However the EOT converter software won't convert a file that has the embedding bit set to restricted. And, it seems, the embedding bit on said font has been set to Restricted by mistake.  \nIs it then OK to just change the embedding bit, and think no more about it?\n\nBTW - As I've noted elsewhere on Typophile, Cufón does not make use of or rely on hinting data. A font like Whitman, used decoratively or for headings, would probably look outstanding. But the Cufón converter will have to \"utilize\" the font so that it can appear, in the browser, in it's ultimate \"fixed, rendered form\".\n\nRegards,\n\nrich\n\n"
+    },
+    {
+      "time": "",
+      "content": "@dberlow\n\n\\> I think there is much more you can do.\n\nOk. Do you have any ideas what they might be? I'm sorry if this sounds rude but constructive criticism would help a lot more than complaints.\n\n\\> The difference between embedding from a desktop-installed font to a document file and serving a font file from a computer to the public, is quite different.\n\nWell, sIFR fonts and other SWFs are usually downloaded over the internet as well. If you meant that Flash files are created on the same computer the font resides in, users are free to install a local copy of the Cufón font generator as well.\n\n\\> I hope you have a business plan are are willing to share it. ;)\n\nThere's no business plan. We do accept donations, and they just about cover the hosting costs but other than that I do not and do not plan on profiting from Cufón.\n\nSimo\n\n"
+    },
+    {
+      "time": "",
+      "content": "Rich -- I am always reluctant to debate the details of copyright in these forums, because it's a rabbit hole and because we aren't lawyers. But heck, I suppose in a way I started this. And exploring these concepts in an open, constructive conversation can be instructive. I feel like you and I can probably have such a discussion.\n\nI will need some time to consider your questions and compose a measure response. But I wanted you to know that I am taking you seriously.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Rich, re. fair use:\n\n_What fair use rights do I have with regards to font files? By law I have to have some regardless of what any EULA might say and I was just wondering what you thought those might be._\n\nIn US law, as I understand it, fair use rights are determined by a balancing test, which is a judicial process. So rather than the usual disclaimer that I'm not a lawyer, in this case I should point out that I'm not a jurist.\n\nWith explicit judicial ruling regarding fair use of font files, you have to look at fair use for similar copyright material. Since fonts are copyrighted as software, the most obvious place to start looking is fair use of copyrighted and commercially licensed software. Now, a lot of software licenses explicitly forbid decompiling the software, which applied to fonts would prevent font format conversions or any tinkering inside the font as a font; even opening such a font in FontLab to take a look at it would constitute license infringement. Frankly, I would be surprised if you could make a case that decompiling software is fair use if the license disallows it, even if you do not do anything more with the software, but I'm not aware of case law relating to this.\n\nIf we presume a font license does not explicitly disallow decompiling the font binary, what fair use rights might exist? Given that distributing a derivative work is contrary to the whole purpose of copyright, I doubt if any balancing test would permit that. So the question is probably whether you have a fair use right to modify the font for your own purposes, and to use the resulting derivative work but not to distribute it or use it beyond the scope of the original license. There are, of course, plenty of font licenses that explicitly _permit_ such modification of fonts; but there are others that explicitly disallow it, that require you to go back to the font maker if you want a custom version even for your own use. So I read your question as 'Are such license prohibitions enforceable, or is that a fair use right to modify fonts?' Again, you'd have to look at the general state of software copyright first, and then more specific case law and, for a final decision, get a judicial balancing test decision on fonts per se.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Since John has already taken his stab at question no. 1, let me stay on just that topic.\n\nI will state that I am not a lawyer (even if I begin to sound like one) and none of my comments should be construed as legal advice. Also, I am not offering any official interpretation of licenses for any foundries that I might work with. I am just giving my personal opinions.\n\nI will assume, as John has, that for the sake of this discussion we are talking about the U.S. Copyright Law, which is contained in Title 17 of the United States Code.\n\nAnyone is welcome to read it for themselves. The full text of the law can be found here: [http://www.copyright.gov/title17/index.html](http://web.archive.org/web/20111209195915/http:/www.copyright.gov/title17/index.html \"http://www.copyright.gov/title17/index.html\") and can be downloaded as Circular 92.\n\nThe doctrine of \"fair use\" is outlined in §107 -- Limitations on Exclusive Rights: Fair Use. It gives the principles for possible exceptions to the rights stated in §106.\n\nSo, before we delve into fair use let's just review that §106 of the Copyright Code secures to the owner of copyright the exclusive right to do (and to authorize others to do) a couple different things: [I'm paraphrasing here]\n\n(1) Reproduce the work in copies;  \n(2) Prepare derivative works based upon the copyrighted work;  \n(3) Distribute copies of the work by sale or other transfer of ownership, or by rental, lease, or lending;  \n(plus a few others that pertain only to other media, primarily visual and performing arts, so I'm not going to enumerate them here).\n\n§107 then outlines a \"fair use exception\" to the exclusivity of those rights \"for purposes such as criticism, comment, news reporting, teaching, scholarship, or research.\"\n\nJohn is right that the Fair Use Exception is usually an affirmative defense against claims of infringement. It would be up case law to determine what uses would actually constitute fair use. Since the statutes were written primarily from the perspective of visual art, written works, and musical works, it's a little hard to say where things would come down in relation to font software.\n\nI will go out on a limb and give my opinion -- contrary to the opinion John expressed above -- that despite most EULAs' prohibition against \"decompiling, reverse engineering, and disassembling\" you could probably make a case under Fair Use for a right to open up a font and examine the outlines purely for the purposes of learning and research.\n\nI'm not sure what application the doctrine of fair use might have in the specific case of Cufón here. But if you see an argument, feel free to posit it.\n\nKeep in mind, the statute gives four factors to be used in the consideration of whether a particular case is fair use or not: [I'm quoting in full this time]\n\n(1) the purpose and character of the use, including whether such use is of a commercial nature or is for nonprofit educational purposes;  \n(2) the nature of the copyrighted work;  \n(3) the amount and substantiality of the portion used in relation to the copyrighted work as a whole; and  \n(4) the effect of the use upon the potential market for or value of the copyrighted work.\n\nThis is the balancing test that John referred to.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Kent: _...you could probably make a case under Fair Use for a right to open up a font and examine the outlines purely for the purposes of learning and research._\n\nThis would depend, I think, on factors 1 and 4 of the balancing test, i.e. what are you intending to do with the knowledge you gain from studying the decompiled font software. The common prohibition against decompiling software is that you will be able to see how it is made and this will give you an unfair advantage in producing a competing product (in that you will not have invested in the original creative development).\n\n"
+    },
+    {
+      "time": "",
+      "content": "@jh and kent:\n\nCopyright law is, indeed, a rabbit hole. And discussions about property rights, in general, tend to descend into back-biting and eye-gouging rather quickly.  \nBut hey, this is Typophile where \"don't punch, pun\" is the order of the day.\n\nThe reason I asked was because I really wanted to know how font designers see the situation.  \n(I should add that there are font designers who's views are not as traditional as the one's you've expressed. It runs the gamut. Also, we're moving a bit away from Simo and Cufón but, as you can see, he's pretty sensitive to IP concerns, ethically-minded, and wants Cufón to have as broad a reach as possible, so I think he'll see some relevance.)\n\nFlash, Cufón, SVG, @font-face - all these things are going to bring yet another revolution to the world of typefaces. And as far as licensing, if there isn't clarity, consistency, and up-frontness, there's going to be grief for all concerned.\n\nThe ironic thing is, I think font designers are going to end up getting a fairer shake from web devs/designers than they do from the print industry, an industry filled with people who also rely on copyright and therefore know quite well when they're ignoring the terms of a license.\n\nMy desire is this: if I am not redistributing your work in a form that makes it easy for others to make use of it without paying, then I'm OK. I don't have to worry about DMCA notices or any other hassles. This is - and please correct me if you see it differently, John - the compromise that was reached in regard to the use of @font-face. Meaning that a \"garden fence\" is the test. With @font-face it consists of a \"wrapped\" font file unsuitable for installation in the OS as in the WOFF and EOT specs.  \nBut it can take other forms, as it does with Cufón. IMHO.\n\nI await your thoughts about the other dilemmas listed.\n\nRegards,\n\nRich\n\n"
+    },
+    {
+      "time": "",
+      "content": "BTW - There's a unique (AFAIK) and little-known site that deals with Fair Use and actually has a \"Fair Use Wizard\" with which you can assess whether the the thing you're looking to redistribute qualifies as Fair Use.\n\n[http://www.benedict.com/Info/FairUse/FairUse.aspx](http://web.archive.org/web/20111209195915/http:/www.benedict.com/Info/FairUse/FairUse.aspx \"http://www.benedict.com/Info/FairUse/FairUse.aspx\")\n\n(The \"Wizard\" link on the site gives a 404, go to the \"Visualizer\" I think they renamed it and didn't remove the old link.)\n\nrich\n\n"
+    }
+  ]
+}

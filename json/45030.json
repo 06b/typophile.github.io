@@ -1,0 +1,30 @@
+{
+  "id": "45030",
+  "title": "Static Text in Flash: Embedding?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "When setting dynamic text in Flash, a button on the properties window allows a user to \"embed\" outlines for an entire font, or various subsets thereof. This option doesn't exist when setting static text, though in Flash help, under \"Font outlines and device fonts\", it says \"For static text, Flash creates outlines of the font and embeds them in the SWF file\".\n\nIt seems as if there are two different uses of the term \"embed\" in play here. They are definitely different concepts in Flash authoring, anyway.\n\nMy question is, as it pertains to, say, a EULA that prohibits embedding, is setting static text in a given font and exporting a SWF legally the same as using the embed button on the properties window and exporting a SWF?\n\n",
+  "author": "Ehague",
+  "time": "6 May 2008 — 8:04am",
+  "uid": "16884",
+  "comments": [
+    {
+      "time": "6 May 2008 — 8:17am",
+      "content": "My understanding is that the two instances of embedding you refer to are the same.  \nThe difference is that when you make a static text field, flash embeds only the outlines of the characters used. While when you use a dynamic text field you have to decide which range of characters should be embedded. This makes sense since the flash cannot know what text you are loading into the textfield. You can see this by generating a size report when publishing the Flash.\n\n"
+    },
+    {
+      "time": "6 May 2008 — 8:32am",
+      "content": "<cite>My question is, as it pertains to, say, a EULA that prohibits embedding, is setting static text in a given font and exporting a SWF legally the same as using the embed button on the properties window and exporting a SWF?</cite>\n\nIn general: yes.  \nIn most cases \"static text\" is the lesser evil, but it is still \"embedding\".  \nSome EULAs are even covering the difference:  \nH&FJ EULA: — Vector art (swf) Because Flash files embed actual portions of a font's sourcecode within themselves, our font licenses require that designers observe some basic safety precautions when publishing Flash files. Text in Flash files must be static (not dynamic), the files must embed only a subset of the character set, and the \"Protect from Import\" option must be enabled when the files are generated.\n\n"
+    },
+    {
+      "time": "6 May 2008 — 8:47am",
+      "content": "Thanks. That's pretty much what I thought the answer would be. Hopefully other foundries will update their EULAs in the near future to address specifically some of these vagaries.\n\n@Fredrik\n\nI think, as far as I've observed, the embedding of static text operates independent of the embedding available to dynamic text. For example, if I have a static text box that reads \"0123456789% Loade\", and I have a dynamic preloader set to something like\n\nloader.text = pctLoaded + \"% Loaded\"\n\nUnless I embed those specific characters using the embed feature, it can't draw on the characters embedded automatically via the static text box and will revert to a device font. This is why I thought they were different type of embedding.\n\n"
+    },
+    {
+      "time": "6 May 2008 — 12:36pm",
+      "content": "Eric,  \nI've just spent most of the day struggling with making a flash file for a project work across most European languages. During this process I have found that unless I specifically instruct each dynamic textfield to embed, they will not make use of the embedded (range of the) font. So yes, something is at work regarding how the different textfield types either treat the embedded font, or embed the font.\n\nIt's been a while since I did this kind of work in Flash, but I seem to remember just adding a dynamic textfield somewhere in the file and specify the embedding, then all further textfields would have those characters available to them.\n\nF.\n\n"
+    }
+  ]
+}

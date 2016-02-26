@@ -1,0 +1,70 @@
+{
+  "id": "67288",
+  "title": "Open Type Ornaments in Indesign? (How to)",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I have a question with regards to the OpenType ornaments feature (ornm):\n\nHow can I activate the feature in Indesign? In case of Adobe Caslon qwwwwe should be replaced by a border. I mean, I know, how to access the characters with the glyph pallet, but can I access them in the same way as the ligatures by activating the feature?\n\nI only found the explanation in the OpenType specs, but it is no help:  \n [http://www.microsoft.com/typography/otspec/features\\_ko.htm#ornm](http://web.archive.org/web/20130823060630/http:/www.microsoft.com/typography/otspec/features_ko.htm#ornm \"http://www.microsoft.com/typography/otspec/features\\_ko.htm#ornm\")\n\nAny help much appreciated.\n\n",
+  "author": "Yehan",
+  "time": "10 Feb 2010 — 6:40pm",
+  "uid": "19396",
+  "comments": [
+    {
+      "time": "10 Feb 2010 — 8:35pm",
+      "content": "the short answer is, \"ornm\" is one of the OpenType layout features not directly supported by InDesign CS4 and earlier. You'd have to use the glyph panel.\n\nSee [http://www.adobe.com/type/browser/pdfs/OTGuide.pdf](http://web.archive.org/web/20130823060630/http:/www.adobe.com/type/browser/pdfs/OTGuide.pdf \"http://www.adobe.com/type/browser/pdfs/OTGuide.pdf\")\n\nThere's a table at the back that shows which apps support which features.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "10 Feb 2010 — 9:57pm",
+      "content": "Hi Thomas..I was kinda hoping you would reply:)\n\nThanks for confirming what I suspected though. I was hoping that there MIGHT be a way to activate it somehow...oh well.\n\n"
+    },
+    {
+      "time": "12 Feb 2010 — 4:48pm",
+      "content": "Well,behind the scenes... inserting stuff via the Glyph Panel can in fact activate OpenType features which there is no UI for otherwise. If there's more than one way to get to the glyphs by base character + features, InDesign uses its own order of preference to decide which feature(s) to activate to get to the glyphs.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "13 Feb 2010 — 3:38am",
+      "content": "@ Thomas\n\nfeature ornm {  \n sub [r s t] by [rose sunflower tulip];  \n} ornm;\n\n<cite>Well,behind the scenes... inserting stuff via the Glyph Panel can in fact activate OpenType features which there is no UI for otherwise.</cite>\n\nWhen you pick up the character rose from the glyph panel and type s or t then, s and t will not be replaced by the characters sunflower and tulip. Doesn’t that mean, that the feature is not activated? I have recognized, that features are activated sometimes, when I pick up a glyph from the panel. Sometimes I first have to delete the glyph, that I had picked up from the panel, before the feature is permanently activated. I did not find real rules behind the behavior of Indesign with regard to that.\n\nAnd I have recognized a bug:\n\nfeature ss01 {#Stylistic Set 1  \n ignore sub a' @allExceptSpace;  \n sub a' by a.fina;  \n} ss01;\n\nIn the moment, in which you add the ignore statement, the stylistic feature is not listed in the drop down list of the glyph panel anymore.\n\nExcept from that it would be very cool, if you could add a real name to those features. Example:\n\nfeature ss01 [title=\"latn dflt: Carl, DEU: Paul, TRK: Peter\"] {#Stylistic Set 1  \n ignore sub a' @allExceptSpace;  \n sub a' by a.fina;  \n} ss01;\n\n"
+    },
+    {
+      "time": "13 Feb 2010 — 7:10am",
+      "content": "Get the latest [AFDKO](http://web.archive.org/web/20130823060630/http:/www.adobe.com/devnet/opentype/afdko/) and you can [assign names](http://web.archive.org/web/20130823060630/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#8.c) to Stylistic Set features.\n\nI didn't try to reproduce the effect which you mention (which InDesign version?), but you could include both commands in an explicit lookup to see if this helps:\n\nfeature ss01 {  \nlookup ss01\\_1 {  \nignore sub a' @allExceptSpace;  \nsub a' by a.fina;  \n} ss01\\_1;  \n} ss01;\n\n"
+    },
+    {
+      "time": "13 Feb 2010 — 7:40am",
+      "content": "@ Karsten\n\n<cite>I didn't try to reproduce the effect which you mention (which InDesign version?)</cite>\n\nIndesign CS3.\n\n<cite>but you could include both commands in an explicit lookup to see if this helps</cite>\n\nI will try that. Although, if it is more a bug than a feature in Indesign, I don’t like hacks very much. And coding anything in a differnt way just because of a bug in an application, is already a hack.\n\n<cite>Get the latest AFDKO and you can assign names to Stylistic Set features.</cite>\n\nWow, Karsten! Thank you very much for that tip! I already have and use the AFDKO (all versions), but I did use TTX and the autohint programs only. I tried makeotf, but I found it more comfortable to build the features with FontLab. However, I will try to generate stylistic sets with names. Which versions of QuarkXPress and Indesign do support that?\n\nI think I will use makeotf for creating the gsub-table only and later I merge it (with TTX) into the font generated with FontLab.\n\n"
+    },
+    {
+      "time": "13 Feb 2010 — 10:42am",
+      "content": "@ Karsten\n\n\\<name\\>  \n \\<namerecord nameID=\"256\" platformID=\"1\" platEncID=\"0\" langID=\"0x0\"\\>  \n Hallo Welt  \n \\</namerecord\\>  \n \\<namerecord nameID=\"256\" platformID=\"3\" platEncID=\"1\" langID=\"0x409\"\\>  \n Hallo Welt  \n \\</namerecord\\>  \n \\</name\\>\n\nPart of the name table of a font, that I just had generated with makeotf belonging to AFDKO 2.5. Decompiled with TTX. And unfortunately that does not seem to be yet supported by Indesign CS3 and QuarkXPress 8. But the output indicates, that I did not make a mistake, doesn’t it?\n\nBy the way, there is a slight bug in [syntax description](http://web.archive.org/web/20130823060630/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#8.c): Either ' or \".\n\nEdited:\n\nA comparison between the GSUB tables of the font genarated without the name tag has shown, that the only difference are a few empty featureParams-tags:\n\nWITHOUT THE NAME TAG  \n \\<FeatureRecord index=\"59\"\\>  \n \\<FeatureTag value=\"ss01\"/\\>  \n \\<Feature\\>  \n \\<!-- LookupCount=1 --\\>  \n \\<LookupListIndex index=\"0\" value=\"16\"/\\>  \n \\</Feature\\>  \n \\</FeatureRecord\\>\n\nWITH THE NAME TAG  \n \\<FeatureRecord index=\"59\"\\>  \n \\<FeatureTag value=\"ss01\"/\\>  \n \\<Feature\\>  \n \\<FeatureParams\\>  \n \\</FeatureParams\\>  \n \\<!-- LookupCount=1 --\\>  \n \\<LookupListIndex index=\"0\" value=\"16\"/\\>  \n \\</Feature\\>  \n \\</FeatureRecord\\>\n\nFrom the Adobe OT feature file spec:  \n“The implementation will store the name strings in the name table, and will create a feature parameter data block which references them.”\n\nSo the feature parameter block was created, but shouldn’t there be anything stored, that links to the name table, to the nameID 256?\n\nAt least I think, that my test has shown, that it is relatively easy to add those names with the help of TTX.\n\n--------------\n\nNow I will check, if your tip with the lookup helps.\n\nResult:  \n1. The lookup does not help.  \n2. It is not the ignore-statement, that makes the feature name missing in the drop down list of the glyph panel, but the pure presence of “'” in “a'”. And even if I trash the ignore statement and simply write “sub a' b by b”, the name is missing on the panel. Sorry, that I partly miss the correct terms.\n\nI think, it is more a bug than a feature. At least I get no idea, why it could be intended.\n\n"
+    },
+    {
+      "time": "13 Feb 2010 — 3:48pm",
+      "content": "Feature names are not supported in any application yet. They are a pretty recent addition to the specification.\n\nI have reported the quote typo quite a while ago. :)\n\nFeatureParams points to a \"name\" table record. Obviously, TTX recognizes it but cannot interpret its content.\n\n"
+    },
+    {
+      "time": "13 Feb 2010 — 4:49pm",
+      "content": "<cite>FeatureParams points to a \"name\" table record. Obviously, TTX recognizes it but cannot interpret its content.</cite>\n\nWouldn’t the process break in this case? If not, it should.\n\n"
+    },
+    {
+      "time": "14 Feb 2010 — 2:57am",
+      "content": "Karsten: _Get the latest AFDKO and you can assign names to Stylistic Set features._\n\nOr as a somewhat more expensive but probably more convenient option, you could use DTL OTMaster, which supports the latest AFDKO 2.5. version. You could generate for instance an OpenType font with FLS, export the features file in OTM, subsequently do some syntax editing to support the latest AFDKO and use the new features file to generate new GSUB (and/or GPOS features). The same features file can be used then for compiling GSUB tables for other OT fonts (which use the same character naming convention, of course).\n\n"
+    },
+    {
+      "time": "14 Feb 2010 — 4:22am",
+      "content": "@ Frank\n\nI don’t program the features in FontLab, but in UltraEdit. So there is no need to export anything from FontLab.\n\nBut what I did not do yesterday, is to check with OTMaster Light, if the feature parameters really point to the name table. TTX should stop (de)compiling, if it cannot interpret anything.\n\nEdited:\n\nYes, the feature parameters point to the name table. And TTX kills the information, unfortunately without any error message. Shit.\n\nSo OTMaster beats TTX. The first time, that I feel a need for OTMaster.\n\n@ Karsten\n\nI assume, that you likewise have checked with OTMaster, if the feature parameters point to the namerecords. Or how could you check that without OTMaster?\n\n"
+    },
+    {
+      "time": "14 Feb 2010 — 5:16am",
+      "content": "When doing some tests earlier last year I checked the content of _FeatureParams_ with AFDKO's spot. But OTMaster is more convenient: Choose _'GSUB' table \\> 'GSUB' feature list_ (left side), then navigate to an 'ssXX' feature (right side) and click on the plus sign in the _FeatureParams_ column [to see its content](http://web.archive.org/web/20130823060630/http:/www.kltf.de/stuff/OTM2_GSUB_ssXX_FeatureParams.gif). If there is a minus rather than a plus sign in this column, no _FeatureParams_ has been defined.\n\nThis is really off-topic now.\n\n"
+    },
+    {
+      "time": "15 Feb 2010 — 2:41pm",
+      "content": "TTX 2.3 is likewise not able to decompile the content of the FeatureParams-tag and does not post an an error message.\n\n"
+    },
+    {
+      "time": "17 Feb 2010 — 3:09pm",
+      "content": "Too much off topic. Sorry.\n\n"
+    }
+  ]
+}

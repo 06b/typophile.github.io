@@ -1,0 +1,94 @@
+{
+  "id": "46521",
+  "title": "Pseudo-random 3.0",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "First I should mention that the goal here is not in fact randomness, because we want a \"natural\" effect, where adjacent glyphs are not identical--which is what would occur occasionally with a truly random disposition of glyphs.\n\nIn these examples, there are four alternates of each character in the font (including punctuation and, importantly, the space). They are sorted in four classes, @one, @two, @three and @four.\n\nVersion 1.0 was provided by Thomas Phinney. This is the first lookup.  \nIt sets glyphs from a sequence of classes: 1234 1234 1234, which then repeats.\n\nVersion 2.0 is a tweak I provided, to deal with repetitive five-character sequences, as in \"they do the things...\"  \nThis is implemented by the second lookup.  \nIt sets the class sequence to: 1234 1324 3142, which then repeats.\n\nVersion 3.0 deals with the line-break problem. (Because layout applications don't carry contextuality from one line to the next, starting over every line, a word like \"the\" at the start of a line is set with the same glyphs every time.) This method was suggested by John Hudson. It works backwards from the fifth character in the line (chosen, again, to deal primarily with the problem of \"the\"). My code splits possible fifth letters into seven groups, arranged to separate those that occur most frequently in English into different groups. The seventh group is the default, and not coded. It includes all accented characters, as I have not bothered to make truly comprehensive classes, as I did with classes one through four, which might include them.  \nThis adjusts Version 2.0 by changing the first four classes in the sequence, depending on the fifth character in the line, to one of: 3143, 4324, 2413, 3214, 4132, 2314 or 1432.\n\n`\nfeature calt { `\n\nlookup calt\\_one {  \nsub @one @one' @one by @two;  \nsub @two @one' @one by @three;  \nsub @three @one' @one by @four;  \n} calt\\_one;\n\nlookup calt\\_two {  \nsub @four @one @two' by @three;  \nsub @three @three' by @two;  \nsub @two @four @one' by @three;  \nsub @four @three @two' by @one;  \nsub @three @one @three' by @four;  \nsub @four @four' by @two;  \n} calt\\_two;\n\nlookup calt\\_three {  \nsub @one' @two @three @four [E M V e m v one space] by @three;  \nsub @two' @three @four [E M V e m v one space] @three by @one;  \nsub @three' @four [E M V e m v one space] @three @two by @four;  \nsub @four' [E M V e m v one space] @three @two @four by @two;  \n} calt\\_three;\n\nlookup calt\\_four {  \nsub @one' @two @three @four [T U B t u b two space.alt2] by @four;  \nsub @two' @three @four [T U B t u b two space.alt2] @three by @three;  \nsub @three' @four [T U B t u b two space.alt2] @three @two by @two;  \nsub @four' [T U B t u b two space.alt2] @three @two @four by @four;  \n} calt\\_four;\n\nlookup calt\\_five {  \nsub @one' @two @three @four [P A C p a c three nine space.alt3] by @two;  \nsub @two' @three @four [P A C p a c three nine space.alt3] @three by @four;  \nsub @three' @four [P A C p a c three nine space.alt3] @three @two by @one;  \nsub @four' [P A C p a c three nine space.alt3] @three @two @four by @three;  \n} calt\\_five;\n\nlookup calt\\_six {  \nsub @one' @two @three @four [L I Q Y l i q y four eight] by @three;  \nsub @two' @three @four [L I Q Y l i q y four eight] @three by @two;  \nsub @three' @four [L I Q Y l i q y four eight] @three @two by @one;  \nsub @four' [L I Q Y l i q y four eight] @three @two @four by @four;  \n} calt\\_six;\n\nlookup calt\\_seven {  \nsub @one' @two @three @four [D O G Z d o g z five] by @four;  \nsub @two' @three @four [D O G Z d o g z five] @three by @one;  \nsub @three' @four [D O G Z d o g z five] @three @two by @three;  \nsub @four' [D O G Z d o g z five] @three @two @four by @two;  \n} calt\\_seven;\n\nlookup calt\\_eight {  \nsub @one' @two @three @four [F R J N f r j n six seven] by @one;  \nsub @two' @three @four [F R J N f r j n six seven] @three by @four;  \nsub @three' @four [F R J N f r j n six seven] @three @two by @three;  \nsub @four' [F R J N f r j n six seven] @three @two @four by @two;  \n} calt\\_eight;\n\nsub @two @two' by @one;  \nsub @one @one' by @two;\n\n} calt;\n\nI suspect it may be possible to configure a system that works entirely with backwards-activation, but it is too mind-boggling for me to figure out.\n\n[Sorry, I meant to post this in the Build forum.]\n\n",
+  "author": "Nick Shinn",
+  "time": "17 Jun 2008 — 11:49am",
+  "uid": "2021",
+  "comments": [
+    {
+      "time": "17 Jun 2008 — 12:23pm",
+      "content": "Nick,  \nIn what style of font do you see random substitution as best used?\n\nI've never tried to achieve a total random look, but the last 2 script fonts I've worked on (both connecting) I've gotten close to this effect just through using a lot of contextual substitution with certain classes. I would see Random substitution being most useful where the variations are subtle and letters are not connected. I've been adding contextual variations of ligatures as well which seems to be a useful thing for handlettering style designs.\n\nStephen\n\n"
+    },
+    {
+      "time": "17 Jun 2008 — 12:56pm",
+      "content": "Pseudo-random reduces repetition. For instance, consider f\\_f.  \nIn a four-alternates font, there would be four different f\\_f ligatures, but 12 different combinations of individual f and f.  \nI've developed this code while working on Duffy Script, which is not connected.  \nHowever, the variations don't have to be subtle.  \nBut they do have to work with every other glyph except themselves, so it's a more more complex design procedure, \"mulling\" (as James Montalbano puts it) over the whole as one works on the individual.  \nI don't see why this shouldn't be applied to any genre of type, from strictly geometric sans to swashy connected script.\n\n"
+    },
+    {
+      "time": "17 Sep 2009 — 5:48pm",
+      "content": "Nick,  \nThanks for the code. I have been having this problem with a font I am working on and couldn't figure out the solution. Your code works great, now I just have to figure out how to expand it from four to nine.\n\nMichael\n\n"
+    },
+    {
+      "time": "24 Feb 2014 — 5:37pm",
+      "content": "> I suspect it may be possible to configure a system that works entirely with backwards-activation, but it is too mind-boggling for me to figure out.\n\n[https://github.com/schriftgestalt/Mekka-Scripts/blob/master/Stylistic%20...](http://web.archive.org/web/20140803214432/https:/github.com/schriftgestalt/Mekka-Scripts/blob/master/Stylistic%20Sets/Create%20pseudorandom%20calt%20feature.py \"https://github.com/schriftgestalt/Mekka-Scripts/blob/master/Stylistic%20Sets/Create%20pseudorandom%20calt%20feature.py\")\n\n"
+    },
+    {
+      "time": "24 Feb 2014 — 6:24pm",
+      "content": "I know of one type of font where such features make sense: lettering fonts for comic strips. They intentionally simulate hand lettering, and they often have alternates (usually put in easy reach as UC/LC in a caps-only font) for the purpose of avoiding identical letters. (But the letter I usually has an alternate where the presence of serifs indicates a capital letter - or, rather, a letter that would still have been a capital even if the text weren't in all caps.)\n\nFor such a face, it might be worthwhile to get more elaborate.\n\nEach letter might have five forms. Which form is used depends on which letter, and which form of that letter, preceded it. But there are two (really four) possible successors for each preceding letter - one picked by shifting the letter. (And if the previous letter was shifted, another two.)\n\n"
+    },
+    {
+      "time": "25 Feb 2014 — 7:08am",
+      "content": "\"I don't see why this shouldn't be applied to any genre of type, from strictly geometric sans to swashy connected script.\"\n\nI don't either, except that effects of writing in some connecting scripts are less than random, being based on reservoir size, dip frequency and the \"length\" and \"weight\" of the glyphs being \"written\".\n\nI'll let you know how that turns out. ;)\n\n"
+    },
+    {
+      "time": "25 Feb 2014 — 12:24pm",
+      "content": "You will ﬁnd that it is impossible to write like an automaton, devoid of randomness.  \nThe constraints you mention are all subject to variation in writing, and are exactly the kind of qualities that might be represented in alternate “takes” of the same glyph—including ligatures and ﬂourishes.\n\n"
+    },
+    {
+      "time": "28 Feb 2014 — 2:24pm",
+      "content": "\"You will ﬁnd that it is impossible to write like an automaton, devoid of randomness.\"\n\nThen you will find it hard to design randomness into a font with OT, won't you. I'm saying, for some results in some script styles, the mull calls for an approach to variation that is not just grapheme roulette.\n\n"
+    },
+    {
+      "time": "28 Feb 2014 — 8:30pm",
+      "content": "It’s not randomness. It’s pseudo-randomness.  \nThe goal is to imitate certain irregular qualities of “natural” media.  \nThe coding can be constrained to accommodate all kinds of variation—anything that can be written.  \nNeither is this grapheme roulette, because the variants are deployed according to contextuality, not by chance.  \nShow me an example of “some results in some script styles” that you believe can’t be pseudo-randomized and I’ll explain how to do it.\n\n"
+    },
+    {
+      "time": "1 Mar 2014 — 4:21am",
+      "content": "\"...the variants are deployed according to contextuality, not by chance.\"\n\n¡ But the quantity of a particular character in text subjected to any psuedomizer, is according chance. And the number of variations in a roulette-wheel of glyphs, playing on the chance in the text is chance times chance !\n\nDon't get me wrong, I do not believe there is any style that can’t be psuedomized in OT. I just don't think it's correct to say one has a solution for 'any genre of type' when there are styles where the writer is not random, because among the mind, the tool and the content, there is an agenda.\n\n"
+    },
+    {
+      "time": "1 Mar 2014 — 6:20am",
+      "content": "As for using this idea for other kinds of type than that used for comic word balloons... there is an illustrious precedent. Gutenberg used many alternate forms in order for his printed books to look like manuscripts.\n\n"
+    },
+    {
+      "time": "1 Mar 2014 — 10:45am",
+      "content": "I have no idea what you’re talking about David. Can you post an image illustrating your point?\n\n"
+    },
+    {
+      "time": "3 Mar 2014 — 7:42am",
+      "content": "\"Gutenberg used many alternate forms in order for his printed books to look like manuscripts.\"\n\nBut then his successors lost the knowledge of the agenda, i.e. started using the several hundred lowercase glyphs randomly, and no one collected their work.\n\nNick, there are a number of things going on in the famous specimen below, some of it is random, and some shows an agenda.\n\n ![](http://web.archive.org/web/20140803214432im_/http:/typophile.com/files/penloading_5830.png)\n\n"
+    },
+    {
+      "time": "3 Mar 2014 — 12:01pm",
+      "content": "Sorry for being so dim, David, but could you please point out the bit(s) that are driven by an agenda, and which cannot be mimicked by OpenType substitution.\n\n"
+    },
+    {
+      "time": "21 Mar 2014 — 6:37am",
+      "content": "Sorry for the break. Nick, there are things that happen in writing, where the foreknowledge and memory of the writer go beyond the line breaks, which is OT's boundary.\n\nSo, in this example, \"It affords me\" is written with a pen that becomes unloaded, i.e. runs nearly dry by the time\"much\"is written. It reloads, in time for \"pleasure\" and etc.\n\nNext, there is no way to know not to cross the t, because a long descending f was used in the previous line, as the \"fine\" above, does to \"that\" which is below.\n\nThis is neither random, pseudo-random, or an OTability I know of, and there is more. .\n\n"
+    },
+    {
+      "time": "21 Mar 2014 — 11:52am",
+      "content": "Right, OT contextuality is conﬁned to single lines (and stumbles at either end). It also fails when tracking (beyond a small amount) is applied—which is really annoying, as that is an intentional feature of layout applications, not a bug or technical limitation.\n\nNonetheless, I do think that your example here, with its huge “negative leading”, is an outlier/special case. If typographers decide to adopt this tricky practice, they are likely aware that it will create extender collisions which will not be ameliorated by the layout app’s H&J’s or OT smart fonts, and are prepared to deal with them manually, or let things fall as they may.\n\nOne might just as well dismiss “smart quotes” software that replaces hash marks with proper quote marks, because it fails when dealing with apostrophes at the beginning of words.\n\nPseudo-randomization is intended to mimic certain “natural media” effects but it cannot produce a perfect facsimile of virtuoso calligraphy and layout on the ﬂy. I doubt the author of the example could either, without ﬁrst sketching the layout—note how the “g” in “king” anticipates the line below.\n\n"
+    },
+    {
+      "time": "21 Mar 2014 — 6:20pm",
+      "content": "Now Nick, I'm not dismissing pseudo random typography!? You asked, I showed, you said you did not understand, I explained. You seem to understand now, good. I just don't think roulette can be applied to any genre of type, because not all genres of type can be properly composed with Any random bits whatsoever, though not all.\n\n"
+    },
+    {
+      "time": "21 Mar 2014 — 9:20pm",
+      "content": "> First I should mention that the goal here is not in fact randomness, because we want a \"natural\" effect, where adjacent glyphs are not identical--which is what would occur occasionally with a truly random disposition of glyphs.\n\nPerhaps the only problem here was to the label the thread \"pseudo randomness\"? Ditching the label, try the type and let's see the result.\n\nIf you want to stay purely theoretical, give some thought to the question of whether or not there could be more than one utopia. Most of us would settle for \"this is nice.\"\n\n"
+    },
+    {
+      "time": "22 Mar 2014 — 12:51pm",
+      "content": "Thanks for posting the Flickinger specimen, David.  \nYou’re right, such a controlled piece of calligraphy has no place for randomness.\n\nIt’s interesting that this penman’s methodology could be readily “pseudomized” with Contextual Alternates.\n\nIn particular, the heavying up of certain downstrokes, but never (with the exception of double-f) for adjacent glyphs, is just the sort of thing that the Contextual Alternates feature handles well.\n\nAlso, the use of different forms of “t” for initial, middle and terminal position.\n\n"
+    },
+    {
+      "time": "24 Mar 2014 — 5:05am",
+      "content": "Your quite welcome Nick. It’s definitely an interesting specimen. After drawing a font in response over the last few seasons, I took a break to confer with Kent Lew about the OT possibilities of this same specimen, and we’re doing an excercise. That plan led me to discuss it with Petr van Blokland, who’s always working at least a little on layout features.\n\nThere are always going to be limits on achieving handmade appearance, so I’m not trying to do the impossible. I take something like these Chinese compositions ( [http://arts.cultural-china.com/en/62A6116A12015.html](http://web.archive.org/web/20140803214432/http:/arts.cultural-china.com/en/62A6116A12015.html \"http://arts.cultural-china.com/en/62A6116A12015.html\")), as an example of something so far inside of a person, I think it’s beyond computers to store.\n\nBut you can see brushes loading up with ink, and spreading it out into writing, (and sure there’s some random in there too!). But there is also care in distributing that ink as evenly as possible, if that’s the compositional need, or not, if that’s what’s needed.\n\n"
+    }
+  ]
+}

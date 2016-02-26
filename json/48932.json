@@ -1,0 +1,62 @@
+{
+  "id": "48932",
+  "title": "MATLAB, LaTeX and psfrag",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "Hi,\n\nIm including some MATLAB plots in a LaTeX document and have used the psfrag package to (successfully) assimilate the axis labels and title with the font in my LaTeX document. What I’m wondering is whether there’s a simple way to do the same for the axis scale labels (ie. the numbers that accompany the ticks along each axis). I can use psfrag to manually replace each and every one, although its incredibly cumbersome.\n\nIs there a better way?\n\nThanks.\n\n",
+  "author": "<a href=\"/web/20091130045929/http://typophile.com/user/36150\" title=\"View user profile.\">blindside</a>",
+  "time": "<br>",
+  "uid": "36150",
+  "comments": [
+    {
+      "time": " 30.Aug.2008 7.49am",
+      "content": "I just noticed a second problem - I’ve been using LaTeX -\\> PS -\\> PDF on a Windows machine. I’ve just been viewing the PS in GSView and using its ’Extract’ option and ’pdfwrite’ to convert the file to a PDF. I didn’t even notice at first - it was exaggerated on printing - but the font colour inside the PDF isnt actually black, but rather a dark grey. Printing directly from GSView is fine, but conversion to PDF leaves the font this dark grey colour which, on printing (from the PDF), looks rather bad.\n\nAny suggestions?\n\nThanks in advance.\n\n"
+    },
+    {
+      "time": " 30.Aug.2008 10.15am",
+      "content": "Hi,\n\nAs far as the plots go, it might be an idea to use gnuplot instead of MATLAB, and use the epslatex option terminal to produce the output, which renders all text (including number on the axis) natively in LaTeX.\n\nAs for the PDF conversion, your LaTeX distribution might have come with pdflatex, which converts latex directly to PDF. Are you using MiKTeX? You might also look at [http://www.toolscenter.org/](http://web.archive.org/web/20091130045929/http:/www.toolscenter.org/ \"http://www.toolscenter.org/\") for a pretty good IDE that should automate the process for you.\n\nI hope this is useful.\n\n"
+    },
+    {
+      "time": " 30.Aug.2008 6.25pm",
+      "content": "Thanks for the reply, but it has to be MATLAB for reasons there isn’t much point in going into.\n\nI do have pdfLaTeX but had to go from LaTeX -\\> PS first because pdfLaTeX couldnt handle including the .eps file.\n\n"
+    },
+    {
+      "time": " 30.Aug.2008 7.15pm",
+      "content": "\\> pdfLaTeX couldnt handle including the .eps file.\n\nYou can use the command epstopdf to get graphicname.pdf from graphicname.eps; with the graphicx package, pdflatex can then handle it with \\includegraphics[width=\\columnwidth]{graphicname} (or you choose the width you want).\n\n"
+    },
+    {
+      "time": " 30.Aug.2008 8.19pm",
+      "content": "If I do that I can’t use psfrag to fix the title & labels, can I?\n\n"
+    },
+    {
+      "time": " 30.Aug.2008 8.24pm",
+      "content": "I don’t know about psfrag. I use inkscape to fix pdf graphics (change fonts, characters, sizes etc).\n\n"
+    },
+    {
+      "time": " 30.Aug.2008 8.41pm",
+      "content": "Fantastic... so I either can’t use psfrag to fix labels, or I can’t have my .pdf with black text :/\n\n"
+    },
+    {
+      "time": " 30.Aug.2008 8.49pm",
+      "content": "You add the labels you want with Inkscape and can even change the colors at will. Am I missing something?\n\n"
+    },
+    {
+      "time": " 30.Aug.2008 9.08pm",
+      "content": "Well, if I do that I have to manually edit everything I want to embed, I have to know the exact size it’ll be once I insert it since scaling the image will scale the labels and any time I want to change the labels I’ll need to edit the image (as apposed to just the TeX file). I just wanna know why ps2pdf is giving me grey font output :/\n\n"
+    },
+    {
+      "time": " 30.Aug.2008 9.22pm",
+      "content": "\\> I just wanna know why ps2pdf is giving me grey font output :/\n\nI can’t answer that question That is something that has never occurred to me and that I find quite surprising. And if you have lots of graphics to handle, using a graphics editor may indeed not be a viable solution. Sorry.\n\n"
+    },
+    {
+      "time": " 30.Aug.2008 9.36pm",
+      "content": "Just used the online ps2pdf converter and it worked fine :/ For some reason when I use ps2pdf on my PC I get a really dark grey (so dark you cant notice in the PDF without zooming in a ridiculous amount), but it becomes really obvious when I print (on my B&W laser), since it uses a fine pattern to try and emulate the gray colour... It ends up looking like my toner is running out.\n\n"
+    },
+    {
+      "time": " 30.Aug.2008 10.18pm",
+      "content": "Found the culprit... psfrag requires the color package, and for some reason just using the color package is whats causing the final pdf to have this dark grey font... weird. Not sure whether its a bug or some genius decided that grey so dark its almost indistinguishable was just a good default font color.. but the option ’monochrome’ fixes it.\n\n"
+    }
+  ]
+}

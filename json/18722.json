@@ -1,0 +1,90 @@
+{
+  "id": "18722",
+  "title": "Mac OSX Essential Fonts",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Can anyone help me with a definitive list of essential Mac OSX System Fonts that are absolutely, positively necessary to ensure that my operating system (Tiger 10.4.5) will continue to run without problems?  \nI've scoured the Internet and other Forums with little luck other than listings that contradict each other.  \nI'm determined to somehow get rid of all unnecessary fonts that irritatingly clutter my various application font menu's  \nAny assistance from anyone would be most appreciated.  \nI thank you all in advance.\n\n",
+  "author": "<a href=\"/web/20110225161936/http://typophile.com/user/12124\" title=\"View user profile.\">Tom Budinger</a>",
+  "time": "<br>",
+  "uid": "12124",
+  "comments": [
+    {
+      "time": "",
+      "content": "Yes, this is more complicated than it initially sounds. For what it's worth, I'm not sure what system fonts are really necessary for Windows XP to function reliably either. Personally, I keep /System/Library/Fonts/ intact, even though Apple has said in the past that some of them aren't \"necessary\". If you have a Classic System Folder, then keep Charcoal, Chicago, Geneva, and Monaco in /System Folder/Fonts/.\n\nI've also tested the suggestions within this document without trouble.  \n [http://dl.extensis.com/downloads/SC/EN/P/Fonts\\_Best\\_Practices\\_in\\_OSX.pdf](http://web.archive.org/web/20110225161936/http:/dl.extensis.com/downloads/SC/EN/P/Fonts_Best_Practices_in_OSX.pdf \"http://dl.extensis.com/downloads/SC/EN/P/Fonts\\_Best\\_Practices\\_in\\_OSX.pdf\")\n\nIn my experience, removing all Asian language support can create a situation where the 10.4 Finder may crash when it is asked to display Asian glyphs. The amusing thing is that the Asian font names themselves use these glyphs, so it can be a trick to put them back. I don't keep anything in /Library/Fonts/ or /Users/(your username)/Library/Fonts/. Although, sometimes people like to keep common MS fonts like Arial and Verdana active at all times because they are commonly specified in webpages. If they aren't available, webpages will fall back to another font.\n\nThere should probably be a wiki article on this...\n\n"
+    },
+    {
+      "time": "",
+      "content": "Anything that the system itself _requires_ to operate will be found in \"/System/Library/Fonts\" or elsewhere in the \"/System\" folder. Mac OS X reorganized things and created the \"/Library\" folder precisely so that you would _leave the \"/System\" folder alone_. Anything you remove from \"/System\" is simply a request for your machine to give you lots of hard-to-track-down trouble, period.\n\n(Yes, I realize 400 people may respond with \"but I removed X and nothing bad happened.\" I don't care - they're wrong. The \"/System\" folder is for Mac OS X itself. That's why \"root\" owns all of it. Leave it alone.)\n\nAnything in your personal fonts folder (\"~/Library/Fonts\") is discretionary, as is, _technically_, anything in \"/Library/Fonts\" (the machine-wide configurable fonts folder). However, applications that require their own fonts are supposed to install them in one of those two places (usually \"/Library/Fonts\"), and if those fonts are missing, those programs may not work properly or at all. Tax preparation and music notation programs may fail completely if their special fonts are not available; suites like Microsoft Office may try to \"reinstall\" Microsoft fonts if they're missing.\n\nGo to your nearby Apple store, find a display system that is obviously little more than an out-of-the-box machine with demo software, take screen captures of \"/Library/Fonts\" and \"~/Library/Fonts\", and E-mail them to yourself. You should leave those fonts in place; use your font manager (or Font Book, if nothing else) to disable them if you don't want them cluttering up menus. Just keep in mind that some applications may require more.\n\nThe suggestion about the four basic fonts for the Mac OS 9 system folder is correct. If you remove outlines from that folder, you must at least keep bitmaps for Charcoal 12, Geneva 9, Geneva 12, Monaco 9, and Chicago 12 available to the system or it will not function. (If your Mac is an older one that can boot into Mac OS 9, it may not even boot if the latter four bitmap fonts are not available.)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Apple has a [list](http://web.archive.org/web/20110225161936/http:/docs.info.apple.com/article.html?artnum=301332%3Cbr%20/%3E) of all the fonts you can and can't disable under Tiger.\n\nMan, that link doesn't exactly pop out. Here you go:\n\n[http://docs.info.apple.com/article.html?artnum=301332%3Cbr%20/%3E](http://web.archive.org/web/20110225161936/http:/docs.info.apple.com/article.html?artnum=301332%3Cbr%20/%3E \"http://docs.info.apple.com/article.html?artnum=301332%3Cbr%20/%3E\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>Anything you remove from “/System” is simply a request for your machine to give you lots of hard-to-track-down trouble, period.</cite>\n\nI agree. I think the most common way to run into trouble is if you have your own Postscript family of Helvetica, which obviously has many more variations than Helvetica.dfont. It could be that it is activated in a font manager which can override system fonts, or it could simply be that it is earlier in the font path, for example, in ~/Library/Fonts/. The effect can be the same in terms of application functionality. An application that uses Helvetica (and many do) will be using the Postscript version, which may not function as expected.\n\nUsually, this isn't a problem, but I think that's what \"hard-to-track-down\" problems are all about. In a way, it is unfortunate that applications like Safari, iChat and Mail make use of Helvetica for display purposes, when users may have perfectly valid reasons for using their own versions. For example, people commonly have older documents that were created with Postscript versions of Helvetica.\n\nIt is interesting to think of this in light of the Segoe/Frutiger controversy. Apple could have avoided this situation by somehow renaming their version of Helvetica, to say AppleHelvetica. Perhaps they couldn't because of licensing issues...\n\n"
+    },
+    {
+      "time": "",
+      "content": "Aaron has given you the **most sound advice**. Follow that article.\n\nI agree with you. I find it annoying that all of the fonts must show up in all the applications I use. Don't delete them, deactivate them. I'd highly suggest using Linotype's Font Exporer for this. I created a set of the approved fonts that I can deactivate and haven't had any problems. I've also noticed apps like Pages and Keynote also install fonts into the system. Again, I create a set specifically for those fonts so I can deactivate them and activate them only when needed.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Does Apple give you \\*\\*\\*\\* medal if you delete Comic Sans ?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Vincent, are you planning to follow Frutiger and Zapf and re-release CS with new and improved OpenType features?\n\nComic Sans Next?  \nComic Sans Nova?  \nComic Sans Premier Pro?\n\n"
+    },
+    {
+      "time": "",
+      "content": "No but I could be convinced to make Comic for Dummies & Mummies..\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"Does Apple give you ----in medal if you delete Comic Sans ?\"\n\nActually it's one of the fonts they say you can't disable!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Apple used to advertise their systems as being the \"computer for the rest of us.\" I think that Apple page is an example of \"documentation for the rest of us.\"\n\nFor some class of Mac user's, Comic Sans is a real necessity. I have relatvies that depend upon said typographical workhorse for posters, fliers, recipe books and resumes every day.\n\nI think the documentation only implies that you can't disable CS with FontBook. I tried it, and it disabled, so it's really unclear what those lists mean.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I've always assumed the lists state which fonts can be safely disabled and which fonts cannot. Although why Comic Sans can't be disabled is beyond me. I've never run across an application that requires it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "You don't need anything in Library-Fonts or User-Library-Fonts.  \nAdobe installs a ton of fonts in Library-Application Support-Adobe-Fonts, you don't need any of them except definitely do NOT delete the Reqrd folder.  \nThen there's the wonderful Adobe fonts in User-Library-Application Support-Adobe-Fonts. Ditch them.  \nMicrosoft also likes to install a bunch of fonts in System-Fonts - most of these you don't need.\n\nThe list is bogus. I have a really stripped down version at work and when I get there I'll post it…\n\nMy head is spinning. Does anyone wonder why we complain of font management in OSX?\n\npeace\n\n"
+    },
+    {
+      "time": "",
+      "content": "Here's the list from my work computers System-Fonts folder\n\nArial  \nArial Black  \nCourier.dfont  \nGeneva.dfont  \nHelvetica.dfont  \nKeyboard.dfont  \nLastResort.dfont  \nLucidaGrande.dfont  \nMonaco.dfont  \nTahoma  \nTrebuchet MS  \nVerdana  \nWebdings\n\nI believe the Arials and Trebuchet and Webdings are MS installed that you need if you're running Office. This is all the fonts that I have in the System anywhere (except for the Reqrd folder in the Adobe location) and it runs just fine.\n\nI have also heard you can replace Helvetica and Courier with T1 versions…\n\nGood Luck!  \npeace\n\n"
+    },
+    {
+      "time": "",
+      "content": "I presume the reason Comic Sans is listed as being required is because if it or any of the other Web Core Fonts are disabled/removed, Microsoft Internet First Run will reinstall them (in ~/L/F) next time you launch Internet Explorer, and you'd end up with copies everywhere. Someone, however, seems to have forgotten to tell the documentation writer that IE no longer ships with the OS.\n\nI just yesterday went through with FontBook and disabled everything that I've not used in the past 16 years, leaving a bare minimum of CJK support:\n\n.Aqua Kana  \nSTHeiti (for Chinese)  \nHiraganu Kaku Gothic Pro (for Japanese)  \nApple Gothic (for Korean)\n\nI'm now down to 90 visible fonts installed with 21 active, the only User one being Gentium. I've been running with no Arial installed for years without problems :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Here's a fun project for the brave that will definitely prove which fonts are essential:\n\n1. Delete all fonts from Library/Fonts  \n2. Delete each font from System/Library/Fonts one at a time, restarting after each deletion.  \n3. As soon as you're unable to fully boot or login, you'll have found an essential font.\n\nIf you can no longer boot or login, just boot to target disk mode and replace the fonts with those from another Mac.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Fisheye, currently the system will load the Finder with only LucidaGrande.dfont active. Most Typhiles use their computers for doing actual work, using one or more applications. Depending on how you use your applications the fonts necessary might be different. Some applications might assume that certain fonts are active, which is why your suggestions are not very useful. This is particularly important when discussing language support.\n\nI think I first performed the procedure you described in 2001.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I will say this again because it's important and may not have sunk in:\n\n_Files in the \"/System\" folder belong to the OS itself, not to you. Remove them at your peril. If something breaks after your remove anything from \"/System\", even a font, no one will cry for you._\n\nOff the top of my head, I know that [iChat will fail if Helvetica is removed or disabled](http://web.archive.org/web/20110225161936/http:/docs.info.apple.com/article.html?artnum=300501). So will [Address Book](http://web.archive.org/web/20110225161936/http:/docs.info.apple.com/article.html?artnum=25726). Terminal gives you a [tiny, unusable window](http://web.archive.org/web/20110225161936/http:/docs.info.apple.com/article.html?artnum=25730) if you disable Monaco. Version 1.0 of iCal [crashes](http://web.archive.org/web/20110225161936/http:/docs.info.apple.com/article.html?artnum=61734) if you try to launch it without Helvetica Neue enabled, and that's just in \"/Library/Fonts\", not \"/System\".\n\nFor better or worse, some applications require their fonts; disable them at your own peril. Disable the _system's_ fonts at the peril of every application. Feaverish posted the [link](http://web.archive.org/web/20110225161936/http:/docs.info.apple.com/article.html?artnum=301332) to the list of fonts that Apple says you should not disable in Mac OS X 10.4, and it, in turn contains a [link](http://web.archive.org/web/20110225161936/http:/docs.info.apple.com/article.html?artnum=25710) to the same list for 10.3.\n\nBut Apple points out that there's an even simpler test: Font Book will not let you disable any font that the system deems as required. So, no matter what font manager you're using, if you have any questions, try disabling the font in Font Book. If you can't, then removing it some other way is a bad idea, and you're on your own.\n\n(Honest to God, tinkering with the \"/System\" folder is such a bad idea. It's like opening the hood of a car and saying, \"Hmm, how many of these parts can I remove and still think everything will work correctly?\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "I disagree. Completely…\n\npeace\n\n"
+    },
+    {
+      "time": "",
+      "content": "It's over 4 years since the other comments, but thought I'd add my experience. I just upgraded from Mac OS 10.4.11 to Mac OS 10.6.4 and couldn't believe how slow and sluggish the Mac became.\n\nFinally discovered that after the upgrade there were:  \n36 font files were inside /System/Library/Fonts  \nOver 500 font files inside /Library/Fonts  \nOver 300 font files inside User/Library/Fonts\n\nEmptied the 800+ font files from the latter two locations (instead I rely on Linotype's FontExplorer to manage all my fonts).\n\nNet result. Vast speed improvement and responsiveness on the Mac.\n\n"
+    }
+  ]
+}

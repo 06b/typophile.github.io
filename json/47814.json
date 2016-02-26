@@ -1,0 +1,22 @@
+{
+  "id": "47814",
+  "title": "FontLab's measurement line in Python",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi everyone,\n\nI'm looking for a way to calculate \"sidebearings\" in a Python script by using (or approximating) FontLab's measurement line. I put \"sidebearings\" in quotes because I actually want the distance between the edge of the glyph and where the measurement line first crosses a contour. I know that I'm able to run a macro like `fl.font.measurement = 0` to set the height of the measurement line, but what I don't know is how to get the values of the modified sidebearings that are shown in the Metrics window when the measurement line is on.\n\nIs there a similar attribute in FontLab's glyph object that isn't documented? Or is there another easy way to calculate this using the contour?\n\nAs a temporary solution, I have been able to use RoboFab's `contour.pointInside()` to get these values by periodically testing points within the bounding box. However, I want to be able to easily get these values for hundreds of glyphs at a time, and this method is quite taxing. There must be an easier way!\n\nThank you in advance for your help, and my apologies if the answer is already out there. I couldn't find anything with a quick search.\n\nCheers,  \nDavid\n\n",
+  "author": "David Jonathan Ross",
+  "time": "28 Jul 2008 — 6:12am",
+  "uid": "12938",
+  "comments": [
+    {
+      "time": "28 Jul 2008 — 6:41am",
+      "content": "Not in the FLS Python API. But Erik van Blokland has added such a function to RoboFab, as a new marginPen object:  \n [http://code.robofab.com/browser/trunk/Lib/robofab/pens/marginPen.py](http://web.archive.org/web/20131017052437/http:/code.robofab.com/browser/trunk/Lib/robofab/pens/marginPen.py \"http://code.robofab.com/browser/trunk/Lib/robofab/pens/marginPen.py\")  \nand even an angledMarginPen:  \n [http://code.robofab.com/browser/trunk/Lib/robofab/pens/angledMarginPen.py](http://web.archive.org/web/20131017052437/http:/code.robofab.com/browser/trunk/Lib/robofab/pens/angledMarginPen.py \"http://code.robofab.com/browser/trunk/Lib/robofab/pens/angledMarginPen.py\")\n\nKarsten\n\n"
+    },
+    {
+      "time": "28 Jul 2008 — 7:11am",
+      "content": "Thank you, Karsten...this is exactly what I was looking for!\n\n"
+    }
+  ]
+}

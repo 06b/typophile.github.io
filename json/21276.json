@@ -1,0 +1,38 @@
+{
+  "id": "21276",
+  "title": "OpenType superscript & ligature problems",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hello,\n\nI'm new to font-making, and I've been pulling my hair out trying to get some OpenType features working for a Cyrillic font I'm putting together. Superscript variants and ligatures \\*are\\* supposed to work in Word 2003, right? (I did try InDesign too, also with no luck.)\n\nMy font needs superscript glyphs that look somewhat different than just a raised standard glyph. If it makes a difference, the superscript glyphs have dimensions such that they should show up above the previous character.\n\nIn addition, the superscript glyphs take on a different appearance if combined with Uni0483 (combining titlo); they should still appear above the previous character.\n\nI've read everything I can on OpenType superscripts and looked at all the fonts I have for clues, but I wasn't able to find much in terms of examples. All I know is that typing any of the relevant characters in superscript doesn't yield the superscript variants, and none of the ligatures appear when the correct combinations are typed.\n\nHere's what I did for the OpenType code:\n\nfeature sups { # Superscript  \n script cyri;  \n sub [uni0434 uni043C uni0440 uni0441] by [uni0434.sups uni043C.sups uni0440.sups uni0441.sups];  \n} sups;\n\nand also\n\nfeature liga { # Standard Ligatures  \n script cyri;  \n sub uni0434 uni0483 by uni0434\\_uni0483.sups;  \n sub uni043C uni0483 by uni043c\\_uni0483.sups;  \n sub uni0440 uni0483 by uni0440\\_uni0483.sups;  \n sub uni0441 uni0483 by uni0441\\_uni0483.sups;  \n} liga;\n\nAny help at all would be wonderful.\n\nThanks a lot!\n\n~Quinn\n\n",
+  "author": "quinnanya",
+  "time": "13 Jul 2006 — 7:21pm",
+  "uid": "13839",
+  "comments": [
+    {
+      "time": "13 Jul 2006 — 8:16pm",
+      "content": "first of all the Cyrillic script tag should be cyrl, secondly you should copy your lookups to to the default script so for your superscript feature it should look something like:\n\nfeature sups { # Superscript  \nlookup sups1 {  \nsub [uni0434 uni043C uni0440 uni0441] by [uni0434.sups uni043C.sups uni0440.sups uni0441.sups];  \n} sups1;  \nscript cyrl;  \nlookup sups1;  \n} sups;\n\nif i've gotten anything wrong, Adam should show up shortly to straighten you out. \\>^p\n\n_Superscript variants and ligatures \\*are\\* supposed to work in Word 2003, right?_   \nI don't believe so. Office apps still give only [faux formatting](http://web.archive.org/web/20130716031232/http:/typophile.com/wiki/faux%20formatting) for thinks like super/subscripts and smallcaps.\n\n"
+    },
+    {
+      "time": "14 Jul 2006 — 5:49am",
+      "content": "Thanks for fixing that-- I really appreciate it. Disappointing news about Word, though. Do you know where I could find a list of programs that do support OpenType features? (And whether Word for Vista will?) I'm assuming browsers don't display it. I'd ideally like to use them in xml-based e-books, but it would be up to the e-book reader software to support it, right?\n\nAlso, if someone writes something with the correct combinations for the superscript or ligature in Word, then copies and pastes it into a program that does support OpenType, will the variant glyphs show up?\n\nThanks,  \nQuinn\n\n"
+    },
+    {
+      "time": "14 Jul 2006 — 6:31am",
+      "content": "Typotheque has a list of applications that support OpenType features:  \n [http://www.typotheque.com/fonts/opentype\\_feature\\_support/](http://web.archive.org/web/20130716031232/http:/www.typotheque.com/fonts/opentype_feature_support/ \"http://www.typotheque.com/fonts/opentype\\_feature\\_support/\")  \nBut read with caution:  \nFor some features in XPress7, the mark only means that the according glyphs can be accessed by way the glyph palette (this is: 'ornaments', 'historical forms', 'slashed zero', 'stylistic alternates').  \nAnd that almost all features are marked in the Microsoft Avalon column does NOT mean that any application actually support them. As it seems, Word for Vista does not (there was a thread on this topic).\n\n"
+    },
+    {
+      "time": "14 Jul 2006 — 7:22am",
+      "content": "Re. Avalon aka WPF. It's is a development platform that is still in beta. Almost all the registered OT features are supported via a simple mark-up language XAML - however as the platform is new there are no notable apps using it yet.\n\n"
+    },
+    {
+      "time": "14 Jul 2006 — 8:22am",
+      "content": "Do you know of a guide for XAML on how to access the OT features?\n\n"
+    },
+    {
+      "time": "14 Jul 2006 — 9:57am",
+      "content": "Hi,\n\nHere are couple of links you may want to look at:\n\nMain page, maybe too much information on it, but at least you can download and install WPF from there:  \n [http://msdn.microsoft.com/winfx/reference/presentation/default.aspx](http://web.archive.org/)\n\nWPF Text team has a blog with useful information about text formatting:  \n [http://blogs.msdn.com/text/default.aspx](http://web.archive.org/)\n\nFilipe Fortes is another guy working in WPF text layout team and has a nice blog with examples: [http://fortes.com/](http://web.archive.org/)\n\nThis should be enough to start.\n\nThanks,  \nSergey\n\n"
+    }
+  ]
+}

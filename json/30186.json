@@ -1,0 +1,50 @@
+{
+  "id": "30186",
+  "title": "Name/Cut & Oblique/Italic: Best Practice in Naming",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "1) I am seeking a consistent and clear method for naming the various fonts in my latest face. I have one face, three cuts, and four styles of each. Should I include the cut name in the OT Family space, or in the OT style space? In the Pre-OT naming fields, I have to include the cut in the Name space?\n\n2) If a typeface includes an oblique version, but not a true italic, is it appropriate to refer to it as an italic in the older naming systems, for backwards compatibility in applications that will otherwise try to render a fauxitalic effect? In the notes and filenames it is referred to as an Oblique.\n\n",
+  "author": "<a href=\"/web/20110427083633/http://typophile.com/user/13605\" title=\"View user profile.\">Choz Cunningham</a>",
+  "time": "<br>",
+  "uid": "13605",
+  "comments": [
+    {
+      "time": "",
+      "content": "Can you clarify what you mean by \"cut\"? An optical size variant, perhaps?\n\n"
+    },
+    {
+      "time": "",
+      "content": "They are distress-level variants. They are called Carved, Slashed and Sliced, with each misssing more \"strips\" than the last.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Choz,\n\nfor OpenType (PS or TT) fonts, you can use arbitrary styles names in the OT (preferred) Style Name field (which is used in the Adobe and Apple font menus) but you should not use any name except the standard four (\"Regular\", \"Italic\", \"Bold\", \"Bold Italic\") in the normal Style Name field (which is used for the Windows style-linked groups in typical Windows applications).\n\nIn the OpenType preferred naming, you could have wither the family name or the style name including the cut name, i.e. it would be \"Cunningham Soft\"-\"Oblique\" or \"Cunningham\"-\"Soft Oblique\". It really is a matter of how you want to present the fonts in the Apple/Adobe menus (three entries in the family menu with 4 subentries for styles, or one entry in the family menu with 12 subentries for styles).\n\nSince Windows style-linked groups can only have up to four members, putting the cut name into the family field may be a better idea because then you can use the same naming for both the Windows and the Apple/Adobe menus.\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, Adam. Based on that reasoning, since it is rather common that one might be using Adobe CS apps and other apps on the same windows machine, it seems that consistency would be the best route to take. So the Cut should stay inside the name.\n\nDoes anyone know if the behavior of Windows Vista is different (specifically, using OT naming methods) from previous versions of Windows?\n\nAs far as the Italics, I understood that I was limited in the style names that would be acceptable in the old-style applications. I am curious- what do others expect with fonts that have an oblique but no italic. In MS Word, would you rather the \"_I_\" button turned on the oblique and called it italic, or that it rendered a faux italic from the regular? If the former, would you then be confused if the Apple/Adobe apps called it Oblique instead of Italic?\n\n[Choz Cunningham](http://web.archive.org/web/20110427083633/http:/www.chozcunningham.com/)  \n [!Exclamachine Type Foundry](http://web.archive.org/web/20110427083633/http:/www.exclamachine.com/)  \n [The Snark](http://web.archive.org/web/20110427083633/http:/www.exclamachine.com/snark)\n\n"
+    },
+    {
+      "time": "",
+      "content": "So, for consistency's sake, I've decided to refer to the Oblique styling as Italic in all places. Not the grandest solution, but I think it is for the best given the current limits of font management across all platforms. Of course, should I ever design a true italic, then I've got a problem, I suppose, but it looks like it will be a long time until contemporary windows and linux applications will support OT Naming.\n\n[Choz Cunningham](http://web.archive.org/web/20110427083633/http:/www.chozcunningham.com/)  \n [!Exclamachine Type Foundry](http://web.archive.org/web/20110427083633/http:/www.exclamachine.com/)  \n [The Snark](http://web.archive.org/web/20110427083633/http:/www.exclamachine.com/snark)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Regarding font menu names and Vista:\n\nMicrosoft's new Windows Presentation Foundation (WPF) handles font names in a completely new way, based on trying to shoehorn them into families that fit within the CSS spec's ideas of how family members can differ. WPF is an optional install with Vista, and will also be made available for XP.\n\nHere are the slides from my presentation on the topic: [http://blogs.adobe.com/typblography/atypi2006/CSS%20&%20OT%2015.pdf](http://web.archive.org/web/20110427083633/http:/blogs.adobe.com/typblography/atypi2006/CSS%20&%20OT%2015.pdf \"http://blogs.adobe.com/typblography/atypi2006/CSS%20&%20OT%2015.pdf\")\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks a ton, Thomas, that gives me a good idea of what is going on in the near future for font names, as that will probably come into use a good bit over the next couple of years.\n\nI just woke up a few minutes ago. Let's see if i understood this:\n\nIf you are creating a variation of a face that could likely be applied as a style in web pages (via CSS) some installations of Windows will attempt to move the style from the family area to the subfamily area. Since this is based on CSS specs, it only applies to the currently common bold/italc styles and to variants of width and weight. By adding new name tables manually, however, it can be predetermined for all of the above variants?\n\nIf/when it is public, I'd love to see a link to the MS whitepaper you mentioned.\n\nIs this going to lead to bad habit of users applying fauxitalic to oblique and italic styles?\n\n[Choz Cunningham](http://web.archive.org/web/20110427083633/http:/www.chozcunningham.com/)  \n [!Exclamachine Type Foundry](http://web.archive.org/web/20110427083633/http:/www.exclamachine.com/)  \n [The Snark](http://web.archive.org/web/20110427083633/http:/www.exclamachine.com/snark)\n\n"
+    },
+    {
+      "time": "",
+      "content": "May I interject and give the opinions of a web developer and Mac user:\n\nAs a user I like Family names to be atomic, and Style (\"Sub-family\") names to be diverse. This way I get a shorter font menu with names such as \"Univers\", which if selected gives me the Regular style. If I then want to choose a variation of Univers, I can select \"47 Condensed Light\" from the submenu. Contrast this with how Arial displays. I have four Families listed for this one font! Arial (r,b,i,bi) Arial Black (r,i) Arial Narrow (r,b,i,bi) and Arial Rounded MT Bold (r). I can't for the life of me understand how Monotype managed to screw up that last one so much!\n\nAs a web developer, I recognise that the CSS properties (font-family, font-style, font-weight, font-variant) are very crude. How does one reliably select \"Univers 47 Condensed Light\"? But I have found the solution is also very simple, use the Postscript name as the font-family!  \nhtml { font-family: 'Univers-CondensedLight', 'Univers', sans-serif; }  \nThe above works on all the browsers I have to hand, but obviously I can't vouch for WinIE.\n\nLooking through Thomas' presentation (thanks!) I see that how Vista handles Fonts will be very similar to how the Mac has handled them for the past decade. This is great news as it seems to be converging on what I like (more styles, fewer families).\n\nLastly, I implore you to use Oblique for an oblique font, and Italic for an italic font, and not to mix the two—firstly it hinders the education of non-typophiles, secondly it looks bad to people who know about type, and third, as you have pointed out, you can't subsequently add an italic style if the name has been used up. You can use the head & OS/2 style linking bits to get QuickDraw and Windows 3.1 to understand them without compromising the nice style names. CSS explicitly distinguishes between regular, italic and oblique—please support this and don't make things more difficult for browsers/OSes or us web developers :-)\n\n"
+    },
+    {
+      "time": "",
+      "content": "_You can use the head & OS/2 style linking bits to get QuickDraw and Windows 3.1 to understand them without compromising the nice style names._\n\nMeaning that all Older PC's and Macs will link to Oblique, where Italic is missing? From the \"_I_\" button? If this behavior is consistent, I'd absolutely prefer to call an Oblique an Oblique.\n\nWhen this is all said and done, I think I will combine all this into a web page about font naming, targeted to non-coders.\n\n[Choz Cunningham](http://web.archive.org/web/20110427083633/http:/www.chozcunningham.com/)  \n [!Exclamachine Type Foundry](http://web.archive.org/web/20110427083633/http:/www.exclamachine.com/)  \n [The Snark](http://web.archive.org/web/20110427083633/http:/www.exclamachine.com/snark)\n\n"
+    }
+  ]
+}

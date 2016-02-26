@@ -1,0 +1,22 @@
+{
+  "id": "46716",
+  "title": "Kerning Pairs List - Robofab",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi all,\n\nI want to get a list of the Kerning pairs for certain glyphs.\n\nI using this code to get a list of the kerning pairs for 'A'\n\n`\n#\n#GetPairs---------------\n#\nfrom robofab.world import CurrentFont\nf = CurrentFont()\n#\nkerning = f.kerning\n#\nprint kerning.getLeft('A')\nprint kerning.getRight('A')`\n\nThis works fine, but the output window shows the results in a array format like :\n\n`\n[(('A', 'w'), -40), (('A', 'W'), -50), (('A', 'G'), -20), (('A', 'quoteright'), -20), (('A', 'Q'), -20), (('A', 'backslash'), -90), (('A', 'v'), -55), (('A', 'asciicircum'), -30), (('A', 'V'), -85), (('A', 'U'), -10), (('A', 'at'), -10), (('A', 'question'), -20), (('A', 'O'), -20), (('A', 'slash'), 20), (('A', 't'), -25), (('A', 'OE'), -20), (('A', 'T'), -65), (('A', 'Y'), -65), (('A', 'trademark'), -70), (('A', 'C'), -20)]\n[(('quoteright', 'A'), -20), (('J', 'A'), -15), (('backslash', 'A'), 20), (('D', 'A'), -20), (('P', 'A'), -40), (('slash', 'A'), -90), (('U', 'A'), -10), (('Q', 'A'), -20), (('F', 'A'), -45), (('Y', 'A'), -65), (('O', 'A'), -20), (('B', 'A'), -5), (('T', 'A'), -65), (('W', 'A'), -50), (('V', 'A'), -85), (('at', 'A'), -10)]\n`\n\nIs it possible to the results in amore readable list format like :\n\n`\n('A', 'w'), -40)\n(('A', 'W'), -50)\n(('A', 'G'), -20)\n(('A', 'quoteright'), -20)\n(('A', 'Q'), -20)\n(('A', 'backslash'), -90)\n(('A', 'v'), -55)\n(('A', 'asciicircum'), -30)\n(('A', 'V'), -85)\n(('A', 'U'), -10)\n`\n\n",
+  "author": "ReginaldV",
+  "time": "23 Jun 2008 — 1:04pm",
+  "uid": "29224",
+  "comments": [
+    {
+      "time": "23 Jun 2008 — 1:48pm",
+      "content": "Sure:\n\n`from robofab.world import CurrentFont`\n\nf = CurrentFont()  \nk = f.kerning\n\nl = k.getLeft('A')  \nfor ((c1, c2), x) in l:  \n--\\>print c1, c2, x\n\nReplace '--\\>' by a tab. Hope this helps. :)\n\n"
+    },
+    {
+      "time": "24 Jun 2008 — 8:17am",
+      "content": "PvdL,\n\nThanks, thats a great help.\n\n"
+    }
+  ]
+}

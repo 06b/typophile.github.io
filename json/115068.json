@@ -1,0 +1,78 @@
+{
+  "id": "115068",
+  "title": "Trouble with Contextual Swashes",
+  "forum": "Build",
+  "tags": [
+    "contextual alternates",
+    "contextual swashes",
+    "OpenType",
+    "swashes",
+    "Build"
+  ],
+  "content": "Hi there,\n\nI've created a font that has 3 character variations using calt (which works fine) and includes a set of 3 swash variations per character as well. The issue I'm having is I also want to include start and end swashes for select letters (a, e, i, o, r). I set up my code as such and it works perfectly fine in FontLab when I test it but when I try in Illustrator, only the start\\_swsh works. The end of the word remains normal.\n\nfeature swsh {  \nignore sub @ALL @letter1' @ALL;  \nignore sub @ALL @letter2' @ALL;  \nignore sub @ALL @letter3' @ALL;  \nsub @letter1' @ALL by @start\\_swsh;  \nsub @letter2' @ALL by @start\\_swsh;  \nsub @letter3' @ALL by @start\\_swsh;  \nsub @ALL @letter1' by @end\\_swsh1;  \nsub @ALL @letter2' by @end\\_swsh1;  \nsub @ALL @letter3' by @end\\_swsh1;  \nsub @swsh1' by @swsh2;  \n} swsh;\n\nI've been reading a lot of forums about it, and have seen people say you need to have different lookups for the start and the end, but I don't understand the code (when I type in 'lookup \\_\\_\\_\\_' I don't know if I'm suppose to have \\_\\_\\_\\_\\_ somewhere else that it's looking up, or how that works, and the FontLab manual doesn't go into detail about this.)\n\nI'm at my wits end with this, any help would be greatly appreciated.\n\n",
+  "author": "kimmyk",
+  "time": "18 Mar 2014 — 9:58am",
+  "uid": "216641",
+  "comments": [
+    {
+      "time": "18 Mar 2014 — 7:44pm",
+      "content": "What is in your @ALL class? If your end swash is in there and you told it to ignore that above that's one problem.\n\n"
+    },
+    {
+      "time": "19 Mar 2014 — 10:22am",
+      "content": "I removed them, so it has every character in the font except the start and end swashes but it's still only working for the start\\_swsh (basically... no change.)\n\nAny other thoughts?\n\n"
+    },
+    {
+      "time": "19 Mar 2014 — 10:30am",
+      "content": "Try doing it like this (inside your `calt` feature):\n\n`\n\tlookup beginnings {\n\t# ignore sub + sub code here\n    } beginnings;`\n\n`lookup endings {\n       # ignore sub + sub code here\n    } endings;\n`\n\n"
+    },
+    {
+      "time": "19 Mar 2014 — 11:25am",
+      "content": "Wouldn't that make it so that every time contextual alternatives were turned on, the start and end swashes would appear? I only want them to appear when swashes are turned on.\n\n"
+    },
+    {
+      "time": "19 Mar 2014 — 11:37am",
+      "content": "I tried it, and as I thought, the start swash appeared when contextual alternatives were turned on. The end swash still doesn't work :/\n\n"
+    },
+    {
+      "time": "19 Mar 2014 — 2:08pm",
+      "content": "Sorry, I meant in your contextual swash feature, not calt.\n\n"
+    },
+    {
+      "time": "19 Mar 2014 — 3:51pm",
+      "content": "Gotcha, thanks. I'm still having the same issue. It makes no sense and it's driving me nuts! Below is a screen shot of how it appears in FontLab, and the second image is how it looks in Illustrator. Even if I delete the start\\_swsh altogether and just have the end\\_swsh it doesn't work. When I delete the ignore part of the end\\_swsh then it works but on every letter that has an end swash, even in the middle of a word. I'm thinking the problem must be in the ignore part of the feature?\n\nHere is the code as it stands, where @ALL is every character in the font minus the start and end swashes. Because I have 3 versions of each character, I need to sub all three by @start\\_swsh (hence @letter1 @letter2 and @letter3)\n\nfeature cswh {  \n lookup beginnings {  \nignore sub @ALL @letter1';  \nignore sub @ALL @letter2';  \nignore sub @ALL @letter3';  \nsub @letter1' @ALL by @start\\_swsh;  \nsub @letter2' @ALL by @start\\_swsh;  \nsub @letter3' @ALL by @start\\_swsh;  \n} beginnings;\n\nlookup endings {  \nignore sub @letter1' @ALL;  \nignore sub @letter2' @ALL;  \nignore sub @letter3' @ALL;  \nsub @ALL @letter1' by @end\\_swsh;  \nsub @ALL @letter2' by @end\\_swsh;  \nsub @ALL @letter3' by @end\\_swsh;  \n} endings;  \n} cswh;\n\n ![](http://web.archive.org/web/20150420170430im_/http:/typophile.com/files/Screen%20Shot%202014-03-19%20at%203_4733.35.52%20PM.png)\n\n ![](http://web.archive.org/web/20150420170430im_/http:/typophile.com/files/Screen%20Shot%202014-03-19%20at%203_6164.36.19%20PM.png)\n\n"
+    },
+    {
+      "time": "19 Mar 2014 — 9:25pm",
+      "content": "Hm. Pretty sure this will work: take out @ALL from all the \"sub\" statements.\n\nLike this:\n\n`sub @letter1' by @start_swsh;`\n\nnot this:\n\n`sub @letter1' @ALL by @start_swsh;`\n\n(Note: It's really tricky to debug something like this without seeing how the font is set up and how the classes are set up. Contextual stuff can be confusing. Also, I usually try to use more descriptive names for my classes to avoid confusing myself. \"@letter1\" doesn't mean anything to me so it's hard to tell what you're trying to do. I would use a name like @non\\_start\\_swash1 or @non\\_swash1 or something like that, that tells you exactly what's going on.)\n\n"
+    },
+    {
+      "time": "20 Mar 2014 — 9:31am",
+      "content": "Thanks for the note, I will be better with my naming of classes. I removed the @ALL, but it didn't do anything. I think the problem has to be in the ignore part because nothing changes until I delete it, at which point all end swashes appear in the word (see image).\n\n ![](http://web.archive.org/web/20150420170430im_/http:/typophile.com/files/Screen%20Shot%202014-03-20%20at%209_3989.29.07%20AM.png)\n\n"
+    },
+    {
+      "time": "20 Mar 2014 — 11:13am",
+      "content": "That's because nothing is preventing the substitutions to take place. The function of the \"ignore\" statement is to filter out cases in which you don't want the substitution(s) that follow(s) to take place. If the \"ignore\" statement finds a match, the rest of the lookup is ignored. If the \"ignore\" statement doesn't find a match, then the rest of the lookup is executed and the substitutions take place.\n\nPart of the trick to writing features like this is to figure out exactly what you want to filter out and only what you want to filter out. From what I can see, you're filtering out cases in which @ALL precedes or follows @letter1, @letter2, or @letter3. Not knowing what's in these classes makes it impossible to tell exactly what's going on.\n\n"
+    },
+    {
+      "time": "20 Mar 2014 — 11:57am",
+      "content": "Okay, I have end swashes for a c e i o r s t u v w. Since I have assigned three variations to each letter, I have to have three letter classes:\n\nletter1 [a c e i o r s t u v w]  \nletter2 [a.1 c.1 e.1 i.1 o.1 r.1 s.1 t.1 u.2 v.1 w.1]  \nletter3 [a.2 c.2 e.2 i.2 o.2 r.2 s.2 t.2 u.2 v.2 w.2]\n\nFor the start and end swashes I only have 1 option per letter, so no matter which variation (1, 2 or 3) is typed it will always become the same start or end swash.\n\nstart\\_swsh [a.swsh2 c e.swsh2 i o.swsh3 r s.swsh1 t u v.swsh3 w.swsh2]  \nend\\_swsh [a.swsh1 c.swsh2 e.swsh1 i.swsh1 o.swsh2 r.swsh1 s.swsh2 t.swsh1 u.swsh2 v.swsh2 w.swsh3]\n\nThe @ALL class includes every since character in the font. My thinking was basically to find a way to say 'substitute characters in the class letter1, letter2 and letter3 by end swash only at the end of a line.' I figured out that removing the space from the @ALL class, it fixed the problem for a single word, but if there are multiple words in a line all of the start and end swashes appear before and after every word, instead of at the start and end of a line.\n\nSee screenshot for how it looks now, and how I would like it to look (I manually took out the swashes in this one)\n\n ![](http://web.archive.org/web/20150420170430im_/http:/typophile.com/files/Screen%20Shot%202014-03-20%20at%2011_4167.56.47%20AM.png)\n\n"
+    },
+    {
+      "time": "20 Mar 2014 — 12:43pm",
+      "content": "A couple things:\n\nIt's not possible to test for the start or end of a line of text in OpenType, which means there's no way to automatically get want you want.\n\nSince you have several glyphs in your @letterx classes that are not represented in your @start\\_swsh class, it would probably be better to keep the starting and ending classes separate, not just the the swash starting and ending glyphs, also the ones you're matching. Like this:\n\nnonstart\\_letter1 [a e o s v w]  \nnonstart\\_letter2 [a.1 e.1 o.1 s.1 v.1 w.1]  \nnonstart\\_letter3 [a.2 e.2 o.2 s.2 v.2 w.2]  \nstart\\_swsh [a.swsh2 e.swsh2 o.swsh3 s.swsh1 v.swsh3 w.swsh2]\n\nnonend\\_letter1 [a c e i o r s t u v w]  \nnonend\\_letter2 [a.1 c.1 e.1 i.1 o.1 r.1 s.1 t.1 u.2 v.1 w.1]  \nnonend\\_letter3 [a.2 c.2 e.2 i.2 o.2 r.2 s.2 t.2 u.2 v.2 w.2]  \nend\\_swsh [a.swsh1 c.swsh2 e.swsh1 i.swsh1 o.swsh2 r.swsh1 s.swsh2 t.swsh1 u.swsh2 v.swsh2 w.swsh3]\n\nThis way, you avoid the probably unexpected effect of some of your swash variants getting converted to plain letters when cswh is invoked.\n\nFinally, in your @ALL class, I would only include characters that are expected to be used in words, unless you think it would be good to have starting and ending swashes on passwords or other random strings.\n\n"
+    },
+    {
+      "time": "23 Sep 2014 — 1:59pm",
+      "content": "\"It's not possible to test for the start or end of a line of text in OpenType\"  \nThats true, but you can substitute first letter in the line:\n\n ![](http://web.archive.org/web/20150420170430im_/http:/typophile.com/files/02_3837.jpg)\n  \nIn the font I made the glyphs .init (these upside down)  \nlanguagesystem latn dflt;  \nlanguagesystem DFLT dflt;  \n@all=[a-z A-Z];  \n@all.init=[a.init-z.init A.init-Z.init];  \n@all.i.sp=[a-z A-Z a.init-z.init A.init-Z.init space period comma];\n\nlookup calt1 {  \nsub @all' by @all.init ;  \n} calt1;\n\nlookup calt2 {  \nsub @all.i.sp @all.init' by @all ;  \n} calt2;\n\nfeature calt {  \nlookup calt1;  \nlookup calt2;  \n} calt;\n\n"
+    },
+    {
+      "time": "24 Sep 2014 — 3:31pm",
+      "content": "That’s great, and what I sometimes recommend.\n\nNote that sadly some OpenType layout engines break context at spaces and other word-endings, which will defeat such attempts. :( One can argue that such engines are just basically broken, but some of Adobe’s layout engines work this way, among others.\n\n"
+    },
+    {
+      "time": "26 Sep 2014 — 4:41am",
+      "content": "sadly FireFox (at least 22) too...  \n\"what I sometimes recommend\" - I did not know about it and made this feature by trials and errors.  \n[edit]  \nI upgraded FireFox (32.0.3, win XP) and the calt works as needed if the line breaks: enter or shift-enter are set manually.\n\n"
+    }
+  ]
+}

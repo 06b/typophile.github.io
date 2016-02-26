@@ -1,0 +1,30 @@
+{
+  "id": "56359",
+  "title": "Opentype: Substitution one-after-another - sub x by y; sub y by z;?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Dear Typophiles,\n\nsorry for maybe asking a quite basic question, i just can't find a potent keyword that gets me to the for sure existing answers, so I'm asking for a link to other threads or a short explanation ... It should be simple, but it just does not work at the moment and I don't know what I am doing wrong. :(\n\nI try to to a \"multi-step\" one-after-another-replacement with opentype (fontlab 5):\n\nLet's say I have a glyph x.  \nin calt-feature, i substitute x by x.alt  \nafter that, i want to check another condition,  \nand in case it applies, want to sub x.alt by x.alt2\n\nis this possible to do?\n\nTo explain what i actually want to achieve with this:  \ni want to do a script font, that has three vertical levels of connectors to the glyph right before it. So i have 4 variations of each letter, i.e. h h.low h.mid h.top  \ndepentent on its predecessors \"end\", the basic \"h\" is replaced by its low mid or top connector variant so it fits seamlessly.  \nafter that, i want to check if the glyph is set at the end of a word (followed by a space for the beginning), and if so, the .low .mid or .top variant is replaced by a .low.end .mid.end or .top.end variant ...\n\nthanks for your help  \nSebastian\n\n",
+  "author": "Sebastian Nagel",
+  "time": "29 Mar 2009 — 8:46am",
+  "uid": "5444",
+  "comments": [
+    {
+      "time": "29 Mar 2009 — 5:03pm",
+      "content": "Substitutions occur in sequence, in the order you wrote your lookups from the top to the bottom. So when you have your first lookup for changing x to x.alt1 , you have to pay attention for your second lookup whether the first condition has met, could be met or not. Whether for your second lookup you are dealing with x or x.alt1 or both, in order to change it to x.alt2  \nSo it is important to pay attention to the sequence of events and write the lookups accordingly.\n\nYou are right. There are a lot of good discussions about this in here but I don't remember the topics off hand. Keep looking. You'll find them.\n\n"
+    },
+    {
+      "time": "30 Mar 2009 — 2:08pm",
+      "content": "thanks for this.  \nI have found a (maybe not very sophisticated) solution.\n\nTo connect this thread to the font thread I have just created:  \n [http://typophile.com/node/56408](http://web.archive.org/web/20130820081419/http:/typophile.com/node/56408 \"http://typophile.com/node/56408\")\n\nmaybe it's better to discuss there.\n\n"
+    },
+    {
+      "time": "3 Apr 2009 — 8:47am",
+      "content": "Sebastian,\n\nAfter one lookup is processed, the application goes back to the beginning of the text string (or better: text run, i.e. the portion of the text string which has the same font, size, writing system/script, and directionality), and processes the next lookup. So your code should look like:\n\n`feature calt {\nlookup calt1 {\nsub @condition1 x' by x.alt;\n} calt;\nlookup calt2 {\nsub @condition2 x.alt' by x.alt2;\n} calt2\n} calt;`\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "5 Apr 2009 — 12:37am",
+      "content": "Thank you Adam, now it's perfectly clear what it does :)\n\n(i should have known though ...)\n\n"
+    }
+  ]
+}

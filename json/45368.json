@@ -1,0 +1,182 @@
+{
+  "id": "45368",
+  "title": "Flash Player has a new text engine",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "The Beta version of Adobe Flash Player 10 was just released on Adobe Labs. Among the many enhancements, there is a new Text Engine which comes along with an extensive library of ActionScript 3.0 Text Layout Components. Here's the blurb from the [release notes](http://web.archive.org/web/20140804043509/http:/labs.adobe.com/technologies/flashplayer10/releasenotes.html).\n\n_ **New Text Engine**  \nA new, highly flexible text layout engine, co-existing with TextField, enables innovation in creating new text controls by providing low-level access to text layout and interactivity APIs to create component-level text objects. The new text engine expands creative freedom by treating device fonts as first class citizens that can be anti-aliased, rotated, and styled and have filters applied as if they were embedded. The new text engine also offers right-to-left and vertical text layout, plus support for typographic elements like ligatures._\n\n**Text Layout Components**  \nAn extensible library of ActionScript 3.0 text components, coming in future to Adobe Labs, provides advanced, easy-to-integrate layout functionality that enables typographic creative expression. Layout and style text with tables, inline images, and column flow through components that are compatible with both Flash and Flex, all while getting the benefits of the new text engine. Rich text components allow designers and developers to flow text and complex scripts, such as Arabic, Hebrew, and Thai, across multiple columns like a newspaper, around tables and inline images, from right-to-left, left-to-right, bi-directionally, or vertically. Selection, editing, and wrapping of text are handled as would be expected for the different layouts.\n\n**Anti-Aliasing Engine (Saffron 3.1)**  \nAn update to the Saffron anti-aliasing text engine increases performance and quality of anti-aliased text, particularly for Asian character rendering. Support for stroke fonts reduces memory requirements.\n\nThat's right, support for Complex Scripts and OpenType features is coming to the Flash platform. These are great news!\n\n[Take a look at the video. It features Hypatia Sans Pro](http://web.archive.org/web/20140804043509/http:/labs.adobe.com/technologies/flashplayer10/demos/videos/text.html) :^)\n\n",
+  "author": "Miguel Sousa",
+  "time": "14 May 2008 — 11:22pm",
+  "uid": "1844",
+  "comments": [
+    {
+      "time": "15 May 2008 — 12:11am",
+      "content": "Thanks Miguel! This sounds quite terrific!\n\nSo this engine clearly supports LIGA. But of course I must ask: What about CALT?\n\n"
+    },
+    {
+      "time": "15 May 2008 — 2:03am",
+      "content": "I think support for Contextual alternates (calt) is there as well, along with a few other features (e.g. Discretionary ligatures, otherwise we wouldn't see Hypatia's 'st' ligature or the cap ligatures). But I need to ask around to get the full list. And surely Thomas will soon blog about it, providing a lot more details.\n\n"
+    },
+    {
+      "time": "15 May 2008 — 7:03am",
+      "content": "Yes, I have a handy chart I made defining exactly what's there for OT features, but it will be a day or two before I post it.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "15 May 2008 — 8:08am",
+      "content": "That sounds like very good news indeed!\n\nThanks Thomas!\n\n"
+    },
+    {
+      "time": "15 May 2008 — 8:09am",
+      "content": "What's the format for the stroke based fonts? Is it a public format or proprietary? As Saffron is owned by Monotype, is it the iType stroke based font format?\n\n"
+    },
+    {
+      "time": "19 May 2008 — 9:40am",
+      "content": "Fantastic Miguel. Thanks for the update.\n\n"
+    },
+    {
+      "time": "19 May 2008 — 10:28am",
+      "content": "For those that are interested - more on Saffron...\n\n[http://www.merl.com/people/perry/SaffronWebPage/index.html](http://web.archive.org/web/20140804043509/http:/www.merl.com/people/perry/SaffronWebPage/index.html \"http://www.merl.com/people/perry/SaffronWebPage/index.html\")\n\n[http://ir.monotypeimaging.com/releasedetail.cfm?ReleaseID=299574](http://web.archive.org/web/20140804043509/http:/ir.monotypeimaging.com/releasedetail.cfm?ReleaseID=299574 \"http://ir.monotypeimaging.com/releasedetail.cfm?ReleaseID=299574\")\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "19 May 2008 — 1:14pm",
+      "content": "Great! I've been wishing for OT support in Flash ever since I started making OT fonts. It's been really frustrating having to tell customers using Flash that they can't have any of the type goodies. Is OT support coming for Fireworks? That would be nice, too.\n\n"
+    },
+    {
+      "time": "23 May 2008 — 6:17pm",
+      "content": "The API documentation for Astro (Flash Player 10's codename) [has been recently made available](http://web.archive.org/web/20140804043509/http:/theflashblog.com/?p=387). I had a look at the classes included in the `flash.text.engine` package, and there's some interesting stuff there,\n\nDigitCase (DEFAULT, LINING, OLD\\_STYLE)  \nDigitWidth (DEFAULT, PROPORTIONAL, TABULAR)  \nKerning (AUTO, OFF, ON)  \nLigatureLevel (COMMON, EXOTIC, MINIMUM, NONE, UNCOMMON)  \nTypographicCase (CAPS, CAPS\\_AND\\_SMALL\\_CAPS, DEFAULT, LOWERCASE, SMALL\\_CAPS, TITLE, UPPERCASE)\n\nSome properties are easy to map to specific OpenType features, but not all. I also suspect that there's more OT support than these items make believe, since FP10 has complex script support after all. Some supported features are likely on by default under the hood.\n\nThe examples provided in the classes ElementFormat, TextBlock and TextLine are quite interesting as well.\n\n"
+    },
+    {
+      "time": "23 May 2008 — 8:07pm",
+      "content": "Yes! This is good news indeed! Thanks, Miguel!\n\n"
+    },
+    {
+      "time": "23 May 2008 — 10:31pm",
+      "content": "Does this enable online type testers to have the functionality of the FontLab preview window?  \nIf so, wow.\n\n"
+    },
+    {
+      "time": "23 May 2008 — 11:02pm",
+      "content": "Nick, that is a utterly great point.\n\n"
+    },
+    {
+      "time": "24 May 2008 — 2:17am",
+      "content": "\\> _Does this enable online type testers to have the functionality of the FontLab preview window?_\n\nYes, I believe so. However, I don't think the API will allow you the level of granularity to turn on/off every single feature, like the FontLab Preview does. Remember, the API is supposed to give you access to the functionalities of the text engine, not to the functionalities of the font itself. You get to the font's functionalities indirectly through the text engine.\n\nFor those who can't wait to start developing content for FP10 Beta, [Lee Brimelow](http://web.archive.org/web/20140804043509/http:/theflashblog.com/) has put together a videocast that explains it all very well: [Flash Player 10 Beta: Getting Started - This tutorial shows you how to get started with creating content for Flash Player 10](http://web.archive.org/web/20140804043509/http:/www.gotoandlearn.com/player.php?id=73)\n\nAnd if you want to see something happening right on your browser, [install the Beta from the labs](http://web.archive.org/web/20140804043509/http:/labs.adobe.com/technologies/flashplayer10/), [go to the Demos page](http://web.archive.org/web/20140804043509/http:/labs.adobe.com/technologies/flashplayer10/demos/), and click on the \"New Text Engine\" button. There you'll be able to interact with the 2-column text layout, and download the source code, like so,\n\n ![](http://web.archive.org/web/20140804043509im_/http:/typophile.com/files/fp10beta_6228.png)\n\n"
+    },
+    {
+      "time": "24 May 2008 — 3:23am",
+      "content": "<cite>LigatureLevel (COMMON, EXOTIC, MINIMUM, NONE, UNCOMMON)</cite>\n\nNick, you may need to redesign fonts' feature logic to create exciting \"exotic\", \"minimum\", \"uncommon\" ligature behavior.&nbsp;&nbsp;:D  \nUnfortunately, the API documentation doesn't say which features are actually linked to which options.\n\nBest wishes,  \nKarsten\n\n"
+    },
+    {
+      "time": "24 May 2008 — 3:55am",
+      "content": "Hello Miguel,  \nWhen will we be able to compile with these new features in Flash CS3 IDE? Is Adobe planning to make available a downloadable upgrade?\n\nthanks\n\n"
+    },
+    {
+      "time": "24 May 2008 — 10:39am",
+      "content": "\\> _When will we be able to compile with these new features in Flash CS3 IDE? Is Adobe planning to make available a downloadable upgrade?_\n\nI don't know.\n\n"
+    },
+    {
+      "time": "25 May 2008 — 5:15pm",
+      "content": "ok thanks.\n\n"
+    },
+    {
+      "time": "27 May 2008 — 10:49am",
+      "content": "\\> _Is OT support coming for Fireworks? That would be nice, too._\n\nI don't know, but [the Adobe Fireworks Beta was just posted on Adobe Labs](http://web.archive.org/web/20140804043509/http:/labs.adobe.com/technologies/fireworkscs4/) and it claims to support the Adobe Type Engine (ATE). Here's the blurb from that page,\n\n**Adobe type engine**  \nProduce superior type designs with the enhanced typesetting capabilities of Adobe Type Engine, familiar to users of Photoshop and Illustrator and now available in Fireworks. Import or copy and paste double-byte characters from Adobe Illustrator or Photoshop without loss of fidelity. Float text inside a path for high impact text logos.\n\nand some more from the [Release Notes page](http://web.archive.org/web/20140804043509/http:/labs.adobe.com/technologies/fireworkscs4/releasenotes.html),\n\nAdobe Text Engine — Many new enhancements have been integrated; such as retaining the fidelity of your Photoshop or Illustrator designs with text. Support for Ligatures and font style. Flowing text inside a closed path has been implemented.\n\n"
+    },
+    {
+      "time": "27 May 2008 — 11:53am",
+      "content": "Thanks, Miguel. That sounds hopeful.\n\n"
+    },
+    {
+      "time": "29 May 2008 — 9:32pm",
+      "content": "Or, maybe not. I just downloaded the Fireworks CS4 Beta. The text tools appear virtually identical to those in the previous version. No obvious way to enable contextual alternates or any other OT feature. Maybe is only works when you paste something in from Illustrator or whatever... Hmm. Paste a text block in from Illustrator, and suddenly the contextual alternates are working, even when I change to a different font. Make a new text block, and it's back to pre-OT text handling. Kind of lame, but better than no support at all, I guess.\n\n"
+    },
+    {
+      "time": "5 Jun 2008 — 11:05am",
+      "content": "Yes, the Fireworks feature is solely for text brought in from Illustrator. You can, however, edit that text to your heart's content (including changing font, size, etc.), so one can imagine making what is essentially a style sheet of pasted Illustrator text blocks for use in Fireworks, implementing different features.\n\nNote that the ligature support is off in the public beta. It wasn't working quite right, so they turned it off rather than let you enjoy a nasty bug. One might reasonably guess it will be back in the final version, though of course I can make no promises.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "5 Jun 2008 — 11:07am",
+      "content": "Also, I finally got up my blog post on Flash Player, which covers language support as well as typographic OpenType functionality (the latter towards the bottom of the post).\n\n[http://blogs.adobe.com/typblography/2008/06/flash\\_player\\_10.html#more](http://web.archive.org/web/20140804043509/http:/blogs.adobe.com/typblography/2008/06/flash_player_10.html#more \"http://blogs.adobe.com/typblography/2008/06/flash\\_player\\_10.html#more\")\n\n"
+    },
+    {
+      "time": "5 Jun 2008 — 11:17am",
+      "content": "Thanks!\n\n"
+    },
+    {
+      "time": "5 Jun 2008 — 11:22am",
+      "content": "Is it possible that any of those missing features (Stylistic Sets, Swashes, Fractions, etc.) will make it in before release?\n\n"
+    },
+    {
+      "time": "5 Jun 2008 — 2:10pm",
+      "content": "I don't see a way to make text.engine text selectable. Miguel, have you checked this ? This would be important in doing page layout and possibly an editor using text.engine. I have spent little time on text.engine so far, so I am not sure if using it for an editor is even practical.\n\n"
+    },
+    {
+      "time": "6 Jun 2008 — 10:03am",
+      "content": "Mark: Not likely, but feel free to use the feature reqest form to let the Flash Player team know what you want. [http://www.adobe.com/cfusion/mmform/index.cfm?name=wishform](http://web.archive.org/web/20140804043509/http:/www.adobe.com/cfusion/mmform/index.cfm?name=wishform \"http://www.adobe.com/cfusion/mmform/index.cfm?name=wishform\")\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "6 Jun 2008 — 10:34am",
+      "content": "\\> _I don’t see a way to make text.engine text selectable. Miguel, have you checked this ?_\n\nNo, I haven't. The `flash.text.engine` classes on the Flash Player 10 Beta are essentially low-level classes. Think of them as the building blocks. If so inclined, you can build a text editor on top of them, but I agree it's not a trivial task. You might want to wait for FP10's final release, which will likely have a more comprehensive framework.\n\n"
+    },
+    {
+      "time": "9 Jun 2008 — 7:33am",
+      "content": "Thanks Miguel... I see that in the adobe labs demo for the text engine, ( [http://labs.adobe.com/technologies/flashplayer10/demos/index.html](http://web.archive.org/web/20140804043509/http:/labs.adobe.com/technologies/flashplayer10/demos/index.html \"http://labs.adobe.com/technologies/flashplayer10/demos/index.html\") ) the text is selectable and I assume this is provided by the programmer, but there is no ibeam cursor. Hopefully they will provide the tools or whatever to do this in an 'efficient' way. In flash 9, I already front end the textfield to fix a couple problems as can be seen here: [http://sms.pangolin.com/vflash/Venus.html](http://web.archive.org/web/20140804043509/http:/sms.pangolin.com/vflash/Venus.html \"http://sms.pangolin.com/vflash/Venus.html\"). Note that the text.engine sample provided by adobe is XML and does not contain complete source.\n\n"
+    },
+    {
+      "time": "22 Oct 2008 — 2:04pm",
+      "content": "Peter deHaan has been posting some Flex Examples on his blog. Check out how to,  \n-- [Embed fonts in Flex Gumbo](http://web.archive.org/web/20140804043509/http:/blog.flexexamples.com/2008/10/15/embedding-fonts-in-flex-gumbo/)  \n-- [Set the typographic case](http://web.archive.org/web/20140804043509/http:/blog.flexexamples.com/2008/10/20/setting-the-typographic-case-on-an-fxtextarea-control-in-flex-gumbo/)  \n-- [Set the ligature level](http://web.archive.org/web/20140804043509/http:/blog.flexexamples.com/2008/10/21/setting-the-ligature-level-on-an-fxtextinput-control-in-flex-gumbo/)\n\n"
+    },
+    {
+      "time": "23 Oct 2008 — 10:14am",
+      "content": "In terms of OpenType feature tags, the ligature levels correspond to,\n\nminimum = rlig  \ncommon = liga, clig  \nuncommon = dlig  \nexotic = hlig\n\n"
+    },
+    {
+      "time": "23 Oct 2008 — 12:19pm",
+      "content": "Does it still support pixelfonts, especially grayscale ones?\n\nhhp\n\n"
+    },
+    {
+      "time": "21 Nov 2008 — 5:46pm",
+      "content": "The promised Text Layout Framework has been released today on Adobe Labs at,  \n [http://labs.adobe.com/technologies/textlayout/](http://web.archive.org/web/20140804043509/http:/labs.adobe.com/technologies/textlayout/ \"http://labs.adobe.com/technologies/textlayout/\")\n\nThe diagram below shows the relationship between the Text Engine and the Framework and Components released today.\n\n ![](http://web.archive.org/web/20140804043509im_/http:/typophile.com/files/TextLayoutFrameworkLabs_6156.png)\n\n"
+    },
+    {
+      "time": "21 Nov 2008 — 5:50pm",
+      "content": "\\> _Does it still support pixelfonts, especially grayscale ones?_\n\nIf by \"support\" you mean that the fonts are displayed the same way as before, I think it does, but I haven't tried.\n\n"
+    },
+    {
+      "time": "21 Nov 2008 — 6:12pm",
+      "content": "Great!\n\nIs there a meaning of \"support\" where the answer is \"No\"? :-/\n\nhhp\n\n"
+    },
+    {
+      "time": "12 Dec 2008 — 11:04am",
+      "content": "I think DefineFont4 only supports OpenType and TrueType fonts.\n\n"
+    },
+    {
+      "time": "12 Dec 2008 — 11:06am",
+      "content": "The Max session entitled \"Using the Component Library for Flash Player\" by Robin Briggs has just been made available on Adobe TV at [http://tv.adobe.com/#vi+f15383v1000](http://web.archive.org/web/20140804043509/http:/tv.adobe.com/#vi+f15383v1000 \"http://tv.adobe.com/#vi+f15383v1000\")\n\n"
+    },
+    {
+      "time": "12 Dec 2008 — 9:53pm",
+      "content": "TLF only works with DefineFont 4.\n\nDefineFont 4 only uses CFF outlines internally, but TrueType fonts can be converted as part of authoring the SWF or AIR app.\n\nMore on this and the rendering of such fonts in my final Adobe blog post here:  \n [http://blogs.adobe.com/typblography/2008/12/tlf\\_rasterization.html](http://web.archive.org/web/20140804043509/http:/blogs.adobe.com/typblography/2008/12/tlf_rasterization.html \"http://blogs.adobe.com/typblography/2008/12/tlf\\_rasterization.html\")\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "12 Dec 2008 — 10:45pm",
+      "content": "Wow, you're leaving Adobe?! That's a bummer. Who will fill  \nyour shoes there? And most of all: what are you moving on to?\n\nhhp\n\n"
+    },
+    {
+      "time": "13 Dec 2008 — 10:36pm",
+      "content": "The answer to both questions is \"I don't know.\" Although I have been working with my (former) colleagues to hand off my more pressing tasks.\n\nT\n\n"
+    },
+    {
+      "time": "17 Feb 2009 — 4:53pm",
+      "content": "Here's a great article by Mihai Corlan on [Using the Text Layout Framework in Flex 3.2 and AIR 1.5](http://web.archive.org/web/20140804043509/http:/www.adobe.com/devnet/flex/articles/text_layout_framework.html).\n\n"
+    },
+    {
+      "time": "8 Apr 2009 — 5:16am",
+      "content": "This is really a good article, and I have to say that FP10 looks and sounds fantastic. I'm really looking forward to the new (inevitable) Flash/Flex updates so I can get stuck into the FP10 features. The new text [jeux de casino](http://web.archive.org/web/20140804043509/http:/www.sitedejeuxenligne.com/) related stuff, 3D API, local file loading/saving, and hardware accelerated bitmap rendering are going to make a huge difference to Flash based websites.\n\n"
+    },
+    {
+      "time": "8 Apr 2009 — 6:01am",
+      "content": "\"...use the feature request form to let the Flash Player team know what you want.\"\n\nJust one; I want Flash to do everything InDesign does. They've already agreed, so I can only wait. :)\n\nCongratulations Adobe, for moving.\n\nCheers!\n\n"
+    }
+  ]
+}

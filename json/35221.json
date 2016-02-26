@@ -1,0 +1,66 @@
+{
+  "id": "35221",
+  "title": "Aringacute: how to get it right?",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "When searching the web for information about U+01FA, I have found here a topic where John Hudson explained that [Aringacute](http://web.archive.org/web/20131013090933/http:/typophile.com/wiki/Aringacute) is a Danish character and thus should be normally present in a well-designed Western font despite of the problems with vertical spacing it causes.\n\nNow the question: so, how should I design this character, if increasing vertical font metrics is heavily undesired? Would it be possible, for example, to put the acute next to the ring rather than above it? Also, does anybody know, what this letter might look like in the traditional Danish typography?\n\n",
+  "author": "anagnost",
+  "time": "18 Jul 2007 — 2:04am",
+  "uid": "19667",
+  "comments": [
+    {
+      "time": "18 Jul 2007 — 5:13am",
+      "content": "I havent really seen this glyph used in the Danish language and Denmark is my neighbour-country. My believe is that it is an old standard (but could of course be wrong).  \nAnyway, I did it like this and have seen similar solutions. In this case I made the acute alittle bit smaller trying to avoid that the diacritic gets to heavy. When I look at it now, it seems as if the acute maybe needs to be placed a little bit higher up...\n\n ![](http://web.archive.org/web/20131013090933im_/http:/typophile.com/files/aruingacute_3581.png)\n\n"
+    },
+    {
+      "time": "18 Jul 2007 — 9:18am",
+      "content": "As I understand it, the acute accented A ring may occur in grammars, dictionaries and other linguistic texts, perhaps also in some poetry. Any Danish vowel can be marked for stress with the acute accent, and since the A ring is an independent vowel it can take the acute.\n\nThis is what I have gathered from past discussions on this topic: The acute should always be above the ring, not beside it. Above the uppercase A, the ring can be lowered slightly, but it is preferred if it does not merge with the top of the letter. Both accents can be made slightly smaller and more vertically compressed than their normal forms, but not so as to look squashed. In the lowercase, the ring may be lowered slightly, but since there is usually enough vertical space for both marks they should not be otherwise modified.\n\nGenerally speaking, merging diacritic marks is a bad idea, because this creates new forms that interrupt reading while we decipher them. It is better for the marks to be distinct and with enough space between them for both to be clearly identifiable. This is a general rule for pretty much all writing systems, especially those that use a heavy number of diacritic marks and combinations of marks (e.g. Biblical Hebrew or Qur'anic Arabic).\n\n"
+    },
+    {
+      "time": "18 Jul 2007 — 10:44am",
+      "content": "John, do you have any visuals of Aringacute? It would be nice to see more of this little interesting glyph.  \nI may have to think twice regarding my Aringacute also, just did it, so there is still time :)\n\n"
+    },
+    {
+      "time": "18 Jul 2007 — 11:18am",
+      "content": "Found it in Times but I think it looks strange.\n\n ![](http://web.archive.org/web/20131013090933im_/http:/typophile.com/files/timesaring_6373.png)\n\n"
+    },
+    {
+      "time": "18 Jul 2007 — 11:43am",
+      "content": "And here is minion pro.\n\n ![](http://web.archive.org/web/20131013090933im_/http:/typophile.com/files/minpro_5642.gif)\n\n"
+    },
+    {
+      "time": "18 Jul 2007 — 12:03pm",
+      "content": "There is a annoyment though. If I type those letters at 10 points (normal spacing and positioning) in Word (with Minion Pro) the acute on Aringacute is cut off on the screen as follows (I don't get that problem at 12 pt).\n\n ![](http://web.archive.org/web/20131013090933im_/http:/typophile.com/files/Cutacute_3885.gif)\n\n"
+    },
+    {
+      "time": "18 Jul 2007 — 1:36pm",
+      "content": "Well, that's Word for you.\n\nT\n\n"
+    },
+    {
+      "time": "18 Jul 2007 — 3:12pm",
+      "content": "\\> Well, that’s Word for you.\n\nWell, I don't use Word except to check things like that (and it gets worst at 16pts -- and with fonts with an acute that raises much above the ascent line)... There are people that use Word, but maybe none that will ever use a Aringacute, hard to know. I did not check with inDesign, I don't have it; if I had, I would have checked from 10 to 48 points, just to see. With TeXShop the editor shows everything ok, and I will not add \"of course\".\n\n"
+    },
+    {
+      "time": "18 Jul 2007 — 5:11pm",
+      "content": "It's not just Word. A lot of the Mac apps do similar things with clipping, which I observed when testing Inconsolata.\n\nI think the answer is that you can set the height metrics so that ascender + descender + line gap define an expanded bounding box greater than the usual 1000 em units (I've seen 1200 bandied about, but a typical line gap is 90, or at least that's the default in FontForge, so 1090 might be the target to shoot for).\n\nThing is, I don't know exactly \\_how\\_ to specify these in OpenType values so that apps recognize them. The rules seem to have changed, especially since the days of Type1. I would like to get to the bottom of it, but don't have time to do a research project of trying various height metrics settings with lots of apps.\n\n"
+    },
+    {
+      "time": "18 Jul 2007 — 10:45pm",
+      "content": "When it comes to this type of thing, and for text fonts in particular, what's worse, clipping on screen (should print fine) or crashing of the marks and base character together, which looks bad on screen and in print? In general I'd vote for clipping.\n\nFot a UI font, where on screen legibility is the most important aspect of the design, crashing may be the best option, or as I've seen done on mobile devices the base character is shorter to accomodate the two marks (these tend to be one-off precomposed characters).\n\nIn Word increasing the leading should solve the problem on-screen.\n\n"
+    },
+    {
+      "time": "19 Jul 2007 — 4:50am",
+      "content": "Simon\n\nThanks for that valuable information.\n\nMichel\n\n"
+    },
+    {
+      "time": "20 Jul 2007 — 9:59am",
+      "content": "_In Word increasing the leading should solve the problem on-screen._\n\nBut only if you use 'exact' leading values. If you use a multiple of the default linespacing, e.g. 1.5, you may still get clipping at some type sizes.\n\nThe Word clipping issue is related to their interpretation of VDMX table data, which means that there isn't an obvious way to correct it in font metrics: the clipping may occur at some sizes even if the OS/2 table win metrics are sufficiently large to clear the tallest glyphs in the font.\n\n"
+    },
+    {
+      "time": "4 Dec 2007 — 12:50pm",
+      "content": "Aringacute is not used in Danish. You can not stress an Å with an extra accent in Danish. The Å an å characters are themselves a rather new invention in Danish spelling. They were implemented in a post WWII reform of Danish spelling in 1948, in part to distance Danish from German influences as Germany, Germans and German was very much out of vogue. So Hudson's claim that it's an archaic Danish form is not correct.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "39184",
+  "title": "Use character map to access alternate glyph",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "I'm really curious about this -- is there any way possible to access an opentype font's alternate 'a' or other characters (like swashes) using the Windows Character Map? I'm trying to see how far I can push using opentype with apps like Microsoft Word and CorelDraw. I can find small caps and such, but no luck on the alternate glyphs. Any thoughts?\n\nThanks,  \nAddison\n\n",
+  "author": "Addison Hall",
+  "time": "17 Nov 2007 — 10:27am",
+  "uid": "8005",
+  "comments": [
+    {
+      "time": "17 Nov 2007 — 10:32am",
+      "content": "Depends on the font. If the alternate characters have Unicode values, you may access them with the Windows/MacOS character map. Otherwise they are not accessible from outside the application.\n\n(In Corel apps you can only access the standard 256 glyphs, or has this changed in the recent versions?)\n\nRalf\n\n"
+    },
+    {
+      "time": "17 Nov 2007 — 10:42am",
+      "content": "Looking in Font Explorer on the Mac, I don't see a Unicode value on the alternate characters, but I didn't see them on the small caps either (I can access those). The small caps were all under the \"Private Use Characters\" so I figured the alternates should be there, too. Font Explorer shows glyph IDs, but no Unicode values.\n\nCorelDraw supports Unicode as of version 12, but I still can't get to every character with their \"Insert Character\" palette. I'm curious about that, too.\n\n"
+    },
+    {
+      "time": "17 Nov 2007 — 3:36pm",
+      "content": "Looking under \"Private Use Characters\" within Priva Pro, I find small caps, old style numerals, and small caps with accents (or whatever they're called). But if I look at the same within Bryant Pro, I get almost nothing. How are small caps and alternates stored within opentype fonts, or is that too much to go into?\n\nI'm on Windows Vista, by the way.\n\nThanks,  \nAddison\n\n"
+    },
+    {
+      "time": "17 Nov 2007 — 4:24pm",
+      "content": "Wow -- when I check out Adobe Garamond Pro, I get everything. I guess it depends on where those characters are placed when the font is put together. I thought there was some sort of standard...\n\n"
+    },
+    {
+      "time": "17 Nov 2007 — 5:17pm",
+      "content": "If you don't see them under the Private Use Area or anywhere else, they are unencoded and only accessible via OpenType features. A developer can assign PUA codes, but there is no standard for them (by definition) so you may get a surprise if you change fonts. Even so, some developers do it to give users at least some access to non-standard characters with apps that lack full OT support.\n\n"
+    },
+    {
+      "time": "17 Nov 2007 — 5:36pm",
+      "content": "Well, it really does me know good to understand this, but I'm curious. Looking at Adobe Garamond Pro with Font Explorer (on Mac), I see that the ffj ligature has a Glyph ID of 615, but no other value. On Vista within BabelMap it has a value of U+E088. Is there an easy way to explain what that means and why they're different?\n\nMark, that's why I'm glad you still provide a version of your fonts for non-opentype savvy apps. Thanks for the explanation.\n\n"
+    }
+  ]
+}

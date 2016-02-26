@@ -1,0 +1,74 @@
+{
+  "id": "52398",
+  "title": "Newbie font issues:(",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi all, this is my first post here.\n\nI'm quite a newbie on font creation. I always wanted to create a font, but only recently I got the chance. I am trying to make a font to match my company's logo, so that I can use it in its corporate identity (I didn't use a font for the logo, the characters are crafted \"by hand\", so it was a great opportunity to finally design a font of my own, based on the logo's characters).\n\nI have designed all the glyphs in Illustrator CS3, I inserted them in FontLab after reading lots of tutorials on the matter, and then exported the font in .otf format.  \nThe otf format looked terrible on small sizes on screen (I'm using Windows Vista, if has anything to do with it), so I tried TrueType (.ttf). That looked much better, but in sizes less than 12pt, the characters look like they have different heights (and they don't!). In print the font looks very nice, and in sizes more than 12pt, it looks nice on the screen as well.  \nAny ideas about that? I read something about hinting here, but I'm not sure its related to the issue I'm having.\n\nAnother issue: I added some ligatures and they work fine in applications like Notepad or MS Word (strangely enough, judging by the issues that I read other people have with MS Word). However, when I type a text with that font in Illustrator CS3 and that text contains a ligature, I get the message \"Can't finish previewing. There is not enough memory\" and I can't switch to the normal preview until I delete the part of the text that contains the ligature. Any ideas about that?\n\nThanks in advance!!\n\nPS: Sorry for any english mistakes, its not my native language.\n\n",
+  "author": "Lea Verou",
+  "time": "5 Dec 2008 — 7:00am",
+  "uid": "40349",
+  "comments": [
+    {
+      "time": "5 Dec 2008 — 8:59am",
+      "content": "English is not my native language either, but I have managed to write a tutorial on this matter in English. I don't know if you have seen it yet.\n\nMy guess is that you have not made your font align and snap to a grid in Illustrator that is compatible with FontLab. If you don't do that your glyphs will be distorted when you copy it over bacause FontLab will snap every node to it's grid.\n\nThe article is here: [http://font.is/?p=48](http://web.archive.org/web/20131024003603/http:/font.is/?p=48 \"http://font.is/?p=48\")\n\nGood luck.\n\n"
+    },
+    {
+      "time": "5 Dec 2008 — 9:38am",
+      "content": "Thanks for your reply siguram. :)\n\nI probably didn't express the problem clearly enough, sorry for that.  \n**The issue is present ONLY in the screen and ONLY in small sizes (below 12pt).  \nIn print (at any size) or in large sizes on screen it displays fine.**    \nAlso I have taken care of the alignment and the glyphs were not distorted as I copied them at a really large size (I read in a tutorial that the bigger the size of the glyph in AI, the less the distortion at FontLab and it actually worked)  \nSo its probably not an alignment or distortion issue. Its something else I have no idea about (like hinting for instance, or some setting I guess)\n\n"
+    },
+    {
+      "time": "5 Dec 2008 — 9:57am",
+      "content": "Yes, it's because of [hinting](http://web.archive.org/web/20131024003603/http:/typophile.com/typowiki). If you want typefaces to look really good on screen at very small sizes, you will probably have to hint them manually.\n\n"
+    },
+    {
+      "time": "5 Dec 2008 — 11:37am",
+      "content": "Hi Quincunx. Thanks a lot for your reply.  \nDo you know of any comprehensive article/tutorial on hinting?  \nI tried to read FontLab's manual about it but it seemed quite confusing :/\n\n"
+    },
+    {
+      "time": "5 Dec 2008 — 1:25pm",
+      "content": "If things are not aligning vertically at lower resolution, the usual cause is missing or incorrect alignment zones. These are horizontal regions placed (usually) near the baseline, cap height, x-height, ascender height and descender height (negative, below the baseline). Typically, the zones should enclose any points above or below these places that should align at low resolution. For example, if you have an alignment zone near the baseline, any points that are off the baseline but inside the alignment zone will \"snap\" to the baseline at lower resolutions. An alignment zone works sort of like the \"snap to\" distance in drawing programs.\n\nYou can create alignment zones manually or have FontLab create them for you (using the little green gem icon button) in the Font Info dialog box under Hinting Settings.\n\n"
+    },
+    {
+      "time": "5 Dec 2008 — 1:25pm",
+      "content": "Read up on hinting in the Fontlab manual. Then install the awesome [AFDKO](http://web.archive.org/web/20131024003603/http:/www.adobe.com/devnet/opentype/afdko/) and use the Adobe auto-hinter to make your fonts look fab onscreen.\n\n"
+    },
+    {
+      "time": "5 Dec 2008 — 1:53pm",
+      "content": "Note: Even if you use the Adobe auto-hinter, you'll need to make alignment zones.\n\n"
+    },
+    {
+      "time": "6 Dec 2008 — 12:26am",
+      "content": "Thank you all, you are great!\n\nI'll look into the alignment zones thing and if I get in trouble I'll ask you.  \nI have a strong feeling that this will solve my problem.\n\nDoes anyone know anything about the second problem I mentioned with Illustrator and ligatures?\n\n"
+    },
+    {
+      "time": "6 Dec 2008 — 7:49am",
+      "content": "Can you post the code for your `liga` feature?\n\n"
+    },
+    {
+      "time": "6 Dec 2008 — 2:51pm",
+      "content": "Sure, here it is:\n\nfeature liga {  \n sub e s s by e\\_s\\_s;  \n sub f f i by f\\_f\\_i;  \n sub f f by f\\_f;  \n sub f r by f\\_r;  \n sub e s by e\\_s;  \n sub s s by s\\_s;  \n sub kappa lambda by kappa\\_lambda;  \n} liga;\n\nand while we're at it, any idea why the last one isn't working (its the only greek ligature)?  \nThat last question isn't very important, so feel free to ignore it if its not simple.\n\nThanks again!\n\n"
+    },
+    {
+      "time": "6 Dec 2008 — 8:35pm",
+      "content": "Strange. It looks like it should work (although I haven't had any experience with Greek, so I have no clue about the last question). Not necessarily relevant, but I find it odd that you have a ff and ffi ligature, but not a fi ligature.\n\n"
+    },
+    {
+      "time": "7 Dec 2008 — 1:43am",
+      "content": "What do your languagesystem statements look like? For a good example see Miguel's post [here](http://web.archive.org/web/20131024003603/http:/typophile.com/node/52414#comment-316668).\n\n"
+    },
+    {
+      "time": "7 Dec 2008 — 3:02am",
+      "content": "@Mark: I'm planning to create an fi ligature as well. In general, I plan to add lots more ligatures when I solve the other issues I have with the font, as I love them :P\n\nBy the way, the Illustrator ligature problem was present before I added the greek ligature, so its not because of it.\n\n@k.l.: Whoa that looked quite confusing but I'll study it in more depth when I find more time, it seems helpful. Thanks.\n\nBy the way, I tried to add alignment zones, I even made the one at the x-height very loose (602-650 when my font's x-height is 626) but it doesn't seem to work at all :(  \nAlso, I tried to define a standard stem for hinting (as my font only consists of 1 stem width) but I still get issues with some thicker stems in small characters (I guess that's because the standard stem setting is for Type 1 and not TT? Is there something similar for TT?). However the alignment zones issue is more important, as the stem width problem occurs only on a small amount of glyphs, so I could solve it with manually hinting them I guess.  \nThis issue is driving me nuts :'(\n\nThank you all again, I would be desperate if I hadn't found this forum. :)\n\n"
+    },
+    {
+      "time": "7 Dec 2008 — 5:35pm",
+      "content": "YES, YES, YESSSS!!!!!  \nI finally managed to get aligmnent zones to work!!!!  \nI think I had been setting Type 1 zones instead of TT zones previously, and this is probably why they didn't work.\n\nAlso, the AI ligature problem is mysteriously solved, so it probably was a one-time thing. :D\n\nJust thought I'd share my happiness with you :D\n\nI have lots of problems to resolve still (stem widths, unicode ligatures) but these were the most annoying ones and they are finally SOOOOLVED! :D\n\n"
+    },
+    {
+      "time": "8 Dec 2008 — 5:52pm",
+      "content": "By the way, the greek ligatures problem was solved when I added `language EL;` before the greek ligatures. :)\n\n"
+    }
+  ]
+}

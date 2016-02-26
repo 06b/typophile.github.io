@@ -1,0 +1,25 @@
+{
+  "id": "104649",
+  "title": "InDesign find&replace hebrew with nikud",
+  "forum": "Hebrew Typography & Type Design",
+  "tags": [
+    "Hebrew",
+    "Hebrew Typography & Type Design",
+    "InDesign",
+    "nikud"
+  ],
+  "content": "Is there a fast way in Indesign to change biblical text imported from the internet the includes nikud into the appropriate unicode sign.\n\nThe imported text is built - letter, nikud, dagesh  \nI would like to change to - letter+dagesh glyph, nikud\n\nBentzi\n\n",
+  "author": "Bentzi Binder",
+  "time": "15 Jul 2013 — 1:10pm",
+  "uid": "188948",
+  "comments": [
+    {
+      "time": "17 Jul 2013 — 3:36pm",
+      "content": "I have never coded for InDesign, and I can't answer the question you are asking.\n\nIn any case, I would just recode the input text (before feeding it to InDesign). But first, are you sure your input never contains a sequence like \"shin shidot qamats dagesh\" (for instance הַשָּׁמַיִם) that you would want to replace by \"shin dagesh shindot qamats\"? If so, the substitution \"[letter][nikkud][dagesh]\" to \"[letter][dagesh][nikkud]\" is not general enough. You need to accept [nikkud]+, i.e. one or more.\n\nIf your input file is already utf-8 encoded, then the following Python code should do it (provided there is no cantillation mark between the letter and the dagesh).\n\n    ---- file reorddag.py ---- cut line\n    #!/usr/bin/env python\n    \n    import re, sys\n    reord = re.compile(ur'([\\u05D0-\\u05EA])([\\u05B0-\\u05BB\\u05BD\\u05BF\\u05C1\\u05C2\\u05C7]+)\\u05BC')\n    \n    if len(sys.argv) > 1:\n       f=open(sys.argv[1])\n    else:\n       f=sys.stdin\n    \n    line = f.readline().decode('utf-8')\n    while line:\n      print re.sub(reord, ur'\\1\\u05BC\\2',line).encode('utf-8'),\n      line = f.readline().decode('utf-8')\n    ---- cut line\n\nIf you you save those lines to `reorddag.py`, then\n\n    python reorddag.py input.txt > output.txt\n\nshould perform the desired changes; if you are on a mac or linux, you can name the file reorddag, make it executable and it can be used with `reorddag input.txt` to get the output on stdout and it can also be piped.\n\n-- 16 Jul 2013 — 11:51am Added # that was missing before ! in the copy, on the first line  \n-- Something weird is happening: starting on my mac with shin shindot qamats dagesh in הַשָּׁמַיִם, copying it to typophile and then copying from typophile to my mac I end with the sequence shin qamats dagesh shindot.  \n-- 17 Jul 2013 — 3:35pm Added a missing comma at the end of the print line (was giving two CR for each line)\n\n"
+    },
+    {
+      "time": "28 Jul 2013 — 12:38am",
+      "content": "Thank you for your help, it took me a little time to figure out how to work a script in python and it works!\n\n"
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "id": "40041",
+  "title": "OT Kern Feature",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Is there any reason when creating an OpenType font to convert OpenType [kern] feature to \"plain\" kerning data? Is this only an option to be used when converting OpenType fonts to standard Postscript or TrueType fonts. Would the kerning data if converted to \"plain\" still work in the final exported OpenType font if the OT kern feature was removed?\n\n",
+  "author": "<a href=\"/web/20110326211921/http://typophile.com/user/17099\" title=\"View user profile.\">Mike Jarboe</a>",
+  "time": "<br>",
+  "uid": "17099",
+  "comments": [
+    {
+      "time": "",
+      "content": "Also I'm having an issue with an OT Kerning pair that shows up perfect in the Metrics window under kerning, as well as when I use the Preview window with Open Type Features… the only time it doesnt show up kerned correctly as a pair is in the standard 'Preview' window.\n\nDoes anyone know why this might happen. I've double checked for exceptions and there are none… as well as I've double checked that the particular character isn't repeated in any other classes… strange… if anyone has experienced this or has had this problem let me know.\n\nThanks\n\n"
+    },
+    {
+      "time": "",
+      "content": "One reason I can think of to convert the kern feature to plain kerning is have a platform independent fontfile with kerning recognized by non OT apps.  \nAs far as I know the plain kerning works after removing the kern feature. But do a bit of testing to be sure.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Assuming the conversion is of your own work...  \nYou need to expand the kerning - Tools \\> Kerning Assistance \\> Expand.  \nAfter pressing this, you have some options, many of which depend on your situation and hopes for the font. Also under Preferences \\> Generating OpenType & True Type \\> Kerning, be sure to uncheck \"Generate OpenType Kern feature etc.\" and check \"Export old-style non-OpenType etc.\"\n\nAs for the issue with Preview, I wouldn't worry about it too much. The best plan is to test kerning with various apps.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Well said, Eric!\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Something to consider is the fact that, even though FontLab lets you do it, the old-style kerning table is not officially part of the spec for OT CFF fonts. So, it may not work. It is supported for the TTF flavor of OT fonts.\n\nFWIW, kerning in OT CFF fonts _is_ supported in non-OT savvy apps. They just don't get every possible pair. The system creates an old-style kerning table for the apps to use based on a subset of the pairs that would be possible using the OT kern feature.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for the input I'm going to stick with the OT kern feature for these purposes… Fontlab is a funny application… it makes me realize how comfortable I am with Adobe, I often find the preview panel doesn't always accurately reflect what is done in the Metrics Kerning window… I'm very meticulous with my work and find inconsistencies here and there as well as actual pallete and window features, drop downs occassionally stop working as well. (OS X, Fontlab 5) I've had to reinstall the program a couple of times to try and solve some of these glitches.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I'm also curious what Twardoch would say as far as going with OT (postscript flavored) kerning feature, keeping in mind Simonson mentioning that the system auto creates 'old-style' kerning table for non OT apps, I'd like to really push the use of the OT features and accept it as a forward format, seems a cleaner and simpler way to go plus not any extra work since I have a few recently completed fonts that are good to go, pending testing, utilizing the OT kern feature and a few other OT features.\n\n"
+    },
+    {
+      "time": "",
+      "content": "For TrueType-flavored OpenType fonts, if your font only has \"GPOS-table\" (OpenType) kerning, you will get zero kerning in applications that don't support GPOS kerning but only support \"kern-table\" (non-OpenType) kerning. Incidentally, Microsoft Office 2007 for Windows only supports kern-table kerning but the new default fonts it ships with (such as Calibri, Cambria, Constantia, Corbel, Candara) only include GPOS-table kerning. Result? No kerning at all. I'm still trying to figure out why Microsoft did here what they did. So if you make an OpenType TT font with just GPOS-table kerning, there will be no kerning at all in applications that don't support OpenType Layout.\n\nFor PostScript-flavored OpenType fonts, the operating system takes the GPOS-table (OpenType) kerning, extracts the kerning pairs for the Western codepage only, and produces a virtual kern-table kerning on the fly. So if you make an OpenType PS font with just GPOS-table kerning, there will be kerning in non-OpenType applications but only for Western codepage characters. Cyrillic, Greek or Extended Latin characters will have no kerning at all in those apps. However, if you include kern-table kerning as well, you will get kerning for the non-Western characters at least in some apps. The kern-table kerning is not officially supported by the OpenType specification, but I don't know of any situation where it would actually break anything (the principle behind the OpenType font format is that you can put whatever table you want into the font, and applications must ignore the tables they cannot process).\n\nRegards,  \nAdam Twardoch\n\n"
+    },
+    {
+      "time": "",
+      "content": "/track/\n\n"
+    },
+    {
+      "time": "",
+      "content": "Great response and much appreciated… gracias…\n\nMike\n\n"
+    },
+    {
+      "time": "",
+      "content": "Ps. I wrote: \"For PostScript-flavored OpenType fonts, the operating system takes the GPOS-table (OpenType) kerning, extracts the kerning pairs for the Western codepage only, and produces a virtual kern-table kerning on the fly.\"\n\nNote that this is only true if the GPOS kerning in the font is built to certain standards (one lookup of type 2). GPOS kerning may employ other techniques as well (multiple lookups, extension lookup type 9 that allows to overcome the subtable size limitation without using subtable breaks, contextual kerning) — but if your font uses any of these, the virtual kerning conversion done by the system will no longer work, so non-OpenType applications will have no kerning, not even for Western glyphs. In such case, placing the kern-table kerning may be the only solution as well.\n\nBut still, keep in mind that the OpenType specification states:  \n\"OpenType fonts containing CFF outlines are not supported by the 'kern' table and must use the 'GPOS' OpenType Layout table.\"\\*  \n [http://www.microsoft.com/OpenType/OTSpec/kern.htm](http://web.archive.org/web/20110326211921/http:/www.microsoft.com/OpenType/OTSpec/kern.htm \"http://www.microsoft.com/OpenType/OTSpec/kern.htm\")\n\nThe spec does not say that the kern table must not be present in an OpenType PS font, nor does it state that OpenType PS fonts must use only the GPOS kerning. But it says that OpenType PS fonts with kern-table kerning are not \"supported\" by OpenType, whatever that means.\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"OpenType fonts containing CFF outlines are not supported by the 'kern' table and must use the 'GPOS' OpenType Layout table.\"\n\nHow do you edit the 'GPOS' OpenType Layout table within fontlab?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Mr. Simonson,\n\nCould you please explain in different words the last part of \"FWIW, kerning in OT CFF fonts is supported in non-OT savvy apps. They just don't get every possible pair. The system creates an old-style kerning table for the apps to use based on a subset of the pairs that would be possible using the OT kern feature.\"?\n\nI can't seem to wrap my mind around this.\n\nWhat do you mean by \"based on a subset of the pairs that would be possible using the OT kern feature?\" Please explain a little more.\n\nThanks!\n\n"
+    },
+    {
+      "time": "",
+      "content": "There is a limit to the number of kerning pairs allowed in an old style kern table. If an OpenType kern feature is expanded to an old style kern table, this limit can easily be exceeded. So, to prevent this from happening, when the system creates an old style kern table on-the-fly from an OT kern feature, it must limit the number of pairs.\n\nOne of the big advantages to using OpenType class kerning is that you can kern many more glyph combinations than were possible with the older kern tables.\n\n[edited to fix spelling error]\n\n"
+    },
+    {
+      "time": "",
+      "content": "The internal limit of the OpenType font format is that no more than 10,920 kerning pairs can fit into one subtable within the \"kern\" table (and most font engines only support one subtable).\n\nBut there are some old Windows GDI-based applications (which still were largely used when the OTF font driver was developed 12 years ago for Windows 2000) which had a smaller limit.\n\nToday, I'd say the practical limit for the \"kern\" table is indeed 10,920.\n\nBest,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Mr. Simonson.\n\nI think I get it now.\n\nI have a font I'm working on with over 4,000 kerning pairs. It's an OT-flavored OT font and it's using the OT kern feature. But if that font is loaded into an old non OT-savvy app, many pairs will not be kerned that should be.\n\nThat really stinks. I can't wait until all apps are OT-savvy. Hopefully this will happen, and happen soon. Right now I am so annoyed when I see kerning that I have worked hard on failing to show up when I use the font in various apps. I'm trying to get all of them to show up and there are certain problem kerns I'm facing. I have many new ideas and possible solutions that I have read about lately that I'm going to try to fix this problem with, but maybe the apps I'm loading the fonts into aren't very OT-savvy and there isn't anything I can do in that situation - or is there? I'm using TextEdit 1.6 on mac, and Microsoft Word X.\n\nDoes anyone know how OT-savvy Mac's TextEdit app is? What about Microsoft Word X? The thing that I will say about these apps is 95 percent of the time it seems to me that all kerns are showing up. It's that 5 percent that is the problem. Maybe I'm being too demanding and will have to accept 95 percent as being the best I can get?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Today I upgraded from fontlab 4.5 to 5, but I hadn't really done any more testing to my font yet. Then I did what twardoch recommended. \"...edit the \"kern\" feature in the OpenType panel. You can explicitly convert your class-based FontLab kerning into the \"kern\" feature in the OpenType panel flyout menu, \"Generate kern feature\". If you don't do that and the option \"Generate \"kern\" feature if it is not defined\" is enabled, then FLS will generate the \"kern\" feature when generating the font.\" It asked me if I wanted to rebuild it, and I clicked yes. That fixed all my kerning problems. It looks perfect in textedit now. I haven't tested it in Word yet but my version of word is old anyway and may not be opentype savvy. But hopefully that's fine too. I'll report back on that soon.\n\nI highly recommend anyone with kerning issues to try this if they haven't.\n\nTHANX AGAIN TWARDOCH!\n\n"
+    }
+  ]
+}

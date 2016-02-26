@@ -1,0 +1,38 @@
+{
+  "id": "42955",
+  "title": "RoboFab Sidebearings Script ?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi all,\n\nIs it possible to use RoboFab control the sidebearing of glyphs.\n\nI was thinking something like this might work.\n\nThis code just prints the sidebearing - 20, what I really wanted to do is decrease the left sidebearing by 20.\n\n`\nfrom robofab.world import CurrentFont\nf = CurrentFont()`\n\nA = f['A'].leftMargin\n\nA-=20\n\nprint A\n\nf.update()\n\n",
+  "author": "RachelR",
+  "time": "8 Mar 2008 — 8:38am",
+  "uid": "16986",
+  "comments": [
+    {
+      "time": "8 Mar 2008 — 10:08am",
+      "content": "Have you tried this?\n\n`print \"before\", f['A'].leftMargin`  \n`f['A'].leftMargin = f['A'].leftMargin -20`  \n`print \"after\", f['A'].leftMargin`\n\n"
+    },
+    {
+      "time": "8 Mar 2008 — 2:41pm",
+      "content": "That's easy to do in Font Lab also. Select the glyphs you want to change, and then go to: actions/metrics/set side bearings.\n\n"
+    },
+    {
+      "time": "8 Mar 2008 — 3:43pm",
+      "content": "k.l.\n\nThanks that worked, still getting to grips with the RoboFab syntax\n\nI think I was trying to do this with my first attempt.\n\n`\nfrom robofab.world import CurrentFont\nf = CurrentFont()`\n\nf['A'].leftMargin -=20\n\nf.update()\n\n"
+    },
+    {
+      "time": "17 Apr 2012 — 1:53pm",
+      "content": "How can I do the same, but using the 'measurement line'?  \nI mean: To measures the distance from, let say, the middle of the x-height instead if the first left point.\n\n"
+    },
+    {
+      "time": "23 Apr 2012 — 1:07pm",
+      "content": "Pablo, have a look at the marginPen module in RoboFab/pens. It will calculate the margins of a glyph at a requested height (or width)\n\n[link to marginPen.py on code.robofab.com](http://web.archive.org/web/20130311085407/http:/code.robofab.com/browser/trunk/Lib/robofab/pens/marginPen.py)\n\n"
+    },
+    {
+      "time": "23 Apr 2012 — 3:53pm",
+      "content": "Erik, thanks!  \nmarginPen is awesome.\n\nI'm working on a spacing macro, will release it shortly.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "65758",
+  "title": "TrueType format glyf table",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi  \nI am trying to create software to look at TrueType fonts but I can not understand all things in the spec for glyf table perhaps because my English is no so good. Is there any where I can get help?\n\nthank you\n\n",
+  "author": "Janic",
+  "time": "30 Dec 2009 — 6:07am",
+  "uid": "29572",
+  "comments": [
+    {
+      "time": "30 Dec 2009 — 6:25am",
+      "content": "This [Apple documentation](http://web.archive.org/web/20150112052033/http:/developer.apple.com/textfonts/TTRefMan/RM06/Chap6glyf.html) shows the basics, in quite short sentences ;-)\n\nDo you want to render the font data yourself as outlines? That's really hard. If you don't want to get involved into extremely low level programming, you can always use the [FreeType](http://web.archive.org/web/20150112052033/http:/www.freetype.org/) libraries to load and rasterize (= convert from math outlines to a bitmapped image) fonts. FreeType can create a monochrome or grayscale image of any character, so all you have to do is write a function to put it up onto your display.\n\n"
+    },
+    {
+      "time": "30 Dec 2009 — 6:47am",
+      "content": "Thank you Theunis  \nI do need to get the glyph data to display. FreeType is not for me as glyphs can only be got from cmap. I need to get all glyphs even if no cmap entry.  \nI am stuck on glyf table 'flags'. How can I calculate the size of flag array?\n\nJanic\n\n"
+    },
+    {
+      "time": "30 Dec 2009 — 3:19pm",
+      "content": "Ah -- okay. The [Microsoft page](http://web.archive.org/web/20150112052033/http:/www.microsoft.com/TRUETYPE/OTSPEC/glyf.htm) is a little less vague on this subject.\n\nApparently, the number of flags should be equal to the number of _points_ in one glyph. However, Bit 3 specifies a \"repeat\" of the current flag value, and the number of repeats is in the next byte in the same array. So if you have 10 points defining the glyph, its flags may be\n\n0: _some flags for pt #0_  \n1: _some flags for pt #1_ + \"repeat\" bit set  \n2: a literal value \"8\"  \n3: _some flags for pt #9_\n\n.. so the table only has 4 bytes but defines flags for all 10 points.\n\nAt least, that's what it sounds like. It's not really clear from this page what the difference is in \"number of contours\" and \"number of points\" -- the number of contours is specifically declared in the first table, and the number of points could be the same.\n\n"
+    },
+    {
+      "time": "1 Jan 2010 — 7:13am",
+      "content": "Theunis  \nThank you for your help. I think I understand now.\n\nJanic\n\n"
+    }
+  ]
+}

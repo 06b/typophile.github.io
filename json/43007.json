@@ -1,0 +1,54 @@
+{
+  "id": "43007",
+  "title": "Trouble with matching black",
+  "forum": "Design",
+  "tags": [
+
+  ],
+  "content": "Not strictly a type question (in fact not really at all) but I’ve got a series of 6x6 cards going to print, and yet again it’s a project that was abandoned (perhaps wisely) by a previous designer.\n\nEach card is black, with white type and a photograph taking up most of the design. After a bit of research here, and despite some variation of opinion I’ve settled on a deep black using CMYK (30,30,30,100) - No problem there, but unfortunately, the photos are of objects shot on a black background. The photographs are also in CMYK, but the blacks do not even come close to matching. I’m trying to find an elegant solution here, as there are 8 different cards and 4 posters all using the same source files. In my mind I can think of 2 options:\n\n1. clipping mask around my objects (super time consuming)  \n2. setup the backgrounds in the cards to match the images (some nasty 84,72,75,95 concoction) and let the printer sort it out (I really don’t want to this)\n\nTo add insult to injury the black in each photo is different, so even if I went with option 2, the printer would likely have to adjust differently for each card.\n\nAnyone ideas?\n\n| Attachment | Size |\n| --- | --- |\n| [card1-1.jpg](http://web.archive.org/web/20080828001639/http:/typophile.com/files/card1-1.jpg) | 69.62 KB |\n\n [‹ Typeface suggestions for a science magazine](http://web.archive.org/web/20080828001639/http:/www.typophile.com/node/42811 \"Go to previous forum topic\") [Howto determine the width of dashes (em/en) ›](http://web.archive.org/web/20080828001639/http:/www.typophile.com/node/41439 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080828001639/http://www.typophile.com/user/23801\" title=\"View user profile.\">richardeflanagan</a>",
+  "time": "<br>",
+  "uid": "23801",
+  "comments": [
+    {
+      "time": " 10.Mar.2008 11.27am",
+      "content": "Could you modify the images so that the image is actually the full size of the card+bleed, rather than an image on top of a black background? The one with the brush doesn’t /look/ like it would be too hard since it’s just pure black.\n\n"
+    },
+    {
+      "time": " 10.Mar.2008 11.36am",
+      "content": "The thought crossed my mind, but it would still be a bizarre and inconsistent mixture across the cards.\n\nbrush no. 1 there, the Background is (82,74,73,95)  \nwhile brush no. 2 is (75,68,76,90)\n\n"
+    },
+    {
+      "time": " 10.Mar.2008 11.39am",
+      "content": "If you could get the black selected you could use a Channel Mixer adjustment layer in PS to get where you want to go. Or could float the layer and delete the black info then put it on your rich black background. Depending on the source material and how good of a selection you can make (Color Range being the first thing I would try) one of these methods will work quite well. If it’s a good enough selection I would probably use solution #2.\n\nLooks to me on this example you could get a pretty good selection using Color Range to select the black then deleting the black background.\n\nBest of luck!\n\npbc\n\n"
+    },
+    {
+      "time": " 10.Mar.2008 11.46am",
+      "content": "Are you sure you don’t mean 75,68,67,90? That would be the default value for rich black in the SWOP V2 color space. The discrepancies you are seeing are probably from the conversions or lack thereof.\n\npbc\n\n"
+    },
+    {
+      "time": " 10.Mar.2008 12.04pm",
+      "content": "75,68,67,90 - Ah, you are correct - is this the default conversion to CMYK from RGB (0,0,0)? If so, how can this help (please excuse my ignorance on this one)?\n\nAlso, after a bit more digging, only the first image is anything other than (75,68,67,90) - I have not yet found the source files for these CMYK images, and doubt that I will - but if I did and they are likely RGB - what would be my best course from there?\n\n"
+    },
+    {
+      "time": " 10.Mar.2008 12.10pm",
+      "content": "Well, I found the originals, RGB, but layered beautifully - virtually nothing to worry about now. phew.\n\nIn the event that I hadn’t found them, I think I would have tried #2 of your suggestions Paul.\n\n"
+    },
+    {
+      "time": " 10.Mar.2008 12.13pm",
+      "content": "For What It’s Worth:\n\nYou might try determining a target rich black that is a good compromise of all the backgrounds, then use Image \\> Adjustments \\> Selective Color… on the Blacks to try to push each of them toward a single target. Keep an eye on the Info palette with your cursor in a variety of edge locations. Using Method=Absolute will move values more quickly. Depending upon the image, Selective Color should stick pretty much to your background, but keep an eye on any shadows or dark neutrals just in case.\n\nYou’re not likely to be able to get to your ideal 30.30.30.100, but you could get the images close to each other. Then you might stand a chance of using the compromise rich black build as a background and get them all to be cohesive.\n\nMight work.\n\n— K.\n\n[EDIT: Oops, looks like you found a better solution while I was typing.]\n\n"
+    },
+    {
+      "time": " 10.Mar.2008 12.24pm",
+      "content": "It’s not as hairy as it sounds - use it all the time. It’s a paranoid workflow I need to have since I cannot possible have conversations with all the printers who output my stuff. I had to work on an Ozzy ad recently and here’s the result - it looks totally natural on the rich black I mixed up - the right is what is actually left of the photo:\n\npbc\n\n ![](http://web.archive.org/web/20080828001639im_/http:/www.typophile.com/files/ozzy-BILL-3-8-08-v3_6322.jpg)\n\n"
+    },
+    {
+      "time": " 10.Mar.2008 12.26pm",
+      "content": "Despite my luck of stumbling onto the originals, all of this advice is indispensable and will definitely come in handy in future projects.\n\nThanks all,\n\n"
+    },
+    {
+      "time": " 11.Mar.2008 6.52am",
+      "content": "I think your first suggestion is the better one, It take time, but you will have exactly what you expect. Make a close cut of the object, keep a small feather, save it as a psd file and paste it over a black color you will choose in your page layout software (Indesign works well with psd file).\n\n"
+    }
+  ]
+}

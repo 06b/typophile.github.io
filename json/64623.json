@@ -1,0 +1,102 @@
+{
+  "id": "64623",
+  "title": "Drawing within Multiple Masters mode",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m trying to get a handle of multiple master for the first time, and came across a huge annoyance that has me questioning my workflow. I have the black weight (wt1) complete and I want to design a light (wt0) so I could generate the weights between. When I define the new axis (wt0), I have to “design” the light glyphs by editing the copy of the black glyphs. This severely limits my usual process of drawing, copying and pasting segments, using the knife tool, etc. I can’t work that way, or else it ruins wt1.  \nIs there a way around this?\n\nI know the point is to maintain the exact number of points, etc. Is there any way I can tell FontLab “Hey, I promise the points will be compatible when I’m done, so relax!”\n\n",
+  "author": "<a href=\"/web/20100103113001/http://typophile.com/user/4186\" title=\"View user profile.\">koleslaw</a>",
+  "time": "<br>",
+  "uid": "4186",
+  "comments": [
+    {
+      "time": " 23.Nov.2009 11.10am",
+      "content": "This is a limitation of the way multiple master fonts work in FontLab. There is really only one path for each part of a glyph. The different masters are variations of that path, not separate paths. If you remove or add a node to a path in one master, the same will happen in any other masters, since they are really the same path.\n\nYou might want to start with single master fonts, and then use the Add Master command to combine them into a multiple master font when you are happy with the separate masters. It is up to you to make sure the paths are compatible if you work this way.\n\nI’ve simply adapted to working with the limitations. I draw one master and then edit the others as needed, avoiding doing anything that would affect the other masters.\n\n"
+    },
+    {
+      "time": " 23.Nov.2009 11.23am",
+      "content": "Just skip MM fonts and get UFOStretch or Superpolator. Then you don’t have to worry about MM limitations and housekeeping, just keep the outlines compatible.\n\n"
+    },
+    {
+      "time": " 23.Nov.2009 11.25am",
+      "content": "You can build your files individually and then use the Blend Fonts tool to build a MM file to do your interpolations from.  \nTwo things to note: You have to make sure your nodes match manually (or use Prepolator) and Fontlab gets confused by glyphs built from multiple components (just flip the component order, ie. if your top component is first in master 1, make it second in master 2).\n\n"
+    },
+    {
+      "time": " 23.Nov.2009 11.29am",
+      "content": "Agree with Mark, There’s really no way around it for now.\n\nOne way I’ve used for a while is to experiment with the other new weight in a separate file until you’re fairy happy. Then you import it into the mask layer in the “new” MM weight to be produced. From there it’s pretty easy to change the curves according to the mask and then make final adjustments to correct horizontal strokes versus vertical stems. It has worked fine for me.\n\nGood luck.\n\n"
+    },
+    {
+      "time": " 23.Nov.2009 12.21pm",
+      "content": "Doing MM stuff in FontLab is really tedious and cumbersome. With Prepolator and Superpolator it’s almost a joy.\n\n"
+    },
+    {
+      "time": " 24.Nov.2009 1.09am",
+      "content": "Jos,\n\nThe backside of using to many advanced programs, is that it takes away the last tiny bit of “hand made” feeling.  \nOver the years I’ve got the feeling typefaces are too perfect and smooth these day. Even if the design itself is  \ngood looking the feeling of “too perfect” shines through somehow. Therefor I’ve gone back to trusting my eyes  \nmore, rather than guidelines and numbers. This is of course just my personal reflection. The nice thing about  \ntype design is that there are so many ways of doing it right! ;-)\n\nCheers\n\n"
+    },
+    {
+      "time": " 24.Nov.2009 1.14am",
+      "content": "Jos,\n\nBtw, I really like your typeface Fertigo Pro and Fertigo Script. Keep up the good work.\n\n"
+    },
+    {
+      "time": " 24.Nov.2009 5.18am",
+      "content": "Stefan, I like the idea of making things not too perfect, though —I think— that can often also be achieved by breaking the regularity of a design. That might indeed be another way of doing it right ;)\n\nThanks for the kind compliment. I always had (and still have) a weak spot for your Anziano.\n\n"
+    },
+    {
+      "time": " 24.Nov.2009 5.23am",
+      "content": "<cite>Doing MM stuff in FontLab is really tedious and cumbersome.</cite>\n\nDoing MMs in Fontographer was really tedious. Compared to that, FontLab is a breeze!\n\n"
+    },
+    {
+      "time": " 24.Nov.2009 6.01am",
+      "content": "Then I’m utterly glad I never had a go at it with Fontographer.\n\n"
+    },
+    {
+      "time": " 24.Nov.2009 7.08am",
+      "content": "<cite>Compared to that, FontLab is a breeze!</cite>\n\nAnd compared to keeping horses fed, shod, clean, and healthy a Yugo is a great way to get around.\n\n"
+    },
+    {
+      "time": " 24.Nov.2009 8.27am",
+      "content": "I prefer the subway\n\n"
+    },
+    {
+      "time": " 24.Nov.2009 1.51pm",
+      "content": "Thanks for the responses, all. I’m not ready to jump into any other third party software. Plus, I doubt there’s anything out there for PC. So for now I will make weights in different files to combine them later.\n\n"
+    },
+    {
+      "time": " 24.Nov.2009 2.32pm",
+      "content": "in a separate vfb file, draw the glyph the way you want it, making sure that the outline is compatible with the original black glyph. when you’re done, go to the original glyph window. hit control (or cmd) + h. paste you new glyph in the mask layer (making sure there is nothing else in the mask. hit ctrl/cmd + h again. hit ctrl/cmd + j. if asked to insert nodes, choose the ’no’ option. voila! you’re on your way. that’s just one work around. it’s a bit tedious, but it sometimes beats the alternative...\n\n"
+    },
+    {
+      "time": " 25.Nov.2009 5.25am",
+      "content": "I use the same method as Paul. Works like a charm.\n\n"
+    },
+    {
+      "time": " 25.Nov.2009 9.48am",
+      "content": "I use “Assign Mask” instead of pasting individual glyphs into the mask layer. But I agree, “Mask-to-Master” is a better way to go than “Blend”.\n\n"
+    },
+    {
+      "time": " 25.Nov.2009 10.09am",
+      "content": "_I use “Assign Mask” instead..._\n\nI just realized I meant “Assign Mask” when I wrote “Add Master” in my reply above. Sorry if this confused anyone.\n\n"
+    },
+    {
+      "time": " 25.Nov.2009 8.50pm",
+      "content": ".  \nChrisL\n\n"
+    },
+    {
+      "time": " 28.Nov.2009 5.38am",
+      "content": "ChrisL,\n\nSix two and even, over and out.\n\n"
+    },
+    {
+      "time": " 28.Nov.2009 8.42am",
+      "content": "Roger that, James.  \n:-)\n\nChrisL\n\n"
+    },
+    {
+      "time": " 2.Dec.2009 1.58pm",
+      "content": "dezcom, i saw a car with the license plate “dezcom” were you by any chance near philadelphia yesterday?\n\n"
+    },
+    {
+      "time": " 2.Dec.2009 2.43pm",
+      "content": "No, was not me. I wish I had that plate though!\n\nChrisL\n\n"
+    }
+  ]
+}

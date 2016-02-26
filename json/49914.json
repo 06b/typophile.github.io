@@ -1,0 +1,54 @@
+{
+  "id": "49914",
+  "title": "Strange behaviour when selecting ot alternates.",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m finishing up an opentype script font that has many alternates. When I select from the ot palette in adobe illustrator, for instance /r.alt/r.alt/ and then select something different like r.alt02 then instead of getting: /r.alt/r.alt/r.alt02 I get: /r.alt02/r.alt02/r.alt02 so it changes all alts before it. Another way might be /p.end/p.end and the selecting q.swsh instead of /p.end/p.end/q.swsh I get /p.swsh/p.swsh/q.swsh\n\nI’m guessing that I set up the aalt feature wrong?\n\nsub r from [r r.alt r.alt02 r.start r.end r.startswsh r.endswsh];\n\nIs this not correct? - Jess\n\n [‹ fontlab question contours don't close/connect](http://web.archive.org/web/20081121135804/http:/www.typophile.com/node/49980 \"Go to previous forum topic\") [Building a Unicase/Allcaps Opentype font with multiple alternates ›](http://web.archive.org/web/20081121135804/http:/www.typophile.com/node/49948 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081121135804/http://www.typophile.com/user/2951\" title=\"View user profile.\">bvfonts</a>",
+  "time": "<br>",
+  "uid": "2951",
+  "comments": [
+    {
+      "time": " 28.Sep.2008 6.46am",
+      "content": "Do you have some calt feature thats active at the same time?\n\n"
+    },
+    {
+      "time": " 28.Sep.2008 9.25am",
+      "content": "When I turn calts off in illustrator it still happens and when I turn all features off it happens. aalts is the only feature that I think could be causing this, there’s no way to turn that off in illustrator. - Jess\n\n"
+    },
+    {
+      "time": " 28.Sep.2008 12.42pm",
+      "content": "I just did a test where I removed r and s from the aalt feature to see how those letters would respond and when pecking out the sequence from the pallete: r.startswsh r.startswsh s.startswsh s.startswsh it stays exactly as is. Then I try t.startswsh t.startswsh u.startswsh and it instantly changes to t.alt02 t.alt02 u.startswsh. Also, I removed all features but the aalt feature and the problem still remains.\n\n"
+    },
+    {
+      "time": " 28.Sep.2008 4.19pm",
+      "content": "If you are already using these glyphs via calt or some other feature, you probably shouldn’t be listing them separately again in the aalt feature. Also... alt should be on top when you compile.\n\nHere is a sample:  \nfeature aalt {  \n feature clig;  \n feature dlig;  \n feature liga;  \n feature calt;  \n feature cswh;  \n feature swsh;  \n feature ss01;  \n feature ss02;  \n feature ss03;  \n feature ss04;  \n feature ss05;  \n feature ss06;  \n feature ss07;  \n feature ornm;  \n feature tnum;  \n feature frac;  \n} aalt;\n\n"
+    },
+    {
+      "time": " 28.Sep.2008 5.41pm",
+      "content": "Then how would you make it possible to select from the opentype pallete? I’m trying to make it possible for the option to choose. It still doesn’t explain why this is happening with only the aalt feature all by itself. Waaaah -Jess\n\n"
+    },
+    {
+      "time": " 29.Sep.2008 12.40am",
+      "content": "Is it the same behavior in InDesign?\n\nNot mentioning by/from substitution in ’aalt’ does not mean that alternate glyphs are not available in the glyph palette. It only means that alternate glyphs are not listed as alternates in a glyph’s popup showing alternates.\n\n"
+    },
+    {
+      "time": " 29.Sep.2008 3.29am",
+      "content": "Do you mean the glyph palette in Illustrator?  \nWhen I do my features as above with the aalt feature listed 1st in the feature code I can access any character from the glyph palette and most can be adjusted easily from the opentype one. The aalt feature should give you little arrows in the glyph palette by each glyph that has alternates and clicking the arrow produces a submenu of those alternates. The aalt feature shouldn’t be in the opentype menu at all. There is a salt feature for Illustrator there, but that’s different.  \nWhat features do you have in this font?\n\n"
+    },
+    {
+      "time": " 29.Sep.2008 9.21am",
+      "content": "k.l, I don’t have InDesign so I can’t say.\n\nStephen, Yes, the glyph palette in Illustrator. Exactly, it’s not in the menu it works just like your explaining.\n\nThe problem happens when two or more alts are selected together for instance: I spell Betty and highlight the two t’s and select from the pop out glyph menu the extra swashy t\\_t. That works so I decide to change the y to the extra swashy ending y from the pop out menu and when I do that the y is fine but the extra swashy t\\_t behind it turns into t.alt So it’s now Bety. Since I have removed all other features but the aalt from the font, the only explanation can be that the aalt feature is doing this.\n\nI’ve created many opentype fonts with the aalt feature but usually with just one or two alternates to choose from. This font I’m working on, one glyph can have up to 5 alternates.\n\nfeature aalt {  \n sub A from [A.alt A.alt02];  \n sub B from [B.alt];  \n sub K from [K.swsh];  \n sub L from [L.swsh];  \n sub M from [M.alt M.alt02];  \n sub N from [N.alt N.alt02];  \n sub Q from [Q.swsh];  \n sub R from [R.swsh];  \n sub a from [a.startswsh a.endswsh];  \n sub b from [b.startswsh b.endswsh];  \n sub c from [c.startswsh c.endswsh];  \n sub d from [d.startswsh d.endswsh];  \n sub e from [e.startswsh e.endswsh];  \n sub f from [f.startswsh f.endswsh];  \n sub g from [g.alt g.startswsh g.endswsh];  \n sub h from [h.startswsh h.endswsh];  \n sub i from [i.startswsh i.endswsh];  \n sub j from [j.startswsh j.endswsh];  \n sub k from [k.alt k.startswsh k.endswsh];  \n sub l from [l.start l.alt\\_end l.startswsh l.endswsh];  \n sub m from [m.startswsh m.endswsh];  \n sub n from [n.startswsh n.endswsh];  \n sub o from [o.alt o.startswsh o.endswsh];  \n sub p from [p.startswsh p.endswsh];  \n sub q from [q.startswsh q.endswsh];  \n sub r from [r.alt r.alt02 r.start r.startswsh r.endswsh];  \n sub s from [s.startswsh s.endswsh];  \n sub t from [t.alt t\\_t.alt t\\_t t.startswsh t.endswsh];  \n sub u from [u.startswsh u.endswsh];  \n sub v from [v.alt v.alt\\_startswsh v.startswsh v.endswsh];  \n sub w from [w.alt w.alt\\_startswsh w.startswsh w.endswsh];  \n sub x from [x.startswsh x.endswsh];  \n sub y from [y.alt y.alt02 y.startswsh y.endswsh];  \n sub z from [z.alt z.startswsh z.endswsh];  \n} aalt;\n\nThe reason I didn’t set up the swsh feature for the lowercase letters is because it’s just too much, it’s better if it’s used sparingly and selectively.\n\n"
+    },
+    {
+      "time": " 29.Sep.2008 9.42am",
+      "content": "<cite>sub t from [t.alt t_t.alt t_t t.startswsh t.endswsh];</cite>\n\nGiven this, the behavior is not a surprise: You consider t\\_t and t\\_t.alt as alternates for t — which they obviously are not. Better do this:\n\n<cite>sub t from [t.alt t.startswsh t.endswsh];</cite>  \n<cite>sub t_t from [t_t.alt];</cite>\n\n"
+    },
+    {
+      "time": " 29.Sep.2008 3.41pm",
+      "content": "Thanks k.l. That will help with those alternates and I just tried it with the sub r from [r.alt r.alt02] in the same location and it caused the same collapse. So I did sub r.alt from [r.alt02]; and that fixes the problem for that, although the fact that it is a problem is puzzling. Having the swsh feature listed makes more sense. Maybe if I move the start and end swashes to a stylistic set it will fix that problem too. - Jess\n\n"
+    }
+  ]
+}

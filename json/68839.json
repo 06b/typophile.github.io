@@ -1,0 +1,87 @@
+{
+  "id": "68839",
+  "title": "Need little help with ending swash.",
+  "forum": "Build",
+  "tags": [
+    "alternate",
+    "code",
+    "ending",
+    "Open Type",
+    "swash",
+    "Build"
+  ],
+  "content": "Hi! My very first post - logged in because of this question.  \nI want to make the following rule in OT font:\n\n(in human language) If the word ends with \"r\", it should be substituted with \"r.alt\"\n\nSo far I've been trying to understand FL manual, search this forum and google for tutorials, but with no luck at all.\n\n",
+  "author": "Eimantas Paškonis",
+  "time": "26 Mar 2010 — 10:15am",
+  "uid": "59672",
+  "comments": [
+    {
+      "time": "26 Mar 2010 — 10:18am",
+      "content": "set up a class which contains all letters, eg @letter, then code it with an ignore sub:\n\nignore sub r' @letter;  \nsub r by r.alt;\n\n"
+    },
+    {
+      "time": "26 Mar 2010 — 10:50am",
+      "content": "It might be better to name it \"r.end\".\n\n"
+    },
+    {
+      "time": "26 Mar 2010 — 1:00pm",
+      "content": "You may not put the space into the class \"letters\". Otherwise the r is replaced in the end of the last word only. What’s better, is probably dependent from the font. And there is a registered feature for your purpose, the fina-feature. So you also can name the terminal form of the r \"r.fina\".\n\n"
+    },
+    {
+      "time": "26 Mar 2010 — 1:20pm",
+      "content": "<cite>ignore sub r' @letter;<br>\nsub r by r.alt;</cite>  \nIs this all I need? I get \"expecting EOF (text was \"ignore\") \" error. I suppose class name should be without \"@\"?\n\n<cite>And there is a registered feature for your purpose, the fina-feature. So you also can name the terminal form of the r \"r.fina\".</cite>  \nCould you tell more about it?\n\n"
+    },
+    {
+      "time": "26 Mar 2010 — 1:40pm",
+      "content": "<cite>Could you tell more about it?</cite>\n\n[http://www.microsoft.com/typography/otspec/features\\_fj.htm#fina](http://web.archive.org/web/20131015092747/http:/www.microsoft.com/typography/otspec/features_fj.htm#fina \"http://www.microsoft.com/typography/otspec/features\\_fj.htm#fina\")  \nand  \n [http://www.typotheque.com/fonts/opentype\\_feature\\_support](http://web.archive.org/web/20131015092747/http:/www.typotheque.com/fonts/opentype_feature_support \"http://www.typotheque.com/fonts/opentype\\_feature\\_support\")\n\nIn the German version of Indesign CS3 it can be activated by \"Opentype/Positionalform/Finalform\".\n\nAnd I think this should be the code:  \nignore sub r **'** …  \nsub r **'** by …\n\nAs far as I remember, it does not work if **'** is missing in the substitution rule because of the ignore rule with the \"context indicator\" ( **'** ) in it.\n\n"
+    },
+    {
+      "time": "27 Mar 2010 — 12:23am",
+      "content": "It works. All that was missing was opening and closing lines :)  \nBut while swash comes up in preview and apps, it doesn't in metrics window.\n\n"
+    },
+    {
+      "time": "27 Mar 2010 — 1:34am",
+      "content": "And one more question - how do I export my kerning values with font to be usable by applications?\n\n"
+    },
+    {
+      "time": "27 Mar 2010 — 1:45am",
+      "content": "In case of OpenType the kerning is in the GPOS-table (kern feature) or in the KERN-table. I am not sure, what you mean. You don’t have to export anything separated from the font. Go to FontLab options/generating OpenType and TrueType/Kerning.\n\n"
+    },
+    {
+      "time": "27 Mar 2010 — 2:03am",
+      "content": "After exporting FL asks me if I \"want to rebuild Kern OpenType feature?\"\n\n"
+    },
+    {
+      "time": "27 Mar 2010 — 2:51am",
+      "content": "Press yes.\n\nWith regards to kerning the end swashes, I would set up class based kerning, eg @r [r r.end] assuming the left hand side of the glyphs are the same. If not, and you need to kern the swashes separately, you can copy and paste the resultant sring from the OpenType Preview window into the Metrics/Kerning window.\n\nI have suggested on the Fontlab forum that it would be good if the Metrics window could be set to apply OpenType substitutions, to make this process less of a hassle.\n\n"
+    },
+    {
+      "time": "27 Mar 2010 — 2:57am",
+      "content": "Thanks for the info, but problem is that ALL kerning is lost when font is exported.\n\n"
+    },
+    {
+      "time": "27 Mar 2010 — 4:54am",
+      "content": "Make sure you're updating the kern feature before exporting. In Tools - Kerning Assistance - Update [kern] feature.\n\nOne other thing to remember - the kern feature only works if there is another OpenType feature in the font. Simple enough to put in liga - sub f i by fi.\n\nThen when you export it will say something like, 'kerning has changed.... blah blah blah'\n\nClick yes\n\n"
+    },
+    {
+      "time": "27 Mar 2010 — 8:02am",
+      "content": "<cite>One other thing to remember - the kern feature only works if there is another OpenType feature in the font.</cite>\n\nThat’s true only for old versions of the Adobe Creative Suite up to version 1 or 2. In version 3 the problem is solved.\n\n"
+    },
+    {
+      "time": "27 Mar 2010 — 8:45am",
+      "content": "So now I know how to export kerning and create ending swash.  \nWhat needs to be changed in the code if I want to make a start swash or a swash that comes up only after specified character?  \nSorry for lots of questions but it's my first experience with FL.\n\n"
+    },
+    {
+      "time": "27 Mar 2010 — 11:00am",
+      "content": "Phoenixed\n\nThat’s explained in the FLS manual. Read it, please.\n\nsub x' y z by x.alterSchwede\n\nIf x is followed by y and z, it will be substituted. And x, y, z and x.alterSchwede can be single characters, lists of characters (in brackets) or classes (@classname) or lists of classes (in brackets). But it is better explained in the manual. You will not learn, if you don’t try to solve problems by yourself at first. If anything does not work, you can still ask. And I recommend to study the feature files, that Adobe provides for Minion (along with the AFDKO, as far as I remember).\n\n"
+    },
+    {
+      "time": "27 Mar 2010 — 11:25am",
+      "content": "What's what I said in first post - I've googled for tutorials (found one in League's Typelog, but about ligatures) and read the manual. (FL5 Manual, \"Substitution lookups\", pages 864-873).\n\nWhat's the point in studying the code if you don't know the language? Like in your post - what do \"alterSchwede, Minion and AFDKO\" mean?\n\n"
+    },
+    {
+      "time": "27 Mar 2010 — 2:56pm",
+      "content": "\"x.alterSchwede\" was a joke. Name the substituted character or class as you want, r.alt or r.fina for example.\n\nMinion is an Adobe font. And the AFDKO is the abbreviation for Adobe Font Development Kit for OpenType, that is available for free. You can download the AFDKO and the Minion feature file at \"http://www.adobe.com/devnet/opentype/afdko/\".\n\n<cite>What needs to be changed in the code if I want to make a start swash or a swash that comes up only after specified character?</cite>\n\nThat is answered on page 860 of the FontLab manual (Context Dependent Substitutions).\n\n<cite>What's the point in studying the code if you don't know the language</cite>\n\nI don’t think, that it is possible to learn a programming language without studying code parallel. In case of OpenType I am even not sure, if the feature file syntax is a language.\n\n"
+    }
+  ]
+}

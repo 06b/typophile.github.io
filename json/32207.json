@@ -1,0 +1,54 @@
+{
+  "id": "32207",
+  "title": "about the x-height of certain fonts",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi everyone,\n\nDoes anyone know how to get value of x-height of certain fonts? say Times  \nNew Roman, etc..\n\nI know there is some functions such as GetTextMetrics, we can use it to get  \nthe height, the ascent and descent of fonts? but how about x-height?\n\nThanks a lot!\n\n",
+  "author": "swatch",
+  "time": "13 Mar 2007 — 1:33pm",
+  "uid": "17381",
+  "comments": [
+    {
+      "time": "13 Mar 2007 — 2:55pm",
+      "content": "you could always measure it... that's what i tell my students...\n\n"
+    },
+    {
+      "time": "13 Mar 2007 — 6:10pm",
+      "content": "Have you considered checking the height of the string \"x\"?\n\n"
+    },
+    {
+      "time": "13 Mar 2007 — 6:59pm",
+      "content": "Thank you very much for your reply.\n\nYes, I think it could be done by measuring the height of x.  \nI mean is there any fuctions could do it? like GetTextMetrics?\n\nHow do you do it? What is the common method to get it? You do it by measuring it in font bitmaps( first write in some types and save it into bitmaps(say 32\\*32), then check its height) or reading directly from true type font file?\n\nThanks!\n\n"
+    },
+    {
+      "time": "13 Mar 2007 — 9:28pm",
+      "content": "The best way, in most fonts, to get the x-height algorithmically.\n\nGet the bounding box of the lower-case \"o\"; take the height. Subtract the overshoot below the baseline.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "13 Mar 2007 — 9:43pm",
+      "content": "But doesn't the <cite>o</cite> typically also have overshoot _above_ the x-height level? Maybe a better approximation would be to take the height of the <cite>o</cite> and subtract _twice_ the overshoot below the baseline.\n\n(BTW, why not just measure the height of the <cite>x</cite> itself? Do the serifs sometimes get in the way?)\n\n"
+    },
+    {
+      "time": "14 Mar 2007 — 8:49am",
+      "content": "Swatch,\n\nwhat programming environment do you work in? What language? What operating system?\n\nA.\n\n"
+    },
+    {
+      "time": "14 Mar 2007 — 3:25pm",
+      "content": "Thanks for all the replying.\n\nHi twardoch,\n\nI am using VC++6.0, windows XP, languages are C++ and java.  \nAny advices?\n\nThanks!\n\n"
+    },
+    {
+      "time": "15 Mar 2007 — 12:05am",
+      "content": "Yes, the serifs sometimes get in the way.\n\nWhen I said the \"height\" of the \"o\" I really meant the \"maximum Y coordinate\" - so you only need to subtract the overshoot once, becase the lower overshoot isn't getting counted in the Y-max in the first place.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "15 Mar 2007 — 4:29am",
+      "content": "There are various software libraries that allow you to access font files directly (rather than calling the Windows API for some information on installed fonts). I think using FreeType 2 would be easiest since it provides object-oriented access to both OpenType/TrueType and Type 1 fonts:  \n [http://www.freetype.org/freetype2/index.html](http://web.archive.org/web/20131107235252/http:/www.freetype.org/freetype2/index.html \"http://www.freetype.org/freetype2/index.html\")\n\nFor TrueType or OpenType fonts, you can read out the x-height included in the font using  \n [http://freetype.sourceforge.net/freetype2/docs/reference/ft2-truetype\\_ta...](http://web.archive.org/web/20131107235252/http:/freetype.sourceforge.net/freetype2/docs/reference/ft2-truetype_tables.html#TT_OS2 \"http://freetype.sourceforge.net/freetype2/docs/reference/ft2-truetype\\_tables.html#TT\\_OS2\") -- see sxHeight\n\nI recommend joining the FreeType discussion list to get more help.\n\nRegards,  \nA.\n\n"
+    },
+    {
+      "time": "16 Mar 2007 — 11:02am",
+      "content": "Hi twardoch,\n\nThanks for your information. I will definitely check them out.\n\nThank you!\n\n"
+    }
+  ]
+}

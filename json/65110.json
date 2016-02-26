@@ -1,0 +1,34 @@
+{
+  "id": "65110",
+  "title": "OpenType features",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "hi, everybody  \nI need some more help for my 1200 ligatures. Can I substitute a combination of letters only if it's in the beginning or at the end of a word? Or if it's a whole word?  \nThanks alot\n\nKonstantinos Siskakis  \nAnagrafi  \nGreece\n\n",
+  "author": "kostas",
+  "time": "7 Dec 2009 — 10:00am",
+  "uid": "46559",
+  "comments": [
+    {
+      "time": "7 Dec 2009 — 12:02pm",
+      "content": "Yes. Use the feature clig (contextual ligatures). For a beginning or end of word it helps to use a lookup along with classes for letters.\n\nExample:\n\n@Letters = all letters except space\n\nfeature clig {  \n lookup clig\\_dsend {  \n ignore sub d' s' @Letters;  \n sub d' s' space by d\\_s.end;  \n } clig\\_dsend;\n\n"
+    },
+    {
+      "time": "9 Dec 2009 — 11:47am",
+      "content": "Thanks Stephen  \nIt seems to be simple... What about the substitution of a whole word?\n\nKonstantinos Siskakis  \nAnagrafi  \nGreece\n\n"
+    },
+    {
+      "time": "13 Jan 2010 — 2:53am",
+      "content": "Hello all, my first post here.  \nHaving created a 'salt' feature for Stylistic Alternates in my OT-PS fonts with FontLab,  \nI find that MS-Word cannot see them.  \nIn Word, RIGHT-CLICK on text, select FONT \\> ADVANCED \\> STYLISTIC SETS: 'Default' appears.  \nClicking on this drop-down reveals Set 1, Set 2 Set 3 etc.  \nSo how does 'Set 1' relate to a feature in the OT font table?  \nShould the 'salt' feature be linked in some way to ''Set 1'?  \nFontLab forum offers now clue, nor does anything I can find on the net.\n\nI note that some designers are using Stylistic sets to address different page layout apps like Illustrator, XPress, InDesign. Set 1 for Ill/InDes, Set 2 for XPress etc.\n\nThanks for any insight,  \nAdrian\n\n"
+    },
+    {
+      "time": "6 Feb 2010 — 2:07pm",
+      "content": "Hi Adrian - what version of MS Word are you using?\n\nThe preview edition of MS Word in Office 2010 (for Windows) introduces support for a few OpenType typographic features, including stylistic alternates.\n\nUnfortunately you won't find this support in older versions of Office for Windows, or in the Mac Office 2008 version.\n\nAll the best,\n\nBill Davis\n\n"
+    },
+    {
+      "time": "8 Feb 2010 — 7:41pm",
+      "content": "Some would consider what follows a hack, but if Word only supports stylistic sets . . .\n\nPut the same substitutions you have in your salt feature in a Stylistic Set feature, say SS01. You can have both salt and SS features with the same substitutions.\n\n(I believe FontLab has an example of the exact syntax for Stylistic sets ... it is not hard to write.)\n\nRecompile, write off, (purge older version of the font) and and turn on SS01 in Word.\n\n"
+    }
+  ]
+}

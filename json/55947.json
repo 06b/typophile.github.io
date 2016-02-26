@@ -1,0 +1,34 @@
+{
+  "id": "55947",
+  "title": "Replace or Kern?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi all,\n\nI’m working on a project where I spaced (with kerning) the caps wider (In classes based on shape) when they stand next to each other. Now my space (Glyph) is too small for in between capitals.\n\n\\> Now my question is, what is the quickest/Best way to make the space bigger?\n\n1 Kern, this means I have to put in a lot of data! Or expand my classes and make a new class?  \n2 Replace with space.alt (Never done this, so have no idea how the code will look like)  \n3 Spacing the capitals with the kern feature is not smart\n\nMaybe this is already somewhere explained on the forum, I used the search, but I may don’t know the right jargon.\n\nCheers,\n\nBruno\n\n",
+  "author": "Bruno Bruno",
+  "time": "16 Mar 2009 — 6:26pm",
+  "uid": "43018",
+  "comments": [
+    {
+      "time": "16 Mar 2009 — 7:37pm",
+      "content": "3 Spacing the capitals with the kern feature is not smart\n\n"
+    },
+    {
+      "time": "16 Mar 2009 — 7:53pm",
+      "content": "Such spacing should be done by the user of type, not the designer. There are too many situations where it is just wrong. The OpenType spec has a feature that can be used for spacing all cap settings, and InDesign, at least, will use it. It is off by default, but the comp can switch it on. Getting the values right for many standard situations, so all the comp has to do is to switch it on, would be a plus. You might want to include punctuation, but do give it a different (smaller) value. Depending on the fit of the lining numbers, you might want to give them a smaller value too.\n\n"
+    },
+    {
+      "time": "16 Mar 2009 — 8:06pm",
+      "content": "I have replaced space by space.case in some OpenType fonts.\n\nI put it in the \"case\" feature, so that it works when \"all caps' is selected.\n\n\"sub space by space.alt\"--where that space.alt is a bit wider than the space character.  \nI use space.alt rather than, say, the Unicode one-third em space, so that the text is not altered by the feature.\n\nMy reasoning is to make the look of all caps similar to that of all small caps, which uses the space.  \nAlso, as a proportion of the cap height, the space is a lot narrower than the proportion it is of x-height, so in some fonts it just looks very, very narrow.\n\nI rarely use the \"cpsp\" feature.\n\n"
+    },
+    {
+      "time": "17 Mar 2009 — 9:10am",
+      "content": "Nick,does that space (space.alt) act like a justifying word space, or a fixed space?\n\n"
+    },
+    {
+      "time": "17 Mar 2009 — 11:08pm",
+      "content": "@ Everyone  \nThank you for reply!\n\n@ James Puckett  \nWhat will be a smart way of doing it?\n\n@Charles\\_e  \nThe metrics of the capitals are quite narrow so my kerning would be minimal with lowercase is minimal. The I kerned Caps with Caps positive. The intention was the lowercase as the base for the metrics of all other glyphs. but it didn’t really work out like that. In the end its less work to kern the odd cap.\n\nSorry for my late reaction, I didn’t find the a notify by email button yet.\n\n@ nick  \nWhere can I find info about how the features should be called to work in those functions, is there some kind of ISO list?\n\nThanks again,\n\nBruno\n\n"
+    }
+  ]
+}

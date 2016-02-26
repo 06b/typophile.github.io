@@ -1,0 +1,94 @@
+{
+  "id": "61330",
+  "title": "Accents, AFDKO, and InDesign",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "To my utter delight, the new [AFDKO](http://web.archive.org/web/20131218053818/http:/www.adobe.com/devnet/opentype/afdko/) now supports proper mark-to-base and mark-to-mark features -- not limited to TrueType 'attachment points', it works perfectly with CFF (Type 1s) as well. So I spend the weekend updating my accents font, removing all rligs that glued a myriad of specifically spaced accents to a few characters and replacing them with a single accent glyph. I even could use the free DTL OTMaster Light to proof them! (And I am utterly convinced the full version is worth its full price, because with that I could have done the positioning straight away!)\n\nHere's the catch.\n\nTraditionally, I positioned my accent glyphs _after_ its base glyph, then manually kerned it into place. The positioned accents I created had, therefore, to be of zero width and _on the left side_ of the zero line. After some initial problems, I worked out I still could position its anchor points on the base point per accent:\n\n` markClass [@ALLTOPMARKS] <anchor -250 500> @TOP_MARKS;`\n\n-- the entire accent glyph is centered horizontally inside a 500 unit wide rectangle. So all I had to do was for umpteen characters figure out where _their_ (optical) center was, and set the position for their anchor:\n\n` position base [g] <anchor 240 500> mark @TOP_MARKS\n\t\t  <anchor 240 -250> mark @BOTTOM_MARKS;`\n\nWorks like a charm in OTMaster. I could even work out vertical stacking of the accents (mark-to-mark). Now the strange thing is, when testing with InDesign CS4, vertical stacking works as advertised, but the **horizontal position** is off by an entire character width. If I type in\n\nm \\<acute\\>\n\nthe acute appears the exact width of the 'm' to the right. I have confirmed this by typing in another 'm' right after the acute, and _then_ the accent was placed perfectly -- on the next 'm'.\n\nWhat are the conventions for combining accents? Should they have a non-zero width after all? (I think their widths would be discarded because they're positioned with the mark-to-base feature.) Should they be zero-width and on the _right hand side_ of the null line? (That would imply that, lacking mark-to-base, one would type first the accent and then the base glyph -- which is, I admit, _also_ a historical convention -- typewriter style.)\n\nOr is OTMaster behaving correctly, and IDCS4 not?\n\n",
+  "author": "Theunis de Jong",
+  "time": "24 Aug 2009 — 1:26pm",
+  "uid": "29994",
+  "comments": [
+    {
+      "time": "25 Aug 2009 — 3:07pm",
+      "content": "Combining mark glyphs should be zero-width. [The exception is in monospaced fonts, in which the combining marks must have the same advance width as all the other glyphs. In this case, the width is collapsed in the GPOS lookups as part of the mark positioning.]\n\nIt doesn't matter where on the zero-width the actual outline is positioned. Typically, the default position is set to offset the mark over the preceding letter in cases where GPOS mark attachments are not supported. So for left-to-right scripts the outline is offset to the left of the zero-width, and for right-to-left scripts it is offset to the right. [The exception is Hebrew, in which the marks are typically centered optically on the zero-width, which allows them to be used by legacy Hebrew engines that employed algorithmic horizontal positioning.]\n\n"
+    },
+    {
+      "time": "25 Aug 2009 — 3:26pm",
+      "content": "The most recent Adobe fonts follow the same approach John described for Hebrew fonts above, i.e. centering glyphs optically on the zero width.\n\n"
+    },
+    {
+      "time": "26 Aug 2009 — 2:05am",
+      "content": "Okay, thanks so far.\n\n<cite>It doesn’t matter where on the zero-width the actual outline is positioned.</cite>\n\nThat's what I assumed. It seems I'm making some mistake elsewhere -- just for laughs I moved the accents to the _right_ side of the zero line, and the results are exactly the same in OTMaster (correct) and CS4 (wrong).\n\n ![](http://web.archive.org/web/20131218053818im_/http:/typophile.com/files/more-accents_5051.PNG)\n\nThe acute is right after the 'm' and should be on top -- adding an extra 'm' after that shows the position is correct, apart from the minor issue it's too far to the right.\n\nThe mk2base is now in 'rlig', I'll put them somewhere else and see what changes.\n\n"
+    },
+    {
+      "time": "27 Aug 2009 — 1:39am",
+      "content": "Is my face red and all. I said\n\n<cite>The mk2base is now in ’rlig’ ...</cite>\n\nand remembered Microsoft has a list of which feature should go where. That got me thinking. `mark` and `mkmk` _are_ the feature names (and the only stuff that goes into these are the commands that perform the actual attachment) -- they shouldn't occur in `rlig` or anywhere else.\n\n(This solves the shifting-to-the-right -- have to think a bit more about `mkmk`.)\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 8:14am",
+      "content": "Well, call me officially stumped.\n\nThis is with all accents centered in a 500 unit wide box, with zero width:\n\n ![](http://web.archive.org/web/20131218053818im_/http:/typophile.com/files/more_ie_fun_6403.PNG)\n\nin lowly Windows' WordPad. (See also note below.) This is the same font in DTP powerhouse CS4:\n\n ![](http://web.archive.org/web/20131218053818im_/http:/typophile.com/files/ie_fun_cs4_6738.PNG)\n\nAs you can see, the top (mkmk) accents go wildly out of whack. It doesn't matter whether I add a bottom accent or not -- the result is the same.\n\nI don't trust my OTF font making abilities enough, so I did the same using Legendum, with this result (CS4):\n\n ![](http://web.archive.org/web/20131218053818im_/http:/typophile.com/files/ie_no_fun_3801.PNG)\n\nand SIL Doulos -- top WordPad, bottom CS4:\n\n ![](http://web.archive.org/web/20131218053818im_/http:/typophile.com/files/hummbug_5249.PNG)\n\n-- so it seems `mkmk` doesn't _really_ work in CS4, while I'm pretty sure it was mentioned as a new feature (perhaps even here on Typophile).  \nI'd be gladly proven wrong. Anyone?\n\n--  \n[Note] For some reason my custom glyph names-per-unicode do not survive the export to PFB/makeOTF trajectory, they never make it into the PFB. Custom names are preferred, because it makes writing the feature file just that bit easier (using \"macroncomb\" and \"opene\" rather than \"uni030F\" and \"uni2011\"). A rather unfortunate side effect is that these glyphs don't appear in Wordpad.\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 1:41pm",
+      "content": "Theunis, this is a known bug in CS4 [http://typophile.com/node/52173](http://web.archive.org/web/20131218053818/http:/typophile.com/node/52173 \"http://typophile.com/node/52173\")\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 2:25pm",
+      "content": "Miguel, thanks for affirming it hasn't bin fixed as of this date.\n\nAs you can see by those older posts (and the even older one referred therein), it's quite the issue for me -- that's why I keep trying. At the very least, Wordpad -- of all possible programs! -- showed me there is nothing wrong with my understanding of the AFDKO (and I'm really thankful to Adobe for their free dev kit! It _does_ tie in nicely to my scripting abilities.)\n\nNote To Self: Try again in another 6 months :-(\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 4:05pm",
+      "content": "_At the very least, Wordpad — of all possible programs! — showed me there is nothing wrong..._\n\nIf you want a really pure test of whether something might be wrong with the font, NotePad is even better than Wordpad: just the font and the layout engine, and nothing else to get in the way.\n\n"
+    },
+    {
+      "time": "28 Aug 2009 — 4:53pm",
+      "content": "No feature bloat, eh? Thanks, I'll keep it in mind for the next time 'round.\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 1:28pm",
+      "content": "Today I did some tests with Notepad, WordPad and Word 2007 using Doulos SIL, and the above combining accents don't stack more than 3 times. Is this a reasonable limit? Should there be any limit at all?\n\nI understand this limit is not being imposed by the font; FWIW, I've opened the same RichText file in OS X's TextEdit and the 7 above combining accents I used were all visible and stacked vertically.\n\n"
+    },
+    {
+      "time": "24 Sep 2009 — 6:17pm",
+      "content": "Miguel,\n\na limit of 3 seems like a strange way of implementing it in the font.\n\nThe Windows Vista/Windows 7 versions of Arial and Times New Roman can stack accents pretty infinitely in Notepad or Word 2007, last I checked.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "25 Sep 2009 — 12:37pm",
+      "content": "I didn't say the limit was in the font. I don't think it is.\n\nI'm also using Windows Vista and Word 2007 (v12.0.6425.1000). Just tried Arial and TNR, and I only see 2 or 3\\* accents. The other accents might be there, but I can't see or print them.\n\n\\* sometimes 2.5 depending on the size of the text and the accents used\n\n"
+    },
+    {
+      "time": "25 Sep 2009 — 2:25pm",
+      "content": "Guys -- thanks for delving a bit deeper into this.\n\nI don't think there is an _implementation_ defined limit to the number of stacked accents; I can't remember reading anything about that. Besides, there seems to be no way of knowing which 'number' one particular accent has in its stacking order. `mkmk` accents only have positions relative to the preceding one, and the very first relative to its parent glyph.\n\nThat said, I'm also not sure why there would be a hard-coded limitation in an OTF drawing routine, it could be written as a simple repeating piece of code (at least, that's how I would've done it ;-).\n\nI suspect it's more a bug (or 'feature') in the way type gets blitted; it may be to a buffer restricted to the current font height plus ascenders, something like that. Do Word, Notepad, and Wordpad all use the same drawing APIs? (And -- again, just suspecting -- the answer is likely to be 'yes'.)\n\n"
+    },
+    {
+      "time": "25 Sep 2009 — 3:05pm",
+      "content": "[In brackets, not directly related to the issue you describe. There may be no limit to the number of marks stacked. Yet if you intend to kern base glyph combinations depending on marks sitting above or below them to avoid clashes, in which case mark glyphs serve as context, you are forced to \"limit\" the number of mark glyphs taken into consideration for the simple reason that context is always a specific context. Add one more mark to the string and your kerning will stop working.]\n\n"
+    },
+    {
+      "time": "25 Sep 2009 — 3:08pm",
+      "content": "Back to the IDCS4 issue, [perhaps this might help](http://web.archive.org/web/20131218053818/http:/www.thomasphinney.com/2009/01/adobe-world-ready-composer/).\n\n"
+    },
+    {
+      "time": "27 Sep 2009 — 11:55am",
+      "content": "Miguel, I believe the limit you report is a clipping zone issue. In Word, try setting the linespacing in the paragraph dialogue to an exact leading value, rather than a multiple of the default linespacing; this should reveal all the stacked accents\n\n ![](http://web.archive.org/web/20131218053818im_/http:/typophile.com/files/cambriaaacuteacuteacute_5040.gif)\n\nAlso, printing to PDF should reveal them even if they are hidden in Word.\n\n[The illustration shows the Win7 version of Cambria, in Word on exact leading, with mark-to-base and mark-to-mark attachment implemented.]\n\n"
+    },
+    {
+      "time": "27 Sep 2009 — 2:44pm",
+      "content": "Hey, a new way of typing \"aaaaaahhhh...\"!\n\nThanks, John -- that makes perfect sense. I seem to have guessed right :-)\n\n<cite>.. printing to PDF should reveal them ..</cite>\n\nWordpad didn't show my accents either until I printed to PDF -- although Miguel _did_ say\n\n<cite>.. I can’t see or print them </cite>\n\nStill, nothing to worry about for font developers, as it must be a software thing: Trying to catch up with the standard :-D\n\n"
+    },
+    {
+      "time": "27 Sep 2009 — 3:26pm",
+      "content": "Thanks for the tips. I shall try again.\n\nOn a related note, is there a real-world example of an orthography that stacks more than two accents in each direction?\n\n"
+    },
+    {
+      "time": "28 Sep 2009 — 5:49am",
+      "content": "If there is it must be something along the lines of Guillaume Apollinaires work, Merz or DADA (collage).\n\n. . .  \nBert Vanderveen BNO\n\n"
+    },
+    {
+      "time": "28 Sep 2009 — 6:47am",
+      "content": "My examples above are based on that old chestnut ie\\_fun.jpg (David Bürgin's thread [Anchors in Fontlab?](http://web.archive.org/web/20131218053818/http:/www.typophile.com/node/13042)):\n\n ![](http://web.archive.org/web/20131218053818im_/http:/typophile.com/files/ie_fun_6695.jpg)\n\nwhich is Indo-European reconstructed stuff (recognizable by its initial asterisk). This stacks tons of stuff on top, but I can't find (nor remember) if same happens belowdecks.\n\n(On 2nd sight, yes, definitely Dadaistic influences! :-)\n\n"
+    }
+  ]
+}

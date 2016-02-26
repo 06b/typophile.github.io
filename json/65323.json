@@ -1,0 +1,54 @@
+{
+  "id": "65323",
+  "title": "Question about support for the entire unicode block for an Arabic font",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "I’m developing a font for Arabic; I’m using Unicode range 0600-06FF.  \nNow from a professional person point of view,  \nMy question is: Should my font include all character glyphs for that range? Or I just add glyphs for characters I’m interested in?\n\n",
+  "author": "<a href=\"/web/20100116143448/http://typophile.com/user/41830\" title=\"View user profile.\">terenaam</a>",
+  "time": "<br>",
+  "uid": "41830",
+  "comments": [
+    {
+      "time": "",
+      "content": "f co rse yo sho ld incl d al gl phs or els it may not make much sense when typed.\n\nNick Cooke\n\n"
+    },
+    {
+      "time": "",
+      "content": ":-)\n\nStop it Nick... I laughed so ha d I sp t my te on y keyb ard!\n\nMichael\n\n"
+    },
+    {
+      "time": "",
+      "content": "Nick: Funny, hadn't had a good belly laugh this morning, thanks.\n\nto the question at hand...\n\nWouldn't that depend entirely on the intended application? If you are the only one using the font it doesn't make any difference - until you need one of the glyphs that are missing. You could update it as the need arose. For any kind of distribution, it should be complete.\n\n~~~~~~~~~~~~~\n\n[_...from the Fontry_](http://web.archive.org/web/20100116143448/http:/www.thefontry.com/)\n\n"
+    },
+    {
+      "time": "",
+      "content": "The longer version is: what is the target for the your typeface?  \nI'm not familiar with the arabic script, but I'll cite some examples in which you could choose _not_ to include the full character set.  \nLatin script:  \n- a display face could include only uppercase letters.  \n- a text face aimed at Western Europe/USA most likely would not include glyphs needed for Eastern Europe scripts.  \n- a text/display face intended only for \"modern\" use will not include historical forms like the long \"s\".  \nCyrillic:  \n- if the market is just Russia, it could not include ukrainian-only letters.  \nGreek:  \n- the Greek Unicode range include Coptic too, I don't know how many modern Greek typefaces include the latter.  \nJapanese:  \n- a face intended for children would include Hiragana, Katakana, and probably latin characters, but only a subset of, if any, Kanji.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Maybe I am missing something but the range you mention is actually not big enough to support arabic except if you are just making something that uses isolated forms. You need the FE rage as well.\n\n0628 ب‎  \nFE8F ﺏ‎  \nFE90 ـب‎  \nFE92 ـبـ‎  \nFE91 بـ‎\n\n[http://en.wikipedia.org/wiki/Arabic\\_Unicode](http://web.archive.org/web/20100116143448/http:/en.wikipedia.org/wiki/Arabic_Unicode \"http://en.wikipedia.org/wiki/Arabic\\_Unicode\")\n\nAnd arguably that isn't enough either but that is another story. Please change the title of the thread to something useful/descriptive.\n\n"
+    },
+    {
+      "time": "",
+      "content": "You will need to include alphabetic presentation forms which are located in a different block. These are identical to the kerning forms to be used when the typeface is used normally; i.e., in text.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks all, nice one Nick\n\nOK,\n\nArabic Presentation Forms\\_A, FD20~FDFD, it contains ligatures, not alphabets, and I'm interested only two glyphs FD3E & FD3F which are Arabic Brackets.  \nWhat do you think from professional point of view, what a Font Designer should have to do with the rest of the glyphs present in these ranges.\n\nShould I include these all glyphs in my font and put something like a circle in them or don't add these glyphs in my font?\n\n"
+    },
+    {
+      "time": "",
+      "content": "As a minumum, I recommend supporting all the characters that are part of the Windows and Macintosh Arabic 8-bit codepages. These ensures backwards compatibility, and ensures that you are supporting all the basic characters necessary for the three largest language groups using the script: Arabic, Persian and Urdu.\n\nIf you want to support additional languages that employ the script, then you need to support more of the 0600 Unicode range, and perhaps the Arabic Supplement range (0750). You can either aim for complete language coverage or you can research the needs of individual languages and support the characters for these. If there are particular languages that you are interested in supporting, but are unsure about what characters you need, let me know and I can probably help you.\n\nYou do **not** need any Presentation Form codepoints, although the decorative parentheses are useful as you've already discovered. You do not need ligature characters or positional form characters, because these can all be handled using OpenType Layout substitutions based on the 0600 range characters. The Presentation Form characters are only included in Unicode for legacy reasons, and can generally be ignored.\n\nNote that there is an Arabic Special Interest Group forum on Typophile:  \n [http://typophile.com/forum/366](http://web.archive.org/web/20100116143448/http:/typophile.com/forum/366 \"http://typophile.com/forum/366\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "_...the Greek Unicode range include Coptic too, I don’t know how many modern Greek typefaces include the latter._\n\nWhen Greek and Coptic were first encoded in Unicode, the common letters were unified in the Greek block, e.g. Greek alpha = Coptic alpha, etc. And the Coptic letters that are not part of the Greek alphabet were encoded in the same block. Later, Unicode accepted that they had made a mistake, and that it would be better to encode Coptic independent from Greek, so the new Coptic block was added (2C80-2CFF) to disunify the common letters; however, the other Coptic letters remained in the Greek block, because that would present fewer problems for software makers than trying to deprecate those codepoints and move the characters to a new block.\n\nEvery once in a while, I get a request from a client who wants to support the entire Greek Unicode block. I can usually talk them out of supporting the Coptic letters in the Greek block, unless they intend to support the Coptic block too. However, one client did insist that I make the Greek block Coptic glyphs, even though they were not supporting Coptic and only because they were included in the Greek block. Sometimes software developers want simply to know with 100% certainty that a font supports all the assigned codepoints in a given Unicode block.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks John, very useful input.  \nI think I got what I want, which is font should include all Unicode glyphs of selected range.\n\nMany Thanks.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "105419",
+  "title": "Ligature caret",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I have a text with some ligatures. When I try to delete a part of a ligature strange things happen (all samples in InDesign 5, font EB Garamond OTF/CFF by Georg Duffner):  \n1. Ligature longs\\_longs\\_t. I want to delete the \"t\" character; placed the cursor after \"t\" and hit 'backspace'. Unluckily ALL my ligature disappeared!  \n2. Ligature f\\_f. I did the same and magically ONLY second\"f\" disappeared. What a confusion.  \nPrintscreen 1\n\n ![](http://web.archive.org/web/20150416160356im_/http:/typophile.com/files/del_test2_4627.jpg)\n  \nPrintscreen 2  \n\n ![](http://web.archive.org/web/20150416160356im_/http:/typophile.com/files/del_test1_3907.jpg)\n  \nI found some info: [http://fontforge.org/editexample4.html](http://web.archive.org/web/20150416160356/http:/fontforge.org/editexample4.html \"http://fontforge.org/editexample4.html\") :  \n\"Some word processors will allow the editing caret to be placed inside a ligature (with a caret position between each component of the ligature). This means that the user of that word processor does not need to know s/he is dealing with a ligature and sees behavior very similar to what s/he would see if the components were present. But if the word processor is to be able to do this it must have some information from the font designer giving the locations of appropriate caret positions.\"  \nLet's try to select a character in our ligatures:  \nPrintscreen 3  \n\n ![](http://web.archive.org/web/20150416160356im_/http:/typophile.com/files/caret_test2_5533.jpg)\n  \nPrintscreen 4  \n\n ![](http://web.archive.org/web/20150416160356im_/http:/typophile.com/files/caret_test1_5484.jpg)\n  \nIt looks like \"f\\_f\" have \"ligature caret' information, \"longs\\_longs\\_t\" have not.  \nActually:  \nPrintscreen 5  \n\n ![](http://web.archive.org/web/20150416160356im_/http:/typophile.com/files/liga_caret_5778.jpg)\n  \nSo it is up to font designer. For example Luc[as] writes: [http://forum.fontlab.com/index.php?topic=8778.msg29007#msg29007](http://web.archive.org/web/20150416160356/http:/forum.fontlab.com/index.php?topic=8778.msg29007#msg29007 \"http://forum.fontlab.com/index.php?topic=8778.msg29007#msg29007\")  \nSome remarks? \n",
+  "author": "JanekZ",
+  "time": "12 Aug 2013 — 4:52am",
+  "uid": "9108",
+  "comments": [
+    {
+      "time": "12 Aug 2013 — 6:16am",
+      "content": "I recently contributed some ligature characters to EBG. I think I remembered to set the ligature caret in all of them. I'll probably be double checking as soon as I post this. ☺\n\n"
+    },
+    {
+      "time": "12 Aug 2013 — 3:13pm",
+      "content": "> But if the word processor is to be able to [place the editing caret inside a ligature] it must have some information from the font designer giving the locations of appropriate caret positions.\n\nNot necessarily. In case any particular ligature is missing caret placement data, text shapers usually divide the ligature’s advance width between the number of its character components and use that as the caret positions. It’s not some heuristics but a mere equal division, so obviously this doesn’t always work well. Still, it’s better than nothing, especially when it’s so rare for a font to have any ligature caret data at all. HarfBuzz, as far as I know, does this, so does CoreText. Not sure about others.\n\n"
+    },
+    {
+      "time": "12 Aug 2013 — 3:29pm",
+      "content": "If a single backspace is deleting the entire 'longs\\_longs\\_t' ligature, that suggests to me that something other than the underlying three-letter character codes was stored in the text: either a PUA codepoint or possible a raw GID. This could depend on how the ligature was input in the first place.\n\n"
+    },
+    {
+      "time": "13 Aug 2013 — 7:34am",
+      "content": "Thank you very much.  \nJohn, you are right - I put 'longs\\_longs\\_t' via Glyphs window.  \nEB Garamond edited: 'longs\\_longs\\_t' with ligature caret:  \nPrintscreen 6\n\n ![](http://web.archive.org/web/20150416160356im_/http:/typophile.com/files/longs_caret_5504.jpg)\n  \nInD 5: longs + longs + t ligatured:  \nPrintscreen 7  \n\n ![](http://web.archive.org/web/20150416160356im_/http:/typophile.com/files/longs_idd_6108.jpg)\n  \nAs you can see InD ignores ligature caret info, splits are (probably) based on advance widths of underlying letters. What a pity that Adobe does not support the specification. \n"
+    }
+  ]
+}

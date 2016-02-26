@@ -1,0 +1,42 @@
+{
+  "id": "12365",
+  "title": "How do \\*you\\* test your fonts?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I have a family of 4 fonts I am close to putting onto Myfonts.com. I have been testing the kerning & design in Illustrator & Word on screen. I plan to print out some samples as well. Because my font is modular & only has a few kern pairs (250 maybe) in it, & the kerns have to be in whole tile units ( [pool tiles](http://web.archive.org/web/20050815083034/http:/typophile.com/node/9915) ) it has been straight foreward to check these things on screen. I am not sure what too look for or be worried about in print however. I imagine a thorough testing would involve an inkjet & a laserprinter & maybe reversing the type but I am just guessing/imagining.\n\nWhich brings me to my question - What seems like a basic/minimal set of tests (on screen & off) to you? I won’t have the luxury of trying the font on newsprint on a web press, but short of that, what do do when you have a display face? What do you do for a bodytext face?\n\n",
+  "author": "Eben Sorkin",
+  "time": "Wed, 2005-05-11 13:50",
+  "uid": "2942",
+  "comments": [
+    {
+      "time": " Wed, 2005-05-11 14:03",
+      "content": "I am working on my first typeface now, so keep that in mind I am no expert. It is a text face that could be used for display as well, and I have been seeting alot of paragraphs with Indesign filler text, using text generated from Adhesiontext, and also just random paragraphs from essays and stuff I have wrote. Then I have also done waterfalls of display sizes Like “Hamburgefonstiv” and I have been looking for a few things. a) counters filling in slightly or dark areas in the text b) bad kern pairs that are either two far away or two close. I usually just circle them and make notes on the side and then review them and look for common problems and go back and fix them. I have printed on a 2400x2800 dpi inkjet, a 600 dpi, laser, and a 2400 dpi laser.\n\nNot sure if this helps?\n\n"
+    },
+    {
+      "time": " Wed, 2005-05-11 19:03",
+      "content": "Eben, what format are your fonts?\n\n"
+    },
+    {
+      "time": " Wed, 2005-05-11 19:56",
+      "content": "Thomas, I am sure it does help. Thankyou!\n\nJohn, My fonts will be in Mac Type 1, Open Type CFF, PC type 1, & PC true type. I am using fontlab & using automatic type 1 hinting & then for the true type I am using Fontlab’s type 1 to true type hinting tool & getting rid of anything fontlab thinks is a stinky hint. Hinting a truetype display face may be overkill but I am doing it anyway. Actually - what do you think about that? The fonts I have are definitely in the display category. I am interested in non-dispaly related advice too though.\n\nNow that I have started to test them I realized that the grunt work of making sure you are not putting out stinky data is something I have not been spending enough time thinking about. Moreover there is no doubt a great deal of hard won wisdom out there! Some of it might be in house trade secrets - but not all of it.\n\nAlso, no doubt Adobe checks many many OS’s & kinds of printers. What do you think a small foundry’s level, a kind of baseline level of checking should be?\n\n"
+    },
+    {
+      "time": " Thu, 2005-05-12 14:11",
+      "content": "For TT and OT, I would consider Microsoft’s [FontValidator](http://web.archive.org/web/20050815083034/http:/www.microsoft.com/typography/FontValidator.mspx) to be essential to any testing procedure. If you are doing any manual hinting, you should run FV before hinting to catch outline problems, and then again after hinting. The FV help is generally pretty good at explaining the error codes, but not necessarily at helping you figure out how to fix them. I’m going down to Redmond next month, and one of the things I intend to discuss with the MST folk is the idea of a collaborative online annotated help resource for FV, so that developers can share information about methods to fix font errors. In the meantime, you could ask here, or consider subscribing to the [OT developer list](http://web.archive.org/web/20050815083034/http:/www.microsoft.com/typography/otspec/otlist.htm), if you are not already on it.\n\n"
+    },
+    {
+      "time": " Sat, 2005-05-14 17:32",
+      "content": "Thanks! I would love an online tool for checking hinting & outlines. Especially hinting. Outlines are less of an issue I think- but still agood idea.\n\nAnybody else care to share info?\n\n"
+    },
+    {
+      "time": " Sun, 2005-05-15 21:08",
+      "content": "For OpenType CFF, and maybe PC TrueType, I’d suggest running the “CompareFamily” tool from the Adobe OpenType FDK.\n\nYou’re right that Adobe does do quite extensive font testing. We have people whose sole job is to test fonts, and since getting into OpenType we also make use of ourside beta testers, just like any other piece of software. Personally, I can no longer imagine shipping a font without outside testing, any more than I can imagine shipping InDesign without outside testing. But then again, I have funny ideas about treating fonts like other software in a bunch of ways.\n\nAnyway, you could also be looking at:\n\n- set up a Word doc on Windows and move it to the Mac OS. Can it find the fonts? Do the same going in either direction with at least one application that keys of PostScript FontName (e.g. Illustrator) and at least one application that does other weird stuff (e.g. InDesign).\n\n- Make sure that the font behaves as you wish with regards to font embedding.\n\n- Output on at least one Adobe PostScript device, one HP clonescript device, and one GDI/Quickdraw device. Both Mac and Windows. Do this from both an app that uses normal system drivers to print (e.g. Word) and from an app that handles output more directly (e.g. InDesign, QuarkXPress, Illustrator).\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": " Mon, 2005-05-16 14:05",
+      "content": "Thanks T!\n\nHaving a conceptual map for application types & behaivior testing is great. Really great. I could have imagined way to many variables to introduce into the process.\n\nI know what an Adobe Post Script device is.\n\nI imagine I can figure out what an HP clonescript device is. Probably any HP inkjet. I could Ask HP. Although I’d appreciate any extra hints about how to identify one. :-)\n\nI looked up GDI/Quickdraw but I don’t seem to have enough insight to seach google properly for this info. Is this what non-hp injets use?\n\nI should probably check embedding ( Into a PDF no? - What else? ) on mac \\*& windows\\*.\n\nThanks again!\n\n"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "55877",
+  "title": "Question on expanding kerning",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi there,\n\nUsually when I expand my class kerning previous to PS1 generation I am in doubt of using or not the options present in the check box \"Create only pair with glyphs in these codepages/encodings\" because I do not fully understand how it works.\n\nDoes it filter the resulting kerning by checking if the resulting pairs are present or not in the languages covered by the chosen codepage or encoding?  \n For a Mac OS Roman font, what options should I check? \"Current codepage in the Font Window\"?\n\nThanks in advance.\n\nRamiro.\n\n",
+  "author": "<a href=\"/web/20100203154607/http://typophile.com/user/1137\" title=\"View user profile.\">RamiroE</a>",
+  "time": "<br>",
+  "uid": "1137",
+  "comments": [
+    {
+      "time": "",
+      "content": "_Does it filter the resulting kerning by checking if the resulting pairs are present or not in the languages covered by the chosen codepage or encoding?_\n\nNo.  \nAnd it does not check to see whether the characters are used in the same language.  \nConsider Latin 1, which contains, for instance, ccedilla and lslash, which are used exclusively in French and Polish, respectively.  \nIf you put a kern between c and l, and include ccedilla in your c kerning class, and lslash in your l kerning class, then your expanded kerning will include an entry for the ccedilla-lslash combination, although this never occurs in any language.\n\nAt least, that's my understanding of the situation.\n\nSome people have gone to the trouble of investigating real-language occurrence of character pairs, and using it to limit the number of kern pairs in their fonts. House Industries and Lucas de Groot, IIRC.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks Nick. I guess for the moment I will continue generating (and checking for collisions) hundred of unnecessary pairs :S\n\nRamiro.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Ramiro,\n\nthe filter just limits the pairs to glyphs which are part of the selected encoding or codepage, i.e. pairs in which one of the glyphs is outside of the encoding or codepage that you select, are not created.\n\nA.\n\n"
+    }
+  ]
+}

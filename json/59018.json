@@ -1,0 +1,26 @@
+{
+  "id": "59018",
+  "title": "Language statement in OT",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi there,\n\nI am trying to understand better OT features in commercial fonts since the features I write are pretty basic.\n\nWhen I check the following piece of code:\n\n-----------------------------------------\n\nfeature dlig { # Discretionary Ligatures  \n # Latin  \nlookup dlig14 {  \n sub A E by AE;  \n sub I J by IJ;  \n sub O E by OE;  \n sub a e by ae;  \n sub i j by ij;  \n sub o e by oe;  \n} dlig14;\n\nlookup dlig15 {  \n sub period period period by ellipsis;  \n} dlig15;  \n language AFK ; # Afrikaans  \n language DEU ; # German  \n language NLD ; # Dutch  \n language ROM ; # Romanian  \n language TRK ; # Turkish  \n} dlig;\n\n-----------------------------------------\n\n... If I understand well the substitutions asked by the lookup \"dlig15\" and \"dlig14\" will work only for the languages listed by the statements. Is that right?\n\nAnother question:  \nOnce the font is installed, what does the OT file in order to identify the language in use? Does it check the selected keyboard?\n\nThanks in advance.\n\nRamiro.\n\n",
+  "author": "<a href=\"/web/20100203091907/http://typophile.com/user/1137\" title=\"View user profile.\">RamiroE</a>",
+  "time": "<br>",
+  "uid": "1137",
+  "comments": [
+    {
+      "time": "",
+      "content": "I would think the keyboard is good to go with the handshake between the typeface and the hardware. But I don't know for certain.  \nbest regards,  \ndaniel\n\n"
+    },
+    {
+      "time": "",
+      "content": "In Adobe InDesign you can set the language of each paragraph of text through selecting it and setting  \nit's 'language'. Okay- I remember having to change this after modifying InDesign files for a catalog we were sent from Germany, so that I could spell check it.  \nIn Illustrator- Show Options in the Character panel, then choose your language from the list at the bottom. (To change the language for just the selected type).\n\nNow, I've had to do this for spellchecking reasons (most of the ad stuff I do has to be bilingual) but I'm not positive that OT features are picking up on this setting... Just checking the keyboard wouldn't work too well for anybody who works in more than one language.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Starting with CS3 InDesign does look at the language selection in determining whether to apply OT features or not. Through version CS2, however, all it did was choose a dictionary for spell checking and hyphenation.\n\nHaving said that, there is a bug in CS3. I believe it was with the various forms of German not calling features correctly. Adobe documented that, and it was fixed in CS4.  \nChristian A. Harder\n\n"
+    }
+  ]
+}

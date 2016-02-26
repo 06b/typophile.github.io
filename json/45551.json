@@ -1,0 +1,46 @@
+{
+  "id": "45551",
+  "title": "InDesign cs3: 100k black outputs both black and gray on same pdf",
+  "forum": "Design",
+  "tags": [
+
+  ],
+  "content": "Hi,  \nI'm struggling with pdf export to print. I have a document, where the cover page has a red background with a black graphic and a black title on it. The graphic is imported from Illustrator (.ai) and created originally in the same cmyk profile as the ID document. It, like the text is 0c0m0y100k, but in ID overprint view as well as in final pdf file (Acrobat's overprint) it shows the graphic as gray but the title as dark black.\n\nWhat has happened there? I know that cmyk 100k black shows gray on screen, but I'm worried that these two black objects on the cover print differently, one gray, the other black.. I've checked that their (ID and Illustrator) color profiles are the same and without overprint preview in Acrobat both objects look gray. Only in overprint does the title turn out black. I also tried to import the graphic as Illustrator tif-file, but that looks gray, too.\n\nAny help appreciated,\n\n--patrik\n\nedit: added an image (screen shot) showing the problem when viewed in Acrobat..\n\n ![](http://web.archive.org/web/20120203213535im_/http:/typophile.com/files/two_blacks_6212.jpg)\n\n",
+  "author": "<a href=\"/web/20120203213535/http://typophile.com/user/31274\" title=\"View user profile.\">patej</a>",
+  "time": "<br>",
+  "uid": "31274",
+  "comments": [
+    {
+      "time": "",
+      "content": "Without knowing what is actually going on with your display, you could check whether everything is as planned by printing separations from your PDF to another PDF by printing from Acrobat to the Adobe PDF printer: Print-\\>Advanced-\\>Color: Separations and then select what you want in the ink manager. Probably the preview will already show you if everything is as you wanted it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi, it looks like you have the overprint switched on for your type, select the type and turn the overprint off, if not that then check your black it could be the registration black (though with the red showing through the black it looks like you have overprint switch on for that type)\n\nAlso in preferences for Indesign, 'appearance of black' switch off 'overprinting black' and the options for RGB and grayscale 'printing/exporting' switch to 'output all blacks as rich black', (having it as 'output all blacks as accurately' can result with black not being 100% K when exporting a grayscale.\n\nWith Indesign you can view with overprint on, then you will see where you are going wrong and what has an overprint or..... is registration black or special black.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hi,  \nconcrete: The type wasn't overprint, but the setting for overprinting black was checked and unchecking it solved the problem! The 'output all blacks as rich black', however, was selected. Thanks for the advice!\n\nLars: I tried printing separations to Adobe PDF and the preview shows both the graphic and type printing only on black plate, the same way in both the previous and this new pdf I exported.. So did the setting mentioned above make any real change? What actually happened with unchecking the box? Is it recommended to keep it unchecked when exporting pdfs? It says that it should be checked when printing separations... I'm still quite new to (and a bit confused with :)) all the color management stuff, so any clarification to these points is greatly appreciated. Again. :)\n\nthanks for your help!  \n--patrik\n\n"
+    },
+    {
+      "time": "",
+      "content": "Overprinting black is used to prevent gaps by just printing black over all the other inks. When you look at the separation plates you can create for both versions, you should notice that the red background isn't knocked out by the black objects when overprint black is turned on. When it is turned off, there would be white areas where the black will go.\n\nDisclaimer: You should verify with your print-shop and others here will also know a lot more about this than myself... My general understanding however is that you would usually want to overprint black so you don't get gaps from misalaignment where the different colors meet. You could also use trapping to compensate that but as the black ink would be opaque anyway, overprinting would render more consistent results - given that it is suitable for your particular printing scenario.\n\n"
+    },
+    {
+      "time": "",
+      "content": "your welcome...  \nAlso, remember inks and especially black are translucent, so if you overprint a colour the based colour will show through when overprinting, if the job was half green and half red the black if overprinted (and being a large graphic) would look different.\n\nwhen to use overprinting when the point size is 5point or less?.. or if 9 point or less on newspaper print.\n\nit's all trial and error.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for the explanation! I guess I'd better just start practicing and experimenting with different options to get the hang of it. :) But first I'll turn my previous question around: when is it (if ever) recommended to not use overprint black in print jobs? If there is the risk of misalignment and unwanted white gaps..\n\n--patrik\n\n"
+    },
+    {
+      "time": "",
+      "content": "do not use when the type is large, or the graphic if it is going over different coloured backgrounds, unless that is the effect you are going for. If in doubt read the Indesign help tips\n\n"
+    },
+    {
+      "time": "",
+      "content": "Black on metallic would warrant a knock-out.\n\n. . .  \nBert Vanderveen BNO\n\n"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "14280",
+  "title": "FontLab Windows OTF troubles",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I am having some difficulties with FL 4.6 in windows when generating OTF fonts. I used to use Fontographer and then load T1 fonts into fontforge/Cygwin to generate OTF fonts. With some experimentation, I got it working fairly well. You would think that after mastering that process, I would be able to get FL to generate some OTF fonts that work properly.\n\nMy problem is this. I have 6 faces in a family, Promethian. I generate all 6 (A standard 4, with 2 small caps variants.) The main face, Promethian generates its name properly, but has no kerning in Illustrator or Indesign, but it does in Photoshop. The other five generate, but in Indesign they are segregated to the bottom with (cyrillic). It's just a standard windows font- I took out all mentions of anything weird in the scripts. Some of these come through with ok kerning (in Illustrator and InDesign), some don't. All of them have kerning in Photoshop.\n\nThis is bizarre. Any thoughts? I'm seriously thinking of going back to my old workflow. I bought FL to streamline generation, but this has taken me weeks to try to figure out. Hoping for some good expert advice. It's probably as simple as a checkmark I forgot somewhere. Let me know if you need any more information.\n\nMuch appreciated!\n\n",
+  "author": "<a href=\"/web/20120203225226/http://typophile.com/user/8555\" title=\"View user profile.\">Carni77</a>",
+  "time": "<br>",
+  "uid": "8555",
+  "comments": [
+    {
+      "time": "",
+      "content": "I'm not an expert but I've had similar problems.\n\n**Kerning**. You may already know this but if not: prior to generating the font make certain to do two things.  \n1. Go to Tools\\>Kerning Assistance\\> Apply and Save  \n2. Open the OT panel and compile the tables.  \nYou have to do the above two steps before generating the font if you've changed any of the kerning or feature definitions!\n\n**Naming**. This is a bitch. Through trial and error I've discovered a method that works, although it may be _The Wromg Way™_. One or more of the following steps may be completely unnecessary or even BAD, but it works, InDesign gets it, and ATM gets it. I think you need to make certain that you've set OpenType Export Options to \"Export only OpenType name records\". (but I may be confused about that). What I do know that works for families larger than the basic 4 (Regular, Bold, Italic, BoldItalic) is the following.\n\nSay you have font MyFont and you want to add an ExtraBold weight and have it appear in the subfamily menu in InDesign (where the Regular and Italic appear). Do the following:\n\nIn the Font Info dialog go to Names & Copyright \\> Basic set of font names\n\nFamily Name: **MyFont ExtraBold**  \nWeight: ExtraBold [800]  \n_don't check \"font is bold\" it confuses things_  \nStyle Name: ExtraBold  \nFont Name: MyFont-ExtraBold  \nFull Name: MyFont ExtraBold  \nMenu Name: MyFont ExtraBold  \nFOND Name: MyFont ExtraBold\n\nGo to the next page **OpenType-specific names** There are three fields.  \nFamily Name: MyFont ExtraBold  \nStyle Name: ExtraBold  \nMacName: MyFont ExtraBold\n\nNow the fun part. Page 3, **Additional OpenType names**\n\nClick the auto generate button. That should do the trick. Of course, I may have forgotten something. If so, let me know and I'll try again.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Oh, and two questions.  \nWhy not include the small-caps in the font? You can use smcp for one and a stylistic alternative for the other. Question 2, with the standard four have you made certain to select \"font is italic\" for the italic, \"font is bold\" for the bold, and both for the bolditalic?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for the post grod. I knew about the \"apply and save\" but that doesn't seem to have any effect.\n\nAs far as the naming, you and I have come to the exact same conclusion. To get it to work right with ATM and Adobe products that appears to be the only way. It seems like every Adobe product has a different way of getting the names/ or kerning from the OTF. Wasen't this supposed to be a new \\*standard\\*? Macs seem to be able to interpret anything I throw at them, otf-wise.\n\nAs far as the small caps, I decided to have the small caps as an additional font so I could charge an extra $20 for it.\n\n"
+    }
+  ]
+}

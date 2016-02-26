@@ -1,0 +1,86 @@
+{
+  "id": "15633",
+  "title": "OpenType problems with Adobe apps",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I feel like this must have been covered before, but I have not been able to find anything that goes far enough.\n\nI am developing an OpenType version of one of my earlier fonts, using FontLab Studio 5 on Windows XP with Adobe Illustrator CS and InDesign CS for checking features and such. his is my second OpenType font, though the first one was developed using FontLab 4.5.\n\nI added all my extra glyphs, set up the classes and worked up a few basic features. I used the Preview in Studio, and everything worked fine. I generated the font -- PS-flavored OpenType. Install it. Started Illustrator CS, set some text in the font, tried the features (basic ligatures and fractions only). Everything worked. Exited Illustrator.\n\nBack in Studio then, I added several more features for small caps, oldstyle figures, stylistic alternates, etc. Features worked fine in Preview, so I generated the font again. Deleted the font from Windows fonts and installed the new one. Started up Illustrator and found no new features. Exited Illustrator and searched my hard drive for all the Adobe font cache files: \"adobefnt\\*.lst\", then deleted them all. Started up Illustrator again and still no new features.\n\nSo, what do I need to do beyond deleting those Adobe font cache files? What am I missing? I really need to get this project wrapped up. Any suggestions appreciated.\n\n",
+  "author": "timotheus",
+  "time": "14 Oct 2005 — 6:56am",
+  "uid": "5658",
+  "comments": [
+    {
+      "time": "14 Oct 2005 — 8:23am",
+      "content": "As a follow-up, I just removed the font through the Fonts control panel and deleted all the Adobe font cache files again. Then I fired up Illustrator, and the font is still listed! It's not installed on the system, but it's still listed and usable in Illustrator!\n\nAdam, Thomas, and ideas?\n\n"
+    },
+    {
+      "time": "14 Oct 2005 — 8:31am",
+      "content": "Hate to ask the obvious, but is your font in the C:\\Program Files\\Adobe\\Illustrator\\Fonts folder?\n\n"
+    },
+    {
+      "time": "14 Oct 2005 — 8:32am",
+      "content": "if it's still usable, it's still either in your Windows fonts folder (somewhere) or somehow it found its way to the adobe fonts folder (although i'm sure you would know it if it were in there). I'd go through your Windows fonts folder again and make sure it is NOT in there in ANY form.\n\n"
+    },
+    {
+      "time": "14 Oct 2005 — 8:44am",
+      "content": "Thanks for the tips, guys. I searched the entire hard drive, and the font file exists only in my working folder, where I generated it from Studio. Not even lurking in the recycle bin.\n\n"
+    },
+    {
+      "time": "14 Oct 2005 — 9:00am",
+      "content": "This just gets stranger and stranger! I deleted the only instance of the font on my hard drive (along with all the font cache files), and it's finally out of the list in Illustrator. However, now when I generate it again from Studio, the Windows preview shows absolutely no glyphs! It looks and works fine in Studio, and even fontQA reports only one minor error. I'll clear that up and search for anything on this new issue....\n\n"
+    },
+    {
+      "time": "14 Oct 2005 — 10:28am",
+      "content": "I can confirm the behaviour. It is sometimes almost impossible to delete a font from Windows, Adobe apps still show the font in menu, although the font file was deleted.\n\nI started to add numbers to all my test fonts. Only the very final font doesn't contain a number. Unfortunately this practice expands those adobelst files...\n\n"
+    },
+    {
+      "time": "14 Oct 2005 — 10:44am",
+      "content": "I am thinking I may make a utility (small .NET Windows app) to aid in the font caching problem. It could locate and delete all instances of the Adobe .lst cache files as well as all instances of the .otf file (making a backup under a different name).\n\nI still don't understand why I can't see my glyphs now even in Windows. When I generate the font as fontname2.otf (Font Name 2), everything works -- in Windows and in Illustrator. When I revert to using the intended name fontname.otf (Font Name), I get nothing. Is that a FontLab problem? A Windows problem? Or am I just missing something?\n\n"
+    },
+    {
+      "time": "14 Oct 2005 — 11:39am",
+      "content": "Have you logged out and logged in after deleting  \nfonts from Windows' fonts folder?  \nI was told Windows' own font cache is deleted  \nonly then.  \n(Have no Adobe apps on my Windows machine, so  \nmay miss a point.)\n\nKarsten\n\n"
+    },
+    {
+      "time": "14 Oct 2005 — 11:51am",
+      "content": "Karsten, you are exactly right. I had just done this, and it looks like things are starting to get worked out. I wonder if I can figure out how to refresh the Windows font cache without logging out. Then I could add that into the utility I'm planning.\n\nAnybody know where Windows does this? Si?\n\n"
+    },
+    {
+      "time": "1 Nov 2005 — 12:04pm",
+      "content": "I have written a little Windows application to do this. If there's any interest, I can post it on my web site. It will search for the Adobe fontcache files and allow you to delete them all, along with an option to include a couple of non-Adobe fontcache files in the Windows directory.\n\nAnybody want to try it?\n\n"
+    },
+    {
+      "time": "1 Nov 2005 — 5:43pm",
+      "content": "Sorry for not responding earlier...\n\n\\>Have you logged out and logged in after deleting fonts from Windows’ fonts folder?  \n\\>I was told Windows’ own font cache is deleted only then.\n\nNever heard this claim before.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "1 Nov 2005 — 6:26pm",
+      "content": "\\> Have you logged out and logged in after deleting fonts  \n\\> from Windows’ fonts folder?  \n\\> I was told Windows’ own font cache is deleted only then.\n\nTo some extent it's true. If you use Windows Explorer to delete the fonts from the Windows fonts folder, Windows will automatically remove the \"font cache\" entries (i.e. the respective entries from the registry that hold the list of installed fonts). If you use a different method and just delete the files using, say, command line or some other application, or a script, then Windows will not automatically uninstall the font.\n\nUnfortunately, there are cases where even logging off and on does not help. I hope that Linotype Font Explorer for Windows (when it's released) will include such a feature.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "2 Nov 2005 — 7:35am",
+      "content": "I had never run into it before, and I usually manage Windows fonts through the Fonts control panel. However, in this case, I believe I may have used FontLab to install the font (via the checkbox on the Generate Font form) just to try it out.\n\nThere is a font utility that claims to refresh the Windows font cache among other things, but I don't know how they do it. I searched the registry but found nothing that looked relevant. I did find a couple of files in the Windows\\System32 directory: \"FNTCACHE.DAT\" and \"GDIPFONTCACHE.DAT\". I believe the latter to be used by device drivers (printers), but I have not found any good information on the latter file. Anybody know anything about the \"FNTCACHE.DAT\" file?\n\n"
+    },
+    {
+      "time": "2 Nov 2005 — 11:15am",
+      "content": "I've asked around. Deleting a font via the Windows fonts folder is the safest and cleanest option - if the font is in use Windows will tell you and not let you delete the font. However...\n\n1. Some apps may keep their own caches of font information which not be flushed when the font is deleted.\n\n2. Some table offsets may be cached by the system - this is only a problem if the font is replaced with a different version of the same font. That's why good apps force a reboot when a font is upgraded.\n\n3. Some apps that delete fonts (possibly some font managers) don't delete fonts properly, or don't report to the user that the font is locked, or don't force a reboot when the font is replaced - all these scenarios can cause problems.\n\nCheers, Si\n\n"
+    },
+    {
+      "time": "2 Nov 2005 — 12:20pm",
+      "content": "Thanks, Si.\n\nWhen you talk about rebooting, do you really mean restart the system? or restart an application? or log off/log on? Sure seems like you should not have to restart the system just because you replaced a font. I would think there should be some way around that, but maybe not.\n\nSo a checklist when testing new versions of a font might be....\n\n1) Delete the font from the Windows Fonts folder.  \n2) Delete all application/Adobe font cache files.  \n3) Install the new version of the font in the Fonts folder.  \n4) Test the font. Log off and log back in, if necessary.  \n5) test the font. Restart, if necessary.\n\nRegards,  \ntim\n\n"
+    },
+    {
+      "time": "2 Nov 2005 — 12:29pm",
+      "content": "I mean reboot, AKA restart. I don't think logging off is good enough on XP. Unfortunately there's no way around it, although problems rarely occur, when they do it's a bad experience for the user. For testing your own fonts I don’t think you need to worry but you do if you're building a font installer that needs to upgrade (or downgrade) an installed font.\n\nHere's a note from the engineer...\n\n<cite>The first time I saw this, the font Tahoma was replaced and was in use by Microsoft Mail. About ½ hour after the font was updated, suddenly all the lower case characters using that font would not display. </cite>\n\nThe way we avoid this when testing is to give each instance of a font a unique production name eg \"Tahoma bld 112\" so we can test without worrying about this, and also compare versions installed on the same machine.\n\n"
+    },
+    {
+      "time": "2 Nov 2005 — 1:03pm",
+      "content": "So we're back to filip's suggestion! Thanks for all the follow-up on this, Si.\n\nI still think the utility might be useful for clearing out those Adobe font cache files. Saves a bit of time manually searching for them. I will simplify it a bit and make it available for download when I get the chance.\n\nRegards,  \ntim\n\n"
+    },
+    {
+      "time": "6 Jan 2006 — 5:24am",
+      "content": "Late addition for part-time Windows users like me:\n\nIf, <cite>in Windows</cite>, you search for \"fnt\" to find Adobe font list files like \"AdobeFnt10.lst\", make sure that you also enable search for \"hidden files\"! Which may bring up some more of them ...\n\n(I didn't find this mentioned in previous posts.)\n\nKarsten\n\n"
+    }
+  ]
+}

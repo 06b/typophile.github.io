@@ -1,0 +1,30 @@
+{
+  "id": "67809",
+  "title": "Robofab script to address Multiple Masters",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi all\n\nIs it possible for a Robofab script to affect all the masters in a Multiple master font ?\n\nI have a MM font with a Light and a Bold Master. I'm kerning this fonts and to speed thing up slightly I wrote this little script to transfer the kerning amount to glyph pairs with the same shape. The script works but only on the light master - is it possible to haveit work on both masters.\n\n`\nfrom robofab.world import CurrentFont\nf = CurrentFont()\nkerning = f.kerning\n#\nOA = kerning[('O','A')]\nAO = kerning[('A','O')]\nOV = kerning[('O','V')]\nVO = kerning[('V','O')]\nOW = kerning[('O','W')]\nWO = kerning[('W','O')]\nOY = kerning[('O','Y')]\nYO = kerning[('Y','O')]\nOX = kerning[('O','X')]\nXO = kerning[('X','O')]\nOT = kerning[('O','T')]\nTO = kerning[('T','O')]\nKO = kerning[('K','O')]\n#\n#\nkerning[('A','C')] = kerning[('A','G')] = kerning[('A','Q')] = kerning[('A','OE')] = AO\nkerning[('D','A')] = kerning[('Q','A')] = OA\n#\nkerning[('V','C')] = kerning[('V','G')] = kerning[('V','Q')] = kerning[('V','OE')] = VO\nkerning[('D','V')] = kerning[('Q','V')] = OV\n#\nkerning[('W','C')] = kerning[('W','G')] = kerning[('W','Q')] = kerning[('W','OE')] = WO\nkerning[('D','W')] = kerning[('Q','W')] = OW\n#\nkerning[('Y','C')] = kerning[('Y','G')] = kerning[('Y','Q')] = kerning[('Y','OE')] = YO\nkerning[('D','Y')] = kerning[('Q','Y')] = OY\n#\nkerning[('X','C')] = kerning[('X','G')] = kerning[('X','Q')] = kerning[('X','OE')] = XO\nkerning[('D','X')] = kerning[('Q','X')] = OX\n#\nkerning[('D','T')] = kerning[('Q','T')] = OT\nkerning[('T','C')] = kerning[('T','Q')] = TO\n#\nkerning[('K','C')] = kerning[('K','G')] = kerning[('K','Q')] = kerning[('K','OE')] = KO\n#\n#\nf.update()\nprint \"UpperUpperKern Done\"\n`\n\n",
+  "author": "RachelR",
+  "time": "25 Feb 2010 — 6:56am",
+  "uid": "16986",
+  "comments": [
+    {
+      "time": "25 Feb 2010 — 1:15pm",
+      "content": "I could be wrong, but AFAIK when you handle the kerning through Robofab you can only control the values of the first master. The kerning value amounts of the remaining masters will be the same as the first master. Therefore, you might have to use [Robofab's naked() method](http://web.archive.org/web/20131107052453/http:/robofab.org/howto/lowlevel.html) and go from there, or use FontLab's API's all the way.\n\nI've wrote several scripts for FL that handle MM kerning, and I can tell you things can be complicated. The kerning values reside in something that looks like a list, and are associated with the left glyph of the pair.\n\nImagine a 2-master font with only one kerning pair AV, with a kerning value of -50 for the first master, and -80 for the second. If you do,  \n`print fl.font['A'].kerning[0].values`  \nyou'll get `[-50,-80]`.\n\nThe difficulties start when you try to modify the values or add new pairs.\n\nThe list of kerning pairs is read-only, so this will fail,  \n`fl.font['A'].kerning[0].values = [-10, -30]`  \nbut you can change the values one by one, like so,  \n`fl.font['A'].kerning[0].values[0] = -10\nfl.font['A'].kerning[0].values[1] = -30`\n\nAnd to copy the values of one pair to another pair, you first need to create that pair (if it doesn't exist already),  \n`defaultKerningValue = -1\nrightGlyphID = fl.font.FindGlyph('T')\npair = KerningPair(rightGlyphID, defaultKerningValue)\nfl.font['A'].kerning.append(pair)`  \nand then go through the values and modify them accordingly.\n\nAgain, handling MM kerning is not trivial. You might be better off saving AFM files, modifying them and reading back in. But that process is not 100% reliable sometimes, so proceed with care.\n\n"
+    },
+    {
+      "time": "25 Feb 2010 — 1:39pm",
+      "content": "Rachel, what your script is trying to to can be handled by _class kerning_ much easier. No coding necessary.\n\n"
+    },
+    {
+      "time": "25 Feb 2010 — 3:28pm",
+      "content": "Very good point Jens.\n\n"
+    },
+    {
+      "time": "25 Feb 2010 — 3:44pm",
+      "content": "You may be better off writing a single script that has a global variable defining the master. So run it once with the value 0 for light master, and then 1 for the next and so on. I've several scripts that I use on fonts with 7+ masters and this works fine, but I also don't do kerning within FontLab so I'm not 100% sure this will work for what you are doing.\n\n"
+    }
+  ]
+}

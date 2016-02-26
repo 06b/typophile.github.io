@@ -1,0 +1,66 @@
+{
+  "id": "50298",
+  "title": "word spacing in inDesign",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "just a few questions on applying Robert Bringhursts principles to an inDesign layout.\n\n1. in justified text, a reasonable minimum word space is M/5, M/4 is a good average and M/2 is maximum. How do i set this up in inDesign. I've looked all over and stumbled upon justification but the values are set in % rather than ems. How do i convert?\n\n2. base line grids, yay or nay. I've only just discovered that option after reading about leading, and it seems quite useful. 12pt baseline grid for 9/12 type setting.\n\n3. what is a good way of achieving an even typographic colour / getting rid of rivers?\n\nthanks in advance\n\n",
+  "author": "victor ivanov",
+  "time": "8 Oct 2008 — 4:01am",
+  "uid": "13653",
+  "comments": [
+    {
+      "time": "8 Oct 2008 — 5:57am",
+      "content": "Base line grids: yay.\n\nI _always_ use a baseline grid. How else do you get lines in two columns to align to each other (making it look neat!)?. ;)\n\n"
+    },
+    {
+      "time": "8 Oct 2008 — 6:26am",
+      "content": "<cite>3. what is a good way . . . getting rid of rivers?</cite>\n\nWrite the text yourself, and re-write when you encounter a problem. Otherwise, you make a different compromise to banish a river. Color is achieved by the design of the piece; the selection of the font, leading, margins, etc.\n\nYou have to remember that Bringhurst is a lecturer/author -- in short, is a teacher & to some extent a reporter, not a practitioner. The word spacing parameters you report seem straight out of Dowding, though Dowding would vary them depending on the typeface. See <cite>Factors in the choice of typefaces</cite>. London: Wace 1957, esp., as I remember, the appendicies.\n\nAs to your first question, the \"spaceband\" used by InDesign is in the font, not in the machine (applications program). It varies from font to font & is set by the font designer. The percentages specified in InDesign are percentages of that width.\n\n"
+    },
+    {
+      "time": "8 Oct 2008 — 6:59am",
+      "content": "Indesign has the awesome ability to flex the spacing as required. You must first set up an acceptable range it can operate within. Word spacing should be adjusted for the line's measure, more spacing for shorter measures. Word spacing can range from min%=75, max%=150 for short columns and min%=90, max%=125 for longer measures. Max% can be set a little higher as open space is less disruptive than crowded text. This all works In conjunction with letter spacing of 3-5% in both directions. Also consider glyph sizing very slightly (no more than 2%). This will squeeze the letters as needed. I know this sounds wrong, but such small alterations go unnoticed and help even things out.\n\nOn top of all that, use hyphens to further even the color and rid the rivers.\n\n"
+    },
+    {
+      "time": "8 Oct 2008 — 12:47pm",
+      "content": "<cite>Word spacing can range from min%=75, max%=150 for short columns and min%=90, max%=125 for longer measures. Max% can be set a little higher as open space is less disruptive than crowded text.</cite>\n\nThis runs quite counter to what we find.\n\nConsider Arno, for example. The space character from the foundry has a width of 190 units. By itself, that is 190/1000, or M/5.2 Consider Minion: the space value is 227 units, or M/4.4 Some older fonts have a space value of 250 units, or M/4.\n\nIf you want to follow Bringhurst:\n\nFor Arno, the settings would be: minimum, 105.2%, ideal, 131.5%, and maximun of whatever.\n\nFor Minion, minimum of 88%, ideal of 110%, and maximum of whatever.\n\nFor a font with a 250-unit space, an 80% minimum, 100% ideal.\n\nBut I've found, by testing, that some of these 250-unit space fonts can use a minimum of 70%, and an M/4 value for \"ideal\" can be too large. It depends on the font, how the letters fit, the characters sidebearings, etc.\n\nBTW, I say \"whatever\" because the upper value seems to have no effect, save on what shows \"yellow\" when you ask to see violations. To test, I set a page of type, & changed the maximum from 133% to 500%. There were no changes in the linebreaks. Perhaps one of the Adobe programmers can reply; unlike TeX, the exact linebreaking algorithm isn't published.\n\nI know Kent Lew has given his methods for getting the spacing parameters for InDesign & various fonts on some Typophile forum, as have I, & others. A search might be useful.\n\n"
+    },
+    {
+      "time": "8 Oct 2008 — 1:22pm",
+      "content": "Here, I found the link where Kent Lew -- & as it turned out, me -- discussed setting the space parameters in InDesign. But you have to trust you own eye, not some theoretical value.\n\n[http://typophile.com/node/36691](http://web.archive.org/web/20150410092528/http:/typophile.com/node/36691 \"http://typophile.com/node/36691\")\n\nGood luck\n\n"
+    },
+    {
+      "time": "8 Oct 2008 — 4:36pm",
+      "content": "thanks everyone for your input.  \nunfortunately i can not write/edit the text as it is for a client job.\n\ncharles\\_e, how do i find out the space value for fonts?  \ni'm using hoefler text at the moment but would like to know this and be able to apply to any type in the future.\n\n"
+    },
+    {
+      "time": "9 Oct 2008 — 5:24am",
+      "content": "If you happen to be working with old Postscript Type 1 fonts, then you can open up the AFM file (most were delivered with AFMs) in a text editor. In the first large matrix of values you'll find something like the following:\n\n_C 32 ; WX 220 ; N space ; B 0 0 0 0 ;_\n\nC = character index; WX = width; N = the name; B # # # # gives the coordinates for the bounding box. In this example, character 32 is named \"space\" and has a width of 220 units.\n\nOtherwise, you'd have to use a font editing program to open the font directly.\n\nOr you can just ask here, I suppose. Hoefler Text Roman has a space of 215.\n\nOnce you have the value in units, you divide by the UPM of the font to get a percent of the em. Most Postscript fonts have a UPM of 1000 units. So 215 units equates with a space that is 0.215 em.\n\n-- Kent.\n\n"
+    },
+    {
+      "time": "9 Oct 2008 — 5:28am",
+      "content": "Oh, but Hoefler Text the .dfont system font has a space value of 500 units and a 2000 upm, so that one has a M/4 space.\n\nThe same font from different foundries/suppliers can vary in space value, so if you're ever asking again, you have to be very specific.\n\n-- K.\n\n"
+    },
+    {
+      "time": "9 Oct 2008 — 7:43am",
+      "content": "The Hoeffler Text that came with my machine is a Truetype font. The space has a width of 512 units, with a 2048 unit em (UPM). But that's still an M/4 space.\n\nAgain, I'd caution that the spacing recommendations in Bringhurst are the old Monotype metal ones. Things have changed considerably since then, both in aesthetics and in the characters (glyphs) themseles -- sidebearings, kerning, etc. The only final solution is to learn to trust your eye.\n\n"
+    },
+    {
+      "time": "9 Oct 2008 — 8:01am",
+      "content": "Command+Option+Shift+Delete\n\nand\n\nCommand+Option+Backslash\n\nGive you more and less word space, based on how you have Indy set up. I believe that Shift is an alternate to work around a default combo conflict.\n\n"
+    },
+    {
+      "time": "9 Oct 2008 — 11:45am",
+      "content": "Without the Shift in Mark's combo, the adjustment is in increments of your basic unit. With the addition of Shift, it moves in multiples of 5x your basic unit. (Basic unit is set in Preference \\> Units & Measurements... \\> Keyboard Increments \\> Kerning:)\n\nThe Delete combo reduces word spacing only; the Backslash combo increases word spacing. It's like tracking, but only acts on word spaces. You have to highlight a span of text which includes word spaces, not just place the cursor.\n\n-- K.\n\n"
+    },
+    {
+      "time": "10 Oct 2008 — 6:37pm",
+      "content": "Let's assume that the default word space in the font is reasonable. Let that be equivalent to M/4. If so, M/5 is 80% of that, and M/2 is 200% of that.\n\nSo Bringhurst's recommendations, applied to InDesign, suggest that 80% minimum and 200% maximum are his preferred defaults, if the base word space is good.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "10 Oct 2008 — 7:52pm",
+      "content": "Thomas, the problem with this is we don't see many fonts wtih an M/4 wordspace anymore (250 units on a 1,000 unit em).\n\nAs I said earlier (can you quote yourself?)\n\n<cite>Consider Arno, for example. The space character from the foundry has a width of 190 units. By itself, that is 190/1000, or M/5.2 Consider Minion: the space value is 227 units, or M/4.4</cite>\n\nSo Arno, (190 unit space) at 100% in InDesign is M/5.26. And 80% of that is 152 units, or M/6.8.\n\nBut Arno is a lovely face. I do happen to use different numbers than 80%-100%-133% with it in InDesign, but not 105%-135%-whatever, as the formula would recommend. I can only assume the reason is the general fit of the font allows the tighter spacing.\n\nFor example, while you could cast a bit of a kern with Monotype (but not Linotype), the space between letters such as \"W\" and \"o\" had to be optically smaller than a word space, or \"People of the World\" would read \"People of the W old.\" the prevalence of tighter letterfitting allows smaller word spacing.\n\nFWIW\n\n"
+    }
+  ]
+}

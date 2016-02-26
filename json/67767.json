@@ -1,0 +1,38 @@
+{
+  "id": "67767",
+  "title": "Another Fatal Error without a clue from FontLab cryptic message",
+  "forum": "Build",
+  "tags": [
+    "classes",
+    "error",
+    "fontlab",
+    "OpenType feature tag",
+    "Build"
+  ],
+  "content": "Here is the message FontLab gives me:\n\n\\>\\>\\>[FATAL] aborting because of errors:  \nsyntax error at \"-63\"  \n[/Users/chrisL/Library/Application Support/FontLab/Studio 5/Features/fontlab.fea 11]  \n\\<\\<\\<\n\nI had been cleaning up classes and getting rid of some duplicate commaaccent glyphs when I tried to recompile. The message above is what happened.  \nI then made a copy of the file and one-by-one deleted each feature and attempted to recompile between each removal to no avail. It seems as though it may be something in the classes but I am going nuts for 2 days now trying to find it!\n\nI am hoping someone can clue me in on my malfunction.\n\nDesperately seeking help,\n\nChrisL\n\n",
+  "author": "dezcom",
+  "time": "24 Feb 2010 — 8:03am",
+  "uid": "3135",
+  "comments": [
+    {
+      "time": "24 Feb 2010 — 8:05am",
+      "content": "BTW, I did update the kern file between each try as well.\n\n"
+    },
+    {
+      "time": "24 Feb 2010 — 8:11am",
+      "content": "Proposal: Destroy the outlines by using a strong effect and post the vfb file.\n\n"
+    },
+    {
+      "time": "24 Feb 2010 — 9:40am",
+      "content": "Whenever I encounter a recalcitrantly corrupt file, I usually generate a Postscript Type 1 version, then open that in FontLab and work from there. It's a lot faster that copy glyphs individually into a new file and, so far, this method has effectively remove whatever voodoo resides in FL's OpenType apparatus...\n\n"
+    },
+    {
+      "time": "24 Feb 2010 — 9:49am",
+      "content": "Another \"purifying\" method:\n\n1. create a new, empty font  \n2. in the Font Info, copy all data from the corrup font  \n3. copy all glyphs from the corrupt font  \n4. in the empty font, right-click in the Font Window and choose \"Append Glyphs\"\n\n"
+    },
+    {
+      "time": "24 Feb 2010 — 10:27am",
+      "content": "Thanks to you both for your suggestions. Luckilly, I won't have to try them on this file (so far anyway).\n\nThe MAN, THE MASTER, Karsten Luecke, has shined a big light on my problem. He told me that glyph names containing a hyphen make FontLab very unhappy! After I corrected that, my font compiled quite happily. It seems the cryptic 'Syntax error at \"-63\"' referred to the hyphen which was followed by a 63 in the glyph name. Not that this was apparent to me before--I had been looking through my code pasted in Excel so that the lines would be numbered and I could find \"Line 63\"--wrong line of thinking on my part. I sure wish FontLab would write error messages that don't require so much detective work to figure out. It would be niceer to be prompted while typing the glyph name with a hyphen to get an alert sound and a message saying \"hyphens are not proper syntax for glyph names\".\n\nAt any rate, THANK YOU KARSTEN!!!\n\nChrisL\n\n"
+    }
+  ]
+}

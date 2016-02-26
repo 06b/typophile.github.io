@@ -1,0 +1,86 @@
+{
+  "id": "100932",
+  "title": "Accurate?",
+  "forum": "Type ID Board [OLD]",
+  "tags": [
+    "Type ID Board [OLD]"
+  ],
+  "content": "The css file calls this web font 'Accurate' but that doesn't seem right.. any ideas?\n\n[http://accurateit.dk/work.php](http://web.archive.org/web/20131022025011/http:/accurateit.dk/work.php \"http://accurateit.dk/work.php\")\n\n",
+  "author": "jlberlin",
+  "time": "27 Feb 2013 — 6:22pm",
+  "uid": "209360",
+  "comments": [
+    {
+      "time": "27 Feb 2013 — 6:24pm",
+      "content": "It looks like Akkurat.  \n [http://lineto.com/The+Fonts/Font+Categories/Text+Fonts/Akkurat/](http://web.archive.org/web/20131022025011/http:/lineto.com/The+Fonts/Font+Categories/Text+Fonts/Akkurat/ \"http://lineto.com/The+Fonts/Font+Categories/Text+Fonts/Akkurat/\")\n\n"
+    },
+    {
+      "time": "27 Feb 2013 — 6:58pm",
+      "content": "I wonder if it's a modification.\n\nhhp\n\n"
+    },
+    {
+      "time": "27 Feb 2013 — 7:56pm",
+      "content": "Akira, I think you're right. Thanks!\n\n"
+    },
+    {
+      "time": "4 Mar 2013 — 12:16pm",
+      "content": "hhp - Good question. I come across hundreds of fonts (mainly in pdfs) that have names that are almost, but not quite the same as well-known faces. Sometimes they are corporate licensed variations, such as NYTLyon used by the NYTimes, but many others, like the one cited in this thread, seem arbitrary. I wonder whether they have been modified, then renamed to avoid confusion, renamed to bypass embedding restrictions, or whatever. In any case, the alterations may or may not be legal or ethical; I know of no way to know which is which. - Herb\n\n"
+    },
+    {
+      "time": "4 Mar 2013 — 12:34pm",
+      "content": "> I know of no way to know which is which.\n\nAsk the original designer. And if it's not an authorized derivation you've killed two birds with one stone... :-)\n\nActually ask the people who made it first: you might get some nice self-incriminating statements. :-)\n\nhhp\n\n"
+    },
+    {
+      "time": "4 Mar 2013 — 2:20pm",
+      "content": "On the site above, the filename is Accurate.ttf but the font name is Akkurat.\n\nHere is an instance (from some other site) where my Safari inspector shows only something looking like a serial number\n\n    c5980c7c-4394-47d6-b6dd-ccf0c0e53944\n\ninstead of the font name (and the font is legit, licensed by Font Bureau). The culprit here seems to be the web inspector: it should display the font name, not some irrelevant information like a filename of some weird combination of digits and letters (which, in fact, is also the filename).\n\n"
+    },
+    {
+      "time": "4 Mar 2013 — 2:28pm",
+      "content": "Wait a second, there's a way to embed serial numbers into fonts? That's Holy Grail stuff, man! How do I do it?\n\nhhp\n\n"
+    },
+    {
+      "time": "4 Mar 2013 — 3:54pm",
+      "content": "In the [Name Table](http://web.archive.org/web/20131022025011/http:/www.microsoft.com/typography/otspec/name.htm) you can use Name ID 13 for licensing information and, why not, add a serial number and other relevant information for a particular use.\n\n> 13 License Description; description of how the font may be legally used, or different example scenarios for licensed use. This field should be written in plain language, not legalese.\n"
+    },
+    {
+      "time": "4 Mar 2013 — 4:00pm",
+      "content": "Sure, manually. What I'm hoping for is a way to insert a unique serial number into that field\\* automatically when somebody buys/downloads a font.\n\n\\* And is that where the Safari inspector is getting it?\n\nhhp\n\n"
+    },
+    {
+      "time": "4 Mar 2013 — 4:23pm",
+      "content": "No, Safari is simply displaying the filename which is not identical to the serial number. The main problem is generating unique serial numbers and keeping track of the licensees. Automatically adding that information to the font should pose no problem.\n\n"
+    },
+    {
+      "time": "4 Mar 2013 — 5:14pm",
+      "content": "1) So in the case you cited above, the font's actual filename _looked like_ a serial number but wasn't\\*, and that's what Safari's inspector displayed?  \n2) Is it really that hard to generate a unique serial number when somebody downloads something (and index that with other info from the downloading party)? I would think automatically inserting the serial number into the font file would be harder. How would you do it?\n\n\\* Perhaps this number is mapped to the actual serial number in a database. Why make them different? Maybe so third parties can't know the serial number?\n\nhhp\n\n"
+    },
+    {
+      "time": "4 Mar 2013 — 5:37pm",
+      "content": "Hrant,\n\nElsewhere I suggested that ttx could be used for this purpose…\n\n"
+    },
+    {
+      "time": "4 Mar 2013 — 5:46pm",
+      "content": "I posit that there's a decent market for a utility that splices unique serial number generation/indexing/insertion into a font e-commerce setup.\n\nhhp\n\n"
+    },
+    {
+      "time": "4 Mar 2013 — 6:18pm",
+      "content": "> Elsewhere I suggested that ttx could be used for this purpose…\n\nThat looks like the most simple way to do it. You just apply \"ttx -t name\" to your font file to get filename.ttx. If your field 13 (there are two occurrences of it) is something like\n\n    ----\n    Abracadabra licensed\n    ----\n\nyou replace it with something like\n\n----  \nAbracadabra licensed \r Serial Number: SSEERRIIAALL  \n----\n\nand then if you have some file `serials.txt` with serial numbers, say\n\n    ----\n    AB1234CD56\n    EV3144EF45\n    ----\n\nexecuting the script\n\n    ----\n    for i in `cat serials.txt` \n    do \n      sed \"s/SSEERRIIAALL/$i/\" filename.ttx > $i.ttx\n      ttx -m filename.ttf $i.ttx\n    done\n    ----\n\nwill produce the files `AB1234CD56.ttf` and `EV3144EF45.ttf` with those serial numbers inside (one font file per line in `serials.txt`).\n\nEven for something more complicated, I don't think you need an xml parser; `sed` and `ttx` can do the job.\n\n"
+    },
+    {
+      "time": "5 Mar 2013 — 10:48am",
+      "content": "ttx is a Python program, so it would be even easier to use pure Python to modify the font files.\n\n    from fontTools.ttLib import TTFont\n    \n    mySerial = \"MYS3R14LNUM3ER\"\n    f = TTFont(\"myfont.otf\")\n    for n in f[\"name\"].names:\n    \tif n.nameID == 13:\n    \t\tif n.platformID == 1 and n.platEncID == 0:\n    \t\t\tn.string = mySerial.encode('mac_roman')\n    \t\tif n.platformID == 3 and n.platEncID == 1:\n    \t\t\tn.string = mySerial.encode('utf_16_be')\n    f.save(\"myfont_personalized.otf\")\n\n(untested code)\n\n"
+    },
+    {
+      "time": "5 Mar 2013 — 6:13am",
+      "content": "After removing one level of indentation, your code works fine with AFDKOPython (2.7.1).\n\n"
+    },
+    {
+      "time": "5 Mar 2013 — 9:11am",
+      "content": "Wow guys, great stuff.\n\nhhp\n\n"
+    },
+    {
+      "time": "5 Mar 2013 — 10:55am",
+      "content": "I’ve updated the code with the correct indentation.\n\nOf course the code only works if a name ID 13 is already present in the font. I’m not sure if the name table is the best place to store such information.\n\nPerhaps you could make up your own custom sfnt table format. If you add an »unknown« table to a font, I think tools that don’t understand it are required by the spec to ignore it but keep it in the font.\n\nFor WOFFs, you could store this in the » [private data](http://web.archive.org/web/20131022025011/http:/www.w3.org/TR/WOFF/#Private)« block, but that is likely to be stripped when someone converts the font.\n\n"
+    }
+  ]
+}

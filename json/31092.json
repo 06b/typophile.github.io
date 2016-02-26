@@ -1,0 +1,34 @@
+{
+  "id": "31092",
+  "title": "Western Diacritics in Windows Vista",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi all,\n\nI have an opentype font (OTF) that works fine on the Mac OS platform and Windows XP, but in Windows Vista the Western Diacritics are cut off. Can anyone think of a reason why this might be.\n\nc.\n\n",
+  "author": "coop",
+  "time": "2 Feb 2007 — 4:52am",
+  "uid": "5642",
+  "comments": [
+    {
+      "time": "2 Feb 2007 — 7:15am",
+      "content": "Generally clipping is caused by an incorrect WinAscent value. The WinAscent and WinDescent are the highest and lowest values in the WinANSI character set (original spec definition).\n\n1. is the font PostScript based outlines output as an .otf file?  \n2. What application are you using?\n\nI doubt Vista is using a different method of height calculation since the WinDesent and WinAscent and many other metric information goes back to the original bitmap formats in most operating systems and these usually are kept so they don't break existing 'things'.\n\n"
+    },
+    {
+      "time": "2 Feb 2007 — 7:16am",
+      "content": "In what contexts are they \"cut off\" -- in Microsoft Word, Photoshop, InDesign, Quark, etc.? And does \"cut off\" mean completely missing or present, but not completely (e.g. half gone)?\n\nEDIT: Obviously Vince has a much better idea of how these things work, so feel free to ignore my questions for his.\n\n"
+    },
+    {
+      "time": "2 Feb 2007 — 7:30am",
+      "content": "vinceconnare\n\nHow do apply the correct WinAscent value?\n\nWhy is this just a problem in Vista ?\n\nYes it's a OTF font, and it seems to occur in most applications.\n\n"
+    },
+    {
+      "time": "2 Feb 2007 — 9:58am",
+      "content": "is it your font or someone else's? FontLab can open it and you can view the values in the 'font info'\n\nif it is a TrueType based font you could run it through the Microsoft Font Validator and it will kick up a bunch of errors that probably will relate to the heights in the 'OS/2' table.\n\nIf the font is CFF based OTF then it's not going to work in the Validator.\n\n ![](http://web.archive.org/web/20131013064255im_/http:/typophile.com/files/truetype_3471.jpg)\n\nthe font is in 1000 units.\n\np.s. I'm still waiting for my copy of Vista to be sent so don't have it yet or the new Office.\n\n"
+    },
+    {
+      "time": "4 Feb 2007 — 1:44pm",
+      "content": "\"Most applications\" is not very specific or helpful. Please name specific applications it does or does not occur in! We need to know if these are GDI applications, WPF applications, or CoolType applications....\n\nIt probably is a usWinAscent problem. Or more accurately, an application problem, as many apps incorrectly use usWinAscent for clipping, in violation of the specifications since day 1. However, since this is a well-known application defect, font makers try to work around it. But without more info, we can't say for sure.\n\nCheers,\n\nT\n\n"
+    }
+  ]
+}

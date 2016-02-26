@@ -1,0 +1,62 @@
+{
+  "id": "46077",
+  "title": "A FontLab \"sort glyphs\" wrinkle . . .",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I have a font that has grown over time. I need to sort it by Unicode for ease in use with InDesign. The problem is all those glyphs (186 of them) that don't have Unicode indexes, just names -- all the number variants, small caps, etc. Is there some way I can get FontLab to let me organize them, so that A.smcp - Z.smcp are found sequentially, etc.?\n\nTIA\n\n",
+  "author": "charles ellertson",
+  "time": "4 Jun 2008 — 2:24pm",
+  "uid": "5094",
+  "comments": [
+    {
+      "time": "4 Jun 2008 — 3:32pm",
+      "content": "you have to use the index mode order and drag them into sequential order.\n\nChrisL\n\n"
+    },
+    {
+      "time": "4 Jun 2008 — 3:48pm",
+      "content": "sort by name  \nswitch to Unicode mode  \nsort by codepage  \nswitch to Index mode  \nselect all unencoded characters and drag to the end of the block  \ntweak sorting as necesary  \nsave codepage for future sorting\n\n...just a suggestion\n\n"
+    },
+    {
+      "time": "4 Jun 2008 — 7:47pm",
+      "content": "First sort by name, then sort by Unicodes.\n\nA.\n\n"
+    },
+    {
+      "time": "2 Feb 2009 — 1:20pm",
+      "content": "That seems to be absolutely right ;-)\n\n"
+    },
+    {
+      "time": "2 Feb 2009 — 1:40pm",
+      "content": "You can also sort by encoding, so I make a custom .enc file for each font project and use it to control glyph order.\n\n"
+    },
+    {
+      "time": "2 Feb 2009 — 2:15pm",
+      "content": "An old thread, revived. As long as it did, I'll report that\n\n<cite>First sort by name, then sort by Unicodes</cite>\n\ndoesn't work for me. I like all my tabular figures together, all my proportional figures together, all my basic small caps together, with the accented ones in a group by themselves, etc.\n\nThe control I wanted was over the \"unencoded\" glphs -- those without a Unicode number. I guess Chris's approach would work, and Paul's might work. What I finally wound up doing was to paste all the unencoded glyphs into a new font window, then paste them back in the order I wanted. Not as good as Chris's method, because when I add enough more glyphs to get lost, I'll have to do it all over again.\n\n"
+    },
+    {
+      "time": "3 Feb 2009 — 3:26am",
+      "content": "I use the same method as John describes here:\n\n1 — Create a custom .enc file in which you define the order of the glyphs the way you would like to see them in your fontwindow.  \n2 — In the fontwindow's Names mode you select your custom encoding  \n3 — Then: Tools \\> Sort Glyphs \\> By Encoding  \n4 — Switch the fontwindow to Index mode to check if the index order now equals your encoding order.\n\nBest,  \nArtur\n\n"
+    },
+    {
+      "time": "3 Feb 2009 — 4:52am",
+      "content": "Artur:\n\nWorks fine as long as you are a font designer only. Might consider shipping your fonts with instructions to graphic designers not to use them when they need characters you haven't included -- like small cap D,H,S,T,Z with dots below.\n\nAs someone who uses type, I have found that there is no telling when a (graphic) designer will pick a font to set a text with transliterated Arabic, \"Sanskrit\", etc. If you think this a rare occurrence, just look a the current political scene . . .\n\nSo, I have to do make up characters the (font) designer left out. Worse, I have to do it on an as-need basis; as they come up. No pre-planning. About the only thing I can tell the (graphic) designer is such & such a designer/foundry absolutely prohibits modifying the font, so they'll have to use something else. But sure as shooting, the something else won't support these characters and glyphs either. I'll have to add them, and eventually get to a point it becomes hard to see just what is there.\n\n"
+    },
+    {
+      "time": "3 Feb 2009 — 5:08am",
+      "content": "I have a suggestion for you.\n\n1. Open your font\n\n2. Save an encoding based on the glyphs you have made. Just like that. By doing this you get the names of all the glyphs in a text document.\n\n ![](http://web.archive.org/web/20131108005713im_/http:/typophile.com/files/saveeenc_5887.png)\n\n3. Open that enc-file in a text editor, and sort the glyph names the way you want them. You can take away the numbers before the names, no problem.\n\nIn the top of the enc-text document, you can name the encoding as you wish.\n\n ![](http://web.archive.org/web/20131108005713im_/http:/typophile.com/files/encod_4303.png)\n\nThen choose this encoding in FontLab and sort the glyphs by that (sort by encoding). You can now have this encoding file as a base and then further on add more glyphs, or make changes in the order you want the glyphs to appear. Make all these changes in a text editor and then re-select it in FontLab for it to update.\n\n"
+    },
+    {
+      "time": "3 Feb 2009 — 5:22am",
+      "content": "Mmmm okay, I'm not sure I understand what it is you need then.  \nI thought you were looking for a method which allows to you to easily organize the order of glyphs in InDesign's glyphwindow?\n\nBest,  \nArtur\n\n"
+    },
+    {
+      "time": "3 Feb 2009 — 5:25am",
+      "content": "Ah crossposting with Goran. This is indeed the method that I mean, but this time with opening an existing font.\n\n"
+    },
+    {
+      "time": "3 Feb 2009 — 5:42am",
+      "content": "Goran -- Thank you. Exactly what I needed.\n\n"
+    }
+  ]
+}

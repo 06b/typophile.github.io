@@ -1,0 +1,26 @@
+{
+  "id": "40232",
+  "title": "Macro - Copy to Composites",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi all,\n\nI’m to write a script to use with RoboFab that will work like the fontlab function “Copy to composites” from the preview window when a glyph is used in other composites.\n\n ![](http://web.archive.org/web/20081007163918im_/http:/www.typophile.com/files/Picture-1_3595.gif)\n\nThis fiunction works fine but I was trying to produce something that would update all the metrics in composites in on go without having to go through each glyph.\n\nI thought something like this might work,  \n`\n#---------------------------\n#UPDATE COMPONENT METRICS\n#---------------------------\nfrom robofab.world import CurrentFont\nf = CurrentFont()`\n\nf['Itilde'].leftMargin = f['I'].leftMargin  \nf['Imacron'].leftMargin = f['I'].leftMargin  \nf['Ibreve'].leftMargin = f['I'].leftMargin  \nf['Iacute'].leftMargin = f['I'].leftMargin  \nf['Icircumflex'].leftMargin = f['I'].leftMargin  \nf['Idieresis'].leftMargin = f['I'].leftMargin  \nf['Igrave'].leftMargin = f['I'].leftMargin  \nf['Idotaccent'].leftMargin = f['I'].leftMargin  \nf['Itilde'].rightMargin = f['I'].rightMargin  \nf['Imacron'].rightMargin = f['I'].rightMargin  \nf['Ibreve'].rightMargin = f['I'].rightMargin  \nf['Iacute'].rightMargin = f['I'].rightMargin  \nf['Icircumflex'].rightMargin = f['I'].rightMargin  \nf['Idieresis'].rightMargin = f['I'].rightMargin  \nf['Igrave'].rightMargin = f['I'].rightMargin  \nf['Idotaccent'].rightMargin = f['I'].rightMargin\n\nf.update()\n\nThis produces sidebearings including the added accents in the case of the Itilde, Imacron etc.\n\nWhen using the Copy to Composites function in FL it produces the correct sidebearings with the accents, as can be seen with the measurement line.\n\nWhat I wanted is someway of applying the copy to composites function to all composites.\n\n ![](http://web.archive.org/web/20081007163918im_/http:/www.typophile.com/files/Picture-2_4690.gif)\n\n [‹ Great Book for Font Developers](http://web.archive.org/web/20081007163918/http:/www.typophile.com/node/40164 \"Go to previous forum topic\") [Fontlab 5: Copy metrics to composites does not work for some glyphs? ›](http://web.archive.org/web/20081007163918/http:/www.typophile.com/node/40235 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081007163918/http://www.typophile.com/user/16986\" title=\"View user profile.\">RachelR</a>",
+  "time": "<br>",
+  "uid": "16986",
+  "comments": [
+    {
+      "time": " 20.Dec.2007 4.14am",
+      "content": "A quicker way is to rebuild your accented glyphs with the f.generateGlyph() method since it will copy the metrics of the baseglyph. Just select the glyphs you want to update and run this script:\n\n`\n#FLM: Build accents`\n\nfrom robofab.world import CurrentFont, CurrentGlyph  \nfrom robofab.interface.all.dialogs import ProgressBar\n\nf = CurrentFont()\n\ndef buildAccents(f, g):  \n--\\> f.generateGlyph(g.name, replace=True, printErrors=True)  \n--\\> g.update()\n\nif f:  \n--\\> if f.selection:  \n--\\> --\\> l = f.selection  \n--\\> else:  \n--\\> --\\> l = f.keys()  \n--\\> bar = ProgressBar('Building accents...', len(l))  \n--\\> for n in l:  \n--\\> --\\> g = f[n]  \n--\\> --\\> buildAccents(f, g)  \n--\\> --\\> bar.tick()  \n--\\> bar.close()  \n--\\> print \"Accents for glyphs \" + str(l) + \" built\"  \n--\\> f.update()  \n--\\> print \"\"  \n  \n(replace the arrows with a tab to get proper Python syntax)\n\n:)\n\n"
+    },
+    {
+      "time": " 20.Dec.2007 8.11am",
+      "content": "but robofab’s accent builder assumes the designer is using [anchors](http://web.archive.org/web/20081007163918/http:/typophile.com/node/39404), right?\n\n;-)\n\n"
+    },
+    {
+      "time": " 21.Dec.2007 4.32am",
+      "content": "Yes, this RoboFab method requires the use of anchors. Which I think is almost vital if you’re dealing with many accented glyphs.\n\n"
+    }
+  ]
+}

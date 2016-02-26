@@ -1,0 +1,30 @@
+{
+  "id": "12312",
+  "title": "Fontlab blend",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "When creating a type family I start with the 2 extreme weights - Thin and Extra Bold.\n\nI then carefully space and kern these 2 weights keeping them consistent. Once I am happy with the 2 weights I blend percentages between them - for example 20%, 40%, 60% and 80% to create a six weight family. Doing it this way ensures correct spacing and kerning throughout the family. I don't use the same kerning for both weights.\n\nThis worked fine in Fontographer.\n\nI tried this in Fontlab - it was OK blending some of the characters, but others could not be blended even though the outlines (or contours) are totally compatible with similar numbers and types of points (or nodes), path directions and starting points. In the resulting font extra nodes were inserted even when the 'Do not interpolate compatible outlines' box is checked. This apparently shouldn't be the case.\n\nAlso - and this is very bad - there is no kerning in the blended font. Where is the kerning? it also should be a percentage blend between the kerning of the Thin and Extra Bold originals.\n\nAny advice?\n\nThanks\n\n",
+  "author": "Nick Cooke",
+  "time": "10 May 2005 — 5:16am",
+  "uid": "3834",
+  "comments": [
+    {
+      "time": "10 May 2005 — 6:38am",
+      "content": "A better way to do it is to set up your two extremes as a one-axis multiple master font, and then generate instances (between 0 and 1000) to get the final fonts. Kerning is correctly blended when you do it this way.\n\n"
+    },
+    {
+      "time": "16 May 2005 — 10:14am",
+      "content": "Thanks for that Mark. I tried it using the 'Tools' - blend fonts - Build the Multiple Master - axis: weight, then 'tools - Multiple Master - generate instance - with the 2 extremes open. The resulting 20% 'Light' blend weight, (200 between 0 and 1000) was correct, but the kerning was all over the place. Is anything ever straightforward in this \\*\\*\\*\\*\\* program?\n\nTake the TA characters: Kerning for Thin is -77, Kerning for Extra Bold is -62\n\nIt should be -74 in the new 'Light' weight but instead it's +32, those were the first characters I looked at, so how can I trust it to do any pairs correctly?\n\nAnd what of the characters that refuse to blend properly? Do you have to replace them manually from an Illustrator/Freehand 4 step blend?\n\nSorry to bother you with this, but trying to get the info from the manual I may as well be reading Russian for all the sense it makes.\n\nNick Cooke\n\n"
+    },
+    {
+      "time": "16 May 2005 — 11:26am",
+      "content": "I wouldn't trust interpolated kerning pairs, just me though.  \nBetter, you might want to give the Transform\\>Metrics\\>Adjust Metrics a try.  \nI usually dump kerning from another weight into a new weight  \nand adjust in relation to the change in spacing metrics.  \nOf course, you'll want to proof the results of this as well.\n\nAs for just a straight inerpolation, why not use FOG for interps  \nif you don't like the results in FL? I've been preparing a font  \nwith round tips recently and I've found the FL interps with this data  \nto be garbage. So back to FOG for some stuff.\n\n"
+    },
+    {
+      "time": "17 May 2005 — 2:58am",
+      "content": "Normally I would use Fontographer for interpolating as it interpolates everything correctly - characters, sidebearings and kerning.\n\nWhy doesn't Fontlab perform the kerning interpolation procedure correctly?\n\nUnfortunately, (as far as kerning goes) I am producing a Cyrillic version of my Chevin family for a client and opening the fonts in Fog doesn't work as all Russian characters are undefined.\n\nI think I'll have to give your Transform\\>Metrics\\>Adjust Metrics a try. It's not ideal but it might be the solution.\n\nNick Cooke\n\n"
+    }
+  ]
+}

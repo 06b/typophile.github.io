@@ -1,0 +1,47 @@
+{
+  "id": "119572",
+  "title": "Class based kerning",
+  "forum": "Build",
+  "tags": [
+    "class kerning",
+    "Build"
+  ],
+  "content": "We have a font we've been using for at least 3 years, developed in FontLab, generated as OTF, primarily for use in InDesign, gets updated from time to time.\n\nSomewhere along the line the class based kerning stopped working in InDesign. I know it WAS working because when we first completed the font (compiled form the client's multiple fonts) we needed to use Karsten Luecke's fabulous \"KLTF-MakeKernFeature\" Python script to compile the kern feature.\n\nUnfortunately, thus far, I've been unable to determine when the problem began occurring. I only have old FontLab files as back up and NOT the old OTF files, will possibly try generating those to see what comes of it.\n\nSo, while I investigate this further, entering panic mode, I thought I'd post asking what would cause this? That is, the class based kerning to not work in InDesign CS6.\n\nThank you,  \nKen\n\n",
+  "author": "Ken Krugh",
+  "time": "15 Sep 2014 — 3:40pm",
+  "uid": "17947",
+  "comments": [
+    {
+      "time": "16 Sep 2014 — 9:30am",
+      "content": "Have you tried opening a support ticket on this at FontLab's site? It seems likely to me that they could give you a good answer.\n\n"
+    },
+    {
+      "time": "16 Sep 2014 — 11:33am",
+      "content": "It is not a FontLab Studio issue nor an issue with my script.\n\nWe solved it off the list, but since the issue (in a nutshell: features&nbsp;stopped working in a more recent version of InDesign) has come up a few times recently, it seems worth to remind of adding proper languagesystem statements when defining OTL features:\n\nDefining OTL features is only part one of the job, the other part consists in associating these features with scripts and languages – applications apply only those features that are associated with script and language that match those of a given text.  \nIn AFDKO's OpenType feature file syntax, there are two ways to associate features with scripts and languages.  \n1) Stating _script [script name];_, stating _language [language name];_, followed by the substitution or positioning statements, right in the feature definition.  \n2) Enumerating all possible script/language combinations in languagesystem statements that precede the feature definitions. (In FLS, their proper place is in the OpenType Panel's bottom right field.) These statements look like this:  \n_languagesystem DFLT dflt;  \nlanguagesystem latn dflt;  \nlanguagesystem grek dflt;  \nlanguagesystem cyrl dflt;_    \nNow, features whose definitions do not mention any script and language will be associated with script/language combinations as mentioned in these languagesystem statements.\n\nIf languagesystem statements are missing, AFDKO will silently add one _but not all that may be required_. As an effect, you may end up generating mal-functioning fonts without even noticing. This is what happened here.\n\nFor details, please see the [AFDKO's OpenType Feature File Specification](http://web.archive.org/web/20150420170510/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#4.b). Do not miss the [examples](http://web.archive.org/web/20150420170510/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#4.h).  \nA more readable version is in Tal Leming's [OpenType Cookbook](http://web.archive.org/web/20150420170510/http:/opentypecookbook.com/rules.html) (search for the \"Language Systems\" section).\n\nSome more background can be found in the [OpenType specification](http://web.archive.org/web/20150420170510/http:/www.microsoft.com/typography/otspec/chapter2.htm) (search for the \"Table Organization\" section).\n\n"
+    },
+    {
+      "time": "16 Sep 2014 — 7:11pm",
+      "content": "Jeepers Karsten! Not only are you bailing me out via email but also filling in by posts before I even have a chance to go back and do so!! :o)\n\nAs Karsten explains, we went from InD CS3 to CS6. CS3 didn't care about the language, CS6 does.\n\nThank you again, Karsten.\n\n"
+    },
+    {
+      "time": "17 Sep 2014 — 12:49am",
+      "content": "{.}\n\n"
+    },
+    {
+      "time": "17 Sep 2014 — 6:41am",
+      "content": "So, now I'm wondering about InDesign's \"[No language]\" setting.  \nI've now defined the following for the languages:  \n`languagesystem DFLT dflt;\nlanguagesystem latn dflt;\nlanguagesystem grek dflt;\nlanguagesystem copt dflt;\nlanguagesystem cyrl dflt;\nlanguagesystem hebr dflt;\nlanguagesystem math dflt;\nlanguagesystem runr dflt;`\n\nI would have thought that `languagesystem DFLT dflt;` would have taken care of this, but apparently not.\n\nIt would be accidental if we had \"[No language]\" applied in InDesign and it seems crazy that InD will, potentially, ignore all features if \"[No language]\" is applied.\n\nDoes anyone know if there is anything I can do in the font to avoid having InD ignore the features when \"[No language]\" is applied?\n\nMany thanks,  \nKen\n\nEDIT: ACaslonPro goes not have the problem, going to investigate that.  \nAlso, when I compile the font I'm getting the following warning from FontLab:  \n`[WARNING] Use of DFLT tag has been deprecated. It will work, but please use 'dflt' instead. [C:/Users/kenkrugh.TEKNTYPE/Documents/FontLab/Studio5/fontlab.fea 90]`.  \nMaybe the line `languagesystem DFLT dflt;` is not getting implemented even though the warning says it will work?\n\n"
+    },
+    {
+      "time": "17 Sep 2014 — 10:31am",
+      "content": "> Maybe the line languagesystem DFLT dflt; is not getting implemented even though the warning says it will work?\n\nThat's it.  \nFLS 5.1.x and later versions know about script DFLT. Old FLS 5.0.4 does not.  \nTo address FLS 5.0.4's trouble with script DFLT, Adam Twardoch has made a [nice script](http://web.archive.org/web/20150420170510/http:/typophile.com/node/29469#comment-168692). You would add the line _languagesystem DFLT dflt;_, you'd generate a buggy TTF or OTF from FLS 5.0.4, and finally you would run the font through the script to fix the TTF or OTF. Unfortunately, the download link which Adam provided back then does not seem to work any more.\n\n"
+    },
+    {
+      "time": "17 Sep 2014 — 12:40pm",
+      "content": "See also: https://groups.google.com/forum/#!topic/uafdkoml/xqJPfEcSrqk\n\n"
+    },
+    {
+      "time": "17 Sep 2014 — 8:55pm",
+      "content": "Downloaded Studio version 5.2.1, it fixed the problem of using \"[No Language]\" in InDesign.\n\nHowever, its now displaying a message that it can't sign the font with our certificate because the password doesn't match, but it does. Any insight into THAT one would be much appreciated.\n\nKarsten, I've not yet tried the script as we discussed via email. Will zip you an email when I do.\n\nThanks again for all the help,  \nKen\n\n"
+    }
+  ]
+}

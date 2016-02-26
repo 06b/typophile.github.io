@@ -1,0 +1,78 @@
+{
+  "id": "33757",
+  "title": "Style-Linking Question from a Newbie",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi, everyone. I’m new to Typophile and I’m hoping some of you can shed some light on a problem I’m having.\n\nI recently purchased a comprehensive OpenType font family that includes a wide range of weights and styles. The problem is that the font designer has not style-linked the font family, so I now have over 40 individual weights and styles that appear in the font menu. Additionally, I can’t take advantage of keyboard shortcuts for bold or italic, and typical OpenType features such as automatic ligatures or alternative sets are not supported.\n\nThe font family is beautiful and well-designed, but the absence of style-linking and the lack of OpenType tyographic features makes production a nightmare. It’s incredibly time consuming to change weights, insert special characters or switch between old style and lining figures.\n\nI’m wondering if anyone has experienced this same issue and if there’s anything I can do on my end to make the fonts more manageable. Are there any font management utilities for the Mac that can style-link fonts? I am working primarily in Pages and Keynote, if that has any bearing on the issue.\n\nThanks in advance for your help.\n\n [‹ Quark Problems / OT-fonts.](http://web.archive.org/web/20081007001706/http:/www.typophile.com/node/33707 \"Go to previous forum topic\") [Font previewer ›](http://web.archive.org/web/20081007001706/http:/www.typophile.com/node/33584 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081007001706/http://www.typophile.com/user/18574\" title=\"View user profile.\">jdusek</a>",
+  "time": "<br>",
+  "uid": "18574",
+  "comments": [
+    {
+      "time": " 13.May.2007 5.00pm",
+      "content": "Does Pages have style sheets? For a project like this, it might be worth investing in InDesign. You’ll find that style-linking isn’t widely supported by foundries for a number of reasons. Style sheets will let you switch character or paragraph styles with key commands.\n\n"
+    },
+    {
+      "time": " 13.May.2007 5.09pm",
+      "content": "\\> _The font family is beautiful and well-designed, but the absence of style-linking and the lack of OpenType tyographic features makes production a nightmare. I’m wondering [...] if there’s anything I can do on my end to make the fonts more manageable._\n\nCan you go back to the designer/foundry and ask him/them to rework the font family?\n\n\\> _Are there any font management utilities for the Mac that can style-link fonts?_\n\nAFAIK, the fonts have to be built in a certain way in order for style-linking to work on the application’s side. I’m not sure that you can achieve that with a font management utility.\n\n"
+    },
+    {
+      "time": " 14.May.2007 12.20pm",
+      "content": "OpenType-savvy applications would not need style linking to group members of the same family — a family’s styles will be automatically grouped in the font menu as long as they share the same ’name’ table entry for name-ID16, or name-ID1/Mac in case of Apple’s OSX apps.  \n(As to bold/italic shortcuts, it is really better to use style sheets and assign shortcuts to them, in case that this is possible in Pages.)\n\n"
+    },
+    {
+      "time": " 14.May.2007 1.33pm",
+      "content": "I have style linking enabled in Proxima Nova, but Pages and Keynote ignore how it’s set up. The Cocoa text engine (which is used in both programs) seems to have its own ideas about how styles should be linked. For example, it links Regular and Semibold intead of Regular and Bold (the way I set it up). But, if you choose the Bold weight first, command-B will toggle between Regular and Bold. Or Regular and Extrabold. Black gets paired with Extrabold. A similar thing happens with Myriad Pro.\n\nIn other programs, the linking I set up works perfectly. The way InDesign implements it is particularly clever: When you do shift-command-B, it toggles between the linked weights. But in doing so, it has exactly the same effect as if you had chosen the fonts from the font menu. InDesign has no such thing as “bold” and “italic” styles, but it responds to the traditional keyboard short cuts as if it did, honoring the linking built into the font.\n\n"
+    },
+    {
+      "time": " 14.May.2007 2.38pm",
+      "content": "<cite>The way InDesign implements it is particularly clever: When you do shift-command-B, it toggles between the linked weights.</cite>\n\nAh, thanks. Now I remember I read about this but then forgot it.\n\n<cite>The Cocoa text engine (which is used in both programs) seems to have its own ideas about how styles should be linked. For example, it links Regular and Semibold intead of Regular and Bold [...]</cite>\n\nThis is just a guess: Does the engine maybe rely on usWeightClass value rather than fsSelection bits for bold/italic, and it’s the difference between weight values from which the engine infers which is the bold?\n\nAnother guess, regarding the original question: My assumption is that in the “problematic” fonts, the name ID1 includes both family and style name which means that Apple apps recognize them as different families.\n\nToo many guesses for today. Maybe plain nonsense.&nbsp;&nbsp;:)\n\n"
+    },
+    {
+      "time": " 14.May.2007 2.44pm",
+      "content": "_This is just a guess: Does the engine maybe rely on usWeightClass value rather than fsSelection bits for bold/italic, and it’s the difference between weight values from which the engine infers which is the bold?_\n\nMaybe, but it always picks Regular as the “plain” weight, no matter which “bold” you get it to work with. It depends on which font you choose first.\n\n"
+    },
+    {
+      "time": " 14.May.2007 3.27pm",
+      "content": "Thanks to all of you for your insights on this. It sounds like the issue primarily has to do with the how the designer set up the fonts.\n\nSomeone mentioned asking the designer to rework the fonts — any sense of how difficult or time consuming this may be? Is this a relatively easy thing to do or I would I be asking him to invest a lot of effort?\n\nI can assign shortcuts or styles to simplify the process of selecting weights and styles, but I would still have to contend with each font appearing separately in the font menu. Not a showstopper, but still kiknd of annoying.\n\n"
+    },
+    {
+      "time": " 14.May.2007 5.41pm",
+      "content": "\\> _Someone mentioned asking the designer to rework the fonts — any sense of how difficult or time consuming this may be? Is this a relatively easy thing to do or I would I be asking him to invest a lot of effort?_\n\nIt should be pretty straightforward if he’s using the AFDKO.  \nIt might not be practical to do it manually; the rules are complex, and I think there’s more to it than just the name ID16. FWIW, MinionPro-Regular is style-linked with MinionPro-Bold and none of the fonts has this name entry. On the other hand, MinionPro-Medium is style-linked with MinionPro-MediumIt, they both have name ID16, but they also have ID17 and ID18, additionally.\n\n"
+    },
+    {
+      "time": " 14.May.2007 6.45pm",
+      "content": "Who is the type designer? That may help answer your question.\n\n"
+    },
+    {
+      "time": " 15.May.2007 12.37am",
+      "content": "<cite>Someone mentioned asking the designer to rework the fonts — any sense of how difficult or time consuming this may be?</cite>\n\nJust tell the foundry from which you licensed the fonts about your problem and wish, and they should pass it on internally.\n\n\\* \\* \\*\n\n<cite>the rules are complex, and I think there’s more to it than just the name ID16. FWIW, MinionPro-Regular is style-linked with MinionPro-Bold and none of the fonts has this name entry</cite>\n\nTrue.&nbsp;&nbsp;:)&nbsp;&nbsp;As regards name ID16 (Win-only in AFDKO) I should have said “name ID16 or its fallback, name ID1”.  \nBut this is not relevant in this case since Apple’s engine seems to rely on name IDs1+2/Mac only, therefore I added “or name-ID1/Mac in case of Apple’s OSX apps”. If families <cite>appear</cite> to be sorted after name IDs16+17 e.g. in TextEdit, this is because IDs1+2/Mac are identical with these (which is what AFDKO produces). If IDs1+2/Mac differ from IDs16+17, then the family sorting in Pages and e.g. InDesign will differ.  \nThis was the case up until OS 10.3.9; things may be different in 10.4.\n\n"
+    },
+    {
+      "time": " 15.May.2007 7.24am",
+      "content": "Any family of types with more than 4 styles — Regular, Italic, Bold, Bold Italic — is poorly served by style-linking. If a family has (for example) 7 weights in roman and italic, no style-linking arrangement seems terribly comfortable or logical.\n\nI have seen 4-weight style-linked type families where the weights are linked thus:  \nFontname Light = Fontname Lt Regular  \nFontname Light Italic = Fontname Lt Italic  \nFontname Regular = Fontname Regular  \nFontname Italic = Fontname Italic  \nFontname Bold = Fontname Bold  \nFontname Bold Italic = Fontname Bold Italic  \nFontname Heavy = Fontname Lt Bold  \nFontname Heavy Italic = Fontname Lt Bold Italic\n\nThe resulting two families of 4 fonts each are hard to manage and confusing to use. A single menu item with all variants in the submenu is a much more logical and workable solution for users.\n\n"
+    },
+    {
+      "time": " 15.May.2007 7.02pm",
+      "content": "<cite>Who is the type designer? That may help answer your question.</cite>\n\nThe designer is Hubert Jocham and the font family is Voice.\n\n\\* \\* \\* \\*\n\n<cite>A single menu item with all variants in the submenu is a much more logical and workable solution for users.</cite>\n\nThis would be a fine solution for my purposes. If there was a way that all of the Voice variants could appear under a single menu item, that would be much simpler than having each style and weight listed separately in the font menu. (For example, I also have Lucas DeGroot’s large Thesis family, and all of its many variants are organized into just three groups — TheSans, TheMix and TheSerif.)\n\nI can defintely live without keyboard shortcuts for bold or italic, and I understand better now why style-linking is not always ideal for large families with many weights and styles. I can also live without OpenType features like automatic ligatures, although these extras are nice to have.\n\nI’m still a bit unclear regarding how difficult it would be for the designer to rework the fonts so that all the variants appear under a single menu. If I ask the designer to make a change, I am asking for a small favor or is this a major undertaking?\n\nThanks again for educating me on this issue — I appreciate it!\n\n"
+    },
+    {
+      "time": " 15.May.2007 9.09pm",
+      "content": "So long as the Font Info settings are correct in FontLab, Mr Jocham should have no problem generating his Voice family as a single menu item with many weights in the flyoff.\n\nAs for building OpenType fonts with “advanced” features such as ligatures, small caps, multiple numeral sets, etc.: Not all designers have gotten around to learning how to do that. (Or they aren’t interested.)\n\nOpenType can be a very powerful format, but it depends upon who is developing for it. A cautious speed-limit-abiding driver in a Ferrari is not pushing the limits of his vehicle’s engine, but if that’s how he rolls...\n\n"
+    },
+    {
+      "time": " 16.May.2007 10.04am",
+      "content": "_typical OpenType features such as automatic ligatures or alternative sets are not supported._\n\nI suspect the designer’s philosophy is that if he gets it right, ligatures and alternatives are not required.\n\n"
+    },
+    {
+      "time": " 16.May.2007 1.32pm",
+      "content": "It might be time to use the Phinney signal. I think he described this issue at a workshop during last year’s Typecon. Part of the problem is deciding how the fonts _should_ be linked in large families, or if they should be linked at all. The other part is that applications can decide for themselves which values they want to honor. Also, as mentioned by others, some inconsistencies are related to OS specific APIs.\n\n"
+    },
+    {
+      "time": " 17.May.2007 8.54pm",
+      "content": "You called, Commissioner Anderson?\n\nI did a talk just a couple of weeks ago at Linotype’s TypoTechnica conference in Frankfurt that covered style linking and font naming. I’m just editing our trip report, and will post my and Miguel’s talks on my [blog](http://web.archive.org/web/20081007001706/http:/blogs.adobe.com/typblography) within the next day.\n\nCheers,\n\nT\n\n"
+    }
+  ]
+}

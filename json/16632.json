@@ -1,0 +1,50 @@
+{
+  "id": "16632",
+  "title": "Need information on AFM file..",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi,\n\nWhether AFM file supports Multi-byte characters?. ie. Is there any AFM files for Multibyte languages.\n\nFor example, we have ’Arial Unicode MS.ttf’ for Unicode support. Like that, do we have anything for Type1 fonts(AFM)?\n\nWhether AFM has only 256 characters?? I am very confused on this?\n\nCan you ppl please help me in resolving my confusion.\n\nThanks,  \nVidya Viswanathan.\n\n [‹ approaches to building 'serious' families](http://web.archive.org/web/20081029023719/http:/typophile.com/node/16685 \"Go to previous forum topic\") [fontlab grid HELP! ›](http://web.archive.org/web/20081029023719/http:/typophile.com/node/16481 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081029023719/http://typophile.com/user/10383\" title=\"View user profile.\">maviswa</a>",
+  "time": "<br>",
+  "uid": "10383",
+  "comments": [
+    {
+      "time": " 6.Dec.2005 9.40am",
+      "content": "| bump |\n\n"
+    },
+    {
+      "time": " 6.Dec.2005 10.40am",
+      "content": "Vidya,  \nyour Arial Unicode MS.ttf is probably a TrueType-flavoured OpenType. (There are two kinds of OpenType: TrueType- and CFF-flavoured. The TrueType flavour uses the TrueType method of glyph description, and the CFF flavour uses the PostScript Type 1 Compact Font Format method of glyph description. (These differences have to do with the way the actual letterforms are “drawn”: the winding direction of the outlines and the way that bezier points and control handles describe the arcs of the letters.))\n\nAs far as I know, an AFM file is really only meant for “standard” 256-character fonts where Unicode indexing is not necessarily built in. One can create OpenType files with “individual kern pairs” table - where each kerned pair is an unique line of code - which is the same form as an AFM, instead of using a kern feature, but this is technically undesirable.\n\nSo, I think that if you have a font with more than 256 characters, the only way for all of those characters to be accessed is with “advanced” font formats, such as the OpenType formats. If you generate a 256+ character font as a regular/heriloom PS Type 1 font, only the basic gamut of the first 256 characters will be available, so any super-gamut kerning will be unused, although it can still be in the AFM (and suitcase) file.\n\nThomas, Si, am I right about this? Vidya, does this answer your question?\n\n"
+    },
+    {
+      "time": " 6.Dec.2005 2.46pm",
+      "content": "AFM stands for “Adobe Font Metrics,” and is associated with Type 1 fonts. You can certainly have Type 1 fonts with more than 256 characters (most of mine do), but you can only encode 256 at one time. Since QuarkMaker doesn’t (to my knowledge) allow one to write their own encoding vectors, most people “chunk” them into 256 characters, and frequently tell big fibs about the character names, such as using “a” for a small capital in a different “small caps” font. But if you can write your own encoding vector, you can put all the glyphs in one Type 1 font, properly named, and write off several encodings to use as you need. The plus for doing this is that if you decide to change the kerning say, between A and W, you do it only in one place, instead needing to do it in both the “regular” font and the “small caps” font. The AFM associated with one of our “big” fonts has all the characters and kerning, i.e., more than 256 characters.\n\nBut there isn’t a lot of point to this approach these days, unless you are using a typesetting program that will let you write your own encoding vectors, and even there, assembling and using something for CJK is tough.\n\n"
+    },
+    {
+      "time": " 6.Dec.2005 8.03pm",
+      "content": "Thanks a ton...\n\nCharles, In your reply you have mentioned that there exists Type1 fonts with more than 256 characters. Whether Adobe provides any Type1 fonts with more than 256 characters? Can you give me some example fonts.\n\n"
+    },
+    {
+      "time": " 6.Dec.2005 8.05pm",
+      "content": "Thanks a lot Chester. Whether Adobe provides any Type 1 fonts with more than 256 charcaters? Can you give me some examples.?\n\n"
+    },
+    {
+      "time": " 7.Dec.2005 4.13am",
+      "content": "Hi,\n\nWhether AFM supports Multibyte characters? ie. In ttf, we have ’Arial Unicode Ms.ttf’ font file that supports all the characters-Unicode font. Likethis,do we have anything for AFM. Give me some examples.\n\nDo we have any AFM fonts for Eastern European languages.\n\nThanks and Regards,  \nVidya Viswanathan\n\n"
+    },
+    {
+      "time": " 7.Dec.2005 10.43am",
+      "content": "Perhaps you need to tell us why you are asking — What are you trying to do, to achieve? I suspect the answer which is true for you is “No.”\n\nOnce again, I think what you are asking about is Type 1 fonts. The AFM file is metrical data, not a font. I don’t know what you mean by the term “multibyte” — 16-bit bytes? (i.e., 16-bit character encoding) Why do you want Type 1 fonts — i.e., will Type 1 fonts in an OpenType wrapper (as Chester mentions) work for you?\n\n"
+    },
+    {
+      "time": " 7.Dec.2005 11.36am",
+      "content": "An AFM file contains three parts: a header, glyph metrics data, and kerning data. The glyph metrics data is organised in a Type 1 centric way in that it uses an 8-bit encoding vector. Glyphs in the font that are outside the 8-bit vector are still listed in the AFM however: their metrics are present, and they are included in the kern pair data. But they are only listed by glyph name: the AFM does not contain multibyte encoding data.\n\n"
+    },
+    {
+      "time": " 7.Dec.2005 8.55pm",
+      "content": "Thanks a lot. This solves my confusion.\n\n"
+    }
+  ]
+}

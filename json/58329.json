@@ -1,0 +1,38 @@
+{
+  "id": "58329",
+  "title": "Middle- & Final Delta suppose to stop working after 56 PPM?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Is it normal that the Middle- and Final Delta intructions in FontLab stop working after 56 PPM? Am I experiencing somekind of bug? ...or am I just out of delta?\n\n",
+  "author": "-Rudy-",
+  "time": "24 May 2009 — 4:58am",
+  "uid": "44027",
+  "comments": [
+    {
+      "time": "24 May 2009 — 7:18pm",
+      "content": "I believe this is 'by design', i.e. not a bug per se. It isn't a limitation of the TT instruction set, but seems to be a limitation of FontLab's implementation. Hopefully Adam Twardoch will drop by and shed some light on this.\n\n"
+    },
+    {
+      "time": "25 May 2009 — 1:06pm",
+      "content": "Yes, I think the internal TrueType instructions compiler used in FontLab Studio has some limitation of the top range at which deltas are applied.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "26 May 2009 — 12:44am",
+      "content": "There is no way around this? No additional or other software I can use to tweak this?\n\nRudy\n\n"
+    },
+    {
+      "time": "26 May 2009 — 4:09am",
+      "content": "Not in FontLab and not that will respect your FontLab-created hints.\n\nVTT provides much more advanced TT hinting capability, but you'll need to start hinting from scratch in VTT.\n\n"
+    },
+    {
+      "time": "26 May 2009 — 11:31pm",
+      "content": "i wonder why you need a delta hint at 56ppem.\n\nas far as i know, delta hints are a 'last resort' when trying to gridfit a glyph. i have only used them for much lower ppem values (\\<13).\n\n"
+    },
+    {
+      "time": "27 May 2009 — 12:14am",
+      "content": "<cite> i wonder why you need a delta hint at 56ppem </cite>\n\nMinor details that can't be corrected with \"normal\" hinting. Minor errors that I will probably only look at and see, or an expert who examins my typeface...\n\nI think I'll look into VTT hinting when I make my next typeface.\n\nRudy\n\n"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "33174",
+  "title": "Kerning issues with PC format",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "hey there everybody -\n\nI am having trouble generating PC version of my font - every PC format I generate out of my either my fotlab or fontographer file the kerning is lost. the kerning works fine for this same font if it generated as a MAC format. i have tried generating an open type, true type and type 1 version for the PC and the kerning will just not work. any thoughts on what might be the casue? thanks!\n\n [‹ FLS5 - Generate Glyphs syntax snafu](http://web.archive.org/web/20071109095929/http:/www.typophile.com/node/32974 \"Go to previous forum topic\") [Kerning a musical font ›](http://web.archive.org/web/20071109095929/http:/www.typophile.com/node/33022 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20071109095929/http://www.typophile.com/user/18147\" title=\"View user profile.\">Automaticiam</a>",
+  "time": "<br>",
+  "uid": "18147",
+  "comments": [
+    {
+      "time": " 19.Apr.2007 1.04pm",
+      "content": "What do you mean the kerning is lost? If you are generating PFB files, also generate an .AFM file. You can open that with almost any text editor, and I’ll bet the KPX commands are there. If you are using only InDesign as your applications program, there is a bug in InDesign that has been covered many, many times on this forum. For OpenType fonts, make sure you have at least one character substitution feature so that a GSUB table is built, build your kerning tables, compile the features, and generate an OpenType font. If there is no GSUB table, kerning won’t work in ID through version CS2. They say that is fixed with CS3.\n\n"
+    },
+    {
+      "time": " 19.Apr.2007 1.13pm",
+      "content": "charles - thanks for the help - i will loo into the PFB and AFM file to see what is there - my problem is not really with programs like in design it that the file i am generating seem to be are loosing the kerning for any PC version i generate.\n\n"
+    },
+    {
+      "time": " 19.Apr.2007 3.03pm",
+      "content": "OK, for Type 1 fonts for the PC, remember that most PC programs don’t use the .AFM file, they use a .PFM file — it is just that you can simply open an .AFM file in a text editor & see what is there. But I can’t imagine that either FontLab or Fontographer would generate a .AFM & not a .PFM, as long as you have the right “boxes” checked off. Of course, I’ve been know to have limited imagination . . .\n\n"
+    },
+    {
+      "time": " 19.Apr.2007 4.19pm",
+      "content": "i generated some new file with both .afm and pfm file, still the kerning is not working - i opened the afm and pfm files in a text editor and there is kerning info but it will jsut not work in any program, please help!\n\n"
+    },
+    {
+      "time": " 19.Apr.2007 5.38pm",
+      "content": "In what applications program — include year and version number — running on which PC Operating system? For example, some of the old Word formats running on Windows 98 didn’t support kerning. And actually, we’ve just ended my expertise, it is time for someone with more knowledge to step in.\n\n"
+    },
+    {
+      "time": " 20.Apr.2007 5.53am",
+      "content": "i have done a lot of testing and what i can determing is that it’s not any one program that is the probelm it seems to be the generated font it’s self. any true type format i generate either Mac or PC does not display the kerning when used in any program. this goes for both my MAC and PC machines. any Postscript type 1 format i generate works fine.\n\nany thoughts out there? i am at a loss.\n\n"
+    }
+  ]
+}

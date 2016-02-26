@@ -1,0 +1,186 @@
+{
+  "id": "33330",
+  "title": "Unicode Ligatures",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi There,\n\nI want to add additional [ligatures](http://web.archive.org/web/20150413075230/http:/typophile.com/wiki/ligature) to an [OpenType](http://web.archive.org/web/20150413075230/http:/typophile.com/wiki/OpenType) typeface i'm developing. I've included ff fi fl ffi ffl ft st and want to add ffb ffh ffi ffk ffl fft fh fj fk fl ft sp fb fh fk. Can anyone advise on what [Unicode](http://web.archive.org/web/20150413075230/http:/typophile.com/wiki/Unicode) Names I need to use. I was looking at the [PUA](http://web.archive.org/web/20150413075230/http:/typophile.com/wiki/Private%20Use%20Area) values which [Warnock Pro](http://web.archive.org/web/20150413075230/http:/typophile.com/wiki/Warnock%20Pro) uses (E032, E033) but [Adobe](http://web.archive.org/web/20150413075230/http:/typophile.com/wiki/Adobe) recommends against this as it can lead to incorrect funtionality. Any help would be really appreciated.\n\nMany thanks,\n\nDave Lawless\n\n",
+  "author": "David Lawless",
+  "time": "26 Apr 2007 — 8:56am",
+  "uid": "8282",
+  "comments": [
+    {
+      "time": "26 Apr 2007 — 10:11am",
+      "content": "As I understand it for the unofficial ligatures you have two choices:\n\n- Include a seprate font with the ligatures in the spaces of official glyphs. This might be a good choice if you want broad compatibility and your font is for display use and it is reasonable to assume that the designer will have time to tweak 1-3 lines of letters and manually select their choices.\n\n- script your ligatures to substitute in automatically, and create your own name for the glyph. This is a good idea ( perhaps ) if your face is for text and you want to make it easy for the ligatures to be used everytime. Of course they won't be in all applications. Different features have different levels of support too.\n\nThere are other options & situations that are possible too but these are the two extremes.\n\nHere is a thread about this subject which links to others and a reference:\n\n[http://typophile.com/node/14590](http://web.archive.org/web/20150413075230/http:/typophile.com/node/14590 \"http://typophile.com/node/14590\")\n\nAlso you might search from the forums page for 'Calt' and or 'Liga' or go to google\n\nAlso, you could go here  \n [http://groups.msn.com/FontLab](http://web.archive.org/web/20150413075230/http:/groups.msn.com/FontLab \"http://groups.msn.com/FontLab\")  \nor here  \n [http://www.twardoch.com/adam/project.php?pid=0049](http://web.archive.org/web/20150413075230/http:/www.twardoch.com/adam/project.php?pid=0049 \"http://www.twardoch.com/adam/project.php?pid=0049\")\n\nI hope that other folk who are more versed in this than I am will comment as well and that you will describe your face and the way you would preffer to see your ligatures used: eg automatically or as discretionary.\n\n"
+    },
+    {
+      "time": "26 Apr 2007 — 8:26pm",
+      "content": "Dave,\n\nFollow the Adobe glyph naming rules for ligatures, which specify that component names separated by an underscore, hence:\n\nf\\_f\\_b  \nf\\_f\\_h  \nf\\_f\\_i  \nf\\_f\\_k  \nf\\_f\\_l  \nf\\_f\\_t  \nf\\_h  \nf\\_j  \nf\\_k  \nf\\_l  \nf\\_t  \ns\\_p  \nf\\_b  \nf\\_h  \nf\\_k\n\nAlthough the glyph names for the ligatures with Unicode presentation form codepoints are recognised by apps that parse glyph names, Adobe's latest practice, which I also recommend, is to use the underscore convention for these too:\n\nf\\_f  \nf\\_i  \nf\\_l  \nf\\_f\\_i  \nf\\_f\\_l  \nf\\_t  \ns\\_t\n\n"
+    },
+    {
+      "time": "27 Apr 2007 — 12:41am",
+      "content": "Thanks to both of you for your help. I think i'll give the undescore convention a go and see what happens.\n\nCheers!\n\nDave\n\n"
+    },
+    {
+      "time": "27 Apr 2007 — 1:14am",
+      "content": "Hi John,\n\nIn the Glyph properties window I've substituted the name with the underscore convention (see attached).\n\nIs this correct?\n\nD.\n\n ![](http://web.archive.org/web/20150413075230im_/http:/typophile.com/files/ffj_6383.png)\n\n"
+    },
+    {
+      "time": "27 Apr 2007 — 9:19am",
+      "content": "In addition to what John wrote, you'll need to have two additional glyphs, named **fi** and **fl** , that are duplicates of 'f\\_i' and 'f\\_l'. These two additional glyphs should be encoded as FB01 and FB02, respectively. The reason for having to include these glyphs (named and encoded this way) is because they are part of the MacRoman character set.\n\n\\> _In the Glyph properties window I’ve substituted the name with the underscore convention. Is this correct?_\n\nYes, that's the way you rename a glyph.\n\n"
+    },
+    {
+      "time": "27 Apr 2007 — 9:31am",
+      "content": "That's great Miguel. I noticed that about the fi and fl and was wondering what to do with them.\n\nCheers!\n\nDave\n\n"
+    },
+    {
+      "time": "28 Apr 2007 — 9:29am",
+      "content": "Are there any other instances, like the fi and fl, that require duplicate encodings? Would the underscore convention also apply to [diphthongs](http://web.archive.org/web/20150413075230/http:/typophile.com/wiki/diphthong) like AE and OE, or to other [digraphs](http://web.archive.org/web/20150413075230/http:/typophile.com/wiki/digraphs) like ij or ch?\n\n"
+    },
+    {
+      "time": "28 Apr 2007 — 12:58pm",
+      "content": "Only the fi and fl need to be encoded, because they exist in the Mac Roman 8-bit codepage. For the most part, ligatures don't need to be encoded at all, and should be accessed via OpenType Layout features.\n\nDigraphs are an interesting issue, because in some cases they are distinctly encoded in Unicode, usually because they existed in a legacy encoding with which Unicode provides one-to-one roundtrip mapping, but in general terms digraphs (and trigraphs and tetragraphs) are not distinctly encoded in Unicode because their handling is something that is expected to be handled at a higher level (e.g. in a tailored collation algorithm for a particular language). So the Æ/æ, Œ/œ and Ĳ/ĳ are encoded in Unicode, along with some Serbocroatian digraphs that were needed for roundtrip mapping to the Cyrillic orthography, but the German ch and many others are not.\n\n"
+    },
+    {
+      "time": "28 Apr 2007 — 4:25pm",
+      "content": "Thanks for commenting John.\n\nWhat Opentype Layout Feature would you suggest using for ch rr or lj? A Language feature - Correct? Not calt, because you won't want a rr digraph in all langages just the ones that use it. (Spanish Catalan & Albanian as far as I can tell so far)\n\nAll my information on Digraphs come from Peter Bil'ak & his Fedra mono work  \n [http://www.typotheque.com/site/font\\_features.php?family\\_id=5&id=58](http://web.archive.org/web/20150413075230/http:/www.typotheque.com/site/font_features.php?family_id=5&id=58 \"http://www.typotheque.com/site/font\\_features.php?family\\_id=5&id=58\")  \nand the wikipedia  \nhttp://en.wikipedia.org/wiki/Digraph\\_(orthography)\n\nWhat sources do you favor?\n\nAlso, I had a thread about Digraphs here which sort of died. Any new input would be great!\n\n[http://typophile.com/node/29782](http://web.archive.org/web/20150413075230/http:/typophile.com/node/29782 \"http://typophile.com/node/29782\")\n\n"
+    },
+    {
+      "time": "28 Apr 2007 — 5:37pm",
+      "content": "Mr. Lawless,\n\nMuch of what one <cite>needs</cite> for a proper OpenType font depends on what you plan to do with it. If a font is for general sale, I suppose following Adobe is prudent; at least, to the extent that the general consumer knows what to expect from Adobe fonts, even though Adobe from time to time rethinks their naming/encoding conventions.\n\nIf, however, you are making a font only for your company's use, you can tailor naming & encoding for that use. For example, our company converts all incoming documents to MS Word (for Windows XP), to be finally typeset in InDesign. There will likely also be an XML file of the final text, but that is the entire universe I have to pay attention to.\n\nFor that reason, I do not have multiple fi ligatures (e.g., \"fi\" and \"f\\_i\") in a font -- simply f\\_i as a glyph name; no Unicode number. The ligature is used in the typeset file via the liga feature. This also prevents the ligature from somehow getting into a later XML file; our house rule is separate characters coming in, separate characters going out, the ligature is used only in the typeset file.\n\nOne reason (I think) ligatures got Unicode encoding is that some applications programs can only perform searches on characters, not glyphs. If you don't know how your font is to be used (i.e., it is for sale), you have to covers such bases. If you do know, you need cover only what you need for your application, with any eye towards the most useful XML file, intended for later use, often with unknown fonts.\n\nI mention this because when I started looking at OpenType naming I too looked at Adobe fonts, and it took me a while to figure out why they did certain things that made no sense from a Unicode point of view, or why some things -- like small caps -- were so complicated.\n\n"
+    },
+    {
+      "time": "29 Apr 2007 — 3:13pm",
+      "content": "The layout feature code to be entered in the OpenType panel of FontLab Studio would be like:\n\n`feature liga {\n  sub f f b by f_f_b;\n  sub f f h by f_f_h;\n  `_... (rest of three-letter substitutions)_`\n  sub f b by f_b;\n  sub f f by f_f;\n  sub f i by f_i;\n  sub f l by f_l;\n  `_... (rest of two-letter substitutions)_`\n} liga;`\n\nfeature dlig {  \n sub s p by s\\_p;  \n sub s p by s\\_t;  \n} dlig;\n\nRemember to put the substitution rules for your three-letter ligatures before the rules for the two-letter ligatures.\n\nIf your font includes character for Turkish and similar languages, remember to include a glyph named \"i.TRK\" which would be an identical copy of \"i\", and at the beginning of your feature list include a layout feature as follows:\n\n`feature locl {\n  language TRK exclude_dflt; # Turkish\n  lookup locl_TRK {\n  sub i by i.TRK;\n  } locl_TRK;\n  language AZE exclude_dflt; # Azeri\n  lookup locl_TRK;\n  language CRT exclude_dflt; # Crimean Tatar\n  lookup locl_TRK;\n} locl;`\n\nIf your font has small caps, you'll need to add more things to your locl feature.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "30 Apr 2007 — 12:33am",
+      "content": "Great advice, thanks to all of you!\n\nDave\n\n"
+    },
+    {
+      "time": "2 May 2007 — 5:14pm",
+      "content": "OK, this may just be a symptom of using obsolete tools, but I can't give characters names that include an underscore in Fontographer 4.1.5 Mac NFPU. I've made a whole bunch of custom ligatures and at some [point I'd like to get them working properly for everyone.\n\nI don't have Fontlab, but I suppose I could generate a Type 1 font and make corrections in FontForge.\n\n"
+    },
+    {
+      "time": "2 May 2007 — 6:31pm",
+      "content": "I haven't thought this through entirely, but the underscore is a convention, not a requirement. If you are making an OpenType font, you can NAME the glyphs anything you want, and leave them unencoded. For example, the glyph \"fb\" could be named \"fb\" (or, for wimsy, \"halfback\", my personal test for the f-b fit). When you write the liga feature, add\n\nsub f b by fb\n\nand so on. I would leave them unencoded, but if for some reason you feel they must have a Unicode encoding, use the private use area -- E001 & so forth.\n\nIf you are making a Type 1 font, you can still name it \"fb\" etc., but be aware that unless someone is using an application program that permits custom encoding vectors, they won't be available. If it is a Type 1 font for Quark, for example, you'd have to give it (them) the name(s) for a Mac or PC encoded character -- do like other foundries do, & lie about the name. \"Integral\" is one favorite, if it isn't a math font.\n\nNot an ideal situation for a commercial font.\n\n"
+    },
+    {
+      "time": "2 May 2007 — 9:03pm",
+      "content": "While using the underscore in ligature names is not a requirement of OpenType, it is a requirement for Acrobat to be able to reconstruct text from raw glyph strings such as might occur in PDFs generated from print streams. The preferred ways to create PDFs embed the original character codes in the document, but there are some mechanisms for creating PDFs that do not do this and in which the glyph name becomes the only indicator of what the underlying text was. In the case of ligatures it then becomes important that the names are of a format parseable by Acrobat. This means using either the underscore convetion or the extended uniXXXX convetion. For example an ffj ligature could be named either\n\nf\\_f\\_j\n\nor\n\nuni00660066006A\n\n"
+    },
+    {
+      "time": "2 May 2007 — 9:11pm",
+      "content": "Eben, I would probably associated the language-specific digraph forms with the 'liga' feature under the appropriate language system tags. Most digraphs forms are probably in the category of things that one wants on by default but wants to allow the user the ability to turn off, so the 'liga' feature is more appropriate than 'dlig' (off by default) or 'rlig' (cannot be turned off).\n\nAside from possible ligated forms (which are actually the exception rather than the norm for digraphs in most languages and type styles), there are other aspects of such phonemically unique letter sequences that need to be considered in quality typography and which cannot be controlled by the font. One of these is behaviour during letterspacing:\n\nS C H R I J V E N or S C H R IJ V E N\n\nAnother is behaviour in vertical setting:\n\nS  \nC  \nH  \nR  \nI  \nJ  \nV  \nE  \nN\n\nor\n\nS  \nC  \nH  \nR  \nIJ  \nV  \nE  \nN\n\nThese kinds of practices vary according to the language, and probably vary over time as different conventions are adopted or dropped.\n\n"
+    },
+    {
+      "time": "2 May 2007 — 10:44pm",
+      "content": "John, Thank You!\n\n"
+    },
+    {
+      "time": "3 May 2007 — 10:18am",
+      "content": "<cite>While using the underscore in ligature names is not a requirement of OpenType, it is a requirement for Acrobat to be able to reconstruct text from raw glyph strings such as might occur in PDFs generated from print streams.</cite>\n\nYes, but in my line of work anyway, this would be a rare situation. Recovering the raw glyph strings is best done out of the Applications program (InDesign in my case) via an XML file. But you're right about the name -- while hard to use, uni00660062 would be a better name for \"fb.\" And since the ligature is executed by the program, you don't really have to remember the name. There is at least one limitation to this technique for Adobe (Acrobat); I believe the limit is 12 places, so that would be a three-character ligature.\n\n"
+    },
+    {
+      "time": "3 May 2007 — 12:41pm",
+      "content": "Adam, what is the reasoning behind substituting an identical glyph and naming it i.TRK?\n\nI would have thought the only special thing that needs to be done for Turkish is to make sure that for the small caps feature \"ı\" (dotless i) is substituted by I.smcp, but that should be done anyway all Latin encodings.\n\n"
+    },
+    {
+      "time": "3 May 2007 — 1:15pm",
+      "content": "In Turkish languages, ı is a separate letter from i, so:  \nin small caps and cap conversion, i should go to a version with a dot and ı to one without  \nligatures should not make the differentiation between the two ambiguous  \nthis is all easier to keep straight with a localized version of \"i\"\n\nsee this tread:  \n [http://typophile.com/node/29469](http://web.archive.org/web/20150413075230/http:/typophile.com/node/29469 \"http://typophile.com/node/29469\")\n\n"
+    },
+    {
+      "time": "3 May 2007 — 1:34pm",
+      "content": ".\n\n"
+    },
+    {
+      "time": "3 May 2007 — 1:56pm",
+      "content": "John, so your point is that in both cases ( Digraphs and ligatures ) we have a bit of a thankless task as font designers. Is that right?\n\nAlso, I was wondering if you felt that the visual density of a digraph was to some extent a part of it's essential nature - or put another way could designing a digraph for pleasant visual spacing (and or Notan) get in the way of recognition? I am sure that it's a bit of a grey area but I am interested to hear what you would say all the same.\n\n"
+    },
+    {
+      "time": "3 May 2007 — 3:01pm",
+      "content": "Thanks Paul.  \nSo the idea is to avoid the ambiguity that an f\\_i ligature might present in Turkish.  \nHmm, not so sure about that -- it seems to be a trade off betweeen the better visual ergonomics of the f\\_i ligature vs. disambiguation. A lot would depend on the typeface. I wonder what Turkish opinion is on the f\\_i ligature?\n\n ![](http://web.archive.org/web/20150413075230im_/http:/typophile.com/files/fikir_3495.jpg)\n\n"
+    },
+    {
+      "time": "3 May 2007 — 3:44pm",
+      "content": "Not necessarily on topic, but I find some typefaces often design the fi ligature too tight. I occasionally do not use the fi ligature just to maintain spacing.\n\n"
+    },
+    {
+      "time": "3 May 2007 — 4:04pm",
+      "content": "Seems pretty on topic to me . . . and the other situation occurs, too, where the fi liagture is too loose, as in Monotype Garamond.\n\nAnother note: while it can be nice to have the f + ascender-on-the-left ligatures (fb, fh, fk), more important are the accented vowels. Try setting an f + igrave sometime. or f + iumlaut, or f + imacron. And it doesn't have to be just the \"i\", any vowel with a grave accent is problematic if the terminal on the \"f\" has a tendency to swoop. I've been known to add these when really needed; it is a fair bit of work, and I've never really found a good solution for some fonts.\n\n"
+    },
+    {
+      "time": "3 May 2007 — 5:09pm",
+      "content": "\"Try setting an f + igrave sometime. or f + iumlaut, or f + imacron. And it doesn’t have to be just the “i”, any vowel with a grave accent is problematic if the terminal on the “f” has a tendency to swoop.\"\n\nMakes a good case for contextual alternates. By including an alternate f with a lessened swoop, you can find a solution.\n\nChrisL\n\n"
+    },
+    {
+      "time": "3 May 2007 — 5:49pm",
+      "content": "Less swoop helps, but of course, you can do that as a part of the ligature. And if it is an f + i(accented), the dot over the \"i\" isn't used, so less swoop needed.\n\nBut with an igrave, work also has to be done on the accent. I have an \"f\\_igrave\" in Bembo that works, but looks passing strange; still better than anything else I've thought of. All suggestions welcome. And apparently f\\_imacron isn't all that uncommon in transliterated Asian languages -- when I have to make one, sometimes the the macron rides a touch lower than established by the foundry. Shorter, too.\n\nBut you have a good idea -- Matthew Carter made a Swedish version of Galliard with a change to the \"f\" to better fit with umlauts. You can get that version in the States, by the way, and the difference in the \"f\" is not noticeable. This is the Galliard I use whenever it is specified. Doesn't help with igrave, though.\n\n"
+    },
+    {
+      "time": "3 May 2007 — 6:31pm",
+      "content": "<cite> Makes a good case for contextual alternates. </cite>\n\nDude! Totaly!!\n\nThanks for the example Charles!\n\n"
+    },
+    {
+      "time": "3 May 2007 — 7:05pm",
+      "content": "I knew you would like that one, Eben :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "3 May 2007 — 11:23pm",
+      "content": "\\> So the idea is to avoid the ambiguity that an f\\_i ligature might present in Turkish. Hmm, not so sure about that\n\nSince of that ambiguity -- fi -\\> fı or fi -- f ligatures are prohibited in Turkish.\n\n"
+    },
+    {
+      "time": "6 May 2007 — 1:32pm",
+      "content": "So then would it be advisable to design a special substitute non-interfering Turkish f when the regular f tends toward accent interference?\n\n"
+    },
+    {
+      "time": "6 May 2007 — 1:50pm",
+      "content": "Sounds like a perfectly good idea - a \"Linotype f\" would work well for that.\n\nT\n\n"
+    },
+    {
+      "time": "6 May 2007 — 4:12pm",
+      "content": "cuttlefish wrote:  \n<cite>So then would it be advisable to design a special substitute non-interfering Turkish f when the regular f tends toward accent interference?</cite>\n\nWhy not! But I'd switch priorities: make the less sweeping 'f' the default, and substitute by the sweeping 'f' if non-ascending or non-accent glyphs follow. Fewer headaches when kerning ...  \nIt's the non-accented glyphs that are the exceptions in an extended glyph set.\n\n"
+    },
+    {
+      "time": "6 May 2007 — 5:15pm",
+      "content": "Nice point Karsten! :-)\n\n"
+    },
+    {
+      "time": "6 May 2007 — 8:57pm",
+      "content": "Eben: _I was wondering if you felt that the visual density of a digraph was to some extent a part of it’s essential nature_\n\nOn the contrary, in the majority of alphabets that do not include a single sign for every phonemic unit of language -- which is probably the majority of alphabets -- digraphs, trigraphs and tetragraphs generally do not take a form in which the letters in any way differ from their normal forms. We read them as individual phonemic signs because we learn to. In some orthographies, a particular sequence of letters might always form a digraph (I believe this is the case with the Dutch ij) but there are very many languages in which letter sequences can be pronounced in multiple ways and in different words may represent a single sound or a sequence of sounds. English and other languages with etymological and root-based spelling tend to develop these situations over time as pronounciation changes.\n\nIn some orthographies, digraphs etc. are considered separate units within the alphabet, which means that they are sorted independently of their constituent letters. This generally indicates a consistency in their pronunciation. In other orthographies letter sequences that function as digraphs some of the time will be sorted in order of the individual letters.\n\n"
+    },
+    {
+      "time": "8 May 2007 — 10:24am",
+      "content": "John, let me see if I have understood what you are saying. Are you are first making the point that digraphs ( trigraphs and tetragraphs ) exist in spoken language first and that their existence as linguistic phonemes is precedes and informs glyphs? I think you are also saying that there is often no neat correspondence or matching between a glyph/sign and the phoneme. I know you said more than this but I am hoping this was the distiction you were making vis a vis glyphs & sorting. If so, this makes sense to me and is a good point that would be easy to loose sight of in the mad rush for glyphs.\n\nOkay. But back to the glyphs again. There is a further distinction between the the sorting of the digraph and visual form the glyphic counterpart to the digraph takes. Which means that you can have:\n\n• a phonemic digraph which can look like two letters and be sorted in the manner of two - the common state. In which case the digraph is a digraph in only the phonemeic sense. Correct?\n\n• a phonemic digraph where it can can look like two letters and be sorted in the manner of one - the next most common\n\n• and a phonemic digraph where it is presented as a single glyph and sorted in the manner of one - the rarity\n\n• and a phonemic digraph where it is treated as a single ligatured glyph and sorted in the manner of one - still more rare (and maybe non-existent?)\n\nIs this breakdown of states corect & complete?\n\nWhich brings me to my question: When Peter Bil’ak made Fedra Mono, and made the digraphs he made as single glyphs was he embracing the various cultures prefered model for these digraphs ( the single sort & single glyph ) or was he inventing something? The sense I have is that he was inventing. That is why places for a single glyph sz do not appear in the Open type spec. Is that right?\n\nStill, if you don't mind I would like to list the single glyph digraphs he made and if you would comment on if you think there is there is a reason or prescedent for making them into single glyphs ( or not ) in monospace or variable spaced fonts - that would be great! And if you think there is a good reason to consider ligatures in any of them ( I don't think there is but...) that would be great too.\n\nCzech - ch  \nCroat - dž ch lj nj  \nDutch - ij  \nHungarian - cs gy ly ny sz ty zs  \nLatvian - ch dz dž  \nLithuanian - ch  \nMaltese - gh ie  \nSlovak - ch dz dž  \nSpanish & Catalan - ch ll rr\n\nThen there is also the Ŀ (U+013F) and ŀ (U+0140) which breaks a digraph which I think would be considered seprate for sorting purposes. I think that the punt volat double l (el) is distinct from the ll listed above. Is it?\n\nThis examples leads me to ask: do you think that the punt volat model is the best one to follow? It seems like it to me given the problems associated with letterspacing you illustrated before.\n\nOr maybe each case has to be considered on it's own merits history etc...\n\n"
+    },
+    {
+      "time": "8 May 2007 — 11:56am",
+      "content": "Eben: Spanish rr isn't technically considered a digraph, althoug it is often taught (erroneously) that way. _rr_ represents a an alveolar trill in the vast majority of dialects which in reality is just a series of alveolar flaps, which incidentally is represented by _r_. Since r-initial and r-final and r-post-nasal is realised as a trill, there's no reason to (and indeed I've never seen an rr lig .. wouldn't it just look like an m with its leg chopped off for lowercase?) I took a look at Fedra Mono, and I know Spanish speakers would find it a bit weird to read the letters squashed into a space like that. I've experimented with some other ways for Spanish digraphs _ch_ and _ll_ with moderate success: the _ch_ digraph using the same style as the German blackletter, and the _ll_ by extending the second _l_'s serif until it joins the ascender of the first. I found this wasn't as distracting to readers but also clearly delineated the special function of those digraphs. The main reason was that the spacing was still the same, just with an ever so slight amount of extra lines.\n\nAnyways, as to encoding the digraphs in Unicode, the vast majority of them were encoded for backwards compatibility's sake. As no encodings previously used _ch_ or _sch_ from German, neither of these were included and so for Unicode to include it as a separate character (Remember Unicode is based on the character, not the glyph) one would have to demonstrate where the digraph/ligatured version was used or is used as a contrasting element to its non-ligatured/digraphed compoments. Spanish at best kerned the _c_ and _h_ a little bit closer but I've not seen any typeset books that combine them as a character ligatured in the same manner as _fi_ or _ae_, and certainly not contrasted with a c-h combination. Hence, the only digraphs you find are really legacy, although those like eszett or _ae_ are included because they are contrastive within languages that use them.\n\n_«El futuro es una línea tan fina que apenas nos damos cuenta de pintarla nosotros mismos». (La Luz Oscura, por Javier Guerrero)_\n\n"
+    },
+    {
+      "time": "8 May 2007 — 12:31pm",
+      "content": "Matthew,\n\nI agree that that rr would be especially hard to make into a 'visual digraph'. Are you sure it's not a phonemic digraph? What about for sorting? Also, I have read that there are some South American designers who though ligation to acknowlege the spoken or phonemeic difference was a good idea:\n\n[http://typophile.com/node/31238](http://web.archive.org/web/20150413075230/http:/typophile.com/node/31238 \"http://typophile.com/node/31238\")  \n [http://www.typophile.com/forums/messages/29/ORIGEN\\_PDF-42729.pdf](http://web.archive.org/web/20150413075230/http:/www.typophile.com/forums/messages/29/ORIGEN_PDF-42729.pdf \"http://www.typophile.com/forums/messages/29/ORIGEN\\_PDF-42729.pdf\")\n\nOf course that doesn't make it a good idea.\n\nIt is also worth noting that :\n\na) A digraph doesn't have to connect/ligate or even squish together like an ae to be a visual digraph. It would just have to look different enough that it's staus as a distinct sorting and phonemic digraph was acknowledged.  \nb) This kind of distinction may or may not be a good idea depending on how it's done & if there is a cultural basis from which to think about doing it.\n\nFor instance in the case of Catalan \"An old ligature for Ll is known as the \"broken L\", which takes the form of a lowercase l with the top half shifted to the left, connected to the lower half with a thin horizontal stroke. This ligature is not encoded by any standard character encoding and therefore cannot be used in digitized documents.\"\n\n[http://en.wikipedia.org/wiki/Ll](http://web.archive.org/web/20150413075230/http:/en.wikipedia.org/wiki/Ll \"http://en.wikipedia.org/wiki/Ll\")\n\nWhich makes me wonder is the old way worth reviving? Does it have currency in Barcelona? How do people write their LL (or ll) now? Probably it's a grey kind of question with no clear answer. Or maybe somebody here can say. Was your ll ligature in the style described above?\n\nAlso sometimes you could have a case like LL where the sorting function has been abandoned. The Wikipedia also says \"This digraph was traditionally considered a single letter in Spanish orthography, called elle, and was collated after L as a separate entry, but this is no longer done.\"\n\nBut it sounds like you are saying that in general most digraphs don't require special treatment. Partly because Unicode doesn't ask for it & partly because there is no historical basis for a distincntive visual treatment - involving ligation or otherwise. Is that right?\n\n"
+    },
+    {
+      "time": "8 May 2007 — 1:33pm",
+      "content": "I tried the so-called broken L, however, it was quite distracting and didn't \"fit\". The Wikipedia article is slightly incorrect though, because of course any OpenType font can define an _ll_ ligature (and a lot of script fonts do). I've not seen any printed examples of the broken L, but that's not to say that it doesn't exist, but I certainly never saw it when I was in Catalonia or the Belearic Islands. When I get back on my home computer I can post examples of my solution and the Catalan one.\n\nBut you are correct in my saying there's no real special treatment that one needs to give digraphs. Unicode has helped create a multilingual sorting algorithm that you can find at [http://www.unicode.org/reports/tr10/](http://web.archive.org/web/20150413075230/http:/www.unicode.org/reports/tr10/ \"http://www.unicode.org/reports/tr10/\") . It's not universal in that it takes some priorities given user preferences, and whilst the document is rather technically oriented, if you're oriented to reading these kinds of documents it might make how Unicode does things make a little (but only marginally so, obviously optimally they would have removed all legacy encodings, but then no one would have adopted it). But the general idea you can get from it is that Unicode itself doesn't encode the language intricacies, and leaves that to the program that displays it. This is why we as designers have to separately encode different display forms for the same letter -- functionally (semantically) they are the same in two different languages, but written (graphically) they are different. Unicode in theory only encodes semantic differences.\n\n_«El futuro es una línea tan fina que apenas nos damos cuenta de pintarla nosotros mismos». (La Luz Oscura, por Javier Guerrero)_\n\n"
+    },
+    {
+      "time": "8 May 2007 — 1:52pm",
+      "content": "Eben, it might help to think about the treatment of digraphs in English. For example, most English speakers would not appreciate a \"th\" or \"aw\" digraph that formed a single unit in a monospaced font, even though they represent single phonemes, because English orthography doesn't acknowledge digraphs. Thus, \"ae\" and \"oe\" ligatures used to be used for loanword digraphs in English, but they've been obsolete for several decades and most people now would think they were weird. Croatian might be an opposite case, where the digraphs - because they correspond to single letters in Cyrillic - are accepted as single letters, and were incorporated as such into official character encodings (and thus into Unicode).\n\nEach language has its own rules for these things, and they aren't necessarily consistent even within a language. Spanish collation rules used to sort \"ch\" and \"ll\" separately from \"c\" and \"l\", but they don't anymore; Dutch treats \"ij\" as a single unit for capitalization, but not \"oe\". And Croatian digraphs like \"lj\" are units for most purposes (including crossword puzzles) but not for capitalization. There's no easy rule for all this; you need to learn it for each language. Or not worry too much about it and just provide general-purpose tools.\n\nThere's a simpler presentation of the Unicode position on digraphs at [http://unicode.org/faq/ligature\\_digraph.html](http://web.archive.org/web/20150413075230/http:/unicode.org/faq/ligature_digraph.html).\n\n"
+    },
+    {
+      "time": "8 May 2007 — 1:55pm",
+      "content": "Eben: _Are you are first making the point that digraphs ( trigraphs and tetragraphs ) exist in spoken language first and that their existence as linguistic phonemes is precedes and informs glyphs?_\n\nDigraphs etc. are written conventions to use more than one letter to represent a single phoneme. They don't 'exist in spoken language': they're an extension of the alphabetic system to represent more sounds without adding more letters. Sometimes, these digraphs evolve into ligated forms as æ and œ have in some orthographies, and the ligation then becomes a standard semantic distinction that may differentiate the pronunciation of e.g. æ from ae.\n\nModern Greek provides a really nice example of the development of a digraph. In ancient Greek the letter β was pronounced as a voiced bilabial plosive and so English tranliteration of classical texts always use the Latin b. But as the pronunciation of Greek changes, β came to be pronounced as a voiced labiodental fricative (like English v). This left a phonemic gap in the Greek orthography for foreign words containing a voiced bilabial plosive, so a digraph convention was introduced and the sequence μπ is now used to transliterate the Latin b. This frequently confuses people trying to learn to read modern Greek, especially if they have some classical Greek education. I remember Beat Stamm at Microsoft being very surprised when he saw that the transliterated Greek name for Jeremy Tankard's Corbel typeface was Κορμπέλ.\n\n"
+    },
+    {
+      "time": "9 May 2007 — 11:51am",
+      "content": "John, thanks for that. I see in re-reading my statement that not only did I have your meaning wrong but I butchered my sentence. It sounds like you also don't think that a variable width font would benfit by making any of the digraphs I listed above into special versions except for the Dutch IJ which is already supported by Unicode. I think I see why now too. In part, thanks to David.\n\nDavid, thanks for explaining the Cyrillic origin of many of the other digraphs!\n\n"
+    },
+    {
+      "time": "20 Feb 2010 — 4:25am",
+      "content": "/track\n\n"
+    }
+  ]
+}

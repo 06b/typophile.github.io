@@ -1,0 +1,26 @@
+{
+  "id": "17760",
+  "title": "Digital Cree?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Continuing from [this discussion](http://web.archive.org/web/20071019125916/http:/typophile.com/node/14818), I am currently in the process of preparing [Jim](http://web.archive.org/web/20071019125916/http:/typophile.com/wiki/Jim%252BRimmer)’s [Cree Syllabics](http://web.archive.org/web/20071019125916/http:/typophile.com/wiki/Cree%252BSyllabics) font for release, but I am a bit unsure where to start. I believe that having a unicode standard opentype font is the way to go, but what else do i need to provide for someone to be able to actually access the Cree characters? a keyboard? some fancy scripts? In the small bit of research i’ve done thus far, it seems that several fonts for Cree follow a keyboard layout designed to work with [CreeKeys](http://web.archive.org/web/20071019125916/http:/www.creeculture.ca/e/language/creekeys_pro.html). Would it just be best to adapt the fonts to this model? Anyhow, if anyone can point me in the right direction on this one, I’d appreciate it. Thnx.\n\n [‹ Arranging glyph order (sorting) in FontLab](http://web.archive.org/web/20071019125916/http:/typophile.com/node/17766 \"Go to previous forum topic\") [Questions regarding the OFA specification ›](http://web.archive.org/web/20071019125916/http:/typophile.com/node/17753 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20071019125916/http://typophile.com/user/7006\" title=\"View user profile.\">paul d hunt</a>",
+  "time": "<br>",
+  "uid": "7006",
+  "comments": [
+    {
+      "time": " 7.Feb.2006 11.29am",
+      "content": "Cree is fairly simple, since each syllable is separately encoded in Unicode, so there is no clever OTL stuff required. Basically, you just need to correctly encode each glyph according to the Unicode Unified Canadian Aboriginal Syllabics code block: [http://www.unicode.org/charts/PDF/U1400.pdf](http://web.archive.org/web/20071019125916/http:/www.unicode.org/charts/PDF/U1400.pdf \"http://www.unicode.org/charts/PDF/U1400.pdf\")\n\nNote that Cree is actually several different closely related languages, so you should probably check whether Jim’s font supports all of these or a specific subset. I recommend dropping a note to Ross Mills (ross[at]tiro[dot]ca) and asking whether he is aware of any language-specific glyph preferences that might require use of the layout feature with language system tags.\n\nAvoid trying to match the font ’layout’ i.e. 8-bit encoding, to a particular keyboard driver. This just perpetuates non-standard 8-bit encodings that prevent reliable data interchange (because wherever there is one hacked encoding, there are multiple hacked encodings; I think Ross’ Inuktitut collaborators found eight such encodings in use in Nunavut, all incompatible). If you want to provide support for people who are used to the CreeKeys layout, then use MSKLC, the Apple keyboard layout tools or KeyMan to create a Unicode keyboard driver with the same layout a CreeKeys.\n\n"
+    },
+    {
+      "time": " 7.Feb.2006 11.45am",
+      "content": "Thank you for answering, John. I knew you’d have the answers I was looking for. I’m sure I’ll have more questions, starting with: Are there already standard Cree keyboard drivers for Windows and Mac?\n\n"
+    },
+    {
+      "time": " 7.Feb.2006 12.28pm",
+      "content": "Paul, you can download standard Cree keyboard drivers for Windows and Mac here: [http://www.carleton.ca/ecree/en/resources.html](http://web.archive.org/web/20071019125916/http:/www.carleton.ca/ecree/en/resources.html \"http://www.carleton.ca/ecree/en/resources.html\"). These packages come with BJCree UNI, a font containing a subset of Cree Unicode syllabics that I designed for Naskapi, East Cree and Swampy Cree. If you encode your font using standard unicode, users can type Cree using those keyboard drivers.\n\nI read Cree (Naskapi) syllabics. I will be interested in seeing your font in text.\n\nAlso look at the LanguageGeek website, Chris Harvey has produced several other Unicode input methods (that is, keyboard layouts) that can also access syllabics that are encoded as Unicode.\n\n"
+    }
+  ]
+}

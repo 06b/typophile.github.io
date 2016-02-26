@@ -1,0 +1,30 @@
+{
+  "id": "101142",
+  "title": "So why does FontLab generate the entire Unicode range?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I've been generating some fonts lately and it finally occurred to me to wonder: When I generate, why does FontLab insist on making a font file that's complete with every character in Unicode? (That is, when I view it in Windows' Character Map, the font shows a character for every Unicode glyph, including everything in Chinese, Korean, and Japanese, plus lots of obscure Asian writing systems.) Is there some sort of option that I could tick so it would only generate the characters that actually exist in my font? Or do these characters somehow not really exist? When I run fontplot in AFDKO, it only plots the ones that I've actually designed.\n\n",
+  "author": "Number3Pencils",
+  "time": "5 Mar 2013 — 10:54pm",
+  "uid": "7642",
+  "comments": [
+    {
+      "time": "6 Mar 2013 — 10:06am",
+      "content": "FontLab is not doing this. Windows Character Map makes use of default font fallback to display Unicode characters that are outside the scope of the individual font.\n\n"
+    },
+    {
+      "time": "6 Mar 2013 — 7:06pm",
+      "content": "Huh. So why doesn't it do it with some of my other fonts? It doesn't seem to have anything to do with otf vs. ttf. Verdana (otf) shows only characters in Verdana, but the Walleye otf that I generate is filled with default characters. What controls it?\n\n"
+    },
+    {
+      "time": "6 Mar 2013 — 10:11pm",
+      "content": "I wish I knew. Character Map displays differing sets of characters for various fonts, and I've never figured out the pattern.\n\nBut trust me: those glyphs are not in your font. If you don't believe me, just re-import the font into FontLab and see what it actually contains.\n\n"
+    },
+    {
+      "time": "6 Mar 2013 — 11:23pm",
+      "content": "Weird. Well, at least now I know that there's no giant load of extraneous data in my files. Thanks!\n\n"
+    }
+  ]
+}

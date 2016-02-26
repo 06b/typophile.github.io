@@ -1,0 +1,47 @@
+{
+  "id": "123360",
+  "title": "How can I remove all hinting data?",
+  "forum": "Build",
+  "tags": [
+    "FontForge",
+    "fontlab",
+    "hinting",
+    "otf",
+    "ttf",
+    "Build"
+  ],
+  "content": "Hello everyone, thanks for reading!\n\nI have been working on a new batch of fonts & while I though that I was well aware of all the basic ins & outs of hinting I have been encountering some information that casts doubt on this.\n\nIn short…\n\n1.) What is the simplest & and/or most reliable way to inspect a ttf ot otf file & determine if it contains any hinting data?\n\n2.) What methods might I use to remove any and all hinting data from an otf or ttf font file?\n\nAt my disposal I have fontlab5, fontforge, fontographer & the latest adobe fdk.\n\nThank you all in advance.\n\n",
+  "author": "raseone",
+  "time": "18 Feb 2015 — 3:19pm",
+  "uid": "171284",
+  "comments": [
+    {
+      "time": "19 Feb 2015 — 11:08am",
+      "content": "Fontlab - Tools - Hints and Guides - Remove Hints\n\n"
+    },
+    {
+      "time": "20 Feb 2015 — 12:01pm",
+      "content": "Thanks for that bojev.\n\nI am aware of that one. & fontlab seems to indicate that there are no hints to remove. Autohinting is turned off etc. The main clue that I have that hinting data may still be present is the file size of the final otf.\n\nCan anyone suggest one, sure, absolute way to tell? …or one sure, absolute way to remove all hinting data? say using the adobe fdk for example to delete such data directly from the otf.\n\nIf fontlabs \"Remove hints\" feature is thought to be 100% reliable then maybe I am just wrong. I've been reading the manual & reading info online. All signs point to absence of hinting data but I have some fonts here that have 20k - 60k of unexplained data so I'm still exploring. There are older copies of these same fonts that have smaller file sizes & I'm having trouble telling exactly why. Hinting data is just my best guess & may be a wild goose chase.\n\nThanks.\n\n"
+    },
+    {
+      "time": "20 Feb 2015 — 12:35pm",
+      "content": "One possibility:  \n [http://www.freetype.org/ttfautohint/doc/ttfautohint.html](http://web.archive.org/web/20150317224105/http:/www.freetype.org/ttfautohint/doc/ttfautohint.html \"http://www.freetype.org/ttfautohint/doc/ttfautohint.html\")  \n\"--dehint, -d  \n Strip off all hints without generating new hints. Consequently, all other hinting options are ignored. This option is intended for testing purposes. \"  \n(pro - you can use .bat files)  \nNormally I would use FontForge.\n\n"
+    },
+    {
+      "time": "20 Feb 2015 — 1:11pm",
+      "content": "You can use TTX or DTL OTMaster to inspect the font files.\n\n"
+    },
+    {
+      "time": "20 Feb 2015 — 2:14pm",
+      "content": "So, what makes you so sure there is still hinting in the font? Just file size?\n\nAnother thing that can contribute to the size of a font file is kerning, which can be in both the 'kern\" table and the GPOS 'kern' feature.\n\n"
+    },
+    {
+      "time": "20 Feb 2015 — 8:52pm",
+      "content": "Thanks for the ideas everyone.\n\nJust as an added fact: It's 100% certain that both the old & new otf files came from fontlab but the old ones may have come from 4.6 & new ones from 5.1 in these particular cases. Any known differences between those 2 versions that might be related?\n\n@ Thomas Phinney  \nThere is one where the glyphs are significantly bigger in the new version but each font has the same number of glyphs in both old & new. There would be automatic, proportional scaling to the metrics done by fontlab… in any case I'll have a look at data. Good idea. Thank you. To answer you question: I don't have any real reason to think there is hinting data hiding somewhere. In fact it seems pretty clear there is not. It's a shot in the dark.\n\n@Frode  \nI will definitely have a look at that as well. Thanks for the tip\n\n"
+    },
+    {
+      "time": "21 Feb 2015 — 8:20pm",
+      "content": "Open the font in Type light (freeware):  \n [http://cr8software.net/typelight.html](http://web.archive.org/web/20150317224105/http:/cr8software.net/typelight.html \"http://cr8software.net/typelight.html\") (Windows)  \n [http://cr8software.net/typex.html](http://web.archive.org/web/20150317224105/http:/cr8software.net/typex.html \"http://cr8software.net/typex.html\") (Mac /Linux)\n\nGo to **font options** on the **font menu**. If the hinting box is ticked then it contains some form of hinting.  \nTo remove all hinting: untick the box and save the font.\n\n"
+    }
+  ]
+}

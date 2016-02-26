@@ -1,0 +1,23 @@
+{
+  "id": "106001",
+  "title": "GSUB with PUA glyphs",
+  "forum": "Build",
+  "tags": [
+    "GSUB PUA",
+    "Build"
+  ],
+  "content": "I am trying to modify a font by adding 'ccmp' basic ligature-type substitutions of the form:\n\nsub a uniE151 by uni0061E151; # uniE151 has unicode value 0xE151 (PUA)\n\nHowever, it doesn't seem to work except in Indesign CS6 and Mellel, not MSWord or TextEdit (on the Mac, by the way). However, if I do a substitution such as:\n\nsub a uni02F9 by uni0061E151; # uni0279 has unicode value 0x02F9 (Non-PUA)\n\nthen it works as expected. I have tried this with several fonts and the same result is observed, it works in Indesign and Mellel but not in MS Word or TextEdit.\n\nIs there something about using an PUA glyph in a substitution lookup that renders it ambiguous or illegal?\n\nMany Thanks!  \n -- Steve.\n\n",
+  "author": "sfmoore",
+  "time": "2 Sep 2013 — 10:50am",
+  "uid": "199771",
+  "comments": [
+    {
+      "time": "2 Sep 2013 — 11:03am",
+      "content": "Have you tried putting the lookups under the 'DFLT' script tag? This might make a difference for Uniscribe apps such as MS Word, although I have not tested this. Layout engines normally determine how to process glyphs in a run based first on their cmap entries; in the case of PUA codepoints, there doesn't seem to be any standard about how OTL processing is expected to proceed.\n\n"
+    },
+    {
+      "time": "2 Sep 2013 — 12:00pm",
+      "content": "Thanks, John. I gave that a try and didn't observe anything different. I haven't seen anything in the documentation that singles out PUA glyphs but it hasn't been an exhaustive reading, either. I checked the cmap entries (via ttx) and the glyph is present for both Mac and Windows. It seems that it doesn't work on the in Word for Windows, either. Hmmm.\n\n"
+    }
+  ]
+}

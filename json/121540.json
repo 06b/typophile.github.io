@@ -1,0 +1,27 @@
+{
+  "id": "121540",
+  "title": "Mimicking old print",
+  "forum": "Build",
+  "tags": [
+    "pseudorandom calt OT",
+    "Build"
+  ],
+  "content": "In this thread [http://typophile.com/node/121385](http://web.archive.org/web/20150317234413/http:/typophile.com/node/121385 \"http://typophile.com/node/121385\") OP put a scanned page from a 1961 book. Used types have somewhat twitched appearance. As I made earlier an OT feature which does that effect I modified a font (in that case Plantin) to recreate that look.\n\n1. FEA file:  \n@class\\_alt1 contains UC and lc letters, space, comma, etc  \n@class\\_alt2 contains as above, slightly displaced, names with .alt2  \netc up to @class\\_alt10 ( .alt10)\n\n2. I made new glyphs - and copied the references of original glyphs and add the .alt1 to their names  \n3. Again the same with .alt2 names  \netc up to .alt10\n\n4. I moved glyphs of every class slightly up or down  \n`\nfeature calt { # contextual Alternates\nsub @class_alt1 @class_alt1' by @class_alt2;\nsub @class_alt2 @class_alt1' by @class_alt3;\nsub @class_alt3 @class_alt1' by @class_alt4;\nsub @class_alt4 @class_alt1' by @class_alt5;\nsub @class_alt5 @class_alt1' by @class_alt6;\nsub @class_alt6 @class_alt1' by @class_alt7;\nsub @class_alt7 @class_alt1' by @class_alt8;\nsub @class_alt8 @class_alt1' by @class_alt9;\nsub @class_alt9 @class_alt1' by @class_alt10;\nsub @class_alt10 @class_alt1' by @class_alt1;\n} calt;`\n\nAs feature calt is applied, letters (and spaces, commas etc) are substituted and in effect their sequence is:  \nx1, x2, x3, (etc), x10, x1, x2, x3 ...  \nso every next letter belongs to the group moved in slightly different way.  \nBecause font is slightly thinner (and more contrasty) than lead types used I added some black stroke and - to compensate inter letter space - some tracking.\n\n ![](http://web.archive.org/web/20150317234413im_/http:/typophile.com/files/book_3673.jpg)\n  \n\n ![](http://web.archive.org/web/20150317234413im_/http:/typophile.com/files/idd_5284.jpg)\n\nAdvantage: -calt works almost everywhere  \nDrawback:  \n- in InD tracking about 40 switches off calt (why?!)  \n- when you repeat lines the letters are moved in the same way (doesn't happen frequently in books)\n\nSpecial thanks to Adam Twardoch  \n [1](http://web.archive.org/web/20150317234413/http:/typedrawers.com/discussion/comment/10641/#Comment_10641)  \n [2](http://web.archive.org/web/20150317234413/http:/sites.twardoch.com/typography/font-tech/gpos-stylistic-sets)\n\n",
+  "author": "JanekZ",
+  "time": "24 Nov 2014 — 7:50am",
+  "uid": "9108",
+  "comments": [
+    {
+      "time": "24 Nov 2014 — 6:49pm",
+      "content": "InDesign turns off contextual features and ligatures for tracked text above a certain value, and in many, but unfortunately not all cases, this makes sense, since contextual substitutions are often used to avoid clashing letterforms or to effect better joins in script faces (though such faces probably shouldn't be tracked in the first place). However, InDesign's threshold is arbitrary and I've often felt it would be better if it were left to the designer to turn these features off.\n\nAndre\n\n"
+    },
+    {
+      "time": "3 Feb 2015 — 4:35pm",
+      "content": "Agree, André.  \nStylistic Set can be used in that case - ssXX's are not turned off by tracking. But support is not that wide and in some environments only GSUB ssXX are allowed. See: [https://www.microsoft.com/typography/otspec/features\\_pt.htm#ssxx](http://web.archive.org/web/20150317234413/https:/www.microsoft.com/typography/otspec/features_pt.htm#ssxx \"https://www.microsoft.com/typography/otspec/features\\_pt.htm#ssxx\") \"Each ssXX feature uses one-to-one (GSUB lookup type 1) substitutions.\"  \nSo precise adjusting of glyph's widths will help.\n\n[edit]  \nI made an error in first post (and can't edit it)\n\n\"2. I made new glyphs - and copied the references of original glyphs and add the .alt1 to their names\"  \nI did not change their names, the first class:  \n`@class_alt1=[space exclam comma hyphen period colon semicolon question a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F G H I J K L M N O P Q R S T U V W X Y Z];`\n\n"
+    },
+    {
+      "time": "8 Feb 2015 — 7:02pm",
+      "content": "> However, InDesign's threshold is arbitrary and I've often felt it would be better if it were left to the designer to turn these features off.\n\nNot quite arbitrary: it is based on a percentage of the /space/ glyph width in a font, which means that the tracking unit at which ligatures and contextual alternates is turned off is proportional to the width of the font: lower for a condensed font and higher for an expanded font.\n\n"
+    }
+  ]
+}

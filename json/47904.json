@@ -1,0 +1,46 @@
+{
+  "id": "47904",
+  "title": "CT-Design \"Emulation\"",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "I need to submit a quote for developing  \na new Armenian font that renders well  \nunder ClearType, and I was wondering:  \nhow hard is it to get close to the quality  \nof something like Corbel? Assuming the  \ntools to get close are even public...\n\nIf however the tools are not public, how would a  \ndesigner accommodate what CT likes to render?  \nWould it only really work for one point size?  \nDoes “regular” hinting help or hinder?\n\nhhp\n\n [‹ avoid red arrows - type foundry of University of Arts and Design Karlsruhe](http://web.archive.org/web/20081121185000/http:/www.typophile.com/node/47512 \"Go to previous forum topic\") [Univers CE/LT? ›](http://web.archive.org/web/20081121185000/http:/www.typophile.com/node/47984 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081121185000/http://www.typophile.com/user/1250\" title=\"View user profile.\">hrant</a>",
+  "time": "<br>",
+  "uid": "1250",
+  "comments": [
+    {
+      "time": " 30.Jul.2008 11.52am",
+      "content": "It would be somewhat difficult to achieve that level of hinting using anything other than VTT (ie would be hard using FontLab) and VTT has a steep learning curve. You might be best off sub-contracting the hinting out so someone with VTT experience. If they have an autohinter that gets them part-way there, then the cost may not be prohibitive, compared to the hrs you might have to spend.\n\n"
+    },
+    {
+      "time": " 30.Jul.2008 12.01pm",
+      "content": "Thanks Simon.\n\nI actually used to use VTT, and it was a viper’s nest,  \nboth metaphorically and graphically! :-) I assume  \nthe version I have is too old to do CT hinting; is it  \nstill a free-to-acquire tool though?\n\n\\> If they have an autohinter\n\nWho is known to have a CT autohinter?\n\nhhp\n\n"
+    },
+    {
+      "time": " 30.Jul.2008 1.22pm",
+      "content": "\\>I assume the version I have is too old to do CT hinting; is it still a free-to-acquire tool though?\n\nMaybe. The more recent versions allow CT proofing, however there’s no reason why an older version could be used to apply light hints. Please contact me off-list and we’ll get latest public version of VTT to you.\n\n\\>Who is known to have a CT autohinter?\n\nNot sure if the owners would consider that NDA. So I’ll answer many of “the usual suspects” associated with hinting TrueType.\n\n"
+    },
+    {
+      "time": " 31.Jul.2008 4.33am",
+      "content": "regular hinting will help. In looking at your Maral font for instance, I think regular TrueType hinting to control the y features, y rounds, heights, ascenders, descenders, etc, you would get good results. Once you are up to speed with the VTT Visual hinting interface, the hinting can be quite fast. It is also easy to proof the font as you go. both in VTT itself, and by installing the font on either XP or Vista. Once hinted I dont see why it wont work well for all sizes.\n\n"
+    },
+    {
+      "time": " 1.Aug.2008 6.29pm",
+      "content": "The hinting in Corbel is actually very light, and probably reproducable with FontLab. You would only need VTT if you wanted to access some new link types that so far, to my knowledge, no shipping fonts use, or if you wanted to include flags to turn on x-direction delta controls. You can certainly do more with VTT than you can with FontLab, but you probably don’t need to.\n\nThe basic thing about CT to remember is that the y-direction is handled much as it was with b/w and greyscale antialiasing, while the x-direction is largely hint-independent in most fonts (i.e. x-direction deltas are inhibited, and a font without even x-direction links may look better than one with them, depending on the design). This has an impact on design, because it means that obtaining harmonised weight relationships between horizontal and vertical elements requires different approaches: x-direction weight needs to be controlled via the outline, while y-direction weight can be controlled with hints. [This is the heart of David Berlow’s complaint against CT.] The biggest problem arising from this in a typical font is that there will be some ppem sizes at which it is impossible to harmonise x- and y-direction heights, i.e. where the y-direction stems jump a full pixel while the x-direction is gaining weight more gradually. This will be especially obvious in glyphs with rotated ductus, e.g. in the lower bowl of a Latin roman g, which will stand out from other glyphs at some sizes.\n\nSo my advice would be to try to identify the common range of ppem sizes (taking into account nominal point sizes and device resolutions) at which the Armenian type is likely to be used by the client. Then try to tailor the design to avoid as far as possible weight problems due to y-direction pixel jumps within this range (keeping in mind that you do have control via hinting of when those jumps happen). I would also go through the Armenian glyph set and identify potential problem shapes.\n\n"
+    },
+    {
+      "time": " 1.Aug.2008 6.33pm",
+      "content": "PS. I think the term ’CT hinting’ is misleading, since this can refer to two very different things. It is used to refer to a particular hinting _strategy_ employing very light hinting with an emphasis on y-direction alignment control and very little x-direction hints, as used in the MS CT font collection. But it could also be used, perhaps more accurately, to refer to what I would characterise as subpixel painting with hints, akin to the use of hints to affect greyscale rendering. To my knowledge, no one is actually doing this kind of hinting — it requires special flags in the hint program to (re)activate x-direction deltas —, which may explain why the term is commonly used in the first sense.\n\n"
+    },
+    {
+      "time": " 1.Aug.2008 6.47pm",
+      "content": "\\>The hinting in Corbel is actually very light, and probably reproducable with FontLab.\n\nA few years back we had a super star hinter analyze FL hinting and they didn’t think it could be done adequately. Maybe Corbel is a special case.\n\n"
+    },
+    {
+      "time": " 1.Aug.2008 8.20pm",
+      "content": "In the original pass on the CT font collection, Mike’s idea was to not employ any x-direction hints at all, which would have left basically y- alignment control, y- stem weights and very occasional y- deltas (considering that the x-direction resolution gain reduces or eliminates the need for deltas in curve transitions between y- and x-direction stems). For sure, there are things one can do in VTT, if one is a ’super star hinter’, in the prep program for example, that are not accessible in FontLab. But I doubt if Hrant would be wanting to do such things anyway; I suppose it depends how demanding his clients are and what they mean by ’renders well under ClearType’.\n\n"
+    }
+  ]
+}

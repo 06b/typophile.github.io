@@ -1,0 +1,70 @@
+{
+  "id": "100074",
+  "title": "Font Editors",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "I'm fairly new to font implementation and I was wondering what Font Editors others use? I've tried High Logic Font Creator and Fontographer.\n\nIf anyone would like to share tips regarding their pipelines I'd much appreciate.\n\nI normally start in vector graphics package (draw shapes). Recently the fantastic iFontMaker came to my attention but I couldn't get it on Android and it made me sad, even though from an experienced typographer's view it may seem like a layman's tool.\n\n",
+  "author": "mch",
+  "time": "26 Jan 2013 — 1:59am",
+  "uid": "207391",
+  "comments": [
+    {
+      "time": "26 Jan 2013 — 4:53am",
+      "content": "I'm a little confused. I'd take \"font implementation\" to be, essentially, concerned with using type rather than creating font software. That means a layout program, and these days, except for modifying parts of letters, layout programs can do most of the things font editors can do. It's all software.\n\nBut if you are ever so gradually going to start working on the type itself -- even if, like me, your only interest is in using type, I can offer one thought: Where ever you start, you're going to change your mind. Accept you'll waste some time and money. The freeing part of that thought is that whatever decisions you make won't be bad mistakes.\n\nAs for specifics, more details would help. What platform are you using? What kinds of things are you interested in? Drawing suggests letter creation. So, you want to move from the computer-equivalent of \"hand lettering\" to \"font creation\" -- For your own use in a particular area, or to make fonts that can be used on a lot of different platforms, with lots of different programs, for lots of different purposes?\n\nAnything that would help cut down that rather large universe would get better answers.\n\n"
+    },
+    {
+      "time": "26 Jan 2013 — 6:49am",
+      "content": "Maciej, you want to do font editing on Android?\n\nI use FontLab (after many years of Fontographer). But there are some new players out there lately with cool features, and some type designers have moved away from FontLab. But many people actually use more than one editor; for example I once had to resort to Fontographer for its then-superior auto-bold:  \n [http://www.typophile.com/node/81774](http://web.archive.org/web/20140724062551/http:/www.typophile.com/node/81774 \"http://www.typophile.com/node/81774\")\n\n> layout programs can do most of the things font editors can do.\n\nI'm sorry Charles, but: what kind of tea are you having at the moment? I'm having Lipton. Teabag.\n\nhhp\n\n"
+    },
+    {
+      "time": "26 Jan 2013 — 7:17am",
+      "content": "hhp -- I keep forgetting you don't seem to use type.\n\nLet's see. First thing to note is that all the OT features just remove handwork in a layout program, so we can skip all them. Now, I can condense, expand, embolden, and change the fit of type in a Layout program. The unit of measurement in InDesign is essentially the same magnitude as for FontLab.\n\nAs long as we're not talking about changing parts of a letter, or creating a new letter that is treated as a \\*character\\* rather than an \\*image\\*, what can you do with a Font editor (someone) can't do with a layout program?\n\n\\* \\* \\*\n\nBy the way, Fontographer's embolding routines have some problems, too. Consider the KLTF Gylph tweaker as another useful tool.\n\n[http://www.kltf.de/kltf\\_otproduction.htm](http://web.archive.org/web/20140724062551/http:/www.kltf.de/kltf_otproduction.htm \"http://www.kltf.de/kltf\\_otproduction.htm\")\n\n"
+    },
+    {
+      "time": "26 Jan 2013 — 11:47am",
+      "content": "But I'm not forgetting you've never made a font.\n\nhhp\n\n"
+    },
+    {
+      "time": "26 Jan 2013 — 12:59pm",
+      "content": "Charles: _First thing to note is that all the OT features just remove handwork in a layout program, so we can skip all them._\n\nThis is a probematic statement, which is not to say that there is not a sense in which it is true. In a sufficiently advanced page layout program such as InDesign, it is possible to achieve the same visual results via 'handwork' as with OpenType Layout features. This is true even of layout for complex scripts -- employing, in essence, a metal type composition paradigm --, although the handwork involved will involve breaking the text in various ways. And this is one of the ways in which the statement is problematic, because visual results are not the only criteria by which digital text layout needs to be evaluated. Even if the principal target is print, the same text may be subjected to live editing, platform interchange, electronic publishing, digital archiving, and other workflows in which _content_, rather than display, is of primary importance. The real benefit of OpenType Layout isn't that it removes the need for handwork, but that it enables glyph-level display handling independent of character encoding, and handwork models have mostly degraded that independence, usually to the cost of clean character encoding.\n\n"
+    },
+    {
+      "time": "26 Jan 2013 — 3:09pm",
+      "content": "John, I'll defer to you on this, though part of your explanation is a bit problematic for me. In my mind, the real advantage working with modern documents -- with, say, OpenType and a layout engine such as InDesign -- is that the object-attribute structure pretty much lets you preserve the text stream while you do other work.\n\nI think of it like a multi-track tape recorder, where the \"attribute tracks\" need not be a part of the objects, i.e., the basic text.\n\nTrivially, for setting text, one kind of attribute applied to a text does not block another. You can manually apply a baseline shift without blocking programmatic kerning. In the old days, even with a complex layout program like TeX, changing the character position required entering the instruction in the file, and the presence of that command blocked anything but an explicit kern also entered in the file.\n\nOff the top of my head, I can't think of how entering a command in InDesign breaks the text stream, save in the (perhaps) trivial sense that it might later have to be ignored, as with a character style who's only purpose was to work around the defect in a font.\n\nStill, given today's presentation of documents, we're not really where we need to be yet. A non-essential instruction can also help by signalling that further work may be needed -- for example, if you want real small caps in an EPUB ebook, you need a separate font where the encoding reminds one of the ticks used with the old PostScript Type 1. (And then stops working as intended when the reader changes fonts.)\n\nAs for the document itself, things do happen. If you rely on XML encoding, the programming capabilities of XLST make many different uses possible. But another kind of document, the PDF, is still often used for further products of typeset files, and that does bring in a host of issues.\n\nSuch things really do lie outside my area of expertise, so again, I'll defer to you on this.\n\n"
+    },
+    {
+      "time": "26 Jan 2013 — 5:43pm",
+      "content": "Charles, I was specifically responding to your comment about OpenType Layout features, so not including a great manner of operations in a program like InDesign, such as you describe, that do not require glyph substitution or reordering operations. The way you put it was 'all the OT features just remove handwork in a layout program', and my point is that they do rather more than this, because handwork options to achieve the same typographic results will tend to involve messing with the text. Consider the old Type 1 'expert set' approach to ligatures and smallcaps. And while something like the InDesign glyph pallette enables you to input glyph variants other than via OTL features, it remains dependent on those features to know how to map those glyphs back to correct underlying character codes in the text string; in the absence of a path via the OTL features, InDesign will insert a raw glyph ID, with no character mapping, and hence you will have messed up the text.\n\n_Still, given today's presentation of documents, we're not really where we need to be yet._\n\nVery true.\n\n"
+    },
+    {
+      "time": "26 Jan 2013 — 6:35pm",
+      "content": "And none of the above makes \"InDesign\" a rational answer to Maciej's question.\n\nhhp\n\n"
+    },
+    {
+      "time": "26 Jan 2013 — 7:07pm",
+      "content": "OK, I see it now. BTW (really hijacking the thread), I'd forgotten this because all through the Type 1 Postscript days, we set type using TeX, and ligaturing was a property of the AFM. The text stream was undisturbed. In some fonts, I had gg, gy, ggy, etc. ligatures, all hooked up through the AFM. Being able to write whatever encoding vector you needed got around a lot of lies in the underlying text, just let the font do the work. Even the Greek characters had the correct name, you just had to write a custom encoding vector.\n\nWe left CJK alone until Unicode; my business partner wrote a complicated routine that let us map everything, even with the 8-bit fonts of the time. The character names were the Unicode number, so again, the text stream was correct.\n\nOddly enough, one of the worst problems was the wordspace, which is not a character in TeX.\n\n\\* \\* \\*\n\nTo the Original Poster, sorry for the side trip, the offer of advice still stands, particularly if you could tell us more...\n\nAbsent that, the program FontLab will work & in some ways is simpler (one program bundles most everything you need), but it is expensive. There are open source programs which obviously are cheaper -- and for some things better -- but usually there is also more to learn.\n\n"
+    },
+    {
+      "time": "26 Jan 2013 — 7:43pm",
+      "content": "If I can get back to the original question...  \nI prefer Robofont, but if you're new to the field, perhaps Fontographer is the way to start.\n\nJason C\n\n"
+    },
+    {
+      "time": "26 Jan 2013 — 7:43pm",
+      "content": "The OP is asking about font creation software. I don't understand what that has to do with the layout capabilities ofword processors, no matter HOW advanced. -- Herb\n\n"
+    },
+    {
+      "time": "26 Jan 2013 — 7:45pm",
+      "content": "It's the special tea.\n\nhhp\n\n"
+    },
+    {
+      "time": "26 Jan 2013 — 11:11pm",
+      "content": "Well, as Charles said right at the beginning of his first response, he was a 'little confused' by mch's use of the phrase 'font implementation', which he understands in a particular way relative to his own work. Yes, the following discussion was a diversion (although, for me, a bit more interesting than yet another 'What font editing software should I use?' question; FAQ, anyone?)\n\n"
+    },
+    {
+      "time": "27 Jan 2013 — 12:59pm",
+      "content": "FontForge now has Mac packages\n\n[http://fontforge.github.com/en-US/downloads/mac.html](http://web.archive.org/web/20140724062551/http:/fontforge.github.com/en-US/downloads/mac.html \"http://fontforge.github.com/en-US/downloads/mac.html\")\n\n"
+    }
+  ]
+}

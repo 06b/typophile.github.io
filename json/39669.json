@@ -1,0 +1,42 @@
+{
+  "id": "39669",
+  "title": "Semi-standards",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "As has been noted in some recent threads, a kind type designer will assign Unicode points to all glyphs so that users can access them in non-Opentype-smart applications.\n\n[MUFI](http://web.archive.org/web/20081007180242/http:/www.mufi.info/) defines an unofficial standard for assigning codes in the Private Use Area to a lot of characters and ligatures needed for the precise transcription of Medieval texts. It’s prominently linked from the Wikipedia entry on Unicode, and it includes many ligatures found in modern fonts, like fj and tz.\n\nThe fonts I’m working on are never going to be used for Medieval work, but since it otherwise doesn’t matter where in the PUA my extra glyphs go, I feel I may as well put my tt ligature at U+EED9, which at least _someone_ has already agreed corresponds to a tt ligature. I think it’s even reasonable to find approximations; for instance, my swash P alternate can go in the place meant for “capital P with flourish”. It’s not really the same thing, but it’s a P, and that’s better than random. MUFI spans E000-F2FF, so glyphs without an applicable MUFI encoding should start at F300, because if half the special characters turn into the right thing when a text is changed to a MUFI font, the other half should become .notdef, not the wrong thing.\n\nWhat are your opinions on using these codepages this way? Do you think it’s a good idea, or a bad idea?\n\n [‹ Why isn't there a problem in InDesign CS3?](http://web.archive.org/web/20081007180242/http:/www.typophile.com/node/39756 \"Go to previous forum topic\") [Suitcase? ›](http://web.archive.org/web/20081007180242/http:/www.typophile.com/node/39639 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081007180242/http://www.typophile.com/user/2462\" title=\"View user profile.\">cerulean</a>",
+  "time": "<br>",
+  "uid": "2462",
+  "comments": [
+    {
+      "time": " 2.Dec.2007 12.42pm",
+      "content": "This was dealt with only ten days ago (see [this comment](http://web.archive.org/web/20081007180242/http:/typophile.com/node/39225#comment-240506)), so why two new threads (including [this one](http://web.archive.org/web/20081007180242/http:/typophile.com/node/39657)) for the same issue ...  \nAlso see [this proposal](http://web.archive.org/web/20081007180242/http:/typophile.com/node/32164) and google for even more related threads.\n\nIndeed most applications have a serious problem with accessing unencoded glyphs. But this is the problem of these applications, not of fonts. It is not up to font developers to work around applications’ shortcomings (mostly). And it has nothing to do with type designers being kind or not-so-kind.&nbsp;&nbsp;;-)\n\nPUA may allow MUFI for faster decisions and agreement among members, but PUA per definition excludes the idea of ’standard’.\n\nThe more interesting question is, how can type designers make sure that _OpenType-savvy_ applications can ’map’ all unencoded alternate glyphs back to encoded glyphs, so that no GIDs end up in the document? (Which would be as bad as PUAs since they are font dependent and non-standard too.)\n\n"
+    },
+    {
+      "time": " 2.Dec.2007 2.17pm",
+      "content": "So... only people with nice new $700 professional design software should be allowed full use of a font they’ve bought? I feel that if an appropriate ligature or alternate is available to someone who is using my font to make a web banner in an old paint program, the results will reflect better on my typeface.\n\nAnd if you want to rest all the responsibility on the software programmers, I think applications that use OpenType lookups should be able to preserve the plaintext whether the replacement glyph is encoded or unencoded. That seems more like something I’m willing to think of as “not my problem.”\n\n"
+    },
+    {
+      "time": " 2.Dec.2007 3.50pm",
+      "content": "<cite>So... only people with nice new $700 professional design software should be allowed full use of a font they’ve bought? I feel that if an appropriate ligature or alternate is available to someone who is using my font to make a web banner in an old paint program, the results will reflect better on my typeface.</cite>\n\nSo you say that it is wrong to blame low-cost applications since they do not cost much, but it is fine to blame fonts since they cost something?  \nIn OT fonts, the relevant information is there: glyphs can be ’mapped’ to Unicode codepoints directly via ’cmap’, but also indirectly via OT layout tables. Of course it were helpful if applications would not ignore half of the information ...  \nSeems using low-cost apps has its price too. But having font developers pay for it, and be it with (more or less) hacks?\n\n<cite>I think applications that use OpenType lookups should be able to preserve the plaintext whether the replacement glyph is encoded or unencoded.</cite>\n\nIf you enter plaintext in your application and apply OT features, then the application already knows the plaintext and may preserve it, and it shoudl not matter if glyphs are encoded or not. So this is neither an issue nor your original question.  \nThe issue is access to ’special glyphs’, like inserting them via glyph palette. Then, the application has to find out, first of all, what a glyph’s codepoint is. And here, PUA is just as bad as is mere glyph ID because PUA is non-standard. Change the font and see the effect.\n\nHowever, if you make fonts for a special audience whom you may please with PUA, and if the result is a gif where character code does not matter anyway, why not.\n\n"
+    },
+    {
+      "time": " 2.Dec.2007 6.04pm",
+      "content": "So it’s only a problem if the glyph is pasted in directly? The only people doing that will be those who can’t get the glyph through OT features, and who know full well what they’ve done when they do it, and probably don’t need to be protected from their own decisions. I don’t see why giving it a codepoint is such a bad thing, then. You made it sound like it would create problems for the OT users.\n\n"
+    },
+    {
+      "time": " 3.Dec.2007 12.22pm",
+      "content": "There are a few other unofficial registries of PUA uses beside MUFI:\n\n[Use of the PUA by Software Vendors (at SIL)](http://web.archive.org/web/20081007180242/http:/scripts.sil.org/VendorUseOfPUA)  \n [ConScript registry of constructed and artificial scripts](http://web.archive.org/web/20081007180242/http:/www.evertype.com/standards/csur/)\n\nThere are more, but much of that is linked through the SIL.org site, so I figured one link to them would be enough.\n\n"
+    },
+    {
+      "time": " 4.Dec.2007 2.56pm",
+      "content": "\\> The only people doing that will be those who can’t get the glyph through  \n\\> OT features, and who know full well what they’ve done when they do it\n\nQuite a bold decision to presume what “the users” will or will not do. My experience says that “the users” will use every single opportunity the software will give them (of course, not every user will do the same).\n\nPUA is OK for many uses but I really seriously doubt that trying to semi-standardize it will make any sense.\n\nA.\n\n"
+    },
+    {
+      "time": " 4.Dec.2007 5.02pm",
+      "content": "To me it seems simple. If it should be standard, petition Unicode to put it in the Unicode Standard. Runes are in. Glagolitic is in. Klingon is out. Otherwise, PUA is just what it says: Private.\n\nBTW, as I understand it, when you export an XML file with Private Use characters, you are apt to lose them. Better to address the problem at the source.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "id": "32650",
+  "title": "0,0 Cross hair - Macro ?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Sorry for the name - not too sure what the correct name is for the little round icon that normally sits at 0,0. Anyway does this icon have to be at 0,0, if so is there a quick way to correct it in the all glyphs like a macro or something similar.\n\nRegards\n\nR ;)\n\n ![](http://web.archive.org/web/20131020191222im_/http:/typophile.com/files/Picture1_6274.jpg)\n\n",
+  "author": "RachelR",
+  "time": "29 Mar 2007 — 5:25am",
+  "uid": "16986",
+  "comments": [
+    {
+      "time": "29 Mar 2007 — 6:25am",
+      "content": "It's called the reference point. There's a whole page about it in the manual. You can change the coordinates by dragging it. You can also command-click (control-click for Windows) on it and a little window pops up that you can type coordinated into.\n\nThere is probably a way to reset the reference points of all glyphs to 0,0 but it's a bit beyond me how exactly to do it.\n\n"
+    },
+    {
+      "time": "29 Mar 2007 — 7:05am",
+      "content": "I may be wrong, but I believe that the reference point is not part of an exported font, but is only used (optionally) within FontLab as a reference for operations like rotation.\n\nIf you export the font and then re-open it, you will see that FontLab puts all the reference points in at 0.0 .\n\nIn other words, unless you are using it as a reference point in an operation--such as an instruction to rotate around the reference point--you can forget about it.\n\n"
+    },
+    {
+      "time": "29 Mar 2007 — 7:09am",
+      "content": "That'd work, but you'd also lose anything else you may have in the font that doesn't get exported (guidelines, background images, OT source code, etc.).\n\n"
+    },
+    {
+      "time": "29 Mar 2007 — 7:16am",
+      "content": "_In other words, unless you are using it as a reference point in an operation—such as an instruction to rotate around the reference point—you can forget about it._\n\nI would agree with that. If you need to use 0,0 as a reference point, you don't need the (movable) reference point to do it. For example:\n\n ![](http://web.archive.org/web/20131020191222im_/http:/typophile.com/files/referencepoint_6687.jpg)\n\nNote that \"zero point\" is one of the choices for a transformation.\n\n"
+    },
+    {
+      "time": "29 Mar 2007 — 7:21am",
+      "content": "An aside: They really should give the movable reference point a different name. In the manual, the term \"reference point\" is used interchangeably to mean either the movable reference point (the little asterisk icon you can move around) or any other reference point. It's a bit confusing that one of your choices for a reference point is the reference point.\n\n"
+    },
+    {
+      "time": "29 Mar 2007 — 6:13pm",
+      "content": "This is the macro I use in order to reset the reference point:\n\n`#FLM: reset rpoint\nfrom FL import *\nf = fl.font\nfor i in range(len(f)):\n  f[i].rpoint = Point(0,0)\nfl.UpdateFont()\n`\n\n"
+    },
+    {
+      "time": "29 Mar 2007 — 11:02pm",
+      "content": "Tim, thanks for this code, but if I run it I get this error message :\n\n`\n File \"\", line 5\n      f[i].rpoint = Point(0,0)\n    ^\nSyntaxError: invalid syntax`\n\n"
+    },
+    {
+      "time": "29 Mar 2007 — 11:37pm",
+      "content": "Rachel, make sure that first white space is a tab.  \n(I noticed that when copy&pasting from Safari, that white space becomes two non-breaking space characters [U+00A0])\n\n"
+    },
+    {
+      "time": "30 Mar 2007 — 6:01am",
+      "content": "Thanks Tim, that's useful - saves loads of time.\n\nNick Cooke\n\n"
+    },
+    {
+      "time": "30 Mar 2007 — 8:52am",
+      "content": "\\>saves loads of time\n\nI'm puzzled. Since, as Mark notes, you don't get any additional functionality by having the reference point at o.o, how does it help you to move the reference point back to 0.0?\n\n"
+    },
+    {
+      "time": "2 Apr 2007 — 4:02am",
+      "content": "It doesn't help – it's just reassuring somehow :^) (note to self; Don't be so anal).\n\nAs it serves no purpose I may ignore it in future.\n\nNick Cooke\n\n"
+    },
+    {
+      "time": "2 Apr 2007 — 4:38am",
+      "content": "\\>note to self\n\nI kept moving it back to 0.0 for months until one day I asked myself, why the heck am I doing this?\n\nThis illustrates a pet gripe about the FontLab manual. It tells you that the reference point is useful for a symmetrical letter--though I'm not sure why as you have the option of rotating etc relative to the center of the selection--but doesn't tell you that it's only of any use in restricted situations. Basically, you have to figure out how its functionality or lack of functionality fits into the job of developing a typeface. A manual ought to give the user more guidance on this.\n\nAlso because you never need to use it at 0.0 it makes more sense for it not to be always on the glyph window, but rather to be inserted optionally when you want it, at a desired rotation center, etc.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "id": "14822",
+  "title": "Bitmap info",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm looking for any info about bitmap fonts (how-to, use, size & use). Who's the expert here?\n\n",
+  "author": "david h",
+  "time": "24 Aug 2005 — 6:09pm",
+  "uid": "8867",
+  "comments": [
+    {
+      "time": "25 Aug 2005 — 7:17am",
+      "content": "Do you mean _actual_ bitmap fonts, or outline fonts that look like bitmap fonts?\n\n"
+    },
+    {
+      "time": "25 Aug 2005 — 9:31am",
+      "content": "Actual bitmap fonts.\n\n"
+    },
+    {
+      "time": "26 Aug 2005 — 8:58am",
+      "content": "No one?\n\n"
+    },
+    {
+      "time": "26 Aug 2005 — 11:07am",
+      "content": "David, please give me until next week.\n\nhhp\n\n"
+    },
+    {
+      "time": "26 Aug 2005 — 11:10am",
+      "content": "Ohhhh...Thank you!\n\n"
+    },
+    {
+      "time": "26 Aug 2005 — 5:17pm",
+      "content": "Sorry, I was away. What operating system and/or software do you want to use bitmap fonts with?\n\n"
+    },
+    {
+      "time": "26 Aug 2005 — 5:55pm",
+      "content": "Thank you Mark!\n\n1. Mac & PC.\n\n2. Do I need BitFonter & FONmaker?\n\n"
+    },
+    {
+      "time": "30 Aug 2005 — 3:45am",
+      "content": "Mark,\n\nI've now become interested in designing bitmap fonts myself. But I'm absolutely ignorant when it comes to actual bitmap fonts; I have no idea what formats are being used and what for, let alone what programs are being used to create them. How do I take my first steps?\n\nAs for outline fonts that look like bitmap ones, I realize I should use a grid, but I guess not any grid will work if I want the result not to be anti-aliased. How do I set it up correctly, then? And how do I do it in such way that the result won't be anti-aliased in Macromedia Flash as well (if it uses outline fonts at all)?\n\nTIA\n\n"
+    },
+    {
+      "time": "30 Aug 2005 — 5:55pm",
+      "content": "David:\n\nOn MacOS X, bitmap fonts by themselves are not recognized at all. However, if they are paired with a TrueType or PostScript font, they will show up at small sizes (depending on what size you have set font smoothing to kick in).\n\nOn the classic MacOS (9 and earlier), bitmap fonts can be installed and used just like any other font, except when you print to a PostScript printer it will not work well or at all. They are also not recognized by some programs (e.g., Illustrator).\n\nOn Windows... I don't know much about using bitmap fonts on Windows. (Sorry.) Maybe someone else can step in with that information.\n\nIf you want to make bitmap fonts, BitFonter is a good choice. It can export to most existing formats and has a relatively nice working environment, similar to FontLab. I don't know anything about FONmaker.\n\nI made a bunch of bitmap fonts years ago using the now long-obsolete FONTastic on a Mac Plus, and earlier still, Apple's Font Editor (I think that's what it was called), a buggy developer tool from the early Mac days (the same one Zuzanna Licko used for her early Emigre fonts).\n\nYou should be aware that software that can use bitmap fonts is becoming rarer. Most of the \"bitmap\" fonts you see on modern operating systems are really outline fonts being rastered at a low resolution without anti-aliasing, or outline fonts made intentionally to look like bitmap fonts (popular with Flash developers). (More on this below.)\n\nOri:\n\nThere are many different ways to make faux-bitmap fonts. Most people work in FontLab or Fontographer, setting up a grid as you suggest. The key thing is that the grid needs to divide evenly into the em square. For example, if your em square is 1000 units tall, and you want to make an 8-pixel tall font, your grid should be set to 250 units. Hint: the em square does not have to be 1000, although that is typical for PostScript fonts. Also, the character widths must all fall on the same grid.\n\nSome people design their fonts in a program like Photoshop that allows them to work in pixels, then, once it looks the way they like, they recreate it in an outline editor. An alternative is to use BitFonter to design the fonts and use its \"Pixel Font\" export feature to create the faux-bitmap font. I have not tried this, but I don't doubt it works fine. (I have not created a faux-bitmap font for a couple of years.)\n\nFinally, if you do it manually, you need to make sure that you do not create a situation where you have the corner points of your \"pixels\" at the same exact font coordinate. This will lead to filled in counters if you try to use the font in Flash. FontLab's BitFonter export takes this into account, as does their FontFlasher program (a standalone that takes existing bitmap fonts and turns them into faux-bitmap outline fonts). There are a number of ways to work around this issue, including making the \"pixels\" slightly bigger and merging the outlines, making the \"pixels\" slightly smaller, or simply snipping off one of the \"pixel\" corners.\n\nAnyway, this is a deep subject and one that I've become less interested in lately. There are others more active in creating this kind of font, and maybe one of them will step in with further information.\n\n"
+    },
+    {
+      "time": "31 Aug 2005 — 1:24am",
+      "content": "\\>\\>FontFlasher program (a standalone that takes existing bitmap fonts and turns them into faux-bitmap outline fonts).\n\nOne small correction: FontFlasher takes installed outline fonts and turns them into .vfb files acceptable by FontLab.\n\nRegards,  \nJohnych\n\n"
+    },
+    {
+      "time": "31 Aug 2005 — 4:58am",
+      "content": "Mark,\n\nThanks a lot, I really appreciate it. Just one more little question, please: some bitmap fonts are designed for use at a specific size (or its multiples); how is it done?\n\noribendor\n\n"
+    },
+    {
+      "time": "31 Aug 2005 — 5:09am",
+      "content": "_some bitmap fonts are designed for use at a specific size (or its multiples); how is it done?_\n\nBy dividing your em square appropriately: with a 1,000 unit em square, for a 10-pixel font, each block (individual pixel) element would be 72x72; for an 8-pixel font, 125x125; and so on.\n\n"
+    },
+    {
+      "time": "31 Aug 2005 — 5:55am",
+      "content": "Now wait a minute, 1,000/8 is actually 125, but 1,000/10 isn't 72. Is it just a mistake or am I missing something?\n\nThanks.\n\n"
+    },
+    {
+      "time": "31 Aug 2005 — 12:55pm",
+      "content": "_Now wait a minute, 1,000/8 is actually 125, but 1,000/10 isn’t 72. Is it just a mistake or am I missing something?_\n\nA mistake...busy day at work, my mind was elsewhere. Obviously, a 10-pixel font would have a 100x100 unit element.\n\n"
+    },
+    {
+      "time": "31 Aug 2005 — 2:00pm",
+      "content": "Mark: thank you very much.\n\n- - - - - - - - - - - -  \nAdjective5™ | Adj5™\n\n"
+    }
+  ]
+}

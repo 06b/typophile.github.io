@@ -1,0 +1,42 @@
+{
+  "id": "51212",
+  "title": "CacheTT",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "**_(Alert-Newbie Question)_**\n\nIs **CacheTT** still used by people creating TT Fonts?\n\nI've found one thread posted here dated years ago, and Microsoft's dl page is dated 2003.  \nI'm using Font Validator to test my first font, and 99% of my error message codes when put in plain English make reference to CacheTT.\n\n_(I gather OpenType PS is the way to go, but TrueType seems less of a steeper learning curve for the beginner than OpenType PS. So I'll go with the smaller steps first)_\n\nAppreciate any wisdom.\n\nThanks  \nDrj\n\n",
+  "author": "<a href=\"/web/20111229210507/http://typophile.com/user/36432\" title=\"View user profile.\">Dr jack</a>",
+  "time": "<br>",
+  "uid": "36432",
+  "comments": [
+    {
+      "time": "",
+      "content": "\\> I gather OpenType PS is the way to go, but  \n\\> TrueType seems less of a steeper learning  \n\\> curve for the beginner than OpenType PS\n\nReally? TrueType is nothing else but OpenType TT, so the only difference between those formats is hinting, which is actually \\*more\\* complicated in TrueType-flavored fonts than in PostScript-flavored fonts.\n\nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "Sorry twardoch,\n\nI think I meant the learning curve in OpenType and applying features.\n\nI'm still try to get my head all around this.  \nWith terminology that uses half another file's terminology it confuses me.  \n(OpenType PS, OpenType TT, TrueType, Windows TrueType, TrueType flavored OpenType, PostScript-Flavored OpenType.......Oh come on!!)\n\nI'm trying hard to learn as much as I can but in the world of Typography I keep getting this feeling that the ones who made the rules **call**...  \n**a car a car  \na horse a horse  \na car, sometimes a horse  \na horse, sometimes a car  \na horse that can be a car when it feels like it  \na car that can be a PC but can't be a Mac  \na Roman horse that uses only three legs to be OS X horse  \na car that has 1252 buttons but won't run on Mac OS 8/9 fuel  \na car that is eaten by a horse...a car  \nand then there is a horse flavored like a Ford!**    \n**_And that's at it friendliest to newbies._**\n\nIs Font terminology really a secret society of confusion, or will my brain eventually surrender, and I talk and walk like you guys?. lol\n\nThanks for answering. I'm already aware of the presence of many gurus here and I really appreciate every learned comment.  \nI love this site. So much to learn.\n\nNow anyone have an answer on CacheTT?\n\nCheers\n\n"
+    },
+    {
+      "time": "",
+      "content": "Believe me, I've been campaigning for unified terminology on this since at least 2002. This is the cheat sheet:\n\nOpenType TT (.ttf) = TrueType-flavored OpenType = OpenType TTF = Windows TrueType\n\nOpenType PS (.otf) = PostScript-flavored OpenType = OpenType CFF\n\nAs for OpenType features, there is also no real difference. If your font just has glyphs that are default representations of Unicode characters, then you don't need any OpenType Layout features, no matter whether you make .otf or .ttf (FontLab Studio will build the kerning feature automatically).\n\nIf your font does have any alternate glyphs or ligatures, then you should add OpenType Layout code, no matter whether you make .otf or .ttf.\n\nIn my own experience, making .otf is much simpler than making .ttf because you don't need to worry about the hinting issues.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"In my own experience, making .otf is much simpler than making .ttf because you don’t need to worry about the hinting issues.\"\n\nThe decision made to worry about hinting or not, can be made without leaving the ttf format.  \nThe decision made to worry about contour conversion or not, can only be made without entering the ttf format.\n\nCheers!\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks twardoch and dberlow.  \nAnd I'm cut & pasting your cheat note too! ;-)\n\nAs a just fallen to earth font newbie myself, I think the major problem is that I want the terminology to be distinct, not bleed into one, which is part of one description, not another and sometimes all at once.  \nI'd love A to be a file format and description, B to be another and C to be another.  \nI just don't find the file format descriptions separate enough.\n\nI'm starting to get it slowly.  \nBut then I look at two files sitting in a folder and from outside I see one icon has TT on it and the other has an O on it. Touch on the files, look at the Properties, and both are described as Truetype.  \nWhy not have one icon on the file? Or have the Properties describe the files as different based on there being different icons? Why have the O on the file if the file format descriptions are the same?\n\nAnyway, thanks again.\n\nCould someone please describe 'hinting' to me in layman's terms.  \nI've read lots here and in manuals, and have read that is the dread of most type designers.  \nHow would you describe it to a Graphic Designer? (Not an already Type Design aware person)\n\nCheers\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hinting is, in simple terms, a way to tell the computer that certain parts of letters should be kept equal at small sizes even if those parts are in reality not identical. For example, all stems in small sizes should either be one pixel wide or two pixels wide, but if some stems are one pixel wide and some stems that in reality are only slightly thicker are then suddenly two pixels wide, it looks horrible. So hinting is a mechanism to regularize the display of a font in small sizes.\n\nThe icon thing is confusing, but regardless of whether a font has an OpenType icon or a TrueType icon in Windows, it actually always is OpenType. OpenType PS fonts always get the O icon while OpenType TT fonts that have a digital signature get the O icon and those which don't have a digital signature get the TT icon. The presence or absence of a digital signature has no influence on any actual \"OpenType functionality\" though.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "In answer to the original question, yes, we're still using CacheTT to calculate device metrics tables in a way that Windows likes. FontLab for Windows includes an option to utilise CacheTT during TTF generation, and I recommend this, if for no other reason than that it makes Font Validator reports a lot shorter.\n\n"
+    }
+  ]
+}

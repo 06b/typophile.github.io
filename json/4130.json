@@ -1,0 +1,74 @@
+{
+  "id": "4130",
+  "title": "Modifying fonts creates other problem",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I'm working on this project that is coming up very nicely and it uses Courier New (sorry if I offended anyone) ;)   \n   \nI wanted to tweak the apostrophe and comma because they seemed too thick so I changed them a little in Fontlab. I started from a .ttf file and saved as Type 1 (Set as bitstream). My modifications worked fine but when I print, some letters seem to have thickened a little (u, r, and n especially.)   \n   \nThere is no such change on screen, only when I print it (using an inkjet printer). What could cause this? Is there another way to save that will keep it from doing this? Is it a matter of bitmaps or something?   \n   \nI'm not really used to FontLab yet and font editing software overall so detailed explanations would be very nice! =)\n\n",
+  "author": "emilie",
+  "time": "5 April, 2004 - 3:44pm",
+  "uid": "2485",
+  "comments": [
+    {
+      "time": " 5 April, 2004 - 9:41pm",
+      "content": "Probably the hinting is being thrown off (especially since you're switching from TT to T1). Hints are \"extra\" instructions embedded in fonts to help them render more consistently in low resolutions\\*. It's something you can tweak yourself, but it's a lot of work to do right. On the other hand, it's possible that Fontlab's auto-hinting will do a decent job for you. Your best bet is to keep the font as TT, and possibly tweak the hinting just for the characters you're modifying.   \n   \n\\* Normally this affects screen rendering most, but for smaller point sizes even laser printers can exhibit funny artefacts.   \n   \nThe other possibility I can think of is a counter direction issue. Contours that are turning the wrong way will render slightly darker - although I'm not sure why only some of your glyphs would exhibit the problem. Also, proper contour direction for TT is opposite that of T1! You can check everything manually: T1 contours have to be counter-clockwise for black bodies, and clockwise for white (like the inside of the \"o\"); or you can use FontLab's automatic process.   \n   \nBTW, I think Courier New is covered by the MS font EULA, which prohibits font modifications of any kind, even if it's just for \"internal\" use. But I personally recommend ignoring such clauses in EULAs, although I might advise you not to publicize it too much. :-)   \n   \nBonne chance...   \n   \nhhp\n\n"
+    },
+    {
+      "time": " 5 April, 2004 - 11:48pm",
+      "content": "_BTW, I think Courier New is covered by the MS font EULA, which prohibits font modifications of any kind, even if it's just for \"internal\" use. But I personally recommend ignoring such clauses in EULAs_   \n   \nThere is no MS _font_ EULA: the core system fonts are covered under the terms of the _operating system_ license, according to which opening and modifying the font would count as decompiling a system component. I'm willing to consider arguments of this kind regarding retail font licenses, because there is room for debate in what is 'normal' for such licenses, but core system fonts are a different kind of thing, developed, paid for and provided to users under a completely different model from retail fonts.\n\n"
+    },
+    {
+      "time": " 6 April, 2004 - 10:49am",
+      "content": "Actually I'm only using it as a school project.   \nKeeping it in TTF worked, thanks! I thought changing it to postscript might make it print better but it did the opposite. What are the main differences between T1 and TT?   \n   \nI've had similar problems with a font I started creating, on screen it appeared nicely but printed on inkjet and even a bit on laser some shapes were a lot thicker than I had made them. I had created it in illustrator and then imported to fontographer.   \n   \nWould this be because fontographer might have a worse hinting engine than Fontlab's? Any tips on how to import my font from fontographer to fontlab?   \n   \nI'm going to start another thread about EULA in release, sounds to me like interesting stuff.\n\n"
+    },
+    {
+      "time": " 6 April, 2004 - 11:41am",
+      "content": "Fontographer's hinting (both auto and the manual methods) are indeed far inferior (and in places buggy) compared FontLab's. But it's actually strange that you're having _fewer_ issues onscreen! Are you using 1-bit (b&w) or anti-aliased screen rendering?   \n   \nhhp\n\n"
+    },
+    {
+      "time": " 6 April, 2004 - 12:37pm",
+      "content": "Actually I was using the typical view in InDesign.   \n   \nI did end up noticing some changes as I switched fonts while I was zoomed out but otherwise there was nothing I could see on screen that was blatantly obvious (compared to what I printed).   \n   \nWhere should I post if I want feedback on H&J's and spacing for my project? The critique category seems to aim more on specific fonts. That Courier is giving me headaches but I'm stubborn. ^.^   \n   \nThanks,   \n�milie\n\n"
+    },
+    {
+      "time": " 6 April, 2004 - 12:44pm",
+      "content": "In the same line of conversation, what can be the consequences on things like hinting or other technicalities in software if I set my type size to an \"in-between\" (i.e. 6,25 points instead of 6)? How is it handled?   \n   \nThanks again,   \nEm\n\n"
+    },
+    {
+      "time": " 6 April, 2004 - 12:45pm",
+      "content": "\\> the typical view in InDesign.   \n   \nAaah, yes: Full-Fuzz. No hinting used.   \n   \nIf you viewed your modified font (especially the T1 version) in something like a word-processor (at least on Windows, now that MacOS has also gone the Full-Fuzz Way), you'll see something truly horrid, at least at smaller point sizes.   \n   \nFYI, in the Critique section there's \"Typography / Composition\".   \nBut my own slogan remains \"Just the fonts, maam.\" :-)   \n   \nhhp\n\n"
+    },
+    {
+      "time": " 6 April, 2004 - 2:45pm",
+      "content": "_In the same line of conversation, what can be the consequences on things like hinting or other technicalities in software if I set my type size to an \"in-between\" (i.e. 6,25 points instead of 6)? How is it handled?_   \n   \nHinting affects pixel sizes (measured in ppem, i.e. pixels per em), not point sizes, so fractional point values are handled exactly the same way as full point values. The rasteriser calculates the relationship of point size and resolution to determine ppem size. At low resolutions, there may be no visible difference between close point values, e.g. 6pt and 6.25 points, since ppem sizes are whole numbers so the rasteriser always rounds to the nearest ppem size.\n\n"
+    },
+    {
+      "time": " 6 April, 2004 - 3:04pm",
+      "content": "Hrant: Been there and posted (quite a few times too......) it's basically just typography so I think it should be fine ;-)   \n   \nJohn: Thanks for that info. This is kind of complicated for me right now but I think I got it.   \nAre there any books that go in depth like this technically that you would know of?   \n   \nEm\n\n"
+    },
+    {
+      "time": " 6 April, 2004 - 11:13pm",
+      "content": "I'm not aware of any books that cover this stuff, and to date I've resisted the tempation to write one. For good information on TrueType hinting, I recommend the following links and the pages that follow from them:   \n   \n [_The raster tragedy at low resolution_](http://web.archive.org/web/20051122160530/http:/www.microsoft.com/typography/tools/trtalr.htm) by Beat Stamm, lead developer of the Visual TrueType hinting tool. [Beat's description of a screen as 'a regularly spaced grid of black and white dots' doesn't take into account either greyscale or RGB rendering, but he's focusing on the difficulties of rasterising clean b/w bitmaps.]   \n   \n [TrueType Hinting overview.](http://web.archive.org/web/20051122160530/http:/www.microsoft.com/typography/TrueTypeHintingIntro.mspx) (Microsoft)   \n   \n [_Basic hinting philosophies and TrueType instructions_](http://web.archive.org/web/20051122160530/http:/www.microsoft.com/typography/hinting/tutorial.htm) by Vincent Connare.(Microsoft)   \n   \n [_TrueType Hinting_](http://web.archive.org/web/20051122160530/http:/www.truetype.demon.co.uk/tthints.htm) by Laurence Penney. [The tools discussion in this article is rather out-of-date, but the basic discussion is good and still relevant.]\n\n"
+    },
+    {
+      "time": " 8 April, 2004 - 11:01am",
+      "content": "Great links thanks!\n\n"
+    },
+    {
+      "time": " 8 April, 2004 - 1:00pm",
+      "content": "I'll add Victor Gaultney's article on hinting in FontLab:   \n   \n [http://scripts.sil.org/cms/scripts/page.php?site\\_id=nrsi&cat\\_id=FontDesignTo](http://web.archive.org/web/20051122160530/http:/scripts.sil.org/cms/scripts/page.php?site_id=nrsi&cat_id=FontDesignTo) ols   \n   \nJohn,   \n   \nWhy resist? I'd buy your book!   \n   \n-Bart\n\n"
+    },
+    {
+      "time": " 8 April, 2004 - 1:22pm",
+      "content": "John Hudson writes: \"There is no MS font EULA: the core system fonts are covered under the terms of the operating system license, according to which opening and modifying the font would count as decompiling a system component.\"   \n   \nI believe this is not completely accurate. Apart from the presence of Courier New in Microsoft Windows as a system component, the font has always been part of the Microsoft Core Fonts for the Web package, which was covered with a separate EULA. The package is available, among others, from:   \n [http://prdownloads.sf.net/corefonts/courie32.exe](http://web.archive.org/web/20051122160530/http:/prdownloads.sf.net/corefonts/courie32.exe)   \n   \nThe EULA that accompanies the product defines, among others, that: \"you may reproduce and distribute an unlimited number of copies\", \" provided that each copy shall be a true and complete copy\", \"you may not reverse engineer, decompile, or disassemble\" the fonts \"except and only to the extent that such activity is expressly permitted by applicable law notwithstanding this limitation\", and finally \"you may not rename, edit or create any derivative works\".   \n   \nSo, editing Courier New is not permitted.   \n   \nAdam\n\n"
+    },
+    {
+      "time": " 8 April, 2004 - 1:46pm",
+      "content": "_Apart from the presence of Courier New in Microsoft Windows as a system component, the font has always been part of the Microsoft Core Fonts for the Web package, which was covered with a separate EULA._   \n   \nTrue, but you would have to check the version number of the font to confirm whether you were dealing with the OS version or the web package version, since the former almost certainly leapfrogs the latter (if it hasn't yet, it is almost certain to in Longhorn, for which MS are updating all the core system fonts).\n\n"
+    },
+    {
+      "time": " 9 April, 2004 - 10:20am",
+      "content": "It's more accurate to say that when our fonts are supplied with Microsoft products their use is governed by the product EULA. In the case of the old Web fonts, they have their own EULA which as Adam points out is even clearer...   \n   \nLimitations on Reverse Engineering, Decompilation, and Disassembly. You may not reverse engineer, decompile, or disassemble the SOFTWARE PRODUCT, except and only to the extent that such activity is expressly permitted by applicable law notwithstanding this limitation.   \n� Restrictions on Alteration. You may not rename, edit or create any derivative works from the SOFTWARE PRODUCT, other than subsetting when embedding them in documents.   \n   \nEmilie has hit on one of the main reasons we prohibit modifications - using off the shelf tools chances are you're going to break the font when you modify it - the hinting, the metrics or other data - if this font gets passed on and users experience problems - document reflow or bad rendering - they'll come to us and complain. Chances are they won't go back to the person who modified the font.   \n   \nCheers, Si\n\n"
+    }
+  ]
+}

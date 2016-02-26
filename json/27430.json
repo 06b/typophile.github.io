@@ -1,0 +1,30 @@
+{
+  "id": "27430",
+  "title": "Layout software - moving from LaTeX",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "I'm new here, so if this is in the wrong forum, feel free to move it.\n\nI'm currently typing up my thesis. As a student in physics, I've resigned myself to using LaTeX. To be honest, up until this year when I started tinkering with fonts, I've been supremely happy with LaTeX. I certainly wouldn't consider typesetting anything with mathematics in something else (unless a successor finally roles around). I'm really charmed with the keyboard driven markup of things. Less point and clicky.\n\nFor other purposes however, LaTeX can be quite frustrating, especially while trying to access different fonts and their features. One of the things that I really like about LaTeX is that I can work in my favorite text editor, type away, and then feed it into LaTeX after the fact. At that point, I only have to tweak things. For example, for an emphasis passage, I \\emph{really like writing like this}. I'd of course be willing to learn new markup if necessary - I just don't want to write in Word and vastly prefer writing and marking up in plain text.\n\nI have a copy of Adobe Indesign 2 (which I might upgrade to CS2 if it will help) and I'm certainly willing to write in XML or other markup languages if there is a path there. So... can Indesign (2 or CS2) process some form of markup instead of just reading in Word files? I'm sure it can... Is there a free and/or cheap way to do this? Do I just need to read the manual more or upgrade to CS2? Thanks for the help!\n\n",
+  "author": "<a href=\"/web/20110205041136/http://typophile.com/user/14118\" title=\"View user profile.\">timgray</a>",
+  "time": "<br>",
+  "uid": "14118",
+  "comments": [
+    {
+      "time": "",
+      "content": "What font features are you trying to access in LaTeX? I am quite happy with LaTeX and its font capabilities, so what exactly does not work with this typesetting engine? (Apart from that: what OS are you using? If Mac OS X: Have you tried XeTeX?) It sounds like you already have your data collected in LaTeX markup - so what's the point in changing over to something else?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes... for my dissertation, or other future scientific documents, I will be using Latex. Fighting math in anything else borders on craziness.\n\nI am on OS X. Xetex is certainly interesting - I should really investigate that more.\n\nAs far as fonts in Latex, its just such a colossal pain in the butt to load new fonts in. I'm using a script and lcdf tools to do most of the work, of which I barely understand :) I've managed to get most things working the way I want, but once you get into greek, old style figures for text and lining figures for math, the proper accents, etc. it gets to be a real bear. I've gotten most of this stuff worked out somehow in a manner that looks acceptable. I did however have to give up on using the greek glyphs from Garamond Premiere Pro since I was having too much difficulty with accents (overbars, vectors, dots, and such) in math mode.\n\nI was really looking for a more forward looking system than TeX's 7 bit madness. I'll look into XeTeX more as I should have done from the beginning. Is it easy to use different fonts in the same XeTeX document (sans and serif)?\n\nIs there a suitable text driven interface into Indesign?\n\n"
+    },
+    {
+      "time": "",
+      "content": "You're right about the problems with setting up new fonts in th TeX tree (I did it with fontinst with the help of [this manual](http://web.archive.org/web/20110205041136/http:/homepage.mac.com/bkerstetter/tex/fonttutorial-current.html) and some 2 weeks of regular trial and error fiddling around). I am currently using XeTeX for typesetting multilingual (and/or rather multi-writing-system) stuff as it allows you to directly input unicode.  \nUsing several fonts in XeTeX is quite easy, you just have to declare them using their PostScript name as in:  \n`\n\\usepackage{fontspec}\n\\defaultfontfeatures{Mapping=tex-text}\n\\setromanfont[Numbers=OldStyle, Ligatures=Common]{GaramondBQ-Regular}\n\\setsansfont{Gill Sans}\n\\setmonofont[Scale=0.94]{American Typewriter Condensed}\n\\renewcommand{\\sc}[1]{\\fontspec{GaramondBQ-SmallCaps}#1\\normalfont}\n`  \nI must admit that I do not have experience with accents in math mode (just using $\\times$ occasionally, that is more or less my math mode experience).  \nAnother possibility would be to use something like LaTeXit, LaTeX Equation Editor or PDF Equation to create your math, and then import it to whatever solution you'll come up with. (I don't know anything about your Indesign question...).\n\n"
+    },
+    {
+      "time": "",
+      "content": "Well, thanks for the input anyway. Thinking more about it, XeTeX is probably the ticket. I'm sure Indesign does some kind of xml import/processing, but I might have to upgrade. That can wait for another day.\n\nThanks again!\n\n"
+    }
+  ]
+}

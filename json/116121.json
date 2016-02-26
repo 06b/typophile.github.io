@@ -1,0 +1,35 @@
+{
+  "id": "116121",
+  "title": "Choosing cvXY and ssXY",
+  "forum": "Build",
+  "tags": [
+    "alternate glyphs",
+    "character variant",
+    "CSS",
+    "OpenType feature tag",
+    "styleset",
+    "Build"
+  ],
+  "content": "Is there any informal standard on how to choose which character variant (`cv01` through `cv99`) or stylistic set (`cv01` through `cv20`) a certain glyph or group of glyphs should go into?  \nAlternatively, has someone conducted a survey what actual typefaces put in these features?\n\nWith [CSS Fonts 3](http://web.archive.org/web/20150420032609/http:/www.w3.org/TR/css-fonts-3/#font-feature-values), there is a higher-level language to add mnemonics for these enumerated features (and some more) when used with the `font-variant-alternates` property.\n\n    @font-feature-values FontFamilyName {\n      @styleset {insular: 1; uncial: 2; unicase: 3;} /* ssXY */\n      @character-variant {initial: 1; medial: 2; final: 3;} /* cvXY */\n      @stylistic {cute: 1;} /* salt index */\n      @swash {curly: 1; longish: 2; playful: 3;} /* swsh or cswh index */\n      @ornaments {ugly: 1; floral: 2; techy: 3;} /* ornm index */\n      @annotation {circled: 1; disced: 2; squared: 3; inverse: 4} /* nalt index */\n      /* identifiers in front of colon are user defined and can be shared by fonts */\n      /* numbers after the colon are font-dependent */\n    }\n\n",
+  "author": "Crissov",
+  "time": "28 Apr 2014 — 9:17am",
+  "uid": "219592",
+  "comments": [
+    {
+      "time": "28 Apr 2014 — 6:01pm",
+      "content": "> Alternatively, has someone conducted a survey what actual typefaces put in these features?\n\nNot a survey, but a data point: SIL's [Scheherazade](http://web.archive.org/web/20150420032609/http:/scripts.sil.org/scheherazade) implements a number cvXX features.\n\nAs for choosing a particular ssXX or cvXX to use, just remember that once users begin to use your fonts with character variant or stylistic set features, you can't change the your mind about which feature to use without breaking user's documents.\n\n"
+    },
+    {
+      "time": "29 Apr 2014 — 1:36am",
+      "content": "Scheherazade seems to use the possibility of OT 1.6 to assign descriptive names to its `cv __` features. It’s also possible for `ss__ `, and AAT always was more verbose. According to the Scheherazade documentation, XeTeX seems to support that (LuaTeX probably too). CSS does not, although it has been proposed already.  \nDoes any font editor and GUI DTP software support named features?  \nDo many fonts contain names?\n\nI believe font vendors should soon start to include CSS files with fonts that are intended to be used on the Web as part of the documentation. They may look something like this:\n\n    @font-feature-values Scheherazade {\n      @character-variant {\n        /* Dal U+062F, 0630, 0688, 0689, 068A, 068B, 068C, 068D, 068E, 068F, 0690, 06EE, 0759, 075A, 08AE */\n        standard-dal: 12 0; alternate-dal: 12 1;\n        /* Meem U+0645, 0765, 0766, 08A7 */\n        standard-meem: 44 0; sindhi-meem: 44 1;\n        /* Heh U+0647 */\n        standard-heh: 48 0; sindhi-heh: 48 1; urdu-heh: 48 2; kurdish-heh: 48 3;\n        /* Arabic U U+0677, 06C7 */\n        standard-u: 50 0; filled-u: 50 1;\n        /* Maddah U+0622, 0627+0653, 0653 */\n        small-maddah: 60 0; large-maddah: 60 1;\n        /* Shadda+Kasra Positioning U+064D, 0650+0651 */\n        raised-shadda-kasra: 62 0; lowered-shadda-kasra: 62 1;\n        /* Damma U+064F */\n        standard-damma: 70 0; filled-damma: 70 1; short-damma: 70 2;\n        /* Dammatan U+064C */\n        standard-dammatan: 72 0; six-nine-dammatan: 72 1;\n        /* Inverted Damma U+0657 */\n        standard-inverted-damma: 74 0; hollow-inverted-damma: 74 1;\n        /* Superscript Alef U+0670+…, 0649, 064A, 06D0, 06D1, 0777, 06CC, 0635, 0636, 069D, 069E, 06FB, 08AF, 0633, 0634, 069A, 069B, 069C, 06FA, 075C, 076D, 0770, 077D, 077E */\n        small-superscript-alef: 76 0; large-superscript-alef: 76 1;\n        /* Sukun U+0652 */\n        closed-sukun: 78 0; open-down-sukun: 78 1; open-left-sukun: 78 2;\n        /* End of Ayah U+06DD */\n        standard-ayah-end: 80 0; circle-ayah-end: 80 1; rectangle-ayah-end: 80 2;\n        /* Eastern Digits U+06F4, 06F6, 06F7 */\n        standard-eastern-digits: 82 0; sindhi-eastern-digits: 82 1; urdu-eastern-digits: 82 2; rohingya-eastern-digits: 82 4;\n        /* Comma U+060C, 061B */\n        upward-comma: 84 0; downward-comma: 84 1;\n        /* Jeh Hack U+0698 */\n        standard-jeh: 90 0; dot-hat-jeh: 90 1;\n        /* Dotless Head of Khah Hack U+06E1 */\n        standard-khah-dotless-head: 92 0; jazm-khah-dotless-head: 92 1;\n      }\n    }\n\nCombining cv features into a virtual styleset only worked in an older draft I think.  \nThis font activates them by language, but they should probably also be available as ss01–ss04.\n\n    /* sindhi-style: 44 1 48 1 82 1;\n        urdu-style: 48 2 82 2;\n        kurdish-style: 48 3;\n        rohingya-style: 82 4;\n      */\n      @styleset {\n        sindhi: 1;\n        urdu: 2;\n        kurdish: 3;\n        rohingya: 4;\n      }\n\n"
+    },
+    {
+      "time": "30 Apr 2014 — 1:55pm",
+      "content": "> Scheherazade seems to use the possibility of OT 1.6 to assign descriptive names to its cv\\_\\_ features.\n\nCorrect that Scheherazade uses the FeatureParams field of the cv\\_\\_ features to provide descriptive names. This facility was part of the original cv\\_\\_ feature definition.\n\n> It’s also possible for ss\\_\\_,\n\nas of OT 1.6, yes.\n\n> Does any font editor and GUI DTP software support named features?  \n> Do many fonts contain names?\n\nI think we've had a chicken-and-egg problem: Font developers are waiting for apps to support these UI strings, and app developers are waiting for fonts to contain them. That is one reason SIL has started including them.\n\n> I believe font vendors should soon start to include CSS files with fonts that are intended to be used on the Web as part of the documentation.\n\nI had that same thought when I read your original post. Thanks for providing an example -- hopefully you won't mind if SIL uses it (or something derived from it) in future releases?\n\n"
+    },
+    {
+      "time": "2 May 2014 — 7:33am",
+      "content": "Please, use and adapt the code as suits your needs. I just hope browsers will soon implement the high-level parts of CSS Fonts 3 instead of just the low-level `font-feature-settings`.\n\nJFTR, here are the proposals to add support for named features to [`character-variant()` and `styleset()`](http://web.archive.org/web/20150420032609/http:/lists.w3.org/Archives/Public/www-style/2014Feb/0509.html) as well as to [`@font-feature-values`](http://web.archive.org/web/20150420032609/http:/lists.w3.org/Archives/Public/www-style/2014Apr/0450.html).\n\n"
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "id": "33389",
+  "title": "curve smoothness",
+  "forum": "Sans Serif",
+  "tags": [
+    "Sans Serif"
+  ],
+  "content": "hello people from typophile  \ni´m looking for any opinion on this cause i´ve never done this kind of work before...\n\nit looks like the curve of the bottom leg it´s not looking very good to me, i just can´t make it look smooth enough. Im getting the impression that its more dificult to control this on thin weights, cause the bolder weights seemed fine...\n\nif it matters, i´m drawing shapes on fonlab  \nall apreciations are welcome,\n\nthanks in advance\n\n ![](http://web.archive.org/web/20131011231956im_/http:/typophile.com/files/s_3494.jpg)\n\n",
+  "author": "kiko",
+  "time": "29 Apr 2007 — 10:31am",
+  "uid": "17987",
+  "comments": [
+    {
+      "time": "29 Apr 2007 — 10:32am",
+      "content": "sorry for the huge size\n\nfirst time posting an image...\n\n"
+    },
+    {
+      "time": "29 Apr 2007 — 10:45am",
+      "content": "[http://briem.ismennt.is/2/2.3.6a/2.3.6.02.curves.htm](http://web.archive.org/web/20131011231956/http:/briem.ismennt.is/2/2.3.6a/2.3.6.02.curves.htm \"http://briem.ismennt.is/2/2.3.6a/2.3.6.02.curves.htm\")\n\n"
+    },
+    {
+      "time": "29 Apr 2007 — 11:14am",
+      "content": "thanks for the reply\n\ni´ve trided that, but it seems to me that inserting new points will change the previous shape... even if its only a bit\n\n"
+    },
+    {
+      "time": "29 Apr 2007 — 11:54am",
+      "content": "please take a (smaller) screenshot of your s, with beizer handles, maybe then we can see whats wrong\n\n"
+    },
+    {
+      "time": "29 Apr 2007 — 1:16pm",
+      "content": "ok, here it goes...  \nmy problem is... if i change the overal shape because of the new points i may insert, i´ll have to make those changes to all the other weights, right?\n\nthanks in advance for all the sugestions...\n\n ![](http://web.archive.org/web/20131011231956im_/http:/typophile.com/files/s1_5271.jpg)\n\n"
+    },
+    {
+      "time": "29 Apr 2007 — 1:52pm",
+      "content": "Not [exactly] what you're having trouble with, but some of your point placement is problematic: your top-left and bottom-right curves are using off-extrema points; same with the two tips of the terminals, although these can probably be safely left as-is; and the inside points of the topmost and bottommost curves are missing a BCP on one side. (Actually the top one has one, but it's stunted.)\n\nThe off-extrema stuff probably happened because  \nyou mechanically slanted upright originals.\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Apr 2007 — 1:58pm",
+      "content": "\\> its more dificult to control this on thin weights\n\nYyyup. That's because the two outlines are closer so it's easier to see unevenness. For a thin, monoline, \"constructed\" design very often it's useful to start from a skeleton\\* and do an expand-stroke, although that does entail a lot of subsequent clean-up, especially at terminals and [non-perpendicular] intersections.\n\n\\* Which is not to say that I think seeing letters are expanded  \nskeletons is at all optimal in type design - quite the contrary.\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Apr 2007 — 2:40pm",
+      "content": "thanks a lot hrant for your reply...  \nmy point is... i have no problem in rearanging points and curves on this particular weight or in some glyphs, but in that case, woundln´t i be messing around with the consistency of the whole family?  \nShoulndn´t the points of a caracter in all weights (thin to black) be aranged in-line?\n\nsorry if i´m not making any sense, í´m new to all of this, and my english its poor to...\n\nthanks again\n\n"
+    },
+    {
+      "time": "29 Apr 2007 — 3:03pm",
+      "content": "If you're interpolating (which is actually a generally very useful thing) then yes it's important to have full consistency of point placement, order, etc. Otherwise it's pretty secondary.\n\nAlso, some glyphs in some weights will in fact sometimes need their points to be different; the [not supremely elegant] solution to this when it comes to interpolation is to put equivalent \"dummy\" points in those glyphs for every weight, even though they might not affect the actual resultant outlines [much].\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Apr 2007 — 3:16pm",
+      "content": "ok, i think i see what you mean...  \nanyway, sorry about my ignorance, but what does interpolating means at all? Does it had something to do with blending glyph outlines? I was told, that tool was the best way to generate various weights in a font, and the most practical way of doing it...\n\n"
+    },
+    {
+      "time": "29 Apr 2007 — 3:44pm",
+      "content": "Yes, blending.  \nAnd you can even extrapolate.\n\nGuys, where's that thread where various people explain how  \nthey go about applying interpolation as optimally as possible?\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Apr 2007 — 3:45pm",
+      "content": "[http://typophile.com/node/7076](http://web.archive.org/web/20131011231956/http:/typophile.com/node/7076 \"http://typophile.com/node/7076\") \\_  \n [http://typophile.com/wiki/family\\_how-to](http://web.archive.org/web/20131011231956/http:/typophile.com/wiki/family_how-to \"http://typophile.com/wiki/family\\_how-to\")\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Apr 2007 — 4:02pm",
+      "content": "thanks a lot hrant for your tips, never thought typophile forums could be so helpfull.\n\n...lot to study and test now :)\n\n"
+    },
+    {
+      "time": "30 Apr 2007 — 9:05am",
+      "content": "Slide the point at the bottom of the S to the right. Adjust the length of the two bezier handles on the segment just left of that point. You just have to fiddle with them and look at them until they are smooth. It might also be necessary to adjust other bezier handles nearby to get everything to balance. Smoothness comes when the handles are balanced and when the on-curve points are ideally located on the curve. I'll repeat Hrant's suggestion to pull the bezier handles out of the inside curves at top and bottom.\n\nThose features (terminals of SCGscert) are notoriously difficult to control.\n\nFor this shape you may find you need the straight segment in the middle to be shorter. Straight segments can be obvious unless you use ample space for the transition to curves (tangent point).\n\n"
+    },
+    {
+      "time": "30 Apr 2007 — 10:54am",
+      "content": "As Hrant and Carl have said, you can often improve a curve by making the handles between Bezier nodes more equal.\n\nHere are useful three features in FontLab you can use to work on the curve.\n\n1. To slide a point as Carl recommends: first shift, then click and hold on the Bezier node you want to slide. This will drag the node while keeping the handles fixed. Very useful for taking out lumps.\n\n2. As I learned recently, you can also keep the nodes in place by shifting, then clicking and holding on the curve. This will move the handles around while keeping the nodes in place.\n\n3. You can shift then click and hold on a Bezier handle. Then you can slide the handle while the node and angle of the handle remain the same.\n\nDoing these three separately I have found useful, as you learn what does what, and start to get a feel of what to use when.\n\nThe straight-to-curve transition is often a problem, as Carl pointed out. His advice here is very sound, I think. Sometimes it is also desirable to use an intermediate point, but you risk adding lumps, so I try it both ways: first try without an intermediate point, then highlight and paste to mask. Then try with an additional point and adjust. You may have to try this repeatedly. Also it is sometimes best to get rid of the straight, and make it a slight curve.\n\nYou have to play with all these different options for some time to get a feel for what does what in Bezier curves. It is quite unnatural, and only after sometime do you start to get a feeling for 'how to get there from here.'\n\n"
+    },
+    {
+      "time": "30 Apr 2007 — 1:07pm",
+      "content": "once more, thanks a lot to all you people  \nlet´s see what i can do based on your advices, maybe i´ll post the result later.\n\ni´m really surprised with all the help you get here  \nwish i had come before...\n\nseeya\n\n"
+    },
+    {
+      "time": "30 Apr 2007 — 4:06pm",
+      "content": "i think it looks better now... but still needs some ajustments  \nthe top left one, was the original...\n\nwhat happen now, is that i'll have to redraw all the other five \"s\" weights, i was trying to avoid that...\n\n ![](http://web.archive.org/web/20131011231956im_/http:/typophile.com/files/s2_4376.jpg)\n\n"
+    },
+    {
+      "time": "30 Apr 2007 — 4:17pm",
+      "content": "You still need extrema points at the top-left and bottom-right.\n\nhhp\n\n"
+    },
+    {
+      "time": "30 Apr 2007 — 4:29pm",
+      "content": "like this...  \nshould i let font audit fix that, or should i manually decide the point placement?\n\n ![](http://web.archive.org/web/20131011231956im_/http:/typophile.com/files/s3_3657.jpg)\n\n"
+    },
+    {
+      "time": "30 Apr 2007 — 4:53pm",
+      "content": "Now get rid of the non-extrema points.\n\nhhp\n\n"
+    },
+    {
+      "time": "30 Apr 2007 — 4:59pm",
+      "content": "removing that points, changes the overall shape too much  \nits dificult to get it back after removing them\n\n ![](http://web.archive.org/web/20131011231956im_/http:/typophile.com/files/s4_5523.jpg)\n\n"
+    },
+    {
+      "time": "30 Apr 2007 — 5:23pm",
+      "content": "I am certainly no expert, but so far as I know, there is no need to put points at the extrema in an italic. For example, open a Minion italic m in FontLab with the Font Audit turned on. You will see that none of the 'east-west' extrema have nodes.\n\nMy conclusion is that the extrema are not necessary for hinting purposes on an italic. Minion does have hints on the horizontal width at extrema without the nodes being present. Hence the key question is what looks best for your font, either printed or on the screen. Having nodes at extrema is often a good idea, but is not an iron-clad rule, especially on an italic.\n\nFurthermore, you can have intermediate points if they help. For example you will see this on many italic D's. And, for example, Minion's lower case italic o has four intermediate points.\n\nIf you do want to add in the extrema then make sure you copy to mask you character, so you can very closely approximate the curves you like.\n\nFinally, as you probably know, no one can really have a clear idea about the strengths and weaknesses of your S without seeing how it works in relation to the other letters in your font.\n\nEdit: I crossposted with you. You could get closer to the original that you have in mask by sliding the nodes around and then adjusting the handles. --Not that I'm recommending it. It is one way to go, but not any technical or aesthetic requirement, so far as I know.\n\n"
+    },
+    {
+      "time": "30 Apr 2007 — 5:26pm",
+      "content": "If you're not getting enough control over your curves just with extrema, definitely put more points, but not right next to the extrema; put them where the curves deviate most from your intentions.\n\nhhp\n\n"
+    },
+    {
+      "time": "30 Apr 2007 — 6:10pm",
+      "content": "Gosh, I feel sorry for all those poor type designers who are still stuck with using Beziers. It's so much easier with spirals.\n\nFortunately, my spiral-based tools will be coming online soon. Watch this space.\n\n"
+    },
+    {
+      "time": "1 May 2007 — 2:23am",
+      "content": "Drawing with Beziers isn't so difficult once you get the hang of it - it becomes second nature after a while. But I'd be interested to see if spirals are easier.\n\nNick Cooke\n\n"
+    },
+    {
+      "time": "1 May 2007 — 2:30am",
+      "content": "Can you tell us something more about your spiral-based tool, Raph? I'm quite intrigued.\n\n"
+    },
+    {
+      "time": "1 May 2007 — 7:13am",
+      "content": "\\>my spiral-based tools\n\nGreat news Raph.\n\nFor those of us who have been hanging around Typophile a while, this has been one of the exciting developments first exposed to the public here.\n\nI hope your drawing program will have an easy work flow going into FontLab, or even better be part of it.\n\nBefore Bezier curves, the type 'drawing offices' used French Curves to do production drawings. I'm not sure but it looks like French Curves might include Raph's beloved Cornu spiral, as well as conic sections, as curves.\n\nI talked to Lucas de Groot--who is an exceptionally math-aware designer--about Bezier curves after his TDC talk in New York a few months ago. De Groot likes to do hand drawings to get an 'organic' feel into his fonts. One of the things he said was that it is in fact impossible to get some straight-to-curve shapes that you might want using Bezier curves. He said he digitized the drawings of an old designer who worked on paper, and it was impossible to get the straight to curve arches the same as the hand drawn ones.\n\nI know from what Raph has written earlier here that this is one of the problems that his curves address.\n\nI hope you have mercy on us and write a good manual to explain how to use your program, Raph!\n\n"
+    },
+    {
+      "time": "1 May 2007 — 9:02am",
+      "content": "\\> it was impossible to get the straight to curve  \n\\> arches the same as the hand drawn ones.\n\nIt would be great to see exactly what such curves look like.\n\nhhp\n\n"
+    },
+    {
+      "time": "1 May 2007 — 10:42am",
+      "content": "\"impossible to get some straight-to-curve shapes that you might want using Bezier curves\"\n\nImpossible or just difficult?\n\n"
+    },
+    {
+      "time": "1 May 2007 — 10:56am",
+      "content": "\\>Impossible or just difficult?\n\nHe said impossible, or that he couldn't do it--more or less the same thing :)\n\nAnd, yes, it would be nice to see pictures of what he was talking about.\n\nI think Raph will confirm that strictly speaking you can't make a cubic equation match a spiral. The question is whether the difference is significant.\n\nLast time Raph wrote about this I believe he was going to have a system that would draw with Cornu spirals and then convert the outlines automatically to Beziers. Then the conversion would not be exact, but differences might not be noticable at normal sizes. I assume that the converted outlines would not be something it would be intuitive to draw from scratch with Beziers.\n\n"
+    },
+    {
+      "time": "1 May 2007 — 11:15am",
+      "content": "\\> strictly speaking you can’t make a cubic equation match a spiral.\n\nThat's true of any two different ways of describing a curve. It's never about getting a perfect match to something, but about how much inaccuracy you tolerate. For example none of these equations can make a \"perfect\" circle - but that's OK.\n\nThe essential appeal of Raph's work is instead in its  \ncloser matching to how humans like to draw curves.\n\nhhp\n\n"
+    },
+    {
+      "time": "1 May 2007 — 3:57pm",
+      "content": "I would like to see better tools for drawing with b-splines. It took me a while to realize that TrueType doesn't use simple quadratic curves, but b-splines that allow for multiple off curve points. However the tool support in FontLab isn't great. For example it would be nice to be able to force off curve points to align with the previous segment.\n\nBezier curves are easy to use, but after a while with points only at the extremes, all of the curves start to look the same. With beziers making smooth curves is pretty easy (which is why we use them), but if _everything_ is smooth, things can get pretty boring. It's knowing where to put the kinks and lumps that makes great type.\n\n"
+    },
+    {
+      "time": "1 May 2007 — 10:42pm",
+      "content": "Quick responses (because I'd rather spend more time actually building the app than talking about it right now):\n\nIt's not impossible to get good straight-to-curved transitions with Beziers, just difficult. It is very easy with my spiral tools.\n\nYou draw on-curve points, just like Ikarus, and a batch process converts them into optimized Beziers. You can control exactly how close you want the match to be. Fortunately, even with a modest number of Beziers you get a match that's close enough to be invisible at large sizes. The input is on the left, the result is on the right. You can see that it automatically takes care of such details as putting points on the extremities.\n\n ![](http://web.archive.org/web/20131011231956im_/http:/typophile.com/files/spiro_4996.png)\n\nThe bad news is that I myself am not going to integrate my tools into FontLab. The good news is that I am doing a GPL release, and will be happy to work with people to either do a free software plugin, or license the technology if it's to ship with an application.\n\nB-splines are primitive compared with what I'm doing. They're definitely easier for some things than Beziers, but in the hands of an expert, Beziers are more lithe and expressive.\n\nI am expecting that volunteers will step forward to write good documentation. More than one person has expressed interest.\n\nStay tuned.\n\n"
+    },
+    {
+      "time": "2 May 2007 — 3:52am",
+      "content": "I don't get it. Why not just draw it like the one on the right in the first place?\n\nNick Cooke\n\n"
+    },
+    {
+      "time": "2 May 2007 — 6:14am",
+      "content": "Nick Cooke wrote:  \n<cite>I don’t get it. Why not just draw it like the one on the right in the first place?</cite>\n\nPresumably because of this, at the very least:\n\nraph wrote:  \n<cite>It’s not impossible to get good straight-to-curved transitions with Beziers, just difficult. It is very easy with my spiral tools.</cite>\n\n"
+    },
+    {
+      "time": "2 May 2007 — 1:24pm",
+      "content": "Raph, nice. One thing you might like to add is automatic insertion of inflection points during the conversion, since sometimes a missing one can cause problems. Like I see a missing one between the top two points on the right of the stem there.\n\nNick, the premise is that drawing certain types of curves (possibly most types of useful curves in type) is unnecessarily tedious with beziers - too much pushing and pulling, too iterative.\n\nhhp\n\n"
+    },
+    {
+      "time": "2 May 2007 — 3:14pm",
+      "content": "I´m still confused about the importance of extreme points in italics...  \nI´ve been examing fonts with similar design of the one i´m drawing, and many don´t use them at all. Is it really necessary in a font for print porpuses like mine?  \nAt this point, i really wouldn't like to redraw the italics in all the font weights.  \nInserting extreme points really change the original shape too much!  \nMaybe I should have done that in a earlier stage of the process!\n\nstill have lot to learn...\n\n"
+    },
+    {
+      "time": "2 May 2007 — 5:03pm",
+      "content": "\\>confused\n\nSince people regularly disagree on Typophile about practically everything, you have to do your own research and judge for yourself--which it looks like you have already done.\n\nWelcome to Typophile :)\n\n"
+    },
+    {
+      "time": "3 May 2007 — 8:07pm",
+      "content": "\"Gosh, I feel sorry for all those poor type designers who are still stuck with using Beziers. It’s so much easier with spirals.\"  \n? hmmm. What outputs spirals? What I don't get is: if the most popular font format in the whole wide world is TRUETYPE, then why do designers draw in beziers? What's more, why would anyone want to draw in a format that is niether? What is easier with spirals? Drawing something that you can't output without converting? And if in fact drawing in some other format and then converting \"losslessly\" to T1 of TT were possible, then that representation of TT or T1 would be as good as the spirals were. But lossless conversion is not happening here I'll guess. So I feel sorry for all type designers, the one's who draw in b's, qs and s's, and convert them automatically to something, or I should say, anything else.\n\n"
+    },
+    {
+      "time": "3 May 2007 — 10:08pm",
+      "content": "\\> if the most popular font format in the whole wide world  \n\\> is TRUETYPE, then why do designers draw in beziers?\n\nI guess you mean cubic beziers, à la PS, as opposed to quadratic, à la TT? If so, that's a good question, and I guess it comes down to: habit, both concerning users and app makers; and the fact that popular is one thing, paying customers is another. And actually the fact that most people design using a math structure that's less popular is good news for the potential future success of Cornu spirals.\n\nAnd anyway it's not a matter of what <cite>outputs</cite> spirals, it's really a matter of: does the thing that let's you <cite>design</cite> with spirals let you convert to beziers in the end? And Raph already knows the answer needs to be yes.\n\nNow clearly it would be really nice to have spiral-based editing available directly in FontLab. But you have to start somewhere, and if the public design&conversion tool becomes popular enough FontLab will end up integrating spirals as an option.\n\n\\> converting “losslessly” to T1 of TT were possible\n\nIt's not only a matter of losslessness. People design in cubics  \nand output in quadratics all the time, and that's lossy too.\n\n\\> that representation of TT or T1 would be as good as the spirals were.\n\nSure, but the spirals are supposed to help <cite>drawing</cite>, not representing.\n\n\\> I feel sorry for all type designers... who ... convert  \n\\> them automatically to ... anything else.\n\nThis is a good point. Spirals aren't \"native\", and probably never will be. And yes, it's always nicer to draw in whatever way will be output (and this applies very well to screen font design for example) but there's a limit to that - like sure the rasterizer ends up converting all the outlines to bitmaps but you don't want to be designing your fonts as bitmaps hundreds of pixels high! It just has to be <cite>good enough</cite>. So if the conversion is tight enough (for which all you ever really need is enough points) then the -presumed- gain in drawing efficiency would make up for the slight lossiness.\n\nhhp\n\n"
+    },
+    {
+      "time": "4 May 2007 — 5:19am",
+      "content": "\"the fact that most people design using a math structure that’s less popular is good news for the potential future success of Cornu spirals.\"  \nrong. (cry o.l.)\n\n\" So if the conversion is tight enough (for which all you ever really need is enough points\"  \nrong.(lol) All the points in a contour must find a new position on the grid when scaled. How more points effect this is not a mystery to me, but apparently it is to others.\n\n\"Now clearly it would be really nice to have spiral-based editing available directly in FontLab.\"  \nClarity is obviously relative. Think it'd be better to have spirals than a decent UI to QBs? Think spirals are a substitute for proper placement of off-curve points in ether QB's or CB's?\n\n\"Sure, but the spirals are supposed to help drawing, not representing.  \nThere is no help for drawing that is not representing the actual. This is where the \"myth of the scaleable outline\" and its polution of the type design community, mix in \"perfect\" union.\n\n ![](http://web.archive.org/web/20131011231956im_/http:/typophile.com/files/CaptureHrant_6665.PNG)\n  \nAbove: L MS CT cloection Calibri l.c. o, as it is. R as \"native TT\".  \nBelow: both scaled to text size, (and back up so you can see (perhapz)).  \nSo rong, it's been good to no you. ;) \n"
+    },
+    {
+      "time": "4 May 2007 — 10:12am",
+      "content": "Caveat: I haven't really tried Raph's spirals yet. It's possible that for the way I work beziers are just as good/bad. But it's also possible that a person could be turned from his scepticism by actually using spirals.\n\nI wrote:  \n\\> the fact that most people design using a math structure that’s  \n\\> less popular is good news for the potential future success of  \n\\> Cornu spirals.\n\nMaybe that was too easy to misunderstand. What I meant was, since so many people design in cubic beziers but often generate and sell those designs in TT format (a conversion which is not lossless), the lossiness of spiral-to-bezier doesn't seem to be a huge barrier to \"success\". Which is not to say it's ideal in terms of Designing For The Medium, but other considerations, like in this case the efficiency of wrapping your head around a design process, are not secondary. If it takes you half the time to make something that's 95% good enough, that suits quite a lot of people.\n\n\\> All the points in a contour must find a new position on the grid  \n\\> when scaled. How more points effect this is not a mystery to me,  \n\\> but apparently it is to others.\n\nI guess you're talking about hinting? That's a good point.  \nBut couldn't the conversion process be hinting-aware?\n\nOr maybe you're talking about resolution? In that case though a larger Em space (which is admittedly sometimes problematic, but not much for contemporary computers) should address that well.\n\n\\> Think it’d be better to have spirals than a decent UI to QBs?\n\nIf spirals are as \"natural\" to design with as it sounds, I would say that a \"decent\" UI for quadratic beziers\\* would have to be almost prescient to match! I suspect it would have to deploy a level of abstraction to obviate the cumbersome nature of quadratics. And that abstraction might in fact ruin the advantage of \"native\" design. It seems safe to say that beziers -especially quadratics- have some inherent mismatch to how humans like to make shapes - at least more of a mismatch that spirals [might] have, and you can overcome that without ruining the main reason you're using them.\n\n\\* And note, we've been talking about the advantage of spirals vs <cite>cubic</cite> beziers, which seem to be [even] less \"unnatural\" for most people than quadratics.\n\n\\> Think spirals are a substitute for proper placement  \n\\> of off-curve points in ether QB’s or CB’s?\n\nMaybe.\n\n\\> There is no help for drawing that is not representing the actual.\n\nIn an absolute sense, I agree. But human activity is never absolute, not even when Designing For The Medium, and if you bend that \"actual\" just a little bit spirals could in fact be a superb substitute.\n\nas for your interesting Calibri example, I think I know what you're getting at, but I don't see how scaling is relevant to the one-time, non-scalar conversion of spirals to beziers.\n\nBTW, the righthand ones looks like cubics  \nto me - are you sure you meant \"native TT\"?\n\nhhp\n\n"
+    },
+    {
+      "time": "4 May 2007 — 3:32pm",
+      "content": "@dberlow:\n\nShort answers: _Think it’d be better to have spirals than a decent UI to QBs?_ No.\n\n_Think spirals are a substitute for proper placement of off-curve points in ether QB’s or CB’s?_ Yes.\n\n@hrant:\n\n_But couldn’t the conversion process be hinting-aware?_ It could be, but I want to be clear up-front. The tools I'm about to release to _nothing_ to help with hinting. Nada. Bupkis. If you care about hints, you need to either manually hint the converted outlines (which, I believe, is not terribly painful given how well-optimized those are), or integrate the tool with an autohinting technology such as the one Adobe ships in [AFDKO](http://web.archive.org/web/20131011231956/http:/typophile.com/wiki/AFDKO).\n\n_Or maybe you’re talking about resolution? In that case though a larger Em space (which is admittedly sometimes problematic, but not much for contemporary computers) should address that well._ Actually, a rather little-known fact of the Type1 font format is that the div operator lets you get pretty much any precision you want, even at a 1000 em. FontForge, for all its other limitations, does have an option to save outlines using this trick.\n\nTed Nelson once said, \"if the button is not shaped like the thought, then the thought will end up shaped like the button.\" All I'm trying to do here is create a button more font-shaped than Beziers. I'm not claiming they'll be better in every situation (especially when the designer has invested a huge amount of time learning how to beat Beziers into submission), but I do claim that my tools will expand the palette open to font designers, and, based on my experience so far, suspect that a lot of people will find that they enjoy sketching in spirals directly on the screen.\n\n"
+    },
+    {
+      "time": "4 May 2007 — 8:58pm",
+      "content": "\"but I do claim that my tools will expand the palette open to font designers\"  \nI think your claim is bogus and challenge you to make a shape with your spirals that I can't make. I.E. show me the expanded pallette and 1 way or another, I will expand to greet it.\n\n\"I guess you’re talking about hinting? That’s a good point.\"  \nI am not talking about hinting Hrant. When one scales a digital outline with or without hints, all of the points, on and off the curve, MUST find a new location on the new grid to round to when the outline is scaled to that em size.\n\n\" it would have to deploy a level of abstraction to obviate the cumbersome nature of quadratics\"  \nYou are looking at optimized quadratica on the right of my illustration. How abstract is that compared to CBs? In fact, to me, QB's (with their ability to represent the entire spectrum of curvature in a quarter of a circle with two off curves between two on curves), is perfect & complete.\n\n\"if the button is not shaped like the thought, then the thought will end up shaped like the button\"  \nYes... well, if the button is shaped like a snap, than the snap will not function like a button, much less with any button hole.\n\n\"All I’m trying to do here is create a button more font-shaped than Beziers\"  \nFor the output QBs of CBs, there is no button more font-shaped than QBs or CBs. I'm not certain how to say it any clearer, except to point out, with all due respect, that we are not making outlines for their appearance, we are making containers for the appearance of pixels. You seem to be making containers for containers for pixels.\n\n\"a larger Em space (which is admittedly sometimes problematic, but not much for contemporary computers) should address that well.\"  \nHow? I heard Bill suggest this in another thread— please, tell me how a larger em helps?\n\n"
+    },
+    {
+      "time": "4 May 2007 — 9:45pm",
+      "content": "@dberlow: _In fact, to me, QB’s (with their ability to represent the entire spectrum of curvature in a quarter of a circle with two off curves between two on curves), is perfect & complete._\n\nCould you please explain this comment more? I don't understand when you say that quadratic Beziers can represent the \"entire spectrum of curvature.\" Quadratic Beziers cannot exactly represent circles (which have constant nonzero curvature). In general, because of their quadratic nature, controlling the curvature along a quadratic Bezier is difficult. Cubic Beziers are a bit easier because they have an additional degree of freedom, but I still find them not very natural. I'm eager to try Raph's new splines based on Cornu spirals to see if they are more natural. From my understanding of how they work, they guarantee nice smoothness properties (continuous curvature) with fewer degrees of freedom (ie, a nice curve with fewer things to worry about while drawing).\n\n"
+    },
+    {
+      "time": "4 May 2007 — 10:18pm",
+      "content": "\\> make a shape with your spirals that I can’t make.\n\nBut, again, it's not about Possible, it's about Comfortable,  \nwhich however does translate to Doable at the end of the day.\n\n\\> When one scales a digital outline\n\nBut there's no scaling going on here. You convert spirals to beziers,  \nin the same resolution space, and then it's the same thing, no?\n\n\\> You are looking at optimized quadratica on the right of  \n\\> my illustration. How abstract is that compared to CBs?\n\nBut I'm not talking about the results, I'm talking about what it took to get the results. The premise here is that somebody who wants to end up with a given result will generally arrive at it more comfortably with spirals than with beziers (especially quadratic ones). And what I was saying about \"abstraction\" is that if you wanted to make a more comfortable UI for quadratic beziers you might ruin the only reason to use them in the first place, essentially by removing \"direct\" control. This is an intuitive judgment though - I'm not too sure about it.\n\n\\> to me, QB’s (with their ability to represent the entire spectrum  \n\\> of curvature in a quarter of a circle with two off curves between  \n\\> two on curves), is perfect & complete.\n\nIf you mean as a representational method, I might agree. But if you mean it as a design process, then you're quite special: most people seem to hate drawing quadratics compared to cubics, and this seems to be due to more than just habit. And these are the same people who might prefer to use spirals over beziers for the same reason. So no, the point isn't that David Berlow will benefit from spirals, or even that Sophisticated Designers will benefit, it's that Some Designers (I suspect Most Designers) will benefit; that's all a new tool needs to be a useful contribution.\n\nThis distinction I keep repeating, and you keep dismissing, concerning result vs process is critical, because we're humans who are by nature attuned to certain ways of doing things, and the end result has to be put in the context of how [comfortably] we can get to it.\n\n\\> we are not making outlines for their appearance,  \n\\> we are making containers for the appearance of pixels.\n\nThat's a great way of looking at it, and sadly many people [prefer to] forget that even a 3600 dpi imagesetter is laying down pixels. BUT: if the conversion from spiral to bezier is tighter than a single pixel (which it can be made to be - it's up to the converter) or even almost as tight as a single pixel, then it's Good Enough, and that's Great.\n\n\\> I heard Bill suggest this in another thread—  \n\\> please, tell me how a larger em helps?\n\nWell Bill's point was something else: that a larger Em space allows finer placement of points, which is obvious. My point above was that when you scale [down], a larger Em is more accomodating. But this is really moot anyway because -as I tried to explain just above- there's no scaling going on that I see, I mean not any time before the spirals get converted to beziers.\n\n--\n\nMaybe what you're getting at is that at the very high end of digital type design one must directly draw quadratic beziers, that spirals can't take you there. That actually sounds right to me, even though I'm not there myself. But 95% of type design out there isn't like that. People still make money and enjoy their work with clunky, poorly hinted cubic beziers, and it seems pretty safe to believe that spirals can help many of them, perhaps even most.\n\nhhp\n\n"
+    },
+    {
+      "time": "5 May 2007 — 12:15pm",
+      "content": "Something that would be very helpful for my thesis: does anyone know of a reference in the citable literature for a statement about how difficult it is to do straight-to-curve transitions using Beziers? The substance of Luc's observations to William are exactly the kind of thing I'm looking for, but it's not really cricket to cite a blog, especially when it's a secondhand quote. A book, or maybe an article in Typo or somesuch, would be ideal.\n\nThanks in advance!\n\n"
+    },
+    {
+      "time": "5 May 2007 — 12:51pm",
+      "content": "Maybe something on Underware's site or Briem's. In hardcopy you are unlikely to find anything, since this is essentially an anecdotal, fuzzy experience.\n\nhhp\n\n"
+    },
+    {
+      "time": "5 May 2007 — 1:15pm",
+      "content": "For a hardcopy source I suddenly thought I remembered something in one  \nof the Cabarga books, but a quick search through them turned up nothing.\n\nhhp\n\n"
+    },
+    {
+      "time": "5 May 2007 — 5:33pm",
+      "content": "\\>it’s not really cricket to cite a blog, especially when it’s a secondhand quote.\n\nI agree. I would suggest contacting him. He has a contact e-mail address at his web site, [www.lucasfonts.com](http://web.archive.org/web/20131011231956/http:/www.lucasfonts.com/ \"www.lucasfonts.com\") . Because he is very interested in the mathematics of drawing fonts, I think he probably would be interested in your project, and be happy to share his views with you.\n\n"
+    }
+  ]
+}

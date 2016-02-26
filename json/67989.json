@@ -1,0 +1,78 @@
+{
+  "id": "67989",
+  "title": "What is the difference between Hints and Links?",
+  "forum": "Build",
+  "tags": [
+    "fontlab",
+    "hinting",
+    "hints",
+    "links",
+    "Build"
+  ],
+  "content": "Hi.\n\nI've been studying optimal hinting techniques for correct screen display of typefaces. I've read tens or hundreds of pages of text about hinting, and I've taken quite a few stabs at googling it (the word \"link\" is a pretty useless search term on the internet).\n\nStill I can't still quite grasp the difference between a hint and a link. Could someone here explain it to me?\n\nRegards,  \nS.\n\n",
+  "author": "svenni",
+  "time": "3 Mar 2010 — 7:56am",
+  "uid": "1092",
+  "comments": [
+    {
+      "time": "3 Mar 2010 — 9:32am",
+      "content": "the term Hinting or instructing as it is sometimes called, is used to describe a set of hints or instuctions that are used to make individual glyphs in a font look better at small point sizes, especially on low-resolution screens, printers, and other devices with fewer dots, or pixels for accurately and legibly matching the glyph outline.\n\na link is one of the set of instructions, and can define a relationship between:\n\na parent point (on the edge of the left hand size of a stem for instance) and  \na child point (on the right hand edge of a stem).\n\nso if you were using VisualTrueType, the tool for hinting developed by Microsoft, a 'link command' written in the higher level VTTalk might look like XLink(10,8,81), where 10 is a point on the left hand side of a vertical stem, and 8 is a point on the right hand side of the same vertical stem. 81 is a reference to a CVT value (control value table reference) The term 'link' is used to decribe a higher level concept so that it can be written and understood more easily. The code for the 'link' above compiles to lower level TrueType Language, where it will look like 'SRP0[],10 (set reference point 10) followed by MIRP[m\\>RBl], 8, 81 (move indirect relative point 8, by a distence defined in the CVT 81,)\n\nthere is a lot of information on the Microsoft Typography site related to hinting fonts with VTT.\n\n[https://www.microsoft.com/typography/hinting/hinttut3.htm](http://web.archive.org/web/20131014113522/https:/www.microsoft.com/typography/hinting/hinttut3.htm \"https://www.microsoft.com/typography/hinting/hinttut3.htm\")\n\n"
+    },
+    {
+      "time": "3 Mar 2010 — 9:46am",
+      "content": "If you mean in the context of FontLab:\n\n- A hint is a PostScript hint. They are usually aligned with nodes to define a stem. They can also be converted to TT instructions.\n\n- A link is similar, but more generalized. Links can be converted to hints (or hints can be converted to links), or TT instructions. Unlike hints, they automatically adjust themselves if you make changes to a glyph. Links are especially useful when you are working with multiple masters. Links are shared across masters, whereas hints must be set separately for each master.\n\n"
+    },
+    {
+      "time": "3 Mar 2010 — 11:43am",
+      "content": "Further to what Mark has written: a Link connects two outline nodes, and moves or expands with them; a Hint defines a position and distance independent of actual outline.\n\n"
+    },
+    {
+      "time": "3 Mar 2010 — 12:37pm",
+      "content": "Svenni, the way I'm working with hints and links in FontLab (to produce CFF OpenType):\n\n1. after the outline is ready, use PS autohinting.  \n2. manually edit hints and add links if necessary (usually are).  \n3. convert these links to hints.  \n4. use PS autoreplacing.\n\nAt this point, the PS hinting is ready to be tested.\n\nI convert all hints back to links before any edition is made to outlines. And then back to hints (with autoreplacing) to finalize the work.\n\nTT hinting is another universe I'll later step into.\n\n"
+    },
+    {
+      "time": "8 Mar 2010 — 6:39am",
+      "content": "TT links are to hints what curve and corner points are to PS contours — they are a convenience the UI grants to the user beyond the format's description that are translated into the format's lingo upon generation of the formatted font.\n\nCheers!\n\n"
+    },
+    {
+      "time": "8 Mar 2010 — 11:00am",
+      "content": "TT links are a whole other proverbial kettle of Boston chowdah. I'm pretty sure the original query related to FontLab's general link tool, which is most easily understood as a different way or representing PS hint, not to its TT hinting link tools.\n\n"
+    },
+    {
+      "time": "9 Mar 2010 — 7:29am",
+      "content": "I guess we wont know for sure until svenni gets back to us to acknowledge the inpu so far :)\n\n"
+    },
+    {
+      "time": "9 Mar 2010 — 2:22pm",
+      "content": "\\>TT links are a whole other proverbial kettle of Boston chowdah. I'm pretty sure the original query related to FontLab's general link tool, which is most easily understood as a different way or representing PS hint, not to its TT hinting link tools.\n\nYou may be right, I may be crazie... but he said:\n\n\\>I've been studying optimal hinting techniques for correct screen display of typefaces\n\nAnd as we all might or might not know, T1 hints don't fit that slipper, prince charming.\n\nCheers!\n\n"
+    },
+    {
+      "time": "13 Mar 2010 — 7:54pm",
+      "content": "I shall add: there is no format difference in how FontLab Studio treats PS hints and PS links. When a PS-flavored font is generated (OpenType PS, Type 1), all PS links are converted to PS hints. When a TT-flavored font is generated (OpenType TT, TrueType), all PS links and hints are converted to TT hinting instructions.\n\nThe difference in PS hints and PS links is only a matter of how they behave in the FontLab Studio UI: hints don't follow outline changes while links do.\n\n"
+    },
+    {
+      "time": "14 Mar 2010 — 9:14am",
+      "content": "\\>When a TT-flavored font is generated (OpenType TT, TrueType), all PS links and hints are converted to TT hinting instructions.\n\nIs there any way this is going to move fwd to a simplified and less over-constraining conversion that works on Windows?\n\nThe current situation for screen/web text and small heads, is that FL hints are useless on the Mac, either for users who preference to alias or preference for unhinted greyscale, and on Windows it should be known by now that less is more.\n\nCheers!\n\n"
+    },
+    {
+      "time": "14 Mar 2010 — 10:00am",
+      "content": "Re. less is more, David, it is possible to remove x-direction PS hints independent of y-direction, so one way to utilise FontLab's PS-to-TT hint conversion is to do this, leaving only y-direction hints to control alignment zones and horizontal stems.\n\n"
+    },
+    {
+      "time": "15 Mar 2010 — 6:28am",
+      "content": "John,\n\nyou may be right for you, your clients, and/or a particular point of view, perhaps based on a definition of market according to % of coverage, or a small library.\n\nwhat I'm saying to Adam/Yuri, who have \"every\" font and many users to consider, is that FL hinting would generally work better for the web's needs just as I said.\n\nCheers!\n\n"
+    },
+    {
+      "time": "15 Mar 2010 — 11:23am",
+      "content": "David: _just as I said_\n\nBut what did you say? You talked about ‘simplified and less over-constraining’ hint conversion, which is pretty vague. I suggested one possible simplified and less constraining approach to FL hint conversion that is currently available, wondering if this were the sort of thing you were talking about. If not, can you explain in more detail what you mean? Perhaps also in light of FontLab's current TT hint conversion options (default settings shown)?\n\n ![](http://web.archive.org/web/20131014113522im_/http:/typophile.com/files/ttah_4211.gif)\n\n"
+    },
+    {
+      "time": "15 Mar 2010 — 11:40am",
+      "content": "The FLS Action Set to only get automatic TrueType hinting in the Y direction and no hints in the X direction is this:  \n [http://www.twardoch.com/tmp/typophile\\_actionsettth.png](http://web.archive.org/web/20131014113522/http:/www.twardoch.com/tmp/typophile_actionsettth.png \"http://www.twardoch.com/tmp/typophile\\_actionsettth.png\")  \n(For some reason, Typophile says \"Could not copy image. Error\" when I'm trying to upload an image directly.)\n\nA.\n\n"
+    },
+    {
+      "time": "17 Mar 2010 — 4:38pm",
+      "content": "John, meet Adam. ;)\n\nCheers!\n\n"
+    }
+  ]
+}

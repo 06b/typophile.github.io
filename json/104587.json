@@ -1,0 +1,46 @@
+{
+  "id": "104587",
+  "title": "How do you (programmatically) move truetype points around?",
+  "forum": "Build",
+  "tags": [
+    "contours",
+    "font tools",
+    "Python",
+    "Truetype points",
+    "Build"
+  ],
+  "content": "In the thread [http://typophile.com/node/103643](http://web.archive.org/web/20150414235648/http:/typophile.com/node/103643 \"http://typophile.com/node/103643\"), a question was raised that can be reformulated as follows: \"how can one build the latin small letter alpha?\", which is uni0251 (in the IPA extensions). Even with a serif font, its lower part appears to be that of a d and its upper part that of a q. My question here is how to do that programmatically.\n\nThe intent, in the tread above, was to get the corresponding glyph for the Roboto fonts. The question is interesting because with Roboto, in all fonts, the d and the q have the same number of truetype points, and they are numbered similarly. In order to get the \"latin small letter alpha\" in the middle below, I took a d and then moved the points 6, 7 and 8 at the coordinates they have in the letter q.\n\n ![](http://web.archive.org/web/20150414235648im_/http:/typophile.com/files/daq-Black3_4307.png)\n  \nI could in fact do that editing (with a script) the ttx files. I found no way to do it (programmatically) with FontForge. I can only get a copy of the contours, the modifications are not reflected in the font. I found no way to access those points in the font tools. How can you do that (programmatically, I mean) with your professional tools (even if it is not really worth the trouble for this particular example). Is that easy to do with Glyphs? \n",
+  "author": "Michel Boyer",
+  "time": "12 Jul 2013 — 7:21pm",
+  "uid": "18942",
+  "comments": [
+    {
+      "time": "12 Jul 2013 — 8:59pm",
+      "content": "In FontLab I'm sure Python can do it.\n\nhhp\n\n"
+    },
+    {
+      "time": "13 Jul 2013 — 12:44am",
+      "content": "In RoboFont this would do:\n\n    f = CurrentFont()\n    f[\"a\"] = f[\"q\"] & f[\"d\"]\n\n... but only because RoboFont has implemented the Boolean operators (in this case &, «and») for glyph operations. I don’t know if other editors have similar options.\n\n ![](http://web.archive.org/web/20150414235648im_/http:/typophile.com/files/glyphmath_4041.png)\n\nThe result would still need some manual cleaning though:\n\n ![](http://web.archive.org/web/20150414235648im_/http:/typophile.com/files/glyphmath-a_3734.png)\n\nEdit: This only seems to work with PS curves, not TT curves.\n\n"
+    },
+    {
+      "time": "13 Jul 2013 — 12:59am",
+      "content": "If the point indices are the same, and known, this would work in any Robofab environment:\n\n    f = CurrentFont()\n    f[\"a\"] = f[\"d\"].copy()\n    \n    # contour 0, segment 1, point 2\n    f[\"a\"][0][1][2].x = f[\"q\"][0][1][2].x\n    f[\"a\"][0][1][2].y = f[\"q\"][0][1][2].y\n    \n    # contour 0, segment 2, point 0\n    f[\"a\"][0][2][0].x = f[\"q\"][0][2][0].x\n    f[\"a\"][0][2][0].y = f[\"q\"][0][2][0].y\n    \n    # contour 0, segment 3, point 0\n    f[\"a\"][0][3][0].x = f[\"q\"][0][3][0].x\n    f[\"a\"][0][3][0].y = f[\"q\"][0][3][0].y\n\nbut in practice it doesn’t because in Roboto the q is narrower than the d, so the right side of the new «a» won’t end up vertical.\n\n"
+    },
+    {
+      "time": "13 Jul 2013 — 5:13am",
+      "content": "Jens, I can do the intersection with a native FontForge script (but not with an assignment as you did). Here is what I get with the medium weight:\n\n![](http://web.archive.org/web/20150414235648im_/http:/typophile.com/files/lalphamedium_3458.png)\n\nThere is too much cleaning to do.\n\nThe Robofab code of your second post is exactly the type of code I had in mind. As for the right side, there is no need to change the x coordinate, changing the y coordinate fixes the height and then the right side stays vertical.\n\nIs that something that can be programmed as a tool to be used in a GUI environment, so that corrections can then be made on the fly?\n\n"
+    },
+    {
+      "time": "13 Jul 2013 — 7:26pm",
+      "content": "You can certainly create the GUI in vanilla, but the complexity of the script increases the more corrections you want to enable, obviously. You could actually do this outside of Fontlab using defcon, but I don't think there's an advantage to that.\n\nJason C\n\n"
+    },
+    {
+      "time": "14 Jul 2013 — 6:35pm",
+      "content": "After all, it is unclear I would gain much with Robofab; to create a new character, I can do something fairly close to the code above, but I need to use the pen to draw (or redraw) the character; here is something that works from the Fontforge script menu and creates uni0251 for Roboto.\n\n    f=fontforge.activeFont()\n    ld=f[\"d\"].foreground\n    lq=f[\"q\"].foreground\n    # Contour 0, point 6\n    ld[0][6].x = lq[0][6].x\n    ld[0][6].y = lq[0][6].y\n    # Contour 0, point 7\n    ld[0][7].x = lq[0][7].x\n    ld[0][7].y = lq[0][7].y\n    # Contour 0, point 8\n    ld[0][8].y = lq[0][8].y\n    # Create the new character\n    f.createChar(0x0251,\"uni0251\")\n    # Draw the modified layer ld\n    pen=f[\"uni0251\"].glyphPen()\n    ld.draw(pen)\n    pen=None\n    f[\"uni0251\"].width = f[\"d\"].width\n\nSince `ld` is only a copy, the character d is left unchanged.\n\nAdded: to get the same numbering for the points in the resulting glyph, I have to draw contour 1 before contour 0. So it is\n\n    ld[1].draw(pen); ld[0].draw(pen)\n\ninstead of `ld.draw(pen)`. (weird!)\n\nOf course, for the italic, we need to calculate the x coordinate of point 8. To cover all cases we thus need to add something like\n\n    m=(ld[0][8].x -ld[0][9].x)*1.0/(ld[0][8].y-ld[0][9].y)\n    ld[0][8].x =ld[0][9].x + (lq[0][8].y-ld[0][9].y)*m\n\nbefore `ld[0][8].y = lq[0][8].y`. This works fine even for the thin italic where there are four points between the top and the bottom of the right part of the d and q.\n\nHere is the picture with d (green) in the background.\n\n ![](http://web.archive.org/web/20150414235648im_/http:/typophile.com/files/segment-9-10_5148.png)\n  \nPoints 9 and 10 are very close. The value of m above is the slope of the segment 8-9 when x is seen as a function of y.\n\nCorrection: there are two other points close to 9; there is thus a 9,10,11 cluster and then a 12,13,14 cluster. Hmm, no! I looked closer and there is a cluster of four points, 9,10,11,12 and then two point 13,14\n\n"
+    },
+    {
+      "time": "15 Jul 2013 — 3:39am",
+      "content": "Robofab wouldn’t gain you anything indeed, it is just the environment that I’m most proficient in at the moment, and it’s not confined to a specific editor.\n\n"
+    }
+  ]
+}

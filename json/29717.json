@@ -1,0 +1,74 @@
+{
+  "id": "29717",
+  "title": "Where to draw the line between fixing \"bearings\" and using kerning?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Hey,\n\nI've been working on DejaVu and I'm kinda wondering where I should draw the line between tweaking \"bearings\" (_the way the left/right limits of the character are called in FontForge, not sure it's the \"standard\" term_) and start working on the kern table.\n\nOf course there are some very obvious letter combinations that need it, but I'm still too unsure of my technique of placing characters in place and make it all look even, and all that across lowercase, uppercase, small-caps and the punctuation.\n\nI don't want to adjust kerning on letters that don't need it, which could cause problems in further development.\n\nI'm sure you guys have some good tips on that.\n\nThanks for the help,\n\nPierre-Luc\n\n",
+  "author": "Pierre-Luc Auclair",
+  "time": "25 Nov 2006 — 11:07pm",
+  "uid": "8675",
+  "comments": [
+    {
+      "time": "26 Nov 2006 — 3:51am",
+      "content": "“Basic Character Spacing in Type Design”  \nby Mark Jamra\n\n[http://www.typeculture.com/academic\\_resource/articles\\_essays/pdfs/tc\\_art...](http://web.archive.org/web/20131014045534/http:/www.typeculture.com/academic_resource/articles_essays/pdfs/tc_article_20.pdf \"http://www.typeculture.com/academic\\_resource/articles\\_essays/pdfs/tc\\_article\\_20.pdf\")\n\n"
+    },
+    {
+      "time": "26 Nov 2006 — 8:22am",
+      "content": "Instead of thinking in terms of perfecting the forms -\\> spacing -\\> kerning  \nsequence, try to think of them all at once, but iteratively, stopping when  \nthe total is simply good enough.\n\nhhp\n\n"
+    },
+    {
+      "time": "26 Nov 2006 — 9:05am",
+      "content": "\"I’ve been working on DejaVu...\"  \nI think, I'm having one. ;)\n\nIt's not true of all typeface designs and is most effective for a given size, and the decisions made on the \"common\" bearings must be correct for either upper and lowercase mixed or uppercase alone, but here's something: There are common bearings (a fine term), and uncommon bearings (I hope a fine term). Common bearings usually come in three pairs: the straight left and right bearings, the round l&r bearings, and the diagonal l&r. Uncommon bearings are like the right side of K e.g. which is usually between the right round bearing and the right diagonal bearing, and often is a unique numerical value.\n\nWe at FB generally use sample strings of H and O for spacing the uppercase because, among other things, their bearings are all common. So the K is the same as the H on one side, but the other side might be a compromise to space between H's and O's. Sometimes, you space it to work best with H, and kern it with O. sometimes, the opposite.\n\nBut our spacing stops and kerning starts when all the common bearings are correct, and all the uncommon bearings are the best compromise for a given design in a system that uses no kerning pairs, and then kerning pairs make the best spacing possible if a system uses them.\n\n"
+    },
+    {
+      "time": "26 Nov 2006 — 9:10am",
+      "content": "David, what proportion of your users would you say don't have kerning on?\n\nhhp\n\n"
+    },
+    {
+      "time": "26 Nov 2006 — 10:47am",
+      "content": "I would just offer the general observation that I think it is more efficient to have the sidebearings in the best possible (i.e. \"most finished\") condition before doing any kerning, because after kerning has started, one will have to re-check all the existing kerning if the metrics subsequently change. If the font has a lot of glyphs, this can be pretty time-consuming and unpleasant.\n\nThat said, I've never seen anyone _not_ go back and change sidebearings after starting the kerning -- it will come to that eventually. It's just that starting the kerning is a powerful temptation which is worth resisting as long as possible! :-)\n\n"
+    },
+    {
+      "time": "26 Nov 2006 — 3:15pm",
+      "content": "One consideration: If it's likely (as Hrant implies) that the typesetting or layout software doesn't support kerning by default, then it's worth considering a different strategy for spacing (how I describe setting sidebearings). If you know the font will usually be used with kerning on by default, then space everything to work adequately between control characters, and then fix bad combinations, usually with negative kern values. If it's likely to be used without kerning, space everything between a variety of control characters: HOVTAX. I suggest this because you might specify tighter sidebearings (with negative values) for things like V and A, so that in general, combinations with them are less gappy. Some combinations will be tight, some loose, but none as gappy as if those glyphs were spaced to be kerned by default. It's a way to average out the unfortunate combinations over all combinations, so that a lack of kerning is not so apparent.\n\nI'd agree with Chris on method. I also find that usually some initial sidebearings need adjustment after kerning is applied. Though Hrant's suggestion takes into account how we can create notan more fluidly, for large character sets it does start to seem endless and impractical. What is inescapable is that the designer must know what texture or setting they are going for, even as they sketch shapes. There are too many factors that influence each other.\n\n"
+    },
+    {
+      "time": "26 Nov 2006 — 5:06pm",
+      "content": "Actually I was implying that it's not too unsafe to assume that kerning is on. For one thing, people casual enough to use an app that doesn't use kerning (even if that's just the default setting) probably won't notice anything wrong anyway! :-/\n\n\\> for large character sets it does start to seem endless and impractical.\n\nI can see that happening. On the other hand I think it's very  \nimportant to take to heart the impossibility of perfection.\n\nhhp\n\n"
+    },
+    {
+      "time": "26 Nov 2006 — 8:37pm",
+      "content": "\"impossibility of perfection\"\n\nSILENCE!!!!!! I will have none of this!!!! LALALALALALALALAAAAAAAA\n\n;D\n\n"
+    },
+    {
+      "time": "27 Nov 2006 — 7:24am",
+      "content": "\"David, what proportion of your users would you say don’t have kerning on?\n\nThat's why, for general audience fonts, we use the method we use, we don't know.\n\n\" I’ve never seen anyone not go back and change sidebearings after starting the kerning..\"\n\nI can count on one hand the number of times I HAVE gone back to change bearings after kerning over the last 17 years since I started this method, and almost all five were a single bearing that was missed, or misassigned. As Chris points out, once you start kerning, bearing edits are complex. So I take this very seriously.\n\n\"typesetting or layout software doesn’t support kerning by default, then it’s worth considering a different strategy for spacing\"\n\nWe don't do it this 3rd way for the following reason: the user is used to two states, kerned type that is flawless, and type that suffers obviously from a lack of lerning pairs.\n\n"
+    },
+    {
+      "time": "27 Nov 2006 — 7:49am",
+      "content": "I suggest there is a third state, and it's quite a big one: imperfectly spaced  \ntype that is not noticed as such. :-/ Just look at the success of Mrs Eaves!\n\nhhp\n\n"
+    },
+    {
+      "time": "27 Nov 2006 — 8:01am",
+      "content": "\"SILENCE!!!!!! I will have none of this!!!!\"\n\nCarl,  \nThis is why I have yet to release a typeface :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "27 Nov 2006 — 8:14am",
+      "content": "\\>why I have yet to release\n\nMicrosoft didn't get rich by releasing perfect products. They released imperfect ones at first. (Some say crap, but of course I'd never say that :) Then they kept improving the product--and charging the customer for it! Is that genius or what?\n\n\"Closer to perfection: NOW 2.0, only $5 per weight upgrade for licensees...\"\n\n"
+    },
+    {
+      "time": "27 Nov 2006 — 2:38pm",
+      "content": "LOL!!  \nShouldn't that read, “NOW Closer to perfection...\"?\n\n:-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "27 Nov 2006 — 5:23pm",
+      "content": "\"Then they kept improving the product\"\n\nThey did?\n\n"
+    },
+    {
+      "time": "27 Nov 2006 — 9:26pm",
+      "content": "It certainly helps to use kerning classes to group glyphs for the different kinds of spacing, and perhaps kerning, that may be required -- as David has indicated. If you consider glyphs as potential members of kerning classes, it will help you determine what kind of a spacing beast each one is.\n\nFor instance, you may decide to group f, t, and r in a \"left\" class, which will lead you to consider whether that is appropriate for the typeface you are working on, and it might be, but perhaps only at one end of the weight scale.\n\n"
+    }
+  ]
+}

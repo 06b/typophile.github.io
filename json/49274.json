@@ -1,0 +1,18 @@
+{
+  "id": "49274",
+  "title": "Class-based kerning questions",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "First: are people still using enough apps without support for [KERN] that I should convert to a plain kerning table when I generate final fonts?\n\nSecond: I created an all-uppercase font, and want to fill in the lowercase characters with the uppercase glyphs. It seems like the best option is to expand my kerning classes and copy/paste the uppercase characters (with kerning) into the lowercase slots. The other option is to just have classes for every character to match the uppercase to lowercase but that seems kind of odd. Suggestions?\n\n",
+  "author": "<a href=\"/web/20101215175719/http://www.typophile.com/user/14722\" title=\"View user profile.\">Dunwich Type</a>",
+  "time": "<br>",
+  "uid": "14722",
+  "comments": [
+    {
+      "time": "",
+      "content": "There is no functional difference between class-based or pure-pair-based kerning within the \"kern\" feature of the OpenType \"GPOS\" table.\n\nBut the other type of kerning, the old-style non-OpenType \"kern\" table, is still needed for OpenType TT (.ttf) fonts. If you don't include non-OpenType kerning in .ttf fonts, there will be no kerning whatsoever in, say, Microsoft Word.\n\nFor OpenType PS (.otf) fonts, if you don't include non-OpenType kerning, the Western subset of your character set will automatically get \"virtual\" non-OpenType kerning, so AV and ÄV will have kerning in Word but ĄV will not.\n\nAs for the all-uppercase font, I'd do it by setting up classes this way:\n\n\\_A: A' a Aacute aacute Adieresis adieresis  \n\\_B: B' b\n\netc.\n\nAdam\n\n"
+    }
+  ]
+}

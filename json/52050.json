@@ -1,0 +1,58 @@
+{
+  "id": "52050",
+  "title": "Hinting/printing/proofing comprehensive advice",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I have several questions so bear with me. I have been trawling through the build forum looking for advice on this subject before posting and confess I have a very limited understanding of the subject. I am working on my first font, it’s PostScript. I don’t feel very confident about proofing what I am drawing, or regarding what I see on screen. I am mainly concerned with how the font prints, though I need a fair screen image to ensure this.\n\n1) Does hinting affect printing?\n\n(So far my understanding is ’yes’ though I don’t understand how much).\n\n2) [http://typophile.com/node/27444](http://web.archive.org/web/20081201072914/http:/typophile.com/node/27444 \"http://typophile.com/node/27444\")\n\nIn Nick’s example he mentions defining standard stems and alignment zones, so this will be the first thing I do.\n\n3) How is the type rendered in the preview window in FontLab? How trustworthy is this representation? Is this FreeType? What is happening when I quick test as Type1?\n\n4) If I export a font before applying any hinting is it up to the engines of individual programs to cope with rendering the type on screen? What informs the printout from this scenario?\n\n5) What are the essentials for a reasonable laser proof? Exporting fonts/printing direct from FontLab, PostScript/emulated etc.\n\nAs you can see I am very confused. I hope someone can take the time to talk me through this, I have spent a fair bit of time reading around but no sooner than I think I have a firm grasp of the subject it somehow slips away. I notice that a lot of threads on this topic go cold fairly quickly, hopefully some typowiki can be gleaned from this one.\n\nMany, many thanks\n\n [‹ Strange text behavior when exporting/producing PDF from InDesign](http://web.archive.org/web/20081201072914/http:/typophile.com/node/51812 \"Go to previous forum topic\") [Metrics working in InDesign CS3 but not CS2 ›](http://web.archive.org/web/20081201072914/http:/typophile.com/node/52023 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081201072914/http://typophile.com/user/16140\" title=\"View user profile.\">1985</a>",
+  "time": "<br>",
+  "uid": "16140",
+  "comments": [
+    {
+      "time": " 25.Nov.2008 7.54am",
+      "content": "1) As far as I know, hinting does not affect printing in any way. It is purely data that is (or is not) used by rasterizers for screen display.\n\n2) Setting up alignment zones (the blue bits) is always a good idea. Both for hinting and optical alignment of rounds and squares.\n\n3) I don’t know what renderer is used in the preview window of FontLab, but I think it is accurate. Adam Twardoch can probably comment on this one best.\n\n4) I suspect the rasterizer of the individual progams will have to cope with the rendering. It shouldn’t have an effect on printing it, though.\n\n5) Personally, I prefer exporting and setting proofs in InDesign, instead of directly printing from FontLab. Purely for convenience’s sake, though. I don’t know what kind of differences there are technically.\n\n"
+    },
+    {
+      "time": " 25.Nov.2008 7.10pm",
+      "content": "1) Yes, hinting does affect printing, most noticeably at very low resolutions like 300dpi. Since most printers today have higher than 600dpi resolution, the effects of hinting are not so noticeable, but they are still there.\n\n"
+    },
+    {
+      "time": " 26.Nov.2008 5.18am",
+      "content": "1) Does hinting affect printing?  \nHinting is not “kind of output” specific — it is resolution and typeface design specific. If one composes type at 72 pt on a 96 dot per inch screen (96 pixels per vertical em), pending typeface design issues, hinting does not effect the type. If one composes 10 pt for a 144 dpi printer, (20 pixels per vertical em), hinting likely is needed to save the type regardless of typeface design issues. Typeface design for less hinting means making fonts more regular in every imaginable way, (until one reaches Chicago;) And for more hinting, typeface design should travel towards Snell Roundhand or Augsburger Initials.\n\n3) How is the type rendered in the preview window in FontLab?  \nAdam, Yuri? How is T1 rendered? How is TT rendered, please? Obviously from above, the larger one renders type in FL, the more accurate, the smaller one renders type in FL, the less accurate. And, the less regular the design, the larger one renders type in FL, the more accurate, the smaller one renders type in FL, the less accurate. Then, depending on how faithful FL is to the OS rendering of your choice, you have an answer.\n\n4) If I export a font before applying any hinting is it up to the engines of individual programs to cope with rendering the type on screen?  \nAll screen rendering depends first on the outlines, and then on hints if they are present. The outlines are either scaled and rendered, or scaled/hinted and rendered. Scaling in this context means shrinking from, e.g. a 1000 unit em to a 25 unit em to transform the outline (1000) to the bitmap ( 6 pt 300 dpi). In this scaling, each and every contour point in the outline must find a coordinate in the new space. So, again, the more regular the type is on the em, the more regular it’ll stay when it is scaled to a lower resolution em. Hints are nice if you want irregular type to remain irregular.\n\nThen, when you project this out into OS and application space, all hell breaks loose unless the OS native to the font format handles it, in which case some hell breaks loose because, though the outlines may be regular or irregular, the hints are treated irregularly if used at all.\n\n5) What are the essentials for a reasonable laser proof? Exporting fonts/printing direct from FontLab, PostScript/emulated etc.  \nIt’s best to generate the final format you intend to supply and use it on the OS(s) and in the expected application(s) for output from the devices where you expect people to use it.\n\nCheers!\n\n"
+    },
+    {
+      "time": " 26.Nov.2008 5.21am",
+      "content": "I said: “Hints are nice if you want irregular type to remain irregular.”  \nThat may be true in some dark corner of the typographic universe, but,  \nI meant: Hints are nice if you want irregular type to become regular (at low resolutions per em).\n\nCheers!!\n\n"
+    },
+    {
+      "time": " 26.Nov.2008 6.41am",
+      "content": "Most of the original questions have already been answered, but I have a few things to add.\n\nFirst, not only does hinting affect printing, but bad hinting can deform letters when printing to a laser printer. Run the AFDKO autohinter before doing your test prints and the prints will look a hell of a lot better.\n\nI have also found that using Fontlab to generate proofs only works down to nine or ten points. Below that the shapes get mangled, so test small sizes from Indesign.\n\n"
+    },
+    {
+      "time": " 26.Nov.2008 7.19am",
+      "content": "I did not know hinting had such a large influence on printing. I have never noticed anything when printing unhinted or poorly hinted proofs of my types.\n\nWhat is interpreting the hinting data when printing? I doubt a printer uses the data?  \nAnd if hinting affects printing, that implies that there should a noticable difference between printing type, and printing type that has been converted to curves?\n\n"
+    },
+    {
+      "time": " 26.Nov.2008 8.34am",
+      "content": "David, I am indeed in some dark corner of the typographic universe! What do you mean by regular on the em?\n\nQuincunx, I always notice a difference between type and type that has been converted to outlines. The outlined type is usually a bit ’bolder’ when printed. It was news to me too when I picked up that hinting effected printing.\n\nI’m going to take a bit of time to digest the bulk of responses, read up on AFDKO etc, maybe Adam etc will chip in in the meantime.\n\nMany thanks all\n\n"
+    },
+    {
+      "time": " 26.Nov.2008 9.03am",
+      "content": "_3) How is the type rendered in the preview window in FontLab?_\n\nDepends on which platform you use ... If I remember correctly, on Windows FL uses an (the?) Adobe rasterizer for PostScript Outline hinting preview (you can choose between Black/White and Greyscale), and for TrueType outlines the Windows rasterizer in Black/White, Greyscale or ClearType mode.\n\nOn Mac OS X it’s different, obviously the Microsoft rasterizer can’t be used, and that’s why the TT preview on Mac is so bad ;)\n\n_How trustworthy is this representation?_\n\nAs trustworthy as you’re certain about which rasterizer will be used for displaying your fonts finally. In the end reliable hinting comes down to educated guessing and experience, I suppose:)\n\n"
+    },
+    {
+      "time": " 26.Nov.2008 10.30am",
+      "content": "And just to really make things weird, some printers don’t seem to pay attention to hints (I’m pretty sure my new Ricoh B&W laser ignores them) while others (HP) have a reputation for for interpreting hints incorrectly. From the research I’ve done it appears that your best bet is to use a Postscript B&W printer from Ricoh or Xante. Those Xante printers are just amazing at text rendering!\n\n"
+    },
+    {
+      "time": " 26.Nov.2008 2.29pm",
+      "content": "“What do you mean by regular on the em?”\n\nFonts for print usually have slight variations in otherwise common values, like alignments and stem thicknesses, to create the optical effects one sees in print as correct. These slight variations however, introduce rounding ’errors’ at lower resolutions and one sees these on screens as incorrect.  \nOne prominent example is the O overshoot vs. H, which, if you look closely on your screen at this font, does not exist, though O overshoot does exist in the outlines of the font you are using. Within the overshoots, the O,C,J,G,S,Q &,& Ø may all have slightly different alignments and weights of the baseline round hairline(s) for print due to variety in shape and proximity of features, width of character, and contrast of baseline hairline, to create the optical effects one sees in print as correct.  \nA more regular design might have one common overshoot, or in a squarer design, none and thus be even more regular on the em. And, the hairlines can be simplified down to a couple of values or even a single value, all to create the optical effects one sees on the screen as correct.\n\nHope that helps some.\n\nCheers!\n\n"
+    },
+    {
+      "time": " 26.Nov.2008 5.48pm",
+      "content": "\\>\\> _I always notice a difference between type and type that has been converted to outlines. The outlined type is usually a bit ’bolder’ when printed. It was news to me too when I picked up that hinting effected printing._\n\nI do notice that boldening of outlined type vs. real type on screen, but I don’t think I’ve ever noticed it in print.\n\nIf there is an effect, I think it will be negligable. I just wonder if printers even use the hinting data at all, or can even interpret it. And is it useful?\n\n"
+    }
+  ]
+}

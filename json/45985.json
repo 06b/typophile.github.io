@@ -1,0 +1,42 @@
+{
+  "id": "45985",
+  "title": "fsSelection field error.",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi there:\n\nI am generating TTF fonts for a a type family of 4 weights:\n\nXXX Light  \nXXX Regular  \nXXX Bold  \nXXX Black\n\nWhen I test the generated fonts with MS Font ValidatorI get OS/2 errors:\n\n’E2100A \\> bit in the fsSelection field doesn’t match the name table’s font subfamily string \\> fsSelection regular bit is set, but subfamily is Light’\n\n(I get the message in every weight except, obviously, in regular)\n\nI do not know how to fix that.\n\nI did the font naming following the instructions in the Fontlab Forum:  \n [http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mvie...](http://web.archive.org/web/20081007164750/http:/groups.msn.com/fontlab/tipsandtricks.msnw?action=get_message&mview=0&ID_Message=2843 \"http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mview=0&ID\\_Message=2843\")\n\nHow can I access this field in Fontlab?\n\nThanks in advance.\n\n [‹ assign a glyph to a keystroke in fontlab](http://web.archive.org/web/20081007164750/http:/www.typophile.com/node/44583 \"Go to previous forum topic\") [Question about OT Scripting and file size ›](http://web.archive.org/web/20081007164750/http:/www.typophile.com/node/46034 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081007164750/http://www.typophile.com/user/1137\" title=\"View user profile.\">RamiroE</a>",
+  "time": "<br>",
+  "uid": "1137",
+  "comments": [
+    {
+      "time": " 2.Jun.2008 1.26pm",
+      "content": "It’s the Italic/Bold checkboxes on the first page of the FontInfo dialog.\n\n"
+    },
+    {
+      "time": " 2.Jun.2008 2.18pm",
+      "content": "If Font Validator reports that “your subfamily is Light” then you did the naming wrong. On FontLab Studio’s first Font Info page, in the Style Name field, only four names are allowed: Regular, Bold, Italic and Bold Italic. Obviously, one of your fonts has “Light” there. That’s wrong. You should put the true typographic style names into the OT Style Name field on the second Font Info page. But I thought I actually wrote this on the FontLab forum.  \nA.\n\n"
+    },
+    {
+      "time": " 2.Jun.2008 11.10pm",
+      "content": "Thanks!  \nI think know I get it. What should I put in the Styte Name field for XXX Black? Bold or Regular?  \nAnd for XXX Light? Regular?\n\n"
+    },
+    {
+      "time": " 2.Jun.2008 11.53pm",
+      "content": "Sloppy reading on my part, sorry ...  \nIf ’Black’ is already part of the black weight’s Family Name, then the according Style Name would be ’Regular’. Similar for the light weight. Since you get the error message even with the bold weight, you seem to have forgotten to check the Bold checkbox in the bold weight. (Whereas it should be unchecked in light, regular and black weight.)  \nThis however would only be true if you intend to link regular with bold, but treat light and black as separate families on the level of Family Name / Style Name. Given your description, I am not sure if you followed the tips & tricks’ _PostScript Type 1_ or the _OpenType_ section.\n\n"
+    },
+    {
+      "time": " 3.Jun.2008 3.45am",
+      "content": "Hi K.L. & Adam,\n\nThe family has only 4 members: Light, Regular, Bold, Black and no italics (it is a display font with no italics).\n\nFor TTF fonts shall I put different Family Names for Light and Black?\n\nOr can I have Light and Black under the same Family Name than Regular and Bold?  \n(Reading ’Learn FL Fast’ -pag. 130- gives me the impression that the four members should only be Regular, Italic, Bold and Bold Italic in TTF.)\n\nThanks in advance.\n\n"
+    },
+    {
+      "time": " 6.Jun.2008 6.26pm",
+      "content": "\\> (Reading ’Learn FL Fast’ -pag. 130- gives  \n\\> me the impression that the four members should  \n\\> only be Regular, Italic, Bold and Bold Italic  \n\\> in TTF.)\n\nWrong impression. This limitation applies to TTF and OTF.\n\nA.\n\n"
+    },
+    {
+      "time": " 6.Jun.2008 6.32pm",
+      "content": "Ramiro,\n\ntypically, you make the typographic “Bold” style act as a style-linked bold for the typographic “Regular”. (The style-linked bold is the font which is chosen when the user clicks on a “B” button in an application, or hits Cmd-B / Ctrl-B).\n\nSo you typically have:  \n`OT Family: XXX, OT Style: Regular,\n  Family: XXX, Style: Regular\n  Font is bold: no\nOT Family: XXX, OT Style: Bold,\n  Family: XXX, Style: Bold,\n  Font is bold: YES`\n\nThen for your typographic “Light” and your typographic “Black”, you really have two choices (I’ve italicized the differences):\n\nSolution 1: The Black font is on its own  \n`OT Family: XXX, OT Style: Light,\n  Family: XXX Light, Style: Regular\n  Font is bold: no\nOT Family: XXX, OT Style: Black,\n  Family: XXX Black, Style: Regular\n  Font is bold: no`\n\nSolution 2: The Black font acts as the style-linked bold for the Light font  \n`OT Family: XXX, OT Style: Light,\n  Family: XXX Light, Style: Regular\n  Font is bold: no\nOT Family: XXX, OT Style: Black,\n  Family: XXX Light, Style: Bold,\n  Font is bold: YES`\n\nIt’s really up to you, but I’d say in this case I’d go with solution 1.\n\nHowever, if your family had the typographic styles Light, Regular, Medium, Bold, Black, then you might consider making the Black font act as the style-linked bold of the Medium font, and leave the Light without a style-linked bold, or you could make the Medium act as the style-linked bold of the Light font, and leave the Black on its own, or you could make the Light, Medium and Black three independent fonts without any style linking. It’s a design decision, really.\n\nAdam\n\n"
+    }
+  ]
+}

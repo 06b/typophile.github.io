@@ -1,0 +1,114 @@
+{
+  "id": "38483",
+  "title": "FontForge now integrates Spiro",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Sort of.\n\nGeorge Williams has extended FontForge to support Raph Levien’s Spiro curves.  \nUnfortunately, the process to install everything and make it function correctly is quite opaque to me.  \nFor purposes of licensing and patents and other things I don’t understand, the Spiro libraries are not included in the basic install of the latest FontForge, so some other stuff I don’t readily understand has to be done to get them all working together.\n\nThere is a Gobuntu build recipe at [http://understandinglimited.com/2007/10/26/ff-spiro/](http://web.archive.org/web/20091029153712/http:/understandinglimited.com/2007/10/26/ff-spiro/) which looks like a bunch of UNIX gobbledygook to me.\n\nIf anyone knows how to get it working on Mac OS X 10.4 X11, please share with us. I’d be much obliged.\n\n",
+  "author": "<a href=\"/web/20091029153712/http://typophile.com/user/14556\" title=\"View user profile.\">cuttlefish</a>",
+  "time": "<br>",
+  "uid": "14556",
+  "comments": [
+    {
+      "time": " 26.Oct.2007 12.31pm",
+      "content": "Neat! One of these days I’ll have the free time to install FontForge and start forging...\n\n"
+    },
+    {
+      "time": " 30.Oct.2007 10.40am",
+      "content": "I’m no Mac expert, but if you asked on an appropriate Usenet newsgroup (maybe comp.sys.mac.system or comp.sys.mac.apps?), somebody who is would probably be willing to convert those instructions from Ubuntu to OS X. If you know any Fink gurus, you might also talk to them.\n\nIn any case, it looks like this job will take considerable time and patience. The fact that the instructions ask you to get FontForge from CVS suggests that there hasn’t yet been an official release with Spiro support. When such a release becomes available, the install process may get simpler.\n\nGood luck!\n\n"
+    },
+    {
+      "time": " 30.Oct.2007 11.19am",
+      "content": "I can write up a build recipe for Mac, but won’t get time for it until probably this weekend. It will get easier when it’s a real release rather than a dev build.\n\nI’m thrilled that people in the free software community are integrating Spiro. This may just be the way that we take over the world :)\n\n"
+    },
+    {
+      "time": " 30.Oct.2007 4.29pm",
+      "content": "I followed the Gobuntu recipe almost as is on a ppc with 10.4.10 and got a running version. The recipe asks to define `TT_CONFIG_OPTION_BYTECODE_INTERPRETER` in the file `include/freetype/config/ftoption.h` where it is written  \n`\nDefine TT_CONFIG_OPTION_BYTECODE_INTERPRETER if you want to compile a bytecode interpreter in the TrueType driver. Note that there are important patent issues related to the use of the interpreter.\n`  \nDoes anyone know what those important patent issues are?\n\nMichel\n\n"
+    },
+    {
+      "time": " 30.Oct.2007 5.40pm",
+      "content": "\\> _Does anyone know what those important patent issues are?_\n\nPerhaps these?  \n [http://www.freetype.org/patents.html](http://web.archive.org/web/20091029153712/http:/www.freetype.org/patents.html \"http://www.freetype.org/patents.html\")\n\n"
+    },
+    {
+      "time": " 30.Oct.2007 6.52pm",
+      "content": "\\> <cite>Perhaps these?</cite>\n\nSo, as long as the interpreter is not used for hinting, there seems to be no problem.\n\nWhat I get is not fully functional (for instance, I can’t import Raph’s files) but if you are in a hurry to see what is probably coming soon, you can try this [recipe.txt](http://web.archive.org/web/20091029153712/http:/www.iro.umontreal.ca/~boyer/typophile/recipe.txt). Just create some temporary folder, save [recipe.txt](http://web.archive.org/web/20091029153712/http:/www.iro.umontreal.ca/~boyer/typophile/recipe.txt) it it, then `cd` there and type “`source recipe.txt`”. You will need to enter an empty password after the first line and then the installation password when you are asked; wget and darcs are not used. Patience required.\n\n"
+    },
+    {
+      "time": " 1.Nov.2007 5.31am",
+      "content": "Since the Gobuntu recipe, lots of modifications were made to fontforge and the recipe is now much shortened. A Spiro library is now available [**here**](http://web.archive.org/web/20091029153712/http:/libspiro.sourceforge.net/). You just install it and then compile fontforge with the standard recipe which has now replaced [**recipe.txt**](http://web.archive.org/web/20091029153712/http:/www.iro.umontreal.ca/~boyer/typophile/recipe.txt). No need of the bytecode interpreter and my guess is that with the next build, installation on the mac will be fast and easy.\n\nMichel\n\nPS And, though I have not tried extensively the resulting binary, it looks completely functional.\n\n"
+    },
+    {
+      "time": " 1.Nov.2007 10.09am",
+      "content": "If you feel like sneaking to see what is going on with the development of FontForge with Spiro, you can look [**here**](http://web.archive.org/web/20091029153712/http:/fontforge.cvs.sourceforge.net/fontforge/fontforge/fontforge/?sortby=date#dirlist).\n\nMichel\n\n"
+    },
+    {
+      "time": " 1.Nov.2007 11.00am",
+      "content": "So, for someone just starting with this, would folks say this is easier to install on Windows or OSX?\n\n"
+    },
+    {
+      "time": " 1.Nov.2007 1.47pm",
+      "content": "My only experience has been with the prebuilt Mac OS X package, but that is easy enough to install. Just make sure you have X11 installed (included on the system install DVD, but as an option that may not be pre-installed) and double-click the package, then launch X11 and select FontForge from its applications menu.\n\nYou need Cygwin to run FF on Windows, and I don’t really know anything about that.\n\nBut that’s just the pre-built package. The development builds (such as the one incorporating Spiro features) are a bit more involved to deal with. Michel has explained what to do with them, but it still goes way over my head.\n\n"
+    },
+    {
+      "time": " 2.Nov.2007 5.10am",
+      "content": "On a PowerPC with 10.4, you can try [this prebuilt package](http://web.archive.org/web/20091029153712/http:/www.iro.umontreal.ca/~boyer/typophile/ff.html). Michel.\n\n"
+    },
+    {
+      "time": " 2.Nov.2007 9.46am",
+      "content": "Thanks, Michel! ^\\_^\n\n"
+    },
+    {
+      "time": " 3.Nov.2007 4.31am",
+      "content": "It is much easier to install on Mac OS X because cvs, gcc and other important libraries are already preinstalled when you install the Developer tools from the system DVD. On Windows, it’s much more complicated to build.\n\n"
+    },
+    {
+      "time": " 4.Nov.2007 9.15am",
+      "content": "I’m still a bit unclear as to the distinction between the G2 and G4 curve point types. They do behave differently, even though 3 points make a circle with either. I guess I’m still not used to it enough to predict the differences, and when to choose one over the other.\n\n"
+    },
+    {
+      "time": " 11.Nov.2007 6.12am",
+      "content": "The last version of FontForge on sourceforge.net is now dated November 10 and can be fetched [**here**](http://web.archive.org/web/20091029153712/http:/sourceforge.net/project/showfiles.php?group_id=103338). To integrate spiro, all you need is to also install [**libspiro**](http://web.archive.org/web/20091029153712/http:/libspiro.sourceforge.net/). For more details on how FontForge integrates functionalities, you can have a look at the documentation on FontForge [**dependencies**](http://web.archive.org/web/20091029153712/http:/fontforge.sourceforge.net/source-build.html#Dependencies).\n\nMichel\n\n"
+    },
+    {
+      "time": " 11.Nov.2007 9.16pm",
+      "content": "Adam, do you fancy building a Windows installer :)\n\n"
+    },
+    {
+      "time": " 12.Nov.2007 5.30am",
+      "content": "Building a Windows installer for FontForge is really quite cumbersome since Windows does not easily integrate X11, the Unix windowing system. Mac OS X ships with an optional X11 install right on the system DVD, AND it also contains all tools necessary to build (compile) FontForge. I have an easy shell script that downloads, compiles and installs FontForge and all its dependancies, all in one simple step — it would be more difficult on Windows.\n\nI uploaded my simple one-click FontForge installer onto:  \n [http://www.font.org/software/fontforge/buildfontforge-macosx.zip](http://web.archive.org/web/20091029153712/http:/www.font.org/software/fontforge/buildfontforge-macosx.zip \"http://www.font.org/software/fontforge/buildfontforge-macosx.zip\")\n\nShould work on Mac OS 10.5 and 10.4. You may need to first install subversion to get it work on 10.4.\n\nAdam\n\n"
+    },
+    {
+      "time": " 12.Nov.2007 10.53pm",
+      "content": "Well, will I be able to get Fontforge with Spiro to run on the XO we just ordered? :)\n\n"
+    },
+    {
+      "time": " 13.Nov.2007 8.04am",
+      "content": "XO?\n\n"
+    },
+    {
+      "time": " 13.Nov.2007 8.12am",
+      "content": "I think that John is referring to the One Laptop Per Child XO machine, which just went on sale.\n\nAnd John, given the state of geek fetishization of the XO, I’m sure that you can find plenty of programmers to compile a package for you...\n\n"
+    },
+    {
+      "time": " 13.Nov.2007 12.14pm",
+      "content": "Yes, the One Laptop Per Child XO machine. My wife just ordered one (technically two, since when you buy one another gets shipped to a child in a developing nation).\n\n"
+    },
+    {
+      "time": " 25.Mar.2008 2.02pm",
+      "content": "Any luck with getting it running on the XO John?\n\n"
+    },
+    {
+      "time": " 26.Mar.2008 5.29pm",
+      "content": "The XO laptop claims to be based on RedHat’s Fedora on an x86 machine. If it’s a normal RedHat system then you should just be able to download the x86 rpm from the FontForge downloads page.\n\nThe site claims to support 5 programming environments, and they do not list C, which is what FontForge is written in. If this lack is real (and it’s hard for me to imagine a linux system without C) then building fontforge yourself may prove difficult.\n\n"
+    },
+    {
+      "time": " 27.Mar.2008 4.47am",
+      "content": "The rpm installs indeed and FontForge runs but the XO displays only one window at a time. If I select a character to edit, all I see on the screen, in tiny characters, in a corner, is this:\n\n ![](http://web.archive.org/web/20091029153712im_/http:/typophile.com/files/corner_4531.jpg)\n\nIn this section on [_Useful Tools_](http://web.archive.org/web/20091029153712/http:/wiki.laptop.org/go/Font_Common_Room#Useful_Tools) for the XO, it is mentioned that a stripped down version of FontForge might prove useful.\n\n"
+    },
+    {
+      "time": " 27.Mar.2008 5.31am",
+      "content": "<cite>the XO displays only one window at a time</cite>\n\nThe problem is not with FontForge, of course. This is a restriction of the XO’s graphical user interface, [_Sugar_](http://web.archive.org/web/20091029153712/http:/wiki.laptop.org/go/Sugar).\n\n"
+    }
+  ]
+}

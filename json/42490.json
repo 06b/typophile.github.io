@@ -1,0 +1,18 @@
+{
+  "id": "42490",
+  "title": "Ascent/Descent Python Script?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Lately I've been troubled with the lousy job FontLab Studio 5 does with calculating its automatic ascent and descent values in addition to the worse job it does plugging in the additional values for OS2 and HHEA values . . .\n\nTo add insult to injury I continue to get the Ascent/Descent output error that John Hudson wrote about extensively . . .\n\nSo, the question remains, is this a FLAB5 problem that they will resolve in future builds or has somebody create a sweet sweet Python Script that can do a competent job of this work?\n\nKindly advise fellow builders . . .  \nStuart :D\n\n",
+  "author": "Diner",
+  "time": "25 Feb 2008 — 1:41pm",
+  "uid": "1226",
+  "comments": [
+    {
+      "time": "25 Feb 2008 — 6:21pm",
+      "content": "It should be fairly easy to script this. But one might actually want a couple of different scripts depending on the approach one intended to take to the linespacing issue:\n\nMETHOD 1 (in which all vertical metrics sum to equivalent values)\n\nThe WinAscent value and WinDescent values can be set to the actual vertical bounding box height and depth (this is, by the way, Adobe' recommendation). I have a script that Adam wrote for me that finds the tallest and deepest glyphs in a font, and it strikes me that it would be easy to then write these values to the relevant metrics fields.\n\nFor the additional OS/2 and hhea values, you would first want to set the Ascender and Descender values in the Key Dimensions font info dialogue correctly. For a Latin font, these can be calculated from the ascent of the d and descent of the p. In a non-Latin font without Latin codepage support, these values would need to be manually set.\n\nThe TypoAscender and TypoDescender values can be calculated by first summing the key dimension ascender and descender values--_treating all values as positive_--and subtracting this value from the UPM value. The difference should then be equally split and added to the key dimension Ascender and Descender values to come up with the OS/2 TypoAscender and TypoDescender values, i.e. the latter should sum to the UPM.\n\nThe TypeLineGap value can then be calculated by summing the WinAscent and WinDescent values and subtracting the UPM value.\n\nThe hhea values can me set in one of two ways, and it would probably be best to have an option dialogue or a separate script. They can either match the OS/2 Typo values, or the hhea Ascender and Descender settings can match the OS/2 WinAscent and WinDescent with the hhea LineGap value set to 0 (zero).\n\nMETHOD 2 (presuming setting of OS/2 version 4 fsSelection bit7, i.e. with idependent Typo and Win values)\n\nOS/2 WinAscent and WinDescent values and the OS/2 TypoAscender and TypoDescender values are determined in the same way as in Method 1. The OS/2 TypoLineGap value is then set to a discretionary value to determine desirable linespacing in apps that respect the fsSelection bit 7 setting. As a default value, a script could set this value to 20% of the UPM, thereby implying 2pts of leading for 10pt text.\n\nIn Method 2 it would be typical for the hhea values to mirror the OS/2 Typo values.\n\nSince FontLab is not currently able to set any of the OS/2 version 4 bits, requiring post production table hacking with e.g. TTX, a Method 1 script would probably serve the majority of FontLab users for the time being.\n\n"
+    }
+  ]
+}

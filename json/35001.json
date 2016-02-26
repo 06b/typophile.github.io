@@ -1,0 +1,42 @@
+{
+  "id": "35001",
+  "title": "Tools to measure Rendering Speed",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "How can we measure the rendering speed of different fonts? Is there any tool, technique or website that can help?\n\nThanks\n\n [‹ Comparing significant Grotesques/Neo-Grotesques](http://web.archive.org/web/20080312174544/http:/www.typophile.com/node/34986 \"Go to previous forum topic\") [Typeface quandary ›](http://web.archive.org/web/20080312174544/http:/www.typophile.com/node/34996 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080312174544/http://www.typophile.com/user/19447\" title=\"View user profile.\">Ijaz.Mehrr</a>",
+  "time": "<br>",
+  "uid": "19447",
+  "comments": [
+    {
+      "time": " 9.Jul.2007 8.27pm",
+      "content": "I just have to ask...are you actually doing something that makes the rendering time perceptible to begin with?\n\n"
+    },
+    {
+      "time": " 9.Jul.2007 8.56pm",
+      "content": "When you consider the real-time refreshing of gobs of small text in a layout app (especially on a typical third-world computer), it can matter. I believe rendering performance is why for example InDesign’s optical spacing is (still?) based on a bilinear model as opposed to a more ideal fully-smooth model. Performance is also the reason MS has recommended Em-sizes that are powers of 2 (although some people dispute the latter-day relevance of this). And this is all in the realm of Latin, which is way less complex than Urdu for example.\n\nhhp\n\n"
+    },
+    {
+      "time": " 9.Jul.2007 9.40pm",
+      "content": "In Muhammad’s part of the world it’s relevant - depending on the methods used an OpenType Nastaliq Urdu font may be anywhere from slow to unusable. In this case it’s shaping not rasterizing that slows things down. If that’s the area of interest I’ll point Sergey to this thread.\n\n"
+    },
+    {
+      "time": " 10.Jul.2007 6.51am",
+      "content": "<cite>And this is all in the realm of Latin, which is way less complex than Urdu for example.</cite>\n\nMakes perfect sense to me now.\n\n"
+    },
+    {
+      "time": " 10.Jul.2007 10.59am",
+      "content": "I’ve seen different interpretations of term ’rendering’: from glyph rasterization to text layout of entire document. You may want to clarify what you actually is trying to measure.\n\nLargely, rasterization speed is independent from text shaping performance using OpenType layout tables. Complexity of the script may require complex layout tables by itself. There are also fonts for simple scripts where designer planned for rich set of contextual forms or complex positioning rules, e.g. Segoe Scrtipt, Bickham Script Pro, or SBL Hebrew. However, this does not automatically mean exteremly complex outlines.\n\n"
+    },
+    {
+      "time": " 11.Jul.2007 11.34am",
+      "content": "Also, the shaping and rasterization can be optimized in various ways. When I developed the contextual OpenType features for Zapfino Extra Pro, I noticed great performance differences between Notepad and InDesign. The same \\*large\\* amount of text took a very long time to initially render after pasting it into both Notepad and InDesign. But once first rendered, page switching and scrolling was fast in InDesign but still very slow in Notepad. This was most likely because InDesign was caching the glyph ids and their positions, and rerun the OpenType Layout shaping only when necessary (when a reflow occured), while Notepad did not have any chaching mechanism so it executed the OpenType code practically at every screen referesh.\n\nA.\n\n"
+    },
+    {
+      "time": " 11.Jul.2007 6.49pm",
+      "content": "I on purpose decided not to touch area of higher level text formatting code in my previous mail. There are two many things that can be measured or optimized for. This includes paragraph formatting, whole document pagination, automatic layuot, editing, scrolling, time to first page on screen/printer, WYSIWYG quality, memory consumption, loading time etc. You may prioritize and address different issues above and get different feel about application performance.\n\nLet’s, for example, compare Notepad and WordPad. Notepad is much faster than Wordpad in shapng simple text (i.e. finding linebreaks within a the paragraph) and so, finishes formatting faster. But Notepad will not do anything, even drawing first lines, until whole document is formatted. Since it is frequently used to view huge log files, it takes seconds, sometimes minutes. Wordpad draws first page as soon as it is ready and allows scrolling while formatting for the rest of the document continues in the background. Which one you think is percieved to be faster?\n\nI’ve seen enough performance problems on all levels of text stack, each of them made overall speed times or even orders of magnitude slower. I remeber Notepad(i.e. Uniscribe) in Windows 2000 drawing Indic text one line per second, now it is hundreds times faster. I know higher level components and applications that had been made 30+ times faster without changing a line in Uniscribe.\n\nThings are, font designer can affect basic things on font-facing text formatting level and rasterization. And I think it is safe to assume that faster font is, faster application works :). But all tricks and optimiaztion within application make it hard to measure performance of the font itself. This is why I like Notepad, it is absolutely straightforward, predictable, pure Uniscribe+GDI client, with basically no additional functionality beyond that. I am sure InDesign is much more advanced and performant in terms of formatting, cachig and screen rendering. But this is what makes Notepad a great tool for testing functionality and preformance of both Uniscribe and fonts.\n\nThanks,  \nSergey\n\n"
+    }
+  ]
+}

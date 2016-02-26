@@ -1,0 +1,154 @@
+{
+  "id": "13036",
+  "title": "S design",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I have a lot of trouble with the design of the letter \"S\". Can you share your secrets, ideas? post a sample/template?\n\nThank you\n\n=============\n\nI hope I didn't mess with the thread.....\n\nok the first drawings (well....not the first first, but....anyway don't \"kill\" my spirit :) )\n\n| Attachment | Size |\n| --- | --- |\n| [letters.gif](http://web.archive.org/web/20140606143245/http:/typophile.com/files/letters.gif) | 4.63 KB |\n\n",
+  "author": "parker",
+  "time": "12 Jun 2005 — 1:53am",
+  "uid": "4955",
+  "comments": [
+    {
+      "time": "12 Jun 2005 — 2:22am",
+      "content": "I know your problem is with the shape and balance of the S but as far as heights are concerned this is the note I placed in the [MS character design standards](http://web.archive.org/web/20140606143245/http:/www.microsoft.com/typography/developers/fdsspec/uppercase.aspx) and Matthew Carter's quote I recieved from him:\n\nNote : It is far more important the tops and bottoms of round characters are visually more than mathematically equal. It is common for designers to make some round characters, such as the uppercase S and C slightly smaller than the uppercase O.\n\n'I'm very unsystematic about things like the relative sizes of round characters, I judge them purely by eye. It's my impression that S and C often need to be a bit smaller than the fully-enclosed O because the openings in their forms make them look bigger. This applies equally to the lowercase.'\n\nComments on visual character heights by Matthew Carter, Carter and Cone Type, Inc.\n\n"
+    },
+    {
+      "time": "12 Jun 2005 — 9:13am",
+      "content": "The S is the most difficult character.  \n1. Try looking at your work differently: rotate it through 90 and 180 degrees, flip it.  \n2. Place an outline from a typeface which you think is similar to yours, and has a successful S, in the layer beneath your outline, and inspect how it differs from your work. Harmonize the way your curves/stem widths vary with the example.  \n3. Copy the top half, scale it up a tad, rotate through 180, and see if it works as the bottom half of your glyph.\n\n"
+    },
+    {
+      "time": "13 Jun 2005 — 9:54am",
+      "content": "Thank you Vincent & Nick (only the Englishmen are here? :) only two type designers?)\n\n"
+    },
+    {
+      "time": "14 Jun 2005 — 10:30am",
+      "content": "Look closely (I mean the vertices and BCPs) at \"S\"es you think work.\n\nhhp\n\n"
+    },
+    {
+      "time": "14 Jun 2005 — 12:10pm",
+      "content": "I wonder if your trouble doesn't come from trying to digitize your drawings? My experience is that drawing the letter with pencil is much easier than discovering the right number and location of bezier points to construct the same shape. If this is part of the problem, try putting the points at different places, more or fewer points. See how few you really need, and when previewing, which points give the best shape. I've done my drawing with points on the left and right extremes, with none along the middle, reflexive curve, which seems to be the trouble area. Hrant's idea is good; if there's a PostScript font with an S you like, open it in your font editor to see how the other designer did it.\n\nOn the other hand, Bitstream used to test type design candidates by giving them paper and pencil and telling them to draw an S, freehand, without correcting anything. The resulting shape brought a thumbs up or thumbs down....\n\n"
+    },
+    {
+      "time": "14 Jun 2005 — 12:16pm",
+      "content": "This is what I do to make an S look good, which is a bit different from the question of making an S. I usually have the shape in my head okay, but the difficulty is managing the curves with a set of bezier curves in such a way that the whole thing hangs together and you don't get odd bulges. I should also note that I generally like my S to flow, so avoid putting straight segments in the middle of the bend unless it is a particularly wide S, e.g. for an extended face, or a real grotesk.\n\nI've found the key for getting the S to look good is to ignore the middle bend completely while positioning most of the nodes: just let it ride free. The really important thing is the positioning of the nodes on the extremes of the vertical curve sections. You have to think of the relationship between these as what really gives the S its form. So you have to ignore the floppy bend in the middle and just concentrate on visualising the relative positions of those four nodes. [[S1.gif]](http://web.archive.org/web/20140606143245/http:/www.tiro.com/John/S1.gif) Getting the two terminals in place helps at this stage, because they define the curves that will lead into the vertical sections, and so into the bend.\n\nOnly when the terminals and the nodes on the vertical sections are looking good do I start paying attention to the bend. I either grab the middle of the bend curves themselves or the control handles off the vertical nodes, and drag them until I have the weight I want _at the middle of the bend_ and an appropriate relationship between the two edges. [[S2.gif]](http://web.archive.org/web/20140606143245/http:/www.tiro.com/John/S2.gif)\n\nNow I draw guidelines (or sometimes just use the knife tool) between the opposing control handles off the verticals. Where these cross the outline defining the bend, I insert a node that I will use to control the middle of the bend. [[S3.gif]](http://web.archive.org/web/20140606143245/http:/www.tiro.com/John/S3.gif)\n\nWhat I have now is a set of bezier curves that produce a very smooth form. I can now adjust the control handle on these to refine the shape. I try to avoid moving the nodes themselves; if a node on one of the vertical needs to be moved, it was probably in the wrong place to begin with, so I might delete those nodes I added on the bend and go back a step to ensure that my shape remains smooth. I may shift the position of the mid-bend nodes up or down a little, if I decide the weight in the middle is too light or too heavy. Usually, to get the final form I want, I only need to move the control handles, being careful to constrain to the tangent. In the final graphic [[S4.gif]](http://web.archive.org/web/20140606143245/http:/www.tiro.com/John/S4.gif), I have put the unrefined S3 form in the background as a mask layer.\n\nI no longer think of S as the most difficult letter. I now have a much harder time with the leg of the R.\n\n"
+    },
+    {
+      "time": "14 Jun 2005 — 12:22pm",
+      "content": "_On the other hand, Bitstream used to test type design candidates by giving them paper and pencil and telling them to draw an S, freehand, without correcting anything. The resulting shape brought a thumbs up or thumbs down…._\n\nThe infamous S-test. Mike Parker and Matthew Carter brought this to Bitstream from Linotype, where it was the standard entry test for prospective drawing office staff. The really nasty version involves a model S in a rectangle, and you have to re-draw it by hand in another rectangle of different dimensions, adjusting the shape of the design to the new proportions.\n\n[My favourite story regarding the Linotype drawing office is that of Tim Holloway, who was hired by Walter Tracy for a management role at Linotype. Tracy insisted that all the management have a working knowledge of the different aspects of the business and making of type, so required Tim to spend a couple of weeks in the drawing office, just to learn what went on there. Tim, it turned out, was a natural, much better suited to drawing type than to management. As I've said here before, I think Tim is one of the greatest living type designers, overlooked by most commentators simply because almost all his work has been in non-Latins.]\n\n"
+    },
+    {
+      "time": "14 Jun 2005 — 2:01pm",
+      "content": "John, your first illustration revives a question that's long been in my head; it's not totally on-topic, but still: How do people (including laymen) feel about an \"s\" that has stroke weight distributed more towards its top-left and bottom-right curves, rather than its spine?\n\nBTW, the hardest letter (in Latin) is most definitely the lc \"g\"!\n\nhhp\n\n"
+    },
+    {
+      "time": "14 Jun 2005 — 7:34pm",
+      "content": "_BTW, the hardest letter (in Latin) is most definitely the lc “g”!_\n\nI actually find the lowercase g not too difficult now. It was a bugger when I first started designing type, but it is like the lowercase a: one of the most important distinctive letters in a typeface, so one that I start thinking about early in a design. Usually, by the time I come to make the outline, the form is really solid in my head.\n\nAs to your other question, I'm not sure how I 'feel' about that kind of S, but I've never been struck by a need to design one that way.\n\n"
+    },
+    {
+      "time": "14 Jun 2005 — 10:23pm",
+      "content": "Ah, but more important in a craft are the needs of your users and readers.\n\nhhp\n\n"
+    },
+    {
+      "time": "15 Jun 2005 — 12:34pm",
+      "content": "If someone comes along and tells me that he can't read my typeface because of the form of my S, I'll consider this carefully.\n\nIf I were designing a really heavy, black sans serif typeface, I would be more inclined to remove weight from the middle of the S, to open it up a bit, than from the top or bottom. But if we're talking about black sans serif types we're not exactly in the realms of readability optimisation.\n\n"
+    },
+    {
+      "time": "15 Jun 2005 — 1:52pm",
+      "content": "People think you could set a book in Comic Sans, sure. The only way  \na layman could actually tell you what's going on in his readability  \n\"firmware\" is if you're a really good hypnotist.\n\nhhp\n\n"
+    },
+    {
+      "time": "15 Jun 2005 — 3:04pm",
+      "content": "I have noticed that Hoefler text,Saracen, Leviathan, Meta, Lucida, Cooper Black, Vendetta - in other words type across all kinds of styles use wieght in the middle of the S. Koch's Kasbel & Nueland don't - but they are really display faces.\n\nHrant, is this the kind of S you are thinking of?\n\n[S with weight at top & bottom example image](http://web.archive.org/web/20140606143245/http:/freemasonry.bcy.ca/symbolism/golden_ratio/kaech/29.jpg)\n\n"
+    },
+    {
+      "time": "15 Jun 2005 — 3:36pm",
+      "content": "Eben, yes - although the irony is huge!  \nThat there is a chirographic artefact, and:  \n1) I don't like chirographic [text] fonts. My interest in the unconventional stroke stress in the \"s\" comes from a desire to explore and improve typography, irrespective of chirography.  \n2) Certain people who do like chirographic fonts gayly accept the violation of the pen necessary to arrive at what they feel is the ideal stroke stress in the \"s\"! And the \"N\". And the \"Z\"... So their concern in the end isn't to maintain chirography, but to maintain the **status quo** , by any ruse and excuse necessary, including chirography as needed.\n\nhhp\n\n"
+    },
+    {
+      "time": "15 Jun 2005 — 3:40pm",
+      "content": "You can see a more conceptually pure (not chirographic) \"prototype\" of the \"s\" I'm talking about by taking a narrow monoline font (like Futura Condensed) and stretching it wide, like 25%.\n\nhhp\n\n"
+    },
+    {
+      "time": "16 Jun 2005 — 4:51am",
+      "content": "\\>only the Englishmen\n\nI spent the first part of my life (education) in England, and the next 27 years (work) in Toronto. I used to think of myself as fundamentally English, but acclimatized to Toronto, which is a city of immigrants anyway. However, I've been living back in the UK for the past 9 months, and it's changed so much that I rarely feel like I belong here. Of course, others of my age who never left have the same sense of anomie. No doubt this happen to every generation as it ages, but the present day is especially disappointing to boomer idealists. I detest nationalism (\"an infantile disease, the measles of mankind\"-- Burgess), and have resigned myself to being a hyphenated individual: Mid-Atlantic or Anglo-Canadian, please.\n\n"
+    },
+    {
+      "time": "25 Jun 2005 — 2:53pm",
+      "content": "Interesting, my approach to making an \"S\" is almost exactly the same as John's. I started out thinking this was because we are tackling the problem of type design in the same way: most of the letterforms are simply in our heads, and we are trying to translate those shapes in our heads to beziers. But even if one were to scan in drawings of everything, I'll bet one could do a very nice job of fitting the S curve by starting with the same approach.\n\nP.S. Always nice to find something Nick and I agree on. I too detest nationalism. If one's own country has an innate superiority and greater worth than any other, it's a very short step to apply that same thinking to people from each country and dehumanizing those who are \"other.\" Oops, must stop before I go further off on this tangent.\n\n"
+    },
+    {
+      "time": "25 Jun 2005 — 3:37pm",
+      "content": "\\> most of the letterforms are simply in our heads\n\nYou know, there's a definite truth to that, but there must also be a limit. We don't finalize any form in advance in our heads, because we can't. It seems to make much more sense that our thoughts and the act of fleshing them out are actually **iterative**. And this actually nicely explains the common \"happy accidents\" during the fleshing out, which really must be part of the nature of design.\n\nNationalism: in superpowers it is indeed the pits; but among threatened peoples it's nothing short of a requirement, trust me.\n\nhhp\n\n"
+    },
+    {
+      "time": "26 Jun 2005 — 2:20am",
+      "content": "One can trace the arc of history, and see that many threatened peoples have evolved into superpowers. Mostly due to their nationalistic intentions. Once they are superpowers, they tend to threaten others.\n\n\\_\\_  \n [www.typeoff.de](http://web.archive.org/web/20140606143245/http:/www.typeoff.de/ \"www.typeoff.de\")\n\n"
+    },
+    {
+      "time": "26 Jun 2005 — 10:06am",
+      "content": "It isn't the size of the nation, but the attitude toward nationality that determines whether the nationalism is odious or benign.\n\nWhat is common to both is a sense of shared fate or welfare, and a willingness to act in concert for the welfare of the nation. The good kind also appreciates the strengths of its culture, but is also self critical. The bad kind is bigoted or arrogant or both. For example compare the USA nationalism of Jimmy Carter, who championed human rights while respecting other nations, and that of George W. Bush.\n\n"
+    },
+    {
+      "time": "26 Jun 2005 — 10:13am",
+      "content": "\\> Once they are superpowers, they tend to threaten others.\n\nThat's another problem. It doesn't prevent nationalism (or ethnicism) from being a **preserving** force among threatened peoples. And why should citizens of superpowers (like you three) worry about that? Simple: cultural variety.\n\nhhp\n\n"
+    },
+    {
+      "time": "26 Jun 2005 — 10:21am",
+      "content": "_\"imagine there's no country…\"_\n\nWe'd all better off if it were so.\n\n\\_\\_  \n [www.typeoff.de](http://web.archive.org/web/20140606143245/http:/www.typeoff.de/ \"www.typeoff.de\")\n\n"
+    },
+    {
+      "time": "26 Jun 2005 — 10:40am",
+      "content": "But since we're not animals, that can't happen. So instead of shooting for one extreme (one huge nasty state for the whole planet) or the other (each individual his own confused little state) let's shoot for something as rewarding as it is tricky: Balance! Except **that's** looking more and more like the most idealistic idea of all... :-/\n\nhhp\n\n"
+    },
+    {
+      "time": "27 Jun 2005 — 1:45pm",
+      "content": "_Nationalism: in superpowers it is indeed the pits; but among threatened peoples it’s nothing short of a requirement, trust me._\n\nThat seems to presume that the nation state is the single best way to preserve and defend ethnic/linguistic/religious identity (what, for simplicity, I'll call cultural identity). Indeed, one could argue that nationalism is the identification of cultural identity with the idea of the nation state, i.e. that cultural identity = national identity (or would do, if only one had control of the territory!). Historically -- at least within the remarkably brief period of time in which nation states have been the normative form of territorial and social organisation --, the identification of cultural identity with national identity has been a powerful force in the struggle against colonialism and, obviously, in the forging of new countries. But I don't think mere historical efficacy should lead us to uncritically accept the assumption of this identification. We can validly ask whether cultural identity can persist and flourish other than through identification with the nation state. We can also ask whether, in a cost/benefit analysis, the whole idea of the nation state might have done more damage to cultural identities -- especially to that of cultural minorities living within or across the boundaries of nation states -- than it has fostered them. As just one example, the Welsh cultural identity has fared very much better within the framework of the supra-national European Union than it ever did within the merely national framework of the United Kingdom.\n\n"
+    },
+    {
+      "time": "27 Jun 2005 — 2:33pm",
+      "content": "\\> That seems to presume that the nation state is the single best way to preserve and defend\n\nNo, I was using it as a blanket/general term (which is one reason I parenthesizes \"ethnicism\" above). Yeah, it's not very good. But \"cultural identity groupism\" sound a bit clunky. :-)\n\n\\> We can validly ask whether cultural identity can persist and  \n\\> flourish other than through identification with the nation state.\n\nI think it can. Think of the Kurds for example, who have **never** had a nation.\n\n\\> We can also ask whether, in a cost/benefit analysis, the whole idea  \n\\> of the nation state might have done more damage to cultural identities\n\nGood question.\n\nhhp\n\n"
+    },
+    {
+      "time": "27 Jun 2005 — 3:04pm",
+      "content": "I think that Turkey's admission to the EU might do wonders for the Kurds. Sadly, I don't believe that talks with Turkey are really going start in October. Not after France and Holland's no votes to the EU constitution, and a likely change of government in Berlin.\n\n\\_\\_  \n [www.typeoff.de](http://web.archive.org/web/20140606143245/http:/www.typeoff.de/ \"www.typeoff.de\")\n\n"
+    },
+    {
+      "time": "27 Jun 2005 — 3:10pm",
+      "content": "Nation-states are artificial constructs which serve the interests of the wealthiest citizens of those states, and little else. They are the successors to the \"great\" Italian city-states which arose during the late Middle Ages, and gave the world corporations, stock exchanges, letters of credit and all manner of financial legerdemain that troubles mankind to this day. Nation-states gained ascendancy as the influence of the One, Holy, Catholic and Apostolic Church declined in the wake of the Renaissance and the Reformation. They proclaim to be secular institutions, but each nation-state also proclaims, in one way or another, that it–and it alone–has been ordained by God (whichever flavor of Whom you choose) to continue His work on earth. All nation-states write their own history, in which they are always the good guys, and each nation-state is, in its own mind and mythology, better than any other nation-state on the earth. So the killing goes on...\n\nTribal or ethnic groups are the same cosmos writ small. The names which the various tribes of Native Americans gave themselves are almost always translated as \"the human beings\" or \"the people,\" and the practice doesn't seem to differ much anywhere else in the world. But whether nation-state or tribal group, one underlying concept remains: the world is divided into Us and Them, and **We are the Good Guys**. We are the human beings; everyone is, well, slightly less than human. This notion even attained the status of the unerring word of God's chosen representative on earth, when in 1452 Pope Nicholas V of the aforementioned UHC&A Church proclaimed in his encyclical _Dum Diversas_ that enslaving infidels and pagans was entirely in accordance with God's will and wishes. Thus, Open Season on People of Color was officially proclaimed, and remained the Western World's official policy for more than four hundred years and, unfortunately, appears to be unofficial policy even today.\n\nWhy does the madness continue? The German philosopher Ernst Cassirer, in his _Philosophy of History_, explained it very simply and very clearly:\n\n\"The past has no why, it _is_ the why of things.\"\n\nThe past is how we got to **now**. But if **now** is somehow less than satisfactory (which seems to be the general consensus), then we aren't going to see a significantly different future until we put the past behind us. The brilliant blaze of sunlight is made up of _all_ colors, and the improbable phenomenon that is mankind (and womankind) is made of _all_ its diverse peoples. No one religion owns the truth; no one tribal or ethnic group embodies all that is good in man; no one nation-state can lead us on an unerring path into the future. It doesn't just take a village; it takes a world...\n\nHmmm, the subject of this forum is presumably the design of the letter S, which I have always considered to be the sexiest letter of the alphabet, but I didn't realize that it could so thought-provoking as well.\n\n"
+    },
+    {
+      "time": "27 Jun 2005 — 3:51pm",
+      "content": "\\> Turkey’s admission to the EU might do wonders for the Kurds.\n\nNo, its **prospective** admission is supposed to be doing that. But \"supposed to\" is as far as it's gone so far... And recognition of the Armenian Genocide is in the same boat as the [Turkish] Kurds.\n\nhhp\n\n"
+    },
+    {
+      "time": "29 Jun 2005 — 4:44pm",
+      "content": "Speaking of nationalism and the letter S...  \nWhen I was studying English Literature at school, one of the set books was Joyce Carey's \"Mister Johnson\". One thing I remember about the book is the introduction, where the protagonaist is fascinated with drawing the letter S. And the general scenario: -- Johnson is an African bureaucrat in British Nigeria (1920s) who doesn't fit in with the locals or the Europeans. Symbolic letter S.\n\nAnd speaking of literary typographic stuff, what about the protagonist of Umberto Eco's new book, who is named Giambattista Bodoni?! (It's set in the present day.) (But set in which typeface?)\n\n"
+    },
+    {
+      "time": "1 Jul 2005 — 5:26am",
+      "content": "Nationalism aside and I'm getting sick of it, I took the Linotype S text that involved making a small cap from the cap, as John refers. I think I passed, but I'm still not sure. I saw people subjected to it at bitstream, but I never looked. I took it with me to Font Bureau, but after the first subject cried for two days, I stopped.\n\nJohn is right to draw the letter without points on the spine. In fact, I usually draw the top, copy it, and I scale the bottom a little larger, change the serif/terminal if required, put 'em together and make the middle work. If you look closely at a lot of sweets \"s's\" you see how this works. You also have to turn it on its side, and upside down before you know it's right, so I rotate and edit this char. more than any other in all four rotations and don't settle 'till it's sweet from every angle. This sometimes takes 2 or 3 passes, interrupted by less curvaceous characters, lunch, or a break to reacquaint myself with the lesser known and struggling nationalities of the world.\n\nThere is a great story of momma Knuth coming down to breakfast where Donald was proudly up all night working on the \"S\" for computer modern or one of the first metafonts. She looked, hmm, and asked, \"can't you make it more \"s\" like?\" I wonder, sometimes, if they're still married.\n\n"
+    },
+    {
+      "time": "1 Jul 2005 — 7:27am",
+      "content": "Wow–the discussion is back on track. In case anyone is interested, here's how I typically approach the S problem in CorelDraw:\n\nWith monoline faces, I begin by drawing two elongated ellipses, one beneath the other, the bottom larger than the top. Then I fudge both ellipses until there's some overlap. I then draw a straight line to define a path that is tangent to points on both ellipses. I convert the ellipses to curves, break the contours at the points of intersection, remove extraneous bits of the ellipses, and combine all objects into a single object. I then convert the tangent points to smooth connections and turn the line segments into curves. Then, selecting the newly-smooth connections and using the curve-smoothing slider (by far the most flexible of any that I have encountered in _any_ drawing program), I increase the smoothness of the curve until the connections disappear. In almost all cases–probably nine times of ten–the connecting curve between the top and bottom elliptical elements assumes a pleasing shape all by itself. With the hardest part out of the way, I can then tweak the remaining segments of the ellipses to balance the overall design. Granted, the process of developing outlines for a face with stroke contrast is a little more involved, but the process works pretty much the same.\n\n"
+    },
+    {
+      "time": "1 Jul 2005 — 10:32am",
+      "content": "My secret to the \"S\": a really good eraser.\n\nSomething else/related:  \nWhen I used to [have to] output TT fonts from Fontographer, one of things the cubic-to-quadratic conversion would explode on was missing inflection points, like those found on the spine of the \"S\". So I'd do the editing without such points but would splice them in for safety at the end. These days my \"S\"es (which don't number many admittedly) tend to have at least a small section of straightness in the spine, so the problem no longer comes up, but I'm wondering: was that explosion unavoidable, does it still happen (in FontLab), and might the issue fail to show up on the computer but end up biting you in the RIP?\n\nhhp\n\n"
+    },
+    {
+      "time": "1 Jul 2005 — 11:05am",
+      "content": "Hrant, that's an excellent point. My minimalist approach to S spines may be pleasing to the eye, but it probably makes for bad Postscript.\n\nI neglected to mention that I normally work via the centerline method, defining my characters by stroke weight. In the process of converting the stroke to an outline, CorelDraw usually adds intermediate points along the spine, most of which I retain for the glyphs that I export. In almost all cases, if there is not a totally flat curve along the way, there is at least one segment along the curve with very little deflection.\n\n"
+    },
+    {
+      "time": "1 Jul 2005 — 12:43pm",
+      "content": "Tina, it would be a good idea to check out your S in the most problematic combinations.  \nPreceeded by an E, or Followed by a T.  \nAlso compare with 8, s, $, &.\n\n"
+    },
+    {
+      "time": "2 Jul 2005 — 2:29pm",
+      "content": "After I have the S shape I want, I always add inflection points on the bendy bit. It gives me the option to make small adjustments to the curvature without having to touch my happy extreme points again, as described above. More importantly, if heading to a TTF with manual hinting, I want points here so that I can interpolate them off the top and bottom, which is one of the easiest ways to control the middle bend. [[S5.gif](http://web.archive.org/web/20140606143245/http:/www.tiro.com/John/S5.gif)]\n\n"
+    }
+  ]
+}

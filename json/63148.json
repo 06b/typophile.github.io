@@ -1,0 +1,54 @@
+{
+  "id": "63148",
+  "title": "Typography in layers",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hello type lovers!  \nI'm currently designing a typeface with two layers or colors. I think it is more useful to program this kind of things than doing them manually when you set some text. So, my doubt is about opentype programming, how can I make this using an OT feature? I'm pretty sure it is possible to do it, I've been looking up for information about it and so far I haven't find anything.  \nSorry, I could not upload the image to the forum, so I uploaded it to my [flickr gallery.](http://web.archive.org/web/20131019193325/http:/www.flickr.com/photos/elibaal/4014785159/)  \nThanks in advance.\n\n",
+  "author": "Eli",
+  "time": "15 Oct 2009 — 4:27pm",
+  "uid": "16579",
+  "comments": [
+    {
+      "time": "15 Oct 2009 — 4:38pm",
+      "content": "You can’t do this with OpenType. Just design it with both layers in a single font, get all of the metrics working, and then split it into two fonts, so that a text box can be duplicated on top of itself and the font changed.\n\n"
+    },
+    {
+      "time": "15 Oct 2009 — 4:54pm",
+      "content": "Hello James, I have seen the [ffdingbats](http://web.archive.org/web/20131019193325/http:/www.fontshop.com/freefonts/) and the demo version works in layers with stylistic alternates.\n\n"
+    },
+    {
+      "time": "15 Oct 2009 — 5:48pm",
+      "content": "Sorry, I thought that you were asking if you could use OpenType to automatically assign color to parts of the type.\n\nI think that what ffdingbats does is use the stylistic set to switch to versions that have no width and/or are positioned to the left of the left sidebearing so that they overlap. This makes sense for these dingbats because they aren’t going to see much interaction after being set. But if you do it with letters things could get really ugly when you decide to change the copy or start recoloring stuff (because the text is going to start reflowing and possibly leave its frame), so I think it would be easier on the end-user if you just use multiple fonts.\n\n"
+    },
+    {
+      "time": "15 Oct 2009 — 7:08pm",
+      "content": "Thanks James, now I'm convinced.\n\n"
+    },
+    {
+      "time": "15 Oct 2009 — 7:54pm",
+      "content": "The only further spin on multiple layer typography I've seen is Typotheque's [History Remixer](http://web.archive.org/web/20131019193325/http:/www.typotheque.com/fonts/history_remixer) for their [History typeface](http://web.archive.org/web/20131019193325/http:/www.typotheque.com/fonts/history/about). They offer this Web application to those who have licensed History; it will export a high-resolution PDF based on the settings input.\n\n"
+    },
+    {
+      "time": "16 Oct 2009 — 2:31pm",
+      "content": "Very interesting auricfuzz, thank you for the links.\n\n"
+    },
+    {
+      "time": "16 Oct 2009 — 3:54pm",
+      "content": "In pre-OpenType days when I was still a student at RIT, I made a collection of fonts that could be used to create multi-color borders. The idea was you'd type a \"master\" character (e.g. top-left corner), then change fonts (and colors, if you like) and type the corresponding overlay piece; repeat for each element. The overlaid pieces all had zero advance widths, with the master controlling escapement across the page. It was a pain in the ass, to be sure, but it worked and there was really no other alternative for nice borders at the time (beyond Quark's lame-o raster-based frames).\n\nThings aren't really much different at the font level today; you still can't specify colors inside of a font. You can code in substitutions/ligatures, etc. but that doesn't really help, because you need to intercept the substitution to change color on the different parts. So you have the hassle of doing that all manually\\*, or the hassle of introducing a custom application (as Monotype BorderMaker did back in the early 1990s) and export/import (and probably losing some editability along the way).\n\n\\*With the various scripting technologies that are more widely available in apps today, this kind of thing could possibly be made a bit easier on an end-user, but OpenType itself doesn't really bring anything new to the game (other than slightly more convenient packaging). And of course then you have the problem of having to create and maintain the scripts, in addition to the font.\n\n"
+    },
+    {
+      "time": "18 Oct 2009 — 7:15am",
+      "content": "It seems we'll wait for a while to see improvements in the scripting for this feature.\n\n"
+    },
+    {
+      "time": "18 Oct 2009 — 9:01am",
+      "content": "We are doing some development in a direction of multi-layer fonts. Please, contact me directly by email (yar fontlab.com), it could be interesting.\n\n"
+    },
+    {
+      "time": "19 Oct 2009 — 1:50pm",
+      "content": "Thanks Yuri, sure, I'll write you.\n\n"
+    }
+  ]
+}

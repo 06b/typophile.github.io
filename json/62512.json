@@ -1,0 +1,34 @@
+{
+  "id": "62512",
+  "title": "My first Robofab script",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I've been working at this for hours..ugh! Sure, if there's a better way to do this, please inform. Regardless, I want to really build this script from scratch to learn.\n\nWhat I want to do:  \nShift points at a certain y value to a different y value.\n\nLogical Process:  \nCycle through each glyph in my font. In each glyph, cycle through contours. Within the contours cycle through points. If the point has a y value or 395, or 265, change accordingly.\n\n--------------------------------------------------  \nfrom robofab.world import CurrentGlyph  \nfrom robofab.world import CurrentFont\n\nfont=CurrentFont()\n\nfor x in font:  \n print font[x.name][0]  \n contour= font[x.name][0]  \n for p in contour.points:  \n if p.y==395:  \n p.y += 100  \n if p.y==265:  \n p.y -= 100  \nfont.update()  \n--------------------------------------------------\n\nWhat am I misunderstanding here? When I target the contour by doing CurrentGlyph()[0], it works. So why not font[x.name][0]? Oddly enough font[x.name] is returning the value expected, but CurrentGlyph() returns the glyph that apparently belongs to \"unnamed\\_font\". And for some reason, the unnamed\\_font one works. Am I totally off in my approach?\n\n",
+  "author": "<a href=\"/web/20100203110336/http://typophile.com/user/4186\" title=\"View user profile.\">kosal</a>",
+  "time": "<br>",
+  "uid": "4186",
+  "comments": [
+    {
+      "time": "",
+      "content": "#!@$%!!  \njust when I mustered up the will to post it, I figured it out:\n\n`\nfrom robofab.world import CurrentGlyph\nfrom robofab.world import CurrentFont`\n\nfont=CurrentFont()\n\nfor x in font:  \n for m in x:  \n print m  \n for p in m.points:  \n if p.y==395:  \n p.y += 100  \n if p.y==265:  \n p.y -= 100\n\nfont.update()\n\nThe only question now is, would this be the best way you would solve this problem?\n\n"
+    },
+    {
+      "time": "",
+      "content": "I suggest using more descriptive variable names. Why x for the glyph? I bet if you look at this code again in a year's time you will find this very confusing – especially since x would also be used for the abscissa of a point.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I agree with Tim: using more descriptive variable names makes your code more readable, both to you and other people.\n\nOne small optimisation could be \"from robofab.world import CurrentFont, CurrentGlyph\" instead of using two seperate lines.\n\n-Paul van der Laan  \n [www.type-invaders.com](http://web.archive.org/web/20100203110336/http:/www.type-invaders.com/ \"www.type-invaders.com\")\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for the tips. I started using descriptive variable names, but i ended up confusing myself by not remembering which word was my own variable versus which were reserved words. Hope to get the hang of it soon...\n\n"
+    },
+    {
+      "time": "",
+      "content": "Regarding the naming of variables some one letter variables are used very often in RoboFab scripts:  \nf for a font object, i.e. f = CurrentFont()  \ng for a glyph object, i.e. g = f['Adieresis']  \np for a point object  \nand when dealing with multiple objects of the same type variables can be numbered, i.e. f1, f2, etc.\n\nTo distinguish variable names from reserved keywords you can always opt to let them begin with the same suffix. For instance 'my':\n\n`\nfrom robofab.world import CurrentFont, CurrentGlyph`\n\nmyFont = CurrentFont()\n\nfor myGlyph in myFont:  \n\\> for myContour in myGlyph:  \n\\> \\> for myPoint in myContour.points:  \n\\> \\> \\> if myPoint.y == 395:  \n\\> \\> \\> \\> myPoint.y += 100  \n\\> \\> \\> if myPoint.y == 265:  \n\\> \\> \\> \\> myPoint.y -= 100\n\nmyFont.update()\n\n-Paul van der Laan  \n [www.type-invaders.com](http://web.archive.org/web/20100203110336/http:/www.type-invaders.com/ \"www.type-invaders.com\")\n\n"
+    }
+  ]
+}

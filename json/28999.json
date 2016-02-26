@@ -1,0 +1,38 @@
+{
+  "id": "28999",
+  "title": "Indesign: Can you integrate the x-height in the ‘show baseline grid‘-option?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Dear all,\n\nWe all know that it is nice to have pictures aligned with the x-height of text in stead of the baseline, I am sure that we all do it intuitively, but _does Indesign CS2 support this in the ‘Grid‘-options?_ Or are there plug-ins available?\n\nCheers, –RTFRT–\n\n [‹ Fractions and nut fractions in the same opentype font?](http://web.archive.org/web/20081015141940/http:/www.typophile.com/node/28608 \"Go to previous forum topic\") [Advanced Encoding Question ›](http://web.archive.org/web/20081015141940/http:/www.typophile.com/node/29100 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081015141940/http://www.typophile.com/user/15070\" title=\"View user profile.\">–RTFRT–</a>",
+  "time": "<br>",
+  "uid": "15070",
+  "comments": [
+    {
+      "time": " 23.Oct.2006 11.05am",
+      "content": "i would love to know this as well. thus far the only option i know is optical alignment which is annoying...\n\n"
+    },
+    {
+      "time": " 23.Oct.2006 11.34am",
+      "content": "If I follow you:\n\nYou could always set up your stylesheet for the text to be set below the baseline.\n\n"
+    },
+    {
+      "time": " 23.Oct.2006 11.55am",
+      "content": "It’s not much work to set this up manually. On the master page I put guidelines on every baseline, make a copy and shift them to the x-height. I put this on a separate layer so I can turn it on and off whenever I want. Takes less than a minute.\n\nRalf\n\n"
+    },
+    {
+      "time": " 23.Oct.2006 12.00pm",
+      "content": "If you set your text frame options to have the first baseline aligned by x-height, and snap text frames to the document grid, it’s simply a matter of matching the increments of the document grid to your leading.\n\n"
+    },
+    {
+      "time": " 23.Oct.2006 3.00pm",
+      "content": "Cheers Ralph. I forgot there were layers in Indesign. =)  \nindeed a very handy solution when there is no software answer.  \nthank you.\n\n–RTFRT–\n\n(thanks for all the posts)\n\n"
+    },
+    {
+      "time": " 29.Oct.2006 3.59am",
+      "content": "This could be easily build in. The value for the x-height is in the font data, along with the values for the caps height, ascender height and descender length.\n\ntable OS/2 {  \n TypoAscender xxx;  \n TypoDescender -xxx;  \n Panose x x x x x x x x x x;  \n XHeight xxx;  \n CapHeight xxx;  \n FSType x;  \n} OS/2;\n\nI see lots of other interesting possibilities. When paring or comparing different fonts, one could have their x-heights aligned, i.e. scale them so that their respective x-heights fit a given absolute value, e.g. 10 pts. One would also have the option to do the same for the caps heights, descenders/ascenders.\n\nThis feature would allow for at least a better standard for font sizes. As we know, the point size (corps) tells nothing about the perceived optical size of a font. Design briefings that state a required point size, but allow to choose a typeface at wish, are inadequate. A prerequired absolute x-height value would be better instead.\n\nI suggest to at least implement a x-height box into the type panel, next to the size box: if one changes either of the values, the other is recalculated, so that one could see immediately what absolute size equals the x-height of a certain value. If caps, ascender/descender height could be implemented this would be nice too.\n\n"
+    }
+  ]
+}

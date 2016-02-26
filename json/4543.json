@@ -1,0 +1,22 @@
+{
+  "id": "4543",
+  "title": "TTF Font height, how?",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "Hi   \n   \nBeing a total noob, please bare with me :-)   \nI have a problem with the font called Akbar. Its \"height\" is too high when used on a Microsoft SmartPhone. I'm using High-Logic Font Creator Program and am looking for the Typographic term for the font \"height\" or how it is defined in a TTF.   \n   \nWhat can I do?   \n   \nHelp, please ![:-)](http://web.archive.org/web/20131013150326im_/http:/www.typophile.com/forums/clipart/happy.gif)   \n   \nThank You ![screenshot](http://web.archive.org/web/20131013150326im_/http:/www.typophile.com/forums/messages/4100/34734.jpg)\n\n",
+  "author": "anonymous",
+  "time": "29 Apr 2004 — 3:29pm",
+  "uid": "1203",
+  "comments": [
+    {
+      "time": "30 Apr 2004 — 12:37am",
+      "content": "Wow thanks a lot!   \nI will give it a go. I actually also had suspected it had something to do with those values, but there were so incredibly many different ones that I didn't know heads from tales.   \n   \nAnd yes, I guess this belongs in 'Build'. Sorry for that, as said I'm a newcomer. :-)\n\n"
+    },
+    {
+      "time": "29 Apr 2004 — 8:09pm",
+      "content": "Default linespacing of TT fonts in MS apps is based on a combination of two values in the OS/2 table:   \n WinAscent   \n WinDescent   \n   \nSimplistically, if you reduce these values, the linespacing will be tighter.   \n   \nIdeally, there is also a relationship between these two values and the combination of the other vertical metrics values in the OS/2 table   \n   \n typoAscender   \n typoDescender   \n typoLineGap   \n   \nwhich should, expressed as positive integers, equal the sum of the WinAscent and WinDescent values. However, for your purposes you can probably get away with just adjusting the WinAscent and WinDescent. Rather than adjusting them by equal amounts, you should take a look at the relationship of the actual ascender and descender heights of the _d_ and _p_ glyphs to these values, and determine which of the values needs most adjustment.   \n   \nThis thread probably belongs in the 'Build' category.\n\n"
+    }
+  ]
+}

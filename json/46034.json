@@ -1,0 +1,74 @@
+{
+  "id": "46034",
+  "title": "Question about OT Scripting and file size",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I was thinking about the practical issues involved in using Calt/Liga for text faces today, and I started wondering about how much larger a file might be if it has has 10, 50, 100, 1000 or 10,000 feature entries. And what the real practical limitations might be in terms of the file size, for the Operating System (OSX, Windows Vista, XP etc.) , and applications, any one of which might potentially choke on an overly big file. Maybe file size per se isn’t the only technical issue. I am BTW deliberately leaving out any mention of managing large #s of features which is essentially a different issue.\n\nIt’s a broad question, and I know the answers are probably very specific and potentially very case dependent.\n\nStill, what is your take on this? Have you run into problems regarding this kind of thing as an OS, application, or font developer you would like to share?\n\n [‹ fsSelection field error.](http://web.archive.org/web/20081015212103/http:/www.typophile.com/node/45985 \"Go to previous forum topic\") [Kerning doesn't transfers from Fontlab Studio to font file ›](http://web.archive.org/web/20081015212103/http:/www.typophile.com/node/46092 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081015212103/http://www.typophile.com/user/2942\" title=\"View user profile.\">Eben Sorkin</a>",
+  "time": "<br>",
+  "uid": "2942",
+  "comments": [
+    {
+      "time": " 3.Jun.2008 5.09pm",
+      "content": "There’s a 64K limit on the size of a subtable offset (I think I have that right). This can be worked around with the “extension” function and appropriate subtable breaks, although not all possible clients will recognize that. Usually this comes up with kerning for really big fonts (e.g. Arno Pro).\n\nThere are a couple of size limits related to glyphs rather than features, as well:\n\n1) Mac OS used to have a limit on the total length of glyph name strings, as well. That has been fixed at some point.\n\n2) There’s the limit of 64K glyphs in the font.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": " 3.Jun.2008 5.32pm",
+      "content": "I’m playing with interleaved contextual and stylistic set stuff for display type that goes way beyond anything that I would anticipate in a text face, and I have not hit any size limits in terms of software support — at least not in my test environments, which in this case are InDesign and WPF —, although I have hit (anticipated) feature implementation issues. Sergey Malkin at MS confirms that my VOLT source for this project is the largest and most complex he has seen (a record I previously held with SBL Hebrew), and the GSUB table takes up something like 40% of the compiled font. This is the stuff I’ll be showing at TypeCon this year.\n\nI can’t imagine anything on that magnitude being necessary in a text face, even presuming that some characters have multiple forms for improved fit. Also, from my perspective there is an important net gain in not using ligature glyphs any more, since it massively simplifies the GPOS mark positioning work.\n\n"
+    },
+    {
+      "time": " 3.Jun.2008 5.33pm",
+      "content": "PS. All my OTL work is done in VOLT, so I don’t know what kind of tool issues you might hit with FontLab/FDK.\n\n"
+    },
+    {
+      "time": " 3.Jun.2008 5.35pm",
+      "content": "PPS. Surely this is a ’Build’ question?\n\n"
+    },
+    {
+      "time": " 3.Jun.2008 7.34pm",
+      "content": "<cite>Surely this is a ’Build’ question?</cite>\n\nQuite so. Thanks for moving it, whoever that was!\n\nI had sort of assumed that what you have said here was so, but then I realized that it was quite an assumption to be leaning on if it was false. So, thanks John!\n\n"
+    },
+    {
+      "time": " 4.Jun.2008 12.23am",
+      "content": "I must confess that large size of GSUB table in presence of complex lookups is the result of VOLT compiler not doing enough optimization work. As I understand, AFDK is doing better job. But contextual lookups usually do not have functional problems (resulting table may be too big for my taste, but will still work), positioning is much more problematic.\n\nBut this does not make John’s work less complex and less amazing. Besides quality, his fonts are always my best VOLT testbed :).\n\nSergey\n\n"
+    },
+    {
+      "time": " 4.Jun.2008 2.09am",
+      "content": "Thomas — <cite>1) Mac OS used to have a limit on the total length of glyph name strings, as well. That has been fixed at some point.</cite>\n\nDo you know in _which_ version this was fixed? I wonder if we need to pay tribute to this issue in future ...  \nMy impression is that someone who wants to use an ultra-plus font simply needs to accept some minimal system requirements — like with any other piece of software too. (And me being the last OSX 10.3 user anyway.)&nbsp;&nbsp;:)\n\nKarsten\n\n"
+    },
+    {
+      "time": " 4.Jun.2008 6.02am",
+      "content": "Karsten, I’m still running OSX 10.3.9 also. ;-)\n\n"
+    },
+    {
+      "time": " 4.Jun.2008 7.51am",
+      "content": "Must have to do with our initials.\n\n"
+    },
+    {
+      "time": " 4.Jun.2008 12.59pm",
+      "content": "\\> _Do you know in which version this was fixed?_\n\nIt was fixed in OS X 10.4.9, [http://support.apple.com/kb/HT1525](http://web.archive.org/web/20081015212103/http:/support.apple.com/kb/HT1525 \"http://support.apple.com/kb/HT1525\") This problem only affects name-keyed OT-CFF fonts. Here are some screenshots I took at that time. Don’t try this at home! The likelihood of getting a [kernel panic](http://web.archive.org/web/20081015212103/http:/en.wikipedia.org/wiki/Kernel_panic) is quite high.\n\n ![](http://web.archive.org/web/20081015212103im_/http:/www.typophile.com/files/Arno_Fontbook_1_5345.png)\n  \n\n ![](http://web.archive.org/web/20081015212103im_/http:/www.typophile.com/files/Arno_Fontbook_2_6100.png)\n  \n\n ![](http://web.archive.org/web/20081015212103im_/http:/www.typophile.com/files/Arno_Fontbook_3_6139.png)\n\n"
+    },
+    {
+      "time": " 4.Jun.2008 2.45pm",
+      "content": "Speaking of optimization, Read Roberts explained to me that there’s not much a font developer can do to reduce the font file size. If the designer really thinks that the typeface is better served by having 30 OpenType features implemented in the font, or 20 contextual lookups, then there’s no way you can compress that data to become half its size. Surely, sometimes lookups can be shared between features (e.g. you can define a lookup to be used by ’subs’, and then reference that same lookup in ’sinf’), but for the most part each feature has its own unique lookup.\n\nHaving said that, from a text engine point of view, contextual lookups will definitely make a bigger dent on the processing performance than one-to-one lookups do, obviously. So, if you need to use contextual lookups try to keep their number low and each context as short as possible. (Contextual lookups are like [regular expressions](http://web.archive.org/web/20081015212103/http:/en.wikipedia.org/wiki/Regular_expressions), the more complex they are, the longer they take to process. No way to avoid that.)\n\nOf course there are some good practices a font developer should observe, which will help keep the font file size low. A simple one is to arrange the glyphs in the font into groups. So for example, putting the a–z glyphs into a continuos range, and then ordering their corresponding small cap glyphs (a.sc–z.sc) in the same way, will keep the size of the lookup generated by this substitution rule,\n\n`sub [a b c ... y z] by [a.sc b.sc c.sc ... y.sc z.sc];`\n\nat its minimum. This is because the GID ranges will be continuos and the offset from the original glyph to the resulting glyph is constant. I should stress that the secret to make this work relies on the way the glyphs are ordered throughout the font, not the way the features are written. This means that, if the glyphs are neatly ordered in the font, it doesn’t matter if you use the code above, or any of the substitutions below.\n\n`sub [z y ... c b a] by [z.sc y.sc ... c.sc b.sc a.sc];\nsub [c y a ... z b] by [c.sc y.sc a.sc ... z.sc b.sc];`\n\nActually, recently I did an experiment in this area with one of our biggest Western fonts, Arno Pro. I took the original GlyphOrderAndAliasDB file, randomized the order of its lines (with the exception of the first line which must correspond to the .notdef glyph), and rebuilt one of the Italic fonts. Keep in mind I didn’t change anything else; the OT code used, the PFA source font and all the supporting files were exactly the same. The results were interesting: 9% increase of the file size (460Kb to 504Kb). I guess the takeaway is, it pays-off to spend some time rationalizing the glyph order.\n\n"
+    },
+    {
+      "time": " 4.Jun.2008 3.52pm",
+      "content": "There is a lag time in opening up a file, or changing a font, when a font with a lot of contextual lookups is involved.\n\nA user might think this is an issue with the font, but probably not, as the wait time is quite short compared to, say, opening a gigabyte Photoshop file with dozens of layers.\n\n"
+    },
+    {
+      "time": " 4.Jun.2008 5.42pm",
+      "content": "When I was a kid, we had to walk 5 miles through the snow to get to school, uphill both ways . . .\n\nBut actually, I did start withe a PC-XT — which used the 8088 chip. We typeset using TeX. The way you did it was to kick off your files when you went home at night; it took about 6 hours to run a typical book. Last time I used TeX, the same chore would take around a minute.\n\nI’m not a machine oriented guy, but the moral is it may seem a bit slow today; it won’t be tomorrow.\n\nNow all I gotta figure out is how Nick got one of my Photoshop files (and Nick, add that you’re using the 16-bit mode for the intermediate, working file . . .)\n\n"
+    },
+    {
+      "time": " 6.Jun.2008 7.16am",
+      "content": "Hello Miguel, very belated thanks for the information! Karsten\n\n"
+    },
+    {
+      "time": " 6.Jun.2008 11.28am",
+      "content": "Me too. This was a very useful thread!\n\n"
+    }
+  ]
+}

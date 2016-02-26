@@ -1,0 +1,62 @@
+{
+  "id": "15458",
+  "title": "CorelDraw/FontLab Problem: ttfs won't export, or otf will look different in different programs!",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hello to all,\n\nI am currently designing a font, but I am stuck into a dilemma. Hopefully somebody can shed some light onto it.\n\nEverything has been done inside a PC. I generated the glyphs inside Corel Draw and then exported them to ttf. So far, so good. The file just needed some kerning and some proper layouting so all the glyphs lay on the correct Unicode squares inside FontLab.\n\nFirst, after a few -successful- exports of the file done in order to check the progress of the font, the resulting ttf file would not open: \"not a valid file\". OK, so I exported to .otf and things went fine.\n\nI am not yet finished, but why is it that the exported .otf file behaves so differently in the programmes I have tested it with?  \n. Inside InDesign (CS2) the leading looks too squashed down and it appears that the font is misplaced along the baseline (see image: the black lines show selected text, which should normally be covered all in black, not just a part of it).\n\n. Inside Corel Draw (12), the font looks just OK, but the space between words vanish completely, so I end up with some boustrophedon-like text. Even if I manually enter extra spaces, they won't show, as if the space glyph had 0-value sidebearings. (image)\n\n- Inside MS Word (XP), the font looks with decent leading, decent inter word spacing, although horribly displayed on screen (image).\n\n-When exported to PDF inside each programme, the ones from InDesign and Word look OK, but the one from Corel won't show the interword spaces still (see other images).\n\nAll of the graphic samples are taken with default leading/kerning for each programme. Kerning & leading processes are not yet finished in FontLab.\n\nSo how can I correct all this? Why does it look like I have got three different fonts, depending on which software I use? Normally Word does a horrible task at displaying fonts, but InDesign & Corel make a beautiful font rendering & typesetting. I suppose the issue resides on how I am handling the font inside FontLab, but that's why I am asking for advice.\n\n................\n\nAnd a couple more questions:\n\nHow does one increase/decrease the leading from a font inside FontLab?\n\nAny comments/suggestions on the overall look of the font? It is supposed to lightly convey a flair of Spain during the XVI Century, but with a fresher look to it. It will be used for the making of a book.\n\nI have got a dateline for this project, and I still have to export the italic version, so the hastier the answers, the better.\n\nThanks a lot,  \nMosh\n\n| Attachment | Size |\n| --- | --- |\n| [File](http://web.archive.org/web/20131020132248/http:/typophile.com/files/drupal_46) | 25.46 KB |\n| [File](http://web.archive.org/web/20131020132248/http:/typophile.com/files/drupal_47) | 25.46 KB |\n| [File](http://web.archive.org/web/20131020132248/http:/typophile.com/files/drupal_48) | 44.66 KB |\n| [File](http://web.archive.org/web/20131020132248/http:/typophile.com/files/drupal_49) | 20.08 KB |\n\n",
+  "author": "mosh",
+  "time": "2 Oct 2005 — 1:50am",
+  "uid": "6146",
+  "comments": [
+    {
+      "time": "2 Oct 2005 — 1:57am",
+      "content": "--------------------\n\n"
+    },
+    {
+      "time": "2 Oct 2005 — 3:27am",
+      "content": "hello Viejo,  \ndont expect much in the way of answers for this kind of question on typophile. The issues you raise are very complex, and on the whole unanswerable since there are so many variables in the formating of font files.  \nA slightly better forum would be the fontlab user group on msn, but i wouldn't expext much there either, we (type designers/fontlab users)all have to slowly glean what information we can in the various forums and tutorials, along with a good dose of trial and error, until it works the way we want it to.\n\n"
+    },
+    {
+      "time": "2 Oct 2005 — 4:20am",
+      "content": "[Dan puts on his moderator's hat…]\n\nHey Typophiles,\n\nCan we (respectfully, of course) prove Miles incorrect here? Let's try and give Viejo some advice…\n\nViejo, I'm a novice at font design and production, and I have never, ever worked with Correll Draw, but I'll do my best here.\n\nI don't know what to suggest about inter-word spacing. I would try to set the space glyph right inside FontLab. Somehow, I don't trust Correll…\n\nThe leading has something to do with the Em Square, and the length of your ascenders and descenders. A font does not have real \"leading values,\" nor can that be set or reset in FontLab, other than by changing letter proportions inside of the Em-Square's grid.\n\nThe reason that your font displays so poorly inside MS Word is most likely because it is not hinted, or it has been auto-hinted (and that auto-hinting wasn't adequate). In order to get your font to display nicely onscreen in MS-Word, it'll have be superbly hinted (mean TrueType Delta hinting, I guess). That is hard work that is not normally done on display faces (and your faces seems to be more in the display direction than strictly \"text.\" I don't mean this in a negative way!)\n\nTo get a Design crit, try posting PDFs of your design—with text settings—in the Critique forums. I'm going to make your thread title more direct, and bump it to the Typophile home page to see if you can get any better tips than mine!\n\n"
+    },
+    {
+      "time": "2 Oct 2005 — 4:31am",
+      "content": "Check out this thread about auto-hinting: [http://typophile.com/node/15436](http://web.archive.org/web/20131020132248/http:/typophile.com/node/15436 \"http://typophile.com/node/15436\")\n\n"
+    },
+    {
+      "time": "2 Oct 2005 — 5:51am",
+      "content": "Mosh,\n\nWhat size is UPM are you working at in FontLab. What is the height of the Caps, ascenders and x-height. What is the depth of your descenders? Do you have an actual space character defined in FontLab? You said you exported ttf in Corel. Do you have actual TrueType outlines in FontLab, and are the path directions set correctly?\n\nJames\n\n"
+    },
+    {
+      "time": "2 Oct 2005 — 10:33am",
+      "content": "[How does one increase/decrease the leading from a font inside FontLab?](http://web.archive.org/)\n\nThis has to do with you vertical metrics. Hopefully the wiki entry called [Vertical Metrics How-To](http://web.archive.org/web/20131020132248/http:/typophile.com/wiki/Vertical%20Metrics%20How-To) can help you understand that a bit more. When I've exported invalid font files, it usually has to do with the fact that i haven't filled out all the naming information, but i suppose there are other problems that chould be the culprits. Have you tried running you font through Microsoft's [Font Validator](http://web.archive.org/web/20131020132248/http:/typophile.com/wiki/Font%20Validator)?\n\n"
+    },
+    {
+      "time": "2 Oct 2005 — 12:04pm",
+      "content": "10 hours later...\n\nI guess Mosh's dilemma has either been solved or wasn't quite the dilemma he proposed.\n\nEither way he should let us know.\n\nJames\n\n"
+    },
+    {
+      "time": "4 Oct 2005 — 1:45am",
+      "content": "Sorry, I had no access to internet in the past hours and therefore I could not reply.\n\nThis is my first time using FontLab for exporting type and I am somehow confused.\n\nI had edited the space glyph inside FL so it would be a little wider, but it is strange that this glyph behaves OK inside Word & ID and not in CorelDraw (and Corel works normally OK).\n\nI will post a screenshot tomorrow of the ascender/descender stuff. I am still not used to manipulate these in order to get proper leading. I will also give the UPM I am using tomorrow, since I have no FL installed in this computer.\n\nPaul: No, I have not run my font through MS's Font Validator. What does it do for fonts?\n\nThank you for your replies. My issue is still not solved, but hopefully I will get some positive results from your replies.\n\nBest regards,  \nMosh\n\n"
+    },
+    {
+      "time": "4 Oct 2005 — 8:38am",
+      "content": "_What does it do for fonts?_\n\nwell, it's one way of checking for any errors that the font may have.\n\n"
+    },
+    {
+      "time": "5 Oct 2005 — 12:12am",
+      "content": "Here are the readings from my font:\n\nUPM: 2048\n\nAscender: 725  \nDescender: -275  \nCaps Height: 663  \nx Height: 397  \nUnderline: -100  \nThickness: 50  \nAverage witdth: 64341\n\nThe issue regarding bad font display is now clear: the font needs to be properly hinted. The problems that are still there are  \n1: Spaces will seem to disappear inside CorelDraw (12).  \n2: Inside InDesign (CS2) the leading looks too squashed down and it appears that the font is misplaced along the baseline.\n\nAny insights on these issues? Thank you very much for your advice so far.\n\n-Mosh\n\n"
+    },
+    {
+      "time": "6 Oct 2005 — 5:53pm",
+      "content": "That Average Width value scares me. Set that Average Width to zero and let FontLab recalculate it for you.\n\n"
+    },
+    {
+      "time": "11 Oct 2005 — 8:37am",
+      "content": "Thanks. Sorry for the late reply, but I just couldn't have access to any place inside Typophile on the last two days. Second time it happens. I'll check the av width value. Is that the one calculating the average width of the glyphs for my font?\n\n"
+    }
+  ]
+}

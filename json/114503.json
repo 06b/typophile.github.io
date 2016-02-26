@@ -1,0 +1,29 @@
+{
+  "id": "114503",
+  "title": "Creating visible zero-width and zero-height glyphs",
+  "forum": "Build",
+  "tags": [
+    "htmx",
+    "TTX",
+    "vmtx",
+    "Build"
+  ],
+  "content": "I'm playing with TTX/Fonttools and I'm trying to accomplish to get zero height and zero width chars:\n\nABC  \nDEF\n\nAll these six chars should be on the same spot (where the A is) and overlap eachother. This includes the chars on the second line.\n\nI got the glyps to overlap horizontally by setting the width to 0 in the HMTX table.\n\nIs there a way to set zero height as well? I read about the VMTX table but it looks like its only used for vertical fonts. Can you set zero height a different way? An line height of 0 for the entire font, instead of setting it for each character, would work as well.\n\nAnd my zero width chars only appear when I prepend with a normal width character. Say I have A, B and C of 0 width, then\n\nABC\n\nwill be invisible, and\n\nXABC\n\nwill show an X and then the A, B and C overlapping eachtoher. Is there any way to get zero width chars to show without prepending them with a normal width char?\n\n",
+  "author": "Pixelambacht",
+  "time": "25 Feb 2014 — 11:50pm",
+  "uid": "216292",
+  "comments": [
+    {
+      "time": "26 Feb 2014 — 4:36am",
+      "content": "I think the minimum font height is 1. I can only confirm this for Windows 7.\n\nWhen pushing the limits, do be aware each rasterizer has its own limits. ABC shows just fine in Windows and Firefox.\n\n"
+    },
+    {
+      "time": "26 Feb 2014 — 4:45am",
+      "content": "Chrome on Windows 7 and Chromium on Linux Mint will only show overlapped ABC when it's prepended by a normal width char. But Firefox on Windows 7 indeed shows the overlapped ABC without any extra chars. Good to learn about this difference.\n\nI've converted my TTF to a TTX XML file. How can I start playing with the line height? I don't see any values that seem to represent it.\n\n"
+    },
+    {
+      "time": "2 Mar 2014 — 11:57pm",
+      "content": "Just in case anyone else ever wants to do this and finds this thread:\n\nI got chars to overlap properly by giving the first char (A) a width of 512 and a left side bearing of 0. All the following chars (B and C) have a width of 0, and a lsb of -512. I can do this because I know I'll always start with the A — I don't know how you can do this reliably cross-browser if the order is unknown.\n\nI'm still looking into the line-height thing, but it seems that both Apple and Microsoft have different approaches to calculate this from the font's properties. A font's height could be based on the bounding box measurements, the ascender/descender values, or other values in the OS2 table. My conclusion is that if you want to tweak the (line-) height of a font, do it in CSS.\n\n"
+    }
+  ]
+}

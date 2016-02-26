@@ -1,0 +1,114 @@
+{
+  "id": "58429",
+  "title": "Web question, unwanted text padding in AP DIV",
+  "forum": "General Discussions",
+  "tags": [
+
+  ],
+  "content": "I am trying to make text and images line up in CSS/HTML using the same principles as baseline typography.  \nI am using images inside AP DIVs, and lining them up with the cap height of adjacent text in another AP DIV.\n\nMy problem is that different browsers pad the text differently within the AP DIV.  \nI can't seem to stop this using CSS.\n\n#alltext  \n{  \nposition:absolute;  \nwidth:width;  \nheight:height;  \nvertical-align:top;  \nwhite-space:nowrap;  \nmargin-top:0px;  \nmargin-left:0px;  \npadding-top:0px;  \npadding-left:0px;  \nborder-top:0px;  \nborder-left:0px;  \n}\n\nI know that it is only a matter of 1 or 2px but I'd like it to be as tight as possible.\n\nApologies for my poor explanation/terminology.  \nThanks in advance.\n\nAndrew\n\n",
+  "author": "<a href=\"/web/20101205024418/http://typophile.com/user/16140\" title=\"View user profile.\">1985</a>",
+  "time": "<br>",
+  "uid": "16140",
+  "comments": [
+    {
+      "time": "",
+      "content": "I don't really get what you mean by AP DIV and how the CSS relates. Can you create a sample page to show the issue?\n\n"
+    },
+    {
+      "time": "",
+      "content": "AP DIV means absolutely positioned div (layer).  \nI can't upload a page but I will provide an example page as code and you can save it as HTML to test in your browser?  \nSorry I can't be more efficient.\n\nEdit: I forgot HTML is active…\n\n"
+    },
+    {
+      "time": "",
+      "content": "If I recall correctly some browsers (esp. Explorer) will always ADD a few pixels of extra padding, even if you have defined exact values in your css.\n\n. . .  \nBert Vanderveen BNO\n\n"
+    },
+    {
+      "time": "",
+      "content": " ![](http://web.archive.org/web/20101205024418im_/http:/typophile.com/files/firefox_4881.png)\n\n ![](http://web.archive.org/web/20101205024418im_/http:/typophile.com/files/safari_5388.png)\n\nHope this helps explain what I mean.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Remember the text is in a positioned DIV, not just in the body of the HTML page.  \nSo it's about how the browser formats the text _inside_ the DIV, not just about adding extra pixels to the body.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Hm. So I made a quick test of this issue to try and see if I could replicate the problem. Part of the problem with just looking at an image is that it is terribly hard to understand how all the elements on the page are set up and rules applied to the outer div are just as important as those applied to the p tag.\n\n[Test Page](http://web.archive.org/web/20101205024418/http:/aaronb.net/ap_test.html \"test page\")\n\nMy example here doesn't seem to have the problem you show. Can you take a look on your end and tell me if you see a problem with it? If it seems to work properly, check out the CSS rules (they are all in the header) and you should be able to figure out what is going on with your example.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks for your time Aaron.\n\nYeah, you are right, the problem does not seem to exist in your test, which I tried in both browsers.  \nI am not using a p tag though, rather using a css class to style the text inside the DIV.\n\nCould this be the problem?\n\nI also noticed that, the two browsers demonstrate different leading/line-height.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Actually, the p tag is not responsible here (although I would use it myself since containing text is why p tags exist). [Test Page 2](http://web.archive.org/web/20101205024418/http:/aaronb.net/ap_test2.html \"Test Page 2\") doesn't use p tags and still appears fine. It may be related to how you are positioning the div instead.\n\nRemember you can use the line-height rule to set leading, but ultimately these are different browsers and their text rendering will be slightly different.\n\n"
+    },
+    {
+      "time": "",
+      "content": "But the p tag has it's own inherent attributes, right? I think I want to avoid those.  \nIs bad technique to style the content of the DIV by assigning a class?  \nI have found the leading controlled by line-height is the same between the Safari and Firefox.\n\nI really need to have a look and see what happens in Internet Explorer.\n\nThanks again for your time…\n\n"
+    },
+    {
+      "time": "",
+      "content": "I really need to adjust to the idea of web design and stop thinking about it like print.  \nNevertheless it is frustrating that basic typographic/layout ideas become impossible on the web.\n\n"
+    },
+    {
+      "time": "",
+      "content": "The p tag does have some inherent properties —&nbsp;specifically applying space before and after itself. That's it. Beyond that, it applies semantic meaning to the text indicating a \"paragraph\" of copy, but that doesn't actually mean anything in terms of positioning.\n\nIt isn't inherently bad form to assign css to copy via a containing div — in fact it can save on file size, but I tend to prefer using p tags since then at the beginning of your css style sheet, you just say:\n\np {  \n stuff  \n}\n\nand it will apply those rules to every single one on the page. I guess for me, it also helps me think, \"ok, this is text because it is in a p tag.\"\n\nActually, basic typographic/layout ideas are not impossible on the web. I've seen some work that is done extremely well that follows those principles. The one I usually present is [Wilson Miner's site](http://web.archive.org/web/20101205024418/http:/www.wilsonminer.com/ \"Wilson Miner\"). Figuring out how to think in terms of web development to make your print-inspired typography and layouts work is the biggest difficulty. That just takes time and practice. It isn't impossible, just _different_.\n\n"
+    },
+    {
+      "time": "",
+      "content": "True, impossible was the wrong word. I don't mean to speak ill of the Wilson Miner site, but I'd really like to see text line up on a baseline or have some kind of relationship with increments of leading that is used across the whole page and transparently throughout the site. Understandably this may not be the agenda/rational/concern of this specific site, so I don't mean to criticise this site in particular.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Actually, the Wilson Miner site is pretty good.\n\n"
+    },
+    {
+      "time": "",
+      "content": "No worries. I tend to like it for usage of grid and readability / legibility more myself.\n\nAs for baselines, I know I have seen that sort of thing done. [Andy Clarke's forabeautifulweb](http://web.archive.org/web/20101205024418/http:/forabeautifulweb.com/blog/about/improve_your_web_typography_with_baseline_shift/ \"Andy Clarke\") has a good article discussing baseline shifts on the web to improve the feel of a page. Course, if you look at the homepage, his site doesn't have a consistent baseline either. I'll see if I can find a better example of consistent baselines in particular.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Interesting, I will take some time to read this.\n\nThanks for your help and examples today, Aaron.\n\n"
+    },
+    {
+      "time": "",
+      "content": "No problem. Glad to have helped.\n\n"
+    },
+    {
+      "time": "",
+      "content": "For future reference, it's best to upload your demo page to a server and give us the link if you can. It's so much faster to just muck with the markup directly than to do the back and forth explanations.\n\nIndeed, if your text is a paragraph of text, you should be using paragraph tags. While there are default styles for most tags in most browsers, you can 'zero them out' using CSS. Just one of many samples is Yahoo's reset.css: [http://developer.yahoo.com/yui/reset/](http://web.archive.org/web/20101205024418/http:/developer.yahoo.com/yui/reset/ \"http://developer.yahoo.com/yui/reset/\")\n\nAs for dealing with baseline grids, the basic premise is that all of your element's styles have to conform to fall within whatever increment you are using for the grid.\n\nSo, if you're using a 20px grid, then your header tags' line-height, padding and margin would have to add up to 20px or 40px or 60px, or etc...\n\n"
+    },
+    {
+      "time": "",
+      "content": "I think it's quite like what aluminum is describing but try adding this to your css:\n\nbody{margin:0px; padding:0px;}  \np{margin:0px; padding:0px;}\n\nit makes sure that for both the _body_ and the _p_ tag no extra pixels are taken.\n\n"
+    },
+    {
+      "time": "",
+      "content": "and also remember to add\n\nhtml {margin:0xp; padding:0px;}\n\ndifferent browsers set different default values.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Heh. I sometimes just use\n\n\\*{margin:0; padding:0}\n\nand be done with it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks folks. Part of the problem seemed to be coming from the fact that I had selected Times rather than Times New Roman in the CSS. Times New Roman was much more stable across browsers.  \nIt seems that there is some inevitable padding within a DIV that even CSS reset can't control. However, if I can count on this value across browsers being the same, or at least not drastically different then I can continue.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"It seems that there is some inevitable padding within a DIV that even CSS reset can’t control.\"\n\nThat should not be the case.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I mean, it is not padding as such, but the effect is the same.  \nIn print, I can align the cap height to the very top of a text frame.  \nI can't seem to do this to the pixel in CSS/HTML.\n\n"
+    },
+    {
+      "time": "",
+      "content": "You won't be able to do it to the pixel given that you don't have absolute control over the type. However, you can get close by using negative padding and/or tweaking the line-height. The issue is that there really isn't a 'top of letterform' object in HTML type.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Interesting, thanks, I hadn't thought of negative padding.\n\nThanks all!\n\n"
+    }
+  ]
+}

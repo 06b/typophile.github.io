@@ -1,0 +1,46 @@
+{
+  "id": "2382",
+  "title": "Zero-width... trouble?",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "I've heard on and off that zero-width glyphs cause problems here and there, but I don't remember ever seeing a broad answer about it. I know that some people give such glyphs (like the stand-alone floating accents) a minimal width (like 2 ems?) to avoid any issues, but in a pixelfont for example this wouldn't work well. Does TT hinting provide any avenue?   \n   \nAny insights at all appreciated.   \n   \nhhp\n\n",
+  "author": "hrant",
+  "time": "12 Dec 2003 — 11:56am",
+  "uid": "1250",
+  "comments": [
+    {
+      "time": "12 Dec 2003 — 12:03pm",
+      "content": "I don't see why you want to do that (advance width = zero) anyway. Can you give us another example?   \nAnd IIRC, floating accents usually come centered in (apparently) arbitrary widths (500 units, for example). What's the advantage of setting them to zero-width?\n\n"
+    },
+    {
+      "time": "12 Dec 2003 — 2:41pm",
+      "content": "I'm not sure what you're building, but be careful if you're doing anything involving color overlaying of characters -- I once built a zero-width font to create flag icons for an multi-language magazine, to facilitate pasting the icons within a QXP text flow. Each flag was 3 or 4 characters, with each character a different color of the flag. We tested it for film output on a Scitex RIP with no problem, but when we changed pre-press houses at the last minute, the new place couldn't get them to output as anything but 4-color black squares on their Linotype RIP. They had to do some sort of mystery trapping magic (that I was not privy to) to fool the machine.\n\n"
+    },
+    {
+      "time": "12 Dec 2003 — 9:02pm",
+      "content": "It makes sense to make them [near-]zero-width because you can then place them -left aligned- on any other character. Sometimes that results badly (like on a dotless-i), but it seems like the best default scheme, no? Unless there's special code somewhere to ignore the metrics and render the accent centered/spanning the middle of the base character? I know keyboards have \"deadable\" characters that only render out in combinations of base+accent, but I think that's only a keying thing, not encoding.   \n   \nPatrick, I wonder if kerning pairs (between non-zero-width glyphs) would help.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "13 Dec 2003 — 10:59am",
+      "content": "Would it be possible to make your dicritics one pixel wide, and kern them -1 pixel with every glyph in the font? I imagine that'd be a breeze with class-based kerning in FL. That's not a very elegant solution, but in effect you'd have zero-width characters.\n\n"
+    },
+    {
+      "time": "14 Dec 2003 — 9:12pm",
+      "content": "Nathan, I think that's indeed the best way, _assuming_ giving those characters a certain width even matters...   \n   \nhhp\n\n"
+    },
+    {
+      "time": "15 Dec 2003 — 6:11am",
+      "content": "\\> Unless there's special code somewhere to ignore   \n\\> the metrics and render the accent centered/   \n\\> spanning the middle of the base character?   \n   \nI guess that those floating accents are only useful   \nwhen you use a DTP software, where you can define   \ncustom kerning-pairs?   \n   \n\\> I know keyboards have \"deadable\" characters that   \n\\> only render out in combinations of base+accent,   \n\\> but I think that's only a keying thing, not   \n\\> encoding.   \n   \nWhat you mean, 'not encoding'? When I type '\n\n"
+    },
+    {
+      "time": "15 Dec 2003 — 6:12am",
+      "content": "Well, I hope it does work. I'm working on a Thai bitmap face right now, and the diacritics really do need to be zero width. Otherwise it's going to look like a bloody train wreck :-/   \n   \nHere's to hoping...\n\n"
+    },
+    {
+      "time": "15 Dec 2003 — 9:17am",
+      "content": "\\> When I type '\n\n"
+    }
+  ]
+}

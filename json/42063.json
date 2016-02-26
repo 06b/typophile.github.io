@@ -1,0 +1,30 @@
+{
+  "id": "42063",
+  "title": "makeotf error",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm teaching myself the AFDKO, and I think I have everything all set up to go with one of my own fonts, but I keep running into this error:\n\n ![](http://web.archive.org/web/20150421234917im_/http:/typophile.com/files/Picture-3_4302.gif)\n\nIf I run `makeotf` on the Myriad sample provided by Adobe, things work perfect. I get the expected .otf file that works without a hitch.\n\nHere is the directory structure of the file I'm creating:\n\n ![](http://web.archive.org/web/20150421234917im_/http:/typophile.com/files/pic-2_5286.gif)\n\nAny suggestions?\n\n",
+  "author": "Dan Gayle",
+  "time": "13 Feb 2008 — 2:30pm",
+  "uid": "12948",
+  "comments": [
+    {
+      "time": "13 Feb 2008 — 3:13pm",
+      "content": "Ok, so I thought that perhaps breaking the featuress into the two different feature files, as Adobe has it in their Myriad sample, would do it. Like so:\n\n ![](http://web.archive.org/web/20150421234917im_/http:/typophile.com/files/pic-1_3806.gif)\n\nStill no go.\n\n"
+    },
+    {
+      "time": "13 Feb 2008 — 5:17pm",
+      "content": "But how do you run MakeOTF? What's the command?\n\nA.\n\n"
+    },
+    {
+      "time": "13 Feb 2008 — 6:04pm",
+      "content": "`DanGayles-PowerBook:~/Fonts/build/fonts/parallelhistories/Roman/Regular Dan$ makeotf -r` was the basic command.\n\nI `cd` to the directory that contains the files to be converted, then run the command. It works for the Minion sample, but not mine. I created all of the documents using the Myriad files as templates, so I don't know if they are the problem.\n\nI'm reading Miguel Sousa's \"Font production at Adobe\" .pdf for some clues. I re-exported the .pfa using standard encoding, and that's getting me further along the line.\n\nNow I'm having an issue with the glyph names db. Will it never end? What's the best way to create or output that db from Fontlab 5 on a Mac?\n\n"
+    },
+    {
+      "time": "13 Feb 2008 — 6:04pm",
+      "content": "I'm going to guess that you're not giving makeOTF info on what font outline file (OTF, PS, PFA) to make the font from, so it is using the default of font.ps, which isn't in your directory. Use 'makeOTF -f Parallel Histories.otf' and it should work, though I would take out the space in 'Parallel Histories', as you may have to escape the space on the command line. Taking out the space would mean that your makeOTF command would be 'makeOTF -f ParallelHistories.otf'.\n\n"
+    }
+  ]
+}

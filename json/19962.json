@@ -1,0 +1,78 @@
+{
+  "id": "19962",
+  "title": "python vector graphic library supporting opentype formats",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m looking for a python vector graphic framework/library/module which supports opentype fonts.  \nI cant understand if ReportLab does it, neither PIDDLE. Maybe doesn’t exist, yet?\n\n [‹ Small caps - to precompose or not to precompose](http://web.archive.org/web/20081205033715/http:/typophile.com/node/49496 \"Go to previous forum topic\") [Why won't FLAB let me apply glyph properties ›](http://web.archive.org/web/20081205033715/http:/typophile.com/node/49417 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20081205033715/http://typophile.com/user/11158\" title=\"View user profile.\">Flavio Curella</a>",
+  "time": "<br>",
+  "uid": "11158",
+  "comments": [
+    {
+      "time": " 16.May.2006 2.24pm",
+      "content": "What exactly do you want it for?  \nHave you looked at [RoboFab](http://web.archive.org/web/20081205033715/http:/typophile.com/wiki/RoboFab) or at the [Adobe FDK](http://web.archive.org/web/20081205033715/http:/typophile.com/wiki/Adobe%252BFDK)?\n\n"
+    },
+    {
+      "time": " 16.May.2006 2.34pm",
+      "content": "yes, but I don’t need a library for creating fonts, just a graphic library which can import them.  \nSpecifically, what I’m trying to do is a Python script which can generate many variations of the same poster (or flyer, or business-cards, or whatever). Something like Fifteen’s posters.\n\n"
+    },
+    {
+      "time": " 16.May.2006 2.55pm",
+      "content": "Well, then ask [LettError](http://web.archive.org/web/20081205033715/http:/typophile.com/wiki/LettError). I think they were the ones who did it for [FontShop](http://web.archive.org/web/20081205033715/http:/typophile.com/wiki/FontShop).\n\n"
+    },
+    {
+      "time": " 16.May.2006 3.10pm",
+      "content": "Flavio, if you’re on the Mac you might be interested in playing around with [DrawBot](http://web.archive.org/web/20081205033715/http:/drawbot.com/), it’s a fun tool for drawing with Python and it has OTF support (but no feature support). Program the poster in DrawBot with whatever amount of Pythonic variation you want and then you can export each result as a PDF.\n\n"
+    },
+    {
+      "time": " 16.May.2006 3.14pm",
+      "content": "Or you could dig deep into [CoreGraphics](http://web.archive.org/web/20081205033715/http:/www.macdevcenter.com/pub/a/mac/2004/03/19/core_graphics.html) (though still Mac-centric)\n\n"
+    },
+    {
+      "time": " 17.May.2006 7.24am",
+      "content": "another alternative would be [Scribus](http://web.archive.org/web/20081205033715/http:/www.scribus.net/), the free software/open-source alternative to indesign/quark. it has a python scripting palette and can export pdfs, but doesn’t offer support to opentype features (yet).\n\ncheers,  \n- gustavo.\n\n"
+    },
+    {
+      "time": " 17.May.2006 9.18am",
+      "content": "@andy:  \n DrawBot seems very cool, but unlucky it doesn’t work on my mac (tiger), it quits silently :(( (tiger: it quits silently).  \n CoreGraphics: I was searching out there while it seems all I need is already in my box :).\n\n@gustavo: I’v tried to run scribus, after installing Fink, but doesn’t works.\n\n@adobe: why Illustrator has not a python API? :P\n\n"
+    },
+    {
+      "time": " 17.May.2006 4.44pm",
+      "content": "You can automate InDesign and Illustrator on Windows from Python (using COM automation and the Python win32all package).\n\nA.\n\n"
+    },
+    {
+      "time": " 28.Jun.2006 2.25pm",
+      "content": "I’ve just returned from the [InDesign Conference](http://web.archive.org/web/20081205033715/http:/www.indesignconference.co.uk/) _Half-Day Tutorial: Automating Page Layout with InDesign Scripting_ talk given by Olav Martin Kvern, and I must say that it was simply brilliant.\n\nAs I understood, it is possible to script \\*any\\* task in InDesign (CS2), which is quite remarkable. His JavaScript demos were very insightful and easy to follow. (Like Python, JavaScript is an object-oriented language, so the two are quite similar in may aspects). The ExtendScript Toolkit application (that comes with the CS2 Suite) also makes scripting much simple.\n\nI was simply amazed how one can enhance InDesign’s capabilities and batch process repetitive tasks quite easily. As anyone ever wished Photoshop’s _Contact Sheets_ or Illustrator’s _Crop Marks_ inside InDesign? Well, it’s actually all possible! Simply download [these ready-made scripts](http://web.archive.org/web/20081205033715/http:/www.adobe.com/products/indesign/xml_scripting.html#sresources) and place them in [InDy folder]/Presets/Scripts/. Then it’s just a matter of bringing up the ’Scripts’ palette (Window-\\>Automation-\\>Scripts) and start clicking\\*\\*. Definitely worth trying!\n\nAlso worth following:  \n [http://jsid.blogspot.com/](http://web.archive.org/web/20081205033715/http:/jsid.blogspot.com/)  \n [http://www.indesignsecrets.com/](http://web.archive.org/web/20081205033715/http:/www.indesignsecrets.com/ \"http://www.indesignsecrets.com/\")\n\n\\*\\* The script “ImageCatalog.jsx” does the Photoshop-like function, and “CropMarks.jsx” the Illustrator-like one.\n\n"
+    },
+    {
+      "time": " 28.Jun.2006 3.52pm",
+      "content": "In addition, there are some pretty useful ’third-party’ scripts.  \nDefinitely I like Python more. Maybe the type department can convince the ID department that Python is worth being supported {natively}\\* too?&nbsp;&nbsp;;-)  \nBtw, the scripting reference mentions one OT feature which can be addressed by scripting but not by the UI. (Was it hist? Forgot which one, not at home yet to check.)\n\nBig ’but’: Despite of all nice things that scripting allows for, some automation should be available to non-scripters too. Like the data merge function which I read about only last week, though maybe a bit more powerful than it is. One cannot expect that soon every designer will find the time to learn JavaScript (or Python). I say this with ID as well as FLS in mind.\n\nKarsten\n\n\\* {edit: To my understanding, scripting InDesign in Python is kind of an add-on, which requires different solutions on Win and Mac (here it’s kind of Python ’clothes’ around AppleScript), and such Python scripts are not altogether platform compatible — which I would consider a must for a cross-platform application like InDesign.}\n\n"
+    },
+    {
+      "time": " 28.Jun.2006 5.05pm",
+      "content": "\\> _Maybe the type department can convince the ID department that Python is worth being supported {natively}\\* too? ;-)_\n\nI asked Olav Kvern about it. He said that the commitment is to support each platform’s native scripting language — AppleScript/Mac, VBScript/Windows — and one cross-platform language (JavaScript). Nonetheless, his opinion is that more languages should be supported, rather than less. His goal is to allow people to script in whichever language they’re more comfortable with. So, stay tuned :)\n\n\\> _Btw, the scripting reference mentions one OT feature which can be addressed by scripting but not by the UI._\n\nThis one, I believe:  \n [http://partners.adobe.com/public/developer/opentype/index\\_tag6.html#hlig](http://web.archive.org/web/20081205033715/http:/partners.adobe.com/public/developer/opentype/index_tag6.html#hlig \"http://partners.adobe.com/public/developer/opentype/index\\_tag6.html#hlig\")\n\n\\> _Big ‘but’: Despite of all nice things that scripting allows for, some automation should be available to non-scripters too._\n\nWell, that’s debatable. We still don’t have _real_ artificial intelligence, or computers that can read the ideas we have on our minds and simply execute them, so people will still have to do some of the work. The way things are made available (documentation, samples, drag-and-drop, double-clicking, code hinting, etc) effectively simplify a lot of the stuff, even for ’native’ non-scripters.\n\nI just think that people relate the word ’scripting’ to something that only computer scientists can do. While that was very true some time ago, nowadays things are much much simpler. People just haven’t got around to become aware of that, and to realise that a simple 5-line script, for example, can have a big impact on their daily work.\n\nEdit:  \nHundreds of free scripts here [http://share.studio.adobe.com/axBrowseSubmit.asp?t=54](http://web.archive.org/web/20081205033715/http:/share.studio.adobe.com/axBrowseSubmit.asp?t=54 \"http://share.studio.adobe.com/axBrowseSubmit.asp?t=54\")\n\n"
+    },
+    {
+      "time": " 28.Jun.2006 5.29pm",
+      "content": "I’m glad to inform you that the Python Imaging Library version 1.1.6b1 now correctly supports Unicode-compatible text rendering using Type 1, TrueType and OpenType fonts. You cannot access OpenType Layout features, just plain Unicode codepoints, and of course you can only render bitmaps, not vectors. But it’s quite powerful and works really nice.\n\nI’ve worked with the library’s author Fredrik Lundh on a fix of a problem that causes PIL to crash on quite many fonts. The good news is that recently released version 1.1.6b1 does not have the problem anymore!\n\nYou can get the newest build of PIL at:  \n [http://effbot.org/zone/pil-changes-116.htm](http://web.archive.org/web/20081205033715/http:/effbot.org/zone/pil-changes-116.htm \"http://effbot.org/zone/pil-changes-116.htm\")\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": " 29.Jun.2006 9.37am",
+      "content": "Miguel Sousa wrote:  \n<cite>We still don’t have real artificial intelligence, or computers that can read the ideas we have on our minds and simply execute them, so people will still have to do some of the work. The way things are made available (documentation, samples, drag-and-drop, double-clicking, code hinting, etc) effectively simplify a lot of the stuff, even for ‘native’ non-scripters.<br>\nI just think that people relate the word ‘scripting’ to something that only computer scientists can do. While that was very true some time ago, nowadays things are much much simpler. People just haven’t got around to become aware of that, and to realise that a simple 5-line script, for example, can have a big impact on their daily work.</cite>\n\nOh, I don’t expect any <cite>intelligence</cite> from the applications’ side!\n\nYet, one has to understand how scripting is supposed to work. On two levels, the scripting language, and the application’s own peculiarities. (InDesign example for the latter: deal with script UI and defaults in units other than inch/point.) If it just were: grab some elements and copy/paste, this would be nice. But, despite some great sources, this is not really possible.\n\nOne obstacle may indeed be designers’ fear of scripting. Maybe fear of working systematically, too?&nbsp;&nbsp;;-)\n\nKarsten\n\n"
+    },
+    {
+      "time": " 29.Jun.2006 12.18pm",
+      "content": "\\> _(InDesign example for the latter: deal with script UI and defaults in units other than inch/point.) If it just were: grab some elements and copy/paste, this would be nice. But, despite some great sources, this is not really possible._\n\nI’m sorry, but I don’t understand your point here.\n\nBTW, shall we start _our own_ thread? We’re deviating quite a lot from the initial title.\n\n"
+    },
+    {
+      "time": " 11.Sep.2008 2.54am",
+      "content": "Flavio you were probably looking for Compositor  \n [http://code.typesupply.com/wiki/Compositor](http://web.archive.org/web/20081205033715/http:/code.typesupply.com/wiki/Compositor \"http://code.typesupply.com/wiki/Compositor\")  \nwhich at the time had not been released yet.\n\n"
+    },
+    {
+      "time": " 14.Sep.2008 4.58pm",
+      "content": "I should point out that while Compositor is a great piece of code for working with Western OpenType fonts, it does not implement any of the script-specific OpenType Layout shaping engines, and is therefore useless for any languages that need them, e.g. Devanagari, Arabic, Hebrew, Syriac, Thai, Tamil etc.\n\nAdam\n\n"
+    }
+  ]
+}

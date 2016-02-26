@@ -1,0 +1,30 @@
+{
+  "id": "39380",
+  "title": "Component Glyph Overlap",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’ve recently noticed working in Illustrator that when using a text block from a font that contains components that overlap, eg. Ccedilla … sometimes when zooming in and out briefly you can see that the overlap space between shapes flash’s white, basically ’inverting’ the overlap shape.\n\nIs this just an occurence with overlapping components in Illustrator? Is there a step in the process to merge a component and glyph before or during export?\n\n [‹ Robofab Glyph to UFO](http://web.archive.org/web/20080830003400/http:/www.typophile.com/node/39492 \"Go to previous forum topic\") [OpenType Resources (link collection) ›](http://web.archive.org/web/20080830003400/http:/www.typophile.com/node/39375 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080830003400/http://www.typophile.com/user/17099\" title=\"View user profile.\">Mike Jarboe</a>",
+  "time": "<br>",
+  "uid": "17099",
+  "comments": [
+    {
+      "time": " 23.Nov.2007 12.53pm",
+      "content": "Either change the curves to post script, or remove the overlaps or if you just want to check your font temporarily, try exporting it as a True Type font to avoid this problem.\n\nI also wanted to know that why does sometimes it shows those white overlaps (specially in OTF outputs), even if the curves direction is correct? Anyone?\n\n"
+    },
+    {
+      "time": " 23.Nov.2007 2.39pm",
+      "content": "Yeah I’m curious if it’s best to decompose all components and merge contours… I assume thats the step to avoid any strange overlaps, they’ve only shown up for myself when zooming or panning, just a detail I picked up on while working with a textfield that had component characters in it.\n\n"
+    },
+    {
+      "time": " 23.Nov.2007 5.45pm",
+      "content": "Yes, it is best to merge contours if there are overlaps. Historically, some RIPs had a problem interpreting overlaps, and reversed-out the overlapped area. This may not be an issue any longer, but a more common problem is that users may want to apply outline effects to type, and if there is an overlap in e.g. Ccedilla then the overlap will be exposed.\n\n"
+    },
+    {
+      "time": " 26.Nov.2007 7.15am",
+      "content": "John: “Historically, some RIPs had a problem interpreting overlap...”  \nThis is true or contours that overlap within a glyph.  \nBut I thought composites are rendered as separate contours, and with the ensuing bitmaps merged, there should be no problem?\n\nMike: “...sometimes when zooming in and out briefly you can see that the overlap space between shapes flash’s white...”  \nI have seen zooming do that described here, almost like there is still some little gremlin of old PS code that is relied on at certain combinations of resolution and zoom.\n\nJohn: “...users may want to apply outline effects to type, and if there is an overlap in e.g. Ccedilla then the overlap will be exposed.”  \n...in many applications. There are some apps, like InDesign for example, which not only respect the TT flag indicating overlaps (& removing them automatically when outline effects are specified), but go beyond and manage the final rendering of all outlined type intelligently, as illustrated below.\n\n ![](http://web.archive.org/web/20080830003400im_/http:/www.typophile.com/files/IndesignOutlines_5832.png)\n\nThe Ç and ø are overlapping composites in this example, and as the intelligent application must do the “right thing” to the “ca” tracking that goes on as the example continues... I mean, what do other apps do?\n\nCheers!\n\n"
+    }
+  ]
+}

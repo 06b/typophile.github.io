@@ -1,0 +1,38 @@
+{
+  "id": "65205",
+  "title": "How can I assign a key combination?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi to everyone,  \nI'm new in this forum but I found many useful informations on Typographic world on it.\n\nI wrote because I have a problem...  \nI'm modifing an existing font and I have to insert some new glyphs that I should recall by a key combination (like \"mblogo\"), is it possible? How can I do that?\n\nI use FontLab Studio 5.\n\nThanks a lot!  \nSorry for my english!\n\nStefano\n\n",
+  "author": "<a href=\"/web/20110527132809/http://www.typophile.com/user/51101\" title=\"View user profile.\">diorg_font</a>",
+  "time": "<br>",
+  "uid": "51101",
+  "comments": [
+    {
+      "time": "",
+      "content": "I've moved your question to the BUILD area where the techies tend to reside.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Piece of cake.  \nYou _do_ need to add some OpenType magic to the font, though.\n\nUsing 'liga' code for ligatures:\n\n`feature liga {\n # Latin\n   sub T e s t by T_e_s_t;\n} liga;`\n\nIf the program you are using supports ligatures, typing \"Test\" will automatically be changed to my quick-and-dirty \"Test\" glyph:\n\n ![](http://web.archive.org/web/20110527132809im_/http:/typophile.com/files/ligatures_4216.PNG)\n  \n(Left is Ligatures Off, right is On.)\n\nOf course, you are free to use any of the other OTF features, if you don't want to mess with 'standard' ligatures (e.g., put them in a stylistic set or in 'calt' -- contextual ligatures). Use the Opentype feature preview in FontLab to check if it works.\n\nI don't think the sequence \"mblogo\" could pop up in the middle of a regular English word. However, if you need to use a phrase that _can_, either don't use ligatures (as these are usually 'on' for all text), or check the OTF Feature File description on how to limit it to a single word. (Sorry -- can't recall, altho' I used to be able to recite it from memory.)\n\nIt is considered 'proper usage' if your new glyph name is composed of the singular characters that make it up, separated by underscores. I think this is best seen in PDFs; selecting and copying the \"Test\" glyph yields the _plain text_ \"Test\" again. You can also search a PDF for 'test', and it'll find both variants.\n\n"
+    },
+    {
+      "time": "",
+      "content": "To make it easy on yourself, throw a symbol into the string you use for replacement. Something like \"=mblogo=\" (The lookups use character names, so that would be \"equal m b l o g o equal\") will protect you from unforeseen surprises if you ever have to write about something like \"tourismblogoftheday.com\".\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thank you!  \nI used both of your solutions.  \nThe font works fine.  \nBut I have a little question...  \nDid you have some books about the font realization to suggest me?  \nI studied the Fontlab manual but I didn' find anything like \"opentype programming language\".  \nThank you!!  \nBye  \nS\n\n"
+    },
+    {
+      "time": "",
+      "content": "That can best be read from the source: [Adobe / OTF / Feature Files](http://web.archive.org/web/20110527132809/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html)\n\nThere are a few enhancements as of this year that do not work (yet!) in FontLab, but I doubt you'd use these anyway for a beginners' project.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Chapter 11 of the FontLab manual covers OpenType. The section on substitution lookups starts at p864 in the Mac PDF manual, p854 for Windows.\n\nThe League of Movable Type also has [a nice tutorial](http://web.archive.org/web/20110527132809/http:/blog.theleagueofmoveabletype.com/post/238296379/how-to-add-opentype-alternates-in-fontlab).\n\n"
+    }
+  ]
+}

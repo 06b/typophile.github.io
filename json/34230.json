@@ -1,0 +1,50 @@
+{
+  "id": "34230",
+  "title": "FontLab Error: invalid first character in name (text was \".null\")",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "After generating the font, this error message appears:\n\ninvalid first character in name (text was \".null\")[1\\_tiger\\_0306:Applications:FontLab 4.6:fontlab.fea 208]\n\ndoes anybody know anything about this error? what does it mean? which \"name\" and which \"text\" is meant?\n\nthank you!\n\n",
+  "author": "martinschka",
+  "time": "4 Jun 2007 — 8:44am",
+  "uid": "18442",
+  "comments": [
+    {
+      "time": "4 Jun 2007 — 12:46pm",
+      "content": "Do your OT features involve substitution from or by '.null' glyph? Or did you kern it with another glyph? Then try removing this kerning pair in the metrics panel, update the kern feature, and generate the font again.\n\n"
+    },
+    {
+      "time": "5 Jun 2007 — 4:44am",
+      "content": "finally we found a glyph named \".null\" in our font. deleting it, we solved the problem.\n\n"
+    },
+    {
+      "time": "5 Jun 2007 — 5:15am",
+      "content": "If you generate OTF fonts (with PostScript outlines):  \nOnly '.notdef' must be present, but not '.null' and 'CR'.\n\nIf you generate TTF fonts (or OTF with TT outlines):  \n'.notdef', '.null' (unicode '0000'), 'CR' ('000D') and 'space' ('0020') should be the first four glyphs in your font, in this order. To reorder them, set the Font Window to Index Mode, then pull the glyphs the the correct place.\n\nWhat I meant was, make sure '.null' is not mentioned in any feature.\n\n"
+    },
+    {
+      "time": "28 Sep 2009 — 4:10pm",
+      "content": "Ouch! I've got a similar error after establishing all my kerning classes and generating the kern feature. When I click to compile the opentype features...\n\n`[FATAL] invalid first character in name (text was \"01e9\")`\n\nU+01e9 is kcircumflex. I've tried deleting this glyph, I've tried regenerating the kern feature and I've run the above solutions but still get the same error.\n\nHopefully this is something straightforward...I don't like FATAL errors...can anyone shed any light ;)\n\n"
+    },
+    {
+      "time": "28 Sep 2009 — 9:11pm",
+      "content": "Well you've awakened an old thread, but it doesn't look like the original problem was ever fully sussed out. The \"name\" in question is the glyph name, which must conform to some rules established by Adobe quite a long time ago. Some font tools are more lenient than others with respect to glyph names, and sometimes a tool can assign an illegal name. This can cause trouble when another tool expects or requires strictly legal names and that is what's going on here.\n\nFrom [http://www.adobe.com/devnet/opentype/archives/glyphnamelimits.html](http://web.archive.org/web/20140512025819/http:/www.adobe.com/devnet/opentype/archives/glyphnamelimits.html \"http://www.adobe.com/devnet/opentype/archives/glyphnamelimits.html\") section 4 (emphasis mine):\n\n`A glyph name may be up to 31 characters in length, must be entirely comprised of characters from the following set:`\n\nA-Z  \na-z  \n0-9  \n. (period)  \n\\_ (underscore)  \nand **must not start with a digit or period**. The only exception is the special character \".notdef\".\n\n\"twocents\", \"a1\", and \"\\_\" are valid glyph names. \"2cents\" and \".twocents\" are not.\n\nBoth of the glyph names here violate the emphasized part above; \".null\" begins with a period and \"01e9\" begins with a digit.\n\nTo fix the \"invalid first character in name\" issue, you need to change the glyph name(s), not delete the glyph. There may be other glyphs with illegal names, too. You might try FontLab Studio's function to assign glyph names based on Unicode if you have a lot to rename.\n\n"
+    },
+    {
+      "time": "29 Sep 2009 — 1:35am",
+      "content": "\\> must not start with a digit or period.\n\nInteresting. I'll check through all the names. I think they're in the format uni1234 but some could just be 1234. If I use the 'assign glyph names' function, the classes and features will all need search/replace too right?\n\nI've a feeling I might just have to wipe my kerning classes and start again. Before I made the classes (and changed the glyph order) the opentype features were compiling correctly.\n\nI'll let you know how I get on. Thanks for the pointers.\n\n"
+    },
+    {
+      "time": "29 Sep 2009 — 2:24pm",
+      "content": "Ok well it looks like there was something not right in the kerning classes. I wiped them, reassigned glyph names, then remade the kerning classes. With the new glyph names I had to search/replace in the other feature definitions. Now it compiles correctly and I get great looking opentype class kerning! :)\n\n(PS there's now a warning that `[WARNING] Start of new pair positioning subtable; some pairs may never be accessed: [z zacute zdotaccent zcaron uni01B6] [t uniFB06 ct ft ft.alt it]` but I'll live with that unless I can figure out what to do about that...)\n\n"
+    },
+    {
+      "time": "29 Sep 2009 — 2:36pm",
+      "content": "That warning usually means that you have the same glyph in more than one kerning class.\n\nNote: You can have a glyph in two kerning classes if they are not for the same side of a kerning pair.\n\n"
+    },
+    {
+      "time": "29 Sep 2009 — 3:34pm",
+      "content": "Aah, thanks Mark, I'll have a look at that.\n\n"
+    }
+  ]
+}

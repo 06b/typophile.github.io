@@ -1,0 +1,58 @@
+{
+  "id": "38534",
+  "title": "Securing font when used with font-face",
+  "forum": "Typography.Guru's blog",
+  "tags": [
+
+  ],
+  "content": "\"Font embedding\" is coming back to the web! The latest build of WebKit (used by Safari) has it, Opera is expected to follow. But the way they use it is by just linking a regular font file, which has to be placed somewhere on the internet, so everyone can download it.  \nOf course that doesn't go well with commercial fonts.\n\nSo I set up a Proof of Concept to show a way to secure\\* a font used with the font-face command. Just download the [latest version](http://web.archive.org/web/20150420094053/http:/nightly.webkit.org/builds/overview/feature-branch) of Safari and open this page:  \n [http://www.fonts.info/webfonts/](http://web.archive.org/web/20150420094053/http:/www.fonts.info/webfonts/ \"http://www.fonts.info/webfonts/\")\n\nYou should see two \"embedded\" fonts. The first is protected\\*, the second is not. Feel free to try to download Kaffeesatz. I won't explain how the protection works, but it uses several layers of protection. It is set up in a way, where the font would reside on the foundry's server and a remote, licensed website can use the font by adding a little snippet of code to its template.\n\n ![](http://web.archive.org/web/20150420094053im_/http:/typophile.com/files/Bild3_4933.jpg)\n\n\\* So it's absolutely safe? No! Everything you see in your browser window was already downloaded to you machine. There is no real protection for anything that is on the web.\n\n",
+  "author": "Typography.Guru",
+  "time": "28 Oct 2007 — 9:47am",
+  "uid": "1794",
+  "comments": [
+    {
+      "time": "28 Oct 2007 — 11:13am",
+      "content": "Nice work Ralf. Thank you for posting this.\n\n"
+    },
+    {
+      "time": "28 Oct 2007 — 11:16am",
+      "content": "Very nice, Ralf! From my point of view, that’s heading in the right direction.\n\n"
+    },
+    {
+      "time": "28 Oct 2007 — 3:23pm",
+      "content": "Nice work indeed!\n\n\\> _So it’s absolutely safe? No! Everything you see in your browser window was already downloaded to you machine._\n\nI see, so browsers' developers are not of the hook yet, right?\n\n\\> _There is no real protection for anything that is on the web._\n\nI'd think that, if the resource(s) — font(s) in this case — are only loaded into memory, i.e. not saving any file(s) on the local system, it would make things pretty safe.\n\n"
+    },
+    {
+      "time": "29 Oct 2007 — 7:04am",
+      "content": "\"I see, so browsers’ developers are not of the hook yet, right?\"\n\nCopyright protection is not/should not be a TECHNICAL thing. It's a LEGAL thing. I see no reason for browser developers to hack the basic premise of the web in a weak attempt at forcing technical restrictions in the name of copyright protection.\n\n"
+    },
+    {
+      "time": "27 Mar 2008 — 6:05am",
+      "content": "Miguel Sousa\n\n<cite>I’d think that, if the resource(s) — font(s) in this case — are only loaded into memory, i.e. not saving any file(s) on the local system, it would make things pretty safe.<cite></cite></cite>\n\nSafari from Apple saves files into \"cache.db\" file (format SQLite3). with SQLiteExpert (no advertising), for example, technically prepared user, like me, can take everything.\n\n"
+    },
+    {
+      "time": "27 Mar 2008 — 7:02am",
+      "content": "I just stumbled upon this thread again.\n\nYea, it's really easy to download the font:\n\n- visit page in firefox  \n - view CSS file  \n - copy and past the URL to the font file  \n - download the 'php' file  \n - change the extension to 'otf'\n\nI now have Yanone Kaffeesatz Regular on my hard drive.\n\n"
+    },
+    {
+      "time": "27 Mar 2008 — 9:45am",
+      "content": "<cite>Yea, it’s really easy to download the font: visit page in firefox</cite>\n\nTrue. But it's an easy fix to prevent this in a future version. The point of this script is to have a system where a licensed website would get access to the font on the foundry's server, but access from other sites and direct downloads would be prevented. This can be done. I just don't have all the neccessary features and levels of protections in it yet.\n\nBut 4thfebruary is also right. Once you access a licensed site the font will end up in your browser cache where it can extracted. And this will always be the case.  \nBut still: Should we stop the iTunes music store because people know how to rip an DRM-protected song?\n\n"
+    },
+    {
+      "time": "27 Mar 2008 — 10:51am",
+      "content": "Well, if you know my stance on DRM, it's \"get rid of it completely.\"\n\nOn the web there seems to be a strong urge to try and protect copyright concepts via technology...which always adds to the complexity/expense of the product, adds to the frustration of the honest customer, and is ultimately little to no deterrent to the person that doesn't care about copyright in the first place. ;o)\n\n"
+    },
+    {
+      "time": "27 Mar 2008 — 5:22pm",
+      "content": "I don't see how Ralf's technique would add frustration to any \"honest customers\" or even honest web page viewers.\n\nThe \"customer,\" it seems to me, would be the party putting the font on the server. The people viewing the page on the web which utilizes the font, who are not the people who licensed the font, are not prevented from seeing the font at all. If the technique required site visitors to have an account or type in a password or some other nonsense, I could see your point.\n\nIn any case, what legitimate reason would anyone have to extract fonts from a cache (other than to demonstrate that there's a security hole)?\n\n"
+    },
+    {
+      "time": "3 Apr 2008 — 9:51am",
+      "content": "Thanks for this Ralf.\n\nI also was wondering if you could somehow secure a css file that contains information about a font to be safe on an EULA's side (e.g. <cite>\"Embedding of the XXX Font-Software into electronic documents or internet pages is only permitted in a secured read-only mode. The Licensee must ensure that recipients of electronic documents or internet pages cannot extract the XXX Font-Software from such documents or use the embedded XXX Font-Software for editing purposes or for the creation of new documents.\"</cite>).\n\nCan anyone actually ensure that no one will eventually extract anything from even a super-protected file? I don't think so. Why such a statement then?\n\nBack to the topic, your solution seems enough \"protection\" for most users who browse websites. As stated many times before, one shouldn't really count in pirates who would steal/wouldn't buy anyway. The question is if font vendors see it as an enough secure embedding on the internet?\n\n\\_\\_\\_\\_\\_\\_\\_\\_  \n [AL](http://web.archive.org/web/20150420094053/http:/www.lenart.pl/) [▪](http://web.archive.org/web/20150420094053/http:/www.lenart.pl/news) [▪](http://web.archive.org/web/20150420094053/http:/www.lenart.pl/work) [▪](http://web.archive.org/web/20150420094053/http:/www.lenart.pl/about) [▪](http://web.archive.org/web/20150420094053/http:/www.lenart.pl/contact)\n\n"
+    },
+    {
+      "time": "3 Apr 2008 — 11:34am",
+      "content": "You may also want to look at this thread with more information about ways to protect the fonts:  \n [http://www.typophile.com/node/43312](http://web.archive.org/web/20150420094053/http:/www.typophile.com/node/43312 \"http://www.typophile.com/node/43312\")\n\n"
+    }
+  ]
+}

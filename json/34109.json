@@ -1,0 +1,34 @@
+{
+  "id": "34109",
+  "title": "Concerning Kerning",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi everybody,  \nI know there are a lot of posts dealing with kerning issues but I couldn't find an answer to my question there. So here it is:  \nI'm working on a font containing 670 glyphs. I made the class-kerning and got 1500 pairs. There are many pairs in there that don't make sense. So I expanded the kerning to a flat table, resulting in 20000 pairs. In the next step I threw 10000 away or rekerned special combinations.  \nSo my question is, does it still make sense to go with pair-kerning? Is there any text-software that can't handle class-kerning? And what would be the barrier for a pair-kerned font. I read somewhere that 5000 pairs are a maximum. Ah yes and yet another question, what do you think of the compress feature in fontlab 5. If I compress my 10000 pairs I get 2500 \"class-pairs\" with exceptions. Would that be the apropriate way to go?\n\nI'm beginning to go insane about this and would appreciate any kind of help.  \nThank you guys in advance.\n\nfelix\n\n",
+  "author": "fontality",
+  "time": "30 May 2007 — 1:06am",
+  "uid": "16904",
+  "comments": [
+    {
+      "time": "30 May 2007 — 6:31am",
+      "content": "I forgot to mention that it is an opentype font...\n\n"
+    },
+    {
+      "time": "30 May 2007 — 8:42am",
+      "content": "Class based kerning should be the rule in OT fonts and is more economic, however, single pair kerning is legitimate too. There was another thread with a similar question (class kerning vs single pair kerning in 'kern' feature) but I cannot find it ...  \nIn my experience, 'Compress' does a good job. But make sure you have flagged your kerning classes correctly as leftside/rightside classes -- the checkboxes next to the class name in the classes panel. 'Compress' relies on these settings.\n\nAFAIK, the 5000-pair-maximum was meant for the 'kern' table (not the 'kern' feature), this was about the amount which e.g. XPress 4 could handle.\n\nKarsten\n\n"
+    },
+    {
+      "time": "30 May 2007 — 8:59am",
+      "content": "Thank you, that will help.\n\n"
+    },
+    {
+      "time": "31 May 2007 — 3:40pm",
+      "content": "Some time around 2000, at Adobe we did tests with flat kerning and found that the maximum varied from application to application. Some apps began having bad behaviors at kerning quantities less than 5000, while some could go quite a bit higher.\n\nT\n\n"
+    },
+    {
+      "time": "31 May 2007 — 7:02pm",
+      "content": "I think I am one of the few -- perhaps the only one -- who sits on the flat pairs kerning side. I have stumbled on too many problems with class-based kerning, among them my own ability to keep things straight. In the old Type 1 days, we made up fonts of about 400 glyphs. Of course, only 254 could be encoded at once, but all the kerning was in the font.\n\nI would typically have from 1500 to 2500 kern pairs, a lot of them punctuation. You have to pay a lot of attention to sidebearings; sometimes you find yourself kerning a lower-case letter with 20 other lower-case letters, and that's often the sign of an error -- but not always (f comes to mind). Vowels with diacriticals may need side-bearing work.\n\nWith OT, contextual alternates can help with awkward pairs, such as an alternate \"f\" with any vowels having a grave or macron accent. Frequently that \"f\" will work with a wordspace too. Or, with f-accented-vowels, I sometime make ligatures.\n\nI do use class-based kerning, esp. with things like any number followed by any numerator (with \"arbitrary\" fractions).\n\nAnother issue is whether or not you plan to ever revisit your font. If not, figuring out what in the world you did six months or a year ago is less of an issue -- unless your customers are complaining too much.\n\nThere are always compromises, and I suppose if you pick better ones, you can use more class-based kerning, carefully, and avoid some of the trains wrecks I see in the kerning of many OT fonts.\n\n"
+    }
+  ]
+}

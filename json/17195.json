@@ -1,0 +1,34 @@
+{
+  "id": "17195",
+  "title": "Chaining Context Substitution",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hello everyone\n\nI am new to Typophile and this is my first post. I am glad to be here. I have an OpenType features related problem. I want to make the following substitutions:\n\n1 + 0 with a glyph called 1\\_0  \n1 + 0 + 0 with a glyph called 1\\_0\\_0 and  \n1 + 0 + 0 + 0 with a glyph called 1\\_0\\_0\\_0\n\n(1 and 0 can be replaced by any digit - see code below)\n\nI work in Fontlab Studio 5 and I at first I wrote the following code:\n\n# glyph classes  \n@digitsnozero=[one two three four five six seven eight nine];  \n@digits=[zero one two three four five six seven eight nine];  \n@twodigits=[X X\\_X X\\_X\\_X X\\_L L L\\_X L\\_X\\_X L\\_X\\_X\\_X X\\_C];  \n@threedigits=[C C\\_C C\\_C\\_C C\\_C\\_C\\_C D D\\_C D\\_C\\_C D\\_C\\_C\\_C D\\_C\\_C\\_C\\_C];  \n@fourdigits=[M M\\_M M\\_M\\_M M\\_M\\_M\\_M];\n\nfeature liga {  \n# substitutions for two digits  \nsub @digitsnozero’ @digits by @twodigits;  \n# substitutions for three digits  \nsub @digitsnozero’ [@digits @twodigits @threedigits] @digits by @threedigits;  \n# substitutions for four digits  \nsub [one two three four]’ [@digits @twodigits @threedigits]  \n@digits @digits by @fourdigits;  \n} liga;\n\nThe problem is that when the first rule is activated the other two are ignored. As a result I only get the first substitution (1 + 0 -\\> 1\\_0)\n\nI solved the problem by putting each rule in a different feature (the first in onum, the second in smcp and the third in liga - it works).\n\nSo now I have the following:\n\nfeature onum {  \n# substitutions for two digits  \nsub @digitsnozero’ @digits by @twodigits;  \n} onum;\n\nfeature smcp {  \n# substitutions for three digits  \nsub @digitsnozero’ [@digits @twodigits @threedigits] @digits by @threedigits;  \n} smcp;\n\nfeature liga {  \n# substitutions for four digits  \nsub [one two three four]’ [@digits @twodigits @threedigits] @digits @digits by @fourdigits;  \n} liga;\n\nI read in the OpenType specification about the Chaining Context Substitution but I did not understand how am I supposed to do it.\n\nCan anyone tell me if I can put all the three rules in one feature (e.g. in a liga feature)? Can I do anything with ‘lookup’?\n\nGeorge Triantafyllakos - backpacker.gr\n\n",
+  "author": "gtrianta",
+  "time": "10 January, 2006 - 6:48pm",
+  "uid": "10933",
+  "comments": [
+    {
+      "time": " 10 January, 2006 - 7:04pm",
+      "content": "I believe the solution is to reverse the order of your substitutions. Start with the longest (1\\_0\\_0\\_0) and work down.\n\n"
+    },
+    {
+      "time": " 10 January, 2006 - 7:11pm",
+      "content": "Oh God! It worked …\n\nI can’t believe it was so easy!! (I thought I tried it but I didn’t and I ‘ve been trying for the last 6 hours for a solution)\n\nMark, thank you very much!\n\nGeorge Triantafyllakos - backpacker.gr\n\n"
+    },
+    {
+      "time": " 10 January, 2006 - 7:39pm",
+      "content": "Writing OT features is a bit of a logic puzzle sometimes. The easy way is not always obvious.\n\n"
+    },
+    {
+      "time": " 10 January, 2006 - 10:08pm",
+      "content": "Big hint: With any many-to-one substitutions, the longest string should go first, which is why “ffi” and “ffl” are before “ff”, “fi”, and “fl”. (Which is pretty much the opposite of what happens when you’re typing. Which is why you should always write OT code while drunk.)\n\n"
+    },
+    {
+      "time": " 12 January, 2006 - 12:43pm",
+      "content": "“Which is why you should always write OT code while drunk”\n\nSo that is your secret :-)\n\nChrisL\n\n"
+    }
+  ]
+}

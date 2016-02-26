@@ -1,0 +1,26 @@
+{
+  "id": "102580",
+  "title": "AFDKO 2.5 Question",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I've completed the installation of FDK + the Macro installation successfully...\n\nBut when I go and run the \"Autohint\" macro (and some others too), I get:  \n\"The script cannot run the command-line program 'autohintexe.exe'. Please make sure the AFDKO is installed, and the system environment variable PATH contains the path the to FDK sub-directory containing 'autohintexe.exe'.\"\n\nI run the Autohint in a command window and it worked, so the FDK is installed OK. I hae a 2.4 version of python, running on Windows 8 64bits.\n\nThen I tried to put the source folder in the macro, but it still throws some imposiblruuu output.\n\nAny ideas? I've cheked other typophile posts, and the adobe documentation, but no answer...\n\n",
+  "author": "ferfolio_2",
+  "time": "27 Apr 2013 — 9:17am",
+  "uid": "209335",
+  "comments": [
+    {
+      "time": "27 Apr 2013 — 9:50am",
+      "content": "**(i'm running python 2.4.4) The Autohint macro has a line that says**  \n`\nif os.name == \"nt\":\n\thaveAC = setFDKToolsPath(\"C:/FDK/Tools/win/autohintexe.exe\")\nelse:\n\thaveAC = setFDKToolsPath(\"autohintexe\")\n`\n\n**Which I substituted for (just for trying):**  \n`\nif os.name == \"nt\":\n\thaveAC = setFDKToolsPath(\"C:/FDK/Tools/win/autohintexe.exe\")\nelse:\n\thaveAC = setFDKToolsPath(\"C:/FDK/Tools/win/autohintexe\")\n`\n\nAnd now the message is the following: \"Skipping glyph k. Failure in processing outline data Hinting l. 'autohintexe' is not recognized as an internal or external command, operable program or batch file.\"\n\nAt the end of the line:  \n\"Log saved to Traceback (most recent call last):  \n File \"\", line 808, in ?  \n File \"\", line 790, in run  \n File \"\", line 280, in doHinting  \n File \"C:\\Program Files (x86)\\FontLab\\Studio5\\macros\\system\\modules\\AdobeFontLabUtils.py\", line 365, in close  \n print \"Log saved to \", self.fileName  \n File \"C:\\Python24\\lib\\codecs.py\", line 178, in write  \n data, consumed = self.encode(object, self.errors)  \nUnicodeDecodeError: 'ascii' codec can't decode byte 0xed in position 22: ordinal not in range(128)\"\n\n"
+    },
+    {
+      "time": "27 Apr 2013 — 9:51am",
+      "content": "This is like advanced Chinese for me...\n\n"
+    },
+    {
+      "time": "27 Apr 2013 — 7:24pm",
+      "content": "Did you also run the FinishInstallWindows.cmd file?\n\nQuoting the Read\\_Me\\_First.html file:  \n<cite>Open the \"FDK\" folder. and find the file \"FinishInstallWindows.cmd\".<br>\nOpen a command prompt window. If you do not know how to do this, read the file \"FDK\\Technical Documentation\\CommandLineHowTo.pdf\".<br>\nDrag the icon for the file \"FinishInstallWindows.cmd\" onto the command prompt window. This pastes the path into the command prompt window. Press the \"enter\" key. This runs the program.<br>\n</cite>\n\n"
+    }
+  ]
+}

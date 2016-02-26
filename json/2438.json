@@ -1,0 +1,62 @@
+{
+  "id": "2438",
+  "title": "Math Symbols",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi Typophiles.   \n   \nI'm curious about the math symbols found in most fonts (pi, integral, delta, mu, square root etc). As I've taken a survey of fonts, some appear to have drawn font specific math symbols, but many seem to have _standard_ math symbols. Is there a standard set? If so, should I use them?   \n   \nThanks,   \nRandy\n\n",
+  "author": "aquatoad",
+  "time": "16 Dec 2003 — 5:56pm",
+  "uid": "618",
+  "comments": [
+    {
+      "time": "17 Dec 2003 — 3:12am",
+      "content": "Randy --   \n   \nIf you generate fonts using Adobe Standard Encoding, there are about two dozen miscellaneous \"math\" characters which will be called from the Symbol font, regardless of whether you draw them or not -- i.e., what you draw in those positions will be ignored.   \n   \nThese are the so-called \"standard\" math symbols you refer to. Your choice whether to use them or not will probably hinge on how important it is to have symbols that blend stylistically with your typeface design (and how much time you want to spend on them).   \n   \n-- K.\n\n"
+    },
+    {
+      "time": "17 Dec 2003 — 4:26am",
+      "content": "Thanks Kent. Did you draw them for Whitman? :-)   \nI ask because I'm not sure how important it is that they blend in a font for long text. (I'm finishing up Saint Nicolaus which I posted in the critique section.)   \n   \nThanks,   \nRandy\n\n"
+    },
+    {
+      "time": "17 Dec 2003 — 6:13am",
+      "content": "Randy --   \n   \nI drew all of the glyphs in Whitman from scratch. But the Font Bureau's standard character set does not call for all of those math characters; so I didn't draw an integral, for example. They use some of those character slots for other glyphs -- for instance, the ff-ligatures are included standard in FB fonts in the infinity (ffi), plusminus (ffl), and notequal (ff) positions.   \n   \nIn addition, I used some of the other positions for other glyphs, not necessarily part of FB's set, like raised parentheses.   \n   \nAnother example: I included the multiplication sign in the approxequal slot so that it would be accessible from the Mac keyboard (which it is ordinarily not). I got this idea from Matthew Carter, who did the same for Miller. It's useful for expressions like 2x4 or for botanical hybrid names like _Crinum x powellii_.   \n   \nI discuss these unusual features in the [PDF specimen](http://web.archive.org/web/20131011131635/http:/www.kentlew.com/Type/WhitmanSpecimen.pdf) available from my site. The complete character sets can be seen on [this html page](http://web.archive.org/web/20131011131635/http:/www.kentlew.com/WhitmanCharSet1.html).   \n   \nThese sorts of unorthodox arrangements are frowned upon by purists and will be made obsolete and unnecessary as Unicode and OT become more the standard.   \n   \n-- K.\n\n"
+    },
+    {
+      "time": "17 Dec 2003 — 9:55am",
+      "content": "_These sorts of unorthodox arrangements are frowned upon by purists and will be made obsolete and unnecessary as Unicode and OT become more the standard._   \n   \nUnicode is already the standard. Please stop destroying text to get ligatures.\n\n"
+    },
+    {
+      "time": "17 Dec 2003 — 9:58am",
+      "content": "Yes, the encoding is God. The text that people have to actually read is secondary...   \n   \nHack away, dudes! That's how people invent things.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "17 Dec 2003 — 10:10am",
+      "content": "Ding ding! And in the blue corner, weighing in at one hundred eighty six pounds...   \n   \nIt was useful to visit the unicode site and check out the proper slots for some of these glyphs. Thanks John.   \n   \nIs there any advantage to using Adobe Standard Encoding?\n\n"
+    },
+    {
+      "time": "17 Dec 2003 — 11:16am",
+      "content": "Randy, you're scary - that's _exactly_ my current weight.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "17 Dec 2003 — 12:15pm",
+      "content": "Randy, Adobe Standard Encoding is for Type 1 PS fonts, and I don't recommend making Type 1 fonts at all. This is a dying technology. Either make CFF OpenType fonts if you want PS format outlines and hints, or make TrueType fonts. Type 1 fonts rely on external character mapping between 8-bit cells and Unicode codepoints, which is a very limited technology (and the principle reason that Adobe got involved OpenType: Type 1 was a dead end). TT and OT fonts contain a cmap table that map from glyphs to Unicode characters internally, which is much more reliable.   \n   \nHrant, digital documents have a much longer lifespan than the software and fonts that you use to create them. If you encode a document to display, for example, ffi ligatures by using the increment math symbol character, you've created a document that can only be read in that font or the small number of fonts from Foundry A with the same hack. Meanwhile, Foundry B has put the ffi ligature in a different slot. Of course, your document cannot be spellchecked, cannot be searched, cannot be correctly sorted. And then the 8-bit font format you are using stops being supported by Microsoft (and it will happen to Type 1). So what have you 'invented', except a mess with no long-term usability?\n\n"
+    },
+    {
+      "time": "17 Dec 2003 — 2:20pm",
+      "content": "Thanks for the more full explanation. So if I want to inlude a ffl and ffi ligature i would follow these steps:   \n1. Go to the unicode website and figure out the number   \n2. Create a new glyph in FLAB   \n3. Rename it the proper name/unicode combo   \n4. Export the font as open type.   \n5. Done.   \n   \n?   \nRandy\n\n"
+    },
+    {
+      "time": "17 Dec 2003 — 3:54pm",
+      "content": "IIRC, the only f-ligatures 'unicoded' are fi and fl.\n\n"
+    },
+    {
+      "time": "17 Dec 2003 — 4:42pm",
+      "content": "_\\>Unicode is already the standard. Please stop destroying text to get ligatures._   \n   \nJohn, I must confess that in my day-to-day professional world, it is not. So, yes, I continue to destroy text to get ligatures. Guilty as charged. I agree with you completely -- in spirit, but not yet in practice.   \n   \nRegarding the Whitman fonts, it's up to FB to specify the formats they wish to offer and support. Within that constraint, I do what I can with what I have to work with.   \n   \nRandy, I believe that Eduardo is right. You must use the OT _liga_ feature to specify the ligature substitution. (John will correct me if I'm wrong.) It is an elegant solution, but it requires software that supports OT layout features in order to implement.   \n   \n-- K.\n\n"
+    },
+    {
+      "time": "17 Dec 2003 — 5:41pm",
+      "content": "_IIRC, the only f-ligatures 'unicoded' are fi and fl._   \n   \nThere are a few more encoded, but don't use them. They are 'presentation form' characters, only included in Unicode for bakcwards compatibility with existing 8-bit character sets. The whole point of the Unicode character/glyph distinction is that you do not need to encode every visual element, only the underlying text. The word 'office' is encoded as the characters o f f i c and e, regardless of whether the sequence ffi is _displayed_ as a ligature or not. There is no need to encode ligatures. See the introductory part of my article on [Windows Glyph Processing](http://web.archive.org/web/20131011131635/http:/www.microsoft.com/typography/developers/opentype/default.htm). This has been the major development of all new text processing and font technology for almost ten years now.\n\n"
+    }
+  ]
+}

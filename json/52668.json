@@ -1,0 +1,78 @@
+{
+  "id": "52668",
+  "title": ".OTF vs .TTF",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hello,\n\nis it just a bug of my FL5 Studio?  \nI can’t get FontLab to generate a .otf font from the same .vfb file i can generate a .ttf file with. It doesn’t give me any warning, FL just freezes at 92% while trying to generate the .otf font. I tried to save the .vfb file under a new name. It still generates .ttf but not .otf. How can i detect what’s wrong?\n\n",
+  "author": "J Weltin",
+  "time": "15 Dec 2008 — 2:45am",
+  "uid": "10971",
+  "comments": [
+    {
+      "time": "15 Dec 2008 — 3:31am",
+      "content": "i'm guessing that there may be problems with some of your character outlines. you might try opening the generated TTF file in FontLab and then trying to generate an OTF font from that file, that sometimes works for me. Otherwise, you may want to go back through glyph-by-glyph and check for outline errors that you can correct. It may be that you have too many points on some glyphs?\n\n"
+    },
+    {
+      "time": "15 Dec 2008 — 4:49am",
+      "content": "Thanks Paul,\n\nGenerating .otf from .ttf is still not working. What do you consider too many points on some glyphs? This is happening just with this particular font. The letters are made of dots (sixteen per cap height), so, of course there are many points. Why is .otf having problems with too many points? I wouldn’t mind just generating .ttf, BUT: .ttf is turning the circular dots into squarish shapes that i don’t like to have. Also in some glyphs it makes some dots heavier and others thinner (which is probably a hinting issue).\n\n"
+    },
+    {
+      "time": "15 Dec 2008 — 5:14am",
+      "content": "Jürgen,\n\nNeither TTF nor a huge number of points should be a problem -- check out [the BPDots pack](http://web.archive.org/web/20130312005754/http:/backpacker.gr/pages/fonts/fonts.asp), which contain both TTF and CFF flavour OTFs.\n\n"
+    },
+    {
+      "time": "15 Dec 2008 — 5:32am",
+      "content": "You may have trouble with encoding, reencode the glyphs and check the font info if there s everything ok. From my experience, the number of points doesn t have any influence on export.\n\n"
+    },
+    {
+      "time": "15 Dec 2008 — 6:02am",
+      "content": "It’s got also nothing to do with encoding (not with number of points anyway). Whatever i change it won’t generate OTF -- only TTF. I think my FontLab is getting worn out ...\n\n"
+    },
+    {
+      "time": "15 Dec 2008 — 6:26am",
+      "content": "I remember having something like this a long time ago. I think I solved it by enabling or disabling 'Use subroutines to compress outlines in the CFF table' in FL's prefs.\n\nBest,  \nArtur\n\n"
+    },
+    {
+      "time": "15 Dec 2008 — 6:44am",
+      "content": "Phew! This was it, thanks Artur! That made my day. Can you remember how you found out about this?\n\n"
+    },
+    {
+      "time": "15 Dec 2008 — 6:56am",
+      "content": "Jürgen,\n\nif your font is very repetitive (e.g. consists just of dots or squares), then the subroutinization can take a really long time, sometimes 20 minutes, and for a large font even more. The result then is a very small font but well, the generation takes time. This is how it works, it's not a \"problem\".\n\nBut if you don't care much about the font size, then you can turn of the subroutinization and the generation process will be much faster.\n\nIn fact, Mac OS X 10.4 sometimes has problems with heavily-subroutinized fonts so actually it may make sense to turn it off altogether.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "15 Dec 2008 — 8:00am",
+      "content": "<cite>Can you remember how you found out about this?</cite>\n\nI think it was something in between pulling out my hair and plain trial and erroring. :)\n\n"
+    },
+    {
+      "time": "15 Dec 2008 — 8:36am",
+      "content": "Adam,\n\nOk, thanks for clarifying this. The font size is indeed big. When i am more patient, i will try to wait for the subroutinization process.  \nBut lately i have also strange behaviour -- when generating OTF from a normal font -- that one or two glyphs (h and i or l) don’t show up in applications. They print however. It was easy to solve by just pasting the glyph into the cell window anew. But i never had this before. And it didn’t occur when generating TTF.\n\n@ Artur  \nWas the photo of your avatar taken befor then or are you bald headed now? ;-)\n\n"
+    },
+    {
+      "time": "15 Dec 2008 — 1:28pm",
+      "content": "Blimey - it worked! :)\n\nI had two fonts that had all sorts of strange behaviour in OpenType format (on MacOSX 10.4), but worked fine in TrueType. Yes, both fonts contained repetitive elements, and I suspected that was somehow the culprit. I though I had tried turning off \"subroutine compression\" before generating too, but I probably had some remnants in some cache or something...  \nI tried unchecking and regenerating now, and both fonts work fine :)\n\nI have upgraded to 10.5 in the meantime, so that may have helped, though...\n\nYes, the file size balooned, but at least the fonts work!  \nLesson learned: turn off subroutine compression before generating OpenType fonts with very repetitive elements.  \nThanks! :)\n\n"
+    },
+    {
+      "time": "16 Dec 2008 — 5:46pm",
+      "content": "Yes, actually, the bug in Mac OS X is very annoying. After all, the point of the compression through subroutines was to get the smallest possible size, and this worked especially good in fonts with repetitive elements -- but such fonts actually \"bomb\" in Mac OS X 10.4 if using the compression.\n\nSo basically, whenever you'd theoretically get the best possible results using the compression, you actually have to resign from the compression at all.\n\n"
+    },
+    {
+      "time": "17 Dec 2008 — 2:17pm",
+      "content": "But this was fixed in 10.5, right?\n\nSo eventually, when font developers are willing to forget support for 10.4, we can use this functionality to the logical extreme.\n\nT\n\n"
+    },
+    {
+      "time": "17 Dec 2008 — 7:54pm",
+      "content": "But with bandwidth and data storage constantly expanding and dropping in price, is the file size of a font such a major concern? By the time hardware running 10.4 (and incapable of the upgrade to 10.5) falls dead, squeezing that last font on to a hard disk will be the least of our concerns.\n\nI'm still running such a machine, BTW. This old G4 Sawtooth has been pretty much bulletproof.\n\n"
+    },
+    {
+      "time": "18 Dec 2008 — 12:31am",
+      "content": "<cite>I’m still running such a machine, BTW. This old G4 Sawtooth has been pretty much bulletproof.</cite>\n\nSame with me. I do not intend to leave my PowerPC G4 aside for the sake of OS 10.5.\n\n"
+    },
+    {
+      "time": "18 Dec 2008 — 12:45am",
+      "content": "Hey, it's going to be years from now. Just saying, eventually....\n\nBig changes in the type industry take a long time. OpenType becoming the de facto standard for new fonts, for example. I tend to have a pretty long-term view of these things.\n\nT\n\n"
+    }
+  ]
+}

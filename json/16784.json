@@ -1,0 +1,34 @@
+{
+  "id": "16784",
+  "title": "Fontographer Editing Lower 31 ASCII Chars",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I’m editing an existing ttf using fontographer 4.1.4 (Mac OS 9) - I’m a new user — trying to copy a character from, say, decimal char # 195 into char # 15. The fog file saves the change, but when I generate font (either ttf or PS type 1), the change is not generated. I need to be able to use some from ASCII chars 0 to 32 as I have a printing system that only supports up to ASCII 127. Need help badly. Thanks.\n\n [‹ Help with pixelfont](http://web.archive.org/web/20070629085951/http:/typophile.com/node/16783 \"Go to previous forum topic\") [OpenType Superiors Feature: Why do letters and numbers have different baselines? ›](http://web.archive.org/web/20070629085951/http:/typophile.com/node/16879 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20070629085951/http://typophile.com/user/10614\" title=\"View user profile.\">eagle3162</a>",
+  "time": "<br>",
+  "uid": "10614",
+  "comments": [
+    {
+      "time": " 13.Dec.2005 7.13pm",
+      "content": "TrueType fonts cannot have characters in those slots. PostScript fonts can, but access is very limited in older Mac systems, and not supported in later systems. In Mac PostScript fonts, for instance, low ASCII slots are sometimes used by font developers to store Windows-only characters for convenience sake. But there is normally no way to access them on the Mac, and definitely no way to type them.\n\nWhat kind of strange printing system do you have which only supports 7-bit ASCII? An Epson MX-80?\n\n"
+    },
+    {
+      "time": " 14.Dec.2005 10.23am",
+      "content": "The printer is Kodak Versamark CS150 with Mailscape software (formerly Scitex models 5120 and 5240). This is a high volume inkjet printer used by direct mailing companies.\n\nThanks for your input. I’ve also tried editing the ttf and generating postscript type 1 and it also did not save it. I have the font as postscript, too. Maybe I should try editing that and re-generate a new postscript font(?).\n\n"
+    },
+    {
+      "time": " 14.Dec.2005 11.18am",
+      "content": "I should clarify that, even if you are able to put characters in the lower ASCII range (as in a PostScript font), you may not be able to access them. The lower ASCII range is not meant as a place to put “normal” characters. This is where special codes like the carriage return, line feed, delete, and tab are found. Using them for normal characters will probably not work, even if you are able to make such a font.\n\n"
+    },
+    {
+      "time": " 16.Dec.2005 9.27am",
+      "content": "I tried Postscript to Postscript but it won’t save changes to the lower ASCII range either. Anyway my problem is resolved as we’ve figured out the correct option on the Scitex software to access the characters past 127 (Roman-8).\n\n"
+    },
+    {
+      "time": " 26.Dec.2005 12.37pm",
+      "content": "Try changing the encoding to Custom or OEM. I once had to resort to that to put something in dec127. Jim Gallagher told me about that trick, and during the same phone call suggested I subscribe to Typo-L... and the rest is HIS-TO-REE... So now you know exactly who to blame for this 8-year infestation. :-)\n\nhhp\n\n"
+    }
+  ]
+}

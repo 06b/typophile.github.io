@@ -1,0 +1,49 @@
+{
+  "id": "115391",
+  "title": "Soft hyphen puzzle in Times New Roman",
+  "forum": "Build",
+  "tags": [
+    "hyphen",
+    "InDesign",
+    "Times New Roman",
+    "Build"
+  ],
+  "content": "Hello everyone!\n\nI have the following text layout problem in InDesign CS6 and CC for Mac. Text is typed with Times New Roman. Some vowels have stresses placed with the symbol Combining Acute Accent (Unicode 0301). This is the common character for the stress in Cyrillic texts. When I choose to automatically hyphenate text the hyphen shifts down if it appears after the stressed letter. This happens when you select the Hunspell hyphenation dictionary and text is marked as Russian. Everything works perfect with English text.  \nSo the question is: What is the cause of the problem, is it in the Adobe software or in the font? What could be changed in TNR to make it work properly?\n\nThanks!\n\n![]()http://typophile.com/files/2zfr728.jpg\n\n| Attachment | Size |\n| --- | --- |\n| [screen shot](http://web.archive.org/web/20150420040000/http:/typophile.com/files/2zfr728.jpg) | 137.96 KB |\n\n",
+  "author": "johnych",
+  "time": "31 Mar 2014 — 6:36am",
+  "uid": "4926",
+  "comments": [
+    {
+      "time": "31 Mar 2014 — 6:54am",
+      "content": "Did you try to use an other typeface than Times New Roman?\n\n"
+    },
+    {
+      "time": "31 Mar 2014 — 7:42am",
+      "content": "Yes, of course. Other fonts work properly but they do not have 'mark' and 'mkmk' OT features. I suspect these features might be the cause but I am not sure.\n\n"
+    },
+    {
+      "time": "31 Mar 2014 — 1:47pm",
+      "content": "It would be the mis-use of the features if they are causing a problem. I can't think how to test this, since the discretionary hyphen is inserted automatically.\n\nExcept maybe... You could do this: put in a hair space following the letter that you want the hyphen appearing, and put in, by hand, a discretionary hyphen after the hair space, then force the work to break there by adding text in front, so the word has to break. If that works OK, then you know some silly sod has made a mistake with mark or mkmk in the font.\n\n"
+    },
+    {
+      "time": "3 Apr 2014 — 4:43am",
+      "content": "Charles, thanks but your suggestion doesn't help much. Here is what happens.  \n1. Inserting hair space before Combining Acute Accent gives stressed space (both English and Cyrillic). The stress is shifted up and right in this case:\n\n ![](http://web.archive.org/web/20150420040000im_/http:/typophile.com/files/Hyphen_1_3503.jpg)\n\n2. Inserting hair space after Combining Acute Accent doesn't allow to hyphenate the word:\n\n ![](http://web.archive.org/web/20150420040000im_/http:/typophile.com/files/Hyphen_2_4925.jpg)\n\n3. Inserting discretional hyphen right after Combining Acute Accent manually makes the trick but we need autohyphenation.\n\n ![](http://web.archive.org/web/20150420040000im_/http:/typophile.com/files/Hyphen_3_3947.jpg)\n\n"
+    },
+    {
+      "time": "3 Apr 2014 — 4:54am",
+      "content": "You can add entries (and hyphenation instructions) to the dictionary in Indesign.\n\n"
+    },
+    {
+      "time": "3 Apr 2014 — 4:59am",
+      "content": "What do you mean? Instruction not to place hyphen sign on the baseline?\n\n"
+    },
+    {
+      "time": "3 Apr 2014 — 10:36am",
+      "content": "> 2. Inserting hair space after Combining Acute Accent doesn't allow to hyphenate the word:\n\nAs Frode said, perhaps...\n\nI was suggesting this as a way to debug, to see if mark or even mkmk was somehow attached to the discretionary hyphen. Adding the thin space blocks the character sequence with the U+0301 accent, putting in a manual discretionary hyphen (in InDesign) should allow the word to break there -- within InDesign, of course. But it seems InDesign will not break after white space, in spite of the discretionary hyphen.\n\nBut this is the build forum, and you maybe have a font editor? If so, debug as you would anything -- my way is to add one instruction at a time until you find the problem.\n\n"
+    },
+    {
+      "time": "14 Apr 2014 — 7:25am",
+      "content": "It was finally decided to use \"Adobe World-ready Parahraph Composer\":\n\n ![](http://web.archive.org/web/20150420040000im_/http:/typophile.com/files/Screen2_3961.png)\n  \nAutomatic hyphen is placed properly in this case. \n"
+    }
+  ]
+}

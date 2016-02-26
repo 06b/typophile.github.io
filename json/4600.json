@@ -1,0 +1,26 @@
+{
+  "id": "4600",
+  "title": "Technical font terminology question",
+  "forum": "Design",
+  "tags": [
+    "Design"
+  ],
+  "content": "Background   \nThe high level problem I am trying to calculate the width of a line of text for a given font. I am generating a dynamic PDF using fpdf.org's tool. FPDF utilizes PHP files among other things to generate the PDF. I can use this PDF to generate the length of a line of text given the definition. I've provided two sample definitions below, one for Arial and one for Amazon (a script font).   \n   \nQuestion   \nMy problem is I want to make sure I'm understanding what all of these variables are first. I don't understand what the following variables are:   \nflags   \nut   \nup   \nstemV   \nAs you can see from the images below, Arial isn't really caluclating correctly, but Amazon is. The reason I don't think Arial is calculating correctly is because the ration between the EM Square =2692 and the EM Width (width of an U.C. \"M\") =833 be SO far apart. Am I misinterpretting the numbers and/or variables?   \n   \nFOR DETAILS AND IMAGES SEE:   \n [http://www.varigata.com/type/fontsample.html](http://web.archive.org/web/20131017130059/http:/www.varigata.com/type/fontsample.html)\n\n",
+  "author": "ginger2snaps",
+  "time": "4 May 2004 — 1:35pm",
+  "uid": "3654",
+  "comments": [
+    {
+      "time": "5 May 2004 — 6:48am",
+      "content": "Hey, all. Abbey's a friend of mine, and when she asked about this particular issue I heartily recommended that she post her questions on Typophile, bragging about the immense intellect found here... Can anyone offer her some direction on this? (see her link for more information).   \n   \nThanks!\n\n"
+    },
+    {
+      "time": "5 May 2004 — 7:36am",
+      "content": "This is a bit heavy for me.   \nCertainly Arial's 2692 is suspicious; could it be a value for the absolute maximum vertical span of the font? Meaning the highest a glyph in the font goes plus the lower another glyph goes? So this value might not be the same as the nominal em height, used for setting your typical line.   \n   \nAlso: would it matter if Arial is a TT font while Amazon in a PS?   \n   \nhhp\n\n"
+    },
+    {
+      "time": "6 May 2004 — 12:28pm",
+      "content": "I'm way outta my league here, but I noticed this:   \n   \nWhen I look at the metrics of Arial, my Descent and CapHeight are -434 and 1466 -- based on a 2048 UPM grid. Those are exactly propotional with yours (-212 and 716), assuming translation to a 1000 UPM grid. However, the Ascent is off (905 translates to 1853 on a 2048 UPM, while the value in Arial is 1491).   \n   \nThe character widths listed in your data also translate spot on to a 1000 UPM grid. (E.g., the width of J is 500 as opposed to 1024.)   \n   \nHowever, when I add up the WinAscent, WinDescent, and LineGap values, I get 2595. Kinda close to the wierd 2692 value, but no cigar.   \n   \nPerhaps the font's UPM is being converted, but there are some funky glitches?   \n   \nNow that I've offered no real help, I'm outta here ;-)\n\n"
+    }
+  ]
+}

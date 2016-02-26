@@ -1,0 +1,26 @@
+{
+  "id": "120150",
+  "title": "Rocky Horror themed Typeface",
+  "forum": "Display",
+  "tags": [
+    "Display"
+  ],
+  "content": "Hey Folks,\n\nThis is my first post here at typophile. I've been working for a long time trying to create a new font for the Rocky Horror community to use for their advertising. There already exists one font, Double Feature, that emulates the Rocky Horror credits, but I have found that it gets a little stale as there is only one alternate for each letterform, or sometimes none at all. In the actual credits everything was hand drawn, so every single character is different. I wanted to create a font that has at least four alternates for each character and allows a designer to immediately cycle through them without having to individually alter settings for each. To accomplish this I used and abused ligatures.\n\n ![](http://web.archive.org/web/20150317170621im_/http:/typophile.com/files/Screen%20Shot%202014-10-03%20at%2012_5056.08.33%20AM.png)\n\nAs you can see in the screenshot, I have it set up so that upper and lowercase characters are identical. My ligatures are set up so that a letter just has to be tapped repeatedly to cycle though the alternate options. In the case that the designer actually needs to repeat a letter they would have to switch between upper and lower case for the characters. This is probably a crude way of doing things, but it is working out how I envisioned.\n\n ![](http://web.archive.org/web/20150317170621im_/http:/typophile.com/files/Specimen_6131.jpg)\n\nI have hit a problem though. I also created alternate characters for the numbers, and had imagined to use them the same way, so that tapping either 1 or ! would first cycle through the \"1\" options and then set an exclamation point. However when I write the ligature code and attempt to compile with either numbers or symbols I receive errors. Is there any way to make them work, or could someone recommend a different way of achieving this?\n\nAlso, as I was searching around the forums to see if anyone had tried anything similar I noticed that the recommendation for naming ligatures is to either put an underscore or a period between the characters. Is this vital? As you can see my ligatures currently are just named A2, A3, A4 etc., and I haven't yet noticed and complications but I'd like to change it now if it is necessary.\n\nCheers!  \nShawn\n\n",
+  "author": "Shawn Hall Design",
+  "time": "2 Oct 2014 — 9:37pm",
+  "uid": "223414",
+  "comments": [
+    {
+      "time": "2 Oct 2014 — 10:03pm",
+      "content": "I'm sorry. I'm working on a retina screen and totally didn't realize that those images would show up so large. Here they are at quarter the size.\n\n ![](http://web.archive.org/web/20150317170621im_/http:/typophile.com/files/Screen%20Shot%202014-10-03%20at%2012_5978.08.33%20AM.png)\n\n ![](http://web.archive.org/web/20150317170621im_/http:/typophile.com/files/Specimen_3605.jpg)\n\n"
+    },
+    {
+      "time": "3 Oct 2014 — 12:42am",
+      "content": "Your numbers and symbols aren't working because you've given them invalid names. Glyph names have to be alphanumeric and start with a letter. Refer to the names of the original characters. I think you should be able to get away with \"one5\" even though the recommended format for a ligature would be \"one\\_one\\_one\\_one\\_one\".\n\nThe other allowed symbol, the period, would be used if you were setting up your alternates properly (and I understand why you won't be doing that). For example, \"one.ss02\", accessed by Stylistic Set 2, would be truncated back to \"one\" upon copying out plaintext.\n\nAnother problem I see is that your substitution order is upside-down. Bigger ligatures should go first, because if X X is already swapped out, X X X won't happen.\n\n"
+    },
+    {
+      "time": "3 Oct 2014 — 6:32pm",
+      "content": "Ahhh yes! Everything is working as I wanted now. Thank you so much!\n\n"
+    }
+  ]
+}

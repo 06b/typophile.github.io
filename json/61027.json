@@ -1,0 +1,74 @@
+{
+  "id": "61027",
+  "title": "Resources on letter pair/diacritic pair frequency?",
+  "forum": "General Discussions",
+  "tags": [
+    "General Discussions"
+  ],
+  "content": "Does anyone know of any resources which would provide information on which letter \\*pairs\\* frequently occur in different languages? It would be especially useful if this included information on diacritics.\n\nI'm currently dealing with some consonant-vowel ligatures, and want to figure out if there are diacritical combinations which can be safely omitted. I'd tried googling for various diacritical combinations, but the useful data ends up buried amid results drawn from a miscellany of legacy CJK encodings.\n\nAndré\n\n",
+  "author": "agisaak",
+  "time": "15 Aug 2009 — 9:23pm",
+  "uid": "31798",
+  "comments": [
+    {
+      "time": "17 Aug 2009 — 7:27pm",
+      "content": "Chthonic, Django Reinhart, Jzanus, Ljubjana, llama...you get the idea: too many possibilities...\n\n"
+    },
+    {
+      "time": "17 Aug 2009 — 8:30pm",
+      "content": "One source of information I have used for similar purposes is [Open Office Dictionaries](http://web.archive.org/web/20121214051830/http:/wiki.services.openoffice.org/wiki/Dictionaries) and other dictionaries for spelling checkers. For instance, if you click on the link for Canadian English ( [zip file](http://web.archive.org/web/20121214051830/http:/ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/en_CA.zip)) you get a folder containing a file with extension .dic with 62341 entries (including \"derived\" entries). Other dictionaries can be much larger. The .dic file is plain text. If you remove what follows the slash after each word, you get a file on which you can run programs to extract pairs, count them, etc. Of course, that gives no information on the frequency with which those pairs occur in actual texts but that gives information on possible pairs for the language you chose. Some dictionaries are utf-8 encoded, others are latin1 and so on. The encoding is given at the first line of a second file with extension .aff. Some programming ability is thus required.\n\n"
+    },
+    {
+      "time": "17 Aug 2009 — 8:31pm",
+      "content": "Well, yes there will be lots of possibilities, but some pairs are still going to be cross-linguistically more common than others, and diacritics which are not commonly used may not occur adjacent to others -- for example, I \\*think\\* that if one had an _sa_ ligature in a font, that it would be more important to also implement _sá_ than _șä_ . But I'm basing that on the fact that _ä_ doesn't occur in Rumanian and AFAIK that's the only language which uses _ș_. Even within a language which contains a variety of diacritics, it's not necessarily the case that all of those diacritics will occur adjacent to one another, and while it's relatively easy to find information on which diacritics are used in which languages, I haven't found information on diacritic pairs..\n\nAndré\n\n"
+    },
+    {
+      "time": "17 Aug 2009 — 8:36pm",
+      "content": "Thanks Michael -- I'd tried using the Mac OS built-in dictionary for those languages I've installed, but it doesn't support wildcards (or if it does, the asterisk isn't used for this). Never thought, though, to try opening the actual file (a senior moment).\n\nAndré\n\n"
+    },
+    {
+      "time": "17 Aug 2009 — 9:10pm",
+      "content": "I use terminal windows and unix utilities to find those files and process them. Maybe you can do better with Mac utilities, I don't know. For dictionaries installed by Firefox, I type the command \"cd $HOME/Library/Ap\\*ort/Firefox\" in a terminal window and then  \n`\nfind . -name \"*.dic\"\n`  \ngives me the list of those dictionaries. They can be copied in some temporary folder and batch processed.\n\nMichel\n\n"
+    },
+    {
+      "time": "17 Aug 2009 — 9:15pm",
+      "content": "I always wish there would be some linguistics textbook that covers this stuff. Maybe Steve Peters will chime in here with some help.\n\nIf you have time to figure out the syntax to sift through text file wordlists it’s pretty easy to put this stuff together using Python or just Bash scripting (grep \"\\*öö\\*\" file.txt | wc -l). The [OpenWall wordlists disk](http://web.archive.org/web/20121214051830/http:/www.openwall.com/wordlists/) is worth it’s low price if you don’t need to analyze actual text. Ask around in the netsec world and I’m sure even more dictionaries exist. Project Gutenberg and similar resources probably have real texts covering many of the languages you need to analyze.\n\n"
+    },
+    {
+      "time": "17 Aug 2009 — 9:26pm",
+      "content": "I have somewhere a python script that counts bigrams in a utf-8 encoded source. To get the list of words, I just use \"awk 'BEGIN{FS=\"/\"}{print $1}' \\*.dic\". If that can be useful, I'll try to find the script. That's just a few lines of code, never more.\n\n"
+    },
+    {
+      "time": "17 Aug 2009 — 10:31pm",
+      "content": "James wrote: _I always wish there would be some linguistics textbook that covers this stuff._\n\nLinguistics texts generally aren't that concerned with orthography, so this isn't a likely source. You'll find lots of information on the pairings of various _sounds_ , but any statistics presented will likely involve IPA rather than orthographic representations.\n\nAndré\n\n"
+    },
+    {
+      "time": "18 Aug 2009 — 1:08am",
+      "content": "Frequency analysis is what you really need - a dictionary would not be enough. This would require some long texts in all the languages of interest. I don't know of a good general source for these, but someone must have compiled such.\n\nSome years ago Luc(as) de Groot ( [http://www.lucasfonts.com/](http://web.archive.org/web/20121214051830/http:/www.lucasfonts.com/ \"http://www.lucasfonts.com/\")) did some good work on compiling resources for kerning and building some tools for it. I think he called it Kernologica. He should be able to point you in some useful directions.\n\n"
+    },
+    {
+      "time": "18 Aug 2009 — 5:20am",
+      "content": "<cite>Frequency analysis is what you really need.</cite>\n\nMost obviously. To get frequencies (absolute or relative) of bigrams, all you need is a very basic script that can be run on some utf-8 encoded input. To get such a script (for alphabetic bigrams), you can just copy what is between the cut lines and paste it in a terminal window and you will get an executable file named `bigrams` in your current folder.  \n`\n----\ncat >bigrams <<'EOF'\n#!/usr/bin/python`\n\n# M. Boyer 2009\n\nimport codecs, sys  \ninfile=codecs.open(sys.argv[1],\"r\",\"utf-8\")  \ntext=infile.read(); infile.close()\n\ntallies={};&nbsp; nbdata=0;&nbsp; prev=' '  \ndef tallyq(c):  \n&nbsp; return c.isalpha()\n\nfor char in text:  \n&nbsp; if (tallyq(prev) and tallyq(char)):  \n&nbsp; &nbsp; datum=prev+char # ; datum=datum.lower()  \n&nbsp; &nbsp; nbdata=nbdata+1  \n&nbsp; &nbsp; if datum in tallies:  \n&nbsp; &nbsp; &nbsp; tallies[datum]=tallies[datum]+1  \n&nbsp; &nbsp; else:  \n&nbsp; &nbsp; &nbsp; tallies[datum]=1  \n&nbsp; prev=char\n\nfor d in tallies:  \n&nbsp; print('%s;%d;%.3f%%' %  \n&nbsp;&nbsp; &nbsp; (d.encode('utf-8'), tallies[d], 100.0\\*tallies[d]/nbdata))  \nEOF  \nchmod 755 bigrams  \n----\n\nThen you decide what you want to run it on. For instance, if you want to run it on Chekhov's text Дама с собачкой (The lady with the little dog), you can type (or copy and paste) the line\n\n`  \tlynx -dump http://lib.ru/LITRA/CHEHOW/d.txt > dama.txt`\n\nand then run (maybe after removing some html references at the bottom)\n\n`  \t./bigrams dama.txt | sort`\n\nHere is a copy paste of part of the output  \n`\nто;372;1.927%\nтп;1;0.005%\nтр;85;0.440%\nтс;31;0.161%\nту;26;0.135%\nтф;2;0.010%\nтх;1;0.005%\nтч;7;0.036%\n`  \nThere were 372 occurrences of то which reprensents 1.927% of all bigrams (after cleaning the text).\n\nWith the internet, there are now many sources of texts in all languages. There is also nothing to prevent you from running the script on a dictionary to know possible combinations; it seems you then don't need the frequencies but it may still be interesting to see what were the words containing bigrams with very low frequencies. A simple `grep` answers the question.\n\nMichel\n\n[added] I guess the mac does not come with lynx installed. I must have installed it myself. That example may be more for Linux than mac users. Sorry.\n\n"
+    },
+    {
+      "time": "18 Aug 2009 — 6:29am",
+      "content": "Nice!\n\n"
+    },
+    {
+      "time": "18 Aug 2009 — 11:41am",
+      "content": "Ohai.\n\nThe LetterMeter from Peter Bilak and Just van Rossum can run a text for single letter and letter pair occurence. Then it is just a matter of feeding it with the texts you deem appropriate.\n\nSays the website:  \n<cite>LetterMeter is a text analysis tool, used in the Type&amp;Media classes (postgraduate course of type design) at the Royal Academy of Art in The Hague. LetterMeter is designed for comparing multilingual texts and measuring the frequency of particular glyphs.</cite>\n\n<cite>Because it is Unicode based, it will work with the majority of languages. The current version will recognize Latin, Greek and Cyrillic glyphs, and sort them according to their formal attributes. LetterMeter's results include statistics for the incidences of round/square/open/diagonal left and right sides of glyphs, ratios of vowels/consonants, and counts of glyphs with accents, ascenders and descenders, in any given text(s).</cite>\n\n<cite>LetterMeter was developed jointly by Peter Bilak and Just van Rossum, whom I would like to thank for the Python programming. Vera Evstafieva helped with the Cyrillic specifications, and Panos Haratzopoulos with the Greek.</cite>\n\n<cite>LetterMeter is created using Python. and works only on Mac OS X. Although it is available for free, it is copyrighted, and you may not redistribute it. All rights reserved, © 2003, Peter Bilak, Just van Rossum.</cite>\n\n[For TEH DOWNLOADS at Typotheque](http://web.archive.org/web/20121214051830/http:/www.typotheque.com/type_utilities/lettermeter)\n\n"
+    },
+    {
+      "time": "19 Aug 2009 — 12:59pm",
+      "content": "Here is another tool I made using the above code (I replaced semicolons by tabs, and added basic choices). It can be used from absolutely any computer (well... you tell me if it works on an iPhone). [**Link**](http://web.archive.org/web/20121214051830/http:/www.iro.umontreal.ca/~boyer/typophile/bigrams/).\n\nOn a PC, if you save the resulting statistics as a text file, you can then import it in Excel for further processing. On the mac, I have found no way to import utf-8 text into Excel. Hard to believe!\n\nMichel\n\n"
+    },
+    {
+      "time": "20 Aug 2009 — 5:33pm",
+      "content": "Here are some results I got for English. [http://groups.google.ca/group/comp.lang.postscript/msg/34c2bb049b42f668?...](http://web.archive.org/web/20121214051830/http:/groups.google.ca/group/comp.lang.postscript/msg/34c2bb049b42f668?hl=en \"http://groups.google.ca/group/comp.lang.postscript/msg/34c2bb049b42f668?hl=en\")\n\nI used to use a C program to count the most common digrams, then augment it against punctuation, to generate kerning pair lists for URW Kernus.\n\n"
+    },
+    {
+      "time": "21 Aug 2009 — 7:22am",
+      "content": "I guess there are indeed good references for English.\n\nBefore continuing, let me say that [**Lynx**](http://web.archive.org/web/20121214051830/http:/en.wikipedia.org/wiki/Lynx_(web_browser)) for Mac OS X can be downloaded from [http://www.apple.com/downloads/macosx/unix\\_open\\_source/lynxtextwebbrowse...](http://web.archive.org/web/20121214051830/http:/www.apple.com/downloads/macosx/unix_open_source/lynxtextwebbrowser.html \"http://www.apple.com/downloads/macosx/unix\\_open\\_source/lynxtextwebbrowser.html\"). To use it at the command line, you add `/Applications` to your path. I assume this is done, and that `\"Terminal > Window Settings > Display\"` is set to `Unicode (UTF-8)`. What follows is then good for Linux and Mac users that are used to unix commands.\n\nNow, some digrams may cause more than kerning problems. For instance, in the Typophile thread [**f + umlauts**](http://web.archive.org/web/20121214051830/http:/typophile.com/node/40439), Florian Hardwig mentions that the diagrams **fä** , **fö** , **fü** may cause a clash between the umlauts and the f. Those combinations occur in German. How often? Let's check.\n\nOn the [**Project Gutenberg Catalog**](http://web.archive.org/web/20121214051830/http:/www.gutenberg.org/catalog/), I find Kant's [Kritik der reinen Vernunft](http://web.archive.org/web/20121214051830/http:/www.gutenberg.org/etext/6343). On that page I see no html version, and no utf-8 version. I see a plain text iso-8859-1 file and if I right click the \"main site\" link and paste it I get that the iso-8859-1 text has url\n\n[http://www.gutenberg.org/dirs/etext04/8ikc210.txt](http://web.archive.org/web/20121214051830/http:/www.gutenberg.org/dirs/etext04/8ikc210.txt \"http://www.gutenberg.org/dirs/etext04/8ikc210.txt\")\n\nI will thus need to tell lynx to expect iso8859-1 text; I will save the result in kritik.txt as follows (on the command line):  \n`\n\tlynx --dump -assume_charset=ISO8859-1 http://www.gutenberg.org/dirs/etext04/8ikc210.txt > kritik.txt\n`  \nThe resulting file kritik.txt now contains the utf8 text (lynx did the reencoding).\n\nNow I look at the digrams in kritik.txt; I do not try to be efficient; the bigrams code above is not, and as long as I get my answer in reasonable time, that's fine with me. I'll just find all bigrams in the text and then `egrep` those containing fä, fö, fü (I replaced semicolons by tabs in the `bigrams` code)  \n`\n  ./bigrams kritik.txt | egrep \"f[äöü]\"\n `  \nand I get the output  \n`\nfö 27 0.003%\nfü 697 0.079%\nfä 255 0.029%\n`  \nwhich means that there is a total of 27+697+255 = 979 possible clashes in Kant's text. In my library, the book is 847 pages. On the average, that is more than one possible clash per page. A few simple an inefficient scripts, unix commands and pipes often give answers faster than sophisticated programs.\n\nMichel\n\n"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "id": "103554",
+  "title": "generating font for hebrew, cyrillic & latin1",
+  "forum": "Hebrew Typography & Type Design",
+  "tags": [
+    "Cyrillic",
+    "font",
+    "generate",
+    "Hebrew",
+    "Hebrew Typography & Type Design",
+    "How",
+    "latin1",
+    "set"
+  ],
+  "content": "Hi everybody,\n\nIm working on a font that includes latin1, hebrew and cyrillic.  \nI already designed all the glyphs. Now I need to know what should I do before generating the font.  \nI know is a big question, Im sorry, Im really lost in this step.\n\nThanks!\n\n",
+  "author": "Benderski",
+  "time": "4 Jun 2013 — 9:39am",
+  "uid": "211963",
+  "comments": [
+    {
+      "time": "10 Jun 2013 — 10:18pm",
+      "content": "I'm sorry, but we can't help if you're not specific. What part are you at in making the font? You drew the glyphs... have you spaced them properly? Added ligatures? Kerned everything? What do you think is involved here that you might, maybe need to do?\n\n"
+    },
+    {
+      "time": "11 Jun 2013 — 5:42am",
+      "content": "Hi Bryan & Thanks for your interest!  \nI have all the glyph drew without out the traking or Kerning.\n\nMy doubts:  \n• Which Encoding should i use when i generate the font?  \n• There is any special code/script or something that i should do for hebrew. I have this doubt because hebrew is written from LTR.  \n• At the Font Info Window, Which supported codepages should I add?\n\nThanks Again  \nAnd sorry for my bad english :)\n\n"
+    },
+    {
+      "time": "11 Jun 2013 — 7:32am",
+      "content": "Encoding: Use Unicode, always!\n\nThe LTR rendering is handled by the renderer. Some programs don't support this, but may support reversing (mirroring) letters. Some people will make a second version of their font with the Hebrew glyphs flopped for this use. You can see some examples of this [here.](http://web.archive.org/web/20150317114142/http:/oketz.com/fonts/all.html)\n\nIf you are also doing Nikkud (which can be a little complicated) you may wish to add Opentype features for it, but I don't recommend it unless you're doing a font intended for printing Scriptures or dictionaries.\n\nBe sure to go over and space everything well, as in the side-bearings. This is very important in Hebrew, even if you don't do any kerning.\n\nOn the code pages, I don't use Fontlab, but I would think you would just want the normal Hebrew codepage, in Unicode U+0590—U+05FF, and if you wish to include some presentational forms, U+FB1D—U+FB4F.\n\nHave you posted the samples of the font on the critique forum? I would be interested in seeing it! :-)\n\n"
+    },
+    {
+      "time": "12 Jun 2013 — 12:25pm",
+      "content": "Hi Again Bryan!  \nI will check all the info you are mention when i get home, thanks for the info.\n\nUnicode for the first encoding and for the second one?\n\nI still have doubts, but like i said i need to sit see and think.\n\nHere you can check it here :)  \n [http://typophile.com/node/103792](http://web.archive.org/web/20150317114142/http:/typophile.com/node/103792 \"http://typophile.com/node/103792\")\n\nHope you like them\n\n"
+    },
+    {
+      "time": "12 Jun 2013 — 7:31pm",
+      "content": "Unicode should be your only encoding? I'm a bit puzzled actually, perhaps we mean two different things by \"encoding\"?\n\n"
+    },
+    {
+      "time": "13 Jun 2013 — 8:41am",
+      "content": "Attach is what i meant\n\n ![](http://web.archive.org/web/20150317114142im_/http:/typophile.com/files/encoding-02_6345.jpg)\n\n"
+    },
+    {
+      "time": "13 Jun 2013 — 11:18am",
+      "content": "You use these tools just to fill out your character ranges. So for instance to see all of the Hebrew glyphs Unicode allows for:\n\n ![](http://web.archive.org/web/20150317114142im_/http:/typophile.com/files/unicode_4921.png)\n\nWhen preparing to output your font, do:  \n--\\> Open your source file in FontLab and go to File, Font Info, and click the expanding triangles from the bottom up so all tabs are expanded.  \n--\\> Go to Encoding and Unicode and select the supported code pages by your font, typically Latin 1 for a Latin font (you will need to select more if you support more than that)  \n--\\> Go to Unicode ranges and select the supported Unicode ranges, typically Basic Latin, Latin-1 Supplement, and Spacing Modifier Letters (you will need to select more if you support more than that)\n\nThere is also an article here that describes how to generate a Web native font -- not everything will apply for you, but this should help with some of the things you wonder about.  \n [https://code.google.com/p/googlefontdirectory/wiki/HowToGenerateWebNativ...](http://web.archive.org/web/20150317114142/https:/code.google.com/p/googlefontdirectory/wiki/HowToGenerateWebNativeFonts \"https://code.google.com/p/googlefontdirectory/wiki/HowToGenerateWebNativeFonts\")\n\n"
+    },
+    {
+      "time": "13 Jun 2013 — 11:23am",
+      "content": "Great Thanks!  \nThis is a huge progess! :)  \nThanks for the link! great info to have!  \nfor hebrew is 0590 and for Cyrillic which one do you recomend me?\n\n"
+    },
+    {
+      "time": "13 Jun 2013 — 11:24am",
+      "content": "o400 Cyrillic\n\n"
+    },
+    {
+      "time": "13 Jun 2013 — 11:58am",
+      "content": "Thanks so much Brian! you are more than kind :)\n\n"
+    },
+    {
+      "time": "4 Jul 2013 — 3:45pm",
+      "content": "I wish you well with your project. Here is a very brief description as to how I have done something similar.\n\nI have a font family - Hebrew Font Shuneet - with eleven fonts. My approach was to find a font that had Hebrew and Latin then to rename it and replace all the letter shapes with my own. At every stage I could easily verify that I had a working font. I never had to start from nothing. I did this with Font Creator which is a relatively low cost application.\n\nAt some point I decided to base the Latin characters on Tuffy. To do this I merely copied all the Tuffy shapes into my own font. I have over some years evolved the Latin so it no longer looks like its source but Tuffy gave me a flying start!\n\nMike\n\n"
+    },
+    {
+      "time": "5 Jul 2013 — 4:56am",
+      "content": "Thanks for your advice Michael, thats a good&simple idea :)  \nMaybe a font like Minion is a good choice no?  \nThanks again!\n\n"
+    },
+    {
+      "time": "20 Oct 2014 — 5:15pm",
+      "content": "If you are also doing Nikkud (which can be a little complicated) you may wish to add Opentype features for it, but I don't recommend it unless you're doing a font intended for printing Scriptures or dictionaries.\n\nBe sure to go over and space everything well, as in the side-bearings. This is very important in Hebrew, even if you don't do any kerning.\n\nRegards\n\n[https://ui.academia.edu/kimjung](http://web.archive.org/web/20150317114142/https:/ui.academia.edu/kimjung \"https://ui.academia.edu/kimjung\")\n\n"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "id": "62508",
+  "title": "Alternative glyphs submenu in glyphs palette",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I can't remember how to get the alternative glyphs to show up in the sub menu in layout applications like the image below. I figured it out about a year ago, but now I can't find any of that information. I'm hoping someone here will help.\n\nThanks  \nMichael\n\n ![](http://web.archive.org/web/20150420094031im_/http:/typophile.com/files/glyphs_palette_2_4443.png)\n\n",
+  "author": "Michael Wallner",
+  "time": "28 Sep 2009 — 8:57pm",
+  "uid": "19370",
+  "comments": [
+    {
+      "time": "28 Sep 2009 — 11:48pm",
+      "content": "Some fonts seem to have this functionality, but others don't it seems to me, even if they have alternate characters. I bought a font just yesterday with about 1500 characters, including lots of alternates, but it didn't have this, even though some of my fonts do.\n\nJH\n\n"
+    },
+    {
+      "time": "29 Sep 2009 — 9:44am",
+      "content": "I guess I haven't looked through all my fonts to see how common this feature is. From what I remember it is not that difficult to achieve, so it seems like most fonts should have this feature. For an end user it must be extremely frustrating to have to search through the palette to find your options.\n\nmw\n\n"
+    },
+    {
+      "time": "29 Sep 2009 — 9:47am",
+      "content": "I think it depends on whether the particular font you're using has opentype substitution routines built in. For example if a font has onum (oldstyle numerals) as a substitution for lnum (lining) then the onum and lnum classes would be alternates of each other.\n\n"
+    },
+    {
+      "time": "29 Sep 2009 — 10:47am",
+      "content": "I'm sorry, I guess I didn't make it clear that it is for a typeface that I have designed. I am trying to find the coding used in FontLab so that the end user can access the alternative glyphs in there layout program. The font currently uses Nick Shinn's Pseudo-random 3.0 script and I have the glyphs in there corresponding classes. If I am remembering correctly it's not an OpenType script that was run, but it is somehow done through the classes.\n\nmw\n\n"
+    },
+    {
+      "time": "29 Sep 2009 — 10:54am",
+      "content": "You need to include the alternate glyphs in the `aalt` OT feature.\n\nExamples here: [http://www.adobe.com/devnet/opentype/afdko/topic\\_feature\\_file\\_syntax.htm...](http://web.archive.org/web/20150420094031/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#8.a \"http://www.adobe.com/devnet/opentype/afdko/topic\\_feature\\_file\\_syntax.html#8.a\")\n\n"
+    },
+    {
+      "time": "29 Sep 2009 — 11:29am",
+      "content": "Thanks. I knew it was something simple and that I would be slightly embarrassed to have had to ask.\n\nmw\n\n"
+    },
+    {
+      "time": "30 Sep 2009 — 9:24am",
+      "content": "OK, so I went through Jens link and the aalt feature works for the most part. The font I am working on has four variations for every glyph. When I try to access them through an application the first three \"A\" glyphs show me all four variations, but the fourth only shows me three (one of them being itself). It is always the default glyph that is not shown, and this happens throughout the entire font not just the \"A\" glyph.\n\nAny ideas?\n\nmw\n\n"
+    },
+    {
+      "time": "1 Oct 2009 — 2:08am",
+      "content": "The glyph palette displays those glyphs which a glyph is mapped _to_ , not those which it is mapped _from_ .\n\nAssuming your glyphs are named A, A.1, A.2, and A.3, try adding the following to your 'aalt' feature:\n\n` sub A.3 by A; `\n\nAndré\n\n"
+    },
+    {
+      "time": "1 Oct 2009 — 10:36am",
+      "content": "`sub A.3 by A;`\n\nThanks for the response André. This adds the fourth variation to the submenu for A.3, but it makes A, A.1, A.2 show itself twice in their submenu giving the user a false fifth variation.\n\nThe typeface I am working on has 383 glyphs with four variations for every character, which means I would have to write that code 383 times. The 'aalt' feature from the test font (Minion Pro) in Adobes FDK just shows a list of its OT features.\n\nmw\n\n"
+    },
+    {
+      "time": "1 Oct 2009 — 10:52am",
+      "content": "You wouldn't have to write it 383 times. You could just include (with the appropriate class definitions):\n\n` sub @Variant4 by @Base; `\n\nThe 'aalt' feature is the one feature which can include other features, in which case all of the substitutions performed by that feature are included in 'aalt'.\n\nThe results you are getting would seem to indicate that the way in which your features are set up involves multiple different pathways by which some of the glyphs can be mapped to the others. If you can't get the desired results by listing your features, you might want to instead not include those features and just include individual substitution statements like the one above.\n\nAdmittedly, though, I haven't experimented with this technique so I can't give any guarantees. I usually just let FontLab create the 'aalt' feature for me.\n\n"
+    },
+    {
+      "time": "2 Oct 2009 — 1:01pm",
+      "content": "Thanks André. I should have known that I wouldn't have to write that code 383 times. Replacing the classes works great for InDesign, but I am getting five variations in Illustrator. At least it is consistent.\n\nmw\n\n"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "67217",
+  "title": "Automatic stylistic alternate substitution with memory?",
+  "forum": "Build",
+  "tags": [
+    "alternates",
+    "OpenType",
+    "Build"
+  ],
+  "content": "Hi\n\nAnybody know a way of programming a font so that it remembers you've typed a letter, and the next time you type that letter an alternate glyph is used? This would be useful in distressed fonts. Ligature substitution is ok for double letters but if I type a word like 'dada' say, and I want to make sure the distressed look isn't repeated, it doesn't help.\n\nI have a feeling it should be simple enough to do this - somehow get typing a letter to flick a switch and then if the same letter is typed while that switch is on, substitute an alternate glyph then reset the switch.\n\nAny ideas?\n\nCheers\n\n",
+  "author": "daverowland",
+  "time": "9 Feb 2010 — 6:14am",
+  "uid": "44740",
+  "comments": [
+    {
+      "time": "9 Feb 2010 — 9:49am",
+      "content": "You can't build in real memory but you can simulate it reasonably well. James Puckett's Recovery is the first font I've seen to do it this way, you should take a look at that. I've done it a few times for private fonts with excellent results.\n\n"
+    },
+    {
+      "time": "9 Feb 2010 — 10:24am",
+      "content": "James started one of several interesting Typophile threads on the subject:  \n [http://www.typophile.com/node/50303](http://web.archive.org/web/20131015022017/http:/www.typophile.com/node/50303 \"http://www.typophile.com/node/50303\")\n\n"
+    },
+    {
+      "time": "9 Feb 2010 — 10:25am",
+      "content": "You mean Black Monday, the grunge version of it? That's what I'm trying to achieve. Just looking at the Myfonts page for it, it looks as though the randomisation is processed via the liga feature, but then looking in the glyph table there don't appear to be many ligatures. I'm guessing the programming reads something like\n\nsub @class1 @class1' by @class2  \nsub @class2 @class1' by @class3\n\nso they rotate round the stylistic sets.\n\nI guess this would work without too much glyph repetition with three stylistic sets.\n\nWould be interesting to see the coding on black monday. Seems to make the sets rotate thus: 1 2 3 2 3 1 3 then repeats\n\n"
+    },
+    {
+      "time": "9 Feb 2010 — 10:26am",
+      "content": "Another thread of interest:  \n [http://typophile.com/node/17177](http://web.archive.org/web/20131015022017/http:/typophile.com/node/17177 \"http://typophile.com/node/17177\")\n\n"
+    },
+    {
+      "time": "9 Feb 2010 — 10:34am",
+      "content": "Cheers for the replies!\n\n"
+    }
+  ]
+}

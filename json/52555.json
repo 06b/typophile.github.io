@@ -1,0 +1,46 @@
+{
+  "id": "52555",
+  "title": "How to create a class with all glyphs exept one?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi all!\n\nDoes anyone know how can I create class that will contain ALL glyphs exept a particular one? (lowercase s in my case)\n\nI have googled for hours and studied the FontLab manual a lot, but I can't find an answer.\n\nI could perhaps do it with character ranges, but which ones should I use? Based on which encoding?\n\nSorry if its a stupid question, I'm quite a beginner in all this...\n\nThanks in advance!\n\n",
+  "author": "Lea Verou",
+  "time": "10 Dec 2008 — 10:49pm",
+  "uid": "40349",
+  "comments": [
+    {
+      "time": "10 Dec 2008 — 11:27pm",
+      "content": "You can make classes in FontLab by first creating a new class in the Classes panel and then simply selecting the glyphs you want to include from the Font Window and dragging them into the top right portion of the Classes panel. So, create a new class, then use Ctrl+A (or Mac equivalent) to select all the glyphs in the Font Window, then use Ctrl click to unselect the one that you do not want in the class, then drag and drop all the selected glyphs into the Classes panel.\n\n"
+    },
+    {
+      "time": "10 Dec 2008 — 11:34pm",
+      "content": "Thanks for your reply John.  \nI thought about this (and its my last resort), but what happens when I add new glyphs? :/  \nWhat I'm looking for is some kind of [not s] definition for a class. If I have to add the glyphs manually, I know how to do it...\n\nAlso, adding the glyphs manually doesn't account for the case of start or end of the text...\n\n"
+    },
+    {
+      "time": "11 Dec 2008 — 1:17am",
+      "content": "Would the 'ignore sub' option work for you? You might want to expand on what you are attempting to do.\n\n"
+    },
+    {
+      "time": "11 Dec 2008 — 9:37am",
+      "content": "I tried the ignore sub with many ways, but it doesn't seem to work for what I want it to do.\n\nWhat I want to do is:  \nI have 2 alternate s, that change based to the preceding or next character.  \nI also have two different s that are used when the next or preceding character (respectively) is also an s, and another s to be used when both the preceding and next character is an s.  \nThis totals to 1 normal s and 7 contextual alternates.\n\nThe code from the calt feature that has to do with any of them is the below (irrelevant subs removed):  \n`\n  @not_s = [a-r t-z e.alt s.alt2 space period .notdef CR];\n  @is_s = [s s.alt s.alt1 s.alt11 s.alt2 s.alt21 s.alt22 s.alt3];\n  sub @not_s s' [a f t z w u y b] by s.alt;\n  sub @is_s s' [a f t z w u y b] by s.alt22;\n  sub @not_s s' s by s.alt1;\n  sub @not_s s.alt2' s by s.alt11;\n  sub [s.alt1 s.alt11 s.alt3] s' s by s.alt3;\n  sub @is_s s' @not_s by s.alt21;\n  sub s.alt3 s.alt' by s.alt22;\n  # fresset!\n  sub f.alt r.alt e.alt s.alt11 s.alt21 e' t' by s_t.logo;\n`\n\nOf course the @not\\_s class is completely temporary and doesn't contain lots of glyphs. What I want it to contain is every glyph that is not a lowercase s (including start and end of lines, even though they aren't glyphs, although I doubt its possible :( ).  \nIf that isn't possible, can anyone think of a way to do it with ignore sub? I have a strong feeling that ignore sub is the way to go, but everything I tried with it doesn't work :(  \nThis is troubling me for several hours but I can't figure out a more complete solution... :(\n\n"
+    },
+    {
+      "time": "12 Dec 2008 — 5:24pm",
+      "content": "Okay, lets simplify the problem a bit.  \nLets suppose I only have s.alt1 which I want to place instead of s before every lowercase s and s.alt3 which I want to place instead of s when s is between two other s (sss). The problem is that in the second case, the middle s would be substituted by s.alt1 because it also precedes an s.\n\nThis does not work:  \n`\nlookup calt_s1 {\n  \tignore substitute s s' s;\n  \tsub s' s by s.alt1;\n  } calt_s1;\n``\n  lookup calt_s3 {\n  \tsub s s' s by s.alt3;\n  } calt_s3;\n`\n\nThis neither:  \n`\nlookup calt_s1 {\n  \tignore substitute s s' s;\n  \tsub s' s by s.alt1;\n  } calt_s1;\n``\n  lookup calt_s3 {\n  \tsub s.alt1 s' s by s.alt3;\n  } calt_s3;\n`\n\nbut this does:  \n`\nlookup calt_s1 {\n  \tignore substitute s s' s;\n  \tsub [a-z space] s' s by s.alt1;\n  } calt_s1;\n``\n  lookup calt_s3 {\n  \tsub s.alt1 s' s by s.alt3;\n  } calt_s3;\n`\n\nThe reason I don't want the latter solution is that I have to create a class with every glyph, and it would still be incomplete, because I would also have to match somehow the start and end of the text.  \nWhat seems to be the problem, is that ignore sub does not work if the pattern given to it is not an exact subcase of the substitution below. In the first case, since ignore sub had s s' s and the pattern was s' s, it didn't work. When we converted the substitution pattern to [a-z space] s' s it worked, as s s' s is a subcase of that.  \nHowever this behavior conflicts with the Adobe [specification](http://web.archive.org/web/20131023225127/http:/www.adobe.com/devnet/opentype/afdko/topic_feature_file_syntax.html#5.f.ii) (see example 1, even though the pattern is [a e n] d' and the exceptions f [a e] d' and a d' d, they are supposed to work.\n\nSo, the possibilities are two:  \n1. I'm not grasping something correctly  \n2. Its a FontLab bug (?!)\n\nMy bet would be on 1. So what am I missing? :(\n\n"
+    },
+    {
+      "time": "13 Dec 2008 — 7:04am",
+      "content": "Nevermind, I figured it out with a weird way and lots of lines of code that even I don't understand or can reproduce :P\n\n"
+    },
+    {
+      "time": "13 Dec 2008 — 10:16am",
+      "content": "Here's my code for long s.  \nFor words like \"scissors\", \"satisfaction\" and \"offside\".  \n`\nsub s by longs;\nsub longs' f by s;\nsub longs longs' by s;\nsub f longs' by s;\nignore sub longs' @letter;\nsub longs' by s;`\n\n"
+    },
+    {
+      "time": "13 Dec 2008 — 10:17am",
+      "content": "I had to play around with the sequence to get it to function correctly.  \nIt seems to me that designing according to a logical understanding of how software is supposed to work often falls short.  \nSo I proceed by trial and error and try to get an effect to work in the FontLab preview panel, and then test it in InDesign.  \nSeems like Lea does similar.\n\n"
+    }
+  ]
+}

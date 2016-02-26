@@ -1,0 +1,30 @@
+{
+  "id": "63170",
+  "title": "How does one combine contextual gsub with gpos",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi,\n\nI've tried but had no luck finding any references for what I'm trying to do: combining contextual gsub with gpos.\n\nI know that the following code example doesn't work but it should illustrate what I'm aiming for.\n\nfeature calt {  \n # if a is followed by by b, shift a 100u y direction  \n sub a' b by pos a \\<0 100 0 0\\>;  \n} calt;\n\nDoes anyone have a hint if/how this can be done.\n\nThanks,  \nMartin\n\n",
+  "author": "martinplus",
+  "time": "16 Oct 2009 — 5:33am",
+  "uid": "13079",
+  "comments": [
+    {
+      "time": "16 Oct 2009 — 11:40am",
+      "content": "GSUB and GPOS are independently processed, with all GSUB being performed before any GPOS is applied. It is technically possible to mix GSUB and GPOS lookups in the same feature, and to include GPOS lookups in a GSUB feature such as ‘calt’, but this is very strongly discouraged. You can't rely on layout engines applying GPOS lookups that occur in a GSUB feature, because if the engine considers e.g. ‘calt’ to be a GSUB feature, as the feature description in the OT spex appendix indicates it to be, then that feature might not be processed during GPOS operations.\n\nWhat you seem to be describing is a GPOS operation involving a contextual single adjustment. I would experiment with putting this in the ‘kern’ feature, since it is fundamentally an adjustment involving the spatial relationship of two base glyphs. I don't use the Adobe FDK or FontLab for OTL work, so I don't know what limitations or assumptions might exist for the ‘kern’ feature in those tools, e.g. if they might presume all kerning lookups to be pair adjustments. I do know that in VOLT it is no problem to include any kind of GPOS lookup within ‘kern’, and I regularly use contextual single adjustments in that feature.\n\n"
+    },
+    {
+      "time": "16 Oct 2009 — 12:30pm",
+      "content": "Yes, like in VOLT you can add a separate lookup to the kern feature, but need to compile with either the new AFDKO (not from within FLS5) or OTMaster.\n\n&nbsp;&nbsp;&nbsp;feature kern {\n\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lookup kern\\_jumpingGlyphs {  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pos a' \\<0 100 0 0\\> b;  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} kern\\_jumpingGlyphs;\n\n&nbsp;&nbsp;&nbsp;} kern;\n\nThe marked glyph is the input glyph to be repositioned, and the value record needs to follow immediately.\n\nBut you need to be careful: Substitution can be executed only once on an input glyph (after substitution it does not exist any more in the glyph string). But if you reposition the same glyph again in other lookups, all of these adjustments will add up.\n\nKarsten\n\n"
+    },
+    {
+      "time": "18 Oct 2009 — 8:52am",
+      "content": "Hi John, Hi Karsten,\n\nthanks for your very concise explanation.\n\nVery much appreciated,  \nMartin\n\n"
+    },
+    {
+      "time": "18 Oct 2009 — 1:57pm",
+      "content": ".\n\nChrisL\n\n"
+    }
+  ]
+}

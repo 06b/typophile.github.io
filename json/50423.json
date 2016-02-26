@@ -1,0 +1,34 @@
+{
+  "id": "50423",
+  "title": "Is it possible through Opentype programming to have 3 or more types of character sets in a single font?",
+  "forum": "Nymus's blog",
+  "tags": [
+
+  ],
+  "content": "Is it possible through Opentype programming to have 3 or more types of character sets in a single Opentype font (even if these character sets not supported by any Unicode page)?\n\nCould anyone tell me if it is possible (theoretically or actually) through Opentype programming to have access in Indesign to 3 or more types of character sets such as:\n\n1. TypefaceNameContemporaryStyle  \n2. TypefaceNameOldStyle  \n3. TypefaceNameArchaicStyle\n\nAnd all the above to be included in a single Opentype font (without resolving to alternates and such) ? Is it possible and if it is, how could it be done?\n\n",
+  "author": "<a href=\"/web/20081016094850/http://typophile.com/user/37569\" title=\"View user profile.\">Nymus</a>",
+  "time": "<br>",
+  "uid": "37569",
+  "comments": [
+    {
+      "time": " 12.Oct.2008 8.28am",
+      "content": "Yes, you can do it, but not quite the way you describe. The best way to implement such a scheme would be by using Stylistic Sets 0 through 20. The downside of this is that you can’t give the sets names, and support is fairly limited. At present, the only apps I know of that support Stylistic Sets are Adobe InDesign and Mac OS X Cocoa-based apps.\n\nHowever, unless you foresee the three different styles as likely being used together in the same word (i.e., with the three styles kerning with each other), you would be better off making them separate fonts.\n\n"
+    },
+    {
+      "time": " 12.Oct.2008 8.58am",
+      "content": "What you’ve described sounds more like a TrueType Collection file (ttc). This is possible, but is fairly complicated, and probably not advantageous.\n\nJason C\n\n"
+    },
+    {
+      "time": " 12.Oct.2008 10.28am",
+      "content": "Thank you very much Mark. I will try out what you advised. By the way there won’t be three different styles being used together in the same word.\n\n"
+    },
+    {
+      "time": " 12.Oct.2008 10.30am",
+      "content": "Thank you jasonc, could you please let me know where I could find more about the TrueType Collection Files (ttc). Are they supported by Indesign?\n\n"
+    },
+    {
+      "time": " 12.Oct.2008 5.47pm",
+      "content": "Thank you jasonc, could you please let me know where I could find more about the TrueType Collection Files (ttc). Are they supported by Indesign?\n\nthe TTC file is just a single file that functions as multiple truetype files. In fact the user will see all components of the TTC as if they were separately installed fonts. But, that’s a limitation, they’re going to have to switch between styles just as if they were separate fonts.  \nFor that reason, I don’t think this will help you much.\n\nIf you don’t mind reading spcs, there’s info about it about 1/2way down this page:  \n [http://www.microsoft.com/typography/otspec/otff.htm](http://web.archive.org/web/20081016094850/http:/www.microsoft.com/typography/otspec/otff.htm)\n\n"
+    }
+  ]
+}

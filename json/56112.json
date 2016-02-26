@@ -1,0 +1,78 @@
+{
+  "id": "56112",
+  "title": "OpenType Stylistic Sets (Issues with aalt salt and SS01 - SS20)",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "After reading this post explaining the concept of using a separate stylistic set for each stylistic alternate:\n\n[http://typophile.com/crss/node/55586](http://web.archive.org/web/20150217005401/http:/typophile.com/crss/node/55586 \"http://typophile.com/crss/node/55586\")\n\nI recalled I had learned that because of Illustrator's OpenType panel's limitations (i.e. it's not easy to access 'sets') you could, if you were so inclined, group SS01 with aalt and salt, and group SS02 with calt… although this was highly debated…\n\nThe reason I wanted to bring this up is that I'm about to complete a font that will have up to five or more 'sets', (where previously I've only used up to two SS01 & SS02) and obviously there's not enough other feature definitions (or buttons on the Illustrator Glyph panel) to make it easy to activate these sets…\n\nHow would you recommend moving forward, I like the idea of breaking the rules for usability, but I also like being consistent with how I do things…\n\nWhat is the best way to implement multiple 'sets', yet still utilize aalt, salt, and possibly calt, and additionally titl, and why doesn't Adobe sync the OpenType panels interface between all of their apps? (Let alone all software brands)\n\nMike\n\n",
+  "author": "msmiths",
+  "time": "21 Mar 2009 — 7:07pm",
+  "uid": "17099",
+  "comments": [
+    {
+      "time": "21 Mar 2009 — 8:12pm",
+      "content": "_I recalled I had learned that because of Illustrator’s OpenType panel’s limitations (i.e. it’s not easy to access ’sets’) you could, if you were so inclined, group SS01 with aalt and salt, and group SS02 with calt… although this was highly debated…_\n\nErr... I don't think anyone was recommending using `calt` as an alternative place to put a stylistic set. `calt` is supposed to be \"on\" by default, except it isn't in Illustrator. I definitely wouldn't do that. Illustrator does not allow you to apply a stylistic set to a range of text as some other apps do, but you can view the sets individually in the Glyph palette.\n\n"
+    },
+    {
+      "time": "21 Mar 2009 — 8:30pm",
+      "content": "Yeah, I know that calt is/was a stretch there… there was a discussion about using OT features in ways they weren't meant to be used… If I remember correctly it was a heated debate/thread…\n\n"
+    },
+    {
+      "time": "21 Mar 2009 — 8:50pm",
+      "content": "The more I think about it, no one was suggesting using calt, someone had brought up the idea of using other features to substitute for stylistic sets… something like that… and everyone was chiming in the reasons for or against, breaking the 'rules'…\n\nI guess what I'm trying to understand is, if you have multiple stylistic sets, then what do you use aalt for? Is aalt in theory just SS00 really?\n\nAnd I'm just trying to understand the Illustrator disconnect with accessing sets and why it is different than other programs.\n\nThanks for your help.\n\nMike\n\n"
+    },
+    {
+      "time": "21 Mar 2009 — 9:50pm",
+      "content": "`aalt` just specifies any and all alternates, including anything covered by other features. There is no specific user interface item to apply `aalt`, but it does affect what you see in the Glyph palette, specifically those little arrows that indicate alternate forms for a glyph and what appears under the little pop-up on the arrows.\n\n`salt` at first seems similar to a stylistic set, except that it is intended to be applied to individual characters and can include more than one glyph alternate. However, the user interface for this feature is inconsistent: In Illustrator there is a single on/off button, with the result that you can only access the first available alternate (you can get at the rest via the glyph palette). InDesign doesn't have any obvious support for `salt`, at least in its OT submenu, but you see them listed under Stylistic Alternates in the glyph palette.\n\n"
+    },
+    {
+      "time": "21 Mar 2009 — 10:21pm",
+      "content": "Mark, thanks for that clarification…\n\nI guess this leads to one final question.\n\nConsidering the inconsistencies in application support/interface, and the fact that the future of application support/interface is unknown, what would be the best scenario for myself (and others), considering I always include some type of alternates (and it looks as though in the future I will include multiple stylistic 'sets' (as well as ligatures, basic fractions, and case features)… What would be the best way to move forward and set up my features, specifically with regards to stylistic sets and alternates?\n\nI appreciate your help with this!\n\n"
+    },
+    {
+      "time": "22 Mar 2009 — 7:10am",
+      "content": "I would recommend following the spec as best you can and hope that application support will improve. If you go your own way, you run the risk of confusing users, particularly when they switch between your font and one that follows the spec. There are definitely areas of ambiguity and disagreements among font developers with regard to such things. In the end, the needs, convenience and expectations of the font user should have the highest priority.\n\n"
+    },
+    {
+      "time": "22 Mar 2009 — 8:06am",
+      "content": "Amen.\n\nChrisL\n\n"
+    },
+    {
+      "time": "22 Mar 2009 — 11:31am",
+      "content": "_What is the best way to implement multiple ’sets’_\n\nSeparate fonts.  \nSeriously. Better usability--users don't have to dig down through so many GUI levels to access the style, and you can spell out what the feature is in the font name.  \nThat way you also get to find out what people really want.  \nAnd you can realistically lower the per-font cost in a family package.\n\n"
+    },
+    {
+      "time": "22 Mar 2009 — 11:55am",
+      "content": "There are drawbacks to using separate fonts rather than OT features: If you put alternate glyphs into separate fonts, there's no way to automatically kern between them, or allow them to interact with things like contextual alternates.\n\nWhat would be really cool is if various OT features like stylistic sets, swash, titling, etc. would show up as virtual fonts in the font menu, sorted under family name like other weights and styles.\n\n"
+    },
+    {
+      "time": "22 Mar 2009 — 12:31pm",
+      "content": "_If you put alternate glyphs into separate fonts, there’s no way to automatically kern between them..._\n\nWhy would you want to kern between different fonts/stylistic sets?\n\n_If you put alternate glyphs into separate fonts, there’s no way to ... allow them to interact with things like contextual alternates._\n\nSurely if you replace all your default glyphs with stylistic alternates, these can still interact with contextual alternates?\n\n"
+    },
+    {
+      "time": "22 Mar 2009 — 1:18pm",
+      "content": "For example, I currently ship Mostra (not available yet in OT format) as three separate fonts--Mostra One, Mostra Two, Mostra Three. Conceptually, it's one typeface, but in order to accommodate the stylistic variants in the basic Type 1 and TrueType formats (without hijacking character slots meant for math characters or symbols, for example), I had to split them into three fonts. However, the way I split them up may not be the way a user would split them up. Ideally, you should be able to combine the different variations in any way you like. If you want to use Mostra Three, but would rather have the \"S\" from Mostra Two, you can simply select the \"S\" and choose Mostra Two, but you may need to do some manual kerning, depending on what characters are on either side of it (from Mostra Three).\n\nWhen I do the OT version of Mostra (which is long overdue), there will just be one font, with Mostra Two and Three represented by stylistic sets, but also in the stylistic alternates feature. The \"S\" from Mostra Two will be kerned against glyphs from Mostra One and Mostra Three that are not present in Mostra Two.\n\nIncidentally, this isn't necessarily anything to do with stylistic sets. It's a problem with any sort of alternate glyphs if they are split out into separate fonts.\n\n"
+    },
+    {
+      "time": "22 Mar 2009 — 3:03pm",
+      "content": "_Incidentally, this isn’t necessarily anything to do with stylistic sets._\n\nRight. So the question is, if there are three sets of alternate glyphs, what is the best way to configure them in fonts, to facilitate a typographer who may wish to mix and match?\n\nI've done some setting along those lines, with the three Eunoias, which are conceptually similar to the way the Mostras are set up.  \nI found the best way to work is to set the word three times in the three different fonts, then cut and paste into a fourth mixed version. And then manually kern.\n\nI certainly think that cutting and pasting is better than selecting a character and applying a stylistic set or font, because with \"select and apply\", you're not so sure what the character is going to look like--whereas with cut and paste, you can see exactly what you're substituting, at the same size. It's better than working from a glyph palette, with small images.\n\n"
+    },
+    {
+      "time": "22 Mar 2009 — 4:11pm",
+      "content": "The advantage of a stylistic set is in the ability to make it apply as part of a stylesheet in InD, Quark, etc. You can't do that with multiple fonts.\n\nChrisL\n\n"
+    },
+    {
+      "time": "22 Mar 2009 — 4:30pm",
+      "content": "What's the difference?  \nYou can only apply one style sheet at a time.\n\n"
+    },
+    {
+      "time": "22 Mar 2009 — 5:56pm",
+      "content": "but you can apply multiple stylistic sets to one style sheet.\n\nChrisL\n\n"
+    },
+    {
+      "time": "22 Mar 2009 — 6:57pm",
+      "content": "Ah yes, I see what you mean.  \nI did that for the Greek in the Modern Suite.  \nThe Sets are culmulative, so you can set different combinations of various features such as script forms, archaic forms, ligatures, &c.\n\n"
+    }
+  ]
+}

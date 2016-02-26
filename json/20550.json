@@ -1,0 +1,82 @@
+{
+  "id": "20550",
+  "title": "OpenType Kerning not working",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I've been trying all morning to get kerning to show up in CS2 apps and MS Word using an opentype font I'm working on. I've read up on the fontlab group and on here to see if I could get some more info, but it feels like I've tried everything.\n\nI'm working on a Mac and with Fontlab Studio 5.\n\nI created a font that contains a kern opentype feature and have converted it to a flat table also.\n\nIt's got around 150 kerning pairs and I'm not using class based kerning.\n\nI'd like this font to be as compatible as possible with old and new apps.\n\nAny ideas?\n\n",
+  "author": "<a href=\"/web/20111222000922/http://typophile.com/user/553\" title=\"View user profile.\">matthew_desmond</a>",
+  "time": "<br>",
+  "uid": "553",
+  "comments": [
+    {
+      "time": "",
+      "content": "Matthew, is your font OpenType PS (.otf extension)? If so, the generated font shouldn't have ANY flat kerning. The kerning in OT PS fonts should all be handled in the 'kern' feature. So, you should use class-based kerning. In addition, go to FontLab's preferences and under Generating OpenType...-\\>Kerning, deactivate the option Export old-style non-Opentype... and tick the box at the bottom that reads Generate OpenType 'kern' feature...\n\nAlso, [some more stuff to fry your brain](http://web.archive.org/web/20111222000922/http:/groups.msn.com/FontLab/tipsandtricks.msnw?action=get_message&mview=0&ID_Message=1109) :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Open Type is a flash in the pan. As a bunch of kids, you probably have no idea about any of the technologies which preceded the Desk Top Computer. All of those technologies and there various glass grids, spinning lenses, etcetera, went the way of the dodo. And Open Type will too, just like Multiple Master.\n\nIf you can't get Open Type fonts to work, why bother making them?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Well, I frankly don't care how long OT lasts. For the moment, it's making me money. ;-) Plus it's nice to have a cross platform solution that isn't Windows TrueType (yuck!)\n\nMiguel: Thanks for the information, I'll try that out.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_Plus it’s nice to have a cross platform solution that isn’t Windows TrueType_\n\nWhat you're referring to as \"Windows TrueType\" IS OpenType, just a different [flavor](http://web.archive.org/web/20111222000922/http:/typophile.com/wiki/flavor).\n\n"
+    },
+    {
+      "time": "",
+      "content": "FOR SALE AS-IS: Open Type fonts with broken kerning.\n\n"
+    },
+    {
+      "time": "",
+      "content": "grumpy\n\nYeah, OT didn't turn out as promised, and down the long road will likely be replaced or evolve into something else. That is the natural history of type technologies, pre-digital and digital. So what?\n\nmatthew\n\nYou are making money on (selling folks) fonts made in a format that you don't apparently understand?\n\nWhat's wrong here.\n\nGerald\n\n"
+    },
+    {
+      "time": "",
+      "content": "Matthew, I believe if the only feature in your font is kern then the kerning might not show up -- add a quick ligature feature or something and see what happens.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I understand the format just fine Gerald. It's just the whole process of getting fontlab to generate fonts that actually work is a freaking maze that changes every time I use it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Only a poor workman blames his tools.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Matthew -\n\nDon't skip over that comment from Andy.  \nYou'll need to have more than just kerning defined to see the pairs in some apps (IDCS2 etc.)  \nThrow some ligs in there to get things moving.  \nAlso, you'll need to turn the kering on in MS Word. But I'm guessing you knew that.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I got it working. Thanks to those that helped... and no thanks to the others with nothing beneficial to add. :-( Great community we have here.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Grumpy\n\nMore that email is a blunt instrument.\n\nMatthew\n\nApologies for the dumb remark.\n\nGerald\n\n"
+    },
+    {
+      "time": "",
+      "content": "_Only a poor workman blames his tools._\n\nI sure hope you're not on the FontLab development team. :-)\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\> You are making money on (selling folks) fonts made  \n\\> in a format that you don’t apparently understand?\n\nI'm not surprised. You don't really have to understand all of a font format. Ten yearsa ago, many people were building Type 1 fonts with Fontographer, and I doubt the majority of them were able to explain the difference between a public dictionary and a private dictionary inside of the Type 1 font. It is, of course, an advantage, to understand the technical aspects of the font, but it's not a prerequisite to understand all of that.\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Matthew,\n\n1. Does your font has any GSUB features? Note that InDesign won't recognize kerning if a font only has GPOS features, so you need at least one substitution (e.g. a \"liga\" feature).\n\n2. Did you activate kerning in MS Word? :\\>\n\nA.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Miguel,\n\n\\> The kerning in OT PS fonts should all be handled  \n\\> in the ‘kern’ feature. So, you should use  \n\\> class-based kerning\n\nThe one does not imply the other. You may have GPOS \"kern\" feature kerning and not use classes at all, i.e. only use pair positioning. For example, all Microsoft ClearType collection fonts (which are in OpenType TT format rather than OpenType PS, but that's secondary), use GPOS \"kern\" feature kerning but do not use classes.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"As a bunch of kids, you probably have no idea about any of the technologies which preceded the Desk Top Computer.\"\n\nDear Mr. Grumpyetc.:  \n1) You should define \"kids\"  \n2) You don't seem such a reliable \"guide\", if you don't even bother to show up who you are, where you live, and from where your bitterness comes.\n\nFinally I think Adam went straight to the point: I have no idea on what actually lay behind a Type 1 font, I just learned enough to work without unacceptable flaws.  \nOn the other hand: it's right: you shouldn't sell a badly manufactured thing.\n\n"
+    }
+  ]
+}

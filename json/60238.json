@@ -1,0 +1,34 @@
+{
+  "id": "60238",
+  "title": "Application level obliques?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I have the feeling the answer to this may be over my head technically, but here goes…  \nSome Adobe fonts like as in the old Laserwriter 35 collection have oblique versions rather than Italic. My first reaction is to imagine fake italics. So I opened up Avant Garde Oblique in Fontlab and find the letters are perfectly upright and the Italic box is even unchecked. Yet if you open the suite in Font Book or view it in any application, the obliques are slanted. Where and how is this accomplished?\n\n",
+  "author": "Stephen Rapp",
+  "time": "23 Jul 2009 — 6:34am",
+  "uid": "14650",
+  "comments": [
+    {
+      "time": "23 Jul 2009 — 7:08am",
+      "content": "It's the \"slant angle\" (the setting next to Italic Angle in FontLab Studio). It works only with Type1 and OpenType CFF, not TrueType.\n\n"
+    },
+    {
+      "time": "23 Jul 2009 — 7:46am",
+      "content": "It has both the italic angle and slant angle boxes left blank. Under that it has a check next to \"Copy Slant angle to Italic angle\". I'm still puzzled. How can it copy slant data if there is none showing?\n\n"
+    },
+    {
+      "time": "23 Jul 2009 — 10:04am",
+      "content": "Hmm ... seems that FontLab can't read the value from a font, but it works. Try entering a value into \"slant angle\" of an upright font, generate and test ...\n\n“Copy Slant angle to Italic angle” just means that when the generated font is artificially slanted, this should be reflected in the Italic Angle property of the font.\n\n"
+    },
+    {
+      "time": "23 Jul 2009 — 10:31am",
+      "content": "I will try that at some point. Are values equal to degrees of slant or is there some other sort if measurement?\n\nAlso...thanks for your response. There's always something new to learn.\n\n"
+    },
+    {
+      "time": "25 Jul 2009 — 5:20pm",
+      "content": "\"Italic angle\" is the exact value that the font file contains for \"ItalicAngle\". However, the Font Matrix in the file is what the renderer should use to transform each character, and that value may differ (a bit) from the Italic angle. This value is what FL calls its 'Slant' -- and notes it's only useful for Type 1.\n\nThe value for ItalicAngle should be in degrees, rotating RIGHT for a positive number (although the Slant is (apparently) _negative_, and changing it changes the ItalicAngle sign as well ...).\n\n"
+    }
+  ]
+}

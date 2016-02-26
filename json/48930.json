@@ -1,0 +1,66 @@
+{
+  "id": "48930",
+  "title": "Font made on Mac loses kerning on PC",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi all,\n\nYeah I am new here.....\n\nThought maybe some experts on here could help.... I ran up against a problem with one font I made on a Mac (using TypeTool btw). First off the font is heavily manually kerned, since it is a cursive script where every glyph connects to every other letter. There isn't really a way to connect the glyphs properly without a very large kerning list.\n\nNow when finished it, I see the font works like a dream on Mac. It's working absolutely perfect.\n\nNext I try to use it on PC. BIG PROBLEM! The font can be used in PC, but loses all its kerning so looks ugly. I've tried putting it in different formats supported by TypeTool, different ways of zipping it, no luck.\n\nI've successfully made cursive fonts in the past.... these work fine on both platforms. The only difference I can think of with this one is the larger amount of kerning. Never have I run into this type of problem before.\n\nPlease help me, I am at a total loss of what to try next.... How can I get this font to work on a PC?\n\nI've thought of buying a conversion software, but don't know if that would help in this case. Maybe I don't need it, since the font translates, its only the kerning that gets lost. If I do need conversion software, any recommendations (preferrably free ones)?\n\n",
+  "author": "<a href=\"/web/20100412135922/http://www.typophile.com/user/36141\" title=\"View user profile.\">Meow</a>",
+  "time": "<br>",
+  "uid": "36141",
+  "comments": [
+    {
+      "time": "",
+      "content": "Which apps did you use to test the font in Windows?\n\n"
+    },
+    {
+      "time": "",
+      "content": "I tested the font using Wordpad and Word. Even on the font preview thing the problem can be seen right away.\n\n"
+    },
+    {
+      "time": "",
+      "content": "kerning is neither supported by wordpad nor by word with default settings.\n\nin word you can turn it on this way:  \n 1. Select the text whose kerning you want to adjust.  \n 2. Choose Font from the Format menu. Word displays the Font dialog box.  \n 3. Display the Character Spacing tab. (Click here to see a related figure.)  \n 4. Click on the Kerning for Fonts check box.  \n 5. Adjust the character point size to indicate when Word should start adjusting kerning.\n\n"
+    },
+    {
+      "time": "",
+      "content": "but kerning (if present) normally displays when you open the font to install on PC, right? i think the kerning just is not present on pc, regardless of which program i use... i'll try some others too to find out.\n\ni'll try what you mentioned first though, changing the word settings like that, and post here the result. thanks for the advice, hope it works.... :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "no, the default font preview of windows does not display kerning, so if you \"open\" (doubleclick) the font file, it potentially looks ugly.\n\nYou should check the font with a program like indesign, illustrator, photoshop, xpress. If the kerning is okay there, the font is okay.\n\n"
+    },
+    {
+      "time": "",
+      "content": "This is why it so many people say it's a good idea ( if possible ) to design your fonts so they work as well as possible prior to kerning. Of course if you don't care about word or apps that don't have kerning you can do as you like... But it's worth considering carefully. The other aspect of this is that doing that may not be easy. It might also compromise the voice of your font. So as usual - it depends...\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>This is why it so many people say it’s a good idea ( if possible ) to design your fonts so they work as well as possible prior to kerning. Of course if you don’t care about word or apps that don’t have kerning you can do as you like...</cite>\n\nReading this before the background of a previous discussion about using or not using the extension lookup type makes me feel quite uncomfortable. Effectively you describe the type designer as someone who produces plugins for this or that application and its limitations (e.g. Word).  \nAs a designer I would say that design should decide which technology is required to implement it, i.e. whether kerning is needed, even if so much kerning is needed that it can be dealt with only by employing newer aspects of OT specs. Not the other way round.  \nIt is nice if a particular typeface can get away with little or no kerning, but no or little kerning should not be a goal in itself. It is not a design virtue.\n\nRather, we should encourage OS and application developers to access _all_ the data present in a font, all of which are documented in specs. And with 'we' I not only mean type designers but also users of fonts who -- I think -- would like to use every bit of what they paid for, rather than a few pieces to which OS and application developers give access.\n\nKarsten\n\n"
+    },
+    {
+      "time": "",
+      "content": "I know this is an old post, but did you manage to solve this problem? I seems I have the same problem with my font.\n\n"
+    },
+    {
+      "time": "",
+      "content": "There is two types of kerning. TTF kerning and OT kerning which has a 'kern' feature in OT tables. I suspect that you put TTF kerning in your font which is only supported on Mac platform. On Windows, I suspect kerning is only supported as OT 'kern' feature.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>This is why it so many people say it’s a good idea ( if possible ) to design your fonts so they work as well as possible prior to kerning.</cite>\n\nOne could take a stubborn, alternative approach and guarantee the font would be unusable without kerning. I could see someone doing this with a display face or something.\n\n"
+    },
+    {
+      "time": "",
+      "content": "\\>... we should encourage OS and application developers to access all the data present in a font...\n\n...or, what I would like to suggest, is that fonts contain in a table-o-'recommendations' indication of what tables and subsets of tables can and cannot be done without, in a given environment and use.\n\nExamples of this: Ed Interlock works fine without OT, but why bother? Courier can go to the ends of the earth without kerning, but we suggest you not justify it. Augsburger initials is 'appropriate' for all uses, (;)), just please don't make it blink.\n\nSo, while encouraging OS and application developers to access 'all the data present in a font', that's only 1/3 of the problem, IMHO.\n\nCheers\n\n"
+    },
+    {
+      "time": "",
+      "content": "Or just support what's defined in the specs? For example, I never understood the \"optional\" approach to OT layout tables ... If I add these tables, then not because yesterday was rain and I had nothing better to do.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I suspect there is more to it. In my experience that I had to constantly do matchmaking between AAT and OT, a TTF specs kerning (supported in AAT) is always directly between two consecutive glyphs. I'm not sure if we can make a parallel between vowels in Arabic script and say, circumflex accent on an e but I know that if a vowel is in between two kerned glyphs, the kern is lost. In 'kern' feature of OT you have the lookup with the 'ignore' option.\n\n"
+    }
+  ]
+}

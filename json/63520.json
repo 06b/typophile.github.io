@@ -1,0 +1,50 @@
+{
+  "id": "63520",
+  "title": "Importing copy to indesign cs4 from word, need to preserve italics",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi Typophiles\n\nI am setting a lot of theater programs and i always recieve the copy in word documents.  \nThe thing is that the theater has always used italics when refering to titles, and sometimes there can be quite a few to say the least. I have tried different methods so far, but what are your prefered methods. I need all copy to take on a paragraph style while maintaining all italics??\n\nHope someone have some good tips.\n\n",
+  "author": "<a href=\"/web/20111222000942/http://typophile.com/user/23280\" title=\"View user profile.\">Gregers™</a>",
+  "time": "<br>",
+  "uid": "23280",
+  "comments": [
+    {
+      "time": "",
+      "content": "These are the settings which I use.\n\n ![](http://web.archive.org/web/20111222000942im_/http:/typophile.com/files/import_5182.png)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Miss Tiffany  \nThanks for sharing, i think that will do the job. Did a quick test and it seems to work the way i wanted it.  \nThank You\n\n"
+    },
+    {
+      "time": "",
+      "content": "Getting the text formatted into ID is one thing, making it stick is another. Tiff, your local overrides will show the dreaded '+' appended to these paragraphs, and if you ever do something like a search-and-replace using a paragraph style, they will all be flattened to its base definition.\n\nThe recommended way to make bold, italics, and so on \"sticky\" is by defining them as character styles. These won't disappear with an override; and you can easily change the definitions, for example, from bold to semi-bold, without touching anything else.\n\nReplacing every possible combination of text attributes with an appropriate style is a bore, especially since ID does not allow nesting of character styles (in particular, you might need a superscript, superscript italic, superscript bold, small caps italic, ... endless possibilities...). So I wrote a script to create them on the fly. It got mentioned on InDesignSecrets! Read (well, listen to) [podcast 108](http://web.archive.org/web/20111222000942/http:/indesignsecrets.com/indesignsecrets-podcast-108.php) for all details.\n\n"
+    },
+    {
+      "time": "",
+      "content": "You are right, Theunis. But when your client doesn't really know what they are doing in Word and randomly starts playing with style sheets it makes such a huge mess that for me, in the long run, well I find it easier to deal with any mess in InDesign after the fact.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Cheers Theunis  \nI actually experienced that today, importing an xls file with playlist dates, it has bullets to mark dates with different singers/actors, when imported all the bullets seemed to have disappered and doing a find/replace did not help much. I am listing to thr pod cast now, sounds interresting. Have you got a link for the script??\n\n"
+    },
+    {
+      "time": "",
+      "content": "@Tiffany  \nThat is exactly what happens all the time. The manuscripts i recieve are most often full of copy/pasted variations of texts from a variety of sources. So far i have used to copy all text and paste it into txtwrangler, and then format everything from scratch, but now i need to create a faster workflow.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Gregers,\n\nYour bullets disappearing happened because they were added in the paragraph style in Word. InDesign also allows bullets as part of paragraph styles, but if you override the style they will disappear. Not visible in Tiffany's screen shot (version?), but the Word options should also include sth like \"Convert Bullets and Numbering to Text\" -- use this if you don't use ID's own bulleted styles.\n\nThe script can be downloaded directly from [my site](http://web.archive.org/web/20111222000942/http:/www.jongware.com/binaries/preptext.zip). Unzip, copy into your Scripts folder. With a right-click on any script in your scripts panel you can select \"Reveal in Explorer/Finder\"; copy the script into there.\n\nA more recent podcast discusses various ways of cleaning up Word before/after importing -- well worth a listening as well.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Theunis\n\nThanks again for sharing. I got your script last night and used it all this day. Takes a little time to get used to it, but have to say that it is just what ive been looking for. Its been such a pleasure to work with. Getting rid of all those ugly word format styles and what not. Thank you.\n\nNow ill check out this other podcast, and maybe try to teach the editors a bit of formating dicipline. :-)\n\n"
+    },
+    {
+      "time": "",
+      "content": "You are welcome :-)\n\nOn the subject of Discipline:\n\nBefore I run my own script, I always check first what the Find Fonts list says. The script doesn't behave properly if a font's styles are not called plain \"Bold\" or \"Italic\" -- it'll fail miserably on \"Light Italic\", \"56 Italic\", \"Bold Condensed\", and such. I replace those fonts with Times New Roman analogs. It also lets me check up on mis-used Symbol (since most fonts I use have their own Greek characters) and kill off any stray Wingdings arrows.  \nAnd _then_ I'm just starting! Next is to check each and every possible text attribute for mis-use -- I hate superscript spaces in the middle of a regular paragraph, italics that include its trailing space, paragraph returns that are formatted with bold and underline, less-than with an underline standing in for less-or-equal, plus with an underline posing as plus-minus.\n\nCleanliness ... Oh, and then I run my script.\n\n"
+    }
+  ]
+}

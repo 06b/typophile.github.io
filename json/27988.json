@@ -1,0 +1,50 @@
+{
+  "id": "27988",
+  "title": "a question of directionality?",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "dear all,\n\ni am wondering if white spots in overlaying type can be caused by anything else than inconsistent curve-directions. the example attached is a screenshot of a pdf - could it also be a pdf-rendering issue or is the font certainly flawed? (i need to check if an argument for my dissertation is water-proof) ;)\n\nthanks,  \ntitus\n\n| Attachment | Size |\n| --- | --- |\n| [directionality.png](http://web.archive.org/web/20131014142910/http:/typophile.com/files/directionality.png) | 21.37 KB |\n\n",
+  "author": "titus n.",
+  "time": "1 Sep 2006 — 9:10am",
+  "uid": "3177",
+  "comments": [
+    {
+      "time": "1 Sep 2006 — 12:00pm",
+      "content": "PDF rendering (especially prior to Acrobat v.7.0.5) can cause problems like this. I used to have trouble with Arabic in Acrobat for this reason. Have you tried printing the PDF to a PS printer? This might reveal whether the issue is rendering or outline direction. If it is outline direction, I would expect to see it in print also.\n\n"
+    },
+    {
+      "time": "1 Sep 2006 — 12:07pm",
+      "content": "The white spots also occur with overlays when the curve directions are correct. For example, if you forget to \"remove overlap\" your ccedilla it can have a white spot even if the curve directions are correct. I assume that most DTP applications and printers are developed under the assumption that there are no overlapping contours, not keeping in mind non-latin scripts.\n\nHowever, ignoring the fact that overlaps are forbidden could still be called a technical flaw of the font. Connecting scripts can be designed without any overlap, if you think of Mistral hot metal.\n\n"
+    },
+    {
+      "time": "1 Sep 2006 — 2:03pm",
+      "content": "_The white spots also occur with overlays when the curve directions are correct._\n\nYes, but this is a renderering error. We accomodate it in the case of something like the c with cedilla, always being sure to merge the outlines, because there are other problems associated with leaving them unmerged (e.g. when a user applies an outline stroke to the glyph). But in the case of connecting scripts, the bug must be fixed on the rendering side.\n\n_Connecting scripts can be designed without any overlap, if you think of Mistral hot metal._\n\nIn digital type, though, there must be an overlap for connecting scripts, because greyscale rounding can cause loss of stroke weight or even drop out where there should be connections. At a upm of 2048, Microsoft recommend an overlap of 70 units for Arabic glyphs to prevent this problem.\n\n"
+    },
+    {
+      "time": "1 Sep 2006 — 2:46pm",
+      "content": "<cite>But in the case of connecting scripts, the bug must be fixed on the rendering side.</cite>\n\nI agree. All I wanted to point out is that the conclusion that the contour direction is wrong is not water-proof.\n\n<cite>because greyscale rounding can cause loss of stroke weight or even drop out where there should be connections.</cite>\n\nWould that not be a rendering error that must be fixed on the rendering side? Interesting to learn about that issue, however.\n\n"
+    },
+    {
+      "time": "1 Sep 2006 — 3:33pm",
+      "content": "john, tim thanks a lot, that was very helpful!\n\n"
+    },
+    {
+      "time": "1 Sep 2006 — 4:25pm",
+      "content": "_Would that not be a rendering error that must be fixed on the rendering side? Interesting to learn about that issue, however._\n\nNot really, because unlike something like how to handle overlapping outlines, which is something that can affect print as well as screen rendering, the rounding issue is simply an aspect of 'the raster tragedy at low resolutions' (to use Beat Stamm's memorable phrase), i.e. it is part-and-parcel of how we make type for screen. The renderer doesn't know that two glyph shapes are adjacent and are supposed to look continuous; it just knows that here are some outlines and tries to rasterise them as well as it can using algorithms and instruction sets. Since a font is going to encounter multiple kinds of rasterisers (b/w, greyscale, subpixel) from multiple software developers (MS, Apple, Adobe, FreeType...) outlines and/or hints need to be able to ensure correct handling of connections.\n\n"
+    },
+    {
+      "time": "3 Sep 2006 — 5:36am",
+      "content": "\"‘the raster tra[ged]y at low resolutions’\" :) Memorable indeed.\n\nAnd an interesting fault dump, too. Because type designers are still alive around here somewhere, the Tragedy, I assure you, is in the Rasterizer: Adobe thinking that two blacks make a white is just plain stupid, and the tragedy that MS thinks \"native mode\" only ever means sub-pixel positioning making the path to quality longer, but still possible.\n\n\"The renderer doesn’t know that two glyph shapes are adjacent and are supposed to look continuous;\"\n\nThe renderer doesn’t know that two glyph shapes are adjacent and, if they are the same, are supposed to look the same, either...\n\n"
+    },
+    {
+      "time": "3 Sep 2006 — 11:50am",
+      "content": "This could be remedied in an OpenType font by having two sets of glyphs for every character, one with clockwise paths, and the other with counter-clockwise paths, and including a contextual alternate feature that alternates the directionality of adjacent glyphs.\n\n"
+    },
+    {
+      "time": "3 Sep 2006 — 3:54pm",
+      "content": "David, yes.\n\nNick, hahahahahaha... (I was supposed to laugh, yes?)\n\n"
+    }
+  ]
+}

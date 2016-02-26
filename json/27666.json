@@ -1,0 +1,18 @@
+{
+  "id": "27666",
+  "title": "Kerning badness, encoding badness, lots of badness",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "FontLab Studio 5.0  \nMac OS X 10.4.6\n\nI'm trying to generate a font. I completely removed the kerning, and re-kerned the entire font. (That part was completely intentional.) But when I test the font in InDesign CS2, the kerning is not correct. For example, the period/quotedblright pair should be -130. When used in InDesign CS2, that kern pair comes out as -50. An AFM exported from the generated font doesn't match the VFB in number of kern pairs, either.\n\nI tried starting fresh by making a new empty VFB, and copying each character into the new font (kerning not copied with glyphs), then importing a good AFM, then generating a new font with a new name, and it still doesn't work.\n\nI have tried generating the font in different ways, and only MacOS Roman encoding seems to solve the kerning issue. However, when I use MacOS Roman encoding, the \"space\" character is highlighted in InDesign as a missing font (InDesign applies a color background to text that is using a missing font). When I test in Illustrator CS2, the spaces appear as question marks. The final format for these fonts is supposed to be Macintosh PostScript Type 1.\n\nI also tried removing the space characters (regular and non-breaking), and just starting fresh glyphs without pasting anything by setting the space width in the metrics window. That produced the same result (missing font in InD).\n\nPlease note that this is just one of three fonts, and all three fonts exhibit this same behavior. That period/quotedblright kern pair comes out as -50 in all of them. I've tried a variety of encoding schemes and different formats. OpenType does work, the kerning comes out correct. I've tried changing the name of the fonts and installing them on different machines, and they all have the same problem. I also tried testing them in TextEdit (under Mac OS X 10.4), and they don't even show up in the font menu!\n\nI've been making fonts with FontLab for ages, and have never seen anything like this. OMG!! WTF am I doing wrong?! This is driving me insane! If anyone out there can help, I desperately need it.\n\nThanks,  \nAlan\n\n",
+  "author": "alan",
+  "time": "15 Aug 2006 — 6:10am",
+  "uid": "749",
+  "comments": [
+    {
+      "time": "18 Aug 2006 — 2:13am",
+      "content": "Alan,\n\nPerhaps you encountered the bug in FLS which was reported and confirmed about 2 months ago. It concerns kerning and the FontInfo option of reordering glyphs on export. But this bug shouldn't affect export in Macintosh PostScript Type 1 format.\n\nRegards,  \nJohnych\n\n"
+    }
+  ]
+}

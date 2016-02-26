@@ -1,0 +1,162 @@
+{
+  "id": "18406",
+  "title": "Swedish characters in Fontlab",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I use Fontlab to import a bitmap font I am going to use. The problem is that the three extra Swedish characters “Å Ä Ö” is missing from the bitmap font and I want to ad them.\n\nI can see where to put them on the unicode template and I do. But when I export the new font the “ÅÄÖ” don’t get included???\n\nAll the settings looks right with Latin 1 etc. What am I missing =(\n\nThanks!\n\n [‹ spacing & kerning classes](http://web.archive.org/web/20070809235919/http:/typophile.com/node/18487 \"Go to previous forum topic\") [Bad habit ›](http://web.archive.org/web/20070809235919/http:/typophile.com/node/18531 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20070809235919/http://typophile.com/user/11898\" title=\"View user profile.\">Matsaki</a>",
+  "time": "<br>",
+  "uid": "11898",
+  "comments": [
+    {
+      "time": " 8.Mar.2006 6.50pm",
+      "content": "It’s hard to tell without looking at your file...\n\nAre you in Codepages view when you generate? And have you renamed the font that you are generating? (You may have a conflict of the old and new if you haven’t.)\n\n"
+    },
+    {
+      "time": " 9.Mar.2006 1.28pm",
+      "content": "Hi and thanks for the reply!\n\nI upload the file so you can see it.\n\n[http://mats.ayianapa.nu/04b.zip](http://web.archive.org/web/20070809235919/http:/mats.ayianapa.nu/04b.zip \"http://mats.ayianapa.nu/04b.zip\")\n\n"
+    },
+    {
+      "time": " 9.Mar.2006 2.12pm",
+      "content": "Mats, I have downloaded the file. Maybe you want to disable that download now. (Copyrighted material, etc...)\n\n"
+    },
+    {
+      "time": " 9.Mar.2006 2.30pm",
+      "content": "Mats, when I open the file “04b-08”, it is in Names view mode, which might be the issue. Here’s what I would do:\n\n\\_ Switch to Codepages view mode  \n\\_ Choose the codepage you need: Mac OS Roman or MS Windows 1252 Western (ANSI)  \n\\_ Perform these commands:  \n\\_ \\_ Select All  \n\\_ \\_ Glyph / Glyph Names / Clear Unicode  \n\\_ \\_ Select All  \n\\_ \\_ Glyph / Glyph Names / Generate Unicode  \n\\_ \\_ Select All  \n\\_ \\_ Glyph / Sort Glyphs / By Encoding\n\nAlso...  \nIn the Font Info / Encoding and Unicode window make sure that Greek is checked.  \nSwitch the “FOND ID” to a number less than 10000.  \nSwitch the “Microsoft Character Set” to “Western (Latin 1) CP1252 / ANSI”\n\nSee if that works.\n\nc\n\n"
+    },
+    {
+      "time": " 9.Mar.2006 2.57pm",
+      "content": "I think I manage to do everything you suggested. But still have the same problem =(\n\nI have uploaded the new file here [http://mats.ayianapa.nu/04b\\_2.zip](http://web.archive.org/web/20070809235919/http:/mats.ayianapa.nu/04b_2.zip \"http://mats.ayianapa.nu/04b\\_2.zip\")\n\nHmm!!\n\nBy the way, what is the small blue icon under each character that looks like a locked symbol or something? My new characters don’t have this symbol.\n\n"
+    },
+    {
+      "time": " 9.Mar.2006 3.03pm",
+      "content": "I’ll have a look. The font naming isn’t what I do, but...\n\nThat symbol indicates that the outlines are TrueType.\n\n"
+    },
+    {
+      "time": " 9.Mar.2006 3.09pm",
+      "content": "Mats, are you going to be using the font on a Mac or Windows box?\n\n"
+    },
+    {
+      "time": " 9.Mar.2006 3.28pm",
+      "content": "On a Mac, but I vulad prefer if it was a tty font so it will work on Windows to. But most important is Mac =)\n\n"
+    },
+    {
+      "time": " 9.Mar.2006 3.30pm",
+      "content": "TrueType-flavoured OpenType... Got it.\n\nWhy don’t you send me an email so that we can continue this off-list:  \nchester (at) vllg.com\n\n"
+    },
+    {
+      "time": " 9.Mar.2006 4.55pm",
+      "content": "I did send you an email, did you get it?\n\n"
+    },
+    {
+      "time": " 9.Mar.2006 6.32pm",
+      "content": "Note to internets: we’ve taken this off-list.\n\n"
+    },
+    {
+      "time": " 11.Mar.2006 3.24pm",
+      "content": "Hello Matsaki... I saw your font and i want to make a note on that. I assume that you wanna add some more characters at that pixel font (04b\\_2), but your stress is not in the right placement...\n\nWhen you make pixel fonts, and your font’s UPM value is 1000 then your pixel is 125x125 in the Glyph window... so you can go at the options (FL5) and give the settings to the grid:\n\n ![](http://web.archive.org/web/20070809235919im_/http:/typophile.com/files/options_grid.gif)\n  \n_\\*notice the value of “snap to distance” - helps you a lot\\*_\n\nso you can then add / draw pixels with the Rectangle tool more easily...\n\n ![](http://web.archive.org/web/20070809235919im_/http:/typophile.com/files/grid.gif)\n\nnotice the left char of yours with the wrong position of the stress. On the right is the right position...\n\nCheers ;o)\n\nps.\n\nSo did you guys managed it to work?\n\n"
+    },
+    {
+      "time": " 11.Mar.2006 5.20pm",
+      "content": "Hi tyfont,  \nThanks for the tip! Yes finally after much here and there I can now get the Swedish characters included when i generate the font =)\n\nBut now I face a new problem. The kerning (space between letters) is getting a bit messed up =( (at least in Photoshop)\n\n ![](http://web.archive.org/web/20070809235919im_/http:/typophile.com/files/kerning.gif)\n\nIs there a way to set the kerning automatically?\n\nPs. How do I get this forum to notify me by email when there is a reply on my thread?? Ds.\n\n"
+    },
+    {
+      "time": " 11.Mar.2006 5.40pm",
+      "content": "By the way. I just tested the grid function and even if it’s a bitmap font I imported it don’t follow the grid?\n\nAs I see some of the lines are only ½ pixel.\n\nThis is the settings and how it looks now:\n\n ![](http://web.archive.org/web/20070809235919im_/http:/typophile.com/files/window.jpg)\n\n ![](http://web.archive.org/web/20070809235919im_/http:/typophile.com/files/char.jpg)\n\n"
+    },
+    {
+      "time": " 11.Mar.2006 5.49pm",
+      "content": "Yes. There were some settings in the Preferences and Font window display which I changed, and which allowed me to generate properly-working fonts.\n\nI have posted the settings here for the curious:  \n [http://vllg.com/files/generatingtt/](http://web.archive.org/web/20070809235919/http:/vllg.com/files/generatingtt/)\n\nI welcome feedback from Adam, Yuri, Cyril, Alex, and anyone else who can guide us all in the best practices of type generation. (I’ve had good success with my settings...)\n\n"
+    },
+    {
+      "time": " 12.Mar.2006 2.26am",
+      "content": "_But now I face a new problem. The kerning (space between letters) is getting a bit messed up =( (at least in Photoshop)  \n=========================================================_\n\nTry and set these options at the Character panel:\n\nPhotoshop CS / CS2\n\n ![](http://web.archive.org/web/20070809235919im_/http:/typophile.com/files/PSCS2.gif)\n\nUse the font only at 8px (if it is designed at this size\\*) or multiples of 8 (16,24,etc) with the Anti-aliasing set to “None”, and the “Kerning” feature set to “Metrics”.\n\n=================  \n_By the way. I just tested the grid function and even if it’s a bitmap font I imported it don’t follow the grid?_  \n=================\n\n\\*Well if your font is designed to work at 8px size then the grid at 125 will work fine, if you have the UPM size at 1000.\n\nRead the valuable posts of Mark Simonson here:\n\n[http://typophile.com/node/706](http://web.archive.org/web/20070809235919/http:/typophile.com/node/706 \"http://typophile.com/node/706\")\n\n"
+    },
+    {
+      "time": " 12.Mar.2006 6.12am",
+      "content": "This is exactly how my settings is in Photoshop. Can it be because I did something wrong when importing the fonts in Fontlab? And just to be sure, is there a way to correct or change the kerning automatically in Fontlab 4.6?\n\nI have changed the prefs exactly as your instructions. I have uploaded a screen shot on my site here: [http://mats.ayianapa.nu/dump.jpg](http://web.archive.org/web/20070809235919/http:/mats.ayianapa.nu/dump.jpg \"http://mats.ayianapa.nu/dump.jpg\")\n\n"
+    },
+    {
+      "time": " 12.Mar.2006 10.16am",
+      "content": "_=================  \nThis is exactly how my settings is in Photoshop. Can it be because I did something wrong when importing the fonts in Fontlab?  \n=================_\n\nTry and generate the font again and at the settings of the first caption of chester’s pics:\n\n[http://vllg.com/files/generatingtt/Generating\\_TT\\_001.png](http://web.archive.org/web/20070809235919/http:/vllg.com/files/generatingtt/Generating_TT_001.png \"http://vllg.com/files/generatingtt/Generating\\_TT\\_001.png\")\n\nUNcheck the “Export Opentype layout tables”\n\n_=================  \nI have changed the prefs exactly as your instructions.  \n=================_\n\nWhat is the UPM size at your font’s info / Metrics and dimensions ? It must be 1000... if not do it so.\n\n:o)\n\n"
+    },
+    {
+      "time": " 12.Mar.2006 1.12pm",
+      "content": "Fonts UPM is set to 1000 now. Before it was 1200. It’s also a checkbox with “Scale all Glyps according to UPM range”? Shall I check that?\n\nAlso the pics of settings that Chester was so nice to give me. Did not help me all the way as he have the newer Fontlab 5.x and I have 4.6. There are far more settings in the newer version.\n\nI’ll give it a new try then =)\n\n"
+    },
+    {
+      "time": " 12.Mar.2006 1.16pm",
+      "content": "_==============  \nIt’s also a checkbox with “Scale all Glyps according to UPM range”? Shall I check that?  \n==============_\n\nNo DON’T check it...\n\n"
+    },
+    {
+      "time": " 12.Mar.2006 1.52pm",
+      "content": "Wow, either I must be so stupid or I am drunk? (or both)\n\nI did the changes and now the font works perfect (as a 7 pixel font)?????????\n\nAnyway, I took a screenshot of all the prefs boxes I have and their settings and uploaded them here:\n\n[http://mats.ayianapa.nu/fonts/settings.html](http://web.archive.org/web/20070809235919/http:/mats.ayianapa.nu/fonts/settings.html \"http://mats.ayianapa.nu/fonts/settings.html\")\n\nI also Upladed the font and the .vfb file.\n\n"
+    },
+    {
+      "time": " 12.Mar.2006 2.13pm",
+      "content": "Here it is what it looks like with 1000 UPM size (was 1200).\n\nUMP 1000 amd 7 px font size:\n\n ![](http://web.archive.org/web/20070809235919im_/http:/typophile.com/files/dump01.jpg)\n\nUMP 1000 amd 8 px font size:\n\n ![](http://web.archive.org/web/20070809235919im_/http:/typophile.com/files/dump02.jpg)\n\n"
+    },
+    {
+      "time": " 12.Mar.2006 2.18pm",
+      "content": "=========EDIT===========\n\nJust change the grid space to 150 and it will work ok at 1200 UPM and 8px at PS\n\n(1200/150=8)\n\nAlso always use 100% view at PS to see the pixel fonts right.\n\n"
+    },
+    {
+      "time": " 12.Mar.2006 3.14pm",
+      "content": "Now I also belive in ghosts!\n\n ![](http://web.archive.org/web/20070809235919im_/http:/typophile.com/files/pref.jpg)\n\n ![](http://web.archive.org/web/20070809235919im_/http:/typophile.com/files/glyph.jpg)\n\n=\n\n ![](http://web.archive.org/web/20070809235919im_/http:/typophile.com/files/dump.jpg)\n\ntyfont\\>\\> did you download the .vfb file and looked at it?\n\n"
+    },
+    {
+      "time": " 12.Mar.2006 3.39pm",
+      "content": "Yes i downloaded it...\n\nthe normal version is ok\n\nit is at 1200 UPM BUT change the Grid step at 150x150 so as to work at 8px size at Photoshop\n\n(1200/150=8)\n\nthe bold version is problematic. it needs redesign.\n\nDo it from scratch again or just leave the UPM size at 1000 as it is and change the grid step at 125 so as to work at 8px at Photoshop\n\n(1000/125=8)\n\nyou must then move the corners of the outlines at the grid corners. (snap to distance will help you)\n\n"
+    },
+    {
+      "time": " 12.Mar.2006 4.12pm",
+      "content": "Darn!  \nSo it was the font the whole time then =( Well I have some hours work in front of me now then.\n\nThanks for the help!!!\n\n"
+    },
+    {
+      "time": " 13.Mar.2006 3.36am",
+      "content": "Hmm,  \nI did it all over again. I imoprted the bitmap bold font. Put the UPM to 1200 and grid step to 150-150. Now the font looks great as far as bitmap in Fontlab. (dont have to be redesigned) But the outcome is that the font only works as 7 pixels and not 8???\n\n"
+    },
+    {
+      "time": " 13.Mar.2006 5.23am",
+      "content": ":)))\n\nOk i guess the original font is ” 04b 09” i opened it and i saw that the UPM size is 900 (its developer just wanted that size - don’t ask why)... so put your grid step at 150... and the font will work ok at 6px size at PS...\n\n900/150=6\n\n;o)\n\n"
+    },
+    {
+      "time": " 13.Mar.2006 8.05am",
+      "content": "Yes that’s the font. But the other one 04b 08 is 8px, and I want to use these 2 fonts as regular and bold, with the same size? The only problem was that it did not have the Swedish characters ÅÄÖ as I started this thread with =(\n\nCan you see if the 04b 08 have the same UPM (900)?\n\n"
+    },
+    {
+      "time": " 13.Mar.2006 10.23am",
+      "content": "Ok... just download the fonts from the [**developer’s site**](http://web.archive.org/web/20070809235919/http:/www.dsg4.com/04/extra/bitmap/) where these two fonts have the same UPM size (1200) and set the grid to 150. ;o)\n\nI downloaded the font the first time [**from another site**](http://web.archive.org/web/20070809235919/http:/www.minefields.org/v2/fonts.php) where maybe the font was altered, and had 900UPM size...\n\n"
+    },
+    {
+      "time": " 13.Mar.2006 12.51pm",
+      "content": "Looking in the yellow pages for a madhouse!!!\n\nI downloaded the 04b\\_09 from the original author. Imported to Fontlab and used UP 200 and grid 150. Now it works fine as a 8px font. but the kerning still gets messed up =((\n\nThis is “the never ending story”!!\n\n"
+    },
+    {
+      "time": " 13.Mar.2006 2.33pm",
+      "content": "_====  \n [http://mats.ayianapa.nu/fonts/settings.html](http://web.archive.org/web/20070809235919/http:/mats.ayianapa.nu/fonts/settings.html \"http://mats.ayianapa.nu/fonts/settings.html\")_\n\nI also Upladed the font and the .vfb file.  \n=======\n\nwell there’s something in your Photoshop Matsaki that mess up the kerning...\n\ni used your bold ttf font from the zip you provided and it works fine to me at 7px.\n\n ![](http://web.archive.org/web/20070809235919im_/http:/typophile.com/files/testAyia.gif)\n\n"
+    },
+    {
+      "time": " 13.Mar.2006 2.48pm",
+      "content": "Yes, I also get the 7px “version” to look ok. But I mean the “original” 8px font from the developer’s site. As I want the font in 8px and not 7px. Same as the 04b\\_08.\n\n"
+    },
+    {
+      "time": " 13.Mar.2006 3.20pm",
+      "content": "Hey, don’t be confused Matsaki... either 8px or 7px at Photoshop’s type panel, the font is still 5 pixels height!! That doesn’t change!!\n\nCount the pixels to see it for yourself...\n\n:o)\n\n"
+    },
+    {
+      "time": " 13.Mar.2006 3.49pm",
+      "content": "Ahh great news =)\n\nI suspect that I maybe have a kerning problem anyway. I closely checked normal and bold. I used the 7px font that you downloaded that os working “better” and also took a closer look at the normal font. As you can see the kerning is better, but not perfect as I can see that you get it from your last screens hot.\n\n ![](http://web.archive.org/web/20070809235919im_/http:/typophile.com/files/normal.jpg)\n\n ![](http://web.archive.org/web/20070809235919im_/http:/typophile.com/files/bold.jpg)\n\nI also noticed that the kerning problem mostly occurs at the first and the last letter?\n\n"
+    },
+    {
+      "time": " 14.Mar.2006 12.38am",
+      "content": "Matsaki did you notice my last screenshot that i attached and the settings at Photoshop’s typepanel???\n\nDid you see the setting at the A—V field that was 0 and not 100 that you use?????\n\nThat’s the tracking that Photoshop uses... i thought you knew some things about Photoshop’s type settings...\n\n...\n\nRead also [**some instructions**](http://web.archive.org/web/20070809235919/http:/typophile.com/node/18468) (my second post) for proper use of pixel fonts (the size of the font that you will use in Photoshop typepanel depends in the size that the developer says the font works)\n\n"
+    },
+    {
+      "time": " 14.Mar.2006 4.43pm",
+      "content": "tyfont,  \nI am truly sorry! Shame on me!!! I don’t know why I missed that? Maybe because I do this work at nights =(\n\nI will play arround with the font now and get it right. Just that after the last security update for Mac I can’t install the bold font???\n\nBut now I SHOULD know enough to make it work, and make my life easier=) Thousand thanks for your help and patiance!\n\n/Mats\n\n"
+    }
+  ]
+}

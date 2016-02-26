@@ -1,0 +1,54 @@
+{
+  "id": "34249",
+  "title": "Multiple Master glyph cut+paste",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "Hi there  \nI’m trying to make a a MM font in Fontlab 5. I have one weight axis. I build the MM I’m working on from two endpoints, a thin and a black. The problem is that if I now try to delete a glyph, say the black ’m’, and then paste a replacement in it’s place, Fontlab replaces both the thin and the black ’m’. I can’t find any mention of that in the manual – is it impossible to do?\n\nAnother thing is the kerning. How can I (can I at all?) import metrics and kerning from other files into the MM font? I’m using identical kerning classes in the thin and the black, but I would like to take the metrics and kerning from the two start designs, thin and black, and put them in the MM version. How to do?\n\n [‹ Missing kerning in Multiple Master / Fontlab](http://web.archive.org/web/20071219010018/http:/www.typophile.com/node/34256 \"Go to previous forum topic\") [FontLab Error: invalid first character in name (text was \".null\") ›](http://web.archive.org/web/20071219010018/http:/www.typophile.com/node/34230 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20071219010018/http://www.typophile.com/user/16321\" title=\"View user profile.\">clauses</a>",
+  "time": "<br>",
+  "uid": "16321",
+  "comments": [
+    {
+      "time": " 5.Jun.2007 4.41am",
+      "content": "Hi,  \nthe masters are connected, so you cannot delete/change only one. Normally I copy the new glyph to the mask and move the points of the Master to align with the mask.  \nOR  \nmaking to single master fonts and blend them and copy the glyph to the original MM font.\n\nif you import metrics in the metrics window, they apply the the selected master. So you can select the Thin master, import the thin afm file, switch to Black and import the black afm file.\n\nGeorg\n\n[www.reets.de](http://web.archive.org/web/20071219010018/http:/www.reets.de/ \"www.reets.de\")  \n [www.schriftgestaltung.de](http://web.archive.org/web/20071219010018/http:/www.schriftgestaltung.de/ \"www.schriftgestaltung.de\")\n\n"
+    },
+    {
+      "time": " 5.Jun.2007 5.25am",
+      "content": "This is what I would do:\n\n1. copy the source glyph  \n2. go into the glyph window of the target  \n3. paste  \n4. Cmd+K, Cmd+M, Cmd+X  \n5. activate the master you want to be changed to the source  \n6. Cmd+J\n\nalternatively, if your source is already an “m” in another font:  \n1. assign mask, select the source font and the right master (or assign all)  \n2. activate the master you want to be changed to the source  \n3. Cmd+J\n\n"
+    },
+    {
+      "time": " 5.Jun.2007 5.27am",
+      "content": "Thanks for the help Georg. I feared it was so, but making a new MM and copying the glyph from there works albeit the detour it is. If Twardoch is listening, then this would perhaps be something to look at for new versions of Fontlab.\n\n"
+    },
+    {
+      "time": " 5.Jun.2007 5.33am",
+      "content": "Tim, what is cmd=J?\n\n"
+    },
+    {
+      "time": " 5.Jun.2007 6.23am",
+      "content": "cmd+j is the same as: tools \\> multiple master \\> mask to master.\n\nwhat i would do in this situation is to paste a copy of the new black m to the mask layer (make sure there’s nothing else in the mask), activate the black master and then cmd+j.\n\n"
+    },
+    {
+      "time": " 5.Jun.2007 6.45am",
+      "content": "<cite>what i would do in this situation is to paste a copy of the new black m to the mask layer (make sure there’s nothing else in the mask), activate the black master and then cmd+j</cite>\n\nThis is exactly what I was describing, only expressed in a more sophisticated way. I was trying to describe it step-by-step.\n\nHowever, if the source glyph (whether it is newer or older) is from another font I believe the other alternative is much quicker and more elegant.\n\n"
+    },
+    {
+      "time": " 5.Jun.2007 6.51am",
+      "content": "Thank you Tim and Paul. Cmd+j seems to be exactly what I was looking for.\n\n"
+    },
+    {
+      "time": " 5.Jun.2007 7.03am",
+      "content": "_This is exactly what I was describing, only expressed in a more sophisticated way._\n\nsorry, but i wouldn’t have been able to figure out how to do this following your instructions, that’s why i posted my own explanation. i guess it takes a more sophisticated mind to understand your process, tim. \\>^p\n\n"
+    },
+    {
+      "time": " 5.Jun.2007 7.30am",
+      "content": "While we’re at it: When I import an .afm into the MM, and select to just replace the kerning, then only some of the kerning is imported. I’m using kerning classes and they have been set up in the MM, but some of the pairs don’t work in the metrics(kerning) window. When I try to change the kerning for the pair then it won’t do it as a class kern. I can’t figure it out - help!\n\n"
+    },
+    {
+      "time": " 5.Jun.2007 9.38am",
+      "content": "I have moved the kerning question to this thread: [http://typophile.com/node/34256](http://web.archive.org/web/20071219010018/http:/typophile.com/node/34256 \"http://typophile.com/node/34256\")\n\n"
+    }
+  ]
+}

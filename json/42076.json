@@ -1,0 +1,70 @@
+{
+  "id": "42076",
+  "title": "GlyphOrderAndAliasDB",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I'm working on some of this [AFDKO](http://web.archive.org/web/20131017120330/http:/typophile.com/wiki/AFDKO) stuff again, and I have a few questions as to how production goes along.\n\n1) How do you typically create the GlyphOrderAndAliasDB file? Specifically, let's say that you're using Fontlab in names mode. What I've been doing is using the \"print all glyphs\" macro, then cleaning the text up by removing the line numbers. There has GOT to be an easier way to get a complete glyph list to create the DB, since I know something like the 3000+ glyph Arno Pro wasn't hashed out by hand the hard way.\n\nWhat program or command line program is the best solution? And what programming tools are useful in creating the basic file components used the creation of an opentype font via the AFDKO procedures laid out by Miguel Sousa at TypoTechnica?\n\n2) Just for practice, I'm trying to merge two ttf files together into one otf. One file is the standard U&lc and the other is the expert set with small caps. I'm looking at the mergeFonts tutorial, and it shows that I need to create a mapping file using, guess what, a glyph names list.\n\nAssuming I correctly map the names of the expert set, i.e., s to s.smcp, I should then be able to merge both fonts together into a single .otf file. That final otf file won't contain class metrics or features, but having all of the glyphs together in one file is a start. Am I correct in how I've interpreted the instructions?\n\nThanks for all of the help!\n\n",
+  "author": "Dan Gayle",
+  "time": "14 Feb 2008 — 2:00am",
+  "uid": "12948",
+  "comments": [
+    {
+      "time": "15 Feb 2008 — 3:28pm",
+      "content": "\\> _How do you typically create the GlyphOrderAndAliasDB file?_\n\nWhat I usually do is to start with an existing GlyphOrderAndAliasDB file and add/remove entries as necessary. (For instance, the one used for Arno Pro was derived from the one used for Garamond Premier Pro, which in turn had been derived from something before). You can, for example, start with the sample file available in the FDK (FDK/Tools/SharedData/GlyphOrderAndAliasDB), or the one present in the ExampleRomanFonts.zip file.  \nWhat we do at Adobe is a mix of using data from existing files, and running our own scripts on the file AGD.txt (FDK/Tools/SharedData/AGD.txt).\n\nAlternatively, you can write your own, which sounds like what you're trying to do. Writing a GlyphOrderAndAliasDB file might require some hand work the first time, but the good thing is that once you have it you can use the same file for other projects (as is, or with minor changes).\n\nIf you're using Fontlab, what you can do is to switch to \"Index mode\", rearrange the order of the glyphs, and then run this little Python program,  \n`for g in fl.font.glyphs:\n   print g.name\n`  \nYou can then use the outputted list for building your own GlyphOrderAndAliasDB. For that, you will eventually need a good text editor and a spreadsheet program.  \nIn case your final font does not require any glyph name changes --which means you're using final glyph names in the development process--, you can replace the second line of the code above by,  \n`   print \"%s\\t%s\" % (g.name, g.name)`  \nwhich will output two columns of glyph names.\n\nMakeOTF knows how to map standard glyph names --AGL glyph names and uniXXXX-style glyph names-- to Unicode values, so normally you won't need to have a third column in the GlyphOrderAndAliasDB file.\n\nAnother thing I normally do is to extract the second column of the GlyphOrderAndAliasDB file, and use that data to create a FontLab encoding file (.enc). Then, in \"Names mode\", I use Glyph \\> Sort Glyphs \\> By Encoding, and upon switching to \"Index mode\" I get all the glyphs neatly ordered.\n\nKeep in mind that it's not mandatory for the GlyphOrderAndAliasDB file to have all the glyphs present in the source font. The data on that file is mainly used for controlling the glyph order on the final font, and to rename glyphs from production name to final (standard) name. If a glyph is in the source font but not in the GlyphOrderAndAliasDB file, it will simply be put at the end on the final font, and its glyph name will remain the same. (NOTE: It's \\*highly\\* un-recommend, but MakeOTF will build your font even if the only entry in the GlyphOrderAndAliasDB file is the '.notdef')\n\nAdditionally, you can use the same GlyphOrderAndAliasDB file for your upright and italic fonts, even if their glyph set is not exactly the same. This allows you to maintain the same overall glyph order within all the fonts in the family. For example, in Arno Pro the italics have a bunch of swash glyphs which aren't present in the uprights. Nonetheless, the same GlyphOrderAndAliasDB file was used for both; MakeOTF simply skipped the entries that didn't apply.\n\n"
+    },
+    {
+      "time": "15 Feb 2008 — 3:30pm",
+      "content": "\\> _Just for practice, I’m trying to merge two ttf files together into one otf._\n\nI'm not sure mergeFonts works with TT or OT fonts. I believe it expects a name-keyed or CID-keyed Type 1 font, and it outputs those same formats. So, if you want to use mergeFonts to merge a \"basic\" font and an \"expert\" font into a single font, you need to convert the source fonts into Type 1 and then run this command,  \n`mergeFonts output.pfa basicfont.pfa glyphlist expertfont.pfa`\n\nwhich will create the merged font (output.pfa). The `glyphlist` file is a simple text file containing entries for renaming the glyphs coming from the `expertfont.pfa` file. Its content can be something like,  \n`mergeFonts\na.sc   Asmall\nb.sc   Bsmall\nc.sc   Csmall`\n\nmergeFonts was created mainly for usage in CJK font development. The raw CID-keyed fonts used as source for the final OTF fonts are normally assembled by merging a few dozen Type 1 fonts, using mergeFonts.\n\n"
+    },
+    {
+      "time": "16 Feb 2008 — 12:34pm",
+      "content": "Ps. And of course, one can use `tx` to convert .ttf or .otf into .pfa.\n\nA.\n\n"
+    },
+    {
+      "time": "16 Feb 2008 — 1:05pm",
+      "content": "Is there a list of commands for `tx`? I've looked all over the place, and I can't find it. There are hints to using parts of it spread throughout the Adobe documentation, but no solid documentation on `tx` itself.\n\n"
+    },
+    {
+      "time": "16 Feb 2008 — 2:40pm",
+      "content": "Dan, try this: `tx -h` (for help) and `tx -u` (for usage).\n\nRegards,  \nErnie\n\n"
+    },
+    {
+      "time": "16 Feb 2008 — 2:40pm",
+      "content": "Try  \n`tx -u`  \nand/or  \n`tx -h`  \nfor usage and help (`-u` and `-h` work with most AFDKO scripts).\n\n"
+    },
+    {
+      "time": "16 Feb 2008 — 3:28pm",
+      "content": "Thanks guys. I tried `help tx`, `man -h tx`, etc, but didn't know about those commands. If I `tx -u > txusage.txt`, that should give me a txt document that I can print off, right?\n\n"
+    },
+    {
+      "time": "16 Feb 2008 — 3:34pm",
+      "content": "_If I tx -u \\> txusage.txt, that should give me a txt document that I can print off, right?_\n\nYes. That redirect should do it nicely.\n\nRegards,  \nErnie\n\n"
+    },
+    {
+      "time": "16 Feb 2008 — 7:31pm",
+      "content": "It seems that you can use .otf fonts as input for `mergeFonts` after all. The output will be a font in CFF format, which you can then convert to Type 1 using `tx`.  \nTherefore, you can do,  \n`mergeFonts output.cff basicfont.otf glyphlist expertfont.otf`  \nand then,  \n`tx -t1 output.cff > output.pfa`\n\n"
+    },
+    {
+      "time": "16 Feb 2008 — 8:55pm",
+      "content": "Of course, OpenType Layout features, including kerning, are an entirely separate matter. You'd need to do some processing to merge both fonts' original kerning tables into a new \"kern\" feature. There does not seem to be an off-the-shelf commandline solution for that, you'd need to write a Python or shell script yourself.\n\nA.\n\n"
+    },
+    {
+      "time": "16 Feb 2008 — 9:35pm",
+      "content": "Aye Papi! No mas! No mas!\n\nAfter all of the conversion work that is taking place around the font industry, you think that someone would have streamlined the process.\n\n"
+    },
+    {
+      "time": "23 Feb 2008 — 9:24am",
+      "content": "This past week I gave a workshop on using the [AFDKO](http://web.archive.org/web/20131017120330/http:/typophile.com/wiki/AFDKO) at the KABK and one student brought to my attention (thanks Ross!) that the FDK contains a FontLab named \"Do Glyph Alias & Ordering\". I honestly don't recall ever using it -- which explains why I didn't mention it earlier --, so I'm not sure what it does. That said, I encourage you to look at it, and report back with any suggestions you might have or bugs you may find. Thanks!\n\n"
+    },
+    {
+      "time": "23 Feb 2008 — 3:45pm",
+      "content": "I've been on Typophile less than twenty-four hours and am not a professional font designer. However I felt obliged to point out the following. I notice there are repeated references in this forum to FontLab. However, no one seems to be familiar at all with a product called FontCreator. FontCreator is vastly superior to anything put out by Fontlab. I advise you to go to cnet.com and download a 30 day trial copy and see for yourself. (And I most certainly do not work for the company.)\n\n"
+    },
+    {
+      "time": "23 Feb 2008 — 4:17pm",
+      "content": "_Vastly superior_ to _anything_?\n\nYou're going to have to back that statement up with facts, because the \"professional font designers\" just might have something to say about that.\n\nBut do it in another thread, so that this discussion can remain on the creation of the non-Fontlab AFDKO GlyphOrderAndAliasDB file.\n\n"
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "id": "19533",
+  "title": "FFIL's in \"User/Library\" with no LWFN's in sight?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "First of all please excuse me if this is a repost of sorts, I’ve searched quite extensivley on the topic, but need some additional help...\n\nThe design studio I work for had a freelancer design some cover art. She ended up using a font found in the user library (OSX) “Goudy Old Face” an [FFIL](http://web.archive.org/web/20090516062651/http:/typophile.com/wiki/FFIL) font. When we sent the layered art to the press, they called me up and said Goudy Old Face was only a screen font, thus no good.\n\nI searched through my fonts and could not find a Goudy Old Face [LWFN](http://web.archive.org/web/20090516062651/http:/typophile.com/wiki/LWFN) version? So I ended up having to purchase the post scripts for the font and just sent those off.\n\nSo here is my question...\n\nIf I only see a FFIL suitcase listed in my “User/Library”, how do I know it has a printer (LWFN) font?\n\nThe reason I ask is, all of the FFIL fonts in my “User/Library” do not have any visible LWFNs? Which leads me to believe these FFIL files are worthless without their LWFN counterparts.\n\nI found this FFIL to DFONT converter, but I’m not sure making DFONT’s out of my FFIL’s is even going to do anything other than changing the wrapper?\n\nShould I just go into my “User/Library” and remove all of the FFIL fonts to prevent this in the future?\n\nThanks for any help!  \n- e\n\n",
+  "author": "<a href=\"/web/20090516062651/http://typophile.com/user/12660\" title=\"View user profile.\">echoes</a>",
+  "time": "<br>",
+  "uid": "12660",
+  "comments": [
+    {
+      "time": " 26.Apr.2006 12.11pm",
+      "content": "That’s pretty odd considering that you would not be able to use the font at all if the LWFN file was missing. If all you have is the FFIL (a.k.a. the font suitcase), and you put this into one of your Font directories, OS X will not show the font in your font menus.\n\nIt’s not likely to have a name like “Goudy Old Face”, more likely something like “GoudyOldFac”. PostScript font file names are usually shortened and must contain no spaces.\n\n"
+    },
+    {
+      "time": " 26.Apr.2006 12.24pm",
+      "content": "I forgot to mention that when I sent the font (FFIL version) to the printer, I had to be made into a disk image because of the whole losing the fork thing.\n\nMark, do you think the font lost its postscript because of the way I tried to send it over?\n\nI wonder if sending over the converted dfont would have differnt results?\n\n"
+    },
+    {
+      "time": " 26.Apr.2006 12.36pm",
+      "content": "The resource fork issue affects the FFIL file, not LWFNs. A FFIL file (font suitcase) has all its information in the resource fork. Only Macs can deal properly with this kind of file. The LWFN (the PostScript outline data) has all its information in the data fork, meaning it’s just a plain old binary file, like the kind used on other OS’s. If you are not careful when moving Mac font suitcases (FFILs) to and from foreign file systems (the internet, for example), the resource fork may be lost resulting in an empty (0kb) file.\n\n"
+    },
+    {
+      "time": " 26.Apr.2006 12.41pm",
+      "content": "Incidentally, a dfont is simply a Mac TrueType font with all its data in the data fork instead of the resource fork. Apple uses this format for essential system fonts on OS X because OS X is UNIX-based and, without higher level stuff like Aqua, can’t deal with resource forks either. There is no need or advantage to converting normal (non-system-essential) fonts to the dfont format.\n\n"
+    },
+    {
+      "time": " 26.Apr.2006 2.01pm",
+      "content": "<cite>and said Goudy Old Face was only a screen font, thus no good.</cite>\n\nThey meant it is originally MADE and optimized for the screen, not that it is a SCREEN FONT made out of pixels. So there’s no need to look for a PostScript version of it. Everything is in the FFIL file.  \nIf you’re happy with the design just tell them to use it. It’s an old myth that TrueType fonts are not printable. Every recent RIP or printer will have no problems using this TrueType font in a font suitcase.\n\nRalf\n\n[http://www.fonts.info](http://web.archive.org/web/20090516062651/http:/www.fonts.info/ \"http://www.fonts.info\")\n\n"
+    },
+    {
+      "time": " 26.Apr.2006 2.12pm",
+      "content": "Good point. It didn’t occur to me that there could be a TrueType font in the FFIL. That would certainly explain why the font was usable yet didn’t have a corresponding LWFN file. I simply assumed from the problem description that it was a PostScript font. D’oh!\n\n"
+    },
+    {
+      "time": " 26.Apr.2006 2.17pm",
+      "content": "Ok, that makes sense...\n\nBecause I’m sure we have sent over other ttf files with no postscripts...\n\nSo was the guy at the printer house just suck under the mindset that he has to have postscripts?\n\nBecause what sucks is they (print house) usually report back to our client (Paramount) about these sort of things, which makes me look like we don’t know what we are doing...\n\n"
+    },
+    {
+      "time": " 27.Apr.2006 3.48am",
+      "content": "\\>The LWFN (the PostScript outline data) has all its information in the data fork, meaning it’s just a plain old binary file, like the kind used on other OS’s\n\nThis statement is completely incorrect. LWFN files are also resource-based Mac files. PostScript data is in the resources of type ’POST’.\n\nRegards,  \nJohnych\n\n"
+    },
+    {
+      "time": " 27.Apr.2006 11.18am",
+      "content": "There seems to be some confusion here. Rather than reply to any specific post, I’m going to state things as I understand them.\n\nThe FFIL file is what is traditionally know as a Mac font suitcase. In OS 9 and before it generally had a suitcase icon. In the case of a Postscript Type 1 font, there needs to be a LWFN paired with it; this is the Postscript Type 1 Outline.\n\nAnother common situation is that the font is a traditional Mac TrueType font. It has the outlines contained in the same file as the Suitcase. There is no obvious way to tell using only the Finder. It does not need to have a .dfont or .ttf extension, and does indeed store critical data in the resource fork. If you add the font to a font manager, you should be able to determine quickly that it is TT.\n\nIf a PostScript font suitcase is missing it’s outline, it may sometimes be refered to as ’bitmap only’ or an ’orphan’. In some applications, these faces may still be available, typically you will get a warning if you try to print them. This situation exists for backwards compatability with certain applications.\n\nIf you work in a prepress environment, you may occasionally come across ancient fonts intended to be bitmap only. These exotic beauties were either intended for screen-only use or for dot matrix printers.(remember those?) Nowdays Mac OS doesn’t use the old bitmap components that are present in the suitcase, but the suitcase file still needs to be intact.\n\nThis may be in the wiki...\n\n"
+    },
+    {
+      "time": " 27.Apr.2006 11.38am",
+      "content": "If someone finds this in the wiki, let me know. I don’t see it anywhere.  \nAlso, in Suitcase Fusion these fonts may appear with either a green “O” or a blue “A” icon depending on their characteristics. This is partly because OpenType and TrueType are part of the same standard. The fonts in this image are provided with Microsoft Office.\n\n"
+    },
+    {
+      "time": " 27.Apr.2006 11.41am",
+      "content": "Oops. I can’t seem to post a .jpg for some reason. Is there a size limit?\n\n"
+    },
+    {
+      "time": " 27.Apr.2006 12.44pm",
+      "content": "there are some problems right now with attaching files i think. you could just host it at [www.imageshack.us](http://web.archive.org/web/20090516062651/http:/www.imageshack.us/) until the bug is fixed here.\n\n"
+    },
+    {
+      "time": " 27.Apr.2006 1.30pm",
+      "content": "It’s not that important. It’s nice to know that it isn’t something i wsa missing though.\n\n"
+    },
+    {
+      "time": " 27.Apr.2006 2.52pm",
+      "content": "_\\> The LWFN (the PostScript outline data) has all its information in the data fork, meaning it’s just a plain old binary file, like the kind used on other OS’s_\n\nThis statement is completely incorrect. LWFN files are also resource-based Mac files. PostScript data is in the resources of type ‘POST’.\n\nYou’re absolutely right. I apologize for the misinformation. I have no idea how that got into my head.\n\n"
+    }
+  ]
+}

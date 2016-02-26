@@ -1,0 +1,62 @@
+{
+  "id": "60745",
+  "title": "Troubles with proofing light sans type",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "I have noticed that the vertical stems of light sans type have inconsistent stem weights when printed on laser printers, even real 1200 DPI postscript printers. Is this just something that I have to accept and should design proofs that only show text at larger sizes? Should I hint the type before I run my proofs? Are the better printers that I can have print shops run proofs on for me?\n\n",
+  "author": "<a href=\"/web/20100203102240/http://typophile.com/user/14722\" title=\"View user profile.\">James Puckett</a>",
+  "time": "<br>",
+  "uid": "14722",
+  "comments": [
+    {
+      "time": "",
+      "content": "You are not alone and the problem runs deeper than just thin sans. I used to get Linotronic output but it since has gone the way of the 8-Track tapes. I suffer along with my 600 dpi laser which sucks.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Some points:  \n\\* Make bloody sure the stems really are the same width in Fontlab.  \n\\* Remember to delete all hints AND make sure the option to 'Hint font on export' in Fontlab is disabled.  \n\\* Even blue-zones (vertical alignment zones) can make the printer do un-funny stuff.  \n\\* Print in target size and in something like 4-500% and take a step back.  \n\\* Get a magnifying loupe and study what happens in the target size, I have found that helpful in some instances.  \n\\* Try rendering some text in Photoshop in the printers resolution and see how that compares to what you are seeing through the loupe.  \n\\* Make sure your printer is not crap. Compare it to other printers. All printers have their peculiar rendering quirks.\n\n"
+    },
+    {
+      "time": "",
+      "content": "New toner makes a difference too.\n\nMy printer had some trouble putting out well light weights as the toner level was too low, letting stems and such appear fuzzy on paper.\n\n"
+    },
+    {
+      "time": "",
+      "content": "I believe hinting the fonts would help, because the stems would, though not be displayed 100% accurately, at least be rounded to the same (pixel) values.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Well Jens, that depends which hinting parameters you are talking about, printed on which printer using which driver? High resolution devices are not really supposed to use hinting instructions, but never the less they sometimes render differently on the printed page if you change the hinting. The problem is the total lack of documentation of how printers _actually_ render glyphs. It's the infamous 'black box' where you can poke around inside of it with a knitting needle in search of clues as to what it contains. I have given up on finding the perfect printer. Some are too dark, some are too light, and all of them have issues with overshoot.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Claus, I was talking about hints on vertical and horizontal stems, together with the font-wide PS \"standard stem\" values which as I understand it make sure that similar stem widths are rounded to the same pixel/printer-dot values by the rasterizer.\n\nIn this respect it is a remedy for James’ problem regarding the inconsistent stem weights. But of course it's not a good way to look at the details in the design phase of a typeface. All the methods you mentioned are preferable for that purpose. But you should anyway keep in mind that this specific rasterizing issue will not be present in the final, hinted fonts.\n\nAnd yes, usually there's a visible difference between unhinted and hinted fonts on a 1200 dpi printer. Perhaps that's not really a high-resolution device ;) My 1200 dpi printer suffers from the blue zone bug, btw, it suppresses overshoot at all (?) sizes.\n\n"
+    },
+    {
+      "time": "",
+      "content": "<cite>\"My 1200 dpi printer suffers from the blue zone bug, btw, it suppresses overshoot at all (?) sizes.\"</cite>  \nhp?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Dear Jens, Nina et al  \nThat overshoot problem is not on all HP printers, and I think it also depends on how the font-file was generated, the layout application, and how it was printed, eg. directly from the layout application or via a PDF, then in Acrobat or Preview – multiply that with OS version and printerdriver version and printer firmware version. If one was methodical, one could go through the mutations one by one and get closer to what is happening. I will probably not be that person.\n\nThe worst problem I've seen is a special variant of the overshoot problem, where characters with overshoot would simply be moved up the difference between the baseline and the overshoot under the baseline. A bizarre bug, never the less I've seen that one several times from Xerox colour laser printers. I've heard anecdotal reports of the general overshoot problem with HP printers, but it's not present on my Laserjet P2015 if that is any help. Be aware that these things are moving targets, things change from version to version of software and hardware, so don't rely on that old HP story be hold true on today's setup.\n\nRegarding the standard stems, I seem to remember that the hinting settings are only supposed to be used from 300 dpi and down. Quite understandable there, but on 1200 dpi printers Georgia in 9pt has a H vertical stem width of 16 dots. One more or less would probably still be visible upon closer examination. The horizontal crossbar in the e is only 6 dots, so one dot more or less would relatively make much more of a visual impact. I still can't find any information on how this is implemented in printer drivers. If someone has some info on this please post it.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_hp?_\n\nCorrect, Nina :) An old LaserJet 4050 with emulated PostScript. Didn't know that before I got it, but it is still a huge improvement over my previous 600 dpi LaserJet 6 MP (which had real PostScript ...).\n\nClaus: _Regarding the standard stems, I seem to remember that the hinting settings are only supposed to be used from 300 dpi and down. Quite understandable there, but on 1200 dpi printers Georgia in 9pt has a H vertical stem width of 16 dots. One more or less would probably still be visible upon closer examination. The horizontal crossbar in the e is only 6 dots, so one dot more or less would relatively make much more of a visual impact. I still can’t find any information on how this is implemented in printer drivers. If someone has some info on this please post it._\n\nI also was under the impression that hinting was ignored on high-res devices, but I today looked into the Type1 spec and another book and can't find any evidence to support it. There is however a value, _BlueScale_, which controls at which point size the overshoot suppression stops working. But hints seem to be applied at every size.\n\nWhich seems quite logical to me now, because when type size or resolution increases, the absolute rounding error (1 dot) stays the same, but the relative error in relation to the stem width gets smaller. So hinting isn't ignored, but just becomes more insignificant at higher resolutions. So there's no real need to implement a limit for hinting in rasterizers.\n\nGeorgia, being a font with TrueType outlines, is a different matter. In TT-based fonts you can set specific ppm sizes above which alignment zones or all hints are ignored. (I'm not sure where to find these values in a decompiled font though ...)\n\nAnd to mention my printer again, usually I see the effect of hinting in TT fonts at normal text sizes too; a badly hinted TT font can really spoil the printed appearance.\n\nI completely agree with you that there are too many variables when it comes to hinting and printing :)\n\n"
+    },
+    {
+      "time": "",
+      "content": "I have a 600-dpi HP 2300 which does not do small sizes well at all. I am looking at an HP P2055 1200-dpi but I can't take it home and test it with my files and paper so I don't know how much better it may be. Has anyone used the P2055?\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Chris, perhaps it's easier to bring a laptop plus preferred paper to the shop?\n\n"
+    },
+    {
+      "time": "",
+      "content": "I never have these problems proofing to a 2400 dpi Xante w/PostScript Level 3.\n\nSuch a shame Xante got out of the desktop laser market.\n\nHopefully they will see the error of their ways and get back in it.\n\n"
+    }
+  ]
+}

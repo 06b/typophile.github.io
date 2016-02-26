@@ -1,0 +1,34 @@
+{
+  "id": "38687",
+  "title": "Problem with overlap in new script font",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi all,  \nI've been working on a new script font named dearJoe 5 and I am encountering a problem I've never seen before: After manually kerning the whole thing I am now testing the font (in Photoshop etc.) and I notice that in some letter combinations, when they overlap, the letters are not displayed correctly. Where the overlap is, the color is inverted: what should be black shows as white. When not overlapping all characters seem fine.  \nNow I could not find the solution myself and I hope it's something simple like a problem with the contours but really I couldn't tell.  \nSo my question is: what could cause this problem, how do I solve this and is there a way to check all characters at once for this error?\n\nThanks a lot for helping me out on this.\n\nAll the best,  \nJoe\n\n| Attachment | Size |\n| --- | --- |\n| [dJ 5 overlap.jpg](http://web.archive.org/web/20150403064335/http:/typophile.com/files/dJ%205%20overlap.jpg) | 31.62 KB |\n\n",
+  "author": "Joebob",
+  "time": "1 Nov 2007 — 3:43am",
+  "uid": "10380",
+  "comments": [
+    {
+      "time": "1 Nov 2007 — 3:59am",
+      "content": "It's a very simple error. You need to make sure your contours have the RIGHT (depending on your outline format) and the SAME direction.\n\nRalf\n\n"
+    },
+    {
+      "time": "1 Nov 2007 — 4:17am",
+      "content": "Hi Ralf, thanks for your quick reply.  \nCould you please explain what direction is the RIGHT direction and is there a way in which to treat the whole font at once to solve this problem?\n\nThanks,  \nJoe\n\n"
+    },
+    {
+      "time": "1 Nov 2007 — 4:49am",
+      "content": "If you use PostScript outlines take a look at chapter \"3.5 Direction of Paths\" in this PDF:  \n [http://partners.adobe.com/public/developer/en/font/T1\\_SPEC.PDF](http://web.archive.org/web/20150403064335/http:/partners.adobe.com/public/developer/en/font/T1_SPEC.PDF \"http://partners.adobe.com/public/developer/en/font/T1\\_SPEC.PDF\")\n\nIf you use TrueType contours, it's the other way around.\n\nRalf\n\n"
+    },
+    {
+      "time": "1 Nov 2007 — 6:15am",
+      "content": "If you're working in FontLab, select all, then CONTOURS \\> PATHS \\> SET PS (or TTF) PATH DIRECTION. In Fontographer, select all, then ELEMENT \\> CORRECT PATH DIRECTION.\n\n"
+    },
+    {
+      "time": "1 Nov 2007 — 7:21am",
+      "content": "Thanks Oldnick,\n\nthat is what I was looking for. And thanks Ralf, the PDF you suggested will come in handy too.\n\nJoe\n\n"
+    }
+  ]
+}

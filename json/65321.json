@@ -1,0 +1,54 @@
+{
+  "id": "65321",
+  "title": "Outlines changing on generate...",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Outlines drawn in Illustrator show bottom of feet as intended: a smooth concave curve. Outline brought into FontLab, all is well: the curve is still right. On generating OT font, however, the curve turns into a kind of wave. When the glyph is set in InDesign, there's the odd wave. But when I convert that glyph to outlines in InDesign, the wave converts back to the proper concave curve. PDF attached. Any ideas?\n\n| Attachment | Size |\n| --- | --- |\n| [waved-foot.pdf](http://web.archive.org/web/20130823072129/http:/typophile.com/files/waved-foot.pdf) | 24.76 KB |\n\n",
+  "author": "jason",
+  "time": "12 Dec 2009 — 11:32pm",
+  "uid": "3771",
+  "comments": [
+    {
+      "time": "13 Dec 2009 — 3:24am",
+      "content": "It's not a change in the outline, but a problem in the rendering by the Adobe apps.  \nIf you look at the PDF with Acrobat you see the \"wave\", but if you look at it with a different app (on OS X, for example, with Preview) you will see the proper concave curve.\n\n"
+    },
+    {
+      "time": "13 Dec 2009 — 6:50am",
+      "content": "I think it's a hinting problem. That could explain the different display in Preview and Adobe Reader (OS X Preview ignores hints, Adobe Reader interprets them for display). When you convert the font to outlines in InDesign, hinting is discarded and the outline looks good again.\n\nWhat do your hints look like in FontLab Studio?\n\n"
+    },
+    {
+      "time": "13 Dec 2009 — 8:56am",
+      "content": "Some apps don't like curves where one end doesn't have a control point.  \nTry adding a \"nominal\" BCP and see if it helps.\n\nhhp\n\n"
+    },
+    {
+      "time": "13 Dec 2009 — 10:36am",
+      "content": "There was no hinting added to the font, and all three points along the bottom of the foot have BCPs in both directions. Also, the \"wave\" is showing up in InDesign as well, not just the PDF. I've added autohinting to test, but the wave is still there (this is essentially my first font, so I'll have to read up more on hinting). Please keep the suggestions coming...\n\n"
+    },
+    {
+      "time": "13 Dec 2009 — 11:11am",
+      "content": "@ jason\n\nWould you post the font, please? (Remove the glyphs except from the l. I think the easiest way of removing the outlines is to swap them with the mask layer and to globally delete the mask then. At the moment I don’t know, if there is a function in FontLab with the help of which you can directly remove outlines from more than one character at once.)\n\n"
+    },
+    {
+      "time": "13 Dec 2009 — 11:13am",
+      "content": "Of the three points I had along the bottom of the foot, I've removed the middle point and the \"wave\" appears to go away. Here is the foot with three points, and with two. The latter seems to be rendering fine in InDesign and in PDF.\n\n ![](http://web.archive.org/web/20130823072129im_/http:/typophile.com/files/bcps_5949.jpg)\n\n"
+    },
+    {
+      "time": "13 Dec 2009 — 11:19am",
+      "content": "@ jason\n\nIt is much easier to comprehend those problems, if I have access to the font file.\n\n"
+    },
+    {
+      "time": "13 Dec 2009 — 12:01pm",
+      "content": "What does the wave look like, exactly?\n\nIs your Em something besides 1000?  \nAre you generating PS outlines or TT?\n\nI have a hunch the BCPs are snapping  \nto a grid that's throwing off the curves.\n\nhhp\n\n"
+    },
+    {
+      "time": "13 Dec 2009 — 12:13pm",
+      "content": "1000 unit em, generating OTPS font from FontLab. I'm drawing the outlines in Illustrator on the 1000 unit grid and, yes, I have everything set to snap to that grid. Then I've copied/pasted the glyphs into FontLab and fine-tuned them there. Here is a JPG to avoid rendering differences: the top is the outline as drawn with three BCPs, the bottom is the same foot as rendered in InDesign using the OTPS font.\n\nAs mentioned in my last post, though, removing the middle BCP from the feet and top serifs seems to fix the problem, so the font is now rendering properly.\n\n ![](http://web.archive.org/web/20130823072129im_/http:/typophile.com/files/wave_5321.jpg)\n\n"
+    },
+    {
+      "time": "13 Dec 2009 — 12:31pm",
+      "content": "I hear you about the grid-snapping, but I think  \nmaybe the points are in fact snapping to the wrong  \nplace when you're bringing them from Illustrator.  \nAnd really, in general, the more that you do stuff  \nnatively in FontLab the better. This could all be  \nFontLab's fault and not Illustrator's, but still.\n\nhhp\n\n"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "4909",
+  "title": "Breaking Unicode rules",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I know so little about Unicode it's embarrassing, but how horrible of a person would I be if I decided to break Unicode classifications and assign a non-alphabetic symbol set (one that IS classified in Unicode) to the alphabetic keys in the MS Windows Symbol codepage? I just want the user to be able to type \"A\", or \"j\" or whatever, and know that they can get the symbol just by changing the font selection.   \n   \nUnicode formatting just seems impractical in this case (to be honest, I disagree with the act of assigning codepoints to certain non-alphabetic sets, especially this one [I Ching Hexagram symbols]).   \n   \nIs this an acceptable practice at all?\n\n",
+  "author": "A. Scott Britton",
+  "time": "24 May 2004 — 8:33am",
+  "uid": "3373",
+  "comments": [
+    {
+      "time": "24 May 2004 — 9:54am",
+      "content": "I guess the question that needs to go with \"Is this an acceptable practice at all\" is \"to whom?\"   \n   \nOn the one hand, these symbols have legitimate codepoints, so we should use them. The problem is one of keyboard input. If you think people are doing to use the font enough that they won't have to look up the character mapping every time, then it's probably worth making a custom keyboard driver, which is a relatively painless activity on both Mac and Windows these days.   \n   \nUsing the proper Unicodes means that your font will be interchangeable with any other Unicode I Ching font that somebody makes, won't trip up spellcheckers, etc.   \n   \nPersonally, I suspect that most people won't use most pi fonts enough to memorize key mappings. In which case, you're not doing them any long-term disservice by using the real Unicodes and letting them use regular access doohickies to get at them (Windows CharMap, Mac Character Palette, Adobe Glyph Palette).   \n   \nThe main problem will be that the font won't work at all in non-Unicode applications, and there are still some of those that matter (like QuarkXPress). That's the best argument for making a font with a bogus encoding, and depending on who's going to use the font, it can be a very strong one.   \n   \nUsing the Symbol codepage and marking the font appopriately will at least alert Windows-based consumers that it's not \"really\" an alphabetic font (not sure that it will have that affect on the Mac side, yet; also not sure the codepoints will work the same way on the Mac). I do know that Adobe's conclusion about the Symbol codepage after much thought and investigation was that we should only use it for the font named \"Symbol\" and nothing else.   \n   \nAdobe's solution, for what it's worth, has been to license both the newer Unicode/OpenType version of a font and the old Type 1 version at the same time. If the user needs direct keyboard access or non-Unicode app usage, they use the Type 1. If not, they are free to use the new stuff.   \n   \nRegards,   \n   \nT\n\n"
+    },
+    {
+      "time": "24 May 2004 — 11:18am",
+      "content": "Thanks Thomas.   \n   \nWell-argued, but at the same time it's the answer I'd hoped I wouldn't get. Sooo...   \n   \nHow does one go about this? Design the font (glyph by glyph, assigning each one its Unicode) and then what?   \n   \nAny suggestions (online or in print) for understanding keyboard drivers, etc.? I'd say the Unicode site is packed with information (and it is of course), but it's difficult to understand all of it at once.\n\n"
+    },
+    {
+      "time": "24 May 2004 — 4:15pm",
+      "content": "If you're going the \"Unicode purity\" route, design the font, assign glyphs their correct Unicode, and generate it as TrueType or OpenType.   \n   \nLuckily, making keyboard drivers for Mac (OS X) and Windows has gotten really dramatically easier in the last couple of years. Both OSes allow you to put something together relatively painlessly with text-based XML sources, and compile keyboards from those.   \n   \nFor OS X, see:   \n\\< [http://developer.apple.com/technotes/tn2002/tn2056.html](http://web.archive.org/web/20131022034329/http:/developer.apple.com/technotes/tn2002/tn2056.html)\\>   \n   \nAlso:   \n\\< [http://scripts.sil.org/cms/scripts/page.php?site\\_id=nrsi&item\\_id=ukelele](http://web.archive.org/web/20131022034329/http:/scripts.sil.org/cms/scripts/page.php?site_id=nrsi&item_id=ukelele)\\>   \n   \nFor Windows 2000 and XP, try this:   \n\\< [http://www.microsoft.com/globaldev/tools/msklc.mspx](http://web.archive.org/web/20131022034329/http:/www.microsoft.com/globaldev/tools/msklc.mspx)\\>   \n   \nThe keyboard stuff can be a lot of fun, really. ![:-)](http://web.archive.org/web/20131022034329im_/http:/www.typophile.com/forums/clipart/happy.gif)\n\n"
+    }
+  ]
+}

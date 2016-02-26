@@ -1,0 +1,122 @@
+{
+  "id": "4340",
+  "title": "Random font",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "i am currently investigating possibilities to randomizing handwritten fonts to enable the placements of variable glyphs. i am new to this subject, so any input would be highly appreciated. thanks.\n\n",
+  "author": "elastik",
+  "time": "18 Apr 2004 — 4:43pm",
+  "uid": "3434",
+  "comments": [
+    {
+      "time": "18 Apr 2004 — 5:15pm",
+      "content": "The only folks I know who have done work with truly randomizing glyph selection are LettError, with FF Kozmik. [http://www.letterror.com/foundry/kosmik/index.html](http://web.archive.org/web/20150123232942/http:/www.letterror.com/foundry/kosmik/index.html)   \n   \nHowever, FF Kozmik is not a handwriting font, but hand-printing.   \n   \nSeveral handwriting fonts have been developed that use elaborate contextual rules which produce a variable effect similar to randomness, though in fact it is deterministic. One is Linotype's Zapfino, in the AAT TrueType version of the font that ships with Mac OS X. I am having difficulty finding a good link to something that explains its contextual goodies, however.   \n   \nTwo other contextual-letterform type families are Caflisch Script Pro (Robert Slimbach after Max Caflisch) and Bickham Script (Richard Lipton after George bickham). These two are in OpenType format, and can display their functionality in applications such as Illustrator CS and InDesign. By way of example, Caflisch Script Pro has 12 different forms for the lowercase \"p,\" and picks one depending on the context.   \n   \nFor more information on OpenType, see [http://www.adobe.com/type/opentype](http://web.archive.org/web/20150123232942/http:/www.adobe.com/type/opentype). See particularly the OpenType User Guide PDF (linked on right).\n\n"
+    },
+    {
+      "time": "18 Apr 2004 — 8:56pm",
+      "content": "Although you should indeed spend a lot of time studying the work of Letterror, I have come to the conclusion that the only way to get typesetting to _really_ look like handwriting is to incorporate MISTAKES: incorrect spelling, crossed out words, changed passages, etc.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "18 Apr 2004 — 10:40pm",
+      "content": "After reading about this (in particular on LE's site) I am still a little confused. They say that \"during print\" the letters are randomized. Does this mean that the glyph replacement does not happen in real time? Do you actually have to wait until it is printed to see these effects?   \n   \nHildebrant.\n\n"
+    },
+    {
+      "time": "19 Apr 2004 — 6:40am",
+      "content": "after an email conversation with luc devroye i am left with the knowledge that he and the guys of letterror seam to be the one of the only people who have worked on random fonts. is that true? can you think of any other examples? am i wrong thinking that the random placement of variations of glyphs is an important step in the development of typography?   \n   \ni love this forum!   \n   \nconstantin\n\n"
+    },
+    {
+      "time": "19 Apr 2004 — 7:29am",
+      "content": "The first person to do parametric digital fonts was Jacques Andr\n\n"
+    },
+    {
+      "time": "19 Apr 2004 — 7:38am",
+      "content": "ParaType in Russia has worked on fonts with random elements. You might need to contact Emile at ParaType directly as details may no longer be on the Website.   \n   \nI think Hrant is correct WRT mistakes - the direct-mail industry, which uses handwriting fonts from vletter and others use the 'crossed-out-words' method. vletter include back-spacing crossed out glyphs in their fonts, I beleive.   \n   \nCheers, Si\n\n"
+    },
+    {
+      "time": "19 Apr 2004 — 8:03am",
+      "content": "One point of concern I'd have is that should you design something with a random font and save it our output at a service bureau, they may open up a different setting of the font and the really nice random combination you saw on your computer will look totally different when you send it to press assuming you don't convert the text to outlines first.   \n   \nBeyond that, making an intelligent OT version of the font will preserve the text setting you intended to reproduce.   \n   \nStuart :D\n\n"
+    },
+    {
+      "time": "19 Apr 2004 — 8:30am",
+      "content": "so would you say that OT enables you to use various shapes of a glyph randomly? sorry, but i am quite new to this subject and still dont feel very comfortable and confident with it.\n\n"
+    },
+    {
+      "time": "19 Apr 2004 — 8:46am",
+      "content": "OpenType as a format has this capability. However, AFAIK it is not yet supported in any application, or any font. Probably the last two are a chicken-and-egg situation.   \n   \nPersonally, I don't think that random glyphs are an important step in the development of typography. Interesting, yes. Important, I don't think so.   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "19 Apr 2004 — 8:47am",
+      "content": "or lets better put it this way:   \nis there any chance that i, as an individual, can produce a font that automatiacally changes glyphs so that i can create a different rythm than with a regular font?\n\n"
+    },
+    {
+      "time": "19 Apr 2004 — 9:10am",
+      "content": "Sure. Assuming you want it to work in some existing applications, you have an unexciting choice insofar as each approach is very limited in how/where it works:   \n   \n- OpenType (contextual, WYSIWYG, currently only supported by Adobe's apps, any output device, easiest to code but that's not saying a lot, use FontLab or maybe DTL FontMaster to make it)   \n   \n- AAT (contextual, WYSIWYG, Mac only, currently only supported by a handful of apps, any output device, hard to code contextual stuff, use Apple's command-line tools to compile the features into a pre-existing font)   \n   \n- Type 1 (true random, non-WYSIWYG, will work in many apps but not most recent Adobe apps, will only work with PostScript output devices, you'd probably have to be a programmer to code it)   \n   \nI hope that helps clarify your choices,   \n   \nT\n\n"
+    },
+    {
+      "time": "19 Apr 2004 — 9:37am",
+      "content": "\\> I don't think that random glyphs are an important step in the development of typography.   \n   \nI agree. However, carefully implemented _alternates_ can be a HUGE development.   \n   \n\\> produce a font that automatiacally changes glyphs so that i can create a different rythm   \n   \nYes and no. You can certainly produce fonts that vary the _patterns_, but \"rhythm\" simply does not exist at the letterform (or even bouma) level.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "19 Apr 2004 — 11:19am",
+      "content": "I agree that contextual alternates, and alternates in general, are a very good thing. Probably not \"huge\" for any western language IMO, but very good.   \n   \nAs for rhythm, well, there I (and a lot of other folks) disagree with you.   \n   \nCheers,   \n   \nT\n\n"
+    },
+    {
+      "time": "19 Apr 2004 — 11:26am",
+      "content": "\\> Probably not \"huge\"   \n   \nHave you considered the power of contextual alternates to aid readability?   \n   \nRhythm: some of the disagreement stems from a simple terminological difference, but some stems from a differing understanding of readability. Anyway, show me how Flow (using a decent definition, please) exists in text type design,and I'll change my mind.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "19 Apr 2004 — 5:24pm",
+      "content": "if i understand correctly [FF Kosmik](http://web.archive.org/web/20150123232942/http:/www.letterror.com/foundry/kosmik/technote.html) produces a \"random effect\" by cycling through a series of three related fonts with alternate glyphs. Kosmik uses postscript programming. I played around one weekend and tried to create the same effect using open type programming, but i'm no programming whiz, so i haven't figgered it out yet. I was opperating on the following premise (which may be faulty as well since logic is not my forte either) have three sets of glyphs for each character: class A, class B & class C. Define the OT substitution rules so that AA becomes AB BB becomes BC CC becomes CA, ad nauseum (infinitum, whatev!) Supposing i could get the programming right would this work??? I've been wondering about this for a while. Here's [another string](http://web.archive.org/web/20150123232942/http:/www.typophile.com/forums/messages/4100/20363.html)similar to this one in case anyone's interested.\n\n"
+    },
+    {
+      "time": "19 Apr 2004 — 7:51pm",
+      "content": "\\>I don't think that random glyphs are an important step in the development of typography   \n   \nOh no, randomness offers amazing opportunities!   \nI can think of two avenues worth exploring:   \n   \nFirstly, it is necessary to introduce an element of randomness into a font that truly emulates handwriting -- not contolled, professional script, but real writing which has the rough creative imperfection of humanity, where whole-word \"ligatures\" are created on the fly. Moving beyond, this process, once formalized, could be used to design fonts which are not mimics of handwriting, but something else again.   \n   \nAnd secondly: If one wanted to mimic the inconsistent quality of letterpress type, which is admirable when subtle, giving it life, rather than the dull predictability of high-res digital type, then one could arrange a \"type tray\" of glyphs, where each character has variants that are \"worn\" differently, or \"print\" differently (simulating arterfacts in paper or printing), and selected at random.   \n   \nAnd is there not an element of randomness (effected by a lack of total control) in the design variants that occur between different type sizes in foundry type?\n\n"
+    },
+    {
+      "time": "19 Apr 2004 — 7:56pm",
+      "content": "Nick, although I tend to agree with you, there's still something very fishy about controlled irregularity.   \n   \nhhp\n\n"
+    },
+    {
+      "time": "19 Apr 2004 — 8:26pm",
+      "content": "Hey, I'm a Pisces.\n\n"
+    },
+    {
+      "time": "20 Apr 2004 — 1:44am",
+      "content": "I agree with you Nick. I have always   \nwondered why there are random fonts,   \nand \"fixed\" letterpress imitations, but   \nthere has, to my knowledge, never been   \na font with subtle, letterpress-like   \nrandomness. Or is there?   \n   \nkris.\n\n"
+    },
+    {
+      "time": "20 Apr 2004 — 3:24am",
+      "content": "kris, thats exactly what i am interested in. it seems so strange, that so few typedesigners are interested in this randomness (most of you are thinking about major differences in the various glyphs), but i am actually really interested in minor differences, that make the font live more - a subtle randomness. and thats what i mean with rythm as well, or flow, hrant, type coming out of the computer seems to be overperfect and sometimes even disturbing to me.   \n   \nconstantin\n\n"
+    },
+    {
+      "time": "20 Apr 2004 — 9:00am",
+      "content": "Constantin, I would explore randomness if the tools I use made it possible, or if I was a programmer. But like most type designers, that's not the case.   \n   \nThe OpenType format, with its ability to contain mutliple glyphs for a single character, can be used to give the appearance of the randomness you seek, by assigning different glyph variants of the same character according to the adjacent character (i.e. with \"invisible ligatures\"). However, it is only since last year that the Mac version of Fontlab that does OpenType has been introduced, so give it a little more time.\n\n"
+    },
+    {
+      "time": "20 Apr 2004 — 9:16am",
+      "content": "Constantin, I for one am actually interested in the \"over-perfect\" problem you mention. But I worry about implementing randomness _consciously_. Like Johnny von Neumann (the father of computing) once said: \"Anyone who considers arithmetical methods of producing random digits is, of course, in a state of sin.\"   \n   \nhhp\n\n"
+    },
+    {
+      "time": "20 Apr 2004 — 11:24am",
+      "content": "hrant:   \nwell. i think the development of electronic music is a good example to look at to understand what i mean. you will see that the conscious implementation of randomness and slight variation makes music live and be much more interesting.\n\n"
+    },
+    {
+      "time": "20 Apr 2004 — 11:56am",
+      "content": "What Hrant meant is (I guess): consciously implemented randomness is not true randomness. In practice, for type stuff, I don't think it makes much difference, but it's an important distinction anyway.   \n   \nNot directly related, but [here](http://web.archive.org/web/20150123232942/http:/www.wired.com/wired/archive/11.08/random.html?pg=1) is something interesting about randomness.\n\n"
+    },
+    {
+      "time": "20 Apr 2004 — 2:16pm",
+      "content": "Related to the webcam with lenscap on (from link in above post):   \n   \nHow does the Photoshop \"Noise\" filter work?   \nOf all the filters, it appears to be the one which produces a different result each time, seemingly random.\n\n"
+    },
+    {
+      "time": "20 Apr 2004 — 4:26pm",
+      "content": "thanks a lot for the link to randomness. it was very helpful. having read that article i must realise that i was not using the right word. looking at the definition of randomness i must actually use the word variation. i sometimes dont find the right terminology because english is not my first language. nonetheless i am very happy to have gotten such great inputs from you guys and would appreciate even more.\n\n"
+    },
+    {
+      "time": "20 Apr 2004 — 2:33pm",
+      "content": "moved to BUILD\n\n"
+    }
+  ]
+}

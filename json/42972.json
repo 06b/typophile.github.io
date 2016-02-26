@@ -1,0 +1,70 @@
+{
+  "id": "42972",
+  "title": "Family Grouping in Adobe CS Font Menu",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "So I’m having this issue, where I just installed a typeface, but instead of every weight being nested within one typeface family, every weight has it’s own name within the character menu of both indesign, and illustrator. The result is I end up having a long list of fonts from the same typeface instead of just the family name, so it gets all mucked up, and I want it to be organized correctly. I took a screenshot of what I’m talking about.\n\nSo does anyone have a solution to this problem, or is there any software out there that can fix it?\n\n ![](http://web.archive.org/web/20080706083746im_/http:/www.typophile.com/files/myproblem_6641.jpg)\n\n [‹ FL5 Class kerning pop-up grey always?](http://web.archive.org/web/20080706083746/http:/www.typophile.com/node/43270 \"Go to previous forum topic\") [How do I shake the blues? (in FontLab) ›](http://web.archive.org/web/20080706083746/http:/www.typophile.com/node/43101 \"Go to next forum topic\")\n\n",
+  "author": "<a href=\"/web/20080706083746/http://www.typophile.com/user/19091\" title=\"View user profile.\">takach</a>",
+  "time": "<br>",
+  "uid": "19091",
+  "comments": [
+    {
+      "time": " 9.Mar.2008 7.21am",
+      "content": "When in doubt and confronted with any font menu anomalies , search for Adobefnt.lst files and trash them.\n\n"
+    },
+    {
+      "time": " 9.Mar.2008 10.20am",
+      "content": "It looks like those OpenType files are direct (automatic maybe?) conversions of&nbsp;Type1 families, in&nbsp;which experts sets were often named incorrectly for technical limitations and basic styles/weights were also named that way for consistency in&nbsp;font list. Try to look at those fonts in&nbsp;Font Book or&nbsp;other font manager which will give you extended info about names etc.\n\n"
+    },
+    {
+      "time": " 9.Mar.2008 11.09am",
+      "content": "I searched for adobefnt.lst, and I didn’t have any\n\nIt’s weird with some of these families, in font book Sophisto shows up all messed up like in adobe, and when I open Linotype manager, it’s all nested in nice family. I really don’t understand this.\n\nThe naming convention for the sophisto family is\n\nSophisto-A.otf  \nSophisto-A-Ita.otf  \nSophisto-A-Xpert.otf  \nSophisto-A-SCOSF.otf\n\nand so on, is there something wrong with the naming convention, or any other software method out there to fix this?\n\n"
+    },
+    {
+      "time": " 9.Mar.2008 3.23pm",
+      "content": "<cite>…and when I open Linotype manager, it’s all nested in nice family</cite>\n\nhmm, it is strange :/\n\n<cite>…and so on, is there something wrong with the naming convention, or any other software method out there to fix this?</cite>\n\nFont file name has nothing to do with this kind of issues. It’s a font’s [name] table which is making trouble. You’ll need software, which will dig into this table (e.g., a&nbsp;font editor) and then you’ll have to change it’s entries manually. I doubt there would be an automatic solution. There are some free font editors out there, like [FontForge](http://web.archive.org/web/20080706083746/http:/fontforge.sourceforge.net/), which supports OpenType fonts.\n\n"
+    },
+    {
+      "time": " 9.Mar.2008 5.34pm",
+      "content": "Best thing might be to just ask the foundry.\n\n"
+    },
+    {
+      "time": " 9.Mar.2008 7.49pm",
+      "content": "“Font file name has nothing to do with this kind of issues. It’s a font’s [name] table which is making trouble. You’ll need software, which will dig into this table (e.g., a font editor) and then you’ll have to change it’s entries manually. I doubt there would be an automatic solution”\n\nWell you were right, kontrapunkt. fortunately a machine a skool has fontlab, and I have to assign the appropriate family name inside the Font Info window and the generate all the fonts to a new folder.\n\nthis could take some time\n\n"
+    },
+    {
+      "time": " 10.Mar.2008 4.48am",
+      "content": "I would contact PSY/OPS directly and ask them about this, rather than start “hacking” the font files.\n\n[http://www.psyops.com/](http://web.archive.org/web/20080706083746/http:/www.psyops.com/ \"http://www.psyops.com/\")\n\n"
+    },
+    {
+      "time": " 10.Mar.2008 9.10am",
+      "content": "I don’t know why your font menu is doing that, but you can’t run any Adobe product without the AdobeFnt.lst files getting generated. (They’re used to cache information so that the product doesn’t have to open up every font during startup. They’re also just text files and you can read them with any text editor.) So, to be clear, the file name is AdobeFntxx.lst where xx is a 2 digit number. On Windows you would search for AdobeFnt\\*.lst. The number is incremented when the format of the file changes. For InDesign 2.0 the number was 06, CS was 07, CS2 was 10, CS3 was 11.\n\n"
+    },
+    {
+      "time": " 10.Mar.2008 9.42am",
+      "content": "well i tried to search for the adobefnt.list things again, and i guess the first time i must have spelled them wrong, or something, because they did come up, i did find them, but getting rid of them didn’t solve the problem. I guess i can try to call PSY/OPS, but at least i have a backup with fontlab, and with taht program I don’t have to save overtop of the original files so i’m not in danger of losing any info, especially since they’re all backed up.\n\n"
+    },
+    {
+      "time": " 10.Mar.2008 2.43pm",
+      "content": "_Meltdown in Adobe_\n\nSo, no corporate restructuring, just a font issue :-)\n\n"
+    },
+    {
+      "time": " 10.Mar.2008 3.07pm",
+      "content": "<cite>Organization Meltdown in Adobe</cite>  \nI was worried they were bought by Microsoft!\n\n"
+    },
+    {
+      "time": " 10.Mar.2008 3.22pm",
+      "content": "People really need to be more careful with their topic titles. I will refine this one if the author doesn’t mind.\n\n"
+    },
+    {
+      "time": " 11.Mar.2008 2.17am",
+      "content": "Do you use font management software? If you have any type library at all, you should be using FontAgentPro, which will nest the families as you wish, once your fonts are installed in its program. That’s how my font families usually display in my Quark and Photoshop CS1. Only some of the small boutique foundry families remain stubbornly perverse—on this and other tech issues!\n\n"
+    },
+    {
+      "time": " 17.Mar.2008 6.05pm",
+      "content": "In OSX, the official releases should appear nested in font menus. Sophisto is a large family and has been broken out into four different menu entries.\n\n ![](http://web.archive.org/web/20080706083746im_/http:/www.typophile.com/files/sophistomenu_3461.jpg)\n\nIt would appear that the version of Sophisto you have installed has never been an official release through PSY/OPS. If you could please email us, [info1@psyops.com](mailto:info1@psyops.com), we will be glad to work out a solution to your problem.\n\n~James\n\n"
+    }
+  ]
+}

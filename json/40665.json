@@ -1,0 +1,46 @@
+{
+  "id": "40665",
+  "title": "Opentype output bugs",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "I all,\n\nI'm outputting a family of fonts for a client (modifyed versions of another font). Some of the fonts (I've a Book, Book Italic, Regular, Italic, Medium, Medium Italic, Bold, Bold Italic) will not show up in the menus although I've cleaned the font caches.\n\nAny clue to where I should look to fix?\n\nThx!\n\n",
+  "author": "Martin LAllier",
+  "time": "8 Jan 2008 — 7:29am",
+  "uid": "7309",
+  "comments": [
+    {
+      "time": "8 Jan 2008 — 8:36am",
+      "content": "Not a good idea to have Book and Regular in the same family, as both have \"400\" as their weight number.\n\n"
+    },
+    {
+      "time": "8 Jan 2008 — 8:46am",
+      "content": "Hi Nick (happy new year btw),\n\nI made sure the weight where all different (made a mistake it's Text not book). The weights of the fonts are 400, 500, 600 and 700.\n\n"
+    },
+    {
+      "time": "8 Jan 2008 — 9:38am",
+      "content": "This is likely a [Font Naming](http://web.archive.org/web/20120718121321/http:/www.typophile.com/wiki/Font%20Naming) issue.  \n(BTW, the thread's title is misleading.)\n\n"
+    },
+    {
+      "time": "9 Jan 2008 — 1:27am",
+      "content": "\"Not a good idea to have Book and Regular in the same family, as both have “400” as their weight number.\"\n\nThis conflates two separate issues:\n\n1) All different weights in a family should have different values for usWeightClass. There are other potential complications with usWeightClass: see my first post in this thread (with the big chart)... [http://typophile.com/node/16327](http://web.archive.org/web/20120718121321/http:/typophile.com/node/16327 \"http://typophile.com/node/16327\")\n\n2) InDesign (only) has some issues with families that have multiple fonts that it considers to be \"regular\" weight, which includes the name \"book\" among others. See my and Miguel's posts in this thread: [http://www.typophile.com/node/35394](http://web.archive.org/web/20120718121321/http:/www.typophile.com/node/35394 \"http://www.typophile.com/node/35394\") (where I again explained that this was a separate issue, despite Nick's belief that one was causing the other problem)\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "9 Jan 2008 — 6:13am",
+      "content": "If I manualy enter different weight values, wouldn't that solve the problem?\n\n"
+    },
+    {
+      "time": "9 Jan 2008 — 12:40pm",
+      "content": "_Nick’s belief that one was causing the other problem_\n\nMy \"belief\" is correct, as an observation of the way that FontLab assigns 400 to both Book and Regular, in the first page of its Font Info dialog. I'm also aware of the problem with InDesign, but didn't mention it (I try to avoid criticizing Adobe).\n\nThanks for clarifying the issue, with links, Thomas.\n\nHappy New Year, Martin!\n\n"
+    },
+    {
+      "time": "9 Jan 2008 — 7:27pm",
+      "content": "Yes, FontLab assigns 400 to both, but that's easily overridden manually (as Martin thinks), and doesn't cause any problem other than poor sorting of styles within some Adobe apps.\n\nBut the reason I mention above is a much stronger reason not to have Book and Regular in the same family, which does not have any workaround, let alone a trivially easy one.\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "11 Jan 2008 — 7:05am",
+      "content": "seems to be working fine, thx for the help!\n\n"
+    }
+  ]
+}

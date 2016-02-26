@@ -1,0 +1,126 @@
+{
+  "id": "56594",
+  "title": "What defines the order of presentation of glyphs in the Adobe Glyph palette?",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "The Adobe Glyph palette does not seem to present glyphs in a logical way for users. Is there a way the font designer or even user can make a more sensible ordering?\n\nChrisL\n\n",
+  "author": "<a href=\"/web/20100203175146/http://typophile.com/user/3135\" title=\"View user profile.\">dezcom</a>",
+  "time": "<br>",
+  "uid": "3135",
+  "comments": [
+    {
+      "time": "",
+      "content": "I do notice that when glyphs are sorted CID/GID, the order is more sensible than the default Unicode order. The figures and punctuation then do not come to the top.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "You can make your own order, and the Glyph palette will display that when in CID/GID mode. Just switch FontLab's Font Window to \"Index mode\" and move the glyphs around. Or make your own encoding file and then, while in \"Names mode\", do Glyph -\\> Sort Glyphs -\\> By Encoding.\n\n"
+    },
+    {
+      "time": "",
+      "content": "In GID mode, which I believe is the default, the glyphs are shown in the same order as they are sorted in your font. So a nicer order in your font would make for a nicer order in the glyphs panel.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Miguel,  \nI have already made my own encoding and it works just fine in CID order. The default appears to be Unicode order though. Most users don't even know there are options and they surely don't know what the option names mean.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "_\"Most users don’t even know there are options and they surely don’t know what the option names mean.\"_  \nI'll confess! :o) Never seen this before.  \nSo what does \"CID/GID\" stand for?\n\n"
+    },
+    {
+      "time": "",
+      "content": "GID = Glyph Identifier. This is a decimal number starting at 0 recording the order of glyphs in a font. GIDs are the backbone of OT fonts: the cmap table maps GIDs to character codepoints, GSUB lookups map GIDs to GIDs, etc. Generally, since font editing tools tend to work around glyph names for convenience, must people are sheltered from working directly with GIDs.\n\n"
+    },
+    {
+      "time": "",
+      "content": "That is what I mean, it is geekspeak that a typacal user would not know but a programmer would be quite happy with.\n\nHere is the long of it:\n\n[http://www.microsoft.com/typography/otspec/5176.cff.pdf](http://web.archive.org/web/20100203175146/http:/www.microsoft.com/typography/otspec/5176.cff.pdf \"http://www.microsoft.com/typography/otspec/5176.cff.pdf\")  \n [http://developer.apple.com/technotes/tn2002/tn2079.html](http://web.archive.org/web/20100203175146/http:/developer.apple.com/technotes/tn2002/tn2079.html \"http://developer.apple.com/technotes/tn2002/tn2079.html\")\n\nI will wait for Miguel to give us the short of it.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thanks, John, I should have known you would have the answer!\n\nMy point is, that as an interface lable, those terms are too obscure even if spelled out, let alone as acronyms. :-)\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "[http://ourworld.compuserve.com/homepages/profirst/c.htm](http://web.archive.org/web/20100203175146/http:/ourworld.compuserve.com/homepages/profirst/c.htm \"http://ourworld.compuserve.com/homepages/profirst/c.htm\")  \n [http://ourworld.compuserve.com/homepages/profirst/g.htm](http://web.archive.org/web/20100203175146/http:/ourworld.compuserve.com/homepages/profirst/g.htm \"http://ourworld.compuserve.com/homepages/profirst/g.htm\")\n\n...and I still dont understand. :D\n\n"
+    },
+    {
+      "time": "",
+      "content": "Huh. Thanks. I'm pretty confused now. :-)\n\n_\"My point is, that as an interface lable, those terms are too obscure even if spelled out, let alone as acronyms. :-)\"_  \nAgreed. :-)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Nina,  \nBehind all of what is seen in a typeface is an interwoven set of tables which refer to eachother so that the proper glyph will show up when requested by the lowly user who never sees workings in the background behind the screen. There are terms naming such things which John mentioned above. GSUB,GID, etc.. What Adobe failed to do when creating their interface for InD or AI is to realize that the people who use their software are very rarely as fluent in this kind of terminology as John, or Thomas, or Miguel so the term stands there in the flyout menu of the Glyph Palette.\n\nChrisL\n\n ![](http://web.archive.org/web/20100203175146im_/http:/typophile.com/files/GIDflyout_6458.png)\n\n"
+    },
+    {
+      "time": "",
+      "content": "Absolutely, Chris. That was the part of the discussion I actually understood. ;-)  \nI can't think of anybody I know (outside of Typophile) who I'd imagine would know what that means if they saw it in the InDesign options.\n\n"
+    },
+    {
+      "time": "",
+      "content": "_I do notice that when glyphs are sorted CID/GID, the order is more sensible than the default Unicode order._\n\nthat's because you sorted them that way already in your font.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Paul,\n\nI was referring to other fonts. I just went randomly through my catalog from all sources.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "I agree that 'By CID / GID' isn't a very good label. Perhaps 'Font order' and 'Unicode order' would be better labels?\n\n"
+    },
+    {
+      "time": "",
+      "content": "Mostly, they should change the default to be CID/GID. That would eliminate 98% of the need to even have an option. Other than type designers, who might use the Unicde order at all?\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "GID is the glyph index in the font, which is visible in the Font Window's Index mode in FontLab Studio.\n\nCID is the character identifier in so-called CID-keyed fonts, i.e. Asian PostScript and OpenType PS fonts. It is kind of like Adobe's own encoding scheme for Asian characters, alternative to Unicode.\n\nI agree that the term \"by CID/GID\" is not very obvious to the user\n\nIt reminds me of the term \"OpenType CFF\". This is why I have been proposing \"OpenType PS\" as in \"PostScript-flavored OpenType\", but it seems that Adobe was concerned about the use of their PostScript trademark in this context. I think that Adobe was primarily worried that \"PostScript-flavored OpenType\" suggested that \"the other\" flavor, i.e. \"TrueType-flavored OpenType\" aka \"OpenType TT\" is not compatible with PostScript, somehow. But \"CFF\" just like \"sfnt\" is an obscure technical term which I think is an additional burden to the user to learn. Same for \"CID/GID\".\n\nI agree with John that \"Font order\" would be a sensible label in this context.\n\nI have just [submitted a feature request](http://web.archive.org/web/20100203175146/http:/www.adobe.com/cfusion/mmform/index.cfm?name=wishform) to Adobe, proposing the terminology _Sort glyphs by_ / _Font order_ and _Unicode order_. I encourage everyone to submit a similar request — the more people submit, the more likely it will be that this feature request is noticed.\n\nCheers,  \nAdam\n\n"
+    },
+    {
+      "time": "",
+      "content": "\"I have just submitted a feature request to Adobe, proposing the terminology Sort glyphs by / Font order and Unicode order.\"\n\nI agree and I also encourage everyone to tell Adobe to make the \"Font Order\" the default setting.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "The Sort By option appeared only in CS3 (I recall); before that, the font definition order was used -- the one Adobe calls \"GID/CID\". I always had a hard time hunting down the character I needed, and was glad to see the Sort menu added, as I know sort-of in what Unicode range I have to look for most special chars.\n\nBut what's with the Character Name showing up if you hover over one? I'm looking for, say, an 'e with a dot above'. I type this into Google and find the unicode: U+0117. Then I sort the font by Unicode. When I _finally_ locate it, the friendly popup says \"e with a dot above\". I know that! It would've be useful if they added a plain search field to the Glyphs panel.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, Theunis is exactly right. It used to only be by GID/CID, and the Unicode-based sort was a new option as of CS3. (I believe unencoded glyphs are still sorted by GID/CID, when in Unicode sort mode.)\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "Thomas,  \nWhat brought on the addition of the Unicode sort mode in CS3?\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "I just submitted my feature request to Adobe as well including making Font Order the default.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "Users (including but not only type designers) complained that GID order was a bit odd.\n\nI agreed with them. After all, hardly anything else in the universe cares or displays GID order, so it seemed odd that InDesign would make it so prominent. I suggested that Unicode order would probably make more sense.\n\nNow that both options have been out there, it would be reasonable to ask users which they prefer as the default. I suppose since I have just wrapped up a survey, I could start another one! This one is much simpler, though.\n\nAre there any other orders people might like? You can already filter by Unicode block so as to see just Cyrillic or just Latin-Extended-B or whatever.\n\nRegards,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "I just posted a survey, linked from my blog here:  \n [http://www.thomasphinney.com/2009/04/ordering-the-glyph-panel/](http://web.archive.org/web/20100203175146/http:/www.thomasphinney.com/2009/04/ordering-the-glyph-panel/ \"http://www.thomasphinney.com/2009/04/ordering-the-glyph-panel/\")\n\nCheers,\n\nT\n\n"
+    },
+    {
+      "time": "",
+      "content": "[Re the second-last email:] Both Unicode character order, and Adobe fonts' glyph order, reflect strata of character/glyph set additions, neither of which is intuitive. But GID order does not need to be odd at all and reasonable order is not hard to achieve. No idea why type designers don't care more.\n\n"
+    },
+    {
+      "time": "",
+      "content": "Yes, Karsten, I think we should put the onus on type designers to make a usable, sensible order for users. Right now, I just began using an order that makes font development easier for me. I would also be happy to output final fonts in an order most usable by typical users, those who do not know the innards of type technicalities (or care). Perhaps Thomas's questionnaire will enlighten us on what that might be. Thanks, Thomas!\n\nI would hope his questionnaire would find its way to a broader audience than we typical typography freaks so that we get a broader perspective from normal users like graphic designers, editors, compositors, and publishers.\n\nChrisL\n\n"
+    },
+    {
+      "time": "",
+      "content": "It is sort of a different issue for a user -- at least, an InDesign user.\n\nFirst of all, consider this: if you need a character which is encoded in Unicode, you can enter it directly from the keyboard. Usually faster, and usually better. Sometimes when you enter a character from the glyph pallet, certain OT features seem to get blocked.\n\nIf you need a character that isn't encoded, two possibilities:\n\nCase 1: If it is a small cap, you have probably used one of the small cap features in InDesign, so again, you can enter the appropriate Unicode cap (or l.c.) & be done with it.\n\nAside: Sometimes a character has a Unicode index, but you don't know it, and figure it will be easier to find it in the glyph pallet. Well, it happens. In that case, you usually want all the characters of a certain kind together. Problem is, there are different \"kinds\".\n\nAn alphabetic sort order makes the most sense when you are trying to find a diacritical variant, at least, using the Latin Script. I don't know the other scripts well enough to comment.\n\nIf you don't know the Unicode index for an oddball character (the circled infinity used for \"archival paper\" for example), you just hope you'll spot it quickly. (But you won't, usually, because it is left out of most fonts.)\n\nCase 2: The other situation occurs with a font like Bingham Script. Now just which of those variants did the designer want? Hard to see all the subtle differences in the glyph pallet. This is one case where I'd personally like to see the variant characters have a Private Use encoding. That way, the \"just which one\" can be passed along the production chain. Failing this, having them all together helps, a little.\n\nFWIW\n\n"
+    },
+    {
+      "time": "",
+      "content": "You can choose \"all alternates for current glyph\" to help with many of those issues, Charles?\n\nChrisL\n\n"
+    }
+  ]
+}

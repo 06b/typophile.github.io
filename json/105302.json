@@ -1,0 +1,29 @@
+{
+  "id": "105302",
+  "title": "alternates in small caps",
+  "forum": "Build",
+  "tags": [
+    "alternates",
+    "scripting",
+    "small caps",
+    "Build"
+  ],
+  "content": "Hi guys,\n\nI'm creating a sans-serif font but as alternates the I and J have little serifs, and I want to carry over the alternates to the small caps. I'm getting a little stuck on the scripting. (Massive newbie on the scripting btw).\n\nSo when Small Caps are on with alternates the small cap serif I will be displayed instead of tthe small cap I.\n\nIs this possible?\n\nThanks in advance.\n\n",
+  "author": "notanotherfolio",
+  "time": "7 Aug 2013 — 5:24am",
+  "uid": "213815",
+  "comments": [
+    {
+      "time": "7 Aug 2013 — 9:10am",
+      "content": "Yes, it's trivially possible.\n\nfeature c2sc {  \n&nbsp;&nbsp;&nbsp;&nbsp;sub [...I J...] by [...I.sc J.sc...];  \n} c2sc;\n\nfeature salt { # placed in 'salt' for access in Illustrator  \n&nbsp;&nbsp;&nbsp;&nbsp;lookup alternates {  \n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sub [I J I.sc J.sc] by [I.alt J.alt I.sc.alt J.sc.alt];  \n&nbsp;&nbsp;&nbsp;&nbsp;} alternates;  \n} salt\n\nfeature ss01 { # duplicated as a stylistic set for access in InDesign  \n&nbsp;&nbsp;&nbsp;&nbsp;lookup alternates;  \n} ss01;\n\nAndré\n\n"
+    },
+    {
+      "time": "7 Aug 2013 — 9:15am",
+      "content": "Features are applied in order. So if your small caps feature comes first, make sure your stylistic alternate code changes both caps and small caps to the alternates. And if your alternate features comes first, make sure your small caps code \"small-capifies\" both the standard and the alternate letters.\n\n"
+    },
+    {
+      "time": "7 Aug 2013 — 5:02pm",
+      "content": "Thank you both agisaak and eliason!!\n\nfeature salt {  \nlookup alternates {  \n sub [I.sc J.sc Igrave.sc Iacute.sc Icircumflex.sc Idieresis.sc] by [I.salt.sc J.salt.sc Igrave.salt.sc Iacute.salt.sc Icircumflex.salt.sc Idieresis.salt.sc];  \n } alternates;  \n...  \n}salt;\n\nwhich sits after the smcp feature.\n\nLegends!\n\n"
+    }
+  ]
+}

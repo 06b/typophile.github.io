@@ -1,0 +1,36 @@
+{
+  "id": "66706",
+  "title": "UNICODE Due Diligence in advance of assigning Private Use UNICODES",
+  "forum": "Build",
+  "tags": [
+    "Private Use",
+    "Unicode",
+    "Build"
+  ],
+  "content": "I am about to assign a bunch (approx. 500) of Private Use UNICODE to the following which do not have official UNICODES and are not yet [to my knowledge] covered by Adobe Glyph List:\n\nNut fractions  \nAnnotation Superiors  \nSuperior Punctuation  \nSmall Cap Numbers  \nSmall Caps Punctuation  \nTabulated Numbers  \nTitling Capitals (x140ish)  \nTitling Lowercase (x140ish)  \nTitling Numbers  \nReversed Encapsulated Sansserif Capitals  \nand perhaps a few other ornaments (not dingbats) etc.\n\nQ. Are there any established Code-blocks for the listed glyphs above \\*agreed\\* between foundries?\n\nI am posting here before approaching anyone individually. My next step is to check the future of the Adobe Glyph List but first I want to gauge the reaction to having so many apparently missing UNICODES.\n\nIf it seems reasonable, perhaps I may make a formal proposal to UNICODE Consortium. It feels better for me to push for some kind of universal acceptance of principle and/or get a better understanding of peoples feeling towards this before I go ahead and assign my one Private Use UNICODES to my own fonts regardless.\n\nI am conscious that if the above Glyphs can have UNICODES shared amongst the Community this will make fonts sharing the UNICODE compatible and easily interchangeable.\n\n/michael\n\n",
+  "author": "Michael Hernan",
+  "time": "27 Jan 2010 — 7:22am",
+  "uid": "9418",
+  "comments": [
+    {
+      "time": "27 Jan 2010 — 1:54pm",
+      "content": "Most of what you've listed are stylistic variants, and are not assigned official Unicode points. Adobe has used Unicode PUA ranges in the past for some stylistic variants, but has reportedly deprecated this practice.\n\nThere are some documented agreements on character assignments in the Private Use Area, notably [Medieval Unicode Font Initiative](http://web.archive.org/web/20131015194531/http:/mufi.info/) and [ConScript Unicode Registry](http://web.archive.org/web/20131015194531/http:/www.evertype.com/standards/csur/). There may be others but I am not familiar with them. You may find some of the glyphs you want to encode have points within those ranges, and you can avoid thos ranges if there isn't a clear fit. The PUA is a big space.\n\n"
+    },
+    {
+      "time": "27 Jan 2010 — 10:26pm",
+      "content": "In the Adobe Fonts the unicode value assigned to small caps or swash capitals for example is not the same in all the fonts.  \nIt seems like such glyphs are left for Open Type features to handle, but then what's the point in assigning unicodes? Is it good practice that every glyph has a unicode value?\n\nI'm sorry if my questions are slightly off subject but I didn't want to start a new thread with a very similar subject.\n\n"
+    },
+    {
+      "time": "28 Jan 2010 — 11:15am",
+      "content": "Some common applications have been reported to not display a glyph if it does not have a Unicode number. This is bad practice on the software publisher's part. Does anyone remember with which programs this is the case, or with those where it has been resolved, with what version?\n\nOpenType features ought to be sufficient to handle such stylistic variants.\n\n"
+    },
+    {
+      "time": "28 Jan 2010 — 2:29pm",
+      "content": "<cite>Some common applications have been reported to not display a glyph if it does not have a Unicode number. This is bad practice on the software publisher's part.</cite>\n\nSupporting Unicode is different than supporting OpenType. A program that did not support Unicode these days would be the equivalent of a program not \"supporting\" ASCII in days past. I suppose you could think of the PUA of Unicode being equivalent to high-order ASCII.\n\nThe point of a Private Use Area is that it has no defined use. Asking for an agreement of typographic niceties shows a certain insensitivity to the purpose of Unicode. Consider documents that pass from one use to another, one font to another. That is job of Unicode.\n\nIt is a little point, but I abhor fonts with titling caps built into the font. I deal with large amounts of running text (books). Titling glyphs are almost always used for display, and with most work, display usually involves a separate font. If titling glyphs are built into a font, and an application program such as InDesign can't handle the switch to them easily, through a paragraph style, they are not as useful as they would be in a separate font.\n\nAs is so often the case, people who use type often have different ideas than people who design type.\n\n"
+    },
+    {
+      "time": "29 Jan 2010 — 5:25pm",
+      "content": "My general advice is not to use Private Use Area codepoints for variants of standard encoded glyphs. The PUA should be used only when you have some idiosyncratic symbol that is neither a standard encoded character nor a variant form of such a character. An obvious example would be a corporate logo in a font. The only time I use PUA characters is for decorative, ornament glyphs.\n\n"
+    }
+  ]
+}

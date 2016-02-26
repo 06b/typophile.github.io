@@ -1,0 +1,15 @@
+{
+  "id": "52199",
+  "title": "Enclosing combining marks",
+  "forum": "Build",
+  "tags": [
+
+  ],
+  "content": "In the recently released released version of my [Old Standard](http://web.archive.org/web/20100203150119/http:/www.thessalonica.org.ru/en/fonts.html) font family I attempted to implement some support for enclosing combining marks, in particular U+20DD. I needed this for Old Cyrillic, where such marks are used to denote large numbers. The implementation looks basically us follows:\n\n- An anchor point is used to attach the mark to the base character. Currently I don't handle those situations there the base character is too large to fit properly into the enclosing mark.\n- A contextual positioning lookup is applied to increase the base glyph's offset and advance width, so that the mark doesn't overlap the surrounding characters.\n\nUnfortunately I see that with most rendering engines my font doesn't work as expected:\n\n- Uniscribe just ignores enclosing combining marks and doesn't apply any lookups to them;\n- Most other engines (InDesign, ICU) seem to share the same common problem: when the base glyph is shifted to right, its anchor points are moved not by the XPlacement value specified for the base glyph (as I would expect), but rather by XAdvance. Thus the mark is shifted much further to right than it should be;\n- In InDesign things get even more complicated if there are additional combining marks attached to other anchor points of the same base glyph.\n\nPango seems to be the only rendering engine which processes my font exactly as expected.\n\nNow the questions:\n\n- To which feature should I attach my contextual GPOS lookups? Currently I mark them as required, but required GPOS lookups seem to be completely ignored by some engines (ICU, Mellel). Another option is to attach them to the 'kern' feature (as the specification seems to allow contextual kerning), but GPOS kerning is currently ignored by Uniscribe.\n- Is the behavior I have described caused by some bugs in rendering engines, or I am doing something wrong?\n- Should I post my questions also to the OpenType mailing list?\n\n",
+  "author": "<a href=\"/web/20100203150119/http://typophile.com/user/19667\" title=\"View user profile.\">anagnost</a>",
+  "time": "<br>",
+  "uid": "19667",
+  "comments": [
+
+  ]
+}

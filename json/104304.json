@@ -1,0 +1,46 @@
+{
+  "id": "104304",
+  "title": "liga? rlig? when to use which...",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Is there a handy reference for when to use which type of OT feature? I'm implementing substitutions for regional indicator symbol pairs, but am not sure if that sort of thing would technically be called a ligature or what.\n\n",
+  "author": "ChristTrekker",
+  "time": "2 Jul 2013 — 11:43am",
+  "uid": "65972",
+  "comments": [
+    {
+      "time": "2 Jul 2013 — 11:47am",
+      "content": "Just as FYI, I have found some references online, but I'm looking for something considered \"authoritative\", so I don't get incorrect information because I used less-than-ideal search terms and blindly followed Google.\n\n"
+    },
+    {
+      "time": "2 Jul 2013 — 7:37pm",
+      "content": "Here you go.  \n [http://www.microsoft.com/typography/otspec/featuretags.htm](http://web.archive.org/web/20150420045817/http:/www.microsoft.com/typography/otspec/featuretags.htm \"http://www.microsoft.com/typography/otspec/featuretags.htm\")\n\nFor browsing, use  \n [http://www.microsoft.com/typography/otspec/features\\_ae.htm](http://web.archive.org/web/20150420045817/http:/www.microsoft.com/typography/otspec/features_ae.htm \"http://www.microsoft.com/typography/otspec/features\\_ae.htm\")\n\nIf you want to check out proper use of a particular feature (like rlig), go to  \n [http://www.microsoft.com/typography/otspec/featurelist.htm](http://web.archive.org/web/20150420045817/http:/www.microsoft.com/typography/otspec/featurelist.htm \"http://www.microsoft.com/typography/otspec/featurelist.htm\")\n\nAnd click on that tag, to get to the description.\n\n"
+    },
+    {
+      "time": "3 Jul 2013 — 6:41am",
+      "content": "TYVM‼\n\n"
+    },
+    {
+      "time": "4 Jul 2013 — 12:09am",
+      "content": "A lot depends on whether you want it “on” by default.\n\nTypotheque has compiled the following information:\n\n[https://www.typotheque.com/articles/opentype\\_features\\_in\\_web\\_browsers](http://web.archive.org/web/20150420045817/https:/www.typotheque.com/articles/opentype_features_in_web_browsers \"https://www.typotheque.com/articles/opentype\\_features\\_in\\_web\\_browsers\")  \n [https://www.typotheque.com/fonts/opentype\\_feature\\_support](http://web.archive.org/web/20150420045817/https:/www.typotheque.com/fonts/opentype_feature_support \"https://www.typotheque.com/fonts/opentype\\_feature\\_support\")\n\n"
+    },
+    {
+      "time": "5 Jul 2013 — 11:24am",
+      "content": "liga = ligatures which you want to be on by default, but which can be deactivated by the user.  \ndlig = ligatures which you want to be off by default, but which can be activated by the user.  \nrlig = ligatures which you want to be on and which cannot be turned off. Or at least that's the theory. Unfortunately, this feature is not implemented by many otherwise OT-savvy applications, probably due to the fact that the adobe feature registry\\* had originally specified that this feature was restricted to arabic. This was (IMO) a rather dumb thing to do even if arabic processing was what originally motivated the desire for this feature.\n\nAndré\n\n\\*http://partners.adobe.com/public/developer/opentype/index\\_tag3.html\n\n"
+    },
+    {
+      "time": "7 Jul 2013 — 2:43pm",
+      "content": "> rlig = ligatures which you want to be on and which cannot be turned off. Or at least that's the theory. Unfortunately, this feature is not implemented by many otherwise OT-savvy applications, ...\n\nI'd say fortunately. Too many type designers are apt to think, \"oh, this **should** be this way, I'll make it required.\" rlig should be used when the alphabet (script) itself requires the ligature, not otherwise.\n\nTake the fi ligature for one example. And suppose you do have a swoopy \"f\", which collides with the tittle of the i, so you make fi and ffi required ligatures.\n\nAnd I have an old-school customer who insists that ligatures should not be used with a setting size greater than 18-point. Or, while you don't claim to support Turkish, someone selects your typeface for a text that contains some Turkish words, a few of which are spelled with a dotted i following an f...\n\nNow of course any comp worth her salt can achieve this even if you've used rlig, but it's handwork they shouldn't have to go through. Be real careful with rlig assigments, indeed, with anything that substitutes your judgement for an editors or experienced compositors judgement.\n\nIf this gives you more time on your hands, make up a separate set of number glyphs for setting proportions versus tabular figures. Make the 1, 3, 4, 5, and 7 fit that \\*required\\* common body...\n\n"
+    },
+    {
+      "time": "8 Jul 2013 — 8:37am",
+      "content": "I see your point, but the example you're using seems to be one of a poor implementation rather than a problem with the available features.\n\nThe case where the absence of 'rlig' implementation created problems for me was a slightly different one. I was working on a design which contained a large number of ligated forms which were implemented using contextual forms of each letter rather than preformed ligature glyphs. This was done to allow accented characters to occur in ligatures, and to allow ligated sequences of more than three characters without creating a huge number of precomposed forms.\n\nThe contextual substitutions were still triggered by 'liga' (in some cases) and 'dlig' (in others) rather than 'calt' since these forms performed the function of ligatures and 'calt' already included a variety of substitutions which served a very different function.\n\nEach type of ligation required two substitutions of the following form:\n\n1. sub @class1' @class2 by @class1joined;  \n2. sub @class1joined @class2' by class2joined;\n\nThe following problem arose:\n\nIf, in a sequence such as XYZ, where ligation was possible between all three characters, but the user only wanted to ligate X and Y, Y would still end up appearing in the form appropriate for joining to Z, but Z would not change accordingly and the results would be not only awful, but entirely illegible.\n\nTo solve this, the first substitution was performed by 'dlig' and the second by 'rlig', which still gives the user full control over whether to ligate or not, but avoids issues at feature boundaries. Unfortunately, I did most of my initial testing in InDesign (where this works) before I discovered that programs like photoshop don't implement 'rlig'.\n\nIt seems to me there should be at least one feature available which has an 'always on' status which is available for _every_ script, and at the moment rlig is the only registered feature which even remotely fit the bill in the above example.\n\nAndré\n\n"
+    },
+    {
+      "time": "24 Sep 2013 — 10:55am",
+      "content": "Which feature should be used to combine Regional Indicator Symbols into, e.g., flags?\n\n"
+    }
+  ]
+}

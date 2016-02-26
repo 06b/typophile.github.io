@@ -1,0 +1,26 @@
+{
+  "id": "33933",
+  "title": "OT error in Photoshop CS2, MAC and PC",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Hi there!!\n\nI'd like some help on an opentype error that a customer found in my fonts After.\n\nThe fonts have special ligatures and alternate caps. The problem is happening in the CALT (Capital Alternatives) feature, only in Photoshop CS2 for Mac.\n\nThe standard version of the characters can't be accessed. By default, the feature is turned ON, and is gray shaded (disabled for access/change).\n\nWhen testing this on Photoshop CS2 in PC, a nasty surprise: the fonts don't even appear. They became invisible. The fonts that don't have OT substitution features (Text version) of my family appear normally. So it could be something OT related.\n\nThe sintax of this feature is this:\n\nfeature calt { #Alternate Caps  \n sub A by capaalt;  \n sub Agrave by capaaltgrave;  \n sub Aacute by capaaltacute;  \n sub Acircumflex by capaaltcircumflex;  \n sub Atilde by capaalttilde;  \n sub Adieresis by capaaltdieresis;  \n sub Aring by capaaltring;  \n sub R by capralt;  \n sub T by captalt;  \n} calt;\n\nI simply have no idea of why is it happening. Is this a Photoshop issue that I can't resolve? Or is there a way to fix it?\n\n",
+  "author": "haag",
+  "time": "21 May 2007 — 6:01am",
+  "uid": "2079",
+  "comments": [
+    {
+      "time": "21 May 2007 — 10:12am",
+      "content": "I think Photoshop behaves correctly. Feature 'calt' is intended for CONTEXTUAL substitutions. You don't specify the context, therefore the substitutions are applied immediately. The alternative forms of capital letters should be placed in different feature, probably 'titl'. Special ligatures in 'liga' or 'dlig' depending on your preferences.\n\nBtw. you use VERY nonstandard glyph names. You should definitely use the dot convention specified here [http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mvie...](http://web.archive.org/web/20130822223736/http:/groups.msn.com/fontlab/tipsandtricks.msnw?action=get_message&mview=0&ID_Message=3065 \"http://groups.msn.com/fontlab/tipsandtricks.msnw?action=get\\_message&mview=0&ID\\_Message=3065\"). Instead of **capalt** you should rather use **t.calt** , resp. **t.titl**.\n\n"
+    },
+    {
+      "time": "21 May 2007 — 10:28am",
+      "content": "Fabio,\n\n1. The feature 'calt' does NOT stand for \"Capital Alternatives\", it stands for \"Contextual Alternates\".\n\n2. I believe 'titl' (Titling) is the feature you're looking for.\n\n3. The glyph names of your alternates are quite odd; you should use 'A.capalt' instead of 'capaalt', 'Agrave.capalt' instead of 'capaaltgrave', and so on.\n\n4. There are known issues regarding the 'calt' feature and Photoshop CS2, but I never heard of fonts not showing up because of that. Your use of the 'calt' feature is definitely incorrect\\*, and that might be the reason why Photoshop doesn't recognize your fonts.\n\nI gather your fonts will start working as expected as soon as you make the changes suggested above.\n\n\\* The substitutions have no context, like `sub A' V by A.capalt;`\n\n(Filip, sorry for the overlap; your post wasn't there when I started writing.)\n\n"
+    },
+    {
+      "time": "21 May 2007 — 10:35am",
+      "content": "Dear Filip and Miguel,\n\nThanks for your help... yes, I've made a mess with the gliph and feature names.  \nI'll correct it all and see what happens ;)\n\nFabio\n\n"
+    }
+  ]
+}

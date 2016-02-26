@@ -1,0 +1,158 @@
+{
+  "id": "55853",
+  "title": "Romanian locl feature (revisited ;)",
+  "forum": "Build",
+  "tags": [
+    "Build"
+  ],
+  "content": "Calling all techheads ;)\n\nI am currently updating all my font files - to get rid of a typo in the embedded license text, really...  \nAt the same time I thought it sensible to include additional support for the infamous Romanian sScedilla/sScommaaccent problem. All my fonts have both glyphs present, but as I understand they might still display inconsistently because of differing application/text/encoding support on the user side. (I also intend to duplicate the tTcommaaccent into the currently empty tTcedilla/U021AB spots - also to make the fonts more compatible)\n\nI have read MANY threads on this forum and elsewhere, but have not found any updated and general solutions - just a lot of specific samples.\n\nSo, in an effort to make an easy and general solution to the Romanian sScedilla/sScommaaccent problem: will this short feature code work as intended? (I'm using FontLab Studio 5.0.4 for Mac)\n\nGeneral definition in the lower right part of the OpenType panel:  \n---  \nlanguagesystem latn dflt;  \nlanguagesystem latn MOL;  \nlanguagesystem latn ROM;  \n---\n\nlocl feature:  \n---  \nfeature locl { # Localized Forms  \n # Latin  \n language MOL exclude\\_dflt; # Moldavian  \n sub [Scedilla scedilla] by [Scommaaccent scommaaccent];  \n language ROM exclude\\_dflt; # Romanian  \n sub [Scedilla scedilla] by [Scommaaccent scommaaccent];  \n} locl;  \n---\n\nI wonder if just including these two snippets will make it work? I do not want to have to include any language specific lines into all the other opentype features the fonts may have...\n\nThankful for any clarifications :)\n\nRoger\n\nPS! From what I had gathered I should start the general definition with \"languagesystem DFLT dflt;\",but this generates an error in FontLab Studio when compiling \"Use of DFLT tag has been deprecated. It will work, but please use 'dflt' instead\" so I removed it again...\n\n",
+  "author": "Roger S. Nelsson",
+  "time": "14 Mar 2009 — 4:29am",
+  "uid": "27336",
+  "comments": [
+    {
+      "time": "14 Mar 2009 — 4:55am",
+      "content": "Starting with the P.S., Adam Twardoch has a [nice script](http://web.archive.org/web/20150217005356/http:/www.silesian.com/software/FixDFLTScriptTagSL.zip) for this. So you can ignore the error message but need to run the .otf(s) through the script. He gave an explanation on Typophile but I cannot find the discussion.\n\n"
+    },
+    {
+      "time": "14 Mar 2009 — 1:16pm",
+      "content": "_So you can ignore the error message but need to run the .otf(s) through the script._\n\nWhy doesn't Fontlab work properly?  \nRunning a script is not what I'd call a bug fix.  \nOr why doesn't the OS take care of this issue?\n\nSurely all I should need to do as the type designer is create the appropriate glyph, with the appropriate Unicode number.  \nI mean, why does all this other technical stuff get downloaded onto me?\n\n"
+    },
+    {
+      "time": "14 Mar 2009 — 2:42pm",
+      "content": "Hello Nick, my comment relates only to the P.S. about the 'languagesystem DFLT dflt;' statement. FLS5's old FDK 1.6 does not know about the rather new 'DFLT' script tag but (fortunately) creates a empty entry which Adam's script can replace by the missing 'DFLT'.\n\n"
+    },
+    {
+      "time": "14 Mar 2009 — 3:04pm",
+      "content": "Hi Karsten.  \nSorry, I don't understand.  \nIf I make the appropriate entries in the \"locl\" feature, and generate the font in FL5, and get the error message, does that mean the feature won't work in Romania?\n\n"
+    },
+    {
+      "time": "14 Mar 2009 — 4:23pm",
+      "content": "The question about locl feature entries and Romanian is one issue that I did not address.  \nThe P.S. question about the 'languagesystem DFLT dflt;' statement and FLS5's error message is another issue. If the feature text contains this statement and the error message pops up, then FDK 1.6 did a mistake and added a entry for a script '&nbsp;&nbsp;&nbsp;&nbsp;' rather than, as it should, for a script 'DFLT' which is Adobe's tag for a default script (i.e. the script is not explicitly Latin, Greek, Cyrillic, etc but anything). Remember that in a layout table, you have, first, a list of scripts that are explicitly addressed by the table, each of which scripts refers to a list of languages, each of which refers to some features associated with it; second, a list of features each of which refers to lookups associated with it; and third, a list of lookups which refer to subtables that define pieces of layout behavior (substitution or positioning). So by analyzing the input text and user settings, an application can find out which lookups it shall apply to the text. It is explained in detail [here](http://web.archive.org/web/20150217005356/http:/www.microsoft.com/typography/otspec/chapter2.htm) in the chapter \"Table Organization\". The entry for a script '&nbsp;&nbsp;&nbsp;&nbsp;' may not harm but is unnecessary, and is either better corrected with Adam's macro, or the ’languagesystem DFLT dflt;’ statement omitted right away.\n\n"
+    },
+    {
+      "time": "14 Mar 2009 — 5:18pm",
+      "content": "Hi Karsten, thanks for the explanations.\n\nSo you're saying I can (safely) omit \"languagesystem DFLT dflt;\"?  \nMy fonts are not overly complicated, and I just want a quick and easy way to support the Romanian conundrum...\n\nI guess it should be included in complex language coded fonts (as a catch-all?) but I specifically ONLY want to solve the ROM (and MOL) situation, which is specific for just \"latn ROM\" (and latn MOL)...  \nOr wouldn't the feature work if I omit \"languagesystem DFLT dflt;\"?\n\n"
+    },
+    {
+      "time": "14 Mar 2009 — 8:19pm",
+      "content": "The question whether to include both \"languagesystem DFLT dflt\" and \"languagesystem latn dflt\" or just \"languagesystem latn dflt\" has nothing to do with locl or Romanian.\n\nAFDKO 1.6 which is part of FontLab Studio 5 only supports \"languagesystem latn dflt\" because \"languagesystem DFLT dflt\" was added to the OpenType specification much later (so in FLS5, it is misunderstood, and the four-spaces-script tag is generated instead, which my script corrects).\n\nWhether one needs to use it at all, or not, is a matter of preference. Microsoft applications and older Adobe applications don't use the \"languagesystem DFLT dflt\" branch at all, just \"languagesystem latn dflt\". Newer Adobe applications will use \"languagesystem latn dflt\" in most cases, and \"languagesystem DFLT dflt\" in some cases, but if it is not present, they will use \"languagesystem latn dflt\" instead.\n\nAs far as I can tell, Microsoft considers the DFLT script tag redundant and unnecessary, so it was registered specifically by Adobe's motivation, but Adobe will also support the latn script tag.\n\nFontLab Studio 6 will include AFDKO 2.5 which supports \"languagesystem DFLT dflt\" — but the question will still remain open whether it actually makes sense at all to add \"languagesystem DFLT dflt\". It's complicated :)\n\nEither way, fonts with just \"languagesystem latn dflt\" will definitely work fine.\n\nRegards,  \nAdam\n\n"
+    },
+    {
+      "time": "14 Mar 2009 — 8:22pm",
+      "content": "I recommend against using the glyph names \"Scommaaccent\" and \"scommaaccent\" because they are not recognized by Mac OS X 10.4 and earlier. Use \"uni0218\" and \"uni0219\" instead, they will work everywhere where \"Scommaaccent\" and \"scommaaccent\" \\*and\\* also in Mac OS X 10.4 and earlier.\n\nSo, the following code works fine and is fully sufficient:\n\n`languagesystem latn dflt;\nlanguagesystem latn MOL;\nlanguagesystem latn ROM;`\n\n`feature locl { # Localized Forms\n# Latin\nlanguage MOL exclude_dflt; # Moldavian\nsub [Scedilla scedilla] by [uni0218 uni0219];\nlanguage ROM exclude_dflt; # Romanian\nsub [Scedilla scedilla] by [uni0218 uni0219];\n} locl;`\n\nIf you use AFDKO 2.5 to build your fonts rather than FLS5, you might optionally also want to add the line\n\n`languagesystem DFLT dflt;`\n\nat the very beginning of your feature definition file (i.e. in FontLab Studio's UI, in the lower-right pane). Or, if you use FLS5, you can add that line and then use my script. Or you may simply not bother about it at all.\n\n"
+    },
+    {
+      "time": "14 Mar 2009 — 8:21pm",
+      "content": "Roger: _I also intend to duplicate the tTcommaaccent into the currently empty tTcedilla/U021AB spots._\n\nI used to recommend that, since I never found any evidence of T/t with actual cedilla in use anywhere, but having discussed this with some Romanians at Microsoft, I've determined that it would be better to have T/t with cedilla glyphs mapped to U+0162 and U+00163. The thinking is that if these codepoints are used for Romanian text, which is still often the case due to legacy encodings, this implies that U+015E and U+015F will be used for the S/s diacritic; in this situation it is considered preferable for both S/s and T/t to be displayed with the incorrect cedilla accent than for one to be displayed with the cedilla and one with the comma-like accent.\n\nAll the Microsoft core fonts were updated in this way recently, and now have actual T/t with cedilla glyphs mapped to U+0162 and U+00163.\n\n"
+    },
+    {
+      "time": "15 Mar 2009 — 2:14am",
+      "content": "@Adam: Thanks for confirming the \"easy\" solution. I prefer to do it all in FontLab, so omitting \"languagesystem DFLT dflt;\" suits me just fine :)  \nAnd BTW: when will FontLab Studio 6 be available? ;)\n\n@John: jeez, you just HAD to throw another spanner in the works! :p  \nI can understand the reasoning behind it, though - it makes sense for the Microsoft core fonts for which there must be LOTS of existing documents written in Romanian...  \nBut I'm not too worried about backward compatibility for my fonts - they will (probably) only be used to set NEW text, and therefore I only want them to support the new \"correct\" glyph designs. That is also the reason I want to implement the language code - to aid in getting rid of the legacy usage (only in language \"tag\" aware application, though).\n\nThanks for all the good help - during a weekend, even!  \n:)\n\nRoger\n\n"
+    },
+    {
+      "time": "15 Mar 2009 — 10:46am",
+      "content": "_All the Microsoft core fonts were updated in this way recently, and now have actual T/t with cedilla glyphs mapped to U+0162 and U+00163._\n\nSame thing for FontFonts.\n\n"
+    },
+    {
+      "time": "15 Mar 2009 — 12:11pm",
+      "content": "\\*Tricketi-tracketi-tracking\\*\n\n"
+    },
+    {
+      "time": "15 Mar 2009 — 1:45pm",
+      "content": "Roger: _But I’m not too worried about backward compatibility for my fonts - they will (probably) only be used to set NEW text, and therefore I only want them to support the new “correct” glyph designs._\n\nBut the standard 8-bit codepages that use the old encodings for Romanian have not gone away, nor have the Romanian keyboard drivers that use them, and plenty of new Romanian text gets encoded using U+0162 and U+0163 for the T/t diacritic instead of the newer, recommended codepoints. Wherever there is the possibility that the Romanian S/s diacritic will be displayed with a cedilla because of the encoding, the T/t diacritic should match.\n\n_That is also the reason I want to implement the language code - to aid in getting rid of the legacy usage (only in language “tag” aware application, though)._\n\nGood. But this mechanism should also be used to convert T/t with cedilla to T/t with comma-like accent, rather than making the latter the default form for U+0162 and U+0163.\n\n"
+    },
+    {
+      "time": "15 Mar 2009 — 2:34pm",
+      "content": "Ouch, my head hurts now... ;)\n\nI understand the problem, and see that it can (maybe) be solved with even more switcheroo-stuff encoded in the font (feel free to supply the needed code ;). But putting in a \"wrongly designed\" glyph just irks me. Using two wrongly designed glyphs in text for the sake of consistency irks me doubly.\n\nI personally have no problem leaving a little responsibility to the users of my fonts.  \nAt least the T will be presented with the correct design in any case - and if the user want an S with the corresponding design, they will have to pick it from the glyph pallette, search/replace or use an input method that works \"correctly\".  \nIf they set the text and have differently designed T and S - and care about it - they should also know how to correct it.  \nAgain: the fonts I make are not intended for large amounts of text, so the user should be able to adjust it manually.\n\nBut for the general information value of this thread: it would be interesting to see a catch-all solution worked out, preferably with the text always ending up with using correctly designed glyphs. Is that even possible?\n\n"
+    },
+    {
+      "time": "15 Mar 2009 — 2:35pm",
+      "content": "I tried to find the correct glyph -\\> unicode assignment of the T/tcommaaccent T/tcedilla S/scomm... I had a look at various fonts and found no clear solution.\n\nCan someone give a clear overview of glyphshape \\> unicode/name for this four glyphs? Does the glyph look like the name and witch unicodes should be assigned?  \nIs is a completely incorrect example of what I meen:\n\n ![](http://web.archive.org/web/20150217005356im_/http:/typophile.com/files/commaaccents_3460.png)\n\nThanks  \nGeorg\n\n"
+    },
+    {
+      "time": "15 Mar 2009 — 2:56pm",
+      "content": "This is exactly the main problem: inconsistency! ;)\n\nWhat John suggests (and Microsoft and FontFont apparently has done recently) is to change the design of the \"tTcommaaccent\"/U021A-B to a Tt with cedilla - a glyph which is \"incorrect\", but more consistent with a wrongly used sScedilla...\n\nAnd previously the recommendation from John (and the choice of Microsoft and FontFont) was to use a comma on both T-designs (as in your example) - with the reasoning being that the tT with cedilla \"doesn't exist\".\n\nMy stance so far (but it might change someday ;) is that it is better to have at least one (T) glyph correct in all instances and leave the correction of the other one (S) up to the user. If they use language tag aware (= updated) software the first mentioned code will auto-correct it, and if they use older software and/or is not capable to change the S around themselves: they are \"bad designers/typographers\", and it will show in their work. Tough love! ;)\n\n"
+    },
+    {
+      "time": "15 Mar 2009 — 2:56pm",
+      "content": "\"FontLab Studio 6 will include AFDKO 2.5 ...\"\n\nWill this actually be in our lifetime, Adam? Or will there be yet another new FDK and 3 OS changes before we actually see it on a Mac?\n\nChrisL\n\n"
+    },
+    {
+      "time": "15 Mar 2009 — 9:21pm",
+      "content": "There are four Unicode characters, included in a single 8-bit Romanian codepage: U+01FE U+015F U+0162 U+0163. These are all identified in Unicode as ...WITH CEDILLA.\n\nNow, this encoding is generally recognised as having been a mistake, because it falsely unifies S/s with cedilla, as used in Turkish, with S/s with comma-like accent as used in Romanian. Later, in an effort to correct this mistake, Unicode added distinct S/s and T/t with comma-like accent codepoints -- U+0218 U+0129 U+021A U+021B -- thereby producing two divergent ways of encoding the Romanian language. It is a mess, to be sure, but I do not think it can be asserted with certainty that T/t with a cedilla is a ‘wrongly designed glyph’ for U+0162 or U+0163; indeed, since Unicode deliberately chose to disunify not only S/s with cedilla from S/s with comma-like accent but also T/t with cedilla from T/t with comma-like accent, I think a very strong case can be made that, whatever the needs of Romanian typography, U+0162 or U+0163 should be designed with a cedilla in parallel with U+01FE and U+015F.\n\nSure, the cedilla is wrong for Romanian, but the approved solution to that problem is to use the new codepoints -- U+0218 U+0129 U+021A U+021B -- for Romanian. For better or for worse, this is the solution that Unicode provides: a change in the character encoding. Since they disunified both the S/s and T/t diacritics for Romanian, that implies to me that the glyphs should be likewise disunified. And as I noted, the change in practice in MS fonts was in response to consultation with native Romanian text processing experts. The same point is also made -- complete with link to me contradicting my current position! -- on this Romanian web page:  \n [http://dic.academic.ru/dic.nsf/enwiki/236528](http://web.archive.org/web/20150217005356/http:/dic.academic.ru/dic.nsf/enwiki/236528 \"http://dic.academic.ru/dic.nsf/enwiki/236528\")\n\nIn this case, two wrongs do seem to make, if not a right, at least a lesser wrong.\n\n"
+    },
+    {
+      "time": "16 Mar 2009 — 1:47am",
+      "content": "OK, John - you have persuaded me, I think ;)\n\nEven though the tT with cedilla shouldn't really be used, it's more fun to design different glyphs, anyway (instead of having duplicate ones)...\n\nNow let's create the needed code! Need a little help here...\n\nlanguagesystem DFLT dflt; # optional  \nlanguagesystem latn dflt;  \nlanguagesystem latn MOL; # Moldovian (is that an actual latin language? Wikipedia says church slavonic)  \nlanguagesystem latn ROM; # Romanian  \nlanguagesystem latn ???; # Livonian (uses commaaccent for other letters, so need help to \"switch\" the tTcedilla if it gets the \"unused\" design)\n\nfeature locl { # Localized Forms  \n# Latin  \nlanguage MOL exclude\\_dflt; # Moldavian  \nsub [Scedilla scedilla] by [uni0218 uni0219];  \nsub [Tcedilla tcedilla] by [uni021A uni021B];  \nlanguage ROM exclude\\_dflt; # Romanian  \nsub [Scedilla scedilla] by [uni0218 uni0219];  \nsub [Tcedilla tcedilla] by [uni021A uni021B];  \nlanguage ??? exclude\\_dflt; # Livonian  \nsub [Tcedilla tcedilla] by [uni021A uni021B];  \n} locl;\n\nAre we getting there?\n\n"
+    },
+    {
+      "time": "16 Mar 2009 — 4:33am",
+      "content": "Thank you to all who commented on this thread. I have posted a [**summary of this discussion on the FontLab forum**](http://web.archive.org/web/20150217005356/http:/forum.fontlab.com/fontlab-studio-tips-and-tricks/handling-romanian-glyphs-in-opentype-fonts-updated-as-of-2009-t337.0.html;msg911#msg911).\n\n"
+    },
+    {
+      "time": "16 Mar 2009 — 4:34am",
+      "content": "Wow, more \"uniXXXX\" glyph names...  \nI like the lookup subroutine, though...\n\nWhen will FontLab start using these (new?) correct glyphnames? (0162-3 are called tTcommaaccent now - the opposite of what they should look like according to the most recent policy ;)  \nWill this be corrected in FontLab Studio 6? And when will this be released, Adam? ;)\n\nAnd to further prove the confusion around these glyphs:  \nOn my Mac (Safari 3.2 / OSX 10.4.11) your letters under point 1 show up correctly (as described) BUT  \nOn my PC (Internet Explorer 7 / Win XP Pro) the tT designs are switched! (tTcedilla has clearly disconnected commaaccents and the tTcommaaccents looks connected)\n\nMan, what a mess! :D\n\nOh, and we should also put in proper language support for the (9?) Livonian-speaking users out there! ;)  \nJust for completeness. Anybody know the proper language code for Livonian?\n\n"
+    },
+    {
+      "time": "16 Mar 2009 — 4:37am",
+      "content": "Oh, Adam deleted his initial post and made a link to the FontLab forum instead...  \nOn the FontLab forum the letters are displayed correctly.\n\nBut trust me, it DID look wrong here ;)  \n(Could you re-post it, Adam?)\n\n"
+    },
+    {
+      "time": "16 Mar 2009 — 4:56am",
+      "content": "Roger,\n\nI was having trouble getting the post formatted here on Typophile because Typophile does not support tables, AFAIK. So I posted it on the FontLab forum. But feel free to comment on it here if you wish.\n\nWe don't have a release date for FontLab Studio 6 yet but of course it will use the newest AGLFN and glyph naming recommendations. The current version uses an older version of AGLFN (which was current at the time of release of FLS5, and which did recommend the use of \\*commaaccent glyph names.)\n\nAs for the rendering of the characters in my posting — they are encoded correctly in the posting, but will of course be rendered using the glyphs that are in the browser's current font. We all know that some fonts have those glyphs designed according to the current recommendations while other fonts will have them designed according to the old specs, or even yet in a different way.\n\nBest,  \nAdam\n\n"
+    },
+    {
+      "time": "16 Mar 2009 — 5:02am",
+      "content": "No worries - it just looked too funny (especially in this context)  \nYeah, I know it had to do with the browser fonts (or probably substitute fonts), but still... hilarious.  \n:)\n\n"
+    },
+    {
+      "time": "16 Mar 2009 — 5:38am",
+      "content": "Hilarious? I don't know. I guess it's the difference in attitude. I assume that all software products, including fonts from all vendors, are faulty and buggy to some extent — so if a bug surfaces, it's just a confirmation of my expectation. In other words, I'm not surprised that those characters render differently depending on the font. If they were all fine, we wouldn't be having this conversation :)\n\n"
+    },
+    {
+      "time": "16 Mar 2009 — 6:31am",
+      "content": "Exactly. :)\n\nNow, if only John (with his exceptional technical linguistic knowledge) could supply us with the language code for Livonian we can also include support for the tTcedilla to tTcommaaccent switch neccesary for that language when we make a tT with cedilla in glyph position U0162-3.\n\nTHEN all new fonts with this feature code and glyph design will work optimally (until next time technology or whatnot makes us change the policy again ;)\n\n"
+    },
+    {
+      "time": "16 Mar 2009 — 7:19am",
+      "content": "'Moldavian' is more usually referred to as Moldovan. Essentially, it is Romanian as spoken in the region of Moldavia that was part of the USSR (now the Republic of Moldova). For this reason, while Romanian in Romania has been written in the Latin alphabet since the 19th Century, Moldovan, like most other minority languages of the Soviet Union, was given a Cyrillic alphabet in the 1930s. In 1989, the former Moldovian SSR officially switched to a Latin alphabet.\n\nThere is no OpenType language system tag for Livonian, but there should be. I'll mention it to Peter Constable at MS.\n\n"
+    },
+    {
+      "time": "16 Mar 2009 — 10:09am",
+      "content": "Thanks, John - you're a true cornucopia of knowledge. :)\n\n"
+    },
+    {
+      "time": "17 Mar 2009 — 8:32am",
+      "content": "I seem to recall that the cedilla is used in one romanisation of Arabic to indicate emphatic consonants: ş z̧ ḑ ţ. The t-cedilla for this purpose should not have the commaaccent.\n\nHowever, I see that the d + combining cedilla is looking like d + commaaccent in my system fonts here, which is incorrect for this Arabic transcription method.\n\n"
+    },
+    {
+      "time": "17 Mar 2009 — 10:28am",
+      "content": "_However, I see that the d + combining cedilla is looking like d + commaaccent in my system fonts here, which is incorrect for this Arabic transcription method._\n\nThat suggests that the combination of d with combining cedilla is being mapped, at the character level, to U+1E0D, using Unicode canonical composition. This codepoint is almost always displayed as d with an undercomma, because that is the Unicode reference glyph form and, as used for Livonian, this is the correct form. There are a number of Unicode characters whose names and canonical decompositions involve cedilla, but whose use and reference glyph specifies the commaaccent form. You would need a specialised Arabic-transcription font in order to display the form with cedilla.\n\nI'm not familiar with this convention for Arabic transcription. Where is it used?\n\n"
+    },
+    {
+      "time": "18 Mar 2009 — 11:06am",
+      "content": "<cite>That suggests that the combination of d with combining cedilla is being mapped, at the character level, to U+1E0D, using Unicode canonical composition. This codepoint is almost always displayed as d with an undercomma, because that is the Unicode reference glyph form and, as used for Livonian, this is the correct form. </cite>\n\nTrue, but there should be a way to produce a D + cedilla using the combining diacritic (U+0327) which produces the cedilla. If one wanted the D + commaaccent, one could either use the precomposed character U+1E10 or use D+ combining commaaccent (U+0326). Yes, the correct forms of U+1E10 and U+1E11 use the commaaccent, regardless of their Unicode character name.\n\n<cite>There are a number of Unicode characters whose names and canonical decompositions involve cedilla, but whose use and reference glyph specifies the commaaccent form.</cite>\n\nIt is a pity that the cedillas and commaaccents were unified early on in Unicode.\n\n<cite>I’m not familiar with this convention for Arabic transcription. Where is it used?</cite>\n\nOff-hand, it's used in National Geographic Atlases. Looking through my copy, there are the Iraqi cities of Al Ḩaḑr, Al Mawşil, Ash Sharqāţ, Al Kāz̧imīyah.\n\n"
+    },
+    {
+      "time": "18 Mar 2009 — 11:46am",
+      "content": "_True, but there should be a way to produce a D + cedilla using the combining diacritic (U+0327) which produces the cedilla._\n\nThere are numerous ways it could be done, all of which are font-level solutions. If unicode normalisation form C is applied to text or if, like MS Uniscribe, the text engine performs buffered character-level substition of D + combining cedilla to U+1E10, then one needs either\n\na) a font for which the default glyph for U+1E10 is a D with cedilla (e.g. specialised font for Arabic transliteration); or\n\nb) a font which contains a [locl] feature subsitution of the default, commaaccent form of U+1E10 to a variant glyph with a cedilla.\n\nThe latter solution raises the question of which language system tag would be appropriate for such a [locl] lookup. Theoretically, the obvious answer would be Arabic [ARA&nbsp;], so one would have an Arabic language system tag associated with a Latin [latn] script tag. In practice, I'm not sure whether this would work or not. If I have a spare half hour at some point I'll make a test in InDesign ME, and see what happens if one tags text in Latin characters as Arabic.\n\n"
+    },
+    {
+      "time": "21 Mar 2009 — 5:38pm",
+      "content": "Sorry for bumping this thread, but I get this on compile:\n\n`\n[FATAL] invalid token (text was \" \") [/Users/claus/Library/Application Support/FontLab/Studio 5/Features/fontlab.fea 26]\n`\n\nand that would be this line:  \n`\n  sub [Scedilla scedilla] by [uni0218 uni0219];\n`\n\nThanks  \nClaus\n\n"
+    },
+    {
+      "time": "21 Mar 2009 — 6:17pm",
+      "content": "Okay, I fixed it. There was an invisible (in the OT panel) tab stop (or something) character that got pulled in from Adam's code on the Fontlab forum, when I copy pasted it. I could see it in the UFO thank God. Perhaps it's my Safari 4 beta playing tricks on me, but I don't think so since nothing weird shows up if I paste into Textmate or Pico. Go figure, or you might want to check if that is replicable in your neck of the woods Adam.\n\n"
+    },
+    {
+      "time": "22 Mar 2009 — 1:03am",
+      "content": "I had that same problem. Caused me some time of head-scratching, too, I can tell you... ;)  \nHere is the needed code (copied and pasted from a working text-file:\n\nlanguagesystem DFLT dflt; # optional  \nlanguagesystem latn dflt;  \nlanguagesystem latn ROM;  \nlanguagesystem latn MOL;\n\nfeature locl { # Localized Forms  \n# Latin  \nlanguage ROM exclude\\_dflt; # Romanian  \nlookup locl\\_ROM {  \n sub [Scedilla scedilla] by [uni0218 uni0219];  \n sub [uni0162 uni0163] by [uni021A uni021B];  \n} locl\\_ROM;  \nlanguage MOL exclude\\_dflt; # Moldavian  \nlookup locl\\_ROM;  \n} locl;\n\nWorks for me! :D\n\n"
+    },
+    {
+      "time": "22 Mar 2009 — 9:04am",
+      "content": "You need to be careful when copying feature code from a web page. Because of the limited html support in discussion forums, it's often difficult to get indentation to display properly (which are especially important to Python, for example), so all sorts of workarounds are used, such as using fixed spaces instead of normal spaces. Unfortunately, this breaks the code if you try to run it. To be safe, check any indents or white space in code you get from the web before running it.\n\n"
+    }
+  ]
+}
