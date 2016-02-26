@@ -26,7 +26,10 @@ def file2json(f)
     begin
       uri = URI.parse(l.attr("href"))
     rescue
-      uri = URI.parse(URI.escape(l.attr("href") || ""))
+      begin
+        uri = URI.parse(URI.escape(l.attr("href") || ""))
+      rescue
+      end
     end
     l["href"] = URI.join("http://web.archive.org/",uri).to_s
   end
