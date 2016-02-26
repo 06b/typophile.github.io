@@ -14,7 +14,10 @@ def file2json(f)
   node = {"id" => id}
 
   r.css("img").each do |i|
+    begin
     i["src"] = URI.join("http://web.archive.org/",i.attr("src")).to_s
+    rescue
+    end
   end
 
   r.css("div.content a").each do |l|
