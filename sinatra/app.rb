@@ -21,7 +21,7 @@ class Application < Sinatra::Base
     @articles = settings.repository.search \
                query: ->(q, t) do
                 query = if q && !q.empty?
-                  { match: { content: q } }
+                  { match: { _all: q } }
                 else
                   { match_all: {} }
                 end
