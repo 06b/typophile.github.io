@@ -25,6 +25,9 @@ class Comment
     @attributes["time"]
   end
 
+  def author
+    @attributes["author"]
+  end
 end
 
 class Article
@@ -44,7 +47,7 @@ class Article
   end
 
   def content_html
-    @@markdown.render(content)
+    @@markdown.render(content || "")
   end
 
   def tags
@@ -53,6 +56,10 @@ class Article
 
   def time
     @attributes["time"]
+  end
+
+  def author
+    @attributes["author"]
   end
 
   def id
