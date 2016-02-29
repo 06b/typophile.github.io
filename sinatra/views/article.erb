@@ -1,0 +1,17 @@
+<section id="main">
+  <div class="article">
+    <a href="/<%= @article.id %>"><h1><%= @article.title %></h1></a>
+    <p>
+      <%= @article.content_html %>
+    <div class="time"><%= @article.time %></div>
+      <% @article.tags.each do |tag| %> <strong class="t"><%= tag %></strong><% end %>
+    </p>
+  </div>
+
+<% @article.comments.each do |c| %>
+  <div class="comment">
+    <%= c.content_html %>
+    <div class="time"><%= c.time %></div>
+  </div>
+<% end %>
+</section>

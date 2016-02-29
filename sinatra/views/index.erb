@@ -1,11 +1,4 @@
 
-<header>
-  <h1>Articles</h1>
-  <form action="/" method='get'>
-    <input type="text" name="q" value="<%= params[:q] %>" id="q" autofocus="autofocus" placeholder="type a search query and press enter..." />
-  </form>
-</header>
-
 <section id="left">
   <p><a href="/">All articles</a> <small class="c i"><%= @articles.size %></small></p>
   <ul id="facets">
@@ -22,7 +15,7 @@
 
 <% @articles.each_with_hit do |article, hit|  %>
   <div class="article">
-    <h2><%= article.title %></h2>
+    <a href="/<%= article.id %>"><h2><%= article.title %></h2></a>
     <p>
       <%= article.content_html %>
 

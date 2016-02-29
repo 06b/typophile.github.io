@@ -1,6 +1,32 @@
 require 'elasticsearch/persistence'
 require 'redcarpet'
 
+class Comment
+  attr_reader :attributes
+  @@markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+
+  def initialize(attributes={})
+    @attributes = attributes
+  end
+
+  def to_hash
+    @attributes
+  end
+
+  def content
+    @attributes["content"]
+  end
+
+  def content_html
+    @@markdown.render(content)
+  end
+
+  def time
+    @attributes["time"]
+  end
+
+end
+
 class Article
   attr_reader :attributes
   @@markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
@@ -35,6 +61,14 @@ class Article
 
   def title
     @attributes["title"]
+  end
+
+  def time
+    @attributes["time"]
+  end
+
+  def comments
+    @attributes["comments"].map {|e| Comment.new(e) }
   end
 end
 

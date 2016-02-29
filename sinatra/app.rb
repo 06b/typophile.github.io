@@ -49,6 +49,12 @@ class Application < Sinatra::Base
     erb :index
   end
 
+  get '/:id' do
+    @articles = settings.repository.search \
+               query: { match: { id: params[:id] } }
+    @article = @articles.first
+    erb :article
+  end
 end
 
 Application.run! if $0 == __FILE__
