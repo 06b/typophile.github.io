@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'reverse_markdown'
+gem 'nokogiri'
 gem 'patron'
 gem 'elasticsearch'
 gem 'elasticsearch-model'
