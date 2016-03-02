@@ -1,22 +1,23 @@
-<section id="main">
-  <div class="article">
+<div class="container">
+  <div class="col-sm-8">
     <a href="/<%= @article.id %>"><h1><%= @article.title %></h1></a>
       <%= @article.content_html %>
 
-    <div class="meta">
-      <span class="author"><%= @article.author %></span>
+    <div class="meta text-right">
+      <span class="author"><%= @article.author %></span><br>
       <span class="time"><%= @article.time %></span>
       <br/>
-      <% @article.tags.each do |tag| %> <strong class="t"><%= tag %></strong><% end %>
+      <% @article.tags.each do |tag| %> <span class="label label-default"><%= tag %></span><% end %>
     </div>
+  <hr/>
+  <% @article.comments.each do |c| %>
+    <div class="panel panel-default">
+      <div class="panel-body"><%= c.content_html %></div>
+      <div class="panel-footer"><%= c.author %> @ <%= c.time %></div>
+    </div>
+  <% end %>
   </div>
-
-<% @article.comments.each do |c| %>
-  <div class="comment">
-    <%= c.content_html %>
-    <div class="time"><%= c.time %></div>
+  <div class="col-sm-4">
+    <a href="/node/<%= @article.id %>.html">View original article</a>
   </div>
-<% end %>
-
-<a href="/node/<%= @article.id %>.html">View original article</a>
-</section>
+</div>

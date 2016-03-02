@@ -1,5 +1,8 @@
 require 'sinatra/base'
 require './models/article'
+require "sinatra/reloader"
+require 'uri'
+require 'cgi'
 
 class Application < Sinatra::Base
   enable :logging
@@ -9,15 +12,22 @@ class Application < Sinatra::Base
   configure :development do
     enable   :dump_errors
     disable  :show_exceptions
-
+    register Sinatra::Reloader
   end
+
+  module URIModHelper
+    def mod_uri(params)
+      return "?" + URI.encode_www_form(CGI.parse(request.query_string).merge(params))
+    end
+  end
+
+  helpers URIModHelper
 
   set :repository, ArticleRepository.new
   set :per_page,   25
 
   get '/' do
     @page  = [ params[:p].to_i, 1 ].max
-
     @articles = settings.repository.search \
                query: ->(q, t) do
                 query = if q && !q.empty?
@@ -46,6 +56,7 @@ class Application < Sinatra::Base
 
                highlight: { fields: { content: { fragment_size: 0, pre_tags: ['<em class="hl">'],post_tags: ['</em>'] } } }
 
+    @pages = @articles.total / settings.per_page
     erb :index
   end
 

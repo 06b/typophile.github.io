@@ -1,30 +1,45 @@
 
-<section id="left">
-  <p><a href="/">All articles</a> <small class="c i"><%= @articles.size %></small></p>
-  <ul id="facets">
-  <% @articles.response.aggregations.tags.buckets.each do |term| %>
-  <li><a href="/?t=<%= term['key'] %>"><%= term['key'] %></a> <small class="c"><%= term['doc_count'] %></small></li>
-  <% end %>
-  </ul>
-</section>
-
-<section id="main">
-<% if @articles.empty?  %>
-  <p>No articles found.</p>
-<% end %>
-
-<% @articles.each_with_hit do |article, hit|  %>
-  <div class="article">
-    <a href="/<%= article.id %>"><h2><%= article.title %></h2></a>
-    <p>
-      <%= article.content_html %>
-
-      <% article.tags.each do |tag| %> <strong class="t"><%= tag %></strong><% end %>
-    </p>
+<div class="container">
+  <div class="col-sm-2">
+    <p><a href="/">All articles</a> <small class="c i"><%= @articles.size %></small></p>
+    <ul id="facets">
+    <% @articles.response.aggregations.tags.buckets.each do |term| %>
+    <li><a href="/?t=<%= term['key'] %>"><%= term['key'] %></a> <small class="c"><%= term['doc_count'] %></small></li>
+    <% end %>
+    </ul>
   </div>
-<% end  %>
 
-<% if @articles.size > 0 && @page.next <= @articles.total / settings.per_page %>
-  <p class="pagination"><a href="?p=<%= @page.next %>">&rarr; Load next</a></p>
-<% end %>
-</section>
+  <div class="col-sm-10">
+  <% if @articles.empty?  %>
+    <p>No articles found.</p>
+  <% end %>
+
+  <% @articles.each_with_hit do |article, hit|  %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><a href="/<%= article.id %>"><%= article.title %></a></h3>
+      </div>
+      <div class="panel-body">
+        <%= article.content_html %>
+      </div>
+      <div class="panel-footer">
+        <span class="author"><%= article.author %></span> @ 
+        <span class="time"><%= article.time %></span>
+        <div class="pull-right">
+          <% article.tags.each do |tag| %> <span class="label label-default"><%= tag %></span><% end %>
+        </div>
+      </div>
+    </div>
+  <% end  %>
+
+  <% if @articles.size > 0 && @page.next <= @pages %>
+  <nav>
+    <ul class="pagination">
+      <% [ ([@page-5,1].max .. [@page+5,@pages].min).to_a, @pages ].flatten.uniq.each do |p| %>
+        <li class="<%= p == @page && "active" %>"> <a href="<%= mod_uri("p" => p) %>"><%= p %></a> </li>
+      <% end %>
+    </ul>
+  </nav>
+  <% end %>
+  </div>
+</div>
