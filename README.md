@@ -1,13 +1,29 @@
 # typophile.github.io
 
+> The phrase ‘democratization of typography’ has become common, referring to the wide availability of the tools of production for type and typographic design. 
+> One may take this with some scepticism: after all, for the majority, the generation and production of these tools is still largely in the hands of a few corporations — though the open source movement may provide an alternative. 
+> The watchwords remain: doubt, critique, reason, hope.
+
+– Robin Kinross, "Modern Typography" (2004, p.182, the final page.)
+
 This repo contains a simple read-only copy of typophile, reconstructed with love. 
 
 [Typophile](https://en.wikipedia.org/wiki/Typophile_(Internet_forum)) was a fantastic type design web forum started in 2000 that ran until 2015. 
+It eptomised the culture of the ‘democratization of typography’ that Robin Kinross described in the final words of _Modern Typography._ 
 It was a cornucopia of type design and font engineering trivia, with threads on every important development in the field in the period. 
-But it was often overrun with spam, and after 6 months of total shutdown it seems, sadly, not likely to come back any time soon. 
 
+But it was often overrun with spam, and after 6 months of total shutdown it seems, sadly, not likely to come back any time soon. 
 In response to the typophile tragedy, during January 2016 Simon Cozens of SILE fame developed a script to download an archive from the [Archive.org Wayback Machine](https://web.archive.org) and Dave Crossland worked with him to convert the raw material into this site. 
 
+## Preview Site
+
+A preview site is available at (somewhere.)
+
+Feel free to [file page design issues](https://github.com/typophile/typophile.github.io/issues) and CSS enhancement Pull Requests. 
+Some parts suffer where the parsing is not done well, but with rake it is now easy to re-parse and re-index the whole site, feel free to file bugs for places where things aren't quite right.
+For example, if a person's name or ID is incorrect.
+
+## How did you get a copy of Typophile?
 
 The Wayback Machine has a number of APIs, one of which is the [CDX Server API](https://github.com/internetarchive/wayback/tree/master/wayback-cdx-server).
 This lists all URIs archived from a given site, and can be called on typophile like this:
@@ -44,11 +60,3 @@ The script creates a `typophile.com` directory with a copy of each page, as it w
 
 The next steps are to finish converting these raw materials into clean MarkDown, and a Jeykll site to publish them nicely on the web.
 See the [github project issues](https://github.com/typophile/typophile.github.io/issues) for details.
-
-* * * 
-
-> The phrase ‘democratization of typography’ has become common, referring to the wide availability of the tools of production for type and typographic design. 
-> One may take this with some scepticism: after all, for the majority, the generation and production of these tools is still largely in the hands of a few corporations — though the [software freedom] movement may provide an alternative. 
-> The watchwords remain: doubt, critique, reason, hope.
-
-Robin Kinross, "Modern Typography" (2004, p.182, the final page.)
