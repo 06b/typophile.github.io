@@ -8,6 +8,7 @@ But it was often overrun with spam, and after 6 months of total shutdown it seem
 
 In response to the typophile tragedy, during January 2016 Simon Cozens of SILE fame developed a script to download an archive from the [Archive.org Wayback Machine](https://web.archive.org) and Dave Crossland worked with him to convert the raw material into this site. 
 
+## Obtaining the HTML files
 
 The Wayback Machine has a number of APIs, one of which is the [CDX Server API](https://github.com/internetarchive/wayback/tree/master/wayback-cdx-server).
 This lists all URIs archived from a given site, and can be called on typophile like this:
@@ -19,31 +20,28 @@ Since there are 1,796 duplicates we can remove them:
 
     awk '{print $1}' urls.txt | sort | uniq > urls-unique.txt ;
 
-However, this is not a complete list of all snapshots for each URI, but just the most recent.
-For instance, the entry for `com,typophile)/wiki/oblique` was `20150630000942` - the update that replaced everything with the "come back soon" page.
-
-So we need to ask the CDX server about each particular URI to get a master list of all archived pages. 
-For the oblique wiki page example, that would be like:
-
-    curl 'http://web.archive.org/cdx/search/cdx?url=typophile.com/wiki/oblique&fl=urlkey,timestamp' ;
-    com,typophile)/wiki/oblique 20120728022207
-    ...
-    com,typophile)/wiki/oblique 20150630000942
-
-So, to download a copy of the last non-broken version of every typophile page from the wayback machine, we need a small script to convert each `urlkey` back into a URL and do a CDX search with that URL. 
-[wayback-typophile.pl](wayback-typophile.pl) is such a script. 
 To get the forum discussion pages, run
 
-    grep node urls-unique.txt > nodes.txt
-    ./wayback-typophile.pl < nodes.txt ;
-    typophile.com/cms/crss/node/56291 -> http://web.archive.org/20090331224652/http%3A%2F%2Ftypophile.com%2Fcms%2Fcrss%2Fnode%2F56291
-    typophile.com/cms/crss/node/56297 -> http://web.archive.org/20090331065320/http%3A%2F%2Ftypophile.com%2Fcms%2Fcrss%2Fnode%2F56297
-    typophile.com/cms/crss/node/56319 -> http://web.archive.org/20090331223924/http%3A%2F%2Ftypophile.com%2Fcms%2Fcrss%2Fnode%2F56319
+    grep '/node/' urls-unique.txt | grep -v cms | grep -v crss | perl wayback-typophile.pl
 
-The script creates a `typophile.com` directory with a copy of each page, as it was the last time it was archived before it got wiped. 
+The script creates a `typophile.com` directory with a copy of each page, as it was the last time it was archived before it got wiped. The contents of this directory come to around 1.3Gb of data, and so are not included in this repository.
 
-The next steps are to finish converting these raw materials into clean MarkDown, and a Jeykll site to publish them nicely on the web.
-See the [github project issues](https://github.com/typophile/typophile.github.io/issues) for details.
+## Extracting the content
+
+The next stage is to parse and index this content. Use `rake convert` to turn the `typophile.com` directory into a directory full of JSON files. The output of this process is included in the repository for convenience.
+
+## Indexing the content
+
+You now need an Elasticsearch server, and the [elasticsearch-fileimport][https://github.com/codecentric/elasticsearch-fileimport] tool. Build the importer with `mvn` and copy the resulting JAR file into this directory. Then run `rake reindex`. (If you are using Homebrew, you may first need to add the following to `file_import_settings.yml`:
+
+    cluster:
+        name: elasticsearch_youruserid
+
+)
+
+## Serving the content
+
+The Typophile articles are then available through a front-end search interface written in [Sinatra][http://www.sinatrarb.com]. Install Sinatra (`bundle install` should do all that) and then run `thin start`. Hey presto, you have your own Typophile archive.
 
 * * * 
 
