@@ -32,7 +32,7 @@ The next stage is to parse and index this content. Use `rake convert` to turn th
 
 ## Indexing the content
 
-You now need an Elasticsearch server, and the [elasticsearch-fileimport][https://github.com/codecentric/elasticsearch-fileimport] tool. Build the importer with `mvn` and copy the resulting JAR file into this directory. Then run `rake reindex`. (If you are using Homebrew, you may first need to add the following to `file_import_settings.yml`:
+You now need an Elasticsearch server, and the [elasticsearch-fileimport](https://github.com/codecentric/elasticsearch-fileimport) tool. Build the importer with `mvn` and copy the resulting JAR file into this directory. Then run `rake reindex`. (If you are using Homebrew, you may first need to add the following to `file_import_settings.yml`:
 
     cluster:
         name: elasticsearch_youruserid
@@ -41,7 +41,7 @@ You now need an Elasticsearch server, and the [elasticsearch-fileimport][https:/
 
 ## Serving the content
 
-The Typophile articles are then available through a front-end search interface written in [Sinatra][http://www.sinatrarb.com]. Install Sinatra (`bundle install` should do all that) and then run `thin start`. Hey presto, you have your own Typophile archive.
+The Typophile articles are then available through a front-end search interface written in [Sinatra](http://www.sinatrarb.com). Install Sinatra (`bundle install` should do all that) and then run `thin start`. Hey presto, you have your own Typophile archive.
 
 * * * 
 
