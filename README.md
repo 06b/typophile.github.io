@@ -8,6 +8,19 @@ But it was often overrun with spam, and after 6 months of total shutdown it seem
 
 In response to the typophile tragedy, during January 2016 Simon Cozens of SILE fame developed a script to download an archive from the [Archive.org Wayback Machine](https://web.archive.org) and Dave Crossland worked with him to convert the raw material into this site. 
 
+## How you can help
+
+1. Look out for places where details have not been picked up (e.g. Commenters' names.) and [open an issue](https://github.com/typophile/typophile.github.io/issues). 
+   To help bring the details back, use the "view original" link to look at the original HTML and figure out a CSS selector which identified them so they can be picked up.
+
+2. Suggest ways to improve the design of the website and improve the usability, by [opening an issue](https://github.com/typophile/typophile.github.io/issues)
+
+3. Let everyone know about the most important discussion threads, by posting links to them along with a note about why they are important to [issue #4](https://github.com/typophile/typophile.github.io/issues/4)
+
+4. Figure out how to extract 2nd or later discussion pages, [Issue #2](https://github.com/typophile/typophile.github.io/issues/2)
+
+5. Review and contribute to any other [open issues](https://github.com/typophile/typophile.github.io/issues/)
+
 ## Obtaining the HTML files
 
 The Wayback Machine has a number of APIs, one of which is the [CDX Server API](https://github.com/internetarchive/wayback/tree/master/wayback-cdx-server).
