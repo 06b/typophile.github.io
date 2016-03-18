@@ -1,7 +1,7 @@
 
 <div class="container">
   <div class="col-sm-2">
-    <p><a href="/">All articles</a> <small class="c i"><%= @articles.size %></small></p>
+    <p><a href="/">All articles</a> <small class="c i"><%= @articles.total %></small></p>
     <ul id="facets">
     <% @articles.response.aggregations.tags.buckets.each do |term| %>
     <li><a href="/?t=<%= term['key'] %>"><%= term['key'] %></a> <small class="c"><%= term['doc_count'] %></small></li>
