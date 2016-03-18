@@ -100,6 +100,7 @@ class ArticleRepository
 
       }
       indexes :author
+      indexes :votes, type: "integer", index: "not_analyzed", null_value: 0
       indexes :uid, type: "integer", index: "not_analyzed"
     end
   end

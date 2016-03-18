@@ -36,6 +36,7 @@ class Application < Sinatra::Base
                   { match_all: {} }
                 end
 
+                query = { function_score: {query: query, field_value_factor: { field: "votes",  modifier: "log1p" } } }
                 filter = if t && !t.empty?
                   { term: { tags: t } }
                 end

@@ -13,6 +13,9 @@ def file2json(f)
   r = doc.root
   node = {"id" => id}
 
+  # Bulk import doesn't seem to copy across null_value so we add this explicitly
+  node["votes"] = 0
+
   r.css("img").each do |i|
     begin
     i["src"] = URI.join("http://web.archive.org/",i.attr("src")).to_s
