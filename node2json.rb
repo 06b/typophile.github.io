@@ -114,7 +114,7 @@ def file2json(f)
   outhandle.close()
 end
 
-Dir.glob("typophile.com/node/*.html").each do |f|
+Dir.glob("public/node/*.html").each do |f|
   puts(f)
   file2json(f)
 end
