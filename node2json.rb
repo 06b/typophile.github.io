@@ -116,7 +116,7 @@ def file2json(f)
   outhandle.close()
 end
 
-Dir.glob("public/node/68591.html").each do |f|
+Dir.glob("public/node/*.html").each do |f|
   puts(f)
   file2json(f)
 end
