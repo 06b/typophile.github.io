@@ -17,6 +17,11 @@
   <% @articles.each_with_hit do |article, hit|  %>
     <div class="panel panel-default">
       <div class="panel-heading">
+        <% if article.comments.count > 0 %>
+        <div class="pull-right">
+        <a href="/<%= article.id %>#comments"><span class="badge"><%= article.comments.count %> comment<% if article.comments.count > 1%>s<% end%></span></a>
+        </div>
+        <% end %>
         <h3 class="panel-title"><a href="/<%= article.id %>"><%= article.title %></a></h3>
       </div>
       <div class="panel-body">

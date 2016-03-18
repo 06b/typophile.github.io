@@ -9,13 +9,16 @@
       <br/>
       <% @article.tags.each do |tag| %> <span class="label label-default"><%= tag %></span><% end %>
     </div>
-  <hr/>
-  <% @article.comments.each do |c| %>
-    <div class="panel panel-default">
-      <div class="panel-body"><%= c.content_html %></div>
-      <div class="panel-footer"><%= c.author %> @ <%= c.time %></div>
+    <hr/>
+    <a name="comments"></a>
+    <div id="comments">
+      <% @article.comments.each do |c| %>
+        <div class="panel panel-default">
+          <div class="panel-body"><%= c.content_html %></div>
+          <div class="panel-footer"><%= c.author %> @ <%= c.time %></div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
   </div>
   <div class="col-sm-4">
     <a href="/node/<%= @article.id %>.html">View original article</a>
