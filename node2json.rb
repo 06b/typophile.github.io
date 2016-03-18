@@ -106,6 +106,7 @@ def file2json(f)
     comment["time"] = time
     content = c.css("div.content")
     comment["content"] = ReverseMarkdown.convert(content.to_s)
+    comment["author"] = ReverseMarkdown.convert(author.to_s)
     node["comments"] << comment
   end
 
