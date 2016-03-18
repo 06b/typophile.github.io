@@ -98,8 +98,9 @@ def file2json(f)
 
       author = metadata.css("a").first.children[0]
       time = metadata.children[5]
-      if time then
-        time = time.children[0].to_s
+      if time.to_s.match(/[0-9]/) then
+        # time = time.children[0].to_s
+        time = time.to_s
       else
         time=metadata.children[3].to_s
       end
@@ -115,7 +116,7 @@ def file2json(f)
   outhandle.close()
 end
 
-Dir.glob("public/node/*.html").each do |f|
+Dir.glob("public/node/68591.html").each do |f|
   puts(f)
   file2json(f)
 end
