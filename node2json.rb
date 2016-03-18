@@ -91,11 +91,12 @@ def file2json(f)
     comment = {}
     metadata = c.css("div.author")
     if metadata.children[0] then
-      author = metadata.children[0]
+      author = metadata.children[0].to_s
       time = metadata.children[3].to_s
     else
       metadata = c.css("div.info")
-      author = metadata.children[1]
+
+      author = metadata.css("a").first.children[0]
       time = metadata.children[5]
       if time then
         time = time.children[0].to_s
