@@ -2,6 +2,8 @@
 
 This repo contains a simple read-only copy of typophile, reconstructed with love. 
 
+# Live Site: <http://typophile-archive.simon-cozens.org>
+
 [Typophile](https://en.wikipedia.org/wiki/Typophile_(Internet_forum)) was a fantastic type design web forum started in 2000 that ran until 2015. 
 It was a cornucopia of type design and font engineering trivia, with threads on every important development in the field in the period. 
 But it was often overrun with spam, and after 6 months of total shutdown it seems, sadly, not likely to come back any time soon. 
